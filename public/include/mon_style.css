@@ -1,0 +1,26 @@
+strong
+{
+    color: #f15929;
+}
+
+h2, h3
+{
+    color: #f15929!important;
+}
+
+nav .ui.menu {
+    background-color: #f15929;
+}
+
+nav .item {
+    color: white!important;
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+
+nav .ui.simple.item:hover {
+    background-color: #1DA962;
+}
+
+

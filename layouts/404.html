@@ -1,0 +1,31 @@
+{{ define "title" }}
+	Erreur 404
+{{ end }}
+
+
+{{ define "main" }}
+
+
+     {{ partial "header" . }}
+
+     <div class="ui text container">
+     <div class="ui icon floating massive message">
+  		<i class="exclamation triangle icon"></i>
+  		<div class="content">
+    		<div class="header">Adresse incorrecte </div>
+    		<p>Vous pouvez signaler l'erreur à <a href="mailto:contact@coopmaths.fr">contact@coopmaths.fr</a>.</p>
+  		</div>
+	</div>
+	</div>
+
+	<div class="ui hidden divider"></div>
+	<div class="ui hidden divider"></div>
+	<div class="ui hidden divider"></div>
+	<div class="ui hidden divider"></div>
+	<div class="ui hidden divider"></div>
+	<div class="ui hidden divider"></div>
+
+     {{ partial "footer" . }}
+
+{{ end }}
+

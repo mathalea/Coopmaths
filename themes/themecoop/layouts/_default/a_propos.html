@@ -1,0 +1,17 @@
+{{ define "title" }}
+	A propos 
+{{ end }}
+
+
+{{ define "main" }}
+
+
+     {{ partial "header" . }}
+
+    <div class="ui text container">
+    {{.Content}}
+	</div>
+
+     {{ partial "footer" . }}
+
+{{ end }}

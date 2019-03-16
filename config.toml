@@ -1,0 +1,33 @@
+baseURL = "https://coopmaths.fr/"
+languageCode = "fr-fr"
+title = "COOPmaths"
+theme = "themecoop"
+disablePathToLower = true #pour garder des URL en majuscule
+googleAnalytics = "UA-5318292-3"
+
+
+### Pour un fonctionnement en local ###
+#uglyurls = true
+#relativeURLs = true
+
+[privacy]
+  [privacy.disqus]
+    disable = false
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    disable = false
+    respectDoNotTrack = true
+    useSessionStorage = true
+  [privacy.instagram]
+    disable = false
+    simple = false
+  [privacy.twitter]
+    disable = false
+    enableDNT = false
+    simple = false
+  [privacy.vimeo]
+    disable = false
+    simple = false
+  [privacy.youtube]
+    disable = false
+    privacyEnhanced = false

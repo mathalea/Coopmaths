@@ -1,0 +1,8 @@
+<!-- {{/*
+Utilisation: {{% alea "titre" "id de l'exercice" "nombre d'exercices" %}}
+*/}}-->
+
+<a class="item" href="/exercice.html?ex={{ .Get 1 }}{{ with .Get 2}}&param1={{.}}{{ end }}{{ with .Get 3}}&param2={{.}}{{ end }}{{ with .Get 4}}&param3={{.}}{{ end }}{{ with .Get 5}}&param4={{.}}{{ end }}&nb_questions=5" target="_blank">
+  	<!-- <i class="large black edit outline icon"></i> <div class="header content"> {{ .Get 0}} </div> -->
+  	<img class="ui avatar image" src="/images/dice.png"> <div class="header content"> {{ .Get 0}} </div>
+</a>

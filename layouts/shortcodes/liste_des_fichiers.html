@@ -1,0 +1,11 @@
+{{- $pathURL := .Get "pathURL" -}}
+{{- $path := .Get "path" -}}
+{{- $files := readDir $path -}}
+
+
+<div class="ui middle aligned animated selection divided list">
+
+{{- range $files }}    
+        <a class="item" href="{{ $pathURL }}{{ .Name | relURL }}" target="_blank"><div class="header content"> {{ .Name }}</div></a>
+{{- end }}
+</div>
