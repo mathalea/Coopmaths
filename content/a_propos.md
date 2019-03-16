@@ -78,6 +78,11 @@ Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise
 
 Pour de plus amples renseignements : [contact@coopmaths.fr](mailto:contact@coopmaths.fr)
 
+### Source
+
+Toutes les sources de ce site sont disponible sur [GitHub](https://github.com/remiangot/Coopmaths).
+
+
 ### Crédits
 
 - Site généré avec [Hugo](https://gohugo.io)

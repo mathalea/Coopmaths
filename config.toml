@@ -4,6 +4,7 @@ title = "COOPmaths"
 theme = "themecoop"
 disablePathToLower = true #pour garder des URL en majuscule
 googleAnalytics = "UA-5318292-3"
+publishDir = "../CoopMaths_Public" 
 
 
 ### Pour un fonctionnement en local ###
