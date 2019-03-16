@@ -37,6 +37,7 @@ var liste_des_exercices_disponibles = {
 		'LaTeX' : Code_LaTeX_personnalise,
 		//13:Exercice_equation1
 	};
+
 //Efface de la liste des exercices disponibles tout ceux qui n'ont pas de version HTML
 if (sortie_html){
 	var codeMG32 = '';
@@ -1707,6 +1708,8 @@ function Reglages_6M22(){
 jQuery(document).ready(function() {
 // Ne se fait qu'après que le DOM soit entièrement défini
 
+	// Trie par ordre alphabétique les exercices disponibles
+	liste_des_exercices_disponibles = tridictionnaire(liste_des_exercices_disponibles);
 	// Affiche la liste des exercices
 	let liste_html_des_exercices = '<h3 class="ui block header">Exercices disponibles</h3>\n<ol>\n';
 	for (var id in liste_des_exercices_disponibles) {

@@ -126,6 +126,24 @@ function shuffle(array) {
   return array_bis;
 }
 
+function tridictionnaire(dict) {
+// Trie un dictionnaire suivant ses clés
+// Source : https://stackoverflow.com/questions/10946880/sort-a-dictionary-or-whatever-key-value-data-structure-in-js-on-word-number-ke
+
+    var sorted = [];
+    for(var key in dict) {
+        sorted[sorted.length] = key;
+    }
+    sorted.sort();
+
+    var tempDict = {};
+    for(var i = 0; i < sorted.length; i++) {
+        tempDict[sorted[i]] = dict[sorted[i]];
+    }
+
+    return tempDict;
+}
+
 function combinaison_listes(liste,taille_minimale){
 	// Concatène liste à elle même en changeant l'ordre à chaque cycle
 	// Exemple combinaison_listes([A,B,C],7) -> [B,C,A,C,B,A,A,B,C]
