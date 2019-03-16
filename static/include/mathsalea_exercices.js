@@ -1510,11 +1510,12 @@ function Probleme_course(){
 }
 
 
-function Perimetre_et_portions_de_disques(){
+function Perimetre_et_portions_de_disques(pa=3){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.pas_de_version_LaTeX = true ;
-	this.titre = "Périmètre de portions de cercles"
-	this.consigne = "Calculer le périmètre de chacune des figures suivantes"
+	this.titre = "Périmètre et aire de portions de cercles"
+	this.consigne = "Calculer le périmètre et l'aire de chacune des figures suivantes"
+	this.sup = pa ; // 1 : périmètre, 2 : aire, 3 : périmètres et aires
 	this.spacing = 2;
 	this.spacing_corr = 2;
 	this.nb_questions = 1;
@@ -1525,33 +1526,181 @@ function Perimetre_et_portions_de_disques(){
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_corrections = []; // Liste de questions corrigées
 		let r = randint(1,5);
-		let r2 = randint(3,5);
+		let r2 = randint(2,4);
 		let r3 = randint(2,4);
+		let figure = randint(1,2);
+		let codeBase64 =""
+		if (this.sup==1){
+			this.consigne = "Calculer le périmètre de chacune des figures suivantes";
+		}
+		if (this.sup==2) {
+			this.consigne = "Calculer l'aire de chacune des figures suivantes";
+		}
+
+
+		if (figure==1) {
+			codeBase64 = "TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAIoAAACNQAAAQEAAAAAAAAAAQAAAE######AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAHQ0NhbGN1bAD#####AAJyMwABNgAAAAFAGAAAAAAAAP####8AAAABAApDUG9pbnRCYXNlAP####8BAAAAAA4AAVUAwCQAAAAAAABAEAAAAAAAAAUAAEAsZmZmZmZmQCxmZmZmZmb#####AAAAAQAUQ0Ryb2l0ZURpcmVjdGlvbkZpeGUA#####wEAAAAAEAAAAQABAAAAAgE#8AAAAAAAAP####8AAAABAA9DUG9pbnRMaWVEcm9pdGUA#####wEAAAAADgABVgDAAAAAAAAAAEAQAAAAAAAABQABQDxmZmZmZmYAAAAD#####wAAAAEACENTZWdtZW50AP####8BAAAAABAAAAEAAQAAAAIAAAAE#####wAAAAEAB0NNaWxpZXUA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAAIAAAAE#####wAAAAIADENDb21tZW50YWlyZQD#####AQAAAAAAAAAAAAAAAEAYAAAAAAAAAAAABgwAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAEx#####wAAAAEACUNMb25ndWV1cgD#####AAAAAgAAAAQAAAADAP####8BAAAAABAAAU8AAAAAAAAAAABACAAAAAAAAAMAAUBRQAAAAAAAQGQAAAAAAAAAAAACAP####8AAXIAATQAAAABQBAAAAAAAAAAAAAEAP####8BAAAAARAAAAEAAQAAAAkBP#AAAAAAAAD#####AAAAAgAJQ0NlcmNsZU9SAP####8BAAAAAAEAAAAJ#####wAAAAEAD0NSZXN1bHRhdFZhbGV1cgAAAAoA#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAsAAAAM#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAANAAAADQD#####AQAAAAAQAAFBAAAAAAAAAAAAQAgAAAAAAAADAAEAAAAN#####wAAAAEADENBcmNEZUNlcmNsZQD#####AAAAAAABAAAACQAAAA######AAAAAUBWgAAAAAAAAAAABgD#####AAAAAAAQAAABAAEAAAAJAAAAD#####8AAAABABZDRHJvaXRlUGVycGVuZGljdWxhaXJlAP####8BAAAAABAAAAEAAQAAAAkAAAARAAAADAD#####AAAAEgAAABAAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwABAAAAEwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAATAAAABgD#####AAAAAAAQAAABAAEAAAAVAAAACf####8AAAABABRDSW1wbGVtZW50YXRpb25Qcm90bwD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAAJAAAAD#####8AAAABAAtDTWVkaWF0cmljZQAAAAAXAQAAAAAQAAABAAEAAAAJAAAADwAAAAcAAAAAFwEAAAAAEAAAAQUAAAAACQAAAA8AAAAKAAAAABcBAAAAAAEAAAAZAAAAAUAwAAAAAAAAAQAAAAwAAAAAFwAAABgAAAAaAAAADQAAAAAXAQAAAAAQAAABBQABAAAAGwAAAAkBAAAAFwAAAAkAAAAP#####wAAAAEAD0NWYWxldXJBZmZpY2hlZQEAAAAXAAAAAAEAAAAcEQAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAADIGNtAQAAAB3#####AAAAAQAOQ01hcnF1ZVNlZ21lbnQA#####wAAAP8AAgEAAAAWAAAAEwD#####AAAA#wACAQAAABEAAAACAP####8AAnIyAAE1AAAAAUAUAAAAAAAAAAAACgD#####AQAA#wABAAAACf####8AAAABAApDT3BlcmF0aW9uAAAAABQAAAAACwAAAAoAAAALAAAAIQAAAAFAAAAAAAAAAAAAAAAMAP####8AAAALAAAAIgAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAAjAAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAACMAAAAKAP####8BAAAAAAEAAAAlAAAACwAAACEAAAAADAD#####AAAACwAAACYAAAANAP####8BAAAAABAAAUIAAAAAAAAAAABACAAAAAAAAAMAAgAAACcAAAANAP####8BAAAAABAAAUMAAAAAAAAAAABACAAAAAAAAAMAAQAAACcAAAAOAP####8AAAAAAAEAAAAlAAAAKQAAACgAAAAGAP####8AAAAAABAAAAEAAQAAACgAAAApAAAAEAD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAAoAAAAKQAAABEAAAAALAEAAAAAEAAAAQABAAAAKAAAACkAAAAHAAAAACwBAAAAABAAAAEFAAAAACgAAAApAAAACgAAAAAsAQAAAAABAAAALgAAAAFAMAAAAAAAAAEAAAAMAAAAACwAAAAtAAAALwAAAA0AAAAALAEAAAAAEAAAAQUAAQAAADAAAAAJAQAAACwAAAAoAAAAKQAAABIBAAAALAAAAAABAAAAMREAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAAAyAAAABwD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAAAACQAAACkAAAAPAP####8BAAAAABAAAAEAAQAAADQAAAArAAAACgD#####AQAAAAABAAAANAAAABQAAAAACwAAAAEAAAABQAAAAAAAAAAAAAAADAD#####AAAANQAAADYAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwACAAAANwAAAA0A#####wEAAAAAEAABRQAAAAAAAAAAAEAIAAAAAAAAAwABAAAANwAAAAQA#####wEAAAABEAAAAQABAAAAOQE#8AAAAAAAAAAAAAoA#####wEAAAAAAQAAADkAAAALAAAAAQAAAAAMAP####8AAAA6AAAAOwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAA8AAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAADwAAAAMAP####8AAAA1AAAAOwAAAA0A#####wEAAAAAEAABRAAAAAAAAAAAAEAIAAAAAAAAAwACAAAAPwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAEAAAA######wAAAAEAEUNHcmFuZEFyY0RlQ2VyY2xlAP####8AAAAAAAEAAAA5AAAAPgAAAEAAAAAGAP####8AAAAAABAAAAEAAQAAAEAAAAA5AAAABgD#####AAAAAAAQAAABAAEAAAA5AAAAPgAAABMA#####wAAAP8AAgIAAABDAAAAEwD#####AAAA#wACAgAAAEQAAAAQAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAAEAAAAA5AAAAEQAAAABHAQAAAAAQAAABAAEAAABAAAAAOQAAAAcAAAAARwEAAAAAEAAAAQUAAAAAQAAAADkAAAAKAAAAAEcBAAAAAAEAAABJAAAAAUAwAAAAAAAAAQAAAAwAAAAARwAAAEgAAABKAAAADQAAAABHAQAAAAAQAAABBQABAAAASwAAAAkBAAAARwAAAEAAAAA5AAAAEgEAAABHAAAAAABARgAAAAAAAAAAAAAAAAAAAAAATBEAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAABNAAAACP##########"
+			
+			if (this.sup ==1) { //si on ne demande pas les aires
+				texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure est un demi-cercle de diamètre ${2*r2} cm auquel il faut ajouter un diamètre qui ferme la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times2\\times${r2}\\times\\pi+${r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure correspond à trois quarts d'un cercle de rayon ${r3} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm\\\\`
+			}
+
+			
+			if (this.sup ==2){
+				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_3=\\dfrac{3}{4}\\times${r3}\\times${r3}\\times\\pi=${tex_nombre(Algebrite.eval(3/4*r3*r3))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r3*r3*Math.PI),1))}~\\text{cm}^2$`
+			}
+
+			if (this.sup == 3){
+				texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure est un demi-cercle de diamètre ${2*r2} cm auquel il faut ajouter un diamètre qui ferme la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times2\\times${r2}\\times\\pi+${r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure correspond à trois quarts d'un cercle de rayon ${r3} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_3=\\dfrac{3}{4}\\times${r3}\\times${r3}\\times\\pi=${tex_nombre(Algebrite.eval(3/4*r3*r3))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r3*r3*Math.PI),1))}~\\text{cm}^2$`
+			}
+		}
+		else {
+			codeBase64 = "TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAL2AAACOAAAAQEAAAAAAAAAAQAAAGT#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAHQ0NhbGN1bAD#####AAJyMwABNgAAAAFAGAAAAAAAAP####8AAAABAApDUG9pbnRCYXNlAP####8BAAAAAA4AAVUAwCQAAAAAAABAEAAAAAAAAAUAAEAsZmZmZmZmQCxmZmZmZmb#####AAAAAQAUQ0Ryb2l0ZURpcmVjdGlvbkZpeGUA#####wEAAAAAEAAAAQABAAAAAgE#8AAAAAAAAP####8AAAABAA9DUG9pbnRMaWVEcm9pdGUA#####wEAAAAADgABVgDAAAAAAAAAAEAQAAAAAAAABQABQDxmZmZmZmYAAAAD#####wAAAAEACENTZWdtZW50AP####8BAAAAABAAAAEAAQAAAAIAAAAE#####wAAAAEAB0NNaWxpZXUA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAAIAAAAE#####wAAAAIADENDb21tZW50YWlyZQD#####AQAAAAAAAAAAAAAAAEAYAAAAAAAAAAAABgwAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAEx#####wAAAAEACUNMb25ndWV1cgD#####AAAAAgAAAAQAAAADAP####8BAAAAABAAAU8AAAAAAAAAAABACAAAAAAAAAMAAUBRQAAAAAAAQGQAAAAAAAAAAAACAP####8AAXIAATQAAAABQBAAAAAAAAAAAAAEAP####8BAAAAARAAAAEAAQAAAAkBP#AAAAAAAAD#####AAAAAgAJQ0NlcmNsZU9SAP####8BAAAAAAEAAAAJ#####wAAAAEAD0NSZXN1bHRhdFZhbGV1cgAAAAoA#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAsAAAAM#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAANAAAADQD#####AQAAAAAQAAFBAAAAAAAAAAAAQAgAAAAAAAADAAEAAAANAAAABgD#####AAAAAAAQAAABAAEAAAAJAAAAD#####8AAAABABZDRHJvaXRlUGVycGVuZGljdWxhaXJlAP####8BAAAAABAAAAEAAQAAAAkAAAAQ#####wAAAAEAFENJbXBsZW1lbnRhdGlvblByb3RvAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAAAkAAAAP#####wAAAAEAC0NNZWRpYXRyaWNlAAAAABIBAAAAABAAAAEAAQAAAAkAAAAPAAAABwAAAAASAQAAAAAQAAABBQAAAAAJAAAADwAAAAoAAAAAEgEAAAAAAQAAABQAAAABQDAAAAAAAAABAAAADAAAAAASAAAAEwAAABUAAAANAAAAABIBAAAAABAAAAEFAAEAAAAWAAAACQEAAAASAAAACQAAAA######AAAAAQAPQ1ZhbGV1ckFmZmljaGVlAQAAABIAAAAAAQAAABcRAAAAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAMgY20BAAAAGP####8AAAABAA5DTWFycXVlU2VnbWVudAD#####AAAA#wACAQAAABAAAAACAP####8AAnIyAAE1AAAAAUAUAAAAAAAAAAAACgD#####AQAA#wABAAAACf####8AAAABAApDT3BlcmF0aW9uAAAAABMAAAAACwAAAAoAAAALAAAAGwAAAAFAAAAAAAAAAAAAAAAMAP####8AAAALAAAAHAAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAAdAAAADQD#####AQAAAAAQAAFHAAAAAAAAAAAAQAgAAAAAAAADAAEAAAAdAAAACgD#####AQAAAAABAAAAHwAAAAsAAAAbAAAAAAwA#####wAAAAsAAAAgAAAADQD#####AQAAAAAQAAFCAAAAAAAAAAAAQAgAAAAAAAADAAIAAAAhAAAADQD#####AQAAAAAQAAFDAAAAAAAAAAAAQAgAAAAAAAADAAEAAAAhAAAABgD#####AQAAAAAQAAABAAEAAAAiAAAAIwAAAA8A#####wASTWVzdXJlIGRlIGxvbmd1ZXVyAAAABQAAAAEAAAACAAAAIgAAACMAAAAQAAAAACUBAAAAABAAAAEAAQAAACIAAAAjAAAABwAAAAAlAQAAAAAQAAABBQAAAAAiAAAAIwAAAAoAAAAAJQEAAAAAAQAAACcAAAABQDAAAAAAAAABAAAADAAAAAAlAAAAJgAAACgAAAANAAAAACUBAAAAABAAAAEFAAEAAAApAAAACQEAAAAlAAAAIgAAACMAAAAHAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwAAAAAJAAAAIwAAAA4A#####wEAAAAAEAAAAQABAAAALAAAACQAAAAKAP####8BAAAAAAEAAAAsAAAAEwAAAAALAAAAAQAAAAFAAAAAAAAAAAAAAAAMAP####8AAAAtAAAALgAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAAvAAAADQD#####AQAAAAAQAAFFAAAAAAAAAAAAQAgAAAAAAAADAAEAAAAvAAAABAD#####AQAAAAEQAAABAAEAAAAxAT#wAAAAAAAAAAAACgD#####AQAAAAABAAAAMQAAAAsAAAABAAAAAAwA#####wAAADIAAAAzAAAADQD#####AQAAAAAQAAFJAAAAAAAAAAAAQAgAAAAAAAADAAIAAAA0AAAADQD#####AQAAAAAQAAFIAAAAAAAAAAAAQAgAAAAAAAADAAEAAAA0AAAADAD#####AAAALQAAADMAAAANAP####8BAAAAABAAAUQAAAAAAAAAAABACAAAAAAAAAMAAgAAADcAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwABAAAANwAAAAYA#####wEAAAAAEAAAAQABAAAAOAAAADEAAAAGAP####8AAAAAABAAAAEAAQAAADEAAAA2AAAADwD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAA4AAAAMQAAABAAAAAAPAEAAAAAEAAAAQABAAAAOAAAADEAAAAHAAAAADwBAAAAABAAAAEFAAAAADgAAAAxAAAACgAAAAA8AQAAAAABAAAAPgAAAAFAMAAAAAAAAAEAAAAMAAAAADwAAAA9AAAAPwAAAA0AAAAAPAEAAAAAEAAAAQUAAQAAAEAAAAAJAQAAADwAAAA4AAAAMQAAABEBAAAAPAEAAAAAQEYAAAAAAAAAAAAAAAAAAAAAAEERAAAAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAMgY20BAAAAQgAAAAwA#####wAAABEAAAAMAAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAUAAgAAAEQAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwABAAAARAAAAAYA#####wAAAAAAEAAAAQABAAAAMQAAADUAAAAOAP####8BAAD#ABAAAAEAAgAAAB8AAAAkAAAADAD#####AAAASAAAACAAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwABAAAASQAAAA0A#####wEAAAAAEAABRgAAAAAAAAAAAEAIAAAAAAAAAwACAAAASQAAAAYA#####wAAAAAAEAAAAQABAAAAHwAAAEsAAAASAP####8AAAD#AAIBAAAATAAAAAYA#####wAAAAAAEAAAAQABAAAAHwAAACIAAAASAP####8AAAD#AAIBAAAATv####8AAAABAAxDQXJjRGVDZXJjbGUA#####wAAAAAAAQAAAAkAAAAPAAAARQAAAA8A#####wASTWVzdXJlIGRlIGxvbmd1ZXVyAAAABQAAAAIAAAACAAAASwAAAB8AAAAQAAAAAFEBAAAAAA0AAAEAAQAAAEsAAAAfAAAABwAAAABRAQAAAAANAAABBQAAAABLAAAAHwAAAAoAAAAAUQEAAAAAAQAAAFMAAAABQDAAAAAAAAABAAAADAAAAABRAAAAUgAAAFQAAAANAAAAAFEBAAAAAA0AAAEFAAEAAABVAAAACQEAAABRAAAASwAAAB8AAAARAQAAAFEAAAAAAMAqAAAAAAAAAAAAAAAAAAAAAABWEQAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAADIGNtAQAAAFcAAAAPAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAADYAAAA1AAAAEAAAAABZAQAAAAANAAABAAEAAAA2AAAANQAAAAcAAAAAWQEAAAAADQAAAQUAAAAANgAAADUAAAAKAAAAAFkBAAAAAAEAAABbAAAAAUAwAAAAAAAAAQAAAAwAAAAAWQAAAFoAAABcAAAADQAAAABZAQAAAAANAAABBQABAAAAXQAAAAkBAAAAWQAAADYAAAA1AAAAEQEAAABZAAAAAAAAAAAAAAAAAMAIAAAAAAAAAAAAXhEAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAABfAAAABgD#####AAAAAAAQAAABAAEAAAAJAAAARQAAABQA#####wAAAAAAAQAAADEAAAA1#####wAAAAFAZoAAAAAAAP####8AAAABABFDR3JhbmRBcmNEZUNlcmNsZQD#####AAAAAAABAAAAHwAAACL#####AAAAAUBw4AAAAAAAAAAACP##########"
+			texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+			
+			if (this.sup==1) {
+				texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure correspond à trois quarts d'un cercle rayon ${r2} cm auquel il faut ajouter deux rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm auquel il faut ajouter un diamètre qui ferme la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm\\\\`
+			}
+
+			if (this.sup==2){
+				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$\\\\`
+			
+			}
+
+
+			if (this.sup==3) {
+				texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure correspond à trois quarts d'un cercle rayon ${r2} cm auquel il faut ajouter deux rayons qui ferment la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure est un demi-cercle de rayon de diamètre ${2*r3} cm auquel il faut ajouter un diamètre qui ferme la figure.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.\\\\`
+				texte_corr += `\\\\`
+				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$\\\\`
+			}
+
+
+
+
+
+			
+		}
+		
 		
 		codeMG32 += `
-	        var st${numero_de_l_exercice} = "TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAIoAAACNQAAAQEAAAAAAAAAAQAAAE######AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAHQ0NhbGN1bAD#####AAJyMwABNgAAAAFAGAAAAAAAAP####8AAAABAApDUG9pbnRCYXNlAP####8BAAAAAA4AAVUAwCQAAAAAAABAEAAAAAAAAAUAAEAsZmZmZmZmQCxmZmZmZmb#####AAAAAQAUQ0Ryb2l0ZURpcmVjdGlvbkZpeGUA#####wEAAAAAEAAAAQABAAAAAgE#8AAAAAAAAP####8AAAABAA9DUG9pbnRMaWVEcm9pdGUA#####wEAAAAADgABVgDAAAAAAAAAAEAQAAAAAAAABQABQDxmZmZmZmYAAAAD#####wAAAAEACENTZWdtZW50AP####8BAAAAABAAAAEAAQAAAAIAAAAE#####wAAAAEAB0NNaWxpZXUA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAAIAAAAE#####wAAAAIADENDb21tZW50YWlyZQD#####AQAAAAAAAAAAAAAAAEAYAAAAAAAAAAAABgwAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAEx#####wAAAAEACUNMb25ndWV1cgD#####AAAAAgAAAAQAAAADAP####8BAAAAABAAAU8AAAAAAAAAAABACAAAAAAAAAMAAUBRQAAAAAAAQGQAAAAAAAAAAAACAP####8AAXIAATQAAAABQBAAAAAAAAAAAAAEAP####8BAAAAARAAAAEAAQAAAAkBP#AAAAAAAAD#####AAAAAgAJQ0NlcmNsZU9SAP####8BAAAAAAEAAAAJ#####wAAAAEAD0NSZXN1bHRhdFZhbGV1cgAAAAoA#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAsAAAAM#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAANAAAADQD#####AQAAAAAQAAFBAAAAAAAAAAAAQAgAAAAAAAADAAEAAAAN#####wAAAAEADENBcmNEZUNlcmNsZQD#####AAAAAAABAAAACQAAAA######AAAAAUBWgAAAAAAAAAAABgD#####AAAAAAAQAAABAAEAAAAJAAAAD#####8AAAABABZDRHJvaXRlUGVycGVuZGljdWxhaXJlAP####8BAAAAABAAAAEAAQAAAAkAAAARAAAADAD#####AAAAEgAAABAAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwABAAAAEwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAATAAAABgD#####AAAAAAAQAAABAAEAAAAVAAAACf####8AAAABABRDSW1wbGVtZW50YXRpb25Qcm90bwD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAAJAAAAD#####8AAAABAAtDTWVkaWF0cmljZQAAAAAXAQAAAAAQAAABAAEAAAAJAAAADwAAAAcAAAAAFwEAAAAAEAAAAQUAAAAACQAAAA8AAAAKAAAAABcBAAAAAAEAAAAZAAAAAUAwAAAAAAAAAQAAAAwAAAAAFwAAABgAAAAaAAAADQAAAAAXAQAAAAAQAAABBQABAAAAGwAAAAkBAAAAFwAAAAkAAAAP#####wAAAAEAD0NWYWxldXJBZmZpY2hlZQEAAAAXAAAAAAEAAAAcEQAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAADIGNtAQAAAB3#####AAAAAQAOQ01hcnF1ZVNlZ21lbnQA#####wAAAP8AAgEAAAAWAAAAEwD#####AAAA#wACAQAAABEAAAACAP####8AAnIyAAE1AAAAAUAUAAAAAAAAAAAACgD#####AQAA#wABAAAACf####8AAAABAApDT3BlcmF0aW9uAAAAABQAAAAACwAAAAoAAAALAAAAIQAAAAFAAAAAAAAAAAAAAAAMAP####8AAAALAAAAIgAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAAjAAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAACMAAAAKAP####8BAAAAAAEAAAAlAAAACwAAACEAAAAADAD#####AAAACwAAACYAAAANAP####8BAAAAABAAAUIAAAAAAAAAAABACAAAAAAAAAMAAgAAACcAAAANAP####8BAAAAABAAAUMAAAAAAAAAAABACAAAAAAAAAMAAQAAACcAAAAOAP####8AAAAAAAEAAAAlAAAAKQAAACgAAAAGAP####8AAAAAABAAAAEAAQAAACgAAAApAAAAEAD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAAoAAAAKQAAABEAAAAALAEAAAAAEAAAAQABAAAAKAAAACkAAAAHAAAAACwBAAAAABAAAAEFAAAAACgAAAApAAAACgAAAAAsAQAAAAABAAAALgAAAAFAMAAAAAAAAAEAAAAMAAAAACwAAAAtAAAALwAAAA0AAAAALAEAAAAAEAAAAQUAAQAAADAAAAAJAQAAACwAAAAoAAAAKQAAABIBAAAALAAAAAABAAAAMREAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAAAyAAAABwD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAAAACQAAACkAAAAPAP####8BAAAAABAAAAEAAQAAADQAAAArAAAACgD#####AQAAAAABAAAANAAAABQAAAAACwAAAAEAAAABQAAAAAAAAAAAAAAADAD#####AAAANQAAADYAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwACAAAANwAAAA0A#####wEAAAAAEAABRQAAAAAAAAAAAEAIAAAAAAAAAwABAAAANwAAAAQA#####wEAAAABEAAAAQABAAAAOQE#8AAAAAAAAAAAAAoA#####wEAAAAAAQAAADkAAAALAAAAAQAAAAAMAP####8AAAA6AAAAOwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAA8AAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAADwAAAAMAP####8AAAA1AAAAOwAAAA0A#####wEAAAAAEAABRAAAAAAAAAAAAEAIAAAAAAAAAwACAAAAPwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAEAAAA######wAAAAEAEUNHcmFuZEFyY0RlQ2VyY2xlAP####8AAAAAAAEAAAA5AAAAPgAAAEAAAAAGAP####8AAAAAABAAAAEAAQAAAEAAAAA5AAAABgD#####AAAAAAAQAAABAAEAAAA5AAAAPgAAABMA#####wAAAP8AAgIAAABDAAAAEwD#####AAAA#wACAgAAAEQAAAAQAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAAEAAAAA5AAAAEQAAAABHAQAAAAAQAAABAAEAAABAAAAAOQAAAAcAAAAARwEAAAAAEAAAAQUAAAAAQAAAADkAAAAKAAAAAEcBAAAAAAEAAABJAAAAAUAwAAAAAAAAAQAAAAwAAAAARwAAAEgAAABKAAAADQAAAABHAQAAAAAQAAABBQABAAAASwAAAAkBAAAARwAAAEAAAAA5AAAAEgEAAABHAAAAAABARgAAAAAAAAAAAAAAAAAAAAAATBEAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAABNAAAACP##########";
+	        var st${numero_de_l_exercice} = "${codeBase64}" ;
 	        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
 	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r", "${r}");
 	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r2", "${r2}");
 	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r3", "${r3}");
 	      ` 	
 		
-		texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
-		texte_corr += `\\\\`
-		texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-		texte_corr += `\\\\`
-		texte_corr += `\\\\`
-		texte_corr += `La deuxième figure est un demi-cercle de rayon ${r2} cm auquel il faut ajouter un rayon qui ferme la figure.\\\\`
-		texte_corr += `\\\\`
-		texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times2\\times${r2}\\times\\pi+${r2}=${r2}\\pi+${r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+r2),1))}$ cm\\\\`
-		texte_corr += `\\\\`
-		texte_corr += `\\\\`
-		texte_corr += `La troisième figure correspond à trois quarts d'un cercle de rayon ${r3} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
-		texte_corr += `$\\mathcal{P}_1=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm`
-				
+			
 		this.liste_corrections.push(texte_corr);
 		mg32_to_contenu(this);		
-	}	
+	}
+
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Périmètres\n\
+2 : Aires\n3 : Périmètres et aires"];			
 }
 
 function Exercice_differentes_ecritures_nombres_decimaux(){
