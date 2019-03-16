@@ -15,7 +15,9 @@ description:
 
 ### Pour participer
 
-Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources et les étudier. Vous pouvez aussi lire [ces exemples de codes](../mathalea_documentation.html) pour un exercice.
+Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources et les étudier. Vous pouvez aussi lire [ces exemples de codes](../mathalea_documentation) pour un exercice.
+
+MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.com/remiangot/Coopmaths)
 
 ### Crédits
 

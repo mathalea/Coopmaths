@@ -1,0 +1,23 @@
+{{ define "title" }}
+	CoopMaths - {{.Title}}
+{{ end }}
+
+
+{{ define "main" }}
+
+
+     {{ partial "header" . }}
+
+
+
+    <div class="ui container">
+
+          <h1 class="ui block header">{{.Title}}{{with .Params.niveau}} - {{.}}{{ end }}</h1>
+         
+
+         {{.Content}}
+	</div>
+
+     {{ partial "footer" . }}
+
+{{ end }}
