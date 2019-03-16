@@ -1549,7 +1549,7 @@ function Perimetre_et_portions_de_disques(pa=3){
 				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est un demi-cercle de diamètre ${2*r2} cm auquel il faut ajouter un diamètre qui ferme la figure.\\\\`
 				texte_corr += `\\\\`
-				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times2\\times${r2}\\times\\pi+${r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
 				texte_corr += `\\\\`
 				texte_corr += `\\\\`
 				texte_corr += `La troisième figure correspond à trois quarts d'un cercle de rayon ${r3} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
@@ -1582,7 +1582,7 @@ function Perimetre_et_portions_de_disques(pa=3){
 				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est un demi-cercle de diamètre ${2*r2} cm auquel il faut ajouter un diamètre qui ferme la figure.\\\\`
 				texte_corr += `\\\\`
-				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times2\\times${r2}\\times\\pi+${r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
 				texte_corr += `\\\\`
 				texte_corr += `\\\\`
 				texte_corr += `La troisième figure correspond à trois quarts d'un cercle de rayon ${r3} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
