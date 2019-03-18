@@ -1744,7 +1744,7 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 			if (this.sup==2){
 				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.\\\\`
 				texte_corr += `\\\\`
-				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
 				texte_corr += `\\\\`
 				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.\\\\`
