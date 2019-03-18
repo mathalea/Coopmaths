@@ -1514,7 +1514,7 @@ function Perimetre_aire_disques(pa=3){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.pas_de_version_LaTeX = true ;
 	this.titre = "Périmètres et aires de disques"
-	this.consigne = "Calculer le périmètre et l'aire de chacune des figures suivantes"
+	this.consigne = "Calculer le périmètre et l'aire des 4 disques suivants"
 	this.sup = pa ; // 1 : périmètre, 2 : aire, 3 : périmètres et aires
 	this.spacing = 2;
 	this.spacing_corr = 2;
