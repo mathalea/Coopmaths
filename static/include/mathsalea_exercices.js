@@ -20,8 +20,9 @@ var liste_des_exercices_disponibles = {
 		'6N24' : Exercice_6N24,
 		'6N24_1' : Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
 		'5N12':Exercice_fractions_simplifier,
-		'5N12-2':Exercice_fractions_completer_egalite,
-		'5N18':Exercice_decomposer_en_facteurs_premiers,
+		'5N12-2': Exercice_fractions_completer_egalite,
+		'5N18': Exercice_decomposer_en_facteurs_premiers,
+		'5N21': Exercice_comparer_des_fractions,
 		'5R20':Exercice_additions_relatifs,
 		'5R20_bis':Exercice_additions_relatifs_a_trou,
 		'5R20_ter':Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe
@@ -526,6 +527,63 @@ function Exercice_fractions_completer_egalite(max=11){
 			enleve_element(liste_fractions,fraction); // Il n'y aura pas 2 fois la même réponse
 			texte = '$ '+ tex_fraction(a,b) + ' = '+ tex_fraction('\\phantom{000000000000}','\\phantom{000000000000}') +' = '+tex_fraction('',k*b)+' $';
 			texte_corr = '$ '+ tex_fraction(a,b) + ' = '+ tex_fraction(k+' \\times '+a,k+' \\times '+b) +' = '+tex_fraction(k*a,k*b)+' $';
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			}
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+	}
+	this.besoin_formulaire_numerique = ['Valeur maximale du facteur commun',99999];		
+}
+
+function Exercice_comparer_des_fractions(max=11){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = max ; // Correspond au facteur commun
+	this.titre = "Comparer les fractions suivantes."
+	this.consigne = 'Comparer les fractions suivantes.'
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]] // Couples de nombres premiers entre eux
+		for (let i = 0, fraction, a, b, texte, texte_corr, cpt=0; i < this.nb_questions;i++) {
+			fraction = choice(liste_fractions); //
+			a = fraction[0];
+			b = fraction[1];
+			k = randint(2,this.sup);
+			ecart = choice([-4,-3,-2,-1,1,2,3,4]);
+			if (k*a+ecart<0){
+				ecart=ecart*(-1)
+			}
+			if (ecart>0) {
+				signe = `<`
+				signe2 = `>`
+			} else {
+				signe = `>`
+				signe2=`<`
+			}
+			enleve_element(liste_fractions,fraction); // Il n'y aura pas 2 fois la même réponse
+
+			ordre_des_fractions = randint(1,2)
+			if (ordre_des_fractions==1) {
+				texte = `$${tex_fraction(a,b)} \\quad$ et $\\quad ${tex_fraction(k*a+ecart,k*b)}$`;
+			} else {
+				texte = `$${tex_fraction(k*a+ecart,k*b)} \\quad$ et $\\quad ${tex_fraction(a,b)}$`;
+			}
+			if (!sortie_html) {
+				texte=texte.replace('\\quad$ et $\\quad','\\ldots\\ldots\\ldots')
+			}
+			texte_corr = `$${tex_fraction(a,b)}=${tex_fraction(a+'\\times '+k,b+'\\times '+k)}=${tex_fraction(a*k,b*k)}\\quad$`
+			if (ordre_des_fractions==1) {
+				texte_corr += `  et   $\\quad${tex_fraction(a*k,b*k)} ${signe} ${tex_fraction(a*k+ecart,b*k)}\\quad$ donc $\\quad${tex_fraction(a,b)} ${signe} ${tex_fraction(a*k+ecart,b*k)}$ `;
+			} else {
+				texte_corr += `  et   $\\quad${tex_fraction(a*k+ecart,b*k)} ${signe2} ${tex_fraction(a*k,b*k)} \\quad$ donc $\\quad ${tex_fraction(a*k+ecart,b*k)} ${signe2} ${tex_fraction(a,b)} $ `;
+			}
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 			}
