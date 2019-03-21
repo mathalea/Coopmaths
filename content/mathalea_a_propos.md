@@ -43,6 +43,11 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 ### Changelog
 
+#### 21/03/19
+
+- Ajout d'un bouton de zoom pour les exercices en ligne
+- Ajout d'exercices sur les disques et les comparaisons de fractions
+
 #### 15/03/19
 
 - Intégration de MathGraph32 pour afficher des constructions géométriques à données aléatoires
