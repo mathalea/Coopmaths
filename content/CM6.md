@@ -3,6 +3,7 @@ title: "Calcul mental - 6e"
 ref: ""
 draft: false
 cycle: 3
+description : "Sixième  : calcul mental"
 ---
 
 

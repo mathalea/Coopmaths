@@ -1,5 +1,6 @@
 ---
 title: "Calcul mental - 5e"
+description : "Cinquième  : calcul mental"
 ---
 
 <h3>Ceinture Blanche</h3>

@@ -6,6 +6,9 @@ disablePathToLower = true #pour garder des URL en majuscule
 googleAnalytics = "UA-5318292-3"
 publishDir = "../CoopMaths_Public" 
 
+[params]
+  description = "Exercices corrigés de Mathématiques pour une pédagogie coopérative et la personnalisation des apprentissages"
+
 
 ### Pour un fonctionnement en local ###
 #uglyurls = true

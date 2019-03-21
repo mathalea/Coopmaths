@@ -1,6 +1,7 @@
 ---
 title: "Mathématiques pour l'enseignement primaire"
 niveau: 
+description : "Préparation au CRPE"
 ---
 
 

@@ -1,7 +1,6 @@
 ---
 title: "Telechargements"
 niveau:
-description:
 ---
 
 ## Chapitres entiers avec les corrigés

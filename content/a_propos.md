@@ -1,7 +1,7 @@
 ---
 title: "À propos"
 niveau:
-description:
+description : "Présentation du projet COOPMaths - Personnalisation des apprentissages - Pédagogie Freinet au collège en mathématiques"
 ---
 
 ### Nos objectifs

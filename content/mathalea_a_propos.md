@@ -1,7 +1,7 @@
 ---
 title: "À propos de MathALEA"
 niveau:
-description:
+description: "Générateur d'exercices de mathématiques à données aléatoires"
 ---
 
 ### Objectifs
