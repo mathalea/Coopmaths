@@ -32,6 +32,8 @@
   <script src="include/mathsalea_outils.js"></script>
   <script src="include/katex-auto-render.min.js"></script>
 
+
+
   <!-- MG32 -->
   <script type="text/javascript" src="https://www.mathgraph32.org/js/mtg32jsmin.js"></script>
   <script type="text/x-mathjax-config">
@@ -100,8 +102,28 @@
 
 
   
+ <button class="btn ui labeled icon button" id="btn_mise_a_jour_code"><i class="redo icon"></i>Nouvelles données</button>
+<!-- Boutons de zoom -->
+ <div class="ui buttons">
+    <button class="btn ui  right labeled icon button" id="btn_zoom_plus">Zoom<i class="plus icon"></i> </button>
+    <button class="btn ui  icon button" id="btn_zoom_moins"><i class="minus icon"></i> </button>   
+ </div>
+ 
 
- <button class="btn ui labeled icon button" id="btn_mise_a_jour_code"><i class="redo icon"></i>Nouvelles données</button> 
+ <script type="text/javascript">
+   let zoom = 1;
+   $( "#btn_zoom_plus").click(function() {
+      zoom+=.5;
+      $("section").css("transform", `scale(${zoom})`);
+      $("section").css("transform-origin", "0 0px");
+   });
+   $( "#btn_zoom_moins").click(function() {
+      zomm=1;
+      $("section").css("transform", "scale(1)");
+      $("section").css("transform-origin", "0 0px");
+   });
+ </script>
+<!-- Fin de gestion des boutons de zoom -->
 
  <div class="ui hidden divider"></div>
 

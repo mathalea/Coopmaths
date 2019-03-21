@@ -98,6 +98,24 @@
  <h3 class="ui block header">Exercices</h3>
 
  <button class="btn ui labeled icon button" id="btn_mise_a_jour_code"><i class="redo icon"></i>Nouvelles données</button> 
+ <!-- Boutons de zoom -->
+ <div class="ui buttons">
+    <button class="btn ui  right labeled icon button" id="btn_zoom_plus">Zoom<i class="plus icon"></i> </button>
+    <button class="btn ui  icon button" id="btn_zoom_moins"><i class="minus icon"></i> </button>   
+ </div>
+ 
+
+ <script type="text/javascript">
+   $( "#btn_zoom_plus").click(function() {
+      $("section").css("transform", "scale(2)");
+      $("section").css("transform-origin", "0 0px");
+   });
+   $( "#btn_zoom_moins").click(function() {
+      $("section").css("transform", "scale(1)");
+      $("section").css("transform-origin", "0 0px");
+   });
+ </script>
+<!-- Fin de gestion des boutons de zoom -->
 
  <div class="ui hidden divider"></div>
 
