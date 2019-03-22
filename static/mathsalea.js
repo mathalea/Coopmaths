@@ -260,7 +260,6 @@ function mise_a_jour_de_la_liste_d_exercice() {
 	}
 	parametres_exercice(liste_des_exercices.length);
 	mise_a_jour_du_code();  
-
 }
 
 
@@ -270,6 +269,16 @@ var code_LaTeX = '', contenu_fichier = '';
 
 
 function mise_a_jour_du_code(){
+	// ajout du numéro de l'exercice dans l'URL
+	if (liste_des_exercices.length>0) {
+		if (sortie_html) {
+			window.history.pushState("","",`exercice.html?ex=${liste_des_exercices.join()}`);	
+		} else {
+			window.history.pushState("","",`?ex=${liste_des_exercices.join()}`);	
+		}
+		
+	}
+
 	codeMG32=``;
 	if (sortie_html){ // code pour la sortie HTML
 		let code1 ='', code2='', code_LaTeX = '';

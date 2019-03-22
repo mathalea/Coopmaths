@@ -45,18 +45,20 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 #### 21/03/19
 
-- Ajout d'un bouton de zoom pour les exercices en ligne
-- Ajout d'exercices sur les disques et les comparaisons de fractions
+- Ajout d'un bouton de zoom pour les exercices en ligne.
+- Modification de l'URL lorsqu'on choisit des exercices.
+- Ajout d'exercices sur les disques et les comparaisons de fractions.
+- Ajout d'exercices sur les comparaisons et additions de fractions (dénominateurs multiples) en 5e.
 
 #### 15/03/19
 
-- Intégration de MathGraph32 pour afficher des constructions géométriques à données aléatoires
-- Ajout d'exercices sur les portions de disques
+- Intégration de MathGraph32 pour afficher des constructions géométriques à données aléatoires.
+- Ajout d'exercices sur les portions de disques.
 
 #### 06/03/19
 
-- Intégration sur le site Coopmaths.fr
-- Utilisation du référentiel Coopmaths
+- Intégration sur le site Coopmaths.fr.
+- Utilisation du référentiel Coopmaths.
 
 #### 03/06/18
 

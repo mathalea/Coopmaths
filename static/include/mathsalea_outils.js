@@ -154,6 +154,16 @@ function combinaison_listes(liste,taille_minimale){
 	return liste
 }
 
+function mise_en_evidence(texte){
+	if (sortie_html) {
+		return '\\mathbf{\\color{#1DA962}{'+texte+'}}'	
+	}
+	else {
+		return '\\mathbf{\\color{red}{'+texte+'}}'
+	}
+	
+}
+
 function ecriture_nombre_relatif(a) { //(+3) ou (-3)
 	let result = '';
 	if (a>0) {
@@ -212,15 +222,9 @@ function arrondi_virgule(nombre, precision=2){ //renvoit un arrondi sous la form
 }
 
 function pgcd(a,b){
-	while (a!=b){
-		if (a>b){
-			a-=b
-		} else {
-			b-=a
-		}
-		return a;
-	}
+	return parseInt(Algebrite.run(`gcd(${a},${b})`));
 }
+
 
 function somme_des_termes_par_signe(liste){
 	let somme_des_positifs = 0, somme_des_negatifs = 0;

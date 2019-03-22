@@ -23,6 +23,7 @@ var liste_des_exercices_disponibles = {
 		'5N12-2': Exercice_fractions_completer_egalite,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
 		'5N21': Exercice_comparer_des_fractions,
+		'5N22': Exercice_additionner_des_fractions,
 		'5R20':Exercice_additions_relatifs,
 		'5R20_bis':Exercice_additions_relatifs_a_trou,
 		'5R20_ter':Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe
@@ -538,7 +539,7 @@ function Exercice_fractions_completer_egalite(max=11){
 function Exercice_comparer_des_fractions(max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ; // Correspond au facteur commun
-	this.titre = "Comparer les fractions suivantes."
+	this.titre = "Comparer des fractions (dénominateurs multiples)"
 	this.consigne = 'Comparer les fractions suivantes.'
 	this.spacing = 2;
 	this.spacing_corr = 2;
@@ -578,7 +579,7 @@ function Exercice_comparer_des_fractions(max=11){
 			if (!sortie_html) {
 				texte=texte.replace('\\quad$ et $\\quad','\\ldots\\ldots\\ldots')
 			}
-			texte_corr = `$${tex_fraction(a,b)}=${tex_fraction(a+'\\times '+k,b+'\\times '+k)}=${tex_fraction(a*k,b*k)}\\quad$`
+			texte_corr = `$${tex_fraction(a,b)}=${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}=${tex_fraction(a*k,b*k)}\\quad$`
 			if (ordre_des_fractions==1) {
 				texte_corr += `  et   $\\quad${tex_fraction(a*k,b*k)} ${signe} ${tex_fraction(a*k+ecart,b*k)}\\quad$ donc $\\quad${tex_fraction(a,b)} ${signe} ${tex_fraction(a*k+ecart,b*k)}$ `;
 			} else {
@@ -589,7 +590,55 @@ function Exercice_comparer_des_fractions(max=11){
 			}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
-	this.besoin_formulaire_numerique = ['Valeur maximale du facteur commun',99999];		
+	this.besoin_formulaire_numerique = ['Valeur maximale du coefficient multiplicateur',99999];		
+}
+
+function Exercice_additionner_des_fractions(max=11){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = max ; // Correspond au facteur commun
+	this.titre = "Additionner deux fractions (dénominateurs multiples)"
+	this.consigne = "Calculer et donner le résultat sous la forme d'une fraction simplifiée"
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		for (let i = 0, a, b, c, d,texte, texte_corr, cpt=0; i < this.nb_questions;i++) {
+			// les numérateurs
+			a = randint (1,9);
+			c = randint (1,9);
+			// les dénominateurs
+			b = randint(2,9);
+			k = randint(2,this.sup);
+			d = b*k
+			ordre_des_fractions = randint(1,2)
+			if (ordre_des_fractions==1) {
+				texte = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=$`;
+			} else {
+				texte = texte = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=$`;
+			}
+			if (ordre_des_fractions==1) {
+				texte_corr = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=${tex_fraction(a+mise_en_evidence('\\times'+k),b+mise_en_evidence('\\times'+k))}+${tex_fraction(c,d)}`
+				texte_corr += `=${tex_fraction(a*k,b*k)}+${tex_fraction(c,d)}=${tex_fraction(a*k+`+`+c,d)}=${tex_fraction(a*k+c,d)}$`;
+			} else {
+				texte_corr = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=${tex_fraction(c,d)}+${tex_fraction(a+mise_en_evidence('\\times'+k),b+mise_en_evidence('\\times'+k))}`
+				texte_corr += `=${tex_fraction(c,d)}+${tex_fraction(a*k,b*k)}=${tex_fraction(c+'+'+a*k,d)}=${tex_fraction(a*k+c,d)}$`;
+			}
+			// Est-ce que le résultat est simplifiable ?
+			let s = pgcd(a*k+c,d);
+			console.log(a*k+c,d,s);
+			if (s!=1) {
+				texte_corr +=`$=${tex_fraction(Algebrite.eval((a*k+c)/s)+mise_en_evidence('\\times'+s),Algebrite.eval(d/s)+mise_en_evidence('\\times'+s))}=${tex_fraction(Algebrite.eval((a*k+c)/s),Algebrite.eval(d/s))}$`
+			}
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			}
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+	}
+	this.besoin_formulaire_numerique = ['Valeur maximale du coefficient multiplicateur',99999];		
 }
 
 function Exercice_fractions_differentes_ecritures(){
