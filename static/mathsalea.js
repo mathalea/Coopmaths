@@ -344,6 +344,7 @@ function mise_a_jour_du_code(){
 
 
 if (!sortie_html){
+
 	// Gestion du téléchargement
 
 	$( "#btn_telechargement").click(function() {
@@ -415,6 +416,8 @@ if (!sortie_html){
 	}
 
 
+
+
 function getUrlVars() { // Récupère les variables de l'URL
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -426,6 +429,10 @@ function getUrlVars() { // Récupère les variables de l'URL
 
 window.onload = function()  {
 //$( document ).ready(function() {	
+
+	// Gestion du menu déroulant
+
+	$('.ui.dropdown') .dropdown();  
 	
 	
 	// Gestion de la mise à jour de l'affichage du code
@@ -519,6 +526,26 @@ window.onload = function()  {
     } else {
     	mise_a_jour_du_code();
     }
+
+
+    if (sortie_html) {
+	// Gestion du bouton de zoom
+	let zoom = 1;
+   	$( "#btn_zoom_plus").click(function() {
+    	zoom+=.5;
+      	$("#affichage_exercices").css("transform", `scale(${zoom})`);
+      	$("#affichage_exercices").css("transform-origin", "0 0px");
+      	//window.location.hash = 'section';
+   	});
+   	$( "#btn_zoom_moins").click(function() {
+    	if (zoom>1) {
+    		zoom-=.5;
+    	}
+      	$("#affichage_exercices").css("transform", `scale(${zoom})`);
+      	$("#affichage_exercices").css("transform-origin", "0 0px");
+   	});
+
+}
         
 
 };
