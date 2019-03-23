@@ -629,7 +629,6 @@ function Exercice_additionner_des_fractions(max=11){
 			}
 			// Est-ce que le résultat est simplifiable ?
 			let s = pgcd(a*k+c,d);
-			console.log(a*k+c,d,s);
 			if (s!=1) {
 				texte_corr +=`$=${tex_fraction(Algebrite.eval((a*k+c)/s)+mise_en_evidence('\\times'+s),Algebrite.eval(d/s)+mise_en_evidence('\\times'+s))}=${tex_fraction(Algebrite.eval((a*k+c)/s),Algebrite.eval(d/s))}$`
 			}

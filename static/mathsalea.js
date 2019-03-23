@@ -14,6 +14,8 @@ var div = document.getElementById('div_code_LaTeX'); // Récupère le div dans l
 var div_parametres_generaux = document.getElementById('parametres_generaux'); // Récupère le div dans lequel seront inscrit les paramètres
 var form_consigne = [], form_nb_questions = [], form_nb_cols = [], form_nb_cols_corr = [], form_spacing = [] , form_spacing_corr = [], form_sup = [], form_sup2 = []; // Création de tableaux qui recevront les éléments HTML de chaque formulaires
 
+var URL_de_depart_complexe = false;
+
 function parametres_exercice(nb_exercices){
 /* Pour l'exercice i, on rajoute un formulaire avec 5 inputs : 
 nombre de questions, nombre de colonnes,nombre de colonnes dans le corrigé,
@@ -271,14 +273,21 @@ var code_LaTeX = '', contenu_fichier = '';
 
 function mise_a_jour_du_code(){
 	// ajout du numéro de l'exercice dans l'URL
-	if (liste_des_exercices.length>0) {
-		if (sortie_html) {
-			window.history.pushState("","",`exercice.html?ex=${liste_des_exercices.join()}`);	
-		} else {
-			window.history.pushState("","",`?ex=${liste_des_exercices.join()}`);	
+	if (!URL_de_depart_complexe){
+		if (liste_des_exercices.length>0) {
+			let fin_de_l_URL = ""
+			if (sortie_html) {
+				fin_de_l_URL+="exercice.html"	
+			} 
+		fin_de_l_URL += "?ex="+liste_des_exercices[0]
+		for (var i = 1; i < liste_des_exercices.length; i++) {
+			fin_de_l_URL +="&ex="+liste_des_exercices[i]
 		}
-		
+		window.history.pushState("","",fin_de_l_URL);
+			
+		}
 	}
+		
 
 	codeMG32=``;
 	if (sortie_html){ // code pour la sortie HTML
@@ -429,15 +438,31 @@ if (!sortie_html){
 
 
 function getUrlVars() { // Récupère les variables de l'URL
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
- // TRAVAIL EN COURS   
- //    var url = new URL(window.location.href)
-	// console.log(url.searchParams.get("ex"))
+    let url = new URL(window.location.href);
+    let tableau_des_strings_exercices_et_parametres = url.searchParams.getAll("ex"); // récupère un string pour chaque paramètre ex de l'URL
+    let tableau_objets_exercices = new Array
+    for (var ex_i = 0; ex_i < tableau_des_strings_exercices_et_parametres.length; ex_i++) {
+    	let CleValeur = tableau_des_strings_exercices_et_parametres[ex_i].split(",");
+	    let ObjetParametres = {}
+	    ObjetParametres["id"] = CleValeur[0] // Récupère le premier élément qui est forcément l'id
+	    CleValeur.shift() // Retire ce premier élément
+	    if (CleValeur.length>0){
+	    	for (let i in CleValeur){
+		    	CleValeur[i]=CleValeur[i].split("=")
+		    	// change le type de ce qui ne doit pas être un string
+		    	if (CleValeur[i][1]=="true" || CleValeur[i][1]=="false") {//"true"=>true
+		    		ObjetParametres[CleValeur[i][0]]=(CleValeur[i][1]=="true")
+		    	} else if (!isNaN(CleValeur[i][1])){ //"17"=>17
+		    		ObjetParametres[CleValeur[i][0]]=parseInt(CleValeur[i][1])
+		    	} else {
+		    		ObjetParametres[CleValeur[i][0]]=CleValeur[i][1]	
+		    	}
+		    }
+	    }
+		tableau_objets_exercices.push(ObjetParametres)
+    }
+	return tableau_objets_exercices;
 
-    return vars;
 }
 
 
@@ -459,82 +484,35 @@ window.onload = function()  {
 	$('.ui.radio.checkbox').checkbox(); // active les boutons radio (pour le style)
 
 	// Récupère les paramètres passés dans l'URL
-	var interrogation_dans_URL = location.href.indexOf("?");
-    if (interrogation_dans_URL > 0) {
-    	liste_des_exercices = getUrlVars()['ex'];
-    	liste_des_exercices = liste_des_exercices.split(",")
-
+	//var interrogation_dans_URL = location.href.indexOf("?");
+	let tableau_objets_exercices = getUrlVars();
+    if (tableau_objets_exercices.length > 0) {
+    	URL_de_depart_complexe = true;
+    	for (var i = 0; i < tableau_objets_exercices.length; i++) {
+    		liste_des_exercices.push(tableau_objets_exercices[i]["id"])
+    	}
     	mise_a_jour_de_la_liste_d_exercice();
+
+    	for (var i = 0; i < tableau_objets_exercices.length; i++) { // récupère les éventuels paramètres dans l'URL
+    		if (tableau_objets_exercices[i]["nb_questions"]){
+    			exercice[i].nb_questions = tableau_objets_exercices[i]["nb_questions"]
+    		}
+    		if (tableau_objets_exercices[i]["sup"]){
+    			exercice[i].sup = tableau_objets_exercices[i]["sup"]
+    		}
+    		if (tableau_objets_exercices[i]["sup2"]){
+    			exercice[i].sup2 = tableau_objets_exercices[i]["sup2"]
+    		}
+    	}
 
  
 
-    	// Les param1 à param5 seront les sup des 7 premiers exercices
-    	var parametre_supplementaires_dans_URL1 = getUrlVars()['param1']; 
-    	var parametre_supplementaires_dans_URL2 = getUrlVars()['param2'];
-    	var parametre_supplementaires_dans_URL3 = getUrlVars()['param3'];
-    	var parametre_supplementaires_dans_URL4 = getUrlVars()['param4'];
-    	var parametre_supplementaires_dans_URL5 = getUrlVars()['param5'];
-    	var parametre_supplementaires_dans_URL6 = getUrlVars()['param6'];
-    	var parametre_supplementaires_dans_URL7 = getUrlVars()['param7']; 
-    	if (parametre_supplementaires_dans_URL1){
-    		exercice[0].sup=parametre_supplementaires_dans_URL1
-    	}
-    	if (parametre_supplementaires_dans_URL2 && liste_des_exercices.length>1){
-    		exercice[1].sup=parametre_supplementaires_dans_URL2
-    	}
-    	if (parametre_supplementaires_dans_URL3 && liste_des_exercices.length>2){
-    		exercice[2].sup=parametre_supplementaires_dans_URL3
-    	}
-    	if (parametre_supplementaires_dans_URL4 && liste_des_exercices.length>3){
-    		exercice[3].sup=parametre_supplementaires_dans_URL4
-    	}
-    	if (parametre_supplementaires_dans_URL5 && liste_des_exercices.length>4){
-    		exercice[4].sup=parametre_supplementaires_dans_URL5
-    	}
-    	if (parametre_supplementaires_dans_URL6 && liste_des_exercices.length>5){
-    		exercice[5].sup=parametre_supplementaires_dans_URL6
-    	}
-    	if (parametre_supplementaires_dans_URL7 && liste_des_exercices.length>6){
-    		exercice[6].sup=parametre_supplementaires_dans_URL7
-    	}
-
-    	// Les paramb1 à paramb5 seront les sup2 des 7 premiers exercices
-    	var parametre_supplementaires_bis_dans_URL1 = getUrlVars()['paramb1'];
-    	var parametre_supplementaires_bis_dans_URL2 = getUrlVars()['paramb2'];
-    	var parametre_supplementaires_bis_dans_URL3 = getUrlVars()['paramb3'];
-    	var parametre_supplementaires_bis_dans_URL4 = getUrlVars()['paramb4'];
-    	var parametre_supplementaires_bis_dans_URL5 = getUrlVars()['paramb5']; 
-    	var parametre_supplementaires_bis_dans_URL6 = getUrlVars()['paramb6']; 
-    	var parametre_supplementaires_bis_dans_URL7 = getUrlVars()['paramb7']; 
-    	if (parametre_supplementaires_bis_dans_URL1){
-    		exercice[0].sup2=parametre_supplementaires_bis_dans_URL1
-    	}
-    	if (parametre_supplementaires_bis_dans_URL2 && liste_des_exercices.length>1){
-    		exercice[1].sup2=parametre_supplementaires_bis_dans_URL2
-    	}
-    	if (parametre_supplementaires_bis_dans_URL3 && liste_des_exercices.length>2){
-    		exercice[2].sup2=parametre_supplementaires_bis_dans_URL3
-    	}
-    	if (parametre_supplementaires_bis_dans_URL4 && liste_des_exercices.length>3){
-    		exercice[3].sup2=parametre_supplementaires_bis_dans_URL4
-    	}
-    	if (parametre_supplementaires_bis_dans_URL5 && liste_des_exercices.length>4){
-    		exercice[4].sup2=parametre_supplementaires_bis_dans_URL5
-    	}
-    	if (parametre_supplementaires_bis_dans_URL6 && liste_des_exercices.length>5){
-    		exercice[5].sup2=parametre_supplementaires_bis_dans_URL6
-    	}
-    	if (parametre_supplementaires_bis_dans_URL7 && liste_des_exercices.length>6){
-    		exercice[6].sup2=parametre_supplementaires_bis_dans_URL7
-    	}
-
-    	// Fixe le même nombre de questions pour tous les exercices
-    	var nb_questions_dans_URL = getUrlVars()['nb_questions'];
-    	if (nb_questions_dans_URL){
-    		for (var i = 0; i <liste_des_exercices.length; i++) {
-	    		exercice[i].nb_questions = String(nb_questions_dans_URL);
-	    	}
-    	}
+    	
+    	// if (parametre_supplementaires_dans_URL1){
+    	// 	exercice[0].sup=parametre_supplementaires_dans_URL1
+    	// }
+    	
+    	
 
     	mise_a_jour_du_code();
     } else {
