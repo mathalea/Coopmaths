@@ -1581,6 +1581,7 @@ function Probleme_course(){
 	this.spacing = 2;
 	this.spacing_corr = 2;
 	this.nb_questions = 1;
+	this.nb_questions_modifiable = false ;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 
@@ -1626,6 +1627,7 @@ function Perimetre_aire_disques(pa=3){
 	this.spacing = 2;
 	this.spacing_corr = 2;
 	this.nb_questions = 1;
+	this.nb_questions_modifiable = false ;
 	this.type_exercice = 'MG32';
 	this.taille_div_MG32 = [500,500];
 

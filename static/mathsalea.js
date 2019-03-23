@@ -18,7 +18,7 @@ function parametres_exercice(nb_exercices){
 /* Pour l'exercice i, on rajoute un formulaire avec 5 inputs : 
 nombre de questions, nombre de colonnes,nombre de colonnes dans le corrigé,
 espacement et espacement dans le corrigé.
-Les réponses modifie les caractéristiques de l'exercice puis le code LaTeX est mis à jour
+Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX est mis à jour
 */
 
 	div_parametres_generaux.innerHTML = ''; // Vide le div parametres_generaux
@@ -255,8 +255,9 @@ form_choix_des_exercices.addEventListener('change', function(e) { // Changement 
 
 function mise_a_jour_de_la_liste_d_exercice() {
 	for (let i=0; i<liste_des_exercices.length; i++){
-		//exercice[i] = new Exercice_tables_de_multiplications();
-		exercice[i] = new liste_des_exercices_disponibles[liste_des_exercices[i]];
+		if (!exercice[i]){
+			exercice[i] = new liste_des_exercices_disponibles[liste_des_exercices[i]];	
+		}
 	}
 	parametres_exercice(liste_des_exercices.length);
 	mise_a_jour_du_code();  
@@ -432,6 +433,10 @@ function getUrlVars() { // Récupère les variables de l'URL
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
         vars[key] = value;
     });
+ // TRAVAIL EN COURS   
+ //    var url = new URL(window.location.href)
+	// console.log(url.searchParams.get("ex"))
+
     return vars;
 }
 
