@@ -14,7 +14,7 @@ var div = document.getElementById('div_code_LaTeX'); // Récupère le div dans l
 var div_parametres_generaux = document.getElementById('parametres_generaux'); // Récupère le div dans lequel seront inscrit les paramètres
 var form_consigne = [], form_nb_questions = [], form_nb_cols = [], form_nb_cols_corr = [], form_spacing = [] , form_spacing_corr = [], form_sup = [], form_sup2 = []; // Création de tableaux qui recevront les éléments HTML de chaque formulaires
 
-var URL_de_depart_complexe = false;
+var URL_de_depart_complexe = false; // Si l'utilisateur a entré une URL avec des paramètres, on ne la modifie pas
 
 function parametres_exercice(nb_exercices){
 /* Pour l'exercice i, on rajoute un formulaire avec 5 inputs : 
@@ -56,7 +56,6 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 			}
 			
 		}
-		
 		
 			// Si un formulaire supplémentaire est défini dans l'exercice alors on l'ajoute
 			if (exercice[i].besoin_formulaire_numerique||exercice[i].besoin_formulaire_texte){ // Ajout du titre pour les réglages supplémentaires
@@ -496,6 +495,7 @@ window.onload = function()  {
     	for (var i = 0; i < tableau_objets_exercices.length; i++) { // récupère les éventuels paramètres dans l'URL
     		if (tableau_objets_exercices[i]["nb_questions"]){
     			exercice[i].nb_questions = tableau_objets_exercices[i]["nb_questions"]
+    			form_nb_questions[i].value = exercice[i].nb_questions;
     		}
     		if (tableau_objets_exercices[i]["sup"]){
     			exercice[i].sup = tableau_objets_exercices[i]["sup"]
