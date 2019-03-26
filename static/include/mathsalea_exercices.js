@@ -20,6 +20,7 @@ var liste_des_exercices_disponibles = {
 		'6N23_1' : Exercice_differentes_ecritures_nombres_decimaux,
 		'6N24' : Exercice_6N24,
 		'6N24_1' : Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
+		'6N33' : Fraction_d_un_nombre,
 		'5N12':Exercice_fractions_simplifier,
 		'5N12-2': Exercice_fractions_completer_egalite,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
@@ -1735,6 +1736,7 @@ function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000(){
 	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
 }
 
+<<<<<<< HEAD
 
 function Variation_en_pourcentages(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -1743,10 +1745,21 @@ function Variation_en_pourcentages(){
 	this.nb_questions = 5;
 	this.spacing = 2;
 	this.spacing_corr = 2;
+=======
+function Fraction_d_un_nombre(max=11){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Calculer la fraction d'un nombre"
+	this.nb_questions = 5;
+	this.consigne = "Calculer"
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.sup = max;
+>>>>>>> Ajout de 6N33 fraction d'un nombre
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
+<<<<<<< HEAD
 		for (let i = 0, prix, taux, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
 			prix = choice([randint(2,9),randint(1,9)*10,randint(1,9)*100,Algebrite.eval(randint(11,99)/10)]);
 			// X | X0 | X00 | X,X0
@@ -1773,6 +1786,26 @@ function Variation_en_pourcentages(){
 				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}+${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix+prix*taux/100))}$ €`
 			}
 			
+=======
+		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]] // Couples de nombres premiers entre eux
+
+		for (let i = 0, a, b, k, n, fraction, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
+			fraction = choice(liste_fractions);
+			a = fraction[0];
+			b = fraction[1];
+			k = randint(1,this.sup);
+			n = b*k; 
+			texte = `$${tex_fraction(a,b)}\\times${n}=$`;
+			if (a==1){
+				texte_corr = `$${tex_fraction(a,b)}\\times${n}=${n}\\div${b}=${Algebrite.eval(n/b)}$`;	
+			} else {
+				texte_corr = `$${tex_fraction(a,b)}\\times${n}=(${n}\\div${b})\\times${a}=${Algebrite.eval(n/b)}\\times${a}=${Algebrite.eval(n/b*a)}$`;
+			}
+			
+			
+>>>>>>> Ajout de 6N33 fraction d'un nombre
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
@@ -1782,6 +1815,10 @@ function Variation_en_pourcentages(){
 		}
 		liste_de_question_to_contenu(this);
 	}
+<<<<<<< HEAD
+=======
+	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
+>>>>>>> Ajout de 6N33 fraction d'un nombre
 }
 
 function Probleme_course(){
