@@ -21,6 +21,7 @@ var liste_des_exercices_disponibles = {
 		'6N24' : Exercice_6N24,
 		'6N24_1' : Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
 		'6N33' : Fraction_d_un_nombre,
+		'6N33-1' : Pourcentage_d_un_nombre,
 		'5N12':Exercice_fractions_simplifier,
 		'5N12-2': Exercice_fractions_completer_egalite,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
@@ -1821,6 +1822,42 @@ function Fraction_d_un_nombre(max=11){
 >>>>>>> Ajout de 6N33 fraction d'un nombre
 }
 
+function Pourcentage_d_un_nombre(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Calculer le pourcentage d'un nombre de tête"
+	this.nb_questions = 5;
+	this.consigne = "Calculer"
+	this.spacing = 2;
+	this.spacing_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		liste_pourcentages = [10,20,30,40,50];
+
+		for (let i = 0, p, n, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
+			p = choice(liste_pourcentages)
+			n = choice([randint(2,9),randint(2,9)*10,randint(1,9)*10+randint(1,2)]); 
+			texte = `$${p}~\\%~\\text{de }${n}$`;
+			if (p==50) {
+			texte_corr = `$${p}~\\%~\\text{de }${n}=${tex_fraction(1,2)}\\times${n}=${tex_nombre(Algebrite.eval(n/2))}$`				
+			} else {
+			texte_corr = `$${p}~\\%~\\text{de }${n}=${tex_fraction(p,100)}\\times${n}=(${p}\\times${n})\\div100=${tex_nombre(p*n)}\\div100=${tex_nombre(Algebrite.eval(p*n/100))}$`				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
+}
+
 function Probleme_course(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Problème - Les courses"
@@ -2040,7 +2077,7 @@ function Perimetre_aire_disques(pa=3){
 
 function Perimetre_aire_et_portions_de_disques(pa=3){
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.pas_de_version_LaTeX = true ;
+	this.pas_de_version_LaTeX = false ;
 	this.titre = "Périmètres et aires de portions de cercles"
 	this.consigne = "Calculer le périmètre et l'aire de chacune des figures suivantes"
 	this.sup = pa ; // 1 : périmètre, 2 : aire, 3 : périmètres et aires
