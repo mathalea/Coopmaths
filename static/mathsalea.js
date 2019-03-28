@@ -30,8 +30,10 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 	}
 	for (let i = 0; i < nb_exercices; i++) {
 		if(sortie_html) {
-			div_parametres_generaux.innerHTML += '<h4 class="ui dividing header">Exercice n°'+ (i+1) +' : '+ exercice[i].titre +'</h4>\
-			<div><label for="form_nb_questions'+i+'">Nombre de questions : </label> <input id="form_nb_questions'+i+'" type="number"  min="1" max="99"></div>'
+			div_parametres_generaux.innerHTML += '<h4 class="ui dividing header">Exercice n°'+ (i+1) +' : '+ exercice[i].titre +'</h4>'
+			if (exercice[i].nb_questions_modifiable){
+			 	div_parametres_generaux.innerHTML +='<div><label for="form_nb_questions'+i+'">Nombre de questions : </label> <input id="form_nb_questions'+i+'" type="number"  min="1" max="99"></div>'
+			}
 		} else {
 			div_parametres_generaux.innerHTML += '<h4 class="ui dividing header">Exercice n°'+ (i+1) +' : '+ exercice[i].titre +'</h4>'
 
@@ -59,7 +61,7 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 		
 			// Si un formulaire supplémentaire est défini dans l'exercice alors on l'ajoute
 			if (exercice[i].besoin_formulaire_numerique||exercice[i].besoin_formulaire_texte){ // Ajout du titre pour les réglages supplémentaires
-				div_parametres_generaux.innerHTML += "<h4 class='ui dividing header'>Réglages supplémentaires</h4>";
+				div_parametres_generaux.innerHTML += "<h4 class='ui dividing header'></h4>";
 			}
 
 			if (exercice[i].besoin_formulaire_numerique){ // Création d'un formulaire numérique
@@ -74,6 +76,17 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 			if (exercice[i].besoin_formulaire_texte){ // Création d'un formulaire texte
 				div_parametres_generaux.innerHTML += "<div style='display: inline'><label for='form_sup"+i+"'>"+exercice[i].besoin_formulaire_texte[0]+" : </label>\
 			<div style='display: inline' data-tooltip='"+exercice[i].besoin_formulaire_texte[1]+"' data-inverted=''><input id='form_sup"+i+"' type='text' size='20' ></div></div>";
+			}
+
+			if (exercice[i].besoin_formulaire_long_texte){ // Création d'un long formulaire de texte
+				div_parametres_generaux.innerHTML += "<label for='form_sup"+i+"'>"+exercice[i].besoin_formulaire_long_texte[0]+" : </label>\
+			<div style='display: inline' data-tooltip='"+exercice[i].besoin_formulaire_long_texte[1]+"' data-inverted=''><textarea id='form_sup"+i+"'></textarea></div>";
+				div_parametres_generaux.innerHTML +=`<div class="ui form">
+  <div class="field">
+    <label>Text</label>
+    <textarea></textarea>
+  </div>
+</div>`
 			}
 
 			if (exercice[i].besoin_formulaire2_case_a_cocher){ // Création d'un formulaire texte
@@ -166,6 +179,21 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 		// Gestion des paramètres supplémentaires s'ils existent
 
 		if (exercice[i].besoin_formulaire_texte){
+			form_sup[i] = document.getElementById('form_sup'+i);
+			form_sup[i].addEventListener('keydown', function(e) { // Appui sur la touche entrée
+				if (e.keyCode == 13){
+        		exercice[i].sup = e.target.value;// Récupère  la saisie de l'utilisateur
+        		mise_a_jour_du_code();
+        	};
+        });
+
+			form_sup[i].addEventListener('blur', function(e) { // Perte du focus
+				exercice[i].sup = e.target.value;
+				mise_a_jour_du_code();
+			});
+		}
+
+		if (exercice[i].besoin_formulaire_long_texte){
 			form_sup[i] = document.getElementById('form_sup'+i);
 			form_sup[i].addEventListener('keydown', function(e) { // Appui sur la touche entrée
 				if (e.keyCode == 13){
@@ -504,16 +532,6 @@ window.onload = function()  {
     			exercice[i].sup2 = tableau_objets_exercices[i]["sup2"]
     		}
     	}
-
- 
-
-    	
-    	// if (parametre_supplementaires_dans_URL1){
-    	// 	exercice[0].sup=parametre_supplementaires_dans_URL1
-    	// }
-    	
-    	
-
     	mise_a_jour_du_code();
     } else {
     	mise_a_jour_du_code();

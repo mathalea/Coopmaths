@@ -22,6 +22,7 @@ var liste_des_exercices_disponibles = {
 		'5N12':Exercice_fractions_simplifier,
 		'5N12-2': Exercice_fractions_completer_egalite,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
+		'5N110' : Variation_en_pourcentages,
 		'5N21': Exercice_comparer_des_fractions,
 		'5N22': Exercice_additionner_des_fractions_5e,
 		'5N22-1': Exercice_additionner_ou_soustraire_des_fractions_5e,
@@ -39,6 +40,7 @@ var liste_des_exercices_disponibles = {
 		//15:Exercice_perimetres_et_aires,
 		'3N1':Exercice_developper,
 		'LaTeX' : Code_LaTeX_personnalise,
+		// 'Perso' : HTML_personnalise,
 		//13:Exercice_equation1
 	};
 
@@ -1654,6 +1656,46 @@ function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000(){
 	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
 }
 
+
+function Variation_en_pourcentages(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Variation en pourcentages";
+	this.consigne = "Calculer le nouveau prix";
+	this.nb_questions = 5;
+	this.spacing = 2;
+	this.spacing_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		for (let i = 0, prix, taux, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
+			prix = choice([randint(2,9),randint(1,9)*10,randint(1,9)*100,Algebrite.eval(randint(11,99)/10)]);
+			// X | X0 | X00 | X,X0
+			taux = choice([20,30,40,60]);
+			if (choice([true,false])) {
+				texte = `Un article coûtait ${tex_prix(prix)} € et son prix diminue de ${taux} \%.`
+				texte_corr = `$\\text{Diminution : }${tex_fraction(taux,100)}\\times ${tex_prix(prix)} = ${tex_prix(Algebrite.eval(prix*taux))}\\div100=${tex_prix(Algebrite.eval(prix*taux/100))}$ €`
+				texte_corr += `\\\\\\\\`
+				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}-${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix-prix*taux/100))}$ €`
+			} else {
+				texte = `Un article coûtait ${tex_prix(prix)} € et son prix augmente de ${taux} \%.`
+				texte_corr = `$\\text{Augmentation : }${tex_fraction(taux,100)}\\times ${tex_prix(prix)}= ${tex_prix(Algebrite.eval(prix*taux))}\\div100=${tex_prix(Algebrite.eval(prix*taux/100))}$ €`
+				texte_corr += `\\\\\\\\`
+				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}+${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix+prix*taux/100))}$ €`
+			}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
+}
+
 function Probleme_course(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Problème - Les courses"
@@ -1822,6 +1864,7 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 	this.spacing = 2;
 	this.spacing_corr = 2;
 	this.nb_questions = 1;
+	this.nb_questions_modifiable = false;
 	this.type_exercice = 'MG32';
 	this.taille_div_MG32 = [600,450];
 
@@ -2097,6 +2140,45 @@ function Code_LaTeX_personnalise() {
    	this.besoin_formulaire_numerique = false; // Sinon this.besoin_formulaire_numerique = [texte,max,tooltip facultatif];
    	this.besoin_formulaire_texte = ['Code LaTeX énoncé','Par exemple : \\input{mon_fichier}']; // Sinon this.besoin_formulaire_texte = [texte,tooltip];
    	this.besoin_formulaire2_texte = ['Code LaTeX correction','Par exemple : \\input{mon_fichier_corr}'];
+   	this.besoin_formulaire_case_a_cocher = false; // Sinon this.besoin_formulaire_case_a_cocher = [texte];
+   	
+   	this.nouvelle_version = function(){
+   		   	this.contenu = this.sup
+   		   	this.contenu_correction = this.sup2
+   	}
+
+}
+
+function HTML_personnalise() {
+	// Classe parente de tous les exercices qui seront créés
+    this.titre = 'Exercice personnalisé';
+    this.pas_de_version_HMTL = false ;
+    this.pas_de_version_LaTeX = true ;
+    this.consigne = '';
+    this.consigne_correction = '';
+    this.liste_questions = [];
+    this.liste_corrections = [];
+    this.contenu = '';
+    this.contenu_correction = '';
+    this.nb_questions = 10;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.spacing = 1;
+    this.spacing_corr = 1;
+    this.beamer = false;
+    this.sup = "Énoncé de l'exercice"
+    this.sup2 = "Énoncé de la correction"
+
+    this.consigne_modifiable = false;
+   	this.nb_questions_modifiable = false;
+   	this.nb_cols_modifiable = false;
+   	this.nb_cols_corr_modifiable = false;
+   	this.spacing_modifiable = false;
+   	this.spacing_corr_modifiable = false;
+
+   	this.besoin_formulaire_numerique = false; // Sinon this.besoin_formulaire_numerique = [texte,max,tooltip facultatif];
+   	this.besoin_formulaire_long_texte = ['Exercice']; // Sinon this.besoin_formulaire_texte = [texte,tooltip];
+   	this.besoin_formulaire2_texte = ['Correction'];
    	this.besoin_formulaire_case_a_cocher = false; // Sinon this.besoin_formulaire_case_a_cocher = [texte];
    	
    	this.nouvelle_version = function(){

@@ -361,7 +361,21 @@ function tex_nombre(nb){
 function tex_prix(nb){
 	//Remplace le . par la ,
 	nombre = Number (nb);
-	let result = nombre.toFixed(2).toString().replace('.',',');
+	let result ;
+	if (nombre==nombre.toFixed(0)){
+		result = nombre
+	} else {
+		result = nombre.toFixed(2).toString().replace('.',',');
+	}
+	return result;
+	
+}
+
+function tex_prix_euros(nb){
+	//Remplace le . par la ,
+	nombre = Number (nb);
+	let result = nombre.toFixed(2).toString().replace('.',',')
+	result+=`~\\text{\\euro{}/kg}`;
 	return result;
 	
 }
