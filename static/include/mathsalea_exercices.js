@@ -23,22 +23,23 @@ var liste_des_exercices_disponibles = {
 		'5N12-2': Exercice_fractions_completer_egalite,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
 		'5N110' : Variation_en_pourcentages,
-		'5N21': Exercice_comparer_des_fractions,
+		'5N21': Exercice_comparer_deux_fractions,
+		'5N21-1': Exercice_comparer_quatre_fractions,
 		'5N22': Exercice_additionner_des_fractions_5e,
 		'5N22-1': Exercice_additionner_ou_soustraire_des_fractions_5e,
-		'5R20':Exercice_additions_relatifs,
-		'5R20_bis':Exercice_additions_relatifs_a_trou,
-		'5R20_ter':Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe
-		'5R21':Exercice_soustractions_relatifs,
-		'5R22':Exercice_additions_et_soustraction_de_relatifs,
-		'5R31':Exercice_additions_et_soustraction_de_relatifs,
-		'5R31-2':Exercice_simplification_somme_algebrique,
-		'4R10':Exercice_multiplications_relatifs,
+		'5R20': Exercice_additions_relatifs,
+		'5R20_bis': Exercice_additions_relatifs_a_trou,
+		'5R20_ter': Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe
+		'5R21': Exercice_soustractions_relatifs,
+		'5R22': Exercice_additions_et_soustraction_de_relatifs,
+		'5R31': Exercice_additions_et_soustraction_de_relatifs,
+		'5R31-2': Exercice_simplification_somme_algebrique,
+		'4R10': Exercice_multiplications_relatifs,
 		//12:Exercice_conversions_de_longueurs,
 		//13:Exercice_conversions,
 		//14:Exercice_conversions_aires,
 		//15:Exercice_perimetres_et_aires,
-		'3N1':Exercice_developper,
+		'3N1': Exercice_developper,
 		'LaTeX' : Code_LaTeX_personnalise,
 		// 'Perso' : HTML_personnalise,
 		//13:Exercice_equation1
@@ -539,7 +540,7 @@ function Exercice_fractions_completer_egalite(max=11){
 	this.besoin_formulaire_numerique = ['Valeur maximale du facteur commun',99999];		
 }
 
-function Exercice_comparer_des_fractions(max=11){
+function Exercice_comparer_deux_fractions (max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ; // Correspond au facteur commun
 	this.titre = "Comparer des fractions (dénominateurs multiples)"
@@ -594,6 +595,84 @@ function Exercice_comparer_des_fractions(max=11){
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
 	this.besoin_formulaire_numerique = ['Valeur maximale du coefficient multiplicateur',99999];		
+}
+
+
+function Exercice_comparer_quatre_fractions (){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Comparer quatre fractions (dénominateurs multiples) et un nombre entier"
+	this.consigne = "Ranger les nombres suivants dans l'ordre croissant."
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 2;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		for (let i = 0, denominateurs, n1, d1, n2, d2, n3, d3, n4, d4, k, texte="", texte_corr="", cpt=0; i < this.nb_questions;i++) {
+			liste_denominateurs = [[12,2,3,4,6],[16,2,4,8],[18,2,3,6,9],[20,2,4,5,10],[24,2,3,4,8,12],[30,2,3,5,6]]
+			denominateurs = choice(liste_denominateurs);
+			d1 = denominateurs[0];
+			enleve_element(denominateurs,d1);
+			d2 = choice(denominateurs);
+			enleve_element(denominateurs,d2);
+			d3 = choice(denominateurs);
+			d4 = choice(denominateurs);
+			k = randint(1,3);
+			n1 = randint(1,10);
+			n2 = randint(1,10);
+			n3 = randint(1,10);
+			n4 = choice([d4+randint(1,3),d4*2+randint(1,2)],randint(1,10));
+			// [num,den,calcul de mise au même dénominateur, num qui correspond au denominateur commun]
+			
+			while (((n1/d1-n2/d2)*(n1/d1-n3/d3)*(n1/d1-n4/d4)*(n2/d2-n3/d3)*(n2/d3-n4/d4)*(n3/d3-n4/d4)<0.1) || (n1%d1==0) || (n2%d2==0) || (n3%d3==0) || (n4%d4==0) ){
+				n1 = randint(1,11);
+				n2 = randint(1,11);
+				n3 = randint(1,11);
+				n4 = randint(1,11);
+			}
+			let tableau_fractions=[[n1,d1,`$${tex_fraction(n1,d1)}$`,`$${tex_fraction(n1,d1)}$`]]
+			tableau_fractions.push([n2,d2,`$${tex_fraction(n2,d2)}=${tex_fraction(n2+"\\times"+Algebrite.eval(d1/d2),d2+"\\times"+Algebrite.eval(d1/d2))}=${tex_fraction(Algebrite.eval(n2*d1/d2),d1)}$`,`$${tex_fraction(Algebrite.eval(n2*d1/d2),d1)}$`])
+			tableau_fractions.push([n3,d3,`$${tex_fraction(n3,d3)}=${tex_fraction(n3+"\\times"+Algebrite.eval(d1/d3),d3+"\\times"+Algebrite.eval(d1/d3))}=${tex_fraction(Algebrite.eval(n3*d1/d3),d1)}$`,`$${tex_fraction(Algebrite.eval(n3*d1/d3),d1)}$`])
+			tableau_fractions.push([n4,d4,`$${tex_fraction(n4,d4)}=${tex_fraction(n4+"\\times"+Algebrite.eval(d1/d4),d4+"\\times"+Algebrite.eval(d1/d4))}=${tex_fraction(Algebrite.eval(n4*d1/d4),d1)}$`,`$${tex_fraction(Algebrite.eval(n4*d1/d4),d1)}$`])
+			tableau_fractions.push([k,1,`$${k}=${tex_fraction(d1*k,d1)}$`,`$${tex_fraction(k*d1,d1)}$`])
+			tableau_fractions.sort(compare_fractions)
+			let tableau_fractions_enonce=shuffle(tableau_fractions)
+			texte = "";
+			for (var j = 0; j < tableau_fractions_enonce.length; j++) {
+				if (tableau_fractions_enonce[j][1]==1)
+					texte+=`$${tableau_fractions_enonce[j][0]}\\quad\\text{;}\\quad$`
+				else
+					texte+=`$${tex_fraction(tableau_fractions_enonce[j][0],tableau_fractions_enonce[j][1])}\\quad\\text{;}\\quad$`
+			}
+			texte = texte.substring(0,texte.length-19)+"$" // Enlève les 21 derniers caractères (pour le ; de la fin)
+			tableau_fractions.sort(compare_fractions)
+			texte_corr ="";
+			for (var j = 0; j < tableau_fractions_enonce.length; j++) {
+				texte_corr+=tableau_fractions_enonce[j][2]
+				texte_corr+="\\\\\\\\\\\\"
+			}
+			for (var j = 0; j < tableau_fractions.length; j++) {
+				texte_corr+=tableau_fractions[j][3]
+				if (j<tableau_fractions.length-1)
+					texte_corr+=`$\\quad<\\quad$`
+			}
+			texte_corr+="\\\\\\\\\\\\"
+			let texte_conclusion = ""
+			for (var j = 0; j < tableau_fractions.length; j++) {
+				if (tableau_fractions[j][1]==1)
+					texte_conclusion+=`$${tableau_fractions[j][0]}\\quad<\\quad$`
+				else
+					texte_conclusion+=`$${tex_fraction(tableau_fractions[j][0],tableau_fractions[j][1])}\\quad<\\quad$`
+			}
+			texte_corr += "Finalement : $\\quad$ "+texte_conclusion.substring(0,texte_conclusion.length-12)+"$"
+
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			}
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+	}
 }
 
 function Exercice_additionner_des_fractions_5e(max=11){

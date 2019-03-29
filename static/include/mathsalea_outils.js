@@ -82,6 +82,17 @@ function range(max,liste_a_eviter=[]){
 	return liste
 }
 
+function compare_fractions(a,b){ 
+	// Fonction de comparaison à utiliser avec tableau.sort(compare_fractions)
+	// Le tableau doit être du type [[num,den],[num2,den2]]
+	if ((a[0]/a[1])>(b[0]/b[1])) 
+		return 1 ;
+	if ((a[0]/a[1])<(b[0]/b[1])) 
+		return -1 ;
+	// Sinon il y a égalité
+	return 0
+}
+
 // Cette première version de shuffle() modifiait le tableau donné en argument
 // function shuffle(array) {
 // 	//Mélange les items d'un tableau, modifie le tableau passé en argument
