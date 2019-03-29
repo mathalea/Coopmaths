@@ -1772,7 +1772,6 @@ function Variation_en_pourcentages(){
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
 }
 
 function Probleme_course(){

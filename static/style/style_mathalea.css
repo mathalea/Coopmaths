@@ -1,4 +1,20 @@
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #affichage_exercices * {
+    visibility: visible;
+  }
+  #affichage_exercices {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 12px; 
+    line-height: 14px;
+  }
+}
+
 
 
 
