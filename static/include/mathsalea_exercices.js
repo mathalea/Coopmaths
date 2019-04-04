@@ -1752,12 +1752,22 @@ function Variation_en_pourcentages(){
 			// X | X0 | X00 | X,X0
 			taux = choice([20,30,40,60]);
 			if (choice([true,false])) {
-				texte = `Un article coûtait ${tex_prix(prix)} € et son prix diminue de ${taux} \%.`
+				if (sortie_html) {
+					texte = `Un article coûtait ${tex_prix(prix)} € et son prix diminue de ${taux} \%.`	
+				} else {
+					texte = `Un article coûtait ${tex_prix(prix)} € et son prix diminue de ${taux}~\\%.`	
+				}
+				
 				texte_corr = `$\\text{Diminution : }${tex_fraction(taux,100)}\\times ${tex_prix(prix)} = ${tex_prix(Algebrite.eval(prix*taux))}\\div100=${tex_prix(Algebrite.eval(prix*taux/100))}$ €`
 				texte_corr += `\\\\\\\\`
 				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}-${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix-prix*taux/100))}$ €`
 			} else {
-				texte = `Un article coûtait ${tex_prix(prix)} € et son prix augmente de ${taux} \%.`
+				if (sortie_html) {
+					texte = `Un article coûtait ${tex_prix(prix)} € et son prix augmente de ${taux} \%.`
+				} else {
+					texte = `Un article coûtait ${tex_prix(prix)} € et son prix augmente de ${taux}~\\%.`
+
+				}
 				texte_corr = `$\\text{Augmentation : }${tex_fraction(taux,100)}\\times ${tex_prix(prix)}= ${tex_prix(Algebrite.eval(prix*taux))}\\div100=${tex_prix(Algebrite.eval(prix*taux/100))}$ €`
 				texte_corr += `\\\\\\\\`
 				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}+${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix+prix*taux/100))}$ €`

@@ -11,7 +11,15 @@
     left: 0;
     top: 0;
     font-size: 12px; 
-    line-height: 14px;
+/*    line-height: 12px;
+*/  }
+
+  div .title {
+    visibility: hidden!important;
+  }
+
+  i.dropdown.icon {
+   visibility: hidden!important; 
   }
 }
 

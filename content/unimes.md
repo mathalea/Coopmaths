@@ -6,7 +6,7 @@ description : "Préparation au CRPE"
 
 
 
-<h2 class="ui horizontal divider header">TD01 - Compas et règle non graduée</h2>
+<h2 class="ui horizontal divider header">TD1 - Compas et règle non graduée</h2>
 
 {{< liste >}}
 	{{% pdf "Cours - Géométrie partie 1" "Unimes_CM01" %}}
@@ -14,11 +14,13 @@ description : "Préparation au CRPE"
 	{{% pdf "Exercices - Au compas et à la règle non graduée - Correction" "Unimes_TD01_corr" %}}
 {{< /liste >}}
 
-<h2 class="ui horizontal divider header">TD02 - Théorème et calculs</h2>
+<h2 class="ui horizontal divider header">TD2 et 3 - Théorème et calculs</h2>
 
 {{< liste >}}
 	{{% pdf "Cours - Géométrie partie 2" "Unimes_CM02" %}}
 	{{% pdf "Exercice - Pythagoras Pile Up" "UnimesPythagorasPileUp" %}}
+	{{% pdf "Géométrie et calculs (1)" "UNimes_GeoCalc" %}}
+	{{% pdf "Géométrie et calculs (1) - Correction" "UNimes_GeoCalc-corr" %}}
 {{< /liste >}}
 
 <h2 class="ui horizontal divider header">Exercices de géométrie dynamique </h2>

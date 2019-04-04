@@ -43,8 +43,9 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 ### Changelog
 
-### 24/03/19
+### 29/03/19
 
+- Amélioration de l'impression des exercices.
 - Nouvelle gestion des URL qui sont maintenant de la forme ?ex=id,param=n&ex=id2,param=n2...
 
 #### 21/03/19
