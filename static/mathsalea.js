@@ -26,7 +26,7 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 	div_parametres_generaux.innerHTML = ''; // Vide le div parametres_generaux
 	if (nb_exercices > 0){
 		div_parametres_generaux.innerHTML += '<div class="ui hidden divider"></div>'
-		div_parametres_generaux.innerHTML += '<h3 class="ui block header">Paramètres des exercices</h3>';
+		// div_parametres_generaux.innerHTML += '<h3 class="ui block header">Paramètres des exercices</h3>';
 	}
 	for (let i = 0; i < nb_exercices; i++) {
 		if(sortie_html) {
