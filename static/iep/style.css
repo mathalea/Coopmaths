@@ -1,0 +1,77 @@
+﻿
+body
+{
+font-family:Verdana,Arial,sans-serif;
+font-size:12px;
+background-color: silver;
+
+}
+
+h1{
+color:red;
+font-size:20px;
+text-align: center;
+}
+h2{
+color:grey;
+font-size:18px;
+text-align: center;
+}
+h3
+{color:blue;
+font-size:15px;
+text-align: center;
+}
+#tete
+{
+text-align:center;
+}
+nav
+{
+	float: left;
+	display: inline-block;
+    width: 300px;
+	min-height : 500px;
+	max-height : 500px;
+	border: 3px black solid;
+	padding: 5px; 
+	overflow: auto;
+	margin: 50px;
+	text-align:left;
+	vertical-align: top;
+	background-color: white;
+}
+section
+{
+    width: 540px;
+	display: inline-block;
+	min-height : 500px;
+	max-height : 500px;
+	margin-left: 300px; /* 300 */ 
+	border: 3px navy solid;
+	padding: 12px; 
+	overflow: auto;
+	margin: 50px;
+	text-align:left;
+	vertical-align: top;
+	background-color: white;
+}
+
+a
+{
+color:#139;
+text-decoration:none;
+text-align: left;
+}
+a:hover
+{
+color:#D41;
+text-decoration:none;
+}
+section a:visited 
+{
+color: #049701; 
+text-decoration:none;
+}
+
+

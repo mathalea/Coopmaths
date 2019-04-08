@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<INSTRUMENPOCHE version="2">
+<action abscisse="800" ordonnee="50" vitesse="10000" mouvement="translation" objet="crayon" />
+<action abscisse="800" ordonnee="600" epaisseur="2" couleur="purple" pointille="tiret" id="c1" mouvement="tracer" objet="crayon" vitesse="1000" />
+<action abscisse="0" ordonnee="600" epaisseur="2" couleur="purple" pointille="tiret" id="c2" mouvement="tracer" objet="crayon" vitesse="1000" />
+<action pris="false" abscisse="10" ordonnee="50" id="50" mouvement="creer" objet="texte" />
+<action couleur="darkgreen" taille="18" police="Tahoma" texte="&lt;B&gt; Construction  du symétrique d&apos;un point à l&apos;aide du compas.&lt;B&gt;" id="50" mouvement="ecrire" objet="texte" tempo="20" />
+<action abscisse="71" ordonnee="465" mouvement="translation" objet="crayon" vitesse="1000" />
+<action abscisse="645" ordonnee="139" epaisseur="2" couleur="bleu" id="1" mouvement="tracer" objet="crayon" vitesse="1000" />
+<action abscisse="207" ordonnee="151" mouvement="translation" objet="crayon" vitesse="1000" />
+<action abscisse="602" ordonnee="121" id="nom_droite" mouvement="creer" objet="texte" />
+<action couleur="noir" texte="(d)" id="nom_droite" mouvement="ecrire" objet="texte" />
+<action ordonnee="230" abscisse="293" epaisseur="0" couleur="noir" id="2" mouvement="creer" objet="point" />
+<action couleur="noir" nom="A" id="2" mouvement="nommer" objet="point" tempo="10" />
+<action ordonnee="500" abscisse="340" id="8" mouvement="creer" objet="texte" />
+<action couleur="noir" texte="On place deux points au hasard sur la droite." id="8" mouvement="ecrire" objet="texte" tempo="10" />
+<action ordonnee="360" abscisse="255" epaisseur="0" couleur="noir" id="3" mouvement="creer" objet="point" />
+<action ordonnee="248" abscisse="453" epaisseur="0" couleur="noir" id="4" mouvement="creer" objet="point" />
+<action couleur="noir" nom="M" id="3" mouvement="nommer" objet="point" />
+<action tempo="10" couleur="noir" nom="N" id="4" mouvement="nommer" objet="point" />
+<action ordonnee="530" abscisse="340" id="9" mouvement="creer" objet="texte" />
+<action couleur="noir" texte="On place le point A&apos; tel que MA&apos; = MA et NA&apos; = NA." id="9" mouvement="ecrire" objet="texte" tempo="10" />
+<action mouvement="montrer" objet="compas" />
+<action cible="3" mouvement="translation" objet="compas" />
+<action cible="2" mouvement="rotation" objet="compas" />
+<action tempo="10" cible="2" mouvement="ecarter" objet="compas" />
+<action sens="5" angle="-8.29" mouvement="rotation" objet="compas" />
+<action mouvement="lever" objet="compas" />
+<action sens="5" angle="-8.29" mouvement="rotation" objet="compas" />
+<action couleur="forestgreen" epaisseur="1" sens="-5" fin="-9.38" debut="51.01" id="5" mouvement="tracer" objet="compas" />
+<action tempo="10" mouvement="coucher" objet="compas" />
+<action cible="4" mouvement="translation" objet="compas" />
+<action cible="2" mouvement="rotation" objet="compas" />
+<action tempo="10" cible="2" mouvement="ecarter" objet="compas" />
+<action sens="-5" angle="127.39" mouvement="rotation" objet="compas" />
+<action mouvement="lever" objet="compas" />
+<action sens="-5" angle="127.39" mouvement="rotation" objet="compas" />
+<action couleur="forestgreen" epaisseur="1" sens="-5" fin="105.01" debut="127.39" id="6" mouvement="tracer" objet="compas" />
+<action mouvement="coucher" objet="compas" />
+<action mouvement="masquer" objet="compas" />
+<action ordonnee="394" abscisse="386" epaisseur="0" couleur="noir" id="7" mouvement="creer" objet="point" />
+<action couleur="noir" nom="A&apos;" id="7" mouvement="nommer" objet="point" />
+</INSTRUMENPOCHE>
