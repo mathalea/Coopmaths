@@ -158,11 +158,11 @@ function tridictionnaire(dict) {
 function combinaison_listes(liste,taille_minimale){
 	// Concatène liste à elle même en changeant l'ordre à chaque cycle
 	// Exemple combinaison_listes([A,B,C],7) -> [B,C,A,C,B,A,A,B,C]
-	liste = shuffle(liste);
-	while (liste.length<taille_minimale){
-		liste = liste.concat(shuffle(liste))
+	l = shuffle(liste);
+	while (l.length<taille_minimale){
+		l = l.concat(shuffle(liste))
 	}
-	return liste
+	return l
 }
 
 function mise_en_evidence(texte){
@@ -319,7 +319,7 @@ function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
 function html_enumerate(liste){
 	let result ='<ol>'
 	for(let i in liste){
-		result += '<li>' + liste[i].replace(/\\dotfill/g,'...').replace(/\\\\/g,'<br>') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\\\/g,'<br>') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 	}
 	result += '</ol>'
 	return result

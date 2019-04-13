@@ -4,6 +4,8 @@ var liste_des_exercices_disponibles = {
 		'6C10-3' :Exercice_tables_de_multiplications_et_decimaux,
 		'6C20': Exercice_tables_d_additions,
 		'6C32': Probleme_course,
+		'6D10' : Conversions_de_durees,
+		'6D11' : Somme_de_durees,
 		'6M10' : Perimetre_ou_aire_de_carres_rectangles_triangles,
 		'6M10-1' : Reglages_6M10,
 		'6M12' : Reglages_6M12,
@@ -102,6 +104,173 @@ function Exercice() {
    	this.spacing_modifiable = true;
    	this.spacing_corr_modifiable = true;
 
+}
+
+function Conversions_de_durees(){
+//Décomposer un nombre en facteurs premiers 
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = 3 ; // 1 : H vers min ou H ou min ou Hmin vers s | 2 : s vers HMS | 3 :  toutes les conversions
+	this.titre = "Convertir des durées";
+	this.consigne = "Compléter les égalités suivantes";
+	this.spacing = 2;
+	this.nb_questions = 5
+
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		let liste_sous_type_de_questionv1=combinaison_listes([1,2,3,4],this.nb_questions)
+		let liste_sous_type_de_questionv2=combinaison_listes([0,1,2],this.nb_questions)
+		let type_de_questions=[]
+		if (this.sup<3){
+			type_de_questions = combinaison_listes([this.sup],this.nb_questions)
+		}
+		if (this.sup==3){
+			type_de_questions = combinaison_listes([1,2],this.nb_questions)
+		}
+
+
+		for (let i = 0, h, m, s, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+			if (type_de_questions[i]==1) {
+				let sous_type_de_question = liste_sous_type_de_questionv1[i]
+				if (sous_type_de_question==1) {
+					h = randint(2,11)
+					texte = `$${h}~\\text{h} = \\dotfill ~\\text{min}$`
+					texte_corr = `$${h}~\\text{h} = ${h}\\times60~~\\text{min} = ${tex_nombre(h*60)}~\\text{min}$`
+				}
+				if (sous_type_de_question==2) {
+					h = choice([1,2,10,20])
+					texte = `$${h}~\\text{h} = \\dotfill ~\\text{s}$`
+					texte_corr = `$${h}~\\text{h} = ${h}\\times3~600~\\text{s} = ${tex_nombre(h*3600)}~\\text{s}$`
+				}
+				if (sous_type_de_question==3) {
+					m = randint(2,59)
+					texte = `$${m}~\\text{min} = \\dotfill ~\\text{s}$`
+					texte_corr = `$${m}~\\text{min} = ${m}\\times60~\\text{s} = ${tex_nombre(m*60)}~\\text{s}$`
+				} 
+				if (sous_type_de_question==4) {
+					h = randint(1,2)
+					m = randint(2,59)
+					texte = `$${h}~\\text{h}~${m}~\\text{min} = \\dotfill ~\\text{s}$`
+					texte_corr = `$${h}~\\text{h}~${m}~\\text{min} = ${h}\\times3~600~\\text{s} + ${m}\\times60~\\text{s} = ${tex_nombre(h*3600)}+${tex_nombre(m*60)}~\\text{s} = ${tex_nombre(h*3600+m*60)}~\\text{s}$`
+				} 
+			}
+			if (type_de_questions[i]==2) {
+				h = liste_sous_type_de_questionv2[i]
+				m = randint(1,59)
+				s = randint(1,59)
+				if (h>0){
+					texte = `$${tex_nombre(h*3600+m*60+s)}~\\text{s} = \\dotfill =  ......~\\text{h}......~\\text{min}......~\\text{s}$`
+					texte_corr = `$${tex_nombre(h*3600+m*60+s)}~\\text{s} = ${tex_nombre(h*3600)}~\\text{s}+${m*60+s}~\\text{s} =${h}~\\text{h}+${m}\\times60~\\text{s}+${s}~\\text{s}=${h}~\\text{h}~${m}~\\text{min}~${s}~\\text{s}$`	
+				} else {
+					texte = `$${tex_nombre(m*60+s)}~\\text{s} = \\dotfill = ......~\\text{h}......~\\text{min}......~\\text{s}$`
+					texte_corr = `$${tex_nombre(m*60+s)}~\\text{s} = ${m}\\times60~\\text{s}+${s}~\\text{s}=${m}~\\text{min}~${s}~\\text{s}$`
+				}
+				
+			}	
+		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+		}
+		cpt++;	
+		
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+ 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Conversions en s ou min\n2 : Conversions en HMS\n3 : Tous types de conversions"]
+	
+}
+
+
+
+function Somme_de_durees(){
+//Décomposer un nombre en facteurs premiers 
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Additionner des durées";
+	this.consigne = "Compléter les égalités suivantes";
+	this.sup = 1 // 2 niveaux de difficultés
+	this.spacing = 2;
+	this.nb_questions = 5
+
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		//MS+MS=1hMS sans retenue sur les s // MS+MS=1hMS avec retenue // HM+HM avec retenue// HMS+HMS avec retenue sur les min // HMS+HMS avec retenues min et s
+		
+		let type_de_questions
+
+		if (this.sup==1) {
+			type_de_questions=combinaison_listes([1,3],this.nb_questions)
+		} else {
+			type_de_questions=combinaison_listes([1,2,3,4,5],this.nb_questions)
+		}
+		for (let i = 0, h1, h2, m1, m2, s1, s2, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+			
+			if (type_de_questions[i]==1) {
+				s1 = randint(11,39)
+				s2 = randint(1,20)
+				m1 = randint(20,59)
+				m2 = randint(40,59)
+				texte = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}=\\dotfill$`
+				texte_corr = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}= ${m1+m2}~\\text{min}~${s1+s2}~\\text{s}= 1~\\text{h}${m1+m2-60}~\\text{min}~${s1}~\\text{s}$`
+			}	
+			if (type_de_questions[i]==2) {
+				s1 = randint(21,39)
+				s2 = randint(40,59)
+				m1 = randint(20,59)
+				m2 = randint(40,59)
+				texte = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}=\\dotfill$`
+				texte_corr = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}= ${m1+m2}~\\text{min}~${s1+s2}~\\text{s} = ${m1+m2+1}~\\text{min}~${s1+s2-60}~\\text{s} = 1~\\text{h}${m1+m2-60}~\\text{min}~${s1}~\\text{s}$`
+			}
+			if (type_de_questions[i]==3) {
+				h1 = randint(2,12)
+				h2 = randint(2,11)
+				m1 = randint(30,50)
+				m2 = randint(30,50)
+				texte = `$${h1}~\\text{h}~${m1}~\\text{min}+${h2}~\\text{h}~${m2}~\\text{min}=\\dotfill$`
+				texte_corr = `$${h1}~\\text{h}~${m1}~\\text{min}+${h2}~\\text{h}~${m2}~\\text{min}= ${h1+h2}~\\text{h}~${m1+m2}~\\text{min} = ${h1+h2+1}~\\text{h}~${m1+m2-60}~\\text{min}$`
+			}
+			if (type_de_questions[i]==4) {
+				h1 = randint(2,12)
+				h2 = randint(2,11)
+				m1 = randint(30,50)
+				m2 = randint(30,50)
+				s1 = randint(2,55)
+				s2 = randint(1,60-s1-1)
+				texte = `$${h1}~\\text{h}~${m1}~\\text{min}~${s1}~\\text{s}+${h2}~\\text{h}~${m2}~\\text{min}~${s2}~\\text{s}=\\dotfill$`
+				texte_corr = `$${h1}~\\text{h}~${m1}~\\text{min}~${s1}~\\text{s}+${h2}~\\text{h}~${m2}~\\text{min}~${s2}~\\text{s}= ${h1+h2}~\\text{h}~${m1+m2}~\\text{min}~${s1+s2}~\\text{s} = ${h1+h2+1}~\\text{h}~${m1+m2-60}~\\text{min}~${s1+s2}~\\text{s}$`
+			}
+			if (type_de_questions[i]==5) {
+				h1 = randint(2,12)
+				h2 = randint(2,11)
+				m1 = randint(30,50)
+				m2 = randint(30,50)
+				s1 = randint(2,55)
+				s2 = randint(60-s1,59)
+				texte = `$${h1}~\\text{h}~${m1}~\\text{min}~${s1}~\\text{s}+${h2}~\\text{h}~${m2}~\\text{min}~${s2}~\\text{s}=\\dotfill$`
+				texte_corr = `$${h1}~\\text{h}~${m1}~\\text{min}~${s1}~\\text{s}+${h2}~\\text{h}~${m2}~\\text{min}~${s2}~\\text{s}=`
+				texte_corr +=` ${h1+h2}~\\text{h}~${m1+m2}~\\text{min}~${s1+s2}~\\text{s} = ${h1+h2}~\\text{h}~${m1+m2+1}~\\text{min}~${s1+s2-60}~\\text{s} =${h1+h2+1}~\\text{h}~${m1+m2+1-60}~\\text{min}~${s1+s2-60}~\\text{s}$`
+			
+			}	
+			
+		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+		}
+		cpt++;	
+		
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+ 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2]//"1 : Additions simples\n2 : Additions avec d'éventuelles conversions"]
+	
 }
 
 function Exercice_decomposer_en_facteurs_premiers(){
@@ -1824,6 +1993,7 @@ function Fraction_d_un_nombre(max=11){
 	this.nb_questions = 5;
 	this.spacing = 2;
 	this.spacing_corr = 2;
+	this.nb_cols_corr = 1;
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -1851,7 +2021,7 @@ function Fraction_d_un_nombre(max=11){
 				}
 				texte_corr = `$\\text{Augmentation : }${tex_fraction(taux,100)}\\times ${tex_prix(prix)}= ${tex_prix(Algebrite.eval(prix*taux))}\\div100=${tex_prix(Algebrite.eval(prix*taux/100))}$ €`
 				texte_corr += `\\\\\\\\`
-				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}+${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix+prix*taux/100))}$ €`
+				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}+${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix*(1+taux/100)))}$ €`
 			}
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
