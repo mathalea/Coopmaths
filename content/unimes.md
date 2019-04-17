@@ -6,7 +6,7 @@ description : "Préparation au CRPE"
 
 
 
-<h2 class="ui horizontal divider header">TD1 - Compas et règle non graduée</h2>
+<h2 class="ui horizontal divider header">Partie 1 - Compas et règle non graduée</h2>
 
 {{< liste >}}
 	{{% pdf "Cours - Géométrie partie 1" "Unimes_CM01" %}}
@@ -14,29 +14,39 @@ description : "Préparation au CRPE"
 	{{% pdf "Exercices - Au compas et à la règle non graduée - Correction" "Unimes_TD01_corr" %}}
 {{< /liste >}}
 
-<h2 class="ui horizontal divider header">TD2 et 3 - Théorème et calculs</h2>
+<h2 class="ui horizontal divider header">Partie 2 - Théorème et calculs</h2>
 
 {{< liste >}}
 	{{% pdf "Cours - Géométrie partie 2" "Unimes_CM02" %}}
 	{{% pdf "Exercice - Pythagoras Pile Up" "UnimesPythagorasPileUp" %}}
 	{{% pdf "Géométrie et calculs (1)" "UNimes_GeoCalc" %}}
 	{{% pdf "Géométrie et calculs (1) - Correction" "UNimes_GeoCalc-corr" %}}
+	{{% pdf "Géométrie et calculs (2)" "UNimes_GeoCalc2" %}}
+	{{% pdf "Géométrie et calculs (2) - Correction" "UNimes_GeoCalc2-corr" %}}
+	{{% pdf "Géométrie et calculs (3)" "UNimes_GeoCalc3" %}}
+	{{% pdf "Géométrie et calculs (3) - Correction" "UNimes_GeoCalc3-corr" %}}
 {{< /liste >}}
 
-<h2 class="ui horizontal divider header">Exercices de géométrie dynamique </h2>
-
+<h2 class="ui horizontal divider header">Partie 3 - Les angles</h2>
 {{< liste >}}
-	{{% url "Construire des droites, segments et des demi-droites" "https://bibliotheque.sesamath.net/public/voir/5c6fcf4f9aad976c484439db" %}}
-	{{% url "Construire des cercles" "https://bibliotheque.sesamath.net/ressource/voir/5c6fd0e99aad976c484439dc" %}}
-	{{% url "Construire un triangle équilatéral" "https://bibliotheque.sesamath.net/ressource/voir/5c6fe4d49aad976c484439e0" %}}
-	{{% url "Construire un triangle connaissant les 3 côtés" "https://bibliotheque.sesamath.net/ressource/voir/5c6a94a14683870a4b88c970" %}}
-	{{% url "Construire un triangle connaissant un côté et deux angles" "https://bibliotheque.sesamath.net/ressource/voir/5c6a6f2bba6a070a45f39dfb" %}}
-	{{% url "Construire un triangle connaissant la longueur de deux côtés et l'angle qu'ils forment" "https://bibliotheque.sesamath.net/public/voir/5c6ac8df4683870a4b88c977" %}}
-	{{% url "Construire un carré" "https://bibliotheque.sesamath.net/public/voir/5c7021522337d46c422232c7" %}}
-	{{% url "Construire un losange à partir d'un angle et de la longueur d'un côté" "https://bibliotheque.sesamath.net/public/voir/5c7cfbac9aad976c48443a40" %}}
-	{{% url "Construire un parallélogramme (1)" "https://bibliotheque.sesamath.net/public/voir/5c73d7519aad976c484439fd" %}}
-	{{% url "Construire un parallélogramme (2)" "https://bibliotheque.sesamath.net/public/voir/5c73d96c9aad976c484439fe" %}}
-	{{% url "Construire un parallélogramme (3)" "https://bibliotheque.sesamath.net/public/voir/5c73daee2337d46c422232d9" %}}
-	{{% url "Construire un parallélogramme (4)" "https://bibliotheque.sesamath.net/public/voir/5c73dbe42337d46c422232da" %}}
+	{{% pdf "Cours - Géométrie partie 3" "Unimes_CM03" %}}
+{{< /liste >}}
+
+
+<h2 class="ui horizontal divider header">Calcul mental</h2>
+{{< liste >}}
+	{{% url "Conversions" "http://mathsmentales.net/index.html#conversionVersPrincipale?n=10&e=1&t=15&xc=1&a=1&tts=0&d=1&o=Litre|Mètre|Gramme&f=false&cd=conversionVersPrincipale" %}}
+	{{% url "Calculer 5%, 10%, 20% ou 30%" "http://mathsmentales.net/index.html#sixFracPourcent?n=10&e=1&t=20&xc=1&a=1&tts=0&d=1&o=5%25|10%25|20%25|30%25&f=false&cd=sixFracPourcent" %}}
+	
+
+
+
+{{< /liste >}}
+
+
+
+
+
+
 
 

@@ -5,6 +5,7 @@ var liste_des_exercices_disponibles = {
 		'6C20': Exercice_tables_d_additions,
 		'6C32': Probleme_course,
 		'6D10' : Conversions_de_durees,
+		'6D101' : Heures_decimales,
 		'6D11' : Somme_de_durees,
 		'6M10' : Perimetre_ou_aire_de_carres_rectangles_triangles,
 		'6M10-1' : Reglages_6M10,
@@ -109,9 +110,11 @@ function Exercice() {
 function Conversions_de_durees(){
 //Décomposer un nombre en facteurs premiers 
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = 3 ; // 1 : H vers min ou H ou min ou Hmin vers s | 2 : s vers HMS | 3 :  toutes les conversions
+	this.sup = 5 ; // 1 : H vers min ou H ou min ou Hmin vers s | 2 : h vers j-h | 3 : s vers HMS | 4 : h vers semaines j h | 5 :  toutes les conversions
 	this.titre = "Convertir des durées";
 	this.consigne = "Compléter les égalités suivantes";
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
 	this.spacing = 2;
 	this.nb_questions = 5
 
@@ -123,15 +126,15 @@ function Conversions_de_durees(){
 		let liste_sous_type_de_questionv1=combinaison_listes([1,2,3,4],this.nb_questions)
 		let liste_sous_type_de_questionv2=combinaison_listes([0,1,2],this.nb_questions)
 		let type_de_questions=[]
-		if (this.sup<3){
+		if (this.sup<5){
 			type_de_questions = combinaison_listes([this.sup],this.nb_questions)
 		}
-		if (this.sup==3){
-			type_de_questions = combinaison_listes([1,2],this.nb_questions)
+		if (this.sup==5){
+			type_de_questions = combinaison_listes([1,2,3,4],this.nb_questions)
 		}
 
 
-		for (let i = 0, h, m, s, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+		for (let i = 0, h, m, s, j, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
 			if (type_de_questions[i]==1) {
 				let sous_type_de_question = liste_sous_type_de_questionv1[i]
 				if (sous_type_de_question==1) {
@@ -154,9 +157,16 @@ function Conversions_de_durees(){
 					m = randint(2,59)
 					texte = `$${h}~\\text{h}~${m}~\\text{min} = \\dotfill ~\\text{s}$`
 					texte_corr = `$${h}~\\text{h}~${m}~\\text{min} = ${h}\\times3~600~\\text{s} + ${m}\\times60~\\text{s} = ${tex_nombre(h*3600)}+${tex_nombre(m*60)}~\\text{s} = ${tex_nombre(h*3600+m*60)}~\\text{s}$`
-				} 
+				}
 			}
 			if (type_de_questions[i]==2) {
+				j = randint(1,6)
+				h = randint(1,23)
+				texte = `$${tex_nombre(h+24*j)}~\\text{h} = \\dotfill =  ......~\\text{j}......~\\text{h}$`
+				texte_corr = `$${tex_nombre(h+24*j)}~\\text{h} = ${j}\\times24~\\text{h} + ${h}~\\text{h} = ${j}~\\text{j}~${h}~\\text{h}$`
+			}
+
+			if (type_de_questions[i]==3) {
 				h = liste_sous_type_de_questionv2[i]
 				m = randint(1,59)
 				s = randint(1,59)
@@ -168,7 +178,19 @@ function Conversions_de_durees(){
 					texte_corr = `$${tex_nombre(m*60+s)}~\\text{s} = ${m}\\times60~\\text{s}+${s}~\\text{s}=${m}~\\text{min}~${s}~\\text{s}$`
 				}
 				
-			}	
+			}
+			if (type_de_questions[i]==4) {
+				s = randint(1,9) // nombre de semaines
+				j = randint(1,6)
+				h = randint(1,23)
+				texte = `$${tex_nombre(h+24*j+24*7*s)}~\\text{h} = \\dotfill =  ......~\\text{semaines}......~\\text{j}......~\\text{h}$`
+				if (s>1) { // pour la gestion du pluriel de semaines
+					texte_corr = `$${tex_nombre(h+24*j+24*7*s)}~\\text{h} = ${j+7*s}\\times24~\\text{h} + ${h}~\\text{h} = ${j+7*s}~\\text{j}~${h}~\\text{h} = ${s}\\times7~\\text{j} + ${j}~\\text{j}~${h}~\\text{h} = ${s}~\\text{semaines}~${j}~\\text{j}~${h}~\\text{h}$`
+				} else {
+					texte_corr = `$${tex_nombre(h+24*j+24*7*s)}~\\text{h} = ${j+7*s}\\times24~\\text{h} + ${h}~\\text{h} = ${j+7*s}~\\text{j}~${h}~\\text{h} = ${s}\\times7~\\text{j} + ${j}~\\text{j}~${h}~\\text{h} = ${s}~\\text{semaine}~${j}~\\text{j}~${h}~\\text{h}$`
+				}
+				
+			}
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
@@ -180,7 +202,54 @@ function Conversions_de_durees(){
 		liste_de_question_to_contenu(this);
 
 	}
- 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Conversions en s ou min\n2 : Conversions en HMS\n3 : Tous types de conversions"]
+ 	this.besoin_formulaire_numerique = ['Niveau de difficulté',5,"1 : Conversions en s ou min\n2 : Conversions en jours-heures \n3 : Conversions en HMS\n4 : Conversions en semaines-jours-heures \n5 : Tous types de conversions"]
+	
+}
+
+function Heures_decimales(){
+//Décomposer un nombre en facteurs premiers 
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Utiliser les heures décimales";
+	this.consigne = "Compléter les égalités suivantes";
+	this.spacing = 2;
+	this.nb_questions = 5
+
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		for (let i = 0, partie_entiere, partie_decimale, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+			partie_entiere = randint(1,12)
+			partie_decimale = choice([1,2,3,4,5,6,7,8,9,25,75])
+			texte = `$${partie_entiere},${partie_decimale}~\\text{h}=\\dotfill$`
+			if (partie_decimale==25){
+				texte_corr = `$${partie_entiere},${partie_decimale}~\\text{h}=${partie_entiere}~\\text{h}+\\dfrac{1}{4}~\\text{h}`
+				texte_corr += `=${partie_entiere}~\\text{h}~15~\\text{min}$`	
+			} else if (partie_decimale==75){
+				texte_corr = `$${partie_entiere},${partie_decimale}~\\text{h}=${partie_entiere}~\\text{h}+\\dfrac{3}{4}~\\text{h}`
+				texte_corr += `=${partie_entiere}~\\text{h}~45~\\text{min}$`	
+			} else if (partie_decimale==5){
+				texte_corr = `$${partie_entiere},${partie_decimale}~\\text{h}=${partie_entiere}~\\text{h}+\\dfrac{1}{2}~\\text{h}`
+				texte_corr += `=${partie_entiere}~\\text{h}~30~\\text{min}$`	
+			} else {
+				texte_corr = `$${partie_entiere},${partie_decimale}~\\text{h}=${partie_entiere}~\\text{h}+\\dfrac{${partie_decimale}}{10}~\\text{h}`
+				texte_corr += `=${partie_entiere}~\\text{h}+${partie_decimale}\\times6~\\text{min}=${partie_entiere}~\\text{h}~${partie_decimale*6}~\\text{min}$`	
+			}
+
+
+		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+		}
+		cpt++;	
+		
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+ 	this.besoin_formulaire_numerique = ['Niveau de difficulté',5,"1 : Conversions en s ou min\n2 : Conversions en jours-heures \n3 : Conversions en HMS\n4 : Conversions en semaines-jours-heures \n5 : Tous types de conversions"]
 	
 }
 

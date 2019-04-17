@@ -43,6 +43,11 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 ### Changelog
 
+### 04/19
+
+- Ajout d'exercices sur les durées
+- Ajout d'exercices sur les pourcentages
+
 ### 29/03/19
 
 - Amélioration de l'impression des exercices.
