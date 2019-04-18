@@ -300,20 +300,36 @@ var code_LaTeX = '', contenu_fichier = '';
 
 function mise_a_jour_du_code(){
 	// ajout du numéro de l'exercice dans l'URL
-	if (!URL_de_depart_complexe){
+	//if (!URL_de_depart_complexe){
 		if (liste_des_exercices.length>0) {
 			let fin_de_l_URL = ""
 			if (sortie_html) {
 				fin_de_l_URL+="exercice.html"	
-			} 
-		fin_de_l_URL += "?ex="+liste_des_exercices[0]
+			}
+		if (exercice[0].sup2){
+				fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions},sup=${exercice[0].sup},sup2=${exercice[0].sup2}`	
+			} else{
+			if (exercice[0].sup){
+					fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions},sup=${exercice[0].sup}`	
+				} else{
+					fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions}`
+				}
+			}
 		for (var i = 1; i < liste_des_exercices.length; i++) {
-			fin_de_l_URL +="&ex="+liste_des_exercices[i]
+			if (exercice[i].sup2){
+				fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions},sup=${exercice[i].sup},sup2=${exercice[i].sup2}`	
+			} else{
+			if (exercice[i].sup){
+					fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions},sup=${exercice[i].sup}`	
+				} else{
+					fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions}`
+				}
+			}
 		}
 		window.history.pushState("","",fin_de_l_URL);
 			
 		}
-	}
+	//}
 		
 
 	codeMG32=``;

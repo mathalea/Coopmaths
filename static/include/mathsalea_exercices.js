@@ -393,10 +393,10 @@ function Exercice_decomposer_en_facteurs_premiers(){
 	
 }
 
-function Exercice_tables_de_multiplications(tables=[2,3,4,5,6,7,8,9]){
+function Exercice_tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = tables ;
+	this.sup = tables_par_defaut ;
 	this.sup2 = 1 ; // classique|a_trous|melange
 	this.titre = "Tables de multiplications";
 	this.consigne = 'Calculer';
@@ -406,14 +406,13 @@ function Exercice_tables_de_multiplications(tables=[2,3,4,5,6,7,8,9]){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		if (this.sup=='') { // Si aucune table n'est saisie
-			this.sup = [2,3,4,5,6,7,8,9]
+		if (!this.sup) { // Si aucune table n'est saisie
+			this.sup = '2;3;4;5;6;7;8;9'
 		}
-		if (typeof this.sup==='string'){
-			this.sup = this.sup.replace(/\s/g, "").replace(";", ",").split(",");// Récupère  la saisie de l'utilisateur
+		let tables = this.sup.split(";");// Récupère  la saisie de l'utilisateur
         		//en supprimant les espaces et en remplaçant les points-virgules par des virgules.
-        	}
-		let couples = creer_couples(this.sup,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
+        	
+		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
 		var type_de_questions = 'a_trous';
 		for (let i = 0, a, b, texte, texte_corr; i < this.nb_questions; i++) {
 			a = couples[i][0];
@@ -429,7 +428,7 @@ function Exercice_tables_de_multiplications(tables=[2,3,4,5,6,7,8,9]){
 				texte = '$ '+ a + ' \\times ' + b + ' = \\dotfill $';
 				texte_corr = '$ '+ a + ' \\times ' + b + ' = ' + a * b +' $';	
 			} else { // a trous
-				if (this.sup.length>2){ // Si pour le premier facteur il y a plus de 2 posibilités on peut le chercher
+				if (tables.length>2){ // Si pour le premier facteur il y a plus de 2 posibilités on peut le chercher
 					texte = choice(['$ '+ a + ' \\times \\ldots\\ldots = ' + a * b + ' $',
 						'$ \\ldots\\ldots' + ' \\times ' + b + ' = ' + a * b + ' $']);
 				} else{ // Sinon on demande forcément le 2e facteur	
@@ -444,14 +443,14 @@ function Exercice_tables_de_multiplications(tables=[2,3,4,5,6,7,8,9]){
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des virgules'] // Texte, tooltip
+	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
 	this.besoin_formulaire2_numerique = ['Style de questions',3,'1 : Classique\n2: À trous\n3: Mélangé'] 
 }
 
-function Exercice_tables_de_multiplications_et_multiples_de_10(tables=[2,3,4,5,6,7,8,9]){
+function Exercice_tables_de_multiplications_et_multiples_de_10(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = tables ;
+	this.sup = tables_par_defaut ;
 	this.titre = "Tables de multiplications et multiples de 10";
 	this.consigne = 'Calculer';
 	this.spacing = 2;
@@ -459,14 +458,13 @@ function Exercice_tables_de_multiplications_et_multiples_de_10(tables=[2,3,4,5,6
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		if (this.sup=='') { // Si aucune table n'est saisie
-			this.sup = [2,3,4,5,6,7,8,9]
+		if (!this.sup) { // Si aucune table n'est saisie
+			this.sup = '2;3;4;5;6;7;8;9'
 		}
-		if (typeof this.sup==='string'){
-			this.sup = this.sup.replace(/\s/g, "").replace(";", ",").split(",");// Récupère  la saisie de l'utilisateur
+		let tables = this.sup.split(";");// Récupère  la saisie de l'utilisateur
         		//en supprimant les espaces et en remplaçant les points-virgules par des virgules.
-        	}
-		let couples = creer_couples(this.sup,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
+        	
+		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
 		for (let i = 0, a, b, k1, k2, texte, texte_corr,melange; i < this.nb_questions; i++) {
 			a = couples[i][0];
 			b = couples[i][1];
@@ -492,13 +490,13 @@ function Exercice_tables_de_multiplications_et_multiples_de_10(tables=[2,3,4,5,6
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des virgules'] // Texte, tooltip
+	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
 }
 
-function Exercice_tables_de_multiplications_et_decimaux(tables=[2,3,4,5,6,7,8,9]){
+function Exercice_tables_de_multiplications_et_decimaux(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = tables ;
+	this.sup = tables_par_defaut ;
 	this.titre = "Tables de multiplications et nombres décimaux";
 	this.consigne = 'Calculer';
 	this.spacing = 2;
@@ -506,14 +504,13 @@ function Exercice_tables_de_multiplications_et_decimaux(tables=[2,3,4,5,6,7,8,9]
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		if (this.sup=='') { // Si aucune table n'est saisie
-			this.sup = [2,3,4,5,6,7,8,9]
+		if (!this.sup) { // Si aucune table n'est saisie
+			this.sup = '2;3;4;5;6;7;8;9'
 		}
-		if (typeof this.sup==='string'){
-			this.sup = this.sup.replace(/\s/g, "").replace(";", ",").split(",");// Récupère  la saisie de l'utilisateur
+		let tables = this.sup.split(";");// Récupère  la saisie de l'utilisateur
         		//en supprimant les espaces et en remplaçant les points-virgules par des virgules.
-        	}
-		let couples = creer_couples(this.sup,[2,3,4,5,6,7,8,9],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
+        	
+		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
 		for (let i = 0, a, b, k1, k2, couple, texte, texte_corr; i < this.nb_questions; i++) {
 			a = couples[i][0];
 			b = couples[i][1];
@@ -529,7 +526,7 @@ function Exercice_tables_de_multiplications_et_decimaux(tables=[2,3,4,5,6,7,8,9]
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des virgules'] // Texte, tooltip
+	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
 }
 
 function Exercice_tables_d_additions(max=20){
@@ -2774,15 +2771,58 @@ jQuery(document).ready(function() {
 
 	// Trie par ordre alphabétique les exercices disponibles
 	liste_des_exercices_disponibles = tridictionnaire(liste_des_exercices_disponibles);
-	// Affiche la liste des exercices
-	let liste_html_des_exercices = '<h3 class="ui block header">Exercices disponibles</h3>\n<ol>\n';
+	
+	// Détermine le nombre d'exercices par niveaux
+	let nombre_d_exercices_disponibles_6 = 0;
+	let nombre_d_exercices_disponibles_5 = 0;
+	let nombre_d_exercices_disponibles_4 = 0;
+	let nombre_d_exercices_disponibles_3 = 0;
+	for (var id in liste_des_exercices_disponibles){
+		if (id[0]==6) {nombre_d_exercices_disponibles_6+=1}
+		if (id[0]==5) {nombre_d_exercices_disponibles_5+=1}
+		if (id[0]==4) {nombre_d_exercices_disponibles_4+=1}
+		if (id[0]==3) {nombre_d_exercices_disponibles_3+=1}
+	}
+
+	//
+	let liste_html_des_exercices_6 = []
+	let liste_html_des_exercices_5 = []
+	let liste_html_des_exercices_4 = []
+	let liste_html_des_exercices_3 = []
+	// Affiche de la liste des exercices disponibles 
+	let liste_html_des_exercices = '<h3 class="ui block header">Exercices disponibles</h3>\n\n';
 	for (var id in liste_des_exercices_disponibles) {
 		let exercice_tmp = new liste_des_exercices_disponibles[id];
-		liste_html_des_exercices += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';
-	}
-	//liste_html_des_exercices += '</ol>'
-	$('#liste_des_exercices').html(liste_html_des_exercices);
+		if (id[0]==6) {
+			liste_html_des_exercices_6 += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
+		}
+		if (id[0]==5) {
+			liste_html_des_exercices_5 += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
+		}
+		if (id[0]==4) {
+			liste_html_des_exercices_4 += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
+		}
+		if (id[0]==3) {
+			liste_html_des_exercices_3 += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
+		}
 
+	}
+	liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="active content">`
+	liste_html_des_exercices += liste_html_des_exercices_6
+	liste_html_des_exercices+=`</div>`
+	liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Cinquième (${nombre_d_exercices_disponibles_5})</div><div class="content">`
+	liste_html_des_exercices += liste_html_des_exercices_5
+	liste_html_des_exercices+=`</div>`
+	liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Quatrième (${nombre_d_exercices_disponibles_4})</div><div class="content">`
+	liste_html_des_exercices += liste_html_des_exercices_4
+	liste_html_des_exercices+=`</div>`
+	liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Troisième (${nombre_d_exercices_disponibles_3})</div><div class="content">`
+	liste_html_des_exercices += liste_html_des_exercices_3
+	liste_html_des_exercices+=`</div>`
+	liste_html_des_exercices+=`</div>`
+
+
+	$('#liste_des_exercices').html(liste_html_des_exercices);
 
 	// Gère le clic sur un exercice de la liste
 	$('.lien_id_exercice').click(function(){
@@ -2794,6 +2834,8 @@ jQuery(document).ready(function() {
 		}
 		liste_des_exercices = $('#choix_des_exercices').val().replace(/\s/g, "").replace(";", ",").split(",");;
 		mise_a_jour_de_la_liste_d_exercice();
+
+
 
 });
 

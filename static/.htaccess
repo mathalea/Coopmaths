@@ -6,7 +6,7 @@ ErrorDocument 404 /404.html
 
 #RedirectMatch 301 ex([0-9]?[A-Za-z]{1,2}[0-9]+-?_?[0-9]*)$ https://coopmaths.fr/exercice.html?ex=$1
 
-RedirectMatch 301 ex([0-9a-zA-Z,=\-]*)$ https://coopmaths.fr/exercice.html?ex=$1
+RedirectMatch 301 /ex([0-9a-zA-Z,=\-]*)$ https://coopmaths.fr/exercice.html?ex=$1
 
 # Redirection pour les pdf
 # Une URL qui se termine par pdf + 0 ou 1 chiffre + 1 ou 2 lettres + des chiffres + 0 ou 1 tiret + 0 ou 1 tiret bas + 0 ou des chiffres 
