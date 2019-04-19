@@ -35,84 +35,66 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 ### ToDo
 
-- ~~Personnalisation des URL qui pourront pointer vers une sélection d'exercices déjà configurés.~~
-- Gestion des catégories des exercices.
 - Ajout d'exercices.
-- Optimiser l'impression des exercices en ligne.
+- Gestion des catégories des exercices.
+- Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome).
+- Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535)).
+- ~~Optimiser l'impression des exercices en ligne.~~
+- ~~Personnalisation des URL qui pourront pointer vers une sélection d'exercices déjà configurés.~~
 
 
 ### Changelog
 
-### 04/19
+#### 04/19
 
-- Ajout d'exercices sur les durées
-- Ajout d'exercices sur les pourcentages
+- L'URL se met automatiquement à jour quand on confugure des exercices pour pouvoir la partager avec des élèves.
+- Les exercices sont listés par classe.
+- Ajout d'exercices sur les durées.
+- Ajout d'exercices sur les pourcentages.
 
-### 29/03/19
 
-- Amélioration de l'impression des exercices.
-- Nouvelle gestion des URL qui sont maintenant de la forme ?ex=id,param=n&ex=id2,param=n2...
+#### 03/19
 
-#### 21/03/19
-
+- Intégration sur le site Coopmaths.fr.
+- Utilisation du référentiel Coopmaths.
+- Intégration de MathGraph32 pour afficher des constructions géométriques à données aléatoires.
+- Ajout d'exercices sur les portions de disques.
 - Ajout d'un bouton de zoom pour les exercices en ligne.
 - Modification de l'URL lorsqu'on choisit des exercices.
 - Ajout d'exercices sur les disques et les comparaisons de fractions.
 - Ajout d'exercices sur les comparaisons et additions de fractions (dénominateurs multiples) en 5e.
+- Amélioration de l'impression des exercices.
+- Nouvelle gestion des URL qui sont maintenant de la forme ?ex=id,param=n&ex=id2,param=n2...
 
-#### 15/03/19
 
-- Intégration de MathGraph32 pour afficher des constructions géométriques à données aléatoires.
-- Ajout d'exercices sur les portions de disques.
-
-#### 06/03/19
-
-- Intégration sur le site Coopmaths.fr.
-- Utilisation du référentiel Coopmaths.
-
-#### 03/06/18
-
-- Exercice de développement simple d'une expression littérale.
-- Exercice de substitution.
-
-#### 02/04/18
-
-- URL directe vers une liste d'exercices avec par exemple : ?ex=3,5.
-- Possibilité de modifier les paramètre de l'exercice 1 avec param1=... et param2=...
-- Exercice de calculs d'aires et de périmètres à partir d'un texte (avec ou sans les cercles)
-- Ajout d'un paramètre "Écriture simplifiée" pour tous les exercices de calculs avec des nombres relatifs.
-
-#### 27/03/18
+#### 04/18
 
 - Paramétrage des tables de multiplications (à trou ou classique).
 - Exercice de conversions d'aires (6 paramètres différents).
 - Possibilité d'ajouter du code LaTeX statique dans l'énoncé et la correction.
 - Possibilité de faire un exercice où la consigne, le nombre de question, l'espacement ou le nombre de colonnes n'est pas modifiable.
+- URL directe vers une liste d'exercices avec par exemple : ?ex=3,5.
+- Possibilité de modifier les paramètre de l'exercice 1 avec param1=... et param2=...
+- Exercice de calculs d'aires et de périmètres à partir d'un texte (avec ou sans les cercles)
+- Ajout d'un paramètre "Écriture simplifiée" pour tous les exercices de calculs avec des nombres relatifs.
 
-#### 04/03/18
 
+
+#### 03/18
+
+- Intégration de KaTeX.
+- Intégration de Semantic UI.- Téléchargement d'un fichier LaTeX.
+- Paramètres du fichier généré (nom, style...).
+- Lien de téléchargment des fichiers nécessaires à la compilation (dans les 2 styles).
 - Listing automatique des nouveaux exercices.
 - Fusion de la gestion de la sortie HTML ou LaTeX.
 - Ajout d'exercices sur les nombres relatifs.
 
-#### 01/03/18
 
-- Téléchargement d'un fichier LaTeX.
-- Paramètres du fichier généré (nom, style...).
-- Lien de téléchargment des fichiers nécessaires à la compilation (dans les 2 styles).
-
-#### 28/02/18
-
-- Intégration de KaTeX.
-- Intégration de Semantic UI.
-
-#### 24/02/18
-
-- Réglage de l'espacement entre les questions .
-- Exercices sur les fractions.
-
-#### 22/02/18
+#### 02/18
 
 - Première version avec 4 exercices.
 - Paramètres généraux des exercices (nombre de questions, nombre de colonnes).
 - Possibilité de régler un paramètre spécifique de l'exercice.
+- Réglage de l'espacement entre les questions .
+- Exercices sur les fractions.
