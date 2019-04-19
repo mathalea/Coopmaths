@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+ 
+  <link rel="stylesheet" type="text/css" href="style/semantic.css">
+  <link rel="stylesheet" type="text/css" href="style/katex.min.css">
+  <link rel="stylesheet" type="text/css" href="style/style_mathalea.css">
+
+  
+  <script src="include/jquery-3.3.1.min.js"></script>
+  <script src="include/semantic.min.js"></script>
+  <script src="include/algebrite.bundle-compressed.js" type="text/javascript"></script>
+  <script src="include/katex.min.js"></script>
+  <script src="include/math.min.js"></script>
+
+
+
+  <script src="include/katex-auto-render.min.js"></script>
+
+
+
+
+   
+
+    
+
+
+
+    <title>Test LaTeX</title>
+
+    
+  </head>
+
+  <body>
+    <h1>Exemple</h1>
+
+    <form>
+      <label for="verse-choose">Choisis un fichier</label>
+      <select id="verse-choose" name="verse-choose">
+        <option>6M1</option>
+        <option>6M2</option>
+        <option>6M3</option>
+        <option>6M4</option>
+      </select>
+    </form>
+
+
+    <div id="div_LaTeX">
+
+    </div>
+
+    <script>
+      var LaTeXChoose = document.querySelector('select');
+      var affichage_LaTeX = document.querySelector('#div_LaTeX');
+      LaTeXChoose.onchange = function() {
+        var LaTeX = LaTeXChoose.value;
+        updateDisplay(LaTeX);
+      };
+      function updateDisplay(LaTeX) {
+        LaTeX = LaTeX.replace(" ", "");
+        var url = LaTeX + '.tex';
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.responseType = 'text';
+        request.onload = function() {
+          affichage_LaTeX.HTML = request.response;
+        };
+        request.send();
+        
+      };
+      
+window.onload = function()  {
+      var LaTeXChoose = document.querySelector('select');
+      var affichage_LaTeX = document.querySelector('#div_LaTeX');
+      LaTeXChoose.onchange = function() {
+        var LaTeX = LaTeXChoose.value;
+        updateDisplay(LaTeX);
+      };
+      function updateDisplay(LaTeX) {
+        LaTeX = LaTeX.replace(" ", "");
+        var url = LaTeX + '.tex';
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.responseType = 'text';
+        request.onload = function() {
+          affichage_LaTeX.textContent = request.response;
+        };
+        request.send();
+        
+      };
+        updateDisplay('6M1');
+        LaTeXChoose.value = '6M1';
+        renderMathInElement(affichage_LaTeX,{delimiters: [
+      {left: "$", right: "$", display: false},
+      {left: "$$", right: "$$", display: true}
+      ]})
+      }
+
+    </script>
+  </body>
+</html>
