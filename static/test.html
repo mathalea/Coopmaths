@@ -34,70 +34,49 @@
   </head>
 
   <body>
-    <h1>Exemple</h1>
+    <h1>Choix de l'exercice</h1>
 
-    <form>
-      <label for="verse-choose">Choisis un fichier</label>
-      <select id="verse-choose" name="verse-choose">
-        <option>6M1</option>
-        <option>6M2</option>
-        <option>6M3</option>
-        <option>6M4</option>
-      </select>
-    </form>
+    <div id='choix_des_exercices'></div>
+
+   <!--  <div class="tex" id='6M1'>6M1</div>
+    <div class="tex" id='6M2'>6M2</div>
+    <div class="tex" id='6M3'>6M3</div>
+    <div class="tex" id='6M4'>6M4</div> -->
+
+    <h1>Contenu LaTeX</h1>
+
+    <pre id='div_LaTeX'></pre>
+  
+  <script>
+$.ajax({
+    url: "tex.json",
+    dataType: "text",
+    success: function(data) {
+        var json = $.parseJSON(data);
+        for (var i=0;i<json.length;++i)
+        {
+            $('#choix_des_exercices').append(`<div class="tex" id="${json[i]}">${json[i]}</>`);
+            
+        }
+    }
+});
 
 
-    <div id="div_LaTeX">
+$( ".tex" ).click(function() {
+  $( this ).slideUp();
+  readFile('tex/'+this.id)
+});
 
-    </div>
-
-    <script>
-      var LaTeXChoose = document.querySelector('select');
-      var affichage_LaTeX = document.querySelector('#div_LaTeX');
-      LaTeXChoose.onchange = function() {
-        var LaTeX = LaTeXChoose.value;
-        updateDisplay(LaTeX);
-      };
-      function updateDisplay(LaTeX) {
-        LaTeX = LaTeX.replace(" ", "");
-        var url = LaTeX + '.tex';
-        var request = new XMLHttpRequest();
-        request.open('GET', url);
-        request.responseType = 'text';
-        request.onload = function() {
-          affichage_LaTeX.HTML = request.response;
-        };
-        request.send();
+    function readFile(fichier){
+      jQuery.get(fichier,function(txt){
+        $('#div_LaTeX').append(txt)
+        $('#div_LaTeX').append('\n')
         
-      };
-      
-window.onload = function()  {
-      var LaTeXChoose = document.querySelector('select');
-      var affichage_LaTeX = document.querySelector('#div_LaTeX');
-      LaTeXChoose.onchange = function() {
-        var LaTeX = LaTeXChoose.value;
-        updateDisplay(LaTeX);
-      };
-      function updateDisplay(LaTeX) {
-        LaTeX = LaTeX.replace(" ", "");
-        var url = LaTeX + '.tex';
-        var request = new XMLHttpRequest();
-        request.open('GET', url);
-        request.responseType = 'text';
-        request.onload = function() {
-          affichage_LaTeX.textContent = request.response;
-        };
-        request.send();
-        
-      };
-        updateDisplay('6M1');
-        LaTeXChoose.value = '6M1';
-        renderMathInElement(affichage_LaTeX,{delimiters: [
-      {left: "$", right: "$", display: false},
-      {left: "$$", right: "$$", display: true}
-      ]})
-      }
+      });
+    }
 
-    </script>
+
+  </script>
+
   </body>
 </html>

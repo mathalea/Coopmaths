@@ -409,9 +409,12 @@ function Exercice_tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9')
 		if (!this.sup) { // Si aucune table n'est saisie
 			this.sup = '2;3;4;5;6;7;8;9'
 		}
-		let tables = this.sup.split(";");// Récupère  la saisie de l'utilisateur
-        		//en supprimant les espaces et en remplaçant les points-virgules par des virgules.
-        	
+		let tables = []
+		if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule table
+			tables[0] = this.sup
+		} else {
+			tables = this.sup.split(";");// Sinon on créé un tableau à partir des valeurs séparées par des ;
+		}	
 		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
 		var type_de_questions = 'a_trous';
 		for (let i = 0, a, b, texte, texte_corr; i < this.nb_questions; i++) {
@@ -461,9 +464,12 @@ function Exercice_tables_de_multiplications_et_multiples_de_10(tables_par_defaut
 		if (!this.sup) { // Si aucune table n'est saisie
 			this.sup = '2;3;4;5;6;7;8;9'
 		}
-		let tables = this.sup.split(";");// Récupère  la saisie de l'utilisateur
-        		//en supprimant les espaces et en remplaçant les points-virgules par des virgules.
-        	
+		let tables = []
+		if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule table
+			tables[0] = this.sup
+		} else {
+			tables = this.sup.split(";");// Sinon on créé un tableau à partir des valeurs séparées par des ;
+		}
 		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
 		for (let i = 0, a, b, k1, k2, texte, texte_corr,melange; i < this.nb_questions; i++) {
 			a = couples[i][0];
@@ -507,9 +513,12 @@ function Exercice_tables_de_multiplications_et_decimaux(tables_par_defaut='2;3;4
 		if (!this.sup) { // Si aucune table n'est saisie
 			this.sup = '2;3;4;5;6;7;8;9'
 		}
-		let tables = this.sup.split(";");// Récupère  la saisie de l'utilisateur
-        		//en supprimant les espaces et en remplaçant les points-virgules par des virgules.
-        	
+		let tables = []
+		if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule table
+			tables[0] = this.sup
+		} else {
+			tables = this.sup.split(";");// Sinon on créé un tableau à partir des valeurs séparées par des ;
+		}
 		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
 		for (let i = 0, a, b, k1, k2, couple, texte, texte_corr; i < this.nb_questions; i++) {
 			a = couples[i][0];
