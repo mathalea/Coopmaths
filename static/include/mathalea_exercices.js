@@ -104,6 +104,7 @@ function Exercice() {
    	this.nb_cols_corr_modifiable = true;
    	this.spacing_modifiable = true;
    	this.spacing_corr_modifiable = true;
+   	this.nouvelle_version = function(){}
 
 }
 

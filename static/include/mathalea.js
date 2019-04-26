@@ -285,7 +285,13 @@ form_choix_des_exercices.addEventListener('change', function(e) { // Changement 
 function mise_a_jour_de_la_liste_d_exercice() {
 	for (let i=0; i<liste_des_exercices.length; i++){
 		if (!exercice[i]){
-			exercice[i] = new liste_des_exercices_disponibles[liste_des_exercices[i]];	
+			try {
+				exercice[i] = new liste_des_exercices_disponibles[liste_des_exercices[i]];					
+			} catch(e) {
+				exercice[i] = new Exercice
+				console.log("Un exercice demandé n'existe pas.") //+e)
+			}
+
 		}
 	}
 	parametres_exercice(liste_des_exercices.length);
