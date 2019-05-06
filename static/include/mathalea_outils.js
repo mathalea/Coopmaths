@@ -263,6 +263,50 @@ function lettre_depuis_chiffre(i){ // 1->A ; 2->B...
   return String.fromCharCode(lettre)
 }
 
+function minToHoraire(minutes){	// 0h24 est accepté
+	var nbHour = parseInt(minutes / 60);
+	if (nbHour>23){
+		nbHour = nbHour-24
+	}
+	var nbminuteRestante = (minutes % 60);
+	if (nbminuteRestante>9){
+		return(nbHour + " h " + nbminuteRestante);
+	} else {
+		return(nbHour + " h 0" + nbminuteRestante);
+	}
+}
+
+function minToHour(minutes){	 // on écrira 24 minutes plutôt que 0h24
+	var nbHour = parseInt(minutes / 60);
+	if (nbHour>23){
+		nbHour = nbHour-24
+	}
+	var nbminuteRestante = (minutes % 60);
+	if (nbHour==0) {
+		return(nbminuteRestante+' min')
+	} else {
+		if (nbminuteRestante>9){
+			return(nbHour + " h " + nbminuteRestante);
+		} else {
+			return(nbHour + " h 0" + nbminuteRestante);
+		}
+	}
+}
+
+
+function prenomF(){
+	return choice(['Manon','Julie','Aude','Corinne','Léa','Carine','Elsa','Lisa','Marina','Magalie','Nawel'])
+}
+function prenomM(){
+	return choice(['Rémi','Benjamin','Guillaume','Christophe','Cyril','Kamel','Yazid','Mehdi','Karim','Bernard','Joachim'])
+}
+function prenom(){
+	return choice([prenomF(),prenomM()])
+}
+
+
+
+
 
 
 
