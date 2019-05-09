@@ -11,6 +11,7 @@ Modules nécessaires :
 
 // Gestion des paramètres
 var div = document.getElementById('div_code_LaTeX'); // Récupère le div dans lequel le code va être affiché
+var div_overleaf = document.getElementById('overleaf'); // Récupère le div dans lequel le code va être affiché
 var div_parametres_generaux = document.getElementById('parametres_generaux'); // Récupère le div dans lequel seront inscrit les paramètres
 var form_consigne = [], form_nb_questions = [], form_nb_cols = [], form_nb_cols_corr = [], form_spacing = [] , form_spacing_corr = [], form_sup = [], form_sup2 = []; // Création de tableaux qui recevront les éléments HTML de chaque formulaires
 
@@ -399,6 +400,54 @@ function mise_a_jour_du_code(){
 			$( "#message_liste_exercice_vide" ).hide();
 			$('#cache').show();
 			div.innerHTML = '<pre><code class="language-latex">' + code_LaTeX + '</code></pre>';
+			code_LaTeX = `\\documentclass[12pt]{article}
+\\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\\usepackage[utf8]{inputenc}		        
+\\usepackage[T1]{fontenc}		
+\\usepackage[francais]{babel}
+\\usepackage{multicol} 					
+\\usepackage{calc} 						
+\\usepackage{enumerate}
+\\usepackage{enumitem}
+\\usepackage{graphicx}				
+\\usepackage{tabularx}
+\\usepackage[autolanguage]{numprint}
+\\usepackage{pgf,tikz}
+\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
+\\usepackage{cancel}
+\\usepackage{eurosym}
+\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+\\usepackage{fancyhdr,lastpage}          	
+ \\pagestyle{fancy}                      	
+\\usepackage{fancybox}					
+\\usepackage{xlop}						
+\\usepackage{setspace}	
+
+\\setlength{\\parindent}{0mm}		
+\\renewcommand{\\arraystretch}{1.5}	
+\\newcounter{exo}          				
+\\setcounter{exo}{0}   				
+\\newcommand{\\exo}[1]{				
+  	\\stepcounter{exo}        		
+  	\\subsection*{Exercice \\no{\\theexo} \\textmd{\\normalsize #1}}
+  	}
+  	
+
+\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
+\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
+\\newcommand{\\version}[1]{\\fancyhead[R]{Version #1}}
+\\setlength{\\fboxsep}{3mm}
+\\newenvironment{correction}{\\newpage\\fancyhead[C]{\\textbf{Correction}}\\setcounter{exo}{0}}{}
+\\fancyhead[C]{\\textbf{Entrainement}}
+\\fancyfoot{}
+
+
+
+
+
+
+\\begin{document}`+ code_LaTeX + `\\end{document}`
+			div_overleaf.innerHTML = `<form method="POST" action="https://www.overleaf.com/docs" target="_blank" class="ng-pristine ng-valid"><div class="form-group text-center"><input type="hidden" name="encoded_snip" value="${encodeURIComponent(code_LaTeX)}" autocomplete="off"><button class="btn-success btn btn-smclass ui labeled icon button"" type="submit" ><i class="cogs icon"></i>Compilier sur Overleaf.com</button></div></form>`
 		Prism.highlightAllUnder(div); // Met à jour le code surligné
 	} else {
 		code_LaTeX = ''
