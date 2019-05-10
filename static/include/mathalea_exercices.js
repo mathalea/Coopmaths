@@ -214,7 +214,8 @@ function Heures_decimales(){
 	this.titre = "Utiliser les heures décimales";
 	this.consigne = "Compléter les égalités suivantes";
 	this.spacing = 2;
-	this.nb_questions = 5
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
 
 
 	this.nouvelle_version = function(){
@@ -349,7 +350,9 @@ function Calculs_de_durees_ou_d_horaires(){
 	this.consigne = "";
 	this.sup = 4 // 1 : calculs de durées | 2 : calculer l'heure de début | 3 : calculer l'heure de fin | 4 : Mélange
 	this.spacing = 2;
-	this.nb_questions = 3
+	this.nb_questions = 3;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
 
 
 	this.nouvelle_version = function(){
@@ -2222,6 +2225,8 @@ function Pourcentage_d_un_nombre(){
 	this.consigne = "Calculer"
 	this.spacing = 2;
 	this.spacing_corr = 2;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1; 
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions

@@ -1,11 +1,12 @@
 /*
-Maths.ALEA()
+MathALEA
 Rémi Angot --- CC-By-SA
+coopmaths.fr
 
 Modules nécessaires : 
 	mathsalea_exercices.js pour la définition des exercices
 	mathsalea_outils.js pour les différentes fonctions de construction des exercices ou de formatage
-	*/
+*/
 
 
 
@@ -83,11 +84,11 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 				div_parametres_generaux.innerHTML += "<label for='form_sup"+i+"'>"+exercice[i].besoin_formulaire_long_texte[0]+" : </label>\
 			<div style='display: inline' data-tooltip='"+exercice[i].besoin_formulaire_long_texte[1]+"' data-inverted=''><textarea id='form_sup"+i+"'></textarea></div>";
 				div_parametres_generaux.innerHTML +=`<div class="ui form">
-  <div class="field">
-    <label>Text</label>
-    <textarea></textarea>
-  </div>
-</div>`
+			  <div class="field">
+			    <label>Text</label>
+			    <textarea></textarea>
+			  </div>
+			</div>`
 			}
 
 			if (exercice[i].besoin_formulaire2_case_a_cocher){ // Création d'un formulaire texte
@@ -307,37 +308,36 @@ var code_LaTeX = '', contenu_fichier = '';
 
 function mise_a_jour_du_code(){
 	// ajout du numéro de l'exercice dans l'URL
-	//if (!URL_de_depart_complexe){
-		if (liste_des_exercices.length>0) {
-			let fin_de_l_URL = ""
-			if (sortie_html) {
-				fin_de_l_URL+="exercice.html"	
-			}
-		if (exercice[0].sup2){
-				fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions},sup=${exercice[0].sup},sup2=${exercice[0].sup2}`	
+	if (liste_des_exercices.length>0) {
+		let fin_de_l_URL = ""
+		if (sortie_html) {
+			fin_de_l_URL+="exercice.html"	
+		}
+	if (exercice[0].sup2){
+			fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions},sup=${exercice[0].sup},sup2=${exercice[0].sup2}`	
+		} else{
+		if (exercice[0].sup){
+				fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions},sup=${exercice[0].sup}`	
 			} else{
-			if (exercice[0].sup){
-					fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions},sup=${exercice[0].sup}`	
-				} else{
-					fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions}`
-				}
-			}
-		for (var i = 1; i < liste_des_exercices.length; i++) {
-			if (exercice[i].sup2){
-				fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions},sup=${exercice[i].sup},sup2=${exercice[i].sup2}`	
-			} else{
-			if (exercice[i].sup){
-					fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions},sup=${exercice[i].sup}`	
-				} else{
-					fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions}`
-				}
+				fin_de_l_URL +=`?ex=${liste_des_exercices[0]},nb_questions=${exercice[0].nb_questions}`
 			}
 		}
-		window.history.pushState("","",fin_de_l_URL);
-			
+	for (var i = 1; i < liste_des_exercices.length; i++) {
+		if (exercice[i].sup2){
+			fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions},sup=${exercice[i].sup},sup2=${exercice[i].sup2}`	
+		} else{
+		if (exercice[i].sup){
+				fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions},sup=${exercice[i].sup}`	
+			} else{
+				fin_de_l_URL +=`&ex=${liste_des_exercices[i]},nb_questions=${exercice[i].nb_questions}`
+			}
 		}
-	//}
+	}
+	window.history.pushState("","",fin_de_l_URL);
 		
+	}
+	
+	// création des figures MG32 (géométrie dynamique)	
 
 	codeMG32=``;
 	if (sortie_html){ // code pour la sortie HTML
@@ -400,55 +400,8 @@ function mise_a_jour_du_code(){
 			$( "#message_liste_exercice_vide" ).hide();
 			$('#cache').show();
 			div.innerHTML = '<pre><code class="language-latex">' + code_LaTeX + '</code></pre>';
-			code_LaTeX = `\\documentclass[12pt]{article}
-\\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
-\\usepackage[utf8]{inputenc}		        
-\\usepackage[T1]{fontenc}		
-\\usepackage[francais]{babel}
-\\usepackage{multicol} 					
-\\usepackage{calc} 						
-\\usepackage{enumerate}
-\\usepackage{enumitem}
-\\usepackage{graphicx}				
-\\usepackage{tabularx}
-\\usepackage[autolanguage]{numprint}
-\\usepackage{pgf,tikz}
-\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
-\\usepackage{cancel}
-\\usepackage{eurosym}
-\\DeclareUnicodeCharacter{20AC}{\\euro{}}
-\\usepackage{fancyhdr,lastpage}          	
- \\pagestyle{fancy}                      	
-\\usepackage{fancybox}					
-\\usepackage{xlop}						
-\\usepackage{setspace}	
-
-\\setlength{\\parindent}{0mm}		
-\\renewcommand{\\arraystretch}{1.5}	
-\\newcounter{exo}          				
-\\setcounter{exo}{0}   				
-\\newcommand{\\exo}[1]{				
-  	\\stepcounter{exo}        		
-  	\\subsection*{Exercice \\no{\\theexo} \\textmd{\\normalsize #1}}
-  	}
-  	
-
-\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
-\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
-\\newcommand{\\version}[1]{\\fancyhead[R]{Version #1}}
-\\setlength{\\fboxsep}{3mm}
-\\newenvironment{correction}{\\newpage\\fancyhead[C]{\\textbf{Correction}}\\setcounter{exo}{0}}{}
-\\fancyhead[C]{\\textbf{Entrainement}}
-\\fancyfoot{}
-
-
-
-
-
-
-\\begin{document}`+ code_LaTeX + `\\end{document}`
-			div_overleaf.innerHTML = `<form method="POST" action="https://www.overleaf.com/docs" target="_blank" class="ng-pristine ng-valid"><div class="form-group text-center"><input type="hidden" name="encoded_snip" value="${encodeURIComponent(code_LaTeX)}" autocomplete="off"><button class="btn-success btn btn-smclass ui labeled icon button"" type="submit" ><i class="cogs icon"></i>Compilier sur Overleaf.com</button></div></form>`
-		Prism.highlightAllUnder(div); // Met à jour le code surligné
+			Prism.highlightAllUnder(div); // Met à jour la coloration syntaxique
+		
 	} else {
 		code_LaTeX = ''
 			$( "#message_liste_exercice_vide" ).show(); // Message au dessus de la liste des exercices
@@ -494,10 +447,13 @@ if (!sortie_html){
 			// Gestion du style pour l'entête du fichier
 
 			if ($('#style_classique:checked').val()){
-				contenu_fichier = '\\documentclass[a4paper,11pt,fleqn]{article}\n\
-				\\input{preambule}\n\\pagestyle{fancy}\n\\renewcommand{\\headrulewidth}{1pt}\n\\fancyhead[C]{' + $("#entete_du_fichier").val() + '}\n\\fancyhead[L]{}\
-				\\fancyhead[R]{}\n\\renewcommand{\\footrulewidth}{1pt}\n\\fancyfoot[C]{}\n\\fancyfoot[L]{}\n\\fancyfoot[R]{}\n\n\
-				\\begin{document}\n\n' + code_LaTeX + '\n\n\\end{document}'
+				if ($("#entete_du_fichier").val()=='') {
+					$("#entete_du_fichier").val('Exercices')
+				}
+				contenu_fichier = `\\documentclass[a4paper,11pt,fleqn]{article}\n`
+				contenu_fichier += `\\input{preambule}\n\\pagestyle{fancy}\n\\renewcommand{\\headrulewidth}{1pt}\n\\fancyhead[C]{${$("#entete_du_fichier").val()}}\n\\fancyhead[L]{}`
+				contenu_fichier += `\\fancyhead[R]{}\n\\renewcommand{\\footrulewidth}{1pt}\n\\fancyfoot[C]{}\n\\fancyfoot[L]{}\n\\fancyfoot[R]{}\n\n`
+				contenu_fichier += `\\begin{document}\n\n` + code_LaTeX + `\n\n\\end{document}`
 			} else
 			{
 				contenu_fichier = '\\documentclass[a4paper,11pt,fleqn]{article}\n\\input{preambule_coop}\n'
@@ -515,22 +471,77 @@ if (!sortie_html){
 			
 		});
 
+
+
+	$( "#btn_overleaf").click(function() {
+		let code_exercices = '', code_correction = '';
+			// Gestion du nombre de versions
+			if ($("#nombre_de_versions").val()>1) {
+				code_LaTeX = '';
+				for (let v = 0; v <$("#nombre_de_versions").val(); v++) {
+					code_exercices += '\\version{' + (v+1) + '}\n\n'
+					code_correction += '\n\n\\newpage\n\\version{' + (v+1) + '}\n\\begin{correction}';
+					for (let i = 0; i < liste_des_exercices.length; i++) {
+						exercice[i].nouvelle_version();
+						code_exercices += exercice[i].contenu;
+						code_exercices += '\n\n';
+						code_correction += exercice[i].contenu_correction;
+						code_correction += '\n\n';
+					}
+					if (v < $("#nombre_de_versions").val() -1) {
+						if ($('#style_classique:checked').val()){
+							code_exercices += '\n\\newpage\n\\setcounter{exo}{0}\n';
+						} else{
+							code_exercices += '\n\\newpage\n\\setcounter{section}{0}\n';
+						}
+					}
+					code_correction += '\n\\end{correction}'
+				}
+				code_LaTeX = code_exercices + code_correction;
+			}
+			
+			// Gestion du style pour l'entête du fichier
+
+			if ($('#style_classique:checked').val()){
+				contenu_fichier = intro_LaTeX($("#entete_du_fichier").val()) + code_LaTeX + '\n\n\\end{document}'
+				console.log(contenu_fichier)
+			} else
+			{
+				contenu_fichier = intro_LaTeX_coop()
+				contenu_fichier +='\n\n\\theme{' + $('input[name=theme]:checked').val() + '}{' + $("#entete_du_fichier").val() + '}'
+				contenu_fichier += '{' + $("#items").val() + '}{' + $("#domaine").val() + '}\n\\begin{document}\n\n' + code_LaTeX
+				contenu_fichier += '\n\n\\end{document}'
+			}
+
+			$('input[name=encoded_snip]').val(encodeURIComponent(contenu_fichier));
+			if ($("#nom_du_fichier").val()) {
+				$('input[name=snip_name]').val($("#nom_du_fichier").val());	//nomme le projet sur Overleaf
+			}
+			
+		});
+
 		// Gestion des paramètres du fichier LaTeX
 
 		$('#options_style_CoopMaths').hide(); 	// par défaut le style est classique donc on 
-												// cache les options du style Coop
+		$('a.lien_images').hide();				// cache les options du style Coop
 												$(function(){
 													$("input:radio[name='style']").change(function(){
 														if ($('#style_classique:checked').val()){
 															$('#options_style_CoopMaths').hide();
 															$('a.lien_preambule').attr('href','fichiers/preambule.tex')
+															$('a.lien_images').hide();
 														} else{
+															$('a.lien_images').show();
 															$('#options_style_CoopMaths').show()
-															$('a.lien_preambule').attr('href','fichiers/preambule_coop.zip')
+															$('a.lien_preambule').attr('href','fichiers/preambule_coop.tex')
 														}
 													});
 												});
 	}
+
+
+
+
 
 
 
@@ -634,6 +645,178 @@ window.onload = function()  {
 
 
 
+// Gestion des styles LaTeX
 
+function intro_LaTeX(entete="Exercices") {
+	if (entete=='') {entete='Exercices'}
+	return `\\documentclass[12pt]{article}
+\\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\\usepackage[utf8]{inputenc}		        
+\\usepackage[T1]{fontenc}		
+\\usepackage[francais]{babel}
+\\usepackage{multicol} 					
+\\usepackage{calc} 						
+\\usepackage{enumerate}
+\\usepackage{enumitem}
+\\usepackage{graphicx}				
+\\usepackage{tabularx}
+\\usepackage[autolanguage]{numprint}
+\\usepackage{pgf,tikz}
+\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
+\\usepackage{cancel}
+\\usepackage{eurosym}
+\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+\\usepackage{fancyhdr,lastpage}          	
+ \\pagestyle{fancy}                      	
+\\usepackage{fancybox}					
+\\usepackage{xlop}						
+\\usepackage{setspace}	
+
+\\setlength{\\parindent}{0mm}		
+\\renewcommand{\\arraystretch}{1.5}	
+\\newcounter{exo}          				
+\\setcounter{exo}{0}   				
+\\newcommand{\\exo}[1]{				
+  	\\stepcounter{exo}        		
+  	\\subsection*{Exercice \\no{\\theexo} \\textmd{\\normalsize #1}}
+  	}
+\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
+\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
+\\newcommand{\\version}[1]{\\fancyhead[R]{Version #1}}
+\\setlength{\\fboxsep}{3mm}
+\\newenvironment{correction}{\\newpage\\fancyhead[C]{\\textbf{Correction}}\\setcounter{exo}{0}}{}
+\\fancyhead[C]{\\textbf{${entete}}}
+\\fancyfoot{}
+\\fancyfoot[R]{\\scriptsize Coopmaths.fr -- CC-BY-SA}
+\\setlength{\\headheight}{14.5pt}
+
+
+\\begin{document}`
+}
+
+function intro_LaTeX_coop(){
+
+	let intro_LaTeX_coop = `
+\\documentclass[12pt]{article}
+\\usepackage[left=1.5cm,right=1.5cm,top=3.5cm,bottom=2cm]{geometry}
+\\usepackage[utf8]{inputenc}		        
+\\usepackage[T1]{fontenc}		
+\\usepackage[francais]{babel}
+\\usepackage{multicol} 					
+\\usepackage{calc} 						
+\\usepackage{enumerate}
+\\usepackage{enumitem}
+\\usepackage{graphicx}				
+\\usepackage{tabularx}
+\\usepackage[autolanguage]{numprint}
+\\usepackage{pgf,tikz}
+	\\usetikzlibrary{calc}
+\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
+\\usepackage{cancel}
+\\usepackage{eurosym}
+	\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+\\usepackage{fancyhdr,lastpage}          	
+ \\pagestyle{fancy}                      	
+\\usepackage{fancybox}					
+\\usepackage{xlop}						
+\\usepackage{setspace}
+
+%%% COULEURS %%%
+
+\\definecolor{nombres}{cmyk}{0,.8,.95,0}
+\\definecolor{gestion}{cmyk}{.75,1,.11,.12}
+\\definecolor{gestionbis}{cmyk}{.75,1,.11,.12}
+\\definecolor{grandeurs}{cmyk}{.02,.44,1,0}
+\\definecolor{geo}{cmyk}{.62,.1,0,0}
+\\definecolor{algo}{cmyk}{.69,.02,.36,0}
+\\definecolor{correction}{cmyk}{.63,.23,.93,.06}
+\\usepackage{colortbl}
+\\arrayrulecolor{couleur_theme}		% Couleur des filets des tableaux
+
+%%% MISE EN PAGE %%%
+
+\\setlength{\\parindent}{0mm}		
+\\renewcommand{\\arraystretch}{1.5}	
+\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
+\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
+\\setlength{\\fboxsep}{3mm}
+
+\\setlength{\\headheight}{14.5pt}
+
+\\spaceskip=2\\fontdimen2\\font plus 3\\fontdimen3\\font minus3\\fontdimen4\\font\\relax %Pour doubler l'espace entre les mots
+\\newcommand{\\numb}[1]{ % Dessin autour du numéro d'exercice
+\\begin{tikzpicture}[overlay,yshift=-.3cm,scale=.8]
+	\\draw[fill=couleur_numerotation,couleur_numerotation](-.3,0)rectangle(.5,.8);
+	\\draw[line width=.05cm,couleur_numerotation,fill=white] (0,0)--(.5,.5)--(1,0)--(.5,-.5)--cycle;
+	\\node[couleur_numerotation]  at (.5,0) { \\large \\bfseries #1};
+		\\draw (-.4,.8) node[white,anchor=north west]{\\bfseries EX}; 
+\\end{tikzpicture}
+}
+
+%%% NUMEROS DES EXERCICES %%%
+
+\\usepackage{titlesec} % Le titre de section est un numéro d'exercice avec sa consigne alignée à gauche.
+\\titleformat{\\section}{}{\\numb{\\arabic{section}}}{1cm}{\\hspace{0em}}{}
+\\newcommand{\\exo}[1]{ % Un exercice est une nouvelle section avec la consigne écrite en caractêres normaux
+\\section{\\textmd{#1}}
+\\medskip
+}
+
+
+%%% ENVIRONNEMENTS - CADRES %%%
+\\usepackage[framemethod=tikz]{mdframed}
+
+\\newmdenv[linecolor=couleur_theme, linewidth=3pt,topline=true,rightline=false,bottomline=false,frametitlerule=false,frametitlefont={\\color{couleur_theme}\\bfseries},frametitlerulewidth=1pt]{methode}
+
+
+\\newmdenv[startcode={\\setlength{\\multicolsep}{0cm}\\setlength{\\columnsep}{.2cm}\\setlength{\\columnseprule}{0pt}\\vspace{0cm}},linecolor=white, linewidth=3pt,innerbottommargin=10pt,innertopmargin=5pt,innerrightmargin=20pt,splittopskip=20pt,splitbottomskip=10pt,everyline=true,tikzsetting={draw=couleur_theme,line width=4pt,dashed,dash pattern= on 10pt off 10pt},frametitleaboveskip=-.6cm,frametitle={\\tikz\\node[anchor= east,rectangle,fill=white]{\\textcolor{couleur_theme}{\\raisebox{-.3\\height}{\\includegraphics[width=.8cm]{\\iconeobjectif}}\\; \\bfseries \\Large Objectifs}};}]{objectif}
+
+\\newmdenv[startcode={\\colorlet{couleur_numerotation}{correction}\\renewcommand{\\columnseprulecolor}{\\color{correction}}
+\\setcounter{section}{0}\\arrayrulecolor{correction}},linecolor=white, linewidth=4pt,innerbottommargin=10pt,innertopmargin=5pt,splittopskip=20pt,splitbottomskip=10pt,everyline=true,frametitle=correction,tikzsetting={draw=correction,line width=3pt,dashed,dash pattern= on 15pt off 10pt},frametitleaboveskip=-.4cm,frametitle={\\tikz\\node[anchor= east,rectangle,fill=white]{\\; \\textcolor{correction}{\\raisebox{-.3\\height}{\\includegraphics[width=.6cm]{icone-correction}}\\; \\bfseries \\Large Corrections}};}]{correction}
+
+\\newmdenv[roundcorner=0,linewidth=0pt,frametitlerule=false, backgroundcolor=gray!40,leftmargin=8cm]{remarque}
+
+
+
+\\newcommand{\\theme}[4]
+{
+	\\fancyhead[L]{}
+	\\fancyhead[R]{}
+	\\fancyhead[C]{
+	\\begin{tikzpicture}[remember picture,overlay]
+	  \\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(0,-.8cm)$) {\\includegraphics{header-#1}};
+	  \\node[anchor=east, fill=white] at ($(current page.north east)+(-2,-1.4cm)$) {\\Huge \\textcolor{couleur_theme}{\\bfseries \\#} \\bfseries #2 \\textcolor{couleur_theme}{\\bfseries \\MakeUppercase{#3}}};
+	  \\node[anchor=center, color=white] at ($(current page.north)+(0,-2.65cm)$) {\\Large \\bfseries \\MakeUppercase{#4}};
+	\\end{tikzpicture}
+	}
+	\\fancyfoot[C]{
+	\\begin{tikzpicture}[remember picture,overlay]
+	  \\node[anchor=south west,inner sep=0pt] at ($(current page.south west)+(0,0)$) {\\includegraphics{footer-#1}};
+	\\end{tikzpicture} 
+	}
+	\\colorlet{couleur_theme}{#1}
+	\\colorlet{couleur_numerotation}{couleur_theme}
+	\\def\\iconeobjectif{icone-objectif-#1}
+	\\def\\urliconeomethode{icone-methode-#1}
+	\\renewcommand{\\headrulewidth}{0pt} % Pour enlever les traits en en-tête et en pied de page
+	\\renewcommand{\\footrulewidth}{0pt}
+}
+
+\\newcommand{\\version}[1]{
+	\\fancyhead[R]{
+	\\begin{tikzpicture}[remember picture,overlay]
+		\\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(-.5,-.5cm)$) {\\large \\textcolor{couleur_theme}{\\bfseries V#1}};
+	\\end{tikzpicture}
+	}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Fin du préambule %%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+`
+	return intro_LaTeX_coop
+
+}
 
 
