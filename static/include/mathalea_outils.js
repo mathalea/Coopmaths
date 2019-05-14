@@ -51,12 +51,21 @@ function creer_couples(E1, E2, nombre_de_couples_min = 10){
 	return result
 }
 
-function randint(min,max){
+function randint(min,max,liste_a_eviter=[]){
 	//Source : https://gist.github.com/pc035860/6546661
-	var range = max - min;
-	var rand = Math.floor(Math.random() * (range + 1));
+	let range = max - min;
+	let rand = Math.floor(Math.random() * (range + 1));
+	if (Number.isInteger(liste_a_eviter)){
+		liste_a_eviter=[liste_a_eviter]
+	}
+	if (liste_a_eviter.length>0) {
+		while (liste_a_eviter.indexOf(min+rand)!=-1){
+			rand = Math.floor(Math.random() * (range + 1));
+		}
+	}
 	return min + rand;
 }
+
 
 function enleve_element(array,item){
 	// Enlève toutes les occurences d'un élément d'un tableau donné
@@ -73,9 +82,22 @@ function choice(liste) {
 }
 
 function range(max,liste_a_eviter=[]){
-	// Créer un tableau avec toutes les valeurs de 0 à max sauf celle de la liste à éviter
+	// Créer un tableau avec toutes les valeurs de 0 à max-1 sauf celle de la liste à éviter
 	let nb_max = parseInt(max,10);
 	let liste = [...Array(nb_max+1).keys()];
+	for (let i=0;i<liste_a_eviter.length;i++){
+		enleve_element(liste,liste_a_eviter[i])
+	}
+	return liste
+}
+
+function range1(max,liste_a_eviter=[]){
+	// Créer un tableau avec toutes les valeurs de 1 à max sauf celle de la liste à éviter
+	let nb_max = parseInt(max,10);
+	let liste = [];
+	for (let i = 1; i <= nb_max; i++) {
+		liste.push(i)
+	}
 	for (let i=0;i<liste_a_eviter.length;i++){
 		enleve_element(liste,liste_a_eviter[i])
 	}
@@ -236,6 +258,14 @@ function pgcd(a,b){
 	return parseInt(Algebrite.run(`gcd(${a},${b})`));
 }
 
+function calcul(expression){ // pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
+	return parseFloat(Algebrite.eval(expression))
+}
+
+function tex_nombrec(expression){ //pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux et renvoyer la virgule comme séparateur décimal
+	return tex_nombre(parseFloat(Algebrite.eval(expression)))
+}
+
 
 function somme_des_termes_par_signe(liste){
 	let somme_des_positifs = 0, somme_des_negatifs = 0;
@@ -261,6 +291,10 @@ function polygone(nbsommets){ // Créer un string de nbsommets caractères dans 
 function lettre_depuis_chiffre(i){ // 1->A ; 2->B...
 	let lettre = 64+i;
   return String.fromCharCode(lettre)
+}
+
+function lettre_minuscule_depuis_chiffre(i){ // 1->A ; 2->B...
+  return lettre_depuis_chiffre(i).toLowerCase()
 }
 
 function minToHoraire(minutes){	// 0h24 est accepté
@@ -363,7 +397,7 @@ function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
 function html_enumerate(liste){
 	let result ='<ol>'
 	for(let i in liste){
-		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\\\/g,'<br>') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\\\/g,'<br>').replace(/\\not=/g,'≠') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 	}
 	result += '</ol>'
 	return result
@@ -455,4 +489,22 @@ function tex_fraction_box(a,b,taille='2em'){ // Ecrire une fraction dans une boi
 
 function tex_texte(texte) { // Pour écrire du texte en mode mathématiques
 	return '~\\text{'+texte+'}'
+}
+
+function itemize(tableau_de_texte){
+	let texte = ''
+	if (sortie_html) {
+			texte = '<div>'
+		for (var i = 0; i < tableau_de_texte.length; i++) {
+			texte += '<div> − ' + tableau_de_texte[i] + '</div>'
+		}
+			texte += '</div>'
+	} else {
+		texte = '\t\\begin{itemize}\n'
+		for (var i = 0; i < tableau_de_texte.length; i++) {
+			texte += '\t\t\\item ' + tableau_de_texte[i]+'\n'
+		}
+		texte += '\t\\end{itemize}'
+	}
+	return texte
 }

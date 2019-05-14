@@ -37,17 +37,25 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 - Ajout d'exercices.
 - Gestion des catégories des exercices.
+- Améliorer l'export sur overleaf.com avec gestion des images.
 - Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome).
 - Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535)).
+- Proposer des versions diaporamas.
 - ~~Optimiser l'impression des exercices en ligne.~~
 - ~~Personnalisation des URL qui pourront pointer vers une sélection d'exercices déjà configurés.~~
 
 
 ### Changelog
 
+### 05/19
+
+- Compilation en ligne avec overleaf.com.
+- Ajout d'exercices sur le calcul littéral en 5e.
+
+
 #### 04/19
 
-- L'URL se met automatiquement à jour quand on confugure des exercices pour pouvoir la partager avec des élèves.
+- L'URL se met automatiquement à jour quand on configure des exercices pour pouvoir la partager avec des élèves.
 - Les exercices sont listés par classe.
 - Ajout d'exercices sur les durées.
 - Ajout d'exercices sur les pourcentages.

@@ -34,6 +34,24 @@
   </head>
 
   <body>
+<h1>New </h1>
+
+<script>
+  
+
+  fetch('tex/6M1.tex')
+  .then(response => response.text())
+  .then((data) => {
+    $('#div1').append(data)
+  })
+
+  
+  
+
+</script>
+
+<div id="div1"></div>
+
     <h1>Choix de l'exercice</h1>
 
     <div id='choix_des_exercices'></div>

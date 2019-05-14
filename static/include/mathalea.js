@@ -18,6 +18,8 @@ var form_consigne = [], form_nb_questions = [], form_nb_cols = [], form_nb_cols_
 
 var URL_de_depart_complexe = false; // Si l'utilisateur a entré une URL avec des paramètres, on ne la modifie pas
 
+var liste_des_exercices_statiques = []
+
 function parametres_exercice(nb_exercices){
 /* Pour l'exercice i, on rajoute un formulaire avec 5 inputs : 
 nombre de questions, nombre de colonnes,nombre de colonnes dans le corrigé,
@@ -89,6 +91,11 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 			    <textarea></textarea>
 			  </div>
 			</div>`
+			}
+
+			if (exercice[i].besoin_formulaire_case_a_cocher){ // Création d'un formulaire texte
+				div_parametres_generaux.innerHTML += "<div style='display: inline'><label for='form_sup"+i+"'>"+exercice[i].besoin_formulaire_case_a_cocher[0]+" : </label>\
+			<input id='form_sup"+i+"' type='checkbox'  ></div>";
 			}
 
 			if (exercice[i].besoin_formulaire2_case_a_cocher){ // Création d'un formulaire texte
@@ -219,6 +226,16 @@ Les réponses modifient les caractéristiques de l'exercice puis le code LaTeX e
 			});
 		}
 
+		if (exercice[i].besoin_formulaire_case_a_cocher){
+			form_sup[i] = document.getElementById('form_sup'+i);
+			form_sup[i].checked = exercice[i].sup; // Rempli le formulaire avec le paramètre supplémentaire
+			form_sup[i].addEventListener('change', function(e) { // 
+				exercice[i].sup = e.target.checked;
+				mise_a_jour_du_code();
+			});
+
+		}
+
 		if (exercice[i].besoin_formulaire2_case_a_cocher){
 			form_sup2[i] = document.getElementById('form_sup2'+i);
 			form_sup2[i].checked = exercice[i].sup2; // Rempli le formulaire avec le paramètre supplémentaire
@@ -282,6 +299,11 @@ form_choix_des_exercices.addEventListener('change', function(e) { // Changement 
 	//document.getElementById('liste_des_exercices').style.display='none';
 });
 
+// Si le nombre de versions changent
+$("#nombre_de_versions").change(function() {
+	mise_a_jour_du_code()
+});
+
 
 
 function mise_a_jour_de_la_liste_d_exercice() {
@@ -298,6 +320,25 @@ function mise_a_jour_de_la_liste_d_exercice() {
 	}
 	parametres_exercice(liste_des_exercices.length);
 	mise_a_jour_du_code();  
+}
+
+
+// Gestion du LaTeX statique par remplacement du texte
+
+function ajout_de_LaTeX_statique (url_sans_extension){
+	$.get(url_sans_extension+'.tex', function(txt) {
+			//url_sans_extension = url_sans_extension.replace(/\//g,'\/') // echapper tous les slashs
+			//let expression = `%£[${url_sans_extension}]`.replace(/\//g,'\\\/')
+			let expression_reguliere = new RegExp ('%£'+url_sans_extension.replace(/\//g,'\\\/')+'£',"g")
+		 	div.innerHTML = div.innerHTML.replace(expression_reguliere,txt)
+		 	code_LaTeX = code_LaTeX.replace(expression_reguliere,txt)
+		 });
+
+	$.get(url_sans_extension+'_corr.tex', function(txt) {
+			let expression_reguliere = new RegExp ('%£'+url_sans_extension.replace(/\//g,'\\\/')+'_corr£',"g")			
+		 	div.innerHTML = div.innerHTML.replace(expression_reguliere,txt)
+		 	code_LaTeX = code_LaTeX.replace(expression_reguliere,txt)
+		 });	
 }
 
 
@@ -389,6 +430,9 @@ function mise_a_jour_du_code(){
 		if (liste_des_exercices.length > 0) {
 			for (let i = 0; i < liste_des_exercices.length; i++) {
 				exercice[i].nouvelle_version();
+				if (exercice[i].titre=='Fichier statique') {
+					liste_des_exercices_statiques.push(exercice[i].sup)
+				}
 				code1 += exercice[i].contenu;
 				code1 += '\n\n'
 				code2 += exercice[i].contenu_correction;
@@ -399,29 +443,12 @@ function mise_a_jour_du_code(){
 			code2 + '\\end{correction}'; 
 			$( "#message_liste_exercice_vide" ).hide();
 			$('#cache').show();
-			div.innerHTML = '<pre><code class="language-latex">' + code_LaTeX + '</code></pre>';
-			Prism.highlightAllUnder(div); // Met à jour la coloration syntaxique
-		
-	} else {
-		code_LaTeX = ''
-			$( "#message_liste_exercice_vide" ).show(); // Message au dessus de la liste des exercices
-			$('#cache').hide(); // Cache au dessus du code LaTeX
-			div.innerHTML = '';
-		}
-		
-	}
-}
 
 
-if (!sortie_html){
-
-	// Gestion du téléchargement
-
-	$( "#btn_telechargement").click(function() {
-		let code_exercices = '', code_correction = '';
 			// Gestion du nombre de versions
 			if ($("#nombre_de_versions").val()>1) {
 				code_LaTeX = '';
+				let code_exercices = '', code_correction = '';
 				for (let v = 0; v <$("#nombre_de_versions").val(); v++) {
 					code_exercices += '\\version{' + (v+1) + '}\n\n'
 					code_correction += '\n\n\\newpage\n\\version{' + (v+1) + '}\n\\begin{correction}';
@@ -443,6 +470,61 @@ if (!sortie_html){
 				}
 				code_LaTeX = code_exercices + code_correction;
 			}
+			for (let i = 0; i < liste_des_exercices_statiques.length; i++) {
+				ajout_de_LaTeX_statique(liste_des_exercices_statiques[i])
+			}
+
+		
+			
+			div.innerHTML = '<pre><code class="language-latex">' + code_LaTeX + '</code></pre>';
+			Prism.highlightAllUnder(div); // Met à jour la coloration syntaxique
+		
+	} else {
+		code_LaTeX = ''
+			$( "#message_liste_exercice_vide" ).show(); // Message au dessus de la liste des exercices
+			$('#cache').hide(); // Cache au dessus du code LaTeX
+			div.innerHTML = '';
+		}
+		
+	}
+
+
+	
+	
+	
+}
+
+
+if (!sortie_html){
+
+	// Gestion du téléchargement
+
+	$( "#btn_telechargement").click(function() {
+		// let code_exercices = '', code_correction = '';
+		// 	// Gestion du nombre de versions
+		// 	if ($("#nombre_de_versions").val()>1) {
+		// 		code_LaTeX = '';
+		// 		for (let v = 0; v <$("#nombre_de_versions").val(); v++) {
+		// 			code_exercices += '\\version{' + (v+1) + '}\n\n'
+		// 			code_correction += '\n\n\\newpage\n\\version{' + (v+1) + '}\n\\begin{correction}';
+		// 			for (let i = 0; i < liste_des_exercices.length; i++) {
+		// 				exercice[i].nouvelle_version();
+		// 				code_exercices += exercice[i].contenu;
+		// 				code_exercices += '\n\n';
+		// 				code_correction += exercice[i].contenu_correction;
+		// 				code_correction += '\n\n';
+		// 			}
+		// 			if (v < $("#nombre_de_versions").val() -1) {
+		// 				if ($('#style_classique:checked').val()){
+		// 					code_exercices += '\n\\newpage\n\\setcounter{exo}{0}\n';
+		// 				} else{
+		// 					code_exercices += '\n\\newpage\n\\setcounter{section}{0}\n';
+		// 				}
+		// 			}
+		// 			code_correction += '\n\\end{correction}'
+		// 		}
+		// 		code_LaTeX = code_exercices + code_correction;
+		// 	}
 			
 			// Gestion du style pour l'entête du fichier
 
@@ -474,37 +556,36 @@ if (!sortie_html){
 
 
 	$( "#btn_overleaf").click(function() {
-		let code_exercices = '', code_correction = '';
-			// Gestion du nombre de versions
-			if ($("#nombre_de_versions").val()>1) {
-				code_LaTeX = '';
-				for (let v = 0; v <$("#nombre_de_versions").val(); v++) {
-					code_exercices += '\\version{' + (v+1) + '}\n\n'
-					code_correction += '\n\n\\newpage\n\\version{' + (v+1) + '}\n\\begin{correction}';
-					for (let i = 0; i < liste_des_exercices.length; i++) {
-						exercice[i].nouvelle_version();
-						code_exercices += exercice[i].contenu;
-						code_exercices += '\n\n';
-						code_correction += exercice[i].contenu_correction;
-						code_correction += '\n\n';
-					}
-					if (v < $("#nombre_de_versions").val() -1) {
-						if ($('#style_classique:checked').val()){
-							code_exercices += '\n\\newpage\n\\setcounter{exo}{0}\n';
-						} else{
-							code_exercices += '\n\\newpage\n\\setcounter{section}{0}\n';
-						}
-					}
-					code_correction += '\n\\end{correction}'
-				}
-				code_LaTeX = code_exercices + code_correction;
-			}
+		// let code_exercices = '', code_correction = '';
+		// 	// Gestion du nombre de versions
+		// 	if ($("#nombre_de_versions").val()>1) {
+		// 		code_LaTeX = '';
+		// 		for (let v = 0; v <$("#nombre_de_versions").val(); v++) {
+		// 			code_exercices += '\\version{' + (v+1) + '}\n\n'
+		// 			code_correction += '\n\n\\newpage\n\\version{' + (v+1) + '}\n\\begin{correction}';
+		// 			for (let i = 0; i < liste_des_exercices.length; i++) {
+		// 				exercice[i].nouvelle_version();
+		// 				code_exercices += exercice[i].contenu;
+		// 				code_exercices += '\n\n';
+		// 				code_correction += exercice[i].contenu_correction;
+		// 				code_correction += '\n\n';
+		// 			}
+		// 			if (v < $("#nombre_de_versions").val() -1) {
+		// 				if ($('#style_classique:checked').val()){
+		// 					code_exercices += '\n\\newpage\n\\setcounter{exo}{0}\n';
+		// 				} else{
+		// 					code_exercices += '\n\\newpage\n\\setcounter{section}{0}\n';
+		// 				}
+		// 			}
+		// 			code_correction += '\n\\end{correction}'
+		// 		}
+		// 		code_LaTeX = code_exercices + code_correction;
+		// 	}
 			
 			// Gestion du style pour l'entête du fichier
 
 			if ($('#style_classique:checked').val()){
 				contenu_fichier = intro_LaTeX($("#entete_du_fichier").val()) + code_LaTeX + '\n\n\\end{document}'
-				console.log(contenu_fichier)
 			} else
 			{
 				contenu_fichier = intro_LaTeX_coop()
@@ -512,6 +593,11 @@ if (!sortie_html){
 				contenu_fichier += '{' + $("#items").val() + '}{' + $("#domaine").val() + '}\n\\begin{document}\n\n' + code_LaTeX
 				contenu_fichier += '\n\n\\end{document}'
 			}
+
+			// Gestion du LaTeX statique
+
+
+			// Envoi à Overleaf.com en modifiant la valeur dans le formulaire
 
 			$('input[name=encoded_snip]').val(encodeURIComponent(contenu_fichier));
 			if ($("#nom_du_fichier").val()) {
@@ -603,7 +689,7 @@ window.onload = function()  {
     	mise_a_jour_de_la_liste_d_exercice();
 
     	for (var i = 0; i < tableau_objets_exercices.length; i++) { // récupère les éventuels paramètres dans l'URL
-    		if (tableau_objets_exercices[i]["nb_questions"]){
+    		if (tableau_objets_exercices[i]["nb_questions"] && exercice[i].nb_questions_modifiable){
     			exercice[i].nb_questions = tableau_objets_exercices[i]["nb_questions"]
     			form_nb_questions[i].value = exercice[i].nb_questions;
     		}

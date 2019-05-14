@@ -35,6 +35,11 @@ var liste_des_exercices_disponibles = {
 		'5N21-1': Exercice_comparer_quatre_fractions,
 		'5N22': Exercice_additionner_des_fractions_5e,
 		'5N22-1': Exercice_additionner_ou_soustraire_des_fractions_5e,
+		'5L10' : Ecrire_une_expression_litterale,
+		'5L101' : Traduire_un_programme_de_calcul,
+		'5L11' : Calculer_la_valeur_d_une_expression_litterale,
+		'5L111' : Tester_une_egalite,
+		'5L12' : Reduire_une_expression_litterale,
 		'5R20': Exercice_additions_relatifs,
 		'5R20_bis': Exercice_additions_relatifs_a_trou,
 		'5R20_ter': Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe
@@ -49,6 +54,7 @@ var liste_des_exercices_disponibles = {
 		//15:Exercice_perimetres_et_aires,
 		'3N1': Exercice_developper,
 		'LaTeX' : Code_LaTeX_personnalise,
+		'coop': LaTeX_static,
 		// 'Perso' : HTML_personnalise,
 		//13:Exercice_equation1
 	};
@@ -91,7 +97,7 @@ function Exercice() {
     this.nb_questions = 10;
     this.nb_cols = 2;
     this.nb_cols_corr = 2;
-    this.spacing = 1;
+    this.spacing = 2;
     this.spacing_corr = 1;
     this.beamer = false;
 
@@ -2882,6 +2888,516 @@ function Exercice_differentes_ecritures_nombres_decimaux(){
 }
 
 
+function Ecrire_une_expression_litterale(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Écrire une expression littérale";
+	this.consigne = "";
+	this.nb_questions = 4;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(17)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let lettres_disponibles = ['x','y','z','t','a','b','c','n','m']
+			let x = choice(lettres_disponibles)
+			enleve_element(lettres_disponibles,x)
+			let y = choice(lettres_disponibles)
+			let k = randint(2,10)
+			switch (liste_type_de_questions[i]){
+				case 1 : // 2x
+					texte = `Exprimer le double de $${x}$ en fonction de $${x}$.`
+					texte_corr = `Le double de $${x}$ se note : $2${x}$.`
+					break ;
+				case 2 : // 3x
+					texte = `Exprimer le triple de $${x}$  en fonction de $${x}$.`
+					texte_corr = `Le triple de $${x}$  se note : $3${x}$.`
+					break ;
+				case 3 : // x/2
+					texte = `Exprimer la moitié de $${x}$ en fonction de $${x}$.`
+					texte_corr = `La moitié de $${x}$  se note :  $${tex_fraction(x,2)}=${x}\\div2=0,5${x}$.`
+					break ;
+				case 4 : // x/4
+					texte = `Exprimer le quart de $${x}$  en fonction de $${x}$.`
+					texte_corr = `Le quart de $${x}$  se note :  $${tex_fraction(x,4)}=${x}\\div4=0,25${x}$.`
+					break ;
+				case 5 : // x+1
+					texte = `$${x}$ étant un nombre entier, exprimer l'entier suivant en fonction de $${x}$.`
+					texte_corr = `Le successeur de $${x}$ se note :  $${x}+1$.`
+					break ;
+				case 6 : // x-1
+					texte = `$${x}$ étant un nombre entier, exprimer l'entier précédent en fonction de $${x}$.`
+					texte_corr = `Le prédecesseur de $${x}$  se note :  $${x}-1$.`
+					break ;
+				case 6 : // x^2
+					texte = `Exprimer le carré de $${x}$  en fonction de $${x}$.`
+					texte_corr = `Le carré de $${x}$  se note : $${x}^2$.`
+					break ;
+				case 7 : // x^3
+					texte = `Exprimer le cube de $${x}$  en fonction de $${x}$.`
+					texte_corr = `Le cube de $${x}$  se note : $${x}^3$.`
+					break ;
+				case 8 : // -x
+					texte = `Exprimer l'opposé de $${x}$  en fonction de $${x}$.`
+					texte_corr = `L'opposé de $${x}$  se note : $-${x}$.`
+					break ;
+				case 9 : // 1/x
+					texte = `Exprimer l'inverse de $${x}$  en fonction de $${x}$.`
+					texte_corr = `L'inverse de $${x}$ se note : $${tex_fraction(1,x)}$.`
+					break ;
+				case 10 : // x+k
+					texte = `Exprimer la somme de $${x}$ et ${k} en fonction de $${x}$.`
+					texte_corr = `La somme de $${x}$ et ${k} se note : $${x}+${k}$.`
+					break ;
+				case 11 : // kx
+					texte = `Exprimer le produit de $${x}$  par ${k} en fonction de $${x}$.`
+					texte_corr = `Le produit de $${x}$ par ${k} se note : $${k}${x}$.`
+					break ;
+				case 12 : // x/k
+					texte = `Exprimer le quotient de $${x}$ par ${k} en fonction de $${x}$.`
+					texte_corr = `Le quotient de $${x}$ par ${k} se note : $${tex_fraction(x,k)}$.`
+					break ;
+				case 13 : // k/x
+					texte = `Exprimer le quotient de ${k} par $${x}$ en fonction de $${x}$.`
+					texte_corr = `Le quotient de ${k} par $${x}$ se note : $${tex_fraction(k,x)}$.`
+					break ;
+				case 14 : //xy
+					texte = `Comment se note le produit de $${x}$ par $${y}$ ?`
+					texte_corr = `Le produit de $${x}$ par $${y}$ se note $${x}${y}$.`
+					break ;
+				case 15 : //pair
+					texte = `Écrire une expression littérale qui permet de représenter un nombre pair.`
+					texte_corr = `Un nombre pair peut s'écrire sous la forme $2n$ avec $n$ un entier naturel.`
+					break ; 
+				case 16 : //impair
+					texte = `Écrire une expression littérale qui permet de représenter un nombre impair.`
+					texte_corr = `Un nombre impair peut s'écrire sous la forme $2n+1$ avec $n$ un entier naturel.`
+					break ;
+				case 17 : //multiple de k
+					texte = `Écrire une expression littérale qui permet de représenter un multiple de ${k}.`
+					texte_corr = `Un multiple de ${k} peut s'écrire sous la forme $${k}n$ avec $n$ un entier naturel.`
+					break ; 
+
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_case_a_cocher = ["Uniquement la lettre $n$."]
+
+}
+
+
+function Traduire_un_programme_de_calcul(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Traduire un programme de calcul par une expression littérale";
+	this.consigne = "";
+	this.nb_questions = 3;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = [1,2,3,4,5,6]
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let a = randint(4,11)
+			let b = randint(2,11)
+			let c = randint(2,11)
+			let d = randint(2,5)
+			switch (liste_type_de_questions[i]){
+				case 1 : // (x+a)*b+c
+					texte = `Voici un programme de calcul : \n`
+					texte += itemize([`Ajoute ${a}`,`Multiplie par ${b}`,`Ajoute ${c}`])
+					texte += `Si on note $x$ le nombre de départ, quel est le résultat du programme de calcul ?`
+					texte_corr = `$x\\rightarrow x+${a}\\rightarrow(x+${a})\\times ${b}=${b}x+${a*b}\\rightarrow${b}x+${a*b+c}$`
+					texte_corr += '\\\\\\\\'
+					texte_corr += `Le résultat du programme est donc $${b}x+${a*b+c}$.`
+					break ;
+				case 2 : // (ax+b)*c
+					texte = `Voici un programme de calcul : \n`
+					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Multiplie par ${c}`])
+					texte += `Si on note $y$ le nombre de départ, quel est le résultat du programme de calcul ?`
+					texte_corr = `$y\\rightarrow ${a}y\\rightarrow${a}y+${b} \\rightarrow(${a}y+${b})\\times${c}=${a*c}y+${b*c}$`
+					texte_corr += '\\\\\\\\'
+					texte_corr += `Le résultat du programme est donc $${a*c}y+${b*c}$.`
+					break ;
+				case 3 : // ax+b-2x
+					texte = `Voici un programme de calcul : \n`
+					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Enlève le double du nombre de départ`])
+					texte += `Si on note $a$ le nombre de départ, quel est le résultat du programme de calcul ?`
+					texte_corr = `$a\\rightarrow ${a}a\\rightarrow${a}a+${b} \\rightarrow${a}a+${b}-2a=${a-2}a+${b}$`
+					texte_corr += '\\\\\\\\'
+					texte_corr += `Le résultat du programme est donc $${a-2}a+${b}$.`
+					break ;
+				case 4 : // ax+b+3x
+					texte = `Voici un programme de calcul : \n`
+					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Ajoute le triple du nombre de départ`])
+					texte += `Si on note $t$ le nombre de départ, quel est le résultat du programme de calcul ?`
+					texte_corr = `$t\\rightarrow ${a}t\\rightarrow${a}t+${b} \\rightarrow${a}t+${b}+3t=${a+3}t+${b}$`
+					texte_corr += '\\\\\\\\'
+					texte_corr += `Le résultat du programme est donc $${a+3}t+${b}$.`
+					break ;
+				case 5 : // (ax+b)*c-d
+					texte = `Voici un programme de calcul : \n`
+					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Multiplie par ${c}`,`Enlève ${d}`])
+					texte += `Si on note $x$ le nombre de départ, quel est le résultat du programme de calcul ?`
+					texte_corr = `$x\\rightarrow ${a}x\\rightarrow${a}x+${b} \\rightarrow(${a}x+${b})\\times ${c}=${a*c}x+${b*c}\\rightarrow${a*c}x+${b*c-d}$`
+					texte_corr += '\\\\\\\\'
+					texte_corr += `Le résultat du programme est donc $${a*c}x+${b*c-d}$.`
+					break ;
+				case 6 : // (ax+b)*c+x
+					texte = `Voici un programme de calcul : \n`
+					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`, `Multiplie par ${c}`,`Ajoute le nombre de départ`])
+					texte += `Si on note $y$ le nombre de départ, quel est le résultat du programme de calcul ?`
+					texte_corr = `$y\\rightarrow ${a}y\\rightarrow${a}y+${b} \\rightarrow(${a}y+${b})\\times ${c}=${a*c}y+${b*c}\\rightarrow ${a*c}y+${b*c}+y=${a*c+1}y+${b*c}$`
+					texte_corr += '\\\\\\\\'
+					texte_corr += `Le résultat du programme est donc $${a*c+1}y+${b*c}$.`
+					break ;
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_case_a_cocher = true;
+}
+
+
+function Calculer_la_valeur_d_une_expression_litterale(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Calculer la valeur d'une expression littérale";
+	this.consigne = "";
+	this.nb_questions = 5;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(10)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let a, b, c, d, x, y
+			switch (liste_type_de_questions[i]){
+				case 1 : // ax+b
+					a = randint(2,10)
+					x = randint(2,10,a)
+					b = randint(1,10,[a,x])
+					texte = `Calculer $${a}x+${b}$ pour $x=${x}$.`
+					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr += `$${a}x+${b}=${a}\\times${x}+${b}=${a*x}+${b}=${a*x+b}$`
+					break ;
+				case 2 : // a(x+b)
+					a = randint(2,10)
+					x = randint(2,10,a)
+					b = randint(1,10,[a,x])
+					texte = `Calculer $${a}(x+${b})$ pour $x=${x}$.`
+					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr += `$${a}(x+${b})=${a}\\times(${x}+${b})=${a}\\times${x+b}=${a*(x+b)}$`
+					break ;
+				case 3 : // x^2+y^2
+					x = randint(2,10)
+					y = randint(2,10)
+					texte = `Calculer $x^2+y^2$ pour $x=${x}$ et $y=${y}$.`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr += `$x^2+y^2=${x}^2+${y}^2=${x**2}+${y**2}=${x**2+y**2}$`
+					break ;
+				case 4 : // x^2-y^2
+					x = randint(2,10)
+					y = randint(1,x-1)
+					texte = `Calculer $x^2-y^2$ pour $x=${x}$ et $y=${y}$.`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr += `$x^2-y^2=${x}^2-${y}^2=${x**2}-${y**2}=${x**2-y**2}$`
+					break ;
+				case 5 : // ax^2+b(x-1)+cy^3
+					a = randint(2,5)
+					b = randint(2,6)
+					c = randint(2,6)
+					x = randint(3,6)
+					y = choice([1,2,3,5,10])
+					texte = `Calculer $${a}x^2+${b}(x-1)+${c}y^3$ pour $x=${x}$ et $y=${y}$.`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr += `$${a}x^2+${b}(x-1)+${c}y^3=${a}\\times${x}^2+${b}(${x}-1)+${c}\\times${y}^3=${a}\\times${x**2}+${b}\\times${x-1}+${c}\\times${y**3}=${a*x**2+b*(x-1)+c*y**3}$.`
+					break ;
+				case 6 : // ax^2+bx+c
+					a = randint(2,5)
+					b = randint(2,6)
+					c = randint(2,6)
+					x = randint(3,6)
+					texte = `Calculer $${a}x^2+${b}x+${c}$ pour $x=${x}$.`
+					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr += `$${a}x^2+${b}x+${c}=${a}\\times${x}^2+${b}\\times${x}+${c}=${a}\\times${x**2}+${b*x}+${c}=${a*x**2+b*x+c}$`
+					break ;
+				case 7 : // ax^2+bx-c
+					a = randint(2,5)
+					b = randint(2,6)
+					c = randint(2,6)
+					x = randint(3,6)
+					texte = `Calculer $${a}x^2+${b}x-${c}$ pour $x=${x}$.`
+					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr += `$${a}x^2+${b}x-${c}=${a}\\times${x}^2+${b}\\times${x}-${c}=${a}\\times${x**2}+${b*x}-${c}=${a*x**2+b*x-c}$`
+					break ;
+				case 8 : // ax^2-bx+c
+					a = randint(2,5)
+					b = randint(2,a)
+					c = randint(2,6)
+					x = randint(3,6)
+					texte = `Calculer $${a}x^2-${b}x+${c}$ pour $x=${x}$.`
+					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr += `$${a}x^2-${b}x+${c}=${a}\\times${x}^2-${b}\\times${x}+${c}=${a}\\times${x**2}-${b*x}+${c}=${a*x**2-b*x+c}$`
+					break ;
+				
+				case 9 : // axy+x+y
+					a = randint(2,10)
+					x = randint(2,10)
+					y = randint(2,10,x)
+					texte = `Calculer $${a}xy+x+y$ pour $x=${x}$ et $y=${y}$.`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr += `$${a}xy+x+y=${a}\\times${x}\\times${y}+${x}+${y}=${a*x*y}+${x}+${y}=${a*x*y+x+y}$`
+					break ;
+				case 10 : // (ax+b)(cy-d)
+					a = randint(2,10)
+					x = randint(2,10)
+					b = randint(1,10)
+					y = randint(2,10,x)
+					c = randint(2,10)
+					d = randint(1,Math.min(10,c*y))
+					texte = `Calculer $(${a}x+${b})(${c}y-${d})$ pour $x=${x}$ et $y=${y}$.`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr += `$(${a}x+${b})(${c}y-${d})=(${a}\\times${x}+${b})(${c}\\times${y}-${d})=${a*x+b}\\times${c*y-d}=${(a*x+b)*(c*y-d)}$`
+					break ;
+				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_case_a_cocher = true;
+}
+
+
+function Tester_une_egalite(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Tester une égalité";
+	this.consigne = "";
+	this.nb_questions = 3;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(5)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let a, b, x1, x2
+			switch (liste_type_de_questions[i]){
+				case 1 : // 3x-a=2x+b   x=a+b  
+					a = randint(1,6)
+					b = randint(1,6,a)
+					x1 = randint(2,10,a+b)
+					x2 = a + b
+					texte = `Tester l'égalité $3x-${a}=2x+${b}$ pour $x=${x1}$ puis pour $x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : \\\\`
+					texte_corr += `$3x-${a}=3\\times${x1}-${a}=${3*x1-a}$ \\\\ $2x+${b}=2\\times${x1}+${b}=${2*x1+b}$\\\\`
+					texte_corr += `$${3*x1-a}\\not=${2*x1+b}$ donc l'égalité n'est pas vraie.\\\\\\\\`
+					texte_corr += `Pour $x=${x2}$ : \\\\`
+					texte_corr += `$3x-${a}=3\\times${x2}-${a}=${3*x2-a}$ \\\\ $2x+${b}=2\\times${x2}+${b}=${2*x2+b}$\\\\`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.`
+					break ;
+				case 2 : // 3x+a=5x-b   x=(a+b)/2 donc a et b impairs pour une solution entière  
+					a = choice([1,3,5,7,9])
+					b = choice([1,3,5,7,9])
+					x1 = parseInt(Algebrite.eval((a+b)/2))
+					x2 = randint(1,9,x1)
+					texte = `Tester l'égalité $3x+${a}=5x-${b}$ pour $x=${x1}$ puis pour $x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : \\\\`
+					texte_corr += `$3x+${a}=3\\times${x1}+${a}=${3*x1+a}$ \\\\ $5x-${b}=5\\times${x1}-${b}=${5*x1-b}$\\\\`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.\\\\\\\\`
+					texte_corr += `Pour $x=${x2}$ : \\\\`
+					texte_corr += `$3x+${a}=3\\times${x2}+${a}=${3*x2+a}$ \\\\ $5x-${b}=5\\times${x2}-${b}=${5*x2-b}$\\\\`
+					texte_corr += `$${3*x2+a}\\not=${5*x2-b}$ donc l'égalité n'est pas vraie.`
+					break ;
+				case 3 : // 10(x-a)=4(2x+b) x=(10a+4b)/2
+					a = randint(1,3)
+					b = randint(1,3)
+					x2 = parseInt(Algebrite.eval((10*a+4*b)/2))
+					x1 = randint(1,9,x2)
+					texte = `Tester l'égalité $10(x-${a})=4(2x+${b})$ pour $x=${x1}$ puis pour $x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : \\\\`
+					texte_corr += `$10(x-${a})=10\\times(${x1}-${a})=10\\times${x1-a}=${10*(x1-a)}$ \\\\ $4(2x+${b})=4\\times(2\\times${x1}+${b})=4\\times${2*x1+b}=${4*(2*x1+b)}$\\\\`
+					texte_corr += `$${10*(x1-a)}\\not=${4*(2*x1+b)}$ donc l'égalité n'est pas vraie.\\\\\\\\`
+					texte_corr += `Pour $x=${x2}$ : \\\\`
+					texte_corr += `$10(x-${a})=10\\times(${x2}-${a})=10\\times${x2-a}=${10*(x2-a)}$ \\\\ $4(2x+${b})=4\\times(2\\times${x2}+${b})=4\\times${2*x2+b}=${4*(2*x2+b)}$\\\\`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.`
+					break ;
+				case 4 : // ax+b=(a+1)x-c x=b+c
+					a = randint(2,9)
+					b = randint(2,9)
+					c = randint(1,3)
+					x1 = b + c
+					x2 = randint(2,10,x2)
+					texte = `Tester l'égalité $${a}x+${b}=${a+1}x-${c}$ pour $x=${x1}$ puis pour $x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : \\\\`
+					texte_corr += `$${a}x+${b}=${a}\\times${x1}+${b}=${a*x1+b}$ \\\\ $${a+1}x-${c}=${a+1}\\times${x1}-${c}=${(a+1)*x1-c}$\\\\`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.\\\\\\\\`
+					texte_corr += `Pour $x=${x2}$ : \\\\`
+					texte_corr += `$${a}x+${b}=${a}\\times${x2}+${b}=${a*x2+b}$ \\\\ $${a+1}x-${c}=${a+1}\\times${x2}-${c}=${(a+1)*x2-c}$\\\\`
+					texte_corr += `$${a*x2+b}\\not=${(a+1)*x2-c}$ donc l'égalité n'est pas vraie.`
+					break ;
+				case 5 : // a-2x=b+2x x=(a-b)/4
+					x1 = randint(1,9)
+					b = randint(1,9)
+					a = b+4*x1
+					x2 = randint(1,11,x1)
+					texte = `Tester l'égalité $${a}-2x=${b}+2x$ pour $x=${x1}$ puis pour $x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : \\\\`
+					texte_corr += `$${a}-2x=${a}-2\\times${x1}=${a-2*x1}$ \\\\ $${b}+2x=${b}+2\\times${x1}=${b+2*x1}$\\\\`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.\\\\\\\\`
+					texte_corr += `Pour $x=${x2}$ : \\\\`
+					texte_corr += `$${a}-2x=${a}-2\\times${x2}=${a-2*x2}$ \\\\ $${b}+2x=${b}+2\\times${x2}=${b+2*x2}$\\\\`
+					texte_corr += `$${a-2*x2}\\not=${b+2*x2}$ donc l'égalité n'est pas vraie.`
+					break ;
+				
+				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_case_a_cocher = true;
+}
+
+function Reduire_une_expression_litterale(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Réduire une expression littérale";
+	this.consigne = "Réduire les expressions suivantes";
+	this.nb_questions = 5;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 9; // valeur maximale des coefficients
+	this.sup2 = false; // avec des nombres décimaux
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(7)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let a, b, c, d
+			if (this.sup2) {
+						a = calcul(randint(2,this.sup)+randint(1,9)/10)
+						b = choice([calcul(randint(2,9)+randint(1,9)/10),calcul(randint(2,9)+randint(1,9)/10+randint(1,9)/100)])
+						c = calcul(randint(2,this.sup)+randint(1,9)/10)
+						d = choice([calcul(randint(2,9)+randint(1,9)/10),calcul(randint(2,9)+randint(1,9)/10+randint(1,9)/100)])
+					} else {
+						a = randint(2,this.sup)
+						b = randint(2,this.sup)
+						c = randint(2,this.sup)
+						d = randint(2,this.sup)
+					}
+			switch (liste_type_de_questions[i]){
+				case 1: // ax+bx+c	
+					texte = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+${tex_nombre(b)}x+${tex_nombre(c)}$`
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+${tex_nombre(b)}x+${tex_nombre(c)}=${tex_nombre(calcul(a+b))}x+${tex_nombre(c)}$`
+					break;
+				case 2: // ax+b+x+c
+					texte = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+${tex_nombre(b)}+x+${tex_nombre(c)}$`
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+${tex_nombre(b)}+x+${tex_nombre(c)}=${tex_nombre(calcul(a+1))}x+${tex_nombre(calcul(b+c))}$`
+					break;
+				case 3: // ax^2+bx+c+dx^2+x
+					texte = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x^2+${tex_nombre(b)}x+${tex_nombre(c)}+${tex_nombre(d)}x^2+x$`
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x^2+${tex_nombre(b)}x+${tex_nombre(c)}+${tex_nombre(d)}x^2+x=${tex_nombre(calcul(a+d))}x^2+${tex_nombre(calcul(b+1))}x+${tex_nombre(c)}$`
+					break;
+				case 4: // a+x+b+c+dx
+					texte = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}+x+${tex_nombre(b)}+${tex_nombre(c)}+${tex_nombre(d)}x$`
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}+x+${tex_nombre(b)}+${tex_nombre(c)}+${tex_nombre(d)}x=${tex_nombrec(1+d)}x+${tex_nombrec(a+b+c)}$`
+					break;
+				case 5: // ax+y+bx+c+dy
+					texte = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+y+${tex_nombre(b)}x+${tex_nombre(c)}+${tex_nombre(d)}y$`
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+y+${tex_nombre(b)}x+${tex_nombre(c)}+${tex_nombre(d)}y=${tex_nombrec(a+b)}x+${tex_nombrec(1+d)}y+${tex_nombre(c)}$`
+					break;
+				case 6: // ax+b-cx
+					if (c > a) {
+						[a, c] = [c, a] //pour s'assurer que a-c est positif
+					}
+					if (c==a){
+						a++
+					}
+					texte = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+${tex_nombre(b)}-${tex_nombre(c)}x$`
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x+${tex_nombre(b)}-${tex_nombre(c)}x=${tex_nombrec(a-c)}x+${tex_nombre(b)}$`
+					break;
+				case 7: // ax-cx
+					if (c > a) {
+						[a, c] = [c, a] //pour s'assurer que a-c est positif
+					}
+					if (c==a){
+						a++
+					}
+					texte = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x-${tex_nombre(c)}x$`
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${tex_nombre(a)}x-${tex_nombre(c)}x=${tex_nombrec(a-c)}x$`
+					break;
+
+				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Valeur maximale des coefficients',999];
+	this.besoin_formulaire2_case_a_cocher = ['Avec des nombres décimaux']
+}
+
+
 
 
 function Code_LaTeX_personnalise() {
@@ -3003,6 +3519,47 @@ function Reglages_6M22(){
 	Exercice_perimetres_et_aires.call(this);
 	this.sup = 2;
 	this.titre = "Périmètres et aires de disques (à partir d'un texte)."
+}
+
+
+
+function LaTeX_static() {
+	// Classe parente de tous les exercices qui seront créés
+    this.titre = 'Fichier statique';
+    this.pas_de_version_HMTL = false ;
+    this.consigne = '';
+    this.consigne_correction = '';
+    this.liste_questions = [];
+    this.liste_corrections = [];
+    this.contenu = '';
+    this.contenu_correction = '';
+    this.nb_questions = 10;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.spacing = 1;
+    this.spacing_corr = 1;
+    this.beamer = false;
+    this.sup = 'Nom du fichier'
+
+    this.consigne_modifiable = false;
+   	this.nb_questions_modifiable = false;
+   	this.nb_cols_modifiable = false;
+   	this.nb_cols_corr_modifiable = false;
+   	this.spacing_modifiable = false;
+   	this.spacing_corr_modifiable = false;
+
+   	this.besoin_formulaire_numerique = false; // Sinon this.besoin_formulaire_numerique = [texte,max,tooltip facultatif];
+   	this.besoin_formulaire_texte = ['url du fichier',"nom du fichier sans l'extension"]; // Sinon this.besoin_formulaire_texte = [texte,tooltip];
+   	//this.besoin_formulaire2_texte = ['Code LaTeX correction','Par exemple : \\input{mon_fichier_corr}'];
+
+   	this.nouvelle_version = function(){
+   		//this.contenu_correction = '%£tex/probleme_altitude_corr£'
+   		//this.contenu = '%£tex/probleme_altitude£'
+   		this.contenu = '%£'+this.sup+'£'
+   		this.contenu_correction = '%£'+this.sup+'_corr£'
+   		//liste_des_exercices_statiques.push(this.sup)
+   	}
+
 }
 
 
