@@ -21,7 +21,8 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 ### Crédits
 
-- Développé par Rémi Angot sous licence **CC-By-SA**.
+- Moteur développé par Rémi Angot sous licence **CC-By-SA**.
+- Exercices écrits par Rémi Angot et Jean-Claude Lhote puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Bitton - Licence GNU AGPLv3 (pour les constructions géométriques).
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
@@ -30,6 +31,8 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 - [jQuery](https://jquery.com/) MIT license (pour alléger la programmation).
 - [Clipboard.js](https://clipboardjs.com/) MIT license (pour le bouton copier le code LaTeX).
 - [prismjs](http://prismjs.com/) MIT license (pour la coloration syntaxique du code LaTeX).
+- [Slick](https://kenwheeler.github.io/slick/) MIT license (pour le diaporama).
+- [TextFill](https://jquery-textfill.github.io) MIT license (pour adapter la taille de la police dans les diaporamas)
 - Merci à Sébastien Cogez pour ses conseils et à Julien Brunel pour son cours sur la programmation objet.
 
 
@@ -37,20 +40,33 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 - Ajout d'exercices.
 - Gestion des catégories des exercices.
-- Améliorer l'export sur overleaf.com avec gestion des images.
+- Améliorer l'export sur overleaf.com avec gestion des images (impossible ?).
 - Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome).
 - Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535)).
-- Proposer des versions diaporamas.
+- ~~~~Proposer des versions diaporamas.
 - ~~Optimiser l'impression des exercices en ligne.~~
 - ~~Personnalisation des URL qui pourront pointer vers une sélection d'exercices déjà configurés.~~
 
 
 ### Changelog
 
-### 05/19
+#### 12/19
+
+- Évaluation à la carte (liste d'exercices différenciée élève par élève).
+- Intégration d'un exercice statique (choisi au hasard dans un répertoire donné).
+- ~~Mise à jour de KaTeX~~ (annulée pour cause de bug sur les traits de fractions).
+- Ajout d'exercices de calcul littéral (Jean Claude Lhote).
+
+#### 08/19
+
+- Diaporama chronométré des questions.
+- Ajout d'exercices de calcul mental.
+
+#### 05/19
 
 - Compilation en ligne avec overleaf.com.
 - Ajout d'exercices sur le calcul littéral en 5e.
+- Ajout d'exercices sur les décimaux en 6e.
 
 
 #### 04/19

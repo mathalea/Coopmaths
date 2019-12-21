@@ -397,7 +397,7 @@ function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
 function html_enumerate(liste){
 	let result ='<ol>'
 	for(let i in liste){
-		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\\\/g,'<br>').replace(/\\not=/g,'≠') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\\\/g,'<br>').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....').replace(/~/g,' ') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 	}
 	result += '</ol>'
 	return result
@@ -435,7 +435,7 @@ function tex_consigne(consigne){
 function tex_nombre(nb){
 	//Ecrit \nombre{nb} pour tous les nombres supérieurs à 1 000 (pour la gestion des espaces)
 	if (sortie_html) {
-		return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'~'); // \nombre n'est pas pris en charge par katex
+		return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace '); // \nombre n'est pas pris en charge par katex
 	} else {
 		let result;
 		if (nb>999 || nombre_de_chiffres_dans_la_partie_decimale(nb)>3) { 

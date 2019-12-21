@@ -1,8 +1,31 @@
 var liste_des_exercices_disponibles = {
-		'6C10-1' :Exercice_tables_de_multiplications,
+		'CM001' :Tables_de_multiplications,
+		'CM002' :Tables_de_divisions,
+		'CM003' :Tables_de_multiplications_et_divisions,
+		'CM004' : Quatre_operations,
+		'CM005' : Ajouter9,
+		'CM006' : Soustraire9,
+		'CM007' : Ajouter11,
+		'CM008' : Soustraire11,
+		'CM009' : Moitie,
+		'CM010' : Tiers,
+		'CM011' : Quart,
+		'CM012' : Complement_a_100,
+		'CM013' : Complement_a_une_dizaine,
+		'CM014' : Double_moitie_tiers_triple,
+		'CM015' : Somme_de_deux_nombres_maries,
+		'CM016' : Diviser_par_10_100_1000,
+		'CM017' : Diviser_decimal_par_10_100_1000,
+		'CM018' : Somme_de_deux_nombres_maries_et_un_entier,
+
+		'6C10' : Additions_soustractions_multiplications_posees,
+		'6C11' : Divisions_euclidiennes,
+		'6C10-1' :Tables_de_multiplications,
 		'6C10-2' :Exercice_tables_de_multiplications_et_multiples_de_10,
 		'6C10-3' :Exercice_tables_de_multiplications_et_decimaux,
-		'6C20': Exercice_tables_d_additions,
+		'6C10-4': Exercice_tables_d_additions,
+		'6C20' : Additionner_soustraires_decimaux,
+		'6C21' : Divisions_euclidiennes_niv2,
 		'6C32': Probleme_course,
 		'6D10' : Conversions_de_durees,
 		'6D101' : Heures_decimales,
@@ -16,7 +39,9 @@ var liste_des_exercices_disponibles = {
 		'6M22-2' : Reglages_6M22, //périmètre et aire de disque à partir d'un texte
 		'6M20' : Aire_de_triangles,
 		'6M22' : Perimetre_aire_disques,
+		'6M23' : Exercice_conversions,
 		'6N10' : Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
+		'6N101': Exercice_numeration_entier,
 		'6N12' : Exercice_6N12,
 		'6N13' : Exercice_6N13,
 		'6N20' : Exercice_fractions_decomposer,
@@ -25,6 +50,7 @@ var liste_des_exercices_disponibles = {
 		'6N23_1' : Exercice_differentes_ecritures_nombres_decimaux,
 		'6N24' : Exercice_6N24,
 		'6N24_1' : Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
+		'6N31' : Comparer_decimaux,
 		'6N33' : Fraction_d_un_nombre,
 		'6N33-1' : Pourcentage_d_un_nombre,
 		'5N12':Exercice_fractions_simplifier,
@@ -48,16 +74,25 @@ var liste_des_exercices_disponibles = {
 		'5R31': Exercice_additions_et_soustraction_de_relatifs,
 		'5R31-2': Exercice_simplification_somme_algebrique,
 		'4R10': Exercice_multiplications_relatifs,
+		// '4G10' : Exercice_Pythagore,
 		//12:Exercice_conversions_de_longueurs,
 		//13:Exercice_conversions,
 		//14:Exercice_conversions_aires,
 		//15:Exercice_perimetres_et_aires,
-		'3N1': Exercice_developper,
+		'3N10': Exercice_developper,
+		'3N11' : Double_distributivite,
 		'LaTeX' : Code_LaTeX_personnalise,
 		'coop': LaTeX_static,
 		// 'Perso' : HTML_personnalise,
 		//13:Exercice_equation1
 	};
+
+//Pour modifier les exercices lorsqu'ils sont en mode diaporama
+var est_diaporama = false
+
+if (window.location.href.indexOf('cm.html')>0) {
+	est_diaporama = true
+}
 
 //Efface de la liste des exercices disponibles tout ceux qui n'ont pas de version HTML
 if (sortie_html){
@@ -147,30 +182,30 @@ function Conversions_de_durees(){
 				let sous_type_de_question = liste_sous_type_de_questionv1[i]
 				if (sous_type_de_question==1) {
 					h = randint(2,11)
-					texte = `$${h}~\\text{h} = \\dotfill ~\\text{min}$`
+					texte = `$${h}~\\text{h en minute}$`
 					texte_corr = `$${h}~\\text{h} = ${h}\\times60~~\\text{min} = ${tex_nombre(h*60)}~\\text{min}$`
 				}
 				if (sous_type_de_question==2) {
 					h = choice([1,2,10,20])
-					texte = `$${h}~\\text{h} = \\dotfill ~\\text{s}$`
+					texte = `$${h}~\\text{h en secondes}$`
 					texte_corr = `$${h}~\\text{h} = ${h}\\times3~600~\\text{s} = ${tex_nombre(h*3600)}~\\text{s}$`
 				}
 				if (sous_type_de_question==3) {
 					m = randint(2,59)
-					texte = `$${m}~\\text{min} = \\dotfill ~\\text{s}$`
+					texte = `$${m}~\\text{min en secondes}$`
 					texte_corr = `$${m}~\\text{min} = ${m}\\times60~\\text{s} = ${tex_nombre(m*60)}~\\text{s}$`
 				} 
 				if (sous_type_de_question==4) {
 					h = randint(1,2)
 					m = randint(2,59)
-					texte = `$${h}~\\text{h}~${m}~\\text{min} = \\dotfill ~\\text{s}$`
+					texte = `$${h}~\\text{h}~${m}~\\text{min en secondes}$`
 					texte_corr = `$${h}~\\text{h}~${m}~\\text{min} = ${h}\\times3~600~\\text{s} + ${m}\\times60~\\text{s} = ${tex_nombre(h*3600)}+${tex_nombre(m*60)}~\\text{s} = ${tex_nombre(h*3600+m*60)}~\\text{s}$`
 				}
 			}
 			if (type_de_questions[i]==2) {
 				j = randint(1,6)
 				h = randint(1,23)
-				texte = `$${tex_nombre(h+24*j)}~\\text{h} = \\dotfill =  ......~\\text{j}......~\\text{h}$`
+				texte = `$${tex_nombre(h+24*j)}~\\text{h en jours et heures}$`
 				texte_corr = `$${tex_nombre(h+24*j)}~\\text{h} = ${j}\\times24~\\text{h} + ${h}~\\text{h} = ${j}~\\text{j}~${h}~\\text{h}$`
 			}
 
@@ -179,10 +214,10 @@ function Conversions_de_durees(){
 				m = randint(1,59)
 				s = randint(1,59)
 				if (h>0){
-					texte = `$${tex_nombre(h*3600+m*60+s)}~\\text{s} = \\dotfill =  ......~\\text{h}......~\\text{min}......~\\text{s}$`
+					texte = `$${tex_nombre(h*3600+m*60+s)}~\\text{s au format HMS}$`
 					texte_corr = `$${tex_nombre(h*3600+m*60+s)}~\\text{s} = ${tex_nombre(h*3600)}~\\text{s}+${m*60+s}~\\text{s} =${h}~\\text{h}+${m}\\times60~\\text{s}+${s}~\\text{s}=${h}~\\text{h}~${m}~\\text{min}~${s}~\\text{s}$`	
 				} else {
-					texte = `$${tex_nombre(m*60+s)}~\\text{s} = \\dotfill = ......~\\text{h}......~\\text{min}......~\\text{s}$`
+					texte = `$${tex_nombre(m*60+s)}~\\text{s au format HMS}$`
 					texte_corr = `$${tex_nombre(m*60+s)}~\\text{s} = ${m}\\times60~\\text{s}+${s}~\\text{s}=${m}~\\text{min}~${s}~\\text{s}$`
 				}
 				
@@ -191,7 +226,7 @@ function Conversions_de_durees(){
 				s = randint(1,9) // nombre de semaines
 				j = randint(1,6)
 				h = randint(1,23)
-				texte = `$${tex_nombre(h+24*j+24*7*s)}~\\text{h} = \\dotfill =  ......~\\text{semaines}......~\\text{j}......~\\text{h}$`
+				texte = `$${tex_nombre(h+24*j+24*7*s)}~\\text{h en semaines jours et heures}$`
 				if (s>1) { // pour la gestion du pluriel de semaines
 					texte_corr = `$${tex_nombre(h+24*j+24*7*s)}~\\text{h} = ${j+7*s}\\times24~\\text{h} + ${h}~\\text{h} = ${j+7*s}~\\text{j}~${h}~\\text{h} = ${s}\\times7~\\text{j} + ${j}~\\text{j}~${h}~\\text{h} = ${s}~\\text{semaines}~${j}~\\text{j}~${h}~\\text{h}$`
 				} else {
@@ -248,6 +283,9 @@ function Heures_decimales(){
 
 
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				if (est_diaporama) {
+					texte = texte.replace('=\\dotfill','')
+				}
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -258,7 +296,6 @@ function Heures_decimales(){
 		liste_de_question_to_contenu(this);
 
 	}
- 	this.besoin_formulaire_numerique = ['Niveau de difficulté',5,"1 : Conversions en s ou min\n2 : Conversions en jours-heures \n3 : Conversions en HMS\n4 : Conversions en semaines-jours-heures \n5 : Tous types de conversions"]
 	
 }
 
@@ -270,7 +307,8 @@ function Somme_de_durees(){
 	this.consigne = "Compléter les égalités suivantes";
 	this.sup = 1 // 2 niveaux de difficultés
 	this.spacing = 2;
-	this.nb_questions = 5
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
 
 
 	this.nouvelle_version = function(){
@@ -294,7 +332,7 @@ function Somme_de_durees(){
 				m1 = randint(20,59)
 				m2 = randint(40,59)
 				texte = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}=\\dotfill$`
-				texte_corr = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}= ${m1+m2}~\\text{min}~${s1+s2}~\\text{s}= 1~\\text{h}${m1+m2-60}~\\text{min}~${s1+s2}~\\text{s}$`
+				texte_corr = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}= ${m1+m2}~\\text{min}~${s1+s2}~\\text{s}= 1~\\text{h}~${m1+m2-60}~\\text{min}~${s1+s2}~\\text{s}$`
 			}	
 			if (type_de_questions[i]==2) {
 				s1 = randint(21,39)
@@ -302,7 +340,7 @@ function Somme_de_durees(){
 				m1 = randint(20,59)
 				m2 = randint(40,59)
 				texte = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}=\\dotfill$`
-				texte_corr = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}= ${m1+m2}~\\text{min}~${s1+s2}~\\text{s} = ${m1+m2+1}~\\text{min}~${s1+s2-60}~\\text{s} = 1~\\text{h}${m1+m2-60}~\\text{min}~${s1+s2-60}~\\text{s}$`
+				texte_corr = `$${m1}~\\text{min}~${s1}~\\text{s}+${m2}~\\text{min}~${s2}~\\text{s}= ${m1+m2}~\\text{min}~${s1+s2}~\\text{s} = ${m1+m2+1}~\\text{min}~${s1+s2-60}~\\text{s} = 1~\\text{h}~${m1+m2-60}~\\text{min}~${s1+s2-60}~\\text{s}$`
 			}
 			if (type_de_questions[i]==3) {
 				h1 = randint(2,12)
@@ -336,6 +374,9 @@ function Somme_de_durees(){
 			}	
 			
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				if (est_diaporama) {
+					texte = texte.replace('=\\dotfill','')
+				}
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -635,7 +676,7 @@ function Exercice_decomposer_en_facteurs_premiers(){
 	
 }
 
-function Exercice_tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9'){
+function Tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = tables_par_defaut ;
@@ -670,8 +711,14 @@ function Exercice_tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9')
 				type_de_questions = choice(['classique','a_trous'])
 			}
 			if (type_de_questions=='classique') { // classique
-				texte = '$ '+ a + ' \\times ' + b + ' = \\dotfill $';
-				texte_corr = '$ '+ a + ' \\times ' + b + ' = ' + a * b +' $';	
+				if (choice([true,false])) {
+					texte = `$ ${tex_nombre(a)} \\times ${tex_nombre(b)} = \\dotfill$`;
+					texte_corr = `$ ${tex_nombre(a)} \\times ${tex_nombre(b)} = ${tex_nombre(a*b)}$`;
+				} else {
+					texte = `$ ${tex_nombre(b)} \\times ${tex_nombre(a)} = \\dotfill$`;
+					texte_corr = `$ ${tex_nombre(b)} \\times ${tex_nombre(a)} = ${tex_nombre(a*b)}$`;
+				}
+						
 			} else { // a trous
 				if (tables.length>2){ // Si pour le premier facteur il y a plus de 2 posibilités on peut le chercher
 					texte = choice(['$ '+ a + ' \\times \\ldots\\ldots = ' + a * b + ' $',
@@ -682,7 +729,9 @@ function Exercice_tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9')
 				
 				texte_corr = '$ '+ a + ' \\times ' + b + ' = ' + a * b +' $';
 			}
-			
+			if (est_diaporama) {
+					texte = texte.replace('= \\dotfill','')
+				}
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 		}
@@ -691,6 +740,859 @@ function Exercice_tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9')
 	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
 	this.besoin_formulaire2_numerique = ['Style de questions',3,'1 : Classique\n2: À trous\n3: Mélangé'] 
 }
+
+
+function Tables_de_divisions(tables_par_defaut='2;3;4;5;6;7;8;9'){
+//Diviser deux nombres 
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = tables_par_defaut ;
+	this.sup2 = 1 ; // classique|a_trous|melange
+	this.titre = "Tables de divisions";
+	this.consigne = 'Calculer';
+	this.spacing = 2;
+
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		if (!this.sup) { // Si aucune table n'est saisie
+			this.sup = '2;3;4;5;6;7;8;9'
+		}
+		let tables = []
+		if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule table
+			tables[0] = this.sup
+		} else {
+			tables = this.sup.split(";");// Sinon on créé un tableau à partir des valeurs séparées par des ;
+		}	
+		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
+		let liste_type_de_questions = combinaison_listes(['classique','a_trous'],this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		var type_de_questions = 'a_trous';
+		for (let i = 0, a, b, texte, texte_corr; i < this.nb_questions; i++) {
+			a = couples[i][0];
+			b = couples[i][1];
+			if (this.sup2==1){
+				type_de_questions = 'classique'
+			} else if (this.sup2==2){
+				type_de_questions = 'a_trous'
+			} else {
+				type_de_questions = liste_type_de_questions[i]
+			}
+			if (type_de_questions=='classique') { // classique
+				texte = '$ '+ a*b + ' \\div ' + a + ' = \\dotfill $';
+			} else { // a trous
+				if (choice([true,false])) {
+					texte = `$ ${a*b} \\div \\ldots\\ldots = ${b}$`;	
+				} else {
+					texte = `$ \\ldots\\ldots \\div ${a}  = ${b}$`;
+				}
+			}
+			texte_corr = `$ ${a*b} \\div ${a} = ${b}$`;
+			if (est_diaporama) {
+					texte = texte.replace('= \\dotfill','')
+				}
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
+	this.besoin_formulaire2_numerique = ['Style de questions',3,'1 : Classique\n2: À trous\n3: Mélangé'] 
+}
+
+
+function Tables_de_multiplications_et_divisions(tables_par_defaut='2;3;4;5;6;7;8;9'){
+//Multiplier ou diviser deux nombres 
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = tables_par_defaut ;
+	this.sup2 = 1 ; // classique|a_trous|melange
+	this.titre = "Tables de multiplications et de divisions";
+	this.consigne = 'Calculer';
+	this.spacing = 2;
+
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		if (!this.sup) { // Si aucune table n'est saisie
+			this.sup = '2;3;4;5;6;7;8;9'
+		}
+		let tables = []
+		if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule table
+			tables[0] = this.sup
+		} else {
+			tables = this.sup.split(";");// Sinon on créé un tableau à partir des valeurs séparées par des ;
+		}	
+		let couples = creer_couples(tables,[2,3,4,5,6,7,8,9,10],this.nb_questions); //Liste tous les couples possibles (2,3)≠(3,2)
+		let liste_type_de_questions = combinaison_listes(['classique','a_trous'],this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let operation = combinaison_listes(['x','div'],this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let type_de_questions;
+		for (let i = 0, a, b, texte, texte_corr; i < this.nb_questions; i++) {
+			a = couples[i][0];
+			b = couples[i][1];
+			if (this.sup2==1){
+				type_de_questions = 'classique'
+			} else if (this.sup2==2){
+				type_de_questions = 'a_trous'
+			} else {
+				type_de_questions = liste_type_de_questions[i]
+			}
+
+			if (operation[i]=='x') {
+				if (type_de_questions=='classique') { // classique
+					texte = '$ '+ a + ' \\times ' + b + ' = \\dotfill $';
+					texte_corr = '$ '+ a + ' \\times ' + b + ' = ' + a * b +' $';	
+				} else { // a trous
+					if (tables.length>2){ // Si pour le premier facteur il y a plus de 2 posibilités on peut le chercher
+						texte = choice(['$ '+ a + ' \\times \\ldots\\ldots = ' + a * b + ' $',
+							'$ \\ldots\\ldots' + ' \\times ' + b + ' = ' + a * b + ' $']);
+					} else{ // Sinon on demande forcément le 2e facteur	
+						texte = '$ '+ a + ' \\times \\ldots\\ldots = ' + a * b + ' $'; 
+					}
+					
+					texte_corr = '$ '+ a + ' \\times ' + b + ' = ' + a * b +' $';
+				}
+			} else {
+				if (type_de_questions=='classique') { // classique
+					texte = '$ '+ a*b + ' \\div ' + b + ' = \\dotfill $';
+				} else { // a trous
+					if (choice([true,false])) {
+						texte = `$ ${a*b} \\div \\ldots\\ldots = ${a}$`;	
+					} else {
+						texte = `$ \\ldots\\ldots \\div ${b}  = ${a}$`;
+					}
+				}
+				texte_corr = `$ ${a*b} \\div ${b} = ${a}$`;
+			}
+			if (est_diaporama) {
+					texte = texte.replace('= \\dotfill','')
+				}
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
+	this.besoin_formulaire2_numerique = ['Style de questions',3,'1 : Classique\n2: À trous\n3: Mélangé'] 
+}
+
+
+function Quatre_operations(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Les quatre opérations";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup = 1; // niveau de difficulté
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(4)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			
+			switch (liste_type_de_questions[i]){
+				case 1: // addition
+					if (this.sup==1) {
+						a = randint(11,89)
+						b = randint(2,9)
+						}
+					if (this.sup==2) {
+						a = randint(11,69)
+						b = randint(11,29)
+						}
+					if (this.sup==3) {
+						a = randint(11,89)
+						b = randint(110-a,110-a+50)
+						}
+					texte = `$${a}+${b}$`
+					texte_corr = `$${a}+${b}=${a+b}$`
+					break;
+				case 2: // soustraction
+					if (this.sup==1) {
+						a = randint(11,89)
+						b = randint(2,9)
+						}
+					if (this.sup==2) {
+						a = randint(20,89)
+						b = randint(a-19,a-11)
+						}
+					if (this.sup==3) {
+						a = randint(40,89)
+						b = randint(a-39,a-21)
+						}
+					texte = `$${a}-${b}$`
+					texte_corr = `$${a}-${b}=${a-b}$`
+					break;
+				case 3: // multiplication
+					if (this.sup==1) {
+						a = randint(2,5)
+						b = randint(2,9)
+						}
+					if (this.sup==2) {
+						a = randint(6,9)
+						b = randint(6,9)
+						}
+					if (this.sup==3) {
+						a = choice([7,8,11,12])
+						b = randint(2,9)
+						}
+					texte = `$${a}\\times${b}$`
+					texte_corr = `$${a}\\times${b}=${a*b}$`
+					break;
+				case 4: // division
+					if (this.sup==1) {
+						a = randint(2,5)
+						b = randint(2,9)
+						}
+					if (this.sup==2) {
+						a = randint(6,9)
+						b = randint(6,9)
+						}
+					if (this.sup==3) {
+						a = choice([7,8,11,12])
+						b = randint(2,9)
+						}
+					texte = `$${a*b}\\div${a}$`
+					texte_corr = `$${a*b}\\div${a}=${b}$`
+					break;
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Ajouter9(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Ajouter 9";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = randint(0,9)*10+randint(1,9)
+			texte = `$${a}+9$`
+			texte_corr = `$${a}+9=${a+9}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Soustraire9(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Soustraire 9";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = randint(1,9)*10+randint(0,8)
+			texte = `$${a}-9$`
+			texte_corr = `$${a}-9=${a-9}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Ajouter11(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Ajouter 11";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = randint(0,9)*10+randint(1,9)
+			texte = `$${a}+11$`
+			texte_corr = `$${a}+11=${a+11}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Soustraire11(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Soustraire 11";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+
+		let type_de_questions_disponibles = [1,1,1,1,2]
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			if (liste_type_de_questions[i]==1) {
+				a = randint(12,99)	
+			} else {
+				a = randint(2,9)*10
+			}
+			
+			texte = `$${a}-11$`
+			texte_corr = `$${a}-11=${a-11}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+function Somme_de_deux_nombres_maries(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Somme de deux nombres mariés";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, u1, u2, cpt=0; i < this.nb_questions && cpt<50; ) {
+			u1 = randint(1,9)
+			u2 = 10-u1
+			a = randint(1,9)*10+u1
+			b = randint(1,9)*10+u2
+			
+			texte = `$${a}+${b}$`
+			texte_corr = `$${a}+${b}=${a+b}$`
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+function Somme_de_deux_nombres_maries_et_un_entier(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Somme de deux nombres mariés et un entier";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = [1,2]
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, c, u1, u2, cpt=0; i < this.nb_questions && cpt<50; ) {
+			u1 = randint(1,9)
+			u2 = 10-u1
+			a = randint(1,4)*10+u1
+			b = randint(1,4)*10+u2
+			c = randint(1,100-a-b)
+			
+			switch (liste_type_de_questions[i]){
+					case 1: 
+						texte = `$${a}+${b}+${c}$`
+						texte_corr = `$${a}+${b}+${c}=${a+b+c}$`
+						break;
+					case 2: 
+						texte = `$${a}+${c}+${b}$`
+						texte_corr = `$${a}+${c}+${b}=${a+b+c}$`
+						break;
+			}	
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Exercice_numeration_entier(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Écrire un chiffre à partir de nombre de dizaines, de centaines, de milliers...";
+	this.consigne = "Écrire en chiffre chacun des nombres";
+	this.nb_questions = 5;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = [1,2] // sans chevauchement ou avec chevauchement
+		let liste_type_de_questions = combinaison_listes([1,1,1,2,2],this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, rang_a, rang_b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = randint(2,8)*10+randint(1,5)
+			b = randint(2,8)*10+randint(1,5)
+			let rangs = ['unités','dizaines','centaines','milliers','dizaines de mille','centaines de mille','millions']
+			rang_a = randint(0,2)
+			if (liste_type_de_questions[i]==1){
+				rang_b = randint(rang_a+2,6)
+			} else {
+				rang_b = rang_a+1}
+			
+			texte = `${b} ${rangs[rang_b]} et ${a} ${rangs[rang_a]}`
+			texte_corr = `${b} ${rangs[rang_b]} et ${a} ${rangs[rang_a]} : ${tex_nombre(b*Math.pow(10,rang_b)+a*Math.pow(10,rang_a))}`
+				
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Complement_a_100(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Complément à 100";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = randint(11,89)
+			texte = `$100-${a}$`
+			texte_corr = `$100-${a}=${100-a}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+function Complement_a_une_dizaine(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Complément à une dizaine";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = randint(2,9)*10
+			b = randint(2,a-11)
+			texte = `$${a}-${b}$`
+			texte_corr = `$${a}-${b}=${a-b}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+function Diviser_par_10_100_1000(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Diviser un entier par 10, 100 ou 1000";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = choice([randint(1,9),randint(11,99),randint(101,999)])
+			b = choice([10,100,1000])
+			texte = `$${tex_nombre(a)}\\div${tex_nombre(b)}$`
+			texte_corr = `$${tex_nombre(a)}\\div${tex_nombre(b)}=${tex_nombrec(a/b)}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+function Diviser_decimal_par_10_100_1000(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Diviser un nombre décimal par 10, 100 ou 1000";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = choice([randint(1,9),randint(11,99),calcul(randint(11,99)/10),calcul(randint(101,999)/100),calcul(randint(1,9)/10)])
+			b = choice([10,100,1000])
+			texte = `$${tex_nombre(a)}\\div${tex_nombre(b)}$`
+			texte_corr = `$${tex_nombre(a)}\\div${tex_nombre(b)}=${tex_nombrec(a/b)}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Moitie(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Moitié";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup = 1; // niveau de difficulté
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(6)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			
+			switch (liste_type_de_questions[i]){
+				case 1: // Table de 2
+					a = randint(2,9)
+					texte = `$\\text{La moitié de }${a*2}$`
+					texte_corr = `$\\text{La moitié de }${a*2} \\text{ est } ${a}$`
+					break;
+				case 2: // Impair inférieur à 20
+					a = randint(2,9)
+					texte = `$\\text{La moitié de }${a*2+1}$`
+					texte_corr = `$\\text{La moitié de }${a*2+1} \\text{ est } ${tex_nombrec(a+5/10)}$`
+					break;
+				case 3: // Table de 200
+					a = randint(2,9)
+					texte = `$\\text{La moitié de }${tex_nombre(a*2*100)}$`
+					texte_corr = `$\\text{La moitié de }${tex_nombre(a*2*100)} \\text{ est } ${tex_nombre(a*100)}$`
+					break;
+				case 4: // a00 avec a impair
+					a = randint(2,9)
+					texte = `$\\text{La moitié de }${tex_nombre((a*2+1)*100)}$`
+					texte_corr = `$\\text{La moitié de }${tex_nombre((a*2+1)*100)} \\text{ est } ${tex_nombre(a*100+50)}$`
+					break;
+				case 5: // a,b avec a et b pairs
+					a = randint(2,9)
+					b = randint(2,9)
+					texte = `$\\text{La moitié de }${tex_nombrec(a*2+b*2/100)}$`
+					texte_corr = `$\\text{La moitié de }${tex_nombrec(a*2+b*2/100)} \\text{ est } ${tex_nombrec(a+b/100)}$`
+					break;
+				case 6: // 1xx avec xx un nombre pair
+					a = randint(2,9)
+					texte = `$\\text{La moitié de }${100+a*2}$`
+					texte_corr = `$\\text{La moitié de }${100+a*2} \\text{ est } ${50+a}$`
+					break;
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Tiers(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Tiers";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup = 1; // niveau de difficulté
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(4)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			
+			switch (liste_type_de_questions[i]){
+				case 1: // Table de 3
+					a = randint(2,9)
+					texte = `$\\text{Le tiers de }${a*3}$`
+					texte_corr = `$\\text{Le tiers de }${a*3} \\text{ est } ${a}$`
+					break;
+				case 2: // Table de 300
+					a = randint(2,9)
+					texte = `$\\text{Le tiers de }${tex_nombre(a*3*100)}$`
+					texte_corr = `$\\text{Le tiers de }${tex_nombre(a*3*100)} \\text{ est } ${tex_nombre(a*100)}$`
+					break;
+				case 3: // Table de 30
+					a = randint(2,9)
+					texte = `$\\text{Le tiers de }${tex_nombre(a*3*10)}$`
+					texte_corr = `$\\text{Le tiers de }${tex_nombre(a*3*10)} \\text{ est } ${tex_nombre(a*10)}$`
+					break;
+				case 4: // a,b avec a et b divisibles par 3
+					a = randint(2,9)
+					b = randint(2,9)
+					texte = `$\\text{Le tiers de }${tex_nombrec(a*3+b*3/100)}$`
+					texte_corr = `$\\text{Le tiers de }${tex_nombrec(a*3+b*3/100)} \\text{ est } ${tex_nombrec(a+b/100)}$`
+					break;
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Quart(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Quart";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup = 1; // niveau de difficulté
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(5)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			
+			switch (liste_type_de_questions[i]){
+				case 1: // Table de 4
+					a = randint(2,9)
+					texte = `$\\text{Le quart de }${a*4}$`
+					texte_corr = `$\\text{Le quart de }${a*4} \\text{ est } ${a}$`
+					break;
+				case 2: // Impair
+					a = randint(2,9)
+					b = choice([1,2,3])
+					texte = `$\\text{Le quart de }${a*4+b}$`
+					texte_corr = `$\\text{Le quart de }${a*4+b} \\text{ est } ${tex_nombrec(a+b/4)}$`
+					break;
+				case 3: // Table de 400
+					a = randint(2,9)
+					texte = `$\\text{Le quart de }${tex_nombre(a*4*100)}$`
+					texte_corr = `$\\text{Le quart de }${tex_nombre(a*4*100)} \\text{ est } ${tex_nombre(a*100)}$`
+					break;
+				case 4: // Table de 40
+					a = randint(2,9)
+					texte = `$\\text{Le quart de }${tex_nombre(a*4*10)}$`
+					texte_corr = `$\\text{Le quart de }${tex_nombre(a*4*10)} \\text{ est } ${tex_nombre(a*10)}$`
+					break;
+				case 5: // a,b avec a et b divisibles par 4
+					a = randint(2,9)
+					b = randint(2,9)
+					texte = `$\\text{Le quart de }${tex_nombrec(a*4+b*4/100)}$`
+					texte_corr = `$\\text{Le quart de }${tex_nombrec(a*4+b*4/100)} \\text{ est } ${tex_nombrec(a+b/100)}$`
+					break;
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+function Double_moitie_tiers_triple(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Double, moitié, tiers, triple";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup = 1; // niveau de difficulté
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = range1(4)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			
+			switch (liste_type_de_questions[i]){
+				case 1: // Double
+					a = randint(2,9)
+					texte = `$\\text{Le double de }${a}$`
+					texte_corr = `$\\text{Le double de }${a} \\text{ est } ${a*2}$`
+					break;
+				case 2: // Moitié
+					a = randint(2,9)*2
+					texte = `$\\text{La moitié de }${a*2}$`
+					texte_corr = `$\\text{La moitié de }${a*2} \\text{ est } ${a}$`
+					break;
+				case 3: // Triple
+					a = randint(2,9)
+					texte = `$\\text{Le triple de }${a}$`
+					texte_corr = `$\\text{Le triple de }${a} \\text{ est } ${a*3}$`
+					break;
+				case 4: // Tiers
+					a = randint(2,9)
+					texte = `$\\text{Le tiers de }${a*3}$`
+					texte_corr = `$\\text{Le tiers de }${a*3} \\text{ est } ${a}$`
+					break;
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
 
 function Exercice_tables_de_multiplications_et_multiples_de_10(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
@@ -1412,6 +2314,7 @@ function Exercice_conversions_de_longueurs(niveau=1){
 				
 				resultat = Algebrite.eval(a*prefixe_multi[k][1]).toString(); // Utilise Algebrite pour avoir le résultat exact même avec des décimaux
 				texte = '$ '+ tex_nombre(a) + tex_texte(prefixe_multi[k][0]+unite) + ' = \\dotfill ' + tex_texte(unite) + '$';
+
 				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_multi[k][0]+unite) + ' =  ' + tex_nombre(a) + '\\times' + tex_nombre(prefixe_multi[k][1]) + tex_texte(unite)
 					 + ' = ' + tex_nombre(resultat) + tex_texte(unite) + '$';
 
@@ -1445,6 +2348,9 @@ function Exercice_conversions_de_longueurs(niveau=1){
 			} 
 				
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				if (est_diaporama) {
+					texte = texte.replace('= \\dotfill','\\text{ en }')
+				}
 				if (sortie_html){
 					texte = texte.replace('\\dotfill','................................................')
 				}
@@ -1557,6 +2463,9 @@ function Exercice_conversions(niveau=1){
 			} 
 				
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				if (est_diaporama) {
+					texte = texte.replace('= \\dotfill','\\text{ en }')
+				}
 				if (sortie_html){
 					texte = texte.replace('\\dotfill','................................................')
 				}
@@ -1657,6 +2566,9 @@ function Exercice_conversions_aires(niveau=1){
 			}
 				
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				if (est_diaporama) {
+					texte = texte.replace('= \\dotfill','\\text{ en }')
+				}
 				if (sortie_html){
 					texte = texte.replace('\\dotfill','................................................')
 				}
@@ -2031,6 +2943,34 @@ function Exercice_developper(difficulte=1){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
 }
 
+function Double_distributivite(){
+    Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Développer des expressions de la forme (ax+b)(cx+d)";
+    this.consigne = "Développer les expressions suivantes.";
+    this.spacing = 2 ;
+    this.spacing_corr = 2 ;
+    this.nb_questions = 5 ;
+
+    this.nouvelle_version = function(){
+        this.liste_questions = []; // Liste de questions
+        this.liste_corrections = []; // Liste de questions corrigées
+        for (let i = 0, fraction, a, b, c, d, ax, cx, texte, texte_corr; i < this.nb_questions;i++) {
+            a = randint(1,4);
+            b = randint(2,8);
+            c = 5-a;
+            d = 10-b;
+            if (a==1){ ax='x'} else { ax=`${a}x` }
+            if (c==1){ cx='x'} else { cx=`${c}x` }
+        	texte = `$(${ax}+${b})(${cx}+${d})$`
+            texte_corr = `$(${ax}+${b})(${cx}+${d})=${a*c}x^2+${a*d}x+${b*c}x+${b*d}=${a*c}x^2+${a*d+b*c}x+${b*d}$`
+            this.liste_questions.push(texte);
+            this.liste_corrections.push(texte_corr);
+            }
+        liste_de_question_to_contenu(this);
+    }
+}
+
+
 
 function Exercice_substituer(difficulte=1){
 //Calculer le périmètre et l'aire de figures 
@@ -2178,6 +3118,9 @@ function Exercice_ecriture_decimale_a_partir_de_fraction_decimale(){
 			texte = '$ '+ tex_fraction(tex_nombre(a),tex_nombre(b)) + ' = \\dotfill $';
 			texte_corr = '$ '+ tex_fraction(tex_nombre(a),tex_nombre(b)) + ' = ' + tex_nombre(Algebrite.eval(a/b)) +' $';
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				if (est_diaporama) {
+					texte = texte.replace('=\\dotfill','')
+				}
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -2186,7 +3129,6 @@ function Exercice_ecriture_decimale_a_partir_de_fraction_decimale(){
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
 }
 
 function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000(){
@@ -2222,6 +3164,142 @@ function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000(){
 	}
 	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
 }
+
+
+function Comparer_decimaux(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Comparer des nombres décimaux";
+	this.consigne = "Compléter avec le signe < , > ou =.";
+	this.nb_questions = 8;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = [choice([1,4,5]),2,2,3,6,7,8,9] // une seule question du type inversion de chiffres (1,4,5)
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let x, y, a, b, c, d, zero_inutile = false
+			
+			switch (liste_type_de_questions[i]){
+				case 1: // ab ba	
+					a = randint(1,9)
+					b = randint (1,9,a)
+					x = a*10+b
+					y = b*10+a
+					break;
+				case 2: // aa,bb aa,cc	
+					a = randint(1,99)
+					b = randint(11,99)
+					c = randint(11,99)
+					x = calcul(a+b/100)
+					y = calcul(a+c/100)
+					break;
+				case 3: // a,b  a,cc avec b>c	
+					a = randint(1,99)
+					b = randint(1,8)
+					c = randint(1,b*10)
+					x = calcul(a+b/10)
+					y = calcul(a+c/100)
+					break;
+				case 4: // 0,ab 0,ba	
+					a = randint(1,9)
+					b = randint (1,9,a)
+					x = calcul((a*10+b)/100)
+					y = calcul((b*10+a)/100)
+					break;
+				case 5: // 0,a0b 0,b0a	
+					a = randint(1,9)
+					b = randint (1,9,a)
+					x = calcul((a*100+b)/1000)
+					y = calcul((b*100+a)/1000)
+					break;
+				case 6: // a,b a,b0	
+					a = randint(11,999)
+					while (a%10==0){ // pas de nombre divisible par 10
+						a = randint(11,999)
+					}
+					x = calcul(a/10)
+					y = x
+					zero_inutile = true
+					break;
+				case 7: // 0,0ab 0,0a0b	
+					a = randint(1,9)
+					b = randint(1,9)
+					x = calcul(a/100+b/1000)
+					y = calcul(a/100+b/10000)
+					break;
+				case 8: // a,bb  a,ccc avec b>c	
+					a = randint(11,99)
+					b = randint(11,99)
+					c = randint(100,b*10)
+					x = calcul(a+b/100)
+					y = calcul(a+c/1000)
+					if (randint(1,2)==1){
+						[x,y]=[y,x]
+					}
+					break;
+				case 9: // a+1,bb  a,cccc avec cccc>bb	
+					a = randint(11,98)
+					b = randint(11,99)
+					c = randint(b*100,10000)
+					x = calcul(a+1+b/100)
+					y = calcul(a+c/10000)
+					if (randint(1,2)==1){
+						[x,y]=[y,x]
+					}
+					break;
+				
+			}
+			
+			texte = `${tex_nombre(x)}\\ldots\\ldots${tex_nombre(y)}`
+			if (parseFloat(x)>parseFloat(y)){
+				texte_corr = `${tex_nombre(x)} > ${tex_nombre(y)}`
+			} else if (parseFloat(x)<parseFloat(y)){
+				texte_corr = `${tex_nombre(x)} < ${tex_nombre(y)}`
+			} else {
+				texte_corr = `${tex_nombre(x)} = ${tex_nombre(y)}`
+			}
+
+			if (zero_inutile) {
+				if (randint(1,2)==1){
+					texte = `${tex_prix(x)}\\ldots\\ldots${tex_nombre(y)}`
+					if (parseFloat(x)>parseFloat(y)){
+						texte_corr = `${tex_prix(x)} > ${tex_nombre(y)}`
+					} else if (parseFloat(x)<parseFloat(y)){
+						texte_corr = `${tex_prix(x)} < ${tex_nombre(y)}`
+					} else {
+						texte_corr = `${tex_prix(x)} = ${tex_nombre(y)}`
+					}
+				} else {
+					texte = `${tex_nombre(x)}\\ldots\\ldots${tex_prix(y)}`
+					if (parseFloat(x)>parseFloat(y)){
+						texte_corr = `${tex_nombre(x)} > ${tex_prix(y)}`
+					} else if (parseFloat(x)<parseFloat(y)){
+						texte_corr = `${tex_nombre(x)} < ${tex_prix(y)}`
+					} else {
+						texte_corr = `${tex_nombre(x)} = ${tex_prix(y)}`
+					}
+				}
+					
+			}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	
+}
+
 
 
 function Pourcentage_d_un_nombre(){
@@ -2852,6 +3930,7 @@ function Exercice_differentes_ecritures_nombres_decimaux(){
 				case 1 : // n/100 = .../10 + .../100
 					texte = `$${tex_fraction(n,'100')}=\\ldots\\ldots+${tex_fraction('',10)}+${tex_fraction('',100)}$`;
 					texte_corr = `$${tex_fraction(n,'100')}=${u}+${tex_fraction(d,'10')}+${tex_fraction(c,'100')}$`;
+
 					break ;
 				case 2 : // n/100 = .../100 + .../10
 					texte = `$${tex_fraction(n,'100')}=\\ldots\\ldots+${tex_fraction('',100)}+${tex_fraction('',10)}$`;
@@ -2885,6 +3964,259 @@ function Exercice_differentes_ecritures_nombres_decimaux(){
 		liste_de_question_to_contenu(this);
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
+}
+
+
+function Additions_soustractions_multiplications_posees(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Additions, soustractions et multiplications posées de nombres entiers"
+	this.consigne = "Poser et effectuer les calculs suivants."
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 5;
+	// this.pas_de_version_HMTL=true;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = [1,2,3,4,5]
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d,e ,f, g, x, y; i < this.nb_questions && cpt<50; ) {
+			type_de_questions = liste_type_de_questions[i];
+			switch (type_de_questions){
+				case 1 : // abcd +efg
+					a = randint(1,9)*10000+randint(5,9)*1000+randint(5,9)*100+randint(7,9)*10+randint(1,9)
+					b = randint(5,9)*100+randint(7,9)*10+randint(1,9)
+					texte = `$${tex_nombre(a)}+${b}$`;
+					!sortie_html ? texte_corr = `$\\opadd{${a}}{${b}}$` : texte_corr = `$${tex_nombre(a)}+${b}=${tex_nombre(a+b)}$`;
+					break ;
+				case 2 : // abc0-efg
+					a = randint(1,9)
+					b = randint(1,9)
+					c = randint(1,9)
+					e = randint(b,9)
+					f = randint(c,9)
+					g = randint(2,9)
+					x = a*1000+b*100+c*10
+					y = e*100+f*10+g
+					texte = `$${tex_nombre(x)}-${y}$`;
+					!sortie_html ? texte_corr = `$\\opsub{${x}}{${y}}$` : texte_corr = `$${tex_nombre(x)}+${y}=${tex_nombre(x+y)}$`;
+					break ;
+				case 3 : // 1abc-def
+					a = randint(1,9)
+					b = randint(1,9)
+					c = randint(1,9)
+					d = randint(a,9)
+					e = randint(1,9)
+					f = randint(c,9)
+					x = 1000+a*100+b*10+c
+					y = d*100+e*10+f
+					texte = `$${tex_nombre(x)}-${y}$`;
+					!sortie_html ? texte_corr = `$\\opsub{${x}}{${y}}$` : texte_corr=`$${tex_nombre(x)}-${y}=${tex_nombre(x-y)}$`;
+					break ;
+				case 4 : // abc*d0e tables de 2 à 5
+					a = randint(2,5)
+					b = randint(2,5)
+					c = randint(2,5)
+					d = randint(2,5)
+					e = randint(2,5)
+					x = 100*a+10*b+c
+					y = d*100+e
+					texte = `$${tex_nombre(x)}\\times${y}$`;
+					!sortie_html ? texte_corr = `$\\opmul{${x}}{${y}}$` : texte_corr=`$${tex_nombre(x)}\\times${y}=${tex_nombre(x*y)}$`;
+					break ;
+				case 5 : // abc*de tables de 5 à 9
+					a = randint(5,9)
+					b = randint(5,9)
+					c = randint(5,9)
+					d = randint(5,9)
+					e = randint(5,9)
+					x = 100*a+10*b+c
+					y = 10*d+e
+					texte = `$${x}\\times${y}$`;
+					!sortie_html ? texte_corr = `$\\opmul{${x}}{${y}}$` : texte_corr=`$${tex_nombre(x)}\\times${y}=${tex_nombre(x*y)}$`;
+					break ;
+			}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
+}
+
+
+function Additionner_soustraires_decimaux(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Additions et soustractions de nombres décimaux"
+	this.consigne = "Poser et effectuer les calculs suivants."
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 4;
+	// this.pas_de_version_HMTL=true;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = choice([[1,2,7,8],[3,4,5,6]])
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d,e ,f, g, x, y; i < this.nb_questions && cpt<50; ) {
+			type_de_questions = liste_type_de_questions[i];
+			switch (type_de_questions){
+				case 1 : // xxx-xx,x
+					a = randint(1,4)*100+randint(2,5)*10+randint(1,9)
+					b = calcul(randint(5,9)*10+randint(6,9)+randint(1,9)/10)
+					texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}-${tex_nombre(b)}=${tex_nombrec(a-b)}$` : texte_corr =`$\\opsub[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+				case 2 : // xxx-xx,xx
+					a = randint(1,4)*100+randint(2,5)*10+randint(1,9)
+					b = calcul(randint(5,9)*10+randint(6,9)+randint(1,9)/10+randint(1,9)/100)
+					texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}-${tex_nombre(b)}=${tex_nombrec(a-b)}$` : texte_corr =`$\\opsub[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+				case 3 : // xxx,x-xxx
+					a = calcul(randint(5,9)*100+randint(2,5)*10+randint(1,9)+randint(1,9)/10)
+					b = randint(1,4)*100+randint(6,9)*10+randint(1,9)
+					texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}-${tex_nombre(b)}=${tex_nombrec(a-b)}$` : texte_corr =`$\\opsub[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+				case 4 : // x0x-xx9,x
+					a = calcul(randint(5,9)*100+randint(1,5))
+					b = calcul(randint(1,4)*100+randint(1,9)*10+9+randint(1,9)/10)
+					texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}-${tex_nombre(b)}=${tex_nombrec(a-b)}$` : texte_corr =`$\\opsub[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+				case 5 : // xxx-xx,x
+					a = randint(1,4)*100+randint(2,5)*10+randint(1,9)
+					b = calcul(randint(5,9)*10+randint(6,9)+randint(1,9)/10)
+					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}+${tex_nombre(b)}=${tex_nombrec(a+b)}$` : texte_corr =`$\\opadd[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+				case 6 : // xxx-xx,xx
+					a = randint(1,4)*100+randint(2,5)*10+randint(1,9)
+					b = calcul(randint(5,9)*10+randint(6,9)+randint(1,9)/10+randint(1,9)/100)
+					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}+${tex_nombre(b)}=${tex_nombrec(a+b)}$` : texte_corr =`$\\opadd[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+				case 7 : // xxx,x-xxx
+					a = calcul(randint(5,9)*100+randint(2,5)*10+randint(1,9)+randint(1,9)/10)
+					b = randint(1,4)*100+randint(6,9)*10+randint(1,9)
+					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}+${tex_nombre(b)}=${tex_nombrec(a+b)}$` : texte_corr =`$\\opadd[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+				case 8 : // x0x-xx9,x
+					a = calcul(randint(5,9)*100+randint(1,5))
+					b = calcul(randint(1,4)*100+randint(1,9)*10+9+randint(1,9)/10)
+					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}+${tex_nombre(b)}=${tex_nombrec(a+b)}$` : texte_corr =`$\\opadd[decimalsepsymbol={,}]{${a}}{${b}}$`;
+					break ;
+			}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
+}
+
+function Divisions_euclidiennes(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Divisions euclidiennes"
+	this.consigne = "Poser et effectuer les divisions euclidiennes suivantes puis donner l'égalité fondamentale correspondante."
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 4;
+	this.sup = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		this.sup==1 ? type_de_questions_disponibles = [1,2,2,3] : type_de_questions_disponibles = [4,4,5,6]
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, q, r; i < this.nb_questions && cpt<50; ) {
+			type_de_questions = liste_type_de_questions[i];
+			switch (type_de_questions){
+				case 1 : // division par 2, 3 , 4 ou 5
+					q = randint(2,5)*100+randint(2,5)*10+randint(2,5)
+					b = randint(2,5)
+					r = randint(1,b)
+					a = b*q+r
+					texte = `$${tex_nombre(a)}\\div${b}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${q}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+					break ;
+				case 2 : // division par 6 à 9
+					q = randint(5,9)*100+randint(2,5)*10+randint(5,9)
+					b = randint(6,9)
+					r = randint(1,b)
+					a = b*q+r
+					texte = `$${tex_nombre(a)}\\div${b}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${q}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+					break ;
+				case 3 : // un 0 dans le quotient
+					if (randint(1,2)==1) {
+						q = randint(2,9)*1000+randint(2,9)*100+randint(2,9)
+					} else {
+						q = randint(2,9)*1000+randint(2,9)*10+randint(2,9)
+					}
+					b = randint(7,9)
+					r = randint(1,b)
+					a = b*q+r
+					texte = `$${tex_nombre(a)}\\div${b}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${tex_nombre(q)}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+					break ;
+				case 4 : // division par 11, 12, 15, 25
+					q = randint(1,5)*100+randint(1,5)*10+randint(1,5)
+					b = choice([11,12,15,25])
+					r = randint(1,b)
+					a = b*q+r
+					texte = `$${tex_nombre(a)}\\div${b}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${tex_nombre(q)}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+					break ;
+				case 5 : // division par 13,14,21,22,23 ou 24 et un 0 dans le quotient
+					q = randint(1,5)*1000+randint(6,9)*100+randint(1,5)
+					b = choice([11,12,13,14,21,22,23,24])
+					r = randint(1,b)
+					a = b*q+r
+					texte = `$${tex_nombre(a)}\\div${b}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${tex_nombre(q)}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+					break ;
+				case 6 : // division par un multiple de 10 et un 0 dans le quotient
+					q = randint(6,9)*1000+randint(6,9)*10+randint(1,5)
+					b = randint(2,9)*10
+					r = randint(1,b)
+					a = b*q+r
+					texte = `$${tex_nombre(a)}\\div${b}$`;
+					sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${tex_nombre(q)}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+					break ;
+			}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Quotient inférieur à 10\n2: Quotient à 2 chiffres'] 
 }
 
 
@@ -3073,6 +4405,9 @@ function Traduire_un_programme_de_calcul(){
 			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				if (est_diaporama) {
+					texte = texte.replace(', quel est le résultat du programme de calcul ?',',\\\\ quel est le résultat de ce programme ?')
+				}
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -3398,6 +4733,76 @@ function Reduire_une_expression_litterale(){
 }
 
 
+// function Exercice_Pythagore(){
+// 	Exercice.call(this); // Héritage de la classe Exercice()
+// 	this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
+// 	this.consigne = "Calculer";
+// 	this.nb_questions = 2;
+// 	this.nb_cols = 1;
+// 	this.nb_cols_corr = 1;
+// 	this.sup = 1; // 1 valeur exacte | 2 valeur approchée
+
+// 	this.nouvelle_version = function(){
+// 		this.liste_questions = []; // Liste de questions
+// 		this.liste_corrections = []; // Liste de questions corrigées
+
+// 		let type_de_questions_disponibles = [1,2] // 1 calcul de l'hypoténuse | 2 calcul d'un coté de l'angle droit
+// 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+// 		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			
+// 			let lettre1 = randint(1,22)
+// 			let s1 = lettre_depuis_chiffre(lettre1)
+// 			let s2 = lettre_depuis_chiffre(lettre1+1)
+// 			let s3 = lettre_depuis_chiffre(lettre1+2)
+
+// 			switch (liste_type_de_questions[i]){
+// 				case 1: // Table de 2
+					
+// 					texte = `$${s1}${s2}${s3}\\text{ est un triangle rectangle en }${s1} \\text{ tel que } ${s1}${s2}=${c1}~\\text{cm et } ${s1}${s3}=${c2}~\\text{cm.}\\\\ \\text{Calculer } ${c2c3} \\text{.}$`
+// 					texte_corr = `$\\text{La moitié de }${a*2} \\text{ est } ${a}$`
+// 					break;
+// 				case 2: // Impair inférieur à 20
+// 					a = randint(2,9)
+// 					texte = `$\\text{La moitié de }${a*2+1}$`
+// 					texte_corr = `$\\text{La moitié de }${a*2+1} \\text{ est } ${tex_nombrec(a+5/10)}$`
+// 					break;
+// 				case 3: // Table de 200
+// 					a = randint(2,9)
+// 					texte = `$\\text{La moitié de }${tex_nombre(a*2*100)}$`
+// 					texte_corr = `$\\text{La moitié de }${tex_nombre(a*2*100)} \\text{ est } ${tex_nombre(a*100)}$`
+// 					break;
+// 				case 4: // a00 avec a impair
+// 					a = randint(2,9)
+// 					texte = `$\\text{La moitié de }${tex_nombre((a*2+1)*100)}$`
+// 					texte_corr = `$\\text{La moitié de }${tex_nombre((a*2+1)*100)} \\text{ est } ${tex_nombre(a*100+50)}$`
+// 					break;
+// 				case 5: // a,b avec a et b pairs
+// 					a = randint(2,9)
+// 					b = randint(2,9)
+// 					texte = `$\\text{La moitié de }${tex_nombrec(a*2+b*2/100)}$`
+// 					texte_corr = `$\\text{La moitié de }${tex_nombrec(a*2+b*2/100)} \\text{ est } ${tex_nombrec(a+b/100)}$`
+// 					break;
+// 				case 6: // 1xx avec xx un nombre pair
+// 					a = randint(2,9)
+// 					texte = `$\\text{La moitié de }${100+a*2}$`
+// 					texte_corr = `$\\text{La moitié de }${100+a*2} \\text{ est } ${50+a}$`
+// 					break;
+// 			}
+			
+			
+// 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+// 				this.liste_questions.push(texte);
+// 				this.liste_corrections.push(texte_corr);
+// 				i++;
+// 			}
+// 			cpt++;	
+// 		}
+// 		liste_de_question_to_contenu(this);
+// 	}
+// 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+// }
+
+
 
 
 function Code_LaTeX_personnalise() {
@@ -3480,9 +4885,15 @@ function HTML_personnalise() {
 
 // Exercices paramétré pour correspondre au référentiel
 
+function Divisions_euclidiennes_niv2(){
+	Divisions_euclidiennes.call(this);
+	this.sup = 2;
+	this.titre = "Divisions euclidiennes - Niveau 2"
+}
+
 function Exercice_6N12(){
-	Exercice_tables_de_multiplications_et_multiples_de_10.call(this);
-	this.sup = [1];
+	Tables_de_multiplications.call(this);
+	this.sup = "10;100;1000";
 	this.titre = 'Multiplier un entier par 10, 100, 1 000...';
 }
 
@@ -3573,6 +4984,8 @@ function LaTeX_static() {
 jQuery(document).ready(function() {
 // Ne se fait qu'après que le DOM soit entièrement défini
 
+
+
 	// Trie par ordre alphabétique les exercices disponibles
 	liste_des_exercices_disponibles = tridictionnaire(liste_des_exercices_disponibles);
 	
@@ -3581,11 +4994,13 @@ jQuery(document).ready(function() {
 	let nombre_d_exercices_disponibles_5 = 0;
 	let nombre_d_exercices_disponibles_4 = 0;
 	let nombre_d_exercices_disponibles_3 = 0;
+	let nombre_d_exercices_disponibles_CM = 0;
 	for (var id in liste_des_exercices_disponibles){
 		if (id[0]==6) {nombre_d_exercices_disponibles_6+=1}
 		if (id[0]==5) {nombre_d_exercices_disponibles_5+=1}
 		if (id[0]==4) {nombre_d_exercices_disponibles_4+=1}
 		if (id[0]==3) {nombre_d_exercices_disponibles_3+=1}
+		if (id[0]=='C') {nombre_d_exercices_disponibles_CM+=1}
 	}
 
 	//
@@ -3593,6 +5008,10 @@ jQuery(document).ready(function() {
 	let liste_html_des_exercices_5 = []
 	let liste_html_des_exercices_4 = []
 	let liste_html_des_exercices_3 = []
+	let liste_html_des_exercices_CM = []
+	
+
+
 	// Affiche de la liste des exercices disponibles 
 	let liste_html_des_exercices = '<h3 class="ui block header">Exercices disponibles</h3>\n\n';
 	for (var id in liste_des_exercices_disponibles) {
@@ -3609,24 +5028,56 @@ jQuery(document).ready(function() {
 		if (id[0]==3) {
 			liste_html_des_exercices_3 += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
 		}
+		if (id[0]=='C') {
+			liste_html_des_exercices_CM += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
+		}
 
 	}
-	liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="active content">`
-	liste_html_des_exercices += liste_html_des_exercices_6
-	liste_html_des_exercices+=`</div>`
-	liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Cinquième (${nombre_d_exercices_disponibles_5})</div><div class="content">`
-	liste_html_des_exercices += liste_html_des_exercices_5
-	liste_html_des_exercices+=`</div>`
-	liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Quatrième (${nombre_d_exercices_disponibles_4})</div><div class="content">`
-	liste_html_des_exercices += liste_html_des_exercices_4
-	liste_html_des_exercices+=`</div>`
-	liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Troisième (${nombre_d_exercices_disponibles_3})</div><div class="content">`
-	liste_html_des_exercices += liste_html_des_exercices_3
-	liste_html_des_exercices+=`</div>`
-	liste_html_des_exercices+=`</div>`
+
+
+	// Change l'ordre des exercices suivant l'URL
+	if (window.location.href.indexOf('cm.html')>0) {
+		liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Calcul mental (${nombre_d_exercices_disponibles_CM})</div><div class="active content">`
+		liste_html_des_exercices += liste_html_des_exercices_CM
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_6
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Cinquième (${nombre_d_exercices_disponibles_5})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_5
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Quatrième (${nombre_d_exercices_disponibles_4})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_4
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Troisième (${nombre_d_exercices_disponibles_3})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_3
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices+=`</div>`	
+	} else {
+		liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="active content">`
+		liste_html_des_exercices += liste_html_des_exercices_6
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Cinquième (${nombre_d_exercices_disponibles_5})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_5
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Quatrième (${nombre_d_exercices_disponibles_4})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_4
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Troisième (${nombre_d_exercices_disponibles_3})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_3
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Calcul mental (${nombre_d_exercices_disponibles_CM})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_CM
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices+=`</div>`
+	}
+
+		
 
 
 	$('#liste_des_exercices').html(liste_html_des_exercices);
+
+	
 
 	// Gère le clic sur un exercice de la liste
 	$('.lien_id_exercice').click(function(){
@@ -3636,7 +5087,7 @@ jQuery(document).ready(function() {
 		} else {
 			$('#choix_des_exercices').val($('#choix_des_exercices').val() + ',' + numero);
 		}
-		liste_des_exercices = $('#choix_des_exercices').val().replace(/\s/g, "").replace(";", ",").split(",");;
+		liste_des_exercices = $('#choix_des_exercices').val().replace(/\s/g, "").replace(";", ",").split(",");
 		mise_a_jour_de_la_liste_d_exercice();
 
 

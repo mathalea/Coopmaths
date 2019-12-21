@@ -37,6 +37,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - FOURNIER Carine
 - LACROIX Olivier
 - LEFORT Julie
+- LHOTE Jean-Claude
 - ROUBIN Sophie
 - UZU Anne
 
@@ -47,7 +48,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 
 ### Exercices à données aléatoires - MathALEA
 
-Les exercices à données aléatoires sont développés par Rémi Angot. Vous pouvez tous les retrouvez en version web sur [mathalea](../mathalea.html) et en version LaTeX paramétrable sur [mathalealatex](../mathalealatex.html).
+Les moteur de gestion des exercices à données aléatoires a été développé par Rémi Angot. Vous pouvez tous les retrouvez en version web sur [mathalea](../mathalea.html) et en version LaTeX paramétrable sur [mathalealatex](../mathalealatex.html).
 
 ### Charte graphique pour les exercices
 

@@ -9,6 +9,9 @@ publishDir = "../CoopMaths_Public"
 [params]
   description = "Exercices corrigés de Mathématiques pour une pédagogie coopérative et la personnalisation des apprentissages"
 
+[blackfriday]
+    fractions = false
+
 
 ### Pour un fonctionnement en local ###
 #uglyurls = true

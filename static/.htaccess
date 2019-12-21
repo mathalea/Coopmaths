@@ -1,3 +1,16 @@
+
+# Accès interdit à évaluation à la carte
+#<Files alacarte>
+
+#AuthUserFile /homez.41/clarensa/.motdepasseprof
+#AuthGroupFile /dev/null
+#AuthName "Accès réservé aux professeurs"
+#AuthType basic
+#require valid-user
+
+#</Files>
+
+
 # Erreur 404
 ErrorDocument 404 /404.html
 
@@ -24,6 +37,8 @@ RedirectMatch 301 /iep([0-9]*[A-Za-z]*[0-9]*-*_*[0-9]*)$ https://instrumenpoche.
 
 # Vocabulaire géométrie Labouche
 Redirect permanent /video6G10 https://www.youtube-nocookie.com/embed/58ZI3W-efDg?rel=0&showinfo=0
+# Tracer parallele Labouche
+Redirect permanent /video6G12 https://www.youtube-nocookie.com/embed/2nmN4KSYBJk?rel=0&showinfo=0
 # Vocabulaire des angles Labouche
 Redirect permanent /video6G22 https://www.youtube-nocookie.com/embed/yfCIOM1tqEw?rel=0&showinfo=0
 # Mesurer un angle Labouche
