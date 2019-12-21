@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<link  rel="icon" type="image/png" href="http://geodyn.mathablette.fr/mathablette4_logo.png" />
+		<title>Geodyn - Géométrie dynamique sur un navigateur internet</title>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
+		<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+		<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="66c4orrkp2lo06d"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+		<script  id="geodyn-plugin"  type="text/javascript" src="http://mathablette.fr/geodyn/lib/geodyn-plugin-loader.js?load=auto"></script>
+	</head>
+	<body>
+		<script>
+			function geodynPluginLoaded()
+			{
+				var figure = new GeodynDiv();
+				figure.loadFromConf(1134,680,"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");
+				figure.appendToBody();
+			}
+		</script>
+	</body>
+</html>
