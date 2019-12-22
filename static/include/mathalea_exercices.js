@@ -33,17 +33,17 @@ var liste_des_exercices_disponibles = {
 		'6D101' : Heures_decimales,
 		'6D11' : Somme_de_durees,
 		'6D12' : Calculs_de_durees_ou_d_horaires,
-		'6M10' : Perimetre_ou_aire_de_carres_rectangles_triangles,
-		'6M10-1' : Reglages_6M10,
+		'6M10-1' : Perimetre_ou_aire_de_carres_rectangles_triangles,
+		'6M10' : Reglages_6M10,
 		'6M12' : Reglages_6M12,
 		'6M23' : Reglages_6M23,
 		'6M22-1' : Perimetre_aire_et_portions_de_disques,
 		'6M22-2' : Reglages_6M22, //périmètre et aire de disque à partir d'un texte
 		'6M20' : Aire_de_triangles,
 		'6M22' : Perimetre_aire_disques,
-		'6M23' : Exercice_conversions,
-		'6N10' : Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
-		'6N101': Exercice_numeration_entier,
+		'6M23' : Reglages_6M23,
+		'6N10-2' : Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
+		'6N10-1': Exercice_numeration_entier,
 		'6N12' : Exercice_6N12,
 		'6N13' : Exercice_6N13,
 		'6N20' : Exercice_fractions_decomposer,
@@ -55,6 +55,7 @@ var liste_des_exercices_disponibles = {
 		'6N31' : Comparer_decimaux,
 		'6N33' : Fraction_d_un_nombre,
 		'6N33-1' : Pourcentage_d_un_nombre,
+		'6N34' : Reglages_6N34,
 		'5N12':Exercice_fractions_simplifier,
 		'5N12-2': Exercice_fractions_completer_egalite,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
@@ -2285,8 +2286,8 @@ function Exercice_conversions_de_longueurs(niveau=1){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		let prefixe_multi = [['da',10],['h',100],['k',1000]]
-		let prefixe_div = [['d',10],['c',100,],['m',1000]];
+		let prefixe_multi = [[' da',10],[' h',100],[' k',1000]]
+		let prefixe_div = [[' d',10],[' c',100,],[' m',1000]];
 		let unite = 'm';
 		let liste_unite = ['mm','cm','dm','m','dam','hm','km'];
 		for (let i = 0, a, k, div, resultat, type_de_questions, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50;) { // On limite le nombre d'essais pour chercher des valeurs nouvelles
@@ -2495,8 +2496,8 @@ function Exercice_conversions_aires(niveau=1){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		let prefixe_multi = [['da',100],['h',10000],['k',1000000]];
-		let prefixe_div = [['d',100],['c',10000,],['m',1000000]]; 
+		let prefixe_multi = [[' da',100],[' h',10000],[' k',1000000]];
+		let prefixe_div = [[' d',100],[' c',10000,],[' m',1000000]]; 
 		let unite = 'm';
 		let liste_unite = ['mm','cm','dm','m','dam','hm','km'];
 		for (let i = 0, a, k, div, resultat, type_de_questions, texte, texte_corr, liste_unite_info, cpt=0; i < this.nb_questions && cpt<50;) { // On limite le nombre d'essais pour chercher des valeurs nouvelles
@@ -2596,6 +2597,7 @@ function Exercice_perimetres_et_aires(difficulte=1){
 	this.titre = "Calculs de périmètres et d'aires";
 	this.consigne = 'Pour chacune des figures, calculer son périmètre puis son aire (valeur exacte et si nécessaire valeur approchée au dixième près).';
 	this.spacing = 1;
+	this.nb_questions = 4;
 
 
 	this.nouvelle_version = function(){
@@ -3109,6 +3111,7 @@ function Exercice_ecriture_decimale_a_partir_de_fraction_decimale(){
 	this.consigne = "Donner l'écriture décimale"
 	this.spacing = 2;
 	this.spacing_corr = 2;
+	this.nb_questions = 8;
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -5046,11 +5049,13 @@ function Exercice_6N24(){
 function Reglages_6M12(){
 	Exercice_conversions_de_longueurs.call(this);
 	this.sup = 3;
+	this.nb_questions = 8;
 }
 
 function Reglages_6M23(){
 	Exercice_conversions_aires.call(this);
 	this.sup = 3;
+	this.nb_cols_corr = 1;
 }
 
 function Reglages_6M10(){
@@ -5062,6 +5067,12 @@ function Reglages_6M22(){
 	Exercice_perimetres_et_aires.call(this);
 	this.sup = 2;
 	this.titre = "Périmètres et aires de disques (à partir d'un texte)."
+}
+
+function Reglages_6N34(){
+	Exercice_conversions.call(this);
+	this.sup = 5;
+	this.titre = "Conversions avec tous les préfixes de milli à tera."
 }
 
 

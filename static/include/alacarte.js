@@ -19,6 +19,7 @@ function selection_exercices_aleatoires(text) {
 	// remplace un id par plusieurs id si un item peut être évalué par plusieurs exercices aléatoires
 	let liste_des_exercices_a_echanger = {
 		'CM' : 'CM001 CM002',
+		'6N10' : '6N10-1 6N10-2'
 		// 'C10' : 'CM001 CM002 CM003'
 		}
 	$.each(liste_des_exercices_a_echanger,function(id){
