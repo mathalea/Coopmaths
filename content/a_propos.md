@@ -48,7 +48,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 
 ### Exercices à données aléatoires - MathALEA
 
-Les moteur de gestion des exercices à données aléatoires a été développé par Rémi Angot. Vous pouvez tous les retrouvez en version web sur [mathalea](../mathalea.html) et en version LaTeX paramétrable sur [mathalealatex](../mathalealatex.html).
+Les moteur de gestion des exercices à données aléatoires a été développé par Rémi Angot. Vous pouvez tous les retrouver en version web sur [mathalea](../mathalea.html) et en version LaTeX paramétrable sur [mathalealatex](../mathalealatex.html).
 
 ### Charte graphique pour les exercices
 
@@ -75,7 +75,7 @@ Pour faciliter le partage de liens vers ce site, quelques adresses raccourcies o
 
 ### Données personnelles
 
-Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune données personnelles et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données receuillies sont les statistiques de visite avec Google Analytics (adresses IP anonymisées et cookies désactivés).
+Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune donnée personnelle et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données receuillies sont les statistiques de visite avec Google Analytics (adresses IP anonymisées et cookies désactivés).
 
 Pour de plus amples renseignements : [contact@coopmaths.fr](mailto:contact@coopmaths.fr)
 
