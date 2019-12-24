@@ -2953,7 +2953,7 @@ function Double_distributivite(){
     this.consigne = "Développer les expressions suivantes.";
     this.spacing = 2 ;
     this.spacing_corr = 2 ;
-    this.nb_questions = 5 ;
+    this.nb_questions = 6 ;
 
     this.nouvelle_version = function(){
         this.liste_questions = []; // Liste de questions
