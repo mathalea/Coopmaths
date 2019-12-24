@@ -51,6 +51,8 @@ function creer_couples(E1, E2, nombre_de_couples_min = 10){
 	return result
 }
 
+// Fonctions mathématiques
+
 function randint(min,max,liste_a_eviter=[]){
 	//Source : https://gist.github.com/pc035860/6546661
 	let range = max - min;
@@ -77,12 +79,13 @@ function enleve_element(array,item){
 }
 
 function choice(liste) {
+	// Renvoit un élément au hasard de la liste
   var index = Math.floor(Math.random() * liste.length);
   return liste[index];
 }
 
 function range(max,liste_a_eviter=[]){
-	// Créer un tableau avec toutes les valeurs de 0 à max-1 sauf celle de la liste à éviter
+	// Créer un tableau avec toutes les valeurs de 0 à max sauf celle de la liste à éviter
 	let nb_max = parseInt(max,10);
 	let liste = [...Array(nb_max+1).keys()];
 	for (let i=0;i<liste_a_eviter.length;i++){
@@ -187,15 +190,7 @@ function combinaison_listes(liste,taille_minimale){
 	return l
 }
 
-function mise_en_evidence(texte){
-	if (sortie_html) {
-		return '\\mathbf{\\color{#1DA962}{'+texte+'}}'	
-	}
-	else {
-		return '\\mathbf{\\color{red}{'+texte+'}}'
-	}
-	
-}
+
 
 function ecriture_nombre_relatif(a) { //(+3) ou (-3)
 	let result = '';
@@ -293,7 +288,7 @@ function lettre_depuis_chiffre(i){ // 1->A ; 2->B...
   return String.fromCharCode(lettre)
 }
 
-function lettre_minuscule_depuis_chiffre(i){ // 1->A ; 2->B...
+function lettre_minuscule_depuis_chiffre(i){ // 1->a ; 2->b...
   return lettre_depuis_chiffre(i).toLowerCase()
 }
 
@@ -447,6 +442,16 @@ function tex_nombre(nb){
 	}
 }
 
+function mise_en_evidence(texte){
+	if (sortie_html) {
+		return '\\mathbf{\\color{#1DA962}{'+texte+'}}'	
+	}
+	else {
+		return '\\mathbf{\\color{red}{'+texte+'}}'
+	}
+	
+}
+
 function tex_prix(nb){
 	//Remplace le . par la ,
 	nombre = Number (nb);
@@ -460,14 +465,6 @@ function tex_prix(nb){
 	
 }
 
-function tex_prix_euros(nb){
-	//Remplace le . par la ,
-	nombre = Number (nb);
-	let result = nombre.toFixed(2).toString().replace('.',',')
-	result+=`~\\text{\\euro{}/kg}`;
-	return result;
-	
-}
 
 
 function nombre_de_chiffres_dans_la_partie_decimale(nb){
@@ -476,6 +473,15 @@ function nombre_de_chiffres_dans_la_partie_decimale(nb){
   } else{
   return 0
   }
+}
+
+function tex_prix_euros(nb){
+	//Remplace le . par la ,
+	nombre = Number (nb);
+	let result = nombre.toFixed(2).toString().replace('.',',')
+	result+=`~\\text{\\euro{}/kg}`;
+	return result;
+	
 }
 
 
