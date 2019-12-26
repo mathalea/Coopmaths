@@ -84,6 +84,8 @@ var liste_des_exercices_disponibles = {
 		//15:Exercice_perimetres_et_aires,
 		'3N10': Exercice_developper,
 		'3N11' : Double_distributivite,
+		'3N12' : Developper_Identites_remarquables,
+		'3N13' : Factoriser_Identites_remarquables,
 		'LaTeX' : Code_LaTeX_personnalise,
 		'coop': LaTeX_static,
 		// 'Perso' : HTML_personnalise,
@@ -2947,55 +2949,86 @@ function Exercice_developper(difficulte=1){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
 }
 
-function Double_distributivite()
+
+function Factoriser_Identites_remarquables()
 {
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Utiliser la double distributivité";
-	this.consigne = "Développer et réduire les expressions suivantes.";
-	this.nb_cols = 1 ;
-	this.nb_cols_corr = 1 ;
+Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Factoriser avec les identités remarquables";
+	this.consigne = "Factoriser les expressions suivantes.";
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
 	this.spacing = 1 ;
 	this.spacing_corr = 1 ;
 	this.nb_questions = 5 ;
-	this.sup = 1 ;
+	this.sup=1 ;
 
 	this.nouvelle_version = function() {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		let type_de_questions_disponibles = [1,2] ;
-		if (this.sup==2) {
-			type_de_questions_disponibles = [3,4]
-		}
-		if (this.sup==3) {
-			type_de_questions_disponibles = [1,2,3,4]
-		}
-
-
+		if(this.sup==1 || this.sup=='1'){
+		    type_de_questions_disponibles = [1,2,3] // coef de x = 1
+        }
+        else if (this.sup==2 || this.sup=='2') {
+		    type_de_questions_disponibles = [4,5,6]  // coef de x > 1
+        }
+        else {type_de_questions_disponibles = [7,8,9]}  // coef de x relatif
+		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
 			type_de_questions = liste_type_de_questions[i];
-			a= randint(2,9);
+			a= randint(1,9);
 			b = randint(2,9);
-			c = randint(2,9,[a]);
-			d = randint(2,9,[b]);
+            c = randint(-9,9,[-1,1,0]);
 			switch(type_de_questions){
-			case 1 : //(x+b)(x+d)
-				b = randint(2,10)
-				d = randint(2,12)
-				texte = `$(x+${b})(x+${d})$`
-				texte_corr = `$(x+${b})(x+${d})=x^2+${b}x+${d}x+${b*d}=x^2+${b+d}x+${b*d}$`
+			case 1 :
+				texte = `$x^2+${2*a}x+${a*a}$`; // (x+a)²
+				texte_corr = `$x^2+${2*a}x+${a*a}=x^2+2 \\times ${a} \\times x+${a}^2=(x+${a})^2$` ; 
 				break;
-			case 2 : //(ax+b)(cx+d)
-				texte = `$(${a}x+${b})(${c}x+${d})$`
-				texte_corr = `$(${a}x+${b})(${c}x+${d})=${a*c}x^2+${a*d}x+${b*c}x+${b*d}=${a*c}x^2+${a*d+b*c}x+${b*d}$`
+			case 2 :
+			texte = `$x^2-${2*a}x+${a*a}$`  // (x-a)²
+				texte_corr = `$x^2-${2*a}x+${a*a}=(x-${a})^2=x^2-2 \\times ${a} \\times x+${a}^2=(x-${a})^2$` ; 
 				break;
-			case 3 ://(ax-b)(cx+d)
-				texte = `$(${a}x-${b})(${c}x+${d})$`
-				texte_corr = `$(${a}x-${b})(${c}x+${d})=${a*c}x^2+${d*a}x-${b*c}x-${b*d}=${a*c}x^2+${d*a}x-${b*c}x-${b*d}$`;
+			case 3 :
+				texte = `$x^2-${a*a}$`    // (x-a)(x+a)
+				texte_corr = `$x^2-${a*a}=x^2-${a}^2=(x-${a})(x+${a})$` ; 
 				break;
-			case 4 ://(ax-b)(cx-d)
-				texte = `$(${a}x-${b})(${c}x-${d})$`
-				texte_corr = `$(${a}x-${b})(${c}x-${d})=${a*c}x^2-${a*d}x-${b*c}x+${b*d}=${a*c}x^2-${a*d+b*c}x+${b*d}$`
+			case 4 :
+				texte = `$${b*b}x^2+${2*b*a}x+${a*a}$`; //(bx+a)²  b>1
+			    texte_corr = `$${b*b}x^2+${2*b*a}x+${a*a}=(${b}x)^2+2 \\times ${b}x \\times {a} + ${a}^2=(${b}x+${a})^2$`;
+				break;
+			case 5 :
+				texte = `$${b*b}x^2-${2*b*a}x+${a*a}$`; //(bx-a)² b>1
+			    texte_corr = `$${b*b}x^2-${2*b*a}x+${a*a}=(${b}x)^2-2 \\times ${b}x \\times {a} + ${a}^2=(${b}x-${a})^2$`;
+				break;
+			case 6 :
+				texte = `$${b*b}x^2-${a*a}$`; //(bx-a)(bx+a) b>1
+			    texte_corr = `$${b*b}x^2-${a*a}=(${b}x)^2-${a}^2=(${b}x-${a})(${b}x+${a})$`;
+                break;
+            case 7 :
+				texte = `$${c*c}x^2 ${ecriture_algebrique(2*c*a)}x+${a*a}$`; //(cx+a)² c relatif différent de -1, 1 ou 0
+				if (c>0) { 
+				texte_corr = `$${c*c}x^2 ${ecriture_algebrique(2*c*a)}x+${a*a}=(${c}x)^2+2 \\times ${ecriture_parenthese_si_negatif(c)}x \\times ${a} + ${a}^2=(${c}x+${a})^2$`;
+			}	else {	// éviter d'avoir (-7x)² quand 49x² à factoriser !
+			texte_corr = `$${c*c}x^2 ${ecriture_algebrique(2*c*a)}x+${a*a}=(${-c}x)^2-2 \\times ${-c}x \\times ${a} + ${a}^2=(${-c}x-${a})^2$`;
+
+			}
+				
+				break;
+			case 8 :
+				texte = `$${c*c}x^2 ${ecriture_algebrique(-2*c*a)} x+ ${a*a}$`; //(cx-a)²   c relatif différent de -1, 1 ou 0
+				if (c>0){ 
+			    texte_corr = `$${c*c}x^2 ${ecriture_algebrique(-2*c*a)} x+ ${a*a}=(${c}x)^2-2 \\times ${ecriture_parenthese_si_negatif(c)}x \\times ${a} + ${a}^2=(${c}x-${a})^2$`;
+				} else {	// éviter d'avoir (-7x)² quand 49x² à factoriser !
+					texte_corr = `$${c*c}x^2 ${ecriture_algebrique(-2*c*a)} x+ ${a*a}=(${-c}x)^2+2 \\times ${-c}x \\times ${a} + ${a}^2=(${-c}x+${a})^2$`;
+				}
+				break;
+			case 9 :
+				texte = `$${c*c}x^2-${a*a}$`; //(cx-a)(cx+a)    c relatif différent de -1, 1 ou 0
+				if (c>0){
+				texte_corr = `$${c*c}x^2-${a*a}=(${c}x)^2-${a}^2=(${c}x-${a})(${c}x+${a})$`;
+				} else {	// éviter d'avoir (-7x)² quand 49x² à factoriser !
+					texte_corr = `$${c*c}x^2-${a*a}=(${-c}x)^2-${a}^2=(${-c}x-${a})(${-c}x+${a})$`;	
+				}
 				break;
 			}
 			if (this.liste_questions.indexOf(texte)==-1) {
@@ -3008,9 +3041,8 @@ function Double_distributivite()
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : (x+a)(x+b) et (ax+b)(cx+d)\n 2 : (ax-b)(cx+d) et (ax-b)(cx-d)\n 3 : Tous les types'] ;
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x = 1\n 2 : coef de x >1\n 3 : Coef de x relatif'] ;
 }
-
 
 
 
