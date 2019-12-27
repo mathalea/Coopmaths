@@ -86,8 +86,8 @@ var liste_des_exercices_disponibles = {
 		'3N11' : Double_distributivite,
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
-		// '2N10' : Developper_Identites_remarquables2,
-		// '2N11' : Factoriser_Identites_remarquables2,
+		'2N10' : Developper_Identites_remarquables,
+		'2N11' : Factoriser_Identites_remarquables2,
 		'LaTeX' : Code_LaTeX_personnalise,
 		'coop': LaTeX_static,
 		// 'Perso' : HTML_personnalise,
@@ -5465,12 +5465,14 @@ jQuery(document).ready(function() {
 	let nombre_d_exercices_disponibles_5 = 0;
 	let nombre_d_exercices_disponibles_4 = 0;
 	let nombre_d_exercices_disponibles_3 = 0;
+	let nombre_d_exercices_disponibles_2 = 0;
 	let nombre_d_exercices_disponibles_CM = 0;
 	for (var id in liste_des_exercices_disponibles){
 		if (id[0]==6) {nombre_d_exercices_disponibles_6+=1}
 		if (id[0]==5) {nombre_d_exercices_disponibles_5+=1}
 		if (id[0]==4) {nombre_d_exercices_disponibles_4+=1}
 		if (id[0]==3) {nombre_d_exercices_disponibles_3+=1}
+		if (id[0]==2) {nombre_d_exercices_disponibles_2+=1}
 		if (id[0]=='C') {nombre_d_exercices_disponibles_CM+=1}
 	}
 
@@ -5479,6 +5481,7 @@ jQuery(document).ready(function() {
 	let liste_html_des_exercices_5 = []
 	let liste_html_des_exercices_4 = []
 	let liste_html_des_exercices_3 = []
+	let liste_html_des_exercices_2 = []
 	let liste_html_des_exercices_CM = []
 	
 
@@ -5498,6 +5501,9 @@ jQuery(document).ready(function() {
 		}
 		if (id[0]==3) {
 			liste_html_des_exercices_3 += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
+		}
+		if (id[0]==2) {
+			liste_html_des_exercices_2 += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
 		}
 		if (id[0]=='C') {
 			liste_html_des_exercices_CM += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
@@ -5523,6 +5529,9 @@ jQuery(document).ready(function() {
 		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Troisième (${nombre_d_exercices_disponibles_3})</div><div class="content">`
 		liste_html_des_exercices += liste_html_des_exercices_3
 		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Seconde (${nombre_d_exercices_disponibles_2})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_2
+		liste_html_des_exercices+=`</div>`
 		liste_html_des_exercices+=`</div>`	
 	} else {
 		liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="active content">`
@@ -5536,6 +5545,9 @@ jQuery(document).ready(function() {
 		liste_html_des_exercices+=`</div>`
 		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Troisième (${nombre_d_exercices_disponibles_3})</div><div class="content">`
 		liste_html_des_exercices += liste_html_des_exercices_3
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Seconde (${nombre_d_exercices_disponibles_2})</div><div class="content">`
+		liste_html_des_exercices += liste_html_des_exercices_2
 		liste_html_des_exercices+=`</div>`
 		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Calcul mental (${nombre_d_exercices_disponibles_CM})</div><div class="content">`
 		liste_html_des_exercices += liste_html_des_exercices_CM
