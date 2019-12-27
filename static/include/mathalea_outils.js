@@ -491,7 +491,14 @@ function tex_prix_euros(nb){
 
 
 function tex_fraction(a,b){ // Ecrire une fraction
-	return '\\dfrac{'+a+'}{'+b+'}'
+	if (b!=1) {
+		return '\\dfrac{'+a+'}{'+b+'}'
+	}
+	else
+	{
+		return a
+	}
+
 }
 
 function tex_fraction_box(a,b,taille='2em'){ // Ecrire une fraction dans une boite pour faciliter l'alignement
