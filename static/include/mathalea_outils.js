@@ -254,9 +254,8 @@ function pgcd(a,b){
 }
 
 function fraction_simplifiee(n,d){  // renvoie le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
-let p=pgcd(n,d)
-var fraction=[n/p,d/p];
-return fraction;
+	let p=pgcd(n,d);
+	return [n/p,d/p];
 }
 
 function calcul(expression){ // pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
