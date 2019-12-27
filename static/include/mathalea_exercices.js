@@ -86,7 +86,7 @@ var liste_des_exercices_disponibles = {
 		'3N11' : Double_distributivite,
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
-		'2N10' : Developper_Identites_remarquables,
+		'2N10' : Developper_Identites_remarquables2,
 		'2N11' : Factoriser_Identites_remarquables2,
 		'LaTeX' : Code_LaTeX_personnalise,
 		'coop': LaTeX_static,
@@ -3153,7 +3153,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x égal à 1\n 2 : coef de x supérieur à 1\n 3 : Coef de x rationnel'] ;
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 function Factoriser_Identites_remarquables3()
 {
@@ -3205,7 +3205,7 @@ function Factoriser_Identites_remarquables3()
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x égal à 1\n 2 : coef de x supérieur à 1\n 3 : Coef de x rationnel'] ;
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 
 function Factoriser_Identites_remarquables2()
