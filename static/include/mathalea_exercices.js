@@ -84,8 +84,10 @@ var liste_des_exercices_disponibles = {
 		//15:Exercice_perimetres_et_aires,
 		'3N10': Exercice_developper,
 		'3N11' : Double_distributivite,
-		'3N12' : Developper_Identites_remarquables,
-		'3N13' : Factoriser_Identites_remarquables,
+		'3N12' : Developper_Identites_remarquables3,
+		'3N13' : Factoriser_Identites_remarquables3,
+		// '2N10' : Developper_Identites_remarquables2,
+		// '2N11' : Factoriser_Identites_remarquables2,
 		'LaTeX' : Code_LaTeX_personnalise,
 		'coop': LaTeX_static,
 		// 'Perso' : HTML_personnalise,
@@ -3023,7 +3025,7 @@ function Double_distributivite()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : (x+a)(x+b) et (ax+b)(cx+d)\n 2 : (ax-b)(cx+d) et (ax-b)(cx-d)'] ;
 }
 
-function Developper_Identites_remarquables()
+function Developper_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Développer avec les identités remarquables";
@@ -3103,7 +3105,120 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x = 1\n 2 : coef de x >1\n 3 : Coef de x relatif'] ;
 }
 
-function Factoriser_Identites_remarquables()
+function Developper_Identites_remarquables3()
+{
+Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Développer (a-b)(a+b)";
+	this.consigne = "Développer les expressions suivantes.";
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.spacing = 1 ;
+	this.spacing_corr = 1 ;
+	this.nb_questions = 5 ;
+	this.sup=1 ;
+
+	this.nouvelle_version = function() {
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+			if(this.sup==1 || this.sup=='1'){
+				a= randint(1,9);	 // coef de x est égal à 1
+				texte = `$(x-${a})(x+${a})$`    // (x-a)(x+a)
+				texte_corr = `$(x-${a})(x+${a})=x^2-${a}^2=x^2-${a*a}$` ; 
+			}
+			else if (this.sup==2 || this.sup=='2') {
+				a= randint(1,9)  // (bx-a)(bx+a) avec a et b entier positifs entre 1 et 9,  b différent de 1
+				b = randint(2,9);
+				texte = `$(${b}x-${a})(${b}x+${a})$`; // b>1
+			    texte_corr = `$(${b}x-${a})(${b}x+${a})=(${b}x)^2-${a}^2=${b*b}x^2-${a*a}$`;
+			}
+			else {   //  (bx-a)(bx+a) avec a entier et b rationnel simple
+				a= randint(1,9);
+				let n=randint(1,9);
+				let d=randint(2,9,[n]);
+				let fraction=fraction_simplifiee(n,d)
+				let ns=fraction[0]
+				let ds=fraction[1]
+				if (ds!=1){
+				texte = `$(\\dfrac{${ns}}{${ds}}x-${a})(\\dfrac{${ns}}{${ds}}x+${a})$`; // b>1
+			    texte_corr = `$(\\dfrac{${ns}}{${ds}}x-${a})(\\dfrac{${ns}}{${ds}}x+${a})=(\\dfrac{${ns}}{${ds}}x)^2-${a}^2=\\dfrac{${ns*ns}}{${ds*ds}}x^2-${a*a}$`;
+				} else { // Si le dénominateur est 1 après simplification, on retombe sur un entier... ce n'est pas satisfaisant, une idée ?
+					texte = `$(${ns}x-${a})(${ns}x+${a})$`; // b>1
+					texte_corr = `$(${ns}x-${a})(${ns}x+${a})=(${ns}x)^2-${a}^2=${ns*ns}x^2-${a*a}$`;	
+				}
+			}  
+				
+			if (this.liste_questions.indexOf(texte)==-1) {
+				 // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x égal à 1\n 2 : coef de x supérieur à 1\n 3 : Coef de x rationnel'] ;
+}
+function Factoriser_Identites_remarquables3()
+{
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Factoriser a²-b²";
+	this.consigne = "Factoriser les expressions suivantes.";
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.spacing = 1 ;
+	this.spacing_corr = 1 ;
+	this.nb_questions = 5 ;
+	this.sup=1 ;
+
+	this.nouvelle_version = function() {
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+			if(this.sup==1 || this.sup=='1'){
+				a= randint(1,9);	 // coef de x est égal à 1
+				texte = `$x^2-${a*a}$`    // (x-a)(x+a)
+				texte_corr = `$x^2-${a*a}==x^2-${a}^2=(x-${a})(x+${a})$` ; 
+			}
+			else if (this.sup==2 || this.sup=='2') {
+				a= randint(1,9)  // (bx-a)(bx+a) avec a et b entier positifs entre 1 et 9,  b différent de 1
+				b = randint(2,9);
+				texte = `$${b*b}x^2-${a*a}$`; // b>1
+			    texte_corr = `$${b*b}x^2-${a*a}=(${b}x)^2-${a}^2=(${b}x-${a})(${b}x+${a})$`;
+			}
+			else {   //  (bx-a)(bx+a) avec a entier et b rationnel simple
+				a= randint(1,9);
+				let n=randint(1,9);
+				let d=randint(2,9,[n]);
+				let fraction=fraction_simplifiee(n,d)
+				let ns=fraction[0]
+				let ds=fraction[1]
+				if (ds!=1){
+				texte = `$\\dfrac{${ns*ns}}{${ds*ds}}x^2-${a*a}$`; // b>1
+			    texte_corr = `$\\dfrac{${ns*ns}}{${ds*ds}}x^2-${a*a}=(\\dfrac{${ns}}{${ds}}x)^2-${a}^2=(\\dfrac{${ns}}{${ds}}x-${a})(\\dfrac{${ns}}{${ds}}x+${a})$`;
+				} else { // Si le dénominateur est 1 après simplification, on retombe sur un entier... ce n'est pas satisfaisant, une idée ?
+					texte = `$${ns*ns}x^2-${a*a}$`; // b>1
+					texte_corr = `$${ns*ns}x^2-${a*a}=(${ns}x)^2-${a}^2=(${ns}x-${a})(${ns}x+${a})$`;	
+				}
+			}  
+				
+			if (this.liste_questions.indexOf(texte)==-1) {
+				 // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x égal à 1\n 2 : coef de x supérieur à 1\n 3 : Coef de x rationnel'] ;
+}
+
+function Factoriser_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Factoriser avec les identités remarquables";
@@ -3196,7 +3311,6 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x = 1\n 2 : coef de x >1\n 3 : Coef de x relatif'] ;
 }
-
 
 function Exercice_substituer(difficulte=1){
 //Calculer le périmètre et l'aire de figures 
