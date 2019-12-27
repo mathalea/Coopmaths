@@ -5464,7 +5464,7 @@ jQuery(document).ready(function() {
 		if (id[0]==4) {nombre_d_exercices_disponibles_4+=1}
 		if (id[0]==3) {nombre_d_exercices_disponibles_3+=1}
 		if (id[0]==2) {nombre_d_exercices_disponibles_2+=1}
-				if (id[0]=='C') {nombre_d_exercices_disponibles_CM+=1}
+		if (id[0]=='C') {nombre_d_exercices_disponibles_CM+=1}
 	}
 
 	//
