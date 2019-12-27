@@ -3017,7 +3017,7 @@ function Double_distributivite()
 }
 
 
-function Developper_Identites_remarquables()
+function Developper_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Développer avec les identités remarquables";
