@@ -3040,10 +3040,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.nouvelle_version = function() {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		if(this.sup==1 || this.sup=='1'){
+		if(this.sup==1){
 		    type_de_questions_disponibles = [1,2,3] // coef de x = 1
         }
-        else if (this.sup==2 || this.sup=='2') {
+        else if (this.sup==2) {
 		    type_de_questions_disponibles = [4,5,6]  // coef de x > 1
         }
         else {type_de_questions_disponibles = [7,8,9]}  // coef de x relatif
@@ -3122,12 +3122,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
 		this.liste_corrections = []; // Liste de questions corrigées
 		
 		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
-			if(this.sup==1 || this.sup=='1'){
+			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$(x-${a})(x+${a})$`    // (x-a)(x+a)
 				texte_corr = `$(x-${a})(x+${a})=x^2-${a}^2=x^2-${a*a}$` ; 
 			}
-			else if (this.sup==2 || this.sup=='2') {
+			else if (this.sup==2) {
 				a= randint(1,9)  // (bx-a)(bx+a) avec a et b entier positifs entre 1 et 9,  b différent de 1
 				b = randint(2,9);
 				texte = `$(${b}x-${a})(${b}x+${a})$`; // b>1
@@ -3178,12 +3178,12 @@ function Factoriser_Identites_remarquables3()
 		this.liste_corrections = []; // Liste de questions corrigées
 		
 		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
-			if(this.sup==1 || this.sup=='1'){
+			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$x^2-${a*a}$`    // (x-a)(x+a)
 				texte_corr = `$x^2-${a*a}==x^2-${a}^2=(x-${a})(x+${a})$` ; 
 			}
-			else if (this.sup==2 || this.sup=='2') {
+			else if (this.sup==2) {
 				a= randint(1,9)  // (bx-a)(bx+a) avec a et b entier positifs entre 1 et 9,  b différent de 1
 				b = randint(2,9);
 				texte = `$${b*b}x^2-${a*a}$`; // b>1
@@ -3233,10 +3233,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.nouvelle_version = function() {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		if(this.sup==1 || this.sup=='1'){
+		if(this.sup==1){
 		    type_de_questions_disponibles = [1,2,3] // coef de x = 1
         }
-        else if (this.sup==2 || this.sup=='2') {
+        else if (this.sup==2) {
 		    type_de_questions_disponibles = [4,5,6]  // coef de x > 1
         }
         else {type_de_questions_disponibles = [7,8,9]}  // coef de x relatif
