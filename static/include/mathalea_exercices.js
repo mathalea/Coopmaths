@@ -86,7 +86,7 @@ var liste_des_exercices_disponibles = {
 		'3N11' : Double_distributivite,
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
-		'2N10' : Developper_Identites_remarquables2,
+		'2N10' : Developper_Identites_remarquables,
 		'2N11' : Factoriser_Identites_remarquables2,
 		'LaTeX' : Code_LaTeX_personnalise,
 		'coop': LaTeX_static,
