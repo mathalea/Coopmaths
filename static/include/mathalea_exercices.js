@@ -3153,7 +3153,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x égal à 1\n 2 : coef de x supérieur à 1\n 3 : Coef de x rationnel'] ;
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 function Factoriser_Identites_remarquables3()
 {
@@ -3205,7 +3205,7 @@ function Factoriser_Identites_remarquables3()
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : coef de x égal à 1\n 2 : coef de x supérieur à 1\n 3 : Coef de x rationnel'] ;
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 
 function Factoriser_Identites_remarquables2()
@@ -5464,7 +5464,7 @@ jQuery(document).ready(function() {
 		if (id[0]==4) {nombre_d_exercices_disponibles_4+=1}
 		if (id[0]==3) {nombre_d_exercices_disponibles_3+=1}
 		if (id[0]==2) {nombre_d_exercices_disponibles_2+=1}
-				if (id[0]=='C') {nombre_d_exercices_disponibles_CM+=1}
+		if (id[0]=='C') {nombre_d_exercices_disponibles_CM+=1}
 	}
 
 	//
