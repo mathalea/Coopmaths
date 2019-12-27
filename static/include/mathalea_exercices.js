@@ -3077,17 +3077,17 @@ Exercice.call(this); // Héritage de la classe Exercice()
 			    texte_corr = `$(${b}x-${a})(${b}x+${a})=(${b}x)^2-${a}^2=${b*b}x^2-${a*a}$`;
                 break;
 			case 7 :
-				texte = `$(${tex_fraction(ns,ds)}x+${a})^2$`; // (kx+a)² k rationnel 
-				texte_corr = `$(${tex_fraction(ns,ds)}x+${a})^2=(${tex_fraction(ns,ds)}x)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=(${tex_fraction(ns,ds)}x+${a})^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
+				texte = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2$`; // (kx+a)² k rationnel 
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left((${tex_fraction(ns,ds)}x+${a})^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
 				break;
 			case 8 :
-				texte = `$(${tex_fraction(ns,ds)}x-${a})^2$`; // (kx-a)² k rationnel 
-				texte_corr = `$(${tex_fraction(ns,ds)}x-${a})^2=(${tex_fraction(ns,ds)}x)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
+				texte = `$\\left((${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
 				break;
 			case 9 :
 				//  (bx-a)(bx+a) avec a entier et b rationnel simple
-				texte = `$(${tex_fraction(ns,ds)}x-${a})(${tex_fraction(ns,ds)}x+${a})$`; // b>1
-				texte_corr = `$(${tex_fraction(ns,ds)}x-${a})(${tex_fraction(ns,ds)}x+${a})=(${tex_fraction(ns,ds)}x)^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
+				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)$`; // b>1
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)=\\left(${tex_fraction(ns,ds)}x\\right)^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
 				break;
 			}
 			if (this.liste_questions.indexOf(texte)==-1) {
@@ -3139,8 +3139,8 @@ Exercice.call(this); // Héritage de la classe Exercice()
 				fraction = choice(liste_fractions);
 				ns=fraction[0]
 				ds=fraction[1]
-				texte = `$(${tex_fraction(ns,ds)}x-${a})(${tex_fraction(ns,ds)}x+${a})$`; // b>1
-				texte_corr = `$(${tex_fraction(ns,ds)}x-${a})(${tex_fraction(ns,ds)}x+${a})=(${tex_fraction(ns,ds)}x)^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
+				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)$`; // b>1
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right))=\\left(${tex_fraction(ns,ds)}x\\right))^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
 				}
 			
 			if (this.liste_questions.indexOf(texte)==-1) {
@@ -3191,7 +3191,7 @@ function Factoriser_Identites_remarquables3()
 				ns=fraction[0]
 				ds=fraction[1]
 				texte = `$${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`; // b>1
-				   texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}=(${tex_fraction(ns,ds)}x)^2-${a}^2=(${tex_fraction(ns,ds)}x-${a})(${tex_fraction(ns,ds)}x+${a})$`;
+				   texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}=\\left(${tex_fraction(ns,ds)}x\\right)^2-${a}^2=\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)$`;
 		
 			}  
 				
@@ -3270,16 +3270,16 @@ Exercice.call(this); // Héritage de la classe Exercice()
             case 7 :
 		
 				texte = `$${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(2*ns*a,ds)}x+${a*a}$`; // (kx+a)² k rationnel 
-				texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(ns*2*a,ds)}x+${a*a}=(${tex_fraction(ns,ds)}x)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=(${tex_fraction(ns,ds)}x+${a})^2$`;
+				texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(ns*2*a,ds)}x+${a*a}=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2$`;
 				break;
 			case 8 :
 				texte = `$${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(2*ns*a,ds)}x+${a*a}$`; // (kx-a)² k rationnel 
-				texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(ns*2*a,ds)}x+${a*a}=(${tex_fraction(ns,ds)}x)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=(${tex_fraction(ns,ds)}x-${a})^2$`;
+				texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(ns*2*a,ds)}x+${a*a}=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2$`;
 				break;
 			case 9 :
 				//  (bx-a)(bx+a) avec a entier et b rationnel simple
 				texte = `$${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`; // b>1
-				texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}=(${tex_fraction(ns,ds)}x)^2-${a}^2=(${tex_fraction(ns,ds)}x-${a})(${tex_fraction(ns,ds)}x+${a})$`;
+				texte_corr = `$${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}=\\left(${tex_fraction(ns,ds)}x\\right)^2-${a}^2=\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)$`;
 				break;
 			}
 			if (this.liste_questions.indexOf(texte)==-1) {
