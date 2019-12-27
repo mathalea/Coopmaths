@@ -3140,7 +3140,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 				ns=fraction[0]
 				ds=fraction[1]
 				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)$`; // b>1
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right))=\\left(${tex_fraction(ns,ds)}x\\right))^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)=\\left(${tex_fraction(ns,ds)}x\\right)^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
 				}
 			
 			if (this.liste_questions.indexOf(texte)==-1) {
