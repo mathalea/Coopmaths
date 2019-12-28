@@ -5213,13 +5213,13 @@ function Exercice_Thales(){
 	let y1 = randint(2,4)
 	let x3 = randint(3,6)
 	let y3 = randint(-1,2)
-	let k = randint(3,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie.
-	let l23=Math.sqrt(x3*x3+y3*y3) // x2=0 et y2=0
-	let l12=Math.sqrt(x1*x1+y1*y1)	// x2=0 et y2=0
-	let l13=Math.sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))		//calcul des longueurs du triangle principal.
-	let l45=Math.abs(k)*l23
-	let l14=Math.abs(k)*l12
-	let l15=Math.abs(k)*l13							//calcul des longueurs du triangle secondaires
+	let k = randint(2,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
+	let l23=Math.round(100*Math.sqrt(x3*x3+y3*y3))/100 // x2=0 et y2=0
+	let l12=Math.round(100*Math.sqrt(x1*x1+y1*y1))/100	// x2=0 et y2=0
+	let l13=Math.round(100*Math.sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1)))/100		//calcul des longueurs du triangle principal arrondies avec 2 décimales
+	let l45=Math.round(100*Math.abs(k)*l23)/100
+	let l14=Math.round(100*Math.abs(k)*l12)/100
+	let l15=Math.round(100*Math.abs(k)*l13)/100							//calcul des longueurs du triangle secondaires
 	let s45= arrondi_virgule(l45,2)			// mise en texte avec 2 chiffres après la virgule pour énoncé
 	let s13= arrondi_virgule(l13,2)
 	let s12= arrondi_virgule(l12,2)
@@ -5228,9 +5228,9 @@ function Exercice_Thales(){
 	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
 	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
 	
-	// enoncé  (j'affiche k pour relecture, à enlever par la suite)
+	// enoncé  
 	let texte = 'On considère la figure suivante :\\\\ Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]$`+'\\\\'
-	texte = texte + `$${'k='+k+';'+s1+s2+'='+s12+';'+s1+s3+'='+s13+';'+s4+s5+'='+s45+';'+s1+s5+'='+s15}$`+'\\\\ Calcule '+`$${s1+s4}~et~${s2+s3}$`+' à 0,1 près.'
+	texte = texte + `$${s1+s2+' = '+s12+'cm~;~'+s1+s3+' = '+s13+'cm~;~'+s4+s5+' = '+s45+'cm~;~'+s1+s5+' = '+s15+'cm'}$`+'\\\\ Calcule '+`$${s1+s4}~et~${s2+s3}$`+' à 0,1 près.'
 
 	// dessin de la figure
 	texte=texte+'\n \\begin{tikzpicture}' // Balise début de figure
@@ -5254,7 +5254,11 @@ function Exercice_Thales(){
 	}
 	texte=texte+'\n \\end{tikzpicture}' // Balise de fin de figure
 	this.liste_questions.push(texte)
-	this.liste_corrections.push('Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}$`)
+	let texte_corr ='Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}$`
+	texte_corr = texte_corr + '\\\\ On a donc '+`$${tex_fraction(s1+s4,s12)}=${tex_fraction(s15,s13)}=${tex_fraction(s45,s2+s3)}$`
+	texte_corr = texte_corr + '\\\\ Soit '+`$${s1+s4}=${tex_fraction(s15+'\\times'+s12,s13)}\\approx${Math.round(l14*10)/10}cm$`
+	texte_corr = texte_corr + '\\\\ Et '+`$${s2+s3}=${tex_fraction(s13+'\\times'+s45,s15)}\\approx${Math.round(l23*10)/10}cm$`
+		this.liste_corrections.push(texte_corr)
 
 	liste_de_question_to_contenu(this);
 	}
