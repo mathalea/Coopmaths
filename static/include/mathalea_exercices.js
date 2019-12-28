@@ -3079,10 +3079,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
                 break;
 			case 7 :
 				texte = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2$`; // (kx+a)² k rationnel 
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left((${tex_fraction(ns,ds)}x+${a})^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
 				break;
 			case 8 :
-				texte = `$\\left((${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
+				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
 				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
 				break;
 			case 9 :
@@ -3141,7 +3141,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 				ns=fraction[0]
 				ds=fraction[1]
 				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)$`; // b>1
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right))=\\left(${tex_fraction(ns,ds)}x\\right))^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)\\left(${tex_fraction(ns,ds)}x+${a}\\right)=\\left(${tex_fraction(ns,ds)}x\\right)^2-${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${a*a}$`;
 				}
 			
 			if (this.liste_questions.indexOf(texte)==-1) {
@@ -3178,7 +3178,7 @@ function Factoriser_Identites_remarquables3()
 			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$x^2-${a*a}$`    // (x-a)(x+a)
-				texte_corr = `$x^2-${a*a}==x^2-${a}^2=(x-${a})(x+${a})$` ; 
+				texte_corr = `$x^2-${a*a}=x^2-${a}^2=(x-${a})(x+${a})$` ; 
 			}
 			else if (this.sup==2) {
 				a= randint(1,9)  // (bx-a)(bx+a) avec a et b entier positifs entre 1 et 9,  b différent de 1
