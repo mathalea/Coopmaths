@@ -86,6 +86,7 @@ var liste_des_exercices_disponibles = {
 		'3N11' : Double_distributivite,
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
+		'3G10' : Exercice_Thales,
 		'2N10' : Developper_Identites_remarquables2,
 		'2N11' : Factoriser_Identites_remarquables2,
 		'LaTeX' : Code_LaTeX_personnalise,
@@ -5185,7 +5186,80 @@ function Reduire_une_expression_litterale(){
 	this.besoin_formulaire_numerique = ['Valeur maximale des coefficients',999];
 	this.besoin_formulaire2_case_a_cocher = ['Avec des nombres décimaux']
 }
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Thales : Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
+* Niveau 1 4ème proportionnelle
+* Niveau 2 utilisation d'une longueur intermédiaire pour trouver le résultat.
+**/
+function Exercice_Thales(){
 
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Déterminer une longueur avec la propriété de Thales";
+	this.consigne = "Calculer";
+	this.nb_questions = 2;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes
+	
+	this.nouvelle_version = function(){
+	let lettre1 = randint(1,20)
+	let s1 = lettre_depuis_chiffre(lettre1)
+	let s2 = lettre_depuis_chiffre(lettre1+1)
+	let s3 = lettre_depuis_chiffre(lettre1+2)
+	let s4 = lettre_depuis_chiffre(lettre1+3)
+	let s5 = lettre_depuis_chiffre(lettre1+4)
+	let x1 = randint(1,4)
+	let y1 = randint(2,4)
+	let x3 = randint(3,6)
+	let y3 = randint(-1,2)
+	let k = randint(3,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie.
+	let l23=Math.sqrt(x3*x3+y3*y3) // x2=0 et y2=0
+	let l12=Math.sqrt(x1*x1+y1*y1)	// x2=0 et y2=0
+	let l13=Math.sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))		//calcul des longueurs du triangle principal.
+	let l45=Math.abs(k)*l23
+	let l14=Math.abs(k)*l12
+	let l15=Math.abs(k)*l13							//calcul des longueurs du triangle secondaires
+	let s45= arrondi_virgule(l45,2)			// mise en texte avec 2 chiffres après la virgule pour énoncé
+	let s13= arrondi_virgule(l13,2)
+	let s12= arrondi_virgule(l12,2)
+	let s15= arrondi_virgule(l15,2)
+	
+	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
+	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+	
+	// enoncé  (j'affiche k pour relecture, à enlever par la suite)
+	let texte = 'On considère la figure suivante :\\\\ Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]$`+'\\\\'
+	texte = texte + `$${'k='+k+';'+s1+s2+'='+s12+';'+s1+s3+'='+s13+';'+s4+s5+'='+s45+';'+s1+s5+'='+s15}$`+'\\\\ Calcule '+`$${s1+s4}~et~${s2+s3}$`+' à 0,1 près.'
+
+	// dessin de la figure
+	texte=texte+'\n \\begin{tikzpicture}' // Balise début de figure
+	texte=texte+'\n \\tkzDefPoints{0/0/'+s2+','+x3+'/'+y3+'/'+s3+','+x1+'/'+y1+'/'+s1+'}' // Placer les points du triangle principal
+	texte=texte+'\n \\tkzDrawPolygon('+s1+','+s2+','+s3+')' // Trace le triangle principal
+	// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
+	texte=texte+'\n \\tkzDefPointBy[homothety=center '+s1+' ratio '+k+']('+s2+')'+'\\tkzGetPoint{'+s4+'}' // Place le premier point du triangle image
+	texte=texte+'\n \\tkzDefPointBy[homothety=center '+s1+' ratio '+k+']('+s3+')'+'\\tkzGetPoint{'+s5+'}' // Place le deuxième point du triangle image
+	texte=texte+'\n \\tkzDrawSegment('+s4+','+s5+')'	// Trace le segment
+	if (k>0){
+	texte=texte+'\n \\tkzLabelPoints[above]('+s1+')' //nomme les points
+	texte=texte+'\n \\tkzLabelPoints[left]('+s2+','+s4+')' //nomme les points
+	texte=texte+'\n \\tkzLabelPoints[right]('+s3+','+s5+')' //nomme les points
+	// Nomme les points au dessus avec above, dessous avec below...
+	}
+	else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
+		texte=texte+'\n \\tkzLabelPoints[left]('+s1+')' //nomme les points
+		texte=texte+'\n \\tkzLabelPoints[right]('+s3+','+s4+')' //nomme les points
+		texte=texte+'\n \\tkzLabelPoints[left]('+s2+','+s5+')' //nomme les points
+		texte=texte+'\n \\tkzDrawPolygon('+s1+','+s4+','+s5+')' // Trace le triangle secondaire
+	}
+	texte=texte+'\n \\end{tikzpicture}' // Balise de fin de figure
+	this.liste_questions.push(texte)
+	this.liste_corrections.push('Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}$`)
+
+	liste_de_question_to_contenu(this);
+	}
+	
+}
 
 // function Exercice_Pythagore(){
 // 	Exercice.call(this); // Héritage de la classe Exercice()
