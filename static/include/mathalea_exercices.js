@@ -3177,7 +3177,7 @@ function Factoriser_Identites_remarquables3()
 			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$x^2-${a*a}$`    // (x-a)(x+a)
-				texte_corr = `$x^2-${a*a}==x^2-${a}^2=(x-${a})(x+${a})$` ; 
+				texte_corr = `$x^2-${a*a}=x^2-${a}^2=(x-${a})(x+${a})$` ; 
 			}
 			else if (this.sup==2) {
 				a= randint(1,9)  // (bx-a)(bx+a) avec a et b entier positifs entre 1 et 9,  b différent de 1
