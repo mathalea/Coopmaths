@@ -3078,10 +3078,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
                 break;
 			case 7 :
 				texte = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2$`; // (kx+a)² k rationnel 
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left((${tex_fraction(ns,ds)}x+${a})^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
 				break;
 			case 8 :
-				texte = `$\\left((${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
+				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
 				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
 				break;
 			case 9 :
