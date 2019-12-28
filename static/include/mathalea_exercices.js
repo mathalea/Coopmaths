@@ -5224,45 +5224,66 @@ function Exercice_Thales(){
 	let s13= arrondi_virgule(l13,2)
 	let s12= arrondi_virgule(l12,2)
 	let s15= arrondi_virgule(l15,2)
-	
+	let l35
+	if (k<0) {l35 = l13 + l15 } else {l35=l13-l15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
+	let s35= arrondi_virgule(l35,2)
 	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
 	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
-	
-	// enoncé  
-	let texte = 'On considère la figure suivante :\\\\ Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]$`+'\\\\'
-	texte = texte + `$${s1+s2+' = '+s12+'cm~;~'+s1+s3+' = '+s13+'cm~;~'+s4+s5+' = '+s45+'cm~;~'+s1+s5+' = '+s15+'cm'}$`+'\\\\ Calcule '+`$${s1+s4}~et~${s2+s3}$`+' à 0,1 près.'
+	let texte,texte_corr
+	if (this.sup==1){ //niveau 1 : Calcul direct quatrième proportionnelle
+		// enoncé  
+		texte = 'On considère la figure suivante :\\\\ Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]$`+'\\\\'
+		texte = texte + `$${s1+s2+' = '+s12+'cm~;~'+s1+s3+' = '+s13+'cm~;~'+s4+s5+' = '+s45+'cm~;~'+s1+s5+' = '+s15+'cm'}$`+'\\\\ Calcule '+`$${s1+s4}~et~${s2+s3}$`+' à 0,1 près.'
+	} 
+	else { // niveau 2 : Calcul intermédiaire nécessaire
+		// enoncé  
+		texte = 'On considère la figure suivante :\\\\ Le segment ' + `$[${s4 + s5}]$` + ' est parallèle au segment ' + `$[${s2 + s3}]$` + '\\\\'
+		texte = texte + `$${s1 + s2 + ' = ' + s12 + 'cm~;~' + s1 + s3 + ' = ' + s13 + 'cm~;~' + s4 + s5 + ' = ' + s45 + 'cm~;~' + s3 + s5 + ' = ' + s35 + 'cm'}$` + '\\\\ Calcule ' + `$${s1 + s4}~et~${s2 + s3}$` + ' à 0,1 près.'
+	}
+		// dessin de la figure
+		texte = texte + '\n \\begin{tikzpicture}' // Balise début de figure
+		texte = texte + '\n \\tkzDefPoints{0/0/' + s2 + ',' + x3 + '/' + y3 + '/' + s3 + ',' + x1 + '/' + y1 + '/' + s1 + '}' // Placer les points du triangle principal
+		texte = texte + '\n \\tkzDrawPolygon(' + s1 + ',' + s2 + ',' + s3 + ')' // Trace le triangle principal
+		// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
+		texte = texte + '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s2 + ')' + '\\tkzGetPoint{' + s4 + '}' // Place le premier point du triangle image
+		texte = texte + '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s3 + ')' + '\\tkzGetPoint{' + s5 + '}' // Place le deuxième point du triangle image
+		texte = texte + '\n \\tkzDrawSegment(' + s4 + ',' + s5 + ')'	// Trace le segment
+		if (k > 0) {
+			texte = texte + '\n \\tkzLabelPoints[above](' + s1 + ')' //nomme les points
+			texte = texte + '\n \\tkzLabelPoints[left](' + s2 + ',' + s4 + ')' //nomme les points
+			texte = texte + '\n \\tkzLabelPoints[right](' + s3 + ',' + s5 + ')' //nomme les points
+			// Nomme les points au dessus avec above, dessous avec below...
+		}
+		else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
+			texte = texte + '\n \\tkzLabelPoints[left](' + s1 + ')' //nomme les points
+			texte = texte + '\n \\tkzLabelPoints[right](' + s3 + ',' + s4 + ')' //nomme les points
+			texte = texte + '\n \\tkzLabelPoints[left](' + s2 + ',' + s5 + ')' //nomme les points
+			texte = texte + '\n \\tkzDrawPolygon(' + s1 + ',' + s4 + ',' + s5 + ')' // Trace le triangle secondaire
+		}
+		texte = texte + '\n \\end{tikzpicture}' // Balise de fin de figure
 
-	// dessin de la figure
-	texte=texte+'\n \\begin{tikzpicture}' // Balise début de figure
-	texte=texte+'\n \\tkzDefPoints{0/0/'+s2+','+x3+'/'+y3+'/'+s3+','+x1+'/'+y1+'/'+s1+'}' // Placer les points du triangle principal
-	texte=texte+'\n \\tkzDrawPolygon('+s1+','+s2+','+s3+')' // Trace le triangle principal
-	// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
-	texte=texte+'\n \\tkzDefPointBy[homothety=center '+s1+' ratio '+k+']('+s2+')'+'\\tkzGetPoint{'+s4+'}' // Place le premier point du triangle image
-	texte=texte+'\n \\tkzDefPointBy[homothety=center '+s1+' ratio '+k+']('+s3+')'+'\\tkzGetPoint{'+s5+'}' // Place le deuxième point du triangle image
-	texte=texte+'\n \\tkzDrawSegment('+s4+','+s5+')'	// Trace le segment
-	if (k>0){
-	texte=texte+'\n \\tkzLabelPoints[above]('+s1+')' //nomme les points
-	texte=texte+'\n \\tkzLabelPoints[left]('+s2+','+s4+')' //nomme les points
-	texte=texte+'\n \\tkzLabelPoints[right]('+s3+','+s5+')' //nomme les points
-	// Nomme les points au dessus avec above, dessous avec below...
-	}
-	else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
-		texte=texte+'\n \\tkzLabelPoints[left]('+s1+')' //nomme les points
-		texte=texte+'\n \\tkzLabelPoints[right]('+s3+','+s4+')' //nomme les points
-		texte=texte+'\n \\tkzLabelPoints[left]('+s2+','+s5+')' //nomme les points
-		texte=texte+'\n \\tkzDrawPolygon('+s1+','+s4+','+s5+')' // Trace le triangle secondaire
-	}
-	texte=texte+'\n \\end{tikzpicture}' // Balise de fin de figure
-	this.liste_questions.push(texte)
-	let texte_corr ='Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}$`
-	texte_corr = texte_corr + '\\\\ On a donc '+`$${tex_fraction(s1+s4,s12)}=${tex_fraction(s15,s13)}=${tex_fraction(s45,s2+s3)}$`
-	texte_corr = texte_corr + '\\\\ Soit '+`$${s1+s4}=${tex_fraction(s15+'\\times'+s12,s13)}\\approx${Math.round(l14*10)/10}cm$`
-	texte_corr = texte_corr + '\\\\ Et '+`$${s2+s3}=${tex_fraction(s13+'\\times'+s45,s15)}\\approx${Math.round(l23*10)/10}cm$`
+		this.liste_questions.push(texte) // on envoie la question
+		if (this.sup==1){ //niveau 1 : Calcul direct quatrième proportionnelle
+			// correction 
+			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}$`
+		
+			texte_corr = texte_corr + '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
+			texte_corr = texte_corr + '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${Math.round(l14 * 10) / 10}cm$`
+			texte_corr = texte_corr + '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${Math.round(l23 * 10) / 10}cm$`
+		}
+		else {
+			texte_corr = 'Dans le triangle ' + `$${s1 + s2 + s3}$` + ', le segment ' + `$[${s4 + s5}]$` + ' est parallèle au côté ' + `$[${s2 + s3}]$` + '.\\\\ D\'après la propriété de Thales, on a ' + `$${tex_fraction(s1 + s4, s1 + s2)}=${tex_fraction(s1 + s5, s1 + s3)}=${tex_fraction(s4 + s5, s2 + s3)}$`
+			texte_corr = texte_corr + '\\\\ On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`
+			texte_corr = texte_corr + '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
+			texte_corr = texte_corr + '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${Math.round(l14 * 10) / 10}cm$`
+			texte_corr = texte_corr + '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${Math.round(l23 * 10) / 10}cm$`
+		}
 		this.liste_corrections.push(texte_corr)
 
 	liste_de_question_to_contenu(this);
+
 	}
-	
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire'];
 }
 
 // function Exercice_Pythagore(){
