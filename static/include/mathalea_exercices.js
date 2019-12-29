@@ -5449,12 +5449,12 @@ this.liste_corrections = []; // Liste de questions corrigées
 		this.liste_questions.push(texte) // on envoie la question
 			// correction 
 		if (this.sup==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
-			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$[${s0}].$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
 			texte_corr +='\\\\ D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
 			texte_corr +='\\\\ Soit '+`$${s0+s2}~=~\\sqrt{${carre12-carre01}}~\\approx${s02}~\\text{cm}.$`
 		}
 		else {
-			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$[${s0}].$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
 			texte_corr +='\\\\ D\'où '+`$${s1+s2}^2~=~${s0+s2}^2~+~${s0+s1}^2~=~${s02}^2~+~${s01}^2~=~${scarre02}~+~${scarre01}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
 			texte_corr +='\\\\ Soit '+`$${s1+s2}~=~\\sqrt{${carre01+carre02}}~\\approx${s12}~\\text{cm}.$`
 		
