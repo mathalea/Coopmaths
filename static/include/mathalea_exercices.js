@@ -5238,113 +5238,144 @@ function Exercice_Thales(){
 	this.nb_cols_corr = 1;
 	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes
 	
-	this.nouvelle_version = function(){
-	let lettre1 = randint(1,20)
-	let s1 = lettre_depuis_chiffre(lettre1)
-	let s2 = lettre_depuis_chiffre(lettre1+1)
-	let s3 = lettre_depuis_chiffre(lettre1+2)
-	let s4 = lettre_depuis_chiffre(lettre1+3)
-	let s5 = lettre_depuis_chiffre(lettre1+4)
-	let x2 = randint(2,4)
-	let y2 = randint(3,5)
-	let x3 = randint(5,6)
-	let y3 = randint(-2,0)
-	let k = randint(20,80)*randint(-1,1,[0])/100	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
-	let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
-	let dist12 = Math.sqrt(x2*x2+y2*y2)
-	let dist13 = Math.sqrt(x3*x3+y3*y3)
-	let dist45 = dist23*Math.abs(k)		//calcul des longueurs du triangle secondaires
-	let dist14 = dist12*Math.abs(k)
-	let dist15 = dist13*Math.abs(k)
-	dist23 = Math.round(dist23*10)/10 // On ne garde qu'une approximation au dixième pour l'exercice
-	dist12 = Math.round(dist12*10)/10
-	dist13 = Math.round(dist13*10)/10
-	dist45 = Math.round(dist45*10)/10
-	dist14 = Math.round(dist14*10)/10
-	dist15 = Math.round(dist15*10)/10
+	if (sortie_html) {
+		this.type_exercice = 'MG32';
+		this.taille_div_MG32 = [500,450];
+		this.nouvelle_version = function(numero_de_l_exercice){
+			this.liste_corrections = []; // Liste de questions corrigées
+			let c1 = calcul(randint(30,90)/10);
+			let c2 = calcul(randint(50,90)/10);
+			let c3 = calcul(randint(50,90)/10);
+			let k = calcul(randint(20,70)/100);
+			let angle = randint(-25,25);
+			
+			let codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+mZmaAAJmcv###wEA#wEAAAAAAAAAAAQzAAACtAAAAQEAAAAAAAAAAQAAADb#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AQAAAAAOAAFVAMAkAAAAAAAAQBAAAAAAAAAFAABAMU+dsi0OVkAxT52yLQ5W#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAABAAAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAAA4AAVYAwAAAAAAAAABAEAAAAAAAAAUAAUBBT52yLQ5WAAAAAv####8AAAABAAhDU2VnbWVudAD#####AQAAAAAQAAABAAEAAAABAAAAA#####8AAAABAAdDTWlsaWV1AP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAABAAAAA#####8AAAACAAxDQ29tbWVudGFpcmUA#####wEAAAAAAAAAAAAAAABAGAAAAAAAAAAAAAUMAAAAAAABAAAAAAAAAAEAAAAAAAAAAAABMf####8AAAABAAlDTG9uZ3VldXIA#####wAAAAEAAAADAAAAAgD#####AAAAAAAQAAFBAMAwAAAAAAAAwCIAAAAAAAAHAAFAWiAAAAAAAEB3Jwo9cKPXAAAAAwD#####AQAAAAEQAAABAAEAAAAIAT#wAAAAAAAAAAAABAD#####AQAAAAAQAAF4AAAAAAAAAAAAQAgAAAAAAAAHAAFAfjAAAAAAAAAAAAn#####AAAAAQAHQ0NhbGN1bAD#####AAVhbmdsZQACMTAAAAABQCQAAAAAAAAAAAAJAP####8AAmMxAAE1AAAAAUAUAAAAAAAAAAAACQD#####AAJjMgABNwAAAAFAHAAAAAAAAAAAAAkA#####wACYzMAATgAAAABQCAAAAAAAAAAAAAJAP####8ABGFuZzEABWFuZ2xl#####wAAAAEAD0NSZXN1bHRhdFZhbGV1cgAAAAsAAAAFAP####8BAAAAABAAAAEAAQAAAAgAAAAK#####wAAAAEAFENJbXBsZW1lbnRhdGlvblByb3RvAP####8AClJhcHBvcnRldXIAAAAFAAAAAwAAAAMAAAAPAAAACgAAAAgAAAAJAAAAABEABmFic2FuZwAJYWJzKGFuZzEp#####wAAAAIACUNGb25jdGlvbgAAAAAKAAAAD#####8AAAABAAlDUm90YXRpb24AAAAAEQAAAAgAAAAKAAAAD#####8AAAABAAtDUG9pbnRJbWFnZQAAAAARAAAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAUAAAAACgAAABP#####AAAAAQAMQ0Jpc3NlY3RyaWNlAAAAABEBAAAAABAAAAEAAQAAAAoAAAAIAAAAFAAAAAQAAAAAEQEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAFAcPqI+5XUWQAAABX#####AAAAAQANQ0RlbWlEcm9pdGVPQQEAAAARAQAAAAAQAAABAAEAAAAIAAAAFP####8AAAACABdDTWFycXVlQW5nbGVHZW9tZXRyaXF1ZQEAAAARAQAAAAABAAAAAUBDgAAAAAAAAAAACgAAAAgAAAAU#####wAAAAEAD0NWYWxldXJBZmZpY2hlZQEAAAARAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAFg4AAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAsKwAgAAABL#####AAAAAgAJQ0NlcmNsZU9SAP####8BAAAAAAEAAAAIAAAACgAAAAwA#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAABcAAAAa#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wAAAAAAEAABQgBAHAAAAAAAAMAoAAAAAAAABwABAAAAGwAAABUA#####wAAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAHAAIAAAAbAAAABQD#####AAAAAAAQAAABAAEAAAAIAAAAHAAAABMA#####wEAAAAAAQAAAAgAAAAKAAAADQAAAAATAP####8BAAAAAAEAAAAcAAAACgAAAA4A#####wAAAAEAEENJbnRDZXJjbGVDZXJjbGUA#####wAAAB8AAAAgAAAAFQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAcAAQAAACEAAAAVAP####8AAAAAABAAAUMAwBgAAAAAAADANQAAAAAAAAcAAgAAACEAAAAFAP####8AAAAAABAAAAEAAQAAAAgAAAAjAAAABQD#####AAAAAAAQAAABAAEAAAAjAAAAHAAAAAkA#####wABawADMC43AAAAAT#mZmZmZmZm#####wAAAAEAC0NIb21vdGhldGllAP####8AAAAjAAAACgAAACYAAAAOAP####8AAAAAABAAAU0AwDUAAAAAAADALAAAAAAAAAcAAAAACAAAACcAAAAOAP####8AAAAAABAAAU4AQBQAAAAAAADAMAAAAAAAAAcAAAAAHAAAACcAAAAFAP####8AAAAAABAAAAEAAQAAACgAAAAp#####wAAAAEACUNQb2x5Z29uZQD#####AQAA#wADAAAABAAAACMAAAAoAAAAKQAAACMAAAAYAP####8B#wAAAAMAAAAEAAAAIwAAAAgAAAAcAAAAI#####8AAAABABBDU3VyZmFjZVBvbHlnb25lAP####8BAAD#AAAABQAAACsAAAAZAP####8B#wAAAAAABQAAACz#####AAAAAQAQQ01hY3JvQXBwYXJpdGlvbgD#####AAAAAAH#####EECBZAAAAAAAQEC4UeuFHrgCAAAAAAAAAAAAAAAAAQAAAAAAAAAAAApUcmlhbmdsZSAxAAAAAAACAAAAKwAAAC0AAAAAGgD#####AP8AAAH#####EECBbAAAAAAAQFHcKPXCj1wCAAAAAAAAAAAAAAAAAQAAAAAAAAAAAApUcmlhbmdsZSAyAAAAAAACAAAALgAAACwA#####wAAAAEAEUNNYWNyb0Rpc3Bhcml0aW9uAP####8AAAAAAf####8QQISUAAAAAABAQbhR64UeuAIAAAAAAAAAAAAAAAABAAAAAAAAAAAAEk1hc3F1ZXIgdHJpYW5nbGUgMQAAAAAAAgAAACsAAAAtAAAAGwD#####AAAAAAH#####EECElAAAAAAAQFIcKPXCj1wCAAAAAAAAAAAAAAAAAQAAAAAAAAAAABJNYXNxdWVyIHRyaWFuZ2xlIDIAAAAAAAIAAAAuAAAALP####8AAAABAAtDTWFjcm9QYXVzZQD#####AAAAAAH#####EECBVAAAAAAAQFucKPXCj1wCAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAVQYXVzZQAAAAAAAP####8AAAABABFDTWFjcm9TdWl0ZU1hY3JvcwD#####AAAAAAH#####EEB3mAAAAAAAQHbXCj1wo9cCAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA9Wb2lyIHRyaWFuZ2xlIDEAAAAAAAMAAAAvAAAAMwAAADEAAAAdAP####8AAAAAAf####8QQHeYAAAAAABAeQcKPXCj1wIAAAAAAAAAAAAAAAABAAAAAAAAAAAAD1ZvaXIgdHJpYW5nbGUgMgAAAAAAAwAAADAAAAAzAAAAMgAAAAf##########w=="
+			texte = `Sachant que $AB=${c1}$ cm.`
+			texte_corr = `${c1}`		
+			codeMG32 += `
+		        var st${numero_de_l_exercice} = "${codeBase64}" ;
+		        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "c1", "${c1}");
+		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "c2", "${c2}");
+		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "c3", "${c3}");
+		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "k", "${k}");
+		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "angle", "${angle}");		        
+		      ` 	
+			this.liste_questions.push(texte);	
+			this.liste_corrections.push(texte_corr);
+			mg32_to_contenu(this);		
+			}
+	} else {
+		this.nouvelle_version = function(){
+		let lettre1 = randint(1,20)
+		let s1 = lettre_depuis_chiffre(lettre1)
+		let s2 = lettre_depuis_chiffre(lettre1+1)
+		let s3 = lettre_depuis_chiffre(lettre1+2)
+		let s4 = lettre_depuis_chiffre(lettre1+3)
+		let s5 = lettre_depuis_chiffre(lettre1+4)
+		let x2 = randint(2,4)
+		let y2 = randint(3,5)
+		let x3 = randint(5,6)
+		let y3 = randint(-2,0)
+		let k = randint(20,80)*randint(-1,1,[0])/100	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
+		let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
+		let dist12 = Math.sqrt(x2*x2+y2*y2)
+		let dist13 = Math.sqrt(x3*x3+y3*y3)
+		let dist45 = dist23*Math.abs(k)		//calcul des longueurs du triangle secondaires
+		let dist14 = dist12*Math.abs(k)
+		let dist15 = dist13*Math.abs(k)
+		dist23 = Math.round(dist23*10)/10 // On ne garde qu'une approximation au dixième pour l'exercice
+		dist12 = Math.round(dist12*10)/10
+		dist13 = Math.round(dist13*10)/10
+		dist45 = Math.round(dist45*10)/10
+		dist14 = Math.round(dist14*10)/10
+		dist15 = Math.round(dist15*10)/10
+			
+		let s45= arrondi_virgule(dist45,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+		let s13= arrondi_virgule(dist13,1)
+		let s12= arrondi_virgule(dist12,1)
+		let s15= arrondi_virgule(dist15,1)
+		let s14= arrondi_virgule(dist14,1)
+		let s23= arrondi_virgule(dist23,1)
+		let dist35
 		
-	let s45= arrondi_virgule(dist45,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
-	let s13= arrondi_virgule(dist13,1)
-	let s12= arrondi_virgule(dist12,1)
-	let s15= arrondi_virgule(dist15,1)
-	let s14= arrondi_virgule(dist14,1)
-	let s23= arrondi_virgule(dist23,1)
-	let dist35
-	
-	if (k<0) {dist35 = dist13+dist15} else {dist35 = dist13-dist15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
-	let s35= arrondi_virgule(dist35,1)  // à priori, c'est déjà arrondi au dixième, mais je me méfie des calculs flottants en js
-	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
-	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
-	let texte,texte_corr
-	texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
-	texte += '\\item Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]~;$`
-	if (this.sup==1){ //niveau 1 : Calcul direct quatrième proportionnelle
-	
-		// enoncé  niveau 1
-	
-		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s1+s5+' = '+s15+'~\\text{cm}.'}$`
-		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
-	} 
-	else { // niveau 2 : Calcul intermédiaire nécessaire
-	
-		// enoncé  niveau 2
-	
-		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s3+s5+' = '+s35+'~\\text{cm}.'}$`
-		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
-	}
-		texte += '\\begin{minipage}{0.5 \\linewidth}'
-		// dessin de la figure
-		texte += '\n \\begin{tikzpicture}' // Balise début de figure
-		texte += '\n \\tkzDefPoints{0/0/'+s1+','+x3+'/'+y3+'/'+s3+','+x2+'/'+y2+'/'+s2+'}' // Placer les points du triangle principal
-		texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s2 + ',' + s3 + ')' // Trace le triangle principal
-		// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
-		texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s2 + ')' + '\\tkzGetPoint{' + s4 + '}' // Place le premier point du triangle image
-		texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s3 + ')' + '\\tkzGetPoint{' + s5 + '}' // Place le deuxième point du triangle image
-		texte += '\n \\tkzDrawSegment(' + s4 + ',' + s5 + ')'	// Trace le segment
-		if (k > 0) {
-			texte += '\n \\tkzLabelPoints[left](' + s1 + ')' //nomme les points
-			texte += '\n \\tkzLabelPoints[above left](' + s2 + ',' + s4 + ')' //nomme les points
-			texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s5 + ')' //nomme les points
-			// Nomme les points au dessus avec above, dessous avec below...
+		if (k<0) {dist35 = dist13+dist15} else {dist35 = dist13-dist15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
+		let s35= arrondi_virgule(dist35,1)  // à priori, c'est déjà arrondi au dixième, mais je me méfie des calculs flottants en js
+		this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
+		this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+		let texte,texte_corr
+		texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
+		texte += '\\item Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]~;$`
+		if (this.sup==1){ //niveau 1 : Calcul direct quatrième proportionnelle
+		
+			// enoncé  niveau 1
+		
+			texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+			texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
+			texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
+			texte += '\\item '+`$${s1+s5+' = '+s15+'~\\text{cm}.'}$`
+			texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
+		} 
+		else { // niveau 2 : Calcul intermédiaire nécessaire
+		
+			// enoncé  niveau 2
+		
+			texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+			texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
+			texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
+			texte += '\\item '+`$${s3+s5+' = '+s35+'~\\text{cm}.'}$`
+			texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
 		}
-		else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
-			texte += '\n \\tkzLabelPoints[below](' + s1 + ')' //nomme les points
-			texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s4 + ')' //nomme les points
-			texte +='\n \\tkzLabelPoints[above](' + s2 + ',' + s5 + ')' //nomme les points
-			texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s4 + ',' + s5 + ')' // Trace le triangle secondaire
-		}
-		texte += '\n \\end{tikzpicture}' // Balise de fin de figure
-		texte +=  '\\end{minipage}'
+			texte += '\\begin{minipage}{0.5 \\linewidth}'
+			// dessin de la figure
+			texte += '\n \\begin{tikzpicture}' // Balise début de figure
+			texte += '\n \\tkzDefPoints{0/0/'+s1+','+x3+'/'+y3+'/'+s3+','+x2+'/'+y2+'/'+s2+'}' // Placer les points du triangle principal
+			texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s2 + ',' + s3 + ')' // Trace le triangle principal
+			// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
+			texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s2 + ')' + '\\tkzGetPoint{' + s4 + '}' // Place le premier point du triangle image
+			texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s3 + ')' + '\\tkzGetPoint{' + s5 + '}' // Place le deuxième point du triangle image
+			texte += '\n \\tkzDrawSegment(' + s4 + ',' + s5 + ')'	// Trace le segment
+			if (k > 0) {
+				texte += '\n \\tkzLabelPoints[left](' + s1 + ')' //nomme les points
+				texte += '\n \\tkzLabelPoints[above left](' + s2 + ',' + s4 + ')' //nomme les points
+				texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s5 + ')' //nomme les points
+				// Nomme les points au dessus avec above, dessous avec below...
+			}
+			else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
+				texte += '\n \\tkzLabelPoints[below](' + s1 + ')' //nomme les points
+				texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s4 + ')' //nomme les points
+				texte +='\n \\tkzLabelPoints[above](' + s2 + ',' + s5 + ')' //nomme les points
+				texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s4 + ',' + s5 + ')' // Trace le triangle secondaire
+			}
+			texte += '\n \\end{tikzpicture}' // Balise de fin de figure
+			texte +=  '\\end{minipage}'
 
-		this.liste_questions.push(texte) // on envoie la question
-			// correction 
-		if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
-			texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
-			if (k>0){
-				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
+			this.liste_questions.push(texte) // on envoie la question
+				// correction 
+			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
+				texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
+				if (k>0){
+					texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
+				}
+				else {
+					texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`+'\\bigskip'
+				}
 			}
 			else {
-				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`+'\\bigskip'
+				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
 			}
-		}
-		else {
-			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
-		}
-		texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip\n\t'
-		texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip\n\t'
-		texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
-		
-		this.liste_corrections.push(texte_corr)
+			texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip\n\t'
+			texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip\n\t'
+			texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
+			
+			this.liste_corrections.push(texte_corr)
 
-		liste_de_question_to_contenu_sans_numero(this);
+			liste_de_question_to_contenu_sans_numero(this);
+
+		}
 
 	}
+	
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire'];
 }
 
