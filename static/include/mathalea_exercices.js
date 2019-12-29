@@ -5209,24 +5209,29 @@ function Exercice_Thales(){
 	let s3 = lettre_depuis_chiffre(lettre1+2)
 	let s4 = lettre_depuis_chiffre(lettre1+3)
 	let s5 = lettre_depuis_chiffre(lettre1+4)
-	let x1 = randint(1,4)
-	let y1 = randint(2,4)
-	let x3 = randint(3,6)
-	let y3 = randint(-1,2)
+	let x2 = randint(2,4)
+	let y2 = randint(3,5)
+	let x3 = randint(5,6)
+	let y3 = randint(-2,0)
 	let k = randint(2,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
-	let l23=Math.round(100*Math.sqrt(x3*x3+y3*y3))/100 // x2=0 et y2=0
-	let l12=Math.round(100*Math.sqrt(x1*x1+y1*y1))/100	// x2=0 et y2=0
-	let l13=Math.round(100*Math.sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1)))/100		//calcul des longueurs du triangle principal arrondies avec 2 décimales
-	let l45=Math.round(100*Math.abs(k)*l23)/100
-	let l14=Math.round(100*Math.abs(k)*l12)/100
-	let l15=Math.round(100*Math.abs(k)*l13)/100							//calcul des longueurs du triangle secondaires
-	let s45= arrondi_virgule(l45,2)			// mise en texte avec 2 chiffres après la virgule pour énoncé
-	let s13= arrondi_virgule(l13,2)
-	let s12= arrondi_virgule(l12,2)
-	let s15= arrondi_virgule(l15,2)
-	let l35
-	if (k<0) {l35 = l13 + l15 } else {l35=l13-l15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
-	let s35= arrondi_virgule(l35,2)
+	let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
+	let dist12 = Math.sqrt(x2*x2+y2*y2)
+	let dist13 = Math.sqrt(x3*x3+y3*y3)
+
+	let dist45 = dist23*Math.abs(k)		//calcul des longueurs du triangle secondaires
+	let dist14 = dist12*Math.abs(k)
+	let dist15 = dist13*Math.abs(k)
+							
+	let s45= arrondi_virgule(dist45,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+	let s13= arrondi_virgule(dist13,1)
+	let s12= arrondi_virgule(dist12,1)
+	let s15= arrondi_virgule(dist15,1)
+	let s14= arrondi_virgule(dist14,1)
+	let s23= arrondi_virgule(dist23,1)
+	let dist35
+	
+	if (k<0) {dist35 = dist13+dist15} else {dist35 = dist13-dist15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
+	let s35= arrondi_virgule(dist35,1)
 	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
 	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
 	let texte,texte_corr
@@ -5251,22 +5256,22 @@ function Exercice_Thales(){
 		texte += '\\begin{minipage}{0.5 \\linewidth}'
 		// dessin de la figure
 		texte += '\n \\begin{tikzpicture}' // Balise début de figure
-		texte += '\n \\tkzDefPoints{0/0/' + s2 + ',' + x3 + '/' + y3 + '/' + s3 + ',' + x1 + '/' + y1 + '/' + s1 + '}' // Placer les points du triangle principal
+		texte += '\n \\tkzDefPoints{0/0/'+s1+','+x3+'/'+y3+'/'+s3+','+x2+'/'+y2+'/'+s2+'}' // Placer les points du triangle principal
 		texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s2 + ',' + s3 + ')' // Trace le triangle principal
 		// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
 		texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s2 + ')' + '\\tkzGetPoint{' + s4 + '}' // Place le premier point du triangle image
 		texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s3 + ')' + '\\tkzGetPoint{' + s5 + '}' // Place le deuxième point du triangle image
 		texte += '\n \\tkzDrawSegment(' + s4 + ',' + s5 + ')'	// Trace le segment
 		if (k > 0) {
-			texte += '\n \\tkzLabelPoints[above left](' + s1 + ')' //nomme les points
-			texte += '\n \\tkzLabelPoints[left](' + s2 + ',' + s4 + ')' //nomme les points
-			texte += '\n \\tkzLabelPoints[above right](' + s3 + ',' + s5 + ')' //nomme les points
+			texte += '\n \\tkzLabelPoints[left](' + s1 + ')' //nomme les points
+			texte += '\n \\tkzLabelPoints[above left](' + s2 + ',' + s4 + ')' //nomme les points
+			texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s5 + ')' //nomme les points
 			// Nomme les points au dessus avec above, dessous avec below...
 		}
 		else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
 			texte += '\n \\tkzLabelPoints[below](' + s1 + ')' //nomme les points
-			texte += '\n \\tkzLabelPoints[right](' + s3 + ',' + s4 + ')' //nomme les points
-			texte +='\n \\tkzLabelPoints[left](' + s2 + ',' + s5 + ')' //nomme les points
+			texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s4 + ')' //nomme les points
+			texte +='\n \\tkzLabelPoints[above](' + s2 + ',' + s5 + ')' //nomme les points
 			texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s4 + ',' + s5 + ')' // Trace le triangle secondaire
 		}
 		texte += '\n \\end{tikzpicture}' // Balise de fin de figure
@@ -5274,18 +5279,22 @@ function Exercice_Thales(){
 
 		this.liste_questions.push(texte) // on envoie la question
 			// correction 
-		texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
-		if (this.sup==1){		 //niveau 1 : Calcul direct quatrième proportionnelle
-			texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
-			texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${Math.round(l14 * 10) / 10}~\\text{cm}$`
-			texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${Math.round(l23 * 10) / 10}~\\text{cm}$`
+		if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
+			texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
+			if (k>0){
+				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
+			}
+			else {
+				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`+'\\bigskip'
+			}
 		}
 		else {
-			texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`
-			texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
-			texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${Math.round(l14 * 10) / 10}~\\text{cm}$`
-			texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${Math.round(l23 * 10) / 10}~\\text{cm}$`
+			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
 		}
+		texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip'
+		texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip'
+		texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
+		
 		this.liste_corrections.push(texte_corr)
 
 		liste_de_question_to_contenu_sans_numero(this);
