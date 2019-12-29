@@ -77,6 +77,7 @@ var liste_des_exercices_disponibles = {
 		'5R31': Exercice_additions_et_soustraction_de_relatifs,
 		'5R31-2': Exercice_simplification_somme_algebrique,
 		'4R10': Exercice_multiplications_relatifs,
+		'4G10' : Exercice_Pythagore,
 		// '4G10' : Exercice_Pythagore,
 		//12:Exercice_conversions_de_longueurs,
 		//13:Exercice_conversions,
@@ -5248,7 +5249,7 @@ function Exercice_Thales(){
 	let y2 = randint(3,5)
 	let x3 = randint(5,6)
 	let y3 = randint(-2,0)
-	let k = randint(2,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
+	let k = randint(20,80)*randint(-1,1,[0])/100	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
 	let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
 	let dist12 = Math.sqrt(x2*x2+y2*y2)
 	let dist13 = Math.sqrt(x3*x3+y3*y3)
@@ -5324,7 +5325,7 @@ function Exercice_Thales(){
 		this.liste_questions.push(texte) // on envoie la question
 			// correction 
 		if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
-			texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
+			texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
 			if (k>0){
 				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
 			}
@@ -5333,10 +5334,10 @@ function Exercice_Thales(){
 			}
 		}
 		else {
-			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
+			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
 		}
-		texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip'
-		texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip'
+		texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip\n\t'
+		texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip\n\t'
 		texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
 		
 		this.liste_corrections.push(texte_corr)
@@ -5347,75 +5348,126 @@ function Exercice_Thales(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire'];
 }
 
-// function Exercice_Pythagore(){
-// 	Exercice.call(this); // Héritage de la classe Exercice()
-// 	this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
-// 	this.consigne = "Calculer";
-// 	this.nb_questions = 2;
-// 	this.nb_cols = 1;
-// 	this.nb_cols_corr = 1;
-// 	this.sup = 1; // 1 valeur exacte | 2 valeur approchée
+function Exercice_Pythagore(){
+Exercice.call(this); // Héritage de la classe Exercice()
+this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
+this.consigne = "";
+this.nb_questions = 1;
+this.nb_cols = 1;
+this.nb_cols_corr = 1;
+this.sup = 1; // 1 valeur exacte | 2 valeur approchée
 
-// 	this.nouvelle_version = function(){
-// 		this.liste_questions = []; // Liste de questions
-// 		this.liste_corrections = []; // Liste de questions corrigées
+this.nouvelle_version = function(){
+this.liste_questions = []; // Liste de questions
+this.liste_corrections = []; // Liste de questions corrigées
 
-// 		let type_de_questions_disponibles = [1,2] // 1 calcul de l'hypoténuse | 2 calcul d'un coté de l'angle droit
-// 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-// 		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+// let type_de_questions_disponibles = [1,2] // 1 calcul de l'hypoténuse | 2 calcul d'un coté de l'angle droit
+// let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+// for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
 			
-// 			let lettre1 = randint(1,22)
-// 			let s1 = lettre_depuis_chiffre(lettre1)
-// 			let s2 = lettre_depuis_chiffre(lettre1+1)
-// 			let s3 = lettre_depuis_chiffre(lettre1+2)
+	let lettre0 = randint(4,23)
+	let s0 = lettre_depuis_chiffre(lettre0)   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
+	let s1 = lettre_depuis_chiffre(lettre0+1)
+	let s2 = lettre_depuis_chiffre(lettre0+2)
+	let k1 = Math.round((Math.random()*3+3)*10)/10
+	let k2 = Math.round((Math.random()*3+1)*10)/10	
+	let alpha1 = Math.random()*2*Math.PI-Math.PI
+	let alpha1deg=math.round(alpha1*180/Math.PI)
+	let x1 = k1	// coordonnées des deux sommets du triangle
+	let y2 = k2
+	// let x1r = k1*Math.cos(alpha1)  // on fait tourner le triangle d'un angle -180°<alpha1<180° 
+	// let y1r = k1*Math.sin(alpha1)
+	// let x2r = -k2*Math.sin(alpha1)
+	// let y2r = k2*Math.cos(alpha1)
+	
+	    
 
-// 			switch (liste_type_de_questions[i]){
-// 				case 1: // Table de 2
-					
-// 					texte = `$${s1}${s2}${s3}\\text{ est un triangle rectangle en }${s1} \\text{ tel que } ${s1}${s2}=${c1}~\\text{cm et } ${s1}${s3}=${c2}~\\text{cm.}\\\\ \\text{Calculer } ${c2c3} \\text{.}$`
-// 					texte_corr = `$\\text{La moitié de }${a*2} \\text{ est } ${a}$`
-// 					break;
-// 				case 2: // Impair inférieur à 20
-// 					a = randint(2,9)
-// 					texte = `$\\text{La moitié de }${a*2+1}$`
-// 					texte_corr = `$\\text{La moitié de }${a*2+1} \\text{ est } ${tex_nombrec(a+5/10)}$`
-// 					break;
-// 				case 3: // Table de 200
-// 					a = randint(2,9)
-// 					texte = `$\\text{La moitié de }${tex_nombre(a*2*100)}$`
-// 					texte_corr = `$\\text{La moitié de }${tex_nombre(a*2*100)} \\text{ est } ${tex_nombre(a*100)}$`
-// 					break;
-// 				case 4: // a00 avec a impair
-// 					a = randint(2,9)
-// 					texte = `$\\text{La moitié de }${tex_nombre((a*2+1)*100)}$`
-// 					texte_corr = `$\\text{La moitié de }${tex_nombre((a*2+1)*100)} \\text{ est } ${tex_nombre(a*100+50)}$`
-// 					break;
-// 				case 5: // a,b avec a et b pairs
-// 					a = randint(2,9)
-// 					b = randint(2,9)
-// 					texte = `$\\text{La moitié de }${tex_nombrec(a*2+b*2/100)}$`
-// 					texte_corr = `$\\text{La moitié de }${tex_nombrec(a*2+b*2/100)} \\text{ est } ${tex_nombrec(a+b/100)}$`
-// 					break;
-// 				case 6: // 1xx avec xx un nombre pair
-// 					a = randint(2,9)
-// 					texte = `$\\text{La moitié de }${100+a*2}$`
-// 					texte_corr = `$\\text{La moitié de }${100+a*2} \\text{ est } ${50+a}$`
-// 					break;
-// 			}
-			
-			
-// 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-// 				this.liste_questions.push(texte);
-// 				this.liste_corrections.push(texte_corr);
-// 				i++;
-// 			}
-// 			cpt++;	
-// 		}
-// 		liste_de_question_to_contenu(this);
-// 	}
-// 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
-// }
+	let s01= arrondi_virgule(k1,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+	let s02= arrondi_virgule(k2,1)
 
+	let carre01=Math.round(k1*k1*100)/100
+	let carre02=Math.round(k2*k2*100)/100
+	let dist12=Math.sqrt(carre01+carre02)	   //calcul de l'hypoténuse
+	dist12 = Math.round(dist12*10)/10		// On ne garde qu'une approximation au dixième pour l'exercice
+	let s12= arrondi_virgule(dist12,1)
+	let carre12=Math.round(dist12*dist12*100)/100
+
+
+	let scarre01=arrondi_virgule(carre01,2)		// carremn = distance entre (xm;ym) et (xn;yn) au carré avec 2 décimales
+	let scarre02=arrondi_virgule(carre02,2)		// scarremn = chaine de caractère avec 2 décimales après une virgule.
+	let scarre12=arrondi_virgule(carre12,2)
+	
+	
+	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
+	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+	let texte,texte_corr
+	texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
+	texte += '\\item Le côté '+`$[${s0+s1}]$`+' est perpendiculaire au côté '+`$[${s0+s2}]~;$`
+	if (this.sup==1){ //niveau 1 : Calcul de l'hypoténuse
+	
+		// enoncé  niveau 1
+	
+		texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s0+s2+' = '+s02+'~\\text{cm}~;'}$`
+		texte += '\\end{itemize} \\bigskip\n\t  Calculer '+`$${s1+s2}$`+' à 0,1 près. \\end{minipage}'
+	} 
+	else { // niveau 2 : Calcul d'un côté de l'angle droit
+		// enoncé  niveau 2
+	
+		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
+		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s0+s2}$`+' à 0,1 près. \\end{minipage}'
+	}
+		texte += '\\begin{minipage}{0.5 \\linewidth}'
+		// dessin de la figure
+		texte += '\n \\begin{tikzpicture}' // Balise début de figure
+		texte += '\n\t \\tkzDefPoints{0/0/'+s0+','+x1+'/0/B,0/'+y2+'/C}' // créer les points du triangle initial 
+				// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](B) \\tkzGetPoint{'+s1+'}' // transformer le premier point par rotation
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](C) \\tkzGetPoint{'+s2+'}' // transformer le deuxième point par rotation
+		texte += '\n\t \\tkzDrawPolygon('+s0+','+s1+','+s2+')' // Trace le triangle
+		// marquer l'angle droit
+		texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1](' + s1 + ')' + '\\tkzGetPoint{B}' 
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 90](B) \\tkzGetPoint{C}'
+		texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}' 
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 45](A) \\tkzGetPoint{A}'
+		texte += '\n\t \\tkzDrawPolygon('+s0+',B,A,C)' // Trace la marque d'angle droit
+
+		if (Math.abs(alpha1deg) < 90) { // rotation "angle droit dessous"
+		texte += '\n\t \\tkzLabelPoints[below]('+s0+')' //nomme les points
+		texte += '\n\t \\tkzLabelPoints[right]('+s1+')' 
+		texte += '\n\t \\tkzLabelPoints[left]('+s2+')' 
+		}
+		else {		// rotation "angle droit dessus" position du nom inversée 
+		texte += '\n\t \\tkzLabelPoints[above]('+s0+')' //nomme les points
+		texte += '\n\t \\tkzLabelPoints[left]('+s1+')' 
+		texte += '\n\t \\tkzLabelPoints[right]('+s2+')' 
+		}
+		texte += '\n \\end{tikzpicture}' // Balise de fin de figure
+		texte +=  '\\end{minipage}'
+
+		this.liste_questions.push(texte) // on envoie la question
+			// correction 
+		if (this.sup==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
+			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
+		}
+		else {
+			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ D\'où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`
+		
+		}
+				
+		this.liste_corrections.push(texte_corr)
+
+		liste_de_question_to_contenu_sans_numero(this);
+
+	// }end for
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit'];
+}
+}
 
 
 
