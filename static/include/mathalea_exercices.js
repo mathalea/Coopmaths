@@ -2953,6 +2953,13 @@ function Exercice_developper(difficulte=1){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
 }
 
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Double_distributivité : Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
+* Niveau 1 développer (x+a)(x+b) ou (ax+b)(cx+d) avec a,b,c et d naturels simples
+* Niveau 2 développer (ax-b)(cx+d) ou (ax-b)(cx-d) avec a,b,c et d naturels simples
+* Niveau 3 mélange des deux niveaux précédents
+**/
 function Double_distributivite()
 {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3017,7 +3024,13 @@ function Double_distributivite()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : (x+a)(x+b) et (ax+b)(cx+d)\n 2 : (ax-b)(cx+d) et (ax-b)(cx-d)\n 3 : Tous les types'] ;
 }
 
-
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Développer_Identites_remarquables2 : Développer en utilisant (a+b)², (a-b)² ou (a-b)(a+b)
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Developper_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -3104,6 +3117,13 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x relatif'] ;
 }
 
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Développer_Identites_remarquables3 : Développer en utilisant (a-b)(a+b)
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Developper_Identites_remarquables3()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -3156,6 +3176,14 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
+
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Factoriser_Identites_remarquables3 : Factoriser en utilisant (a-b)(a+b)
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Factoriser_Identites_remarquables3()
 {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3209,6 +3237,13 @@ function Factoriser_Identites_remarquables3()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Factoriser_Identites_remarquables2 : Factoriser en utilisant (a-b)(a+b), (a-b)² ou (a+b)² 
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Factoriser_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
