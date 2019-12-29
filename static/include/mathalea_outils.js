@@ -24,7 +24,7 @@ function liste_de_question_to_contenu_sans_numero(argument) {
 
 function mg32_to_contenu(argument) {
 	if (sortie_html) {
-		argument.contenu = html_consigne(argument.consigne);
+		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions);
 		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_enumerate(argument.liste_corrections);
 	} 
 	
