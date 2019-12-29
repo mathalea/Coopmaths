@@ -5244,7 +5244,7 @@ function Exercice_Thales(){
 		this.nouvelle_version = function(numero_de_l_exercice){
 			this.liste_questions = [];
 			this.liste_corrections = []; // Liste de questions corrigées
-			let c1 = calcul(randint(30,90)/10);
+			let c1 = calcul(randint(45,90)/10);
 			let c2 = calcul(randint(50,90)/10);
 			let c3 = calcul(randint(50,90)/10);
 			let k = calcul(randint(20,70)/100);
@@ -5254,10 +5254,11 @@ function Exercice_Thales(){
 			let c1p = arrondi(calcul(c1*k),1) //petit côté au millimètre près
 			let c2p = arrondi(calcul(c2*k),1)
 			let c3p = arrondi(calcul(c3*k),1)
-			texte = `Dans la figure ci-dessous, on sait que $(MN)$ et $(AB)$ sont parallèles, $AB=${tex_nombre(c1)}$ cm, $MC=${tex_nombre(c2p)}$ cm, $MN=${tex_nombre(c1p)}$ cm et $BC=${tex_nombre(c3p)}$ cm.`
+			texte = `Dans la figure ci-dessous, on sait que $(MN)$ et $(AB)$ sont parallèles, $AB=${tex_nombre(c1)}$ cm, $MC=${tex_nombre(c2p)}$ cm, $MN=${tex_nombre(c1p)}$ cm et $BC=${tex_nombre(c3)}$ cm.`
 			texte += '</br>'
-			texte += `Calculer $AB$ et $NC$.`
-			texte_corr = `${c1}`		
+			texte += `Calculer $AC$ et $NC$.`
+			texte_corr = `AC=${tex_nombre(arrondi(calcul(c2p*c1/c1p),1))}~cm et NC=${tex_nombre(arrondi(calcul(c3*c1p/c1),1))}~cm`
+
 			codeMG32 += `
 		        var st${numero_de_l_exercice} = "${codeBase64}" ;
 		        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
