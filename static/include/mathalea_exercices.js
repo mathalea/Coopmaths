@@ -5196,7 +5196,7 @@ function Exercice_Thales(){
 
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Déterminer une longueur avec la propriété de Thales";
-	this.consigne = "Calculer";
+	this.consigne = "";
 	this.nb_questions = 1;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
@@ -5217,11 +5217,16 @@ function Exercice_Thales(){
 	let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
 	let dist12 = Math.sqrt(x2*x2+y2*y2)
 	let dist13 = Math.sqrt(x3*x3+y3*y3)
-
 	let dist45 = dist23*Math.abs(k)		//calcul des longueurs du triangle secondaires
 	let dist14 = dist12*Math.abs(k)
 	let dist15 = dist13*Math.abs(k)
-							
+	dist23 = Math.round(dist23*10)/10 // On ne garde qu'une approximation au dixième pour l'exercice
+	dist12 = Math.round(dist12*10)/10
+	dist13 = Math.round(dist13*10)/10
+	dist45 = Math.round(dist45*10)/10
+	dist14 = Math.round(dist14*10)/10
+	dist15 = Math.round(dist15*10)/10
+		
 	let s45= arrondi_virgule(dist45,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
 	let s13= arrondi_virgule(dist13,1)
 	let s12= arrondi_virgule(dist12,1)
@@ -5231,27 +5236,31 @@ function Exercice_Thales(){
 	let dist35
 	
 	if (k<0) {dist35 = dist13+dist15} else {dist35 = dist13-dist15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
-	let s35= arrondi_virgule(dist35,1)
+	let s35= arrondi_virgule(dist35,1)  // à priori, c'est déjà arrondi au dixième, mais je me méfie des calculs flottants en js
 	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
 	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
 	let texte,texte_corr
 	texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
 	texte += '\\item Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]~;$`
 	if (this.sup==1){ //niveau 1 : Calcul direct quatrième proportionnelle
-		// enoncé  
+	
+		// enoncé  niveau 1
+	
 		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
 		texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
 		texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
 		texte += '\\item '+`$${s1+s5+' = '+s15+'~\\text{cm}.'}$`
-		texte += '\\end{itemize} \\bigskip  Calcule '+`$${s1+s4}~et~${s2+s3}$`+' à 0,1 près. \\end{minipage}'
+		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
 	} 
 	else { // niveau 2 : Calcul intermédiaire nécessaire
-		// enoncé  
+	
+		// enoncé  niveau 2
+	
 		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
 		texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
 		texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
 		texte += '\\item '+`$${s3+s5+' = '+s35+'~\\text{cm}.'}$`
-		texte += '\\end{itemize} \\bigskip  Calcule '+`$${s1+s4}~et~${s2+s3}$`+' à 0,1 près. \\end{minipage}'
+		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
 	}
 		texte += '\\begin{minipage}{0.5 \\linewidth}'
 		// dessin de la figure
