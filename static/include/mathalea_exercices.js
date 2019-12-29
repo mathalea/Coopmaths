@@ -5249,7 +5249,7 @@ function Exercice_Thales(){
 	let y2 = randint(3,5)
 	let x3 = randint(5,6)
 	let y3 = randint(-2,0)
-	let k = randint(2,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
+	let k = randint(20,80)*randint(-1,1,[0])/100	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
 	let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
 	let dist12 = Math.sqrt(x2*x2+y2*y2)
 	let dist13 = Math.sqrt(x3*x3+y3*y3)
@@ -5325,7 +5325,7 @@ function Exercice_Thales(){
 		this.liste_questions.push(texte) // on envoie la question
 			// correction 
 		if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
-			texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
+			texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
 			if (k>0){
 				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
 			}
@@ -5334,10 +5334,10 @@ function Exercice_Thales(){
 			}
 		}
 		else {
-			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
+			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
 		}
-		texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip'
-		texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip'
+		texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip\n\t'
+		texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip\n\t'
 		texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
 		
 		this.liste_corrections.push(texte_corr)
@@ -5372,24 +5372,30 @@ this.liste_corrections = []; // Liste de questions corrigées
 	let k1 = Math.round((Math.random()*3+3)*10)/10
 	let k2 = Math.round((Math.random()*3+1)*10)/10	
 	let alpha1 = Math.random()*2*Math.PI-Math.PI
-	let alpha1deg=alpha1*180/Math.PI
+	let alpha1deg=math.round(alpha1*180/Math.PI)
 	let x1 = k1	// coordonnées des deux sommets du triangle
 	let y2 = k2
 	// let x1r = k1*Math.cos(alpha1)  // on fait tourner le triangle d'un angle -180°<alpha1<180° 
 	// let y1r = k1*Math.sin(alpha1)
 	// let x2r = -k2*Math.sin(alpha1)
 	// let y2r = k2*Math.cos(alpha1)
-			
-	let dist12 = Math.sqrt(x1*x1+y2*y2)   //calcul de l'hypoténuse
-	dist12 = Math.round(dist12*10)/10    // On ne garde qu'une approximation au dixième pour l'exercice
+	
+	    
 
 	let s01= arrondi_virgule(k1,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
 	let s02= arrondi_virgule(k2,1)
-	let s12= arrondi_virgule(dist12,1)
 
-	let scarre01=arrondi_virgule(Math.round(k1*k1*100)/100,2)
-	let scarre02=arrondi_virgule(Math.round(k2*k2*100)/100,2)
-	let scarre12=arrondi_virgule(Math.round(dist12*dist12*100)/100,2)
+	let carre01=Math.round(k1*k1*100)/100
+	let carre02=Math.round(k2*k2*100)/100
+	let dist12=Math.sqrt(carre01+carre02)	   //calcul de l'hypoténuse
+	dist12 = Math.round(dist12*10)/10		// On ne garde qu'une approximation au dixième pour l'exercice
+	let s12= arrondi_virgule(dist12,1)
+	let carre12=Math.round(dist12*dist12*100)/100
+
+
+	let scarre01=arrondi_virgule(carre01,2)		// carremn = distance entre (xm;ym) et (xn;yn) au carré avec 2 décimales
+	let scarre02=arrondi_virgule(carre02,2)		// scarremn = chaine de caractère avec 2 décimales après une virgule.
+	let scarre12=arrondi_virgule(carre12,2)
 	
 	
 	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
@@ -5403,7 +5409,7 @@ this.liste_corrections = []; // Liste de questions corrigées
 	
 		texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
 		texte += '\\item '+`$${s0+s2+' = '+s02+'~\\text{cm}~;'}$`
-		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s2}$`+' à 0,1 près. \\end{minipage}'
+		texte += '\\end{itemize} \\bigskip\n\t  Calculer '+`$${s1+s2}$`+' à 0,1 près. \\end{minipage}'
 	} 
 	else { // niveau 2 : Calcul d'un côté de l'angle droit
 		// enoncé  niveau 2
@@ -5415,43 +5421,42 @@ this.liste_corrections = []; // Liste de questions corrigées
 		texte += '\\begin{minipage}{0.5 \\linewidth}'
 		// dessin de la figure
 		texte += '\n \\begin{tikzpicture}' // Balise début de figure
-		texte += '\n \\tkzDefPoints{0/0/'+s0+','+x1+'/0/B,0/'+y2+'/C}' // créer les points du triangle initial 
+		texte += '\n\t \\tkzDefPoints{0/0/'+s0+','+x1+'/0/B,0/'+y2+'/C}' // créer les points du triangle initial 
 				// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
-		texte += '\n \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](B) \\tkzGetPoint{'+s1+'}' // transformer le premier point par rotation
-		texte += '\n \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](C) \\tkzGetPoint{'+s2+'}' // transformer le deuxième point par rotation
-		texte += '\n \\tkzDrawPolygon('+s0+','+s1+','+s2+')' // Trace le triangle
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](B) \\tkzGetPoint{'+s1+'}' // transformer le premier point par rotation
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](C) \\tkzGetPoint{'+s2+'}' // transformer le deuxième point par rotation
+		texte += '\n\t \\tkzDrawPolygon('+s0+','+s1+','+s2+')' // Trace le triangle
 		// marquer l'angle droit
-		texte += '\n \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1](' + s1 + ')' + '\\tkzGetPoint{B}' 
-		texte += '\n \\tkzDefPointBy[rotation= center '+s0+' angle 90](B) \\tkzGetPoint{C}'
-		texte += '\n \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}' 
-		texte += '\n \\tkzDefPointBy[rotation= center '+s0+' angle 45](A) \\tkzGetPoint{A}'
-		texte += '\n \\tkzDrawPolygon('+s0+',B,A,C)' // Trace la marque d'angle droit
+		texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1](' + s1 + ')' + '\\tkzGetPoint{B}' 
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 90](B) \\tkzGetPoint{C}'
+		texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}' 
+		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 45](A) \\tkzGetPoint{A}'
+		texte += '\n\t \\tkzDrawPolygon('+s0+',B,A,C)' // Trace la marque d'angle droit
 
-		// if (alpha1 > 0) {
-		texte += '\n \\tkzLabelPoints[below]('+s0+')' //nomme les points
-		texte += '\n \\tkzLabelPoints[right]('+s1+')' //nomme les points
-		texte += '\n \\tkzLabelPoints[left]('+s2+')' //nomme les points
-			// Nomme les points au dessus avec above, dessous avec below...
-		// }
-		// else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
-		//	texte += '\n \\tkzLabelPoints[below](' + s1 + ')' //nomme les points
-		//	texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s4 + ')' //nomme les points
-		//	texte +='\n \\tkzLabelPoints[above](' + s2 + ',' + s5 + ')' //nomme les points
-		// }
+		if (Math.abs(alpha1deg) < 90) { // rotation "angle droit dessous"
+		texte += '\n\t \\tkzLabelPoints[below]('+s0+')' //nomme les points
+		texte += '\n\t \\tkzLabelPoints[right]('+s1+')' 
+		texte += '\n\t \\tkzLabelPoints[left]('+s2+')' 
+		}
+		else {		// rotation "angle droit dessus" position du nom inversée 
+		texte += '\n\t \\tkzLabelPoints[above]('+s0+')' //nomme les points
+		texte += '\n\t \\tkzLabelPoints[left]('+s1+')' 
+		texte += '\n\t \\tkzLabelPoints[right]('+s2+')' 
+		}
 		texte += '\n \\end{tikzpicture}' // Balise de fin de figure
 		texte +=  '\\end{minipage}'
 
 		this.liste_questions.push(texte) // on envoie la question
 			// correction 
 		if (this.sup==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
-			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$[${s0}]$`+'\\bigskip'+'.\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip'
-			texte_corr +='\\\\ D\'où '+`$${s0+s2}^2=${s1+s2}^2-${s0+s1}^2 =${s12}^2-${s01}^2 =${scarre12}-${scarre01}=${arrondi_virgule(Math.round(dist12*dist12*100)/100-Math.round(k1*k1*100)/100,2)}.$`+'\\bigskip'
-			texte_corr +='\\\\ Soit '+`$${s0+s2} \\approx${s02}~\\text{cm}.$`+'\\bigskip'
+			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$[${s0}].$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ Soit '+`$${s0+s2}~=~\\sqrt{${carre12-carre01}}~\\approx${s02}~\\text{cm}.$`
 		}
 		else {
-			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$[${s0}]$`+'\\bigskip'+'.\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip'
-			texte_corr +='\\\\ D\'où '+`$${s1+s2}^2=${s0+s2}^2+${s0+s1}^2 =${s02}^2+${s01}^2 =${scarre02}+${scarre01}=${arrondi_virgule(Math.round(k2*k2*100)/100+Math.round(k1*k1*100)/100,2)}.$`+'\\bigskip'
-			texte_corr +='\\\\ Soit '+`$${s1+s2}\\approx${s12}~\\text{cm}.$`+'\\bigskip'	
+			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$[${s0}].$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ D\'où '+`$${s1+s2}^2~=~${s0+s2}^2~+~${s0+s1}^2~=~${s02}^2~+~${s01}^2~=~${scarre02}~+~${scarre01}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
+			texte_corr +='\\\\ Soit '+`$${s1+s2}~=~\\sqrt{${carre01+carre02}}~\\approx${s12}~\\text{cm}.$`
 		
 		}
 				
