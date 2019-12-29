@@ -86,6 +86,7 @@ var liste_des_exercices_disponibles = {
 		'3N11' : Double_distributivite,
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
+		'3G10' : Exercice_Thales,
 		'2N10' : Developper_Identites_remarquables2,
 		'2N11' : Factoriser_Identites_remarquables2,
 		'LaTeX' : Code_LaTeX_personnalise,
@@ -2952,6 +2953,13 @@ function Exercice_developper(difficulte=1){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
 }
 
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Double_distributivité : Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
+* Niveau 1 développer (x+a)(x+b) ou (ax+b)(cx+d) avec a,b,c et d naturels simples
+* Niveau 2 développer (ax-b)(cx+d) ou (ax-b)(cx-d) avec a,b,c et d naturels simples
+* Niveau 3 mélange des deux niveaux précédents
+**/
 function Double_distributivite()
 {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3016,7 +3024,13 @@ function Double_distributivite()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : (x+a)(x+b) et (ax+b)(cx+d)\n 2 : (ax-b)(cx+d) et (ax-b)(cx-d)\n 3 : Tous les types'] ;
 }
 
-
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Développer_Identites_remarquables2 : Développer en utilisant (a+b)², (a-b)² ou (a-b)(a+b)
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Developper_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -3103,6 +3117,13 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x relatif'] ;
 }
 
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Développer_Identites_remarquables3 : Développer en utilisant (a-b)(a+b)
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Developper_Identites_remarquables3()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -3155,6 +3176,14 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
+
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Factoriser_Identites_remarquables3 : Factoriser en utilisant (a-b)(a+b)
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Factoriser_Identites_remarquables3()
 {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3208,6 +3237,13 @@ function Factoriser_Identites_remarquables3()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Factoriser_Identites_remarquables2 : Factoriser en utilisant (a-b)(a+b), (a-b)² ou (a+b)² 
+* Niveau 1 le coefficient de x et donc de x² est égal à 1
+* Niveau 2 le coefficient de x est naturel supérieur à 1
+* Niveau 3 le coeficient de x est rationnel
+**/
 function Factoriser_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -5185,7 +5221,131 @@ function Reduire_une_expression_litterale(){
 	this.besoin_formulaire_numerique = ['Valeur maximale des coefficients',999];
 	this.besoin_formulaire2_case_a_cocher = ['Avec des nombres décimaux']
 }
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Thales : Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
+* Niveau 1 4ème proportionnelle
+* Niveau 2 utilisation d'une longueur intermédiaire pour trouver le résultat.
+**/
+function Exercice_Thales(){
 
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Déterminer une longueur avec la propriété de Thales";
+	this.consigne = "";
+	this.nb_questions = 1;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes
+	
+	this.nouvelle_version = function(){
+	let lettre1 = randint(1,20)
+	let s1 = lettre_depuis_chiffre(lettre1)
+	let s2 = lettre_depuis_chiffre(lettre1+1)
+	let s3 = lettre_depuis_chiffre(lettre1+2)
+	let s4 = lettre_depuis_chiffre(lettre1+3)
+	let s5 = lettre_depuis_chiffre(lettre1+4)
+	let x2 = randint(2,4)
+	let y2 = randint(3,5)
+	let x3 = randint(5,6)
+	let y3 = randint(-2,0)
+	let k = randint(2,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
+	let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
+	let dist12 = Math.sqrt(x2*x2+y2*y2)
+	let dist13 = Math.sqrt(x3*x3+y3*y3)
+	let dist45 = dist23*Math.abs(k)		//calcul des longueurs du triangle secondaires
+	let dist14 = dist12*Math.abs(k)
+	let dist15 = dist13*Math.abs(k)
+	dist23 = Math.round(dist23*10)/10 // On ne garde qu'une approximation au dixième pour l'exercice
+	dist12 = Math.round(dist12*10)/10
+	dist13 = Math.round(dist13*10)/10
+	dist45 = Math.round(dist45*10)/10
+	dist14 = Math.round(dist14*10)/10
+	dist15 = Math.round(dist15*10)/10
+		
+	let s45= arrondi_virgule(dist45,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+	let s13= arrondi_virgule(dist13,1)
+	let s12= arrondi_virgule(dist12,1)
+	let s15= arrondi_virgule(dist15,1)
+	let s14= arrondi_virgule(dist14,1)
+	let s23= arrondi_virgule(dist23,1)
+	let dist35
+	
+	if (k<0) {dist35 = dist13+dist15} else {dist35 = dist13-dist15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
+	let s35= arrondi_virgule(dist35,1)  // à priori, c'est déjà arrondi au dixième, mais je me méfie des calculs flottants en js
+	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
+	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+	let texte,texte_corr
+	texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
+	texte += '\\item Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]~;$`
+	if (this.sup==1){ //niveau 1 : Calcul direct quatrième proportionnelle
+	
+		// enoncé  niveau 1
+	
+		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s1+s5+' = '+s15+'~\\text{cm}.'}$`
+		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
+	} 
+	else { // niveau 2 : Calcul intermédiaire nécessaire
+	
+		// enoncé  niveau 2
+	
+		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
+		texte += '\\item '+`$${s3+s5+' = '+s35+'~\\text{cm}.'}$`
+		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
+	}
+		texte += '\\begin{minipage}{0.5 \\linewidth}'
+		// dessin de la figure
+		texte += '\n \\begin{tikzpicture}' // Balise début de figure
+		texte += '\n \\tkzDefPoints{0/0/'+s1+','+x3+'/'+y3+'/'+s3+','+x2+'/'+y2+'/'+s2+'}' // Placer les points du triangle principal
+		texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s2 + ',' + s3 + ')' // Trace le triangle principal
+		// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
+		texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s2 + ')' + '\\tkzGetPoint{' + s4 + '}' // Place le premier point du triangle image
+		texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s3 + ')' + '\\tkzGetPoint{' + s5 + '}' // Place le deuxième point du triangle image
+		texte += '\n \\tkzDrawSegment(' + s4 + ',' + s5 + ')'	// Trace le segment
+		if (k > 0) {
+			texte += '\n \\tkzLabelPoints[left](' + s1 + ')' //nomme les points
+			texte += '\n \\tkzLabelPoints[above left](' + s2 + ',' + s4 + ')' //nomme les points
+			texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s5 + ')' //nomme les points
+			// Nomme les points au dessus avec above, dessous avec below...
+		}
+		else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
+			texte += '\n \\tkzLabelPoints[below](' + s1 + ')' //nomme les points
+			texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s4 + ')' //nomme les points
+			texte +='\n \\tkzLabelPoints[above](' + s2 + ',' + s5 + ')' //nomme les points
+			texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s4 + ',' + s5 + ')' // Trace le triangle secondaire
+		}
+		texte += '\n \\end{tikzpicture}' // Balise de fin de figure
+		texte +=  '\\end{minipage}'
+
+		this.liste_questions.push(texte) // on envoie la question
+			// correction 
+		if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
+			texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
+			if (k>0){
+				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
+			}
+			else {
+				texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`+'\\bigskip'
+			}
+		}
+		else {
+			texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip'
+		}
+		texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip'
+		texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip'
+		texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
+		
+		this.liste_corrections.push(texte_corr)
+
+		liste_de_question_to_contenu_sans_numero(this);
+
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire'];
+}
 
 // function Exercice_Pythagore(){
 // 	Exercice.call(this); // Héritage de la classe Exercice()
