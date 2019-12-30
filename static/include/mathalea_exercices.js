@@ -5228,25 +5228,6 @@ function Reduire_une_expression_litterale(){
 * Niveau 1 4ème proportionnelle
 * Niveau 2 utilisation d'une longueur intermédiaire pour trouver le résultat.
 **/
-function randint(min,max,liste_a_eviter=[]){
-	//Source : https://gist.github.com/pc035860/6546661
-	let range = max - min;
-	let rand = Math.floor(Math.random() * (range + 1));
-	if (Number.isInteger(liste_a_eviter)){
-		liste_a_eviter=[liste_a_eviter]
-	}
-	if (liste_a_eviter.length>0) {
-		while (liste_a_eviter.indexOf(min+rand)!=-1){
-			rand = Math.floor(Math.random() * (range + 1));
-		}
-	}
-	return min + rand;
-}
-function arrondi_virgule(nombre, precision=2){ //renvoit un arrondi sous la forme d'un string avec une virgule comme séparateur décimal
-    let tmp = Math.pow(10, precision);
-    return String(Math.round( nombre*tmp )/tmp).replace('.',',');
-}
-
 function Exercice_Thales(){
 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -5257,68 +5238,59 @@ function Exercice_Thales(){
 	this.nb_cols_corr = 1;
 	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes
 	// paramètres communs Html ou Latex
-	// let lettre1 = randint(1,20)
-	// let s1 = lettre_depuis_chiffre(lettre1)
-	// let s2 = lettre_depuis_chiffre(lettre1+1)
-	// let s3 = lettre_depuis_chiffre(lettre1+2)
-	// let s4 = lettre_depuis_chiffre(lettre1+3)
-	// let s5 = lettre_depuis_chiffre(lettre1+4)
 	let s1='A',s2='B',s3='C',s4='M',s5='N'
-	let x2 = randint(2,4)
-	let y2 = randint(3,5)
-	let x3 = randint(5,6)
-	let y3 = randint(-2,1)
-	let k = randint(2,8)*randint(-1,1,[0])/10	// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
-	let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
-	let dist12 = Math.sqrt(x2*x2+y2*y2)
-	let dist13 = Math.sqrt(x3*x3+y3*y3)
-	let dist45 = dist23*Math.abs(k)		//calcul des longueurs du triangle secondaires
-	let dist14 = dist12*Math.abs(k)
-	let dist15 = dist13*Math.abs(k)
-	dist23 = Math.round(dist23*10)/10 // On ne garde qu'une approximation au dixième pour l'exercice
-	dist12 = Math.round(dist12*10)/10
-	dist13 = Math.round(dist13*10)/10
-	dist45 = Math.round(dist45*10)/10
-	dist14 = Math.round(dist14*10)/10
-	dist15 = Math.round(dist15*10)/10
-		
-	let s45= arrondi_virgule(dist45,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
-	let s13= arrondi_virgule(dist13,1)
-	let s12= arrondi_virgule(dist12,1)
-	let s15= arrondi_virgule(dist15,1)
-	let s14= arrondi_virgule(dist14,1)
-	let s23= arrondi_virgule(dist23,1)
-	let dist35
+		// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
 	
-	if (k<0) {dist35 = dist13+dist15} else {dist35 = dist13-dist15} // calcul de la longueur intermédiaire dans un cas classique ou en papillon
-	let s35= arrondi_virgule(dist35,1)  // à priori, c'est déjà arrondi au dixième, mais je me méfie des calculs flottants en js
 
 	if (sortie_html) {
 		this.type_exercice = 'MG32';
-		this.taille_div_MG32 = [500,450];
+		this.taille_div_MG32 = [700,500];
 		this.nouvelle_version = function(numero_de_l_exercice){
 			this.liste_questions = [];
 			this.liste_corrections = []; // Liste de questions corrigées
-			// let c1 = calcul(randint(45,90)/10);
-			// let c2 = calcul(randint(40,80)/10);
-			// let c3 = calcul(randint(40,80)/10);
-			// let k = calcul(randint(20,70)/100)*randint(-1,1,[0]);
-			// let angle = randint(-25,25);
+			let x2 = randint(2,4)
+			let y2 = randint(3, 5)
+			let x3 = randint(5, 6)
+			let y3 = randint(-2, 1)
+			let k = randint(2, 8) * randint(-1, 1, [0]) / 10
+			
+			let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
+			let dist12 = Math.sqrt(x2 * x2 + y2 * y2)
+			let dist13 = Math.sqrt(x3 * x3 + y3 * y3)
+			let dist45 = dist23 * Math.abs(k)		//calcul des longueurs du triangle secondaires
+			let dist14 = dist12 * Math.abs(k)
+			let dist15 = dist13 * Math.abs(k)
+			dist23 = Math.round(dist23 * 10) / 10 // On ne garde qu'une approximation au dixième pour l'exercice
+			dist12 = Math.round(dist12 * 10) / 10
+			dist13 = Math.round(dist13 * 10) / 10
+			dist45 = Math.round(dist45 * 10) / 10
+			dist14 = Math.round(dist14 * 10) / 10
+			dist15 = Math.round(dist15 * 10) / 10
+
+			let s45 = arrondi_virgule(dist45, 1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+			let s13 = arrondi_virgule(dist13, 1)
+			let s12 = arrondi_virgule(dist12, 1)
+			let s15 = arrondi_virgule(dist15, 1)
+			let s14 = arrondi_virgule(dist14, 1)
+			let s23 = arrondi_virgule(dist23, 1)
+			// let dist35
+
+			if (k < 0) { dist35 = dist13 + dist15 } else { dist35 = dist13 - dist15 } // calcul de la longueur intermédiaire dans un cas classique ou en papillon
+			let s35 = arrondi_virgule(dist35,1)  // à priori, c'est déjà arrondi au dixième, mais je me méfie des calculs flottants en js
+			
 			let codeBase64
-			if (k<0) {codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAYfAAADsgAAAQEAAAAAAAAAAQAAABz#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AQAAAAAOAAFPAMAoAAAAAAAAAAAAAAAAAAAFAAFAiH6PXCj1wkB9lhR64Ueu#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAAA4AAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAAA4AAUkAwBgAAAAAAAAAAAAAAAAAAAUAAUBHq0OVgQYlAAAAAv####8AAAABAAlDRHJvaXRlQUIA#####wEAAAAAEAAAAQABAAAAAQAAAAP#####AAAAAQAWQ0Ryb2l0ZVBlcnBlbmRpY3VsYWlyZQD#####AQAAAAAOAAABAAEAAAABAAAABP####8AAAABAAlDQ2VyY2xlT0EA#####wEAAAAAAQAAAAEAAAAD#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAUAAAAG#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAADgAAAQUAAQAAAAcAAAAJAP####8BAAAAAA4AAUoAwCgAAAAAAADAEAAAAAAAAAUAAgAAAAf#####AAAAAgAHQ1JlcGVyZQD#####AObm5gABAAAAAQAAAAMAAAAJAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAT#wAAAAAAAAAAAAAT#wAAAAAAAA#####wAAAAEACkNVbml0ZXhSZXAA#####wAEdW5pdAAAAAr#####AAAAAQALQ0hvbW90aGV0aWUA#####wAAAAH#####AAAAAQAKQ09wZXJhdGlvbgMAAAABP#AAAAAAAAD#####AAAAAQAPQ1Jlc3VsdGF0VmFsZXVyAAAAC#####8AAAABAAtDUG9pbnRJbWFnZQD#####AQAAAAAQAAJXIgEBAAAAAAMAAAAM#####wAAAAEACUNMb25ndWV1cgD#####AAAAAQAAAA3#####AAAAAQAHQ0NhbGN1bAD#####AAJ4MgABMgAAAAFAAAAAAAAAAAAAABEA#####wACeTIAATUAAAABQBQAAAAAAAAAAAARAP####8AAngzAAE2AAAAAUAYAAAAAAAAAAAAEQD#####AAJ5MwACLTH#####AAAAAQAMQ01vaW5zVW5haXJlAAAAAT#wAAAAAAAAAAAAEQD#####AAFrAAQtMC41AAAAEgAAAAE#4AAAAAAAAP####8AAAABABBDUG9pbnREYW5zUmVwZXJlAP####8AAAAAABYAAUEAAAAAAAAAAABACAAAAAAAAAgAAAAACgAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABMA#####wAAAAAAFgABQgDAMAAAAAAAAMBDgAAAAAAACAAAAAAKAAAADgAAAA8AAAAOAAAAEAAAABMA#####wAAAAAAFgABQwAAAAAAAAAAAEAIAAAAAAAACAAAAAAKAAAADgAAABEAAAAOAAAAEgAAAAwA#####wAAABQAAAAOAAAAEwAAAA8A#####wAAAAAAFgABTgDAJAAAAAAAAEAmAAAAAAAACAAAAAAVAAAAFwAAAA8A#####wAAAAAAFgABTQDAPwAAAAAAAMBBgAAAAAAACAAAAAAWAAAAF#####8AAAABAAlDUG9seWdvbmUA#####wAAAAAAAgAAAAQAAAAWAAAAFQAAABQAAAAWAAAAFAD#####AAAAAAACAAAABAAAABkAAAAUAAAAGAAAABkAAAAO##########8="
+
+			if (k<0) {codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAYfAAADsgAAAQEAAAAAAAAAAQAAABz#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AQAAAAAOAAFPAMAoAAAAAAAAAAAAAAAAAAAFAAFAdD0euFHrhkBxxhR64Ueu#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAAA4AAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAAA4AAUkAwBgAAAAAAAAAAAAAAAAAAAUAAUBHq0OVgQYlAAAAAv####8AAAABAAlDRHJvaXRlQUIA#####wEAAAAAEAAAAQABAAAAAQAAAAP#####AAAAAQAWQ0Ryb2l0ZVBlcnBlbmRpY3VsYWlyZQD#####AQAAAAAOAAABAAEAAAABAAAABP####8AAAABAAlDQ2VyY2xlT0EA#####wEAAAAAAQAAAAEAAAAD#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAUAAAAG#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAADgAAAQUAAQAAAAcAAAAJAP####8BAAAAAA4AAUoAwCgAAAAAAADAEAAAAAAAAAUAAgAAAAf#####AAAAAgAHQ1JlcGVyZQD#####AObm5gABAAAAAQAAAAMAAAAJAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAT#wAAAAAAAAAAAAAT#wAAAAAAAA#####wAAAAEACkNVbml0ZXhSZXAA#####wAEdW5pdAAAAAr#####AAAAAQALQ0hvbW90aGV0aWUA#####wAAAAH#####AAAAAQAKQ09wZXJhdGlvbgMAAAABP#AAAAAAAAD#####AAAAAQAPQ1Jlc3VsdGF0VmFsZXVyAAAAC#####8AAAABAAtDUG9pbnRJbWFnZQD#####AQAAAAAQAAJXIgEBAAAAAAMAAAAM#####wAAAAEACUNMb25ndWV1cgD#####AAAAAQAAAA3#####AAAAAQAHQ0NhbGN1bAD#####AAJ4MgABMgAAAAFAAAAAAAAAAAAAABEA#####wACeTIAATUAAAABQBQAAAAAAAAAAAARAP####8AAngzAAE2AAAAAUAYAAAAAAAAAAAAEQD#####AAJ5MwACLTH#####AAAAAQAMQ01vaW5zVW5haXJlAAAAAT#wAAAAAAAAAAAAEQD#####AAFrAAQtMC44AAAAEgAAAAE#6ZmZmZmZmv####8AAAABABBDUG9pbnREYW5zUmVwZXJlAP####8AAAAAABYAAUEAAAAAAAAAAABACAAAAAAAAAgAAAAACgAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABMA#####wAAAAAAFgABQgDAMAAAAAAAAMBDgAAAAAAACAAAAAAKAAAADgAAAA8AAAAOAAAAEAAAABMA#####wAAAAAAFgABQwAAAAAAAAAAAEAIAAAAAAAACAAAAAAKAAAADgAAABEAAAAOAAAAEgAAAAwA#####wAAABQAAAAOAAAAEwAAAA8A#####wAAAAAAFgABTgBAJgAAAAAAAMAkAAAAAAAACAAAAAAVAAAAFwAAAA8A#####wAAAAAAFgABTQDAGAAAAAAAAMBBAAAAAAAACAAAAAAWAAAAF#####8AAAABAAlDUG9seWdvbmUA#####wAAAAAAAgAAAAQAAAAWAAAAFQAAABQAAAAWAAAAFAD#####AAAAAAACAAAABAAAABkAAAAUAAAAGAAAABkAAAAO##########8="
 			}
-				else {codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAYfAAADsgAAAQEAAAAAAAAAAQAAABz#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AQAAAAAOAAFPAMAoAAAAAAAAAAAAAAAAAAAFAAFAiH6PXCj1wkB9lhR64Ueu#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAAA4AAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAAA4AAUkAwBgAAAAAAAAAAAAAAAAAAAUAAUBHq0OVgQYlAAAAAv####8AAAABAAlDRHJvaXRlQUIA#####wEAAAAAEAAAAQABAAAAAQAAAAP#####AAAAAQAWQ0Ryb2l0ZVBlcnBlbmRpY3VsYWlyZQD#####AQAAAAAOAAABAAEAAAABAAAABP####8AAAABAAlDQ2VyY2xlT0EA#####wEAAAAAAQAAAAEAAAAD#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAUAAAAG#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAADgAAAQUAAQAAAAcAAAAJAP####8BAAAAAA4AAUoAwCgAAAAAAADAEAAAAAAAAAUAAgAAAAf#####AAAAAgAHQ1JlcGVyZQD#####AObm5gABAAAAAQAAAAMAAAAJAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAT#wAAAAAAAAAAAAAT#wAAAAAAAA#####wAAAAEACkNVbml0ZXhSZXAA#####wAEdW5pdAAAAAr#####AAAAAQALQ0hvbW90aGV0aWUA#####wAAAAH#####AAAAAQAKQ09wZXJhdGlvbgMAAAABP#AAAAAAAAD#####AAAAAQAPQ1Jlc3VsdGF0VmFsZXVyAAAAC#####8AAAABAAtDUG9pbnRJbWFnZQD#####AQAAAAAQAAJXIgEBAAAAAAMAAAAM#####wAAAAEACUNMb25ndWV1cgD#####AAAAAQAAAA3#####AAAAAQAHQ0NhbGN1bAD#####AAJ4MgABMgAAAAFAAAAAAAAAAAAAABEA#####wACeTIAATUAAAABQBQAAAAAAAAAAAARAP####8AAngzAAE2AAAAAUAYAAAAAAAAAAAAEQD#####AAJ5MwACLTH#####AAAAAQAMQ01vaW5zVW5haXJlAAAAAT#wAAAAAAAAAAAAEQD#####AAFrAAMwLjUAAAABP+AAAAAAAAD#####AAAAAQAQQ1BvaW50RGFuc1JlcGVyZQD#####AAAAAAAWAAFBAAAAAAAAAAAAQAgAAAAAAAAIAAAAAAoAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAATAP####8AAAAAABYAAUIAwDAAAAAAAADAQ4AAAAAAAAgAAAAACgAAAA4AAAAPAAAADgAAABAAAAATAP####8AAAAAABYAAUMAAAAAAAAAAABACAAAAAAAAAgAAAAACgAAAA4AAAARAAAADgAAABIAAAAMAP####8AAAAUAAAADgAAABMAAAAPAP####8AAAAAABYAAU4AwDcAAAAAAADAQoAAAAAAAAgAAAAAFQAAABcAAAAPAP####8AAAAAABYAAU0AwCAAAAAAAABAFAAAAAAAAAgAAAAAFgAAABf#####AAAAAQAJQ1BvbHlnb25lAP####8AAAAAAAIAAAAEAAAAFgAAABUAAAAUAAAAFgAAABQA#####wAAAAAAAgAAAAQAAAAZAAAAFAAAABgAAAAZAAAADv##########"
+			else {codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAYfAAADsgAAAQEAAAAAAAAAAQAAABz#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AQAAAAAOAAFPAMAoAAAAAAAAAAAAAAAAAAAFAAFAY5o9cKPXDEB0VhR64Ueu#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAAA4AAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAAA4AAUkAwBgAAAAAAAAAAAAAAAAAAAUAAUBHq0OVgQYlAAAAAv####8AAAABAAlDRHJvaXRlQUIA#####wEAAAAAEAAAAQABAAAAAQAAAAP#####AAAAAQAWQ0Ryb2l0ZVBlcnBlbmRpY3VsYWlyZQD#####AQAAAAAOAAABAAEAAAABAAAABP####8AAAABAAlDQ2VyY2xlT0EA#####wEAAAAAAQAAAAEAAAAD#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAUAAAAG#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAADgAAAQUAAQAAAAcAAAAJAP####8BAAAAAA4AAUoAwCgAAAAAAADAEAAAAAAAAAUAAgAAAAf#####AAAAAgAHQ1JlcGVyZQD#####AObm5gABAAAAAQAAAAMAAAAJAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAT#wAAAAAAAAAAAAAT#wAAAAAAAA#####wAAAAEACkNVbml0ZXhSZXAA#####wAEdW5pdAAAAAr#####AAAAAQALQ0hvbW90aGV0aWUA#####wAAAAH#####AAAAAQAKQ09wZXJhdGlvbgMAAAABP#AAAAAAAAD#####AAAAAQAPQ1Jlc3VsdGF0VmFsZXVyAAAAC#####8AAAABAAtDUG9pbnRJbWFnZQD#####AQAAAAAQAAJXIgEBAAAAAAMAAAAM#####wAAAAEACUNMb25ndWV1cgD#####AAAAAQAAAA3#####AAAAAQAHQ0NhbGN1bAD#####AAJ4MgABMgAAAAFAAAAAAAAAAAAAABEA#####wACeTIAATUAAAABQBQAAAAAAAAAAAARAP####8AAngzAAE2AAAAAUAYAAAAAAAAAAAAEQD#####AAJ5MwACLTH#####AAAAAQAMQ01vaW5zVW5haXJlAAAAAT#wAAAAAAAAAAAAEQD#####AAFrAAMwLjIAAAABP8mZmZmZmZr#####AAAAAQAQQ1BvaW50RGFuc1JlcGVyZQD#####AAAAAAAWAAFBAAAAAAAAAAAAQAgAAAAAAAAIAAAAAAoAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAATAP####8AAAAAABYAAUIAwDAAAAAAAADAQ4AAAAAAAAgAAAAACgAAAA4AAAAPAAAADgAAABAAAAATAP####8AAAAAABYAAUMAAAAAAAAAAABACAAAAAAAAAgAAAAACgAAAA4AAAARAAAADgAAABIAAAAMAP####8AAAAUAAAADgAAABMAAAAPAP####8AAAAAABYAAU4AwDcAAAAAAADAQoAAAAAAAAgAAAAAFQAAABcAAAAPAP####8AAAAAABYAAU0AwCAAAAAAAABAFAAAAAAAAAgAAAAAFgAAABf#####AAAAAQAJQ1BvbHlnb25lAP####8AAAAAAAIAAAAEAAAAFgAAABUAAAAUAAAAFgAAABQA#####wAAAAAAAgAAAAQAAAAZAAAAFAAAABgAAAAZAAAADv##########"
 			}
-			// let c1p = arrondi(calcul(c1*k),1) //petit côté au millimètre près
-			// let c2p = arrondi(calcul(c2*k),1)
-			// let c3p = arrondi(calcul(c3*k),1)
 			texte = `Dans la figure ci-dessous, on sait que $(MN)$ et $(BC)$ sont parallèles, $AB=${s12}$ cm, $AC=${s13}$ cm, $MN=${s45}$ cm et $AN=${s15}$ cm.`
 			texte += '</br>'
 			texte += `Calculer $AM$ et $BC$.`
-			texte_corr =	texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.</br>'+' D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
-			texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'</br>'
-			texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '&times' + s12, s13)}&asymp${s14} cm}$`+'</br>'
-			texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '&times' + s45, s15)}&asymp${s23} cm}$`
+			texte_corr =	texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
+			texte_corr += 'On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'</br>'
+			texte_corr += 'Soit '+`$${s1 + s4}=${tex_fraction(s15 + '&times;' + s12, s13)}&asymp;${s14} cm$`+'</br>'
+			texte_corr += 'Et ' + `$${s2 + s3}=${tex_fraction(s13 + '&times;' + s45, s15)}&asymp;${s23} cm$`
 			
 
 			codeMG32 += `
@@ -5338,6 +5310,35 @@ function Exercice_Thales(){
 		this.nouvelle_version = function(){
 		this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
 		this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+		let x2 = randint(2,4)
+		let y2 = randint(3, 5)
+		let x3 = randint(5, 6)
+		let y3 = randint(-2, 1)
+		let k = randint(2, 8) * randint(-1, 1, [0]) / 10
+		let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
+			let dist12 = Math.sqrt(x2 * x2 + y2 * y2)
+			let dist13 = Math.sqrt(x3 * x3 + y3 * y3)
+			let dist45 = dist23 * Math.abs(k)		//calcul des longueurs du triangle secondaires
+			let dist14 = dist12 * Math.abs(k)
+			let dist15 = dist13 * Math.abs(k)
+			dist23 = Math.round(dist23 * 10) / 10 // On ne garde qu'une approximation au dixième pour l'exercice
+			dist12 = Math.round(dist12 * 10) / 10
+			dist13 = Math.round(dist13 * 10) / 10
+			dist45 = Math.round(dist45 * 10) / 10
+			dist14 = Math.round(dist14 * 10) / 10
+			dist15 = Math.round(dist15 * 10) / 10
+
+			let s45 = arrondi_virgule(dist45, 1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+			let s13 = arrondi_virgule(dist13, 1)
+			let s12 = arrondi_virgule(dist12, 1)
+			let s15 = arrondi_virgule(dist15, 1)
+			let s14 = arrondi_virgule(dist14, 1)
+			let s23 = arrondi_virgule(dist23, 1)
+			let dist35
+
+			if (k < 0) { dist35 = dist13 + dist15 } else { dist35 = dist13 - dist15 } // calcul de la longueur intermédiaire dans un cas classique ou en papillon
+			let s35 = arrondi_virgule(dist35,1)  // à priori, c'est déjà arrondi au dixième, mais je me méfie des calculs flottants en js
+			
 		let texte,texte_corr
 		texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
 		texte += '\\item Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]~;$`
