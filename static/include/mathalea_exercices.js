@@ -5478,17 +5478,17 @@ if (sortie_html) {
 			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $AC=${s02}$ cm.`
 			texte += '</br>'
 			texte += `Calculer $BC$.`
-			texte_corr = 'Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
+			texte_corr = '<div style="line-height: 3;">Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
 			texte_corr += 'D&rsquo;où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'</br>'
-			texte_corr += 'Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`	
+			texte_corr += 'Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}$`+'&nbsb;cm.</div>'
 		}
 		else {  // Calcul d'un côté de l'angle droit
 			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $BC=${s12}$ cm.`
 			texte += '</br>'
 			texte += `Calculer $AC$.`
-			texte_corr = 'Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
+			texte_corr = '<div style="line-height: 3;">Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
 			texte_corr +='D&rsquo;où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'</br>'
-			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
+			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.</div>'
 		}
 
 		codeMG32 += `
