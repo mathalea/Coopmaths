@@ -5438,116 +5438,184 @@ this.nb_cols = 1;
 this.nb_cols_corr = 1;
 this.sup = 1; // 1 valeur exacte | 2 valeur approchée
 
-this.nouvelle_version = function(){
-this.liste_questions = []; // Liste de questions
-this.liste_corrections = []; // Liste de questions corrigées
-
-// let type_de_questions_disponibles = [1,2] // 1 calcul de l'hypoténuse | 2 calcul d'un coté de l'angle droit
-// let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-// for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
-			
-	let lettre0 = randint(4,23)
-	let s0 = lettre_depuis_chiffre(lettre0)   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
-	let s1 = lettre_depuis_chiffre(lettre0+1)
-	let s2 = lettre_depuis_chiffre(lettre0+2)
-	let k1 = Math.round((Math.random()*3+3)*10)/10
-	let k2 = Math.round((Math.random()*3+1)*10)/10	
-	let alpha1 = Math.random()*2*Math.PI-Math.PI
-	let alpha1deg=math.round(alpha1*180/Math.PI)
-	let x1 = k1	// coordonnées des deux sommets du triangle
-	let y2 = k2
-	// let x1r = k1*Math.cos(alpha1)  // on fait tourner le triangle d'un angle -180°<alpha1<180° 
-	// let y1r = k1*Math.sin(alpha1)
-	// let x2r = -k2*Math.sin(alpha1)
-	// let y2r = k2*Math.cos(alpha1)
-	
-	    
-
-	let s01= arrondi_virgule(k1,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
-	let s02= arrondi_virgule(k2,1)
-
-	let carre01=Math.round(k1*k1*100)/100
-	let carre02=Math.round(k2*k2*100)/100
-	let dist12=Math.sqrt(carre01+carre02)	   //calcul de l'hypoténuse
-	dist12 = Math.round(dist12*10)/10		// On ne garde qu'une approximation au dixième pour l'exercice
-	let s12= arrondi_virgule(dist12,1)
-	let carre12=Math.round(dist12*dist12*100)/100
-
-
-	let scarre01=arrondi_virgule(carre01,2)		// carremn = distance entre (xm;ym) et (xn;yn) au carré avec 2 décimales
-	let scarre02=arrondi_virgule(carre02,2)		// scarremn = chaine de caractère avec 2 décimales après une virgule.
-	let scarre12=arrondi_virgule(carre12,2)
-	
-	
-	this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
-	this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
-	let texte,texte_corr
-	texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
-	texte += '\\item Le côté '+`$[${s0+s1}]$`+' est perpendiculaire au côté '+`$[${s0+s2}]~;$`
-	if (this.sup==1){ //niveau 1 : Calcul de l'hypoténuse
-	
-		// enoncé  niveau 1
-	
-		texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s0+s2+' = '+s02+'~\\text{cm}~;'}$`
-		texte += '\\end{itemize} \\bigskip\n\t  Calculer '+`$${s1+s2}$`+' à 0,1 près. \\end{minipage}'
-	} 
-	else { // niveau 2 : Calcul d'un côté de l'angle droit
-		// enoncé  niveau 2
-	
-		texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
-		texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
-		texte += '\\end{itemize} \\bigskip  Calculer '+`$${s0+s2}$`+' à 0,1 près. \\end{minipage}'
-	}
-		texte += '\\begin{minipage}{0.5 \\linewidth}'
-		// dessin de la figure
-		texte += '\n \\begin{tikzpicture}' // Balise début de figure
-		texte += '\n\t \\tkzDefPoints{0/0/'+s0+','+x1+'/0/B,0/'+y2+'/C}' // créer les points du triangle initial 
-				// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
-		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](B) \\tkzGetPoint{'+s1+'}' // transformer le premier point par rotation
-		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](C) \\tkzGetPoint{'+s2+'}' // transformer le deuxième point par rotation
-		texte += '\n\t \\tkzDrawPolygon('+s0+','+s1+','+s2+')' // Trace le triangle
-		// marquer l'angle droit
-		texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1](' + s1 + ')' + '\\tkzGetPoint{B}' 
-		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 90](B) \\tkzGetPoint{C}'
-		texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}' 
-		texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 45](A) \\tkzGetPoint{A}'
-		texte += '\n\t \\tkzDrawPolygon('+s0+',B,A,C)' // Trace la marque d'angle droit
-
-		if (Math.abs(alpha1deg) < 90) { // rotation "angle droit dessous"
-		texte += '\n\t \\tkzLabelPoints[below]('+s0+')' //nomme les points
-		texte += '\n\t \\tkzLabelPoints[right]('+s1+')' 
-		texte += '\n\t \\tkzLabelPoints[left]('+s2+')' 
-		}
-		else {		// rotation "angle droit dessus" position du nom inversée 
-		texte += '\n\t \\tkzLabelPoints[above]('+s0+')' //nomme les points
-		texte += '\n\t \\tkzLabelPoints[left]('+s1+')' 
-		texte += '\n\t \\tkzLabelPoints[right]('+s2+')' 
-		}
-		texte += '\n \\end{tikzpicture}' // Balise de fin de figure
-		texte +=  '\\end{minipage}'
-
-		this.liste_questions.push(texte) // on envoie la question
-			// correction 
-		if (this.sup==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
-			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
-			texte_corr +='\\\\ D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
-			texte_corr +='\\\\ Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
-		}
-		else {
-			texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
-			texte_corr +='\\\\ D\'où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
-			texte_corr +='\\\\ Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`
+if (sortie_html) {
+	this.type_exercice = 'MG32';
+	this.taille_div_MG32 = [700,500];
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = [];
+		this.liste_corrections = []; // Liste de questions corrigées
 		
+			let s0 = 'A'   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
+			let s1 = 'B'
+			let s2 = 'C'
+			let k1 = Math.round((Math.random()*3+3)*10)/10
+			let k2 = Math.round((Math.random()*3+1)*10)/10	
+			let alpha1 = Math.random()*Math.PI-Math.PI/2
+			let alpha1deg=math.round(alpha1*180/Math.PI)
+			let x1 = k1	// coordonnées des deux sommets du triangle
+			let y2 = k2
+			let s01= arrondi_virgule(k1,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+			let s02= arrondi_virgule(k2,1)
+		
+			let carre01=Math.round(k1*k1*100)/100
+			let carre02=Math.round(k2*k2*100)/100
+			let dist12=Math.sqrt(carre01+carre02)	   //calcul de l'hypoténuse
+			dist12 = Math.round(dist12*10)/10		// On ne garde qu'une approximation au dixième pour l'exercice
+			let s12= arrondi_virgule(dist12,1)
+			let carre12=Math.round(dist12*dist12*100)/100
+		
+		
+			let scarre01=arrondi_virgule(carre01,2)		// carremn = distance entre (xm;ym) et (xn;yn) au carré avec 2 décimales
+			let scarre02=arrondi_virgule(carre02,2)		// scarremn = chaine de caractère avec 2 décimales après une virgule.
+			let scarre12=arrondi_virgule(carre12,2)
+		let codeBase64
+
+		if (alpha1deg<0) {codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAYfAAADsgAAAQEAAAAAAAAAAQAAABr#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AQAAAAAOAAFPAMAoAAAAAAAAAAAAAAAAAAAFAAFAWfR64UeuDEBprCj1wo9c#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAAA4AAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAAA4AAUkAwBgAAAAAAAAAAAAAAAAAAAUAAUBHq0OVgQYlAAAAAv####8AAAABAAlDRHJvaXRlQUIA#####wEAAAAAEAAAAQABAAAAAQAAAAP#####AAAAAQAWQ0Ryb2l0ZVBlcnBlbmRpY3VsYWlyZQD#####AQAAAAAOAAABAAEAAAABAAAABP####8AAAABAAlDQ2VyY2xlT0EA#####wEAAAAAAQAAAAEAAAAD#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAUAAAAG#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAADgAAAQUAAQAAAAcAAAAJAP####8BAAAAAA4AAUoAwCgAAAAAAADAEAAAAAAAAAUAAgAAAAf#####AAAAAgAHQ1JlcGVyZQD#####AObm5gABAAAAAQAAAAMAAAAJAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAT#wAAAAAAAAAAAAAT#wAAAAAAAA#####wAAAAEACkNVbml0ZXhSZXAA#####wAEdW5pdAAAAAr#####AAAAAQALQ0hvbW90aGV0aWUA#####wAAAAH#####AAAAAQAKQ09wZXJhdGlvbgMAAAABP#AAAAAAAAD#####AAAAAQAPQ1Jlc3VsdGF0VmFsZXVyAAAAC#####8AAAABAAtDUG9pbnRJbWFnZQD#####AQAAAAAQAAJXIgEBAAAAAAMAAAAM#####wAAAAEACUNMb25ndWV1cgD#####AAAAAQAAAA3#####AAAAAQAHQ0NhbGN1bAD#####AAJ4MQABNgAAAAFAGAAAAAAAAAAAABEA#####wACeDIAATQAAAABQBAAAAAAAAAAAAARAP####8ACGFscGhhZGVnAAMtMzD#####AAAAAQAMQ01vaW5zVW5haXJlAAAAAUA+AAAAAAAA#####wAAAAEAEENQb2ludERhbnNSZXBlcmUA#####wAAAAAAFgABQQDANQAAAAAAAEAUAAAAAAAABwAAAAAKAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAEwD#####AQAAAAAWAAFGAAAAAAAAAAAAQAgAAAAAAAAHAAAAAAoAAAAOAAAADwAAAAEAAAAAAAAAAAAAABMA#####wEAAAAAFgABRAAAAAAAAAAAAEAIAAAAAAAABwAAAAAKAAAAAQAAAAAAAAAAAAAADgAAABD#####AAAAAQAJQ1JvdGF0aW9uAP####8AAAASAAAADgAAABEAAAAPAP####8AAAAAABYAAUIAwBAAAAAAAABAAAAAAAAAAAcAAAAAEwAAABUAAAAPAP####8AAAAAABYAAUMAwBQAAAAAAADAQYAAAAAAAAcAAAAAFAAAABX#####AAAAAQAJQ1BvbHlnb25lAP####8AAAAAAAIAAAAEAAAAEgAAABYAAAAXAAAAEv####8AAAACABdDTWFycXVlQW5nbGVHZW9tZXRyaXF1ZQD#####AAAAAAACAAAAAUAwAAAAAAAAAAAAFgAAABIAAAAXAAAADv##########"
 		}
-				
-		this.liste_corrections.push(texte_corr)
+		else {codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAYfAAADsgAAAQEAAAAAAAAAAQAAABr#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AQAAAAAOAAFPAMAoAAAAAAAAAAAAAAAAAAAFAAFAbFo9cKPXBkB0BhR64Ueu#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAAA4AAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAAA4AAUkAwBgAAAAAAAAAAAAAAAAAAAUAAUBHq0OVgQYlAAAAAv####8AAAABAAlDRHJvaXRlQUIA#####wEAAAAAEAAAAQABAAAAAQAAAAP#####AAAAAQAWQ0Ryb2l0ZVBlcnBlbmRpY3VsYWlyZQD#####AQAAAAAOAAABAAEAAAABAAAABP####8AAAABAAlDQ2VyY2xlT0EA#####wEAAAAAAQAAAAEAAAAD#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAUAAAAG#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAADgAAAQUAAQAAAAcAAAAJAP####8BAAAAAA4AAUoAwCgAAAAAAADAEAAAAAAAAAUAAgAAAAf#####AAAAAgAHQ1JlcGVyZQD#####AObm5gABAAAAAQAAAAMAAAAJAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAT#wAAAAAAAAAAAAAT#wAAAAAAAA#####wAAAAEACkNVbml0ZXhSZXAA#####wAEdW5pdAAAAAr#####AAAAAQALQ0hvbW90aGV0aWUA#####wAAAAH#####AAAAAQAKQ09wZXJhdGlvbgMAAAABP#AAAAAAAAD#####AAAAAQAPQ1Jlc3VsdGF0VmFsZXVyAAAAC#####8AAAABAAtDUG9pbnRJbWFnZQD#####AQAAAAAQAAJXIgEBAAAAAAMAAAAM#####wAAAAEACUNMb25ndWV1cgD#####AAAAAQAAAA3#####AAAAAQAHQ0NhbGN1bAD#####AAJ4MQABNgAAAAFAGAAAAAAAAAAAABEA#####wACeDIAATQAAAABQBAAAAAAAAAAAAARAP####8ACGFscGhhZGVnAAI5MAAAAAFAVoAAAAAAAP####8AAAABABBDUG9pbnREYW5zUmVwZXJlAP####8AAAAAABYAAUEAwBQAAAAAAABAAAAAAAAAAAcAAAAACgAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABIA#####wEAAAAAFgABRgAAAAAAAAAAAEAIAAAAAAAABwAAAAAKAAAADgAAAA8AAAABAAAAAAAAAAAAAAASAP####8BAAAAABYAAUQAAAAAAAAAAABACAAAAAAAAAcAAAAACgAAAAEAAAAAAAAAAAAAAA4AAAAQ#####wAAAAEACUNSb3RhdGlvbgD#####AAAAEgAAAA4AAAARAAAADwD#####AAAAAAAWAAFCAEAqAAAAAAAAwDgAAAAAAAAHAAAAABMAAAAVAAAADwD#####AAAAAAAWAAFDAMA3AAAAAAAAwEAAAAAAAAAHAAAAABQAAAAV#####wAAAAEACUNQb2x5Z29uZQD#####AAAAAAACAAAABAAAABIAAAAWAAAAFwAAABL#####AAAAAgAXQ01hcnF1ZUFuZ2xlR2VvbWV0cmlxdWUA#####wAAAAAAAgAAAAFAMAAAAAAAAAAAABYAAAASAAAAFwAAAA7##########w=="
+		}
+		if (this.sup==1){  // calcul direct de l'hypoténuse
+			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $AC=${s02}$ cm.`
+			texte += '</br>'
+			texte += `Calculer $BC$.`
+			texte_corr = 'Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
+			texte_corr += 'D&rsquo;où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'</br>'
+			texte_corr += 'Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`	
+		}
+		else {  // Calcul d'un côté de l'angle droit
+			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $BC=${s12}$ cm.`
+			texte += '</br>'
+			texte += `Calculer $AC$.`
+			texte_corr = 'Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
+			texte_corr +='D&rsquo;où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'</br>'
+			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
+		}
 
-		liste_de_question_to_contenu_sans_numero(this);
-
-	// }end for
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit'];
+		codeMG32 += `
+			var st${numero_de_l_exercice} = "${codeBase64}" ;
+			mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x2", "${y2}");
+			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x1", "${x1}");
+			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
+		` 	
+		this.liste_questions.push(texte);	
+		this.liste_corrections.push(texte_corr);
+		mg32_to_contenu(this);		
+		}
 }
+else {
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		// let type_de_questions_disponibles = [1,2] // 1 calcul de l'hypoténuse | 2 calcul d'un coté de l'angle droit
+		// let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		// for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+					
+			let lettre0 = randint(4,23)
+			let s0 = lettre_depuis_chiffre(lettre0)   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
+			let s1 = lettre_depuis_chiffre(lettre0+1)
+			let s2 = lettre_depuis_chiffre(lettre0+2)
+			let k1 = Math.round((Math.random()*3+3)*10)/10
+			let k2 = Math.round((Math.random()*3+1)*10)/10	
+			let alpha1 = Math.random()*2*Math.PI-Math.PI
+			let alpha1deg=math.round(alpha1*180/Math.PI)
+			let x1 = k1	// coordonnées des deux sommets du triangle
+			let y2 = k2
+			// let x1r = k1*Math.cos(alpha1)  // on fait tourner le triangle d'un angle -180°<alpha1<180° 
+			// let y1r = k1*Math.sin(alpha1)
+			// let x2r = -k2*Math.sin(alpha1)
+			// let y2r = k2*Math.cos(alpha1)
+			
+				
+		
+			let s01= arrondi_virgule(k1,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
+			let s02= arrondi_virgule(k2,1)
+		
+			let carre01=Math.round(k1*k1*100)/100
+			let carre02=Math.round(k2*k2*100)/100
+			let dist12=Math.sqrt(carre01+carre02)	   //calcul de l'hypoténuse
+			dist12 = Math.round(dist12*10)/10		// On ne garde qu'une approximation au dixième pour l'exercice
+			let s12= arrondi_virgule(dist12,1)
+			let carre12=Math.round(dist12*dist12*100)/100
+		
+		
+			let scarre01=arrondi_virgule(carre01,2)		// carremn = distance entre (xm;ym) et (xn;yn) au carré avec 2 décimales
+			let scarre02=arrondi_virgule(carre02,2)		// scarremn = chaine de caractère avec 2 décimales après une virgule.
+			let scarre12=arrondi_virgule(carre12,2)
+			
+			
+			this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
+			this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+			let texte,texte_corr
+			texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
+			texte += '\\item Le côté '+`$[${s0+s1}]$`+' est perpendiculaire au côté '+`$[${s0+s2}]~;$`
+			if (this.sup==1){ //niveau 1 : Calcul de l'hypoténuse
+			
+				// enoncé  niveau 1
+			
+				texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
+				texte += '\\item '+`$${s0+s2+' = '+s02+'~\\text{cm}~;'}$`
+				texte += '\\end{itemize} \\bigskip\n\t  Calculer '+`$${s1+s2}$`+' à 0,1 près. \\end{minipage}'
+			} 
+			else { // niveau 2 : Calcul d'un côté de l'angle droit
+				// enoncé  niveau 2
+			
+				texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+				texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
+				texte += '\\end{itemize} \\bigskip  Calculer '+`$${s0+s2}$`+' à 0,1 près. \\end{minipage}'
+			}
+				texte += '\\begin{minipage}{0.5 \\linewidth}'
+				// dessin de la figure
+				texte += '\n \\begin{tikzpicture}' // Balise début de figure
+				texte += '\n\t \\tkzDefPoints{0/0/'+s0+','+x1+'/0/B,0/'+y2+'/C}' // créer les points du triangle initial 
+						// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
+				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](B) \\tkzGetPoint{'+s1+'}' // transformer le premier point par rotation
+				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](C) \\tkzGetPoint{'+s2+'}' // transformer le deuxième point par rotation
+				texte += '\n\t \\tkzDrawPolygon('+s0+','+s1+','+s2+')' // Trace le triangle
+				// marquer l'angle droit
+				texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1](' + s1 + ')' + '\\tkzGetPoint{B}' 
+				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 90](B) \\tkzGetPoint{C}'
+				texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}' 
+				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 45](A) \\tkzGetPoint{A}'
+				texte += '\n\t \\tkzDrawPolygon('+s0+',B,A,C)' // Trace la marque d'angle droit
+		
+				if (Math.abs(alpha1deg) < 90) { // rotation "angle droit dessous"
+				texte += '\n\t \\tkzLabelPoints[below]('+s0+')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[right]('+s1+')' 
+				texte += '\n\t \\tkzLabelPoints[left]('+s2+')' 
+				}
+				else {		// rotation "angle droit dessus" position du nom inversée 
+				texte += '\n\t \\tkzLabelPoints[above]('+s0+')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[left]('+s1+')' 
+				texte += '\n\t \\tkzLabelPoints[right]('+s2+')' 
+				}
+				texte += '\n \\end{tikzpicture}' // Balise de fin de figure
+				texte +=  '\\end{minipage}'
+		
+				this.liste_questions.push(texte) // on envoie la question
+					// correction 
+				if (this.sup==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
+					texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\ D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\ Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
+				}
+				else {
+					texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\ D\'où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\ Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`
+				
+				}
+						
+				this.liste_corrections.push(texte_corr)
+		
+				liste_de_question_to_contenu_sans_numero(this);
+		
+			// }end for
+			
+		}
+	}
+this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit'];
 }
 
 
