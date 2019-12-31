@@ -5286,13 +5286,13 @@ function Exercice_Thales(){
 			}
 			if (this.sup==1){  // calcul direct de AM et BC : pas de calcul intermédiaire de AN
 				texte = `Dans la figure ci-dessous, on sait que $(MN)$ et $(BC)$ sont parallèles</br> $AB=${s12}$ cm, $AC=${s13}$ cm, $MN=${s45}$ cm et $AN=${s15}$ cm.`
-				texte += '</br>'
+				texte += '</br>Le point A peut être déplacé</br>'
 				texte += `Calculer $AM$ et $BC$.`
 				texte_corr = '<div style="line-height: 3;">Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
 			}
 			else {  // Calcul de AN nécessaire avant de calculer AM et BC
 				texte = `Dans la figure ci-dessous, on sait que $(MN)$ et $(BC)$ sont parallèles, $AB=${s12}$ cm, $AC=${s13}$ cm, $MN=${s45}$ cm et $NC=${s35}$ cm.`
-				texte += '</br>'
+				texte += '</br>Le point A peut être déplacé</br>'
 				texte += `Calculer $AM$ et $BC$.`
 				texte_corr = '<div style="line-height: 3;">Dans le triangle ' + `$${s1 + s2 + s3}$` + ', le segment ' + `$[${s4 + s5}]$` + ' est parallèle au côté ' + `$[${s2 + s3}]$` + '.</br>' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1 + s4, s1 + s2)}=${tex_fraction(s1 + s5, s1 + s3)}=${tex_fraction(s4 + s5, s2 + s3)}.$` + '</br>'
 				if (k>0){
@@ -5476,7 +5476,7 @@ if (sortie_html) {
 		}
 		if (this.sup==1){  // calcul direct de l'hypoténuse
 			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $AC=${s02}$ cm.`
-			texte += '</br>'
+			texte += '</br>Le point A peut être déplacé</br>'
 			texte += `Calculer $BC$.`
 			texte_corr = '<div style="line-height: 3;">Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
 			texte_corr += 'D&rsquo;où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'</br>'
@@ -5484,7 +5484,7 @@ if (sortie_html) {
 		}
 		else {  // Calcul d'un côté de l'angle droit
 			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $BC=${s12}$ cm.`
-			texte += '</br>'
+			texte += '</br>Le point A peut être déplacé</br>'
 			texte += `Calculer $AC$.`
 			texte_corr = '<div style="line-height: 3;">Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
 			texte_corr +='D&rsquo;où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'</br>'
