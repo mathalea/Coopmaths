@@ -5235,6 +5235,8 @@ function Exercice_Thales(){
 	this.titre = "Déterminer une longueur avec la propriété de Thales";
 	this.consigne = "";
 	this.nb_questions = 1;
+	this.nb_questions_modifiable = false;
+	this.spacing_corr = 2.5;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes
@@ -5286,15 +5288,15 @@ function Exercice_Thales(){
 			}
 			if (this.sup==1){  // calcul direct de AM et BC : pas de calcul intermédiaire de AN
 				texte = `Dans la figure ci-dessous, on sait que $(MN)$ et $(BC)$ sont parallèles</br> $AB=${s12}$ cm, $AC=${s13}$ cm, $MN=${s45}$ cm et $AN=${s15}$ cm.`
-				texte += '</br>Le point A peut être déplacé</br>'
+				texte += '</br>Le point A peut être déplacé.</br>'
 				texte += `Calculer $AM$ et $BC$.`
-				texte_corr = '<div style="line-height: 3;">Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
+				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
 			}
 			else {  // Calcul de AN nécessaire avant de calculer AM et BC
 				texte = `Dans la figure ci-dessous, on sait que $(MN)$ et $(BC)$ sont parallèles, $AB=${s12}$ cm, $AC=${s13}$ cm, $MN=${s45}$ cm et $NC=${s35}$ cm.`
 				texte += '</br>Le point A peut être déplacé</br>'
 				texte += `Calculer $AM$ et $BC$.`
-				texte_corr = '<div style="line-height: 3;">Dans le triangle ' + `$${s1 + s2 + s3}$` + ', le segment ' + `$[${s4 + s5}]$` + ' est parallèle au côté ' + `$[${s2 + s3}]$` + '.</br>' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1 + s4, s1 + s2)}=${tex_fraction(s1 + s5, s1 + s3)}=${tex_fraction(s4 + s5, s2 + s3)}.$` + '</br>'
+				texte_corr = 'Dans le triangle ' + `$${s1 + s2 + s3}$` + ', le segment ' + `$[${s4 + s5}]$` + ' est parallèle au côté ' + `$[${s2 + s3}]$` + '.</br>' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1 + s4, s1 + s2)}=${tex_fraction(s1 + s5, s1 + s3)}=${tex_fraction(s4 + s5, s2 + s3)}.$` + '</br>'
 				if (k>0){
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.</br>'
 				}
@@ -5305,7 +5307,7 @@ function Exercice_Thales(){
 
 			texte_corr += 'On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}.$` + '</br>'
 			texte_corr += 'Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~$` + '&nbsp;cm'
-			texte_corr += ' et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~$` + '&nbsp;cm.</div>'
+			texte_corr += ' et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~$` + '&nbsp;cm.'
 
 			codeMG32 += `
 		        var st${numero_de_l_exercice} = "${codeBase64}" ;
@@ -5405,18 +5407,18 @@ function Exercice_Thales(){
 			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
 				texte_corr = 'Le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
 				if (k>0){
-					texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
+					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
 				}
 				else {
-					texte_corr +='\\\\ On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`+'\\bigskip'
+					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`+'\\bigskip'
 				}
 			}
 			else {
-				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
+				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', le segment '+`$[${s4+s5}]$`+' est parallèle au côté '+`$[${s2+s3}]$`+'\\bigskip\n\t'+'.\\\\\n D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
 			}
-			texte_corr += '\\\\ On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip\n\t'
-			texte_corr += '\\\\ Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip\n\t'
-			texte_corr += '\\\\ Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
+			texte_corr += '\\\\\n On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip\n\t'
+			texte_corr += '\\\\\n Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip\n\t'
+			texte_corr += '\\\\\n Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
 			
 			this.liste_corrections.push(texte_corr)
 
@@ -5434,9 +5436,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
 this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
 this.consigne = "";
 this.nb_questions = 1;
+this.nb_questions_modifiable = false ;
 this.nb_cols = 1;
 this.nb_cols_corr = 1;
 this.sup = 1; // 1 valeur exacte | 2 valeur approchée
+this.spacing_corr = 2
 
 if (sortie_html) {
 	this.type_exercice = 'MG32';
@@ -5478,17 +5482,17 @@ if (sortie_html) {
 			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $AC=${s02}$ cm.`
 			texte += '</br>Le point A peut être déplacé</br>'
 			texte += `Calculer $BC$.`
-			texte_corr = '<div style="line-height: 3;">Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
+			texte_corr = 'Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
 			texte_corr += 'D&rsquo;où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'</br>'
-			texte_corr += 'Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}$`+'&nbsb;cm.</div>'
+			texte_corr += 'Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}$`+'&nbsb;cm.'
 		}
 		else {  // Calcul d'un côté de l'angle droit
 			texte = `Dans la figure ci-dessous, le triangle ABC est rectangle en A, $AB=${s01}$ cm, $BC=${s12}$ cm.`
 			texte += '</br>Le point A peut être déplacé</br>'
 			texte += `Calculer $AC$.`
-			texte_corr = '<div style="line-height: 3;">Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
+			texte_corr = 'Dans le triangle ABC rectangle en A D&rsquo;après le Théorème de Pythagore, on a : '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'</br>'
 			texte_corr +='D&rsquo;où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'</br>'
-			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.</div>'
+			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.'
 		}
 
 		codeMG32 += `
@@ -5596,14 +5600,14 @@ else {
 				this.liste_questions.push(texte) // on envoie la question
 					// correction 
 				if (this.sup==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
-					texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
-					texte_corr +='\\\\ D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
-					texte_corr +='\\\\ Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
+					texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\\n D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\\n D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\\n Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
 				}
 				else {
-					texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\ D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
-					texte_corr +='\\\\ D\'où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
-					texte_corr +='\\\\ Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`
+					texte_corr = 'Le triangle '+`$[${s0+s1+s2}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\\n D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\\n D\'où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
+					texte_corr +='\\\\\n Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`
 				
 				}
 						

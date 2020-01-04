@@ -13,19 +13,20 @@ function liste_de_question_to_contenu(argument) {
 
 function liste_de_question_to_contenu_sans_numero(argument) {
 	if (sortie_html) {
-		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions)
-		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_ligne(argument.liste_corrections)	
+		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions,argument.spacing)
+		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_ligne(argument.liste_corrections,argument.spacing_corr)	
 	} else {
-		argument.contenu = tex_consigne(argument.consigne) + tex_multicols(tex_enumerate_sans_numero(argument.liste_questions,argument.spacing,true),argument.nb_cols)
-		argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate_sans_numero(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
+		argument.contenu = tex_consigne(argument.consigne) + tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+		// argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate_sans_numero(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
+		argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_paragraphe(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
 	}
 	
 }
 
 function mg32_to_contenu(argument) {
 	if (sortie_html) {
-		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions);
-		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_enumerate(argument.liste_corrections);
+		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions,argument.spacing);
+		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_ligne(argument.liste_corrections,argument.spacing_corr);
 	} 
 	
 }
@@ -392,6 +393,21 @@ function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
 	return result
 }
 
+function tex_paragraphe(liste,spacing=false){
+	let result =''
+	if (spacing>1){
+			result = `\\begin{spacing}{${spacing}}\n`
+	}
+	 
+	for(let i in liste){
+		result += `\t${liste[i]}\\\\\n`
+	}
+	if (spacing>1){
+		result += '\\end{spacing}'
+	} 
+	return result
+}
+
 
 
 function html_enumerate(liste){
@@ -403,11 +419,19 @@ function html_enumerate(liste){
 	return result
 }
 
-function html_ligne(liste){
+function html_ligne(liste,spacing){
 	let result = '';
-	for(let i in liste){
-		result += liste[i].replace(/\\dotfill/g,'...').replace(/\\\\/g,'<br>') + '</br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+	if (spacing>1) {
+		result = `<div style="line-height: ${spacing};">\n`
 	}
+	for(let i in liste){
+		result += '\t' + liste[i].replace(/\\dotfill/g,'...').replace(/\\\\/g,'<br>') + '</br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+	}
+
+	if (spacing>1) {
+		result += `</div>\n`
+	}
+
 	return result
 }
 
