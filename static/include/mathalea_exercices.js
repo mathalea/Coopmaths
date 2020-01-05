@@ -5237,7 +5237,7 @@ function Exercice_Thales(){
 	this.consigne = "";
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false;
-	this.spacing_corr = 3.5;
+	sortie_html ? this.spacing_corr = 3.5 : this.spacing_corr = 2.5
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes
@@ -5365,47 +5365,47 @@ function Exercice_Thales(){
 			
 		let texte,texte_corr
 		texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
-		texte += '\\item Le segment '+`$[${s4+s5}]$`+' est parallèle au segment '+`$[${s2+s3}]~;$`
+		texte += `\n\t\\item Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.`
 		if (this.sup==1){ //niveau 1 : Calcul direct quatrième proportionnelle
 		
 			// enoncé  niveau 1
 		
-			texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
-			texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
-			texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
-			texte += '\\item '+`$${s1+s5+' = '+s15+'~\\text{cm}.'}$`
+			texte += '\n\t\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+			texte += '\n\t\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
+			texte += '\n\t\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
+			texte += '\n\t\\item '+`$${s1+s5+' = '+s15+'~\\text{cm}.'}$`
 			texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
 		} 
 		else { // niveau 2 : Calcul intermédiaire nécessaire
 		
 			// enoncé  niveau 2
 		
-			texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
-			texte += '\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
-			texte += '\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
-			texte += '\\item '+`$${s3+s5+' = '+s35+'~\\text{cm}.'}$`
+			texte += '\n\t\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+			texte += '\n\t\\item '+`$${s1+s3+' = '+s13+'~\\text{cm}~;'}$`
+			texte += '\n\t\\item '+`$${s4+s5+' = '+s45+'~\\text{cm}~;'}$`
+			texte += '\n\t\\item '+`$${s3+s5+' = '+s35+'~\\text{cm}.'}$`
 			texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
 		}
 			texte += '\\begin{minipage}{0.5 \\linewidth}'
 			// dessin de la figure
 			texte += '\n \\begin{tikzpicture}' // Balise début de figure
-			texte += '\n \\tkzDefPoints{0/0/'+s1+','+x3+'/'+y3+'/'+s3+','+x2+'/'+y2+'/'+s2+'}' // Placer les points du triangle principal
-			texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s2 + ',' + s3 + ')' // Trace le triangle principal
+			texte += '\n\t \\tkzDefPoints{0/0/'+s1+','+x3+'/'+y3+'/'+s3+','+x2+'/'+y2+'/'+s2+'}' // Placer les points du triangle principal
+			texte += '\n\t \\tkzDrawPolygon(' + s1 + ',' + s2 + ',' + s3 + ')' // Trace le triangle principal
 			// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
-			texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s2 + ')' + '\\tkzGetPoint{' + s4 + '}' // Place le premier point du triangle image
-			texte += '\n \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s3 + ')' + '\\tkzGetPoint{' + s5 + '}' // Place le deuxième point du triangle image
-			texte += '\n \\tkzDrawSegment(' + s4 + ',' + s5 + ')'	// Trace le segment
+			texte += '\n\t \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s2 + ')' + '\t\\tkzGetPoint{' + s4 + '}' // Place le premier point du triangle image
+			texte += '\n\t \\tkzDefPointBy[homothety=center ' + s1 + ' ratio ' + k + '](' + s3 + ')' + '\t\\tkzGetPoint{' + s5 + '}' // Place le deuxième point du triangle image
+			texte += '\n\t \\tkzDrawSegment(' + s4 + ',' + s5 + ')'	// Trace le segment
 			if (k > 0) {
-				texte += '\n \\tkzLabelPoints[left](' + s1 + ')' //nomme les points
-				texte += '\n \\tkzLabelPoints[above left](' + s2 + ',' + s4 + ')' //nomme les points
-				texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s5 + ')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[left](' + s1 + ')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[above left](' + s2 + ',' + s4 + ')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[below](' + s3 + ',' + s5 + ')' //nomme les points
 				// Nomme les points au dessus avec above, dessous avec below...
 			}
 			else {		// position papillon -> position du nom inversée et nécessité de tracer le triangle secondaire
-				texte += '\n \\tkzLabelPoints[below](' + s1 + ')' //nomme les points
-				texte += '\n \\tkzLabelPoints[below](' + s3 + ',' + s4 + ')' //nomme les points
-				texte +='\n \\tkzLabelPoints[above](' + s2 + ',' + s5 + ')' //nomme les points
-				texte += '\n \\tkzDrawPolygon(' + s1 + ',' + s4 + ',' + s5 + ')' // Trace le triangle secondaire
+				texte += '\n\t \\tkzLabelPoints[below](' + s1 + ')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[below](' + s3 + ',' + s4 + ')' //nomme les points
+				texte +='\n\t \\tkzLabelPoints[above](' + s2 + ',' + s5 + ')' //nomme les points
+				texte += '\n\t \\tkzDrawPolygon(' + s1 + ',' + s4 + ',' + s5 + ')' // Trace le triangle secondaire
 			}
 			texte += '\n \\end{tikzpicture}' // Balise de fin de figure
 			texte +=  '\\end{minipage}'
@@ -5413,20 +5413,20 @@ function Exercice_Thales(){
 			this.liste_questions.push(texte) // on envoie la question
 				// correction 
 			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
-				texte_corr = 'Les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$ sont parallèles.`+'\\bigskip\n\t'+'.\\\\ D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
+				texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$\\\\\n\t`
 				if (k>0){
-					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`+'\\bigskip'
+					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`
 				}
 				else {
-					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`+'\\bigskip'
+					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`
 				}
 			}
 			else {
-				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$ et $[${s2+s3}]$ sont parallèles.`+'\\bigskip\n\t'+'.\\\\\n D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\bigskip\n\t'
+				texte_corr = `Dans le triangle $${s1+s2+s3}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
 			}
-			texte_corr += '\\\\\n On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`+'\\bigskip\n\t'
-			texte_corr += '\\\\\n Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$`+'\\bigskip\n\t'
-			texte_corr += '\\\\\n Et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$`
+			texte_corr += `\\\\\n On a donc $${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
+			texte_corr += `\\\\\n Soit $${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$.`
+			texte_corr += `\\\\\n Et $${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$.`
 			
 			this.liste_corrections.push(texte_corr)
 
@@ -5445,11 +5445,10 @@ this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
 this.consigne = "";
 this.nb_questions = 1;
 this.nb_questions_modifiable = false ;
-this.spacing_corr = 3.5;
 this.nb_cols = 1;
 this.nb_cols_corr = 1;
 this.sup = 1; // 1 valeur exacte | 2 valeur approchée
-this.spacing_corr = 2
+sortie_html ? this.spacing_corr = 2.5 : this.spacing_corr = 1.5
 
 
 if (sortie_html) {
@@ -5647,20 +5646,20 @@ else {
 			let nom_du_triangle = choice([s0+s1+s2, s0+s2+s1, s1+s0+s2, s1+s2+s0, s2+s0+s1, s2+s1+s0])
 
 			texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
-			texte += '\\item Le côté '+`$[${s0+s1}]$`+' est perpendiculaire au côté '+`$[${s0+s2}]~;$`
+			texte += '\n\t\\item Le côté '+`$[${s0+s1}]$`+' est perpendiculaire au côté '+`$[${s0+s2}]~;$`
 			if (type_de_questions==1){ //niveau 1 : Calcul de l'hypoténuse
 			
 				// enoncé  niveau 1
 			
-				texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
-				texte += '\\item '+`$${s0+s2+' = '+s02+'~\\text{cm}~;'}$`
+				texte += '\n\t\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
+				texte += '\n\t\\item '+`$${s0+s2+' = '+s02+'~\\text{cm}~;'}$`
 				texte += '\\end{itemize} \\bigskip\n\t  Calculer '+`$${s1+s2}$`+' à 0,1 près. \\end{minipage}'
 			} 
 			else { // niveau 2 : Calcul d'un côté de l'angle droit
 				// enoncé  niveau 2
 			
-				texte += '\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
-				texte += '\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
+				texte += '\n\t\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
+				texte += '\n\t\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
 				texte += '\\end{itemize} \\bigskip  Calculer '+`$${s0+s2}$`+' à 0,1 près. \\end{minipage}'
 			}
 				texte += '\\begin{minipage}{0.5 \\linewidth}'
@@ -5694,13 +5693,13 @@ else {
 				this.liste_questions.push(texte) // on envoie la question
 					// correction 
 				if (type_de_questions==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
-					texte_corr = 'Le triangle '+`$[${nom_du_triangle}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\\n D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
-					texte_corr +='\\\\\n D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'\\bigskip\n\t\t'
+					texte_corr = 'Le triangle '+`$${nom_du_triangle}$`+' est rectangle en '+`$${s0}.$`+'\\\\\n D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`
+					texte_corr +='\\\\\n D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`
 					texte_corr +='\\\\\n Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
 				}
 				else {
-					texte_corr = 'Le triangle '+`$[${nom_du_triangle}]$`+' est rectangle en '+`$${s0}.$`+'\\bigskip \n\t\t '+'\\\\\n D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`+'\\bigskip\n\t\t'
-					texte_corr +='\\\\\n D\'où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'\\bigskip\n\t\t'
+					texte_corr = 'Le triangle '+`$${nom_du_triangle}$`+' est rectangle en '+`$${s0}.$`+'\\\\\n D\'après le théorème de Pythagore, on a '+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`
+					texte_corr +='\\\\\n D\'où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`
 					texte_corr +='\\\\\n Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}~\\text{cm}.$`
 				
 				}
