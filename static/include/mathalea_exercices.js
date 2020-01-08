@@ -5240,7 +5240,7 @@ function Exercice_Thales(){
 	sortie_html ? this.spacing_corr = 3.5 : this.spacing_corr = 2.5
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
-	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes
+	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes | 3 version 1&2 sans figure
 	// paramètres communs Html ou Latex
 	let s1='A',s2='B',s3='C',s4='M',s5='N'
 		// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
@@ -5289,15 +5289,16 @@ function Exercice_Thales(){
 			else {codeBase64 ="TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAYfAAADsgAAAQEAAAAAAAAAAQAAACX#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAKQ1BvaW50QmFzZQD#####AAAAAAAWAAFBAMAoAAAAAAAAQCIAAAAAAAAHAAFAczFHrhR64UBxvCj1wo9c#####wAAAAEAFENEcm9pdGVEaXJlY3Rpb25GaXhlAP####8BAAAAAA4AAAEAAQAAAAEBP#AAAAAAAAD#####AAAAAQAPQ1BvaW50TGllRHJvaXRlAP####8BAAAAABAAAUkAwBgAAAAAAAAAAAAAAAAAAAUAAUBHq0OVgQYlAAAAAv####8AAAABAAlDRHJvaXRlQUIA#####wEAAAAAEgAAAQABAAAAAQAAAAP#####AAAAAQAWQ0Ryb2l0ZVBlcnBlbmRpY3VsYWlyZQD#####AQAAAAAOAAABAAEAAAABAAAABP####8AAAABAAlDQ2VyY2xlT0EA#####wEAAAAAAQAAAAEAAAAD#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAUAAAAG#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAADgAAAQUAAQAAAAcAAAAJAP####8BAAAAABAAAUoAwCgAAAAAAADAEAAAAAAAAAUAAgAAAAf#####AAAAAgAHQ1JlcGVyZQD#####AObm5gABAAAAAQAAAAMAAAAJAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAT#wAAAAAAAAAAAAAT#wAAAAAAAA#####wAAAAEACkNVbml0ZXhSZXAA#####wAEdW5pdAAAAAr#####AAAAAQALQ0hvbW90aGV0aWUA#####wAAAAH#####AAAAAQAKQ09wZXJhdGlvbgMAAAABP#AAAAAAAAD#####AAAAAQAPQ1Jlc3VsdGF0VmFsZXVyAAAAC#####8AAAABAAtDUG9pbnRJbWFnZQD#####AQAAAAASAAJXIgEBAAAAAAMAAAAM#####wAAAAEACUNMb25ndWV1cgD#####AAAAAQAAAA3#####AAAAAQAHQ0NhbGN1bAD#####AAJ4MgABMgAAAAFAAAAAAAAAAAAAABEA#####wACeTIAATUAAAABQBQAAAAAAAAAAAARAP####8AAngzAAE2AAAAAUAYAAAAAAAAAAAAEQD#####AAJ5MwACLTH#####AAAAAQAMQ01vaW5zVW5haXJlAAAAAT#wAAAAAAAAAAAAEQD#####AAFrAAMwLjUAAAABP+AAAAAAAAD#####AAAAAQAQQ1BvaW50RGFuc1JlcGVyZQD#####AQAAAAAYAAFaAAAAAAAAAAAAQAgAAAAAAAAHAAAAAAoAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAATAP####8AAAAAABgAAUIAwDAAAAAAAADAQ4AAAAAAAAcAAAAACgAAAA4AAAAPAAAADgAAABAAAAATAP####8AAAAAABgAAUMAAAAAAAAAAABACAAAAAAAAAcAAAAACgAAAA4AAAARAAAADgAAABIAAAAMAP####8AAAAUAAAADgAAABMAAAAPAP####8AAAAAABgAAU0AwDsAAAAAAADANwAAAAAAAAcAAAAAFQAAABcAAAAPAP####8AAAAAABgAAU4AwCgAAAAAAABAAAAAAAAAAAcAAAAAFgAAABf#####AAAAAQAJQ1BvbHlnb25lAP####8AAAAAAAIAAAAEAAAAFgAAABUAAAAUAAAAFgAAABQA#####wAAAAAAAgAAAAQAAAAZAAAAFAAAABgAAAAZ#####wAAAAEAEENTdXJmYWNlUG9seWdvbmUA#####wEAAP8AAAAFAAAAGwAAABUA#####wH#AAAAAAAFAAAAGv####8AAAABABBDTWFjcm9BcHBhcml0aW9uAP####8A#wAAAf####8QQIigo9cKPXFAQuFHrhR64QIAAAAAAAAAAAAAAAABAAAAAAAAAAAABkFwcEFNTgAAAAAAAQAAABwAAAAAFgD#####AP8AAAH#####EECIsKPXCj1xQFQwo9cKPXACAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAZBcHBBQkMAAAAAAAEAAAAdAP####8AAAABABFDTWFjcm9EaXNwYXJpdGlvbgD#####AP8AAAH#####EECL4KPXCj1xQEThR64UeuECAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAdNYXNxQU1OAAAAAAABAAAAHAAAABcA#####wD#AAAB#####xBAi+ij1wo9cUBU8KPXCj1wAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAAHTWFzcUFCQwAAAAAAAQAAAB3#####AAAAAQALQ01hY3JvUGF1c2UA#####wD#AAAB#####xBAiPij1wo9cUBfcKPXCj1wAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAAFUGF1c2UAAAAAAAH#####AAAAAQARQ01hY3JvU3VpdGVNYWNyb3MA#####wD#AAAB#####xBAUcUeuFHrhUB4#Cj1wo9cAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAAKVHJpYW5nbGUgMQAAAAAAAwAAAB8AAAAiAAAAIQAAABkA#####wD#AAAB#####xBAUUUeuFHrhUB7fCj1wo9cAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAAKVHJpYW5nbGUgMgAAAAAAAwAAAB4AAAAiAAAAIAAAAA7##########w=="
 			}
 			if (this.sup==1){  // calcul direct de AM et BC : pas de calcul intermédiaire de AN
-				texte = `Dans la figure ci-dessous, les droites $(MN)$ et $(BC)$ sont parallèles.</br> $AB=${s12}$ cm, $AC=${s13}$ cm, $MN=${s45}$ cm et $AN=${s15}$ cm.`
-				texte += '</br>Le point $A$ peut être déplacé.</br>'
-				texte += `Calculer $AM$ et $BC$.`
+				texte = `Dans la figure ci-dessous, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
+				texte += `</br>Le point $${s1}$ peut être déplacé.</br>`
+				texte += `Calculer $${s1+s4}$ et $${s2+s3}$.`
 				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
 			}
-			else {  // Calcul de AN nécessaire avant de calculer AM et BC
-				texte = `Dans la figure ci-dessous, les droites $(MN)$ et $(BC)$ sont parallèles.</br> $AB=${s12}$ cm, $AC=${s13}$ cm, $MN=${s45}$ cm et $NC=${s35}$ cm.`
-				texte += '</br>Le point $A$ peut être déplacé.</br>'
-				texte += `Calculer $AM$ et $BC$.`
+			else if (this.sup==2)
+			 {  // Calcul de AN nécessaire avant de calculer AM et BC
+				texte = `Dans la figure ci-dessous, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
+				texte += `</br>Le point $${s1}$ peut être déplacé.</br>`
+				texte += `Calculer $${s1+s4}$ et $${s2+s3}$.`
 				if (k>0) {
 					texte_corr = 'Dans le triangle ' + `$${s1+s2+s3}$` + ', les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.</br>' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '</br>'
 				} else {
@@ -5310,11 +5311,30 @@ function Exercice_Thales(){
 					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`+'&nbsp;cm.</br>'
 				}
 			}
-
+			else if (randint(1,2)==1) {
+				texte = `$${s1}$, $${s2}$ et $${s3}$ sont trois point distincts. ${s4} appartient à $[${s1+s2}]$ et ${s5} appartient à $[${s1+s3}]$ tel que les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
+				texte += `</br>Calculer $${s1+s4}$ et $${s2+s3}$.`
+				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
+			}
+			else {
+				texte = `Les droites $(${s2+s4})$ et $(${s5+s3})$ sont sécantes en ${s1}, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
+				texte += `</br>Calculer $${s1+s4}$ et $${s2+s3}$.`
+				if (k>0) {
+					texte_corr = 'Dans le triangle ' + `$${s1+s2+s3}$` + ', les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.</br>' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '</br>'
+				} else {
+					texte_corr = `Les points $${s2}$, $${s1}$, $${s5}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br>` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '</br>'
+				}
+				if (k>0){
+					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.</br>'
+				}
+				else {
+					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`+'&nbsp;cm.</br>'
+				}
+			}
 			texte_corr += 'On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}.$` + '</br>'
 			texte_corr += 'Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~$` + '&nbsp;cm'
 			texte_corr += ' et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~$` + '&nbsp;cm.'
-
+			if (this.sup<3) {
 			codeMG32 += `
 		        var st${numero_de_l_exercice} = "${codeBase64}" ;
 		        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
@@ -5323,7 +5343,8 @@ function Exercice_Thales(){
 		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x3", "${x3}");
 				mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "y3", "${y3}");
 				mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "k", "${k}");
-      	      ` 	
+				` 	
+			} else {this.taille_div_MG32 = [700,5]}
 			this.liste_questions.push(texte);	
 			this.liste_corrections.push(texte_corr);
 			mg32_to_contenu(this);		
@@ -5436,7 +5457,7 @@ function Exercice_Thales(){
 
 	}
 	
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire'];
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire\n 3 : Sans figure'];
 }
 
 function Exercice_Pythagore(){
