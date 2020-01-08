@@ -5600,7 +5600,7 @@ if (sortie_html) {
 			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x1", "${x1}");
 			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
 		` 	
-		}
+		} else {this.taille_div_MG32 = [700,5]}
 		this.liste_questions.push(texte);	
 		this.liste_corrections.push(texte_corr);
 		mg32_to_contenu(this);
