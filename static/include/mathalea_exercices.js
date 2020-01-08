@@ -5447,7 +5447,7 @@ this.nb_questions = 1;
 this.nb_questions_modifiable = false ;
 this.nb_cols = 1;
 this.nb_cols_corr = 1;
-this.sup = 1; // 1 valeur exacte | 2 valeur approchée
+this.sup = 1; // 1 calcul de l'hypoténuse 2 calcul d'un côté de l'angle droit 
 sortie_html ? this.spacing_corr = 2.5 : this.spacing_corr = 1.5
 
 
@@ -5466,6 +5466,9 @@ if (sortie_html) {
 		}
 		if (this.sup==3) {
 			type_de_questions = randint(1,2) //un des deux calculs
+		}
+		if (this.sup==4) {
+			type_de_questions = randint(3,4)
 		}
 		
 			let s0 = 'A'   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
@@ -5566,7 +5569,7 @@ if (sortie_html) {
 			texte_corr += 'D&rsquo;où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'</br>'
 			texte_corr += 'Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}$`+'&nbsp;cm.'
 		}
-		else { // Calcul d'un côté de l'angle droit
+		if (type_de_questions ==2) { // Calcul d'un côté de l'angle droit
 			texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$, $${s0+s1}=${s01}$ cm, $${s1+s2}=${s12}$ cm.`
 			texte += `</br>Le point $${s0}$ peut être déplacé</br>`
 			texte += `Calculer $${s0+s2}$.`
@@ -5574,7 +5577,22 @@ if (sortie_html) {
 			texte_corr +='D&rsquo;où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'</br>'
 			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.'
 		}
-
+		if (type_de_questions==3) { // calcul d'hypoténuse sans figure
+			texte = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, $${s0+s1}=${s01}$ cm, $${s0+s2}=${s02}$ cm.`
+			texte += `</br>Calculer $${s1+s2}$.`
+			texte_corr = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, d&rsquo;après le théorème de Pythagore, on a : $${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$</br>`
+			texte_corr += 'D&rsquo;où '+`$${s1+s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02+carre01,2)}.$`+'</br>'
+			texte_corr += 'Soit '+`$${s1+s2}~=~\\sqrt{${arrondi_virgule(carre02+carre01,2)}}~\\approx${s12}$`+'&nbsp;cm.'
+		}
+		
+		if (type_de_questions==4) {
+			texte = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, $${s0+s1}=${s01}$ cm, $${s1+s2}=${s12}$ cm.`
+			texte += `</br>Calculer $${s0+s2}$.`
+			texte_corr = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, d&rsquo;après le théorème de Pythagore, on a : $${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$</br>`
+			texte_corr +='D&rsquo;où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'</br>'
+			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.'
+		}
+		if (type_de_questions<3) {
 		codeMG32 += `
 			var st${numero_de_l_exercice} = "${codeBase64}" ;
 			mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
@@ -5582,9 +5600,11 @@ if (sortie_html) {
 			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x1", "${x1}");
 			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
 		` 	
+		}
 		this.liste_questions.push(texte);	
 		this.liste_corrections.push(texte_corr);
-		mg32_to_contenu(this);		
+		mg32_to_contenu(this);
+			
 		}
 }
 else {
@@ -5712,7 +5732,7 @@ else {
 			
 		}
 	}
-this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit\n 3 : Calcul d\'un côté quelconque'];
+this.besoin_formulaire_numerique = ['Niveau de difficulté',4,'1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit\n 3 : Calcul d\'un côté quelconque\n 4 : Sans la figure'];
 }
 
 
