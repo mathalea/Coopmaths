@@ -550,3 +550,80 @@ function itemize(tableau_de_texte){
 	}
 	return texte
 }
+
+
+
+
+// function ajoute_une_figure_MG32(numero_de_l_exercice) {
+// 	let svgOptions = {
+// 		idSvg: `MG32svg${numero_de_l_exercice}`, width: `${exercice[numero_de_l_exercice].taille_div_MG32[0]}`, height: `${exercice[numero_de_l_exercice].taille_div_MG32[1]}`
+// 	}
+
+// 	let mtgOptions = {
+// 		fig: exercice[numero_de_l_exercice].MG32codeBase64,
+// 		isEditable: false
+// 	}
+
+// 	mtgLoad(`MG32div${numero_de_l_exercice}`, svgOptions, mtgOptions, function (error, mtgAppPlayer) {
+// 		if (error) return console.error(error)
+// 		if (!window.mtg32App) window.mtg32App = mtgAppPlayer
+// 		})
+// }
+
+
+function MG32_modifie_figure(numero_figure) {
+	let code_pour_modifier_la_figure = exercice[numero_figure].MG32code_pour_modifier_la_figure
+	let modification = new Function('numero_figure',code_pour_modifier_la_figure)
+	modification(numero_figure);
+}
+
+function MG32_modifie_toutes_les_figures() {
+	for (let i = 0; i < liste_des_exercices.length; i++) {
+			if (exercice[i].type_exercice=='MG32'){
+				MG32_modifie_figure(i)
+			}
+	}
+}
+
+function MG32_ajouter_figure(numero_de_l_exercice) {
+	MG32_tableau_de_figures.push(
+  // pour chaque figure on précise ici ses options
+	  {
+	  	idContainer: `MG32div${numero_de_l_exercice}`,
+	  	svgOptions: {
+	  		width: `${exercice[numero_de_l_exercice].taille_div_MG32[0]}`, 
+	  		height: `${exercice[numero_de_l_exercice].taille_div_MG32[1]}`, 
+	  		idSvg: `MG32svg${numero_de_l_exercice}`
+	  	},
+	  	mtgOptions: {
+	  		fig: exercice[numero_de_l_exercice].MG32codeBase64,
+	  		isEditable: false
+	  	}
+	  }
+	)	
+}
+
+
+// pour chaque figure on récupère une promesse de chargement, 
+// on lance tout en parallèle, 
+// et quand toutes seront résolues on continue
+
+function MG32_tracer_toutes_les_figures() {
+	if (window.mtg32App) {
+		for (var i = 0; i < mtg32App.docs.length; i++) {
+			mtg32App.removeDoc(mtg32App.docs[i].idDoc)
+		}	
+	}
+	Promise.all(MG32_tableau_de_figures.map(({idContainer, svgOptions, mtgOptions}) => mtgLoad(idContainer, svgOptions, mtgOptions)))
+	  .then(results => {
+	    // results est le tableau des valeurs des promesses résolues, avec la même instance du player pour chacune, la 1re valeur nous suffit donc
+	    // if (!window.mtg32App) window.mtg32App = results[0]
+	    window.mtg32App = results[0]
+	    // on peut l'utiliser…
+		MG32_modifie_toutes_les_figures()
+
+	  })
+	  .catch(error => console.error(error))
+}
+
+	

@@ -3875,17 +3875,20 @@ function Aire_de_triangles(){
 		texte_corr+="\\\\\\\\"
 		texte_corr+=`$\\mathcal{A}_{ABC}=\\dfrac{1}{2}\\times MN\\times IO=\\dfrac{1}{2}\\times${c3}~\\text{cm}\\times ${h3}~\\text{cm}=${tex_nombre(Algebrite.eval(c3*h3/2))}~\\text{cm}^2$`	
 		
-		codeMG32 += `
-	        var st${numero_de_l_exercice} = "${codeBase64}" ;
-	        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "c1", "${c1}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "c2", "${c2}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "c3", "${c3}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "h1", "${h1}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "h2", "${h2}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "h3", "${h3}");
-	        
+		
+
+		this.MG32codeBase64 = codeBase64
+		this.MG32code_pour_modifier_la_figure = `
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "c1", "${c1}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "c2", "${c2}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "c3", "${c3}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "h1", "${h1}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "h2", "${h2}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "h3", "${h3}");
+	        mtg32App.calculate("MG32svg${numero_de_l_exercice}");
+	        mtg32App.updateDisplay("MG32svg${numero_de_l_exercice}");
 	      ` 	
+
 		
 			
 		this.liste_corrections.push(texte_corr);
@@ -3995,11 +3998,11 @@ function Perimetre_aire_disques(pa=3){
 		
 		codeMG32 += `
 	        var st${numero_de_l_exercice} = "${codeBase64}" ;
-	        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r1", "${r1}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r2", "${r2}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r3", "${r3}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r4", "${r4}");
+	        mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r1", "${r1}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r2", "${r2}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r3", "${r3}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r4", "${r4}");
 	      ` 	
 		
 			
@@ -4188,15 +4191,15 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 			
 		}
 		
-		
-		codeMG32 += `
-	        var st${numero_de_l_exercice} = "${codeBase64}" ;
-	        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r", "${r}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r2", "${r2}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "r3", "${r3}");
+		this.MG32codeBase64 = codeBase64
+		this.MG32code_pour_modifier_la_figure = `
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r", "${r}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r2", "${r2}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r3", "${r3}");
+	        mtg32App.calculate("MG32svg${numero_de_l_exercice}");
+	        mtg32App.display("MG32svg${numero_de_l_exercice}");
 	      ` 	
-		
+	
 			
 		this.liste_corrections.push(texte_corr);
 		mg32_to_contenu(this);		
@@ -4249,12 +4252,12 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 		
 		codeMG32 += `
 	        var st${numero_de_l_exercice} = "${codeBase64}" ;
-	        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "c", "${c}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "L", "${L}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "l", "${l}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "a", "${a}");
-	        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "b", "${b}");
+	        mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "c", "${c}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "L", "${L}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "l", "${l}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "a", "${a}");
+	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "b", "${b}");
 	      ` 	
 		
 			
@@ -5317,12 +5320,12 @@ function Exercice_Thales(){
 
 			codeMG32 += `
 		        var st${numero_de_l_exercice} = "${codeBase64}" ;
-		        mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x2", "${x2}");
-		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "y2", "${y2}");
-		        mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x3", "${x3}");
-				mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "y3", "${y3}");
-				mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "k", "${k}");
+		        mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x2", "${x2}");
+		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y2", "${y2}");
+		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x3", "${x3}");
+				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y3", "${y3}");
+				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "k", "${k}");
       	      ` 	
 			this.liste_questions.push(texte);	
 			this.liste_corrections.push(texte_corr);
@@ -5577,10 +5580,10 @@ if (sortie_html) {
 
 		codeMG32 += `
 			var st${numero_de_l_exercice} = "${codeBase64}" ;
-			mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x2", "${y2}");
-			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x1", "${x1}");
-			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
+			mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+			mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x2", "${y2}");
+			mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x1", "${x1}");
+			mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
 		` 	
 		this.liste_questions.push(texte);	
 		this.liste_corrections.push(texte_corr);
