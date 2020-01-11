@@ -3886,7 +3886,7 @@ function Aire_de_triangles(){
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "h2", "${h2}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "h3", "${h3}");
 	        mtg32App.calculate("MG32svg${numero_de_l_exercice}");
-	        mtg32App.updateDisplay("MG32svg${numero_de_l_exercice}");
+	        mtg32App.display("MG32svg${numero_de_l_exercice}");
 	      ` 	
 
 		
@@ -3996,13 +3996,15 @@ function Perimetre_aire_disques(pa=3){
 			texte_corr += `$\\mathcal{A}_4=${r4}\\times${r4}\\times\\pi=${r4*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r4*r4*Math.PI),1))}~\\text{cm}^2$\\\\`
 		}
 		
-		codeMG32 += `
-	        var st${numero_de_l_exercice} = "${codeBase64}" ;
-	        mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+
+		this.MG32codeBase64 = codeBase64
+		this.MG32code_pour_modifier_la_figure = `
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r1", "${r1}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r2", "${r2}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r3", "${r3}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "r4", "${r4}");
+	        mtg32App.calculate("MG32svg${numero_de_l_exercice}");
+	        mtg32App.display("MG32svg${numero_de_l_exercice}");
 	      ` 	
 		
 			
@@ -4249,15 +4251,15 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 		texte_corr += `$\\mathcal{A}_{IJK}=${a}~\\text{cm}\\times${b}~\\text{cm}\\div2=${tex_nombre(Algebrite.eval(a*b/2))}~\\text{cm}^2$`
 		
 
-		
-		codeMG32 += `
-	        var st${numero_de_l_exercice} = "${codeBase64}" ;
-	        mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+		this.MG32codeBase64 = codeBase64
+		this.MG32code_pour_modifier_la_figure = `
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "c", "${c}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "L", "${L}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "l", "${l}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "a", "${a}");
 	        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "b", "${b}");
+	        mtg32App.calculate("MG32svg${numero_de_l_exercice}");
+	        mtg32App.display("MG32svg${numero_de_l_exercice}");
 	      ` 	
 		
 			
@@ -5318,14 +5320,15 @@ function Exercice_Thales(){
 			texte_corr += 'Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~$` + '&nbsp;cm'
 			texte_corr += ' et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~$` + '&nbsp;cm.'
 
-			codeMG32 += `
-		        var st${numero_de_l_exercice} = "${codeBase64}" ;
-		        mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x2", "${x2}");
+
+			this.MG32codeBase64 = codeBase64
+			this.MG32code_pour_modifier_la_figure = `
 		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y2", "${y2}");
 		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x3", "${x3}");
 				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y3", "${y3}");
 				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "k", "${k}");
+				mtg32App.calculate("MG32svg${numero_de_l_exercice}");
+	        	mtg32App.display("MG32svg${numero_de_l_exercice}");
       	      ` 	
 			this.liste_questions.push(texte);	
 			this.liste_corrections.push(texte_corr);
@@ -5477,7 +5480,7 @@ if (sortie_html) {
 			let k1 = Math.round((Math.random()*3+3)*10)/10
 			let k2 = Math.round((Math.random()*3+1)*10)/10	
 			let alpha1 = Math.random()*Math.PI-Math.PI/2
-			let alpha1deg=math.round(alpha1*180/Math.PI)
+			let alpha1deg=Math.round(alpha1*180/Math.PI)
 			let x1 = k1	// coordonnées des deux sommets du triangle
 			let y2 = k2
 			let s01= arrondi_virgule(k1,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
@@ -5578,12 +5581,13 @@ if (sortie_html) {
 			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.'
 		}
 
-		codeMG32 += `
-			var st${numero_de_l_exercice} = "${codeBase64}" ;
-			mtg32App.addDoc("MG32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+		this.MG32codeBase64 = codeBase64
+		this.MG32code_pour_modifier_la_figure = `
 			mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x2", "${y2}");
 			mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x1", "${x1}");
 			mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
+			mtg32App.calculate("MG32svg${numero_de_l_exercice}");
+	        mtg32App.display("MG32svg${numero_de_l_exercice}");
 		` 	
 		this.liste_questions.push(texte);	
 		this.liste_corrections.push(texte_corr);

@@ -573,6 +573,10 @@ function itemize(tableau_de_texte){
 
 function MG32_modifie_figure(numero_figure) {
 	let code_pour_modifier_la_figure = exercice[numero_figure].MG32code_pour_modifier_la_figure
+	if (window.mtg32App.docs.length==1){
+		code_pour_modifier_la_figure.replace("display","updateDisplay")
+
+	}
 	let modification = new Function('numero_figure',code_pour_modifier_la_figure)
 	modification(numero_figure);
 }
@@ -586,6 +590,11 @@ function MG32_modifie_toutes_les_figures() {
 }
 
 function MG32_ajouter_figure(numero_de_l_exercice) {
+	if (window.mtg32App) {
+		for (var i = 0; i < mtg32App.docs.length; i++) {
+			mtg32App.removeDoc(mtg32App.docs[i].idDoc)
+		}	
+	}
 	MG32_tableau_de_figures.push(
   // pour chaque figure on précise ici ses options
 	  {
@@ -609,11 +618,7 @@ function MG32_ajouter_figure(numero_de_l_exercice) {
 // et quand toutes seront résolues on continue
 
 function MG32_tracer_toutes_les_figures() {
-	if (window.mtg32App) {
-		for (var i = 0; i < mtg32App.docs.length; i++) {
-			mtg32App.removeDoc(mtg32App.docs[i].idDoc)
-		}	
-	}
+	
 	Promise.all(MG32_tableau_de_figures.map(({idContainer, svgOptions, mtgOptions}) => mtgLoad(idContainer, svgOptions, mtgOptions)))
 	  .then(results => {
 	    // results est le tableau des valeurs des promesses résolues, avec la même instance du player pour chacune, la 1re valeur nous suffit donc
