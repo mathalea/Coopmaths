@@ -55,7 +55,9 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 - Évaluation à la carte (liste d'exercices différenciée élève par élève).
 - Intégration d'un exercice statique (choisi au hasard dans un répertoire donné).
 - ~~Mise à jour de KaTeX~~ (annulée pour cause de bug sur les traits de fractions).
-- Ajout d'exercices de calcul littéral (Jean Claude Lhote).
+- Arrivée de Jean-Claude Lhote pour la programmation d'exercices.
+- Ajout d'exercices de calcul littéral.
+- Ajout d'exercices sur les théorèmes de Thalès et de Pythagore.
 
 #### 08/19
 

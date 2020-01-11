@@ -402,16 +402,16 @@ function mise_a_jour_du_code(){
 	
 	// création des figures MG32 (géométrie dynamique)	
 
-	codeMG32=``;
+	window.MG32_tableau_de_figures = []
 	 // code pour la sortie HTML
 	let code1 ='', code2='', code_LaTeX = '';
 	if (liste_des_exercices.length > 0) {
 		for (let i = 0; i < liste_des_exercices.length; i++) {
-			exercice[i].nouvelle_version(i+1);
+			exercice[i].nouvelle_version(i);
 			//code1 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 			code1 +=  exercice[i].contenu;
 			if (exercice[i].type_exercice=='MG32'){
-				code1 += `<div><svg id ="mtg32svg${i+1}" width=${exercice[i].taille_div_MG32[0]} height=${exercice[i].taille_div_MG32[1]} xmlns="http://www.w3.org/2000/svg"></svg></div>`	
+				code1 += `<div id="MG32div${i}"></div>`;	
 			}
 			// code2 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 			code2 +=  exercice[i].contenu_correction;
@@ -432,22 +432,13 @@ function mise_a_jour_du_code(){
 		{left: "$", right: "$", display: false},
 		{left: "$$", right: "$$", display: true}
 		]})
-	
-
-
-
-	// Exécute le code MG32
-	let codeMG32complet = `
-	var mtg32App = new mtg32.mtg32App();
-	    function mtg32start() {
-	    mtg32loadFigures();
-	    mtg32App.calculateAndDisplayAll();
-	      }
-	      function mtg32loadFigures() {
-	`+ codeMG32 + `}
-		MathJax.Hub.Queue(function() {mtg32start()});`
-	var F=new Function (codeMG32complet);
-	return(F());
+	//Ajoute figures MG32
+		for (let i = 0; i < liste_des_exercices.length; i++) {
+			if (exercice[i].type_exercice=='MG32'){
+				MG32_ajouter_figure(i)
+			}
+		}
+		MG32_tracer_toutes_les_figures()
 
 
 	
