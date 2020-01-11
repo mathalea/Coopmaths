@@ -88,6 +88,7 @@ var liste_des_exercices_disponibles = {
 		'3N11' : Double_distributivite,
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
+		'3N14' : Résoudre_une_equation_produit_nul,
 		'3G10' : Exercice_Thales,
 		'2N10' : Developper_Identites_remarquables2,
 		'2N11' : Factoriser_Identites_remarquables2,
@@ -5259,15 +5260,15 @@ function Exercice_Thales(){
 		this.nouvelle_version = function(numero_de_l_exercice){
 			this.liste_questions = [];
 			this.liste_corrections = []; // Liste de questions corrigées
-			let lettre1 = randint(11,25)	// aleatoirisation du nom des points
+			let lettre1 = randint(15,25)	// aleatoirisation du nom des points
 			let s1 = lettre_depuis_chiffre(lettre1)
-			lettre2 = randint(11, 25, [lettre1])
+			lettre2 = randint(15, 25, [lettre1])
 			let s2 = lettre_depuis_chiffre(lettre2)
-			lettre3 = randint(11, 25, [lettre1, lettre2])
+			lettre3 = randint(15, 25, [lettre1, lettre2])
 			let s3 = lettre_depuis_chiffre(lettre3)
-			lettre4 = randint(11, 25, [lettre1, lettre2, lettre3])
+			lettre4 = randint(15, 25, [lettre1, lettre2, lettre3])
 			let s4 = lettre_depuis_chiffre(lettre4)
-			lettre5 = randint(11, 25, [lettre1, lettre2, lettre3, lettre4])
+			lettre5 = randint(15, 25, [lettre1, lettre2, lettre3, lettre4])
 			let s5 = lettre_depuis_chiffre(lettre5)
 			let x2 = randint(2,4)
 			let y2 = randint(3, 5)
@@ -5334,7 +5335,7 @@ function Exercice_Thales(){
 				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
 			}
 			else {
-				texte = `Les droites $(${s2+s4})$ et $(${s5+s3})$ sont sécantes en ${s1}, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
+				texte = `Les droites $(${s2+s4})$ et $(${s5+s3})$ sont sécantes en $${s1}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
 				texte += `</br>Calculer $${s1+s4}$ et $${s2+s3}$.`
 				if (k>0) {
 					texte_corr = 'Dans le triangle ' + `$${s1+s2+s3}$` + ', les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.</br>' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '</br>'
@@ -5781,6 +5782,62 @@ function Exercice_Pythagore() {
 		}
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 4, '1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit\n 3 : Calcul d\'un côté quelconque\n 4 : Sans la figure'];
+}
+
+function Résoudre_une_equation_produit_nul(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Résoudre une équation produit nul";
+	this.consigne = "Résoudre les équations suivantes";
+	this.nb_questions = 5;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1; // niveaux 1: coefficient de x = 1 | 2:coefficient de x>=1 | 3:coefficient de x rationnel
+	// this.sup2 = false; // avec des nombres décimaux
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_questions
+		switch (this.sup) {
+			case 1: type_de_questions=combinaison_listes([1],this.nb_questions)
+				break;
+			case 2: type_de_questions=combinaison_listes([2],this.nb_questions)
+				break;
+			case 3: type_de_questions=combinaison_listes([3],this.nb_questions)
+				break;
+			case 4: type_de_questions=combinaison_listes([1,1,2,2,3],this.nb_questions)
+
+		}
+		for (let i = 0, a, b, c, d, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+		this.liste_questions = []; // Liste de questions
+		switch (type_de_questions[i]) {
+			case 1: b = randint(1,20); // (x+a)(x+b)=0 avec a et b entiers
+					d = randint(1,20,[b])
+				texte = `$(x+${b})(x+${d})=0$`
+				texte_coor = 'Un produit est nul si l\'un au moins de ses facteurs est nul'
+				texte_corr += `\\\\\n $(x+${b})(x+${d})=0 si x+${b}=0 ou si x+${d}=0`
+				texte_corr += `\\\\\n Donc si x=${0-b} ou si x=${0-d}`
+				break;
+			case 2: a = randint(2,6); 	//(ax+b)(cx+d)=0  avec b/a et d/c entiers.
+					b = Math.round(randint(1,5)*a);
+					c = randint(2,6,[a]);
+					d = Math.round(randint(1,5)*c);
+				break;
+			case 3: a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
+					b = randint(1,20);
+					c = randint(2,9,[a]);
+					d = Math.round(randint(1,5)*c);
+				break;
+		}
+		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			i++;
+		}
+		cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['niveau',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
 }
 
 
