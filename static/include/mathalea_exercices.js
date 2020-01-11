@@ -5259,7 +5259,7 @@ function Exercice_Thales(){
 		this.nouvelle_version = function(numero_de_l_exercice){
 			this.liste_questions = [];
 			this.liste_corrections = []; // Liste de questions corrigées
-			let lettre1 = randint(11,25)
+			let lettre1 = randint(11,25)	// aleatoirisation du nom des points
 			let s1 = lettre_depuis_chiffre(lettre1)
 			lettre2 = randint(11, 25, [lettre1])
 			let s2 = lettre_depuis_chiffre(lettre2)
@@ -5383,7 +5383,7 @@ function Exercice_Thales(){
 		this.nouvelle_version = function(){
 		this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
 		this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
-		let lettre1 = randint(11,25)
+		let lettre1 = randint(11,25)  // aleatoirisation du nom des points
 		let s1 = lettre_depuis_chiffre(lettre1)
 		lettre2 = randint(11, 25, [lettre1])
 		let s2 = lettre_depuis_chiffre(lettre2)
@@ -5540,7 +5540,7 @@ function Exercice_Pythagore() {
 		this.nouvelle_version = function (numero_de_l_exercice) {
 			this.liste_questions = [];
 			this.liste_corrections = []; // Liste de questions corrigées
-			let lettre0 = randint(11, 25)
+			let lettre0 = randint(11, 25)  // aleatoirisation du nom des points
 			let s0 = lettre_depuis_chiffre(lettre0)
 			lettre1 = randint(11, 25, [lettre0])
 			let s1 = lettre_depuis_chiffre(lettre1)
@@ -5645,7 +5645,7 @@ function Exercice_Pythagore() {
 		this.nouvelle_version = function () {
 			this.liste_questions = []; // Liste de questions
 			this.liste_corrections = []; // Liste de questions corrigées
-			let lettre0 = randint(11, 25)
+			let lettre0 = randint(11, 25) // aleatoirisation du nom des points
 			let s0 = lettre_depuis_chiffre(lettre0)
 			lettre1 = randint(11, 25, [lettre0])
 			let s1 = lettre_depuis_chiffre(lettre1)
