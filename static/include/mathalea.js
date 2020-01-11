@@ -380,7 +380,6 @@ function mise_a_jour_du_code(){
 	
 	// création des figures MG32 (géométrie dynamique)	
 	
-	window.code_exercice = [] // tableau de [code exercice,code correction]
 	window.MG32_tableau_de_figures = []
 	if (sortie_html){ // code pour la sortie HTML
 		
