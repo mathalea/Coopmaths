@@ -5337,7 +5337,7 @@ function Exercice_Thales(){
 				}
 			}
 			else if (randint(1,2)==1) {
-				texte = `$${s1}$, $${s2}$ et $${s3}$ sont trois point distincts. ${s4} appartient à $[${s1+s2}]$ et ${s5} appartient à $[${s1+s3}]$ tel que les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
+				texte = `$${s1}$, $${s2}$ et $${s3}$ sont trois point distincts. $${s4}$ appartient à $[${s1+s2}]$ et $${s5}$ appartient à $[${s1+s3}]$ tel que les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
 				texte += `</br>Calculer $${s1+s4}$ et $${s2+s3}$.`
 				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
 				// texte_corr = 'Les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.</br> Les droites '+`$(${s2+s4})$` + ' et ' + `$(${s3+s5})$` + ' sont sécantes en '+`$${s1}`+'</br>D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '</br>'
