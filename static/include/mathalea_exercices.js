@@ -3445,7 +3445,7 @@ function Exercice_equation1(){
 			texte_corr = '$ '+a+'x'+ecriture_algebrique(b)+' = 0$\n\n'+'$ '+a+'x'+ecriture_algebrique(b)+ecriture_algebrique(-b)+' = 0'+ecriture_algebrique(-b)+'$\n\n';
 			texte_corr += '$ x = '+ tex_fraction(-1*b,a);
 			if (pgcd(Math.abs(a),Math.abs(b))>1){
-				texte_corr += ' = ' + math.parse(Algebrite.run(-1*b+'/('+a+')')).toTex()+'$'
+				texte_corr += ' = ' + Math.parse(Algebrite.run(-1*b+'/('+a+')')).toTex()+'$'
 			} else {
 				texte_corr += '$'
 			}
