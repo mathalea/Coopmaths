@@ -88,7 +88,7 @@ var liste_des_exercices_disponibles = {
 		'3N11' : Double_distributivite,
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
-		'3N14' : Résoudre_une_equation_produit_nul,
+		'3N14' : Resoudre_une_equation_produit_nul,
 		'3G10' : Exercice_Thales,
 		'2N10' : Developper_Identites_remarquables2,
 		'2N11' : Factoriser_Identites_remarquables2,
@@ -5793,7 +5793,7 @@ function Exercice_Pythagore() {
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 4, '1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit\n 3 : Calcul d\'un côté quelconque\n 4 : Sans la figure'];
 }
 
-function Résoudre_une_equation_produit_nul(){
+function Resoudre_une_equation_produit_nul(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Résoudre une équation produit nul";
 	this.consigne = "Résoudre les équations suivantes";
