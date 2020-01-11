@@ -5669,39 +5669,68 @@ else {
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		
+		let type_de_questions
+		if (this.sup==1) {
+			type_de_questions = 1 //calcul de l'hypoténuse
+		}
+		if (this.sup==2) {
+			type_de_questions = 2 //calcul d'un côté de l'angle droit
+		}
+		if (this.sup==3) {
+			type_de_questions = randint(1,2) //un des deux calculs
+		}
+		if (this.sup==4) {
+			type_de_questions = randint(3,4) // un des deux calculs sans figure
+		}
 		// let type_de_questions_disponibles = [1,2] // 1 calcul de l'hypoténuse | 2 calcul d'un coté de l'angle droit
 		// let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
 		// for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
-					
-			let type_de_questions
-			if (this.sup==1) {
-				type_de_questions = 1 //calcul de l'hypoténuse
+			let lettres=choice(["ABC","BAC","MNO","RST"])
+
+			switch (lettres){
+				case "ABC" : 
+					s0="A"
+					s1="B"
+					s2="C"
+					break;
+				case "BAC" : 
+					s0="B"
+					s1="A"
+					s2="C"
+					break;
+				case "MNO" : 
+					s0="M"
+					s1="N"
+					s2="O"
+					break;
+				case "RST" : 
+					s0="R"
+					s1="S"
+					s2="T"
+					break;
+				case "TUV" : 
+					s0="T"
+					s1="U"
+					s2="V"
+					break;
 			}
-			if (this.sup==2) {
-				alert('2')
-				type_de_questions = 2 //calcul d'un côté de l'angle droit
-			}
-			if (this.sup==3) {
-				type_de_questions = randint(1,2) //un des deux calculs
-			}
-			let lettre0 = randint(4,23)
-			let s0 = lettre_depuis_chiffre(lettre0)   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
-			let s1 = lettre_depuis_chiffre(lettre0+1)
-			let s2 = lettre_depuis_chiffre(lettre0+2)
+	
+			let nom_du_triangle = choice([s0+s1+s2, s0+s2+s1, s1+s0+s2, s1+s2+s0, s2+s0+s1, s2+s1+s0]);
+
+			// let lettre0 = randint(4,23)
+			// let s0 = lettre_depuis_chiffre(lettre0)   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
+			// let s1 = lettre_depuis_chiffre(lettre0+1)
+			// let s2 = lettre_depuis_chiffre(lettre0+2)
+
 			let k1 = Math.round((Math.random()*3+3)*10)/10
 			let k2 = Math.round((Math.random()*3+1)*10)/10	
-			let alpha1 = Math.random()*2*Math.PI-Math.PI
-			let alpha1deg=math.round(alpha1*180/Math.PI)
+			
+			let alpha1 = Math.random()*Math.PI-Math.PI/2
+			let alpha1deg=Math.round(alpha1*180/Math.PI)
+			
 			let x1 = k1	// coordonnées des deux sommets du triangle
 			let y2 = k2
-			// let x1r = k1*Math.cos(alpha1)  // on fait tourner le triangle d'un angle -180°<alpha1<180° 
-			// let y1r = k1*Math.sin(alpha1)
-			// let x2r = -k2*Math.sin(alpha1)
-			// let y2r = k2*Math.cos(alpha1)
-			
-				
-		
+					
 			let s01= arrondi_virgule(k1,1)			// mise en texte avec 1 chiffres après la virgule pour énoncé
 			let s02= arrondi_virgule(k2,1)
 		
@@ -5711,66 +5740,81 @@ else {
 			dist12 = Math.round(dist12*10)/10		// On ne garde qu'une approximation au dixième pour l'exercice
 			let s12= arrondi_virgule(dist12,1)
 			let carre12=Math.round(dist12*dist12*100)/100
-		
-		
+				
 			let scarre01=arrondi_virgule(carre01,2)		// carremn = distance entre (xm;ym) et (xn;yn) au carré avec 2 décimales
 			let scarre02=arrondi_virgule(carre02,2)		// scarremn = chaine de caractère avec 2 décimales après une virgule.
 			let scarre12=arrondi_virgule(carre12,2)
-			
-			
-			this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
-			this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+					
 			let texte,texte_corr
-			let nom_du_triangle = choice([s0+s1+s2, s0+s2+s1, s1+s0+s2, s1+s2+s0, s2+s0+s1, s2+s1+s0])
+			if (type_de_questions<3)
+			{
+				texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
+				texte += '\n\t\\item Le côté ' + `$[${s0 + s1}]$` + ' est perpendiculaire au côté ' + `$[${s0 + s2}]~;$`
+				if (type_de_questions == 1) { //niveau 1 : Calcul de l'hypoténuse
 
-			texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}'
-			texte += '\n\t\\item Le côté '+`$[${s0+s1}]$`+' est perpendiculaire au côté '+`$[${s0+s2}]~;$`
-			if (type_de_questions==1){ //niveau 1 : Calcul de l'hypoténuse
-			
-				// enoncé  niveau 1
-			
-				texte += '\n\t\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
-				texte += '\n\t\\item '+`$${s0+s2+' = '+s02+'~\\text{cm}~;'}$`
-				texte += '\\end{itemize} \\bigskip\n\t  Calculer '+`$${s1+s2}$`+' à 0,1 près. \\end{minipage}'
-			} 
-			else { // niveau 2 : Calcul d'un côté de l'angle droit
-				// enoncé  niveau 2
-			
-				texte += '\n\t\\item '+`$${s1+s2+' = '+s12+'~\\text{cm}~;'}$`
-				texte += '\n\t\\item '+`$${s0+s1+' = '+s01+'~\\text{cm}~;'}$`
-				texte += '\\end{itemize} \\bigskip  Calculer '+`$${s0+s2}$`+' à 0,1 près. \\end{minipage}'
-			}
+					// enoncé  niveau 1
+
+					texte += '\n\t\\item ' + `$${s0 + s1 + ' = ' + s01 + '~\\text{cm}~;'}$`
+					texte += '\n\t\\item ' + `$${s0 + s2 + ' = ' + s02 + '~\\text{cm}~;'}$`
+					texte += '\\end{itemize} \\bigskip\n\t  Calculer ' + `$${s1 + s2}$` + ' à 0,1 près. \\end{minipage}'
+				}
+				else { // niveau 2 : Calcul d'un côté de l'angle droit
+					// enoncé  niveau 2
+
+					texte += '\n\t\\item ' + `$${s1 + s2 + ' = ' + s12 + '~\\text{cm}~;'}$`
+					texte += '\n\t\\item ' + `$${s0 + s1 + ' = ' + s01 + '~\\text{cm}~;'}$`
+					texte += '\\end{itemize} \\bigskip  Calculer ' + `$${s0 + s2}$` + ' à 0,1 près. \\end{minipage}'
+				}
 				texte += '\\begin{minipage}{0.5 \\linewidth}'
 				// dessin de la figure
 				texte += '\n \\begin{tikzpicture}' // Balise début de figure
-				texte += '\n\t \\tkzDefPoints{0/0/'+s0+','+x1+'/0/B,0/'+y2+'/C}' // créer les points du triangle initial 
-						// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
-				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](B) \\tkzGetPoint{'+s1+'}' // transformer le premier point par rotation
-				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle '+alpha1deg+'](C) \\tkzGetPoint{'+s2+'}' // transformer le deuxième point par rotation
-				texte += '\n\t \\tkzDrawPolygon('+s0+','+s1+','+s2+')' // Trace le triangle
+				texte += '\n\t \\tkzDefPoints{0/0/' + s0 + ',' + x1 + '/0/B,0/' + y2 + '/C}' // créer les points du triangle initial 
+				// Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
+				texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle ' + alpha1deg + '](B) \\tkzGetPoint{' + s1 + '}' // transformer le premier point par rotation
+				texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle ' + alpha1deg + '](C) \\tkzGetPoint{' + s2 + '}' // transformer le deuxième point par rotation
+				texte += '\n\t \\tkzDrawPolygon(' + s0 + ',' + s1 + ',' + s2 + ')' // Trace le triangle
 				// marquer l'angle droit
-				texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1](' + s1 + ')' + '\\tkzGetPoint{B}' 
-				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 90](B) \\tkzGetPoint{C}'
-				texte += '\n\t \\tkzDefPointBy[homothety=center '+s0+' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}' 
-				texte += '\n\t \\tkzDefPointBy[rotation= center '+s0+' angle 45](A) \\tkzGetPoint{A}'
-				texte += '\n\t \\tkzDrawPolygon('+s0+',B,A,C)' // Trace la marque d'angle droit
-		
+				texte += '\n\t \\tkzDefPointBy[homothety=center ' + s0 + ' ratio 0.1](' + s1 + ')' + '\\tkzGetPoint{B}'
+				texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle 90](B) \\tkzGetPoint{C}'
+				texte += '\n\t \\tkzDefPointBy[homothety=center ' + s0 + ' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}'
+				texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle 45](A) \\tkzGetPoint{A}'
+				texte += '\n\t \\tkzDrawPolygon(' + s0 + ',B,A,C)' // Trace la marque d'angle droit
+
 				if (Math.abs(alpha1deg) < 90) { // rotation "angle droit dessous"
-				texte += '\n\t \\tkzLabelPoints[below]('+s0+')' //nomme les points
-				texte += '\n\t \\tkzLabelPoints[right]('+s1+')' 
-				texte += '\n\t \\tkzLabelPoints[left]('+s2+')' 
+					texte += '\n\t \\tkzLabelPoints[below](' + s0 + ')' //nomme les points
+					texte += '\n\t \\tkzLabelPoints[right](' + s1 + ')'
+					texte += '\n\t \\tkzLabelPoints[left](' + s2 + ')'
 				}
 				else {		// rotation "angle droit dessus" position du nom inversée 
-				texte += '\n\t \\tkzLabelPoints[above]('+s0+')' //nomme les points
-				texte += '\n\t \\tkzLabelPoints[left]('+s1+')' 
-				texte += '\n\t \\tkzLabelPoints[right]('+s2+')' 
+					texte += '\n\t \\tkzLabelPoints[above](' + s0 + ')' //nomme les points
+					texte += '\n\t \\tkzLabelPoints[left](' + s1 + ')'
+					texte += '\n\t \\tkzLabelPoints[right](' + s2 + ')'
 				}
 				texte += '\n \\end{tikzpicture}' // Balise de fin de figure
-				texte +=  '\\end{minipage}'
-		
+				texte += '\\end{minipage}'
+			}
+			else {
+				texte = '\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Dans le triangle '+`${nom_du_triangle}`+' rectangle en '+`${s0}`+' : \\begin{itemize}'
+				// texte += '\n\t\\item Le côté ' + `$[${s0 + s1}]$` + ' est perpendiculaire au côté ' + `$[${s0 + s2}]~;$`
+				if (type_de_questions == 1) { //niveau 1 : Calcul de l'hypoténuse
+
+					// enoncé  niveau 1
+
+					texte += '\n\t\\item ' + `$${s0 + s1 + ' = ' + s01 + '~\\text{cm}~;'}$`
+					texte += '\n\t\\item ' + `$${s0 + s2 + ' = ' + s02 + '~\\text{cm}~;'}$`
+					texte += '\\end{itemize} \\bigskip\n\t  Calculer ' + `$${s1 + s2}$` + ' à 0,1 près. \\end{minipage}'
+				}
+				else { // niveau 2 : Calcul d'un côté de l'angle droit
+					// enoncé  niveau 2
+
+					texte += '\n\t\\item ' + `$${s1 + s2 + ' = ' + s12 + '~\\text{cm}~;'}$`
+					texte += '\n\t\\item ' + `$${s0 + s1 + ' = ' + s01 + '~\\text{cm}~;'}$`
+					texte += '\\end{itemize} \\bigskip  Calculer ' + `$${s0 + s2}$` + ' à 0,1 près. \\end{minipage}'
+				}
+			}	
 				this.liste_questions.push(texte) // on envoie la question
 					// correction 
-				if (type_de_questions==2){		 //niveau 2 : Calcul d'un côté de l'angle droit
+				if (type_de_questions==2||type_de_questions==4){		 //niveau 2 : Calcul d'un côté de l'angle droit
 					texte_corr = 'Le triangle '+`$${nom_du_triangle}$`+' est rectangle en '+`$${s0}.$`+'\\\\\n D\'après le théorème de Pythagore, on a :~'+`$${s1+s2}^2 = ${s0+s1}^2~+~${s0+s2}^2.$`
 					texte_corr +='\\\\\n D\'où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`
 					texte_corr +='\\\\\n Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}~\\text{cm}.$`
