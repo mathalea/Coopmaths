@@ -5339,20 +5339,28 @@ function Exercice_Thales(){
 			texte_corr += 'On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}.$` + '</br>'
 			texte_corr += 'Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~$` + '&nbsp;cm'
 			texte_corr += ' et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~$` + '&nbsp;cm.'
-		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x3", "${x3}");
-
-
+		
+			if (this.sup<3)	{
 			this.MG32codeBase64 = codeBase64
 			this.MG32code_pour_modifier_la_figure = `
+				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x3", "${x3}");
 		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y2", "${y2}");
 				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y3", "${y3}");
 				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "k", "${k}");
 				mtg32App.calculate("MG32svg${numero_de_l_exercice}");
 	        	mtg32App.display("MG32svg${numero_de_l_exercice}");
-      	      ` 	
+				` 	
+			}
 			this.liste_questions.push(texte);	
 			this.liste_corrections.push(texte_corr);
-			mg32_to_contenu(this);		
+			if (this.sup<3) {
+				mg32_to_contenu(this)
+			}
+			else 	{
+				this.type_exercice = '';
+				liste_de_question_to_contenu_sans_numero(this)
+			}	
+			
 			}
 	} else {	// sortie Latex
 		this.nouvelle_version = function(){
@@ -5402,7 +5410,7 @@ function Exercice_Thales(){
 			texte += '\n\t\\item '+`$${s1+s5+' = '+s15+'~\\text{cm}.'}$`
 			texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
 		} 
-		else { // niveau 2 : Calcul intermédiaire nécessaire
+		else if (this.sup==2) { // niveau 2 : Calcul intermédiaire nécessaire
 		
 			// enoncé  niveau 2
 		
@@ -5412,6 +5420,28 @@ function Exercice_Thales(){
 			texte += '\n\t\\item '+`$${s3+s5+' = '+s35+'~\\text{cm}.'}$`
 			texte += '\\end{itemize} \\bigskip  Calculer '+`$${s1+s4}$`+' et '+`$${s2+s3}$`+' à 0,1 près. \\end{minipage}'
 		}
+		else  // énoncé sans figure
+			if (randint(1,2)==1) {
+				texte = `$${s1}$, $${s2}$ et $${s3}$ sont trois point distincts.\\\\\n ${s4} appartient à $[${s1+s2}]$ et ${s5} appartient à $[${s1+s3}]$ tel que les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
+				texte += `\\\\\n Calculer $${s1+s4}$ et $${s2+s3}$.`
+				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.\\\\\n'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\\\\n'
+			}
+			else {
+				texte = `Les droites $(${s2+s4})$ et $(${s5+s3})$ sont sécantes en ${s1}, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
+				texte += `</br>Calculer $${s1+s4}$ et $${s2+s3}$.`
+				if (k>0) {
+					texte_corr = 'Dans le triangle ' + `$${s1+s2+s3}$` + ', les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.\\\\\n' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+				} else {
+					texte_corr = `Les points $${s2}$, $${s1}$, $${s5}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br>` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+				}
+				if (k>0){
+					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.\\\\\n'
+				}
+				else {
+					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`+'&nbsp;cm.\\\\\n'
+				}
+			}
+		if (this.sup<3) { // on ne fait la figure que si niveau < 3
 			texte += '\\begin{minipage}{0.5 \\linewidth}'
 			// dessin de la figure
 			texte += '\n \\begin{tikzpicture}' // Balise début de figure
@@ -5435,7 +5465,7 @@ function Exercice_Thales(){
 			}
 			texte += '\n \\end{tikzpicture}' // Balise de fin de figure
 			texte +=  '\\end{minipage}'
-
+		}
 			this.liste_questions.push(texte) // on envoie la question
 				// correction 
 			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
@@ -5603,7 +5633,7 @@ if (sortie_html) {
 			texte_corr +='D&rsquo;où '+`$${s0+s2}^2~=~${s1+s2}^2~-~${s0+s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12-carre01,2)}.$`+'</br>'
 			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.'
 		}
-
+		if (type_de_questions<3)	{
 		codeMG32 += `
 			var st${numero_de_l_exercice} = "${codeBase64}" ;
 			mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
