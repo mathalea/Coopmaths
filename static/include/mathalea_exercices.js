@@ -5634,17 +5634,34 @@ if (sortie_html) {
 			texte_corr +='Soit '+`$${s0+s2}~=~\\sqrt{${arrondi_virgule(carre12-carre01,2)}}~\\approx${s02}$`+'&nbsp;cm.'
 		}
 		if (type_de_questions<3)	{
-		codeMG32 += `
-			var st${numero_de_l_exercice} = "${codeBase64}" ;
-			mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x2", "${y2}");
-			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x1", "${x1}");
-			mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
-		` 	
-		} else {this.taille_div_MG32 = [700,5]}
+			this.type_exercice = 'MG32';
+			this.MG32codeBase64 = codeBase64
+			this.MG32code_pour_modifier_la_figure = `
+				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x2", "${y2}");
+		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "x1", "${x1}");
+				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
+				mtg32App.calculate("MG32svg${numero_de_l_exercice}");
+	        	mtg32App.display("MG32svg${numero_de_l_exercice}");
+				` 	
+		
+		//	codeMG32 += `
+		//	var st${numero_de_l_exercice} = "${codeBase64}" ;
+		//	mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
+		//	mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x2", "${y2}");
+		//	mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x1", "${x1}");
+		//	mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
+		// ` 	
+		} else {
+		this.type_exercice = '';
+	}
 		this.liste_questions.push(texte);	
 		this.liste_corrections.push(texte_corr);
-		mg32_to_contenu(this);
+		if (type_de_questions<3) {
+			mg32_to_contenu(this)
+		}
+		else 	{
+			liste_de_question_to_contenu_sans_numero(this)
+		}	
 			
 		}
 }
