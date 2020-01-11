@@ -5247,7 +5247,9 @@ function Exercice_Thales(){
 	this.nb_cols_corr = 1;
 	this.sup = 1; // 1 calcul direct | 2 calcul en deux étapes | 3 version 1&2 sans figure
 	// paramètres communs Html ou Latex
-	let s1='A',s2='B',s3='C',s4='M',s5='N'
+	
+
+	// let s1='A',s2='B',s3='C',s4='M',s5='N'
 		// coefficient de l'homothétie compris entre -0,8 et -0,2 ou entre 0,2 et 0,8 pour éviter les constructions trop serrées
 	
 
@@ -5257,6 +5259,16 @@ function Exercice_Thales(){
 		this.nouvelle_version = function(numero_de_l_exercice){
 			this.liste_questions = [];
 			this.liste_corrections = []; // Liste de questions corrigées
+			let lettre1 = randint(11,25)
+			let s1 = lettre_depuis_chiffre(lettre1)
+			lettre2 = randint(11, 25, [lettre1])
+			let s2 = lettre_depuis_chiffre(lettre2)
+			lettre3 = randint(11, 25, [lettre1, lettre2])
+			let s3 = lettre_depuis_chiffre(lettre3)
+			lettre4 = randint(11, 25, [lettre1, lettre2, lettre3])
+			let s4 = lettre_depuis_chiffre(lettre4)
+			lettre5 = randint(11, 25, [lettre1, lettre2, lettre3, lettre4])
+			let s5 = lettre_depuis_chiffre(lettre5)
 			let x2 = randint(2,4)
 			let y2 = randint(3, 5)
 			let x3 = randint(5, 6)
@@ -5347,6 +5359,11 @@ function Exercice_Thales(){
 		        mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y2", "${y2}");
 				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "y3", "${y3}");
 				mtg32App.giveFormula2("MG32svg${numero_de_l_exercice}", "k", "${k}");
+				mtg32App.rename("MG32svg${numero_de_l_exercice}","A","${s1}");
+				mtg32App.rename("MG32svg${numero_de_l_exercice}","B","${s2}");
+				mtg32App.rename("MG32svg${numero_de_l_exercice}","C","${s3}");
+				mtg32App.rename("MG32svg${numero_de_l_exercice}","M","${s4}");
+				mtg32App.rename("MG32svg${numero_de_l_exercice}","N","${s5}");
 				mtg32App.calculate("MG32svg${numero_de_l_exercice}");
 	        	mtg32App.display("MG32svg${numero_de_l_exercice}");
 				` 	
@@ -5366,6 +5383,16 @@ function Exercice_Thales(){
 		this.nouvelle_version = function(){
 		this.liste_questions = []; // Ici contiendra l'énoncé avec la figure
 		this.liste_corrections = []; // Ici ne contiendra que le calcul avec la justification
+		let lettre1 = randint(11,25)
+		let s1 = lettre_depuis_chiffre(lettre1)
+		lettre2 = randint(11, 25, [lettre1])
+		let s2 = lettre_depuis_chiffre(lettre2)
+		lettre3 = randint(11, 25, [lettre1, lettre2])
+		let s3 = lettre_depuis_chiffre(lettre3)
+		lettre4 = randint(11, 25, [lettre1, lettre2, lettre3])
+		let s4 = lettre_depuis_chiffre(lettre4)
+		lettre5 = randint(11, 25, [lettre1, lettre2, lettre3, lettre4])
+		let s5 = lettre_depuis_chiffre(lettre5)
 		let x2 = randint(2,4)
 		let y2 = randint(3, 5)
 		let x3 = randint(5, 6)
@@ -5717,10 +5744,7 @@ else {
 	
 			let nom_du_triangle = choice([s0+s1+s2, s0+s2+s1, s1+s0+s2, s1+s2+s0, s2+s0+s1, s2+s1+s0]);
 
-			// let lettre0 = randint(4,23)
-			// let s0 = lettre_depuis_chiffre(lettre0)   // les trois sommets du triangle rectangle 1ère lettre pour l'angle droit.
-			// let s1 = lettre_depuis_chiffre(lettre0+1)
-			// let s2 = lettre_depuis_chiffre(lettre0+2)
+			
 
 			let k1 = Math.round((Math.random()*3+3)*10)/10
 			let k2 = Math.round((Math.random()*3+1)*10)/10	
