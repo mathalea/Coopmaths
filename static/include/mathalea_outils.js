@@ -191,6 +191,14 @@ function combinaison_listes(liste,taille_minimale){
 	return l
 }
 
+function combinaison_listes_sans_changer_ordre(liste,taille_minimale){
+	// Concatène liste à elle même en changeant 
+	while (liste.length<taille_minimale){
+		liste = liste.concat(liste)
+	}
+	return liste
+}
+
 
 
 function ecriture_nombre_relatif(a) { //(+3) ou (-3)
