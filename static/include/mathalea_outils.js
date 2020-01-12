@@ -2,8 +2,8 @@
 
 function liste_de_question_to_contenu(argument) {
 	if (sortie_html) {
-		argument.contenu = html_consigne(argument.consigne) + html_enumerate(argument.liste_questions)
-		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_enumerate(argument.liste_corrections)	
+		argument.contenu = html_consigne(argument.consigne) + html_enumerate(argument.liste_questions,argument.spacing)
+		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_enumerate(argument.liste_corrections,argument.spacing_corr)	
 	} else {
 		argument.contenu = tex_consigne(argument.consigne) + tex_multicols(tex_enumerate(argument.liste_questions,argument.spacing),argument.nb_cols)
 		argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
@@ -413,8 +413,9 @@ function tex_paragraphe(liste,spacing=false){
 
 
 
-function html_enumerate(liste){
-	let result ='<ol>'
+function html_enumerate(liste,spacing){
+	let result='';
+	(spacing>1) ? result =`<ol style="line-height: ${spacing};">` : result = '<ol>'
 	for(let i in liste){
 		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\\\/g,'<br>').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....').replace(/~/g,' ') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 	}
