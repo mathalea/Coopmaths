@@ -375,7 +375,6 @@ function mise_a_jour_du_code(){
 			}
 		}
 		window.history.pushState("","",fin_de_l_URL);
-		location.replace(fin_de_l_URL);
 		
 	}
 	
