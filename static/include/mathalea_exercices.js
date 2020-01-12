@@ -5802,7 +5802,8 @@ function Resoudre_une_equation_produit_nul(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; 
-	sortie_html ? this.spacing_corr = 3.5 : this.spacing_corr = 4.5
+	this.spacing = 1.5
+	this.spacing_corr = 2.5
 	
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -5899,7 +5900,7 @@ function Resoudre_une_equation_produit_nul(){
 		}
 		cpt++;	
 		}
-		liste_de_question_to_contenu_sans_numero(this); // liste_de_question_to_contenu(this);
+		liste_de_question_to_contenu(this);
 	}
 	this.besoin_formulaire_numerique = ['niveau',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
 }
