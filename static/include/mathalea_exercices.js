@@ -3095,11 +3095,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
                 break;
 			case 7 :
 				texte = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2$`; // (kx+a)² k rationnel 
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2+2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns,ds)}x+${a}\\right)^2=${tex_fraction(ns*ns,ds*ds)}x^2+${tex_fraction_reduite(ns*2*a,ds)}x+${a*a}$`;
 				break;
 			case 8 :
 				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction(fraction_simplifiee(ns*2*a,ds)[0],fraction_simplifiee(ns*2*a,ds)[1])}x+${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fractionreduite(ns*2*a,ds)}x+${a*a}$`;
 				break;
 			case 9 :
 				//  (bx-a)(bx+a) avec a entier et b rationnel simple
@@ -5647,6 +5647,7 @@ function Exercice_Pythagore() {
 			}
 			else {
 				liste_de_question_to_contenu_sans_numero(this)
+				this.type_exercice = 'MG32'
 			}
 
 		}
@@ -5800,51 +5801,105 @@ function Resoudre_une_equation_produit_nul(){
 	this.nb_questions = 5;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
-	this.sup = 1; // niveaux 1: coefficient de x = 1 | 2:coefficient de x>=1 | 3:coefficient de x rationnel
-	// this.sup2 = false; // avec des nombres décimaux
+	this.sup = 1; 
+	sortie_html ? this.spacing_corr = 3.5 : this.spacing_corr = 4.5
+	
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
+		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+ 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+ 		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
 		let type_de_questions
 		switch (this.sup) {
-			case 1: type_de_questions=combinaison_listes([1],this.nb_questions)
+			case 1: type_de_questions=combinaison_listes([1,2],this.nb_questions);
 				break;
-			case 2: type_de_questions=combinaison_listes([2],this.nb_questions)
+			case 2: type_de_questions=combinaison_listes([3,4],this.nb_questions);
 				break;
-			case 3: type_de_questions=combinaison_listes([3],this.nb_questions)
+			case 3: type_de_questions=combinaison_listes([5,6],this.nb_questions);
 				break;
-			case 4: type_de_questions=combinaison_listes([1,1,2,2,3],this.nb_questions)
+			case 4: type_de_questions=combinaison_listes([1,2,3,4,5,6],this.nb_questions);
 
 		}
 		for (let i = 0, a, b, c, d, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
-		this.liste_questions = []; // Liste de questions
-		switch (type_de_questions[i]) {
+			fraction1 = choice(liste_fractions);
+			ns1=fraction1[0]
+			ds1=fraction1[1]
+			fraction2 = choice(liste_fractions);
+			ns2=fraction2[0]
+			ds2=fraction2[1]
+			switch (type_de_questions[i]) {
 			case 1: b = randint(1,20); // (x+a)(x+b)=0 avec a et b entiers
 					d = randint(1,20,[b])
-				texte = `$(x+${b})(x+${d})=0$`
-				texte_coor = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-				texte_corr += `\\\\\n $(x+${b})(x+${d})=0 si x+${b}=0 ou si x+${d}=0`
-				texte_corr += `\\\\\n Donc si x=${0-b} ou si x=${0-d}`
+					texte = `$(x+${b})(x+${d})=0$`
+					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
+					texte_corr += '\\\\\n'+`$(x+${b})(x+${d})=0$`+' si '+`$x+${b}=0$`+' ou si '+`$x+${d}=0$`
+					texte_corr += '\\\\\n Donc si '+`$x=${0-b}$`+' ou si '+`$x=${0-d}$`
 				break;
-			case 2: a = randint(2,6); 	//(ax+b)(cx+d)=0  avec b/a et d/c entiers.
+			case 2: b = randint(1,20); // (x-a)(x+b)=0 avec a et b entiers
+					d = randint(1,20,[b])
+					texte = `$(x-${b})(x+${d})=0$`
+					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
+					texte_corr += '\\\\\n'+`$(x-${b})(x+${d})=0$`+' si '+`$x-${b}=0$`+' ou si '+`$x+${d}=0$`
+					texte_corr += '\\\\\n Donc si '+`$x=${b}$`+' ou si '+`$x=${0-d}$`
+				break;
+				
+			case 3: a = randint(2,6); 	//(ax+b)(cx+d)=0  avec b/a et d/c entiers.
 					b = Math.round(randint(1,5)*a);
 					c = randint(2,6,[a]);
 					d = Math.round(randint(1,5)*c);
+					texte = `$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x+${d}=0$`
+					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${0-d}$`
+					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=-${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc si '+`$x=${0-b/a}$`+' ou si '+`$x=${0-d/c}$`
 				break;
-			case 3: a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
-					b = randint(1,20);
-					c = randint(2,9,[a]);
+			case 4: a = randint(2,6); 	//(ax+b)(cx-d)=0  avec b/a et d/c entiers.
+					b = Math.round(randint(1,5)*a);
+					c = randint(2,6,[a]);
 					d = Math.round(randint(1,5)*c);
+					texte = `$(${a}x+${b})(${c}x-${d})=0$`
+					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x-${d}=0$`
+					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${d}$`
+					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc si '+`$x=${0-b/a}$`+' ou si '+`$x=${d/c}$`
+				break;
+			case 5:
+					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
+					b = randint(1,20,[a]);
+					c = randint(2,9,[a]);
+					d = randint(1,20,[b,c]);
+					texte = `$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
+					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x+${d}=0$`
+					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${0-d}$`
+					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=-${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou si '+`$x=-${tex_fraction_reduite(d,c)}$`
+				break;
+			case 6:
+					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
+					b = randint(1,20,[a]);
+					c = randint(2,9,[a]);
+					d = randint(1,20,[b,c]);
+					texte = `$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x-${d}=0$`
+					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${d}$`
+					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou si '+`$x=${tex_fraction_reduite(d,c)}$`
 				break;
 		}
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-			this.liste_questions.push(texte);
-			this.liste_corrections.push(texte_corr);
+		this.liste_questions.push(texte);
+		this.liste_corrections.push(texte_corr);
 			i++;
 		}
 		cpt++;	
 		}
-		liste_de_question_to_contenu(this);
+		liste_de_question_to_contenu_sans_numero(this); // liste_de_question_to_contenu(this);
 	}
 	this.besoin_formulaire_numerique = ['niveau',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
 }

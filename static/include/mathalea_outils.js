@@ -259,6 +259,9 @@ function fraction_simplifiee(n,d){  // renvoie le numérateur et le dénominateu
 	return [n/p,d/p];
 }
 
+function tex_fraction_reduite(n,d){
+	return tex_fraction(fraction_simplifiee(n,d)[0],fraction_simplifiee(n,d)[1]);
+}
 function calcul(expression){ // pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
 	return parseFloat(Algebrite.eval(expression))
 }
