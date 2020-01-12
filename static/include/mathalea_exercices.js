@@ -4349,8 +4349,10 @@ function Additions_soustractions_multiplications_posees(){
 		this.liste_corrections = []; // Liste de questions corrigées
 
 		let type_de_questions_disponibles = [1,2,3,4,5]
-		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-		
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		if (this.nb_questions==3) {liste_type_de_questions = [1,2,5]}
+		if (this.nb_questions==4) {liste_type_de_questions = [1,2,4,5]}
+
 		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d,e ,f, g, x, y; i < this.nb_questions && cpt<50; ) {
 			type_de_questions = liste_type_de_questions[i];
 			switch (type_de_questions){
@@ -4434,9 +4436,18 @@ function Additionner_soustraires_decimaux(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 
-		let type_de_questions_disponibles = choice([[1,2,7,8],[3,4,5,6]])
-		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-		
+		let liste_de_type_d_additions = combinaison_listes([5,6,7,8],this.nb_questions)
+		let liste_de_type_de_soustractions = combinaison_listes([1,2,3,4],this.nb_questions)
+		let liste_type_de_questions=[]
+		for (let i = 0; i < this.nb_questions; i++) {
+			if ((i+1)<(this.nb_questions/2)) { // première moitié sont des additions mais si c'est impair on prendra plus de soustractions
+				liste_type_de_questions.push(liste_de_type_d_additions[i])
+			} else {
+				liste_type_de_questions.push(liste_de_type_de_soustractions[i])
+			}
+		}
+
+
 		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d,e ,f, g, x, y; i < this.nb_questions && cpt<50; ) {
 			type_de_questions = liste_type_de_questions[i];
 			switch (type_de_questions){
@@ -4464,25 +4475,25 @@ function Additionner_soustraires_decimaux(){
 					texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
 					sortie_html ? texte_corr = `$${tex_nombre(a)}-${tex_nombre(b)}=${tex_nombrec(a-b)}$` : texte_corr =`$\\opsub[decimalsepsymbol={,}]{${a}}{${b}}$`;
 					break ;
-				case 5 : // xxx-xx,x
+				case 5 : // xxx+xx,x
 					a = randint(1,4)*100+randint(2,5)*10+randint(1,9)
 					b = calcul(randint(5,9)*10+randint(6,9)+randint(1,9)/10)
 					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
 					sortie_html ? texte_corr = `$${tex_nombre(a)}+${tex_nombre(b)}=${tex_nombrec(a+b)}$` : texte_corr =`$\\opadd[decimalsepsymbol={,}]{${a}}{${b}}$`;
 					break ;
-				case 6 : // xxx-xx,xx
+				case 6 : // xxx+xx,xx
 					a = randint(1,4)*100+randint(2,5)*10+randint(1,9)
 					b = calcul(randint(5,9)*10+randint(6,9)+randint(1,9)/10+randint(1,9)/100)
 					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
 					sortie_html ? texte_corr = `$${tex_nombre(a)}+${tex_nombre(b)}=${tex_nombrec(a+b)}$` : texte_corr =`$\\opadd[decimalsepsymbol={,}]{${a}}{${b}}$`;
 					break ;
-				case 7 : // xxx,x-xxx
+				case 7 : // xxx,x+xxx
 					a = calcul(randint(5,9)*100+randint(2,5)*10+randint(1,9)+randint(1,9)/10)
 					b = randint(1,4)*100+randint(6,9)*10+randint(1,9)
 					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
 					sortie_html ? texte_corr = `$${tex_nombre(a)}+${tex_nombre(b)}=${tex_nombrec(a+b)}$` : texte_corr =`$\\opadd[decimalsepsymbol={,}]{${a}}{${b}}$`;
 					break ;
-				case 8 : // x0x-xx9,x
+				case 8 : // x0x+xx9,x
 					a = calcul(randint(5,9)*100+randint(1,5))
 					b = calcul(randint(1,4)*100+randint(1,9)*10+9+randint(1,9)/10)
 					texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
