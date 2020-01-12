@@ -5908,7 +5908,7 @@ function Resoudre_une_equation_produit_nul(){
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['niveau',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
+	this.besoin_formulaire_numerique = ['niveau de difficulté',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
 }
 
 
