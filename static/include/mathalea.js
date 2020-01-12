@@ -390,7 +390,8 @@ function mise_a_jour_du_code(){
 				code1 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 				code1 +=  exercice[i].contenu;
 				if (exercice[i].type_exercice=='MG32'){
-					code1 += `<div id="MG32div${i}" class="MG32"></div>`;
+					code1 += `<div class="MG32"><div id="MG32div${i}"></div></div>`;
+					//Une classe MG32 englobante qui sera détectée avant de lancer MG32
 				}
 				code2 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 				code2 +=  exercice[i].contenu_correction;
@@ -609,10 +610,12 @@ window.onload = function()  {
 
 	// Gestion du menu déroulant par une fonction auto-exécutante
 	(function menu_deroulant () {
-		const el = document.getElementsByClassName('ui accordion');
-		// Sélectionne les accordeons
-		if (el.length) {
+		const el = document.getElementsByClassName('id_exercice');
+		// Sélectionne les exercices de la liste des exercices disponibles
+		if (el.length>50) {
+			// S'il y a plus de 50 exercices, l'accordéon est initialisé
 	    	$('.ui.dropdown').dropdown();
+	    	$('.ui.accordion').accordion();
 		} else {
     		setTimeout(menu_deroulant, 300); // retente dans 300 milliseconds
 		}
@@ -627,7 +630,7 @@ window.onload = function()  {
 	btn_mise_a_jour_code.addEventListener('click', mise_a_jour_du_code);
 
 	// Gestion des effets visuels
-	$('.ui.accordion').accordion(); // active les acordéons (paramètres du fichier .tex)
+	// $('.ui.accordion').accordion(); // active les acordéons (paramètres du fichier .tex)
 	$('.ui.radio.checkbox').checkbox(); // active les boutons radio (pour le style)
 
 	// Récupère les paramètres passés dans l'URL

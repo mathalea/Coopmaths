@@ -6126,8 +6126,6 @@ jQuery(document).ready(function() {
 	}
 
 		
-
-
 	$('#liste_des_exercices').html(liste_html_des_exercices);
 
 	

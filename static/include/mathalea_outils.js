@@ -626,23 +626,20 @@ function MG32_tracer_toutes_les_figures() {
 	(function verifie_div_MG32() {
 		const el = document.getElementsByClassName('MG32');
 		// Sélectionne les div de classe MG32
-		if (el.length) { // S'ils existent
+		if (el.length) { // S'ils existent, on peut appeler MG32
 	    	Promise.all(MG32_tableau_de_figures.map(({idContainer, svgOptions, mtgOptions}) => mtgLoad(idContainer, svgOptions, mtgOptions)))
-		  .then(results => {
-		    // results est le tableau des valeurs des promesses résolues, avec la même instance du player pour chacune, la 1re valeur nous suffit donc
-		    // if (!window.mtg32App) window.mtg32App = results[0]
-		    window.mtg32App = results[0]
-		    // on peut l'utiliser…
-			MG32_modifie_toutes_les_figures()
-
-		  })
-		  .catch(error => console.error(error))
+		  		.then(results => {
+		    		// results est le tableau des valeurs des promesses résolues, avec la même instance du player pour chacune, la 1re valeur nous suffit donc
+			    	window.mtg32App = results[0]
+			    	// on peut l'utiliser…
+					MG32_modifie_toutes_les_figures()
+		  		})
+			  .catch(error => console.error(error))
 		} else {
     		setTimeout(verifie_div_MG32, 300); // retente dans 300 milliseconds
 		}
 	})();
 
-		
 }
 
 	
