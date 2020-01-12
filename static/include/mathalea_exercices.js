@@ -5459,7 +5459,7 @@ function Exercice_Thales(){
 			this.liste_questions.push(texte) // on envoie la question
 				// correction 
 			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
-				// texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$\\\\\n\t`
+				texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$\\\\\n\t`
 				if (k>0){
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`
 				}
