@@ -390,8 +390,8 @@ function mise_a_jour_du_code(){
 				code1 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 				code1 +=  exercice[i].contenu;
 				if (exercice[i].type_exercice=='MG32'){
-					code1 += `<div class="MG32"><div id="MG32div${i}"></div></div>`;
-					//Une classe MG32 englobante qui sera détectée avant de lancer MG32
+					code1 += `<div id="MG32div${i}" class="MG32"></div>`;
+					
 				}
 				code2 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 				code2 +=  exercice[i].contenu_correction;
@@ -607,15 +607,17 @@ return tableau_objets_exercices;
 
 window.onload = function()  {
 //$( document ).ready(function() {	
-	$('.ui.dropdown').dropdown(); // Pour le menu des exercices	
+	$('.ui.dropdown').dropdown(); // Pour le menu des exercices
+	$('.ui.accordion').accordion('refresh');
 	// Gestion du menu déroulant par une fonction auto-exécutante
 	(function menu_deroulant () {
 		const el = document.getElementsByClassName('id_exercice');
+		const el_accordion = document.getElementsByClassName('accordion');
 		// Sélectionne les exercices de la liste des exercices disponibles
 		if (el.length>50) {
 			// S'il y a plus de 50 exercices, l'accordéon est initialisé
 	    	
-	    	$('.ui.accordion').accordion();
+	    	$('.ui.accordion').accordion('refresh');
 		} else {
     		setTimeout(menu_deroulant, 300); // retente dans 300 milliseconds
 		}

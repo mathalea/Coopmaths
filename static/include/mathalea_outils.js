@@ -558,24 +558,6 @@ function itemize(tableau_de_texte){
 
 
 
-
-// function ajoute_une_figure_MG32(numero_de_l_exercice) {
-// 	let svgOptions = {
-// 		idSvg: `MG32svg${numero_de_l_exercice}`, width: `${exercice[numero_de_l_exercice].taille_div_MG32[0]}`, height: `${exercice[numero_de_l_exercice].taille_div_MG32[1]}`
-// 	}
-
-// 	let mtgOptions = {
-// 		fig: exercice[numero_de_l_exercice].MG32codeBase64,
-// 		isEditable: false
-// 	}
-
-// 	mtgLoad(`MG32div${numero_de_l_exercice}`, svgOptions, mtgOptions, function (error, mtgAppPlayer) {
-// 		if (error) return console.error(error)
-// 		if (!window.mtg32App) window.mtg32App = mtgAppPlayer
-// 		})
-// }
-
-
 function MG32_modifie_figure(numero_figure) {
 	let code_pour_modifier_la_figure = exercice[numero_figure].MG32code_pour_modifier_la_figure
 	if (window.mtg32App.docs.length==1){

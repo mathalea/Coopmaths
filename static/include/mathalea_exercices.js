@@ -5839,6 +5839,7 @@ function Resoudre_une_equation_produit_nul(){
 		}
 		liste_de_question_to_contenu(this);
 	}
+	
 }
 
 
