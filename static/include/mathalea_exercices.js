@@ -5647,7 +5647,6 @@ function Exercice_Pythagore() {
 			}
 			else {
 				liste_de_question_to_contenu_sans_numero(this)
-				this.type_exercice = 'MG32'
 			}
 
 		}
