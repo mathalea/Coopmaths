@@ -5706,8 +5706,9 @@ function Resoudre_une_equation_produit_nul(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; 
+	sortie_html ? this.spacing_corr=3 : this.spacing_corr=2
 	this.spacing = 1.5
-	this.spacing_corr = 3
+	
 	
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -5786,7 +5787,7 @@ function Resoudre_une_equation_produit_nul(){
 					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
 					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
 					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=-${tex_fraction_reduite(d,c)}$`
+					if ((a!=b)||(c!=d)) {texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=-${tex_fraction_reduite(d,c)}$`}
 				break;
 			case 6:
 					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
@@ -5799,7 +5800,7 @@ function Resoudre_une_equation_produit_nul(){
 					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
 					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
 					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=${tex_fraction_reduite(d,c)}$`
+					if ((a!=b)||(c!=d)) {texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=${tex_fraction_reduite(d,c)}$`}
 				break;
 		}
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
