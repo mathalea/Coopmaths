@@ -5787,7 +5787,7 @@ function Resoudre_une_equation_produit_nul(){
 					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
 					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
 					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
-					if ((a!=b)||(c!=d)) {texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=-${tex_fraction_reduite(d,c)}$`}
+					if ((tex_fraction(b,a)!=tex_fraction_reduite(b,a))||(tex_fraction(d,c)!=tex_fraction_reduite(d,c))) {texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=-${tex_fraction_reduite(d,c)}$`}
 				break;
 			case 6:
 					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
@@ -5800,7 +5800,7 @@ function Resoudre_une_equation_produit_nul(){
 					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
 					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
 					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
-					if ((a!=b)||(c!=d)) {texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=${tex_fraction_reduite(d,c)}$`}
+					if ((tex_fraction(b,a)!=tex_fraction_reduite(b,a))||(tex_fraction(d,c)!=tex_fraction_reduite(d,c))) {texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=${tex_fraction_reduite(d,c)}$`}
 				break;
 		}
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
