@@ -5421,17 +5421,19 @@ function Exercice_Thales(){
 		}
 		else  // énoncé sans figure
 			if (randint(1,2)==1) {
-				texte = `$${s1}$, $${s2}$ et $${s3}$ sont trois point distincts.\\\\\n ${s4} appartient à $[${s1+s2}]$ et ${s5} appartient à $[${s1+s3}]$ tel que les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
-				texte += `\\\\\n Calculer $${s1+s4}$ et $${s2+s3}$.`
+				texte = `$${s1}$, $${s2}$ et $${s3}$`+' sont trois point distincts.\\\\\n' + `$${s4} \\in [${s1+s2}]$`+' et '+`$${s5} \\in [${s1+s3}]$`+' tel que les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.\\\\\n'
+				texte += `$${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
+				texte += `\\\\\nCalculer $${s1+s4}$ et $${s2+s3}$.`
 				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.\\\\\n'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\\\\n'
 			}
 			else {
-				texte = `Les droites $(${s2+s4})$ et $(${s5+s3})$ sont sécantes en ${s1}, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
-				texte += `</br>Calculer $${s1+s4}$ et $${s2+s3}$.`
+				texte = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre.`
+				texte += `\\\\\nLes droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
+				texte += `\\\\\nCalculer $${s1+s4}$ et $${s2+s3}$.`
 				if (k>0) {
 					texte_corr = 'Dans le triangle ' + `$${s1+s2+s3}$` + ', les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.\\\\\n' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
 				} else {
-					texte_corr = `Les points $${s2}$, $${s1}$, $${s5}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br>` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+					texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
 				}
 				if (k>0){
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.\\\\\n'
@@ -5470,14 +5472,18 @@ function Exercice_Thales(){
 			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
 				texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$\\\\\n\t`
 				if (k>0){
-					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`
+					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`
 				}
 				else {
-					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`
+					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`
 				}
 			}
-			else {
-				texte_corr = `Dans le triangle $${s1+s2+s3}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
+			else 
+			if (this.sup==1){
+				if (k>0) {texte_corr = `Dans le triangle $${s1+s2+s3}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
+				}
+				else {texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+				}
 			}
 			texte_corr += `\\\\\n On a donc $${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
 			texte_corr += `\\\\\n Soit $${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$.`
@@ -5711,8 +5717,9 @@ function Resoudre_une_equation_produit_nul(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; 
+	sortie_html ? this.spacing_corr=3 : this.spacing_corr=2
 	this.spacing = 1.5
-	this.spacing_corr = 3
+	
 	
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -5790,11 +5797,13 @@ function Resoudre_une_equation_produit_nul(){
 					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
 					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=-${tex_fraction_reduite(d,c)}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`
+					if (tex_fraction(b,a)!=tex_fraction_reduite(b,a)) {texte_corr+=`$=-${tex_fraction_reduite(b,a)}$`}
+					texte_corr+=' ou '+`$x=-${tex_fraction(d,c)}$`
+					if (tex_fraction(d,c)!=tex_fraction_reduite(d,c)) {texte_corr+=`$=-${tex_fraction_reduite(d,c)}$`}
 				break;
 			case 6:
-					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
+					a = randint(2,9);	//(ax+b)(cx-d)=0 	avec b/a et d/c quelconques.
 					b = randint(1,20,[a]);
 					c = randint(2,9,[a]);
 					d = randint(1,20,[b,c]);
@@ -5803,8 +5812,11 @@ function Resoudre_une_equation_produit_nul(){
 					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`
 					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
 					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=${tex_fraction_reduite(d,c)}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`
+					if (tex_fraction(b,a)!=tex_fraction_reduite(b,a)) {texte_corr+=`$=-${tex_fraction_reduite(b,a)}$`}
+					texte_corr+=' ou '+`$x=${tex_fraction(d,c)}$`
+					if (tex_fraction(d,c)!=tex_fraction_reduite(d,c)) {texte_corr+=`$=${tex_fraction_reduite(d,c)}$`}
+					
 				break;
 		}
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -5818,7 +5830,6 @@ function Resoudre_une_equation_produit_nul(){
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['niveau de difficulté',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
 }
 
 
