@@ -5422,7 +5422,7 @@ function Exercice_Thales(){
 				if (k>0) {
 					texte_corr = 'Dans le triangle ' + `$${s1+s2+s3}$` + ', les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.\\\\\n' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
 				} else {
-					texte_corr = `Les points $${s2}$, $${s1}$, $${s5}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+					texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
 				}
 				if (k>0){
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.\\\\\n'
