@@ -665,22 +665,21 @@ window.onload = function()  {
 
     if (sortie_html) {
 	// Gestion du bouton de zoom
-	let zoom = 1;
-	$( "#btn_zoom_plus").click(function() {
-		zoom+=.5;
-		$("#affichage_exercices").css("transform", `scale(${zoom})`);
-		$("#affichage_exercices").css("transform-origin", "0 0px");
-      	//window.location.hash = 'section';
-      });
-	$( "#btn_zoom_moins").click(function() {
-		if (zoom>1) {
-			zoom-=.5;
-		}
-		$("#affichage_exercices").css("transform", `scale(${zoom})`);
-		$("#affichage_exercices").css("transform-origin", "0 0px");
-	});
-
-}
+		let zoom = 1;
+		$( "#btn_zoom_plus").click(function() {
+			zoom+=.5;
+			$("#affichage_exercices").css("transform", `scale(${zoom})`);
+			$("#affichage_exercices").css("transform-origin", "0 0px");
+	      	//window.location.hash = 'section';
+	      });
+		$( "#btn_zoom_moins").click(function() {
+			if (zoom>1) {
+				zoom-=.5;
+			}
+			$("#affichage_exercices").css("transform", `scale(${zoom})`);
+			$("#affichage_exercices").css("transform-origin", "0 0px");
+		});
+	}
 
 
 };

@@ -5839,7 +5839,7 @@ function Resoudre_une_equation_produit_nul(){
 		}
 		liste_de_question_to_contenu(this);
 	}
-	
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,'1 : Coefficient de x = 1\n 2 : Coefficient de x>1 et solutions entières\n 3 : Solutions rationnelles\n 4 : Mélange des 3 autres niveaux'];
 }
 
 
