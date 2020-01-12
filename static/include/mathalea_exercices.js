@@ -1201,8 +1201,8 @@ function Somme_de_deux_nombres_maries_et_un_entier(){
 
 function Exercice_numeration_entier(){
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Écrire un chiffre à partir de nombre de dizaines, de centaines, de milliers...";
-	this.consigne = "Écrire en chiffre chacun des nombres";
+	this.titre = "Écrire un nombre à partir de son nombre de dizaines, de centaines, de milliers...";
+	this.consigne = "Écrire en chiffres chacun des nombres.";
 	this.nb_questions = 5;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
@@ -1223,8 +1223,8 @@ function Exercice_numeration_entier(){
 			} else {
 				rang_b = rang_a+1}
 			
-			texte = `${b} ${rangs[rang_b]} et ${a} ${rangs[rang_a]}`
-			texte_corr = `${b} ${rangs[rang_b]} et ${a} ${rangs[rang_a]} : ${tex_nombre(b*Math.pow(10,rang_b)+a*Math.pow(10,rang_a))}`
+			texte = `$\\text{${b}  ${rangs[rang_b]} et ${a} ${rangs[rang_a]}}$`
+			texte_corr = `$${b} \\text{ ${rangs[rang_b]} et }${a} \\text{ ${rangs[rang_a]} : } ${tex_nombre(b*Math.pow(10,rang_b)+a*Math.pow(10,rang_a))}$`
 				
 			
 			
