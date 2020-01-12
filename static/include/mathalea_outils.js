@@ -350,23 +350,16 @@ function prenom(){
 
 // Fonctions LaTeX
 
-function tex_enumerate(liste,itemsep=1,spacing=false){
+function tex_enumerate(liste,spacing){
 	let result =''
-	if (itemsep==1){
-		result = '\\begin{enumerate}\n';
-	}else{
-		if (spacing){
-			result = '\\begin{enumerate}\n\\begin{spacing}{'+itemsep+'}\n'
-		} else {
-			result = '\\begin{enumerate}[itemsep='+itemsep+'em]\n'	
-		}
-		
+	result = "\\begin{enumerate}"
+	if (spacing>1) {
+		result += `\\begin{spacing}{${spacing}}`
 	}
-	 
 	for(let i in liste){
 		result += '\t\\item ' + liste[i] +'\n'
 	}
-	if (spacing){
+	if (spacing>1){
 		result += '\\end{spacing}'
 	} 
 	result += '\\end{enumerate}'
