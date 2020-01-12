@@ -5337,10 +5337,10 @@ function Exercice_Thales(){
 					texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br>` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '</br>'
 				}
 				if (k>0){
-					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.</br>'
+					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'~cm.</br>'
 				}
 				else {
-					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`+'&nbsp;cm.</br>'
+					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`+'~cm.</br>'
 				}
 			}
 			else if (randint(1,2)==1) {
@@ -5359,15 +5359,15 @@ function Exercice_Thales(){
 					texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br>` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '</br>'
 				}
 				if (k>0){
-					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.</br>'
+					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'~cm.</br>'
 				}
 				else {
-					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`+'&nbsp;cm.</br>'
+					texte_corr +='On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}$`+'~cm.</br>'
 				}
 			}
 			texte_corr += 'On a donc ' + `$${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}.$` + '</br>'
-			texte_corr += 'Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~$` + '&nbsp;cm'
-			texte_corr += ' et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~$` + '&nbsp;cm.'
+			texte_corr += 'Soit ' + `$${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~$` + '~cm'
+			texte_corr += ' et ' + `$${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~$` + '~cm.'
 		
 			if (this.sup<3)	{
 			this.MG32codeBase64 = codeBase64
@@ -5582,7 +5582,7 @@ function Exercice_Pythagore() {
 				texte += `Calculer $${s1 + s2}$.`
 				texte_corr = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, d&rsquo;après le théorème de Pythagore, on a : $${s1 + s2}^2 = ${s0 + s1}^2~+~${s0 + s2}^2.$</br>`
 				texte_corr += 'D&rsquo;où ' + `$${s1 + s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02 + carre01, 2)}.$` + '</br>'
-				texte_corr += 'Soit ' + `$${s1 + s2}~=~\\sqrt{${arrondi_virgule(carre02 + carre01, 2)}}~\\approx${s12}$` + '&nbsp;cm.'
+				texte_corr += 'Soit ' + `$${s1 + s2}~=~\\sqrt{${arrondi_virgule(carre02 + carre01, 2)}}~\\approx${s12}$` + '~cm.'
 			}
 			if (type_de_questions == 2) { // Calcul d'un côté de l'angle droit
 				texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$, $${s0 + s1}=${s01}$ cm, $${s1 + s2}=${s12}$ cm.`
@@ -5590,7 +5590,7 @@ function Exercice_Pythagore() {
 				texte += `Calculer $${s0 + s2}$.`
 				texte_corr = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, d&rsquo;après le théorème de Pythagore, on a : $${s1 + s2}^2 = ${s0 + s1}^2~+~${s0 + s2}^2.$</br>`
 				texte_corr += 'D&rsquo;où ' + `$${s0 + s2}^2~=~${s1 + s2}^2~-~${s0 + s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12 - carre01, 2)}.$` + '</br>'
-				texte_corr += 'Soit ' + `$${s0 + s2}~=~\\sqrt{${arrondi_virgule(carre12 - carre01, 2)}}~\\approx${s02}$` + '&nbsp;cm.'
+				texte_corr += 'Soit ' + `$${s0 + s2}~=~\\sqrt{${arrondi_virgule(carre12 - carre01, 2)}}~\\approx${s02}$` + '~cm.'
 			}
 			if (type_de_questions < 3) {
 				this.type_exercice = 'MG32';
