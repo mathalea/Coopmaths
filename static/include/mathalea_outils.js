@@ -468,7 +468,7 @@ function tex_nombre(nb){
 	} else {
 		let result;
 		if (nb>999 || nombre_de_chiffres_dans_la_partie_decimale(nb)>3) { 
-			result = '\\nombre{'+nb.toString().replace('.',',')+'}';
+			result = '\\numprint{'+nb.toString().replace('.',',')+'}';
 		}else{
 			result = nb.toString().replace('.',',');
 		}
