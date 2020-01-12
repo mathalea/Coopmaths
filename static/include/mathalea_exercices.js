@@ -5662,16 +5662,16 @@ function Exercice_Pythagore() {
 			lettre2 = randint(11, 25, [lettre0, lettre1])
 			let s2 = lettre_depuis_chiffre(lettre2)
 			let type_de_questions
-			if (this.sup == 1) {
+			if (parseInt(this.sup) == 1) {
 				type_de_questions = 1 //calcul de l'hypoténuse
 			}
-			if (this.sup == 2) {
+			if (parseInt(this.sup) == 2) {
 				type_de_questions = 2 //calcul d'un côté de l'angle droit
 			}
-			if (this.sup == 3) {
+			if (parseInt(this.sup) == 3) {
 				type_de_questions = randint(1, 2) //un des deux calculs
 			}
-			if (this.sup == 4) {
+			if (parseInt(this.sup) == 4) {
 				type_de_questions = randint(3, 4) // un des deux calculs sans figure
 			}
 
@@ -5802,7 +5802,7 @@ function Resoudre_une_equation_produit_nul(){
 	this.nb_cols_corr = 1;
 	this.sup = 1; 
 	this.spacing = 1.5
-	this.spacing_corr = 2.5
+	this.spacing_corr = 3
 	
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -5810,15 +5810,15 @@ function Resoudre_une_equation_produit_nul(){
 		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		let type_de_questions
-		switch (this.sup) {
-			case 1: type_de_questions=combinaison_listes([1,2],this.nb_questions);
+		let liste_type_de_questions=[]
+		switch (parseInt(this.sup)) {
+			case 1: liste_type_de_questions=combinaison_listes([1,2],this.nb_questions);
 				break;
-			case 2: type_de_questions=combinaison_listes([3,4],this.nb_questions);
+			case 2: liste_type_de_questions=combinaison_listes([3,4],this.nb_questions);
 				break;
-			case 3: type_de_questions=combinaison_listes([5,6],this.nb_questions);
+			case 3: liste_type_de_questions=combinaison_listes([5,6],this.nb_questions);
 				break;
-			case 4: type_de_questions=combinaison_listes([1,2,3,4,5,6],this.nb_questions);
+			case 4: liste_type_de_questions=combinaison_listes([1,2,3,4,5,6],this.nb_questions);
 
 		}
 		for (let i = 0, a, b, c, d, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
@@ -5828,20 +5828,22 @@ function Resoudre_une_equation_produit_nul(){
 			fraction2 = choice(liste_fractions);
 			ns2=fraction2[0]
 			ds2=fraction2[1]
-			switch (type_de_questions[i]) {
+			switch (liste_type_de_questions[i]) {
 			case 1: b = randint(1,20); // (x+a)(x+b)=0 avec a et b entiers
 					d = randint(1,20,[b])
 					texte = `$(x+${b})(x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(x+${b})(x+${d})=0$`+' si '+`$x+${b}=0$`+' ou si '+`$x+${d}=0$`
-					texte_corr += '\\\\\n Donc si '+`$x=${0-b}$`+' ou si '+`$x=${0-d}$`
+					texte_corr += '\\\\\n'+`$(x+${b})(x+${d})=0$`
+					texte_corr +='\\\\\n Soit '+`$x+${b}=0$`+' ou '+`$x+${d}=0$`
+					texte_corr += '\\\\\n Donc '+`$x=${0-b}$`+' ou '+`$x=${0-d}$`
 				break;
 			case 2: b = randint(1,20); // (x-a)(x+b)=0 avec a et b entiers
 					d = randint(1,20,[b])
 					texte = `$(x-${b})(x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(x-${b})(x+${d})=0$`+' si '+`$x-${b}=0$`+' ou si '+`$x+${d}=0$`
-					texte_corr += '\\\\\n Donc si '+`$x=${b}$`+' ou si '+`$x=${0-d}$`
+					texte_corr += '\\\\\n'+`$(x-${b})(x+${d})=0$`
+					texte_corr += '\\\\\n Soit '+`$x-${b}=0$`+' ou  '+`$x+${d}=0$`
+					texte_corr += '\\\\\n Donc '+`$x=${b}$`+' ou '+`$x=${0-d}$`
 				break;
 				
 			case 3: a = randint(2,6); 	//(ax+b)(cx+d)=0  avec b/a et d/c entiers.
@@ -5850,10 +5852,11 @@ function Resoudre_une_equation_produit_nul(){
 					d = Math.round(randint(1,5)*c);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x+${d}=0$`
-					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${0-d}$`
-					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=-${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc si '+`$x=${0-b/a}$`+' ou si '+`$x=${0-d/c}$`
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
+					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${0-d/c}$`
 				break;
 			case 4: a = randint(2,6); 	//(ax+b)(cx-d)=0  avec b/a et d/c entiers.
 					b = Math.round(randint(1,5)*a);
@@ -5861,10 +5864,11 @@ function Resoudre_une_equation_produit_nul(){
 					d = Math.round(randint(1,5)*c);
 					texte = `$(${a}x+${b})(${c}x-${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x-${d}=0$`
-					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${d}$`
-					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc si '+`$x=${0-b/a}$`+' ou si '+`$x=${d/c}$`
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`
+					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
+					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${d/c}$`
 				break;
 			case 5:
 					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
@@ -5873,11 +5877,11 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b,c]);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x+${d}=0$`
-					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${0-d}$`
-					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=-${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou si '+`$x=-${tex_fraction_reduite(d,c)}$`
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
+					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=-${tex_fraction_reduite(d,c)}$`
 				break;
 			case 6:
 					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
@@ -5886,15 +5890,18 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b,c]);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`+' si '+`$${a}x+${b}=0$`+' ou si '+`$${c}x-${d}=0$`
-					texte_corr += '\\\\\n Donc si '+`$${a}x=${0-b}$`+' ou si '+`$${c}x=${d}$`
-					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction(b,a)}$`+' ou si '+`$x=${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc si '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou si '+`$x=${tex_fraction_reduite(d,c)}$`
+					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`
+					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
+					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
+					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction_reduite(b,a)}$`+' ou '+`$x=${tex_fraction_reduite(d,c)}$`
 				break;
 		}
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 		this.liste_questions.push(texte);
 		this.liste_corrections.push(texte_corr);
+		// alert(this.liste_questions)
+		// alert(this.liste_corrections)
 			i++;
 		}
 		cpt++;	
