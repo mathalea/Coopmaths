@@ -5410,17 +5410,19 @@ function Exercice_Thales(){
 		}
 		else  // énoncé sans figure
 			if (randint(1,2)==1) {
-				texte = `$${s1}$, $${s2}$ et $${s3}$ sont trois point distincts.\\\\\n ${s4} appartient à $[${s1+s2}]$ et ${s5} appartient à $[${s1+s3}]$ tel que les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
+				texte = `$${s1}$, $${s2}$ et $${s3}$`+' sont trois point distincts.\\\\\n' + `$${s4} \\in [${s1+s2}]$`+' et '+`$${s5} \\in [${s1+s3}]$`+' tel que les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.\\\\\n'
+				texte += `$${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
 				texte += `\\\\\n Calculer $${s1+s4}$ et $${s2+s3}$.`
 				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.\\\\\n'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'\\\\\n'
 			}
 			else {
-				texte = `Les droites $(${s2+s4})$ et $(${s5+s3})$ sont sécantes en ${s1}, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
-				texte += `</br>Calculer $${s1+s4}$ et $${s2+s3}$.`
+				texte = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre.`
+				texte += `\\\\\nLes droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s5+s3}=${s35}$ cm.`
+				texte += `\\\\\nCalculer $${s1+s4}$ et $${s2+s3}$.`
 				if (k>0) {
 					texte_corr = 'Dans le triangle ' + `$${s1+s2+s3}$` + ', les droites ' + `$(${s4+s5})$` + ' et ' + `$(${s2+s3})$` + ' sont parallèles.\\\\\n' + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
 				} else {
-					texte_corr = `Les points $${s2}$, $${s1}$, $${s5}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br>` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+					texte_corr = `Les points $${s2}$, $${s1}$, $${s5}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
 				}
 				if (k>0){
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'&nbsp;cm.\\\\\n'
@@ -5457,7 +5459,7 @@ function Exercice_Thales(){
 			this.liste_questions.push(texte) // on envoie la question
 				// correction 
 			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
-				texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$\\\\\n\t`
+				// texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$\\\\\n\t`
 				if (k>0){
 					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`
 				}
@@ -5465,8 +5467,12 @@ function Exercice_Thales(){
 					texte_corr +='\\\\\n On sait que '+`$${s1+s5}=${s3+s5}-${s1+s3}=${s35}-${s13}=${s15}~\\text{cm}.$`
 				}
 			}
-			else {
-				texte_corr = `Dans le triangle $${s1+s2+s3}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
+			else 
+			if (this.sup==1){
+				if (k>0) {texte_corr = `Dans le triangle $${s1+s2+s3}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
+				}
+				else {texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D&rsquo;après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+				}
 			}
 			texte_corr += `\\\\\n On a donc $${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
 			texte_corr += `\\\\\n Soit $${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$.`
@@ -5807,7 +5813,7 @@ function Resoudre_une_equation_produit_nul(){
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['niveau',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
+	this.besoin_formulaire_numerique = ['Niveau',4,'1: coefficient de x = 1\n 2: coefficient de x>1 solutions entières\n 3:solutions rationnelles\n 4: mélange des 3 autres niveaux'];
 }
 
 
