@@ -5810,15 +5810,15 @@ function Resoudre_une_equation_produit_nul(){
 		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		let type_de_questions
-		switch (this.sup) {
-			case 1: type_de_questions=combinaison_listes([1,2],this.nb_questions);
+		let liste_type_de_questions=[]
+		switch (parseInt(this.sup)) {
+			case 1: liste_type_de_questions=combinaison_listes([1,2],this.nb_questions);
 				break;
-			case 2: type_de_questions=combinaison_listes([3,4],this.nb_questions);
+			case 2: liste_type_de_questions=combinaison_listes([3,4],this.nb_questions);
 				break;
-			case 3: type_de_questions=combinaison_listes([5,6],this.nb_questions);
+			case 3: liste_type_de_questions=combinaison_listes([5,6],this.nb_questions);
 				break;
-			case 4: type_de_questions=combinaison_listes([1,2,3,4,5,6],this.nb_questions);
+			case 4: liste_type_de_questions=combinaison_listes([1,2,3,4,5,6],this.nb_questions);
 
 		}
 		for (let i = 0, a, b, c, d, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
@@ -5828,7 +5828,7 @@ function Resoudre_une_equation_produit_nul(){
 			fraction2 = choice(liste_fractions);
 			ns2=fraction2[0]
 			ds2=fraction2[1]
-			switch (type_de_questions[i]) {
+			switch (liste_type_de_questions[i]) {
 			case 1: b = randint(1,20); // (x+a)(x+b)=0 avec a et b entiers
 					d = randint(1,20,[b])
 					texte = `$(x+${b})(x+${d})=0$`
@@ -5895,6 +5895,8 @@ function Resoudre_une_equation_produit_nul(){
 		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 		this.liste_questions.push(texte);
 		this.liste_corrections.push(texte_corr);
+		// alert(this.liste_questions)
+		// alert(this.liste_corrections)
 			i++;
 		}
 		cpt++;	
