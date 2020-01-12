@@ -390,7 +390,7 @@ function mise_a_jour_du_code(){
 				code1 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 				code1 +=  exercice[i].contenu;
 				if (exercice[i].type_exercice=='MG32'){
-					code1 += `<div id="MG32div${i}"></div>`;
+					code1 += `<div id="MG32div${i}" class="MG32"></div>`;
 				}
 				code2 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
 				code2 +=  exercice[i].contenu_correction;
@@ -607,17 +607,17 @@ return tableau_objets_exercices;
 window.onload = function()  {
 //$( document ).ready(function() {	
 
-	// Gestion du menu déroulant
-	function menu_deroulant () {
+	// Gestion du menu déroulant par une fonction auto-exécutante
+	(function menu_deroulant () {
 		const el = document.getElementsByClassName('ui accordion');
 		// Sélectionne les accordeons
 		if (el.length) {
 	    	$('.ui.dropdown').dropdown();
 		} else {
-    		setTimeout(pollDOM, 300); // retente dans 300 milliseconds
+    		setTimeout(menu_deroulant, 300); // retente dans 300 milliseconds
 		}
-	}
-	menu_deroulant();
+	})();
+	
 	  
 	
 	
