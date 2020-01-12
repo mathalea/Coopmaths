@@ -607,14 +607,14 @@ return tableau_objets_exercices;
 
 window.onload = function()  {
 //$( document ).ready(function() {	
-
+	$('.ui.dropdown').dropdown(); // Pour le menu des exercices	
 	// Gestion du menu déroulant par une fonction auto-exécutante
 	(function menu_deroulant () {
 		const el = document.getElementsByClassName('id_exercice');
 		// Sélectionne les exercices de la liste des exercices disponibles
 		if (el.length>50) {
 			// S'il y a plus de 50 exercices, l'accordéon est initialisé
-	    	$('.ui.dropdown').dropdown();
+	    	
 	    	$('.ui.accordion').accordion();
 		} else {
     		setTimeout(menu_deroulant, 300); // retente dans 300 milliseconds
