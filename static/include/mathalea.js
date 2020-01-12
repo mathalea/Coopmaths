@@ -608,8 +608,17 @@ window.onload = function()  {
 //$( document ).ready(function() {	
 
 	// Gestion du menu déroulant
-
-	$('.ui.dropdown') .dropdown();  
+	function menu_deroulant () {
+		const el = document.getElementsByClassName('ui accordion');
+		// Sélectionne les accordeons
+		if (el.length) {
+	    	$('.ui.dropdown').dropdown();
+		} else {
+    		setTimeout(pollDOM, 300); // retente dans 300 milliseconds
+		}
+	}
+	menu_deroulant();
+	  
 	
 	
 	// Gestion de la mise à jour de l'affichage du code
