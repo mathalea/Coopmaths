@@ -262,6 +262,8 @@ function pgcd(a,b){
 	return parseInt(Algebrite.run(`gcd(${a},${b})`));
 }
 
+const ppcm = (a,b) => { return parseInt(Algebrite.run(`lcm(${a},${b})`))}
+
 function fraction_simplifiee(n,d){  // renvoie le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
 	let p=pgcd(n,d);
 	return [n/p,d/p];
