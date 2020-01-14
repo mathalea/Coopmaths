@@ -55,8 +55,9 @@ var liste_des_exercices_disponibles = {
 		'6N33' : Fraction_d_un_nombre,
 		'6N33-1' : Pourcentage_d_un_nombre,
 		'6N34' : Reglages_6N34,
+		'6N41' : Egalites_entre_fractions,
 		'5N12':Exercice_fractions_simplifier,
-		'5N12-2': Exercice_fractions_completer_egalite,
+		'5N12-2': Egalites_entre_fractions,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
 		'5N110' : Variation_en_pourcentages,
 		'5N21': Exercice_comparer_deux_fractions,
@@ -1913,11 +1914,11 @@ function Exercice_fractions_simplifier(max=11){
 	this.besoin_formulaire_numerique = ['Valeur maximale du facteur commun',99999];		
 }
 
-function Exercice_fractions_completer_egalite(max=11){
+function Egalites_entre_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = max ; // Correspond au facteur commun
-	this.titre = "Compléter une égalité de de fractions"
-	this.consigne = 'Compléter.'
+	this.sup = 11 ; // Correspond au facteur commun
+	this.titre = "Égalités entre fractions simples"
+	this.consigne = 'Compléter les égalités.'
 	this.spacing = 2;
 	this.spacing_corr = 2;
 
@@ -1927,21 +1928,36 @@ function Exercice_fractions_completer_egalite(max=11){
 		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
 		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]] // Couples de nombres premiers entre eux
-		for (let i = 0, fraction, a, b, texte, texte_corr, cpt=0; i < this.nb_questions;i++) {
-			fraction = choice(liste_fractions); //
-			a = fraction[0];
-			b = fraction[1];
-			k = randint(2,this.sup)
-			enleve_element(liste_fractions,fraction); // Il n'y aura pas 2 fois la même réponse
-			texte = '$ '+ tex_fraction(a,b) + ' = '+ tex_fraction('\\phantom{000000000000}','\\phantom{000000000000}') +' = '+tex_fraction('',k*b)+' $';
-			texte_corr = '$ '+ tex_fraction(a,b) + ' = '+ tex_fraction(k+' \\times '+a,k+' \\times '+b) +' = '+tex_fraction(k*a,k*b)+' $';
+		let liste_type_de_questions = combinaison_listes([1,1,1,1,2],this.nb_questions)
+		for (let i = 0, fraction, a, b, c, d, k, texte, texte_corr, cpt=0; i < this.nb_questions;i++) {
+			if (liste_type_de_questions[i]==1) { // égalité entre 2 fractions
+				fraction = choice(liste_fractions); //
+				a = fraction[0];
+				b = fraction[1];
+				k = randint(2,this.sup);
+				c = k*a;
+				d = k*b;
+				enleve_element(liste_fractions,fraction); // Il n'y aura pas 2 fois la même fraction de départ
+				texte = `$${tex_fraction(a,b)} = ${tex_fraction("\\phantom{00000000000000}","\\phantom{00000000000000}")} = ${tex_fraction("\\phantom{0000}",d)}$`;
+				texte_corr = `$${tex_fraction(a,b)} = ${tex_fraction(a+mise_en_evidence("\\times"+k),b+mise_en_evidence("\\times"+k))} = ${tex_fraction(c,d)}$`;
+			
+			} else { //écrire un entier sous la forme d'une fraction
+				a = randint(1,9);
+				d = randint(2,9);
+				c = a*d;
+				texte = `$${a} = ${tex_fraction("\\phantom{00000000000000}","\\phantom{00000000000000}")} = ${tex_fraction("\\phantom{0000}",d)}$`;
+				texte_corr = `$${a} = \\dfrac{${a}}{1} =${tex_fraction(a+mise_en_evidence("\\times"+d),"1"+mise_en_evidence("\\times"+d))} = ${tex_fraction(c,d)}$`;
+			}
+
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 			}
-		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Valeur maximale du facteur commun',99999];		
+	this.besoin_formulaire_numerique = ['Valeur maximale du facteur commun',99];		
 }
+
+
 
 function Exercice_comparer_deux_fractions (max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()

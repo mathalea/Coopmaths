@@ -86,11 +86,25 @@ function item_to_contenu(e){
 window.onload = function()  {
 
 	jQuery.ajaxSetup({async:false}); // la commande MAGIQUE ^^
-
 	$('.ui.radio.checkbox').checkbox(); // active les boutons radio (pour le style)
-	$('.ui.dropdown').dropdown({ // gestion du clic sur le menu déroulant pour ajouter un item dans le textarea
+	// Gestion du menu déroulant par une fonction auto-exécutante
+	(function menu_deroulant () {
+		const el = document.getElementsByClassName('menu_exercices_construit');
+		// Sélectionne les exercices de la liste des exercices disponibles
+		if (el.length) {
+			// S'il y a plus de 35 items
+	    	console.log(el)
+	    	$('.ui.dropdown').dropdown({ // gestion du clic sur le menu déroulant pour ajouter un item dans le textarea
 	    action: function(text, value, element){$('#textarea_id_items').val($('#textarea_id_items').val()+text.split(' ')[0]+' ')}
 	  });  //active les menus déroulants
+		} else {
+    		setTimeout(menu_deroulant, 300); // retente dans 300 milliseconds
+		}
+	})();
+
+
+	$('.ui.radio.checkbox').checkbox(); // active les boutons radio (pour le style)
+	
 
 	$('#reglages_sortie_LaTeX').hide();
 
