@@ -43,12 +43,17 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 - Améliorer l'export sur overleaf.com avec gestion des images (impossible ?).
 - Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome).
 - Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535)).
-- ~~~~Proposer des versions diaporamas.
+- ~~Proposer des versions diaporamas.~~
 - ~~Optimiser l'impression des exercices en ligne.~~
 - ~~Personnalisation des URL qui pourront pointer vers une sélection d'exercices déjà configurés.~~
 
 
 ### Changelog
+
+#### 01/20
+
+- Mise à jour de MathGraph32
+- Ajout d'exercices sur les calculs de fractions (4e et 3e)
 
 #### 12/19
 

@@ -2426,7 +2426,16 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 			if (this.sup2) { //si les numérateurs sont relatifs
 				a = a * choice([-1,1]);
 				c = c * choice([-1,1]);
+
 			}
+
+			if (!this.sup2 && plus_ou_moins=='-' && a/b<c/d) { //s'il n'y a pas de relatifs, il faut s'assurer que la soustraction soit positive
+				[a,b,c,d]=[c,d,a,b]
+				k1 = ppcm(b,d)/b;
+				k2 = ppcm(b,d)/d;
+				(type_de_questions=='d_multiple_de_b') ? k=b/d : k=b/d;
+			}
+
 			texte = `$${tex_fraction(a,b)}${plus_ou_moins}${tex_fraction(c,d)}=$`;
 			texte_corr = `$${tex_fraction(a,b)}${plus_ou_moins}${tex_fraction(c,d)}`
 
@@ -2463,11 +2472,20 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 					n = n * choice([-1,1]);
 				}
 				if (choice([true,false])) {
+					// n+-a/b
+					if (!this.sup2 && plus_ou_moins=="-" && n<a/b) {
+						n = randint(5,9) // max(a/b)=9/2
+					}
 					texte = `$${n}${plus_ou_moins}${tex_fraction(a,b)}=$`;
 					texte_corr = texte ;
 					texte_corr += `$${tex_fraction(n+'\\times'+b,b)}${plus_ou_moins}${tex_fraction(a,b)}`;
 					texte_corr += `=${tex_fraction(n*b+plus_ou_moins+ecriture_parenthese_si_negatif(a),b)}`;
 				} else {
+					// a/b +-n
+					if (!this.sup2 && plus_ou_moins=="-" && n>a/b) {
+						n = randint(1,4) // 
+						a = n*b+randint(1,9) //(n*b+?)/b-n>0
+					}
 					texte = `$${tex_fraction(a,b)}${plus_ou_moins}${ecriture_parenthese_si_negatif(n)}=$`;
 					texte_corr = texte ;
 					texte_corr += `$${tex_fraction(a,b)}${plus_ou_moins}${tex_fraction(n+'\\times'+b,b)}`;
