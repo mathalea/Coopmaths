@@ -78,6 +78,7 @@ var liste_des_exercices_disponibles = {
 		'5R31-2': Exercice_simplification_somme_algebrique,
 		'4N10': Exercice_additionner_des_fractions,
 		'4N11': Exercice_additionner_ou_soustraire_des_fractions,
+		'4N12': Exercice_Trouver_l_inverse,
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Thales_4eme,
@@ -2536,6 +2537,53 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 
 }
 
+function Exercice_Trouver_l_inverse(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = 1 ; // Avec ou sans relatifs
+	this.titre = "Trouver l'inverse d'un nombre"
+	this.consigne = "Calculer l'inverse et donner la réponse sous forme décimale ou de fraction simplifiée quand c'est impossible"
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_questions_disponibles
+		if (this.sup==4) {type_de_questions_disponibles = [1,1,2,2,3]} // nombre entier,fraction,décimal]
+		else {type_de_questions_disponibles = [parseInt(this.sup)]}
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+		for (let i = 0, nombre_choisi, nombre_inverse, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions;i++) {
+			type_de_questions = liste_type_de_questions[i];
+			switch (type_de_questions){
+								case 1 :
+					let liste_couples_d_inverses = [['1','1'],['2','0,5'],['3',tex_fraction(1,3)],['4','0,25'],['5','0,2'],['6',tex_fraction(1,6)],['8','0,125']]
+					let couples_d_inverses = choice(liste_couples_d_inverses)
+					if (choice([true,false])) {
+						nombre_choisi = couples_d_inverses[0];
+						nombre_inverse = couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi}\\: est\\:  ${nombre_inverse}\\:  car\\:  ${nombre_choisi}   \\times   ${nombre_inverse} =  1$`
+					} else {
+						nombre_choisi = '-'+couples_d_inverses[0];
+						nombre_inverse = '-'+couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi} \\: est \\: ${nombre_inverse}$`
+						nombre_inverse = '(-'+couples_d_inverses[1]+')';
+						texte_corr+=`$ \\: car \\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$`
+					}
+					
+					texte = 'Quel est l\'inverse de '+`$${nombre_choisi}$`+' ? ';
+					
+			break
+			}
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			}
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',1,"1 : nombres entiers"]
+}
+
 function Exercice_fractions_differentes_ecritures(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Décomposer une fraction (partie entière + fraction inférieure à 1) puis donner l'écriture décimale.";
@@ -3291,7 +3339,7 @@ function Exercice_developper(difficulte=1){
 
 /**
 * @author: Jean-Claude Lhote
-* Exercice_Double_distributivité : Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
+* Exercice_Double_distributivité : 
 * Niveau 1 développer (x+a)(x+b) ou (ax+b)(cx+d) avec a,b,c et d naturels simples
 * Niveau 2 développer (ax-b)(cx+d) ou (ax-b)(cx-d) avec a,b,c et d naturels simples
 * Niveau 3 mélange des deux niveaux précédents
