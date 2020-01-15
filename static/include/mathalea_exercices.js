@@ -4814,7 +4814,7 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 function Exercice_differentes_ecritures_nombres_decimaux(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Différentes écritures des nombres décimaux"
-	this.consigne = "Compléter."
+	this.consigne = "Compléter l'égalité puis donner l'écriture décimale."
 	this.spacing = 2;
 	this.spacing_corr = 2;
 
@@ -4830,20 +4830,24 @@ function Exercice_differentes_ecritures_nombres_decimaux(){
 			let u = randint(2,9); //chiffre des unités
 			let d = randint(1,9); //chiffre des dixièmes
 			let c = randint(1,9); //chiffre des centièmes
-			let n = 100*u+10*d+c
+			let n = 100*u+10*d+c;
+			let ecriture_decimale;
 			switch (type_de_questions){
 				case 1 : // n/100 = .../10 + .../100
-					texte = `$${tex_fraction(n,'100')}=\\ldots\\ldots+${tex_fraction('',10)}+${tex_fraction('',100)}$`;
-					texte_corr = `$${tex_fraction(n,'100')}=${u}+${tex_fraction(d,'10')}+${tex_fraction(c,'100')}$`;
+					ecriture_decimale = tex_nombre(calcul(u+d/10+c/100));
+					texte = `$${tex_fraction(n,'100')}=\\ldots\\ldots+${tex_fraction('',10)}+${tex_fraction('',100)}=\\ldots$`;
+					texte_corr = `$${tex_fraction(n,'100')}=${u}+${tex_fraction(d,'10')}+${tex_fraction(c,'100')}=${ecriture_decimale}$`;
 
 					break ;
 				case 2 : // n/100 = .../100 + .../10
-					texte = `$${tex_fraction(n,'100')}=\\ldots\\ldots+${tex_fraction('',100)}+${tex_fraction('',10)}$`;
-					texte_corr = `$${tex_fraction(n,'100')}=${u}+${tex_fraction(c,100)}+${tex_fraction(d,10)}$`;
+					ecriture_decimale = tex_nombre(calcul(u+d/10+c/100))
+					texte = `$${tex_fraction(n,'100')}=\\ldots\\ldots+${tex_fraction('',100)}+${tex_fraction('',10)}=\\ldots$`;
+					texte_corr = `$${tex_fraction(n,'100')}=${u}+${tex_fraction(c,100)}+${tex_fraction(d,10)}=${ecriture_decimale}$`;
 					break ;
 				case 3 : // .../100 = u+ d/10 + c/100
-					texte = `$${tex_fraction('','100')}=${u}+${tex_fraction(d,'10')}+${tex_fraction(c,'100')}$`;
-					texte_corr = `$${tex_fraction(n,'100')}=${u}+${tex_fraction(d,'10')}+${tex_fraction(c,'100')}$`;
+					ecriture_decimale = tex_nombre(calcul(u+d/10+c/100))
+					texte = `$${tex_fraction('','100')}=${u}+${tex_fraction(d,'10')}+${tex_fraction(c,'100')}=\\ldots$`;
+					texte_corr = `$${tex_fraction(n,'100')}=${u}+${tex_fraction(d,'10')}+${tex_fraction(c,'100')}=${ecriture_decimale}$`;
 					break ;
 				case 4 : // u = .../10
 					texte = `$${u}=${tex_fraction('','10')}$`;
@@ -4854,8 +4858,9 @@ function Exercice_differentes_ecritures_nombres_decimaux(){
 					texte_corr = `$${u}=${tex_fraction(100*u,'10')}$`;
 					break ;
 				case 6 : // n/10 = ... + .../10 + .../100
-					texte = `$${tex_fraction(n,10)}=\\ldots\\ldots+${tex_fraction('',10)}+${tex_fraction('',100)}$`;
-					texte_corr = `$${tex_fraction(n,10)}=${u*10+d}+${tex_fraction(c,10)}+${tex_fraction(0,100)}$`;
+					ecriture_decimale = tex_nombre(calcul(n/10))
+					texte = `$${tex_fraction(n,10)}=\\ldots\\ldots+${tex_fraction('',10)}+${tex_fraction('',100)}=\\ldots$`;
+					texte_corr = `$${tex_fraction(n,10)}=${u*10+d}+${tex_fraction(c,10)}+${tex_fraction(0,100)}=${ecriture_decimale}$`;
 					break ;
 			}
 			
