@@ -79,6 +79,7 @@ var liste_des_exercices_disponibles = {
 		'5R31-2': Exercice_simplification_somme_algebrique,
 		'4N10': Exercice_additionner_des_fractions,
 		'4N11': Exercice_additionner_ou_soustraire_des_fractions,
+		'4N12': Exercice_Trouver_l_inverse,
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Thales_4eme,
@@ -2125,7 +2126,7 @@ function Exercice_comparer_deux_fractions (max=11){
 				texte_corr += `  et   $\\quad${tex_fraction(a*k,b*k)} ${signe} ${tex_fraction(a*k+ecart,b*k)}\\quad$ donc $\\quad${tex_fraction(a,b)} ${signe} ${tex_fraction(a*k+ecart,b*k)}$ `;
 			} else {
 				texte_corr += `  et   $\\quad${tex_fraction(a*k+ecart,b*k)} ${signe2} ${tex_fraction(a*k,b*k)} \\quad$ donc $\\quad ${tex_fraction(a*k+ecart,b*k)} ${signe2} ${tex_fraction(a,b)} $ `;
-			}
+			}			
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 			}
@@ -2652,6 +2653,95 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 2 : Cas général"]
 	this.besoin_formulaire2_case_a_cocher = ['Avec des nombres relatifs'];
 
+}
+
+function Exercice_Trouver_l_inverse(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = 1 ; // Avec ou sans relatifs
+	this.titre = "Trouver l'inverse d'un nombre"
+	this.consigne = "Calculer l'inverse et donner la réponse sous forme décimale ou de fraction simplifiée quand c'est impossible"
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_questions_disponibles
+		let liste_couples_d_inverses
+		let couples_d_inverses
+		if (this.sup==4) {type_de_questions_disponibles = [1,1,2,2,3]} // nombre entier,fraction,décimal]
+		else {type_de_questions_disponibles = [parseInt(this.sup)]}
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+		for (let i = 0, nombre_choisi, nombre_inverse, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+			type_de_questions = liste_type_de_questions[i];
+			switch (type_de_questions){
+				case 1 :
+					liste_couples_d_inverses = [['1','1'],['2','0,5'],['3',tex_fraction(1,3)],['4','0,25'],['5','0,2'],['6',tex_fraction(1,6)],['8','0,125'],['10','0,1'],['20','0,05'],['16','0,0625'],[7,tex_fraction(1,7)]]
+					couples_d_inverses = choice(liste_couples_d_inverses)
+					if (choice([true,false])) {
+						nombre_choisi = couples_d_inverses[0];
+						nombre_inverse = couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi}\\: est\\:  ${nombre_inverse}\\:  car\\:  ${nombre_choisi}   \\times   ${nombre_inverse} =  1$`
+					} else {
+						nombre_choisi = '-'+couples_d_inverses[0];
+						nombre_inverse = '-'+couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi} \\: est \\: ${nombre_inverse}$`
+						nombre_inverse = '(-'+couples_d_inverses[1]+')';
+						texte_corr+=`$ \\: car \\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$`
+					}
+					
+					texte = 'Quel est l\'inverse de '+`$${nombre_choisi}$`+' ? ';
+					
+				break
+				case 2 :
+					liste_couples_d_inverses = [[tex_fraction(2,3),'1,5'],[tex_fraction(4,5),'1,25'],[tex_fraction(5,6),'1,2'],[tex_fraction(7,6),tex_fraction(6,7)],[tex_fraction(8,7),'0,875'],[tex_fraction(9,8),tex_fraction(8,9)]]
+					couples_d_inverses = choice(liste_couples_d_inverses)
+					if (choice([true,false])) {
+						nombre_choisi = couples_d_inverses[0];
+						nombre_inverse = couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi}\\: est\\:  ${nombre_inverse}\\:  car\\:  ${nombre_choisi}   \\times   ${nombre_inverse} =  1$`
+					} else {
+						nombre_choisi = '-'+couples_d_inverses[0];
+						nombre_inverse = '-'+couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi} \\: est \\: ${nombre_inverse}$`
+						nombre_inverse = '(-'+couples_d_inverses[1]+')';
+						texte_corr+=`$ \\: car \\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$`
+					}
+					
+					texte = 'Quel est l\'inverse de '+`$${nombre_choisi}$`+' ? ';
+					
+				break	
+				case 3 :
+					liste_couples_d_inverses = [['0,6',tex_fraction(5,3)],['0,75',tex_fraction(4,3)],['0,1','10'],['0,4','2,5'],['5,5',tex_fraction(2,11)],['12,5','0,08'],['7,5',tex_fraction(2,15)]]
+					couples_d_inverses = choice(liste_couples_d_inverses)
+					if (choice([true,false])) {
+						nombre_choisi = couples_d_inverses[0];
+						nombre_inverse = couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi}\\: est\\:  ${nombre_inverse}\\:  car\\:  ${nombre_choisi}   \\times   ${nombre_inverse} =  1$`
+					} else {
+						nombre_choisi = '-'+couples_d_inverses[0];
+						nombre_inverse = '-'+couples_d_inverses[1];
+						texte_corr = 'L\'inverse de '+ `$${nombre_choisi} \\: est \\: ${nombre_inverse}$`
+						nombre_inverse = '(-'+couples_d_inverses[1]+')';
+						texte_corr+=`$ \\: car \\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$`
+					}
+					
+					texte = 'Quel est l\'inverse de '+`$${nombre_choisi}$`+' ? ';
+					
+				break	
+			}
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++
+		}
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : nombres entiers\n 2 : fractions\n 3 : nombre décimal\n 4 : mélange des 3 niveaux"]
 }
 
 function Exercice_fractions_differentes_ecritures(){
@@ -3409,7 +3499,7 @@ function Exercice_developper(difficulte=1){
 
 /**
 * @author: Jean-Claude Lhote
-* Exercice_Double_distributivité : Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
+* Exercice_Double_distributivité : 
 * Niveau 1 développer (x+a)(x+b) ou (ax+b)(cx+d) avec a,b,c et d naturels simples
 * Niveau 2 développer (ax-b)(cx+d) ou (ax-b)(cx-d) avec a,b,c et d naturels simples
 * Niveau 3 mélange des deux niveaux précédents
