@@ -2683,17 +2683,14 @@ function Exercice_Trouver_l_inverse(){
 					if (choice([true,false])) {
 						nombre_choisi = couples_d_inverses[0];
 						nombre_inverse = couples_d_inverses[1];
-						texte_corr = 'L\'inverse de '+ `$${nombre_choisi}\\: est\\:  ${nombre_inverse}\\:  car\\:  ${nombre_choisi}   \\times   ${nombre_inverse} =  1$`
+						texte_corr = `L\'inverse de $${nombre_choisi}$ est $${nombre_inverse} \\:$ car $\\: ${nombre_choisi}   \\times   ${nombre_inverse} =  1$.`
 					} else {
 						nombre_choisi = '-'+couples_d_inverses[0];
 						nombre_inverse = '-'+couples_d_inverses[1];
-						texte_corr = 'L\'inverse de '+ `$${nombre_choisi} \\: est \\: ${nombre_inverse}$`
+						texte_corr = `L'inverse de $${nombre_choisi}$ est $${nombre_inverse} \\:$`
 						nombre_inverse = '(-'+couples_d_inverses[1]+')';
-						texte_corr+=`$ \\: car \\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$`
+						texte_corr+=` car $\\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$.`
 					}
-					
-					texte = 'Quel est l\'inverse de '+`$${nombre_choisi}$`+' ? ';
-					
 				break
 				case 2 :
 					liste_couples_d_inverses = [[tex_fraction(2,3),'1,5'],[tex_fraction(4,5),'1,25'],[tex_fraction(5,6),'1,2'],[tex_fraction(7,6),tex_fraction(6,7)],[tex_fraction(8,7),'0,875'],[tex_fraction(9,8),tex_fraction(8,9)]]
@@ -2701,17 +2698,14 @@ function Exercice_Trouver_l_inverse(){
 					if (choice([true,false])) {
 						nombre_choisi = couples_d_inverses[0];
 						nombre_inverse = couples_d_inverses[1];
-						texte_corr = 'L\'inverse de '+ `$${nombre_choisi}\\: est\\:  ${nombre_inverse}\\:  car\\:  ${nombre_choisi}   \\times   ${nombre_inverse} =  1$`
+						texte_corr = `L'inverse de $${nombre_choisi}$ est $${nombre_inverse} \\:$ car $\\: ${nombre_choisi}   \\times   ${nombre_inverse} =  1$.`
 					} else {
 						nombre_choisi = '-'+couples_d_inverses[0];
 						nombre_inverse = '-'+couples_d_inverses[1];
-						texte_corr = 'L\'inverse de '+ `$${nombre_choisi} \\: est \\: ${nombre_inverse}$`
+						texte_corr = `L'inverse de $${nombre_choisi}$ est $${nombre_inverse} \\:$`
 						nombre_inverse = '(-'+couples_d_inverses[1]+')';
-						texte_corr+=`$ \\: car \\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$`
+						texte_corr+=` car $\\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$.`
 					}
-					
-					texte = 'Quel est l\'inverse de '+`$${nombre_choisi}$`+' ? ';
-					
 				break	
 				case 3 :
 					liste_couples_d_inverses = [['0,6',tex_fraction(5,3)],['0,75',tex_fraction(4,3)],['0,1','10'],['0,4','2,5'],['5,5',tex_fraction(2,11)],['12,5','0,08'],['7,5',tex_fraction(2,15)]]
@@ -2719,19 +2713,17 @@ function Exercice_Trouver_l_inverse(){
 					if (choice([true,false])) {
 						nombre_choisi = couples_d_inverses[0];
 						nombre_inverse = couples_d_inverses[1];
-						texte_corr = 'L\'inverse de '+ `$${nombre_choisi}\\: est\\:  ${nombre_inverse}\\:  car\\:  ${nombre_choisi}   \\times   ${nombre_inverse} =  1$`
+						texte_corr = `L'inverse de $${nombre_choisi}$ est $${nombre_inverse} \\:$ car $\\: ${nombre_choisi}   \\times   ${nombre_inverse} =  1$.`
 					} else {
 						nombre_choisi = '-'+couples_d_inverses[0];
 						nombre_inverse = '-'+couples_d_inverses[1];
-						texte_corr = 'L\'inverse de '+ `$${nombre_choisi} \\: est \\: ${nombre_inverse}$`
+						texte_corr = `L'inverse de $${nombre_choisi}$ est $${nombre_inverse} \\:$`
 						nombre_inverse = '(-'+couples_d_inverses[1]+')';
-						texte_corr+=`$ \\: car \\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$`
+						texte_corr+=` car $\\: ${nombre_choisi}  \\times  ${nombre_inverse}  =  1$.`
 					}
-					
-					texte = 'Quel est l\'inverse de '+`$${nombre_choisi}$`+' ? ';
-					
 				break	
 			}
+			texte = `Quel est l'inverse de $${nombre_choisi}$ ?`;
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
@@ -2741,7 +2733,7 @@ function Exercice_Trouver_l_inverse(){
 		}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : nombres entiers\n 2 : fractions\n 3 : nombre décimal\n 4 : mélange des 3 niveaux"]
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : Nombres entiers\n 2 : Fractions\n 3 : Nombres décimaux\n 4 : Mélange des 3 niveaux"]
 }
 
 function Exercice_fractions_differentes_ecritures(){
