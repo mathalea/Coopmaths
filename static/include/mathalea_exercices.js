@@ -1968,6 +1968,7 @@ function Criteres_de_divisibilite(){
 	this.spacing = 2;
 	this.spacing_corr = 1;
 	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -4882,7 +4883,7 @@ function Additions_soustractions_multiplications_posees(){
 	this.titre = "Additions, soustractions et multiplications posées de nombres entiers"
 	this.consigne = "Poser et effectuer les calculs suivants."
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon les opérations posées ne sont pas jolies
 	this.nb_questions = 5;
 	// this.pas_de_version_HMTL=true;
 
@@ -4970,9 +4971,8 @@ function Additionner_soustraires_decimaux(){
 	this.titre = "Additions et soustractions de nombres décimaux"
 	this.consigne = "Poser et effectuer les calculs suivants."
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon les opérations posées ne sont pas jolies
 	this.nb_questions = 4;
-	// this.pas_de_version_HMTL=true;
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -5060,7 +5060,7 @@ function Divisions_euclidiennes(){
 	this.titre = "Divisions euclidiennes"
 	this.consigne = "Poser et effectuer les divisions euclidiennes suivantes puis donner l'égalité fondamentale correspondante."
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon opidiv n'est pas joli
 	this.nb_questions = 4;
 	this.sup = 1;
 
@@ -5129,7 +5129,7 @@ function Division_decimale(){
 	this.titre = "Divisions décimales"
 	this.consigne = "Effectuer les divisions décimales suivantes et donner la valeur exacte de leur quotient."
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon opdiv n'est pas joli
 	this.nb_questions = 4;
 	this.sup = 1;
 

@@ -88,16 +88,18 @@ window.onload = function()  {
 	jQuery.ajaxSetup({async:false}); // la commande MAGIQUE ^^
 	$('.ui.radio.checkbox').checkbox(); // active les boutons radio (pour le style)
 	// Gestion du menu déroulant par une fonction auto-exécutante
+	let attendre=0;
 	(function menu_deroulant () {
 		const el = document.getElementsByClassName('menu_exercices_construit');
 		// Vérifie que ce div inutile a bien été créé
-		if (el.length) {
+		if (el.length && attendre>1) {
 			// S'il est présent on règle le menu
 	    	$('.ui.dropdown').dropdown({ // gestion du clic sur le menu déroulant pour ajouter un item dans le textarea
 	    action: function(text, value, element){$('#textarea_id_items').val($('#textarea_id_items').val()+text.split(' ')[0]+' ')}
 	  });  //active les menus déroulants
 		} else {
     		setTimeout(menu_deroulant, 300); // retente dans 300 milliseconds
+    		attendre+=1
 		}
 	})();
 

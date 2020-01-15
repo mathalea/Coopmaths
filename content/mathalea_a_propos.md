@@ -15,9 +15,8 @@ description: "Générateur d'exercices de mathématiques à données aléatoires
 
 ### Pour participer
 
-Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources et les étudier. Vous pouvez aussi lire [ces exemples de codes](../mathalea_documentation) pour un exercice.
+Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/remiangot/Coopmaths) et lire la documentation sur le [wiki](https://github.com/remiangot/Coopmaths/wiki).
 
-MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.com/remiangot/Coopmaths)
 
 ### Crédits
 
@@ -38,11 +37,11 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 
 ### ToDo
 
-- Ajout d'exercices.
+- Ajout d'exercices (notamment en cycle 4).
 - Gestion des catégories des exercices.
 - Améliorer l'export sur overleaf.com avec gestion des images (impossible ?).
 - Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome).
-- Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535)).
+- Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535) sur MathémaTICE).
 - ~~Proposer des versions diaporamas.~~
 - ~~Optimiser l'impression des exercices en ligne.~~
 - ~~Personnalisation des URL qui pourront pointer vers une sélection d'exercices déjà configurés.~~
@@ -114,7 +113,8 @@ MathALEA comme l'ensemble de ce site est disponible sur [GitHub](https://github.
 #### 03/18
 
 - Intégration de KaTeX.
-- Intégration de Semantic UI.- Téléchargement d'un fichier LaTeX.
+- Intégration de Semantic UI.
+- Téléchargement d'un fichier LaTeX.
 - Paramètres du fichier généré (nom, style...).
 - Lien de téléchargment des fichiers nécessaires à la compilation (dans les 2 styles).
 - Listing automatique des nouveaux exercices.
