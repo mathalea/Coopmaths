@@ -90,10 +90,9 @@ window.onload = function()  {
 	// Gestion du menu déroulant par une fonction auto-exécutante
 	(function menu_deroulant () {
 		const el = document.getElementsByClassName('menu_exercices_construit');
-		// Sélectionne les exercices de la liste des exercices disponibles
+		// Vérifie que ce div inutile a bien été créé
 		if (el.length) {
-			// S'il y a plus de 35 items
-	    	console.log(el)
+			// S'il est présent on règle le menu
 	    	$('.ui.dropdown').dropdown({ // gestion du clic sur le menu déroulant pour ajouter un item dans le textarea
 	    action: function(text, value, element){$('#textarea_id_items').val($('#textarea_id_items').val()+text.split(' ')[0]+' ')}
 	  });  //active les menus déroulants

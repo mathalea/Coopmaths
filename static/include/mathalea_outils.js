@@ -243,6 +243,15 @@ function signe(a) { // + ou -
 	return result;
 };
 
+function somme_des_chiffre(n) { //renvoie un string avec la somme des chiffres
+	let somme_string =''
+	for (let i = 0; i < n.length-1; i++) {
+		somme_string += n[i]+'+'
+	}
+	somme_string += n[n.length-1]
+	return somme_string
+}
+
 
 function arrondi(nombre, precision=2){
     let tmp = Math.pow(10, precision);
