@@ -441,7 +441,7 @@ function html_ligne(liste,spacing){
 		result = `<div style="line-height: ${spacing};">\n`
 	}
 	for(let i in liste){
-		result += '\t' + liste[i].replace(/\\dotfill/g,'...').replace(/\\\\/g,'<br>') + '</br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '\t' + liste[i].replace(/\\dotfill/g,'...').replace(/\\\\/g,'<br>').replace(/~/g,' ') + '</br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 	}
 
 	if (spacing>1) {
