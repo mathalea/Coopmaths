@@ -634,5 +634,3 @@ function MG32_tracer_toutes_les_figures() {
 	})();
 
 }
-
-	

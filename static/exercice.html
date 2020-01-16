@@ -22,7 +22,7 @@
   <script src="include/semantic.min.js" type="text/javascript"></script>
   <script src="include/algebrite.bundle-compressed.js" type="text/javascript" ></script>
   <!-- <script src="include/prism.js" type="text/javascript"></script> -->
-  <!-- <script src="include/clipboard.min.js" type="text/javascript"></script> -->
+  <script src="include/clipboard.min.js" type="text/javascript"></script>
   <script src="include/katex.min.js" type="text/javascript"></script>
   <!-- <script src="include/math.min.js" type="text/javascript"></script> -->
 
@@ -51,12 +51,13 @@
   <a  href="/telechargements"class="ui simple  item">Téléchargements</a> 
   <a  href="mailto:contact@coopmaths.fr" class="ui simple  item">Contact</a>
   <div class="ui  dropdown item" class="blanc">MathALEA <i class="dropdown icon"></i> 
-    <div class="menu">
-      <a href="/mathalea_a_propos" class="item">Présentation</a>
+   <div class="menu">
       <a href="/mathalea.html" class="item">Exercices en ligne</a>
       <a href="/cm.html" class="item">Diaporama</a>
       <a href="/mathalealatex.html"class="item">Générateur LaTeX</a>
       <a href="/alacarte"class="item">Évaluation à la carte</a>
+      <a href="/mathalea_tuto" class="item">Comment l'utiliser ?</a>
+      <a href="/mathalea_a_propos" class="item">À propos</a>
     </div>
   </div>
 </div>
@@ -91,6 +92,7 @@
     <button class="btn ui  right labeled icon button" id="btn_zoom_plus">Zoom<i class="plus icon"></i> </button>
     <button class="btn ui  icon button" id="btn_zoom_moins"><i class="minus icon"></i> </button>   
  </div>
+ <button class="btn ui toggle button labeled icon url" data-clipboard-action="copy" data-clipboard-text=url_courant()><i class="copy icon"></i>Copier le lien vers les exercices sélectionnés</button> 
  
  <div class="ui hidden divider"></div>
 
@@ -118,7 +120,9 @@
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>
 <div class="ui right aligned container">
-  <b>COOPmaths - CC-BY-SA - 2020</b>
+
+  <img class="ui middle aligned tiny image" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
+  <span class="ui header"></span>
 </div>
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>

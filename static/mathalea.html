@@ -2,14 +2,14 @@
 <html>
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5318292-3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5318292-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      gtag('config', 'UA-5318292-3');
-    </script>
+    gtag('config', 'UA-5318292-3');
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <!-- <link rel="stylesheet" type="text/css" href="style/prism.css"> -->
@@ -53,93 +53,99 @@
     
 
 
-  <title>CoopMaths - MathALÉA</title>
-</head>
+    <title>CoopMaths - MathALÉA</title>
+  </head>
 
-<body>
+  <body>
 
-<nav>
+    <nav>
 
-<div class="ui top attached five item stackable container menu  ">
-  <a  href="/" class="ui simple  item">CoopMaths </a> 
-  <a  href="/a_propos/" class="ui simple  item">À propos</a>
-  <a  href="/telechargements"class="ui simple  item">Téléchargements</a> 
-  <a  href="mailto:contact@coopmaths.fr" class="ui simple  item">Contact</a>
-  <div class="ui  dropdown item" class="blanc">MathALEA <i class="dropdown icon"></i> 
-    <div class="menu">
-      <a href="/mathalea_a_propos" class="item">Présentation</a>
-      <a href="/mathalea.html" class="item">Exercices en ligne</a>
-      <a href="/cm.html" class="item">Diaporama</a>
-      <a href="/mathalealatex.html"class="item">Générateur LaTeX</a>
-      <a href="/alacarte"class="item">Évaluation à la carte</a>
+      <div class="ui top attached five item stackable container menu  ">
+        <a  href="/" class="ui simple  item">CoopMaths </a> 
+        <a  href="/a_propos/" class="ui simple  item">À propos</a>
+        <a  href="/telechargements"class="ui simple  item">Téléchargements</a> 
+        <a  href="mailto:contact@coopmaths.fr" class="ui simple  item">Contact</a>
+        <div class="ui  dropdown item" class="blanc">MathALEA <i class="dropdown icon"></i> 
+          <div class="menu">
+            <a href="/mathalea.html" class="item">Exercices en ligne</a>
+            <a href="/cm.html" class="item">Diaporama</a>
+            <a href="/mathalealatex.html"class="item">Générateur LaTeX</a>
+            <a href="/alacarte"class="item">Évaluation à la carte</a>
+            <a href="/mathalea_tuto" class="item">Comment l'utiliser ?</a>
+            <a href="/mathalea_a_propos" class="item">À propos</a>
+          </div>
+        </div>
+      </div>
+
+
+    </nav>
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui hidden divider"></div>
+
+    <section class="ui  container " >
+      <h3 class="ui block header">Choix des exercices</h3>
+      <div class="ui fluid left icon input" data-tooltip='Nombres séparés par des virgules' data-inverted="">
+       <i class="edit icon"></i>
+       <input id='choix_des_exercices'  type='text' >
+     </div>
+
+     <div class="ui hidden divider"></div>
+
+     <div id="liste_des_exercices" style="margin-top: 20px">
+       <h3 class="ui dividing header">Exercices disponibles</h3>
+       <!-- Liste mise à jour en JS -->
+     </div>
+     <div class="ui hidden divider"></div>
+
+     <h3 class="ui block header">Exercices</h3>
+
+     <button class="btn ui labeled icon button" id="btn_mise_a_jour_code"><i class="redo icon"></i>Nouvelles données</button> 
+     <div class="ui buttons">
+      <button class="btn ui  right labeled icon button" id="btn_zoom_plus">Zoom<i class="plus icon"></i> </button>
+      <button class="btn ui  icon button" id="btn_zoom_moins"><i class="minus icon"></i> </button>  
     </div>
-  </div>
-</div>
- 
-
-</nav>
-
-<div class="ui hidden divider"></div>
-
-<div class="ui hidden divider"></div>
-
- <section class="ui  container " >
-  <h3 class="ui block header">Choix des exercices</h3>
-  <div class="ui fluid left icon input" data-tooltip='Nombres séparés par des virgules' data-inverted="">
-   <i class="edit icon"></i>
-   <input id='choix_des_exercices'  type='text' >
- </div>
- <div class="ui hidden divider"></div>
-
- <div id="liste_des_exercices" style="margin-top: 20px">
-   <h3 class="ui dividing header">Exercices disponibles</h3>
-   <!-- Liste mise à jour en JS -->
- </div>
- <div class="ui hidden divider"></div>
-
- <h3 class="ui block header">Exercices</h3>
-
- <button class="btn ui labeled icon button" id="btn_mise_a_jour_code"><i class="redo icon"></i>Nouvelles données</button> 
- <div class="ui buttons">
-    <button class="btn ui  right labeled icon button" id="btn_zoom_plus">Zoom<i class="plus icon"></i> </button>
-    <button class="btn ui  icon button" id="btn_zoom_moins"><i class="minus icon"></i> </button>   
- </div>
+      <button class="btn ui toggle button labeled icon url" data-clipboard-action="copy" data-clipboard-text=url_courant()><i class="copy icon"></i>Copier le lien vers les exercices sélectionnés</button> 
 
 
- <div class="ui hidden divider"></div>
-
- <div id="affichage_exercices">
-  <div id="exercices">  </div> 
 
 
-  <div class="ui fluid accordion">
-    <div class="title">
-      <i class="dropdown icon"></i>
-      Corrections
+    <div class="ui hidden divider"></div>
+
+    <div id="affichage_exercices">
+      <div id="exercices">  </div> 
+
+
+      <div class="ui fluid accordion">
+        <div class="title">
+          <i class="dropdown icon"></i>
+          Corrections
+        </div>
+        <div class="content">
+          <div id="corrections"></div> 
+        </div>
+      </div>
+      <div class="ui  fluid accordion" id="accordeon_parametres">
+        <div class="title">
+          <i class="dropdown icon"></i>
+          Paramètres
+        </div>
+        <div class="content" id='parametres_generaux'>
+        </div>
+      </div> 
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+      <div class="ui right aligned container">
+        <img class="ui middle aligned tiny image" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
+        <span class="ui header"></span>
+      </div>
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
     </div>
-    <div class="content">
-      <div id="corrections"></div> 
-    </div>
-  </div>
-<div class="ui  fluid accordion" id="accordeon_parametres">
-  <div class="title">
-    <i class="dropdown icon"></i>
-    Paramètres
-  </div>
-  <div class="content" id='parametres_generaux'>
-  </div>
-</div> 
-<div class="ui hidden divider"></div>
-<div class="ui hidden divider"></div>
-<div class="ui right aligned container">
-  <b>COOPmaths - CC-BY-SA - 2020</b>
-</div>
-<div class="ui hidden divider"></div>
-<div class="ui hidden divider"></div>
-</div>
 
 
-</div> 
+  </div> 
 
 
 </section>

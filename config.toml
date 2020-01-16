@@ -12,6 +12,9 @@ publishDir = "../CoopMaths_Public"
 [blackfriday]
     fractions = false
 
+[markup.goldmark.renderer]
+  unsafe= true
+
 
 ### Pour un fonctionnement en local ###
 #uglyurls = true

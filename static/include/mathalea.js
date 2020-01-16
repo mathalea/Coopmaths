@@ -375,6 +375,11 @@ function mise_a_jour_du_code(){
 			}
 		}
 		window.history.pushState("","",fin_de_l_URL);
+		let url = window.location.href; //met l'URL dans le bouton de copie de l'URL
+      	new Clipboard('.url', {text: function() {
+          return url;
+          }
+      	});
 		
 	}
 	
@@ -609,6 +614,7 @@ window.onload = function()  {
 //$( document ).ready(function() {	
 	$('.ui.dropdown').dropdown(); // Pour le menu des exercices
 	$('.ui.accordion').accordion('refresh');
+	$('.ui.button.toggle').state();
 	// Gestion du menu déroulant par une fonction auto-exécutante
 	(function menu_deroulant () {
 		const el = document.getElementsByClassName('id_exercice');
