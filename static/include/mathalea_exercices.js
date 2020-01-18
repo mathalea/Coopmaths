@@ -80,7 +80,7 @@ var liste_des_exercices_disponibles = {
 		'5R31-2': Exercice_simplification_somme_algebrique,
 		'4N10': Exercice_additionner_des_fractions,
 		'4N11': Exercice_additionner_ou_soustraire_des_fractions,
-		'4N12': Exercice_Trouver_l_inverse,
+		'4N12': Exercice_trouver_l_inverse,
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Thales_4eme,
@@ -2748,7 +2748,7 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 
 }
 
-function Exercice_Trouver_l_inverse(){
+function Exercice_trouver_l_inverse(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
 	this.titre = "Trouver l'inverse d'un nombre"
@@ -2791,10 +2791,10 @@ function Exercice_Trouver_l_inverse(){
 							nombre_choisi=-nombre_choisi
 							if (nombre_inverse!=0) { //inverse décimal
 								texte_corr = `L'inverse de $${nombre_choisi}$ est $${tex_nombrec(-nombre_inverse)} \\:$`
-								texte_corr+=` car $\\: ${nombre_choisi}  \\times  (-${tex_nombrec(nombre_inverse)})  =  1$.`
+								texte_corr+=` car $\\: ${nombre_choisi}  \\times  \\left(-${tex_nombrec(nombre_inverse)}\\right)  =  1$.`
 							}
 							else {  //inverse non décimal
-								texte_corr = `L\'inverse de $${nombre_choisi}$ est $-${tex_fraction(1,-nombre_choisi)} \\:$ car $\\: ${nombre_choisi}   \\times   (-${tex_fraction(1,-nombre_choisi)}) =  1$.`
+								texte_corr = `L\'inverse de $${nombre_choisi}$ est $-${tex_fraction(1,-nombre_choisi)} \\:$ car $\\: ${nombre_choisi}   \\times   \\left(-${tex_fraction(1,-nombre_choisi)}\\right) =  1$.`
 							}
 					}
 					texte = `Quel est l'inverse de $${tex_nombrec(nombre_choisi)}$ ?`;
@@ -2815,12 +2815,12 @@ function Exercice_Trouver_l_inverse(){
 					} else { // nombre négatif
 						nombre_choisi=-nombre_choisi
 						if (pgcd(nombre_inverse_num,nombre_inverse_den)==1) {  //non simplifiable après inversion
-							texte_corr = `L'inverse de $${tex_nombrec(nombre_choisi)}$ est $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)} \\:$ car $\\: ${tex_nombrec(nombre_choisi)}   \\times   (-${tex_fraction(nombre_inverse_num,nombre_inverse_den)}) =  1$.`
-							texte_corr = `Comme $${tex_nombrec(nombre_choisi)}=-${tex_fraction(nombre_inverse_den,nombre_inverse_num)}$, l'inverse de $${tex_nombrec(nombre_choisi)}$ est $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)} \\:$ car $\\: -${tex_fraction(nombre_inverse_den,nombre_inverse_num)}   \\times  (- ${tex_fraction(nombre_inverse_num,nombre_inverse_den)}) =  1$.`
+							texte_corr = `L'inverse de $${tex_nombrec(nombre_choisi)}$ est $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)} \\:$ car $\\: ${tex_nombrec(nombre_choisi)}   \\times   \\left(-${tex_fraction(nombre_inverse_num,nombre_inverse_den)}\\right) =  1$.`
+							texte_corr = `Comme $${tex_nombrec(nombre_choisi)}=-${tex_fraction(nombre_inverse_den,nombre_inverse_num)}$, l'inverse de $${tex_nombrec(nombre_choisi)}$ est $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)} \\:$ car $\\: -${tex_fraction(nombre_inverse_den,nombre_inverse_num)}   \\times  \\left(- ${tex_fraction(nombre_inverse_num,nombre_inverse_den)}\\right) =  1$.`
 						
 						}
 						else {  // à simplifier après inversion
-							texte_corr = `Comme $${tex_nombrec(nombre_choisi)}=-${tex_fraction(nombre_inverse_den,nombre_inverse_num)}=-${tex_fraction_reduite(nombre_inverse_den,nombre_inverse_num)}$, l'inverse de $${tex_nombrec(nombre_choisi)}$ est $-${tex_fraction_reduite(nombre_inverse_num,nombre_inverse_den)} \\:$ car $\\: -${tex_fraction_reduite(nombre_inverse_den,nombre_inverse_num)}  \\times  (- ${tex_fraction_reduite(nombre_inverse_num,nombre_inverse_den)} )=  1$.`	
+							texte_corr = `Comme $${tex_nombrec(nombre_choisi)}=-${tex_fraction(nombre_inverse_den,nombre_inverse_num)}=-${tex_fraction_reduite(nombre_inverse_den,nombre_inverse_num)}$, l'inverse de $${tex_nombrec(nombre_choisi)}$ est $-${tex_fraction_reduite(nombre_inverse_num,nombre_inverse_den)} \\:$ car $\\: -${tex_fraction_reduite(nombre_inverse_den,nombre_inverse_num)}  \\times  \\left(- ${tex_fraction_reduite(nombre_inverse_num,nombre_inverse_den)} \\right)=  1$.`	
 					}
 					}
 					texte = `Quel est l'inverse de $${tex_nombrec(nombre_choisi)}$ ?`;
@@ -2840,10 +2840,10 @@ function Exercice_Trouver_l_inverse(){
 					} 
 					else {  // fraction négative
 						if (couples_d_inverses[2]==true) {  // inverse décimal
-							texte_corr = `L'inverse de $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)}$ est $-${tex_fraction(nombre_inverse_den,nombre_inverse_num)}=-${tex_nombrec(nombre_inverse_den/nombre_inverse_num)} \\:$ car $\\: -${tex_fraction(nombre_inverse_num,nombre_inverse_den)}   \\times  (- ${tex_fraction(nombre_inverse_den,nombre_inverse_num)}) =  1$.`
+							texte_corr = `L'inverse de $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)}$ est $-${tex_fraction(nombre_inverse_den,nombre_inverse_num)}=-${tex_nombrec(nombre_inverse_den/nombre_inverse_num)} \\:$ car $\\: -${tex_fraction(nombre_inverse_num,nombre_inverse_den)}   \\times  \\left(- ${tex_fraction(nombre_inverse_den,nombre_inverse_num)}\\right) =  1$.`
 						}
 						else {   // inverse non décimal
-							texte_corr = `L'inverse de $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)}$ est $-${tex_fraction(nombre_inverse_den,nombre_inverse_num)} \\:$ car $\\: -${tex_fraction(nombre_inverse_num,nombre_inverse_den)}   \\times  (- ${tex_fraction(nombre_inverse_den,nombre_inverse_num)} )=  1$.`
+							texte_corr = `L'inverse de $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)}$ est $-${tex_fraction(nombre_inverse_den,nombre_inverse_num)} \\:$ car $\\: -${tex_fraction(nombre_inverse_num,nombre_inverse_den)}   \\times  \\left(- ${tex_fraction(nombre_inverse_den,nombre_inverse_num)} \\right)=  1$.`
 						}
 						texte = `Quel est l'inverse de $-${tex_fraction(nombre_inverse_num,nombre_inverse_den)}$ ?`;
 					}

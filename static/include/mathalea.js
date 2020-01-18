@@ -614,7 +614,15 @@ window.onload = function()  {
 //$( document ).ready(function() {	
 	$('.ui.dropdown').dropdown(); // Pour le menu des exercices
 	$('.ui.accordion').accordion('refresh');
-	$('.ui.button.toggle').state();
+	// Gestion du bouton de copie
+	$('.ui.button.toggle').state(); // initialise le bouton
+	document.getElementById('btnCopieURL').addEventListener('click', function () {
+		setTimeout(function () {
+			$('#btnCopieURL').removeClass('active'); // "éteint" le bouton 1s après 
+		}, 1000);
+	});
+
+
 	// Gestion du menu déroulant par une fonction auto-exécutante
 	(function menu_deroulant () {
 		const el = document.getElementsByClassName('id_exercice');
