@@ -3055,7 +3055,7 @@ function Exercice_diviser_fractions(){
 function Exercice_additionner_fraction_produit(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
-	this.titre = "Mutliplier des fractions"
+	this.titre = "Fractions et priorités opératoires"
 	this.consigne = "Calculer et donner le résultat sous forme irréductible"
 	this.spacing = 2;
 	this.spacing_corr = 2;
