@@ -2898,50 +2898,119 @@ function Exercice_multiplier_fractions(){
 		else {type_de_questions_disponibles = [3]}
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, a, b, c, d, p, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+		for (let i = 0, a, b, c, d, p, aa, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
-			a=randint(2,12);
-			b=randint(2,12,[a]);
-			c=randint(2,12,[b]);
-			d=randint(2,12,[a,c]);
-			p=pgcd(a*c,b*d);
+			a=randint(2,16);
+			b=randint(2,16,[a]);
+			c=randint(1,16,[b]);
+			d=randint(2,16,[a,c]);
+			p=pgcd(a,b);
+			if (p!=1) {
+				a=a/p;  //  on rend a/b irréductible
+				if (b!=p){
+				b=b/p;
+				}
+				else {b=randint(3,11,[4,6,8,10])};
+				}
+			p=pgcd(c,d);
+			if (p!=1) {
+				c=c/p;  //  on rend c/d irréductible
+				if (d!=p){
+				d=d/p;
+				}
+				else {
+					d=randint(3,11,[4,6,8,10]);
+				}
+			}
+						
+			
+			
 			switch (type_de_questions){
 				case 1 : // entier * fraction (tout positif)
+					if (a==1) {a=randint(2,9)}
 					texte=`$${tex_fraction(a,1)}\\times${tex_fraction(c,d)}=$`;
 					if (pgcd(a*c,d)==1) {
 						texte_corr= `$${tex_fraction(a,1)}\\times${tex_fraction(c,d)}=\\dfrac{${a}}{1}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,'1\\times'+d)}=${tex_fraction(a*c,d)}$`
 					}
 					else {
-						texte_corr= `$${tex_fraction(a,1)}\\times${tex_fraction(c,d)}=${tex_fraction(a*c,d)}=${tex_fraction_reduite(a*c,d)}$`
+						texte_corr= `$${tex_fraction(a,1)}\\times${tex_fraction(c,d)}=\\dfrac{${a}}{1}\\times${tex_fraction(c,d)}=${tex_fraction(a*c,d)}=${tex_fraction_reduite(a*c,d)}$`
 
 					}
 					break
 				
 				case 2 : // fraction * fraction tout positif
+				if (a==b) {b=b+1}
+				if (c==d) {d=d+1}
+				p=pgcd(a*c,b*d);
 				texte=`$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=$`;
 				if (p==1) {
 					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}=${tex_fraction(a*c,b*d)}$`
 				}
 				else {
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction(a*c/p,b*d/p)}$`
+					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}=${tex_fraction(a*c,b*d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction(a*c/p,b*d/p)}$`
 
 				}
 				break
 					
 			
 				case 3 :
-					a=randint(-12,12,[0]);
-					b=randint(-12,12,[a,0]);
-					c=randint(-12,12,[b,0]);
-					d=randint(-12,12,[a,c,0]);
-					p=pgcd(a*c,b*d);
-					texte=`$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=$`;
+					a=randint(-5,5,[0])*2;
+					b=randint(-5,5,[0,-1])*2+1;
+					c=randint(-4,4,[0])*3+1;
+					d=randint(-3,3,[0])*4+2;
+					p=pgcd(Math.abs(a),Math.abs(b));
+					if (p != 1) {
+						a = a / p;  //  on rend a/b irréductible
+						if (Math.abs(b) != p) {
+							b = b / p;
+						}
+						else {
+							aa=a;
+							a=b/p;
+							b=aa;
+						 };
+					}
+					p = pgcd(Math.abs(c),Math.abs(d));
+					if (p != 1) {
+						c = c / p;  //  on rend c/d irréductible
+						if (d != pgcd(c,d)) {
+							d = d / p;
+						}
+						else {
+							d = choice([5,7,11])*randint(-1,1,[0]);
+						}
+					}
+					if (a==b) {
+						if (a==-1||a==-2) {b=choice([-7,-5,-3,3,5,7])}
+						else {b=b+1}
+					}
+					if (c==d) {
+						if (c==-1||c==-2) {d=choice([-7,-5,-3,3,5,7])}
+						else {d=d+1}
+					}
+					p=pgcd(Math.abs(a*c),Math.abs(b*d));
+
+					texte=`$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`;
+					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`
+					aa=false;
+					if (a<0) {
+						if (b<0) {a=-a;b=-b;aa=true}
+					}
+					if (c<0) {
+						if (d<0) {c=-c;d=-d;aa=true}
+					}
+					if (aa==true) {texte_corr+= `$=${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`}
+					texte_corr+=`$=${tex_fraction(a +'\\times'+ecriture_parenthese_si_negatif(c),b+'\\times'+ecriture_parenthese_si_negatif(d))}$`
+		
 				if (p==1) {
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}=${tex_fraction_signe(a*c,b*d)}$`
+					
+					texte_corr+=`$=${tex_fraction(a*c,b*d)}$`
+
+					if((a*c<0)&&(b*d<0)) {texte_corr+=`$=${tex_fraction_signe(a*c,b*d)}$`}
 				}
 				else {
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*c/p,b*d/p)}$`
-
+					texte_corr+= `$=${tex_fraction(a*c,b*d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*c/p,b*d/p)}$`
+					
 				}
 				
 				break	
@@ -2956,7 +3025,7 @@ function Exercice_multiplier_fractions(){
 		}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Fractions à numérateurs et dénominateurs positifs \n 2 : Type 1 et type 3 pour 50%/50%\n 3 : Ecritures fractionnaires à numérateur et dénominateur entiers relatifs"]
 }
 
 /**
@@ -3144,10 +3213,17 @@ function Exercice_additionner_fraction_produit(){
 					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+ecriture_parenthese_si_negatif(e),d+'\\times'+ecriture_parenthese_si_negatif(f))}=$`
 					if (c*e*d*f<0) {  // si trois signes -, on n'en garde qu'un au numérateur
 						c=-Math.abs(c);
+						d=Math.abs(d);
+						e=Math.abs(e);
+						f=Math.abs(f);
 					} 
-					d=Math.abs(d);
-					e=Math.abs(e);
-					f=Math.abs(f);
+					else {
+						c=Math.abs(c); // sinon, on n'en garde aucun
+						d=Math.abs(d);
+						e=Math.abs(e);
+						f=Math.abs(f);
+					}
+					
 					
 					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
 					if (p!=1) {
