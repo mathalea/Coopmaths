@@ -3045,7 +3045,13 @@ function Exercice_diviser_fractions(){
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
 }
-
+/**
+* @author: Jean-Claude Lhote
+* Exercice_additionner_fraction_produit : Calcul d'une expression fractionnaire avec priorité opératoire'
+* Niveau 1 mélange avec 2 calculs sans piège 2 calculs avec piège de priorité (dénominateurs égaux). Tous nombres positifs.
+* Niveau 2 mélange 2 calculs avec piège et nombres positifs et 2 calculs avec nombres relatifs
+* Niveau 3 calculs avec nombres relatifs
+**/
 function Exercice_additionner_fraction_produit(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -3123,37 +3129,33 @@ function Exercice_additionner_fraction_produit(){
 					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
 					p=pgcd(c*e,d*f);
 					texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`
-					if (a*b>0) {
+					if (a*b>0) {  //suppression des signes - superflus
 						a=Math.abs(a);
 						b=Math.abs(b);
 					} else if (b<0){a=-a;b=-b}
-					if (c*d>0) {
+					if (c*d>0) {  //suppression des signes - superflus
 						c=Math.abs(c);
 						d=Math.abs(d);
 					} 
-					if (e*f>0) {
+					if (e*f>0) {  //suppression des signes - superflus
 						e=Math.abs(e);
 						f=Math.abs(f);
 					} 
 					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+ecriture_parenthese_si_negatif(e),d+'\\times'+ecriture_parenthese_si_negatif(f))}=$`
-					if (c*e*d*f>0) {
-						c=Math.abs(c);
-						d=Math.abs(d);
-						e=Math.abs(e);
-						f=Math.abs(f);
-					} else {
+					if (c*e*d*f<0) {  // si trois signes -, on n'en garde qu'un au numérateur
 						c=-Math.abs(c);
-						d=Math.abs(d);
-						e=Math.abs(e);
-						f=Math.abs(f);
-					}
+					} 
+					d=Math.abs(d);
+					e=Math.abs(e);
+					f=Math.abs(f);
+					
 					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
 					if (p!=1) {
 						texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}=$`
 					}
 					c=e*c/p;
 					d=f*d/p;
-					if (c*d>0) {
+					if (c*d>0) { //suppression des signes - superflus après produit
 						c=Math.abs(c);
 						d=Math.abs(d);
 					} else if (d<0) {c=-c;d=-d}
@@ -3169,11 +3171,11 @@ function Exercice_additionner_fraction_produit(){
 						e=(a*k1+c*k2)/p;
 						f=b*k1/p;
 						if (p!=1) {
-							if (e*f>0) {
+							if (e*f>0) { // numérateur et dénominateur de même signe => fraction positive => pas de signe
 							texte_corr+=`$=${tex_fraction(e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
 							texte_corr+=`$=${tex_fraction(e,f)}$`
 							}
-							else {
+							else {  // numérateur négatif => signe - devant les fractions suivantes.
 								texte_corr+=`$=-${tex_fraction(-e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
 								texte_corr+=`$=-${tex_fraction(-e,f)}$`	
 							}
@@ -3193,7 +3195,7 @@ function Exercice_additionner_fraction_produit(){
 		}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : nombres positifs sans piège de priorité\n 2 : 2 calculs avec positifs et piège de priorité et 2 calculs avec relatifs\n 3 : calculs avec relatifs"]
 }
 
 function Exercice_fractions_differentes_ecritures(){
