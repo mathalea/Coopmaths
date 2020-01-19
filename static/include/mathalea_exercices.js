@@ -82,6 +82,7 @@ var liste_des_exercices_disponibles = {
 		'4N11': Exercice_additionner_ou_soustraire_des_fractions,
 		'4N12': Exercice_trouver_l_inverse,
 		'4N13': Exercice_multiplier_fractions,
+		'4N14': Exercice_diviser_fractions,
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Thales_4eme,
@@ -2921,7 +2922,7 @@ function Exercice_multiplier_fractions(){
 					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}=${tex_fraction(a*c,b*d)}$`
 				}
 				else {
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a*c/p +'\\times'+p,b*d/p+'\\times'+p)}=${tex_fraction(a*c/p,b*d/p)}$`
+					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction(a*c/p,b*d/p)}$`
 
 				}
 				break
@@ -2938,7 +2939,86 @@ function Exercice_multiplier_fractions(){
 					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}=${tex_fraction_signe(a*c,b*d)}$`
 				}
 				else {
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a*c/p +'\\times'+p,b*d/p+'\\times'+p)}=${tex_fraction_signe(a*c/p,b*d/p)}$`
+					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*c/p,b*d/p)}$`
+
+				}
+				
+				break	
+			}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++
+		}
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
+}
+function Exercice_diviser_fractions(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = 1 ; // Avec ou sans relatifs
+	this.titre = "Diviser des fractions"
+	this.consigne = "Calculer et donner le résultat sous forme irréductible"
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_questions_disponibles
+
+		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
+		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
+		else {type_de_questions_disponibles = [3]}
+		
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+		for (let i = 0, a, b, c, d, p, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+			type_de_questions = liste_type_de_questions[i];
+			a=randint(2,12);
+			b=randint(2,12,[a]);
+			c=randint(2,12,[b]);
+			d=randint(2,12,[a,c]);
+			p=pgcd(a*d,b*c);
+			switch (type_de_questions){
+				case 1 : // entier * fraction (tout positif)
+					texte=`$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=$`;
+					if (pgcd(a*d,c)==1) {
+						texte_corr= `$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=${tex_fraction(a,1)}\\times${tex_fraction(d,c)}=\\dfrac{${a}}{1}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,'1\\times'+c)}=${tex_fraction(a*d,c)}$`
+					}
+					else {
+						texte_corr= `$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=${tex_fraction(a,1)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d,c)}=${tex_fraction_reduite(a*d,c)}$`
+					}
+					break
+				
+				case 2 : // fraction * fraction tout positif
+				texte=`$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=$`;
+				if (p==1) {
+					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,b+'\\times'+c)}=${tex_fraction(a*d,b*c)}$`
+				}
+				else {
+					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}=${tex_fraction(a*d/p,b*c/p)}$`
+
+				}
+				break
+					
+			
+				case 3 :
+					a=randint(-12,12,[0]);
+					b=randint(-12,12,[a,0]);
+					c=randint(-12,12,[b,0]);
+					d=randint(-12,12,[a,c,0]);
+					p=pgcd(a*d,b*c);
+					texte=`$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=$`;
+				if (p==1) {
+					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,b+'\\times'+c)}=${tex_fraction_signe(a*d,b*c)}$`
+				}
+				else {
+					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*d/p,b*c/p)}$`
 
 				}
 				
