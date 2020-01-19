@@ -83,6 +83,7 @@ var liste_des_exercices_disponibles = {
 		'4N12': Exercice_trouver_l_inverse,
 		'4N13': Exercice_multiplier_fractions,
 		'4N14': Exercice_diviser_fractions,
+		'4N15': Exercice_additionner_fraction_produit,
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Thales_4eme,
@@ -2957,6 +2958,14 @@ function Exercice_multiplier_fractions(){
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
 }
+
+/**
+* @author: Jean-Claude Lhote
+* Exercice_diviser_fractions : Calcul du quotient de deux fractions
+* Niveau 1 mélange avec 1 calcul du type entier / fraction pour 3 calculs fraction / fraction (nombres positifs)
+* Niveau 2 mélange fraction / fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
+* Niveau 3 fraction / fraction avec nombres relatifs
+**/
 function Exercice_diviser_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -3022,6 +3031,156 @@ function Exercice_diviser_fractions(){
 
 				}
 				
+				break	
+			}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++
+		}
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
+}
+
+function Exercice_additionner_fraction_produit(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = 1 ; // Avec ou sans relatifs
+	this.titre = "Mutliplier des fractions"
+	this.consigne = "Calculer et donner le résultat sous forme irréductible"
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_questions = 5;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_questions_disponibles
+
+		if (this.sup==1) {type_de_questions_disponibles = [1,1,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
+		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
+		else {type_de_questions_disponibles = [3]}
+		
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+		for (let i = 0, a, b, c, d, e, f, p, k1, k2, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+			type_de_questions = liste_type_de_questions[i];
+			a=randint(2,10);
+			b=randint(2,10,[a]);
+			c=randint(2,10,[b]);
+			d=randint(2,10,[a,c,b]);
+			e=randint(2,10,[d,c]);
+			f=randint(2,10,[e,c,d]);
+			
+			switch (type_de_questions){
+				case 1 : // sans piège fraction1 + fraction2 x fraction3 (tout positif)
+					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
+					p=pgcd(c*e,d*f);
+					texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+e,d+'\\times'+f)}=${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
+					if (p!=1) {
+						texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}=$`
+					}
+					c=e*c/p;
+					d=f*d/p;
+					p=ppcm(b,d);
+					k1=p/b;
+					k2=p/d;
+					texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
+					texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+c*k2,b*k1)}$`
+					if (pgcd(a*k1+c*k2,b*k1)!=1) {texte_corr+=`$=${tex_fraction_reduite(a*k1+c*k2,b*k1)}$`}
+
+					break
+				
+				case 2 : // avec piege addition non prioritaire fraction1 + fraction2 * fraction3 tout positif
+				d=b;
+				texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
+				p=pgcd(c*e,d*f);
+				texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+e,d+'\\times'+f)}=${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
+				if (p!=1) {
+					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}=$`
+				}
+				c=e*c/p;
+				d=f*d/p;
+				p=ppcm(b,d);
+				k1=p/b;
+				k2=p/d;
+				texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
+				texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+c*k2,b*k1)}$`
+				if (pgcd(a*k1+c*k2,b*k1)!=1) {texte_corr+=`$=${tex_fraction_reduite(a*k1+c*k2,b*k1)}$`}
+
+				break
+				case 3 :
+					a=randint(-10,10,[0]);
+					b=randint(-10,10,[a,0]);
+					c=randint(-10,10,[b,0]);
+					d=randint(-10,10,[a,c,d,0]);
+					e=randint(-10,10,[d,c,0]);
+					f=randint(-10,10,[e,c,d,0]);
+					p=pgcd(a*c,b*d);
+					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
+					p=pgcd(c*e,d*f);
+					texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`
+					if (a*b>0) {
+						a=Math.abs(a);
+						b=Math.abs(b);
+					} else if (b<0){a=-a;b=-b}
+					if (c*d>0) {
+						c=Math.abs(c);
+						d=Math.abs(d);
+					} 
+					if (e*f>0) {
+						e=Math.abs(e);
+						f=Math.abs(f);
+					} 
+					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+ecriture_parenthese_si_negatif(e),d+'\\times'+ecriture_parenthese_si_negatif(f))}=$`
+					if (c*e*d*f>0) {
+						c=Math.abs(c);
+						d=Math.abs(d);
+						e=Math.abs(e);
+						f=Math.abs(f);
+					} else {
+						c=-Math.abs(c);
+						d=Math.abs(d);
+						e=Math.abs(e);
+						f=Math.abs(f);
+					}
+					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
+					if (p!=1) {
+						texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}=$`
+					}
+					c=e*c/p;
+					d=f*d/p;
+					if (c*d>0) {
+						c=Math.abs(c);
+						d=Math.abs(d);
+					} else if (d<0) {c=-c;d=-d}
+					p=ppcm(b,d);
+					k1=p/b;
+					k2=p/d;
+				
+					texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}+${tex_fraction(c+'\\times'+ecriture_parenthese_si_negatif(k2),d+'\\times'+ecriture_parenthese_si_negatif(k2))}=$`
+					texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+'+'+ecriture_parenthese_si_negatif(c*k2),b*k1)}$`
+					if ((a*k1+c*k2)!=0) {
+						texte_corr+=`$=${tex_fraction_signe(a*k1+c*k2,b*k1)}$`
+						p=pgcd(a*k1+c*k2,b*k1);
+						e=(a*k1+c*k2)/p;
+						f=b*k1/p;
+						if (p!=1) {
+							if (e*f>0) {
+							texte_corr+=`$=${tex_fraction(e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
+							texte_corr+=`$=${tex_fraction(e,f)}$`
+							}
+							else {
+								texte_corr+=`$=-${tex_fraction(-e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
+								texte_corr+=`$=-${tex_fraction(-e,f)}$`	
+							}
+						}
+					}
+					else {texte_corr+='$=0$'}
+
 				break	
 			}
 			
