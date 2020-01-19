@@ -3048,6 +3048,10 @@ function Exercice_diviser_fractions(){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
+		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+ 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+		 [1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		 
 		let type_de_questions_disponibles
 
 		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
@@ -3055,12 +3059,14 @@ function Exercice_diviser_fractions(){
 		else {type_de_questions_disponibles = [3]}
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, a, b, c, d, p, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+		for (let i = 0, ab,cd,aa,a, b, c, d, p, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
-			a=randint(2,12);
-			b=randint(2,12,[a]);
-			c=randint(2,12,[b]);
-			d=randint(2,12,[a,c]);
+			ab=choice(liste_fractions);
+			cd=choice(liste_fractions);
+			a=ab[0];
+			b=ab[1]
+			c=cd[0];
+			d=cd[1];
 			p=pgcd(a*d,b*c);
 			switch (type_de_questions){
 				case 1 : // entier * fraction (tout positif)
@@ -3086,20 +3092,33 @@ function Exercice_diviser_fractions(){
 					
 			
 				case 3 :
-					a=randint(-12,12,[0]);
-					b=randint(-12,12,[a,0]);
-					c=randint(-12,12,[b,0]);
-					d=randint(-12,12,[a,c,0]);
+					a=a*randint(-1,1,[0]);
+					b=b*randint(-1,1,[0]);
+					c=c*randint(-1,1,[0]);
+					d=d*randint(-1,1,[0]);
 					p=pgcd(a*d,b*c);
 					texte=`$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=$`;
-				if (p==1) {
-					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,b+'\\times'+c)}=${tex_fraction_signe(a*d,b*c)}$`
-				}
-				else {
-					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*d/p,b*c/p)}$`
-
-				}
-				
+					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}$`
+					aa=false;
+					if (a<0) {
+						if (b<0) {a=-a;b=-b;aa=true}
+					}
+					if (c<0) {
+						if (d<0) {c=-c;d=-d;aa=true}
+					}
+					if (aa==true) {texte_corr+= `$=${tex_fraction(a,b)}\\div${tex_fraction(c,d)}$`}
+					if (p==1) {
+						texte_corr+=`$=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,b+'\\times'+c)}=${tex_fraction_signe(a*d,b*c)}$`
+					}
+					else {
+						texte_corr= `$=${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d,b*c)}$`
+						if (a*d!=b*c){
+							texte_corr+=`$=${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*d/p,b*c/p)}$`
+						}
+						else {
+						texte_corr+=`$=1$`
+						}
+					}
 				break	
 			}
 			
@@ -3112,7 +3131,7 @@ function Exercice_diviser_fractions(){
 		}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Fractions à numérateur et dénominateur positifs \n 2 : 50% Type 2 et 50% type 3\n 3 : Fractions à numérateur et dénominateur relatifs"]
 }
 /**
 * @author: Jean-Claude Lhote
