@@ -546,7 +546,7 @@ function tex_fraction_signe(a,b){// ecrire une fraction avec - devant si a ou b 
 
 function tex_fraction_parentheses(a,b){ // met des parenthèses si besoin pour inclure une fraction dans une expresion en fonction du signe
 	if (a*b>0) {return tex_fraction_signe(a,b)}
-	else {return '\\left'+tex_fraction_signe(a,b)+'\\right'}
+	else {return '\\left('+tex_fraction_signe(a,b)+'\\right)'}
 }
 
 function tex_fraction(a,b){ // Ecrire une fraction
