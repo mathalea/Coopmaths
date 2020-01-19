@@ -3154,20 +3154,27 @@ function Exercice_additionner_fraction_produit(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		let type_de_questions_disponibles
+		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+ 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+		 [1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		 
 
 		if (this.sup==1) {type_de_questions_disponibles = [1,1,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
 		else {type_de_questions_disponibles = [3]}
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, a, b, c, d, e, f, p, k1, k2, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+		for (let i = 0,ab,cd,ef, a, b, c, d, e, f, p, k1, k2, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
-			a=randint(2,10);
-			b=randint(2,10,[a]);
-			c=randint(2,10,[b]);
-			d=randint(2,10,[a,c,b]);
-			e=randint(2,10,[d,c]);
-			f=randint(2,10,[e,c,d]);
+			ab=choice(liste_fractions);
+			cd=choice(liste_fractions);
+			ef=choice(liste_fractions)
+			a=ab[0];
+			b=ab[1];
+			c=cd[0];
+			d=cd[1];
+			e=ef[0];
+			f=ef[1];
 			
 			switch (type_de_questions){
 				case 1 : // sans piège fraction1 + fraction2 x fraction3 (tout positif)
@@ -3182,7 +3189,19 @@ function Exercice_additionner_fraction_produit(){
 					p=ppcm(b,d);
 					k1=p/b;
 					k2=p/d;
-					texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
+					if (k1!=1) {
+						texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}$`
+					} 
+					else {
+						texte_corr+=`$${tex_fraction(a,b)}$`	
+					}
+					if (k2!=1) {
+						texte_corr+=`$+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
+					} 
+					else {
+						texte_corr+=`$+${tex_fraction(c,d)}=$`	
+					}
+								
 					texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+c*k2,b*k1)}$`
 					if (pgcd(a*k1+c*k2,b*k1)!=1) {texte_corr+=`$=${tex_fraction_reduite(a*k1+c*k2,b*k1)}$`}
 
@@ -3201,7 +3220,18 @@ function Exercice_additionner_fraction_produit(){
 				p=ppcm(b,d);
 				k1=p/b;
 				k2=p/d;
-				texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
+				if (k1!=1) {
+					texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}$`
+				} 
+				else {
+					texte_corr+=`$${tex_fraction(a,b)}$`	
+				}
+				if (k2!=1) {
+					texte_corr+=`$+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
+				} 
+				else {
+					texte_corr+=`$+${tex_fraction(c,d)}=$`	
+				}
 				texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+c*k2,b*k1)}$`
 				if (pgcd(a*k1+c*k2,b*k1)!=1) {texte_corr+=`$=${tex_fraction_reduite(a*k1+c*k2,b*k1)}$`}
 
