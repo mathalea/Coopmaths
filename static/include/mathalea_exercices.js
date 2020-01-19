@@ -85,7 +85,6 @@ var liste_des_exercices_disponibles = {
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Thales_4eme,
-		// '4G10' : Exercice_Pythagore,
 		//12:Exercice_conversions_de_longueurs,
 		//13:Exercice_conversions,
 		//14:Exercice_conversions_aires,
@@ -2748,7 +2747,14 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 	this.besoin_formulaire2_case_a_cocher = ['Avec des nombres relatifs'];
 
 }
-
+/**
+* @author: Jean-Claude Lhote
+* Exercice_trouver_l_inverse : Calcul de l'inverse d'un nombre
+* Niveau 1 inverse d'un nombre entier
+* Niveau 2 inverse d'un nombre décimal simple
+* Niveau 3 inverse d'une fraction
+* Niveau 4 mélange des trois autres niveaux.
+**/
 function Exercice_trouver_l_inverse(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -2863,6 +2869,13 @@ function Exercice_trouver_l_inverse(){
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : Nombres entiers\n 2 : Fractions\n 3 : Nombres décimaux\n 4 : Mélange des 3 niveaux"]
 }
+/**
+* @author: Jean-Claude Lhote
+* Exercice_multiplier_fractions : Calcul du produit de deux fractions
+* Niveau 1 mélange avec 1 calcul du type entier x fraction pour 3 calculs fraction x fraction (nombres positifs)
+* Niveau 2 mélange fraction x fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
+* Niveau 3 fraction x fraction avec nombres relatifs
+**/
 function Exercice_multiplier_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -2879,7 +2892,9 @@ function Exercice_multiplier_fractions(){
 		let type_de_questions_disponibles
 
 		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
-		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]}  // fractions, 2*positifs, 2*relatifs
+		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
+		else {type_de_questions_disponibles = [3]}
+		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
 		for (let i = 0, a, b, c, d, p, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
@@ -2939,7 +2954,7 @@ function Exercice_multiplier_fractions(){
 		}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : fractions positives\n 2 : avec négatifs éventuels"]
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : fractions forcées positives \n 2 : 2 forcées positives et 2 non forcées positives\n 3 : non forcées positives"]
 }
 
 function Exercice_fractions_differentes_ecritures(){
@@ -6309,7 +6324,12 @@ function Exercice_Thales(){
 	
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire\n 3 : Sans figure'];
 }
-
+/**
+* @author: Jean-Claude Lhote
+* Exercice_Pythagore : Déterminer des longueurs en utilisant le théorème de Pythagore
+* Niveau 1 calcul de l'hypoténuse
+* Niveau 2 calcul d'un côté de l'angle droit
+**/
 function Exercice_Pythagore() {
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
@@ -6519,6 +6539,14 @@ function Exercice_Pythagore() {
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 4, '1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit\n 3 : Calcul d\'un côté quelconque\n 4 : Sans la figure'];
 }
 
+/**
+* @author: Jean-Claude Lhote
+* Resoudre_une_equation_produit_nul : Résoudre des équations du type (ax+b)(cx+d)=0
+* Niveau 1 coefficient de x égal à 1, solutions entières
+* Niveau 2 coefficient de x supérieur à 1, solutions entières
+* Niveau 3 coefficient de x supérieur à 1, solutions fractionnaires
+* Niveau 4 mélange des trois autres niveaux.
+**/
 function Resoudre_une_equation_produit_nul(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Résoudre une équation produit nul";
