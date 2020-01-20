@@ -2662,21 +2662,8 @@ function Exercice_additionner_des_fractions(){
 				num = n*b+a
 				den = b 
 			}
-
-			
-
-			texte_corr += `=${tex_fraction(num,den)}$`
-			// Est-ce que le résultat est simplifiable ?
-			let s = pgcd(num,den); 
-			if (s!=1) {
-				if ((num)%(den)==0) { //si le résultat est entier
-					texte_corr += `$=${(num)/(den)}$`
-				} else {
-					texte_corr +=`$=${tex_fraction(Algebrite.eval((num)/s)+mise_en_evidence('\\times'+s),Algebrite.eval(den/s)+mise_en_evidence('\\times'+s))}=${tex_fraction(Algebrite.eval((num)/s),Algebrite.eval(den/s))}$`
-				}
-			}
-				
-				
+			texte_corr += `=${tex_fraction(num,den)}`;
+			texte_corr += simplification_de_fraction_avec_etapes(num,den)+'$';
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 			}
@@ -2835,21 +2822,8 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 				num = calcul(n*b+plus_ou_moins+ecriture_parenthese_si_negatif(a))
 				den = b 
 			}
-
-			
-
-			texte_corr += `=${tex_fraction(num,den)}$`
-			// Est-ce que le résultat est simplifiable ?
-			let s = pgcd(num,den); 
-			if (s!=1) {
-				if ((num)%(den)==0) { //si le résultat est entier
-					texte_corr += `$=${(num)/(den)}$`
-				} else {
-					texte_corr +=`$=${tex_fraction(Algebrite.eval((num)/s)+mise_en_evidence('\\times'+s),Algebrite.eval(den/s)+mise_en_evidence('\\times'+s))}=${tex_fraction(Algebrite.eval((num)/s),Algebrite.eval(den/s))}$`
-				}
-			}
-				
-				
+			texte_corr += `=${tex_fraction(num,den)}`
+			texte_corr += simplification_de_fraction_avec_etapes(num,den)+'$';
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 			}
