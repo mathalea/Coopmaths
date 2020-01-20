@@ -136,8 +136,11 @@ for (var i in liste_des_exercices_disponibles) {
 	
 
 
-// Définition des exercices
-
+/**
+* Classe parente de tous les exercices
+*
+* @Auteur Rémi Angot
+*/
 function Exercice() {
 	// Classe parente de tous les exercices qui seront créés
     this.titre = '';
@@ -168,6 +171,9 @@ function Exercice() {
 
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Conversions_de_durees(){
 //Décomposer un nombre en facteurs premiers 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -267,8 +273,10 @@ function Conversions_de_durees(){
 	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Heures_decimales(){
-//Décomposer un nombre en facteurs premiers 
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Utiliser les heures décimales";
 	this.consigne = "Compléter les égalités suivantes";
@@ -318,7 +326,9 @@ function Heures_decimales(){
 }
 
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Somme_de_durees(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Additionner des durées";
@@ -409,6 +419,9 @@ function Somme_de_durees(){
 	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Calculs_de_durees_ou_d_horaires(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Calculer des durées ou déterminer un horaire";
@@ -643,8 +656,10 @@ function Calculs_de_durees_ou_d_horaires(){
 	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_decomposer_en_facteurs_premiers(){
-//Décomposer un nombre en facteurs premiers 
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = '' ;
 	this.sup2 = '' ; 
@@ -694,6 +709,9 @@ function Exercice_decomposer_en_facteurs_premiers(){
 	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -759,7 +777,9 @@ function Tables_de_multiplications(tables_par_defaut='2;3;4;5;6;7;8;9'){
 	this.besoin_formulaire2_numerique = ['Style de questions',3,'1 : Classique\n2: À trous\n3: Mélangé'] 
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Tables_de_divisions(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Diviser deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -817,7 +837,9 @@ function Tables_de_divisions(tables_par_defaut='2;3;4;5;6;7;8;9'){
 	this.besoin_formulaire2_numerique = ['Style de questions',3,'1 : Classique\n2: À trous\n3: Mélangé'] 
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Tables_de_multiplications_et_divisions(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier ou diviser deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -893,7 +915,9 @@ function Tables_de_multiplications_et_divisions(tables_par_defaut='2;3;4;5;6;7;8
 	this.besoin_formulaire2_numerique = ['Style de questions',3,'1 : Classique\n2: À trous\n3: Mélangé'] 
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Quatre_operations(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Les quatre opérations";
@@ -991,7 +1015,9 @@ function Quatre_operations(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Ajouter9(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Ajouter 9";
@@ -1023,7 +1049,9 @@ function Ajouter9(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Soustraire9(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Soustraire 9";
@@ -1055,7 +1083,9 @@ function Soustraire9(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Ajouter11(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Ajouter 11";
@@ -1087,7 +1117,9 @@ function Ajouter11(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Soustraire11(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Soustraire 11";
@@ -1127,6 +1159,9 @@ function Soustraire11(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Somme_de_deux_nombres_maries(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Somme de deux nombres mariés";
@@ -1160,6 +1195,9 @@ function Somme_de_deux_nombres_maries(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Somme_de_deux_nombres_maries_et_un_entier(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Somme de deux nombres mariés et un entier";
@@ -1205,7 +1243,9 @@ function Somme_de_deux_nombres_maries_et_un_entier(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_numeration_entier(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Écrire un nombre à partir de son nombre de dizaines, de centaines, de milliers...";
@@ -1247,6 +1287,9 @@ function Exercice_numeration_entier(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Decomposition_nombre_decimal(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Décomposer un nombre décimal (nombre de..., chiffre de...)";
@@ -1338,7 +1381,9 @@ function Decomposition_nombre_decimal(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Complement_a_100(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Complément à 100";
@@ -1370,6 +1415,9 @@ function Complement_a_100(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Complement_a_une_dizaine(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Complément à une dizaine";
@@ -1402,6 +1450,9 @@ function Complement_a_une_dizaine(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Diviser_par_10_100_1000(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Diviser un entier par 10, 100 ou 1000";
@@ -1434,6 +1485,9 @@ function Diviser_par_10_100_1000(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Diviser_decimal_par_10_100_1000(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Diviser un nombre décimal par 10, 100 ou 1000";
@@ -1466,7 +1520,9 @@ function Diviser_decimal_par_10_100_1000(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function Moitie(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Moitié";
@@ -1532,6 +1588,9 @@ function Moitie(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Tiers(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Tiers";
@@ -1587,6 +1646,9 @@ function Tiers(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Quart(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Quart";
@@ -1648,6 +1710,9 @@ function Quart(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Double_moitie_tiers_triple(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Double, moitié, tiers, triple";
@@ -1703,6 +1768,9 @@ function Double_moitie_tiers_triple(){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_tables_de_multiplications_et_multiples_de_10(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -1752,6 +1820,9 @@ function Exercice_tables_de_multiplications_et_multiples_de_10(tables_par_defaut
 	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_tables_de_multiplications_et_decimaux(tables_par_defaut='2;3;4;5;6;7;8;9'){
 //Multiplier deux nombres 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -1791,6 +1862,9 @@ function Exercice_tables_de_multiplications_et_decimaux(tables_par_defaut='2;3;4
 	this.besoin_formulaire_texte = ['Choix des tables','Nombres séparés par des points-virgules'] // Texte, tooltip
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_tables_d_additions(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Addition de deux entiers"
@@ -1818,6 +1892,9 @@ function Exercice_tables_d_additions(max=20){
 	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additions_relatifs(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ;
@@ -1856,6 +1933,9 @@ function Exercice_additions_relatifs(max=20){
 	this.besoin_formulaire2_case_a_cocher = ['Avec des écritures simplifiées'];	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additions_relatifs_a_trou(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ;
@@ -1894,6 +1974,9 @@ function Exercice_additions_relatifs_a_trou(max=20){
 	this.besoin_formulaire2_case_a_cocher = ['Avec des écritures simplifiées'];	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_soustractions_relatifs(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ;
@@ -1935,6 +2018,9 @@ function Exercice_soustractions_relatifs(max=20){
 	this.besoin_formulaire2_case_a_cocher = ['Avec des écritures simplifiées'];			
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_multiplications_relatifs(max=10){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ;
@@ -1980,6 +2066,9 @@ function Exercice_multiplications_relatifs(max=10){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_fractions_simplifier(max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ; // Correspond au facteur commun
@@ -2010,6 +2099,9 @@ function Exercice_fractions_simplifier(max=11){
 	this.besoin_formulaire_numerique = ['Valeur maximale du facteur commun',99999];		
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Egalites_entre_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 11 ; // Correspond au facteur commun
@@ -2054,6 +2146,9 @@ function Egalites_entre_fractions(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Criteres_de_divisibilite(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 4 ; // Correspond au facteur commun
@@ -2167,12 +2262,9 @@ function Criteres_de_divisibilite(){
 2 : Critères de divisibilité par 3,9\n3 : Critères de divisibilité par 2, 3, 5, 9, 10\n4 : Avec ou sans critère de divisibilité"]
 }
 
-
-
-
-
-
-
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_comparer_deux_fractions (max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ; // Correspond au facteur commun
@@ -2231,6 +2323,9 @@ function Exercice_comparer_deux_fractions (max=11){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_comparer_quatre_fractions (){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Comparer quatre fractions (dénominateurs multiples) et un nombre entier"
@@ -2308,6 +2403,9 @@ function Exercice_comparer_quatre_fractions (){
 	}
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additionner_des_fractions_5e(max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ; // Correspond au facteur commun
@@ -2360,6 +2458,9 @@ function Exercice_additionner_des_fractions_5e(max=11){
 	this.besoin_formulaire_numerique = ['Valeur maximale du coefficient multiplicateur',99999];		
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additionner_ou_soustraire_des_fractions_5e(max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ; // Correspond au facteur commun
@@ -2436,6 +2537,9 @@ function Exercice_additionner_ou_soustraire_des_fractions_5e(max=11){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additionner_des_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 2; // Niveau de difficulté
@@ -2585,6 +2689,9 @@ function Exercice_additionner_des_fractions(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additionner_ou_soustraire_des_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 2; // Niveau de difficulté
@@ -2754,13 +2861,16 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 
 }
 /**
-* @author: Jean-Claude Lhote
-* Exercice_trouver_l_inverse : Calcul de l'inverse d'un nombre
-* Niveau 1 inverse d'un nombre entier
-* Niveau 2 inverse d'un nombre décimal simple
-* Niveau 3 inverse d'une fraction
-* Niveau 4 mélange des trois autres niveaux.
-**/
+* 
+* Calcul de l'inverse d'un nombre
+*
+*    * Niveau 1 inverse d'un nombre entier
+*    * Niveau 2 inverse d'un nombre décimal simple
+*    * Niveau 3 inverse d'une fraction
+*    * Niveau 4 mélange des trois autres niveaux.
+*
+* @auteur Jean-Claude Lhote
+*/
 function Exercice_trouver_l_inverse(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -2876,11 +2986,14 @@ function Exercice_trouver_l_inverse(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : Nombres entiers\n 2 : Fractions\n 3 : Nombres décimaux\n 4 : Mélange des 3 niveaux"]
 }
 /**
-* @author: Jean-Claude Lhote
-* Exercice_multiplier_fractions : Calcul du produit de deux fractions
-* Niveau 1 mélange avec 1 calcul du type entier x fraction pour 3 calculs fraction x fraction (nombres positifs)
-* Niveau 2 mélange fraction x fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
-* Niveau 3 fraction x fraction avec nombres relatifs
+* Calcul du produit de deux fractions
+* 
+* * Niveau 1 mélange avec 1 calcul du type entier x fraction pour 3 calculs fraction x fraction (nombres positifs)
+* * Niveau 2 mélange fraction x fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
+* * Niveau 3 fraction x fraction avec nombres relatifs 
+*
+* @Auteur: Jean-Claude Lhote
+* 
 **/
 function Exercice_multiplier_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3033,11 +3146,11 @@ function Exercice_multiplier_fractions(){
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Exercice_diviser_fractions : Calcul du quotient de deux fractions
-* Niveau 1 mélange avec 1 calcul du type entier / fraction pour 3 calculs fraction / fraction (nombres positifs)
-* Niveau 2 mélange fraction / fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
-* Niveau 3 fraction / fraction avec nombres relatifs
+* Calcul du quotient de deux fractions
+* * Niveau 1 mélange avec 1 calcul du type entier / fraction pour 3 calculs fraction / fraction (nombres positifs)
+* * Niveau 2 mélange fraction / fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
+* * Niveau 3 fraction / fraction avec nombres relatifs
+* @Auteur: Jean-Claude Lhote
 **/
 function Exercice_diviser_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3138,11 +3251,14 @@ function Exercice_diviser_fractions(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Fractions à numérateur et dénominateur positifs \n 2 : 50% Type 2 et 50% type 3\n 3 : Fractions à numérateur et dénominateur relatifs"]
 }
 /**
-* @author: Jean-Claude Lhote
-* Exercice_additionner_fraction_produit : Calcul d'une expression fractionnaire avec priorité opératoire'
-* Niveau 1 mélange avec 2 calculs sans piège 2 calculs avec piège de priorité (dénominateurs égaux). Tous nombres positifs.
-* Niveau 2 mélange 2 calculs avec piège et nombres positifs et 2 calculs avec nombres relatifs
-* Niveau 3 calculs avec nombres relatifs
+* 
+* Calcul d'une expression fractionnaire avec priorité opératoire'
+* 
+* * Niveau 1 mélange avec 2 calculs sans piège 2 calculs avec piège de priorité (dénominateurs égaux). Tous nombres positifs.
+* * Niveau 2 mélange 2 calculs avec piège et nombres positifs et 2 calculs avec nombres relatifs
+* * Niveau 3 calculs avec nombres relatifs
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Exercice_additionner_fraction_produit(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3327,6 +3443,11 @@ function Exercice_additionner_fraction_produit(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : nombres positifs sans piège de priorité\n 2 : 2 calculs avec positifs et piège de priorité et 2 calculs avec relatifs\n 3 : calculs avec relatifs"]
 }
 
+
+
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_fractions_differentes_ecritures(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Décomposer une fraction (partie entière + fraction inférieure à 1) puis donner l'écriture décimale.";
@@ -3365,6 +3486,9 @@ function Exercice_fractions_differentes_ecritures(){
 	}
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_fractions_decomposer(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Décomposer une fraction (partie entière + fraction inférieure à 1).";
@@ -3404,8 +3528,9 @@ function Exercice_fractions_decomposer(){
 	}
 }
 
-
-
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_conversions_de_longueurs(niveau=1){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = niveau ; // Niveau de difficulté de l'exercice 
@@ -3502,6 +3627,9 @@ function Exercice_conversions_de_longueurs(niveau=1){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_conversions(niveau=1){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = niveau ; // Niveau de difficulté de l'exercice 
@@ -3616,6 +3744,9 @@ function Exercice_conversions(niveau=1){
 	this.besoin_formulaire2_case_a_cocher = ['Avec des nombres décimaux'];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_conversions_aires(niveau=1){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = niveau ; // Niveau de difficulté de l'exercice 
@@ -3721,6 +3852,9 @@ function Exercice_conversions_aires(niveau=1){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_perimetres_et_aires(difficulte=1){
 //Calculer le périmètre et l'aire de figures 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -3817,6 +3951,9 @@ function Exercice_perimetres_et_aires(difficulte=1){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Carré, rectangle et triangle rectangle\n2: Cercles\n3: Mélangé'] 
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_simplification_somme_algebrique(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max;
@@ -3852,6 +3989,9 @@ function Exercice_simplification_somme_algebrique(max=20){
 	this.besoin_formulaire_numerique = ['Valeur maximale',99999];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additions_et_soustraction_de_relatifs(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ;
@@ -3919,6 +4059,9 @@ function Exercice_additions_et_soustraction_de_relatifs(max=20){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_additions_de_5_relatifs(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = max ;
@@ -3978,6 +4121,9 @@ function Exercice_additions_de_5_relatifs(max=20){
 	this.besoin_formulaire2_case_a_cocher = ['Avec des écritures simplifiées'];	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_developper(difficulte=1){
 //Calculer le périmètre et l'aire de figures 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -4081,11 +4227,12 @@ function Exercice_developper(difficulte=1){
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Exercice_Double_distributivité : 
-* Niveau 1 développer (x+a)(x+b) ou (ax+b)(cx+d) avec a,b,c et d naturels simples
-* Niveau 2 développer (ax-b)(cx+d) ou (ax-b)(cx-d) avec a,b,c et d naturels simples
-* Niveau 3 mélange des deux niveaux précédents
+* 
+* * Niveau 1 développer (x+a)(x+b) ou (ax+b)(cx+d) avec a,b,c et d naturels simples
+* * Niveau 2 développer (ax-b)(cx+d) ou (ax-b)(cx-d) avec a,b,c et d naturels simples
+* * Niveau 3 mélange des deux niveaux précédents
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Double_distributivite()
 {
@@ -4152,11 +4299,14 @@ function Double_distributivite()
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Exercice_Développer_Identites_remarquables2 : Développer en utilisant (a+b)², (a-b)² ou (a-b)(a+b)
-* Niveau 1 le coefficient de x et donc de x² est égal à 1
-* Niveau 2 le coefficient de x est naturel supérieur à 1
-* Niveau 3 le coeficient de x est rationnel
+* 
+* Développer en utilisant (a+b)², (a-b)² ou (a-b)(a+b)
+* 
+* * Niveau 1 le coefficient de x et donc de x² est égal à 1
+* * Niveau 2 le coefficient de x est naturel supérieur à 1
+* * Niveau 3 le coeficient de x est rationnel
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Developper_Identites_remarquables2()
 {
@@ -4245,11 +4395,13 @@ Exercice.call(this); // Héritage de la classe Exercice()
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Exercice_Développer_Identites_remarquables3 : Développer en utilisant (a-b)(a+b)
-* Niveau 1 le coefficient de x et donc de x² est égal à 1
-* Niveau 2 le coefficient de x est naturel supérieur à 1
-* Niveau 3 le coeficient de x est rationnel
+* 
+* Développer en utilisant (a-b)(a+b)
+* * Niveau 1 le coefficient de x et donc de x² est égal à 1
+* * Niveau 2 le coefficient de x est naturel supérieur à 1
+* * Niveau 3 le coeficient de x est rationnel
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Developper_Identites_remarquables3()
 {
@@ -4305,11 +4457,14 @@ Exercice.call(this); // Héritage de la classe Exercice()
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Exercice_Factoriser_Identites_remarquables3 : Factoriser en utilisant (a-b)(a+b)
-* Niveau 1 le coefficient de x et donc de x² est égal à 1
-* Niveau 2 le coefficient de x est naturel supérieur à 1
-* Niveau 3 le coeficient de x est rationnel
+* 
+* Factoriser en utilisant (a-b)(a+b)
+* 
+* * Niveau 1 le coefficient de x et donc de x² est égal à 1
+* * Niveau 2 le coefficient de x est naturel supérieur à 1
+* * Niveau 3 le coeficient de x est rationnel
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Factoriser_Identites_remarquables3()
 {
@@ -4365,11 +4520,14 @@ function Factoriser_Identites_remarquables3()
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Exercice_Factoriser_Identites_remarquables2 : Factoriser en utilisant (a-b)(a+b), (a-b)² ou (a+b)² 
-* Niveau 1 le coefficient de x et donc de x² est égal à 1
-* Niveau 2 le coefficient de x est naturel supérieur à 1
-* Niveau 3 le coeficient de x est rationnel
+* 
+* Factoriser en utilisant (a-b)(a+b), (a-b)² ou (a+b)² 
+* 
+* * Niveau 1 le coefficient de x et donc de x² est égal à 1
+* * Niveau 2 le coefficient de x est naturel supérieur à 1
+* * Niveau 3 le coeficient de x est rationnel
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Factoriser_Identites_remarquables2()
 {
@@ -4458,6 +4616,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x relatif'] ;
 }
 
+
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_substituer(difficulte=1){
 //Calculer le périmètre et l'aire de figures 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -4551,6 +4713,9 @@ function Exercice_substituer(difficulte=1){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_equation1(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Résolution d'équation (1)"
@@ -4587,6 +4752,9 @@ function Exercice_equation1(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_ecriture_decimale_a_partir_de_fraction_decimale(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Donner l'écriture décimale d'une fraction décimale"
@@ -4618,6 +4786,9 @@ function Exercice_ecriture_decimale_a_partir_de_fraction_decimale(){
 	}
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Multiplier ou diviser un nombre entier par 10, 100 ou 1 000"
@@ -4653,6 +4824,9 @@ function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Comparer_decimaux(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Comparer des nombres décimaux";
@@ -4789,6 +4963,9 @@ function Comparer_decimaux(){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Pourcentage_d_un_nombre(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Calculer le pourcentage d'un nombre de tête"
@@ -4827,6 +5004,9 @@ function Pourcentage_d_un_nombre(){
 	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Fraction_d_un_nombre(max=11){
  	Exercice.call(this); // Héritage de la classe Exercice()
  	this.titre = "Calculer la fraction d'un nombre"
@@ -4870,7 +5050,10 @@ function Fraction_d_un_nombre(max=11){
  }
 
 
- function Variation_en_pourcentages(){
+ /**
+* @Auteur Rémi Angot
+*/
+function Variation_en_pourcentages(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Variation en pourcentages";
 	this.consigne = "Calculer le nouveau prix";
@@ -4920,6 +5103,9 @@ function Fraction_d_un_nombre(max=11){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Probleme_course(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Problème - Les courses"
@@ -4964,6 +5150,9 @@ function Probleme_course(){
 	}	
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Aire_de_triangles(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.pas_de_version_LaTeX = true ;
@@ -5017,7 +5206,7 @@ function Aire_de_triangles(){
 		
 			
 		this.liste_corrections.push(texte_corr);
-		mg32_to_contenu(this);		
+		liste_de_question_to_contenu(this);		
 	}
 
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Périmètres\n\
@@ -5025,6 +5214,9 @@ function Aire_de_triangles(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Perimetre_aire_disques(pa=3){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.pas_de_version_LaTeX = true ;
@@ -5138,7 +5330,7 @@ function Perimetre_aire_disques(pa=3){
 		
 			
 		this.liste_corrections.push(texte_corr);
-		mg32_to_contenu(this);		
+		liste_de_question_to_contenu(this);		
 	}
 
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Périmètres\n\
@@ -5146,6 +5338,9 @@ function Perimetre_aire_disques(pa=3){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Perimetre_aire_et_portions_de_disques(pa=3){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.pas_de_version_LaTeX = true ;
@@ -5333,13 +5528,16 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 	
 			
 		this.liste_corrections.push(texte_corr);
-		mg32_to_contenu(this);		
+		liste_de_question_to_contenu(this);		
 	}
 
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Périmètres\n\
 2 : Aires\n3 : Périmètres et aires"];			
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.pas_de_version_LaTeX = true ;
@@ -5393,7 +5591,7 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 		
 			
 		this.liste_corrections.push(texte_corr);
-		mg32_to_contenu(this);		
+		liste_de_question_to_contenu(this);		
 	}
 
 // 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Périmètres\n\
@@ -5402,6 +5600,9 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Perimetre_ou_aire_de_figures_composees(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.pas_de_version_LaTeX = true ;
@@ -5447,7 +5648,7 @@ function Perimetre_ou_aire_de_figures_composees(){
 		
 			
 		this.liste_corrections.push(texte_corr);
-		mg32_to_contenu(this);		
+		liste_de_question_to_contenu(this);		
 	}
 
 // 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Périmètres\n\
@@ -5456,6 +5657,9 @@ function Perimetre_ou_aire_de_figures_composees(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Exercice_differentes_ecritures_nombres_decimaux(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Différentes écritures des nombres décimaux"
@@ -5522,6 +5726,9 @@ function Exercice_differentes_ecritures_nombres_decimaux(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Additions_soustractions_multiplications_posees(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Additions, soustractions et multiplications posées de nombres entiers"
@@ -5610,6 +5817,9 @@ function Additions_soustractions_multiplications_posees(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Additionner_soustraires_decimaux(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Additions et soustractions de nombres décimaux"
@@ -5699,6 +5909,9 @@ function Additionner_soustraires_decimaux(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif'] 
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Divisions_euclidiennes(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Divisions euclidiennes"
@@ -5768,6 +5981,9 @@ function Divisions_euclidiennes(){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Division_decimale(){ 
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Divisions décimales"
@@ -5861,6 +6077,9 @@ function Division_decimale(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Multiplier_decimaux(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Multiplications posées de nombres décimaux"
@@ -5915,6 +6134,9 @@ function Multiplier_decimaux(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Ecrire_une_expression_litterale(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Écrire une expression littérale";
@@ -6027,6 +6249,9 @@ function Ecrire_une_expression_litterale(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Traduire_un_programme_de_calcul(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Traduire un programme de calcul par une expression littérale";
@@ -6115,6 +6340,9 @@ function Traduire_un_programme_de_calcul(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Calculer_la_valeur_d_une_expression_litterale(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Calculer la valeur d'une expression littérale";
@@ -6237,6 +6465,9 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Tester_une_egalite(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Tester une égalité";
@@ -6338,6 +6569,9 @@ function Tester_une_egalite(){
 	//this.besoin_formulaire_case_a_cocher = true;
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function Reduire_une_expression_litterale(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Réduire une expression littérale";
@@ -6428,10 +6662,12 @@ function Reduire_une_expression_litterale(){
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Exercice_Thales : Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
-* Niveau 1 4ème proportionnelle
-* Niveau 2 utilisation d'une longueur intermédiaire pour trouver le résultat.
+* 
+* Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
+*  * Niveau 1 4ème proportionnelle
+*  * Niveau 2 utilisation d'une longueur intermédiaire pour trouver le résultat.
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Exercice_Thales(){
 
@@ -6574,7 +6810,7 @@ function Exercice_Thales(){
 			this.liste_questions.push(texte);	
 			this.liste_corrections.push(texte_corr);
 			if (this.sup<3) {
-				mg32_to_contenu(this)
+				liste_de_question_to_contenu(this)
 			}
 			else 	{
 				this.type_exercice = '';
@@ -6695,10 +6931,13 @@ function Exercice_Thales(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire\n 3 : Sans figure'];
 }
 /**
-* @author: Jean-Claude Lhote
-* Exercice_Pythagore : Déterminer des longueurs en utilisant le théorème de Pythagore
-* Niveau 1 calcul de l'hypoténuse
-* Niveau 2 calcul d'un côté de l'angle droit
+* 
+* Déterminer des longueurs en utilisant le théorème de Pythagore
+* 
+* * Niveau 1 calcul de l'hypoténuse
+* * Niveau 2 calcul d'un côté de l'angle droit
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Exercice_Pythagore() {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -6796,21 +7035,13 @@ function Exercice_Pythagore() {
 				mtg32App.calculate("MG32svg${numero_de_l_exercice}");
 	        	mtg32App.display("MG32svg${numero_de_l_exercice}");
 				`
-
-				//	codeMG32 += `
-				//	var st${numero_de_l_exercice} = "${codeBase64}" ;
-				//	mtg32App.addDoc("mtg32svg${numero_de_l_exercice}", st${numero_de_l_exercice}, false);
-				//	mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x2", "${y2}");
-				//	mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "x1", "${x1}");
-				//	mtg32App.giveFormula2("mtg32svg${numero_de_l_exercice}", "alphadeg", "${alpha1deg}");
-				// ` 	
 			} else {
 				this.type_exercice = '';
 			}
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 			if (type_de_questions < 3) {
-				mg32_to_contenu(this)
+				liste_de_question_to_contenu(this)
 			}
 			else {
 				liste_de_question_to_contenu_sans_numero(this)
@@ -6910,12 +7141,15 @@ function Exercice_Pythagore() {
 }
 
 /**
-* @author: Jean-Claude Lhote
-* Resoudre_une_equation_produit_nul : Résoudre des équations du type (ax+b)(cx+d)=0
-* Niveau 1 coefficient de x égal à 1, solutions entières
-* Niveau 2 coefficient de x supérieur à 1, solutions entières
-* Niveau 3 coefficient de x supérieur à 1, solutions fractionnaires
-* Niveau 4 mélange des trois autres niveaux.
+* 
+* Résoudre des équations du type (ax+b)(cx+d)=0
+*
+* * Niveau 1 coefficient de x égal à 1, solutions entières
+* * Niveau 2 coefficient de x supérieur à 1, solutions entières
+* * Niveau 3 coefficient de x supérieur à 1, solutions fractionnaires
+* * Niveau 4 mélange des trois autres niveaux.
+*
+* @Auteur: Jean-Claude Lhote
 **/
 function Resoudre_une_equation_produit_nul(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -7043,6 +7277,9 @@ function Resoudre_une_equation_produit_nul(){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function Code_LaTeX_personnalise() {
 	// Classe parente de tous les exercices qui seront créés
     this.titre = 'Code LaTeX personnalisé';
@@ -7081,6 +7318,9 @@ function Code_LaTeX_personnalise() {
 
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function HTML_personnalise() {
 	// Classe parente de tous les exercices qui seront créés
     this.titre = 'Exercice personnalisé';
@@ -7184,6 +7424,9 @@ function Thales_4eme() {		//Dans cette version, pas de configuration papillon re
 }
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function LaTeX_static() {
 	// Classe parente de tous les exercices qui seront créés
     this.titre = 'Fichier statique';

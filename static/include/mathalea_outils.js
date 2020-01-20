@@ -1,5 +1,14 @@
 // Fonctions diverses pour la création des exercices
 
+
+/**
+* Utilise this.liste\_questions et this.liste\_corrections pour remplir this.contenu et this.contenu_correction
+* 
+* La liste des questions devient une liste HTML ou LaTeX avec html\_enumerate() ou tex\_enumerate()
+*
+* @param {exercice} 
+* @author Rémi Angot
+*/
 function liste_de_question_to_contenu(argument) {
 	if (sortie_html) {
 		argument.contenu = html_consigne(argument.consigne) + html_enumerate(argument.liste_questions,argument.spacing)
@@ -11,6 +20,13 @@ function liste_de_question_to_contenu(argument) {
 	
 }
 
+/**
+* Utilise this.liste\_questions et this.liste\_corrections pour remplir this.contenu et this.contenu_correction
+* 
+* La liste des questions devient une liste HTML ou LaTeX avec html\_ligne() ou tex\_paragraphe()
+* @param {exercice} 
+* @author Rémi Angot
+*/
 function liste_de_question_to_contenu_sans_numero(argument) {
 	if (sortie_html) {
 		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions,argument.spacing)
@@ -23,6 +39,16 @@ function liste_de_question_to_contenu_sans_numero(argument) {
 	
 }
 
+/**
+* Utilise this.liste\_questions et this.liste\_corrections pour remplir this.contenu et this.contenu_correction
+* 
+* La liste des questions devient une liste HTML ou LaTeX avec html\_ligne() 
+*
+* **Doit être remplacée par liste_de_question_to_contenu()**
+* @deprecated Doit être remplacée par liste_de_question_to_contenu()
+* @param {exercice} 
+* @author Rémi Angot
+*/
 function mg32_to_contenu(argument) {
 	if (sortie_html) {
 		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions,argument.spacing);
@@ -31,12 +57,20 @@ function mg32_to_contenu(argument) {
 	
 }
 
+/**
+* Créé tous les couples possibles avec un élément de E1 et un élément de E2.
+* L'ordre est pris en compte, donc on pourra avoir (3,4) et (4,3).
+* Si le nombre de couples possibles est inférieur à nombre_de_couples_min alors
+*	on concatène 2 fois la même liste mais avec des ordres différents.
+* @param {liste} E1 - Liste
+* @param {liste} E2 - Liste
+* @param {int} nombre_de_couples_min=10 - Nombre de couples souhaités
+*
+* @author Rémi Angot
+*/
 	
 function creer_couples(E1, E2, nombre_de_couples_min = 10){
-	//Créer tous les couples possibles avec un élément de E1 et un élément de E2
-	//L'ordre est pris en compte, donc on pourra avoir (3,4) et (4,3)
-	//Si le nombre de couples possibles est inférieur à nombre_de_couples_min alors
-	//on concatène 2 fois la même liste mais avec des ordres différents
+	
 	let result = [], temp = [];
 	for (let i in E1){
 		for (let j in E2){
@@ -54,6 +88,22 @@ function creer_couples(E1, E2, nombre_de_couples_min = 10){
 
 // Fonctions mathématiques
 
+/**
+* Choisit un nombre au hasard entre min et max sans appartenir à liste\_a\_eviter.
+* @param {int} min
+* @param {int} max
+* @param {liste} liste - Tous les éléments que l'on souhaite supprimer 
+*
+* @example
+* // Renvoit 1, 2 ou 3
+* randint(1,3)
+* @example
+* // Renvoit -1 ou 1
+* randint(-1,1,[0])
+*
+* @author Rémi Angot
+* @Source https://gist.github.com/pc035860/6546661
+*/
 function randint(min,max,liste_a_eviter=[]){
 	//Source : https://gist.github.com/pc035860/6546661
 	let range = max - min;
@@ -70,8 +120,15 @@ function randint(min,max,liste_a_eviter=[]){
 }
 
 
+/**
+* Enlève toutes les occurences d'un élément d'un tableau donné
+* @param liste
+* @param element
+*
+* @author Rémi Angot
+*/
 function enleve_element(array,item){
-	// Enlève toutes les occurences d'un élément d'un tableau donné
+	// 
 	for(var i = array.length - 1; i >= 0; i--){
     	if(array[i] == item) {
        		array.splice(i, 1);
@@ -79,6 +136,20 @@ function enleve_element(array,item){
 	}
 }
 
+/**
+* Retourne un élément au hasard de la liste
+* @param {liste} liste
+* 
+*
+* @example
+* // Renvoit 1, 2 ou 3
+* choice[(1,2,3)]
+* @example
+* // Renvoit Rémi ou Léa
+* choice(['Rémi','Léa'])
+*
+* @author Rémi Angot
+*/
 function choice(liste) {
 	// Renvoit un élément au hasard de la liste
   var index = Math.floor(Math.random() * liste.length);
@@ -95,8 +166,16 @@ function range(max,liste_a_eviter=[]){
 	return liste
 }
 
+
+/**
+* Créé un tableau avec toutes les valeurs de 1 à max sauf celle de la liste à éviter
+* 
+*
+* @param {int} max
+* @param {liste} liste valeurs à éviter 
+* @author Rémi Angot
+*/
 function range1(max,liste_a_eviter=[]){
-	// Créer un tableau avec toutes les valeurs de 1 à max sauf celle de la liste à éviter
 	let nb_max = parseInt(max,10);
 	let liste = [];
 	for (let i = 1; i <= nb_max; i++) {
@@ -108,9 +187,15 @@ function range1(max,liste_a_eviter=[]){
 	return liste
 }
 
+
+/**
+* Fonction de comparaison à utiliser avec tableau.sort(compare_fractions)
+*
+* Le tableau doit être du type [[num,den],[num2,den2]]
+*
+* @author Rémi Angot
+*/
 function compare_fractions(a,b){ 
-	// Fonction de comparaison à utiliser avec tableau.sort(compare_fractions)
-	// Le tableau doit être du type [[num,den],[num2,den2]]
 	if ((a[0]/a[1])>(b[0]/b[1])) 
 		return 1 ;
 	if ((a[0]/a[1])<(b[0]/b[1])) 
@@ -119,31 +204,14 @@ function compare_fractions(a,b){
 	return 0
 }
 
-// Cette première version de shuffle() modifiait le tableau donné en argument
-// function shuffle(array) {
-// 	//Mélange les items d'un tableau, modifie le tableau passé en argument
-// 	//Source : https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-//   var currentIndex = array.length, temporaryValue, randomIndex;
-
-//   // While there remain elements to shuffle...
-//   while (0 !== currentIndex) {
-
-//     // Pick a remaining element...
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex -= 1;
-
-//     // And swap it with the current element.
-//     temporaryValue = array[currentIndex];
-//     array[currentIndex] = array[randomIndex];
-//     array[randomIndex] = temporaryValue;
-//   }
-
-//   return array;
-// }
-
+/*
+* Mélange les items d'un tableau, sans modifier le tableau passé en argument
+*
+* @Example
+* tableau_melange = shuffle (tableau_origine)
+* @Source https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+*/
 function shuffle(array) {
-	//Mélange les items d'un tableau, sans modifier le tableau passé en argument
-	//Source : https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -163,10 +231,14 @@ function shuffle(array) {
   return array_bis;
 }
 
+/*
+* Trie un dictionnaire suivant ses clés
+*
+* @Example
+* dictionnaire_tri = tridictionnaire(dictionnaire)
+* @Source https://stackoverflow.com/questions/10946880/sort-a-dictionary-or-whatever-key-value-data-structure-in-js-on-word-number-ke
+*/
 function tridictionnaire(dict) {
-// Trie un dictionnaire suivant ses clés
-// Source : https://stackoverflow.com/questions/10946880/sort-a-dictionary-or-whatever-key-value-data-structure-in-js-on-word-number-ke
-
     var sorted = [];
     for(var key in dict) {
         sorted[sorted.length] = key;
@@ -181,9 +253,18 @@ function tridictionnaire(dict) {
     return tempDict;
 }
 
+
+/*
+* Concatène liste à elle même en changeant l'ordre à chaque cycle
+*
+*
+* @Example
+* combinaison_listes([A,B,C],7)
+* // [B,C,A,C,B,A,A,B,C]
+*
+* @Auteur Rémi Angot
+*/
 function combinaison_listes(liste,taille_minimale){
-	// Concatène liste à elle même en changeant l'ordre à chaque cycle
-	// Exemple combinaison_listes([A,B,C],7) -> [B,C,A,C,B,A,A,B,C]
 	l = shuffle(liste);
 	while (l.length<taille_minimale){
 		l = l.concat(shuffle(liste))
@@ -199,9 +280,13 @@ function combinaison_listes_sans_changer_ordre(liste,taille_minimale){
 	return liste
 }
 
-
-
-function ecriture_nombre_relatif(a) { //(+3) ou (-3)
+/**
+* Ajoute les parenthèses et le signe
+* @Example
+* //(+3) ou (-3)
+* @Auteur Rémi Angot
+*/
+function ecriture_nombre_relatif(a) { 
 	let result = '';
 	if (a>0) {
 		result = '(+'+a+')'
@@ -213,7 +298,13 @@ function ecriture_nombre_relatif(a) { //(+3) ou (-3)
 	return result;
 }
 
-function ecriture_algebrique(a) { // +3 ou -3
+/**
+* Ajoute le + devant les nombres positifs
+* @Example
+* //+3 ou -3
+* @Auteur Rémi Angot
+*/
+function ecriture_algebrique(a) { 
 	let result = '';
 	if (a>0) {
 		result = '+'+a;
@@ -223,7 +314,13 @@ function ecriture_algebrique(a) { // +3 ou -3
 	return result;
 };
 
-function ecriture_parenthese_si_negatif(a) { // 3 ou (-3)
+/**
+* Ajoute des parenthèses aux nombres négatifs
+* @Example
+* // 3 ou (-3)
+* @Auteur Rémi Angot
+*/
+function ecriture_parenthese_si_negatif(a) { 
 	let result = '';
 	if (a>0) {
 		result = a;
@@ -233,6 +330,12 @@ function ecriture_parenthese_si_negatif(a) { // 3 ou (-3)
 	return result;
 };
 
+/**
+* Retourne le signe d'un nombre
+* @Example
+* // + ou -
+* @Auteur Rémi Angot
+*/
 function signe(a) { // + ou -
 	let result = '';
 	if (a>0) {
@@ -243,7 +346,14 @@ function signe(a) { // + ou -
 	return result;
 };
 
-function somme_des_chiffre(n) { //renvoie un string avec la somme des chiffres
+
+/**
+* Retourne un string avec la somme des chiffres
+* @Example
+* somme_des_chiffres(123)
+* // 6
+* @Auteur Rémi Angot
+*/function somme_des_chiffre(n) { 
 	let somme_string =''
 	for (let i = 0; i < n.length-1; i++) {
 		somme_string += n[i]+'+'
@@ -252,45 +362,81 @@ function somme_des_chiffre(n) { //renvoie un string avec la somme des chiffres
 	return somme_string
 }
 
-
+/**
+* Retourne l'arrondi (par défaut au centième près)
+* 
+* @Auteur Rémi Angot
+*/
 function arrondi(nombre, precision=2){
     let tmp = Math.pow(10, precision);
     return Math.round( nombre*tmp )/tmp;
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function abs(a){
 	return Math.abs(a);
 }
 
-function arrondi_virgule(nombre, precision=2){ //renvoit un arrondi sous la forme d'un string avec une virgule comme séparateur décimal
+/**
+* Retourne un arrondi sous la forme d'un string avec une virgule comme séparateur décimal
+* @Auteur Rémi Angot
+*/
+function arrondi_virgule(nombre, precision=2){ //
     let tmp = Math.pow(10, precision);
     return String(Math.round( nombre*tmp )/tmp).replace('.',',');
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function pgcd(a,b){
 	return parseInt(Algebrite.run(`gcd(${a},${b})`));
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 const ppcm = (a,b) => { return parseInt(Algebrite.run(`lcm(${a},${b})`))}
 
-function fraction_simplifiee(n,d){  // renvoie le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
+
+/**
+* Retourne le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
+* @Auteur Rémi Angot
+*/
+function fraction_simplifiee(n,d){ 
 	let p=pgcd(n,d);
 	return [n/p,d/p];
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function tex_fraction_reduite(n,d){
 	return tex_fraction(fraction_simplifiee(n,d)[0],fraction_simplifiee(n,d)[1]);
 }
-function calcul(expression){ // pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
+
+/**
+* Utilise Algebrite pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
+* @Auteur Rémi Angot
+*/
+function calcul(expression){ 
 	return parseFloat(Algebrite.eval(expression))
 }
 
-function tex_nombrec(expression){ //pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux et renvoyer la virgule comme séparateur décimal
+/**
+* Utilise Algebrite pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux et retourne un string avec la virgule comme séparateur décimal
+* @Auteur Rémi Angot
+*/
+function tex_nombrec(expression){ 
 	return tex_nombre(parseFloat(Algebrite.eval(expression)))
 }
 
 
-function somme_des_termes_par_signe(liste){
+/**
+* @Auteur Rémi Angot
+*/function somme_des_termes_par_signe(liste){
 	let somme_des_positifs = 0, somme_des_negatifs = 0;
 	for (var i = 0; i < liste.length; i++) {
 		if (liste[i]>0){
@@ -302,7 +448,11 @@ function somme_des_termes_par_signe(liste){
 	return [somme_des_positifs,somme_des_negatifs]
 }
 
-function polygone(nbsommets){ // Créer un string de nbsommets caractères dans l'ordre alphabétique et en majuscule
+/**
+* Créé un string de nbsommets caractères dans l'ordre alphabétique et en majuscule
+* @Auteur Rémi Angot
+*/
+function polygone(nbsommets){ 
 	let premiersommet = randint(65,90-nbsommets);
   let polygone="";
   for (let i=0;i<nbsommets;i++){
@@ -311,16 +461,31 @@ function polygone(nbsommets){ // Créer un string de nbsommets caractères dans 
   return polygone
 }
 
-function lettre_depuis_chiffre(i){ // 1->A ; 2->B...
+/**
+* @Auteur Rémi Angot
+*@Example
+* // 1->A ; 2->B...
+*/
+function lettre_depuis_chiffre(i){ 
 	let lettre = 64+i;
   return String.fromCharCode(lettre)
 }
 
-function lettre_minuscule_depuis_chiffre(i){ // 1->a ; 2->b...
+/**
+* @Auteur Rémi Angot
+* @Example
+* // 1->a ; 2->b...
+*/
+function lettre_minuscule_depuis_chiffre(i){ 
   return lettre_depuis_chiffre(i).toLowerCase()
 }
 
-function minToHoraire(minutes){	// 0h24 est accepté
+/**
+* @Auteur Rémi Angot
+* @Example
+* //0h24 est accepté
+*/
+function minToHoraire(minutes){	 
 	var nbHour = parseInt(minutes / 60);
 	if (nbHour>23){
 		nbHour = nbHour-24
@@ -333,7 +498,12 @@ function minToHoraire(minutes){	// 0h24 est accepté
 	}
 }
 
-function minToHour(minutes){	 // on écrira 24 minutes plutôt que 0h24
+/**
+* @Auteur Rémi Angot
+* @Example
+* //on écrira 24 minutes plutôt que 0h24
+*/
+function minToHour(minutes){
 	var nbHour = parseInt(minutes / 60);
 	if (nbHour>23){
 		nbHour = nbHour-24
@@ -350,13 +520,23 @@ function minToHour(minutes){	 // on écrira 24 minutes plutôt que 0h24
 	}
 }
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function prenomF(){
 	return choice(['Manon','Julie','Aude','Corinne','Léa','Carine','Elsa','Lisa','Marina','Magalie','Nawel'])
 }
+
+/**
+* @Auteur Rémi Angot
+*/
 function prenomM(){
 	return choice(['Rémi','Benjamin','Guillaume','Christophe','Cyril','Kamel','Yazid','Mehdi','Karim','Bernard','Joachim'])
 }
+
+/**
+* @Auteur Rémi Angot
+*/
 function prenom(){
 	return choice([prenomF(),prenomM()])
 }
@@ -369,6 +549,9 @@ function prenom(){
 
 // Fonctions LaTeX
 
+/**
+* @Auteur Rémi Angot
+*/
 function tex_enumerate(liste,spacing){
 	let result =''
 	result = "\\begin{enumerate}"
@@ -385,6 +568,9 @@ function tex_enumerate(liste,spacing){
 	return result
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
 	let result =''
 	if (itemsep==1){
@@ -408,6 +594,9 @@ function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
 	return result
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function tex_paragraphe(liste,spacing=false){
 	let result =''
 	if (spacing>1){
@@ -425,6 +614,9 @@ function tex_paragraphe(liste,spacing=false){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function html_enumerate(liste,spacing){
 	let result='';
 	(spacing>1) ? result =`<ol style="line-height: ${spacing};">` : result = '<ol>'
@@ -435,6 +627,9 @@ function html_enumerate(liste,spacing){
 	return result
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function html_ligne(liste,spacing){
 	let result = '';
 	if (spacing>1) {
@@ -453,6 +648,9 @@ function html_ligne(liste,spacing){
 
 
 
+/**
+* @Auteur Rémi Angot
+*/
 function tex_multicols(texte,nb_cols=2){
 	let result;
 	if (nb_cols > 1){
@@ -464,14 +662,23 @@ function tex_multicols(texte,nb_cols=2){
 	return result
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function html_consigne(consigne){
 	return '<h4>' + consigne + '</h4>\n\n'
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function tex_consigne(consigne){
 	return '\\exo{' + consigne + '}\n\n'
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function tex_nombre(nb){
 	//Ecrit \nombre{nb} pour tous les nombres supérieurs à 1 000 (pour la gestion des espaces)
 	if (sortie_html) {
@@ -487,6 +694,10 @@ function tex_nombre(nb){
 	}
 }
 
+/**
+* Met en couleur verte si sortie HTML et en rouge si sortie PDF
+* @Auteur Rémi Angot
+*/
 function mise_en_evidence(texte){
 	if (sortie_html) {
 		return '\\mathbf{\\color{#1DA962}{'+texte+'}}'	
@@ -497,6 +708,10 @@ function mise_en_evidence(texte){
 	
 }
 
+/**
+* Pour bien afficher les centimes avec 2 chiffres après la virgule
+* @Auteur Rémi Angot
+*/
 function tex_prix(nb){
 	//Remplace le . par la ,
 	nombre = Number (nb);
@@ -511,7 +726,9 @@ function tex_prix(nb){
 }
 
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function nombre_de_chiffres_dans_la_partie_decimale(nb){
 	if (String(nb).indexOf('.')>0){
   	return String(nb).split(".")[1].length
@@ -520,6 +737,10 @@ function nombre_de_chiffres_dans_la_partie_decimale(nb){
   }
 }
 
+/**
+* Pour écrire €/kg et bien mettre la virgule comme séparateur décimal
+* @Auteur Rémi Angot
+*/
 function tex_prix_euros(nb){
 	//Remplace le . par la ,
 	nombre = Number (nb);
@@ -529,7 +750,11 @@ function tex_prix_euros(nb){
 	
 }
 
-function tex_fraction_signe(a,b){// ecrire une fraction avec - devant si a ou b est négatif 
+/**
+* Écrit une fraction avec - devant si a ou b est négatif
+* @Auteur Jean-Claude Lhote
+*/
+function tex_fraction_signe(a,b){ 
 	if (b!=1) {
 		if (a*b>0){
 			return '\\dfrac{'+Math.abs(a)+'}{'+Math.abs(b)+'}'
@@ -544,12 +769,20 @@ function tex_fraction_signe(a,b){// ecrire une fraction avec - devant si a ou b 
 	}
 }
 
-function tex_fraction_parentheses(a,b){ // met des parenthèses si besoin pour inclure une fraction dans une expresion en fonction du signe
+/**
+* Met des parenthèses si besoin pour inclure une fraction dans une expresion en fonction du signe
+* @Auteur Jean-Claude Lhote
+*/
+function tex_fraction_parentheses(a,b){ 
 	if (a*b>0) {return tex_fraction_signe(a,b)}
 	else {return '\\left('+tex_fraction_signe(a,b)+'\\right)'}
 }
 
-function tex_fraction(a,b){ // Ecrire une fraction
+/**
+* Écrit une fraction
+* @Auteur Rémi Angot
+*/
+function tex_fraction(a,b){ 
 	if (b!=1) {
 		return '\\dfrac{'+a+'}{'+b+'}'
 	}
@@ -560,14 +793,26 @@ function tex_fraction(a,b){ // Ecrire une fraction
 
 }
 
-function tex_fraction_box(a,b,taille='2em'){ // Ecrire une fraction dans une boite pour faciliter l'alignement
+
+/**
+* Écrit une fraction dans une boite pour faciliter l'alignement
+* @Auteur Rémi Angot
+*/
+function tex_fraction_box(a,b,taille='2em'){
 	return '\\makebox['+taille+'][l]{$\\dfrac{'+a+'}{'+b+'}$}'
 }
 
-function tex_texte(texte) { // Pour écrire du texte en mode mathématiques
+/**
+* Écrit du texte en mode mathématiques
+* @Auteur Rémi Angot
+*/
+function tex_texte(texte) {
 	return '~\\text{'+texte+'}'
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function itemize(tableau_de_texte){
 	let texte = ''
 	if (sortie_html) {
@@ -587,7 +832,9 @@ function itemize(tableau_de_texte){
 }
 
 
-
+/**
+* @Auteur Rémi Angot
+*/
 function MG32_modifie_figure(numero_figure) {
 	let code_pour_modifier_la_figure = exercice[numero_figure].MG32code_pour_modifier_la_figure
 	if (window.mtg32App.docs.length==1){
@@ -597,6 +844,9 @@ function MG32_modifie_figure(numero_figure) {
 	modification(numero_figure);
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function MG32_modifie_toutes_les_figures() {
 	for (let i = 0; i < liste_des_exercices.length; i++) {
 			if (exercice[i].type_exercice=='MG32'){
@@ -605,6 +855,9 @@ function MG32_modifie_toutes_les_figures() {
 	}
 }
 
+/**
+* @Auteur Rémi Angot
+*/
 function MG32_ajouter_figure(numero_de_l_exercice) {
 	if (window.mtg32App) {
 		for (var i = 0; i < mtg32App.docs.length; i++) {
@@ -628,10 +881,12 @@ function MG32_ajouter_figure(numero_de_l_exercice) {
 	)	
 }
 
-
-// pour chaque figure on récupère une promesse de chargement, 
-// on lance tout en parallèle, 
-// et quand toutes seront résolues on continue
+/**
+* Pour chaque figure on récupère une promesse de chargement, 
+* on lance tout en parallèle, 
+* et quand toutes seront résolues on continue
+* @Auteur Rémi Angot
+*/
 
 function MG32_tracer_toutes_les_figures() {
 
