@@ -3170,13 +3170,10 @@ function Exercice_diviser_fractions(){
 		 [1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
 		 
 		let type_de_questions_disponibles
-
-		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
-		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
-		else {type_de_questions_disponibles = [3]}
-		
+		type_de_questions_disponibles = [parseInt(this.sup)];
+		let nombre_de_signe_moins				
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, ab,cd,aa,a, b, c, d, p, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+		for (let i = 0, ab,cd,a, b, c, d, p,signe, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
 			ab=choice(liste_fractions);
 			cd=choice(liste_fractions);
@@ -3184,71 +3181,75 @@ function Exercice_diviser_fractions(){
 			b=ab[1]
 			c=cd[0];
 			d=cd[1];
+			if (d%c==0) {d=cd[0];c=cd[1]}
 			p=pgcd(a*d,b*c);
+			
 			switch (type_de_questions){
-				case 1 : // entier * fraction (tout positif)
-					texte=`$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=$`;
-					if (pgcd(a*d,c)==1) {
-						texte_corr= `$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=${tex_fraction(a,1)}\\times${tex_fraction(d,c)}=\\dfrac{${a}}{1}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,'1\\times'+c)}=${tex_fraction(a*d,c)}$`
-					}
-					else {
-						texte_corr= `$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=${tex_fraction(a,1)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d,c)}=${tex_fraction_reduite(a*d,c)}$`
-					}
-					break
-				
-				case 2 : // fraction * fraction tout positif
+			//	case 0 : // entier * fraction (tout positif)
+			//		texte=`$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=$`;
+			//		if (pgcd(a*d,c)==1) {
+			//			texte_corr= `$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=${tex_fraction(a,1)}\\times${tex_fraction(d,c)}=\\dfrac{${a}}{1}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,'1\\times'+c)}=${tex_fraction(a*d,c)}$`
+			//		}
+			//		else {
+			//			texte_corr= `$${tex_fraction(a,1)}\\div${tex_fraction(c,d)}=${tex_fraction(a,1)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d,c)}=${tex_fraction_reduite(a*d,c)}$`
+			//		}
+			//		break
+			//	
+				case 1 : // fraction * fraction tout positif
 				texte=`$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=$`;
 				if (p==1) {
 					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,b+'\\times'+c)}=${tex_fraction(a*d,b*c)}$`
 				}
 				else {
-					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}=${tex_fraction(a*d/p,b*c/p)}$`
+					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,b+'\\times'+c)}=${tex_fraction(a*d,b*c)}=${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}=${tex_fraction(a*d/p,b*c/p)}$`
 
 				}
 				break
-					
 			
-				case 3 :
+				case 2 :
 					a=a*randint(-1,1,[0]);
 					b=b*randint(-1,1,[0]);
 					c=c*randint(-1,1,[0]);
 					d=d*randint(-1,1,[0]);
-					p=pgcd(a*d,b*c);
+					nombre_de_signe_moins=(a<0)+(b<0)+(c<0)+(d<0);
+					if (Math.pow(-1,nombre_de_signe_moins)==1) {signe=''} else {signe='-'}
 					texte=`$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=$`;
 					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}$`
-					aa=false;
-					if (a<0) {
-						if (b<0) {a=-a;b=-b;aa=true}
-					}
-					if (c<0) {
-						if (d<0) {c=-c;d=-d;aa=true}
-					}
-					if (aa==true) {texte_corr+= `$=${tex_fraction(a,b)}\\div${tex_fraction(c,d)}$`}
+					a=Math.abs(a);
+					b=Math.abs(b);
+					c=Math.abs(c);
+					d=Math.abs(d);
+					p=pgcd(a*d,b*c);
+					texte_corr+=`$=${signe}${tex_fraction(a,b)}\\times${tex_fraction(d,c)}$`
+					texte_corr+=`$=${signe}${tex_fraction(a +'\\times'+ecriture_parenthese_si_negatif(d),b+'\\times'+ecriture_parenthese_si_negatif(c))}$`
 					if (p==1) {
-						texte_corr+=`$=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a +'\\times'+d,b+'\\times'+c)}=${tex_fraction_signe(a*d,b*c)}$`
+						texte_corr+=`$=${signe}${tex_fraction_signe(a*d,b*c)}$`
 					}
 					else {
-						texte_corr= `$=${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=${tex_fraction(a,b)}\\times${tex_fraction(d,c)}=${tex_fraction(a*d,b*c)}$`
+	
+						texte_corr+=`$=${signe}${tex_fraction(a*d,b*c)}$`
 						if (a*d!=b*c){
-							texte_corr+=`$=${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*d/p,b*c/p)}$`
+							texte_corr+=`$=${signe}${tex_fraction(a*d/p +'\\times\\cancel{'+p+'}',b*c/p+'\\times\\cancel{'+p+'}')}$`
+							texte_corr+=`$=${signe}${tex_fraction(a*d/p,b*c/p)}$`
 						}
 						else {
-						texte_corr+=`$=1$`
+							texte_corr+=`$=${signe}1$`							
 						}
-					}
+					}	
 				break	
 			}
-			
+			console.log(i+1,type_de_questions,a,b,c,d,nombre_de_signe_moins);
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
 			}
+			
 			cpt++
 		}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Fractions à numérateur et dénominateur positifs \n 2 : 50% Type 2 et 50% type 3\n 3 : Fractions à numérateur et dénominateur relatifs"]
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Fractions à numérateur et dénominateur positifs \n 2 : Fractions à numérateur et dénominateur relatifs"]
 }
 /**
 * 
