@@ -2650,7 +2650,6 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 				break
 			}
 
-			
 			a = randint (1,9,[b]);
 			c = randint (1,9,[d]);
 			if (this.sup2) { //si les numérateurs sont relatifs
@@ -2658,14 +2657,19 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 				c = c * choice([-1,1]);
 
 			}
-
 			if (!this.sup2 && plus_ou_moins=='-' && a/b<c/d) { //s'il n'y a pas de relatifs, il faut s'assurer que la soustraction soit positive
-				[a,b,c,d]=[c,d,a,b]
+				[a,b,c,d]=[c,d,a,b] // on échange les 2 fractions
 				k1 = ppcm(b,d)/b;
 				k2 = ppcm(b,d)/d;
-				(type_de_questions=='d_multiple_de_b') ? k=b/d : k=b/d;
+				if (type_de_questions=='d_multiple_de_b') {
+					type_de_questions='b_multiple_de_d'; //comme on a échangé les 2 fractions, le type de la question change
+					k = b/d;
+				} else if (type_de_questions=='b_multiple_de_d') {
+					type_de_questions='d_multiple_de_b'; //comme on a échangé les 2 fractions, le type de la question change
+					k = d/b;
+				}
+				echange = true;
 			}
-
 			texte = `$${tex_fraction(a,b)}${plus_ou_moins}${tex_fraction(c,d)}=$`;
 			texte_corr = `$${tex_fraction(a,b)}${plus_ou_moins}${tex_fraction(c,d)}`
 
@@ -2708,7 +2712,7 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 					}
 					texte = `$${n}${plus_ou_moins}${tex_fraction(a,b)}=$`;
 					texte_corr = texte ;
-					texte_corr += `$${tex_fraction(n+'\\times'+b,b)}${plus_ou_moins}${tex_fraction(a,b)}`;
+					texte_corr += `$${tex_fraction(n+mise_en_evidence('\\times'+b),mise_en_evidence(b))}${plus_ou_moins}${tex_fraction(a,b)}`;
 					texte_corr += `=${tex_fraction(n*b+plus_ou_moins+ecriture_parenthese_si_negatif(a),b)}`;
 				} else {
 					// a/b +-n
@@ -2718,7 +2722,7 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 					}
 					texte = `$${tex_fraction(a,b)}${plus_ou_moins}${ecriture_parenthese_si_negatif(n)}=$`;
 					texte_corr = texte ;
-					texte_corr += `$${tex_fraction(a,b)}${plus_ou_moins}${tex_fraction(n+'\\times'+b,b)}`;
+					texte_corr += `$${tex_fraction(a,b)}${plus_ou_moins}${tex_fraction(n+mise_en_evidence('\\times'+b),mise_en_evidence(b))}`;
 					texte_corr += `=${tex_fraction(a+'+'+ecriture_parenthese_si_negatif(n*b),b)}`
 				}
 				num = calcul(n*b+plus_ou_moins+ecriture_parenthese_si_negatif(a))
