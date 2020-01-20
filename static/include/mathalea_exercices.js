@@ -3009,39 +3009,21 @@ function Exercice_multiplier_fractions(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		let type_de_questions_disponibles
+		liste_fractions = liste_fractions_irreductibles();
 
 		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
 		else {type_de_questions_disponibles = [3]}
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, a, b, c, d, p, aa, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+		for (let i = 0, ab, cd, a, b, c, d, p, aa, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
-			a=randint(2,16);
-			b=randint(2,16,[a]);
-			c=randint(1,16,[b]);
-			d=randint(2,16,[a,c]);
-			p=pgcd(a,b);
-			if (p!=1) {
-				a=a/p;  //  on rend a/b irréductible
-				if (b!=p){
-				b=b/p;
-				}
-				else {b=randint(3,11,[4,6,8,10])};
-				}
-			p=pgcd(c,d);
-			if (p!=1) {
-				c=c/p;  //  on rend c/d irréductible
-				if (d!=p){
-				d=d/p;
-				}
-				else {
-					d=randint(3,11,[4,6,8,10]);
-				}
-			}
-						
-			
-			
+			ab=choice(liste_fractions);
+			cd=choice(liste_fractions);
+			a=ab[0];
+			b=ab[1]
+			c=cd[0];
+			d=cd[1];
 			switch (type_de_questions){
 				case 1 : // entier * fraction (tout positif)
 					if (a==1) {a=randint(2,9)}
@@ -3056,16 +3038,14 @@ function Exercice_multiplier_fractions(){
 					break
 				
 				case 2 : // fraction * fraction tout positif
-				if (a==b) {b=b+1}
-				if (c==d) {d=d+1}
 				p=pgcd(a*c,b*d);
 				texte=`$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=$`;
-				if (p==1) {
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}=${tex_fraction(a*c,b*d)}$`
-				}
-				else {
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}=${tex_fraction(a*c,b*d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction(a*c/p,b*d/p)}$`
-
+				texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`
+				texte_corr+= `$=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}$`
+				texte_corr += `$=${tex_fraction(a*c,b*d)}$`
+				if (p!=1) {
+					texte_corr += `$=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}$`
+					texte_corr += `$=${tex_fraction(a*c/p,b*d/p)}$`
 				}
 				break
 					
@@ -3165,10 +3145,8 @@ function Exercice_diviser_fractions(){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
- 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
-		 [1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		 
+		liste_fractions = liste_fractions_irreductibles();
+
 		let type_de_questions_disponibles
 		type_de_questions_disponibles = [parseInt(this.sup)];
 		let nombre_de_signe_moins				
@@ -3181,7 +3159,7 @@ function Exercice_diviser_fractions(){
 			b=ab[1]
 			c=cd[0];
 			d=cd[1];
-			if (d%c==0) {d=cd[0];c=cd[1]}
+			
 			p=pgcd(a*d,b*c);
 			
 			switch (type_de_questions){
@@ -3275,10 +3253,7 @@ function Exercice_additionner_fraction_produit(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		let type_de_questions_disponibles
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
- 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
-		 [1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		 
+		liste_fractions = liste_fractions_irreductibles();
 
 		if (this.sup==1) {type_de_questions_disponibles = [1,1,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
