@@ -418,6 +418,26 @@ function tex_fraction_reduite(n,d){
 }
 
 /**
+*
+* Simplifie une fraction en montrant les étapes
+* Le résultat est un string qui doit être entouré de $ pour le mode mathématiques
+* @Auteur Rémi Angot
+*/
+function simplification_de_fraction_avec_etapes(num,den){
+	// Est-ce que le résultat est simplifiable ?
+	let result = ''
+	let s = pgcd(num,den); 
+	if (s!=1) {
+		if ((num)%(den)==0) { //si le résultat est entier
+			result = `=${(num)/(den)}`
+		} else {
+			result =`=${tex_fraction(Algebrite.eval((num)/s)+mise_en_evidence('\\times'+s),Algebrite.eval(den/s)+mise_en_evidence('\\times'+s))}=${tex_fraction(Algebrite.eval((num)/s),Algebrite.eval(den/s))}`
+		}
+	}
+	return result
+}
+
+/**
 * Utilise Algebrite pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
 * @Auteur Rémi Angot
 */
