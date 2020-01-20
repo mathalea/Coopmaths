@@ -2988,9 +2988,9 @@ function Exercice_multiplier_fractions(){
 		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
 		else {type_de_questions_disponibles = [3]}
-		
-		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, ab, cd, a, b, c, d, p, aa, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+		let nombre_de_signe_moins;
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions);
+		for (let i = 0, ab, cd, a, b, c, d, p, aa, signe, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
 			ab=choice(liste_fractions);
 			cd=choice(liste_fractions);
@@ -3025,65 +3025,37 @@ function Exercice_multiplier_fractions(){
 					
 			
 				case 3 :
-					a=randint(-5,5,[0])*2;
-					b=randint(-5,5,[0,-1])*2+1;
-					c=randint(-4,4,[0])*3+1;
-					d=randint(-3,3,[0])*4+2;
-					p=pgcd(Math.abs(a),Math.abs(b));
-					if (p != 1) {
-						a = a / p;  //  on rend a/b irréductible
-						if (Math.abs(b) != p) {
-							b = b / p;
-						}
-						else {
-							aa=a;
-							a=b/p;
-							b=aa;
-						 };
-					}
-					p = pgcd(Math.abs(c),Math.abs(d));
-					if (p != 1) {
-						c = c / p;  //  on rend c/d irréductible
-						if (d != pgcd(c,d)) {
-							d = d / p;
-						}
-						else {
-							d = choice([5,7,11])*randint(-1,1,[0]);
-						}
-					}
-					if (a==b) {
-						if (a==-1||a==-2) {b=choice([-7,-5,-3,3,5,7])}
-						else {b=b+1}
-					}
-					if (c==d) {
-						if (c==-1||c==-2) {d=choice([-7,-5,-3,3,5,7])}
-						else {d=d+1}
-					}
-					p=pgcd(Math.abs(a*c),Math.abs(b*d));
+					a=a*randint(-1,1,[0]);
+					b=b*randint(-1,1,[0]);
+					c=c*randint(-1,1,[0]);
+					d=d*randint(-1,1,[0]);
+					nombre_de_signe_moins=(a<0)+(b<0)+(c<0)+(d<0);
+					if (Math.pow(-1,nombre_de_signe_moins)==1) {signe=''} else {signe='-'}
 
 					texte=`$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`;
 					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`
-					aa=false;
-					if (a<0) {
-						if (b<0) {a=-a;b=-b;aa=true}
+					a=Math.abs(a);
+					b=Math.abs(b);
+					c=Math.abs(c);
+					d=Math.abs(d);						
+					p=pgcd(a*c,b*d);
+					texte_corr+=`$=${signe}${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`
+					texte_corr+=`$=${signe}${tex_fraction(a +'\\times'+c,b+'\\times'+d)}$`
+					if (p==1) {
+						texte_corr+=`$=${signe}${tex_fraction(a*c,b*d)}$`
 					}
-					if (c<0) {
-						if (d<0) {c=-c;d=-d;aa=true}
+					else {
+	
+						texte_corr+=`$=${signe}${tex_fraction(a*c,b*d)}$`
+						if (a*c!=b*d){
+							texte_corr+=`$=${signe}${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}$`
+							texte_corr+=`$=${signe}${tex_fraction(a*c/p,b*d/p)}$`
+						}
+						else {
+							texte_corr+=`$=${signe}1$`							
+						}
 					}
-					if (aa==true) {texte_corr+= `$=${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`}
-					texte_corr+=`$=${tex_fraction(a +'\\times'+ecriture_parenthese_si_negatif(c),b+'\\times'+ecriture_parenthese_si_negatif(d))}$`
-		
-				if (p==1) {
-					
-					texte_corr+=`$=${tex_fraction(a*c,b*d)}$`
-
-					if((a*c<0)&&(b*d<0)) {texte_corr+=`$=${tex_fraction_signe(a*c,b*d)}$`}
-				}
-				else {
-					texte_corr+= `$=${tex_fraction(a*c,b*d)}=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}=${tex_fraction_signe(a*c/p,b*d/p)}$`
-					
-				}
-				
+			
 				break	
 			}
 			
