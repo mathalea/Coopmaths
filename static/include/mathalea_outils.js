@@ -951,7 +951,6 @@ function MG32_ajouter_figure(numero_de_l_exercice) {
 * et quand toutes seront résolues on continue
 * @Auteur Rémi Angot
 */
-
 function MG32_tracer_toutes_les_figures() {
 
 	(function verifie_div_MG32() {
