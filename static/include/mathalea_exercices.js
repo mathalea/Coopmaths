@@ -34,7 +34,7 @@ var liste_des_exercices_disponibles = {
 		'6D11' : Somme_de_durees,
 		'6D12' : Calculs_de_durees_ou_d_horaires,
 		'6M11-1' : Perimetre_ou_aire_de_carres_rectangles_triangles,
-		// '6M11-2' : Perimetre_ou_aire_de_figures_composees,
+		'6M11-2' : Perimetre_ou_aire_de_figures_composees,
 		'6M10' : Reglages_6M10,
 		'6M12' : Reglages_6M12,
 		'6M20' : Aire_de_triangles,
@@ -5189,65 +5189,34 @@ function Perimetre_aire_disques(pa=3){
 		texte_corr=""	
 		if (this.sup ==1) { //si on ne demande pas les aires
 			texte_corr = `$\\mathcal{P}_1=2\\times${r1}\\times\\pi=${2*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r1*Math.PI),1))}$ cm\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{P}_2=${2*r2}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r2*Math.PI),1))}$ cm\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{P}_3=${2*r3}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r3*Math.PI),1))}$ cm\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{P}_4=2\\times${r4}\\times\\pi=${2*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r4*Math.PI),1))}$ cm\\\\`
 		}
 
 		
 		if (this.sup ==2){
 			texte_corr += `$\\mathcal{A}_1=${r1}\\times${r1}\\times\\pi=${r1*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r1*r1*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `Le diamètre de $\\mathcal{C}_2$ est ${2*r2} cm donc son rayon est ${r2} cm.\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{A}_2=${r2}\\times${r2}\\times\\pi=${r2*r2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `Le diamètre de $\\mathcal{C}_3$ est ${2*r3} cm donc son rayon est ${r3} cm.\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{A}_3=${r3}\\times${r3}\\times\\pi=${r3*r3}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{A}_4=${r4}\\times${r4}\\times\\pi=${r4*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r4*r4*Math.PI),1))}~\\text{cm}^2$\\\\`
 		}
 
 		if (this.sup == 3){
 			texte_corr = `$\\mathcal{P}_1=2\\times${r1}\\times\\pi=${2*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r1*Math.PI),1))}$ cm\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{P}_2=${2*r2}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r2*Math.PI),1))}$ cm\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{P}_3=${2*r3}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r3*Math.PI),1))}$ cm\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{P}_4=2\\times${r4}\\times\\pi=${2*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r4*Math.PI),1))}$ cm\\\\`
 			
 			texte_corr += `\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			
 			texte_corr += `$\\mathcal{A}_1=${r1}\\times${r1}\\times\\pi=${r1*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r1*r1*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `Le diamètre de $\\mathcal{C}_2$ est ${2*r2} cm donc son rayon est ${r2} cm.\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{A}_2=${r2}\\times${r2}\\times\\pi=${r2*r2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `Le diamètre de $\\mathcal{C}_3$ est ${2*r3} cm donc son rayon est ${r3} cm.\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{A}_3=${r3}\\times${r3}\\times\\pi=${r3*r3}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `\\\\`
-			texte_corr += `\\\\`
 			texte_corr += `$\\mathcal{A}_4=${r4}\\times${r4}\\times\\pi=${r4*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r4*r4*Math.PI),1))}~\\text{cm}^2$\\\\`
 		}
 		
@@ -5282,7 +5251,7 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 	this.consigne = "Calculer le périmètre et l'aire de chacune des figures suivantes"
 	this.sup = pa ; // 1 : périmètre, 2 : aire, 3 : périmètres et aires
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html ? this.spacing_corr = 3 : this.spacing_corr = 2 ;
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false;
 	this.type_exercice = 'MG32';
@@ -5309,67 +5278,35 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 			
 			if (this.sup ==1) { //si on ne demande pas les aires
 				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r2} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r3} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm\\\\`
 			}
 
 			
 			if (this.sup ==2){
 				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_3=\\dfrac{3}{4}\\times${r3}\\times${r3}\\times\\pi=${tex_nombre(Algebrite.eval(3/4*r3*r3))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r3*r3*Math.PI),1))}~\\text{cm}^2$`
 			}
 
 			if (this.sup == 3){
 				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r2} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r3} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_3=\\dfrac{3}{4}\\times${r3}\\times${r3}\\times\\pi=${tex_nombre(Algebrite.eval(3/4*r3*r3))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r3*r3*Math.PI),1))}~\\text{cm}^2$`
 			}
 		}
@@ -5379,33 +5316,19 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 			
 			if (this.sup==1) {
 				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r2} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r3} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm\\\\`
 			}
 
 			if (this.sup==2){
 				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$\\\\`
 			
 			}
@@ -5413,34 +5336,16 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 
 			if (this.sup==3) {
 				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r2} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r3} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.\\\\`
-				texte_corr += `\\\\`
 				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$\\\\`
 			}
 
@@ -5478,7 +5383,7 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 	this.titre = "Périmètres et aires carrés, rectangles et triangles rectangles"
 	this.consigne = "Calculer le périmètre et l'aire des 3 figures suivantes"
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html? this.spacing_corr = 3 : this.spacing_corr = 2 ;
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false;
 	this.type_exercice = 'MG32';
@@ -5500,16 +5405,11 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 		let pIJK = Algebrite.eval(a+b+c2).d.toFixed(1)
 
 		texte_corr = `$\\mathcal{P}_{ABCD}=${c}~\\text{cm}+${c}~\\text{cm}+${c}~\\text{cm}+${c}~\\text{cm}=${4*c}~\\text{cm}$`
-		texte_corr += '\\\\\\\\'
-		texte_corr += `$\\mathcal{A}_{ABCD}=${c}~\\text{cm}\\times${c}~\\text{cm}=${c*c}~\\text{cm}^2$`
-		texte_corr += '\\\\\\\\\\\\'
-		texte_corr += `$\\mathcal{P}_{EFGH}=${L}~\\text{cm}+${l}~\\text{cm}+${L}~\\text{cm}+${l}~\\text{cm}=${2*L+2*l}~\\text{cm}$`
-		texte_corr += '\\\\\\\\'
-		texte_corr += `$\\mathcal{A}_{EFGH}=${L}~\\text{cm}\\times${l}~\\text{cm}=${L*l}~\\text{cm}^2$`
-		texte_corr += '\\\\\\\\\\\\'
-		texte_corr += `$\\mathcal{P}_{IJK}=${a}~\\text{cm}+${b}~\\text{cm}+${tex_nombre(c2.toFixed(1))}~\\text{cm}=${tex_nombre(pIJK)}~\\text{cm}$`
-		texte_corr += '\\\\\\\\'
-		texte_corr += `$\\mathcal{A}_{IJK}=${a}~\\text{cm}\\times${b}~\\text{cm}\\div2=${tex_nombre(Algebrite.eval(a*b/2))}~\\text{cm}^2$`
+		texte_corr += `\\\\$\\mathcal{A}_{ABCD}=${c}~\\text{cm}\\times${c}~\\text{cm}=${c*c}~\\text{cm}^2$`
+		texte_corr += `\\\\$\\mathcal{P}_{EFGH}=${L}~\\text{cm}+${l}~\\text{cm}+${L}~\\text{cm}+${l}~\\text{cm}=${2*L+2*l}~\\text{cm}$`
+		texte_corr += `\\\\$\\mathcal{A}_{EFGH}=${L}~\\text{cm}\\times${l}~\\text{cm}=${L*l}~\\text{cm}^2$`
+		texte_corr += `\\\\$\\mathcal{P}_{IJK}=${a}~\\text{cm}+${b}~\\text{cm}+${tex_nombre(c2.toFixed(1))}~\\text{cm}=${tex_nombre(pIJK)}~\\text{cm}$`
+		texte_corr += `\\\\$\\mathcal{A}_{IJK}=${a}~\\text{cm}\\times${b}~\\text{cm}\\div2=${tex_nombre(Algebrite.eval(a*b/2))}~\\text{cm}^2$`
 		
 
 		this.MG32codeBase64 = codeBase64
