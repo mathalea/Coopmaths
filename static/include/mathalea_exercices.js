@@ -2835,14 +2835,6 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 
 }
 /**
-* 
-* Calcul de l'inverse d'un nombre
-*
-*    * Niveau 1 inverse d'un nombre entier
-*    * Niveau 2 inverse d'un nombre décimal simple
-*    * Niveau 3 inverse d'une fraction
-*    * Niveau 4 mélange des trois autres niveaux.
-*
 * @auteur Jean-Claude Lhote
 */
 function Exercice_trouver_l_inverse(){
@@ -2959,16 +2951,10 @@ function Exercice_trouver_l_inverse(){
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : Nombres entiers\n 2 : Fractions\n 3 : Nombres décimaux\n 4 : Mélange des 3 niveaux"]
 }
+
 /**
-* Calcul du produit de deux fractions
-* 
-* * Niveau 1 mélange avec 1 calcul du type entier x fraction pour 3 calculs fraction x fraction (nombres positifs)
-* * Niveau 2 mélange fraction x fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
-* * Niveau 3 fraction x fraction avec nombres relatifs 
-*
-* @Auteur: Jean-Claude Lhote
-* 
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Exercice_multiplier_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -3072,12 +3058,8 @@ function Exercice_multiplier_fractions(){
 }
 
 /**
-* Calcul du quotient de deux fractions
-* * Niveau 1 mélange avec 1 calcul du type entier / fraction pour 3 calculs fraction / fraction (nombres positifs)
-* * Niveau 2 mélange fraction / fraction avec 2 calculs avec nombres positifs forcés et 2 calculs avec nombres relatifs
-* * Niveau 3 fraction / fraction avec nombres relatifs
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Exercice_diviser_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -3162,7 +3144,7 @@ function Exercice_diviser_fractions(){
 					}	
 				break	
 			}
-			console.log(i+1,type_de_questions,a,b,c,d,nombre_de_signe_moins);
+		
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
@@ -3175,16 +3157,10 @@ function Exercice_diviser_fractions(){
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Fractions à numérateur et dénominateur positifs \n 2 : Fractions à numérateur et dénominateur relatifs"]
 }
+
 /**
-* 
-* Calcul d'une expression fractionnaire avec priorité opératoire'
-* 
-* * Niveau 1 mélange avec 2 calculs sans piège 2 calculs avec piège de priorité (dénominateurs égaux). Tous nombres positifs.
-* * Niveau 2 mélange 2 calculs avec piège et nombres positifs et 2 calculs avec nombres relatifs
-* * Niveau 3 calculs avec nombres relatifs
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Exercice_additionner_fraction_produit(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; // Avec ou sans relatifs
@@ -3200,13 +3176,13 @@ function Exercice_additionner_fraction_produit(){
 		this.liste_corrections = []; // Liste de questions corrigées
 		let type_de_questions_disponibles
 		liste_fractions = liste_fractions_irreductibles();
-
+		let nombre_de_signe_moins;
 		if (this.sup==1) {type_de_questions_disponibles = [1,1,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
 		else {type_de_questions_disponibles = [3]}
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0,ab,cd,ef, a, b, c, d, e, f, p, k1, k2, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
+		for (let i = 0,ab,cd,ef, a, b, c, d, e, f, p, k1, k2, signe1,signe2, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
 			type_de_questions = liste_type_de_questions[i];
 			ab=choice(liste_fractions);
 			cd=choice(liste_fractions);
@@ -3217,138 +3193,208 @@ function Exercice_additionner_fraction_produit(){
 			d=cd[1];
 			e=ef[0];
 			f=ef[1];
-			
+	
 			switch (type_de_questions){
 				case 1 : // sans piège fraction1 + fraction2 x fraction3 (tout positif)
-					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
+					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}$`;
+					
 					p=pgcd(c*e,d*f);
-					texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+e,d+'\\times'+f)}=${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
-					if (p!=1) {
-						texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}=$`
+					texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}$`;
+					texte_corr+=`$=${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+e,d+'\\times'+f)}$`;
+					texte_corr+=`$=${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}$`;
+					// faut-il simplifier c*e/d*f
+					if ((p!=1)&&(ppcm(b,d*f)>ppcm(b,d*f/p))) {
+						texte_corr+=`$=${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}$`
+						c=e*c/p;
+						d=f*d/p;
 					}
-					c=e*c/p;
-					d=f*d/p;
-					p=ppcm(b,d);
+					else {
+						c=e*c;
+						d=f*d;
+					}
+					p=ppcm(b,d); // p = dénominateur commun
 					k1=p/b;
 					k2=p/d;
 					if (k1!=1) {
-						texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}$`
+						texte_corr+=`$=${tex_fraction(a+mise_en_evidence('\\times'+k1),b+mise_en_evidence('\\times'+k1))}$`;
 					} 
 					else {
-						texte_corr+=`$${tex_fraction(a,b)}$`	
+						texte_corr+=`$=${tex_fraction(a,b)}$`	
 					}
 					if (k2!=1) {
-						texte_corr+=`$+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
+						texte_corr+=`$+${tex_fraction(c+mise_en_evidence('\\times'+k2),d+mise_en_evidence('\\times'+k2))}$`;
 					} 
 					else {
-						texte_corr+=`$+${tex_fraction(c,d)}=$`	
+						texte_corr+=`$+${tex_fraction(c,d)}$`	
 					}
 								
-					texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+c*k2,b*k1)}$`
-					if (pgcd(a*k1+c*k2,b*k1)!=1) {texte_corr+=`$=${tex_fraction_reduite(a*k1+c*k2,b*k1)}$`}
-
+					texte_corr+=`$=${tex_fraction(a*k1,p)}+${tex_fraction(c*k2,p)}$`;
+					e=a*k1+c*k2;
+					f=p;
+					texte_corr+=`$=${tex_fraction(e,f)}$`;
+					p=pgcd(e,f);
+					// faut-il simplifier e/f
+					if (p!=1) {
+						texte_corr+=`$=${tex_fraction(e/p +'\\times\\cancel{'+p+'}',f/p+'\\times\\cancel{'+p+'}')}$`
+						texte_corr+=`$=${tex_fraction_reduite(e/p,f/p)}$`;
+					}
+				
 					break
 				
 				case 2 : // avec piege addition non prioritaire fraction1 + fraction2 * fraction3 tout positif
-				d=b;
-				texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
-				p=pgcd(c*e,d*f);
-				texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+e,d+'\\times'+f)}=${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
-				if (p!=1) {
-					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}=$`
-				}
-				c=e*c/p;
-				d=f*d/p;
-				p=ppcm(b,d);
-				k1=p/b;
-				k2=p/d;
-				if (k1!=1) {
-					texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}$`
-				} 
-				else {
-					texte_corr+=`$${tex_fraction(a,b)}$`	
-				}
-				if (k2!=1) {
-					texte_corr+=`$+${tex_fraction(c+'\\times'+k2,d+'\\times'+k2)}=$`
-				} 
-				else {
-					texte_corr+=`$+${tex_fraction(c,d)}=$`	
-				}
-				texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+c*k2,b*k1)}$`
-				if (pgcd(a*k1+c*k2,b*k1)!=1) {texte_corr+=`$=${tex_fraction_reduite(a*k1+c*k2,b*k1)}$`}
-
-				break
-				case 3 :
-					a=randint(-10,10,[0]);
-					b=randint(-10,10,[a,0]);
-					c=randint(-10,10,[b,0]);
-					d=randint(-10,10,[a,c,d,0]);
-					e=randint(-10,10,[d,c,0]);
-					f=randint(-10,10,[e,c,d,0]);
-					p=pgcd(a*c,b*d);
-					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
-					p=pgcd(c*e,d*f);
-					texte_corr= `$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`
-					if (a*b>0) {  //suppression des signes - superflus
-						a=Math.abs(a);
-						b=Math.abs(b);
-					} else if (b<0){a=-a;b=-b}
-					if (c*d>0) {  //suppression des signes - superflus
-						c=Math.abs(c);
-						d=Math.abs(d);
-					} 
-					if (e*f>0) {  //suppression des signes - superflus
-						e=Math.abs(e);
-						f=Math.abs(f);
-					} 
-					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c +'\\times'+ecriture_parenthese_si_negatif(e),d+'\\times'+ecriture_parenthese_si_negatif(f))}=$`
-					if (c*e*d*f<0) {  // si trois signes -, on n'en garde qu'un au numérateur
-						c=-Math.abs(c);
-						d=Math.abs(d);
-						e=Math.abs(e);
-						f=Math.abs(f);
-					} 
-					else {
-						c=Math.abs(c); // sinon, on n'en garde aucun
-						d=Math.abs(d);
-						e=Math.abs(e);
-						f=Math.abs(f);
-					}
+					d = b;
 					
-					
-					texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(c*e,d*f)}=$`
-					if (p!=1) {
-						texte_corr+=`$${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}=$`
-					}
-					c=e*c/p;
-					d=f*d/p;
-					if (c*d>0) { //suppression des signes - superflus après produit
-						c=Math.abs(c);
-						d=Math.abs(d);
-					} else if (d<0) {c=-c;d=-d}
-					p=ppcm(b,d);
-					k1=p/b;
-					k2=p/d;
+					texte = `$${tex_fraction(a, b)}+${tex_fraction(c, d)}\\times${tex_fraction(e, f)}$`;
 				
-					texte_corr+=`$${tex_fraction(a+'\\times'+k1,b+'\\times'+k1)}+${tex_fraction(c+'\\times'+ecriture_parenthese_si_negatif(k2),d+'\\times'+ecriture_parenthese_si_negatif(k2))}=$`
-					texte_corr+=`$${tex_fraction(a*k1,b*k1)}+${tex_fraction(c*k2,d*k2)}=${tex_fraction(a*k1+'+'+ecriture_parenthese_si_negatif(c*k2),b*k1)}$`
-					if ((a*k1+c*k2)!=0) {
-						texte_corr+=`$=${tex_fraction_signe(a*k1+c*k2,b*k1)}$`
-						p=pgcd(a*k1+c*k2,b*k1);
-						e=(a*k1+c*k2)/p;
-						f=b*k1/p;
-						if (p!=1) {
-							if (e*f>0) { // numérateur et dénominateur de même signe => fraction positive => pas de signe
-							texte_corr+=`$=${tex_fraction(e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
-							texte_corr+=`$=${tex_fraction(e,f)}$`
-							}
-							else {  // numérateur négatif => signe - devant les fractions suivantes.
-								texte_corr+=`$=-${tex_fraction(-e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
-								texte_corr+=`$=-${tex_fraction(-e,f)}$`	
-							}
+					p = pgcd(c * e, d * f);
+					texte_corr = `$${tex_fraction(a, b)}+${tex_fraction(c, d)}\\times${tex_fraction(e, f)}$`;
+					texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(c + '\\times' + e, d + '\\times' + f)}$`;
+					texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(c * e, d * f)}$`
+					
+					// faut-il simplifier c*e/d*f
+					if ((p!=1)&&(ppcm(b,d*f)>ppcm(b,d*f/p))) {
+						texte_corr+=`$=${tex_fraction(a,b)}+${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}$`
+						c=e*c/p;
+						d=f*d/p;
+					}
+					else {
+						c=e*c;
+						d=f*d;
+					}
+					p = ppcm(b, d); //denominateur commun = p
+					k1 = p / b;
+					k2 = p / d;
+					if (k1 != 1) {
+						texte_corr += `$=${tex_fraction(a + mise_en_evidence('\\times' + k1), b + mise_en_evidence('\\times' + k1))}$`
+					}
+					else {
+						texte_corr += `$=${tex_fraction(a, b)}$`
+					}
+					if (k2 != 1) {
+						texte_corr += `$+${tex_fraction(c + '\\times' + k2, d + '\\times' + k2)}$`
+					}
+					else {
+						texte_corr += `$+${tex_fraction(c, d)}$`
+					}
+					texte_corr += `$=${tex_fraction(a * k1, b * k1)}+${tex_fraction(c * k2, d * k2)}=${tex_fraction(a * k1 + c * k2, p)}$`
+					e=a * k1 + c * k2;
+					f=p;
+					texte_corr+=`$=${tex_fraction(e,f)}$`;
+					p=pgcd(e,f);
+					// faut-il simplifier e/f
+					if (p!=1) {
+						texte_corr+=`$=${tex_fraction(e/p +'\\times\\cancel{'+p+'}',f/p+'\\times\\cancel{'+p+'}')}$`
+						texte_corr+=`$=${tex_fraction_reduite(e/p,f/p)}$`;
+					}
+			
+				break
+
+				case 3 :
+					a=a*randint(-1,1,[0]);
+					b=b*randint(-1,1,[0]);
+					c=c*randint(-1,1,[0]);
+					d=d*randint(-1,1,[0]);
+					e=e*randint(-1,1,[0]);
+					f=f*randint(-1,1,[0]);
+
+					nombre_de_signe_moins=(c<0)+(d<0)+(e<0)+(f<0);
+					if (Math.pow(-1,nombre_de_signe_moins)==1) {signe2='+'} else {signe2='-'}
+					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
+					texte_corr=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}$`
+					
+					c=Math.abs(c); // gestion du signe du produit avec {signe}
+					d=Math.abs(d);
+					e=Math.abs(e);
+					f=Math.abs(f);
+					
+					
+					if (a*b>0) {  //suppression des signes - superflus de la première fraction
+					
+						signe1=''
+					} else {signe1='-'}
+
+					a=Math.abs(a);
+					b=Math.abs(b);
+
+					texte_corr+=`$=${signe1}${tex_fraction(a,b)}${signe2}${tex_fraction(c +'\\times'+e,d+'\\times'+f)}$`
+					texte_corr+=`$=${signe1}${tex_fraction(a,b)}${signe2}${tex_fraction(c*e,d*f)}$`
+					
+					p=pgcd(c*e,d*f);
+					// faut-il simplifier c*e/d*f
+					if ((p!=1)&&(ppcm(b,d*f)>ppcm(b,d*f/p))) {
+						texte_corr+=`$=${signe1}${tex_fraction(a,b)}${signe2}${tex_fraction(e*c/p +'\\times\\cancel{'+p+'}',f*d/p+'\\times\\cancel{'+p+'}')}$`
+						c=e*c/p;
+						d=f*d/p;
+					}
+					else {
+						c=e*c;
+						d=f*d;
+					}
+					p=ppcm(d,b);  // mise au même dénominateur
+					if (((d)%b!=0)&&(b%(d)!=0)) {
+						// dénominateur commun = p
+						k1=p/b;
+						k2=p/d;
+						texte_corr+=`$=${signe1}${tex_fraction(a+mise_en_evidence('\\times'+k1),b+mise_en_evidence('\\times'+k1))}${signe2}${tex_fraction(c+mise_en_evidence('\\times'+k2),d+mise_en_evidence('\\times'+k2))}$`
+						texte_corr+=`$=${signe1}${tex_fraction(a*k1,b*k1)}${signe2}${tex_fraction(c*k2,d*k2)}$`
+						texte_corr+=`$=${tex_fraction(signe1+a*k1+signe2+c*k2,b*k1)}$`
+						a=a*k1;
+						c=c*k2;
+						d=p;
+					}
+					else {
+						if (p==d) {
+							k1=d/b;  // d = dénominateur commun
+							texte_corr+=`$=${signe1}${tex_fraction(a+mise_en_evidence('\\times'+k1),b+mise_en_evidence('\\times'+k1))}${signe2}${tex_fraction(c,d)}$`
+						texte_corr+=`$=${signe1}${tex_fraction(a*k1,d)}${signe2}${tex_fraction(c,d)}$`
+						texte_corr+=`$=${tex_fraction(signe1+a*k1+signe2+c,d)}$`	
+						a=a*k1;
+						} 
+						else{  // b=k2*d
+							k2=b/d;  // b= dénominateur commun
+							texte_corr+=`$=${signe1}${tex_fraction(a,b)}${signe2}${tex_fraction(c+mise_en_evidence('\\times'+k2),d+mise_en_evidence('\\times'+k2))}$`
+						texte_corr+=`$=${signe1}${tex_fraction(a,b)}${signe2}${tex_fraction(c*k2,b)}$`
+						texte_corr+=`$=${tex_fraction(signe1+a+signe2+c*k2,b)}$`
+						c=c*k2;
+						d=d*k2;
 						}
 					}
-					else {texte_corr+='$=0$'}
+					
+					if (a!=c) {
+						e=0;
+						if (signe1=='') {
+							e=a;
+						}
+						else {
+							e=-a
+						}
+						if (signe2=='+') {e+=c} else {e=e-c}
+
+					}
+					else {
+						if (((signe1=='-')&&(signe2=='+'))||((signe1=='')&&(signe2=='-'))) {
+							e=0;	
+						}
+						else {
+							e=0;
+							if (signe1=='') {e=a+c} else {e=-a-c}
+						}
+					}
+					
+					texte_corr+=`$=${tex_fraction_signe(e,d)}$`
+					p=pgcd(Math.abs(e),d);
+					if (p!=1) {
+						f=d/p;
+						e=e/p;
+						if (e>0) { // fraction positive => pas de signe
+						texte_corr+=`$=${tex_fraction(e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
+						texte_corr+=`$=${tex_fraction(e,f)}$`
+						}
+						else {  // numérateur négatif => signe - devant les fractions suivantes.
+							texte_corr+=`$=-${tex_fraction(-e+'\\times\\cancel{'+p+'}',f+'\\times\\cancel{'+p+'}')}$`
+							texte_corr+=`$=-${tex_fraction(-e,f)}$`	
+						}
+					}
 
 				break	
 			}
