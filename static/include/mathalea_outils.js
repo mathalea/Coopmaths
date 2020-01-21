@@ -438,6 +438,28 @@ function simplification_de_fraction_avec_etapes(num,den){
 }
 
 /**
+*
+* Donne la liste des facteurs premiers d'un nombre
+* @Auteur Rémi Angot
+*/
+function obtenir_liste_facteurs_premiers(n){
+	// Algorithme de base où l'on divise par chacun des nombres premiers 
+	liste = []
+	liste_nombres_premiers = obtenir_liste_nombres_premiers()
+	let i = 0;
+	while (n>2 && liste_nombres_premiers[i]<=n){
+		if (n%liste_nombres_premiers[i]==0) {
+			liste.push(liste_nombres_premiers[i])
+			n/=liste_nombres_premiers[i]
+		} else{
+			i++
+		}
+	}
+	if (liste.length==0) {liste.push(n)}
+	return liste
+}
+
+/**
 * Utilise Algebrite pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
 * @Auteur Rémi Angot
 */
@@ -802,10 +824,18 @@ function tex_fraction_parentheses(a,b){
 * Retourne une liste de fractions irréductibles
 * @Auteur Jean-Claude Lhote
 */
-function liste_fractions_irreductibles() {
+function obtenir_liste_fractions_irreductibles() {
  return  [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  [1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  [1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+}
+
+/**
+* Retourne la liste des premiers nombres premiers
+* @Auteur Rémi Angot
+*/
+function obtenir_liste_nombres_premiers() {
+ return  [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53, 59, 61, 67, 71, 73, 79, 83, 89,97]
 }
 
 

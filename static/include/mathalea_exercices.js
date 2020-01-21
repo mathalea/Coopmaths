@@ -2278,9 +2278,7 @@ function Exercice_comparer_deux_fractions (max=11){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
-		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
-		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]] // Couples de nombres premiers entre eux
+		liste_fractions = obtenir_liste_fractions_irreductibles();
 		for (let i = 0, fraction, a, b, texte, texte_corr, signe, signe2, cpt=0; i < this.nb_questions;i++) {
 			fraction = choice(liste_fractions); //
 			a = fraction[0];
@@ -2969,7 +2967,7 @@ function Exercice_multiplier_fractions(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		let type_de_questions_disponibles
-		liste_fractions = liste_fractions_irreductibles();
+		liste_fractions = obtenir_liste_fractions_irreductibles();
 
 		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
@@ -3073,7 +3071,7 @@ function Exercice_diviser_fractions(){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = liste_fractions_irreductibles();
+		liste_fractions = obtenir_liste_fractions_irreductibles();
 
 		let type_de_questions_disponibles
 		type_de_questions_disponibles = [parseInt(this.sup)];
@@ -3175,7 +3173,7 @@ function Exercice_additionner_fraction_produit(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		let type_de_questions_disponibles
-		liste_fractions = liste_fractions_irreductibles();
+		liste_fractions = obtenir_liste_fractions_irreductibles();
 		let nombre_de_signe_moins;
 		if (this.sup==1) {type_de_questions_disponibles = [1,1,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
