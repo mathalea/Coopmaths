@@ -4195,13 +4195,8 @@ function Exercice_developper(difficulte=1){
 }
 
 /**
-* 
-* * Niveau 1 développer (x+a)(x+b) ou (ax+b)(cx+d) avec a,b,c et d naturels simples
-* * Niveau 2 développer (ax-b)(cx+d) ou (ax-b)(cx-d) avec a,b,c et d naturels simples
-* * Niveau 3 mélange des deux niveaux précédents
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Double_distributivite()
 {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -4267,15 +4262,8 @@ function Double_distributivite()
 }
 
 /**
-* 
-* Développer en utilisant (a+b)², (a-b)² ou (a-b)(a+b)
-* 
-* * Niveau 1 le coefficient de x et donc de x² est égal à 1
-* * Niveau 2 le coefficient de x est naturel supérieur à 1
-* * Niveau 3 le coeficient de x est rationnel
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Developper_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -4363,14 +4351,8 @@ Exercice.call(this); // Héritage de la classe Exercice()
 }
 
 /**
-* 
-* Développer en utilisant (a-b)(a+b)
-* * Niveau 1 le coefficient de x et donc de x² est égal à 1
-* * Niveau 2 le coefficient de x est naturel supérieur à 1
-* * Niveau 3 le coeficient de x est rationnel
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Developper_Identites_remarquables3()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -4425,15 +4407,8 @@ Exercice.call(this); // Héritage de la classe Exercice()
 }
 
 /**
-* 
-* Factoriser en utilisant (a-b)(a+b)
-* 
-* * Niveau 1 le coefficient de x et donc de x² est égal à 1
-* * Niveau 2 le coefficient de x est naturel supérieur à 1
-* * Niveau 3 le coeficient de x est rationnel
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Factoriser_Identites_remarquables3()
 {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -4488,15 +4463,8 @@ function Factoriser_Identites_remarquables3()
 }
 
 /**
-* 
-* Factoriser en utilisant (a-b)(a+b), (a-b)² ou (a+b)² 
-* 
-* * Niveau 1 le coefficient de x et donc de x² est égal à 1
-* * Niveau 2 le coefficient de x est naturel supérieur à 1
-* * Niveau 3 le coeficient de x est rationnel
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Factoriser_Identites_remarquables2()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -6630,13 +6598,8 @@ function Reduire_une_expression_litterale(){
 }
 
 /**
-* 
-* Déterminer des longueurs en utilisant la proriété de Thales dans les configurations du collège
-*  * Niveau 1 4ème proportionnelle
-*  * Niveau 2 utilisation d'une longueur intermédiaire pour trouver le résultat.
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Exercice_Thales(){
 
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -6899,14 +6862,8 @@ function Exercice_Thales(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire\n 3 : Sans figure'];
 }
 /**
-* 
-* Déterminer des longueurs en utilisant le théorème de Pythagore
-* 
-* * Niveau 1 calcul de l'hypoténuse
-* * Niveau 2 calcul d'un côté de l'angle droit
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Exercice_Pythagore() {
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
@@ -7109,16 +7066,8 @@ function Exercice_Pythagore() {
 }
 
 /**
-* 
-* Résoudre des équations du type (ax+b)(cx+d)=0
-*
-* * Niveau 1 coefficient de x égal à 1, solutions entières
-* * Niveau 2 coefficient de x supérieur à 1, solutions entières
-* * Niveau 3 coefficient de x supérieur à 1, solutions fractionnaires
-* * Niveau 4 mélange des trois autres niveaux.
-*
-* @Auteur: Jean-Claude Lhote
-**/
+* @auteur Jean-Claude Lhote
+*/
 function Resoudre_une_equation_produit_nul(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Résoudre une équation produit nul";
