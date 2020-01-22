@@ -2969,12 +2969,12 @@ function Exercice_multiplier_fractions(){
 		let type_de_questions_disponibles
 		liste_fractions = obtenir_liste_fractions_irreductibles();
 
-		if (this.sup==1) {type_de_questions_disponibles = [1]} // pour test [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
+		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
 		else {type_de_questions_disponibles = [3]}
 		let nombre_de_signe_moins;
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions);
-		for (let i = 0, ab, cd, a, b, c, d, p, aa,bb,cc,dd, signe, texte, texte_corr, type_de_questions, cpt = 0; i < this.nb_questions && cpt < 50;) {
+		for (let i = 0, ab, cd, a, b, c, d, p, aa,bb,cc,dd, signe,numerateur,denominateur,index, texte, texte_corr, type_de_questions, cpt = 0; i < this.nb_questions && cpt < 50;) {
 				type_de_questions = liste_type_de_questions[i];
 				ab = choice(liste_fractions);
 				cd = choice(liste_fractions);
@@ -3057,11 +3057,10 @@ function Exercice_multiplier_fractions(){
 					var listeb=obtenir_liste_facteurs_premiers(b);
 					var listec=obtenir_liste_facteurs_premiers(c);
 					var listed=obtenir_liste_facteurs_premiers(d);
-					var listeavf,listebvf,listecvf,listedvf;
+					var listeavf,listebvf;
 
 					switch (type_de_questions) {
 						case 1: // entier * fraction (tout positif)
-
 
 							texte = `$${a}\\times${tex_fraction(c, d)}=$`;
 							texte_corr = `$${a}\\times${tex_fraction(c, d)}$`;
@@ -3072,65 +3071,122 @@ function Exercice_multiplier_fractions(){
 							listeb = listed;
 							listeavf=[];
 							listebvf=[];
-							listea.forEach (function a_ajouter_dans_listeavf(element, index, array) {
-								console.log("a[" + index + "] = " + element);
+							
+							listea.forEach (function a_ajouter_dans_listeavf(element) {
 								listeavf.push([element,true]);
-								console.log(listeavf)
 							});
-							// listeb.forEach(function (element,index,array) {listebvf.push([element,true])});
-							// listec.forEach(function (element,index,array) {listecvf.push([element,true])});
-							// for (let k in listea) {liste}
-							let index
-							// console.log(listea,listeavf,listeb,listebvf)
-							for (index=listeb.length; (index>=0);) {
-								
+							listeb.forEach (function a_ajouter_dans_listebvf(element) {
+								listebvf.push([element,true]);
+							});
+							
+							for (index=0; index<listeb.length;) {
 								for (let j = 0; j <= listea.length;) {
 									if (listeb[index] == listea[j]) {
-										listebvf[index,1]=[listeb[index],false];
-										listeavf[j,1]=[listea[j],false];
-										break
-									}
-									j++;
-									
-								}
-								index--;
-								
-							}
-							for (index=listeb.length; (index>=0);) {  //éliminer les facteurs communs des listes
-								for (let j = 0; j <= listea.length;) {
-									if (listeb[index] == listea[j]) {
-										listeb.splice(index, 1);
-										listea.splice(j, 1);
+										listebvf[index]=[listeb[index],false];
+										listeavf[j]=[listea[j],false];
+										listea[j]=1;
+										listeb[index]=1;
 										break
 									}
 									j++;
 								}
-								index--;
+								index++;
 							}
 						
-							if (index<0) {listeb.push(1);listebvf.push[1,true]}
-							// console.log (listea,listeavf,listeb,listebvf)
 							a=1;b=1;
-							for (let k in listea) {a=a*listea[k]}
-							for (let k in listeb) {b=b*listeb[k]}
+							for (let k in listea) {a=a*listea[k]};
+							for (let k in listeb) {b=b*listeb[k]};
 							
+							numerateur ='';
+							denominateur ='';
+							console.log (listeavf,listebvf)
+							for (let j in listeavf) {
+								if (listeavf[j][1]==true) {
+									numerateur+=listeavf[j][0] + '\\times';
+								}
+								else {
+									numerateur+='\\cancel{'+listeavf[j][0]+'}\\times';
+								}
+							}
+							numerateur=numerateur.substr(0,numerateur.length-6);
+
+							for (let j in listebvf) {
+								if (listebvf[j][1]==true) {
+									denominateur+=listebvf[j][0] + '\\times';
+								}
+								else {
+									denominateur+='\\cancel{'+listebvf[j][0]+'}\\times';
+								}
+							}
+							denominateur=denominateur.substr(0,denominateur.length-6);
 							
-							texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a), decomposition_facteurs_premiers(b))}$`
+							texte_corr += `$=\\dfrac{${numerateur}}{${denominateur}}$`
 							texte_corr += `$=${tex_fraction(a,b)}$`
 							break
 
 						case 2: // fraction * fraction tout positif
-							p = pgcd(a * c, b * d);
+							
 							texte = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}=$`;
 							texte_corr = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}$`
 							texte_corr += `$=${tex_fraction(a + '\\times' + c, b + '\\times' + d)}$`
-							texte_corr += `$=${tex_fraction(a * c, b * d)}$`
-							if (p != 1) {
-								texte_corr += `$=${tex_fraction(a * c / p + '\\times\\cancel{' + p + '}', b * d / p + '\\times\\cancel{' + p + '}')}$`
-								texte_corr += `$=${tex_fraction(a * c / p, b * d / p)}$`
-							}
-							break
 
+							for (let k in listec) {listea.push(listec[k])}
+							for (let k in listed) {listed.push(listed[k])}
+
+							listeavf=[];
+							listebvf=[];
+
+							listea.forEach (function a_ajouter_dans_listeavf(element) {
+								listeavf.push([element,true]);
+							});
+							listeb.forEach (function a_ajouter_dans_listebvf(element) {
+								listebvf.push([element,true]);
+							});
+							
+							for (index=0; index<listeb.length;) {
+								for (let j = 0; j <= listea.length;) {
+									if (listeb[index] == listea[j]) {
+										listebvf[index]=[listeb[index],false];
+										listeavf[j]=[listea[j],false];
+										listea[j]=1;
+										listeb[index]=1;
+										break
+									}
+									j++;
+								}
+								index++;
+							}
+						
+							a=1;b=1;
+							for (let k in listea) {a=a*listea[k]};
+							for (let k in listeb) {b=b*listeb[k]};
+							
+							numerateur ='';
+							denominateur ='';
+							console.log (i+1,listeavf,listebvf)
+							for (let j in listeavf) {
+								if (listeavf[j][1]==true) {
+									numerateur+=listeavf[j][0] + '\\times';
+								}
+								else {
+									numerateur+='\\cancel{'+listeavf[j][0]+'}\\times';
+								}
+							}
+							numerateur=numerateur.substr(0,numerateur.length-6);
+
+							for (let j in listebvf) {
+								if (listebvf[j][1]==true) {
+									denominateur+=listebvf[j][0] + '\\times';
+								}
+								else {
+									denominateur+='\\cancel{'+listebvf[j][0]+'}\\times';
+								}
+							}
+							denominateur=denominateur.substr(0,denominateur.length-6);
+							
+							texte_corr += `$=\\dfrac{${numerateur}}{${denominateur}}$`
+							texte_corr += `$=${tex_fraction(a,b)}$`
+							break
 
 						case 3:
 							a = a * randint(-1, 1, [0]);
