@@ -3099,7 +3099,7 @@ function Exercice_multiplier_fractions(){
 							
 							numerateur ='';
 							denominateur ='';
-							console.log (listeavf,listebvf)
+					
 							for (let j in listeavf) {
 								if (listeavf[j][1]==true) {
 									numerateur+=listeavf[j][0] + '\\times';
@@ -3163,7 +3163,7 @@ function Exercice_multiplier_fractions(){
 							
 							numerateur ='';
 							denominateur ='';
-							console.log (i+1,listeavf,listebvf)
+							
 							for (let j in listeavf) {
 								if (listeavf[j][1]==true) {
 									numerateur+=listeavf[j][0] + '\\times';
@@ -3202,27 +3202,66 @@ function Exercice_multiplier_fractions(){
 							bb = abs(b);
 							cc = abs(c);
 							dd = abs(d);
-							p = pgcd(aa * cc, bb * dd);
+						
 							texte_corr += `$=${signe}${tex_fraction(aa, bb)}\\times${tex_fraction(cc, dd)}$`
 							texte_corr += `$=${signe}${tex_fraction(aa + '\\times' + cc, bb + '\\times' + dd)}$`
-							if (p == 1) {
-								texte_corr += `$=${signe}${tex_fraction(aa * cc, bb * dd)}$`
-							}
-							else {
 
-								texte_corr += `$=${signe}${tex_fraction(aa * cc, bb * dd)}$`
-								if (aa * cc != bb * dd) {
-									texte_corr += `$=${signe}${tex_fraction(aa * cc / p + '\\times\\cancel{' + p + '}', bb * dd / p + '\\times\\cancel{' + p + '}')}$`
-									texte_corr += `$=${signe}${tex_fraction(aa * cc / p, bb * dd / p)}$`
+							for (let k in listec) {listea.push(listec[k])}
+							for (let k in listed) {listed.push(listed[k])}
+
+							listeavf=[];
+							listebvf=[];
+
+							listea.forEach (function a_ajouter_dans_listeavf(element) {
+								listeavf.push([element,true]);
+							});
+							listeb.forEach (function a_ajouter_dans_listebvf(element) {
+								listebvf.push([element,true]);
+							});
+							
+							for (index=0; index<listeb.length;) {
+								for (let j = 0; j <= listea.length;) {
+									if (listeb[index] == listea[j]) {
+										listebvf[index]=[listeb[index],false];
+										listeavf[j]=[listea[j],false];
+										listea[j]=1;
+										listeb[index]=1;
+										break
+									}
+									j++;
+								}
+								index++;
+							}
+						
+							a=1;b=1;
+							for (let k in listea) {a=a*listea[k]};
+							for (let k in listeb) {b=b*listeb[k]};
+							
+							numerateur ='';
+							denominateur ='';
+						
+							for (let j in listeavf) {
+								if (listeavf[j][1]==true) {
+									numerateur+=listeavf[j][0] + '\\times';
 								}
 								else {
-									texte_corr += `$=${signe}1$`
+									numerateur+='\\cancel{'+listeavf[j][0]+'}\\times';
 								}
 							}
-							if (this.methode == 3) {
-								texte_corr += 'ou d\'une autre façon :\n';
-							}
+							numerateur=numerateur.substr(0,numerateur.length-6);
 
+							for (let j in listebvf) {
+								if (listebvf[j][1]==true) {
+									denominateur+=listebvf[j][0] + '\\times';
+								}
+								else {
+									denominateur+='\\cancel{'+listebvf[j][0]+'}\\times';
+								}
+							}
+							denominateur=denominateur.substr(0,denominateur.length-6);
+							
+							texte_corr += `$=${signe}\\dfrac{${numerateur}}{${denominateur}}$`
+							texte_corr += `$=${signe}${tex_fraction(a,b)}$`
 							break
 					}
 				}
