@@ -2982,7 +2982,7 @@ function Exercice_multiplier_fractions(){
 				b = ab[1]
 				c = cd[0];
 				d = cd[1];
-				if (this.sup2==1){  // methode 1 : simplifications finale
+				if (this.sup2==false){  // methode 1 : simplifications finale
 					switch (type_de_questions) {
 						case 1: // entier * fraction (tout positif)
 							if (a == 1) { a = randint(2,9) };
@@ -3276,7 +3276,7 @@ function Exercice_multiplier_fractions(){
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Fractions à numérateurs et dénominateurs positifs \n 2 : Type 1 et type 3 pour 50%/50%\n 3 : Ecritures fractionnaires à numérateur et dénominateur entiers relatifs"]
-	this.besoin_formulaire2_numerique = ['Méthode',2,"1 : simplifications du résultat \n 2 : En utilisant les décompositions en produit de facteurs premiers"]
+	this.besoin_formulaire2_case_a_cocher = ['Avec décomposition']
 }
 
 /**
