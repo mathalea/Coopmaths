@@ -3070,8 +3070,8 @@ function Exercice_multiplier_fractions(){
 							// texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a * c), decomposition_facteurs_premiers(d))}$`
 							for (let k in listec) {listea.push(listec[k])}
 							listeb = listed;
-							listeavf=[,];
-							listebvf=[,];
+							listeavf=[];
+							listebvf=[];
 							listea.forEach (function a_ajouter_dans_listeavf(element, index, array) {
 								console.log("a[" + index + "] = " + element);
 								listeavf.push([element,true]);
