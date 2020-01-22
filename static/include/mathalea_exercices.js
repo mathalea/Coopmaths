@@ -3057,24 +3057,37 @@ function Exercice_multiplier_fractions(){
 					var listeb=obtenir_liste_facteurs_premiers(b);
 					var listec=obtenir_liste_facteurs_premiers(c);
 					var listed=obtenir_liste_facteurs_premiers(d);
+					var listeavf,listebvf,listecvf,listedvf;
 
 					switch (type_de_questions) {
 						case 1: // entier * fraction (tout positif)
-							listeb = listed;
+
+
 							texte = `$${a}\\times${tex_fraction(c, d)}=$`;
 							texte_corr = `$${a}\\times${tex_fraction(c, d)}$`;
 							texte_corr+= `$=${tex_fraction(a+'\\times'+c,d)}$`;
 							texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a)+'\\times'+decomposition_facteurs_premiers(c), decomposition_facteurs_premiers(d))}$`;
 							// texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a * c), decomposition_facteurs_premiers(d))}$`
 							for (let k in listec) {listea.push(listec[k])}
+							listeb = listed;
+							listeavf=[,];
+							listebvf=[,];
+							listea.forEach (function a_ajouter_dans_listeavf(element, index, array) {
+								console.log("a[" + index + "] = " + element);
+								listeavf.push([element,true]);
+								console.log(listeavf)
+							});
+							// listeb.forEach(function (element,index,array) {listebvf.push([element,true])});
+							// listec.forEach(function (element,index,array) {listecvf.push([element,true])});
+							// for (let k in listea) {liste}
 							let index
-							console.log (listea,listeb);
+							// console.log(listea,listeavf,listeb,listebvf)
 							for (index=listeb.length; (index>=0);) {
 								
 								for (let j = 0; j <= listea.length;) {
 									if (listeb[index] == listea[j]) {
-										listeb.splice(index, 1);
-										listea.splice(j, 1);
+										listebvf[index,1]=[listeb[index],false];
+										listeavf[j,1]=[listea[j],false];
 										break
 									}
 									j++;
@@ -3083,8 +3096,20 @@ function Exercice_multiplier_fractions(){
 								index--;
 								
 							}
-							if (index<0) {listeb.push(1)}
-							console.log (listea,listeb)
+							for (index=listeb.length; (index>=0);) {  //éliminer les facteurs communs des listes
+								for (let j = 0; j <= listea.length;) {
+									if (listeb[index] == listea[j]) {
+										listeb.splice(index, 1);
+										listea.splice(j, 1);
+										break
+									}
+									j++;
+								}
+								index--;
+							}
+						
+							if (index<0) {listeb.push(1);listebvf.push[1,true]}
+							// console.log (listea,listeavf,listeb,listebvf)
 							a=1;b=1;
 							for (let k in listea) {a=a*listea[k]}
 							for (let k in listeb) {b=b*listeb[k]}
