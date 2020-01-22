@@ -447,7 +447,7 @@ function obtenir_liste_facteurs_premiers(n){
 	liste = []
 	liste_nombres_premiers = obtenir_liste_nombres_premiers()
 	let i = 0;
-	while (n>2 && liste_nombres_premiers[i]<=n){
+	while (n>1 && liste_nombres_premiers[i]<=n){
 		if (n%liste_nombres_premiers[i]==0) {
 			liste.push(liste_nombres_premiers[i])
 			n/=liste_nombres_premiers[i]
@@ -838,6 +838,15 @@ function obtenir_liste_nombres_premiers() {
  return  [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
 }
 
+function decomposition_facteurs_premiers(n) {
+	let decomposition='';
+	let liste=obtenir_liste_facteurs_premiers(n);
+	for (let i in liste) {
+		decomposition+=liste[i]+'\\times';
+	}
+	decomposition=decomposition.substr(0,decomposition.length-6)
+	return decomposition;
+}
 
 /**
 * Écrit une fraction

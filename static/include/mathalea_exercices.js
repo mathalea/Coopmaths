@@ -2962,97 +2962,197 @@ function Exercice_multiplier_fractions(){
 	this.spacing_corr = 2;
 	this.nb_questions = 5;
 	this.nb_cols_corr = 1;
-
+	this.sup2 = 1; //méthode
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		let type_de_questions_disponibles
 		liste_fractions = obtenir_liste_fractions_irreductibles();
 
-		if (this.sup==1) {type_de_questions_disponibles = [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
+		if (this.sup==1) {type_de_questions_disponibles = [1]} // pour test [1,2,2,2]} // 1*nombre entier,3*fraction (pas de négatifs)
 		else if (this.sup==2) {type_de_questions_disponibles = [2,2,3,3]} // fractions, 2*positifs, 2*relatifs
 		else {type_de_questions_disponibles = [3]}
 		let nombre_de_signe_moins;
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions);
-		for (let i = 0, ab, cd, a, b, c, d, p, aa, signe, texte, texte_corr, type_de_questions, cpt=0; i < this.nb_questions&&cpt<50;) {
-			type_de_questions = liste_type_de_questions[i];
-			ab=choice(liste_fractions);
-			cd=choice(liste_fractions);
-			a=ab[0];
-			b=ab[1]
-			c=cd[0];
-			d=cd[1];
-			switch (type_de_questions){
-				case 1 : // entier * fraction (tout positif)
-					if (a==1) {a=randint(2,9)}
-					texte=`$${tex_fraction(a,1)}\\times${tex_fraction(c,d)}=$`;
-					if (pgcd(a*c,d)==1) {
-						texte_corr= `$${tex_fraction(a,1)}\\times${tex_fraction(c,d)}=\\dfrac{${a}}{1}\\times${tex_fraction(c,d)}=${tex_fraction(a +'\\times'+c,'1\\times'+d)}=${tex_fraction(a*c,d)}$`
-					}
-					else {
-						texte_corr= `$${tex_fraction(a,1)}\\times${tex_fraction(c,d)}=\\dfrac{${a}}{1}\\times${tex_fraction(c,d)}=${tex_fraction(a*c,d)}=${tex_fraction_reduite(a*c,d)}$`
+		for (let i = 0, ab, cd, a, b, c, d, p, aa,bb,cc,dd, signe, texte, texte_corr, type_de_questions, cpt = 0; i < this.nb_questions && cpt < 50;) {
+				type_de_questions = liste_type_de_questions[i];
+				ab = choice(liste_fractions);
+				cd = choice(liste_fractions);
+				a = ab[0];
+				b = ab[1]
+				c = cd[0];
+				d = cd[1];
+				if (this.sup2==1){  // methode 1 : simplifications finale
+					switch (type_de_questions) {
+						case 1: // entier * fraction (tout positif)
+							if (a == 1) { a = randint(2,9) };
+							texte = `$${tex_fraction(a, 1)}\\times${tex_fraction(c, d)}=$`;
+							texte_corr = `$${tex_fraction(a, 1)}\\times${tex_fraction(c, d)}$`
+							texte_corr +=`$=\\dfrac{${a}}{1}\\times${tex_fraction(c, d)}$`
+							texte_corr +=`$=${tex_fraction(a + '\\times' + c, '1\\times' + d)}$`
+							texte_corr +=`$=${tex_fraction(a * c, d)}$`
+							if (pgcd(a * c, d) != 1) {
+								texte_corr += `$=${tex_fraction_reduite(a * c, d)}$`
+							}
+							break
 
+						case 2: // fraction * fraction tout positif
+							p = pgcd(a * c, b * d);
+							texte = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}=$`;
+							texte_corr = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}$`
+							texte_corr += `$=${tex_fraction(a + '\\times' + c, b + '\\times' + d)}$`
+							texte_corr += `$=${tex_fraction(a * c, b * d)}$`
+							if (p != 1) {
+								texte_corr += `$=${tex_fraction(a * c / p + '\\times\\cancel{' + p + '}', b * d / p + '\\times\\cancel{' + p + '}')}$`
+								texte_corr += `$=${tex_fraction(a * c / p, b * d / p)}$`
+							}
+							break
+
+
+						case 3:
+							a = a * randint(-1, 1, [0]);
+							b = b * randint(-1, 1, [0]);
+							c = c * randint(-1, 1, [0]);
+							d = d * randint(-1, 1, [0]);
+							nombre_de_signe_moins = (a < 0) + (b < 0) + (c < 0) + (d < 0);
+							if (Math.pow(-1, nombre_de_signe_moins) == 1) { signe = '' } else { signe = '-' }
+
+							texte = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}$`;
+							texte_corr = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}$`
+							aa = abs(a);
+							bb = abs(b);
+							cc = abs(c);
+							dd = abs(d);
+							p = pgcd(aa * cc, bb * dd);
+							texte_corr += `$=${signe}${tex_fraction(aa, bb)}\\times${tex_fraction(cc, dd)}$`
+							texte_corr += `$=${signe}${tex_fraction(aa + '\\times' + cc, bb + '\\times' + dd)}$`
+							if (p == 1) {
+								texte_corr += `$=${signe}${tex_fraction(aa * cc, bb * dd)}$`
+							}
+							else {
+
+								texte_corr += `$=${signe}${tex_fraction(aa * cc, bb * dd)}$`
+								if (aa * cc != bb * dd) {
+									texte_corr += `$=${signe}${tex_fraction(aa * cc / p + '\\times\\cancel{' + p + '}', bb * dd / p + '\\times\\cancel{' + p + '}')}$`
+									texte_corr += `$=${signe}${tex_fraction(aa * cc / p, bb * dd / p)}$`
+								}
+								else {
+									texte_corr += `$=${signe}1$`
+								}
+							}
+							break
 					}
-					break
-				
-				case 2 : // fraction * fraction tout positif
-				p=pgcd(a*c,b*d);
-				texte=`$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}=$`;
-				texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`
-				texte_corr+= `$=${tex_fraction(a +'\\times'+c,b+'\\times'+d)}$`
-				texte_corr += `$=${tex_fraction(a*c,b*d)}$`
-				if (p!=1) {
-					texte_corr += `$=${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}$`
-					texte_corr += `$=${tex_fraction(a*c/p,b*d/p)}$`
 				}
-				break
-					
-			
-				case 3 :
-					a=a*randint(-1,1,[0]);
-					b=b*randint(-1,1,[0]);
-					c=c*randint(-1,1,[0]);
-					d=d*randint(-1,1,[0]);
-					nombre_de_signe_moins=(a<0)+(b<0)+(c<0)+(d<0);
-					if (Math.pow(-1,nombre_de_signe_moins)==1) {signe=''} else {signe='-'}
+				else { //méthode 2 : décomposition
+					aa=obtenir_liste_nombres_premiers()[randint(1,5)];
+					bb=obtenir_liste_nombres_premiers()[randint(1,5,[aa])];
+					a=a*aa;
+					d=d*aa;
+					b=b*bb;
+					c=c*bb;
+					var listea=obtenir_liste_facteurs_premiers(a);
+					var listeb=obtenir_liste_facteurs_premiers(b);
+					var listec=obtenir_liste_facteurs_premiers(c);
+					var listed=obtenir_liste_facteurs_premiers(d);
 
-					texte=`$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`;
-					texte_corr= `$${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`
-					a=Math.abs(a);
-					b=Math.abs(b);
-					c=Math.abs(c);
-					d=Math.abs(d);						
-					p=pgcd(a*c,b*d);
-					texte_corr+=`$=${signe}${tex_fraction(a,b)}\\times${tex_fraction(c,d)}$`
-					texte_corr+=`$=${signe}${tex_fraction(a +'\\times'+c,b+'\\times'+d)}$`
-					if (p==1) {
-						texte_corr+=`$=${signe}${tex_fraction(a*c,b*d)}$`
+					switch (type_de_questions) {
+						case 1: // entier * fraction (tout positif)
+							listeb = listed;
+							texte = `$${a}\\times${tex_fraction(c, d)}=$`;
+							texte_corr = `$${a}\\times${tex_fraction(c, d)}$`;
+							texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a)+'\\times'+decomposition_facteurs_premiers(c), decomposition_facteurs_premiers(d))}$`;
+							// texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a * c), decomposition_facteurs_premiers(d))}$`
+							for (let k in listec) {listea.push(listec[k])}
+							let index
+							console.log (listea,listeb);
+							for (index=listeb.length; (index>=0);) {
+								
+								for (let j = 0; j <= listea.length;) {
+									if (listeb[index] == listea[j]) {
+										listeb.splice(index, 1);
+										listea.splice(j, 1);
+										break
+									}
+									j++;
+									console.log(j)
+								}
+								index--;
+								console.log(index)
+							}
+							if (index<0) {listeb.push(1)}
+							console.log (listea,listeb)
+							a=1;b=1;
+							for (let k in listea) {a=a*listea[k]}
+							for (let k in listeb) {b=b*listeb[k]}
+							
+							
+							texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a), decomposition_facteurs_premiers(b))}$`
+							texte_corr += `$=${tex_fraction(a,b)}$`
+							break
+
+						case 2: // fraction * fraction tout positif
+							p = pgcd(a * c, b * d);
+							texte = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}=$`;
+							texte_corr = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}$`
+							texte_corr += `$=${tex_fraction(a + '\\times' + c, b + '\\times' + d)}$`
+							texte_corr += `$=${tex_fraction(a * c, b * d)}$`
+							if (p != 1) {
+								texte_corr += `$=${tex_fraction(a * c / p + '\\times\\cancel{' + p + '}', b * d / p + '\\times\\cancel{' + p + '}')}$`
+								texte_corr += `$=${tex_fraction(a * c / p, b * d / p)}$`
+							}
+							break
+
+
+						case 3:
+							a = a * randint(-1, 1, [0]);
+							b = b * randint(-1, 1, [0]);
+							c = c * randint(-1, 1, [0]);
+							d = d * randint(-1, 1, [0]);
+							nombre_de_signe_moins = (a < 0) + (b < 0) + (c < 0) + (d < 0);
+							if (Math.pow(-1, nombre_de_signe_moins) == 1) { signe = '' } else { signe = '-' }
+
+							texte = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}$`;
+							texte_corr = `$${tex_fraction(a, b)}\\times${tex_fraction(c, d)}$`
+							aa = abs(a);
+							bb = abs(b);
+							cc = abs(c);
+							dd = abs(d);
+							p = pgcd(aa * cc, bb * dd);
+							texte_corr += `$=${signe}${tex_fraction(aa, bb)}\\times${tex_fraction(cc, dd)}$`
+							texte_corr += `$=${signe}${tex_fraction(aa + '\\times' + cc, bb + '\\times' + dd)}$`
+							if (p == 1) {
+								texte_corr += `$=${signe}${tex_fraction(aa * cc, bb * dd)}$`
+							}
+							else {
+
+								texte_corr += `$=${signe}${tex_fraction(aa * cc, bb * dd)}$`
+								if (aa * cc != bb * dd) {
+									texte_corr += `$=${signe}${tex_fraction(aa * cc / p + '\\times\\cancel{' + p + '}', bb * dd / p + '\\times\\cancel{' + p + '}')}$`
+									texte_corr += `$=${signe}${tex_fraction(aa * cc / p, bb * dd / p)}$`
+								}
+								else {
+									texte_corr += `$=${signe}1$`
+								}
+							}
+							if (this.methode == 3) {
+								texte_corr += 'ou d\'une autre façon :\n';
+							}
+
+							break
 					}
-					else {
-	
-						texte_corr+=`$=${signe}${tex_fraction(a*c,b*d)}$`
-						if (a*c!=b*d){
-							texte_corr+=`$=${signe}${tex_fraction(a*c/p +'\\times\\cancel{'+p+'}',b*d/p+'\\times\\cancel{'+p+'}')}$`
-							texte_corr+=`$=${signe}${tex_fraction(a*c/p,b*d/p)}$`
-						}
-						else {
-							texte_corr+=`$=${signe}1$`							
-						}
-					}
-			
-				break	
-			}
-			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte);
-				this.liste_corrections.push(texte_corr);
-				i++;
-			}
-			cpt++
+				}
+				if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
+					this.liste_questions.push(texte);
+					this.liste_corrections.push(texte_corr);
+					i++;
+				}
+				cpt++
 		}
+		
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Fractions à numérateurs et dénominateurs positifs \n 2 : Type 1 et type 3 pour 50%/50%\n 3 : Ecritures fractionnaires à numérateur et dénominateur entiers relatifs"]
+	this.besoin_formulaire2_numerique = ['Méthode',2,"1 : simplifications du résultat \n 2 : En utilisant les décompositions en produit de facteurs premiers"]
 }
 
 /**
@@ -3119,10 +3219,10 @@ function Exercice_diviser_fractions(){
 					if (Math.pow(-1,nombre_de_signe_moins)==1) {signe=''} else {signe='-'}
 					texte=`$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}=$`;
 					texte_corr= `$${tex_fraction(a,b)}\\div${tex_fraction(c,d)}$`
-					a=Math.abs(a);
-					b=Math.abs(b);
-					c=Math.abs(c);
-					d=Math.abs(d);
+					a=abs(a);
+					b=abs(b);
+					c=abs(c);
+					d=abs(d);
 					p=pgcd(a*d,b*c);
 					texte_corr+=`$=${signe}${tex_fraction(a,b)}\\times${tex_fraction(d,c)}$`
 					texte_corr+=`$=${signe}${tex_fraction(a +'\\times'+ecriture_parenthese_si_negatif(d),b+'\\times'+ecriture_parenthese_si_negatif(c))}$`
@@ -3300,10 +3400,10 @@ function Exercice_additionner_fraction_produit(){
 					texte=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}=$`;
 					texte_corr=`$${tex_fraction(a,b)}+${tex_fraction(c,d)}\\times${tex_fraction(e,f)}$`
 					
-					c=Math.abs(c); // gestion du signe du produit avec {signe}
-					d=Math.abs(d);
-					e=Math.abs(e);
-					f=Math.abs(f);
+					c=abs(c); // gestion du signe du produit avec {signe}
+					d=abs(d);
+					e=abs(e);
+					f=abs(f);
 					
 					
 					if (a*b>0) {  //suppression des signes - superflus de la première fraction
@@ -3311,8 +3411,8 @@ function Exercice_additionner_fraction_produit(){
 						signe1=''
 					} else {signe1='-'}
 
-					a=Math.abs(a);
-					b=Math.abs(b);
+					a=abs(a);
+					b=abs(b);
 
 					texte_corr+=`$=${signe1}${tex_fraction(a,b)}${signe2}${tex_fraction(c +'\\times'+e,d+'\\times'+f)}$`
 					texte_corr+=`$=${signe1}${tex_fraction(a,b)}${signe2}${tex_fraction(c*e,d*f)}$`
@@ -3380,7 +3480,7 @@ function Exercice_additionner_fraction_produit(){
 					}
 					
 					texte_corr+=`$=${tex_fraction_signe(e,d)}$`
-					p=pgcd(Math.abs(e),d);
+					p=pgcd(abs(e),d);
 					if (p!=1) {
 						f=d/p;
 						e=e/p;
@@ -4668,7 +4768,7 @@ function Exercice_equation1(){
 			texte = '$ '+ Algebrite.run(a+'*x+('+b+')') + ' = 0 $';
 			texte_corr = '$ '+a+'x'+ecriture_algebrique(b)+' = 0$\n\n'+'$ '+a+'x'+ecriture_algebrique(b)+ecriture_algebrique(-b)+' = 0'+ecriture_algebrique(-b)+'$\n\n';
 			texte_corr += '$ x = '+ tex_fraction(-1*b,a);
-			if (pgcd(Math.abs(a),Math.abs(b))>1){
+			if (pgcd(abs(a),abs(b))>1){
 				texte_corr += ' = ' + Math.parse(Algebrite.run(-1*b+'/('+a+')')).toTex()+'$'
 			} else {
 				texte_corr += '$'
@@ -6536,13 +6636,13 @@ function Exercice_Thales(){
 		let x3 = randint(5, 6)
 		let y3 = randint(-2, 1)
 		let k = randint(2, 8) * randint(-1, 1, [0]) / 10
-		if (this.quatrieme) {k=Math.abs(k)}	
+		if (this.quatrieme) {k=abs(k)}	
 		let dist23 =Math.sqrt((x3-x2)*(x3-x2)+(y3-y2)*(y3-y2)) 		//calcul des longueurs du triangle principal
 		let dist12 = Math.sqrt(x2 * x2 + y2 * y2)
 		let dist13 = Math.sqrt(x3 * x3 + y3 * y3)
-		let dist45 = dist23 * Math.abs(k)		//calcul des longueurs du triangle secondaires
-		let dist14 = dist12 * Math.abs(k)
-		let dist15 = dist13 * Math.abs(k)
+		let dist45 = dist23 * abs(k)		//calcul des longueurs du triangle secondaires
+		let dist14 = dist12 * abs(k)
+		let dist15 = dist13 * abs(k)
 		dist23 = Math.round(dist23 * 10) / 10 // On ne garde qu'une approximation au dixième pour l'exercice
 		dist12 = Math.round(dist12 * 10) / 10
 		dist13 = Math.round(dist13 * 10) / 10
@@ -6910,7 +7010,7 @@ function Exercice_Pythagore() {
 				texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle 45](A) \\tkzGetPoint{A}'
 				texte += '\n\t \\tkzDrawPolygon(' + s0 + ',B,A,C)' // Trace la marque d'angle droit
 
-				if (Math.abs(alpha1deg) < 90) { // rotation "angle droit dessous"
+				if (abs(alpha1deg) < 90) { // rotation "angle droit dessous"
 					texte += '\n\t \\tkzLabelPoints[below](' + s0 + ')' //nomme les points
 					texte += '\n\t \\tkzLabelPoints[right](' + s1 + ')'
 					texte += '\n\t \\tkzLabelPoints[left](' + s2 + ')'
