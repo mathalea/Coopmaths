@@ -3078,10 +3078,10 @@ function Exercice_multiplier_fractions(){
 										break
 									}
 									j++;
-									console.log(j)
+									
 								}
 								index--;
-								console.log(index)
+								
 							}
 							if (index<0) {listeb.push(1)}
 							console.log (listea,listeb)
