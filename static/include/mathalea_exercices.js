@@ -2986,6 +2986,7 @@ function Exercice_multiplier_fractions(){
 					switch (type_de_questions) {
 						case 1: // entier * fraction (tout positif)
 							if (a == 1) { a = randint(2,9) };
+							if (a==c) {a=a+1}
 							texte = `$${tex_fraction(a, 1)}\\times${tex_fraction(c, d)}=$`;
 							texte_corr = `$${tex_fraction(a, 1)}\\times${tex_fraction(c, d)}$`
 							texte_corr +=`$=\\dfrac{${a}}{1}\\times${tex_fraction(c, d)}$`
@@ -3044,12 +3045,14 @@ function Exercice_multiplier_fractions(){
 					}
 				}
 				else { //méthode 2 : décomposition
+					if (a==c) {a++}
 					aa=obtenir_liste_nombres_premiers()[randint(1,5)];
 					bb=obtenir_liste_nombres_premiers()[randint(1,5,[aa])];
 					a=a*aa;
 					d=d*aa;
 					b=b*bb;
 					c=c*bb;
+					
 					var listea=obtenir_liste_facteurs_premiers(a);
 					var listeb=obtenir_liste_facteurs_premiers(b);
 					var listec=obtenir_liste_facteurs_premiers(c);
@@ -3060,6 +3063,7 @@ function Exercice_multiplier_fractions(){
 							listeb = listed;
 							texte = `$${a}\\times${tex_fraction(c, d)}=$`;
 							texte_corr = `$${a}\\times${tex_fraction(c, d)}$`;
+							texte_corr+= `$=${tex_fraction(a+'\\times'+c,d)}$`;
 							texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a)+'\\times'+decomposition_facteurs_premiers(c), decomposition_facteurs_premiers(d))}$`;
 							// texte_corr += `$=${tex_fraction(decomposition_facteurs_premiers(a * c), decomposition_facteurs_premiers(d))}$`
 							for (let k in listec) {listea.push(listec[k])}
