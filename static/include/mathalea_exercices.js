@@ -2962,7 +2962,7 @@ function Exercice_multiplier_fractions(){
 	this.spacing_corr = 2;
 	this.nb_questions = 5;
 	this.nb_cols_corr = 1;
-	this.sup2 = 1; //méthode
+	this.sup2 = false; //méthode
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
