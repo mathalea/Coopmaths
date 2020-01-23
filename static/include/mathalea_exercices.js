@@ -3949,8 +3949,8 @@ function Exercice_conversions_aires(niveau=1){
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		let prefixe_multi = [[' da',100],[' h',10000],[' k',1000000]];
-		let prefixe_div = [[' d',100],[' c',10000,],[' m',1000000]]; 
+		let prefixe_multi = [[' da','\\times10\\times10',100],[' h','\\times100\\times100',10000],[' k','\\times1~000\\times1~000',1000000]];
+		let prefixe_div = [[' d','\\div10\\div10',100],[' c','\\div100\\div100',10000],[' m','\\div1~000\\div1~000',1000000]]; 
 		let unite = 'm';
 		let liste_unite = ['mm','cm','dm','m','dam','hm','km'];
 		for (let i = 0, a, k, div, resultat, type_de_questions, texte, texte_corr, liste_unite_info, cpt=0; i < this.nb_questions && cpt<50;) { // On limite le nombre d'essais pour chercher des valeurs nouvelles
@@ -3980,17 +3980,17 @@ function Exercice_conversions_aires(niveau=1){
 
 			if (!div&&type_de_questions<4) { // Si il faut multiplier pour convertir
 				
-				
-				resultat = Algebrite.eval(a*prefixe_multi[k][1]).toString(); // Utilise Algebrite pour avoir le résultat exact même avec des décimaux
+				prefixe_multi = [[' da','\\times10\\times10',100],[' h','\\times100\\times100',10000],[' k','\\times1~000\\times1~000',1000000]];// On réinitialise cette liste qui a pu être modifiée dans le cas des ares
+				resultat = Algebrite.eval(a*prefixe_multi[k][2]).toString(); // Utilise Algebrite pour avoir le résultat exact même avec des décimaux
 				texte = '$ '+ tex_nombre(a) + tex_texte(prefixe_multi[k][0]+unite) + '^2' + ' = \\dotfill ' + tex_texte('~'+unite)  + '^2' + '$';
-				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_multi[k][0]+unite)+ '^2' + ' =  ' + tex_nombre(a) + '\\times' + tex_nombre(prefixe_multi[k][1]) + tex_texte('~'+unite)  + '^2'
+				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_multi[k][0]+unite)+ '^2' + ' =  ' + tex_nombre(a) + prefixe_multi[k][1] + tex_texte('~'+unite)  + '^2'
 					 + ' = ' + tex_nombre(resultat) + tex_texte('~'+unite)+ '^2' + '$';
 
 			}else if(div&&type_de_questions<4) {
 				k = randint(0,1); // Pas de conversions de mm^2 en m^2 avec des nombres décimaux car résultat inférieur à 10e-8
-				resultat = Algebrite.eval(a/prefixe_multi[k][1]).toString(); // Attention aux notations scientifiques pour 10e-8
+				resultat = Algebrite.eval(a/prefixe_multi[k][2]).toString(); // Attention aux notations scientifiques pour 10e-8
 				texte = '$ '+ tex_nombre(a) + tex_texte(prefixe_div[k][0]+unite)+ '^2' + ' = \\dotfill ' + tex_texte('~'+unite)  + '^2' + '$';
-				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_div[k][0]+unite)+ '^2' + ' =  ' + tex_nombre(a) + '\\div' + tex_nombre(prefixe_div[k][1]) + tex_texte('~'+unite)  + '^2'
+				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_div[k][0]+unite)+ '^2' + ' =  ' + tex_nombre(a) + prefixe_div[k][1] + tex_texte('~'+unite)  + '^2'
 					 + ' = ' + tex_nombre(resultat) + tex_texte('~'+unite)  + '^2' + '$';
 			}else if(type_de_questions==4){ 
 				let unite1 = randint(0,3);
@@ -4001,23 +4001,23 @@ function Exercice_conversions_aires(niveau=1){
 				let unite2 = unite1+ecart
 				if (randint(0,1)>0) {
 					resultat = Algebrite.eval(a*Math.pow(10,2*ecart));
-					texte = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite2]) + '^2' + ' = \\dotfill ' + tex_texte(liste_unite[unite1]) + '^2' + '$';
-					texte_corr = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite2]) + '^2' + ' =  ' + tex_nombre(a) + '\\times' + tex_nombre(Math.pow(10,2*ecart)) + tex_texte(liste_unite[unite1]) + '^2'
-					 + ' = ' + tex_nombre(resultat) + tex_texte(liste_unite[unite1]) + '^2' + '$';	
+					texte = '$ '+ tex_nombre(a) + tex_texte('~'+liste_unite[unite2]) + '^2' + ' = \\dotfill ' + tex_texte('~'+liste_unite[unite1]) + '^2' + '$';
+					texte_corr = '$ '+ tex_nombre(a) + tex_texte('~'+liste_unite[unite2]) + '^2' + ' =  ' + tex_nombre(a) + '\\times' + tex_nombre(Math.pow(10,2*ecart)) + tex_texte('~'+liste_unite[unite1]) + '^2'
+					 + ' = ' + tex_nombre(resultat) + tex_texte('~'+liste_unite[unite1]) + '^2' + '$';	
 
 				} else {
 					resultat = Algebrite.eval(a/Math.pow(10,2*ecart));
-					texte = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite1]) + '^2' + ' = \\dotfill ' + tex_texte(liste_unite[unite2]) + '^2' + '$';
-					texte_corr = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite1]) + '^2' + ' =  ' + tex_nombre(a) + '\\div' + tex_nombre(Math.pow(10,2*ecart)) + tex_texte(liste_unite[unite2]) + '^2'
-					 + ' = ' + tex_nombre(resultat) + tex_texte(liste_unite[unite2]) + '^2' + '$';
+					texte = '$ '+ tex_nombre(a) + tex_texte('~'+liste_unite[unite1]) + '^2' + ' = \\dotfill ' + tex_texte('~'+liste_unite[unite2]) + '^2' + '$';
+					texte_corr = '$ '+ tex_nombre(a) + tex_texte('~'+liste_unite[unite1]) + '^2' + ' =  ' + tex_nombre(a) + '\\div' + tex_nombre(Math.pow(10,2*ecart)) + tex_texte('~'+liste_unite[unite2]) + '^2'
+					 + ' = ' + tex_nombre(resultat) + tex_texte('~'+liste_unite[unite2]) + '^2' + '$';
 				}
 				
 			} else if(type_de_questions==5) { // Pour type_de_questions==5
 				prefixe_multi = [['ha',10000],['a',100]];
 				k = randint(0,1)
 				resultat = Algebrite.eval(a*prefixe_multi[k][1]).toString(); // Utilise Algebrite pour avoir le résultat exact même avec des décimaux
-				texte = '$ '+ tex_nombre(a) + tex_texte(prefixe_multi[k][0]) + ' = \\dotfill ' + tex_texte('~'+unite)  + '^2' + '$';
-				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_multi[k][0]) + ' =  ' + tex_nombre(a) + '\\times' + tex_nombre(prefixe_multi[k][1]) + tex_texte('~'+unite)  + '^2'
+				texte = '$ '+ tex_nombre(a) + tex_texte('~'+prefixe_multi[k][0]) + ' = \\dotfill ' + tex_texte('~'+unite)  + '^2' + '$';
+				texte_corr = '$ '+ tex_nombre(a) + tex_texte('~'+prefixe_multi[k][0]) + ' =  ' + tex_nombre(a) + '\\times' + tex_nombre(prefixe_multi[k][1]) + tex_texte('~'+unite)  + '^2'
 					 + ' = ' + tex_nombre(resultat) + tex_texte('~'+unite)+ '^2' + '$';
 			}
 				
@@ -5819,7 +5819,6 @@ function Perimetre_ou_aire_de_figures_composees(){
 		let DA = arrondi(Math.sqrt(L2**2+l1**2),1)
 		let t1 = arrondi(Math.sqrt(4+h**2),1) // longueur d'un côté du triangle
 		let t2 = arrondi(Math.sqrt((c-2)**2+h**2),1) // longueur de l'autre côté d'un triangle
-		console.log(L1,l1,L2,c,h,DA)
 		let texte_corr = ""
 		texte_corr += `La première figure est composée d'un rectangle de ${L1} cm par ${l1} cm`
 		texte_corr += ` et d'un triangle rectangle dont les côtés de l'angle droit mesurent ${L2} cm et ${l1} cm.\\\\`
