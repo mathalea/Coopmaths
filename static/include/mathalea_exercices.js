@@ -7369,10 +7369,10 @@ function Reciproque_Pythagore(){
 				break 
 			}
 			texte += `\\\\Ce triangle est-il rectangle ?`
-			texte_corr = `Dans le triangle $${nom_triangle}$, le plus grand côté est $[${A+C}]$.`
-			texte_corr += `\\\\$${A+C}^2=${b}^2=${calcul(b**2)}$`
-			texte_corr += `\\\\$${A+B}^2+${B+C}^2=${c}^2+${a}^2=${calcul(c**2+a**2)}$`
-			texte_corr += `\\\\On constate que $${A+C}^2=${A+B}^2+${B+C}^2$, l'égalité de Pythagore est vérifiée donc $${nom_triangle}$ est rectangle en $${B}$.`
+			texte_corr = `Dans le triangle $${nom_triangle}$, le plus grand côté est $[${A+B}]$.`
+			texte_corr += `\\\\$${A+B}^2=${c}^2=${calcul(c**2)}$`
+			texte_corr += `\\\\$${A+C}^2+${B+C}^2=${b}^2+${a}^2=${calcul(b**2+a**2)}$`
+			texte_corr += `\\\\On constate que $${A+B}^2=${A+C}^2+${B+C}^2$, l'égalité de Pythagore est vérifiée donc $${nom_triangle}$ est rectangle en $${C}$.`
 			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
