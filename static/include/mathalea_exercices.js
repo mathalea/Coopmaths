@@ -3131,7 +3131,7 @@ function Exercice_multiplier_fractions(){
 							texte_corr += `$=${tex_fraction(a + '\\times' + c, b + '\\times' + d)}$`
 
 							for (let k in listec) {listea.push(listec[k])}
-							for (let k in listed) {listed.push(listed[k])}
+							for (let k in listed) {listeb.push(listed[k])}
 
 							listeavf=[];
 							listebvf=[];
@@ -3207,7 +3207,7 @@ function Exercice_multiplier_fractions(){
 							texte_corr += `$=${signe}${tex_fraction(aa + '\\times' + cc, bb + '\\times' + dd)}$`
 
 							for (let k in listec) {listea.push(listec[k])}
-							for (let k in listed) {listed.push(listed[k])}
+							for (let k in listed) {listeb.push(listed[k])}
 
 							listeavf=[];
 							listebvf=[];
