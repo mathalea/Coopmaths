@@ -87,7 +87,8 @@ var liste_des_exercices_disponibles = {
 		'4N15': Exercice_additionner_fraction_produit,
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
-		'4G11' : Thales_4eme,
+		'4G11' : Reciproque_Pythagore,
+		'4G20' : Thales_4eme,
 		//12:Exercice_conversions_de_longueurs,
 		//13:Exercice_conversions,
 		//14:Exercice_conversions_aires,
@@ -7321,6 +7322,69 @@ function Exercice_Pythagore() {
 		}
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 4, '1 : Calcul de l\'hypoténuse \n 2 : Calcul d\'un côté de l\'angle droit\n 3 : Calcul d\'un côté quelconque\n 4 : Sans la figure'];
+}
+
+
+/**
+* @Auteur Rémi Angot
+*/
+function Reciproque_Pythagore(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Déterminer si un triangle est rectangle ou pas.";
+	this.consigne = "";
+	this.nb_questions = 10;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let liste_triplets_pythagoriciens =  [[3,4,5],[5,12,13],[6,8,10],[7,24,25],[8,15,17],[9,12,15],[9,40,41], [10,24,26], [11,60,61], [12,16,20], [12,35,37], [13,84,85], [14,48,50], [15,20,25], [15,36,39], [16,30,34], [16,63,65], [18,24,30], [18,80,82],  [20,21,29], [20,48,52], [21,28,35], [21,72,75], [24,32,40], [24,45,51], [24,70,74], [25,60,65], [27,36,45], [28,45,53], [28,96,100], [30,40,50], [30,72,78], [32,60,68], [33,44,55], [33,56,65], [35,84,91], [36,48,60], [36,77,85], [39,52,65], [39,80,89], [40,42,58], [40,75,85], [42,56,70], [45,60,75], [48,55,73], [48,64,80], [51,68,85], [54,72,90], [57,76,95], [60,63,87], [60,80,100], [65,72,97]]
+		for (let i = 0, texte, texte_corr, AB,BC,AC,a,b,c,nom_triangle,triplet, ordre_des_cotes, cpt=0; i < this.nb_questions && cpt<50; ) {
+			nom_triangle = polygone(3);
+			A = nom_triangle[0];
+			B = nom_triangle[1];
+			C = nom_triangle[2];
+			triplet = choice(liste_triplets_pythagoriciens);
+			enleve_element(liste_triplets_pythagoriciens,triplet) // Supprime le triplet pour les prochaines questions
+			a = triplet[0];
+			b = triplet[1];
+			c = triplet[2];
+			if (a>9 && choice([true,false]) ) { //une fois sur 2 on utilise des décimaux
+				a = calcul(a/10);
+				b = calcul(b/10);
+				c = calcul(c/10);
+			}
+			ordre_des_cotes = randint(1,3)
+			switch (ordre_des_cotes){
+				case 1 : 
+				texte = `Le triangle $${nom_triangle}$ est tel que $${A+B}=${tex_nombre(c)}$~cm, $${A+C}=${tex_nombre(b)}$~cm et $${B+C}=${tex_nombre(a)}$~cm.`
+				break
+				case 2 : 
+				texte = `Le triangle $${nom_triangle}$ est tel que  $${B+C}=${tex_nombre(a)}$~cm, $${A+C}=${tex_nombre(b)}$~cm et $${A+B}=${tex_nombre(c)}$~cm.`
+				break
+				case 3 : 
+				texte = `Le triangle $${nom_triangle}$ est tel que $${A+C}=${tex_nombre(b)}$~cm, $${A+B}=${tex_nombre(c)}$~cm,  et $${B+C}=${tex_nombre(a)}$~cm.`
+				break 
+			}
+			texte += `\\\\Ce triangle est-il rectangle ?`
+			texte_corr = `Dans le triangle $${nom_triangle}$, le plus grand côté est $[${A+C}]$.`
+			texte_corr += `\\\\$${A+C}^2=${b}^2=${calcul(b**2)}$`
+			texte_corr += `\\\\$${A+B}^2+${B+C}^2=${c}^2+${a}^2=${calcul(c**2+a**2)}$`
+			texte_corr += `\\\\On constate que $${A+C}^2=${A+B}^2+${B+C}^2$, l'égalité de Pythagore est vérifiée donc $${nom_triangle}$ est rectangle en $${B}$.`
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
 /**
