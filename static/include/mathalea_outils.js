@@ -491,16 +491,34 @@ function tex_nombrec(expression){
 }
 
 /**
-* Créé un string de nbsommets caractères dans l'ordre alphabétique et en majuscule
+* Créé un string de nbsommets caractères dans l'ordre alphabétique et en majuscule qui ne soit pas dans la liste donnée en 2e argument
 * @Auteur Rémi Angot
 */
-function polygone(nbsommets){ 
+function polygone(nbsommets,liste_a_eviter=[]){ 
 	let premiersommet = randint(65,90-nbsommets);
-  let polygone="";
-  for (let i=0;i<nbsommets;i++){
-  	polygone += String.fromCharCode(premiersommet+i)
-  }
-  return polygone
+	let polygone="";
+	while(est_deja_donne(String.fromCharCode(premiersommet),liste_a_eviter)){
+		premiersommet = randint(65,90-nbsommets);
+	}
+		
+	for (let i=0;i<nbsommets;i++){
+		polygone += String.fromCharCode(premiersommet+i)
+	}
+	return polygone
+}
+
+/**
+* Vérifie dans une liste si un élément commence par premiersommet et renvoit true si c'est le cas
+* @Auteur Rémi Angot
+*/
+function est_deja_donne(premiersommet,liste_a_eviter) {
+	let result = false
+	for (let i = 0; i < liste_a_eviter.length; i++) {
+		if (premiersommet==liste_a_eviter[i][0]) {
+			result = true;
+		}
+	}
+	return result;
 }
 
 /**
