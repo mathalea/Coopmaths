@@ -601,15 +601,53 @@ function prenom(){
 	return choice([prenomF(),prenomM()])
 }
 
+ /**
+* @auteur Jean-Claude Lhote
+*/
 function tirer_les_des(nombre_tirages,nombre_faces,nombre_des) { // paramètres : combien de tirages ? avec quel type de dés ? et combien de dés lancés à chaque tirage
 	let tirages =[];
-	for (i=0;i<=(nombre_faces-1)*nombre_des;i++) tirages.push(0);
+	for (i=0;i<=(nombre_faces-1)*nombre_des;i++) tirages.push([i+nombre_des,0]);
 	for (let i=0,resultat;i<nombre_tirages;i++) {
 		resultat=0;
 		for (j=0;j<nombre_des;j++) resultat+=randint(1,nombre_faces); 
-		tirages [resultat-nombre_des]++;
+		tirages [resultat-nombre_des][1]++;
 	}
 return tirages
+}
+
+ /**
+* @auteur Jean-Claude Lhote
+*/
+function jours_par_mois(n){
+	let jours_mois=[31,28,31,30,31,30,31,31,30,31,30,31];
+	return jours_mois[n]
+}
+ /**
+* @auteur Jean-Claude Lhote
+*/
+function un_mois_de_temperature(base,mois,annee) { // paramètres : température médiane, quantième du mois (janvier=1), annee pour déterminer si bissextile
+
+	let tirages =[];
+	let nombre_jours=jours_par_mois(mois-1);
+	if (mois==2) {
+		if (((annee%4==0)&&(annee%100!=0))||(annee%400==0)) 	nombre_jours=29;	// années bissextiles.  
+		else nombre_jours=28; 
+	}	
+	for (let i=0;i<11;i++) tirages.push([(i-5+base),0]);
+	console.log(tirages)
+	for (let i=0,resultat;i<nombre_jours;i++) {
+		resultat=randint(0,10);
+		tirages [resultat][1]++;
+	}
+return tirages
+}
+	
+ /**
+* @auteur Jean-Claude Lhote
+*/
+function nom_du_mois(quantieme) {
+	let mois=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+	return mois[quantieme]
 }
 
 // Fonctions LaTeX

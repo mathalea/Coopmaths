@@ -5348,10 +5348,10 @@ function Fraction_d_un_nombre(max=11){
  	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
  }
 
- /**
+  /**
 * @auteur Jean-Claude Lhote
 */
- function Calculer_des_fréquences(){
+function Calculer_des_fréquences(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Calculer des fréquences";
 	this.consigne = "Calculer ";
@@ -5359,16 +5359,20 @@ function Fraction_d_un_nombre(max=11){
 	this.spacing = 2;
 	this.spacing_corr = 2;
 	this.nb_cols_corr = 1;	 
+	this.sup = 1;
+
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
+	
 		for (let i = 0, nombre_des, nombre_faces, nombre_tirages,index_valeur,tirages, texte,texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
+		if (this.sup==1) { // ici on lance des dés
 			nombre_des=randint(1,2);
 			nombre_faces=choice([4,6,8,10]);
 			nombre_tirages=choice([50,100,200,500,1000]);
 			tirages=tirer_les_des(nombre_tirages,nombre_faces,nombre_des);
-			do index_valeur=randint(0,(nombre_faces-1)*nombre_des);
-			while (tirages[index_valeur]==0)
+			do index_valeur=randint(0,tirages.length-1);
+			while (tirages[index_valeur][1]==0)
 			if (nombre_des>1) {
 				texte=`On a réalisé $${nombre_tirages}$ lancers de $${nombre_des}$ dés à $${nombre_faces}$ faces.<br>`;
 			}
@@ -5379,14 +5383,61 @@ function Fraction_d_un_nombre(max=11){
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
 			for (let j=0;j<=tirages.length;j++)		texte+='|c';
 			texte+='}\\hline  \\text{Scores}';
-			for (let j=0;j<tirages.length;j++) 		texte+='&'+calcul(nombre_des+j);
+			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][0];
 			texte+='\\\\\\hline \\text{Effectifs}'
-			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j];
+			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][1];
 			texte+='\\\\\\hline\\end{array}$'
 			texte+='<br><br> Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$.`
-			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${tex_nombre(nombre_tirages)}$.<br>`;
-			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
-			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur]*100/nombre_tirages))}\\thickspace\\%$.`
+			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur][1]}$.<br>L\'effectif total de la série est $${tex_nombre(nombre_tirages)}$.<br>`;
+			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur][1],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur][1]/nombre_tirages))}$<br>`;
+			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur][1]*100/nombre_tirages))}\\thickspace\\%$.`
+		}
+		else if (this.sup==2) { // ici on trie des notes
+			nombre_tirages=choice([5,8,10,12]);
+			
+			tirages=tirer_les_des(nombre_tirages,4,5);
+			do index_valeur=randint(0,tirages.length-1);
+			while (tirages[index_valeur][1]==0)
+			console.log(tirages)
+			texte=`Un élève a obtenu $${nombre_tirages}$ notes ce trimestre-ci en mathématiques.<br>Voici le tableau de ces notes ci-dessous:<br>`;
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
+			texte+='|c';
+			for (let j=0;j<tirages.length;j++)		if (tirages[j][1]!=0) {texte+='|c'};
+			texte+='}\\hline  \\text{Notes}';
+			for (let j=0;j<tirages.length;j++) 		if (tirages[j][1]!=0) {texte+='&'+tirages[j][0]};
+			texte+='\\\\\\hline \\text{Effectifs}'
+			for (let j=0;j<tirages.length;j++) 		if (tirages[j][1]!=0) {texte+='&'+tirages[j][1]};
+			texte+='\\\\\\hline\\end{array}$'
+			texte+='<br><br> Calculer la fréquence de la note '+`$${tirages[index_valeur][0]}$.`
+			texte_corr='L\'effectif de la valeur '+`$${tirages[index_valeur][0]}$`+' est '+`$${tirages[index_valeur][1]}$.<br>L\'effectif total de la série est $${tex_nombre(nombre_tirages)}$.<br>`;
+			texte_corr+='La fréquence de la valeur '+`$${tirages[index_valeur][0]}$`+' est '+`$${tex_fraction(tirages[index_valeur][1],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur][1]/nombre_tirages))}$<br>`;
+			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur][1]*100/nombre_tirages))}\\thickspace\\%$.`
+
+		}
+		else {  // ici on relève des températures
+			let mois=randint(1,12);
+			let annee=randint(1980,2019);
+			let temperatures_de_base=[3,4,7,13,19,24,30,29,23,18,10,5];
+			nombre_tirages=jours_par_mois(mois);
+			tirages=un_mois_de_temperature(temperatures_de_base[mois],mois,annee);
+			do index_valeur=randint(0,tirages.length-1);
+			while (tirages[index_valeur][1]==0)
+			
+			texte=`En ${nom_du_mois(mois)} ${annee} on a relevé les températures suivantes<br>`;
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
+			texte+='|c';
+			for (let j=0;j<tirages.length;j++)		if (tirages[j][1]!=0) {texte+='|c'};
+			texte+='}\\hline  \\text{températures}';
+			for (let j=0;j<tirages.length;j++) 		if (tirages[j][1]!=0) {texte+='&'+tirages[j][0]};
+			texte+='\\\\\\hline \\text{Effectifs}'
+			for (let j=0;j<tirages.length;j++) 		if (tirages[j][1]!=0) {texte+='&'+tirages[j][1]};
+			texte+='\\\\\\hline\\end{array}$'
+			texte+='<br><br> Calculer la fréquence de la température '+`$${tirages[index_valeur][0]}$.`
+			texte_corr='L\'effectif de la valeur '+`$${tirages[index_valeur][0]}$`+' est '+`$${tirages[index_valeur][1]}$.<br>L\'effectif total de la série est $${tex_nombre(nombre_tirages)}$.<br>`;
+			texte_corr+='La fréquence de la valeur '+`$${tirages[index_valeur][0]}$`+' est '+`$${tex_fraction(tirages[index_valeur][1],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur][1]/nombre_tirages))}$<br>`;
+			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur][1]*100/nombre_tirages))}\\thickspace\\%$.`
+
+		}
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
@@ -5397,6 +5448,7 @@ function Fraction_d_un_nombre(max=11){
 		}
 		liste_de_question_to_contenu(this);
 	}
+	this.besoin_formulaire_numerique = ['Choix de la série', 3, '1 : Lancers de dés\n 2 : Notes de contrôle\n 3 : Températures(relatifs)\n'];
 }
 
  /**
