@@ -5374,13 +5374,13 @@ function Fraction_d_un_nombre(max=11){
 			}
 			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br>'
 			texte+=' Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+'.<br>';
-			texte+='$\\begin{array}{c';
-			for (let j=0;j<=tirages.length;j++)		texte+='|c';
-			texte+='} scores';
+			texte+='$\\begin{array}{|c|';
+			for (let j=0;j<=tirages.length;j++)		texte+='c|';
+			texte+='} \\hline scores';
 			for (let j=0;j<tirages.length;j++) 		texte+='&'+calcul(nombre_des+j);
 			texte+='\\\\\\hline effectifs'
 			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j];
-			texte+='\\end{array}$'
+			texte+='\\\\\\hline\\end{array}$'
 	
 			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${nombre_tirages}$.<br>`;
 			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],nombre_tirages)}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
