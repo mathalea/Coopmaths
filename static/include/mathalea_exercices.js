@@ -5362,7 +5362,7 @@ function Fraction_d_un_nombre(max=11){
 		for (let i = 0, nombre_des, nombre_faces, nombre_tirages,index_valeur,tirages, texte,texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
 			nombre_des=randint(1,2);
 			nombre_faces=choice([4,6,8,10]);
-			nombre_tirages=choice([10,25,50,100,200,500,1000]);
+			nombre_tirages=choice([50,100,200,500,1000]);
 			tirages=tirer_les_des(nombre_tirages,nombre_faces,nombre_des);
 			do index_valeur=randint(0,(nombre_faces-1)*nombre_des);
 			while (tirages[index_valeur]==0)
@@ -5381,8 +5381,8 @@ function Fraction_d_un_nombre(max=11){
 			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j];
 			texte+='\\\\\\hline\\end{array}$'
 			texte+='<br><br> Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$.`
-			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${nombre_tirages}$.<br>`;
-			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],nombre_tirages)}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
+			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${tex_nombre(nombre_tirages)}$.<br>`;
+			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
 			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur]*100/nombre_tirages))}\\%.$`
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
