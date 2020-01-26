@@ -601,11 +601,16 @@ function prenom(){
 	return choice([prenomF(),prenomM()])
 }
 
-
-
-
-
-
+function tirer_les_des(nombre_tirages,nombre_faces,nombre_des) { // paramètres : combien de tirages ? avec quel type de dés ? et combien de dés lancés à chaque tirage
+	let tirages =[];
+	for (i=0;i<=(nombre_faces-1)*nombre_des;i++) tirages.push(0);
+	for (let i=0,resultat;i<nombre_tirages;i++) {
+		resultat=0;
+		for (j=0;j<nombre_des;j++) resultat+=randint(1,nombre_faces); 
+		tirages [resultat-nombre_des]++;
+	}
+return tirages
+}
 
 // Fonctions LaTeX
 

@@ -79,6 +79,7 @@ var liste_des_exercices_disponibles = {
 		'5R22': Exercice_additions_et_soustraction_de_relatifs,
 		'5R31': Exercice_additions_et_soustraction_de_relatifs,
 		'5R31-2': Exercice_simplification_somme_algebrique,
+		'5S10': Calculer_des_fréquences,
 		'4N10': Exercice_additionner_des_fractions,
 		'4N11': Exercice_additionner_ou_soustraire_des_fractions,
 		'4N12': Exercice_trouver_l_inverse,
@@ -5341,6 +5342,54 @@ function Fraction_d_un_nombre(max=11){
  	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
  }
 
+ function Calculer_des_fréquences(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Calculer des fréquences";
+	this.consigne = "Calculer ";
+	this.nb_questions = 1;
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_cols_corr = 1;	 
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		for (let i = 0, nombre_des, nombre_faces, nombre_tirages,index_valeur,tirages, texte,texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
+			nombre_des=randint(1,2);
+			nombre_faces=choice([4,6,8,10]);
+			nombre_tirages=choice([10,25,50,100,200,500,1000]);
+			index_valeur=randint(0,(nombre_faces-1)*nombre_des);
+			tirages=tirer_les_des(nombre_tirages,nombre_faces,nombre_des);
+			console.log(tirages)
+			if (nombre_des>1) {
+				texte=`On a réalisé $${nombre_tirages}$ lancers de $${nombre_des}$ dés à $${nombre_faces}$ faces.<br>`;
+			}
+			else {
+				texte=`On a réalisé $${nombre_tirages}$ lancers d'un dé à $${nombre_faces}$ faces.<br>`;
+			}
+			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br>'
+			texte+=' Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+'.<br>';
+			texte+='$\\begin{array}{c';
+			for (let j=0;j<=tirages.length;j++)		texte+='|c';
+			texte+='} scores';
+			for (let j=0;j<tirages.length;j++) 		texte+='&'+calcul(nombre_des+j);
+			texte+='\\\\\\hline effectifs'
+			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j];
+			texte+='\\end{array}$'
+	
+			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${nombre_tirages}$.<br>`;
+			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],nombre_tirages)}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
+			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur]*100/nombre_tirages))}\\%.$`
+
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+}
 
  /**
 * @Auteur Rémi Angot
