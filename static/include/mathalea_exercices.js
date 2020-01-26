@@ -5393,7 +5393,7 @@ function Calculer_des_fréquences(){
 			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur][1]*100/nombre_tirages))}\\thickspace\\%$.`
 		}
 		else if (this.sup==2) { // ici on trie des notes
-			nombre_tirages=choice([5,8,10,12]);
+			nombre_tirages=choice([8,10,12]);
 			
 			tirages=tirer_les_des(nombre_tirages,4,5);
 			do index_valeur=randint(0,tirages.length-1);
@@ -5417,12 +5417,11 @@ function Calculer_des_fréquences(){
 		else {  // ici on relève des températures
 			let mois=randint(1,12);
 			let annee=randint(1980,2019);
-			let temperatures_de_base=[3,4,7,13,19,24,30,29,23,18,10,5];
+			let temperatures_de_base=[1,3,7,13,19,24,30,29,23,18,10,5];
 			nombre_tirages=jours_par_mois(mois);
-			tirages=un_mois_de_temperature(temperatures_de_base[mois],mois,annee);
+			tirages=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee);
 			do index_valeur=randint(0,tirages.length-1);
 			while (tirages[index_valeur][1]==0)
-			
 			texte=`En ${nom_du_mois(mois)} ${annee} on a relevé les températures suivantes<br>`;
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
 			texte+='|c';
