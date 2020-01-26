@@ -1850,11 +1850,17 @@ function Exercice_tables_de_multiplications_et_decimaux(tables_par_defaut='2;3;4
 		for (let i = 0, a, b, k1, k2, couple, texte, texte_corr; i < this.nb_questions; i++) {
 			a = couples[i][0];
 			b = couples[i][1];
-			couple = choice([[1,10],[1,100],[1,1000],[10,100],[10,1000],[100,1000]]);
+			couple = choice([[1,10],[1,100],[1,1000],[10,100],[10,1000],[100,100],[100,1000]]);
 			k1 = couple[0];
 			k2 = couple[1];
 			a = Algebrite.eval(a/k1);
 			b = Algebrite.eval(b/k2);
+			if (a==1) {
+				a=0.01
+			}
+			if (b==1) {
+				b=0.1
+			}
 			texte = '$ '+ tex_nombre(a) + ' \\times ' + tex_nombre(b) + ' = \\dotfill $';
 			texte_corr = '$ '+ tex_nombre(a) + ' \\times ' + tex_nombre(b) + ' = ' + tex_nombre(Algebrite.eval(a*b)) +' $';
 			this.liste_questions.push(texte);
@@ -6334,9 +6340,8 @@ function Multiplier_decimaux(){
 	this.titre = "Multiplications posées de nombres décimaux"
 	this.consigne = "Poser et effectuer les calculs suivants."
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	this.spacing_corr = 1; //Important sinon le calcul posé ne fonctionne pas avec opmul et spacing
 	this.nb_questions = 4;
-	// this.pas_de_version_HMTL=true;
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
