@@ -5363,9 +5363,9 @@ function Fraction_d_un_nombre(max=11){
 			nombre_des=randint(1,2);
 			nombre_faces=choice([4,6,8,10]);
 			nombre_tirages=choice([10,25,50,100,200,500,1000]);
-			index_valeur=randint(0,(nombre_faces-1)*nombre_des);
 			tirages=tirer_les_des(nombre_tirages,nombre_faces,nombre_des);
-			console.log(tirages)
+			do index_valeur=randint(0,(nombre_faces-1)*nombre_des);
+			while (tirages[index_valeur]==0)
 			if (nombre_des>1) {
 				texte=`On a réalisé $${nombre_tirages}$ lancers de $${nombre_des}$ dés à $${nombre_faces}$ faces.<br>`;
 			}
@@ -5373,19 +5373,18 @@ function Fraction_d_un_nombre(max=11){
 				texte=`On a réalisé $${nombre_tirages}$ lancers d'un dé à $${nombre_faces}$ faces.<br>`;
 			}
 			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br>'
-			texte+=' Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+'.<br>';
-			texte+='$\\begin{array}{|c|';
-			for (let j=0;j<=tirages.length;j++)		texte+='c|';
-			texte+='} \\hline scores';
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
+			for (let j=0;j<=tirages.length;j++)		texte+='|c';
+			texte+='}\\hline  \\text{Scores}';
 			for (let j=0;j<tirages.length;j++) 		texte+='&'+calcul(nombre_des+j);
-			texte+='\\\\\\hline effectifs'
+			texte+='\\\\\\hline \\text{Effectifs}'
 			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j];
 			texte+='\\\\\\hline\\end{array}$'
-	
+			texte+='<br><br> Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$.`
 			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${nombre_tirages}$.<br>`;
 			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],nombre_tirages)}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
 			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur]*100/nombre_tirages))}\\%.$`
-
+			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
