@@ -625,7 +625,7 @@ function tex_enumerate(liste,spacing){
 		result += '\\end{spacing}'
 	} 
 	result += '\\end{enumerate}'
-	return result
+	return result.replace(/<br>/g,'\\\\')
 }
 
 /**
@@ -651,7 +651,7 @@ function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
 		result += '\\end{spacing}'
 	} 
 	result += '\\end{enumerate}'
-	return result
+	return result.replace(/<br>/g,'\\\\')
 }
 
 /**
@@ -681,7 +681,7 @@ function html_enumerate(liste,spacing){
 	let result='';
 	(spacing>1) ? result =`<ol style="line-height: ${spacing};">` : result = '<ol>'
 	for(let i in liste){
-		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\\\/g,'<br>').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....').replace(/~/g,' ') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....').replace(/~/g,' ') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 	}
 	result += '</ol>'
 	return result
@@ -696,7 +696,8 @@ function html_ligne(liste,spacing){
 		result = `<div style="line-height: ${spacing};">\n`
 	}
 	for(let i in liste){
-		result += '\t' + liste[i].replace(/\\dotfill/g,'...').replace(/\\\\/g,'<br>').replace(/~/g,' ') + '</br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '\t' + liste[i].replace(/\\dotfill/g,'...').replace(/~/g,' ') + '</br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		// .replace(/\\\\/g,'<br>') abandonné pour supporter les array
 	}
 
 	if (spacing>1) {
@@ -733,7 +734,7 @@ function html_consigne(consigne){
 * @Auteur Rémi Angot
 */
 function tex_consigne(consigne){
-	return '\\exo{' + consigne + '}\n\n'
+	return '\\exo{' + consigne.replace(/<br>/g,'\\\\') + '}\n\n'
 }
 
 /**

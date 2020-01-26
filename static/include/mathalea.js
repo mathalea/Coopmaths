@@ -412,10 +412,13 @@ function mise_a_jour_du_code(){
 		
 		$('#exercices').html(code1);
 		$('#corrections').html(code2);
-		renderMathInElement(document.body,{delimiters: [
-			{left: "$", right: "$", display: false},
-			{left: "$$", right: "$$", display: true}
-			]});
+		renderMathInElement(document.body, {
+            delimiters: [
+			{left: "\\[", right: "\\]", display: true},
+			{left: "$", right: "$", display: false}
+			],
+			"throwOnError":true,"errorColor":"#CC0000","strict":"warn","trust":false
+        });
 		//Ajoute figures MG32
 		for (let i = 0; i < liste_des_exercices.length; i++) {
 			if (exercice[i].type_exercice=='MG32'){
@@ -616,11 +619,14 @@ window.onload = function()  {
 	$('.ui.accordion').accordion('refresh');
 	// Gestion du bouton de copie
 	$('.ui.button.toggle').state(); // initialise le bouton
-	document.getElementById('btnCopieURL').addEventListener('click', function () {
-		setTimeout(function () {
-			$('#btnCopieURL').removeClass('active'); // "éteint" le bouton 1s après 
-		}, 1000);
-	});
+	if (sortie_html) {
+		document.getElementById('btnCopieURL').addEventListener('click', function () {
+			setTimeout(function () {
+				$('#btnCopieURL').removeClass('active'); // "éteint" le bouton 1s après 
+			}, 1000);
+		});
+	}
+		
 
 
 	// Gestion du menu déroulant par une fonction auto-exécutante

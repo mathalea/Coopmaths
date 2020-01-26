@@ -469,19 +469,19 @@ function Calculs_de_durees_ou_d_horaires(){
 				if (type_de_questions[i]==1) {
 					texte = `La diffusion d'un film commence à ${d1} et se termine à ${d2}. Combien de temps a duré ce film ?`;
 					texte_corr = `${d2} − ${d1} = ${d}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le film dure ${d}.`;
 				}
 				if (type_de_questions[i]==2) {
 					texte = `Un film dure ${d} et commence à ${d1}. À quelle heure se terminera-t-il ?`;
 					texte_corr = `${d1} + ${d} = ${d2}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le film terminera à ${d2}.`;
 				}
 				if (type_de_questions[i]==3) {
 					texte = `Un film de ${d} termine à ${d2}. À quelle heure a-t-il commencé ?`;
 					texte_corr = `${d2} − ${d} = ${d1}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le film a commencé à ${d1}.`;
 				} 
 
@@ -511,19 +511,19 @@ function Calculs_de_durees_ou_d_horaires(){
 				if (type_de_questions[i]==1) {
 					texte = `Sur son service de streaming favori, ${prenom()} commence à regarder une série à ${d1} et celle-ci se termine à ${d2}. Combien de temps a duré l'épisode ?`;
 					texte_corr = `${d2} − ${d1} = ${d}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `La série a duré ${d}.`;
 				}
 				if (type_de_questions[i]==2) {
 					texte = `${prenom()} allume son ordinateur à ${d1} pour regarder une série de ${d}. À quelle heure la série s'achèvera-t-elle ?`;
 					texte_corr = `${d1} + ${d} = ${d2}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `La série s'achèvera à ${d2}.`;
 				}
 				if (type_de_questions[i]==3) {
 					texte = `${prenom()} termine de regarder une série de ${d} à ${d2}. À quelle la série a-t-elle commencé ?`;
 					texte_corr = `${d2} − ${d} = ${d1}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Elle a commencé à ${d1}.`;
 				}
 			}
@@ -543,19 +543,19 @@ function Calculs_de_durees_ou_d_horaires(){
 				if (type_de_questions[i]==1) {
 					texte = `Une émission télévisée est diffusée de ${d1} à ${d2}. Combien de temps dure-t-elle ?`;
 					texte_corr = `${d2} − ${d1} = ${d}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `L'émission dure ${d}.`;
 				}
 				if (type_de_questions[i]==2) {
 					texte = `Une émission télévisée de ${d} commence à ${d1}. À quelle heure s'achèvera-t-elle ?`;
 					texte_corr = `${d1} + ${d} = ${d2}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `L'émission s'achèvera à ${d2}.`;
 				}
 				if (type_de_questions[i]==3) {
 					texte = `${prenom()} termine de regarder une émission de ${d} à ${d2}. À quelle heure l'émission a-t-elle commencé ?`;
 					texte_corr = `${d2} − ${d} = ${d1}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `L'émission a commencé à ${d1}.`;
 				}
 			}
@@ -584,19 +584,19 @@ function Calculs_de_durees_ou_d_horaires(){
 				if (type_de_questions[i]==1) {
 					texte = `Un papa regarde la compétition de gymnastique de sa fille  de ${d1} à ${d2}. Calculer la durée de cette compétition.`;
 					texte_corr = `${d2} − ${d1} = ${d}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `La compétition dure ${d}.`;
 				}
 				if (type_de_questions[i]==2) {
 					texte = `Une compétition de gymnastique commence à ${d1} et dure ${d}. À quelle heure sera-t-elle terminée ?`;
 					texte_corr = `${d1} + ${d} = ${d2}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `La compétition terminera à ${d2}.`;
 				}
 				if (type_de_questions[i]==3) {
 					texte = `Une compétition de gymnastique qui se termine à ${d2} a duré ${d}. À quelle heure a-t-elle commencé.`;
 					texte_corr = `${d2} − ${d} = ${d1}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `La compétition a commencé à ${d1}.`;
 				}
 			}
@@ -625,19 +625,19 @@ function Calculs_de_durees_ou_d_horaires(){
 				if (type_de_questions[i]==1) {
 					texte = `Un train part à ${d1} et arrive à destination à ${d2}. Calculer la durée du trajet.`;
 					texte_corr = `${d2} − ${d1} = ${d}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le trajet dure ${d}.`;
 				}
 				if (type_de_questions[i]==2) {
 					texte = `${prenomF()} monte dans le train à ${d1} pour un trajet qui doit durer ${d}. À quelle heure arrivera-t-elle ?`;
 					texte_corr = `${d1} + ${d} = ${d2}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Elle arrivera à ${d2}.`;
 				}
 				if (type_de_questions[i]==3) {
 					texte = `Un train arrive en gare à ${d2} après un trajet de ${d}. À quelle heure le voyage a-t-il commencé ?`;
 					texte_corr = `${d2} − ${d} = ${d1}`;
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le voyage a commencé à ${d1}.`;
 				}
 			}
@@ -2188,10 +2188,10 @@ function Criteres_de_divisibilite(){
 					somme_string = somme_des_chiffre(n);
 					texte = `$${tex_nombre(n)}$ est-il divisible par $3$ ?`
 					if (calcul(somme_string)%3==0) {
-						texte_corr = `$${somme_string}=${calcul(somme_string)}=3\\times${calcul(somme_string)/3}$\\\\`
+						texte_corr = `$${somme_string}=${calcul(somme_string)}=3\\times${calcul(somme_string)/3}$<br>`
 						texte_corr += `La somme des chiffres de $${tex_nombre(n)}$ est divisible par $3$ donc $${tex_nombre(n)}$ est divisible par $3$.`
 					} else {
-						texte_corr = `$${somme_string}=${calcul(somme_string)}=3\\times${(calcul(somme_string)-calcul(somme_string)%3)/3}+${calcul(somme_string)%3}$\\\\`
+						texte_corr = `$${somme_string}=${calcul(somme_string)}=3\\times${(calcul(somme_string)-calcul(somme_string)%3)/3}+${calcul(somme_string)%3}$<br>`
 						texte_corr += `La somme des chiffres de $${tex_nombre(n)}$ n'est pas divisible par $3$ donc $${tex_nombre(n)}$ n'est pas divisible par $3$.`
 					}
 				break
@@ -2201,10 +2201,10 @@ function Criteres_de_divisibilite(){
 					somme_string = somme_des_chiffre(n);
 					texte = `$${tex_nombre(n)}$ est-il divisible par $9$ ?`
 					if (calcul(somme_string)%9==0) {
-						texte_corr = `$${somme_string}=${calcul(somme_string)}=9\\times${calcul(somme_string)/9}$\\\\`
+						texte_corr = `$${somme_string}=${calcul(somme_string)}=9\\times${calcul(somme_string)/9}$<br>`
 						texte_corr += `La somme des chiffres de $${tex_nombre(n)}$ est divisible par $9$ donc $${tex_nombre(n)}$ est divisible par $9$.`
 					} else {
-						texte_corr = `$${somme_string}=${calcul(somme_string)}=9\\times${(calcul(somme_string)-calcul(somme_string)%9)/9}+${calcul(somme_string)%9}$\\\\`
+						texte_corr = `$${somme_string}=${calcul(somme_string)}=9\\times${(calcul(somme_string)-calcul(somme_string)%9)/9}+${calcul(somme_string)%9}$<br>`
 						texte_corr += `La somme des chiffres de $${tex_nombre(n)}$ n'est pas divisible par $9$ donc $${tex_nombre(n)}$ n'est pas divisible par $9$.`
 					}
 				break
@@ -2240,12 +2240,12 @@ function Criteres_de_divisibilite(){
 						n = choice([randint(10,99)*100+u],u*randint(11,99),randint(100,999)) //un nombre qui se termine par u, un divisible par u, un au hasard
 					}	
 					texte = `$${tex_nombre(n)}$ est-il divisible par $${u}$ ?`
-					texte_corr = `On ne connait pas de critère de divisibilité par $${u}$, on calcule donc la division euclidienne de $${tex_nombre(n)}$ par $${u}$.\\\\`
+					texte_corr = `On ne connait pas de critère de divisibilité par $${u}$, on calcule donc la division euclidienne de $${tex_nombre(n)}$ par $${u}$.<br>`
 					if (n%u==0) {
-						texte_corr += `$${tex_nombre(n)}=${u}\\times${tex_nombre(n/u)}$\\\\`
+						texte_corr += `$${tex_nombre(n)}=${u}\\times${tex_nombre(n/u)}$<br>`
 						texte_corr += `Le reste de la division euclidienne est nul donc $${tex_nombre(n)}$ est divisible par $${u}$.`
 					} else {
-						texte_corr += `$${tex_nombre(n)}=${u}\\times${(n-n%u)/u}+${n%u}$\\\\`
+						texte_corr += `$${tex_nombre(n)}=${u}\\times${(n-n%u)/u}+${n%u}$<br>`
 						texte_corr += `Le reste de la division euclidienne n'est pas nul donc $${tex_nombre(n)}$ n'est pas divisible par $${u}$.`
 					}
 
@@ -2331,7 +2331,7 @@ function Exercice_comparer_quatre_fractions (){
 	this.titre = "Comparer quatre fractions (dénominateurs multiples) et un nombre entier"
 	this.consigne = "Ranger les nombres suivants dans l'ordre croissant."
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html ? this.spacing_corr = 4 : this.spacing_corr = 3 ;
 	this.nb_questions = 2;
 	this.nb_cols_corr = 1;
 
@@ -2379,14 +2379,14 @@ function Exercice_comparer_quatre_fractions (){
 			texte_corr ="";
 			for (var j = 0; j < tableau_fractions_enonce.length; j++) {
 				texte_corr+=tableau_fractions_enonce[j][2]
-				texte_corr+="\\\\\\\\\\\\"
+				texte_corr+="<br>"
 			}
 			for (var j = 0; j < tableau_fractions.length; j++) {
 				texte_corr+=tableau_fractions[j][3]
 				if (j<tableau_fractions.length-1)
 					texte_corr+=`$\\quad<\\quad$`
 			}
-			texte_corr+="\\\\\\\\\\\\"
+			texte_corr+="<br>"
 			let texte_conclusion = ""
 			for (var j = 0; j < tableau_fractions.length; j++) {
 				if (tableau_fractions[j][1]==1)
@@ -4214,7 +4214,7 @@ function Exercice_perimetres_et_aires(difficulte=1){
 						texte = `Un carré $${nom_carre}$ tel que $${nom_carre[0]+nom_carre[1]} = ${cote}$ cm.`;
 					}
 					 
-					texte_corr = `$\\mathcal{P}_{${nom_carre}}=4\\times${cote}~\\text{cm}=${4*cote}~\\text{cm}$\\\\\n`;
+					texte_corr = `$\\mathcal{P}_{${nom_carre}}=4\\times${cote}~\\text{cm}=${4*cote}~\\text{cm}$<br>\n`;
 					texte_corr += `$\\mathcal{A}_{${nom_carre}}=${cote}~\\text{cm}\\times${cote}~\\text{cm}=${cote*cote}~\\text{cm}^2$`;
 					break ;
 				case 'rectangle' : 
@@ -4227,7 +4227,7 @@ function Exercice_perimetres_et_aires(difficulte=1){
 							texte = `Un rectangle $${nom_rectangle}$ tel que $${nom_rectangle[0]+nom_rectangle[1]+' = '+L}$ cm et $${nom_rectangle[1]+nom_rectangle[2]+' = '+l}$ cm.`;
 						}
 					 
-					texte_corr = `$\\mathcal{P}_{${nom_rectangle}}=(${L}~\\text{cm}+${l}~\\text{cm})\\times2=${(L+l)*2}~\\text{cm}$\\\\\n`;
+					texte_corr = `$\\mathcal{P}_{${nom_rectangle}}=(${L}~\\text{cm}+${l}~\\text{cm})\\times2=${(L+l)*2}~\\text{cm}$<br>\n`;
 					texte_corr += `$\\mathcal{A}_{${nom_rectangle}}=${L}~\\text{cm}\\times${l}~\\text{cm}=${L*l}~\\text{cm}^2$`;
 					break ;
 				case 'triangle_rectangle' :
@@ -4244,7 +4244,7 @@ function Exercice_perimetres_et_aires(difficulte=1){
 						texte = `Un triangle rectangle $${nom_triangle}$ a pour côtés : $${a}$ cm, $${c}$ cm et $${b}$ cm.`;	
 					}
 					
-					texte_corr = `$\\mathcal{P}_{${nom_triangle}}=${a}~\\text{cm}+${b}~\\text{cm}+${c}~\\text{cm}=${a+b+c}~\\text{cm}$\\\\\n`;
+					texte_corr = `$\\mathcal{P}_{${nom_triangle}}=${a}~\\text{cm}+${b}~\\text{cm}+${c}~\\text{cm}=${a+b+c}~\\text{cm}$<br>\n`;
 					texte_corr += `$\\mathcal{A}_{${nom_triangle}}=${a}~\\text{cm}\\times${b}~\\text{cm}\\div2=${Algebrite.eval(a*b/2)}~\\text{cm}^2$`;
 					break ;
 				case 'cercle' : 
@@ -4252,13 +4252,13 @@ function Exercice_perimetres_et_aires(difficulte=1){
 					let donne_le_diametre = choice([true,false])
 					if (donne_le_diametre) {
 						texte = `Un cercle de $${2*R}$ cm de diamètre.`;
-						texte_corr = `Le diamètre est de $${2*R}$ cm donc le rayon est de $${R}$~cm.\\\\\n`	
+						texte_corr = `Le diamètre est de $${2*R}$ cm donc le rayon est de $${R}$~cm.<br>\n`	
 					} else {
 						texte = `Un cercle de $${R}$ cm de rayon.`;
 						texte_corr = '';	
 					}
 					 
-					texte_corr += `$\\mathcal{P}=2\\times${R}\\times\\pi~\\text{cm}=${2*R}\\pi~\\text{cm}\\approx${arrondi_virgule(2*R*Math.PI,1)}~\\text{cm}$\\\\\n`;
+					texte_corr += `$\\mathcal{P}=2\\times${R}\\times\\pi~\\text{cm}=${2*R}\\pi~\\text{cm}\\approx${arrondi_virgule(2*R*Math.PI,1)}~\\text{cm}$<br>\n`;
 					texte_corr += `$\\mathcal{A}=${R}\\times${R}\\times\\pi~\\text{cm}^2=${R*R}\\pi~\\text{cm}^2\\approx${arrondi_virgule(R*R*Math.PI,1)}~\\text{cm}^2$`;
 					break ;
 			}
@@ -4355,7 +4355,7 @@ function Exercice_additions_et_soustraction_de_relatifs(max=20){
 			if (this.sup2){
 				texte = `$ ${lettre_depuis_chiffre(i+1)} = ${a}${ecriture_algebrique(b)}${ecriture_algebrique(c)}${ecriture_algebrique(d)}${ecriture_algebrique(e)} = \\dotfill $`;
 				if (!sortie_html){
-					texte += `\\\\\n$ ${lettre_depuis_chiffre(i+1)} = \\dotfill $`
+					texte += `<br>\n$ ${lettre_depuis_chiffre(i+1)} = \\dotfill $`
 				}
 				texte_corr = `$ ${lettre_depuis_chiffre(i+1)} =  ${a}${ecriture_algebrique(b)}${ecriture_algebrique(c)}${ecriture_algebrique(d)}${ecriture_algebrique(e)} = ${somme_des_termes_par_signe([a,b,c,d,e])[0]}${ecriture_algebrique(somme_des_termes_par_signe([a,b,c,d,e])[1])} = ${a+b+c+d+e} $`;		
 			} else {
@@ -4364,8 +4364,8 @@ function Exercice_additions_et_soustraction_de_relatifs(max=20){
 					texte += `\\\\\n$ ${lettre_depuis_chiffre(i+1)} = \\dotfill $`	
 				}
 				texte_corr = `$ ${lettre_depuis_chiffre(i+1)} =  ${ecriture_nombre_relatif(a)}${signe(s1)}${ecriture_nombre_relatif(b)}${signe(s2)}${ecriture_nombre_relatif(c)}${signe(s3)}${ecriture_nombre_relatif(d)}${signe(s4)}${ecriture_nombre_relatif(e)} $`;
-				texte_corr += `\\\\\n$ ${lettre_depuis_chiffre(i+1)} = ${ecriture_nombre_relatif(a)}+${ecriture_nombre_relatif(s1*b)}+${ecriture_nombre_relatif(s2*c)}+${ecriture_nombre_relatif(s3*d)}+${ecriture_nombre_relatif(s4*e)} $`;
-				texte_corr += `\\\\\n$ ${lettre_depuis_chiffre(i+1)} = ${a+s1*b+s2*c+s3*d+s4*e} $`;
+				texte_corr += `<br>\n$ ${lettre_depuis_chiffre(i+1)} = ${ecriture_nombre_relatif(a)}+${ecriture_nombre_relatif(s1*b)}+${ecriture_nombre_relatif(s2*c)}+${ecriture_nombre_relatif(s3*d)}+${ecriture_nombre_relatif(s4*e)} $`;
+				texte_corr += `<br>\n$ ${lettre_depuis_chiffre(i+1)} = ${a+s1*b+s2*c+s3*d+s4*e} $`;
 			}
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -4425,11 +4425,11 @@ function Exercice_additions_de_5_relatifs(max=20){
 			} else {
 				texte = `$ ${lettre_depuis_chiffre(i+1)} =  ${ecriture_nombre_relatif(a)}${signe(s1)}${ecriture_nombre_relatif(b)}${signe(s2)}${ecriture_nombre_relatif(c)}${signe(s3)}${ecriture_nombre_relatif(d)}${signe(s4)}${ecriture_nombre_relatif(e)} = \\dotfill $`;
 				if (!sortie_html){
-					texte += `\\\\\n$ ${lettre_depuis_chiffre(i+1)} = \\dotfill $`	
+					texte += `<br>\n$ ${lettre_depuis_chiffre(i+1)} = \\dotfill $`	
 				}
 				texte_corr = `$ ${lettre_depuis_chiffre(i+1)} =  ${ecriture_nombre_relatif(a)}${signe(s1)}${ecriture_nombre_relatif(b)}${signe(s2)}${ecriture_nombre_relatif(c)}${signe(s3)}${ecriture_nombre_relatif(d)}${signe(s4)}${ecriture_nombre_relatif(e)} $`;
 				//A faire regroupement des termes de même signe texte_corr += `\\\\\n$ ${lettre_depuis_chiffre(i+1)} = ${ecriture_nombre_relatif(a)}+${ecriture_nombre_relatif(s1*b)}+${ecriture_nombre_relatif(s2*c)}+${ecriture_nombre_relatif(s3*d)}+${ecriture_nombre_relatif(s4*e)} $`;
-				texte_corr += `\\\\\n$ ${lettre_depuis_chiffre(i+1)} = ${a+s1*b+s2*c+s3*d+s4*e} $`;
+				texte_corr += `<br>\n$ ${lettre_depuis_chiffre(i+1)} = ${a+s1*b+s2*c+s3*d+s4*e} $`;
 			}
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -5369,7 +5369,7 @@ function Variation_en_pourcentages(){
 				}
 				
 				texte_corr = `$\\text{Diminution : }${tex_fraction(taux,100)}\\times ${tex_prix(prix)} = ${tex_prix(Algebrite.eval(prix*taux))}\\div100=${tex_prix(Algebrite.eval(prix*taux/100))}$ €`
-				texte_corr += `\\\\\\\\`
+				texte_corr += `<br>`
 				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}-${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix-prix*taux/100))}$ €`
 			} else {
 				if (sortie_html) {
@@ -5379,7 +5379,7 @@ function Variation_en_pourcentages(){
 
 				}
 				texte_corr = `$\\text{Augmentation : }${tex_fraction(taux,100)}\\times ${tex_prix(prix)}= ${tex_prix(Algebrite.eval(prix*taux))}\\div100=${tex_prix(Algebrite.eval(prix*taux/100))}$ €`
-				texte_corr += `\\\\\\\\`
+				texte_corr += `<br>`
 				texte_corr += `$\\text{Nouveau prix : }${tex_prix(prix)}+${tex_prix(Algebrite.eval(prix*taux/100))}=${tex_prix(Algebrite.eval(prix*(1+taux/100)))}$ €`
 			}
 			
@@ -5422,15 +5422,15 @@ function Probleme_course(){
 
 			texte = `${prenom} achète ${tex_nombre(masse_en_kg_de_aliment1)} kg de ${aliment1} à ${tex_prix(prix_aliment1)} €/kg `
 			texte += `et ${masse_en_g_de_aliment2} g de ${aliment2} à ${tex_prix(prix_aliment2)} €/kg. Quel est le prix total à payer ?`
-			texte_corr = `Prix des ${aliment1} : ${tex_nombre(masse_en_kg_de_aliment1)} kg × ${tex_prix(prix_aliment1)} €/kg = ${tex_prix(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))} €`+'\\\\'
-			texte_corr += `\\\\`;
-			texte_corr += `Prix du ${aliment2} : ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2/1000))} kg × ${tex_prix(prix_aliment2)} €/kg = ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))} € `+'\\\\'
-			texte_corr += `\\\\`;
+			texte_corr = `Prix des ${aliment1} : ${tex_nombre(masse_en_kg_de_aliment1)} kg × ${tex_prix(prix_aliment1)} €/kg = ${tex_prix(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))} €`+'<br>'
+			texte_corr += `<br>`;
+			texte_corr += `Prix du ${aliment2} : ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2/1000))} kg × ${tex_prix(prix_aliment2)} €/kg = ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))} € `+'<br>'
+			texte_corr += `<br>`;
 			texte_corr += `Prix total à payer : ${tex_nombre(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))} € + ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))} € ≈ ${arrondi_virgule(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1+masse_en_g_de_aliment2*prix_aliment2/1000))} €`
 			
 			if (!sortie_html) {
-				texte_corr = `Prix des ${aliment1} : $${tex_nombre(masse_en_kg_de_aliment1)}~\\text{kg}\\times${tex_prix(prix_aliment1)}~\\text{\\euro{}/kg} = ${tex_prix(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))}~\\text{\\euro}$`+'\\\\'
-				texte_corr += `Prix du ${aliment2} : $${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2/1000))}~\\text{kg}\\times${tex_prix(prix_aliment2)}~\\text{\\euro{}/kg} = ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro}$`+'\\\\'
+				texte_corr = `Prix des ${aliment1} : $${tex_nombre(masse_en_kg_de_aliment1)}~\\text{kg}\\times${tex_prix(prix_aliment1)}~\\text{\\euro{}/kg} = ${tex_prix(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))}~\\text{\\euro}$`+'<br>'
+				texte_corr += `Prix du ${aliment2} : $${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2/1000))}~\\text{kg}\\times${tex_prix(prix_aliment2)}~\\text{\\euro{}/kg} = ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro}$`+'<br>'
 				texte_corr += `Prix total à payer : $${tex_nombre(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))}~\\text{\\euro} + ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro} \\approx ${arrondi_virgule(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1+masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro}$`
 			
 			}
@@ -5451,7 +5451,7 @@ function Aire_de_triangles(){
 	this.titre = "Aires de triangles"
 	this.consigne = "Calculer l'aire des 3 triangles suivants (vous pouvez déplacer certains points)."
 	this.spacing = 2;
-	this.spacing_corr = 2;
+	sortie_html ? this.spacing_corr = 3 : this.spacing_corr = 2;
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false ;
 	this.type_exercice = 'MG32';
@@ -5476,9 +5476,9 @@ function Aire_de_triangles(){
 			codeBase64 = "TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAL2AAACOAAAAQEAAAABAAAABgAQTG9uZ3VldXJPcmllbnRlZQArIzE6IExlIHByZW1pZXIgcG9pbnQKIzI6IExlIGRldXhpw6htZSBwb2ludAAAAAIAAAADAAAAAAn#####AAAAAQARQ0VsZW1lbnRHZW5lcmlxdWUAAUEAAAAA#####wAAAAAAAUIAAAAA##########8AAAABABRDRHJvaXRlRGlyZWN0aW9uRml4ZQD#####AAAAAAEQAAABAAEAAAAAAT#wAAAAAAAA#####wAAAAEAD0NQb2ludExpZURyb2l0ZQD#####AAAAAAAQAAJXJwAAAAAAAAAAAEAIAAAAAAAABQABQGDAAAAAAAAAAAAC#####wAAAAEACENTZWdtZW50Af####8AAAAAABAAAAEAAQAAAAAAAAAB#####wAAAAIAE0NNZXN1cmVBbmdsZU9yaWVudGUA#####wAEYW5nJwAAAAMAAAAAAAAAAf####8AAAABAAlDTG9uZ3VldXIB#####wAAAAAAAAAB#####wAAAAEAB0NNaWxpZXUA#####wAAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAAAAAAAB#####wAAAAEAD0NWYWxldXJBZmZpY2hlZQH#####AAAAAABAAAAAAAAAAMAAAAAAAAAAAAAABxAAAAAAAAEAAAAC#####wAAAAEAD0NSZXN1bHRhdFZhbGV1cgAAAAUAAAAAAgAAAAYAAAABAAAAw#####8AAAABAApDQ2FsY0NvbnN0AP####8AAnBpABYzLjE0MTU5MjY1MzU4OTc5MzIzODQ2#####wAAAAEACkNDb25zdGFudGVACSH7VEQtGP####8AAAABAApDUG9pbnRCYXNlAP####8BAAAAAA4AAVUAwCQAAAAAAABAEAAAAAAAAAUAAEAsZmZmZmZmQCxmZmZmZmYAAAABAP####8BAAAAABAAAAEAAQAAAAEBP#AAAAAAAAAAAAACAP####8BAAAAAA4AAVYAwAAAAAAAAABAEAAAAAAAAAUAAUA8ZmZmZmZmAAAAAgAAAAMA#####wEAAAAAEAAAAQABAAAAAQAAAAMAAAAGAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAABAAAAA#####8AAAACAAxDQ29tbWVudGFpcmUA#####wEAAAAAAAAAAAAAAABAGAAAAAAAAAAAAAUMAAAAAAABAAAAAAAAAAoAAAAAAAAAAAABMQAAAAUA#####wAAAAEAAAAD#####wAAAAEAB0NDYWxjdWwA#####wACYzEAATQAAAAKQBAAAAAAAAAAAAANAP####8AAmgxAAE0AAAACkAQAAAAAAAAAAAADQD#####AAJjMgABNQAAAApAFAAAAAAAAAAAAA0A#####wACaDIAATQAAAAKQBAAAAAAAAAAAAANAP####8AAmMzAAE1AAAACkAUAAAAAAAAAAAADQD#####AAJoMwABNAAAAApAEAAAAAAAAAAAAAsA#####wAAAAAAEAABQQDAMgAAAAAAAMAwAAAAAAAAAwABQFDAAAAAAABAQoAAAAAAAP####8AAAABABRDSW1wbGVtZW50YXRpb25Qcm90bwD#####ABtTZWdtZW50IGRlIGxvbmd1ZXVyIGRvbm7DqWUAAAABAAAAAgAAAAIAAAAIAAAADv####8AAAACAAlDQ2VyY2xlT1IAAAAADwEAAAAAAQAAAA4AAAAIAAAACAD#####AAAAAQAPQ1BvaW50TGllQ2VyY2xlAQAAAA8AAAAAABAAAUIAwDMAAAAAAADACAAAAAAAAAMAAUAS60sQO3OGAAAAEAAAAAMBAAAADwAAAAAAEAAAAQABAAAADgAAABEAAAACAP####8AAAAAABAAAUgAP#AAAAAAAAA#8AAAAAAAAAMAAT#ouymi+6YKAAAAEv####8AAAABABZDRHJvaXRlUGVycGVuZGljdWxhaXJlAP####8BAAAAABAAAAEAAQAAABMAAAASAAAADwD#####AQAAAAABAAAAEwAAAAgAAAAJAP####8AAAABABBDSW50RHJvaXRlQ2VyY2xlAP####8AAAAUAAAAFf####8AAAABABBDUG9pbnRMaWVCaXBvaW50AP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwABAAAAFgAAABMA#####wAAAAAAEAABQwBAIAAAAAAAAMAoAAAAAAAAAwACAAAAFgAAAAMA#####wAAAAAAEAAAAQABAAAADgAAABgAAAADAP####8AAAAAABAAAAEAAQAAABgAAAARAAAAAwD#####AAAAAAAQAAABAQEAAAATAAAAGAAAAAsA#####wAAAAAAEAABRABAEAAAAAAAAAAAAAAAAAAAAwABQH0QAAAAAABAZGAAAAAAAAAAAA4A#####wAbU2VnbWVudCBkZSBsb25ndWV1ciBkb25uw6llAAAAAQAAAAIAAAACAAAACgAAABwAAAAPAAAAAB0BAAAAAAEAAAAcAAAACAAAAAoAAAAAEAEAAAAdAAAAAAAQAAFFAMAyAAAAAAAAwDAAAAAAAAADAAFAA5gUsW2nVQAAAB4AAAADAQAAAB0AAAAAABAAAAEAAQAAABwAAAAfAAAAAgD#####AAAAAAAQAAFHAMA3AAAAAAAAwCIAAAAAAAADAAE#5pq7A1eUfwAAACAAAAARAP####8BAAAAABAAAAEAAQAAACEAAAAgAAAADwD#####AQAAAAABAAAAIQAAAAgAAAALAAAAABIA#####wAAACIAAAAjAAAAEwD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAACQAAAATAP####8AAAAAABAAAUYAwDIAAAAAAAC#8AAAAAAAAAMAAgAAACQAAAADAP####8AAAAAABAAAAEAAQAAABwAAAAmAAAAAwD#####AAAAAAAQAAABAAEAAAAmAAAAHwAAAAMA#####wAAAAAAEAAAAQEBAAAAIQAAACYAAAAOAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAABAAAAAgAAABMAAAAY#####wAAAAEAC0NNZWRpYXRyaWNlAAAAACoBAAAAAA0AAAEAAQAAABMAAAAYAAAABgAAAAAqAQAAAAANAAABBQAAAAATAAAAGAAAAA8AAAAAKgEAAAAAAQAAACwAAAAKQDAAAAAAAAABAAAAEgAAAAAqAAAAKwAAAC0AAAATAAAAACoBAAAAAA0AAAEFAAEAAAAuAAAABQEAAAAqAAAAEwAAABgAAAAOAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAABAAAAAgAAACEAAAAmAAAAFAAAAAAxAQAAAAANAAABAAEAAAAhAAAAJgAAAAYAAAAAMQEAAAAADQAAAQUAAAAAIQAAACYAAAAPAAAAADEBAAAAAAEAAAAzAAAACkAwAAAAAAAAAQAAABIAAAAAMQAAADIAAAA0AAAAEwAAAAAxAQAAAAANAAABBQABAAAANQAAAAUBAAAAMQAAACEAAAAmAAAACwD#####AAAAAAAQAAFNAMAgAAAAAAAAwD0AAAAAAAADAAFAdBAAAAAAAEBwcAAAAAAAAAAADgD#####ABtTZWdtZW50IGRlIGxvbmd1ZXVyIGRvbm7DqWUAAAABAAAAAgAAAAIAAAAMAAAAOAAAAA8AAAAAOQEAAAAAAQAAADgAAAAIAAAADAAAAAAQAQAAADkAAAAAABAAAU4AwBwAAAAAAADAOgAAAAAAAAMAAUAJOHyA#SdXAAAAOgAAAAMBAAAAOQAAAAAAEAAAAQABAAAAOAAAADv#####AAAAAQAJQ0Ryb2l0ZUFCAP####8BAAAAABAAAAEAAQAAADgAAAA7AAAAAgD#####AAAAAAAQAAFJAMAIAAAAAAAAwDwAAAAAAAADAAE#99qox0vglgAAAD0AAAARAP####8BAAAAABAAAAEAAQAAAD4AAAA9AAAADwD#####AQAAAAABAAAAPgAAAAgAAAANAAAAABIA#####wAAAD8AAABAAAAAEwD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAAEEAAAATAP####8AAAAAABAAAU8AwBwAAAAAAABAHAAAAAAAAAMAAgAAAEEAAAADAP####8AAAAAABAAAAEAAQAAADsAAABDAAAAAwD#####AAAAAAAQAAABAAEAAABDAAAAOAAAAAMA#####wAAAAAAEAAAAQEBAAAAOwAAAD4AAAADAP####8AAAAAABAAAAEBAQAAAD4AAABD#####wAAAAIAF0NNYXJxdWVBbmdsZUdlb21ldHJpcXVlAP####8AAAAAAAEAAAABQDAAAAAAAAAAAABDAAAAPgAAADsAAAAWAP####8AAAAAAAEAAAABQDAAAAAAAAAAAAAYAAAAEwAAAA4AAAAWAP####8AAAAAAAEAAAABQDAAAAAAAAAAAAAmAAAAIQAAABwAAAAOAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAABAAAAAgAAAD4AAABDAAAAFAAAAABLAQAAAAANAAABAAEAAAA+AAAAQwAAAAYAAAAASwEAAAAADQAAAQUAAAAAPgAAAEMAAAAPAAAAAEsBAAAAAAEAAABNAAAACkAwAAAAAAAAAQAAABIAAAAASwAAAEwAAABOAAAAEwAAAABLAQAAAAANAAABBQABAAAATwAAAAUBAAAASwAAAD4AAABDAAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAABAAAAAMAAAACAAAAEwAAABgAAAABAAAAAFIAAAAAARAAAAEAAQAAABMBP#AAAAAAAAAAAAACAAAAAFIAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAFMAAAADAQAAAFIAAAAAABAAAAEBAQAAABMAAAAYAAAABAAAAABSAARhbmcnAAAAVAAAABMAAAAYAAAABQEAAABSAAAAEwAAABgAAAAGAAAAAFIAAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAATAAAAGAAAAAcBAAAAUgAAAAAAQAAAAAAAAADAAAAAAAAAAAAAAFgQAAAAAAABAAAAAgAAAAgAAABWAAAAAyBjbQIAAABXAAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAAAwAAAAIAAAACAAAAIQAAACYAAAABAAAAAFoAAAAAARAAAAEAAQAAACEBP#AAAAAAAAAAAAACAAAAAFoAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAFsAAAADAQAAAFoAAAAAABAAAAEBAQAAACEAAAAmAAAABAAAAABaAARhbmcnAAAAXAAAACEAAAAmAAAABQEAAABaAAAAIQAAACYAAAAOAP####8AEExvbmd1ZXVyT3JpZW50ZWUAAAADAAAAAgAAAAIAAAA7AAAAQwAAAAEAAAAAYAAAAAABEAAAAQABAAAAOwE#8AAAAAAAAAAAAAIAAAAAYAAAAAAAEAACVycAAAAAAAAAAABACAAAAAAAAAUAAUBgwAAAAAAAAAAAYQAAAAMBAAAAYAAAAAAAEAAAAQABAAAAOwAAAEMAAAAEAAAAAGAABGFuZycAAABiAAAAOwAAAEMAAAAFAQAAAGAAAAA7AAAAQwAAAA4A#####wAQTG9uZ3VldXJPcmllbnRlZQAAAAQAAAADAAAAAgAAAD4AAABDAAAAAQAAAABmAAAAAAEQAAABAAEAAAA+AT#wAAAAAAAAAAAAAgAAAABmAAAAAAAQAAJXJwAAAAAAAAAAAEAIAAAAAAAABQABQGDAAAAAAAAAAABnAAAAAwEAAABmAAAAAAAQAAABAQEAAAA+AAAAQwAAAAQAAAAAZgAEYW5nJwAAAGgAAAA+AAAAQwAAAAUBAAAAZgAAAD4AAABDAAAABgAAAABmAAAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAUAAAAAPgAAAEMAAAAHAQAAAGYAAAAAAMAyAAAAAAAAwAgAAAAAAAAAAABsEAAAAAAAAQAAAAIAAAAIAAAAagAAAAMgY20CAAAAawAAAA4A#####wAQTG9uZ3VldXJPcmllbnRlZQAAAAQAAAADAAAAAgAAAA4AAAARAAAAAQAAAABuAAAAAAEQAAABAAEAAAAOAT#wAAAAAAAAAAAAAgAAAABuAAAAAAAQAAJXJwAAAAAAAAAAAEAIAAAAAAAABQABQGDAAAAAAAAAAABvAAAAAwEAAABuAAAAAAAQAAABAAEAAAAOAAAAEQAAAAQAAAAAbgAEYW5nJwAAAHAAAAAOAAAAEQAAAAUBAAAAbgAAAA4AAAARAAAABgAAAABuAAAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAUAAAAADgAAABEAAAAHAQAAAG4AAAAAAMA2AAAAAAAAQDQAAAAAAAAAAAB0EAAAAAAAAQAAAAIAAAAIAAAAcgAAAAMgY20CAAAAcwAAAA4A#####wAQTG9uZ3VldXJPcmllbnRlZQAAAAQAAAADAAAAAgAAAB8AAAAcAAAAAQAAAAB2AAAAAAEQAAABAAEAAAAfAT#wAAAAAAAAAAAAAgAAAAB2AAAAAAAQAAJXJwAAAAAAAAAAAEAIAAAAAAAABQABQGDAAAAAAAAAAAB3AAAAAwEAAAB2AAAAAAAQAAABAAEAAAAfAAAAHAAAAAQAAAAAdgAEYW5nJwAAAHgAAAAfAAAAHAAAAAUBAAAAdgAAAB8AAAAcAAAABgAAAAB2AAAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAUAAAAAHwAAABwAAAAHAQAAAHYAAAAAAEAAAAAAAAAAwAAAAAAAAAAAAAB8EAAAAAAAAQAAAAIAAAAIAAAAegAAAAMgY20CAAAAewAAAA4A#####wAQTG9uZ3VldXJPcmllbnRlZQAAAAMAAAACAAAAAgAAADgAAAA7AAAAAQAAAAB+AAAAAAEQAAABAAEAAAA4AT#wAAAAAAAAAAAAAgAAAAB+AAAAAAAQAAJXJwAAAAAAAAAAAEAIAAAAAAAABQABQGDAAAAAAAAAAAB#AAAAAwEAAAB+AAAAAAAQAAABAAEAAAA4AAAAOwAAAAQAAAAAfgAEYW5nJwAAAIAAAAA4AAAAOwAAAAUBAAAAfgAAADgAAAA7AAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAABAAAAAMAAAACAAAAOwAAADgAAAABAAAAAIQAAAAAARAAAAEAAQAAADsBP#AAAAAAAAAAAAACAAAAAIQAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAIUAAAADAQAAAIQAAAAAABAAAAEAAQAAADsAAAA4AAAABAAAAACEAARhbmcnAAAAhgAAADsAAAA4AAAABQEAAACEAAAAOwAAADgAAAAGAAAAAIQAAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAA7AAAAOAAAAAcBAAAAhAAAAAAAQAAAAAAAAADAAAAAAAAAAAAAAIoQAAAAAAABAAAAAgAAAAgAAACIAAAAAyBjbQIAAACJAAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAABAAAAAMAAAACAAAAEQAAABgAAAABAAAAAIwAAAAAARAAAAEAAQAAABEBP#AAAAAAAAAAAAACAAAAAIwAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAI0AAAADAQAAAIwAAAAAABAAAAEAAQAAABEAAAAYAAAABAAAAACMAARhbmcnAAAAjgAAABEAAAAYAAAABQEAAACMAAAAEQAAABgAAAAGAAAAAIwAAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAARAAAAGAAAAAcBAAAAjAAAAAAAQBQAAAAAAABAMwAAAAAAAAAAAJIQAAAAAAABAAAAAgAAAAgAAACQAAAAAyBjbQEAAACRAAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAABAAAAAMAAAACAAAADgAAABgAAAABAAAAAJQAAAAAARAAAAEAAQAAAA4BP#AAAAAAAAAAAAACAAAAAJQAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAJUAAAADAQAAAJQAAAAAABAAAAEAAQAAAA4AAAAYAAAABAAAAACUAARhbmcnAAAAlgAAAA4AAAAYAAAABQEAAACUAAAADgAAABgAAAAGAAAAAJQAAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAAOAAAAGAAAAAcBAAAAlAAAAAAAQAAAAAAAAADAAAAAAAAAAAAAAJoQAAAAAAABAAAAAgAAAAgAAACYAAAAAyBjbQEAAACZAAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAABAAAAAMAAAACAAAAJgAAAB8AAAABAAAAAJwAAAAAARAAAAEAAQAAACYBP#AAAAAAAAAAAAACAAAAAJwAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAJ0AAAADAQAAAJwAAAAAABAAAAEAAQAAACYAAAAfAAAABAAAAACcAARhbmcnAAAAngAAACYAAAAfAAAABQEAAACcAAAAJgAAAB8AAAAGAAAAAJwAAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAAmAAAAHwAAAAcBAAAAnAAAAAAAQAAAAAAAAADAAAAAAAAAAAAAAKIQAAAAAAABAAAAAgAAAAgAAACgAAAAAyBjbQEAAAChAAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAABAAAAAMAAAACAAAAJgAAABwAAAABAAAAAKQAAAAAARAAAAEAAQAAACYBP#AAAAAAAAAAAAACAAAAAKQAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAKUAAAADAQAAAKQAAAAAABAAAAEAAQAAACYAAAAcAAAABAAAAACkAARhbmcnAAAApgAAACYAAAAcAAAABQEAAACkAAAAJgAAABwAAAAGAAAAAKQAAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQAAAAAmAAAAHAAAAAcBAAAApAAAAAAAQAgAAAAAAABAMwAAAAAAAAAAAKoQAAAAAAABAAAAAgAAAAgAAACoAAAAAyBjbQEAAACpAAAADgD#####ABBMb25ndWV1ck9yaWVudGVlAAAABAAAAAIAAAACAAAAJgAAACEAAAABAAAAAKwAAAAAARAAAAEAAQAAACYBP#AAAAAAAAAAAAACAAAAAKwAAAAAABAAAlcnAAAAAAAAAAAAQAgAAAAAAAAFAAFAYMAAAAAAAAAAAK0AAAAEAAAAAKwABGFuZycAAACuAAAAJgAAACEAAAAFAQAAAKwAAAAmAAAAIQAAAAYAAAAArAAAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAACYAAAAhAAAABwEAAACsAAAAAABALgAAAAAAAEAmAAAAAAAAAAAAsRAAAAAAAAEAAAACAAAACAAAAK8AAAADIGNtAQAAALAAAAAOAP####8AEExvbmd1ZXVyT3JpZW50ZWUAAAAEAAAAAwAAAAIAAABDAAAAOwAAAAEAAAAAswAAAAABEAAAAQABAAAAQwE#8AAAAAAAAAAAAAIAAAAAswAAAAAAEAACVycAAAAAAAAAAABACAAAAAAAAAUAAUBgwAAAAAAAAAAAtAAAAAMBAAAAswAAAAAAEAAAAQABAAAAQwAAADsAAAAEAAAAALMABGFuZycAAAC1AAAAQwAAADsAAAAFAQAAALMAAABDAAAAOwAAAAYAAAAAswAAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAEMAAAA7AAAABwEAAACzAAAAAABAAAAAAAAAAMAAAAAAAAAAAAAAuRAAAAAAAAEAAAACAAAACAAAALcAAAADIGNtAQAAALgAAAAOAP####8AEExvbmd1ZXVyT3JpZW50ZWUAAAAEAAAAAwAAAAIAAABDAAAAOAAAAAEAAAAAuwAAAAABEAAAAQABAAAAQwE#8AAAAAAAAAAAAAIAAAAAuwAAAAAAEAACVycAAAAAAAAAAABACAAAAAAAAAUAAUBgwAAAAAAAAAAAvAAAAAMBAAAAuwAAAAAAEAAAAQABAAAAQwAAADgAAAAEAAAAALsABGFuZycAAAC9AAAAQwAAADgAAAAFAQAAALsAAABDAAAAOAAAAAYAAAAAuwAAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAEMAAAA4AAAABwEAAAC7AAAAAABAKAAAAAAAAEAsAAAAAAAAAAAAwRAAAAAAAAEAAAACAAAACAAAAL8AAAADIGNtAQAAAMAAAAAH##########8="
 		}
 		texte_corr=`$\\mathcal{A}_{ABC}=\\dfrac{1}{2}\\times AB\\times HC=\\dfrac{1}{2}\\times${c1}~\\text{cm}\\times ${h1}~\\text{cm}=${tex_nombre(Algebrite.eval(c1*h1/2))}~\\text{cm}^2$`	
-		texte_corr+="\\\\\\\\"
+		texte_corr+="<br>"
 		texte_corr+=`$\\mathcal{A}_{DEF}=\\dfrac{1}{2}\\times DE\\times GF=\\dfrac{1}{2}\\times${c2}~\\text{cm}\\times ${h2}~\\text{cm}=${tex_nombre(Algebrite.eval(c2*h2/2))}~\\text{cm}^2$`	
-		texte_corr+="\\\\\\\\"
+		texte_corr+="<br>"
 		texte_corr+=`$\\mathcal{A}_{ABC}=\\dfrac{1}{2}\\times MN\\times IO=\\dfrac{1}{2}\\times${c3}~\\text{cm}\\times ${h3}~\\text{cm}=${tex_nombre(Algebrite.eval(c3*h3/2))}~\\text{cm}^2$`	
 		
 		
@@ -5546,36 +5546,36 @@ function Perimetre_aire_disques(pa=3){
 	//  Si affichage LaTeX alors bug de MG32
 		texte_corr=""	
 		if (this.sup ==1) { //si on ne demande pas les aires
-			texte_corr = `$\\mathcal{P}_1=2\\times${r1}\\times\\pi=${2*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r1*Math.PI),1))}$ cm\\\\`
-			texte_corr += `$\\mathcal{P}_2=${2*r2}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r2*Math.PI),1))}$ cm\\\\`
-			texte_corr += `$\\mathcal{P}_3=${2*r3}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r3*Math.PI),1))}$ cm\\\\`
-			texte_corr += `$\\mathcal{P}_4=2\\times${r4}\\times\\pi=${2*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r4*Math.PI),1))}$ cm\\\\`
+			texte_corr = `$\\mathcal{P}_1=2\\times${r1}\\times\\pi=${2*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r1*Math.PI),1))}$ cm<br>`
+			texte_corr += `$\\mathcal{P}_2=${2*r2}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r2*Math.PI),1))}$ cm<br>`
+			texte_corr += `$\\mathcal{P}_3=${2*r3}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r3*Math.PI),1))}$ cm<br>`
+			texte_corr += `$\\mathcal{P}_4=2\\times${r4}\\times\\pi=${2*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r4*Math.PI),1))}$ cm<br>`
 		}
 
 		
 		if (this.sup ==2){
-			texte_corr += `$\\mathcal{A}_1=${r1}\\times${r1}\\times\\pi=${r1*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r1*r1*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `Le diamètre de $\\mathcal{C}_2$ est ${2*r2} cm donc son rayon est ${r2} cm.\\\\`
-			texte_corr += `$\\mathcal{A}_2=${r2}\\times${r2}\\times\\pi=${r2*r2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `Le diamètre de $\\mathcal{C}_3$ est ${2*r3} cm donc son rayon est ${r3} cm.\\\\`
-			texte_corr += `$\\mathcal{A}_3=${r3}\\times${r3}\\times\\pi=${r3*r3}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `$\\mathcal{A}_4=${r4}\\times${r4}\\times\\pi=${r4*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r4*r4*Math.PI),1))}~\\text{cm}^2$\\\\`
+			texte_corr += `$\\mathcal{A}_1=${r1}\\times${r1}\\times\\pi=${r1*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r1*r1*Math.PI),1))}~\\text{cm}^2$<br>`
+			texte_corr += `Le diamètre de $\\mathcal{C}_2$ est ${2*r2} cm donc son rayon est ${r2} cm.<br>`
+			texte_corr += `$\\mathcal{A}_2=${r2}\\times${r2}\\times\\pi=${r2*r2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2*Math.PI),1))}~\\text{cm}^2$<br>`
+			texte_corr += `Le diamètre de $\\mathcal{C}_3$ est ${2*r3} cm donc son rayon est ${r3} cm.<br>`
+			texte_corr += `$\\mathcal{A}_3=${r3}\\times${r3}\\times\\pi=${r3*r3}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3*Math.PI),1))}~\\text{cm}^2$<br>`
+			texte_corr += `$\\mathcal{A}_4=${r4}\\times${r4}\\times\\pi=${r4*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r4*r4*Math.PI),1))}~\\text{cm}^2$<br>`
 		}
 
 		if (this.sup == 3){
-			texte_corr = `$\\mathcal{P}_1=2\\times${r1}\\times\\pi=${2*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r1*Math.PI),1))}$ cm\\\\`
-			texte_corr += `$\\mathcal{P}_2=${2*r2}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r2*Math.PI),1))}$ cm\\\\`
-			texte_corr += `$\\mathcal{P}_3=${2*r3}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r3*Math.PI),1))}$ cm\\\\`
-			texte_corr += `$\\mathcal{P}_4=2\\times${r4}\\times\\pi=${2*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r4*Math.PI),1))}$ cm\\\\`
+			texte_corr = `$\\mathcal{P}_1=2\\times${r1}\\times\\pi=${2*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r1*Math.PI),1))}$ cm<br>`
+			texte_corr += `$\\mathcal{P}_2=${2*r2}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r2*Math.PI),1))}$ cm<br>`
+			texte_corr += `$\\mathcal{P}_3=${2*r3}\\times\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r3*Math.PI),1))}$ cm<br>`
+			texte_corr += `$\\mathcal{P}_4=2\\times${r4}\\times\\pi=${2*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(2*r4*Math.PI),1))}$ cm<br>`
 			
-			texte_corr += `\\\\`
+			texte_corr += `<br>`
 			
-			texte_corr += `$\\mathcal{A}_1=${r1}\\times${r1}\\times\\pi=${r1*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r1*r1*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `Le diamètre de $\\mathcal{C}_2$ est ${2*r2} cm donc son rayon est ${r2} cm.\\\\`
-			texte_corr += `$\\mathcal{A}_2=${r2}\\times${r2}\\times\\pi=${r2*r2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `Le diamètre de $\\mathcal{C}_3$ est ${2*r3} cm donc son rayon est ${r3} cm.\\\\`
-			texte_corr += `$\\mathcal{A}_3=${r3}\\times${r3}\\times\\pi=${r3*r3}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3*Math.PI),1))}~\\text{cm}^2$\\\\`
-			texte_corr += `$\\mathcal{A}_4=${r4}\\times${r4}\\times\\pi=${r4*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r4*r4*Math.PI),1))}~\\text{cm}^2$\\\\`
+			texte_corr += `$\\mathcal{A}_1=${r1}\\times${r1}\\times\\pi=${r1*r1}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r1*r1*Math.PI),1))}~\\text{cm}^2$<br>`
+			texte_corr += `Le diamètre de $\\mathcal{C}_2$ est ${2*r2} cm donc son rayon est ${r2} cm.<br>`
+			texte_corr += `$\\mathcal{A}_2=${r2}\\times${r2}\\times\\pi=${r2*r2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2*Math.PI),1))}~\\text{cm}^2$<br>`
+			texte_corr += `Le diamètre de $\\mathcal{C}_3$ est ${2*r3} cm donc son rayon est ${r3} cm.<br>`
+			texte_corr += `$\\mathcal{A}_3=${r3}\\times${r3}\\times\\pi=${r3*r3}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3*Math.PI),1))}~\\text{cm}^2$<br>`
+			texte_corr += `$\\mathcal{A}_4=${r4}\\times${r4}\\times\\pi=${r4*r4}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r4*r4*Math.PI),1))}~\\text{cm}^2$<br>`
 		}
 		
 
@@ -5635,76 +5635,76 @@ function Perimetre_aire_et_portions_de_disques(pa=3){
 			codeBase64 = "TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAIoAAACNQAAAQEAAAAAAAAAAQAAAE######AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAHQ0NhbGN1bAD#####AAJyMwABNgAAAAFAGAAAAAAAAP####8AAAABAApDUG9pbnRCYXNlAP####8BAAAAAA4AAVUAwCQAAAAAAABAEAAAAAAAAAUAAEAsZmZmZmZmQCxmZmZmZmb#####AAAAAQAUQ0Ryb2l0ZURpcmVjdGlvbkZpeGUA#####wEAAAAAEAAAAQABAAAAAgE#8AAAAAAAAP####8AAAABAA9DUG9pbnRMaWVEcm9pdGUA#####wEAAAAADgABVgDAAAAAAAAAAEAQAAAAAAAABQABQDxmZmZmZmYAAAAD#####wAAAAEACENTZWdtZW50AP####8BAAAAABAAAAEAAQAAAAIAAAAE#####wAAAAEAB0NNaWxpZXUA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAAIAAAAE#####wAAAAIADENDb21tZW50YWlyZQD#####AQAAAAAAAAAAAAAAAEAYAAAAAAAAAAAABgwAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAEx#####wAAAAEACUNMb25ndWV1cgD#####AAAAAgAAAAQAAAADAP####8BAAAAABAAAU8AAAAAAAAAAABACAAAAAAAAAMAAUBRQAAAAAAAQGQAAAAAAAAAAAACAP####8AAXIAATQAAAABQBAAAAAAAAAAAAAEAP####8BAAAAARAAAAEAAQAAAAkBP#AAAAAAAAD#####AAAAAgAJQ0NlcmNsZU9SAP####8BAAAAAAEAAAAJ#####wAAAAEAD0NSZXN1bHRhdFZhbGV1cgAAAAoA#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAsAAAAM#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAANAAAADQD#####AQAAAAAQAAFBAAAAAAAAAAAAQAgAAAAAAAADAAEAAAAN#####wAAAAEADENBcmNEZUNlcmNsZQD#####AAAAAAABAAAACQAAAA######AAAAAUBWgAAAAAAAAAAABgD#####AAAAAAAQAAABAAEAAAAJAAAAD#####8AAAABABZDRHJvaXRlUGVycGVuZGljdWxhaXJlAP####8BAAAAABAAAAEAAQAAAAkAAAARAAAADAD#####AAAAEgAAABAAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwABAAAAEwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAATAAAABgD#####AAAAAAAQAAABAAEAAAAVAAAACf####8AAAABABRDSW1wbGVtZW50YXRpb25Qcm90bwD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAAJAAAAD#####8AAAABAAtDTWVkaWF0cmljZQAAAAAXAQAAAAAQAAABAAEAAAAJAAAADwAAAAcAAAAAFwEAAAAAEAAAAQUAAAAACQAAAA8AAAAKAAAAABcBAAAAAAEAAAAZAAAAAUAwAAAAAAAAAQAAAAwAAAAAFwAAABgAAAAaAAAADQAAAAAXAQAAAAAQAAABBQABAAAAGwAAAAkBAAAAFwAAAAkAAAAP#####wAAAAEAD0NWYWxldXJBZmZpY2hlZQEAAAAXAAAAAAEAAAAcEQAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAADIGNtAQAAAB3#####AAAAAQAOQ01hcnF1ZVNlZ21lbnQA#####wAAAP8AAgEAAAAWAAAAEwD#####AAAA#wACAQAAABEAAAACAP####8AAnIyAAE1AAAAAUAUAAAAAAAAAAAACgD#####AQAA#wABAAAACf####8AAAABAApDT3BlcmF0aW9uAAAAABQAAAAACwAAAAoAAAALAAAAIQAAAAFAAAAAAAAAAAAAAAAMAP####8AAAALAAAAIgAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAAjAAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAACMAAAAKAP####8BAAAAAAEAAAAlAAAACwAAACEAAAAADAD#####AAAACwAAACYAAAANAP####8BAAAAABAAAUIAAAAAAAAAAABACAAAAAAAAAMAAgAAACcAAAANAP####8BAAAAABAAAUMAAAAAAAAAAABACAAAAAAAAAMAAQAAACcAAAAOAP####8AAAAAAAEAAAAlAAAAKQAAACgAAAAGAP####8AAAAAABAAAAEAAQAAACgAAAApAAAAEAD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAAoAAAAKQAAABEAAAAALAEAAAAAEAAAAQABAAAAKAAAACkAAAAHAAAAACwBAAAAABAAAAEFAAAAACgAAAApAAAACgAAAAAsAQAAAAABAAAALgAAAAFAMAAAAAAAAAEAAAAMAAAAACwAAAAtAAAALwAAAA0AAAAALAEAAAAAEAAAAQUAAQAAADAAAAAJAQAAACwAAAAoAAAAKQAAABIBAAAALAAAAAABAAAAMREAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAAAyAAAABwD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAAAACQAAACkAAAAPAP####8BAAAAABAAAAEAAQAAADQAAAArAAAACgD#####AQAAAAABAAAANAAAABQAAAAACwAAAAEAAAABQAAAAAAAAAAAAAAADAD#####AAAANQAAADYAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAAwACAAAANwAAAA0A#####wEAAAAAEAABRQAAAAAAAAAAAEAIAAAAAAAAAwABAAAANwAAAAQA#####wEAAAABEAAAAQABAAAAOQE#8AAAAAAAAAAAAAoA#####wEAAAAAAQAAADkAAAALAAAAAQAAAAAMAP####8AAAA6AAAAOwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAA8AAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAQAAADwAAAAMAP####8AAAA1AAAAOwAAAA0A#####wEAAAAAEAABRAAAAAAAAAAAAEAIAAAAAAAAAwACAAAAPwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAEAAAA######wAAAAEAEUNHcmFuZEFyY0RlQ2VyY2xlAP####8AAAAAAAEAAAA5AAAAPgAAAEAAAAAGAP####8AAAAAABAAAAEAAQAAAEAAAAA5AAAABgD#####AAAAAAAQAAABAAEAAAA5AAAAPgAAABMA#####wAAAP8AAgIAAABDAAAAEwD#####AAAA#wACAgAAAEQAAAAQAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAAEAAAAA5AAAAEQAAAABHAQAAAAAQAAABAAEAAABAAAAAOQAAAAcAAAAARwEAAAAAEAAAAQUAAAAAQAAAADkAAAAKAAAAAEcBAAAAAAEAAABJAAAAAUAwAAAAAAAAAQAAAAwAAAAARwAAAEgAAABKAAAADQAAAABHAQAAAAAQAAABBQABAAAASwAAAAkBAAAARwAAAEAAAAA5AAAAEgEAAABHAAAAAABARgAAAAAAAAAAAAAAAAAAAAAATBEAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAABNAAAACP##########"
 			
 			if (this.sup ==1) { //si on ne demande pas les aires
-				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `La deuxième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r2} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `La troisième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r3} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm\\\\`
+				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm<br>`
+				texte_corr += `La deuxième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r2} cm et d'un diamètre qui ferme la figure.<br>`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm<br>`
+				texte_corr += `La troisième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r3} cm et 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm<br>`
 			}
 
 			
 			if (this.sup ==2){
-				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.\\\\`
-				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.\\\\`
+				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.<br>`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.<br>`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.<br>`
 				texte_corr += `$\\mathcal{A}_3=\\dfrac{3}{4}\\times${r3}\\times${r3}\\times\\pi=${tex_nombre(Algebrite.eval(3/4*r3*r3))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r3*r3*Math.PI),1))}~\\text{cm}^2$`
 			}
 
 			if (this.sup == 3){
-				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `La deuxième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r2} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `La troisième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r3} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm\\\\`
-				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.\\\\`
-				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.\\\\`
+				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm<br>`
+				texte_corr += `La deuxième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r2} cm et d'un diamètre qui ferme la figure.<br>`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{1}{2}\\times${2*r2}\\times\\pi+${2*r2}=${r2}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(r2*Math.PI+2*r2),1))}$ cm<br>`
+				texte_corr += `La troisième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r3} cm et 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{3}{4}\\times2\\times${r3}\\times\\pi+${r3}+${r3}=${tex_nombre(Algebrite.eval(6*r3/4))}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(6*r3/4*Math.PI+2*r3),1))}$ cm<br>`
+				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.<br>`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La deuxième figure est la moitié d'un disque de diamètre ${2*r2} cm donc de ${r2} cm de rayon.<br>`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{1}{2}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(Algebrite.eval(r2*r2/2))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r2*r2/2*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La troisième figure est trois quarts d'un disque de rayon ${r3} cm.<br>`
 				texte_corr += `$\\mathcal{A}_3=\\dfrac{3}{4}\\times${r3}\\times${r3}\\times\\pi=${tex_nombre(Algebrite.eval(3/4*r3*r3))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r3*r3*Math.PI),1))}~\\text{cm}^2$`
 			}
 		}
 		else {
 			codeBase64 = "TWF0aEdyYXBoSmF2YTEuMAAAABI+TMzNAAJmcv###wEA#wEAAAAAAAAAAAL2AAACOAAAAQEAAAAAAAAAAQAAAGX#####AAAAAQAKQ0NhbGNDb25zdAD#####AAJwaQAWMy4xNDE1OTI2NTM1ODk3OTMyMzg0Nv####8AAAABAApDQ29uc3RhbnRlQAkh+1RELRj#####AAAAAQAHQ0NhbGN1bAD#####AAJyMwABNgAAAAFAGAAAAAAAAP####8AAAABAApDUG9pbnRCYXNlAP####8BAAAAAA4AAVUAwCQAAAAAAABAEAAAAAAAAAUAAEAsZmZmZmZmQCxmZmZmZmb#####AAAAAQAUQ0Ryb2l0ZURpcmVjdGlvbkZpeGUA#####wEAAAAAEAAAAQABAAAAAgE#8AAAAAAAAP####8AAAABAA9DUG9pbnRMaWVEcm9pdGUA#####wEAAAAADgABVgDAAAAAAAAAAEAQAAAAAAAABQABQDxmZmZmZmYAAAAD#####wAAAAEACENTZWdtZW50AP####8BAAAAABAAAAEAAQAAAAIAAAAE#####wAAAAEAB0NNaWxpZXUA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAAFAAAAAAIAAAAE#####wAAAAIADENDb21tZW50YWlyZQD#####AQAAAAAAAAAAAAAAAEAYAAAAAAAAAAAABgwAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAEx#####wAAAAEACUNMb25ndWV1cgD#####AAAAAgAAAAQAAAADAP####8BAAAAABAAAU8AAAAAAAAAAABACAAAAAAAAAMAAUBRQAAAAAAAQGQAAAAAAAAAAAACAP####8AAXIAATQAAAABQBAAAAAAAAAAAAAEAP####8BAAAAARAAAAEAAQAAAAkBP#AAAAAAAAD#####AAAAAgAJQ0NlcmNsZU9SAP####8BAAAAAAEAAAAJ#####wAAAAEAD0NSZXN1bHRhdFZhbGV1cgAAAAoA#####wAAAAEAEENJbnREcm9pdGVDZXJjbGUA#####wAAAAsAAAAM#####wAAAAEAEENQb2ludExpZUJpcG9pbnQA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAIAAAANAAAADQD#####AQAAAAAQAAFBAAAAAAAAAAAAQAgAAAAAAAADAAEAAAANAAAABgD#####AAAAAAAQAAABAAEAAAAJAAAAD#####8AAAABABZDRHJvaXRlUGVycGVuZGljdWxhaXJlAP####8BAAAAABAAAAEAAQAAAAkAAAAQ#####wAAAAEAFENJbXBsZW1lbnRhdGlvblByb3RvAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAAAkAAAAP#####wAAAAEAC0NNZWRpYXRyaWNlAAAAABIBAAAAABAAAAEAAQAAAAkAAAAPAAAABwAAAAASAQAAAAAQAAABBQAAAAAJAAAADwAAAAoAAAAAEgEAAAAAAQAAABQAAAABQDAAAAAAAAABAAAADAAAAAASAAAAEwAAABUAAAANAAAAABIBAAAAABAAAAEFAAEAAAAWAAAACQEAAAASAAAACQAAAA######AAAAAQAPQ1ZhbGV1ckFmZmljaGVlAQAAABIAAAAAAQAAABcRAAAAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAMgY20BAAAAGAAAAAIA#####wACcjIAATQAAAABQBAAAAAAAAAAAAAKAP####8BAAD#AAEAAAAJ#####wAAAAEACkNPcGVyYXRpb24AAAAAEgAAAAALAAAACgAAAAsAAAAaAAAAAUAAAAAAAAAAAAAAAAwA#####wAAAAsAAAAbAAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAgAAABwAAAANAP####8BAAAAABAAAUcAAAAAAAAAAABACAAAAAAAAAMAAQAAABwAAAAKAP####8BAAAAAAEAAAAeAAAACwAAABoAAAAADAD#####AAAACwAAAB8AAAANAP####8BAAAAABAAAUIAAAAAAAAAAABACAAAAAAAAAMAAgAAACAAAAANAP####8BAAAAABAAAUMAAAAAAAAAAABACAAAAAAAAAMAAQAAACAAAAAGAP####8BAAAAABAAAAEAAQAAACEAAAAiAAAADwD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAQAAAAIAAAAhAAAAIgAAABAAAAAAJAEAAAAAEAAAAQABAAAAIQAAACIAAAAHAAAAACQBAAAAABAAAAEFAAAAACEAAAAiAAAACgAAAAAkAQAAAAABAAAAJgAAAAFAMAAAAAAAAAEAAAAMAAAAACQAAAAlAAAAJwAAAA0AAAAAJAEAAAAAEAAAAQUAAQAAACgAAAAJAQAAACQAAAAhAAAAIgAAAAcA#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAAAAAkAAAAiAAAADgD#####AQAAAAAQAAABAAEAAAArAAAAIwAAAAoA#####wEAAAAAAQAAACsAAAASAgAAAAE#+AAAAAAAAAAAAAsAAAAaAAAAAAwA#####wAAACwAAAAtAAAADQD#####AQAAAAAQAAAAAAAAAAAAAABACAAAAAAAAAMAAgAAAC4AAAANAP####8BAAAAABAAAUUAAAAAAAAAAABACAAAAAAAAAMAAQAAAC4AAAAEAP####8BAAAAARAAAAEAAQAAADABP#AAAAAAAAAAAAAKAP####8BAAAAAAEAAAAwAAAACwAAAAEAAAAADAD#####AAAAMQAAADIAAAANAP####8BAAAAABAAAUkAAAAAAAAAAABACAAAAAAAAAMAAgAAADMAAAANAP####8BAAAAABAAAUgAAAAAAAAAAABACAAAAAAAAAMAAQAAADMAAAAMAP####8AAAAsAAAAMgAAAA0A#####wEAAAAAEAABRAAAAAAAAAAAAEAIAAAAAAAAAwACAAAANgAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAEAAAA2AAAABgD#####AQAAAAAQAAABAAEAAAA3AAAAMAAAAAYA#####wAAAAAAEAAAAQABAAAAMAAAADUAAAAPAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAADcAAAAwAAAAEAAAAAA7AQAAAAAQAAABAAEAAAA3AAAAMAAAAAcAAAAAOwEAAAAAEAAAAQUAAAAANwAAADAAAAAKAAAAADsBAAAAAAEAAAA9AAAAAUAwAAAAAAAAAQAAAAwAAAAAOwAAADwAAAA+AAAADQAAAAA7AQAAAAAQAAABBQABAAAAPwAAAAkBAAAAOwAAADcAAAAwAAAAEQEAAAA7AQAAAABARgAAAAAAAAAAAAAAAAAAAAAAQBEAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAABBAAAADAD#####AAAAEQAAAAwAAAANAP####8BAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAABQACAAAAQwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAEAAABDAAAABgD#####AAAAAAAQAAABAAEAAAAwAAAANAAAAA4A#####wEAAP8AEAAAAQACAAAAHgAAACMAAAAMAP####8AAABHAAAAHwAAAA0A#####wEAAAAAEAAAAAAAAAAAAAAAQAgAAAAAAAADAAEAAABIAAAADQD#####AQAAAAAQAAFGAAAAAAAAAAAAQAgAAAAAAAADAAIAAABIAAAABgD#####AAAAAAAQAAABAAEAAAAeAAAASgAAAAYA#####wAAAAAAEAAAAQABAAAAHgAAACH#####AAAAAQAMQ0FyY0RlQ2VyY2xlAP####8AAAAAAAEAAAAJAAAADwAAAEQAAAAPAP####8AEk1lc3VyZSBkZSBsb25ndWV1cgAAAAUAAAACAAAAAgAAAEoAAAAeAAAAEAAAAABOAQAAAAAQAAABAAEAAABKAAAAHgAAAAcAAAAATgEAAAAAEAAAAQUAAAAASgAAAB4AAAAKAAAAAE4BAAAAAAEAAABQAAAAAUAwAAAAAAAAAQAAAAwAAAAATgAAAE8AAABRAAAADQAAAABOAQAAAAAQAAABBQABAAAAUgAAAAkBAAAATgAAAEoAAAAeAAAAEQEAAABOAAAAAADAKgAAAAAAAAAAAAAAAAAAAAAAUxEAAAAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAyBjbQEAAABUAAAADwD#####ABJNZXN1cmUgZGUgbG9uZ3VldXIAAAAFAAAAAgAAAAIAAAA1AAAANAAAABAAAAAAVgEAAAAAEAAAAQABAAAANQAAADQAAAAHAAAAAFYBAAAAABAAAAEFAAAAADUAAAA0AAAACgAAAABWAQAAAAABAAAAWAAAAAFAMAAAAAAAAAEAAAAMAAAAAFYAAABXAAAAWQAAAA0AAAAAVgEAAAAAEAAAAQUAAQAAAFoAAAAJAQAAAFYAAAA1AAAANAAAABEBAAAAVgAAAAAAAAAAAAAAAADACAAAAAAAAAAAAFsRAAAAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAMgY20BAAAAXAAAAAYA#####wAAAAAAEAAAAQABAAAACQAAAEQAAAATAP####8AAAAAAAEAAAAwAAAANP####8AAAABQGaAAAAAAAD#####AAAAAQARQ0dyYW5kQXJjRGVDZXJjbGUA#####wAAAAAAAQAAAB4AAAAh#####wAAAAFAcOAAAAAAAP####8AAAABAA5DTWFycXVlU2VnbWVudAD#####AAAA#wACAgAAAF4AAAAVAP####8AAAD#AAICAAAAEAAAABUA#####wAAAP8AAgAAAABLAAAAFQD#####AAAA#wACAAAAAEwAAAAI##########8="
-			texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.\\\\`
+			texte_corr = `La première figure est un quart de cercle de rayon ${r} cm auquel il faut ajouter les 2 rayons qui ferment la figure.<br>`
 			
 			if (this.sup==1) {
-				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `La deuxième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r2} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `La troisième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r3} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm\\\\`
+				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm<br>`
+				texte_corr += `La deuxième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r2} cm et 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm<br>`
+				texte_corr += `La troisième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r3} cm et d'un diamètre qui ferme la figure.<br>`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm<br>`
 			}
 
 			if (this.sup==2){
-				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr = `La première figure est un quart de disque de rayon ${r} cm.<br>`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.<br>`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.<br>`
+				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$<br>`
 			
 			}
 
 
 			if (this.sup==3) {
-				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm\\\\`
-				texte_corr += `La deuxième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r2} cm et 2 rayons qui ferment la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm\\\\`
-				texte_corr += `La troisième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r3} cm et d'un diamètre qui ferme la figure.\\\\`
-				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm\\\\`
-				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$\\\\`
-				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.\\\\`
-				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$\\\\`
+				texte_corr = `La première figure est un quart de disque, son périmètre est composé d'un quart de cercle de rayon ${r} cm et de 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_1=\\dfrac{1}{4}\\times2\\times${r}\\times\\pi+${r}+${r}=${tex_nombre(Algebrite.eval(r/2))}\\pi+${2*r}\\approx${tex_nombre(arrondi(Algebrite.eval(r/2*Math.PI+2*r),1))}$ cm<br>`
+				texte_corr += `La deuxième figure est trois quarts d'un disque, son périmètre est composé de trois quarts d'un cercle de rayon ${r2} cm et 2 rayons qui ferment la figure.<br>`
+				texte_corr += `$\\mathcal{P}_2=\\dfrac{3}{4}\\times2\\times${r2}\\times\\pi+${r2}+${r2}=${tex_nombre(6/4*r2)}\\pi+${2*r2}\\approx${tex_nombre(arrondi(Algebrite.eval(6/4*r2*Math.PI+2*r2),1))}$ cm<br>`
+				texte_corr += `La troisième figure est un demi-disque, son périmètre est composé d'un demi-cercle de diamètre ${2*r3} cm et d'un diamètre qui ferme la figure.<br>`
+				texte_corr += `$\\mathcal{P}_3=\\dfrac{1}{2}\\times${2*r3}\\times\\pi+${2*r3}=${r3}\\pi+${2*r3}\\approx${tex_nombre(arrondi(Algebrite.eval(r3*Math.PI+2*r3),1))}$ cm<br>`
+				texte_corr += `La première figure est un quart de disque de rayon ${r} cm.<br>`
+				texte_corr += `$\\mathcal{A}_1=\\dfrac{1}{4}\\times${r}\\times${r}\\times\\pi=${tex_nombre(Algebrite.eval(r*r/4))}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r*r/4*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La deuxième figure est trois quarts d'un disque rayon ${r2} cm.<br>`
+				texte_corr += `$\\mathcal{A}_2=\\dfrac{3}{4}\\times${r2}\\times${r2}\\times\\pi=${tex_nombre(3/4*r2*r2)}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(3/4*r2*r2*Math.PI),1))}~\\text{cm}^2$<br>`
+				texte_corr += `La troisième figure est un demi-cercle de diamètre ${2*r3} cm donc de rayon ${r3} cm.<br>`
+				texte_corr += `$\\mathcal{A}_3=\\dfrac{1}{2}\\times${r3}\\times${r3}\\times\\pi=${r3*r3/2}\\pi\\approx${tex_nombre(arrondi(Algebrite.eval(r3*r3/2*Math.PI),1))}~\\text{cm}^2$<br>`
 			}
 
 
@@ -5763,11 +5763,11 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles(){
 		let pIJK = Algebrite.eval(a+b+c2).d.toFixed(1)
 
 		texte_corr = `$\\mathcal{P}_{ABCD}=${c}~\\text{cm}+${c}~\\text{cm}+${c}~\\text{cm}+${c}~\\text{cm}=${4*c}~\\text{cm}$`
-		texte_corr += `\\\\$\\mathcal{A}_{ABCD}=${c}~\\text{cm}\\times${c}~\\text{cm}=${c*c}~\\text{cm}^2$`
-		texte_corr += `\\\\$\\mathcal{P}_{EFGH}=${L}~\\text{cm}+${l}~\\text{cm}+${L}~\\text{cm}+${l}~\\text{cm}=${2*L+2*l}~\\text{cm}$`
-		texte_corr += `\\\\$\\mathcal{A}_{EFGH}=${L}~\\text{cm}\\times${l}~\\text{cm}=${L*l}~\\text{cm}^2$`
-		texte_corr += `\\\\$\\mathcal{P}_{IJK}=${a}~\\text{cm}+${b}~\\text{cm}+${tex_nombre(c2.toFixed(1))}~\\text{cm}=${tex_nombre(pIJK)}~\\text{cm}$`
-		texte_corr += `\\\\$\\mathcal{A}_{IJK}=${a}~\\text{cm}\\times${b}~\\text{cm}\\div2=${tex_nombre(Algebrite.eval(a*b/2))}~\\text{cm}^2$`
+		texte_corr += `<br>$\\mathcal{A}_{ABCD}=${c}~\\text{cm}\\times${c}~\\text{cm}=${c*c}~\\text{cm}^2$`
+		texte_corr += `<br>$\\mathcal{P}_{EFGH}=${L}~\\text{cm}+${l}~\\text{cm}+${L}~\\text{cm}+${l}~\\text{cm}=${2*L+2*l}~\\text{cm}$`
+		texte_corr += `<br>$\\mathcal{A}_{EFGH}=${L}~\\text{cm}\\times${l}~\\text{cm}=${L*l}~\\text{cm}^2$`
+		texte_corr += `<br>$\\mathcal{P}_{IJK}=${a}~\\text{cm}+${b}~\\text{cm}+${tex_nombre(c2.toFixed(1))}~\\text{cm}=${tex_nombre(pIJK)}~\\text{cm}$`
+		texte_corr += `<br>$\\mathcal{A}_{IJK}=${a}~\\text{cm}\\times${b}~\\text{cm}\\div2=${tex_nombre(Algebrite.eval(a*b/2))}~\\text{cm}^2$`
 		
 
 		this.MG32codeBase64 = codeBase64
@@ -5822,12 +5822,12 @@ function Perimetre_ou_aire_de_figures_composees(){
 		let t2 = arrondi(Math.sqrt((c-2)**2+h**2),1) // longueur de l'autre côté d'un triangle
 		let texte_corr = ""
 		texte_corr += `La première figure est composée d'un rectangle de ${L1} cm par ${l1} cm`
-		texte_corr += ` et d'un triangle rectangle dont les côtés de l'angle droit mesurent ${L2} cm et ${l1} cm.\\\\`
-		texte_corr += `$\\mathcal{P}_{1}=${L1+L2}+${tex_nombre(DA)}+${L1}+${l1}=${tex_nombrec(L1+L2+DA+L1+l1)}$ cm.\\\\`
+		texte_corr += ` et d'un triangle rectangle dont les côtés de l'angle droit mesurent ${L2} cm et ${l1} cm.<br>`
+		texte_corr += `$\\mathcal{P}_{1}=${L1+L2}+${tex_nombre(DA)}+${L1}+${l1}=${tex_nombrec(L1+L2+DA+L1+l1)}$ cm.<br>`
 		texte_corr += `$\\mathcal{A}_{1}=${L1}\\times${l1}+${L2}\\times${l1}\\div2=${L1*l1}+${calcul((L2*l1)/2)}=${calcul(L1*l1+(L2*l1)/2)}~${tex_texte(' cm')}^2$.`
-		texte_corr += '\\\\\\\\\\\\'
-		texte_corr += `La deuxième figure est un carré de côté ${c} cm auquel il faut enlever un triangle de ${c} cm de base et ${h} cm de hauteur.\\\\`
-		texte_corr += `$\\mathcal{P}_{2}=${c}+${c}+${c}+${tex_nombre(t1)}+${tex_nombre(t2)}=${tex_nombrec(3*c+t1+t2)}$ cm\\\\`
+		texte_corr += '<br><br>'
+		texte_corr += `La deuxième figure est un carré de côté ${c} cm auquel il faut enlever un triangle de ${c} cm de base et ${h} cm de hauteur.<br>`
+		texte_corr += `$\\mathcal{P}_{2}=${c}+${c}+${c}+${tex_nombre(t1)}+${tex_nombre(t2)}=${tex_nombrec(3*c+t1+t2)}$ cm<br>`
 		texte_corr += `$\\mathcal{A}_{2}=${c}\\times${c}-${c}\\times${h}\\div2=${c*c}-${c*h}=${tex_nombrec(c**2-c*h)}~${tex_texte(' cm')}^2$.`
 		
 		this.MG32codeBase64 = codeBase64
@@ -6155,10 +6155,15 @@ function Divisions_euclidiennes(){
 					b = randint(2,9)*10
 					break ;
 			}
-			r = randint(1,b)
+			r = randint(0,b-1) //reste inférieur au diviseur
 			a = b*q+r
 			texte = `$${tex_nombre(a)}\\div${b}$`;
-			sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${q}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+			if (r==0) {
+				sortie_html ? texte_corr = `$${tex_nombre(a)}\\div${b}=${q}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}\\div${b}=${q}$`;
+
+			} else {
+				sortie_html ? texte_corr = `$${tex_nombre(a)}=${b}\\times${q}+${r}$` : texte_corr = `$\\opidiv[voperation=top]{${a}}{${b}}$\\\\\\\\$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+			}
 					
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -6473,7 +6478,7 @@ function Traduire_un_programme_de_calcul(){
 					texte += itemize([`Ajoute ${a}`,`Multiplie par ${b}`,`Ajoute ${c}`])
 					texte += `Si on note $x$ le nombre de départ, quel est le résultat du programme de calcul ?`
 					texte_corr = `$x\\rightarrow x+${a}\\rightarrow(x+${a})\\times ${b}=${b}x+${a*b}\\rightarrow${b}x+${a*b+c}$`
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${b}x+${a*b+c}$.`
 					break ;
 				case 2 : // (ax+b)*c
@@ -6481,7 +6486,7 @@ function Traduire_un_programme_de_calcul(){
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Multiplie par ${c}`])
 					texte += `Si on note $y$ le nombre de départ, quel est le résultat du programme de calcul ?`
 					texte_corr = `$y\\rightarrow ${a}y\\rightarrow${a}y+${b} \\rightarrow(${a}y+${b})\\times${c}=${a*c}y+${b*c}$`
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a*c}y+${b*c}$.`
 					break ;
 				case 3 : // ax+b-2x
@@ -6489,7 +6494,7 @@ function Traduire_un_programme_de_calcul(){
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Enlève le double du nombre de départ`])
 					texte += `Si on note $a$ le nombre de départ, quel est le résultat du programme de calcul ?`
 					texte_corr = `$a\\rightarrow ${a}a\\rightarrow${a}a+${b} \\rightarrow${a}a+${b}-2a=${a-2}a+${b}$`
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a-2}a+${b}$.`
 					break ;
 				case 4 : // ax+b+3x
@@ -6497,7 +6502,7 @@ function Traduire_un_programme_de_calcul(){
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Ajoute le triple du nombre de départ`])
 					texte += `Si on note $t$ le nombre de départ, quel est le résultat du programme de calcul ?`
 					texte_corr = `$t\\rightarrow ${a}t\\rightarrow${a}t+${b} \\rightarrow${a}t+${b}+3t=${a+3}t+${b}$`
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a+3}t+${b}$.`
 					break ;
 				case 5 : // (ax+b)*c-d
@@ -6505,7 +6510,7 @@ function Traduire_un_programme_de_calcul(){
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Multiplie par ${c}`,`Enlève ${d}`])
 					texte += `Si on note $x$ le nombre de départ, quel est le résultat du programme de calcul ?`
 					texte_corr = `$x\\rightarrow ${a}x\\rightarrow${a}x+${b} \\rightarrow(${a}x+${b})\\times ${c}=${a*c}x+${b*c}\\rightarrow${a*c}x+${b*c-d}$`
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a*c}x+${b*c-d}$.`
 					break ;
 				case 6 : // (ax+b)*c+x
@@ -6513,7 +6518,7 @@ function Traduire_un_programme_de_calcul(){
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`, `Multiplie par ${c}`,`Ajoute le nombre de départ`])
 					texte += `Si on note $y$ le nombre de départ, quel est le résultat du programme de calcul ?`
 					texte_corr = `$y\\rightarrow ${a}y\\rightarrow${a}y+${b} \\rightarrow(${a}y+${b})\\times ${c}=${a*c}y+${b*c}\\rightarrow ${a*c}y+${b*c}+y=${a*c+1}y+${b*c}$`
-					texte_corr += '\\\\\\\\'
+					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a*c+1}y+${b*c}$.`
 					break ;
 			}
@@ -6521,7 +6526,7 @@ function Traduire_un_programme_de_calcul(){
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				if (est_diaporama) {
-					texte = texte.replace(', quel est le résultat du programme de calcul ?',',\\\\ quel est le résultat de ce programme ?')
+					texte = texte.replace(', quel est le résultat du programme de calcul ?',',<br> quel est le résultat de ce programme ?')
 				}
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
@@ -6561,7 +6566,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					x = randint(2,10,a)
 					b = randint(1,10,[a,x])
 					texte = `Calculer $${a}x+${b}$ pour $x=${x}$.`
-					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ : <br>`
 					texte_corr += `$${a}x+${b}=${a}\\times${x}+${b}=${a*x}+${b}=${a*x+b}$`
 					break ;
 				case 2 : // a(x+b)
@@ -6569,21 +6574,21 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					x = randint(2,10,a)
 					b = randint(1,10,[a,x])
 					texte = `Calculer $${a}(x+${b})$ pour $x=${x}$.`
-					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ : <br>`
 					texte_corr += `$${a}(x+${b})=${a}\\times(${x}+${b})=${a}\\times${x+b}=${a*(x+b)}$`
 					break ;
 				case 3 : // x^2+y^2
 					x = randint(2,10)
 					y = randint(2,10)
 					texte = `Calculer $x^2+y^2$ pour $x=${x}$ et $y=${y}$.`
-					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : <br>`
 					texte_corr += `$x^2+y^2=${x}^2+${y}^2=${x**2}+${y**2}=${x**2+y**2}$`
 					break ;
 				case 4 : // x^2-y^2
 					x = randint(2,10)
 					y = randint(1,x-1)
 					texte = `Calculer $x^2-y^2$ pour $x=${x}$ et $y=${y}$.`
-					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : <br>`
 					texte_corr += `$x^2-y^2=${x}^2-${y}^2=${x**2}-${y**2}=${x**2-y**2}$`
 					break ;
 				case 5 : // ax^2+b(x-1)+cy^3
@@ -6593,7 +6598,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					x = randint(3,6)
 					y = choice([1,2,3,5,10])
 					texte = `Calculer $${a}x^2+${b}(x-1)+${c}y^3$ pour $x=${x}$ et $y=${y}$.`
-					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : <br>`
 					texte_corr += `$${a}x^2+${b}(x-1)+${c}y^3=${a}\\times${x}^2+${b}(${x}-1)+${c}\\times${y}^3=${a}\\times${x**2}+${b}\\times${x-1}+${c}\\times${y**3}=${a*x**2+b*(x-1)+c*y**3}$.`
 					break ;
 				case 6 : // ax^2+bx+c
@@ -6602,7 +6607,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					c = randint(2,6)
 					x = randint(3,6)
 					texte = `Calculer $${a}x^2+${b}x+${c}$ pour $x=${x}$.`
-					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ : <br>`
 					texte_corr += `$${a}x^2+${b}x+${c}=${a}\\times${x}^2+${b}\\times${x}+${c}=${a}\\times${x**2}+${b*x}+${c}=${a*x**2+b*x+c}$`
 					break ;
 				case 7 : // ax^2+bx-c
@@ -6611,7 +6616,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					c = randint(2,6)
 					x = randint(3,6)
 					texte = `Calculer $${a}x^2+${b}x-${c}$ pour $x=${x}$.`
-					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ : <br>`
 					texte_corr += `$${a}x^2+${b}x-${c}=${a}\\times${x}^2+${b}\\times${x}-${c}=${a}\\times${x**2}+${b*x}-${c}=${a*x**2+b*x-c}$`
 					break ;
 				case 8 : // ax^2-bx+c
@@ -6620,7 +6625,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					c = randint(2,6)
 					x = randint(3,6)
 					texte = `Calculer $${a}x^2-${b}x+${c}$ pour $x=${x}$.`
-					texte_corr = `Pour $x=${x}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ : <br>`
 					texte_corr += `$${a}x^2-${b}x+${c}=${a}\\times${x}^2-${b}\\times${x}+${c}=${a}\\times${x**2}-${b*x}+${c}=${a*x**2-b*x+c}$`
 					break ;
 				
@@ -6629,7 +6634,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					x = randint(2,10)
 					y = randint(2,10,x)
 					texte = `Calculer $${a}xy+x+y$ pour $x=${x}$ et $y=${y}$.`
-					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : <br>`
 					texte_corr += `$${a}xy+x+y=${a}\\times${x}\\times${y}+${x}+${y}=${a*x*y}+${x}+${y}=${a*x*y+x+y}$`
 					break ;
 				case 10 : // (ax+b)(cy-d)
@@ -6640,7 +6645,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 					c = randint(2,10)
 					d = randint(1,Math.min(10,c*y))
 					texte = `Calculer $(${a}x+${b})(${c}y-${d})$ pour $x=${x}$ et $y=${y}$.`
-					texte_corr = `Pour $x=${x}$ et $y=${y}$ : \\\\`
+					texte_corr = `Pour $x=${x}$ et $y=${y}$ : <br>`
 					texte_corr += `$(${a}x+${b})(${c}y-${d})=(${a}\\times${x}+${b})(${c}\\times${y}-${d})=${a*x+b}\\times${c*y-d}=${(a*x+b)*(c*y-d)}$`
 					break ;
 				
@@ -6687,11 +6692,11 @@ function Tester_une_egalite(){
 					x1 = randint(2,10,a+b)
 					x2 = a + b
 					texte = `Tester l'égalité $3x-${a}=2x+${b}$ pour $x=${x1}$ puis pour $x=${x2}$`
-					texte_corr = `Pour $x=${x1}$ : \\\\`
-					texte_corr += `$3x-${a}=3\\times${x1}-${a}=${3*x1-a}$ \\\\ $2x+${b}=2\\times${x1}+${b}=${2*x1+b}$\\\\`
-					texte_corr += `$${3*x1-a}\\not=${2*x1+b}$ donc l'égalité n'est pas vraie.\\\\\\\\`
-					texte_corr += `Pour $x=${x2}$ : \\\\`
-					texte_corr += `$3x-${a}=3\\times${x2}-${a}=${3*x2-a}$ \\\\ $2x+${b}=2\\times${x2}+${b}=${2*x2+b}$\\\\`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$3x-${a}=3\\times${x1}-${a}=${3*x1-a}$ <br> $2x+${b}=2\\times${x1}+${b}=${2*x1+b}$<br>`
+					texte_corr += `$${3*x1-a}\\not=${2*x1+b}$ donc l'égalité n'est pas vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$3x-${a}=3\\times${x2}-${a}=${3*x2-a}$ <br> $2x+${b}=2\\times${x2}+${b}=${2*x2+b}$<br>`
 					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.`
 					break ;
 				case 2 : // 3x+a=5x-b   x=(a+b)/2 donc a et b impairs pour une solution entière  
@@ -6700,11 +6705,11 @@ function Tester_une_egalite(){
 					x1 = parseInt(Algebrite.eval((a+b)/2))
 					x2 = randint(1,9,x1)
 					texte = `Tester l'égalité $3x+${a}=5x-${b}$ pour $x=${x1}$ puis pour $x=${x2}$`
-					texte_corr = `Pour $x=${x1}$ : \\\\`
-					texte_corr += `$3x+${a}=3\\times${x1}+${a}=${3*x1+a}$ \\\\ $5x-${b}=5\\times${x1}-${b}=${5*x1-b}$\\\\`
-					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.\\\\\\\\`
-					texte_corr += `Pour $x=${x2}$ : \\\\`
-					texte_corr += `$3x+${a}=3\\times${x2}+${a}=${3*x2+a}$ \\\\ $5x-${b}=5\\times${x2}-${b}=${5*x2-b}$\\\\`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$3x+${a}=3\\times${x1}+${a}=${3*x1+a}$ <br> $5x-${b}=5\\times${x1}-${b}=${5*x1-b}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$3x+${a}=3\\times${x2}+${a}=${3*x2+a}$ <br> $5x-${b}=5\\times${x2}-${b}=${5*x2-b}$<br>`
 					texte_corr += `$${3*x2+a}\\not=${5*x2-b}$ donc l'égalité n'est pas vraie.`
 					break ;
 				case 3 : // 10(x-a)=4(2x+b) x=(10a+4b)/2
@@ -6713,11 +6718,11 @@ function Tester_une_egalite(){
 					x2 = parseInt(Algebrite.eval((10*a+4*b)/2))
 					x1 = randint(1,9,x2)
 					texte = `Tester l'égalité $10(x-${a})=4(2x+${b})$ pour $x=${x1}$ puis pour $x=${x2}$`
-					texte_corr = `Pour $x=${x1}$ : \\\\`
-					texte_corr += `$10(x-${a})=10\\times(${x1}-${a})=10\\times${x1-a}=${10*(x1-a)}$ \\\\ $4(2x+${b})=4\\times(2\\times${x1}+${b})=4\\times${2*x1+b}=${4*(2*x1+b)}$\\\\`
-					texte_corr += `$${10*(x1-a)}\\not=${4*(2*x1+b)}$ donc l'égalité n'est pas vraie.\\\\\\\\`
-					texte_corr += `Pour $x=${x2}$ : \\\\`
-					texte_corr += `$10(x-${a})=10\\times(${x2}-${a})=10\\times${x2-a}=${10*(x2-a)}$ \\\\ $4(2x+${b})=4\\times(2\\times${x2}+${b})=4\\times${2*x2+b}=${4*(2*x2+b)}$\\\\`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$10(x-${a})=10\\times(${x1}-${a})=10\\times${x1-a}=${10*(x1-a)}$ <br> $4(2x+${b})=4\\times(2\\times${x1}+${b})=4\\times${2*x1+b}=${4*(2*x1+b)}$<br>`
+					texte_corr += `$${10*(x1-a)}\\not=${4*(2*x1+b)}$ donc l'égalité n'est pas vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$10(x-${a})=10\\times(${x2}-${a})=10\\times${x2-a}=${10*(x2-a)}$ <br> $4(2x+${b})=4\\times(2\\times${x2}+${b})=4\\times${2*x2+b}=${4*(2*x2+b)}$<br>`
 					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.`
 					break ;
 				case 4 : // ax+b=(a+1)x-c x=b+c
@@ -6727,11 +6732,11 @@ function Tester_une_egalite(){
 					x1 = b + c
 					x2 = randint(2,10,x2)
 					texte = `Tester l'égalité $${a}x+${b}=${a+1}x-${c}$ pour $x=${x1}$ puis pour $x=${x2}$`
-					texte_corr = `Pour $x=${x1}$ : \\\\`
-					texte_corr += `$${a}x+${b}=${a}\\times${x1}+${b}=${a*x1+b}$ \\\\ $${a+1}x-${c}=${a+1}\\times${x1}-${c}=${(a+1)*x1-c}$\\\\`
-					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.\\\\\\\\`
-					texte_corr += `Pour $x=${x2}$ : \\\\`
-					texte_corr += `$${a}x+${b}=${a}\\times${x2}+${b}=${a*x2+b}$ \\\\ $${a+1}x-${c}=${a+1}\\times${x2}-${c}=${(a+1)*x2-c}$\\\\`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$${a}x+${b}=${a}\\times${x1}+${b}=${a*x1+b}$ <br> $${a+1}x-${c}=${a+1}\\times${x1}-${c}=${(a+1)*x1-c}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$${a}x+${b}=${a}\\times${x2}+${b}=${a*x2+b}$ <br> $${a+1}x-${c}=${a+1}\\times${x2}-${c}=${(a+1)*x2-c}$<br>`
 					texte_corr += `$${a*x2+b}\\not=${(a+1)*x2-c}$ donc l'égalité n'est pas vraie.`
 					break ;
 				case 5 : // a-2x=b+2x x=(a-b)/4
@@ -6740,11 +6745,11 @@ function Tester_une_egalite(){
 					a = b+4*x1
 					x2 = randint(1,11,x1)
 					texte = `Tester l'égalité $${a}-2x=${b}+2x$ pour $x=${x1}$ puis pour $x=${x2}$`
-					texte_corr = `Pour $x=${x1}$ : \\\\`
-					texte_corr += `$${a}-2x=${a}-2\\times${x1}=${a-2*x1}$ \\\\ $${b}+2x=${b}+2\\times${x1}=${b+2*x1}$\\\\`
-					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.\\\\\\\\`
-					texte_corr += `Pour $x=${x2}$ : \\\\`
-					texte_corr += `$${a}-2x=${a}-2\\times${x2}=${a-2*x2}$ \\\\ $${b}+2x=${b}+2\\times${x2}=${b+2*x2}$\\\\`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$${a}-2x=${a}-2\\times${x1}=${a-2*x1}$ <br> $${b}+2x=${b}+2\\times${x1}=${b+2*x1}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$${a}-2x=${a}-2\\times${x2}=${a-2*x2}$ <br> $${b}+2x=${b}+2\\times${x2}=${b+2*x2}$<br>`
 					texte_corr += `$${a-2*x2}\\not=${b+2*x2}$ donc l'égalité n'est pas vraie.`
 					break ;
 				
@@ -7034,7 +7039,7 @@ function Exercice_Thales(){
 		else  // énoncé sans figure
 			
 			if (k>0) {
-				texte = `$${s1}$, $${s2}$ et $${s3}$`+' sont trois point distincts.\\\\\n' + `$${s4} \\in [${s1+s2}]$`+' et '+`$${s5} \\in [${s1+s3}]$`+' tel que les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.\\\\\n'
+				texte = `$${s1}$, $${s2}$ et $${s3}$`+' sont trois point distincts.<br>\n' + `$${s4} \\in [${s1+s2}]$`+' et '+`$${s5} \\in [${s1+s3}]$`+' tel que les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.<br>\n'
 				texte += `$${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et `
 				if (niv_diff==1) {
 					texte +=`$${s1+s5}=${s15}$ cm.`
@@ -7042,23 +7047,23 @@ function Exercice_Thales(){
 				else {
 					texte +=`$${s3+s5}=${s35}$ cm.`
 				}
-				texte += `\\\\\nCalculer $${s1+s4}$ et $${s2+s3}$.`
-				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.\\\\\n'+' D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
+				texte += `<br>\nCalculer $${s1+s4}$ et $${s2+s3}$.`
+				texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.<br>\n'+' D\'après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
 				if (niv_diff==2) {
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'~;cm.'
 				}
 			}
 			else {
 				texte = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre.`
-				texte += `\\\\\nLes droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et `
+				texte += `<br>\nLes droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.<br>\n $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et `
 				if (niv_diff==1) {
 					texte +=`$${s1+s5}=${s15}$ cm.`
 				}
 				else {
 					texte +=`$${s3+s5}=${s35}$ cm.`
 				}
-				texte += `\\\\\nCalculer $${s1+s4}$ et $${s2+s3}$.`
-				texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D\'après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+				texte += `<br>\nCalculer $${s1+s4}$ et $${s2+s3}$.`
+				texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés dans cet ordre et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.<br>\n` + ' D\'après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '<br>\n'
 				if (niv_diff==2) {
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}$`+'~cm.'
 				}
@@ -7091,7 +7096,7 @@ function Exercice_Thales(){
 			this.liste_questions.push(texte) // on envoie la question
 				// correction 
 			if (this.sup==2){		 //niveau 2 : Calcul intermédiaire nécessaire
-				texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$\\\\\n\t`
+				texte_corr = `Les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.<br>\n\t D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$<br>\n\t`
 				if (k>0){
 					texte_corr +='On sait que '+`$${s1+s5}=${s1+s3}-${s5+s3}=${s13}-${s35}=${s15}~\\text{cm}.$`
 				}
@@ -7101,14 +7106,14 @@ function Exercice_Thales(){
 			}
 			else 
 			if (this.sup==1){
-				if (k>0) {texte_corr = `Dans le triangle $${s1+s2+s3}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
+				if (k>0) {texte_corr = `Dans le triangle $${s1+s2+s3}$, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.<br>\n D\'après la propriété de Thales, on a $${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`
 				}
-				else {texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.\\\\\n` + ' D\'après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '\\\\\n'
+				else {texte_corr = `Les points $${s2}$, $${s1}$, $${s4}$ et $${s3}$, $${s1}$, $${s5}$ sont alignés et les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.<br>\n` + ' D\'après la propriété de Thales, on a ' + `$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$` + '<br>\n'
 				}
 			}
-			texte_corr += `\\\\\n On a donc $${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
-			texte_corr += `\\\\\n Soit $${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$.`
-			texte_corr += `\\\\\n Et $${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$.`
+			texte_corr += `<br>\n On a donc $${tex_fraction(s1 + s4, s12)}=${tex_fraction(s15, s13)}=${tex_fraction(s45, s2 + s3)}$`
+			texte_corr += `<br>\n Soit $${s1 + s4}=${tex_fraction(s15 + '\\times' + s12, s13)}\\approx${s14}~\\text{cm}$.`
+			texte_corr += `<br>\n Et $${s2 + s3}=${tex_fraction(s13 + '\\times' + s45, s15)}\\approx${s23}~\\text{cm}$.`
 			
 			this.liste_corrections.push(texte_corr)
 
@@ -7302,14 +7307,14 @@ function Exercice_Pythagore() {
 			this.liste_questions.push(texte) // on envoie la question
 			// correction 
 			if (type_de_questions == 2 || type_de_questions == 4) {		 //niveau 2 : Calcul d'un côté de l'angle droit
-				texte_corr = 'Le triangle ' + `$${nom_du_triangle}$` + ' est rectangle en ' + `$${s0}.$` + '\\\\\n D\'après le théorème de Pythagore, on a :~' + `$${s1 + s2}^2 = ${s0 + s1}^2~+~${s0 + s2}^2.$`
-				texte_corr += '\\\\\n D\'où ' + `$${s0 + s2}^2~=~${s1 + s2}^2~-~${s0 + s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12 - carre01, 2)}.$`
-				texte_corr += '\\\\\n Soit ' + `$${s0 + s2}~=~\\sqrt{${arrondi_virgule(carre12 - carre01, 2)}}~\\approx${s02}~\\text{cm}.$`
+				texte_corr = 'Le triangle ' + `$${nom_du_triangle}$` + ' est rectangle en ' + `$${s0}.$` + '<br>\n D\'après le théorème de Pythagore, on a :~' + `$${s1 + s2}^2 = ${s0 + s1}^2~+~${s0 + s2}^2.$`
+				texte_corr += '<br>\n D\'où ' + `$${s0 + s2}^2~=~${s1 + s2}^2~-~${s0 + s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12 - carre01, 2)}.$`
+				texte_corr += '<br>\n Soit ' + `$${s0 + s2}~=~\\sqrt{${arrondi_virgule(carre12 - carre01, 2)}}~\\approx${s02}~\\text{cm}.$`
 			}
 			else {
-				texte_corr = 'Le triangle ' + `$${nom_du_triangle}$` + ' est rectangle en ' + `$${s0}.$` + '\\\\\n D\'après le théorème de Pythagore, on a ' + `$${s1 + s2}^2 = ${s0 + s1}^2~+~${s0 + s2}^2.$`
-				texte_corr += '\\\\\n D\'où ' + `$${s1 + s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02 + carre01, 2)}.$`
-				texte_corr += '\\\\\n Soit ' + `$${s1 + s2}~=~\\sqrt{${arrondi_virgule(carre02 + carre01, 2)}}~\\approx${s12}~\\text{cm}.$`
+				texte_corr = 'Le triangle ' + `$${nom_du_triangle}$` + ' est rectangle en ' + `$${s0}.$` + '<br>\n D\'après le théorème de Pythagore, on a ' + `$${s1 + s2}^2 = ${s0 + s1}^2~+~${s0 + s2}^2.$`
+				texte_corr += '<br>\n D\'où ' + `$${s1 + s2}^2~=~${s01}^2~+~${s02}^2~=~${scarre01}~+~${scarre02}~=~${arrondi_virgule(carre02 + carre01, 2)}.$`
+				texte_corr += '<br>\n Soit ' + `$${s1 + s2}~=~\\sqrt{${arrondi_virgule(carre02 + carre01, 2)}}~\\approx${s12}~\\text{cm}.$`
 
 			}
 
@@ -7378,14 +7383,14 @@ function Reciproque_Pythagore(){
 				texte = `Le triangle $${nom_triangle}$ est tel que $${A+C}=${tex_nombre(b)}$~cm, $${A+B}=${tex_nombre(c)}$~cm,  et $${B+C}=${tex_nombre(a)}$~cm.`
 				break 
 			}
-			texte += `\\\\Ce triangle est-il rectangle ?`
+			texte += `<br>Ce triangle est-il rectangle ?`
 			texte_corr = `Dans le triangle $${nom_triangle}$, le plus grand côté est $[${A+B}]$.`
-			texte_corr += `\\\\$${A+B}^2=${tex_nombre(c)}^2=${tex_nombrec(c**2)}$`
-			texte_corr += `\\\\$${A+C}^2+${B+C}^2=${tex_nombre(b)}^2+${tex_nombre(a)}^2=${tex_nombrec(b**2+a**2)}$`
+			texte_corr += `<br>$${A+B}^2=${tex_nombre(c)}^2=${tex_nombrec(c**2)}$`
+			texte_corr += `<br>$${A+C}^2+${B+C}^2=${tex_nombre(b)}^2+${tex_nombre(a)}^2=${tex_nombrec(b**2+a**2)}$`
 			if (liste_type_de_questions[i]=='rectangle') {
-				texte_corr += `\\\\On constate que $${A+B}^2=${A+C}^2+${B+C}^2$, l'égalité de Pythagore est vérifiée donc $${nom_triangle}$ est rectangle en $${C}$.`
+				texte_corr += `<br>On constate que $${A+B}^2=${A+C}^2+${B+C}^2$, l'égalité de Pythagore est vérifiée donc $${nom_triangle}$ est rectangle en $${C}$.`
 			} else {
-				texte_corr += `\\\\On constate que $${A+B}^2\\not=${A+C}^2+${B+C}^2$, l'égalité de Pythagore n'est pas vérifiée donc $${nom_triangle}$ n'est pas rectangle.`
+				texte_corr += `<br>On constate que $${A+B}^2\\not=${A+C}^2+${B+C}^2$, l'égalité de Pythagore n'est pas vérifiée donc $${nom_triangle}$ n'est pas rectangle.`
 			}
 			
 			
@@ -7445,17 +7450,17 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b])
 					texte = `$(x+${b})(x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(x+${b})(x+${d})=0$`
-					texte_corr +='\\\\\n Soit '+`$x+${b}=0$`+' ou '+`$x+${d}=0$`
-					texte_corr += '\\\\\n Donc '+`$x=${0-b}$`+' ou '+`$x=${0-d}$`
+					texte_corr += '<br>\n'+`$(x+${b})(x+${d})=0$`
+					texte_corr +='<br>\n Soit '+`$x+${b}=0$`+' ou '+`$x+${d}=0$`
+					texte_corr += '<br>\n Donc '+`$x=${0-b}$`+' ou '+`$x=${0-d}$`
 				break;
 			case 2: b = randint(1,20); // (x-a)(x+b)=0 avec a et b entiers
 					d = randint(1,20,[b])
 					texte = `$(x-${b})(x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(x-${b})(x+${d})=0$`
-					texte_corr += '\\\\\n Soit '+`$x-${b}=0$`+' ou  '+`$x+${d}=0$`
-					texte_corr += '\\\\\n Donc '+`$x=${b}$`+' ou '+`$x=${0-d}$`
+					texte_corr += '<br>\n'+`$(x-${b})(x+${d})=0$`
+					texte_corr += '<br>\n Soit '+`$x-${b}=0$`+' ou  '+`$x+${d}=0$`
+					texte_corr += '<br>\n Donc '+`$x=${b}$`+' ou '+`$x=${0-d}$`
 				break;
 				
 			case 3: a = randint(2,6); 	//(ax+b)(cx+d)=0  avec b/a et d/c entiers.
@@ -7464,11 +7469,11 @@ function Resoudre_une_equation_produit_nul(){
 					d = Math.round(randint(1,5)*c);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`
-					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
-					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${0-d/c}$`
+					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
+					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
+					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
+					texte_corr += '<br>\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${0-d/c}$`
 				break;
 			case 4: a = randint(2,6); 	//(ax+b)(cx-d)=0  avec b/a et d/c entiers.
 					b = Math.round(randint(1,5)*a);
@@ -7476,11 +7481,11 @@ function Resoudre_une_equation_produit_nul(){
 					d = Math.round(randint(1,5)*c);
 					texte = `$(${a}x+${b})(${c}x-${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`
-					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
-					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
-					texte_corr += '\\\\\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${d/c}$`
+					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x-${d})=0$`
+					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
+					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
+					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
+					texte_corr += '<br>\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${d/c}$`
 				break;
 			case 5:
 					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
@@ -7489,10 +7494,10 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b,c]);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x+${d})=0$`
-					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
-					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`
+					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
+					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
+					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`
 					if (tex_fraction(b,a)!=tex_fraction_reduite(b,a)) {texte_corr+=`$=-${tex_fraction_reduite(b,a)}$`}
 					texte_corr+=' ou '+`$x=-${tex_fraction(d,c)}$`
 					if (tex_fraction(d,c)!=tex_fraction_reduite(d,c)) {texte_corr+=`$=-${tex_fraction_reduite(d,c)}$`}
@@ -7504,10 +7509,10 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b,c]);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '\\\\\n'+`$(${a}x+${b})(${c}x-${d})=0$`
-					texte_corr += '\\\\\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
-					texte_corr += '\\\\\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
-					texte_corr += '\\\\\n Donc '+`$x=-${tex_fraction(b,a)}$`
+					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x-${d})=0$`
+					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
+					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
+					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`
 					if (tex_fraction(b,a)!=tex_fraction_reduite(b,a)) {texte_corr+=`$=-${tex_fraction_reduite(b,a)}$`}
 					texte_corr+=' ou '+`$x=${tex_fraction(d,c)}$`
 					if (tex_fraction(d,c)!=tex_fraction_reduite(d,c)) {texte_corr+=`$=${tex_fraction_reduite(d,c)}$`}
