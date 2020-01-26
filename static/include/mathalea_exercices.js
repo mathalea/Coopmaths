@@ -5348,6 +5348,9 @@ function Fraction_d_un_nombre(max=11){
  	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
  }
 
+ /**
+* @auteur Jean-Claude Lhote
+*/
  function Calculer_des_fréquences(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Calculer des fréquences";
@@ -5383,7 +5386,7 @@ function Fraction_d_un_nombre(max=11){
 			texte+='<br><br> Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$.`
 			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${tex_nombre(nombre_tirages)}$.<br>`;
 			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
-			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur]*100/nombre_tirages))}\\%.$`
+			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur]*100/nombre_tirages))}\\thickspace\\%$.`
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
