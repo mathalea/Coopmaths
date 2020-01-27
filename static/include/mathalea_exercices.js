@@ -5350,11 +5350,10 @@ function Fraction_d_un_nombre(max=11){
  	this.besoin_formulaire_numerique = ['Valeur maximale',99999];	
  }
 
-<<<<<<<
-  /**
+ /**
 * @auteur Jean-Claude Lhote
 */
-function Calculer_des_frequences(){
+ function Calculer_des_frequences(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Calculer des fréquences";
 	this.consigne = "";
@@ -5362,60 +5361,6 @@ function Calculer_des_frequences(){
 	this.spacing = 2;
 	this.spacing_corr = 2;
 	this.nb_cols_corr = 1;	 
-	this.sup = 1;
-=======
- /**
-* @auteur Jean-Claude Lhote
-*/
- function Calculer_des_fréquences(){
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Calculer des fréquences";
-	this.consigne = "Calculer ";
-	this.nb_questions = 1;
-	this.spacing = 2;
-	this.spacing_corr = 2;
-	this.nb_cols_corr = 1;	 
-	this.nouvelle_version = function(){
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-		for (let i = 0, nombre_des, nombre_faces, nombre_tirages,index_valeur,tirages, texte,texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
-			nombre_des=randint(1,2);
-			nombre_faces=choice([4,6,8,10]);
-			nombre_tirages=choice([50,100,200,500,1000]);
-			tirages=tirer_les_des(nombre_tirages,nombre_faces,nombre_des);
-			do index_valeur=randint(0,(nombre_faces-1)*nombre_des);
-			while (tirages[index_valeur]==0)
-			if (nombre_des>1) {
-				texte=`On a réalisé $${nombre_tirages}$ lancers de $${nombre_des}$ dés à $${nombre_faces}$ faces.<br>`;
-			}
-			else {
-				texte=`On a réalisé $${nombre_tirages}$ lancers d'un dé à $${nombre_faces}$ faces.<br>`;
-			}
-			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br>'
-			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
-			for (let j=0;j<=tirages.length;j++)		texte+='|c';
-			texte+='}\\hline  \\text{Scores}';
-			for (let j=0;j<tirages.length;j++) 		texte+='&'+calcul(nombre_des+j);
-			texte+='\\\\\\hline \\text{Effectifs}'
-			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j];
-			texte+='\\\\\\hline\\end{array}$'
-			texte+='<br><br> Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$.`
-			texte_corr='L\'effectif de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tirages[index_valeur]}$.<br>L\'effectif total de la série est $${tex_nombre(nombre_tirages)}$.<br>`;
-			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur]/nombre_tirages))}$<br>`;
-			texte_corr+='Soit '+`$${tex_nombre(calcul(tirages[index_valeur]*100/nombre_tirages))}\\thickspace\\%$.`
-			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte);
-				this.liste_corrections.push(texte_corr);
-				i++;
-			}
-			cpt++;
-		}
-		liste_de_question_to_contenu(this);
-	}
-}
->>>>>>>
-
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
@@ -5492,9 +5437,9 @@ function Calculer_des_frequences(){
 			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ C';
 			for (somme=0,j=0;j<temperatures.length;j++) 	texte+='&'+temperatures[j];
 			texte+='\\\\\\hline\\end{array}$';
-			texte+='<br><br> Calculer la fréquence de la température '+`$${temperatures[index_valeur]}^\\circ$.`;
-			texte_corr=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, la température $${temperatures[index_valeur]}^\\circ$ a été relevée $${frequence}$ fois.<br>`;
-			texte_corr+=`Il y a $${jours_par_mois(mois)}$ jours ce mois-ci.<br> La fréquence de la température $${temperatures[index_valeur]}^\\circ$ est :<br>`;
+			texte+='<br><br> Calculer la fréquence de la température '+`$${temperatures[index_valeur]}^\\circ C$.`;
+			texte_corr=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, la température $${temperatures[index_valeur]}^\\circ C$ a été relevée $${frequence}$ fois.<br>`;
+			texte_corr+=`Il y a $${jours_par_mois(mois)}$ jours ce mois-ci.<br> La fréquence de la température $${temperatures[index_valeur]}^\\circ C$ est :<br>`;
 			texte_corr+=`$${tex_fraction(tex_nombre(frequence),tex_nombre(jours_par_mois(mois)))}$`;
 			if (arrondi(frequence/nombre_temperatures,3)==frequence/nombre_temperatures) {
 				texte_corr+=`$=${arrondi_virgule(frequence/nombre_temperatures,3)}$<br>`;
@@ -5515,6 +5460,7 @@ function Calculer_des_frequences(){
 		}
 		liste_de_question_to_contenu(this);
 	}
+	this.besoin_formulaire_numerique = ['Type de séries',3,"1 : Lancers de dés \n 2 : Liste de notes\n 3 : Un mois de températures"];
 }
  /**
 * @auteur Jean-Claude Lhote
