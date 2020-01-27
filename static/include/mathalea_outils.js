@@ -614,6 +614,14 @@ function tirer_les_des(nombre_tirages,nombre_faces,nombre_des) { // paramètres 
 	}
 return tirages
 }
+ /**
+* @auteur Jean-Claude Lhote
+*/
+function liste_de_notes(nombre_notes,note_min,note_max) { // paramètres : combien de tirages ? avec quel type de dés ? et combien de dés lancés à chaque tirage
+	let notes =[];
+	for (i=0;i<nombre_notes;i++) notes.push(randint(note_min,note_max));
+return notes
+}
 
  /**
 * @auteur Jean-Claude Lhote
@@ -626,19 +634,15 @@ function jours_par_mois(n){
 * @auteur Jean-Claude Lhote
 */
 function un_mois_de_temperature(base,mois,annee) { // paramètres : température médiane, quantième du mois (janvier=1), annee pour déterminer si bissextile
-
-	let tirages =[];
+	let temperatures =[];
 	let nombre_jours=jours_par_mois(mois);
 	if (mois==2) {
 		if (((annee%4==0)&&(annee%100!=0))||(annee%400==0)) 	nombre_jours=29;	// années bissextiles.  
 		else nombre_jours=28; 
-	}	
-	for (let i=0;i<15;i++) tirages.push([(i-7+base),0]);
-	for (let i=0,resultat;i<nombre_jours;i++) {
-		resultat=randint(0,14);
-		tirages [resultat][1]++;
 	}
-return tirages
+	temperatures.push(randint(-3,3)+base);
+	for (let i=1;i<nombre_jours;i++) temperatures.push(temperatures[i-1]+randint(-2,2));
+return temperatures
 }
 	
  /**
