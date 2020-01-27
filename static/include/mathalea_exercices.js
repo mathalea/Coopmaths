@@ -79,7 +79,7 @@ var liste_des_exercices_disponibles = {
 		'5R22': Exercice_additions_et_soustraction_de_relatifs,
 		'5R31': Exercice_additions_et_soustraction_de_relatifs,
 		'5R31-2': Exercice_simplification_somme_algebrique,
-		'5S10': Calculer_des_fréquences,
+		'5S10': Calculer_des_frequences,
 		'5S10-2': Calculer_des_moyennes,
 		//'5S10-3': Calculer_des_étendues,
 		'4N10': Exercice_additionner_des_fractions,
@@ -5353,7 +5353,7 @@ function Fraction_d_un_nombre(max=11){
   /**
 * @auteur Jean-Claude Lhote
 */
-function Calculer_des_fréquences(){
+function Calculer_des_frequences(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Calculer des fréquences";
 	this.consigne = "";
