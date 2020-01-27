@@ -5619,16 +5619,16 @@ function Probleme_course(){
 			texte = `${prenom} achète ${tex_nombre(masse_en_kg_de_aliment1)} kg de ${aliment1} à ${tex_prix(prix_aliment1)} €/kg `
 			texte += `et ${masse_en_g_de_aliment2} g de ${aliment2} à ${tex_prix(prix_aliment2)} €/kg. Quel est le prix total à payer ?`
 			texte_corr = `Prix des ${aliment1} : ${tex_nombre(masse_en_kg_de_aliment1)} kg × ${tex_prix(prix_aliment1)} €/kg = ${tex_prix(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))} €`+'<br>'
-			texte_corr += `<br>`;
 			texte_corr += `Prix du ${aliment2} : ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2/1000))} kg × ${tex_prix(prix_aliment2)} €/kg = ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))} € `+'<br>'
-			texte_corr += `<br>`;
-			texte_corr += `Prix total à payer : ${tex_nombre(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))} € + ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))} € ≈ ${arrondi_virgule(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1+masse_en_g_de_aliment2*prix_aliment2/1000))} €`
+			texte_corr += `Prix total à payer : ${tex_nombre(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))} € + ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))} € ≈ ${arrondi_virgule(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1+masse_en_g_de_aliment2*prix_aliment2/1000))} €<br>`
+			texte_corr += `<br><i>Le prix total aurait aussi pu être trouvé en un seul calcul</i> : ${tex_nombre(masse_en_kg_de_aliment1)} kg × ${tex_prix(prix_aliment1)} €/kg + ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2/1000))} kg × ${tex_prix(prix_aliment2)} €/kg ≈ ${arrondi_virgule(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1+masse_en_g_de_aliment2*prix_aliment2/1000))} €.`
+
 			
 			if (!sortie_html) {
 				texte_corr = `Prix des ${aliment1} : $${tex_nombre(masse_en_kg_de_aliment1)}~\\text{kg}\\times${tex_prix(prix_aliment1)}~\\text{\\euro{}/kg} = ${tex_prix(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))}~\\text{\\euro}$`+'<br>'
 				texte_corr += `Prix du ${aliment2} : $${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2/1000))}~\\text{kg}\\times${tex_prix(prix_aliment2)}~\\text{\\euro{}/kg} = ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro}$`+'<br>'
-				texte_corr += `Prix total à payer : $${tex_nombre(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))}~\\text{\\euro} + ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro} \\approx ${arrondi_virgule(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1+masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro}$`
-			
+				texte_corr += `Prix total à payer : $${tex_nombre(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1))}~\\text{\\euro} + ${tex_nombre(Algebrite.eval(masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro} \\approx ${arrondi_virgule(Algebrite.eval(masse_en_kg_de_aliment1*prix_aliment1+masse_en_g_de_aliment2*prix_aliment2/1000))}~\\text{\\euro}$<br>`
+				
 			}
 
 			this.liste_questions.push(texte);
@@ -6653,6 +6653,7 @@ function Traduire_un_programme_de_calcul(){
 	this.nb_questions = 3;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
+	this.spacing_corr = 2;
 
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
@@ -6671,7 +6672,7 @@ function Traduire_un_programme_de_calcul(){
 					texte = `Voici un programme de calcul : \n`
 					texte += itemize([`Ajoute ${a}`,`Multiplie par ${b}`,`Ajoute ${c}`])
 					texte += `Si on note $x$ le nombre de départ, quel est le résultat du programme de calcul ?`
-					texte_corr = `$x\\rightarrow x+${a}\\rightarrow(x+${a})\\times ${b}=${b}x+${a*b}\\rightarrow${b}x+${a*b+c}$`
+					texte_corr = `$x\\xrightarrow{+${a}} x+${a}\\xrightarrow{\\times ${b}}(x+${a})\\times ${b}=${b}x+${a*b}\\xrightarrow{+${c}}${b}x+${a*b+c}$`
 					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${b}x+${a*b+c}$.`
 					break ;
@@ -6679,7 +6680,7 @@ function Traduire_un_programme_de_calcul(){
 					texte = `Voici un programme de calcul : \n`
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Multiplie par ${c}`])
 					texte += `Si on note $y$ le nombre de départ, quel est le résultat du programme de calcul ?`
-					texte_corr = `$y\\rightarrow ${a}y\\rightarrow${a}y+${b} \\rightarrow(${a}y+${b})\\times${c}=${a*c}y+${b*c}$`
+					texte_corr = `$y\\xrightarrow{\\times ${a}} ${a}y\\xrightarrow{+${b}}${a}y+${b} \\xrightarrow{\\times ${c}}(${a}y+${b})\\times${c}=${a*c}y+${b*c}$`
 					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a*c}y+${b*c}$.`
 					break ;
@@ -6687,7 +6688,7 @@ function Traduire_un_programme_de_calcul(){
 					texte = `Voici un programme de calcul : \n`
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Enlève le double du nombre de départ`])
 					texte += `Si on note $a$ le nombre de départ, quel est le résultat du programme de calcul ?`
-					texte_corr = `$a\\rightarrow ${a}a\\rightarrow${a}a+${b} \\rightarrow${a}a+${b}-2a=${a-2}a+${b}$`
+					texte_corr = `$a\\xrightarrow{\\times ${a}} ${a}a\\xrightarrow{+${b}}${a}a+${b} \\xrightarrow{-2a}${a}a+${b}-2a=${a-2}a+${b}$`
 					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a-2}a+${b}$.`
 					break ;
@@ -6695,7 +6696,7 @@ function Traduire_un_programme_de_calcul(){
 					texte = `Voici un programme de calcul : \n`
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Ajoute le triple du nombre de départ`])
 					texte += `Si on note $t$ le nombre de départ, quel est le résultat du programme de calcul ?`
-					texte_corr = `$t\\rightarrow ${a}t\\rightarrow${a}t+${b} \\rightarrow${a}t+${b}+3t=${a+3}t+${b}$`
+					texte_corr = `$t\\xrightarrow{\\times ${a}} ${a}t\\xrightarrow{+${b}}${a}t+${b} \\xrightarrow{+3t}${a}t+${b}+3t=${a+3}t+${b}$`
 					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a+3}t+${b}$.`
 					break ;
@@ -6703,7 +6704,7 @@ function Traduire_un_programme_de_calcul(){
 					texte = `Voici un programme de calcul : \n`
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`,`Multiplie par ${c}`,`Enlève ${d}`])
 					texte += `Si on note $x$ le nombre de départ, quel est le résultat du programme de calcul ?`
-					texte_corr = `$x\\rightarrow ${a}x\\rightarrow${a}x+${b} \\rightarrow(${a}x+${b})\\times ${c}=${a*c}x+${b*c}\\rightarrow${a*c}x+${b*c-d}$`
+					texte_corr = `$x\\xrightarrow{\\times ${a}} ${a}x\\xrightarrow{+${b}}${a}x+${b} \\xrightarrow{\\times ${c}}(${a}x+${b})\\times ${c}=${a*c}x+${b*c}\\xrightarrow{-${d}}${a*c}x+${b*c-d}$`
 					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a*c}x+${b*c-d}$.`
 					break ;
@@ -6711,7 +6712,7 @@ function Traduire_un_programme_de_calcul(){
 					texte = `Voici un programme de calcul : \n`
 					texte += itemize([`Multiplie par ${a}`,`Ajoute ${b}`, `Multiplie par ${c}`,`Ajoute le nombre de départ`])
 					texte += `Si on note $y$ le nombre de départ, quel est le résultat du programme de calcul ?`
-					texte_corr = `$y\\rightarrow ${a}y\\rightarrow${a}y+${b} \\rightarrow(${a}y+${b})\\times ${c}=${a*c}y+${b*c}\\rightarrow ${a*c}y+${b*c}+y=${a*c+1}y+${b*c}$`
+					texte_corr = `$y\\xrightarrow{\\times ${a}} ${a}y\\xrightarrow{+${b}}${a}y+${b} \\xrightarrow{\\times ${c}}(${a}y+${b})\\times ${c}=${a*c}y+${b*c}\\rightarrow ${a*c}y+${b*c}+y=${a*c+1}y+${b*c}$`
 					texte_corr += '<br>'
 					texte_corr += `Le résultat du programme est donc $${a*c+1}y+${b*c}$.`
 					break ;
