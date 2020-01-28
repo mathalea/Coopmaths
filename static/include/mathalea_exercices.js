@@ -81,7 +81,7 @@ var liste_des_exercices_disponibles = {
 		'5R31-2': Exercice_simplification_somme_algebrique,
 		'5S10': Calculer_des_frequences,
 		'5S10-2': Calculer_des_moyennes,
-		//'5S10-3': Calculer_des_étendues,
+		'5S10-3': Calculer_des_etendues,
 		'4N10': Exercice_additionner_des_fractions,
 		'4N11': Exercice_additionner_ou_soustraire_des_fractions,
 		'4N12': Exercice_trouver_l_inverse,
@@ -5370,9 +5370,9 @@ function Fraction_d_un_nombre(max=11){
 			nombre_des=randint(1,2);
 			nombre_faces=choice([4,6,8,10]);
 			nombre_tirages=choice([50,100,200,500,1000]);
-			tirages=tirer_les_des(nombre_tirages,nombre_faces,nombre_des);
+			tirages=tirer_les_des(nombre_tirages,nombre_faces,nombre_des); // on récupère une série rangée dans l'ordre croissant avec les effectifs correspondants
 			do index_valeur=randint(0,tirages.length-1);
-			while (tirages[index_valeur][1]==0)
+			while (tirages[index_valeur][1]==0) // on choisi au hasard l'index d'une valeur dont l'effectif est différent de 0.
 			if (nombre_des>1) {
 				texte=`On a réalisé $${nombre_tirages}$ lancers de $${nombre_des}$ dés à $${nombre_faces}$ faces.<br>`;
 			}
@@ -5380,13 +5380,15 @@ function Fraction_d_un_nombre(max=11){
 				texte=`On a réalisé $${nombre_tirages}$ lancers d'un dé à $${nombre_faces}$ faces.<br>`;
 			}
 			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br>'
-			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
+
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';  // construction du tableau des effectifs
 			for (let j=0;j<=tirages.length;j++)		texte+='|c';
 			texte+='}\\hline  \\text{Scores}';
 			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][0];
 			texte+='\\\\\\hline \\text{Nombre d\'apparitions}'
 			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][1];
 			texte+='\\\\\\hline\\end{array}$'
+
 			texte+='<br><br> Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$.`
 			texte_corr='La valeur '+`$${calcul(nombre_des+index_valeur)}$ apparaît `+`$${tirages[index_valeur][1]}$ fois.<br>Le nombre total de lancers est $${tex_nombre(nombre_tirages)}$.<br>`;
 			texte_corr+='La fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$`+' est '+`$${tex_fraction(tirages[index_valeur][1],tex_nombre(nombre_tirages))}=${tex_nombre(calcul(tirages[index_valeur][1]/nombre_tirages))}$<br>`;
@@ -5394,25 +5396,26 @@ function Fraction_d_un_nombre(max=11){
 		}
 		else if (this.sup==2) { // ici on trie des notes
 			nombre_notes=choice([8,10,12]);
-			notes=liste_de_notes(nombre_notes,randint(0,7),randint(13,20));
-			index_valeur=randint(0,notes.length-1);
+			notes=liste_de_notes(nombre_notes,randint(0,7),randint(13,20));  // on récupère une liste de notes (série brute)
+			index_valeur=randint(0,notes.length-1);  // on choisi une des notes au hasard
 			frequence=0;
-			for(j=0;j<notes.length;j++) {
+			for(j=0;j<notes.length;j++) {   // frequence va contenir l'effectif de la note choisie
 				if (notes[j]==notes[index_valeur]) frequence++;
 			}
 			texte=`${prenom()} a obtenu ces notes ce trimestre-ci en mathématiques :<br>`;
 			texte+=`$${notes[0]}$`
-			for (let j=1;j<nombre_notes-1;j++) 	texte+=`; $${notes[j]}$ `;
+			for (let j=1;j<nombre_notes-1;j++) 	texte+=`; $${notes[j]}$ `;	// On liste les notes (série brute)
 			texte+=`et $${notes[nombre_notes-1]}$.<br>`;
+
 			texte+=`Calculer la fréquence de la note $${notes[index_valeur]}$.`
 			texte_corr=`La note $${notes[index_valeur]}$ a été obtenue $${frequence}$ fois.<br> Il y a $${nombre_notes}$ notes<br>`;
 			texte_corr+=`Donc la fréquence de la note $${notes[index_valeur]}$ est : `+`$${tex_fraction(tex_nombre(frequence),tex_nombre(nombre_notes))}$`;
-			if (arrondi(frequence/nombre_notes,3)==frequence/nombre_notes) {
-				texte_corr+=`$=${arrondi_virgule(frequence/nombre_notes,3)}$<br>`;
-				texte_corr+='Soit '+`$${tex_nombre(calcul(frequence*100/nombre_notes))}\\thickspace\\%$.`
+			if (arrondi(frequence/nombre_notes,3)==frequence/nombre_notes) {  // valeurs exactes
+				texte_corr+=`$=${arrondi_virgule(frequence/nombre_notes,3)}$<br>`;	// fréquence à 3 chiffres significatifs
+				texte_corr+='Soit '+`$${tex_nombre(calcul(frequence*100/nombre_notes))}\\thickspace\\%$.` // fréquence en pourcentage avec 1 décimale
 			}
 			else {
-				texte_corr+=`$\\approx${arrondi_virgule(frequence/nombre_notes,3)}$`
+				texte_corr+=`$\\approx${arrondi_virgule(frequence/nombre_notes,3)}$`  // valeurs arrondies
 				texte_corr+='Soit environ '+`$${arrondi_virgule(calcul(frequence*100/nombre_notes),1)}\\thickspace\\%$.`		
 			}
 			
@@ -5422,14 +5425,15 @@ function Fraction_d_un_nombre(max=11){
 			let annee=randint(1980,2019);
 			let temperatures_de_base=[3,5,9,13,19,24,26,25,23,18,10,5];
 			nombre_temperatures=jours_par_mois(mois);
-			temperatures=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee);
-			index_valeur=randint(0,temperatures.length-1);
+			temperatures=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee); // on récupère une série de température correspondant à 1 mois d'une année (série brute)
+			index_valeur=randint(0,temperatures.length-1);  // on choisi l'index d'une valeur au hasard
 			frequence=0;
 			for(j=0;j<temperatures.length;j++) {
-				if (temperatures[j]==temperatures[index_valeur]) frequence++;
+				if (temperatures[j]==temperatures[index_valeur]) frequence++;  // frequence contient l'effectif de cette valeur
 			}
 			texte=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, on a relevé les températures suivantes<br>`;
-			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
+
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // On construit le tableau des températures
 			texte+='|c';
 			for (let j=0;j<temperatures.length;j++) texte+='|c';
 			texte+='}\\hline  \\text{jour}';
@@ -5441,13 +5445,13 @@ function Fraction_d_un_nombre(max=11){
 			texte_corr=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, la température $${temperatures[index_valeur]}^\\circ C$ a été relevée $${frequence}$ fois.<br>`;
 			texte_corr+=`Il y a $${jours_par_mois(mois)}$ jours ce mois-ci.<br> La fréquence de la température $${temperatures[index_valeur]}^\\circ C$ est :<br>`;
 			texte_corr+=`$${tex_fraction(tex_nombre(frequence),tex_nombre(jours_par_mois(mois)))}$`;
-			if (arrondi(frequence/nombre_temperatures,3)==frequence/nombre_temperatures) {
+			if (arrondi(frequence/nombre_temperatures,3)==frequence/nombre_temperatures) {	// valeurs exactes
 				texte_corr+=`$=${arrondi_virgule(frequence/nombre_temperatures,3)}$<br>`;
 				texte_corr+='Soit '+`$${tex_nombre(calcul(frequence*100/nombre_temperatures))}\\thickspace\\%$.`
 
 			}
 			else {
-				texte_corr+=`$\\approx${arrondi_virgule(frequence/nombre_temperatures,3)}$<br>`;
+				texte_corr+=`$\\approx${arrondi_virgule(frequence/nombre_temperatures,3)}$<br>`; // valeurs arrondies
 				texte_corr+='Soit environ '+`$${arrondi_virgule(calcul(frequence*100/nombre_temperatures),1)}\\thickspace\\%$.`
 			}
 		}			
@@ -5482,28 +5486,28 @@ function Calculer_des_moyennes(){
 		for (let i = 0, nombre_notes,notes,somme,nombre_temperatures,temperatures, texte,texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
 		if (this.sup==1) { // ici on trie des notes
 			nombre_notes=choice([8,10,12]);
-			notes=liste_de_notes(nombre_notes,randint(0,7),randint(13,20));
+			notes=liste_de_notes(nombre_notes,randint(0,7),randint(13,20)); // on récupère une série de notes (série brute)
 			for (somme=0,j=0;j<nombre_notes;j++) somme+=notes[j];
-			console.log(notes,somme)
+		
 			texte=`${prenom()} a obtenu ces notes ce trimestre-ci en mathématiques :<br>`;
 			texte+=`$${notes[0]}$`
-			for (let j=1;j<nombre_notes-1;j++) 	texte+=`; $${notes[j]}$ `;
+			for (let j=1;j<nombre_notes-1;j++) 	texte+=`; $${notes[j]}$ `;	// On liste les notes
 			texte+=`et $${notes[nombre_notes-1]}$.<br>`;
 			texte+=`Calculer la moyenne de cet élève en mathématiques.`
 			texte_corr=`La somme des notes est : $${somme}$.<br> Il y a $${nombre_notes}$ notes<br>`;
 			texte_corr+='Donc la moyenne de cet élève est : '+`$${tex_fraction(tex_nombre(somme),tex_nombre(nombre_notes))}$`;
-			if (arrondi(somme/nombre_notes,2)==somme/nombre_notes) texte_corr+=`$=${arrondi_virgule(somme/nombre_notes,2)}$<br>`;
-			else texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_notes,2)}$`
+			if (arrondi(somme/nombre_notes,2)==somme/nombre_notes) texte_corr+=`$=${arrondi_virgule(somme/nombre_notes,2)}$<br>`; // moyenne exacte
+			else texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_notes,2)}$`	// moyenne arrondie
 		}
 		else {  // ici on relève des températures
 			let mois=randint(1,12);
 			let annee=randint(1980,2019);
 			let temperatures_de_base=[3,5,9,13,19,24,26,25,23,18,10,5];
 			nombre_temperatures=jours_par_mois(mois);
-			temperatures=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee);
+			temperatures=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee); // série brute de un mois de température
 			
 			texte=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, on a relevé les températures suivantes<br>`;
-			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures
 			texte+='|c';
 			for (let j=0;j<temperatures.length;j++) texte+='|c';
 			texte+='}\\hline  \\text{jour}';
@@ -5517,12 +5521,87 @@ function Calculer_des_moyennes(){
 				somme+=temperatures[j];
 			}
 			texte+='\\\\\\hline\\end{array}$';
-			texte+='<br><br> Calculer la température moyenne de ce mois ';
-			texte_corr=`En ${nom_du_mois(mois)} ${annee}, la somme des température est `+`$${somme}^\\circ C$.<br> Il y a $${temperatures.length}$ jours ce mois-ci.<br> La température moyenne est :<br>`;
+			texte+='Calculer la température moyenne de ce mois.';
+			texte_corr=`En ${nom_du_mois(mois)} ${annee}, la somme des températures est `+`$${somme}^\\circ C$.<br> Il y a $${temperatures.length}$ jours ce mois-ci.<br> La température moyenne est :<br>`;
 			texte_corr+=`$${tex_fraction(tex_nombre(somme)+`^\\circ C`,tex_nombre(nombre_temperatures))}$`
 		
-			if (arrondi(somme/nombre_temperatures,2)==somme/nombre_temperatures) 	texte_corr+=`$=${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ C$<br>`;
-			else 				texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ C$<br>`;
+			if (arrondi(somme/nombre_temperatures,2)==somme/nombre_temperatures)  
+				texte_corr+=`$=${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ C$<br>`; // moyenne exacte
+			else 				texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ C$<br>`;  // moyenne arrondie
+		}
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Type de séries',2,"1 : Série de notes\n 2 : Série de températures"];
+}
+
+ /**
+* @auteur Jean-Claude Lhote
+*/
+function Calculer_des_etendues(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Calculer des étendues";
+	this.consigne = "";
+	this.nb_questions = 1;
+	this.spacing = 2;
+	this.spacing_corr = 2;
+	this.nb_cols_corr = 1;	 
+	this.sup = 1;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+	
+		for (let i = 0, nombre_notes,notes,min,max,temperatures,nombre_temperatures, texte,texte_corr, cpt = 0; i < this.nb_questions && cpt<50;){
+		if (this.sup==1) { // ici on trie des notes
+			nombre_notes=randint(8,12);
+			notes=liste_de_notes(nombre_notes,randint(0,7),randint(13,20)); // on récupère une série de notes (série brute)
+			for (min=20,max=0,j=0;j<nombre_notes;j++) {  // On cherche la note minimum et la note maximum
+				min=Math.min(notes[j],min);
+				max=Math.max(notes[j],max);
+			}
+			texte=`${prenom()} a obtenu ces notes ce trimestre-ci en mathématiques :<br>`;
+			texte+=`$${notes[0]}$`
+			for (let j=1;j<nombre_notes-1;j++) 	texte+=`; $${notes[j]}$ `;	// On liste les notes
+			texte+=`et $${notes[nombre_notes-1]}$.<br>`;
+			texte+=`Calculer l\'étendue de cette série de notes.`
+			texte_corr=`La note la plus basse est : $${min}$.<br>La note la plus haute est $${max}$<br>`;
+			texte_corr+='Donc l\'étendue de cette série est : '+`$${tex_nombre(max)}-${tex_nombre(min)}=${tex_nombre(max-min)}$`;
+		}
+		else {  // ici on relève des températures
+			let mois=randint(1,12);
+			let annee=randint(1980,2019);
+			let temperatures_de_base=[3,5,9,13,19,24,26,25,23,18,10,5];
+			nombre_temperatures=jours_par_mois(mois);
+			temperatures=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee); // série brute de un mois de température
+			
+			texte=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, on a relevé les températures suivantes<br>`;
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures
+			texte+='|c';
+			for (let j=0;j<temperatures.length;j++) texte+='|c';
+			texte+='}\\hline  \\text{jour}';
+			for (let j=0;j<temperatures.length;j++)  	texte+='&'+tex_nombre(j+1)
+			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ C'
+			
+			for (max=0,min=20,j=0;j<temperatures.length;j++) 	{  // on cherche le minimum et le maximum
+				texte+='&'+temperatures[j];
+				min=Math.min(temperatures[j],min);
+				max=Math.max(temperatures[j],max);
+			}
+			texte+='\\\\\\hline\\end{array}$';
+			texte+='Calculer l\'amplitude thermique de ce mois (l\'étendue de la série).';
+			texte_corr=`En ${nom_du_mois(mois)} ${annee}, la température minimale est `+`$${min}$.<br>La température maximale est $${max}$.<br> L\'amplitude thermique est :<br>`;
+			texte_corr+=`$${tex_nombre(max)}-${ecriture_parenthese_si_negatif(min)}$`
+			if (min<0) 	texte_corr+=`$=${tex_nombre(max)}+${tex_nombre(-min)}$`;
+			texte_corr+=`$=${tex_nombre(max-min)}$`;
+
 		}
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
