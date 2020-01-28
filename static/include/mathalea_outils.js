@@ -322,7 +322,7 @@ function ecriture_algebrique(a) {
 */
 function ecriture_parenthese_si_negatif(a) { 
 	let result = '';
-	if (a>0) {
+	if (a>=0) {
 		result = a;
 	}else {
 		result = `(${a})`;

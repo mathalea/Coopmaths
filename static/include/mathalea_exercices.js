@@ -5363,6 +5363,8 @@ function Fraction_d_un_nombre(max=11){
 	this.spacing = 2;
 	this.spacing_corr = 2;
 	this.nb_cols_corr = 1;	 
+	this.sup=1;
+
 	this.nouvelle_version = function(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
@@ -5382,14 +5384,32 @@ function Fraction_d_un_nombre(max=11){
 				texte=`On a réalisé $${nombre_tirages}$ lancers d'un dé à $${nombre_faces}$ faces.<br>`;
 			}
 			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br>'
+			if (tirages.length>12) {
+				texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';  // construction du tableau des effectifs 1/2
+				for (let j=0;j<=Math.round(tirages.length/2);j++)		texte+='|c';
+				texte+='}\\hline  \\text{Scores}';
+				for (let j=0;j<Math.round(tirages.length/2);j++) 		texte+='&'+tirages[j][0];
+				texte+='\\\\\\hline \\text{Nombre d\'apparitions}'
+				for (let j=0;j<Math.round(tirages.length/2);j++) 		texte+='&'+tirages[j][1];
+				texte+='\\\\\\hline\\end{array}$<br><br>'
 
-			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';  // construction du tableau des effectifs
-			for (let j=0;j<=tirages.length;j++)		texte+='|c';
-			texte+='}\\hline  \\text{Scores}';
-			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][0];
-			texte+='\\\\\\hline \\text{Nombre d\'apparitions}'
-			for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][1];
-			texte+='\\\\\\hline\\end{array}$'
+				texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';  // construction du tableau des effectifs 2/2
+				for (let j=Math.round(tirages.length/2);j<=tirages.length;j++)		texte+='|c';
+				texte+='}\\hline  \\text{Scores}';
+				for (let j=Math.round(tirages.length/2);j<tirages.length;j++) 		texte+='&'+tirages[j][0];
+				texte+='\\\\\\hline \\text{Nombre d\'apparitions}'
+				for (let j=Math.round(tirages.length/2);j<tirages.length;j++) 		texte+='&'+tirages[j][1];
+				texte+='\\\\\\hline\\end{array}$'
+			}
+			else {
+				texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';  // construction du tableau des effectifs en un seul morceau
+				for (let j=0;j<=tirages.length;j++)		texte+='|c';
+				texte+='}\\hline  \\text{Scores}';
+				for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][0];
+				texte+='\\\\\\hline \\text{Nombre d\'apparitions}'
+				for (let j=0;j<tirages.length;j++) 		texte+='&'+tirages[j][1];
+				texte+='\\\\\\hline\\end{array}$'
+			}
 
 			texte+='<br><br> Calculer la fréquence de la valeur '+`$${calcul(nombre_des+index_valeur)}$.`
 			texte_corr='La valeur '+`$${calcul(nombre_des+index_valeur)}$ apparaît `+`$${tirages[index_valeur][1]}$ fois.<br>Le nombre total de lancers est $${tex_nombre(nombre_tirages)}$.<br>`;
@@ -5437,15 +5457,25 @@ function Fraction_d_un_nombre(max=11){
 
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // On construit le tableau des températures
 			texte+='|c';
-			for (let j=0;j<temperatures.length;j++) texte+='|c';
+			for (let j=0;j<Math.round(temperatures.length/2);j++) texte+='|c';
 			texte+='}\\hline  \\text{jour}';
-			for (let j=0;j<temperatures.length;j++)  texte+='&'+tex_nombre(j+1);
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ C';
-			for (somme=0,j=0;j<temperatures.length;j++) 	texte+='&'+temperatures[j];
-			texte+='\\\\\\hline\\end{array}$';
-			texte+='<br><br> Calculer la fréquence de la température '+`$${temperatures[index_valeur]}^\\circ C$.`;
-			texte_corr=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, la température $${temperatures[index_valeur]}^\\circ C$ a été relevée $${frequence}$ fois.<br>`;
-			texte_corr+=`Il y a $${jours_par_mois(mois)}$ jours ce mois-ci.<br> La fréquence de la température $${temperatures[index_valeur]}^\\circ C$ est :<br>`;
+			for (let j=0;j<Math.round(temperatures.length/2);j++)  texte+='&'+tex_nombre(j+1);
+			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace °\\text{C}';
+			for (j=0;j<Math.round(temperatures.length/2);j++) 	texte+='&'+temperatures[j];
+			texte+='\\\\\\hline\\end{array}$<br><br>';
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // On construit le tableau des températures
+			texte+='|c';
+			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++) texte+='|c';
+			texte+='}\\hline  \\text{jour}';
+			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++)  texte+='&'+tex_nombre(j+1);
+			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace °\\text{C}';
+			for (j=Math.round(temperatures.length/2);j<temperatures.length;j++) 	texte+='&'+temperatures[j];
+			texte+='\\\\\\hline\\end{array}$<br><br>';
+			
+
+			texte+='<br><br> Calculer la fréquence de la température '+`$${temperatures[index_valeur]}°\\text{C}$.`;
+			texte_corr=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, la température $${temperatures[index_valeur]}°\\text{C}$ a été relevée $${frequence}$ fois.<br>`;
+			texte_corr+=`Il y a $${jours_par_mois(mois)}$ jours ce mois-ci.<br> La fréquence de la température $${temperatures[index_valeur]}°\\text{C}$ est :<br>`;
 			texte_corr+=`$${tex_fraction(tex_nombre(frequence),tex_nombre(jours_par_mois(mois)))}$`;
 			if (arrondi(frequence/nombre_temperatures,3)==frequence/nombre_temperatures) {	// valeurs exactes
 				texte_corr+=`$=${arrondi_virgule(frequence/nombre_temperatures,3)}$<br>`;
@@ -5507,29 +5537,39 @@ function Calculer_des_moyennes(){
 			let temperatures_de_base=[3,5,9,13,19,24,26,25,23,18,10,5];
 			nombre_temperatures=jours_par_mois(mois);
 			temperatures=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee); // série brute de un mois de température
-			
+			somme=0;
 			texte=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, on a relevé les températures suivantes<br>`;
-			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 1/2
 			texte+='|c';
-			for (let j=0;j<temperatures.length;j++) texte+='|c';
+			for (let j=0;j<Math.round(temperatures.length/2);j++) texte+='|c';
 			texte+='}\\hline  \\text{jour}';
-			for (let j=0;j<temperatures.length;j++)  {
-				texte+='&'+tex_nombre(j+1)
-				
-			};
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ C'
-			for (somme=0,j=0;j<temperatures.length;j++) 	{
+			for (let j=0;j<Math.round(temperatures.length/2);j++)  texte+='&'+tex_nombre(j+1)
+			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace °\\text{C}'
+			for (j=0;j<Math.round(temperatures.length/2);j++) 	{
 				texte+='&'+temperatures[j];
 				somme+=temperatures[j];
 			}
-			texte+='\\\\\\hline\\end{array}$';
+			texte+='\\\\\\hline\\end{array}$<br><br>';
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 2/2
+			texte+='|c';
+			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++) texte+='|c';
+			texte+='}\\hline  \\text{jour}';
+			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++)  texte+='&'+tex_nombre(j+1)
+			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace °\\text{C}'
+			for (j=Math.round(temperatures.length/2);j<temperatures.length;j++) 	{
+				texte+='&'+temperatures[j];
+				somme+=temperatures[j];
+			}
+			texte+='\\\\\\hline\\end{array}$<br><br>';
+			
+
 			texte+='Calculer la température moyenne de ce mois.';
-			texte_corr=`En ${nom_du_mois(mois)} ${annee}, la somme des températures est `+`$${somme}^\\circ C$.<br> Il y a $${temperatures.length}$ jours ce mois-ci.<br> La température moyenne est :<br>`;
-			texte_corr+=`$${tex_fraction(tex_nombre(somme)+`^\\circ C`,tex_nombre(nombre_temperatures))}$`
+			texte_corr=`En ${nom_du_mois(mois)} ${annee}, la somme des températures est `+`$${somme}°\\text{C}$.<br> Il y a $${temperatures.length}$ jours ce mois-ci.<br> La température moyenne est :<br>`;
+			texte_corr+=`$${tex_fraction(tex_nombre(somme)+`°\\text{C}`,tex_nombre(nombre_temperatures))}$`
 		
 			if (arrondi(somme/nombre_temperatures,2)==somme/nombre_temperatures)  
-				texte_corr+=`$=${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ C$<br>`; // moyenne exacte
-			else 				texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ C$<br>`;  // moyenne arrondie
+				texte_corr+=`$=${arrondi_virgule(somme/nombre_temperatures,2)}°\\text{C}$<br>`; // moyenne exacte
+			else 				texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_temperatures,2)}°\\text{C}$<br>`;  // moyenne arrondie
 		}
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -5583,26 +5623,41 @@ function Calculer_des_etendues(){
 			let temperatures_de_base=[3,5,9,13,19,24,26,25,23,18,10,5];
 			nombre_temperatures=jours_par_mois(mois);
 			temperatures=un_mois_de_temperature(temperatures_de_base[mois-1],mois,annee); // série brute de un mois de température
-			
+			max=0;
+			min=20;
 			texte=`En ${nom_du_mois(mois)} ${annee}, à ${choice(['Moscou','Berlin','Paris','Bruxelles','Rome','Belgrade'])}, on a relevé les températures suivantes<br>`;
-			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures
-			texte+='|c';
-			for (let j=0;j<temperatures.length;j++) texte+='|c';
-			texte+='}\\hline  \\text{jour}';
-			for (let j=0;j<temperatures.length;j++)  	texte+='&'+tex_nombre(j+1)
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ C'
 			
-			for (max=0,min=20,j=0;j<temperatures.length;j++) 	{  // on cherche le minimum et le maximum
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 1/2
+			texte+='|c';
+			for (let j=0;j<Math.round(temperatures.length/2);j++) texte+='|c';
+			texte+='}\\hline  \\text{jour}';
+			for (let j=0;j<Math.round(temperatures.length/2);j++)  	texte+='&'+tex_nombre(j+1)
+			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace °\\text{C}'
+			for (j=0;j<Math.round(temperatures.length/2);j++) 	{  // on cherche le minimum et le maximum
 				texte+='&'+temperatures[j];
 				min=Math.min(temperatures[j],min);
 				max=Math.max(temperatures[j],max);
 			}
-			texte+='\\\\\\hline\\end{array}$';
+			texte+='\\\\\\hline\\end{array}$<br><br>';
+
+			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 2/2
+			texte+='|c';
+			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++) texte+='|c';
+			texte+='}\\hline  \\text{jour}';
+			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++)  	texte+='&'+tex_nombre(j+1)
+			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace °\\text{C}'
+			for (j=Math.round(temperatures.length/2);j<temperatures.length;j++) 	{  // on cherche le minimum et le maximum
+				texte+='&'+temperatures[j];
+				min=Math.min(temperatures[j],min);
+				max=Math.max(temperatures[j],max);
+			}
+			texte+='\\\\\\hline\\end{array}$<br><br>';
+
 			texte+='Calculer l\'amplitude thermique de ce mois (l\'étendue de la série).';
-			texte_corr=`En ${nom_du_mois(mois)} ${annee}, la température minimale est `+`$${min}$.<br>La température maximale est $${max}$.<br> L\'amplitude thermique est :<br>`;
+			texte_corr=`En ${nom_du_mois(mois)} ${annee}, la température minimale est `+`$${min}°\\text{C}$.<br>La température maximale est $${max}°\\text{C}$.<br> L\'amplitude thermique est :<br>`;
 			texte_corr+=`$${tex_nombre(max)}-${ecriture_parenthese_si_negatif(min)}$`
-			if (min<0) 	texte_corr+=`$=${tex_nombre(max)}+${tex_nombre(-min)}$`;
-			texte_corr+=`$=${tex_nombre(max-min)}$`;
+			if (min<0) 	texte_corr+=`$\\thickspace~=${tex_nombre(max)}+${tex_nombre(-min)}$`;
+			texte_corr+=`$\\thickspace=${tex_nombre(max-min)}°\\text{C}$`;
 
 		}
 			
@@ -7666,7 +7721,7 @@ function Exercice_Trigo_longueurs() {
 			}
 			
 			if (type_de_questions <3) { // calcul direct du côté adjacent 
-				texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$, l'angle $\\widehat{${s0+s1+s2}}$~mesure~$${angle1}^\\circ$, $${s1 + s2}=${s12}$ cm.`
+				texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$, l'angle $\\widehat{${s0+s1+s2}}$~mesure~$${angle1}$^\\circ, $${s1 + s2}=${s12}$ cm.`
 				texte += `</br>Le point $${s0}$ peut être déplacé.</br>`
 				texte += `Calculer $${s1 + s2}$.`
 				texte_corr = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, le cosinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par : $\\cos \\widehat{${s0+s1+s2}}=${tex_fraction(s0 + s1,s1+s2)}$</br>`
