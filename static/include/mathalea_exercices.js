@@ -7867,7 +7867,7 @@ function Exercice_Trigo_longueurs() {
 			}
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
-			liste_de_question_to_contenu(this);;
+			liste_de_question_to_contenu_sans_numero(this);;
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Calcul lié au cosinus \n 2 : Cosinus, Sinus ou tangente'];
 }
