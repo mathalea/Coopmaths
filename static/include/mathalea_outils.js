@@ -715,7 +715,7 @@ function tex_paragraphe(liste,spacing=false){
 	if (spacing>1){
 		result += '\\end{spacing}'
 	} 
-	return result
+	return result.replace(/<br>/g,'\\\\')
 }
 
 
