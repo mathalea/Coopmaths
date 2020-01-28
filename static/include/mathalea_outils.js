@@ -329,6 +329,15 @@ function ecriture_parenthese_si_negatif(a) {
 	}
 	return result;
 };
+/**
+* Convertit un angle de radian vers degrés
+* @Example
+* // PI->180
+* @Auteur Jean-Claude Lhote
+*/
+Math.degres = function(radians) {
+	return radians * 180 / Math.PI;
+  };
 
 /**
 * Retourne le signe d'un nombre
