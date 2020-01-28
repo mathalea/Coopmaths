@@ -91,6 +91,7 @@ var liste_des_exercices_disponibles = {
 		'4R10': Exercice_multiplications_relatifs,
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Reciproque_Pythagore,
+		'4G12' : Problemes_Pythagore,
 		'4G20' : Thales_4eme,
 		//12:Exercice_conversions_de_longueurs,
 		//13:Exercice_conversions,
@@ -7666,6 +7667,135 @@ function Reciproque_Pythagore(){
 				texte_corr += `<br>On constate que $${A+B}^2\\not=${A+C}^2+${B+C}^2$, l'égalité de Pythagore n'est pas vérifiée donc $${nom_triangle}$ n'est pas rectangle.`
 			}
 			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+/**
+* @Auteur Rémi Angot
+*/
+function Problemes_Pythagore(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Problèmes utilisant le théorème de Pythagore";
+	this.consigne = "";
+	this.nb_questions = 2;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1.5;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_questions_disponibles = ['losange','rectangle_diagonale_connue','rectangle_diagonale_a_trouver','parallelogramme_est_losange','parallelogramme_n_est_pas_losange','parallelogramme_est_rectangle','parallelogramme_n_est_pas_rectangle']
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+		let liste_triplets_pythagoriciens =  [[3,4,5],[5,12,13],[6,8,10],[7,24,25],[8,15,17],[9,12,15],[9,40,41], [10,24,26], [11,60,61], [12,16,20], [12,35,37], [13,84,85], [14,48,50], [15,20,25], [15,36,39], [16,30,34], [16,63,65], [18,24,30], [18,80,82],  [20,21,29], [20,48,52], [21,28,35], [21,72,75], [24,32,40], [24,45,51], [24,70,74], [25,60,65], [27,36,45], [28,45,53], [28,96,100], [30,40,50], [30,72,78], [32,60,68], [33,44,55], [33,56,65], [35,84,91], [36,48,60], [36,77,85], [39,52,65], [39,80,89], [40,42,58], [40,75,85], [42,56,70], [45,60,75], [48,55,73], [48,64,80], [51,68,85], [54,72,90], [57,76,95], [60,63,87], [60,80,100], [65,72,97]];
+		let liste_noms_quadrilateres = ['L','M','N','O'] // pour que le O ne soit pas une des 4 lettres
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let nom_quadrilatere = polygone(4,liste_noms_quadrilateres);
+			liste_noms_quadrilateres.push(nom_quadrilatere)
+			let A = nom_quadrilatere[0];
+			let B = nom_quadrilatere[1];
+			let C = nom_quadrilatere[2];
+			let D = nom_quadrilatere[3]
+			let O = `O`
+			let triplet = choice(liste_triplets_pythagoriciens);
+			enleve_element(liste_triplets_pythagoriciens,triplet) // Supprime le triplet pour les prochaines questions
+			let a = triplet[0];
+			let b = triplet[1];
+			let c = triplet[2];
+			if (liste_type_de_questions[i]=='parallelogramme_n_est_pas_losange' || liste_type_de_questions[i]=='parallelogramme_n_est_pas_rectangle') {
+				c += randint(-3,3,[0]) // on change la valeur de c 
+				while (a**2+b**2==c**2){ // si par hasard (est-ce possible ?) on retombe sur un triplet pythagoricien on change les valeurs
+					c += randint(-3,3,[0]) // on change la valeur de c
+					b += randint(-3,3,[0]) // on change la valeur de b
+				}
+			}
+			if (a>9 && choice([true,true,true,false]) ) { //le plus souvent on utilise des décimaux
+				a = calcul(a/10);
+				b = calcul(b/10);
+				c = calcul(c/10);
+			}
+
+			switch (liste_type_de_questions[i]) {
+				case 'losange' :
+				texte = `$${nom_quadrilatere}$ est un losange de centre $O$ tel que $${A+B}=${tex_nombre(c)}$ cm et $${A+C}=${tex_nombre(2*a)}$ cm.<br>`
+				texte += `Calculer $${B+C}$.`
+				texte_corr = `$${nom_quadrilatere}$ est un losange donc ses diagonales se coupent en leur milieu : $${A+O}=${A+C}\\div2=${tex_nombre(2*a)}\\div2=${tex_nombre(a)}$.<br>`
+				texte_corr += `On sait que les diagonales d'un losange se coupent perpendiculairement donc $${A+O+C}$ est un triangle rectangle en $O$.<br>`
+				texte_corr += `D'après le théorème de Pythagore, on a : $${A+O}^2+${O+B}^2=${A+B}^2$.<br>`
+				texte_corr += `Donc $${O+B}^2=${A+B}^2-${A+O}^2=${tex_nombre(c)}^2-${tex_nombre(a)}^2=${tex_nombre(b**2)}$.<br>`
+				texte_corr += `On a alors $${O+B}=\\sqrt{${tex_nombrec(b**2)}}=${tex_nombre(b)}$ cm.<br>`
+				texte_corr += `Finalement comme $O$ est aussi le milieu de $[${D+B}]$ : $${D+B}=2\\times ${O+B}=2\\times${tex_nombre(b)}=${tex_nombre(2*b)}$ cm.`
+				break
+
+				case 'rectangle_diagonale_connue' :
+				texte = `$${nom_quadrilatere}$ est un rectangle tel que $${A+B}=${tex_nombre(a)}$ cm et $${A+C}=${tex_nombre(c)}$ cm.<br>`
+				texte += `Calculer $${B+C}$.`
+				texte_corr = `$${nom_quadrilatere}$ est un rectangle donc il possède 4 angles droits et $${A+B+C}$ est un triangle rectangle en $${B}$.<br>`
+				texte_corr += `D'après le théorème de Pythagore, on a : $${A+B}^2+${B+C}^2=${A+C}^2$.<br>`
+				texte_corr += `Donc $${B+C}^2=${A+C}^2-${A+B}^2=${tex_nombre(c)}^2-${tex_nombre(a)}^2=${tex_nombre(b**2)}$.<br>`
+				texte_corr += `Finalement, $${B+C}=\\sqrt{${tex_nombrec(b**2)}}=${tex_nombre(b)}$ cm.`
+				break
+
+				case 'rectangle_diagonale_a_trouver' :
+				texte = `$${nom_quadrilatere}$ est un rectangle tel que $${A+B}=${tex_nombre(a)}$ cm et $${B+C}=${tex_nombre(b)}$ cm.<br>`
+				texte += `Calculer $${A+C}$.`
+				texte_corr = `$${nom_quadrilatere}$ est un rectangle donc il possède 4 angles droits et $${A+B+C}$ est un triangle rectangle en $${B}$.<br>`
+				texte_corr += `D'après le théorème de Pythagore, on a : $${A+C}^2=${A+B}^2+${B+C}^2=${tex_nombrec(a)}^2+${tex_nombrec(b)}^2=${tex_nombrec(c**2)}$.<br>`
+				texte_corr += `Finalement, $${A+C}=\\sqrt{${tex_nombrec(c**2)}}=${tex_nombre(c)}$ cm.`
+				break
+
+				case 'parallelogramme_est_losange' :
+				texte = `$${nom_quadrilatere}$ est un parallélogramme de centre $O$ tel que $${A+O}=${tex_nombre(a)}$ cm, $${A+B}=${tex_nombre(c)}$ cm et $${B+O}=${tex_nombre(b)}$ cm.<br>`
+				texte += `$${nom_quadrilatere}$ est-il un losange ?`
+				texte_corr = `Dans le triangle $${A+O+B}$, le plus grand côté est $[${A+B}]$.<br>`
+				texte_corr += `$${A+B}^2=${tex_nombre(c)}^2=${tex_nombrec(c**2)}$<br>`
+				texte_corr += `$${A+O}^2+${O+B}^2=${tex_nombre(a)}^2+${tex_nombre(b)}^2=${tex_nombrec(a**2+b**2)}$<br>`
+				texte_corr += `On constate que $${A+B}^2=${A+O}^2+${O+B}^2$, l'égalité de Pythagore est vérifiée donc $${A+O+B}$ est rectangle en $O$.<br>`
+				texte_corr += `Finalement, comme $${nom_quadrilatere}$ est un parallélogramme qui a ses diagonales perpendiculaires alors c'est aussi un losange.`
+				break
+
+				case 'parallelogramme_n_est_pas_losange' :
+				texte = `$${nom_quadrilatere}$ est un parallélogramme de centre $O$ tel que $${A+O}=${tex_nombre(a)}$ cm, $${A+B}=${tex_nombre(c)}$ cm et $${B+O}=${tex_nombre(b)}$ cm.<br>`
+				texte += `$${nom_quadrilatere}$ est-il un losange ?`
+				texte_corr = `Dans le triangle $${A+O+B}$, le plus grand côté est $[${A+B}]$.<br>`
+				texte_corr += `$${A+B}^2=${tex_nombre(c)}^2=${tex_nombrec(c**2)}$<br>`
+				texte_corr += `$${A+O}^2+${O+B}^2=${tex_nombre(a)}^2+${tex_nombre(b)}^2=${tex_nombrec(a**2+b**2)}$<br>`
+				texte_corr += `On constate que $${A+B}^2\\not=${A+O}^2+${O+B}^2$, l'égalité de Pythagore n'est vérifiée donc $${A+O+B}$ n'est pas un triangle rectangle.<br>`
+				texte_corr += `Si $${nom_quadrilatere}$ était un losange alors ses diagonales devraient être perpendiculaires et $${A+O+B}$ devrait être un triangle rectangle.<br>`
+				texte_corr += `Finalement comme $${A+O+B}$ n'est pas un triangle rectangle, $${nom_quadrilatere}$ n'est pas un losange.`
+				break
+
+				case 'parallelogramme_est_rectangle' :
+				texte = `$${nom_quadrilatere}$ est un parallélogramme de centre $O$ tel que $${A+B}=${tex_nombre(a)}$ cm, $${A+C}=${tex_nombre(c)}$ cm et $${B+C}=${tex_nombre(b)}$ cm.<br>`
+				texte += `$${nom_quadrilatere}$ est-il un rectangle ?`
+				texte_corr = `Dans le triangle $${A+B+B}$, le plus grand côté est $[${A+C}]$.<br>`
+				texte_corr += `$${A+C}^2=${tex_nombre(c)}^2=${tex_nombrec(c**2)}$<br>`
+				texte_corr += `$${A+B}^2+${B+C}^2=${tex_nombre(a)}^2+${tex_nombre(b)}^2=${tex_nombrec(a**2+b**2)}$<br>`
+				texte_corr += `On constate que $${A+C}^2=${A+B}^2+${B+C}^2$, l'égalité de Pythagore est vérifiée donc $${A+B+C}$ est rectangle en $${B}$.<br>`
+				texte_corr += `Finalement, comme $${nom_quadrilatere}$ est un parallélogramme qui a un angle droit en $${B}$ alors c'est aussi un rectangle.`
+				break
+
+				case 'parallelogramme_n_est_pas_rectangle' :
+				texte = `$${nom_quadrilatere}$ est un parallélogramme de centre $O$ tel que $${A+B}=${tex_nombre(a)}$ cm, $${A+C}=${tex_nombre(c)}$ cm et $${B+C}=${tex_nombre(b)}$ cm.<br>`
+				texte += `$${nom_quadrilatere}$ est-il un rectangle ?`
+				texte_corr = `Dans le triangle $${A+B+B}$, le plus grand côté est $[${A+C}]$.<br>`
+				texte_corr += `$${A+C}^2=${tex_nombre(c)}^2=${tex_nombrec(c**2)}$<br>`
+				texte_corr += `$${A+B}^2+${B+C}^2=${tex_nombre(a)}^2+${tex_nombre(b)}^2=${tex_nombrec(a**2+b**2)}$<br>`
+				texte_corr += `On constate que $${A+C}^2\\not=${A+B}^2+${B+C}^2$, l'égalité de Pythagore n'est vérifiée donc $${A+B+C}$ n'est pas rectangle en $${B}$.<br>`
+				texte_corr += `Finalement, comme $${nom_quadrilatere}$ n'a pas d'angle droit en $${B}$ ce n'est pas un rectangle.`
+				break
+			}
+				
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
