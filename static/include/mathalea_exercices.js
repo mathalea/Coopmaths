@@ -7606,16 +7606,16 @@ function Exercice_Pythagore() {
 				texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle 45](A) \\tkzGetPoint{A}'
 				texte += '\n\t \\tkzDrawPolygon(' + s0 + ',B,A,C)' // Trace la marque d'angle droit
 
-				if (abs(alpha1deg) < 90) { // rotation "angle droit dessous"
-					texte += '\n\t \\tkzLabelPoints[below](' + s0 + ')' //nomme les points
-					texte += '\n\t \\tkzLabelPoints[right](' + s1 + ')'
-					texte += '\n\t \\tkzLabelPoints[left](' + s2 + ')'
-				}
-				else {		// rotation "angle droit dessus" position du nom inversée 
-					texte += '\n\t \\tkzLabelPoints[above](' + s0 + ')' //nomme les points
-					texte += '\n\t \\tkzLabelPoints[left](' + s1 + ')'
-					texte += '\n\t \\tkzLabelPoints[right](' + s2 + ')'
-				}
+				if (alpha1deg > 0) { // rotation "angle droit dessous"
+				texte += '\n\t \\tkzLabelPoints[below](' + s0 + ')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[right](' + s1 + ')'
+				texte += '\n\t \\tkzLabelPoints[left](' + s2 + ')'
+			}
+			else {		// rotation "angle droit dessus" position du nom inversée 
+				texte += '\n\t \\tkzLabelPoints[above](' + s0 + ')' //nomme les points
+				texte += '\n\t \\tkzLabelPoints[left](' + s1 + ')'
+				texte += '\n\t \\tkzLabelPoints[right](' + s2 + ')'
+			}
 				texte += '\n \\end{tikzpicture}' // Balise de fin de figure
 				texte += '\\end{minipage}'
 			}
@@ -7773,7 +7773,7 @@ function Exercice_Trigo_longueurs() {
 			}
 			else { //sortie Latex
 				texte = `\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}`
-				texte += `\n\t\\item Le côté $[${s0 + s1}]$ est perpendiculaire au côté $[${s0 + s2}]$~;`
+				texte += `\n\t\\item Le triangle $${nom_du_triangle}]$ est rectangle en $${s0}$~;`
 
 				if (type_de_questions == 1) { // Calcul du coté adjacent (cosinus)
 					texte += `\n\t\\item $${s1 + s2}=${s12}~\\text{cm}$`;
@@ -7819,15 +7819,15 @@ function Exercice_Trigo_longueurs() {
 				texte += '\n\t \\tkzDefPointBy[homothety=center ' + s0 + ' ratio 0.1414](' + s1 + ')' + '\\tkzGetPoint{A}'
 				texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle 45](A) \\tkzGetPoint{A}'
 				texte += '\n\t \\tkzDrawPolygon(' + s0 + ',B,A,C)' // Trace la marque d'angle droit
-				if (abs(alpha1deg) < 90) { // rotation "angle droit dessous"
+				if (alpha1deg > 0) { // rotation "angle droit dessous"
 					texte += '\n\t \\tkzLabelPoints[below](' + s0 + ')' //nomme les points
-					texte += '\n\t \\tkzLabelPoints[right](' + s1 + ')'
+					texte += '\n\t \\tkzLabelPoints[above right](' + s1 + ')'
 					texte += '\n\t \\tkzLabelPoints[left](' + s2 + ')'
 				}
 				else {		// rotation "angle droit dessus" position du nom inversée 
-					texte += '\n\t \\tkzLabelPoints[above](' + s0 + ')' //nomme les points
-					texte += '\n\t \\tkzLabelPoints[left](' + s1 + ')'
-					texte += '\n\t \\tkzLabelPoints[right](' + s2 + ')'
+					texte += '\n\t \\tkzLabelPoints[left](' + s0 + ')' //nomme les points
+					texte += '\n\t \\tkzLabelPoints[below left](' + s1 + ')'
+					texte += '\n\t \\tkzLabelPoints[above right](' + s2 + ')'
 				}
 				texte += '\n \\end{tikzpicture}' // Balise de fin de figure
 				texte += '\\end{minipage}'
@@ -7905,7 +7905,7 @@ function Exercice_Trigo_angles() {
 			type_de_questions = randint(1,2) // utilisation de Arccos
 		}
 		if (this.sup == 2) {
-			type_de_questions = randint(1,6) // utilisation des 3 fonctions Arccos, Arcsin et Arctan
+			type_de_questions = randint(1,6,[2]) // utilisation des 3 fonctions Arccos, Arcsin et Arctan
 		}
 		
 		let nom_du_triangle = choice([s0 + s1 + s2, s0 + s2 + s1, s1 + s0 + s2, s1 + s2 + s0, s2 + s0 + s1, s2 + s1 + s0])
@@ -7945,37 +7945,41 @@ function Exercice_Trigo_angles() {
 			texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$.<br>`
 			texte += `Le point $${s0}$ peut être déplacé (si la figure est tronquée).</br>`
 
-			if (type_de_questions == 1) { // calcul de l'angle adjacent (arccos)
+			if (type_de_questions == 1) { // calcul de l'angle 1 (arccos)
 				texte += `$${s1 + s2}=${s12}$~cm<br>`;
 				texte += `$${s0 + s1}=${s01}$~cm<br>`;
 				texte += `Calculer l'angle $\\widehat{${s0 + s1 + s2}}$ à 1° près.`;
 
 
 			}
-			if (type_de_questions == 2) { // Calcul de l'angle opposé (90-arccos)
+			if (type_de_questions == 2) { // Calcul de l'angle 2 (90-arccos)
 			texte += `$${s1 + s2}=${s12}$~cm<br>`;
 			texte += `$${s0 + s1}=${s01}$~cm<br>`;
 			texte += `Calculer l'angle $\\widehat{${s0 + s2 + s1}}$ à 1° près.`;
 			}
-			if (type_de_questions == 3) { // calcul du côté opposé (sinus)
-				texte += `L'angle $\\widehat{${s0 + s1 + s2}}$~mesure~$${angle1}°$, $${s1 + s2}=${s12}$ cm.<br>`;
-				texte += `Calculer $${s0 + s2}$.`;
+			if (type_de_questions == 3) { // calcul de l'angle 1 (arcsin)
+				texte += `$${s0 + s2}=${s02}$~cm<br>`;
+				texte += `$${s1 + s2}=${s12}$~cm<br>`;
+				texte += `Calculer l'angle $\\widehat{${s0 + s1 + s2}}$ à 1° près.`;
+
 
 			}
-			if (type_de_questions == 4) { // Calcul de l'hypoténuse (1/sinus) 
-				texte += `L'angle $\\widehat{${s0 + s1 + s2}}$~mesure~$${angle1}°$, $${s0 + s2}=${s02}$ cm.<br>`;
-				texte += `Calculer $${s1 + s2}$.`;
+			if (type_de_questions == 4) { // Calcul de l'angle 2 (arcsin)
+			texte += `$${s1 + s2}=${s12}$~cm<br>`;
+			texte += `$${s0 + s1}=${s01}$~cm<br>`;
+			texte += `Calculer l'angle $\\widehat{${s0 + s2 + s1}}$ à 1° près.`;
+			}
+			if (type_de_questions == 5) { // calcul de l'angle 1 (arctan)
+				texte += `$${s0 + s2}=${s02}$~cm<br>`;
+				texte += `$${s0 + s1}=${s01}$~cm<br>`;
+				texte += `Calculer l'angle $\\widehat{${s0 + s1 + s2}}$ à 1° près.`;
+
 
 			}
-			if (type_de_questions == 5) { // calcul du côté opposé (tangente)
-				texte += `L'angle $\\widehat{${s0 + s1 + s2}}$~mesure~$${angle1}°$, $${s0 + s1}=${s01}$ cm.<br>`;
-				texte += `Calculer $${s0 + s2}$.`;
-
-			}
-			if (type_de_questions == 6) { // Calcul du côté adjacent (1/tangente) 
-				texte += `L'angle $\\widehat{${s0 + s1 + s2}}$~mesure~$${angle1}°$, $${s0 + s2}=${s02}$ cm.<br>`;
-				texte += `Calculer $${s0 + s1}$.`;
-
+			if (type_de_questions == 6) { // Calcul de l'angle 2 (arctan)
+			texte += `$${s0 + s2}=${s02}$~cm<br>`;
+			texte += `$${s0 + s1}=${s01}$~cm<br>`;
+			texte += `Calculer l'angle $\\widehat{${s0 + s2 + s1}}$ à 1° près.`;
 			}
 
 			this.type_exercice = 'MG32';
@@ -7993,7 +7997,7 @@ function Exercice_Trigo_angles() {
 		}
 		else { //sortie Latex
 			texte = `\\begin{minipage}{.5 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}`
-			texte += `\n\t\\item Le côté $[${s0 + s1}]$ est perpendiculaire au côté $[${s0 + s2}]$~;`
+			texte += `\n\t\\item Le triangle $${nom_du_triangle}$ est rectangle en $${s0}$~;`
 
 			if (type_de_questions == 1) { // Calcul de l'angle coté adjacent (Arccos)
 				texte += `\n\t\\item $${s1 + s2}=${s12}~\\text{cm}$`;
@@ -8005,25 +8009,26 @@ function Exercice_Trigo_angles() {
 				texte += `\n\t\\item $${s0 + s1}=${s01}~\\text{cm}$`;
 				texte += `\\end{itemize} \\bigskip\n\t  Calculer l'angle $\\widehat{${s0 + s2 + s1}}$ à 1° près. \\end{minipage}`
 			}
-			if (type_de_questions == 3) { // Calcul du coté opposé (sinus)
+			if (type_de_questions == 3) { // Calcul de l'angle 1 (Arcsin)
 				texte += `\n\t\\item $${s1 + s2}=${s12}~\\text{cm}$`;
-				texte += `\n\t\\item $${s1 + s2}=${s12}~\\text{cm}$`;
-				texte += `\\end{itemize} \\bigskip\n\t  Calculer L'angle $\\widehat{${s0 + s2 + s1}}$ à 1° près. \\end{minipage}`
-			}
-			if (type_de_questions == 4) { // Calcul de l'hypoténuse (1/sinus)
 				texte += `\n\t\\item $${s0 + s2}=${s02}~\\text{cm}$`;
-				texte += `\n\t\\item L'angle $\\widehat{${s0 + s1 + s2}}$~mesure~$${angle1}°$.<br>`;
-				texte += `\\end{itemize} \\bigskip\n\t  Calculer $${s1 + s2}$ à 0,1 près. \\end{minipage}`
+				texte += `\\end{itemize} \\bigskip\n\t  Calculer l'angle $\\widehat{${s0 + s1 + s2}}$ à 1° près. \\end{minipage}`
 			}
-			if (type_de_questions == 5) { // Calcul du côté opposé (tangente)
+			if (type_de_questions == 4) { // Calcul de l'angle 2 (Arcsin)
+				texte += `\n\t\\item $${s1 + s2}=${s12}~\\text{cm}$`;
 				texte += `\n\t\\item $${s0 + s1}=${s01}~\\text{cm}$`;
-				texte += `\n\t\\item L'angle $\\widehat{${s0 + s1 + s2}}$~mesure~$${angle1}°$.<br>`;
-				texte += `\\end{itemize} \\bigskip\n\t  Calculer $${s0 + s2}$ à 0,1 près. \\end{minipage}`
+				texte += `\\end{itemize} \\bigskip\n\t  Calculer l'angle $\\widehat{${s0 + s2 + s1}}$ à 1° près. \\end{minipage}`
 			}
-			if (type_de_questions == 6) { // Calcul du côté adjacent (1/tangente)
+			if (type_de_questions == 5) { // Calcul de l'angle 1 (Arctan)
 				texte += `\n\t\\item $${s0 + s2}=${s02}~\\text{cm}$`;
-				texte += `\n\t\\item L'angle $\\widehat{${s0 + s1 + s2}}$~mesure~$${angle1}°$.<br>`;
-				texte += `\\end{itemize} \\bigskip\n\t  Calculer $${s0 + s1}$ à 0,1 près. \\end{minipage}`
+				texte += `\n\t\\item $${s0 + s1}=${s01}~\\text{cm}$`;
+				texte += `\\end{itemize} \\bigskip\n\t  Calculer l'angle $\\widehat{${s0 + s1 + s2}}$ à 1° près. \\end{minipage}`
+	
+			}
+			if (type_de_questions == 6) { // Calcul de l'angle 2 (Arctan)
+				texte += `\n\t\\item $${s0 + s2}=${s02}~\\text{cm}$`;
+				texte += `\n\t\\item $${s0 + s1}=${s01}~\\text{cm}$`;
+				texte += `\\end{itemize} \\bigskip\n\t  Calculer l'angle $\\widehat{${s0 + s2 + s1}}$ à 1° près. \\end{minipage}`
 			}
 			texte += '\\begin{minipage}{0.5 \\linewidth}'
 			// dessin de la figure
@@ -8040,15 +8045,15 @@ function Exercice_Trigo_angles() {
 			texte += '\n\t \\tkzDefPointBy[rotation= center ' + s0 + ' angle 45](A) \\tkzGetPoint{A}'
 			texte += '\n\t \\tkzDrawPolygon(' + s0 + ',B,A,C)' // Trace la marque d'angle droit
 			if (alpha1deg > 0) { // rotation "angle droit dessous"
-				texte += '\n\t \\tkzLabelPoints[below](' + s0 + ')' //nomme les points
-				texte += '\n\t \\tkzLabelPoints[right](' + s1 + ')'
-				texte += '\n\t \\tkzLabelPoints[left](' + s2 + ')'
-			}
-			else {		// rotation "angle droit dessus" position du nom inversée 
-				texte += '\n\t \\tkzLabelPoints[above](' + s0 + ')' //nomme les points
-				texte += '\n\t \\tkzLabelPoints[left](' + s1 + ')'
-				texte += '\n\t \\tkzLabelPoints[right](' + s2 + ')'
-			}
+			texte += '\n\t \\tkzLabelPoints[below](' + s0 + ')' //nomme les points
+			texte += '\n\t \\tkzLabelPoints[above right](' + s1 + ')'
+			texte += '\n\t \\tkzLabelPoints[left](' + s2 + ')'
+		}
+		else {		// rotation "angle droit dessus" position du nom inversée 
+			texte += '\n\t \\tkzLabelPoints[left](' + s0 + ')' //nomme les points
+			texte += '\n\t \\tkzLabelPoints[below left](' + s1 + ')'
+			texte += '\n\t \\tkzLabelPoints[above right](' + s2 + ')'
+		}
 			texte += '\n \\end{tikzpicture}' // Balise de fin de figure
 			texte += '\\end{minipage}'
 		}
@@ -8069,28 +8074,32 @@ function Exercice_Trigo_angles() {
 			texte_corr += `$\\widehat{${s0+s2+s1}}=90-${angle1}=${angle2}$°`
 		}	
 		if (type_de_questions == 3) {
-			texte_corr += `Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
-			texte_corr += `$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$<br>`;
-			texte_corr += `D'où $${s0 + s2}~=~${s1+s2}~\\times~\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s12}~\\times~\\sin\\left(${angle1}°\\right)~\\approx~${s02}$.\n`;
-			texte_corr += `Soit $${s0 + s2}~\\approx${s02}$~cm.$<br>$`;
+			texte_corr+=`Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
+			texte_corr +=`$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$<br>`;
+			texte_corr += `D'où $\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${tex_fraction(s02,s12)}$<br>`;
+			texte_corr += `On en déduit que $\\widehat{${s0+s1+s2}}=\\arcsin\\left(${tex_fraction(s02,s12)}\\right)$<br>`;
+			texte_corr += `Soit $\\widehat{${s0+s1+s2}}=${angle1}$°`
 		}
 		if (type_de_questions == 4) {
-			texte_corr = `Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :\n`;
-			texte_corr +=`$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$\n`;
-			texte_corr += `D'où $${s1 + s2}~=~${s0+s2}~\\div~\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s02}~\\div~\\sin\\left(${angle1}°\\right)~\\approx~${s12}$.\n`;
-			texte_corr += `Soit $${s1 + s2}~\\approx${s12}$~cm.`;
+			texte_corr+=`Le sinus de l'angle $\\widehat{${s0+s2+s1}}$ est défini par :<br>`;
+			texte_corr +=`$\\sin \\left(\\widehat{${s0+s2+s1}}\\right)=${tex_fraction(s0 + s1,s1+s2)}$<br>`;
+			texte_corr += `D'où $\\sin\\left(\\widehat{${s0+s2+s1}}\\right)~=~${tex_fraction(s01,s12)}$<br>`;
+			texte_corr += `On en déduit que $\\widehat{${s0+s2+s1}}=\\arcsin\\left(${tex_fraction(s01,s12)}\\right)$<br>`;
+			texte_corr += `Soit $\\widehat{${s0+s2+s1}}=${angle2}$°`
 		}
 		if (type_de_questions == 5) {
-			texte_corr = `La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :$<br>$`;
-			texte_corr += `$\\tan \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s0+s1)}<br>$`;
-			texte_corr += `D'où $${s0 + s2}~=~${s0+s1}~\\times~\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s01}~\\times~\\tan\\left(${angle1}°\\right)~\\approx~${s02}$.\n`;
-			texte_corr += `Soit $${s0 + s2}~\\approx${s02}$~cm.`;
+			texte_corr+=`La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :<br>`;
+			texte_corr +=`$\\tan \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s0+s1)}$<br>`;
+			texte_corr += `D'où $\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${tex_fraction(s02,s01)}$<br>`;
+			texte_corr += `On en déduit que $\\widehat{${s0+s1+s2}}=\\arctan\\left(${tex_fraction(s02,s01)}\\right)$<br>`;
+			texte_corr += `Soit $\\widehat{${s0+s1+s2}}=${angle1}$°`
 		}
 		if (type_de_questions == 6) {
-			texte_corr = `La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :\n`;
-			texte_corr +=`$\\tan \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s0+s1)}$\n`;
-			texte_corr += `D'où $${s0 + s1}~=~${s0+s2}~\\div~\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s02}~\\div~\\tan\\left(${angle1}°\\right)~\\approx~${s01}$.\n`;
-			texte_corr += `Soit $${s0 + s1}~\\approx${s01}$~cm.`;
+			texte_corr+=`La tangente de l'angle $\\widehat{${s0+s2+s1}}$ est définie par :<br>`;
+			texte_corr +=`$\\tan \\left(\\widehat{${s0+s2+s1}}\\right)=${tex_fraction(s0 + s1,s0+s2)}$<br>`;
+			texte_corr += `D'où $\\tan\\left(\\widehat{${s0+s2+s1}}\\right)~=~${tex_fraction(s01,s02)}$<br>`;
+			texte_corr += `On en déduit que $\\widehat{${s0+s2+s1}}=\\arctan\\left(${tex_fraction(s01,s02)}\\right)$<br>`;
+			texte_corr += `Soit $\\widehat{${s0+s2+s1}}=${angle2}$°`
 		}
 		this.liste_questions.push(texte);
 		this.liste_corrections.push(texte_corr);
