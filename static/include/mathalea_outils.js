@@ -680,7 +680,7 @@ function tex_enumerate(liste,spacing){
 		result += '\\end{spacing}'
 	} 
 	result += '\\end{enumerate}'
-	return result.replace(/<br>/g,'\\\\')
+	return result.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
 }
 
 /**

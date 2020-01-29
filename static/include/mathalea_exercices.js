@@ -5363,8 +5363,8 @@ function Fraction_d_un_nombre(max=11){
 	this.titre = "Calculer des fréquences";
 	this.consigne = "";
 	this.nb_questions = 1;
-	this.spacing = 2;
-	this.spacing_corr = 2;
+	this.spacing = 1;
+	this.spacing_corr = 1.5;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;	 
 	this.sup=1;
@@ -5387,7 +5387,7 @@ function Fraction_d_un_nombre(max=11){
 			else {
 				texte=`On a réalisé $${nombre_tirages}$ lancers d'un dé à $${nombre_faces}$ faces.<br>`;
 			}
-			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br>'
+			texte+='Les résultats sont inscrits dans le tableau ci-dessous :<br><br>'
 			if (tirages.length>12) {
 				texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c';  // construction du tableau des effectifs 1/2
 				for (let j=0;j<=Math.round(tirages.length/2);j++)		texte+='|c';
@@ -5510,8 +5510,8 @@ function Calculer_des_moyennes(){
 	this.titre = "Calculer des moyennes";
 	this.consigne = "";
 	this.nb_questions = 1;
-	this.spacing = 2;
-	this.spacing_corr = 2;
+	this.spacing = 1;
+	this.spacing_corr = 1.5;
 	this.nb_cols_corr = 1;	
 	this.nb_cols=1;  
 	this.sup = 1;
@@ -5573,8 +5573,8 @@ function Calculer_des_moyennes(){
 			texte_corr+=`$${tex_fraction(tex_nombre(somme)+`^\\circ\\text{C}`,tex_nombre(nombre_temperatures))}$`
 		
 			if (arrondi(somme/nombre_temperatures,2)==somme/nombre_temperatures)  
-				texte_corr+=`$=${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ\\text{C}$<br>`; // moyenne exacte
-			else 				texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ\\text{C}$<br>`;  // moyenne arrondie
+				texte_corr+=`$=${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ\\text{C}$`; // moyenne exacte
+			else 				texte_corr+=`$\\approx${arrondi_virgule(somme/nombre_temperatures,2)}^\\circ\\text{C}$`;  // moyenne arrondie
 		}
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -5597,8 +5597,8 @@ function Calculer_des_etendues(){
 	this.titre = "Calculer des étendues";
 	this.consigne = "";
 	this.nb_questions = 1;
-	this.spacing = 2;
-	this.spacing_corr = 2;
+	this.spacing = 1;
+	this.spacing_corr = 1;
 	this.nb_cols_corr = 1;	
 	this.nb_cols=1; 
 	this.sup = 1;
@@ -5838,7 +5838,6 @@ function Aire_de_triangles(){
 		liste_de_question_to_contenu(this);		
 	}
 
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Périmètres\n2 : Aires\n3 : Périmètres et aires"];			
 }
 
 
@@ -7839,19 +7838,19 @@ function Exercice_Trigo_longueurs() {
 				texte_corr+=`Le cosinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
 				texte_corr +=`$\\cos \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s1,s1+s2)}$<br>`;
 				texte_corr += `D'où $${s0 + s1}~=~${s1+s2}~\\times~\\cos\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s12}~\\times~\\cos\\left(${angle1}°\\right)~\\approx~${s01}$.<br>`;
-				texte_corr += `Soit $${s0 + s1}~\\approx${s01}$~cm.<br>`;
+				texte_corr += `Soit $${s0 + s1}~\\approx${s01}$~cm.`;
 			}
 			if (type_de_questions == 2) {
 				texte_corr += `Le cosinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
 				texte_corr +=`$\\cos \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s1,s1+s2)}$<br>`;
 				texte_corr += `D'où $${s1 + s2}~=~${s0+s1}~\\div~\\cos\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s01}~\\div~\\cos\\left(${angle1}°\\right)~\\approx~${s12}$.<br>`;
-				texte_corr += `Soit $${s1 + s2}~\\approx${s12}$~cm.<br>`;
+				texte_corr += `Soit $${s1 + s2}~\\approx${s12}$~cm.`;
 			}	
 			if (type_de_questions == 3) {
 				texte_corr += `Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
 				texte_corr += `$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$<br>`;
 				texte_corr += `D'où $${s0 + s2}~=~${s1+s2}~\\times~\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s12}~\\times~\\sin\\left(${angle1}°\\right)~\\approx~${s02}$.<br>`;
-				texte_corr += `Soit $${s0 + s2}~\\approx${s02}$~cm.<br>`;
+				texte_corr += `Soit $${s0 + s2}~\\approx${s02}$~cm.`;
 			}
 			if (type_de_questions == 4) {
 				texte_corr = `Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
@@ -8196,8 +8195,9 @@ function Problemes_Pythagore(){
 	this.titre = "Problèmes utilisant le théorème de Pythagore";
 	this.consigne = "";
 	this.nb_questions = 2;
-	this.nb_cols = 2;
-	this.nb_cols_corr = 2;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.spacing = 1;
 	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1.5;
 
 	this.nouvelle_version = function(){
@@ -8243,7 +8243,7 @@ function Problemes_Pythagore(){
 				} else {
 					texte_corr = ``
 				}
-				texte_corr += `$${nom_quadrilatere}$ est un losange donc ses diagonales se coupent en leur milieu : $${A+O}=${A+C}\\div2=${tex_nombre(2*a)}\\div2=${tex_nombre(a)}$ cm.<br>`
+				texte_corr += `$${nom_quadrilatere}$ est un losange donc ses diagonales se coupent en leur milieu : $${A+O}=${A+C}\\div2=${tex_nombre(2*a)}\\div2=${tex_nombre(a)}$~cm.<br>`
 				texte_corr += `On sait que les diagonales d'un losange se coupent perpendiculairement donc $${A+O+C}$ est un triangle rectangle en $O$.<br>`
 				texte_corr += `D'après le théorème de Pythagore, on a : $${A+O}^2+${O+B}^2=${A+B}^2$.<br>`
 				texte_corr += `Donc $${O+B}^2=${A+B}^2-${A+O}^2=${tex_nombre(c)}^2-${tex_nombre(a)}^2=${tex_nombre(b**2)}$.<br>`
