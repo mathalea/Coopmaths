@@ -5462,17 +5462,17 @@ function Fraction_d_un_nombre(max=11){
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // On construit le tableau des températures
 			texte+='|c';
 			for (let j=0;j<Math.round(temperatures.length/2);j++) texte+='|c';
-			texte+='}\\hline  \\text{jour}';
+			texte+='}\\hline  \\text{Jour}';
 			for (let j=0;j<Math.round(temperatures.length/2);j++)  texte+='&'+tex_nombre(j+1);
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ\\text{C}';
+			texte+='\\\\\\hline \\text{Température\\thickspace en} \\thickspace ^\\circ\\text{C}';
 			for (j=0;j<Math.round(temperatures.length/2);j++) 	texte+='&'+temperatures[j];
 			texte+='\\\\\\hline\\end{array}$<br><br>';
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // On construit le tableau des températures
 			texte+='|c';
 			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++) texte+='|c';
-			texte+='}\\hline  \\text{jour}';
+			texte+='}\\hline  \\text{Jour}';
 			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++)  texte+='&'+tex_nombre(j+1);
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ\\text{C}';
+			texte+='\\\\\\hline \\text{Température\\thickspace en} \\thickspace ^\\circ\\text{C}';
 			for (j=Math.round(temperatures.length/2);j<temperatures.length;j++) 	texte+='&'+temperatures[j];
 			texte+='\\\\\\hline\\end{array}$';
 			
@@ -5547,9 +5547,9 @@ function Calculer_des_moyennes(){
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 1/2
 			texte+='|c';
 			for (let j=0;j<Math.round(temperatures.length/2);j++) texte+='|c';
-			texte+='}\\hline  \\text{jour}';
+			texte+='}\\hline  \\text{Jour}';
 			for (let j=0;j<Math.round(temperatures.length/2);j++)  texte+='&'+tex_nombre(j+1)
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ\\text{C}'
+			texte+='\\\\\\hline \\text{Température\\thickspace en} \\thickspace ^\\circ\\text{C}'
 			for (j=0;j<Math.round(temperatures.length/2);j++) 	{
 				texte+='&'+temperatures[j];
 				somme+=temperatures[j];
@@ -5558,9 +5558,9 @@ function Calculer_des_moyennes(){
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 2/2
 			texte+='|c';
 			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++) texte+='|c';
-			texte+='}\\hline  \\text{jour}';
+			texte+='}\\hline  \\text{Jour}';
 			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++)  texte+='&'+tex_nombre(j+1)
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ\\text{C}'
+			texte+='\\\\\\hline \\text{Température\\thickspace en} \\thickspace ^\\circ\\text{C}'
 			for (j=Math.round(temperatures.length/2);j<temperatures.length;j++) 	{
 				texte+='&'+temperatures[j];
 				somme+=temperatures[j];
@@ -5636,9 +5636,9 @@ function Calculer_des_etendues(){
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 1/2
 			texte+='|c';
 			for (let j=0;j<Math.round(temperatures.length/2);j++) texte+='|c';
-			texte+='}\\hline  \\text{jour}';
+			texte+='}\\hline  \\text{Jour}';
 			for (let j=0;j<Math.round(temperatures.length/2);j++)  	texte+='&'+tex_nombre(j+1)
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ\\text{C}'
+			texte+='\\\\\\hline \\text{Température\\thickspace en} \\thickspace ^\\circ\\text{C}'
 			for (j=0;j<Math.round(temperatures.length/2);j++) 	{  // on cherche le minimum et le maximum
 				texte+='&'+temperatures[j];
 				min=Math.min(temperatures[j],min);
@@ -5649,9 +5649,9 @@ function Calculer_des_etendues(){
 			texte+='$\\def\\arraystretch{1.5}\\begin{array}{|c'; // tableau des températures 2/2
 			texte+='|c';
 			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++) texte+='|c';
-			texte+='}\\hline  \\text{jour}';
+			texte+='}\\hline  \\text{Jour}';
 			for (let j=Math.round(temperatures.length/2);j<temperatures.length;j++)  	texte+='&'+tex_nombre(j+1)
-			texte+='\\\\\\hline \\text{température}\\thickspace en \\thickspace ^\\circ\\text{C}'
+			texte+='\\\\\\hline \\text{Température\\thickspace en} \\thickspace ^\\circ\\text{C}'
 			for (j=Math.round(temperatures.length/2);j<temperatures.length;j++) 	{  // on cherche le minimum et le maximum
 				texte+='&'+temperatures[j];
 				min=Math.min(temperatures[j],min);
@@ -7677,7 +7677,7 @@ function Exercice_Trigo_longueurs() {
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; // 1 utilisation du cosinus exclusivement 2 utilisation des 3 fonctions trigo 
-	sortie_html ? this.spacing_corr = 2.5 : this.spacing_corr = 1.5
+	sortie_html ? this.spacing_corr = 3 : this.spacing_corr = 1.5
 
 	this.nouvelle_version = function (numero_de_l_exercice) {
 
@@ -7849,32 +7849,32 @@ function Exercice_Trigo_longueurs() {
 			if (type_de_questions == 3) {
 				texte_corr += `Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
 				texte_corr += `$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$<br>`;
-				texte_corr += `D'où $${s0 + s2}~=~${s1+s2}~\\times~\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s12}~\\times~\\sin\\left(${angle1}°\\right)~\\approx~${s02}$.\n`;
-				texte_corr += `Soit $${s0 + s2}~\\approx${s02}$~cm.$<br>$`;
+				texte_corr += `D'où $${s0 + s2}~=~${s1+s2}~\\times~\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s12}~\\times~\\sin\\left(${angle1}°\\right)~\\approx~${s02}$.<br>`;
+				texte_corr += `Soit $${s0 + s2}~\\approx${s02}$~cm.<br>`;
 			}
 			if (type_de_questions == 4) {
-				texte_corr = `Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :\n`;
-				texte_corr +=`$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$\n`;
-				texte_corr += `D'où $${s1 + s2}~=~${s0+s2}~\\div~\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s02}~\\div~\\sin\\left(${angle1}°\\right)~\\approx~${s12}$.\n`;
+				texte_corr = `Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
+				texte_corr +=`$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$<br>`;
+				texte_corr += `D'où $${s1 + s2}~=~${s0+s2}~\\div~\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s02}~\\div~\\sin\\left(${angle1}°\\right)~\\approx~${s12}$.<br>`;
 				texte_corr += `Soit $${s1 + s2}~\\approx${s12}$~cm.`;
 			}
 			if (type_de_questions == 5) {
-				texte_corr = `La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :$<br>$`;
+				texte_corr = `La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :<br>`;
 				texte_corr += `$\\tan \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s0+s1)}<br>$`;
-				texte_corr += `D'où $${s0 + s2}~=~${s0+s1}~\\times~\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s01}~\\times~\\tan\\left(${angle1}°\\right)~\\approx~${s02}$.\n`;
+				texte_corr += `D'où $${s0 + s2}~=~${s0+s1}~\\times~\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s01}~\\times~\\tan\\left(${angle1}°\\right)~\\approx~${s02}$.<br>`;
 				texte_corr += `Soit $${s0 + s2}~\\approx${s02}$~cm.`;
 			}
 			if (type_de_questions == 6) {
-				texte_corr = `La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :\n`;
-				texte_corr +=`$\\tan \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s0+s1)}$\n`;
-				texte_corr += `D'où $${s0 + s1}~=~${s0+s2}~\\div~\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s02}~\\div~\\tan\\left(${angle1}°\\right)~\\approx~${s01}$.\n`;
+				texte_corr = `La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :<br>`;
+				texte_corr +=`$\\tan \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s0+s1)}$<br>`;
+				texte_corr += `D'où $${s0 + s1}~=~${s0+s2}~\\div~\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${s02}~\\div~\\tan\\left(${angle1}°\\right)~\\approx~${s01}$.<br>`;
 				texte_corr += `Soit $${s0 + s1}~\\approx${s01}$~cm.`;
 			}
 			this.liste_questions.push(texte);
 			this.liste_corrections.push(texte_corr);
 			liste_de_question_to_contenu_sans_numero(this);;
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Calcul lié au cosinus \n 2 : Cosinus, Sinus ou tangente'];
+	this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Cosinus \n 2 : Cosinus, sinus ou tangente'];
 }
 /**
 * @auteur Jean-Claude Lhote
@@ -7888,7 +7888,7 @@ function Exercice_Trigo_angles() {
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; // 1 calcul avec Arccos
-	sortie_html ? this.spacing_corr = 2.5 : this.spacing_corr = 1.5
+	sortie_html ? this.spacing_corr = 3 : this.spacing_corr = 1.5
 
 	this.nouvelle_version = function (numero_de_l_exercice) {
 		this.type_exercice = 'MG32';
@@ -8064,50 +8064,50 @@ function Exercice_Trigo_angles() {
 			texte_corr +=`$\\cos \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s1,s1+s2)}$<br>`;
 			texte_corr += `D'où $\\cos\\left(\\widehat{${s0+s1+s2}}\\right)~=~${tex_fraction(s01,s12)}$<br>`;
 			texte_corr += `On en déduit que $\\widehat{${s0+s1+s2}}=\\arccos\\left(${tex_fraction(s01,s12)}\\right)$<br>`;
-			texte_corr += `Soit $\\widehat{${s0+s1+s2}}=${angle1}$°`
+			texte_corr += `Soit $\\widehat{${s0+s1+s2}}\\approx${angle1}$°`
 		}
 		if (type_de_questions == 2) {
 			texte_corr+=`Le cosinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
 			texte_corr +=`$\\cos \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s1,s1+s2)}$<br>`;
 			texte_corr += `D'où $\\cos\\left(\\widehat{${s0+s1+s2}}\\right)~=~${tex_fraction(s01,s12)}$<br>`;
 			texte_corr += `On en déduit que $\\widehat{${s0+s1+s2}}=\\arccos\\left(${tex_fraction(s01,s12)}\\right)$<br>`;
-			texte_corr += `Soit $\\widehat{${s0+s1+s2}}=${angle1}$°<br>`
+			texte_corr += `Soit $\\widehat{${s0+s1+s2}}\\approx${angle1}$°<br>`
 			texte_corr += `Or, dans un triangle rectangle les angles aigus sont complémentaires, donc :<br>`
-			texte_corr += `$\\widehat{${s0+s2+s1}}=90-${angle1}=${angle2}$°`
+			texte_corr += `$\\widehat{${s0+s2+s1}}\\approx90-${angle1}\\approx${angle2}$°`
 		}	
 		if (type_de_questions == 3) {
 			texte_corr+=`Le sinus de l'angle $\\widehat{${s0+s1+s2}}$ est défini par :<br>`;
 			texte_corr +=`$\\sin \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s1+s2)}$<br>`;
 			texte_corr += `D'où $\\sin\\left(\\widehat{${s0+s1+s2}}\\right)~=~${tex_fraction(s02,s12)}$<br>`;
 			texte_corr += `On en déduit que $\\widehat{${s0+s1+s2}}=\\arcsin\\left(${tex_fraction(s02,s12)}\\right)$<br>`;
-			texte_corr += `Soit $\\widehat{${s0+s1+s2}}=${angle1}$°`
+			texte_corr += `Soit $\\widehat{${s0+s1+s2}}\\approx${angle1}$°`
 		}
 		if (type_de_questions == 4) {
 			texte_corr+=`Le sinus de l'angle $\\widehat{${s0+s2+s1}}$ est défini par :<br>`;
 			texte_corr +=`$\\sin \\left(\\widehat{${s0+s2+s1}}\\right)=${tex_fraction(s0 + s1,s1+s2)}$<br>`;
 			texte_corr += `D'où $\\sin\\left(\\widehat{${s0+s2+s1}}\\right)~=~${tex_fraction(s01,s12)}$<br>`;
 			texte_corr += `On en déduit que $\\widehat{${s0+s2+s1}}=\\arcsin\\left(${tex_fraction(s01,s12)}\\right)$<br>`;
-			texte_corr += `Soit $\\widehat{${s0+s2+s1}}=${angle2}$°`
+			texte_corr += `Soit $\\widehat{${s0+s2+s1}}\\approx${angle2}$°`
 		}
 		if (type_de_questions == 5) {
 			texte_corr+=`La tangente de l'angle $\\widehat{${s0+s1+s2}}$ est définie par :<br>`;
 			texte_corr +=`$\\tan \\left(\\widehat{${s0+s1+s2}}\\right)=${tex_fraction(s0 + s2,s0+s1)}$<br>`;
 			texte_corr += `D'où $\\tan\\left(\\widehat{${s0+s1+s2}}\\right)~=~${tex_fraction(s02,s01)}$<br>`;
 			texte_corr += `On en déduit que $\\widehat{${s0+s1+s2}}=\\arctan\\left(${tex_fraction(s02,s01)}\\right)$<br>`;
-			texte_corr += `Soit $\\widehat{${s0+s1+s2}}=${angle1}$°`
+			texte_corr += `Soit $\\widehat{${s0+s1+s2}}\\approx${angle1}$°`
 		}
 		if (type_de_questions == 6) {
 			texte_corr+=`La tangente de l'angle $\\widehat{${s0+s2+s1}}$ est définie par :<br>`;
 			texte_corr +=`$\\tan \\left(\\widehat{${s0+s2+s1}}\\right)=${tex_fraction(s0 + s1,s0+s2)}$<br>`;
 			texte_corr += `D'où $\\tan\\left(\\widehat{${s0+s2+s1}}\\right)~=~${tex_fraction(s01,s02)}$<br>`;
 			texte_corr += `On en déduit que $\\widehat{${s0+s2+s1}}=\\arctan\\left(${tex_fraction(s01,s02)}\\right)$<br>`;
-			texte_corr += `Soit $\\widehat{${s0+s2+s1}}=${angle2}$°`
+			texte_corr += `Soit $\\widehat{${s0+s2+s1}}\\approx${angle2}$°`
 		}
 		this.liste_questions.push(texte);
 		this.liste_corrections.push(texte_corr);
 		liste_de_question_to_contenu_sans_numero(this);;
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Calcul de l\'angle avec Acos \n 2 : Calcul Avec Acos, Asin ou Atan'];
+	this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Calcul de l\'angle avec Acos \n 2 : Calcul de l\'angle avec Acos, Asin ou Atan'];
 }
 
 /**
@@ -8580,7 +8580,7 @@ function Exercice_Trigo_longueurs_4e(){
 function Exercice_Trigo_angles_4e(){
 	Exercice_Trigo_angles.call(this);
 	this.sup =1;
-	this.titre = "Utiliser le cosinus pour calculer un angle dans un triangle rectangle"
+	this.titre = "Utiliser le cosinus pour calculer la mesure d'un angle dans un triangle rectangle"
 }
 
 function Exercice_6N12(){
