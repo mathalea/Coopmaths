@@ -92,6 +92,8 @@ var liste_des_exercices_disponibles = {
 		'4G10' : Exercice_Pythagore,
 		'4G11' : Reciproque_Pythagore,
 		'4G12' : Problemes_Pythagore,
+		'4G13' : Exercice_trigo_longueurs_4e,
+		'4G14' : Exercice_trigo_angles_4e,
 		'4G20' : Thales_4eme,
 		//12:Exercice_conversions_de_longueurs,
 		//13:Exercice_conversions,
@@ -8534,6 +8536,17 @@ function Divisions_euclidiennes_niv2(){
 	Divisions_euclidiennes.call(this);
 	this.sup = 2;
 	this.titre = "Divisions euclidiennes - Niveau 2"
+}
+function Exercice_trigo_longueurs_4e(){
+	Exercice_Trigo_longueurs.call(this);
+	this.sup =1;
+	this.titre = "Utiliser le cosinus pour calculer une longueur dans un triangle rectangle"
+}
+
+function Exercice_trigo_angles_4e(){
+	Exercice_Trigo_angles.call(this);
+	this.sup =1;
+	this.titre = "Utiliser le cosinus pour calculer un angle dans un triangle rectangle"
 }
 
 function Exercice_6N12(){
