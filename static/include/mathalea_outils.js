@@ -322,13 +322,22 @@ function ecriture_algebrique(a) {
 */
 function ecriture_parenthese_si_negatif(a) { 
 	let result = '';
-	if (a>0) {
+	if (a>=0) {
 		result = a;
 	}else {
 		result = `(${a})`;
 	}
 	return result;
 };
+/**
+* Convertit un angle de radian vers degrés
+* @Example
+* // PI->180
+* @Auteur Jean-Claude Lhote
+*/
+Math.degres = function(radians) {
+	return radians * 180 / Math.PI;
+  };
 
 /**
 * Retourne le signe d'un nombre
@@ -715,7 +724,7 @@ function tex_paragraphe(liste,spacing=false){
 	if (spacing>1){
 		result += '\\end{spacing}'
 	} 
-	return result
+	return result.replace(/<br>/g,'\\\\')
 }
 
 
