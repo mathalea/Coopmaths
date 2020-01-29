@@ -7267,7 +7267,6 @@ function Exercice_Thales(){
 			}
 			if (this.sup==1){  // calcul direct de AM et BC : pas de calcul intermédiaire de AN
 				texte = `Dans la figure ci-dessous, les droites $(${s4+s5})$ et $(${s2+s3})$ sont parallèles.</br> $${s1+s2}=${s12}$ cm, $${s1+s3}=${s13}$ cm, $${s4+s5}=${s45}$ cm et $${s1+s5}=${s15}$ cm.`
-				texte += `</br>Le point $${s1}$ peut être déplacé.</br>`
 				texte += `Calculer $${s1+s4}$ et $${s2+s3}$.`
 				if (k>0) {
 					texte_corr = 'Dans le triangle '+`$${s1+s2+s3}$`+', les droites '+`$(${s4+s5})$`+' et '+`$(${s2+s3})$`+' sont parallèles.</br>'+' D&rsquo;après la propriété de Thales, on a '+`$${tex_fraction(s1+s4,s1+s2)}=${tex_fraction(s1+s5,s1+s3)}=${tex_fraction(s4+s5,s2+s3)}.$`+'</br>'
@@ -7336,6 +7335,7 @@ function Exercice_Thales(){
 				mtg32App.calculate("MG32svg${numero_de_l_exercice}");
 	        	mtg32App.display("MG32svg${numero_de_l_exercice}");
 				` 	
+				texte += `<br>$\\footnotesize{\\textit{Le point \\thickspace ${s1} peut être déplacé (si la figure est tronquée).}}$</br>`;
 			}
 			this.liste_questions.push(texte);	
 			this.liste_corrections.push(texte_corr);
@@ -7540,7 +7540,6 @@ function Exercice_Pythagore() {
 			}
 			if (type_de_questions == 2) { // Calcul d'un côté de l'angle droit
 				texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$, $${s0 + s1}=${s01}$ cm, $${s1 + s2}=${s12}$ cm.`
-				texte += `</br>Le point $${s0}$ peut être déplacé</br>`
 				texte += `Calculer $${s0 + s2}$.`
 				texte_corr = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, d&rsquo;après le théorème de Pythagore, on a : $${s1 + s2}^2 = ${s0 + s1}^2~+~${s0 + s2}^2.$</br>`
 				texte_corr += 'D&rsquo;où ' + `$${s0 + s2}^2~=~${s1 + s2}^2~-~${s0 + s1}^2 = ${s12}^2~-~${s01}^2~=~${scarre12}~-~${scarre01}~=~${arrondi_virgule(carre12 - carre01, 2)}.$` + '</br>'
@@ -7559,6 +7558,7 @@ function Exercice_Pythagore() {
 				mtg32App.calculate("MG32svg${numero_de_l_exercice}");
 	        	mtg32App.display("MG32svg${numero_de_l_exercice}");
 				`
+				texte += `<br>$\\footnotesize{\\textit{Le point \\thickspace ${s0} peut être déplacé (si la figure est tronquée).}}$</br>`;
 			} else {
 				this.type_exercice = '';
 			}
