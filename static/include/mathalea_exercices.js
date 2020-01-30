@@ -104,6 +104,7 @@ var liste_des_exercices_disponibles = {
 		'3N12' : Developper_Identites_remarquables3,
 		'3N13' : Factoriser_Identites_remarquables3,
 		'3N14' : Resoudre_une_equation_produit_nul,
+		'3N14-2' : Resoudre_une_equation_produit_nul_niv2,
 		'3G10' : Exercice_Thales,
 		'3G30' : Exercice_Trigo_longueurs,
 		'3G31' : Exercice_Trigo_angles,
@@ -8376,8 +8377,8 @@ function Resoudre_une_equation_produit_nul(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1; 
-	sortie_html ? this.spacing_corr=3 : this.spacing_corr=2
-	this.spacing = 1.5
+	sortie_html ? this.spacing_corr=2 : this.spacing_corr=1.5
+	this.spacing = 1
 	
 	
 	this.nouvelle_version = function(){
@@ -8409,17 +8410,17 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b])
 					texte = `$(x+${b})(x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '<br>\n'+`$(x+${b})(x+${d})=0$`
-					texte_corr +='<br>\n Soit '+`$x+${b}=0$`+' ou '+`$x+${d}=0$`
-					texte_corr += '<br>\n Donc '+`$x=${0-b}$`+' ou '+`$x=${0-d}$`
+					texte_corr += '<br>'+`$(x+${b})(x+${d})=0$`
+					texte_corr +='<br> Soit '+`$x+${b}=0$`+' ou '+`$x+${d}=0$`
+					texte_corr += '<br> Donc '+`$x=${0-b}$`+' ou '+`$x=${0-d}$`
 				break;
 			case 2: b = randint(1,20); // (x-a)(x+b)=0 avec a et b entiers
 					d = randint(1,20,[b])
 					texte = `$(x-${b})(x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '<br>\n'+`$(x-${b})(x+${d})=0$`
-					texte_corr += '<br>\n Soit '+`$x-${b}=0$`+' ou  '+`$x+${d}=0$`
-					texte_corr += '<br>\n Donc '+`$x=${b}$`+' ou '+`$x=${0-d}$`
+					texte_corr += '<br>'+`$(x-${b})(x+${d})=0$`
+					texte_corr += '<br> Soit '+`$x-${b}=0$`+' ou  '+`$x+${d}=0$`
+					texte_corr += '<br> Donc '+`$x=${b}$`+' ou '+`$x=${0-d}$`
 				break;
 				
 			case 3: a = randint(2,6); 	//(ax+b)(cx+d)=0  avec b/a et d/c entiers.
@@ -8428,11 +8429,11 @@ function Resoudre_une_equation_produit_nul(){
 					d = Math.round(randint(1,5)*c);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x+${d})=0$`
-					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
-					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
-					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
-					texte_corr += '<br>\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${0-d/c}$`
+					texte_corr += '<br>'+`$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr += '<br> Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
+					texte_corr += '<br> Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
+					texte_corr += '<br> Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=-${tex_fraction(d,c)}$`
+					texte_corr += '<br> Donc '+`$x=${0-b/a}$`+' ou '+`$x=${0-d/c}$`
 				break;
 			case 4: a = randint(2,6); 	//(ax+b)(cx-d)=0  avec b/a et d/c entiers.
 					b = Math.round(randint(1,5)*a);
@@ -8440,11 +8441,11 @@ function Resoudre_une_equation_produit_nul(){
 					d = Math.round(randint(1,5)*c);
 					texte = `$(${a}x+${b})(${c}x-${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x-${d})=0$`
-					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
-					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
-					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
-					texte_corr += '<br>\n Donc '+`$x=${0-b/a}$`+' ou '+`$x=${d/c}$`
+					texte_corr += '<br>'+`$(${a}x+${b})(${c}x-${d})=0$`
+					texte_corr += '<br> Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
+					texte_corr += '<br> Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
+					texte_corr += '<br> Donc '+`$x=-${tex_fraction(b,a)}$`+' ou '+`$x=${tex_fraction(d,c)}$`
+					texte_corr += '<br> Donc '+`$x=${0-b/a}$`+' ou '+`$x=${d/c}$`
 				break;
 			case 5:
 					a = randint(2,9);	//(ax+b)(cx+d)=0 	avec b/a et d/c quelconques.
@@ -8453,10 +8454,10 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b,c]);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x+${d})=0$`
-					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
-					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
-					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`
+					texte_corr += '<br>'+`$(${a}x+${b})(${c}x+${d})=0$`
+					texte_corr += '<br> Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x+${d}=0$`
+					texte_corr += '<br> Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${0-d}$`
+					texte_corr += '<br> Donc '+`$x=-${tex_fraction(b,a)}$`
 					if (tex_fraction(b,a)!=tex_fraction_reduite(b,a)) {texte_corr+=`$=-${tex_fraction_reduite(b,a)}$`}
 					texte_corr+=' ou '+`$x=-${tex_fraction(d,c)}$`
 					if (tex_fraction(d,c)!=tex_fraction_reduite(d,c)) {texte_corr+=`$=-${tex_fraction_reduite(d,c)}$`}
@@ -8468,10 +8469,10 @@ function Resoudre_une_equation_produit_nul(){
 					d = randint(1,20,[b,c]);
 					texte = `$(${a}x+${b})(${c}x+${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
-					texte_corr += '<br>\n'+`$(${a}x+${b})(${c}x-${d})=0$`
-					texte_corr += '<br>\n Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
-					texte_corr += '<br>\n Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
-					texte_corr += '<br>\n Donc '+`$x=-${tex_fraction(b,a)}$`
+					texte_corr += '<br>'+`$(${a}x+${b})(${c}x-${d})=0$`
+					texte_corr += '<br> Soit '+`$${a}x+${b}=0$`+' ou '+`$${c}x-${d}=0$`
+					texte_corr += '<br> Donc '+`$${a}x=${0-b}$`+' ou '+`$${c}x=${d}$`
+					texte_corr += '<br> Donc '+`$x=-${tex_fraction(b,a)}$`
 					if (tex_fraction(b,a)!=tex_fraction_reduite(b,a)) {texte_corr+=`$=-${tex_fraction_reduite(b,a)}$`}
 					texte_corr+=' ou '+`$x=${tex_fraction(d,c)}$`
 					if (tex_fraction(d,c)!=tex_fraction_reduite(d,c)) {texte_corr+=`$=${tex_fraction_reduite(d,c)}$`}
@@ -8579,6 +8580,11 @@ function HTML_personnalise() {
 
 
 // Exercices paramétré pour correspondre au référentiel
+function Resoudre_une_equation_produit_nul_niv2(){
+	Resoudre_une_equation_produit_nul.call(this);
+	this.titre = "Résoudre une équation produit nul niveau2";
+	this.sup=2;
+}
 
 function Divisions_euclidiennes_niv2(){
 	Divisions_euclidiennes.call(this);
