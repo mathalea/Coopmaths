@@ -21,7 +21,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 ### Crédits
 
 - Moteur développé par Rémi Angot sous licence **CC-By-SA**.
-- Exercices écrits par Rémi Angot et Jean-Claude Lhote puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
+- Exercices écrits par Rémi Angot, Jean-Claude Lhote et Sébastien Lozano puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Bitton - Licence GNU AGPLv3 (pour les constructions géométriques).
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
@@ -32,6 +32,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - [prismjs](http://prismjs.com/) MIT license (pour la coloration syntaxique du code LaTeX).
 - [Slick](https://kenwheeler.github.io/slick/) MIT license (pour le diaporama).
 - [TextFill](https://jquery-textfill.github.io) MIT license (pour adapter la taille de la police dans les diaporamas)
+- [SVG.js](https://svgjs.com/) MIT license (pour afficher des figures)
 - Merci à Sébastien Cogez pour ses conseils et à Julien Brunel pour son cours sur la programmation objet.
 
 
@@ -49,16 +50,28 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 ### Changelog
 
+#### 02/20
+
+- Ajout d'exercices sur les puissances.
+- Ajout d'exercices sur les angles.
+- Ajout d'exercices sur la résolution d'équation.
+- Support de JSDoc pour générer le wiki.
+- Intégration de SVG.JS.
+- Mise en place d'une correction plus ou moins détaillée dans les exercices.
+- Arrivée de Sébastien Lozano pour la programmation d'exercices.
+
 #### 01/20
 
 - Mise à jour de MathGraph32
 - Ajout d'exercices sur les calculs de fractions (4e et 3e)
+- Ajout d'exercices de statistiques (5e)
+- Ajout d'un exercice de conversion de volumes
 
 #### 12/19
 
 - Évaluation à la carte (liste d'exercices différenciée élève par élève).
 - Intégration d'un exercice statique (choisi au hasard dans un répertoire donné).
-- ~~Mise à jour de KaTeX~~ (annulée pour cause de bug sur les traits de fractions).
+- Mise à jour de KaTeX.
 - Arrivée de Jean-Claude Lhote pour la programmation d'exercices.
 - Ajout d'exercices de calcul littéral.
 - Ajout d'exercices sur les théorèmes de Thalès et de Pythagore.

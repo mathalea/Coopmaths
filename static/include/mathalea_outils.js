@@ -39,23 +39,7 @@ function liste_de_question_to_contenu_sans_numero(argument) {
 	
 }
 
-/**
-* Utilise this.liste\_questions et this.liste\_corrections pour remplir this.contenu et this.contenu_correction
-* 
-* La liste des questions devient une liste HTML ou LaTeX avec html\_ligne() 
-*
-* **Doit être remplacée par liste_de_question_to_contenu()**
-* @deprecated Doit être remplacée par liste_de_question_to_contenu()
-* @param {exercice} 
-* @author Rémi Angot
-*/
-function mg32_to_contenu(argument) {
-	if (sortie_html) {
-		argument.contenu = html_consigne(argument.consigne) + html_ligne(argument.liste_questions,argument.spacing);
-		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_ligne(argument.liste_corrections,argument.spacing_corr);
-	} 
-	
-}
+
 
 /**
 * Créé tous les couples possibles avec un élément de E1 et un élément de E2.
@@ -68,7 +52,7 @@ function mg32_to_contenu(argument) {
 *
 * @author Rémi Angot
 */
-	
+
 function creer_couples(E1, E2, nombre_de_couples_min = 10){
 	
 	let result = [], temp = [];
@@ -130,16 +114,16 @@ function randint(min,max,liste_a_eviter=[]){
 function enleve_element(array,item){
 	// 
 	for(var i = array.length - 1; i >= 0; i--){
-    	if(array[i] == item) {
-       		array.splice(i, 1);
-    	}
+		if(array[i] == item) {
+			array.splice(i, 1);
+		}
 	}
 }
 
 /**
-* Retourne un élément au hasard de la liste
-* @param {liste} liste
-* 
+* Retourne un élément au hasard de la liste sans appartenir à une liste donnée
+* @param {liste} 
+* @param {liste_a_eviter}
 *
 * @example
 * // Renvoit 1, 2 ou 3
@@ -150,10 +134,13 @@ function enleve_element(array,item){
 *
 * @author Rémi Angot
 */
-function choice(liste) {
-	// Renvoit un élément au hasard de la liste
-  var index = Math.floor(Math.random() * liste.length);
-  return liste[index];
+function choice(liste,liste_a_eviter=[]) {
+	// Supprime les éléments de liste à éviter
+	for (let i=0;i<liste_a_eviter.length;i++){
+		enleve_element(liste,liste_a_eviter[i])
+	}
+	var index = Math.floor(Math.random() * liste.length);
+	return liste[index];
 }
 
 function range(max,liste_a_eviter=[]){
@@ -191,7 +178,7 @@ function range1(max,liste_a_eviter=[]){
 /**
 * Fonction de comparaison à utiliser avec tableau.sort(compare_fractions)
 *
-* Le tableau doit être du type [[num,den],[num2,den2]]
+* Le tableau doit être du type `[[num,den],[num2,den2]]`
 *
 * @author Rémi Angot
 */
@@ -212,7 +199,7 @@ function compare_fractions(a,b){
 * @Source https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 */
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+	var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
   var array_bis = array.slice()
@@ -221,14 +208,14 @@ function shuffle(array) {
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-		
+
     // And swap it with the current element.
     temporaryValue = array_bis[currentIndex];
     array_bis[currentIndex] = array_bis[randomIndex];
     array_bis[randomIndex] = temporaryValue;
-  }
+}
 
-  return array_bis;
+return array_bis;
 }
 
 /*
@@ -239,18 +226,18 @@ function shuffle(array) {
 * @Source https://stackoverflow.com/questions/10946880/sort-a-dictionary-or-whatever-key-value-data-structure-in-js-on-word-number-ke
 */
 function tridictionnaire(dict) {
-    var sorted = [];
-    for(var key in dict) {
-        sorted[sorted.length] = key;
-    }
-    sorted.sort();
+	var sorted = [];
+	for(var key in dict) {
+		sorted[sorted.length] = key;
+	}
+	sorted.sort();
 
-    var tempDict = {};
-    for(var i = 0; i < sorted.length; i++) {
-        tempDict[sorted[i]] = dict[sorted[i]];
-    }
+	var tempDict = {};
+	for(var i = 0; i < sorted.length; i++) {
+		tempDict[sorted[i]] = dict[sorted[i]];
+	}
 
-    return tempDict;
+	return tempDict;
 }
 
 
@@ -278,6 +265,22 @@ function combinaison_listes_sans_changer_ordre(liste,taille_minimale){
 		liste = liste.concat(liste)
 	}
 	return liste
+}
+/**
+* N'écrit pas un nombre s'il est égal à 1
+* @Example
+* //rien_si_1(1)+'x' -> x
+* //rien_si_1(-1)+'x' -> -x
+* @Auteur Rémi Angot
+*/
+function rien_si_1(a) { 
+	if (a==1) {
+		return ''
+	} else if (a==-1) {
+		return '-'
+	} else {
+		return a
+	}
 }
 
 /**
@@ -337,7 +340,7 @@ function ecriture_parenthese_si_negatif(a) {
 */
 Math.degres = function(radians) {
 	return radians * 180 / Math.PI;
-  };
+};
 
 /**
 * Retourne le signe d'un nombre
@@ -377,11 +380,12 @@ function signe(a) { // + ou -
 * @Auteur Rémi Angot
 */
 function arrondi(nombre, precision=2){
-    let tmp = Math.pow(10, precision);
-    return Math.round( nombre*tmp )/tmp;
+	let tmp = Math.pow(10, precision);
+	return Math.round( nombre*tmp )/tmp;
 }
 
 /**
+* Renvoit la valeur absolue
 * @Auteur Rémi Angot
 */
 function abs(a){
@@ -393,11 +397,12 @@ function abs(a){
 * @Auteur Rémi Angot
 */
 function arrondi_virgule(nombre, precision=2){ //
-    let tmp = Math.pow(10, precision);
-    return String(Math.round( nombre*tmp )/tmp).replace('.',',');
+	let tmp = Math.pow(10, precision);
+	return String(Math.round( nombre*tmp )/tmp).replace('.',',');
 }
 
 /**
+* Renvoit le PGCD de deux nombres
 * @Auteur Rémi Angot
 */
 function pgcd(a,b){
@@ -405,6 +410,7 @@ function pgcd(a,b){
 }
 
 /**
+* Renvoit le PPCM de deux nombres
 * @Auteur Rémi Angot
 */
 const ppcm = (a,b) => { return parseInt(Algebrite.run(`lcm(${a},${b})`))}
@@ -416,14 +422,27 @@ const ppcm = (a,b) => { return parseInt(Algebrite.run(`lcm(${a},${b})`))}
 */
 function fraction_simplifiee(n,d){ 
 	let p=pgcd(n,d);
-	return [n/p,d/p];
+	let ns = n/p;
+	let ds = d/p;
+	if (ns<0 && ds<0) {
+		[ns,ds] = [-ns,-ds]
+	}
+	if (ns>0 && ds<0) {
+		[ns,ds] = [-ns,-ds]
+	}
+	return [ns,ds];
 }
 
 /**
+* Retourne le code LaTeX d'une fraction simplifiée ou d'un nombre entier 
 * @Auteur Rémi Angot
 */
 function tex_fraction_reduite(n,d){
-	return tex_fraction(fraction_simplifiee(n,d)[0],fraction_simplifiee(n,d)[1]);
+	if (n%d==0) {
+		return n/d
+	} else {
+		return tex_fraction(fraction_simplifiee(n,d)[0],fraction_simplifiee(n,d)[1]);
+	}
 }
 
 /**
@@ -465,7 +484,7 @@ function obtenir_liste_facteurs_premiers(n){
 		}
 	}
 	if (liste.length==0) {liste.push(n)}
-	return liste
+		return liste
 }
 
 /**
@@ -473,7 +492,7 @@ function obtenir_liste_facteurs_premiers(n){
 * @Auteur Rémi Angot
 */
 function calcul(expression){ 
-	return parseFloat(Algebrite.eval(expression))
+	return parseFloat(Algebrite.eval('float('+expression+')'))
 }
 
 /**
@@ -486,6 +505,7 @@ function tex_nombrec(expression){
 
 
 /**
+* Renvoit un tableau (somme des termes positifs, somme des termes négatifs)
 * @Auteur Rémi Angot
 */function somme_des_termes_par_signe(liste){
 	let somme_des_positifs = 0, somme_des_negatifs = 0;
@@ -509,7 +529,7 @@ function polygone(nbsommets,liste_a_eviter=[]){
 	while(est_deja_donne(String.fromCharCode(premiersommet),liste_a_eviter)){
 		premiersommet = randint(65,90-nbsommets);
 	}
-		
+
 	for (let i=0;i<nbsommets;i++){
 		polygone += String.fromCharCode(premiersommet+i)
 	}
@@ -531,22 +551,38 @@ function est_deja_donne(premiersommet,liste_a_eviter) {
 }
 
 /**
+* Renvoit une lettre majuscule depuis un nombre compris entre 1 et 702
 * @Auteur Rémi Angot
 *@Example
-* // 1->A ; 2->B...
+* // 0 -> @ 1->A ; 2->B...
+* // 27->AA ; 28 ->AB ...
 */
 function lettre_depuis_chiffre(i){ 
-	let lettre = 64+i;
-  return String.fromCharCode(lettre)
+	
+	let result=''
+	if (i<=26) {
+		result = String.fromCharCode(64+i)
+	} else {
+		if (i%26==0) {
+			result = String.fromCharCode(64+Math.floor(i/26)-1)
+			result+=String.fromCharCode(64+26)
+		} else {
+			result = String.fromCharCode(64+Math.floor(i/26))
+			result+=String.fromCharCode(64+i%26)
+		}
+	}
+	return result
 }
 
 /**
+* Renvoit une lettre majuscule depuis un nombre compris entre 1 et 702
 * @Auteur Rémi Angot
-* @Example
-* // 1->a ; 2->b...
+*@Example
+* // 0 -> @ 1->a ; 2->b...
+* // 27->aa ; 28 ->ab ...
 */
 function lettre_minuscule_depuis_chiffre(i){ 
-  return lettre_depuis_chiffre(i).toLowerCase()
+	return lettre_depuis_chiffre(i).toLowerCase()
 }
 
 /**
@@ -590,20 +626,23 @@ function minToHour(minutes){
 }
 
 /**
+* Renvoit un prénom féminin au hasard 
 * @Auteur Rémi Angot
 */
 function prenomF(){
-	return choice(['Manon','Julie','Aude','Corinne','Léa','Carine','Elsa','Lisa','Marina','Magalie','Nawel'])
+	return choice(['Manon','Julie','Aude','Corinne','Léa','Carine','Elsa','Lisa','Marina','Magalie','Nawel','Dalila','Nadia','Yasmine'])
 }
 
 /**
+* Renvoit un prénom masculin au hasard
 * @Auteur Rémi Angot
 */
 function prenomM(){
-	return choice(['Rémi','Benjamin','Guillaume','Christophe','Cyril','Kamel','Yazid','Mehdi','Karim','Bernard','Joachim'])
+	return choice(['Rémi','Benjamin','Guillaume','Christophe','Cyril','Kamel','Yazid','Mehdi','Karim','Bernard','Joachim','Jean-Claude'])
 }
 
 /**
+* Renvoit un prénom au hasard
 * @Auteur Rémi Angot
 */
 function prenom(){
@@ -611,28 +650,38 @@ function prenom(){
 }
 
  /**
+* Renvoit un tableau avec les résultats des tirages successifs
+* @param nombre_tirages Combien de tirages ?
+* @param nombre_faces Pour spécifier le type de dés
+* @param nombre_des Combien de dés à chaque tirage ?
 * @auteur Jean-Claude Lhote
 */
-function tirer_les_des(nombre_tirages,nombre_faces,nombre_des) { // paramètres : combien de tirages ? avec quel type de dés ? et combien de dés lancés à chaque tirage
+function tirer_les_des(nombre_tirages,nombre_faces,nombre_des) { 
 	let tirages =[];
 	for (i=0;i<=(nombre_faces-1)*nombre_des;i++) tirages.push([i+nombre_des,0]);
-	for (let i=0,resultat;i<nombre_tirages;i++) {
-		resultat=0;
-		for (j=0;j<nombre_des;j++) resultat+=randint(1,nombre_faces); 
-		tirages [resultat-nombre_des][1]++;
+		for (let i=0,resultat;i<nombre_tirages;i++) {
+			resultat=0;
+			for (j=0;j<nombre_des;j++) resultat+=randint(1,nombre_faces); 
+				tirages [resultat-nombre_des][1]++;
+		}
+		return tirages
 	}
-return tirages
-}
  /**
+* Renvoit un tableau de nombres
+* @param nombre_notes
+* @param note_min
+* @param note_max
 * @auteur Jean-Claude Lhote
 */
-function liste_de_notes(nombre_notes,note_min,note_max) { // paramètres : combien de tirages ? avec quel type de dés ? et combien de dés lancés à chaque tirage
+function liste_de_notes(nombre_notes,note_min,note_max) { 
 	let notes =[];
 	for (i=0;i<nombre_notes;i++) notes.push(randint(note_min,note_max));
-return notes
+		return notes
 }
 
  /**
+* Renvoit le nombre de jour d'un mois donné
+* @param n quantième du mois (janvier=1...)
 * @auteur Jean-Claude Lhote
 */
 function jours_par_mois(n){
@@ -640,9 +689,13 @@ function jours_par_mois(n){
 	return jours_mois[n-1]
 }
  /**
+* Renvoit un tableau de températures
+* @param base température médiane
+* @mois quantième du mois (janvier=1...)
+* @annee pour déterminer si elle est bissextile ou non 
 * @auteur Jean-Claude Lhote
 */
-function un_mois_de_temperature(base,mois,annee) { // paramètres : température médiane, quantième du mois (janvier=1), annee pour déterminer si bissextile
+function un_mois_de_temperature(base,mois,annee) { 
 	let temperatures =[];
 	let nombre_jours=jours_par_mois(mois);
 	if (mois==2) {
@@ -651,10 +704,12 @@ function un_mois_de_temperature(base,mois,annee) { // paramètres : température
 	}
 	temperatures.push(randint(-3,3)+base);
 	for (let i=1;i<nombre_jours;i++) temperatures.push(temperatures[i-1]+randint(-2,2));
-return temperatures
+		return temperatures
 }
-	
+
  /**
+* Renvoit le nom du mois
+* @param n quantième du mois
 * @auteur Jean-Claude Lhote
 */
 function nom_du_mois(n) {
@@ -665,84 +720,84 @@ function nom_du_mois(n) {
 // Fonctions LaTeX
 
 /**
+* * Retourne un environnement LaTeX enumerate à partir d'une liste.
+* * `<br>`est remplacé par un saut de paragraphe
+* * `<br><br>` est remplacé par un saut de paragraphe et un medskip
+* * L'espacement est généré avec spacing
 * @Auteur Rémi Angot
 */
 function tex_enumerate(liste,spacing){
 	let result =''
-	result = "\\begin{enumerate}"
+	result = "\\begin{enumerate}\n"
 	if (spacing>1) {
-		result += `\\begin{spacing}{${spacing}}`
+		result += `\\begin{spacing}{${spacing}}\n`
 	}
 	for(let i in liste){
 		result += '\t\\item ' + liste[i] +'\n'
 	}
 	if (spacing>1){
-		result += '\\end{spacing}'
+		result += '\\end{spacing}\n'
 	} 
-	result += '\\end{enumerate}'
+	result += '\\end{enumerate}\n'
 	return result.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
 }
 
 /**
+* * Retourne un environnement LaTeX enumerate à partir d'une liste sans afficher les numéros.
+* * `<br>` est remplacé par un saut de paragraphe
+* * `<br><br>` est remplacé par un saut de paragraphe et un medskip
+* * L'espacement est généré avec spacing
 * @Auteur Rémi Angot
 */
-function tex_enumerate_sans_numero(liste,itemsep=1,spacing=false){
-	let result =''
-	if (itemsep==1){
-		result = '\\begin{enumerate}[label={}]\n';
-	}else{
-		if (spacing){
-			result = '\\begin{enumerate}[label={}]\n\\begin{spacing}{'+itemsep+'}\n'
-		} else {
-			result = '\\begin{enumerate}[itemsep='+itemsep+'em]\n'	
-		}
-		
-	}
-	 
-	for(let i in liste){
-		result += '\t\\item ' + liste[i] +'\n'
-	}
-	if (spacing){
-		result += '\\end{spacing}'
-	} 
-	result += '\\end{enumerate}'
-	return result.replace(/<br>/g,'\\\\')
+function tex_enumerate_sans_numero(liste,spacing){
+	return tex_enumerate(liste,spacing).replace('\\begin{enumerate}[label={}]','\\begin{enumerate}[label={}]')
 }
 
 /**
+* * Concatène les éléments d'une liste avec un saut de ligne entre chaque élément
+* * `<br>` est remplacé par un saut de paragraphe
+* * `<br><br>` est remplacé par un saut de paragraphe et un medskip
 * @Auteur Rémi Angot
 */
 function tex_paragraphe(liste,spacing=false){
 	let result =''
 	if (spacing>1){
-			result = `\\begin{spacing}{${spacing}}\n`
+		result = `\\begin{spacing}{${spacing}}\n`
 	}
-	 
+
 	for(let i in liste){
 		result += `\t${liste[i]}\\\\\n`
 	}
 	if (spacing>1){
 		result += '\\end{spacing}'
 	} 
-	return result.replace(/<br>/g,'\\\\')
+	return result.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
 }
 
 
 
 /**
+*  Renvoit une liste HTML à partir d'une liste
+* 
+* @param liste une liste de questions
+* @param spacing interligne (line-height en css)
 * @Auteur Rémi Angot
 */
 function html_enumerate(liste,spacing){
 	let result='';
 	(spacing>1) ? result =`<ol style="line-height: ${spacing};">` : result = '<ol>'
 	for(let i in liste){
-		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....').replace(/~/g,' ') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....').replace(/~/g,"&nbsp;") + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 	}
 	result += '</ol>'
 	return result
 }
 
 /**
+*  Renvoit un div HTML à partir d'une liste découpée par des sauts de ligne
+* 
+* @param liste une liste de questions
+* @param spacing interligne (line-height en css)
 * @Auteur Rémi Angot
 */
 function html_ligne(liste,spacing){
@@ -751,7 +806,7 @@ function html_ligne(liste,spacing){
 		result = `<div style="line-height: ${spacing};">\n`
 	}
 	for(let i in liste){
-		result += '\t' + liste[i].replace(/\\dotfill/g,'...').replace(/~/g,' ') + '</br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+		result += '\t' + liste[i].replace(/\\dotfill/g,'...').replace(/~/g,' ') + '<br>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 		// .replace(/\\\\/g,'<br>') abandonné pour supporter les array
 	}
 
@@ -765,6 +820,7 @@ function html_ligne(liste,spacing){
 
 
 /**
+* Renvoit un environnent LaTeX multicolonnes
 * @Auteur Rémi Angot
 */
 function tex_multicols(texte,nb_cols=2){
@@ -779,6 +835,7 @@ function tex_multicols(texte,nb_cols=2){
 }
 
 /**
+* Renvoit la consigne en titre 4
 * @Auteur Rémi Angot
 */
 function html_consigne(consigne){
@@ -786,6 +843,7 @@ function html_consigne(consigne){
 }
 
 /**
+* Renvoit \exo{consigne}
 * @Auteur Rémi Angot
 */
 function tex_consigne(consigne){
@@ -793,6 +851,7 @@ function tex_consigne(consigne){
 }
 
 /**
+* Renvoit un nombre dans le format français (séparateur de classes)
 * @Auteur Rémi Angot
 */
 function tex_nombre(nb){
@@ -806,7 +865,7 @@ function tex_nombre(nb){
 		}else{
 			result = nb.toString().replace('.',',');
 		}
-	return result;
+		return result;
 	}
 }
 
@@ -820,6 +879,46 @@ function mise_en_evidence(texte){
 	}
 	else {
 		return '\\mathbf{\\color{red}{'+texte+'}}'
+	}
+	
+}
+
+/**
+* Met en couleur un texte
+* @param {string} texte à mettre en couleur
+* @param {string} couleur en anglais ou code couleur hexadécimal par défaut c'est le orange de CoopMaths
+* @Auteur Rémi Angot
+*/
+function texte_en_couleur(texte,couleur="#f15929"){
+	if (sortie_html) {
+		return `<span style="color:${couleur};">${texte}</span>`	
+	}
+	else {
+		if (couleur[0]=='#') {
+			return `{\\color[HTML]{${couleur.replace('#','')}}${texte}}`
+		} else {
+			return `{\\color{${couleur.replace('#','')}}${texte}}`
+		}
+	}
+	
+}
+
+/**
+* Met en couleur et gras un texte
+* @param {string} texte à mettre en couleur
+* @param {string} couleur en anglais ou code couleur hexadécimal par défaut c'est le orange de CoopMaths
+* @Auteur Rémi Angot
+*/
+function texte_en_couleur_et_gras(texte,couleur="#f15929"){
+	if (sortie_html) {
+		return `<span style="color:${couleur};font-weight: bold;">${texte}</span>`	
+	}
+	else {
+		if (couleur[0]=='#') {
+			return `{\\color[HTML]{${couleur.replace('#','')}}${texte}}`
+		} else {
+			return `{\\bfseries \\color{${couleur.replace('#','')}}${texte}}`
+		}
 	}
 	
 }
@@ -843,31 +942,20 @@ function tex_prix(nb){
 
 
 /**
+* Renvoit le nombre de chiffres de la partie décimale 
 * @Auteur Rémi Angot
 */
 function nombre_de_chiffres_dans_la_partie_decimale(nb){
 	if (String(nb).indexOf('.')>0){
-  	return String(nb).split(".")[1].length
-  } else{
-  return 0
-  }
+		return String(nb).split(".")[1].length
+	} else{
+		return 0
+	}
 }
 
-/**
-* Pour écrire €/kg et bien mettre la virgule comme séparateur décimal
-* @Auteur Rémi Angot
-*/
-function tex_prix_euros(nb){
-	//Remplace le . par la ,
-	nombre = Number (nb);
-	let result = nombre.toFixed(2).toString().replace('.',',')
-	result+=`~\\text{\\euro{}/kg}`;
-	return result;
-	
-}
 
 /**
-* Écrit une fraction avec - devant si a ou b est négatif
+* Écrit une fraction avec - devant si le numérateur ou le dénominateur est négatif
 * @Auteur Jean-Claude Lhote
 */
 function tex_fraction_signe(a,b){ 
@@ -886,32 +974,36 @@ function tex_fraction_signe(a,b){
 }
 
 /**
-* Met des parenthèses si besoin pour inclure une fraction dans une expresion en fonction du signe
+* Met de grandes parenthèses autour de la fraction a/b si besoin pour inclure une fraction dans une expresion en fonction du signe
 * @Auteur Jean-Claude Lhote
 */
 function tex_fraction_parentheses(a,b){ 
 	if (a*b>0) {return tex_fraction_signe(a,b)}
-	else {return '\\left('+tex_fraction_signe(a,b)+'\\right)'}
-}
+		else {return '\\left('+tex_fraction_signe(a,b)+'\\right)'}
+	}
 
 /**
 * Retourne une liste de fractions irréductibles
 * @Auteur Jean-Claude Lhote
 */
 function obtenir_liste_fractions_irreductibles() {
- return  [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
- [1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
- [1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+	return  [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+	[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+	[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
 }
 
 /**
-* Retourne la liste des premiers nombres premiers
+* Retourne la liste des nombres premiers inférieurs à 300
 * @Auteur Rémi Angot
 */
 function obtenir_liste_nombres_premiers() {
- return  [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
+	return  [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293];
 }
 
+/**
+* Retourne le code LaTeX de la décomposition en produit de facteurs premiers d'un nombre
+* @Auteur Rémi Angot
+*/
 function decomposition_facteurs_premiers(n) {
 	let decomposition='';
 	let liste=obtenir_liste_facteurs_premiers(n);
@@ -923,7 +1015,24 @@ function decomposition_facteurs_premiers(n) {
 }
 
 /**
-* Écrit une fraction
+* Retourne la liste des diviseurs d'un entier
+* @Auteur Rémi Angot
+*/
+function liste_des_diviseurs(n) {
+	let k =2;
+	let liste = [1];
+	while (k<=n){
+		if (n%k==0) {
+			liste.push(k);
+		}
+		k++
+	}
+
+	return liste;
+}
+
+/**
+* Retourne le code LaTeX d'une fraction a/b
 * @Auteur Rémi Angot
 */
 function tex_fraction(a,b){ 
@@ -937,18 +1046,6 @@ function tex_fraction(a,b){
 
 }
 
-
-/**
-* Écrit une fraction dans une boite pour faciliter l'alignement
-* @Auteur Rémi Angot
-*/
-function tex_fraction_box(a,b,taille='2em'){
-	return '\\makebox['+taille+'][l]{$\\dfrac{'+a+'}{'+b+'}$}'
-}
-
-
-
-
 /**
 * Écrit du texte en mode mathématiques
 * @Auteur Rémi Angot
@@ -958,16 +1055,17 @@ function tex_texte(texte) {
 }
 
 /**
+* Retourne un environnement LaTeX itemize à partir d'une liste
 * @Auteur Rémi Angot
 */
 function itemize(tableau_de_texte){
 	let texte = ''
 	if (sortie_html) {
-			texte = '<div>'
+		texte = '<div>'
 		for (var i = 0; i < tableau_de_texte.length; i++) {
 			texte += '<div> − ' + tableau_de_texte[i] + '</div>'
 		}
-			texte += '</div>'
+		texte += '</div>'
 	} else {
 		texte = '\t\\begin{itemize}\n'
 		for (var i = 0; i < tableau_de_texte.length; i++) {
@@ -980,6 +1078,7 @@ function itemize(tableau_de_texte){
 
 
 /**
+* Récupère le code JS d'un exercice qui modifie les valeurs d'une figure MG32 et actualise la figure
 * @Auteur Rémi Angot
 */
 function MG32_modifie_figure(numero_figure) {
@@ -992,17 +1091,19 @@ function MG32_modifie_figure(numero_figure) {
 }
 
 /**
+* Actualise toutes les figures MG32 avec les nouvelles valeurs
 * @Auteur Rémi Angot
 */
 function MG32_modifie_toutes_les_figures() {
 	for (let i = 0; i < liste_des_exercices.length; i++) {
-			if (exercice[i].type_exercice=='MG32'){
-				MG32_modifie_figure(i)
-			}
+		if (exercice[i].type_exercice=='MG32'){
+			MG32_modifie_figure(i)
+		}
 	}
 }
 
 /**
+* Ajoute une figure MG32 dans le code HTML de la page
 * @Auteur Rémi Angot
 */
 function MG32_ajouter_figure(numero_de_l_exercice) {
@@ -1013,19 +1114,19 @@ function MG32_ajouter_figure(numero_de_l_exercice) {
 	}
 	MG32_tableau_de_figures.push(
   // pour chaque figure on précise ici ses options
-	  {
-	  	idContainer: `MG32div${numero_de_l_exercice}`,
-	  	svgOptions: {
-	  		width: `${exercice[numero_de_l_exercice].taille_div_MG32[0]}`, 
-	  		height: `${exercice[numero_de_l_exercice].taille_div_MG32[1]}`, 
-	  		idSvg: `MG32svg${numero_de_l_exercice}`
-	  	},
-	  	mtgOptions: {
-	  		fig: exercice[numero_de_l_exercice].MG32codeBase64,
-	  		isEditable: false
-	  	}
-	  }
-	)	
+  {
+  	idContainer: `MG32div${numero_de_l_exercice}`,
+  	svgOptions: {
+  		width: `${exercice[numero_de_l_exercice].taille_div_MG32[0]}`, 
+  		height: `${exercice[numero_de_l_exercice].taille_div_MG32[1]}`, 
+  		idSvg: `MG32svg${numero_de_l_exercice}`
+  	},
+  	mtgOptions: {
+  		fig: exercice[numero_de_l_exercice].MG32codeBase64,
+  		isEditable: false
+  	}
+  }
+  )	
 }
 
 /**
@@ -1040,17 +1141,68 @@ function MG32_tracer_toutes_les_figures() {
 		const el = document.getElementsByClassName('MG32');
 		// Sélectionne les div de classe MG32
 		if (el.length) { // S'ils existent, on peut appeler MG32
-	    	Promise.all(MG32_tableau_de_figures.map(({idContainer, svgOptions, mtgOptions}) => mtgLoad(idContainer, svgOptions, mtgOptions)))
-		  		.then(results => {
+			Promise.all(MG32_tableau_de_figures.map(({idContainer, svgOptions, mtgOptions}) => mtgLoad(idContainer, svgOptions, mtgOptions)))
+		.then(results => {
 		    		// results est le tableau des valeurs des promesses résolues, avec la même instance du player pour chacune, la 1re valeur nous suffit donc
-			    	window.mtg32App = results[0]
+		    		window.mtg32App = results[0]
 			    	// on peut l'utiliser…
-					MG32_modifie_toutes_les_figures()
-		  		})
-			  .catch(error => console.error(error))
-		} else {
+			    	MG32_modifie_toutes_les_figures()
+			    })
+		.catch(error => console.error(error))
+	} else {
     		setTimeout(verifie_div_MG32, 300); // retente dans 300 milliseconds
-		}
-	})();
+    	}
+    })();
 
 }
+
+/**
+* Trace une graduation avec sur le SVG
+* @param mon_svg Objet SVG
+* @param pas
+* @param derniere_graduation
+* @param taille taille verticale
+* @param y ordonnée de la droite
+* @param color
+* @param width 
+* @Auteur Rémi Angot
+*/
+function SVG_graduation(mon_svg,origine,pas,derniere_graduation,taille=10,y=100,color='black',width=5) {
+	for (let i = origine; i <= derniere_graduation; i+=pas) {
+		let line = mon_svg.line(i, y-taille/2, i, y+taille/2)
+		line.stroke({ color: color, width: width, linecap: 'round' })
+	}
+}
+
+function SVG_label(mon_svg,liste_d_abscisses,y=100) {
+	for (let i = 0; i < liste_d_abscisses.length; i++) {
+		let text = mon_svg.text((liste_d_abscisses[i][0]).toString())
+		text.move(liste_d_abscisses[i][1],y).font({
+			family:   'Helvetica'
+			, size:     20
+			, anchor:   'middle'
+			, leading : -1
+		})
+	}
+}
+
+function SVG_tracer_point(mon_svg,x,nom) {
+	//creer un groupe pour la croix
+	let point = mon_svg.group()
+	let c1 = point.line(-5,5,5,-5)
+	c1.stroke({ color: '#f15929', width: 5, linecap: 'round' })
+	let c2 = point.line(-5,-5,5,5)
+	c2.stroke({ color: '#f15929', width: 5, linecap: 'round' })
+	//déplace la croix
+	point.move(x,100)
+	point.dmove(-5,-5)
+	//ecrit le nom
+	let text = mon_svg.text(nom)
+	text.move(x,100).font({
+		family:   'Helvetica'
+		, size:     20
+		, anchor:   'middle'
+		, leading : 2
+		})
+}
+

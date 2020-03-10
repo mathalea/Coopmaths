@@ -38,6 +38,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - LACROIX Olivier
 - LEFORT Julie
 - LHOTE Jean-Claude
+- LOZANO Sébastien
 - ROUBIN Sophie
 - UZU Anne
 

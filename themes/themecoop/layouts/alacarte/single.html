@@ -8,28 +8,41 @@
 
      {{ partial "header" . }}
 
-     <!-- Styles et JS -->
+     <!-- JQuery-->
+  <script   src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css" href="/style/katex.min.css">
-<link rel="stylesheet" type="text/css" href="/style/style_mathalea.css">
-<link rel="stylesheet" type="text/css" href="/style/katex.min.css">
-<link rel="stylesheet" type="text/css" href="/style/prism.css">
+  <!-- Prism-->
+  <script src="/include/prism.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="/style/prism.css">
 
 
-<script src="/include/prism.js" type="text/javascript"></script>
+  <!-- Semantic UI-->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/state.min.js"></script> 
 
-<script src="/include/clipboard.min.js" type="text/javascript"></script>
-<script src="/include/download.js" type="text/javascript"></script>
+  <!-- Algebrite-->
+  <script src="/include/algebrite.bundle-compressed.js" type="text/javascript" ></script>
 
-<script type="text/javascript">var sortie_html=false;</script> 
+  <!-- Clipboard-->
+  <script src="/include/clipboard.min.js" type="text/javascript"></script>
+  
 
-<script src="/include/algebrite.bundle-compressed.js" type="text/javascript" ></script>
-<script src="/include/mathalea_exercices.js" type="text/javascript"></script> 
-<script src="/include/mathalea_outils.js" type="text/javascript"></script>
-<!-- <script src="/include/mathalea.js" type="text/javascript"></script>  -->
-<script src="/include/alacarte.js" type="text/javascript"></script> 
+  
+  <!-- MathALEA-->
+  <script type="text/javascript">var sortie_html=false;</script>
+  <script src="/include/mathalea_exercices_5e.js" type="text/javascript"></script>
+  <script src="/include/mathalea_exercices_4e.js" type="text/javascript"></script>
+  <script src="/include/mathalea_exercices_3e.js" type="text/javascript"></script>
+  <script src="/include/mathalea_exercices.js" type="text/javascript"></script> 
+ 
+  <script src="/include/mathalea_outils.js" type="text/javascript"></script>
+   <script src="/include/alacarte.js" type="text/javascript"></script>
+  
+  <link rel="stylesheet" type="text/css" href="/style/style_mathalea.css">
 
-<!-- Fin des styles et JS -->
+  <!-- Download-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js" type="text/javascript"></script>
 
 
 <div class="ui  text container ">
@@ -38,23 +51,22 @@
 <!-- Choix du format items | nom prenom items  -->
 <div class="ui form" id="formulaire_radio_style">
   <div class="grouped fields">
-    <!-- <label for="fruit">Sélectionnez votre second fruit favori :</label> -->
     <div class="field">
       <div class="ui radio checkbox">
         <input type="radio" name="style" id="style1" checked="" tabindex="0" class="hidden">
-        <label>Nom Prenom item1 item2 item3... </label>
+        <label>Nom;Prenom;item1;item2;item3... </label>
       </div>
     </div>
     <div class="field">
       <div class="ui radio checkbox">
         <input type="radio" name="style" id="style2" tabindex="0" class="hidden">
-        <label>Nom item1 item2 item 3...</label>
+        <label>Nom;item1;item2;item 3...</label>
       </div>
     </div>
     <div class="field">
       <div class="ui radio checkbox">
         <input type="radio" name="style" id="style3" tabindex="0" class="hidden">
-        <label>item1 item2 item3...</label>
+        <label>item1;item2;item3...</label>
       </div>
     </div>
   </div>
