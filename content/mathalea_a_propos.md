@@ -50,6 +50,28 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 ### Changelog
 
+#### 05/20
+
+- Ajout d'exercices sur les probabilités.
+- Ajout d'exercices sur l'arithmétique en 3e.
+- Ajout d'exercices sur les fonctions en 3e.
+- Ajout d'exercices sur les grandeurs-produits et grandeurs-quotients en 4e.
+- Ajout d'exercices de calculs de volumes et d'aires de parallélogrammes.
+
+
+#### 04/20
+
+- Ajout d'un numéro de série qui permet de garder un lien vers une version précise d'un exercice
+
+
+#### 03/20
+
+- Ajout de « À la carte » pour générer des évaluations personnalisées.
+- Ajout de boutons d'aides dans certains exercices ouvrant une fenêter modale avec du texte, un pdf ou une vidéo.
+- Ajout d'un paramètre pour avoir une correction plus ou moins détaillée.
+- Ajout de problèmes de proportionnalité en 6e.
+
+
 #### 02/20
 
 - Ajout d'exercices sur les puissances.

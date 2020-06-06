@@ -379,6 +379,20 @@ function rien_si_1(a) {
 }
 
 /**
+* Gère l'écriture de l'exposant en mode text
+* @Example
+* // 'dm'+exposant(3)
+* @Auteur Rémi Angot
+*/
+function exposant(texte){
+	if (sortie_html) {
+		return `<sup>${texte}</sup>`
+	} else {
+		return `\\up{${texte}}`
+	}
+}
+
+/**
 * Ajoute les parenthèses et le signe
 * @Example
 * //(+3) ou (-3)
@@ -1024,13 +1038,14 @@ function tex_introduction(texte){
 */
 function html_enumerate(liste,spacing){
 	let result='';
+
 	if (liste.length>1) {
 		(spacing>1) ? result =`<ol style="line-height: ${spacing};">` : result = '<ol>'
 		for(let i in liste){
 			result += '<li>' + liste[i].replace(/\\dotfill/g,'..............................').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....') + '</li>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 		}
 		result += '</ol>'
-	} else {
+	} else if (liste.length==1) {
 		(spacing>1) ? result =`<div style="line-height: ${spacing};">` : result = '<div>'
 		result += liste[0].replace(/\\dotfill/g,'..............................').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....')   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
 		result += '</div>'	
@@ -1984,7 +1999,9 @@ function SVG_reperage_sur_un_axe(id_du_div,origine,longueur,pas1,pas2,points_inc
 function Latex_reperage_sur_un_axe(zoom,origine,pas1,pas2,points_inconnus,points_connus,fraction){
 	'use strict';
 	let result=`\\begin{tikzpicture}[scale=${zoom}]` ;
- 	let valeur
+	 let valeur
+	 let decalage
+	
 
 	result+=`\n\t \\tkzInit[xmin=${origine},xmax=${calcul(origine+7/pas1)},ymin=-0.5,ymax=0.5,xstep=${calcul(1/pas1)}]`
 
@@ -1992,9 +2009,11 @@ function Latex_reperage_sur_un_axe(zoom,origine,pas1,pas2,points_inconnus,points
 	else result+=`\n\t \\tkzDrawX[left space=0.2,tickwd=2pt];`
 	result+=`\n\t \\tikzset{arr/.style={postaction=decorate,	decoration={markings,mark=at position 1 with {\\arrow[thick]{#1}}}}}`
 
+	if (origine<0) decalage=arrondi(origine*pas1)
+	else decalage=0
 	result+=`\n\t \\foreach \\x in {0,${calcul(1/pas2)},...,7}`
-	result+=`\n\t {\\draw (${origine*pas1}+\\x,-0.05)--(${origine*pas1}+\\x,0.05);}`
-	
+	result+=`\n\t {\\draw (${decalage}+\\x,-0.05)--(${decalage}+\\x,0.05);}`  	//result+=`\n\t {\\draw (${origine*pas1}+\\x,-0.05)--(${origine*pas1}+\\x,0.05);}`
+
 	for (i=0;i<points_connus.length;i++){
 		valeur=calcul(origine+points_connus[i][1]/pas1+calcul(points_connus[i][2]/pas1/pas2))
 		result+=`\n\t \\tkzDefPoint(${valeur},0){A}`
@@ -2992,8 +3011,9 @@ function SVG_machine_maths(id_du_div,w,h,nom,etape1,etape2,etape3,x_ligne1,x_lig
 
  function tex_cadre_par_orange(texte) {
 	 'use strict';
+	 //\\definecolor{orangeCoop}{rgb}{0.9450980392156862,0.34901960784313724,0.1607843137254902}
 	 let sortie = `
-	 \\definecolor{orangeCoop}{rgb}{0.9450980392156862,0.34901960784313724,0.1607843137254902}
+	 
 	 \\setlength{\\fboxrule}{1.5mm}
 	 \\par\\vspace{0.25cm}
 	 \\noindent\\fcolorbox{orangeCoop}{white}{\\parbox{\\linewidth-2\\fboxrule-2\\fboxsep}{`+texte+`}}
@@ -3393,6 +3413,70 @@ function warn_message(texte) {
 };
 
 /**
+ *  Renvoie un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte + icone lampe
+ * @param {string} texte 
+ * @author Sébastien Lozano
+ */
+
+function lampe_message(titre,texte) {
+	'use strict';
+	if (sortie_html) {
+		return `
+		<div class="ui compact icon message">
+			<i class="lightbulb outline icon"></i>
+			<div class="content">
+		  		<div class="header">
+					`+titre+`
+		  		</div>
+		  		<p>`+texte+`</p>
+			</div>
+	  	</div>
+		`;
+	} else {
+		return `
+		\\begin{bclogo}[couleurBarre=orangeCoop,couleurBord=orangeCoop,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
+			`+texte+`
+		\\end{bclogo}
+		`;
+	};
+};
+
+/**
+ * Renvoie deux engrenages en HTML pour le moment
+ * @param {string} id_du_div id unique pour éviter les doublons, généré dans l'exo; à revoir?
+ * @param {number} w largeur du conteneur
+ * @param {number} h hauteur du conteneur
+ * @author Sébastien Lozano
+ */
+function SVG_engrenages(id_du_div,w,h) {
+	'use strict';
+	if (sortie_html) {
+		if (!window.SVGExist) {window.SVGExist = {}} // Si SVGExist n'existe pas on le créé
+		// SVGExist est un dictionnaire dans lequel on stocke les listenner sur la création des div
+		window.SVGExist[id_du_div] = setInterval(function() {
+			
+			if ($(`#${id_du_div}`).length ) {
+				$(`#${id_du_div}`).html("");//Vide le div pour éviter les SVG en doublon
+				document.getElementById(id_du_div).innerHTML = `
+					<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 `+w+` `+h+`" width="`+w+`">
+					<g id="surface1">
+					<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 106.5625 0.125 C 106.289062 0.175781 105.386719 0.289062 104.5625 0.363281 C 103.738281 0.449219 103.023438 0.550781 102.960938 0.613281 C 102.761719 0.8125 102 8.164062 102 9.988281 C 102 10.476562 101.9375 10.914062 101.851562 11.023438 C 101.761719 11.136719 101.238281 11.324219 100.6875 11.4375 C 100.136719 11.5625 99.300781 11.800781 98.8125 11.960938 C 97.664062 12.386719 94.125 14.039062 93.226562 14.585938 C 92.800781 14.835938 92.4375 14.976562 92.351562 14.925781 C 92.261719 14.875 90.375 13.351562 88.148438 11.523438 C 85.9375 9.710938 84.074219 8.25 84.011719 8.273438 C 83.949219 8.300781 83.226562 8.863281 82.414062 9.523438 C 80.75 10.886719 78.3125 13.414062 76.699219 15.425781 C 75.75 16.613281 75.636719 16.8125 75.789062 16.988281 C 75.886719 17.101562 76.425781 17.773438 77.011719 18.5 C 77.585938 19.226562 79.023438 20.976562 80.210938 22.414062 C 81.398438 23.835938 82.375 25.039062 82.375 25.085938 C 82.375 25.125 82.148438 25.523438 81.863281 25.976562 C 81.199219 27.011719 80.113281 29.238281 79.773438 30.1875 C 79.574219 30.789062 78.75 33.425781 78.5625 34.074219 C 78.539062 34.148438 77.351562 34.3125 75.601562 34.488281 C 71.3125 34.886719 68.273438 35.273438 68.0625 35.425781 C 67.613281 35.761719 67.351562 40.875 67.625 43.8125 C 67.800781 45.699219 68.023438 47.113281 68.175781 47.300781 C 68.261719 47.414062 69.050781 47.539062 70.5625 47.675781 C 76.101562 48.164062 78.324219 48.386719 78.449219 48.425781 C 78.523438 48.449219 78.625 48.710938 78.675781 49.011719 C 78.726562 49.300781 78.863281 49.800781 78.988281 50.113281 C 79.113281 50.425781 79.425781 51.335938 79.675781 52.136719 C 80.164062 53.648438 81.175781 55.800781 82.011719 57.050781 C 82.273438 57.449219 82.5 57.824219 82.5 57.886719 C 82.5 57.949219 81.363281 59.363281 79.976562 61.023438 C 77.148438 64.425781 76.6875 64.988281 76.210938 65.636719 L 75.875 66.085938 L 76.636719 67.074219 C 78.5625 69.574219 81.164062 72.175781 83.613281 74.050781 C 84.324219 74.601562 84.4375 74.648438 84.664062 74.5 C 85 74.289062 88.789062 71.164062 90.835938 69.414062 C 91.738281 68.636719 92.585938 68 92.726562 68 C 92.863281 68 93.550781 68.324219 94.261719 68.738281 C 95.851562 69.625 97.960938 70.488281 99.863281 71 C 101.125 71.335938 101.75 71.5625 101.75 71.664062 C 101.75 72.476562 102.824219 81.9375 102.9375 82.113281 C 102.960938 82.175781 103.8125 82.289062 104.8125 82.375 C 106.960938 82.5625 112.511719 82.476562 114.0625 82.226562 L 115.050781 82.0625 L 115.148438 81.625 C 115.199219 81.386719 115.414062 79.210938 115.625 76.8125 C 115.835938 74.398438 116.050781 72.210938 116.101562 71.9375 C 116.210938 71.335938 116.273438 71.300781 118.363281 70.6875 C 120.226562 70.148438 122.625 69.085938 124.113281 68.164062 C 125.023438 67.585938 125.226562 67.5 125.425781 67.625 C 125.550781 67.699219 126.363281 68.375 127.238281 69.125 C 129.101562 70.710938 133.5 74.25 133.625 74.25 C 133.664062 74.25 134.148438 73.925781 134.699219 73.523438 C 136.113281 72.488281 141.414062 66.851562 141.988281 65.761719 C 142.101562 65.5625 141.75 65.074219 139.476562 62.351562 C 138.023438 60.613281 136.511719 58.8125 136.113281 58.363281 C 135.699219 57.898438 135.375 57.4375 135.375 57.324219 C 135.375 57.199219 135.710938 56.449219 136.113281 55.648438 C 137.113281 53.6875 138.074219 51.238281 138.398438 49.851562 C 138.613281 48.960938 138.710938 48.699219 138.925781 48.625 C 139.074219 48.5625 139.886719 48.460938 140.75 48.386719 C 145.675781 47.976562 149.324219 47.574219 149.398438 47.460938 C 149.476562 47.324219 149.523438 47 149.773438 44.6875 C 149.976562 42.699219 150.039062 40.136719 149.886719 39.25 C 149.8125 38.800781 149.699219 37.761719 149.625 36.9375 C 149.550781 36.101562 149.425781 35.375 149.335938 35.300781 C 149.25 35.210938 147.074219 34.960938 144.0625 34.6875 C 140.039062 34.324219 138.898438 34.1875 138.789062 34.039062 C 138.699219 33.925781 138.550781 33.449219 138.4375 32.976562 C 138.011719 31.113281 136.5625 27.601562 135.5 25.851562 C 135.363281 25.625 135.25 25.3125 135.25 25.164062 C 135.25 24.988281 136.460938 23.414062 138.550781 20.863281 C 141.074219 17.789062 141.835938 16.789062 141.75 16.636719 C 141.488281 16.148438 139.851562 14.300781 138.335938 12.773438 C 136.960938 11.375 133.886719 8.664062 133.324219 8.351562 C 133.175781 8.261719 129.636719 11.023438 126.699219 13.539062 C 125.8125 14.289062 125.023438 14.914062 124.949219 14.925781 C 124.875 14.925781 123.601562 14.335938 122.125 13.601562 C 119.664062 12.363281 118.039062 11.75 116.476562 11.4375 C 116.085938 11.363281 116.164062 11.800781 115.6875 6.875 C 115.261719 2.523438 115.011719 0.710938 114.851562 0.613281 C 114.699219 0.511719 114.335938 0.476562 112.0625 0.238281 C 110.375 0.0625 107.175781 -0.0117188 106.5625 0.125 Z M 113.1875 26.425781 C 116.261719 27.335938 119.238281 29.460938 121.261719 32.175781 C 126.011719 38.523438 124.863281 47.886719 118.75 52.914062 C 115.613281 55.488281 112.164062 56.648438 108.210938 56.460938 C 103.449219 56.25 99.5 54.125 96.625 50.25 C 93.289062 45.75 92.710938 39.4375 95.199219 34.460938 C 95.925781 33.011719 96.710938 31.914062 97.976562 30.613281 C 100.335938 28.148438 102.5 26.875 105.375 26.238281 C 106.273438 26.039062 106.863281 26.011719 109.25 26.050781 C 111.875 26.085938 112.136719 26.113281 113.1875 26.425781 Z M 113.1875 26.425781 "/>
+					<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 106.386719 28.5625 C 103.1875 29.261719 100.199219 31.261719 98.460938 33.863281 C 96.726562 36.460938 96.050781 39.050781 96.261719 42.261719 C 96.613281 47.523438 100.648438 52.363281 105.875 53.773438 C 106.800781 54.011719 107.226562 54.050781 109.0625 54.050781 C 111.5 54.039062 112.449219 53.851562 114.210938 53.011719 C 115.613281 52.335938 116.613281 51.636719 117.835938 50.460938 C 119.175781 49.175781 119.988281 48.074219 120.675781 46.613281 C 122.335938 43.074219 122.238281 38.5625 120.4375 35.136719 C 118.738281 31.898438 115.148438 29.25 111.523438 28.550781 C 110.363281 28.324219 107.449219 28.335938 106.386719 28.5625 Z M 110.960938 31.574219 C 112.3125 31.851562 113.386719 32.3125 114.648438 33.148438 C 116.4375 34.351562 117.699219 36 118.335938 37.960938 C 118.585938 38.738281 118.675781 39.289062 118.726562 40.613281 C 118.851562 44.0625 118.074219 46.085938 115.789062 48.25 C 114.023438 49.925781 112.386719 50.726562 110.164062 51.011719 C 107.539062 51.351562 104.898438 50.550781 102.789062 48.761719 C 100.550781 46.886719 99.4375 44.625 99.289062 41.675781 C 99.175781 39.398438 99.6875 37.511719 100.925781 35.636719 C 101.675781 34.511719 102.386719 33.800781 103.511719 33.050781 C 105.738281 31.574219 108.414062 31.050781 110.960938 31.574219 Z M 110.960938 31.574219 "/>
+					<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 58.5 55.886719 C 58.011719 57.148438 57.023438 59.835938 56.300781 61.875 C 55.585938 63.898438 54.925781 65.761719 54.835938 66 L 54.675781 66.4375 L 52.4375 66.511719 C 48.898438 66.636719 45.476562 67.125 43.164062 67.824219 C 42.386719 68.0625 41.699219 68.25 41.648438 68.25 C 41.585938 68.25 41.011719 67.5 40.375 66.585938 C 38.375 63.75 33.585938 57.1875 33.449219 57.101562 C 33.300781 57 32.289062 57.375 30.789062 58.074219 C 30.148438 58.375 29.585938 58.625 29.539062 58.625 C 29.476562 58.625 28.789062 59 28 59.449219 C 27.210938 59.914062 25.976562 60.625 25.25 61.039062 C 22.886719 62.386719 19.875 64.636719 19.875 65.0625 C 19.875 65.226562 20.550781 66.699219 24.085938 74.289062 L 25.523438 77.375 L 24.449219 78.5 C 23.863281 79.125 23.0625 80.011719 22.6875 80.476562 C 22.3125 80.9375 21.6875 81.675781 21.300781 82.125 C 20.476562 83.085938 18.699219 85.738281 18.136719 86.835938 C 17.925781 87.273438 17.699219 87.625 17.648438 87.625 C 17.601562 87.625 15.8125 87.324219 13.6875 86.949219 C 7.726562 85.898438 4.101562 85.351562 4 85.460938 C 3.863281 85.613281 2.726562 88.476562 2.210938 89.949219 C 1.699219 91.425781 0.914062 95.199219 0.386719 98.75 C 0.25 99.613281 0.113281 100.398438 0.0742188 100.5 C 0.0117188 100.664062 0.9375 101.0625 4.835938 102.550781 C 7.511719 103.574219 10.398438 104.6875 11.289062 105.039062 L 12.875 105.648438 L 12.875 107.300781 C 12.886719 110.324219 13.226562 112.851562 14.136719 116.5625 C 14.414062 117.664062 14.625 118.613281 14.625 118.6875 C 14.625 118.75 14.414062 118.960938 14.148438 119.136719 C 11.625 120.875 3.949219 126.449219 3.75 126.6875 C 3.449219 127.039062 5.761719 131.738281 7.925781 135.1875 C 8.851562 136.675781 10.585938 139.175781 11.273438 140.039062 L 11.5625 140.386719 L 13.75 139.375 C 19.039062 136.914062 23.851562 134.75 24.050781 134.75 C 24.175781 134.75 25 135.4375 25.898438 136.289062 C 27.9375 138.210938 29.011719 139.011719 31.8125 140.726562 C 33.398438 141.6875 34.074219 142.175781 34.101562 142.351562 C 34.125 142.488281 33.886719 144.136719 33.574219 146.023438 C 33.261719 147.898438 32.800781 150.863281 32.550781 152.601562 C 32.164062 155.273438 32.113281 155.789062 32.261719 155.886719 C 33.136719 156.449219 37.523438 157.835938 41.0625 158.675781 C 43.199219 159.1875 47.238281 159.9375 47.3125 159.851562 C 47.488281 159.625 50.574219 151.5 51.6875 148.3125 C 51.960938 147.550781 52.238281 146.898438 52.300781 146.851562 C 52.375 146.800781 53.3125 146.75 54.375 146.75 C 57.539062 146.75 59.710938 146.4375 63.085938 145.488281 L 64.925781 144.976562 L 65.25 145.335938 C 65.425781 145.539062 67.261719 148.101562 69.335938 151.023438 L 73.125 156.351562 L 75.25 155.375 C 78.074219 154.074219 79.726562 153.1875 81.675781 151.914062 C 83.386719 150.800781 86 148.851562 86.460938 148.351562 L 86.726562 148.0625 L 85.75 145.875 C 85.226562 144.675781 84.011719 142.023438 83.0625 140 C 82.125 137.976562 81.289062 136.136719 81.210938 135.914062 C 81.085938 135.511719 81.113281 135.488281 82.199219 134.3125 C 84.363281 132 86.238281 129.488281 87.386719 127.351562 C 87.738281 126.710938 88.101562 126.101562 88.199219 126 C 88.398438 125.789062 88.101562 125.75 95.6875 127 C 98.648438 127.5 101.300781 127.925781 101.574219 127.960938 L 102.085938 128.023438 L 102.5 126.988281 C 103.039062 125.574219 104.386719 121.386719 104.851562 119.6875 C 105.164062 118.539062 105.761719 115.386719 106.050781 113.289062 C 106.125 112.773438 106.113281 112.75 105.664062 112.523438 C 105.0625 112.210938 102.585938 111.273438 97.625 109.4375 C 95.460938 108.636719 93.5625 107.898438 93.414062 107.800781 C 93.136719 107.625 93.125 107.550781 93.125 105.648438 C 93.125 102.824219 92.75 100.074219 91.925781 96.835938 C 91.75 96.175781 91.625 95.5 91.648438 95.351562 C 91.675781 95.164062 92.550781 94.460938 94.550781 93.039062 C 96.925781 91.335938 102.273438 87.351562 102.664062 87 C 102.875 86.8125 101.039062 82.886719 99.550781 80.300781 C 98.125 77.8125 95.011719 73.5 94.664062 73.5 C 94.414062 73.5 90.75 75.136719 86.625 77.085938 C 84.523438 78.085938 82.664062 78.9375 82.476562 78.960938 C 82.175781 79.023438 81.9375 78.835938 80.523438 77.476562 C 78.898438 75.886719 76.761719 74.199219 75.1875 73.273438 C 74.363281 72.789062 73.25 72.039062 72.738281 71.625 C 72.476562 71.414062 72.375 72.125 73.875 62.6875 C 74.210938 60.488281 74.539062 58.488281 74.574219 58.226562 L 74.636719 57.773438 L 72.726562 57.023438 C 70.449219 56.136719 67.761719 55.25 67.335938 55.25 C 67.164062 55.25 66.8125 55.164062 66.550781 55.050781 C 66.050781 54.835938 61.3125 53.835938 60.113281 53.6875 L 59.398438 53.601562 Z M 55.664062 86.9375 C 61.8125 87.738281 66.976562 90.976562 69.988281 95.914062 C 71.335938 98.113281 72.460938 100.914062 72.886719 103.0625 C 73 103.636719 73.0625 104.800781 73.0625 106.4375 C 73.050781 108.710938 73.023438 109.074219 72.699219 110.4375 C 71.710938 114.699219 70.175781 117.664062 67.625 120.238281 C 64.648438 123.25 60.539062 125.351562 56.261719 126.0625 C 52.601562 126.675781 47.773438 125.8125 43.988281 123.863281 C 38.3125 120.925781 34.289062 114.898438 33.625 108.3125 C 33.273438 104.863281 34.300781 100.125 36.125 96.8125 C 38.800781 91.949219 44.085938 88.1875 49.726562 87.136719 C 51.976562 86.710938 53.550781 86.664062 55.664062 86.9375 Z M 55.664062 86.9375 "/>
+					<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 51.875 89.835938 C 49.851562 90.050781 47.925781 90.648438 45.875 91.699219 C 41.324219 94.011719 38.789062 97.289062 37.4375 102.5625 C 36.523438 106.125 36.5625 108.800781 37.585938 111.851562 C 38.625 114.949219 41.324219 118.449219 44.136719 120.324219 C 49.289062 123.75 55.664062 124.1875 61.0625 121.460938 C 65.613281 119.1875 68.851562 115.023438 69.898438 110.113281 C 70.125 109.050781 70.175781 108.414062 70.175781 106.5625 C 70.175781 104.523438 70.148438 104.1875 69.835938 102.960938 C 68.6875 98.386719 65.761719 94.335938 62 92.125 C 59.238281 90.488281 54.898438 89.511719 51.875 89.835938 Z M 54.898438 93.9375 C 56.726562 94.136719 59.136719 95.039062 60.761719 96.125 C 63.050781 97.664062 65.113281 100.636719 65.898438 103.511719 C 66.148438 104.425781 66.1875 104.835938 66.175781 106.625 C 66.164062 108.324219 66.113281 108.863281 65.898438 109.675781 C 65.300781 111.863281 63.675781 114.539062 62.164062 115.851562 C 59.539062 118.113281 57.210938 119.101562 54.175781 119.210938 C 52.386719 119.289062 51.351562 119.136719 49.449219 118.539062 C 45.824219 117.398438 43.164062 114.789062 41.636719 110.914062 C 40.761719 108.664062 40.585938 105.726562 41.1875 103.335938 C 41.449219 102.351562 42.3125 100.511719 43.011719 99.488281 C 44.976562 96.574219 48.710938 94.300781 52.261719 93.886719 C 53.164062 93.789062 53.449219 93.789062 54.898438 93.9375 Z M 54.898438 93.9375 "/>
+					</g>
+					</svg>
+					`;
+					clearInterval(SVGExist[id_du_div]);//Arrête le timer
+				};
+			}, 100); // Vérifie toutes les 100ms
+
+	};
+};
+
+
+
+/**
  * renvoie un tableau avec la decomposition en facteurs premiers sous forme développée
  * @param {number} n 
  * @author Sébastien Lozano
@@ -3404,7 +3488,490 @@ function decomp_fact_prem_array(n) {
 		decomposition.push(liste[i]);
 	};
 	return decomposition;
-}var liste_des_exercices_disponibles = {
+}
+
+
+
+
+// Gestion des styles LaTeX
+
+
+/**
+* Renvoie un texte avec le préambule d'un fichier LaTeX
+* @param {string} Le titre de l'entête 
+* @author Rémi Angot
+*/
+function intro_LaTeX(entete = "Exercices") {
+	if (entete=='') {entete='Exercices'}
+		return `\\documentclass[12pt]{article}
+\\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\\usepackage[utf8]{inputenc}		        
+\\usepackage[T1]{fontenc}		
+\\usepackage[french]{babel}
+\\usepackage{multicol} 					
+\\usepackage{calc} 						
+\\usepackage{enumerate}
+\\usepackage{enumitem}
+\\usepackage{graphicx}				
+\\usepackage{tabularx}
+\\usepackage[autolanguage]{numprint}
+\\usepackage{hyperref}
+\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
+\\usepackage{cancel}
+\\usepackage{textcomp}
+\\usepackage{gensymb}
+\\usepackage{eurosym}
+\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+\\usepackage{fancyhdr,lastpage}          	
+\\pagestyle{fancy}                      	
+\\usepackage{fancybox}					
+\\usepackage{setspace}	
+\\usepackage{xcolor}
+	\\definecolor{nombres}{cmyk}{0,.8,.95,0}
+	\\definecolor{gestion}{cmyk}{.75,1,.11,.12}
+	\\definecolor{gestionbis}{cmyk}{.75,1,.11,.12}
+	\\definecolor{grandeurs}{cmyk}{.02,.44,1,0}
+	\\definecolor{geo}{cmyk}{.62,.1,0,0}
+	\\definecolor{algo}{cmyk}{.69,.02,.36,0}
+\\definecolor{correction}{cmyk}{.63,.23,.93,.06}
+\\usepackage{pgf,tikz}					
+\\usetikzlibrary{arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
+shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows}
+
+
+\\setlength{\\parindent}{0mm}		
+\\renewcommand{\\arraystretch}{1.5}	
+\\newcounter{exo}          				
+\\setcounter{exo}{0}   				
+\\newcommand{\\exo}[1]{				
+	\\stepcounter{exo}        		
+	\\subsection*{Exercice \\no{\\theexo} \\textmd{\\normalsize #1}}
+}
+\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
+\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
+\\newcommand{\\version}[1]{\\fancyhead[R]{Version #1}}
+\\setlength{\\fboxsep}{3mm}
+\\newenvironment{correction}{\\newpage\\fancyhead[C]{\\textbf{Correction}}\\setcounter{exo}{0}}{}
+\\fancyhead[C]{\\textbf{${entete}}}
+\\fancyfoot{}
+\\fancyfoot[R]{\\scriptsize Coopmaths.fr -- CC-BY-SA}
+\\setlength{\\headheight}{14.5pt}
+
+${preambule_personnalise(liste_packages)}
+
+
+\\begin{document}
+
+`
+	}
+
+/**
+* Renvoie un texte avec le préambule d'un fichier LaTeX avec le style CoopMaths
+* @author Rémi Angot
+*/
+	function intro_LaTeX_coop(){
+
+		let intro_LaTeX_coop = `\\documentclass[12pt]{article}
+\\usepackage[left=1.5cm,right=1.5cm,top=4cm,bottom=2cm]{geometry}
+\\usepackage[utf8]{inputenc}		        
+\\usepackage[T1]{fontenc}		
+\\usepackage[french]{babel}
+\\usepackage{hyperref}
+\\usepackage{multicol} 					
+\\usepackage{calc} 						
+\\usepackage{enumerate}
+\\usepackage{enumitem}
+\\usepackage{graphicx}				
+\\usepackage{tabularx}
+\\usepackage[autolanguage]{numprint}			
+\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
+\\usepackage{cancel}
+\\usepackage{textcomp}
+\\usepackage{gensymb}
+\\usepackage{eurosym}
+\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+\\usepackage{fancyhdr,lastpage}          	
+\\pagestyle{fancy}                      	
+\\usepackage{fancybox}					
+\\usepackage{setspace}
+\\usepackage{xcolor}
+\\usepackage{pgf,tikz}					% Pour les images et figures gÃ©omÃ©triques
+\\usetikzlibrary{arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
+shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows}
+
+\\renewcommand{\\headrulewidth}{0pt}
+\\renewcommand{\\footrulewidth}{0pt}
+\\fancyhead[L]{}
+\\fancyhead[R]{}
+
+%%% COULEURS %%%
+
+\\definecolor{nombres}{cmyk}{0,.8,.95,0}
+\\definecolor{gestion}{cmyk}{.75,1,.11,.12}
+\\definecolor{gestionbis}{cmyk}{.75,1,.11,.12}
+\\definecolor{grandeurs}{cmyk}{.02,.44,1,0}
+\\definecolor{geo}{cmyk}{.62,.1,0,0}
+\\definecolor{algo}{cmyk}{.69,.02,.36,0}
+\\definecolor{correction}{cmyk}{.63,.23,.93,.06}
+\\usepackage{colortbl}
+\\arrayrulecolor{couleur_theme}		% Couleur des filets des tableaux
+
+%%% MISE EN PAGE %%%
+
+\\setlength{\\parindent}{0mm}		
+\\renewcommand{\\arraystretch}{1.5}	
+\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
+\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
+\\setlength{\\fboxsep}{3mm}
+
+\\setlength{\\headheight}{14.5pt}
+
+\\spaceskip=2\\fontdimen2\\font plus 3\\fontdimen3\\font minus3\\fontdimen4\\font\\relax %Pour doubler l'espace entre les mots
+\\newcommand{\\numb}[1]{ % Dessin autour du numéro d'exercice
+\\begin{tikzpicture}[overlay,yshift=-.3cm,scale=.8]
+\\draw[fill=couleur_numerotation,couleur_numerotation](-.3,0)rectangle(.5,.8);
+\\draw[line width=.05cm,couleur_numerotation,fill=white] (0,0)--(.5,.5)--(1,0)--(.5,-.5)--cycle;
+\\node[couleur_numerotation]  at (.5,0) { \\large \\bfseries #1};
+\\draw (-.4,.8) node[white,anchor=north west]{\\bfseries EX}; 
+\\end{tikzpicture}
+}
+
+%%% NUMEROS DES EXERCICES %%%
+
+\\usepackage{titlesec} % Le titre de section est un numéro d'exercice avec sa consigne alignée à gauche.
+\\titleformat{\\section}{}{\\numb{\\arabic{section}}}{1cm}{\\hspace{0em}}{}
+\\newcommand{\\exo}[1]{ % Un exercice est une nouvelle section avec la consigne écrite en caractêres normaux
+	\\section{\\textmd{#1}}
+	\\medskip
+}
+
+
+%%% ENVIRONNEMENTS - CADRES %%%
+\\usepackage[framemethod=tikz]{mdframed}
+
+\\newmdenv[linecolor=couleur_theme, linewidth=3pt,topline=true,rightline=false,bottomline=false,frametitlerule=false,frametitlefont={\\color{couleur_theme}\\bfseries},frametitlerulewidth=1pt]{methode}
+
+
+\\newmdenv[startcode={\\setlength{\\multicolsep}{0cm}\\setlength{\\columnsep}{.2cm}\\setlength{\\columnseprule}{0pt}\\vspace{0cm}},linecolor=white, linewidth=3pt,innerbottommargin=10pt,innertopmargin=5pt,innerrightmargin=20pt,splittopskip=20pt,splitbottomskip=10pt,everyline=true,tikzsetting={draw=couleur_theme,line width=4pt,dashed,dash pattern= on 10pt off 10pt},frametitleaboveskip=-.6cm,frametitle={\\tikz\\node[anchor= east,rectangle,fill=white]{\\textcolor{couleur_theme}{\\raisebox{-.3\\height}{}\\; \\bfseries \\Large Objectifs}};}]{objectif}
+
+\\newmdenv[startcode={\\colorlet{couleur_numerotation}{correction}\\renewcommand{\\columnseprulecolor}{\\color{correction}}
+\\setcounter{section}{0}\\arrayrulecolor{correction}},linecolor=white, linewidth=4pt,innerbottommargin=10pt,innertopmargin=5pt,splittopskip=20pt,splitbottomskip=10pt,everyline=true,frametitle=correction,tikzsetting={draw=correction,line width=3pt,dashed,dash pattern= on 15pt off 10pt},frametitleaboveskip=-.4cm,frametitle={\\tikz\\node[anchor= east,rectangle,fill=white]{\\; \\textcolor{correction}{\\raisebox{-.3\\height}{}\\; \\bfseries \\Large Corrections}};}]{correction}
+
+\\newmdenv[roundcorner=0,linewidth=0pt,frametitlerule=false, backgroundcolor=gray!40,leftmargin=8cm]{remarque}
+
+
+
+\\newcommand{\\theme}[4]
+{
+	%\\theme{nombres|gestion|grandeurs|geo|algo}{Texte (entrainement, évaluation, mise en route...}{numéro de version ou vide}{titre du thême et niveau}
+	\\fancyhead[C]{
+	\\begin{tikzpicture}[line cap=round,line join=round,remember picture, overlay, shift={(current page.north west)},yshift=-8.5cm]
+    \\fill[fill=couleur_theme] (0,5) rectangle (21,6);
+    \\fill[fill=couleur_theme] (6,6)--(7.5,6)--(8.5,7)--(7.5,8)--(6,8)--(7,7)-- cycle;
+    \\fill[fill=couleur_theme] (8,6)--(8.5,6)--(9.5,7)--(8.5,8)--(8,8)--(9,7)-- cycle;  
+    \\fill[fill=couleur_theme] (9,6)--(9.5,6)--(10.5,7)--(9.5,8)--(9,8)--(10,7)-- cycle;  
+    \\node[color=white] at (10.5,5.5) {\\LARGE \\bfseries \\MakeUppercase #4};
+\\end{tikzpicture}
+	\\begin{tikzpicture}[remember picture,overlay]
+	  \\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(0,-.8cm)$) {};
+	  \\node[anchor=east, fill=white] at ($(current page.north east)+(-2,-1.9cm)$) {\\Huge \\textcolor{couleur_theme}{\\bfseries \\#} #2 \\textcolor{couleur_theme}{\\bfseries \\MakeUppercase{#3}}};
+	\\end{tikzpicture}
+	}
+	\\fancyfoot[R]{\\scriptsize Coopmaths.fr -- CC-BY-SA}
+	\\fancyfoot[C]{}
+	\\colorlet{couleur_theme}{#1}
+	\\colorlet{couleur_numerotation}{couleur_theme}
+	\\def\\iconeobjectif{icone-objectif-#1}
+	\\def\\urliconeomethode{icone-methode-#1}
+}
+
+\\newcommand{\\version}[1]{
+	\\fancyhead[R]{
+		\\begin{tikzpicture}[remember picture,overlay]
+		\\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(-.5,-.5cm)$) {\\large \\textcolor{couleur_theme}{\\bfseries V#1}};
+		\\end{tikzpicture}
+	}
+}
+
+${preambule_personnalise()}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Fin du préambule %%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+		
+
+`
+		return intro_LaTeX_coop
+
+	}
+
+
+
+
+
+
+function preambule_personnalise(){
+	let result = ''
+	for (let packages of liste_packages){
+		switch (packages) {
+		  case 'axe_gradues':
+		    result += `
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Gestion des axes gradués (Olivier Lacroix) %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\\usepackage{xparse}
+\\usepackage{ifthen}
+\\usepackage{xargs}
+
+\\newboolean{demiDroite}
+\\newboolean{affichePointilles}
+\\newboolean{affichePoint}
+\\newboolean{afficheGraduations}
+
+\\makeatletter
+\\newtoks\\@tabtoks
+\\providecommand\\addtabtoks[1]{\\@tabtoks\\expandafter{\\the\\@tabtoks#1}}
+\\providecommand*\\resettabtoks{\\@tabtoks{}}
+\\providecommand*\\printtabtoks{\\the\\@tabtoks}
+\\makeatother
+
+\\DeclareDocumentCommand \\placePoints%
+{ > { \\SplitList { | } } m }%
+{\\ProcessList {#1} {\\mycommand}}
+
+\\newcommand{\\mycommand}[1]{
+\\def\\temp{#1}
+\\expandafter\\placePointsDeuxArg\\temp
+}
+
+\\def\\placePointsDeuxArg#1,#2{\\draw (#1,0) node{\\Large $\\times$} node[above=.2] {\\ensuremath{#2}};}
+
+
+
+
+\\newcommandx{\\axeGradueFraction}[5][5=]{
+\\begin{tikzpicture}[xscale=#4,>=latex]
+	\\def\\Xmin{#1} 
+	\\def\\Xmax{#2} 
+	\\def\\Decoupage{#3}
+	
+	\\ifthenelse { \\equal {#5} {} }
+	{%pas d'argument optionnel, on trace juste l'axe ci-dessous
+	}
+	{% un nombre est Ã  placer sur l'axe avec son label
+		\\placePoints{#5}
+		%\\draw (#5,-.08) -- (#5,.08) node[above] {#6};
+	}
+
+
+		
+	% Xfleche de l'axe
+	\\pgfmathparse{\\Xmax+0.2}\\let\\Xfleche\\pgfmathresult;
+	% dÃ©but du segment reprÃ©sentant l'axe numÃ©ro 1
+	\\ifthenelse{\\equal{\\Xmin}{0}}
+	{
+		\\def\\Xorigine{\\Xmin} 	
+	}
+	{
+		\\pgfmathparse{\\Xmin-0.5}\\let\\Xorigine\\pgfmathresult;	
+		% pour la dÃ©co :
+		\\draw (\\Xmin-1/\\Decoupage,-.05) -- (\\Xmin-1/\\Decoupage,.05);
+	}
+	\\pgfmathparse{int(\\Xmax-1)}\\let\\XmaxMoinsUn\\pgfmathresult;
+	% construction de la droite
+	\\draw[->,>=latex] (\\Xorigine,0) -- (\\Xfleche,0);
+	\\foreach \\x in {\\Xmin,...,\\XmaxMoinsUn}{
+			\\draw (\\x,-.1) -- (\\x,.1) node[below=.3] {\\x};
+			\\foreach \\y in {1,...,\\Decoupage}{
+				\\pgfmathparse{\\x+\\y/\\Decoupage}\\let\\Xgrad\\pgfmathresult;
+				\\draw (\\Xgrad,-.05) -- (\\Xgrad,.05);
+			}
+	};
+	% derniÃ¨re graduation Ã  la mano 
+	\\draw (\\Xmax,-.1) -- (\\Xmax,.1) node[below=.3] {\\Xmax};
+
+\\end{tikzpicture}
+}
+
+
+
+\\newcommand{\\axesZoom}[5]{
+{} \\hfill 
+\\begin{tikzpicture}
+	\\def\\XA{#1} % nombre (positif pour l'instant) Ã  placer (avec deux dÃ©cimales)
+	\\def\\Nom{#2} % nom du point Ã  placer. Laisser vide si vous ne souhaitez pas voir le point
+	\\def\\Xmin{#3} % premiÃ¨re valeur de x entiÃ¨re sur l'axe
+	\\setboolean{affichePointilles}{true}  % affiche les pointillÃ©s indiquant le grossissement
+	\\setboolean{affichePoint}{#4} % Est ce que le point doit apparaÃ®tre sur la construction. 
+	\\setboolean{afficheGraduations}{#5} % Est ce que l'on gradue tous les axes ou seulement \\Xmin et \\Xmax sur le premier axe (si false)
+	\\setboolean{demiDroite}{true} %Par dÃ©faut, on construit des demi-droites pour les 6Ã¨mes, si Xmin=0 ou si une des dÃ©cimales l'exige.
+	
+	\\ifthenelse{\\boolean{demiDroite}}
+	{
+		\\def\\DebordementAGauche{0} % mettre 0 pour une demi-droite graduÃ©e partant de l'origine
+	}
+	{
+		\\def\\DebordementAGauche{0.5} % mettre 0.5 dans les autres cas.
+	}	
+	
+	\\pgfmathparse{int(\\Xmin+10)}\\let\\Xmax\\pgfmathresult; % Xmax vaut toujours Xmin+10
+		
+	\\pgfmathparse{int(\\XA)}\\let\\Unites\\pgfmathresult;
+	\\pgfmathparse{int((\\XA-\\Unites)*10)}\\let\\Dixiemes\\pgfmathresult;
+	\\pgfmathparse{int(round((\\XA-\\Unites.\\Dixiemes)*100))}\\let\\Centiemes\\pgfmathresult;	
+
+	\\pgfmathparse{int(\\Unites+1)}\\let\\UnitesMaj\\pgfmathresult;
+	\\pgfmathparse{int(\\Dixiemes+1)}\\let\\DixiemesMaj\\pgfmathresult;
+	\\pgfmathparse{int(\\Centiemes+1)}\\let\\CentiemesMaj\\pgfmathresult;				
+
+	\\pgfmathparse{\\Xmax+1}\\let\\Xfleche\\pgfmathresult;
+	\\ifthenelse{\\equal{\\Xmin}{0}}
+	{
+		\\def\\Xorigine{\\Xmin} 	
+	}
+	{
+		\\pgfmathparse{\\Xmin-0.5}\\let\\Xorigine\\pgfmathresult;	
+	}
+
+	\\pgfmathparse{int(\\Xmax-1)}\\let\\XmaxMoinsUn\\pgfmathresult;
+	\\pgfmathparse{int(\\Xmin+1)}\\let\\XminPlusUn\\pgfmathresult;
+		
+	\\draw[->,>=latex] (\\Xorigine,0) -- (\\Xfleche,0);
+	\\foreach \\x in {\\XminPlusUn,...,\\XmaxMoinsUn}{
+		\\ifthenelse{\\boolean{afficheGraduations}}
+		{
+			\\draw (\\x,-.1) -- (\\x,.1) node[above] {\\x};
+		}
+		{
+			\\draw (\\x,-.1) -- (\\x,.1);
+		}
+	};
+	\\foreach \\x in {1,...,9}{
+		\\draw (\\Unites.\\x,-.05) -- (\\Unites.\\x,.05);
+	}
+	\\draw (\\Xmin,-.1) -- (\\Xmin,.1) node[above] {\\Xmin};
+	\\draw (\\Xmax,-.1) -- (\\Xmax,.1) node[above] {\\Xmax};
+	\\ifthenelse{\\not\\equal{\\Unites}{0}}
+	{
+		\\pgfmathparse{\\Xmin-0.5}\\let\\Xorigine\\pgfmathresult;		
+	}{}
+	\\draw[->,>=latex] (\\Xorigine,-2) -- (\\Xfleche,-2);
+	\\foreach \\x in {1,...,9}{
+		\\pgfmathparse{int(\\Xmin+\\x)}\\let\\X\\pgfmathresult;
+		\\ifthenelse{\\boolean{afficheGraduations}}
+		{
+			\\draw (\\X,-2.1) -- (\\X,-1.9) node[above] {\\Unites,\\x};
+		}
+		{
+			\\draw (\\X,-2.1) -- (\\X,-1.9);
+		}		
+		\\pgfmathparse{int(\\Dixiemes+\\Xmin)+\\x/10}\\let\\Xtirets\\pgfmathresult;
+		\\draw (\\Xtirets,-2.05) -- (\\Xtirets,-1.95);
+	};
+	
+	\\ifthenelse{\\boolean{afficheGraduations}}
+	{	
+		\\draw (\\Xmax,-2.1) -- (\\Xmax,-1.9) node[above] {\\UnitesMaj};
+		\\draw (\\Xmin,-2.1) -- (\\Xmin,-1.9) node[above] {\\Unites};
+	}
+	{
+		\\draw (\\Xmax,-2.1) -- (\\Xmax,-1.9) ;
+		\\draw (\\Xmin,-2.1) -- (\\Xmin,-1.9) ;		
+	}
+	
+	\\pgfmathparse{int(\\Dixiemes+\\Xmin)}\\let\\XGaucheAxeBis\\pgfmathresult;
+	\\pgfmathparse{int(\\XGaucheAxeBis+1)}\\let\\XDroitAxeBis\\pgfmathresult;
+
+	\\ifthenelse{\\boolean{affichePointilles}}
+	{
+	\\draw[dashed] (\\Unites,0) -- (\\Xmin,-2);
+	\\draw[dashed] (\\UnitesMaj,0) -- (\\Xmax,-2);
+	\\draw[dashed] (\\XGaucheAxeBis,-2) -- (\\Xmin,-4);
+	\\draw[dashed] (\\XDroitAxeBis,-2) -- (\\Xmax,-4);
+	}{}
+	
+	\\ifthenelse{\\not\\equal{\\Dixiemes}{0}}
+	{
+		\\pgfmathparse{\\Xmin-0.5}\\let\\Xorigine\\pgfmathresult;		
+	}{}
+	\\draw[->,>=latex] (\\Xorigine,-4) -- (\\Xfleche,-4);
+	\\foreach \\x in {1,...,9}{
+		\\pgfmathparse{int(\\Xmin+\\x)}\\let\\X\\pgfmathresult;
+		\\ifthenelse{\\boolean{afficheGraduations}}
+			{
+			\\draw (\\X,-4.1) -- (\\X,-3.9) node[above] {\\Unites,\\Dixiemes\\x};
+			}
+			{
+			\\draw (\\X,-4.1) -- (\\X,-3.9) ;
+			}
+		};
+
+	
+\\ifthenelse{\\boolean{afficheGraduations}}
+	{
+	\\ifthenelse{\\equal{\\Dixiemes}{9}}
+		{
+		\\draw (\\Xmax,-4.1) -- (\\Xmax,-3.9) node[above] {\\UnitesMaj};		
+		}	
+		{
+		\\draw (\\Xmax,-4.1) -- (\\Xmax,-3.9) node[above] {\\Unites,\\DixiemesMaj};
+		}	
+	
+	\\ifthenelse{\\equal{\\Dixiemes}{0}}
+		{
+		\\draw (\\Xmin,-4.1) -- (\\Xmin,-3.9) node[above] {\\Unites};
+		}
+		{
+		\\draw (\\Xmin,-4.1) -- (\\Xmin,-3.9) node[above] {\\Unites,\\Dixiemes};	
+		}
+	}
+	{
+	\\ifthenelse{\\equal{\\Dixiemes}{9}}
+		{
+		\\draw (\\Xmax,-4.1) -- (\\Xmax,-3.9);		
+		}	
+		{
+		\\draw (\\Xmax,-4.1) -- (\\Xmax,-3.9) ;
+		}	
+	
+	\\ifthenelse{\\equal{\\Dixiemes}{0}}
+		{
+		\\draw (\\Xmin,-4.1) -- (\\Xmin,-3.9) ;
+		}
+		{
+		\\draw (\\Xmin,-4.1) -- (\\Xmin,-3.9) ;	
+		}
+	\\pgfmathparse{int(\\Centiemes+\\Xmin)}\\let\\XGaucheAxeTer\\pgfmathresult;
+	\\draw (\\XGaucheAxeTer,-4) node[below] {\\Nom};
+	}
+	
+	\\ifthenelse{\\boolean{affichePoint}}
+	{
+		\\draw (\\XA,0) node{\\Large $\\times$} node[below] {\\Nom};
+		\\draw (\\XGaucheAxeBis.\\Centiemes,-2) node{\\Large $\\times$} node[below] {\\Nom};
+	}{}
+\\end{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Fin de la gestion des axes gradués %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+}
+
+`
+		break;
+		case 'bclogo' :
+			result += '\\usepackage[tikz]{bclogo}'
+		break
+		default:
+		    result += `\\usepackage{${packages}}\n`
+		} 
+	}
+	return result
+}
+var liste_des_exercices_disponibles = {
 		'CM001' :Tables_de_multiplications,
 		'CM002' :Tables_de_divisions,
 		'CM003' :Tables_de_multiplications_et_divisions,
@@ -3478,7 +4045,7 @@ function decomp_fact_prem_array(n) {
 		'6N43-2' : Tableau_criteres_de_divisibilite,
 		'6P10' : Proportionnalite_pas_proportionnalite,
 		'6P11' : Proportionnalite_par_linearite,
-		'5N12':Exercice_fractions_simplifier,
+		'5N12': Exercice_fractions_simplifier,
 		'5N12-2': Egalites_entre_fractions,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
 		'5N110' : Variation_en_pourcentages,
@@ -3538,21 +4105,22 @@ function decomp_fact_prem_array(n) {
 		'3A11-2' : Decomposition_facteurs_premiers,
 		'3A11-3' : Lister_Diviseurs_Par_Decomposition_facteurs_premiers,
 		'3A12' : Fractions_irreductibles,
-		//'3A13' : PGCD_PPCM_Engrenages,
+		'3A13' : PPCM_Engrenages,
 		'3M30' : Calcul_de_volumes_3e,
-		'3N10': Exercice_developper,
-		'3N11' : Double_distributivite,
-		'3N12' : Developper_Identites_remarquables3,
-		'3N13' : Factoriser_Identites_remarquables3,
-		'3N14' : Resoudre_une_equation_produit_nul,
-		'3N14-2' : Resoudre_une_equation_produit_nul_niv2,
-		'3G10' : Exercice_Thales,
-		'3G11' : Reciproque_Thales,
+		'3L11': Exercice_developper,
+		'3L11-1' : Double_distributivite,
+		'3L12-1' : Developper_Identites_remarquables3,
+		'3L12' : Factoriser_Identites_remarquables3,
+		'3L14' : Resoudre_une_equation_produit_nul,
+		'3L14-1' : Resoudre_une_equation_produit_nul_niv2,
+		'3L15' : Resoudre_une_equation_x2_egal_A,
+		'3G20' : Exercice_Thales,
+		'3G21' : Reciproque_Thales,
 		'3G30' : Exercice_Trigo_longueurs,
 		'3G31' : Exercice_Trigo_angles,
 		'3F1-act' : fonction_notion_vocabulaire,
-		'3F10' : fonctions_lineaires,
-		'3F11' : fonctions_affines,
+		'3F20' : Lecture_expression_fonctions_lineaires,
+		'3F20-1' : Lecture_expression_fonctions_affines,
 		'3F12' : fonctions_calculs_d_images,
 		'3F12-2' : Image_fonction_algebrique,
 		'3F12-3' : Tableau_de_valeurs,
@@ -3635,6 +4203,7 @@ function Exercice() {
    	// this.bouton_aide = modal_pdf(numero_de_l_exercice,url_pdf,texte="Aide",label_bouton="Aide - PDF",icone="file pdf")
    	this.pas_de_version_LaTeX = false ;
    	this.nouvelle_version = function(numero_de_l_exercice){}
+   	this.liste_packages = []; // string ou liste de string avec le nom des packages spécifiques à ajouter dans le préambule
 
 }
 
@@ -3655,6 +4224,7 @@ function feuille_d_axes_gradues() {
    	this.nb_cols_corr_modifiable = false;
    	this.spacing_modifiable = false;
    	this.spacing_corr_modifiable = false;
+   	this.liste_packages = 'axes_gradues'
 
 
 	this.nouvelle_version = function(numero_de_l_exercice){
@@ -3696,6 +4266,7 @@ function Lire_abscisse_entiere(){
 	this.spacing = 1;
     this.spacing_corr = 1;
 	this.sup=4;
+	this.liste_packages = ['tkz-euclide']
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
 		let type_de_questions;
@@ -3769,6 +4340,8 @@ function Placer_un_point_abscisse_entiere(){
 		this.spacing_corr = 1;
 		this.sup=1;
 		this.type_exercice = 'SVGJS';
+   		this.liste_packages = 'tkz-euclide'
+
 	
 	
 		this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
@@ -3958,6 +4531,8 @@ function Lire_abscisse_decimale(){
 	this.spacing = 1;
     this.spacing_corr = 1;
 	this.sup=1;
+   	this.liste_packages = 'tkz-euclide'
+
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
 		let type_de_questions;
@@ -4030,6 +4605,8 @@ function Lire_abscisse_fractionnaire(){
 	this.spacing = 1;
     this.spacing_corr = 1;
 	this.sup=1;
+   	this.liste_packages = 'tkz-euclide'
+
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
 		let type_de_questions;
@@ -4104,6 +4681,7 @@ function Placer_points_sur_axe(){
     this.spacing_corr = 1;
 	this.sup=1;
 	this.type_exercice = 'SVGJS';
+	this.liste_packages = 'tkz-euclide'
 
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
@@ -4909,6 +5487,7 @@ function Quatre_operations(){
 	this.nb_cols = 2;
 	this.nb_cols_corr = 2;
 	this.sup = 1; // niveau de difficulté
+	this.liste_packages = 'xlop'
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -8420,6 +8999,7 @@ function Additions_soustractions_multiplications_posees(){
 	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon les opérations posées ne sont pas jolies
 	this.nb_questions = 5;
 	// this.pas_de_version_HMTL=true;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -8622,6 +9202,7 @@ function Divisions_euclidiennes(){
 	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon opidiv n'est pas joli
 	this.nb_questions = 4;
 	this.sup = 1;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -8710,6 +9291,7 @@ function Division_decimale(){
 	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon opdiv n'est pas joli
 	this.nb_questions = 4;
 	this.sup = 1;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -8811,6 +9393,7 @@ function Multiplier_decimaux(){
 	this.spacing = 2;
 	this.spacing_corr = 1; //Important sinon le calcul posé ne fonctionne pas avec opmul et spacing
 	this.nb_questions = 4;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -9485,7 +10068,7 @@ function reperage_point_du_quart_de_plan(){
 	this.quart_de_plan=true;	;
 
 }
-function fonctions_lineaires(){
+function Lecture_expression_fonctions_lineaires(){
 	fonctions_affines.call(this);
 	this.titre="Déterminer une fonction linéaire";
 	this.lineaire=true;
@@ -16352,14 +16935,19 @@ function problemes_grandeurs_composees(){
 							let deltat=randint(2,5);
 							texte = `Une piscine a la forme d'un prisme droit. La profondeur à son extrémité nord est de ${h1} cm et la profondeur à son extrémité sud est de ${h2} cm.<br>`
 							texte +=`D\'une extrémité à l\'autre la pente au fond de la piscine est régulière.<br>La largeur de la piscine (Est-Ouest) est de ${l} m et sa longueur (Nord-Sud) est de ${L} m.<br>`
-							texte += num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube ($\\text{m}^3$) mais on peut aussi rencontrer le litre (L) avec comme correspondance $\\text{1dm}^3=\\text{1L}$`)+` d'eau en m³ contenu dans cette piscine quand elle est pleine.<br>`
+							texte += num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube (m${exposant(3)}) mais on peut aussi rencontrer le litre (L) avec comme correspondance 1dm${exposant(3)}=1L`)+` d'eau en m${exposant(3)} contenu dans cette piscine quand elle est pleine.<br>`
 							texte += num_alpha(1)+` Sachant que pour élever la température d'un litre d'eau de 1 degré, il faut une énergie de 1,162 Wattheure.<br> Quelle est l'énergie consommée en kWh pour augmenter de ${deltat} degrés ?<br>`							
 							texte_corr = num_alpha(0)+` La base de ce prisme droit est un trapèze rectangle de petite base ${h2} cm, de grande base ${h1} cm et de hauteur ${L} m.<br>`
-							texte_corr += `$\\mathcal{A}=\\dfrac{\\left(${h1}\\text{ cm}+${h2}\\text{ cm}\\right)}{2}\\times${L}\\text{ m}=\\dfrac{\\left(${arrondi_virgule(h1/100)}\\text{ m}+${arrondi_virgule(h2/100)}\\text{ m}\\right)}{2}\\times${L}\\text{ m}`
-							texte_corr += `=\\dfrac{${arrondi_virgule((h1+h2)/100)}\\text{ m}}{2}\\times${L}\\text{ m}=${arrondi_virgule((h1+h2)/200)}\\text{ m}\\times${L}\\text{ m}=${arrondi_virgule((h1+h2)/200*L)}\\text{ m²}$<br>`
-							texte_corr += `Le volume de ce prisme et donc par extension le volume d'eau conteu dans la piscine est :<br>$\\mathcal{A}\\times\\mathcal{h}=${arrondi_virgule((h1+h2)/200*L)}\\text{ m²}\\times${l}\\text{ m}=${arrondi_virgule((h1+h2)/200*L*l)}\\text{ m³}$.<br>`
-							texte_corr += num_alpha(1)+` L'énergie consomée pour élever la température de l'eau de cette piscine de ${deltat} degrés est :<br>`
-							texte_corr += `$${arrondi_virgule((h1+h2)/200*L*l)}\\text{ m³}=${tex_nombre((h1+h2)*L*l*5)}\\text{ dm³}=${tex_nombre((h1+h2)*L*l*5)}\\text{ L}$<br>`
+							texte_corr += `$\\mathcal{A}=\\dfrac{\\left(${h1}\\text{ cm}+${h2}\\text{ cm}\\right)}{2}\\times${L}\\text{ m}$`
+							texte_corr += ` $=\\dfrac{\\left(${arrondi_virgule(h1/100)}\\text{ m}+${arrondi_virgule(h2/100)}\\text{ m}\\right)}{2}\\times${L}\\text{ m}$`
+							texte_corr += ` $=\\dfrac{${arrondi_virgule((h1+h2)/100)}\\text{ m}}{2}\\times${L}\\text{ m}$`
+							texte_corr += ` $=${arrondi_virgule((h1+h2)/200)}\\text{ m}\\times${L}\\text{ m}$`
+							texte_corr += ` $=${arrondi_virgule((h1+h2)/200*L)}\\text{ m}$${exposant(2)}<br>`
+							texte_corr += `Le volume de ce prisme et donc par extension le volume d'eau conteu dans la piscine est :<br>`
+							texte_corr += `$\\mathcal{A}\\times\\mathcal{h}=${arrondi_virgule((h1+h2)/200*L)}\\text{ m}^2\\times${l}\\text{ m}$`
+							texte_corr += ` $=${arrondi_virgule((h1+h2)/200*L*l)}$m${exposant(3)}.<br>`
+							texte_corr += num_alpha(1)+` Convertissons le volume de la piscine en litres : $${arrondi_virgule((h1+h2)/200*L*l)}\\text{ m}^3=${tex_nombre((h1+h2)*L*l*5)}\\text{ dm}^3=${tex_nombre((h1+h2)*L*l*5)}\\text{ L}$<br>`
+							texte_corr += ` L'énergie consomée pour élever la température de l'eau de cette piscine de ${deltat} degrés est :<br>`
 							texte_corr += `$\\mathcal{E}=${tex_nombre((h1+h2)*L*l*5)}\\text{ L}\\times${deltat}\\text{ °C}\\times 1,162 \\dfrac{\\text{Wh}}{\\text{°C}\\times\\text{L}}=${tex_nombre(arrondi((h1+h2)*L*l*5*deltat*1.162,3))}\\text{ Wh}=${tex_nombre(arrondi((h1+h2)*L*l/200*deltat*1.162,7))}\\text{ kWh}$<br>`
 							break;
 						case 1 : // Volume d'un tonneau cylindrique
@@ -16367,7 +16955,7 @@ function problemes_grandeurs_composees(){
 						let r=randint(10,15)*2;
 						let h=randint(0,10)+r*4;
 						texte = `Un tonneau cylindrique a un rayon de ${r} cm et une hauteur de ${h} cm.<br>`;
-						texte +=num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube ($\\text{m}^3$) mais on peut aussi rencontrer le litre (L) avec comme correspondance $\\text{1dm}^3=\\text{1L}$`)+` en dm³ à 0,1 près de ce tonneau.<br>`
+						texte +=num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube ($\\text{m}^3$) mais on peut aussi rencontrer le litre (L) avec comme correspondance $\\text{1dm}^3=\\text{1L}$`)+` en dm${exposant(3)} à 0,1 près de ce tonneau.<br>`
 						texte +=num_alpha(1)+` Si on le remplit ${liquides[index2][0]} (dont la `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"densité",`Définition : densité (grandeur physique)`,`La densité d'une substance est égale à la masse volumique de la substance divisée par la masse volumique du corps de référence à la même température.<br>Pour les liquides et les solides, l'eau est utilisée comme référence (sa masse volumique est de 1kg/dm$^3$), pour les gaz, la mesure s'effectue par rapport à l'air.<br>Donc pour les liquides, la densité est égale à la masse volumique exprimée en kg/dm$^3$.`)+` est de ${tex_nombrec(liquides[index2][1])}), quelle masse ${liquides[index2][0]} en kg contiendra-t-il au gramme près ?<br>`
 						texte_corr=num_alpha(0)+` Le volume d'un cylindre est donné par la formule $\\mathcal{A}\\text{ire de base}\\times\\mathcal{h}$.<br> Ici la base est un disque de rayon ${r} cm.<br>`
 						texte_corr+=`$\\mathcal{A}\\text{ire de base}\\times\\mathcal{h}=\\pi\\times${r}^{2}\\text{ cm}^2\\times${h}\\text{ cm}=${r*r*h}\\pi\\text{ cm}^3\\approx${tex_nombre(arrondi(r*r*h*Math.PI,1))}\\text{ cm}^3\\approx${tex_nombre(arrondi(r*r*h*Math.PI/1000,1))}\\text{ dm}^3$<br>`
@@ -16394,7 +16982,7 @@ function problemes_grandeurs_composees(){
 					index=randint(60,90) //masse du père (recyclage de variable)
 					masse=randint(20,30) //masse de l'enfant
 					distance=arrondi(randint(25,35)/10)
-					texte = `${quidam} qui pèse ${masse} kg se trouve sur le siège d'une balançoire "`+ katex_Popup2(numero_de_l_exercice+i*3,2,`trébuchet`,`https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/`,`https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/balancoire-a-bascule-trebuchet-baskul-768x768.jpg`) +`" dans un jardin d'enfant. Le siège est situé à ${tex_nombre(distance)} m du pivot central de la balançoire (bras de levier).<br>`
+					texte = `${quidam} qui pèse ${masse} kg se trouve sur le siège d'une balançoire "`+ katex_Popup2(numero_de_l_exercice+i*3,2,`trébuchet`,`Schéma explicatif`,`images/trebuchet.png`) +`" dans un jardin d'enfant. Le siège est situé à ${tex_nombre(distance)} m du pivot central de la balançoire (bras de levier).<br>`
 					texte+= num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3+1,type_aide,`moment`,`Définition : momnent (grandeur physique)`,`Le moment d'une force d'intensité F(en Newton ou kg.m.s$^{-2}$) en un point M par rapport à un pivot P est le produit de F par la distance PM (appelée bras de levier) exprimée en mètres (lorsque cette force s'exerce perpendiculairement au bras de levier). Le moment est l'energie permettant de faire tourner l'objet autour du pivot.<br>L'unité de mesure du moment est le Joule (J).<br>$1J=1\\text{ kg.m}^2\\text{s}^{-2}$.`) +` du `+katex_Popup2(numero_de_l_exercice+i*3+2,type_aide,`poids`,`Définition : Poids`,`Le poids est le produit de la masse d'un objet par l'accélération de la pesanteur terrestre ($9,81\\text{ m.s}^{-2}$).<br>L'unité du poids est le Newton (N) : 1N=1kg.m.s$^{-2}$`)+` de ${quidam} sur son siège par rapport au pivot central du trébuchet en Joules (on admettra que le bras de levier est horizontal).<br>`
 					texte+= num_alpha(1)+` Le père de ${quidam} vient s'installer de l'autre côté du pivot central. Il pèse ${index} kg et s'installe de façon à ce que son poids permette d'équilibrer la balançoire à l'horizontale. Quelle doit être la longueur du bras de levier de son côté ( à quelle distance du pivot est-il assis ) ?<br>`
 					texte_corr=num_alpha(0)+` Le moment du poids de ${quidam} appliqué sur son siège par rapport au pivot central du trébuchet est :<br>`
@@ -16591,10 +17179,10 @@ function problemes_grandeurs_composees(){
 					index2=randint(0,14,[index1])
 					let ville1=villes[index1][0]
 					let ville2=villes[index2][0]
-					texte = num_alpha(0)+` En 2016, à ${villes[index1][0]} il y avait $${tex_nombre(villes[index1][1])}$ habitants pour une superficie de $${tex_nombre(villes[index1][2]*1000)}$ ha.<br> Calculer la densité de population en hab/km².<br>`
-					texte += num_alpha(1)+` La même année, la `+katex_Popup2(numero_de_l_exercice+i*3+1,type_aide,`densité de population`,`Définition : Densité de population`,`C’est le quotient du nombre d'habitants par la superficie en km².<br>L'unité de la densité de population est l'habitant par km² (hab/km²).`)+` de ${villes[index2][0]} était de $${tex_nombrec(villes[index2][1]/villes[index2][2])}$ hab/km² pour une superficie de $${tex_nombrec(villes[index2][2]*1000)}$ ha.<br> Calculer le nombre d'habitants de ${villes[index2][0]} à cette date.<br>`
-					texte_corr = num_alpha(0)+` En 2016, la densité de population à ${villes[index1][0]} était de :<br> $\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2]*1000)}\\text{ ha}}=\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2])}\\text{ km}^2}=${tex_nombrec(villes[index1][1]/villes[index1][2])}\\text{ hab/km}^2$.<br>`
-					texte_corr+= num_alpha(1)+` A cette date, le nombre d'habitants de ${villes[index2][0]} était de :<br> $${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2]*1000)}\\text{ ha}=${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2])}\\text{ km}^2=${tex_nombre(villes[index2][1])}\\text{ hab}$.`
+					texte = num_alpha(0)+` En 2016, à ${villes[index1][0]} il y avait $${tex_nombre(villes[index1][1])}$ habitants pour une superficie de $${tex_nombre(villes[index1][2]*100)}$ ha.<br> Calculer la densité de population en hab/km$^2$.<br>`
+					texte += num_alpha(1)+` La même année, la `+katex_Popup2(numero_de_l_exercice+i*3+1,type_aide,`densité de population`,`Définition : Densité de population`,`C’est le quotient du nombre d'habitants par la superficie en km$^2$.<br>L'unité de la densité de population est l'habitant par km$^2$ (hab/km$^2$).`)+` de ${villes[index2][0]} était de $${tex_nombrec(villes[index2][1]/villes[index2][2])}$ hab/km$^2$ pour une superficie de $${tex_nombrec(villes[index2][2]*100)}$ ha.<br> Calculer le nombre d'habitants de ${villes[index2][0]} à cette date.<br>`
+					texte_corr = num_alpha(0)+` En 2016, la densité de population à ${villes[index1][0]} était de :<br> $\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2]*100)}\\text{ ha}}=\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2])}\\text{ km}^2}=${tex_nombrec(villes[index1][1]/villes[index1][2])}\\text{ hab/km}^{2}$.<br>`
+					texte_corr+= num_alpha(1)+` A cette date, le nombre d'habitants de ${villes[index2][0]} était de :<br> $${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2]*100)}\\text{ ha}=${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2])}\\text{ km}^{2}=${tex_nombre(villes[index2][1])}\\text{ hab}$.`
 					break;
 				case 11 : //problème de masse volumique
 					index1=randint(0,14)
@@ -16633,9 +17221,9 @@ function problemes_grandeurs_composees(){
 					index2=randint(0,6)
 					duree=randint(2,24)
 					let vmax=rivieres[index2][3]*3600
-					texte = `Le `+katex_Popup2(numero_de_l_exercice+i,type_aide,`débit`,`Définition : Débit (grandeur physique)`,`Le débit est le quotient d'un volume d'eau écoulée dans une section de conduit par le temps d'écoulement.<br>L'unité officielle est le mètre cube par seconde ($\\text{m}^3/\\text{s}$  et dans certains cas on peut utiliser le litre par minute (L/min)`)+` annuel moyen ${rivieres[index2][6]}${rivieres[index2][0]} mesuré à ${rivieres[index2][1]} est de ${rivieres[index2][2]} m³/s.<br>`
-					texte += num_alpha(0)+` Calculer le volume d'eau en m³ écoulé en ${duree} heures à ce débit.<br>`
-					texte += num_alpha(1)+` En ${rivieres[index2][4]} à ${rivieres[index2][1]}, ${rivieres[index2][5]}${rivieres[index2][0]} a débité ${nombre_avec_espace(vmax)} m³ en une heure. Quel a été alors le débit en m³/s ?`
+					texte = `Le `+katex_Popup2(numero_de_l_exercice+i,type_aide,`débit`,`Définition : Débit (grandeur physique)`,`Le débit est le quotient d'un volume d'eau écoulée dans une section de conduit par le temps d'écoulement.<br>L'unité officielle est le mètre cube par seconde ($\\text{m}^3/\\text{s}$  et dans certains cas on peut utiliser le litre par minute (L/min)`)+` annuel moyen ${rivieres[index2][6]}${rivieres[index2][0]} mesuré à ${rivieres[index2][1]} est de ${rivieres[index2][2]} m${exposant(3)}/s.<br>`
+					texte += num_alpha(0)+` Calculer le volume d'eau en m${exposant(3)} écoulé en ${duree} heures à ce débit.<br>`
+					texte += num_alpha(1)+` En ${rivieres[index2][4]} à ${rivieres[index2][1]}, ${rivieres[index2][5]}${rivieres[index2][0]} a débité ${nombre_avec_espace(vmax)} m${exposant(3)} en une heure. Quel a été alors le débit en m³/s ?`
 					texte_corr = num_alpha(0)+` En ${duree} heures il s'écoule en moyenne dans ${rivieres[index2][5]}${rivieres[index2][0]} à ${rivieres[index2][1]} :<br>`
 					texte_corr+= `$\\mathcal{V}=${duree}\\text{ h}\\times${rivieres[index2][2]}\\text{ m}^3\\text{/s}=${duree}\\times 3600\\text{ s}\\times${rivieres[index2][2]}\\text{ m}^3\\text{/s}=${tex_nombre(duree*3600*rivieres[index2][2])}\\text{ m}^3$<br>`
 					texte_corr += num_alpha(1)+` En ${rivieres[index2][4]} lors de la crue historique ${rivieres[index2][6]}${rivieres[index2][0]} à ${rivieres[index2][1]} le débit maximal a été de :<br>`
@@ -17056,7 +17644,7 @@ function fonctions_probabilite2(){
  * Trace 5 droites et demande l'expression de la fonction affine ou linéaire correspondante
  * @Auteur Jean-Claude Lhote
  */
-function fonctions_affines(){
+function Lecture_expression_fonctions_affines(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Déterminer une fonction affine";
@@ -17537,6 +18125,7 @@ function Tableau_de_valeurs(){
 */
 function Double_distributivite()
 {
+	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Utiliser la double distributivité";
 	this.consigne = "Développer et réduire les expressions suivantes.";
@@ -17560,7 +18149,7 @@ function Double_distributivite()
 
 
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d,type_de_questions; i < this.nb_questions && cpt<50 ;) {
 			type_de_questions = liste_type_de_questions[i];
 			a= randint(2,9);
 			b = randint(2,9);
@@ -17604,6 +18193,7 @@ function Double_distributivite()
 */
 function Developper_Identites_remarquables2()
 {
+	'use strict';
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Développer avec les identités remarquables";
 	this.consigne = "Développer les expressions suivantes.";
@@ -17617,9 +18207,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		let type_de_questions_disponibles = [];
 		if(this.sup==1){
 		    type_de_questions_disponibles = [1,2,3] // coef de x = 1
         }
@@ -17629,7 +18220,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
         else {type_de_questions_disponibles = [7,8,9]}  // coef de x relatif
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, type_de_questions,fraction=[],ds,ns; i < this.nb_questions && cpt<50 ;) {
 			type_de_questions = liste_type_de_questions[i];
 			a= randint(1,9);
 			b = randint(2,9);
@@ -17667,7 +18258,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 				break;
 			case 8 :
 				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fractionreduite(ns*2*a,ds)}x+${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction_reduite(ns*2*a,ds)}x+${a*a}$`;
 				break;
 			case 9 :
 				//  (bx-a)(bx+a) avec a entier et b rationnel simple
@@ -17693,6 +18284,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 */
 function Developper_Identites_remarquables3()
 {
+	'use strict';
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Développer (a-b)(a+b)";
 	this.consigne = "Développer les expressions suivantes.";
@@ -17707,10 +18299,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
 		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0,ns,ds ,texte, texte_corr, cpt=0, a, b,fraction=[]; i < this.nb_questions && cpt<50 ;) {
 			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$(x-${a})(x+${a})$`    // (x-a)(x+a)
@@ -17749,6 +18341,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 */
 function Factoriser_Identites_remarquables3()
 {
+	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Factoriser a²-b²";
 	this.consigne = "Factoriser les expressions suivantes.";
@@ -17762,10 +18355,10 @@ function Factoriser_Identites_remarquables3()
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, ns,ds,fraction=[] ; i < this.nb_questions && cpt<50 ;) {
 			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$x^2-${a*a}$`    // (x-a)(x+a)
@@ -17805,6 +18398,7 @@ function Factoriser_Identites_remarquables3()
 */
 function Factoriser_Identites_remarquables2()
 {
+	'use strict';
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Factoriser avec les identités remarquables";
 	this.consigne = "Factoriser les expressions suivantes.";
@@ -17813,14 +18407,15 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.spacing = 1 ;
 	this.spacing_corr = 1 ;
 	this.nb_questions = 5 ;
-	this.sup=1 ;
+	this.sup = 1 ;
 
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
 		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		let type_de_questions_disponibles = [];
 		if(this.sup==1){
 		    type_de_questions_disponibles = [1,2,3] // coef de x = 1
         }
@@ -17830,7 +18425,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
         else {type_de_questions_disponibles = [7,8,9]}  // coef de x rationnel
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt=0, a, b ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b ,fraction=[],ns,ds,type_de_questions; i < this.nb_questions && cpt<50 ;) {
 			type_de_questions = liste_type_de_questions[i];
 			a= randint(1,9);
 			b = randint(2,9);
@@ -17887,13 +18482,15 @@ Exercice.call(this); // Héritage de la classe Exercice()
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x relatif'] ;
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 
 /**
 * @auteur Jean-Claude Lhote
+* Tout est dans le nom de la fonction.
 */
 function Resoudre_une_equation_produit_nul(){
+	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Résoudre une équation produit nul";
 	this.consigne = "Résoudre les équations suivantes";
@@ -17908,7 +18505,7 @@ function Resoudre_une_equation_produit_nul(){
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
 		let liste_type_de_questions=[]
@@ -17922,7 +18519,7 @@ function Resoudre_une_equation_produit_nul(){
 			case 4: liste_type_de_questions=combinaison_listes([1,2,3,4,5,6],this.nb_questions);
 
 		}
-		for (let i = 0, a, b, c, d, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+		for (let i = 0, a, b, c, d,fraction1,fraction2,ns1,ns2,ds1,ds2, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
 			fraction1 = choice(liste_fractions);
 			ns1=fraction1[0]
 			ds1=fraction1[1]
@@ -18015,6 +18612,78 @@ function Resoudre_une_equation_produit_nul(){
 		liste_de_question_to_contenu(this);
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,'1 : Coefficient de x = 1\n 2 : Coefficient de x>1 et solutions entières\n 3 : Solutions rationnelles\n 4 : Mélange des 3 autres niveaux'];
+}
+
+/**
+* @auteur Jean-Claude Lhote
+*/
+
+function Resoudre_une_equation_x2_egal_A(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Résoudre une équation du second degré";
+	this.consigne = "Résoudre les équations suivantes";
+	this.nb_questions = 5;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1; 
+	sortie_html ? this.spacing_corr=2 : this.spacing_corr=1.5
+	this.spacing = 1
+	
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		   let liste_type_de_questions=[]
+		switch (parseInt(this.sup)) {
+			case 1: liste_type_de_questions=combinaison_listes([1],this.nb_questions);
+				break;
+			case 2: liste_type_de_questions=combinaison_listes([2],this.nb_questions);
+				break;
+			case 3: liste_type_de_questions=combinaison_listes([3],this.nb_questions);
+				break;
+			case 4: liste_type_de_questions=combinaison_listes([1,2,3],this.nb_questions);
+
+		}
+		for (let i = 0,fraction,ns,ds, a,  texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+
+			switch (liste_type_de_questions[i]) {
+			case 1: a = randint(1,20); // x²=a*a donc x=a ou -a.
+				texte = `$x^2=${a*a}$`
+				texte_corr = `$x^2=${a*a}$ équivaut à $x = \\sqrt{${a*a}}$ ou $x = -\\sqrt{${a*a}}$<br>Soit $x = ${a}$ ou $x = -${a}$<br>`
+				texte_corr += `Il est équivalent de résoudre $x^2 - ${a*a}=0$ c'est à dire $x^2 - ${a}^{2}=0$ <br>Soit $(x - ${a})(x + ${a})=0$ qui donne les deux solutions ci-dessus. `
+				break;
+			case 2: // x²=(ns*ns)/(ds*ds) solutions rationnelles
+				fraction = choice(liste_fractions);
+				ns=fraction[0]
+				ds=fraction[1]
+				texte = `$x^2=\\dfrac{${ns*ns}}{${ds*ds}}$`
+				texte_corr = `$x^2=\\dfrac{${ns*ns}}{${ds*ds}}$ équivaut à $x = \\sqrt{\\dfrac{${ns*ns}}{${ds*ds}}}$ ou $x = -\\sqrt{\\dfrac{${ns*ns}}{${ds*ds}}}$<br>Soit $x = \\dfrac{${ns}}{${ds}}$ ou $x = -\\dfrac{${ns}}{${ds}}$<br>`
+				texte_corr += `Il est équivalent de résoudre $x^2 - \\dfrac{${ns*ns}}{${ds*ds}}=0$ c'est à dire $x^2 - (\\dfrac{${ns}}{${ds}})^{2}=0$<br>Soit $(x - \\dfrac{${ns}}{${ds}})(x + \\dfrac{${ns}}{${ds}})=0$ qui donne les deux solutions ci-dessus. `
+				break;
+				
+			case 3: a = randint(2,50,[4,9,16,25,36,49]); 	//solution irrationnelles
+					texte = `$x^2=${a}$`
+					texte_corr = `$x^2=${a}$ équivaut à $x = \\sqrt{${a}}$ ou $x = -\\sqrt{${a}}$<br>`
+					texte_corr += `Il est équivalent de résoudre $x^2 - ${a}=0$  c'est à dire $x^2 - (\\sqrt{${a}})^{2}=0$<br>Soit $(x - \\sqrt{${a}})(x + \\sqrt{${a}})=0$ qui donne les deux solutions ci-dessus. `
+				break;
+
+		}
+		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+		this.liste_questions.push(texte);
+		this.liste_corrections.push(texte_corr);
+		// alert(this.liste_questions)
+		// alert(this.liste_corrections)
+			i++;
+		}
+		cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,'1 : solutions entières\n 2 : solutions rationnelles\n 3 : Solutions irrationnelles\n 4 : Mélange des 3 autres niveaux'];
 }
 
 /**
@@ -20147,7 +20816,7 @@ function Fractions_irreductibles(){
 	this.sup = 1 ; 
 	this.titre = "Fractions irréductibles"; 
 	// pas de différence entre la version html et la version latex pour la consigne
-	this.consigne =`Décomposer une fraction et son inverse à partir des décompositons en facteurs premier.`;
+	this.consigne =`Décomposer une fraction et son inverse à partir des décompositons en facteurs premiers.`;
 	this.consigne += `<br>`;
 	sortie_html ? this.spacing = 4 : this.spacing = 3;
 	sortie_html ? this.spacing_corr = 4: this.spacing_corr = 3;
@@ -20161,7 +20830,7 @@ function Fractions_irreductibles(){
 		let type_de_questions;
 		if (sortie_html) { // les boutons d'aide uniquement pour la version html
 			//this.bouton_aide = '';
-			//this.bouton_aide = modal_pdf(numero_de_l_exercice,"pdf/FicheArithmetique-3A12.pdf","Aide mémoire sur les fonctions (Sébastien Lozano)","Aide mémoire")					
+			this.bouton_aide = modal_pdf(numero_de_l_exercice,"pdf/FicheArithmetique-3A12.pdf","Aide mémoire sur les fonctions (Sébastien Lozano)","Aide mémoire")					
 			//this.bouton_aide += modal_video('conteMathsNombresPremiers','videos/LesNombresPremiers.mp4','Petit conte mathématique','Intro Vidéo');
 		} else { // sortie LaTeX
 		};
@@ -20407,18 +21076,21 @@ function Fractions_irreductibles(){
 };
 
 /**
- * 3A13 - PGCD_PPCM_Engrenages
+ * 3A13 - PPCM_Engrenages
+ * les deux on besoin de la def partielle serie : stlX
+ * pb dans la sortie LaTeX, revoir comment user de la fonction katex_Popup2() pour affichage d'une note hors texte!
  * @author Sébastien Lozano
  */
  
-function PGCD_PPCM_Engrenages(){
+function PPCM_Engrenages(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; 
-	this.titre = "PGCD_PPCM_Engrenages"; 
+	this.titre = "Engrenages"; 
 	// pas de différence entre la version html et la version latex pour la consigne
-	this.consigne =`PGCD_PPCM_Engrenages.`;
-	this.consigne += `<br>`;
+	//this.consigne =`Déterminer au bout de combien de tours les deux roues seront toutes les deux revenues à leur position initiale.`;
+	this.consigne =``;
+	//this.consigne += `<br>`;
 	sortie_html ? this.spacing = 3 : this.spacing = 2;
 	sortie_html ? this.spacing_corr = 2: this.spacing_corr = 1;
 	this.nb_questions = 4;
@@ -20426,7 +21098,15 @@ function PGCD_PPCM_Engrenages(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1;
+	this.liste_packages = 'bclogo';
 
+	var num_ex = '3A13'; // pour rendre unique les id des SVG, en cas d'utilisation dans plusieurs exercices y faisant appel
+
+	if (sortie_html) {		
+		var pourcentage = '100%'; // pour l'affichage des svg. On a besoin d'une variable globale
+	} else { // sortie LaTeX
+
+	};
 	this.nouvelle_version = function(numero_de_l_exercice){
 		let type_de_questions;
 		if (sortie_html) { // les boutons d'aide uniquement pour la version html
@@ -20444,27 +21124,176 @@ function PGCD_PPCM_Engrenages(){
 		let type_de_questions_disponibles = [1,2,3,4];
 		//let type_de_questions_disponibles = [1];
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions);
-
+		this.introduction = lampe_message(`Arithmétique des engrenages`,`Boîte de vitesse, transmission de vélo, de moto, perceuse electrique, tout ça fonctionne avec des engrenages! Mais au fait, comment ça marche, les engrenages?`);
+		if (sortie_html) {						
+			this.introduction += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`);
+			this.introduction += `<div id="${num_ex}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;					 							
+			SVG_engrenages(num_ex,200,200);						
+		};
 			for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions&&cpt<50;) {
 				type_de_questions = liste_type_de_questions[i];
 				
-	
+				if (sortie_html) {
+					let id_unique = `${num_ex}_${i}_${Date.now()}`
+					var id_du_div = `div_svg${numero_de_l_exercice}${id_unique}`;
+					//var id_du_div_corr = `div_svg_corr${numero_de_l_exercice}${id_unique}`;
+				 }
+
+				 var nb_dents_r1;
+				 var nb_dents_r2;
+
 				switch (type_de_questions) {
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 1';
-						texte_corr = 'corr type 1';
+					case 1 : // avec de petits nombres on calcule les mutliples
+						nb_dents_r1 = randint(5,30);
+						nb_dents_r2 = randint(5,30,nb_dents_r1);
+						texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 en a $${nb_dents_r2}$ dents.`;
+						//texte += `<br> On cherche à savoir au bout de combien de tours les deux roues seront toutes les deux revenues à leur position initiale.`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)==(nb_dents_r1*nb_dents_r2)) {
+							texte += katex_Popup2(
+								numero_de_l_exercice+1,
+								1,
+								"nombres premiers entre eux",
+								`Définition : Nombres premiers entre eux`,
+								`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							);
+						};
+						texte += `<br>`+num_alpha(0)+` Écrire la liste des multiples de $${nb_dents_r1}$ et de $${nb_dents_r2}$.`
+						texte += `<br>`+num_alpha(1)+` En déduire le nombre de tours de chaque roue avant retour à leur position initiale.`
+						// if (sortie_html) {						
+						// 	texte += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`);
+						// 	texte += `<div id="${id_du_div}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;					 							
+						// 	SVG_engrenages(id_du_div,200,200);						
+						// };
+						let nb_marge = 4;
+						texte_corr = num_alpha(0)+` Liste des premiers multiples de $${nb_dents_r1}$ : <br>`;
+						for (let k=1;k<(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1+nb_marge);k++) {
+							texte_corr += `$${k}\\times${nb_dents_r1} = `;
+							if (k==(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1)) {
+								texte_corr += mise_en_evidence(tex_nombre(k*nb_dents_r1));
+								texte_corr += `$; `;
+							} else {
+								texte_corr += `${tex_nombre(k*nb_dents_r1)}$; `;
+							};
+						};
+						texte_corr += `$\\ldots$ `;
+						texte_corr += `<br>`;
+						texte_corr += ` Liste des premiers multiples de ${nb_dents_r2} : <br>`;
+						for (let k=1;k<(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2+nb_marge);k++) {
+							texte_corr += `$${k}\\times${nb_dents_r2} = `;
+							if (k==(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2)) {
+								texte_corr += mise_en_evidence(tex_nombre(k*nb_dents_r2));
+								texte_corr += `$; `;
+							} else {
+								texte_corr += `${tex_nombre(k*nb_dents_r2)}$; `;
+							};
+						};
+						texte_corr += `$\\ldots$ `;
+						texte_corr += `<br>`;
+						texte_corr += `Le plus petit multiple commun à $${nb_dents_r1}$ et $${nb_dents_r2}$ vaut donc $ppcm(${nb_dents_r1},${nb_dents_r2}) = ${ppcm(nb_dents_r1,nb_dents_r2)}$.`
+
+						//texte_corr += `Correction à détailler, en écrivant la liste des mutliples de chaque nombre de dents jusqu'à un peu plus que le ppcm et en le mettant en valeur.<br>`;
+						//texte_corr += `PPCM du nombres de dents puis on calcule le nombre de tours de chaque roue.<br>`;
+						//texte_corr += `chaque roue doit tourner de ppcm(${nb_dents_r1},${nb_dents_r2})=${ppcm(nb_dents_r1,nb_dents_r2)} dents <br>`;
+						texte_corr += `<br>`+num_alpha(1)+` Chaque roue doit tourner de $ppcm(${nb_dents_r1},${nb_dents_r2})=${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents.`;
+						texte_corr += `<br> Cela correspond à $(${ppcm(nb_dents_r1,nb_dents_r2)}\\text{ dents})\\div (${nb_dents_r1}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};						
+						texte_corr +=`pour la roue n$\\degree$1.`
+						texte_corr += `<br>Cela correspond à $(${ppcm(nb_dents_r1,nb_dents_r2)}\\text{ dents})\\div (${nb_dents_r2}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};				
+						texte_corr += `pour la roue n$\\degree$2.`
+						//roue1 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1} tours.<br>`;
+						//texte_corr += `roue2 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2} tours.`;
+						//`<br>`+num_alpha(0)+`
 						break;		
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 2';
-						texte_corr = 'corr type 2';
-						break;	
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 3';
-						texte_corr = 'corr type 3';
-						break;	
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 4';
-						texte_corr = 'corr type 4';
+					case 2 : // avec de plus grands nombre, c'est mieux de décomposer en facteurs premiers
+						nb_dents_r1 = randint(31,80);
+						nb_dents_r2 = randint(31,80,nb_dents_r1);
+						texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 en a $${nb_dents_r2}$ dents.`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)==(nb_dents_r1*nb_dents_r2)) {
+							texte += katex_Popup2(
+								numero_de_l_exercice+2,
+								1,
+								"nombres premiers entre eux",
+								`Définition : Nombres premiers entre eux`,
+								`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							);
+						};
+						//texte += `<br> On cherche à savoir au bout de combien de tours les deux roues seront toutes les deux revenues à leur position initiale.`;
+						texte += `<br>`+num_alpha(0)+` Décomposer $${nb_dents_r1}$ et $${nb_dents_r2}$ en produit de facteurs premiers.`;
+						texte += `<br>`+num_alpha(1)+` En déduire le nombre de tours de chaque roue avant retour à leur position initiale.`;
+						// if (sortie_html) {
+						// 	texte += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`);
+						// 	texte += `<div id="${id_du_div}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;					 
+						// 	SVG_engrenages(id_du_div,200,200);						
+						// };
+						texte_corr = `Pour un nombre de dents plus élevé, il est plus commode d'utiliser les décompositions en produit de facteurs premiers.`
+						//texte_corr = `Correction à détailler, en décomposant chaque nombre de dents en produit de facteurs premiers. Utilisation de la couleur!<br>`;
+						texte_corr += `<br>`+num_alpha(0)+` Décomposition de $${nb_dents_r1}$ en produit de facteurs premiers :  $${nb_dents_r1} = ${decomposition_facteurs_premiers(nb_dents_r1)}$.`;
+						texte_corr += `<br> Décomposition de $${nb_dents_r2}$ en produit de facteurs premiers :  $${nb_dents_r2} = ${decomposition_facteurs_premiers(nb_dents_r2)}$.`;
+						texte_corr += `<br> D'où $ppcm(${nb_dents_r1},${nb_dents_r2})= ${decomposition_facteurs_premiers(ppcm(nb_dents_r1,nb_dents_r2))}$.<br>`;						
+						// texte_corr += `PPCM du nombres de dents puis on calcule le nombre de tours de chaque roue.<br>`;
+						// texte_corr += `chaque roue doit tourner de ppcm(${nb_dents_r1},${nb_dents_r2})=${ppcm(nb_dents_r1,nb_dents_r2)} dents <br>`;
+						// texte_corr += `roue1 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1} tours.<br>`;
+						// texte_corr += `roue2 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2} tours.`;
+						texte_corr += `<br>`+num_alpha(1)+` Chaque roue doit tourner de $ppcm(${nb_dents_r1},${nb_dents_r2})=${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents.`;
+						texte_corr += `<br> Cela correspond à $(${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}\\text{ dents})\\div (${nb_dents_r1}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};						
+						texte_corr +=`pour la roue n$\\degree$1.`;						
+						texte_corr += `<br> Cela correspond à $(${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}\\text{ dents})\\div (${nb_dents_r2}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};						
+						texte_corr +=`pour la roue n$\\degree$2.`
+						break;		
+					case 3 : // déterminer le nombre de dents d'une roue connaissant l'autre et le nombre de tours necessaires à la re-synchro
+						nb_dents_r1 = randint(5,80);
+						nb_dents_r2 = randint(5,80,nb_dents_r1);						
+						texte = `La roue n$\\degree$2 a maintenant $${nb_dents_r2}$ dents.`;
+						texte += ` Déterminer le nombre de dents de la roue n$\\degree$1 qui ferait $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$ `;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};	
+						texte_corr += ` pendant que la roue n$\\degree$2 en fait $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$.`
+						texte_corr = `Puisque la roue n$\\degree$2, qui a $${nb_dents_r2}$ dents, fait $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$ `;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};	
+						texte_corr +=`, cela représente $${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents.`;
+						texte_corr += `<br>La roue n$\\degree$1 doit donc aussi tourner de $${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents, ceci en $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$ `;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};							
+						texte_corr += `.`;
+						texte_corr += `<br> on obtient donc $(${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}\\text{ dents})\\div (${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}\\text{`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};
+						texte_corr += `}) = ${nb_dents_r1} \\text{ dents/tour}.$`
+						texte_corr += `<br>La roue n$\\degree$1 a donc : $${nb_dents_r1}$ dents.`;
+						// texte_corr += `<br> roue 2 : ${nb_dents_r2} dents.`;
+						// texte_corr += `<br> ppcm : ${ppcm(nb_dents_r1,nb_dents_r2)}.`;
 						break;		
 				};
 			
@@ -21022,7 +21851,7 @@ function ajout_de_LaTeX_statique (url_sans_extension){
 
 // Gestion de l'affichage
 
-var code_LaTeX = '', contenu_fichier = '';
+var code_LaTeX = '', contenu_fichier = '', liste_packages = new Set;
 
 
 function mise_a_jour_du_code(){
@@ -21138,6 +21967,11 @@ function mise_a_jour_du_code(){
 				code1 += '\n\n'
 				code2 += exercice[i].contenu_correction;
 				code2 += '\n\n'
+				if (typeof exercice[i].liste_packages === 'string') {
+					liste_packages.add(exercice[i].liste_packages)
+				} else { // si c'est un tableau
+					exercice[i].liste_packages.forEach(liste_packages.add,liste_packages)
+				} 
 			}
 				
 			if ($('#supprimer_correction:checked').val()) {
@@ -21209,7 +22043,7 @@ if (!sortie_html){
 			// Gestion du style pour l'entête du fichier
 
 			contenu_fichier = `
-			
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document généré avec MathALEA sous licence CC-BY-SA
 %
@@ -21452,199 +22286,6 @@ window.onload = function()  {
 	 });
 
 };
-
-
-
-
-// Gestion des styles LaTeX
-
-function intro_LaTeX(entete="Exercices") {
-	if (entete=='') {entete='Exercices'}
-		return `\\documentclass[12pt]{article}
-\\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
-\\usepackage[utf8]{inputenc}		        
-\\usepackage[T1]{fontenc}		
-\\usepackage[french]{babel}
-\\usepackage{multicol} 					
-\\usepackage{calc} 						
-\\usepackage{enumerate}
-\\usepackage{enumitem}
-\\usepackage{graphicx}				
-\\usepackage{tabularx}
-\\usepackage[autolanguage]{numprint}
-\\usepackage{hyperref}
-\\usepackage{pgf,tikz}
-\\usepackage{pgfplots}
-\\usetikzlibrary{arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
-	shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows,babel} % Charge toutes les librairies de Tikz
-\\usepackage{tkz-tab,tkz-euclide,tkz-fct,tkz-base}	% Géométrie euclidienne avec TikZ
-\\usetkzobj{all}	
-\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
-\\usepackage{cancel}
-\\usepackage{gensymb}
-\\usepackage{eurosym}
-\\DeclareUnicodeCharacter{20AC}{\\euro{}}
-\\usepackage{fancyhdr,lastpage}          	
-\\pagestyle{fancy}                      	
-\\usepackage{fancybox}					
-\\usepackage{xlop}						
-\\usepackage{setspace}	
-
-\\setlength{\\parindent}{0mm}		
-\\renewcommand{\\arraystretch}{1.5}	
-\\newcounter{exo}          				
-\\setcounter{exo}{0}   				
-\\newcommand{\\exo}[1]{				
-	\\stepcounter{exo}        		
-	\\subsection*{Exercice \\no{\\theexo} \\textmd{\\normalsize #1}}
-}
-\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
-\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
-\\newcommand{\\version}[1]{\\fancyhead[R]{Version #1}}
-\\setlength{\\fboxsep}{3mm}
-\\newenvironment{correction}{\\newpage\\fancyhead[C]{\\textbf{Correction}}\\setcounter{exo}{0}}{}
-\\fancyhead[C]{\\textbf{${entete}}}
-\\fancyfoot{}
-\\fancyfoot[R]{\\scriptsize Coopmaths.fr -- CC-BY-SA}
-\\setlength{\\headheight}{14.5pt}
-
-
-\\begin{document}
-
-`
-	}
-
-	function intro_LaTeX_coop(){
-
-		let intro_LaTeX_coop = `\\documentclass[12pt]{article}
-\\usepackage[left=1.5cm,right=1.5cm,top=3.5cm,bottom=2cm]{geometry}
-\\usepackage[utf8]{inputenc}		        
-\\usepackage[T1]{fontenc}		
-\\usepackage[french]{babel}
-\\usepackage{hyperref}
-\\usepackage{multicol} 					
-\\usepackage{calc} 						
-\\usepackage{enumerate}
-\\usepackage{enumitem}
-\\usepackage{graphicx}				
-\\usepackage{tabularx}
-\\usepackage[autolanguage]{numprint}
-\\usepackage{pgf,tikz}
-\\usepackage{pgfplots}
-\\usetikzlibrary{arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
-	shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows,babel} % Charge toutes les librairies de Tikz
-\\usepackage{tkz-tab,tkz-euclide,tkz-fct,tkz-base}	% Géométrie euclidienne avec TikZ
-\\usetkzobj{all}				
-\\usepackage{amsmath,amsfonts,amssymb,mathrsfs} 
-\\usepackage{cancel}
-\\usepackage{gensymb}
-\\usepackage{eurosym}
-\\DeclareUnicodeCharacter{20AC}{\\euro{}}
-\\usepackage{fancyhdr,lastpage}          	
-\\pagestyle{fancy}                      	
-\\usepackage{fancybox}					
-\\usepackage{xlop}						
-\\usepackage{setspace}
-
-%%% COULEURS %%%
-
-\\definecolor{nombres}{cmyk}{0,.8,.95,0}
-\\definecolor{gestion}{cmyk}{.75,1,.11,.12}
-\\definecolor{gestionbis}{cmyk}{.75,1,.11,.12}
-\\definecolor{grandeurs}{cmyk}{.02,.44,1,0}
-\\definecolor{geo}{cmyk}{.62,.1,0,0}
-\\definecolor{algo}{cmyk}{.69,.02,.36,0}
-\\definecolor{correction}{cmyk}{.63,.23,.93,.06}
-\\usepackage{colortbl}
-\\arrayrulecolor{couleur_theme}		% Couleur des filets des tableaux
-
-%%% MISE EN PAGE %%%
-
-\\setlength{\\parindent}{0mm}		
-\\renewcommand{\\arraystretch}{1.5}	
-\\renewcommand{\\labelenumi}{\\textbf{\\theenumi{}.}}	
-\\renewcommand{\\labelenumii}{\\textbf{\\theenumii{}.}}	
-\\setlength{\\fboxsep}{3mm}
-
-\\setlength{\\headheight}{14.5pt}
-
-\\spaceskip=2\\fontdimen2\\font plus 3\\fontdimen3\\font minus3\\fontdimen4\\font\\relax %Pour doubler l'espace entre les mots
-\\newcommand{\\numb}[1]{ % Dessin autour du numéro d'exercice
-\\begin{tikzpicture}[overlay,yshift=-.3cm,scale=.8]
-\\draw[fill=couleur_numerotation,couleur_numerotation](-.3,0)rectangle(.5,.8);
-\\draw[line width=.05cm,couleur_numerotation,fill=white] (0,0)--(.5,.5)--(1,0)--(.5,-.5)--cycle;
-\\node[couleur_numerotation]  at (.5,0) { \\large \\bfseries #1};
-\\draw (-.4,.8) node[white,anchor=north west]{\\bfseries EX}; 
-\\end{tikzpicture}
-}
-
-%%% NUMEROS DES EXERCICES %%%
-
-\\usepackage{titlesec} % Le titre de section est un numéro d'exercice avec sa consigne alignée à gauche.
-\\titleformat{\\section}{}{\\numb{\\arabic{section}}}{1cm}{\\hspace{0em}}{}
-\\newcommand{\\exo}[1]{ % Un exercice est une nouvelle section avec la consigne écrite en caractêres normaux
-	\\section{\\textmd{#1}}
-	\\medskip
-}
-
-
-%%% ENVIRONNEMENTS - CADRES %%%
-\\usepackage[framemethod=tikz]{mdframed}
-
-\\newmdenv[linecolor=couleur_theme, linewidth=3pt,topline=true,rightline=false,bottomline=false,frametitlerule=false,frametitlefont={\\color{couleur_theme}\\bfseries},frametitlerulewidth=1pt]{methode}
-
-
-\\newmdenv[startcode={\\setlength{\\multicolsep}{0cm}\\setlength{\\columnsep}{.2cm}\\setlength{\\columnseprule}{0pt}\\vspace{0cm}},linecolor=white, linewidth=3pt,innerbottommargin=10pt,innertopmargin=5pt,innerrightmargin=20pt,splittopskip=20pt,splitbottomskip=10pt,everyline=true,tikzsetting={draw=couleur_theme,line width=4pt,dashed,dash pattern= on 10pt off 10pt},frametitleaboveskip=-.6cm,frametitle={\\tikz\\node[anchor= east,rectangle,fill=white]{\\textcolor{couleur_theme}{\\raisebox{-.3\\height}{\\includegraphics[width=.8cm]{\\iconeobjectif}}\\; \\bfseries \\Large Objectifs}};}]{objectif}
-
-\\newmdenv[startcode={\\colorlet{couleur_numerotation}{correction}\\renewcommand{\\columnseprulecolor}{\\color{correction}}
-\\setcounter{section}{0}\\arrayrulecolor{correction}},linecolor=white, linewidth=4pt,innerbottommargin=10pt,innertopmargin=5pt,splittopskip=20pt,splitbottomskip=10pt,everyline=true,frametitle=correction,tikzsetting={draw=correction,line width=3pt,dashed,dash pattern= on 15pt off 10pt},frametitleaboveskip=-.4cm,frametitle={\\tikz\\node[anchor= east,rectangle,fill=white]{\\; \\textcolor{correction}{\\raisebox{-.3\\height}{\\includegraphics[width=.6cm]{icone-correction}}\\; \\bfseries \\Large Corrections}};}]{correction}
-
-\\newmdenv[roundcorner=0,linewidth=0pt,frametitlerule=false, backgroundcolor=gray!40,leftmargin=8cm]{remarque}
-
-
-
-\\newcommand{\\theme}[4]
-{
-	\\fancyhead[L]{}
-	\\fancyhead[R]{}
-	\\fancyhead[C]{
-		\\begin{tikzpicture}[remember picture,overlay]
-		\\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(0,-.8cm)$) {\\includegraphics{header-#1}};
-		\\node[anchor=east, fill=white] at ($(current page.north east)+(-2,-1.4cm)$) {\\Huge \\textcolor{couleur_theme}{\\bfseries \\#} \\bfseries #2 \\textcolor{couleur_theme}{\\bfseries \\MakeUppercase{#3}}};
-		\\node[anchor=center, color=white] at ($(current page.north)+(0,-2.65cm)$) {\\Large \\bfseries \\MakeUppercase{#4}};
-		\\end{tikzpicture}
-	}
-	\\fancyfoot[C]{
-		\\begin{tikzpicture}[remember picture,overlay]
-		\\node[anchor=south west,inner sep=0pt] at ($(current page.south west)+(0,0)$) {\\includegraphics{footer-#1}};
-		\\end{tikzpicture} 
-	}
-	\\colorlet{couleur_theme}{#1}
-	\\colorlet{couleur_numerotation}{couleur_theme}
-	\\def\\iconeobjectif{icone-objectif-#1}
-	\\def\\urliconeomethode{icone-methode-#1}
-	\\renewcommand{\\headrulewidth}{0pt} % Pour enlever les traits en en-tête et en pied de page
-	\\renewcommand{\\footrulewidth}{0pt}
-}
-
-\\newcommand{\\version}[1]{
-	\\fancyhead[R]{
-		\\begin{tikzpicture}[remember picture,overlay]
-		\\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(-.5,-.5cm)$) {\\large \\textcolor{couleur_theme}{\\bfseries V#1}};
-		\\end{tikzpicture}
-	}
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Fin du préambule %%%
-%%%%%%%%%%%%%%%%%%%%%%%%
-		
-
-`
-		return intro_LaTeX_coop
-
-	}
 
 
 

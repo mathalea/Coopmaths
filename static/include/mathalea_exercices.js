@@ -72,7 +72,7 @@ var liste_des_exercices_disponibles = {
 		'6N43-2' : Tableau_criteres_de_divisibilite,
 		'6P10' : Proportionnalite_pas_proportionnalite,
 		'6P11' : Proportionnalite_par_linearite,
-		'5N12':Exercice_fractions_simplifier,
+		'5N12': Exercice_fractions_simplifier,
 		'5N12-2': Egalites_entre_fractions,
 		'5N18': Exercice_decomposer_en_facteurs_premiers,
 		'5N110' : Variation_en_pourcentages,
@@ -132,21 +132,22 @@ var liste_des_exercices_disponibles = {
 		'3A11-2' : Decomposition_facteurs_premiers,
 		'3A11-3' : Lister_Diviseurs_Par_Decomposition_facteurs_premiers,
 		'3A12' : Fractions_irreductibles,
-		//'3A13' : PGCD_PPCM_Engrenages,
+		'3A13' : PPCM_Engrenages,
 		'3M30' : Calcul_de_volumes_3e,
-		'3N10': Exercice_developper,
-		'3N11' : Double_distributivite,
-		'3N12' : Developper_Identites_remarquables3,
-		'3N13' : Factoriser_Identites_remarquables3,
-		'3N14' : Resoudre_une_equation_produit_nul,
-		'3N14-2' : Resoudre_une_equation_produit_nul_niv2,
-		'3G10' : Exercice_Thales,
-		'3G11' : Reciproque_Thales,
+		'3L11': Exercice_developper,
+		'3L11-1' : Double_distributivite,
+		'3L12-1' : Developper_Identites_remarquables3,
+		'3L12' : Factoriser_Identites_remarquables3,
+		'3L14' : Resoudre_une_equation_produit_nul,
+		'3L14-1' : Resoudre_une_equation_produit_nul_niv2,
+		'3L15' : Resoudre_une_equation_x2_egal_A,
+		'3G20' : Exercice_Thales,
+		'3G21' : Reciproque_Thales,
 		'3G30' : Exercice_Trigo_longueurs,
 		'3G31' : Exercice_Trigo_angles,
 		'3F1-act' : fonction_notion_vocabulaire,
-		'3F10' : fonctions_lineaires,
-		'3F11' : fonctions_affines,
+		'3F20' : Lecture_expression_fonctions_lineaires,
+		'3F20-1' : Lecture_expression_fonctions_affines,
 		'3F12' : fonctions_calculs_d_images,
 		'3F12-2' : Image_fonction_algebrique,
 		'3F12-3' : Tableau_de_valeurs,
@@ -229,6 +230,7 @@ function Exercice() {
    	// this.bouton_aide = modal_pdf(numero_de_l_exercice,url_pdf,texte="Aide",label_bouton="Aide - PDF",icone="file pdf")
    	this.pas_de_version_LaTeX = false ;
    	this.nouvelle_version = function(numero_de_l_exercice){}
+   	this.liste_packages = []; // string ou liste de string avec le nom des packages spécifiques à ajouter dans le préambule
 
 }
 
@@ -249,6 +251,7 @@ function feuille_d_axes_gradues() {
    	this.nb_cols_corr_modifiable = false;
    	this.spacing_modifiable = false;
    	this.spacing_corr_modifiable = false;
+   	this.liste_packages = 'axes_gradues'
 
 
 	this.nouvelle_version = function(numero_de_l_exercice){
@@ -290,6 +293,7 @@ function Lire_abscisse_entiere(){
 	this.spacing = 1;
     this.spacing_corr = 1;
 	this.sup=4;
+	this.liste_packages = ['tkz-euclide']
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
 		let type_de_questions;
@@ -363,6 +367,8 @@ function Placer_un_point_abscisse_entiere(){
 		this.spacing_corr = 1;
 		this.sup=1;
 		this.type_exercice = 'SVGJS';
+   		this.liste_packages = 'tkz-euclide'
+
 	
 	
 		this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
@@ -552,6 +558,8 @@ function Lire_abscisse_decimale(){
 	this.spacing = 1;
     this.spacing_corr = 1;
 	this.sup=1;
+   	this.liste_packages = 'tkz-euclide'
+
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
 		let type_de_questions;
@@ -624,6 +632,8 @@ function Lire_abscisse_fractionnaire(){
 	this.spacing = 1;
     this.spacing_corr = 1;
 	this.sup=1;
+   	this.liste_packages = 'tkz-euclide'
+
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
 		let type_de_questions;
@@ -698,6 +708,7 @@ function Placer_points_sur_axe(){
     this.spacing_corr = 1;
 	this.sup=1;
 	this.type_exercice = 'SVGJS';
+	this.liste_packages = 'tkz-euclide'
 
 
 	this.nouvelle_version = function(numero_de_l_exercice){ // numero_de_l_exercice est 0 pour l'exercice 1
@@ -1503,6 +1514,7 @@ function Quatre_operations(){
 	this.nb_cols = 2;
 	this.nb_cols_corr = 2;
 	this.sup = 1; // niveau de difficulté
+	this.liste_packages = 'xlop'
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -5014,6 +5026,7 @@ function Additions_soustractions_multiplications_posees(){
 	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon les opérations posées ne sont pas jolies
 	this.nb_questions = 5;
 	// this.pas_de_version_HMTL=true;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -5216,6 +5229,7 @@ function Divisions_euclidiennes(){
 	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon opidiv n'est pas joli
 	this.nb_questions = 4;
 	this.sup = 1;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -5304,6 +5318,7 @@ function Division_decimale(){
 	sortie_html ? this.spacing_corr=2 : this.spacing_corr = 1; //Important sinon opdiv n'est pas joli
 	this.nb_questions = 4;
 	this.sup = 1;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -5405,6 +5420,7 @@ function Multiplier_decimaux(){
 	this.spacing = 2;
 	this.spacing_corr = 1; //Important sinon le calcul posé ne fonctionne pas avec opmul et spacing
 	this.nb_questions = 4;
+	this.liste_packages = 'xlop';
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -6079,7 +6095,7 @@ function reperage_point_du_quart_de_plan(){
 	this.quart_de_plan=true;	;
 
 }
-function fonctions_lineaires(){
+function Lecture_expression_fonctions_lineaires(){
 	fonctions_affines.call(this);
 	this.titre="Déterminer une fonction linéaire";
 	this.lineaire=true;
@@ -12946,14 +12962,19 @@ function problemes_grandeurs_composees(){
 							let deltat=randint(2,5);
 							texte = `Une piscine a la forme d'un prisme droit. La profondeur à son extrémité nord est de ${h1} cm et la profondeur à son extrémité sud est de ${h2} cm.<br>`
 							texte +=`D\'une extrémité à l\'autre la pente au fond de la piscine est régulière.<br>La largeur de la piscine (Est-Ouest) est de ${l} m et sa longueur (Nord-Sud) est de ${L} m.<br>`
-							texte += num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube ($\\text{m}^3$) mais on peut aussi rencontrer le litre (L) avec comme correspondance $\\text{1dm}^3=\\text{1L}$`)+` d'eau en m³ contenu dans cette piscine quand elle est pleine.<br>`
+							texte += num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube (m${exposant(3)}) mais on peut aussi rencontrer le litre (L) avec comme correspondance 1dm${exposant(3)}=1L`)+` d'eau en m${exposant(3)} contenu dans cette piscine quand elle est pleine.<br>`
 							texte += num_alpha(1)+` Sachant que pour élever la température d'un litre d'eau de 1 degré, il faut une énergie de 1,162 Wattheure.<br> Quelle est l'énergie consommée en kWh pour augmenter de ${deltat} degrés ?<br>`							
 							texte_corr = num_alpha(0)+` La base de ce prisme droit est un trapèze rectangle de petite base ${h2} cm, de grande base ${h1} cm et de hauteur ${L} m.<br>`
-							texte_corr += `$\\mathcal{A}=\\dfrac{\\left(${h1}\\text{ cm}+${h2}\\text{ cm}\\right)}{2}\\times${L}\\text{ m}=\\dfrac{\\left(${arrondi_virgule(h1/100)}\\text{ m}+${arrondi_virgule(h2/100)}\\text{ m}\\right)}{2}\\times${L}\\text{ m}`
-							texte_corr += `=\\dfrac{${arrondi_virgule((h1+h2)/100)}\\text{ m}}{2}\\times${L}\\text{ m}=${arrondi_virgule((h1+h2)/200)}\\text{ m}\\times${L}\\text{ m}=${arrondi_virgule((h1+h2)/200*L)}\\text{ m²}$<br>`
-							texte_corr += `Le volume de ce prisme et donc par extension le volume d'eau conteu dans la piscine est :<br>$\\mathcal{A}\\times\\mathcal{h}=${arrondi_virgule((h1+h2)/200*L)}\\text{ m²}\\times${l}\\text{ m}=${arrondi_virgule((h1+h2)/200*L*l)}\\text{ m³}$.<br>`
-							texte_corr += num_alpha(1)+` L'énergie consomée pour élever la température de l'eau de cette piscine de ${deltat} degrés est :<br>`
-							texte_corr += `$${arrondi_virgule((h1+h2)/200*L*l)}\\text{ m³}=${tex_nombre((h1+h2)*L*l*5)}\\text{ dm³}=${tex_nombre((h1+h2)*L*l*5)}\\text{ L}$<br>`
+							texte_corr += `$\\mathcal{A}=\\dfrac{\\left(${h1}\\text{ cm}+${h2}\\text{ cm}\\right)}{2}\\times${L}\\text{ m}$`
+							texte_corr += ` $=\\dfrac{\\left(${arrondi_virgule(h1/100)}\\text{ m}+${arrondi_virgule(h2/100)}\\text{ m}\\right)}{2}\\times${L}\\text{ m}$`
+							texte_corr += ` $=\\dfrac{${arrondi_virgule((h1+h2)/100)}\\text{ m}}{2}\\times${L}\\text{ m}$`
+							texte_corr += ` $=${arrondi_virgule((h1+h2)/200)}\\text{ m}\\times${L}\\text{ m}$`
+							texte_corr += ` $=${arrondi_virgule((h1+h2)/200*L)}\\text{ m}$${exposant(2)}<br>`
+							texte_corr += `Le volume de ce prisme et donc par extension le volume d'eau conteu dans la piscine est :<br>`
+							texte_corr += `$\\mathcal{A}\\times\\mathcal{h}=${arrondi_virgule((h1+h2)/200*L)}\\text{ m}^2\\times${l}\\text{ m}$`
+							texte_corr += ` $=${arrondi_virgule((h1+h2)/200*L*l)}$m${exposant(3)}.<br>`
+							texte_corr += num_alpha(1)+` Convertissons le volume de la piscine en litres : $${arrondi_virgule((h1+h2)/200*L*l)}\\text{ m}^3=${tex_nombre((h1+h2)*L*l*5)}\\text{ dm}^3=${tex_nombre((h1+h2)*L*l*5)}\\text{ L}$<br>`
+							texte_corr += ` L'énergie consomée pour élever la température de l'eau de cette piscine de ${deltat} degrés est :<br>`
 							texte_corr += `$\\mathcal{E}=${tex_nombre((h1+h2)*L*l*5)}\\text{ L}\\times${deltat}\\text{ °C}\\times 1,162 \\dfrac{\\text{Wh}}{\\text{°C}\\times\\text{L}}=${tex_nombre(arrondi((h1+h2)*L*l*5*deltat*1.162,3))}\\text{ Wh}=${tex_nombre(arrondi((h1+h2)*L*l/200*deltat*1.162,7))}\\text{ kWh}$<br>`
 							break;
 						case 1 : // Volume d'un tonneau cylindrique
@@ -12961,7 +12982,7 @@ function problemes_grandeurs_composees(){
 						let r=randint(10,15)*2;
 						let h=randint(0,10)+r*4;
 						texte = `Un tonneau cylindrique a un rayon de ${r} cm et une hauteur de ${h} cm.<br>`;
-						texte +=num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube ($\\text{m}^3$) mais on peut aussi rencontrer le litre (L) avec comme correspondance $\\text{1dm}^3=\\text{1L}$`)+` en dm³ à 0,1 près de ce tonneau.<br>`
+						texte +=num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"volume",`Définition : volume (grandeur physique)`,`C’est le produit de trois longueurs ou le produit d'une aire et d'une longueur.<br>L'unité de mesure du volume est le mètre cube ($\\text{m}^3$) mais on peut aussi rencontrer le litre (L) avec comme correspondance $\\text{1dm}^3=\\text{1L}$`)+` en dm${exposant(3)} à 0,1 près de ce tonneau.<br>`
 						texte +=num_alpha(1)+` Si on le remplit ${liquides[index2][0]} (dont la `+katex_Popup2(numero_de_l_exercice+i*3,type_aide,"densité",`Définition : densité (grandeur physique)`,`La densité d'une substance est égale à la masse volumique de la substance divisée par la masse volumique du corps de référence à la même température.<br>Pour les liquides et les solides, l'eau est utilisée comme référence (sa masse volumique est de 1kg/dm$^3$), pour les gaz, la mesure s'effectue par rapport à l'air.<br>Donc pour les liquides, la densité est égale à la masse volumique exprimée en kg/dm$^3$.`)+` est de ${tex_nombrec(liquides[index2][1])}), quelle masse ${liquides[index2][0]} en kg contiendra-t-il au gramme près ?<br>`
 						texte_corr=num_alpha(0)+` Le volume d'un cylindre est donné par la formule $\\mathcal{A}\\text{ire de base}\\times\\mathcal{h}$.<br> Ici la base est un disque de rayon ${r} cm.<br>`
 						texte_corr+=`$\\mathcal{A}\\text{ire de base}\\times\\mathcal{h}=\\pi\\times${r}^{2}\\text{ cm}^2\\times${h}\\text{ cm}=${r*r*h}\\pi\\text{ cm}^3\\approx${tex_nombre(arrondi(r*r*h*Math.PI,1))}\\text{ cm}^3\\approx${tex_nombre(arrondi(r*r*h*Math.PI/1000,1))}\\text{ dm}^3$<br>`
@@ -12988,7 +13009,7 @@ function problemes_grandeurs_composees(){
 					index=randint(60,90) //masse du père (recyclage de variable)
 					masse=randint(20,30) //masse de l'enfant
 					distance=arrondi(randint(25,35)/10)
-					texte = `${quidam} qui pèse ${masse} kg se trouve sur le siège d'une balançoire "`+ katex_Popup2(numero_de_l_exercice+i*3,2,`trébuchet`,`https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/`,`https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/balancoire-a-bascule-trebuchet-baskul-768x768.jpg`) +`" dans un jardin d'enfant. Le siège est situé à ${tex_nombre(distance)} m du pivot central de la balançoire (bras de levier).<br>`
+					texte = `${quidam} qui pèse ${masse} kg se trouve sur le siège d'une balançoire "`+ katex_Popup2(numero_de_l_exercice+i*3,2,`trébuchet`,`Schéma explicatif`,`images/trebuchet.png`) +`" dans un jardin d'enfant. Le siège est situé à ${tex_nombre(distance)} m du pivot central de la balançoire (bras de levier).<br>`
 					texte+= num_alpha(0)+` Calculer le `+katex_Popup2(numero_de_l_exercice+i*3+1,type_aide,`moment`,`Définition : momnent (grandeur physique)`,`Le moment d'une force d'intensité F(en Newton ou kg.m.s$^{-2}$) en un point M par rapport à un pivot P est le produit de F par la distance PM (appelée bras de levier) exprimée en mètres (lorsque cette force s'exerce perpendiculairement au bras de levier). Le moment est l'energie permettant de faire tourner l'objet autour du pivot.<br>L'unité de mesure du moment est le Joule (J).<br>$1J=1\\text{ kg.m}^2\\text{s}^{-2}$.`) +` du `+katex_Popup2(numero_de_l_exercice+i*3+2,type_aide,`poids`,`Définition : Poids`,`Le poids est le produit de la masse d'un objet par l'accélération de la pesanteur terrestre ($9,81\\text{ m.s}^{-2}$).<br>L'unité du poids est le Newton (N) : 1N=1kg.m.s$^{-2}$`)+` de ${quidam} sur son siège par rapport au pivot central du trébuchet en Joules (on admettra que le bras de levier est horizontal).<br>`
 					texte+= num_alpha(1)+` Le père de ${quidam} vient s'installer de l'autre côté du pivot central. Il pèse ${index} kg et s'installe de façon à ce que son poids permette d'équilibrer la balançoire à l'horizontale. Quelle doit être la longueur du bras de levier de son côté ( à quelle distance du pivot est-il assis ) ?<br>`
 					texte_corr=num_alpha(0)+` Le moment du poids de ${quidam} appliqué sur son siège par rapport au pivot central du trébuchet est :<br>`
@@ -13185,10 +13206,10 @@ function problemes_grandeurs_composees(){
 					index2=randint(0,14,[index1])
 					let ville1=villes[index1][0]
 					let ville2=villes[index2][0]
-					texte = num_alpha(0)+` En 2016, à ${villes[index1][0]} il y avait $${tex_nombre(villes[index1][1])}$ habitants pour une superficie de $${tex_nombre(villes[index1][2]*1000)}$ ha.<br> Calculer la densité de population en hab/km².<br>`
-					texte += num_alpha(1)+` La même année, la `+katex_Popup2(numero_de_l_exercice+i*3+1,type_aide,`densité de population`,`Définition : Densité de population`,`C’est le quotient du nombre d'habitants par la superficie en km².<br>L'unité de la densité de population est l'habitant par km² (hab/km²).`)+` de ${villes[index2][0]} était de $${tex_nombrec(villes[index2][1]/villes[index2][2])}$ hab/km² pour une superficie de $${tex_nombrec(villes[index2][2]*1000)}$ ha.<br> Calculer le nombre d'habitants de ${villes[index2][0]} à cette date.<br>`
-					texte_corr = num_alpha(0)+` En 2016, la densité de population à ${villes[index1][0]} était de :<br> $\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2]*1000)}\\text{ ha}}=\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2])}\\text{ km}^2}=${tex_nombrec(villes[index1][1]/villes[index1][2])}\\text{ hab/km}^2$.<br>`
-					texte_corr+= num_alpha(1)+` A cette date, le nombre d'habitants de ${villes[index2][0]} était de :<br> $${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2]*1000)}\\text{ ha}=${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2])}\\text{ km}^2=${tex_nombre(villes[index2][1])}\\text{ hab}$.`
+					texte = num_alpha(0)+` En 2016, à ${villes[index1][0]} il y avait $${tex_nombre(villes[index1][1])}$ habitants pour une superficie de $${tex_nombre(villes[index1][2]*100)}$ ha.<br> Calculer la densité de population en hab/km$^2$.<br>`
+					texte += num_alpha(1)+` La même année, la `+katex_Popup2(numero_de_l_exercice+i*3+1,type_aide,`densité de population`,`Définition : Densité de population`,`C’est le quotient du nombre d'habitants par la superficie en km$^2$.<br>L'unité de la densité de population est l'habitant par km$^2$ (hab/km$^2$).`)+` de ${villes[index2][0]} était de $${tex_nombrec(villes[index2][1]/villes[index2][2])}$ hab/km$^2$ pour une superficie de $${tex_nombrec(villes[index2][2]*100)}$ ha.<br> Calculer le nombre d'habitants de ${villes[index2][0]} à cette date.<br>`
+					texte_corr = num_alpha(0)+` En 2016, la densité de population à ${villes[index1][0]} était de :<br> $\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2]*100)}\\text{ ha}}=\\dfrac{${tex_nombre(villes[index1][1])}\\text{ hab}}{${tex_nombre(villes[index1][2])}\\text{ km}^2}=${tex_nombrec(villes[index1][1]/villes[index1][2])}\\text{ hab/km}^{2}$.<br>`
+					texte_corr+= num_alpha(1)+` A cette date, le nombre d'habitants de ${villes[index2][0]} était de :<br> $${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2]*100)}\\text{ ha}=${tex_nombrec(villes[index2][1]/villes[index2][2])}\\text{ hab/km}^2\\times ${tex_nombrec(villes[index2][2])}\\text{ km}^{2}=${tex_nombre(villes[index2][1])}\\text{ hab}$.`
 					break;
 				case 11 : //problème de masse volumique
 					index1=randint(0,14)
@@ -13227,9 +13248,9 @@ function problemes_grandeurs_composees(){
 					index2=randint(0,6)
 					duree=randint(2,24)
 					let vmax=rivieres[index2][3]*3600
-					texte = `Le `+katex_Popup2(numero_de_l_exercice+i,type_aide,`débit`,`Définition : Débit (grandeur physique)`,`Le débit est le quotient d'un volume d'eau écoulée dans une section de conduit par le temps d'écoulement.<br>L'unité officielle est le mètre cube par seconde ($\\text{m}^3/\\text{s}$  et dans certains cas on peut utiliser le litre par minute (L/min)`)+` annuel moyen ${rivieres[index2][6]}${rivieres[index2][0]} mesuré à ${rivieres[index2][1]} est de ${rivieres[index2][2]} m³/s.<br>`
-					texte += num_alpha(0)+` Calculer le volume d'eau en m³ écoulé en ${duree} heures à ce débit.<br>`
-					texte += num_alpha(1)+` En ${rivieres[index2][4]} à ${rivieres[index2][1]}, ${rivieres[index2][5]}${rivieres[index2][0]} a débité ${nombre_avec_espace(vmax)} m³ en une heure. Quel a été alors le débit en m³/s ?`
+					texte = `Le `+katex_Popup2(numero_de_l_exercice+i,type_aide,`débit`,`Définition : Débit (grandeur physique)`,`Le débit est le quotient d'un volume d'eau écoulée dans une section de conduit par le temps d'écoulement.<br>L'unité officielle est le mètre cube par seconde ($\\text{m}^3/\\text{s}$  et dans certains cas on peut utiliser le litre par minute (L/min)`)+` annuel moyen ${rivieres[index2][6]}${rivieres[index2][0]} mesuré à ${rivieres[index2][1]} est de ${rivieres[index2][2]} m${exposant(3)}/s.<br>`
+					texte += num_alpha(0)+` Calculer le volume d'eau en m${exposant(3)} écoulé en ${duree} heures à ce débit.<br>`
+					texte += num_alpha(1)+` En ${rivieres[index2][4]} à ${rivieres[index2][1]}, ${rivieres[index2][5]}${rivieres[index2][0]} a débité ${nombre_avec_espace(vmax)} m${exposant(3)} en une heure. Quel a été alors le débit en m³/s ?`
 					texte_corr = num_alpha(0)+` En ${duree} heures il s'écoule en moyenne dans ${rivieres[index2][5]}${rivieres[index2][0]} à ${rivieres[index2][1]} :<br>`
 					texte_corr+= `$\\mathcal{V}=${duree}\\text{ h}\\times${rivieres[index2][2]}\\text{ m}^3\\text{/s}=${duree}\\times 3600\\text{ s}\\times${rivieres[index2][2]}\\text{ m}^3\\text{/s}=${tex_nombre(duree*3600*rivieres[index2][2])}\\text{ m}^3$<br>`
 					texte_corr += num_alpha(1)+` En ${rivieres[index2][4]} lors de la crue historique ${rivieres[index2][6]}${rivieres[index2][0]} à ${rivieres[index2][1]} le débit maximal a été de :<br>`
@@ -13650,7 +13671,7 @@ function fonctions_probabilite2(){
  * Trace 5 droites et demande l'expression de la fonction affine ou linéaire correspondante
  * @Auteur Jean-Claude Lhote
  */
-function fonctions_affines(){
+function Lecture_expression_fonctions_affines(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Déterminer une fonction affine";
@@ -14131,6 +14152,7 @@ function Tableau_de_valeurs(){
 */
 function Double_distributivite()
 {
+	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Utiliser la double distributivité";
 	this.consigne = "Développer et réduire les expressions suivantes.";
@@ -14154,7 +14176,7 @@ function Double_distributivite()
 
 
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, c, d,type_de_questions; i < this.nb_questions && cpt<50 ;) {
 			type_de_questions = liste_type_de_questions[i];
 			a= randint(2,9);
 			b = randint(2,9);
@@ -14198,6 +14220,7 @@ function Double_distributivite()
 */
 function Developper_Identites_remarquables2()
 {
+	'use strict';
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Développer avec les identités remarquables";
 	this.consigne = "Développer les expressions suivantes.";
@@ -14211,9 +14234,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		let type_de_questions_disponibles = [];
 		if(this.sup==1){
 		    type_de_questions_disponibles = [1,2,3] // coef de x = 1
         }
@@ -14223,7 +14247,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
         else {type_de_questions_disponibles = [7,8,9]}  // coef de x relatif
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, type_de_questions,fraction=[],ds,ns; i < this.nb_questions && cpt<50 ;) {
 			type_de_questions = liste_type_de_questions[i];
 			a= randint(1,9);
 			b = randint(2,9);
@@ -14261,7 +14285,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 				break;
 			case 8 :
 				texte = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
-				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fractionreduite(ns*2*a,ds)}x+${a*a}$`;
+				texte_corr = `$\\left(${tex_fraction(ns,ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns,ds)}x\\right)^2-2 \\times ${tex_fraction(ns,ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns*ns,ds*ds)}x^2-${tex_fraction_reduite(ns*2*a,ds)}x+${a*a}$`;
 				break;
 			case 9 :
 				//  (bx-a)(bx+a) avec a entier et b rationnel simple
@@ -14287,6 +14311,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 */
 function Developper_Identites_remarquables3()
 {
+	'use strict';
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Développer (a-b)(a+b)";
 	this.consigne = "Développer les expressions suivantes.";
@@ -14301,10 +14326,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
 		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0,ns,ds ,texte, texte_corr, cpt=0, a, b,fraction=[]; i < this.nb_questions && cpt<50 ;) {
 			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$(x-${a})(x+${a})$`    // (x-a)(x+a)
@@ -14343,6 +14368,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 */
 function Factoriser_Identites_remarquables3()
 {
+	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Factoriser a²-b²";
 	this.consigne = "Factoriser les expressions suivantes.";
@@ -14356,10 +14382,10 @@ function Factoriser_Identites_remarquables3()
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
-		for (let i = 0, texte, texte_corr, cpt=0, a, b, c ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b, ns,ds,fraction=[] ; i < this.nb_questions && cpt<50 ;) {
 			if(this.sup==1){
 				a= randint(1,9);	 // coef de x est égal à 1
 				texte = `$x^2-${a*a}$`    // (x-a)(x+a)
@@ -14399,6 +14425,7 @@ function Factoriser_Identites_remarquables3()
 */
 function Factoriser_Identites_remarquables2()
 {
+	'use strict';
 Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Factoriser avec les identités remarquables";
 	this.consigne = "Factoriser les expressions suivantes.";
@@ -14407,14 +14434,15 @@ Exercice.call(this); // Héritage de la classe Exercice()
 	this.spacing = 1 ;
 	this.spacing_corr = 1 ;
 	this.nb_questions = 5 ;
-	this.sup=1 ;
+	this.sup = 1 ;
 
 	this.nouvelle_version = function(numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
 		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
 		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		let type_de_questions_disponibles = [];
 		if(this.sup==1){
 		    type_de_questions_disponibles = [1,2,3] // coef de x = 1
         }
@@ -14424,7 +14452,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
         else {type_de_questions_disponibles = [7,8,9]}  // coef de x rationnel
 		
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt=0, a, b ; i < this.nb_questions && cpt<50 ;) {
+		for (let i = 0, texte, texte_corr, cpt=0, a, b ,fraction=[],ns,ds,type_de_questions; i < this.nb_questions && cpt<50 ;) {
 			type_de_questions = liste_type_de_questions[i];
 			a= randint(1,9);
 			b = randint(2,9);
@@ -14481,13 +14509,15 @@ Exercice.call(this); // Héritage de la classe Exercice()
 		}
 		liste_de_question_to_contenu(this);
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x relatif'] ;
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'] ;
 }
 
 /**
 * @auteur Jean-Claude Lhote
+* Tout est dans le nom de la fonction.
 */
 function Resoudre_une_equation_produit_nul(){
+	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Résoudre une équation produit nul";
 	this.consigne = "Résoudre les équations suivantes";
@@ -14502,7 +14532,7 @@ function Resoudre_une_equation_produit_nul(){
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
  		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
  		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
 		let liste_type_de_questions=[]
@@ -14516,7 +14546,7 @@ function Resoudre_une_equation_produit_nul(){
 			case 4: liste_type_de_questions=combinaison_listes([1,2,3,4,5,6],this.nb_questions);
 
 		}
-		for (let i = 0, a, b, c, d, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+		for (let i = 0, a, b, c, d,fraction1,fraction2,ns1,ns2,ds1,ds2, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
 			fraction1 = choice(liste_fractions);
 			ns1=fraction1[0]
 			ds1=fraction1[1]
@@ -14609,6 +14639,78 @@ function Resoudre_une_equation_produit_nul(){
 		liste_de_question_to_contenu(this);
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,'1 : Coefficient de x = 1\n 2 : Coefficient de x>1 et solutions entières\n 3 : Solutions rationnelles\n 4 : Mélange des 3 autres niveaux'];
+}
+
+/**
+* @auteur Jean-Claude Lhote
+*/
+
+function Resoudre_une_equation_x2_egal_A(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Résoudre une équation du second degré";
+	this.consigne = "Résoudre les équations suivantes";
+	this.nb_questions = 5;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1; 
+	sortie_html ? this.spacing_corr=2 : this.spacing_corr=1.5
+	this.spacing = 1
+	
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let liste_fractions = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+		[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
+		[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+		   let liste_type_de_questions=[]
+		switch (parseInt(this.sup)) {
+			case 1: liste_type_de_questions=combinaison_listes([1],this.nb_questions);
+				break;
+			case 2: liste_type_de_questions=combinaison_listes([2],this.nb_questions);
+				break;
+			case 3: liste_type_de_questions=combinaison_listes([3],this.nb_questions);
+				break;
+			case 4: liste_type_de_questions=combinaison_listes([1,2,3],this.nb_questions);
+
+		}
+		for (let i = 0,fraction,ns,ds, a,  texte, texte_corr, cpt = 0; i < this.nb_questions && cpt<50;) {
+
+			switch (liste_type_de_questions[i]) {
+			case 1: a = randint(1,20); // x²=a*a donc x=a ou -a.
+				texte = `$x^2=${a*a}$`
+				texte_corr = `$x^2=${a*a}$ équivaut à $x = \\sqrt{${a*a}}$ ou $x = -\\sqrt{${a*a}}$<br>Soit $x = ${a}$ ou $x = -${a}$<br>`
+				texte_corr += `Il est équivalent de résoudre $x^2 - ${a*a}=0$ c'est à dire $x^2 - ${a}^{2}=0$ <br>Soit $(x - ${a})(x + ${a})=0$ qui donne les deux solutions ci-dessus. `
+				break;
+			case 2: // x²=(ns*ns)/(ds*ds) solutions rationnelles
+				fraction = choice(liste_fractions);
+				ns=fraction[0]
+				ds=fraction[1]
+				texte = `$x^2=\\dfrac{${ns*ns}}{${ds*ds}}$`
+				texte_corr = `$x^2=\\dfrac{${ns*ns}}{${ds*ds}}$ équivaut à $x = \\sqrt{\\dfrac{${ns*ns}}{${ds*ds}}}$ ou $x = -\\sqrt{\\dfrac{${ns*ns}}{${ds*ds}}}$<br>Soit $x = \\dfrac{${ns}}{${ds}}$ ou $x = -\\dfrac{${ns}}{${ds}}$<br>`
+				texte_corr += `Il est équivalent de résoudre $x^2 - \\dfrac{${ns*ns}}{${ds*ds}}=0$ c'est à dire $x^2 - (\\dfrac{${ns}}{${ds}})^{2}=0$<br>Soit $(x - \\dfrac{${ns}}{${ds}})(x + \\dfrac{${ns}}{${ds}})=0$ qui donne les deux solutions ci-dessus. `
+				break;
+				
+			case 3: a = randint(2,50,[4,9,16,25,36,49]); 	//solution irrationnelles
+					texte = `$x^2=${a}$`
+					texte_corr = `$x^2=${a}$ équivaut à $x = \\sqrt{${a}}$ ou $x = -\\sqrt{${a}}$<br>`
+					texte_corr += `Il est équivalent de résoudre $x^2 - ${a}=0$  c'est à dire $x^2 - (\\sqrt{${a}})^{2}=0$<br>Soit $(x - \\sqrt{${a}})(x + \\sqrt{${a}})=0$ qui donne les deux solutions ci-dessus. `
+				break;
+
+		}
+		if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+		this.liste_questions.push(texte);
+		this.liste_corrections.push(texte_corr);
+		// alert(this.liste_questions)
+		// alert(this.liste_corrections)
+			i++;
+		}
+		cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,'1 : solutions entières\n 2 : solutions rationnelles\n 3 : Solutions irrationnelles\n 4 : Mélange des 3 autres niveaux'];
 }
 
 /**
@@ -16741,7 +16843,7 @@ function Fractions_irreductibles(){
 	this.sup = 1 ; 
 	this.titre = "Fractions irréductibles"; 
 	// pas de différence entre la version html et la version latex pour la consigne
-	this.consigne =`Décomposer une fraction et son inverse à partir des décompositons en facteurs premier.`;
+	this.consigne =`Décomposer une fraction et son inverse à partir des décompositons en facteurs premiers.`;
 	this.consigne += `<br>`;
 	sortie_html ? this.spacing = 4 : this.spacing = 3;
 	sortie_html ? this.spacing_corr = 4: this.spacing_corr = 3;
@@ -16755,7 +16857,7 @@ function Fractions_irreductibles(){
 		let type_de_questions;
 		if (sortie_html) { // les boutons d'aide uniquement pour la version html
 			//this.bouton_aide = '';
-			//this.bouton_aide = modal_pdf(numero_de_l_exercice,"pdf/FicheArithmetique-3A12.pdf","Aide mémoire sur les fonctions (Sébastien Lozano)","Aide mémoire")					
+			this.bouton_aide = modal_pdf(numero_de_l_exercice,"pdf/FicheArithmetique-3A12.pdf","Aide mémoire sur les fonctions (Sébastien Lozano)","Aide mémoire")					
 			//this.bouton_aide += modal_video('conteMathsNombresPremiers','videos/LesNombresPremiers.mp4','Petit conte mathématique','Intro Vidéo');
 		} else { // sortie LaTeX
 		};
@@ -17001,18 +17103,21 @@ function Fractions_irreductibles(){
 };
 
 /**
- * 3A13 - PGCD_PPCM_Engrenages
+ * 3A13 - PPCM_Engrenages
+ * les deux on besoin de la def partielle serie : stlX
+ * pb dans la sortie LaTeX, revoir comment user de la fonction katex_Popup2() pour affichage d'une note hors texte!
  * @author Sébastien Lozano
  */
  
-function PGCD_PPCM_Engrenages(){
+function PPCM_Engrenages(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.sup = 1 ; 
-	this.titre = "PGCD_PPCM_Engrenages"; 
+	this.titre = "Engrenages"; 
 	// pas de différence entre la version html et la version latex pour la consigne
-	this.consigne =`PGCD_PPCM_Engrenages.`;
-	this.consigne += `<br>`;
+	//this.consigne =`Déterminer au bout de combien de tours les deux roues seront toutes les deux revenues à leur position initiale.`;
+	this.consigne =``;
+	//this.consigne += `<br>`;
 	sortie_html ? this.spacing = 3 : this.spacing = 2;
 	sortie_html ? this.spacing_corr = 2: this.spacing_corr = 1;
 	this.nb_questions = 4;
@@ -17020,7 +17125,15 @@ function PGCD_PPCM_Engrenages(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup = 1;
+	this.liste_packages = 'bclogo';
 
+	var num_ex = '3A13'; // pour rendre unique les id des SVG, en cas d'utilisation dans plusieurs exercices y faisant appel
+
+	if (sortie_html) {		
+		var pourcentage = '100%'; // pour l'affichage des svg. On a besoin d'une variable globale
+	} else { // sortie LaTeX
+
+	};
 	this.nouvelle_version = function(numero_de_l_exercice){
 		let type_de_questions;
 		if (sortie_html) { // les boutons d'aide uniquement pour la version html
@@ -17038,27 +17151,176 @@ function PGCD_PPCM_Engrenages(){
 		let type_de_questions_disponibles = [1,2,3,4];
 		//let type_de_questions_disponibles = [1];
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions);
-
+		this.introduction = lampe_message(`Arithmétique des engrenages`,`Boîte de vitesse, transmission de vélo, de moto, perceuse electrique, tout ça fonctionne avec des engrenages! Mais au fait, comment ça marche, les engrenages?`);
+		if (sortie_html) {						
+			this.introduction += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`);
+			this.introduction += `<div id="${num_ex}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;					 							
+			SVG_engrenages(num_ex,200,200);						
+		};
 			for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions&&cpt<50;) {
 				type_de_questions = liste_type_de_questions[i];
 				
-	
+				if (sortie_html) {
+					let id_unique = `${num_ex}_${i}_${Date.now()}`
+					var id_du_div = `div_svg${numero_de_l_exercice}${id_unique}`;
+					//var id_du_div_corr = `div_svg_corr${numero_de_l_exercice}${id_unique}`;
+				 }
+
+				 var nb_dents_r1;
+				 var nb_dents_r2;
+
 				switch (type_de_questions) {
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 1';
-						texte_corr = 'corr type 1';
+					case 1 : // avec de petits nombres on calcule les mutliples
+						nb_dents_r1 = randint(5,30);
+						nb_dents_r2 = randint(5,30,nb_dents_r1);
+						texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 en a $${nb_dents_r2}$ dents.`;
+						//texte += `<br> On cherche à savoir au bout de combien de tours les deux roues seront toutes les deux revenues à leur position initiale.`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)==(nb_dents_r1*nb_dents_r2)) {
+							texte += katex_Popup2(
+								numero_de_l_exercice+1,
+								1,
+								"nombres premiers entre eux",
+								`Définition : Nombres premiers entre eux`,
+								`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							);
+						};
+						texte += `<br>`+num_alpha(0)+` Écrire la liste des multiples de $${nb_dents_r1}$ et de $${nb_dents_r2}$.`
+						texte += `<br>`+num_alpha(1)+` En déduire le nombre de tours de chaque roue avant retour à leur position initiale.`
+						// if (sortie_html) {						
+						// 	texte += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`);
+						// 	texte += `<div id="${id_du_div}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;					 							
+						// 	SVG_engrenages(id_du_div,200,200);						
+						// };
+						let nb_marge = 4;
+						texte_corr = num_alpha(0)+` Liste des premiers multiples de $${nb_dents_r1}$ : <br>`;
+						for (let k=1;k<(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1+nb_marge);k++) {
+							texte_corr += `$${k}\\times${nb_dents_r1} = `;
+							if (k==(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1)) {
+								texte_corr += mise_en_evidence(tex_nombre(k*nb_dents_r1));
+								texte_corr += `$; `;
+							} else {
+								texte_corr += `${tex_nombre(k*nb_dents_r1)}$; `;
+							};
+						};
+						texte_corr += `$\\ldots$ `;
+						texte_corr += `<br>`;
+						texte_corr += ` Liste des premiers multiples de ${nb_dents_r2} : <br>`;
+						for (let k=1;k<(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2+nb_marge);k++) {
+							texte_corr += `$${k}\\times${nb_dents_r2} = `;
+							if (k==(ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2)) {
+								texte_corr += mise_en_evidence(tex_nombre(k*nb_dents_r2));
+								texte_corr += `$; `;
+							} else {
+								texte_corr += `${tex_nombre(k*nb_dents_r2)}$; `;
+							};
+						};
+						texte_corr += `$\\ldots$ `;
+						texte_corr += `<br>`;
+						texte_corr += `Le plus petit multiple commun à $${nb_dents_r1}$ et $${nb_dents_r2}$ vaut donc $ppcm(${nb_dents_r1},${nb_dents_r2}) = ${ppcm(nb_dents_r1,nb_dents_r2)}$.`
+
+						//texte_corr += `Correction à détailler, en écrivant la liste des mutliples de chaque nombre de dents jusqu'à un peu plus que le ppcm et en le mettant en valeur.<br>`;
+						//texte_corr += `PPCM du nombres de dents puis on calcule le nombre de tours de chaque roue.<br>`;
+						//texte_corr += `chaque roue doit tourner de ppcm(${nb_dents_r1},${nb_dents_r2})=${ppcm(nb_dents_r1,nb_dents_r2)} dents <br>`;
+						texte_corr += `<br>`+num_alpha(1)+` Chaque roue doit tourner de $ppcm(${nb_dents_r1},${nb_dents_r2})=${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents.`;
+						texte_corr += `<br> Cela correspond à $(${ppcm(nb_dents_r1,nb_dents_r2)}\\text{ dents})\\div (${nb_dents_r1}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};						
+						texte_corr +=`pour la roue n$\\degree$1.`
+						texte_corr += `<br>Cela correspond à $(${ppcm(nb_dents_r1,nb_dents_r2)}\\text{ dents})\\div (${nb_dents_r2}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};				
+						texte_corr += `pour la roue n$\\degree$2.`
+						//roue1 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1} tours.<br>`;
+						//texte_corr += `roue2 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2} tours.`;
+						//`<br>`+num_alpha(0)+`
 						break;		
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 2';
-						texte_corr = 'corr type 2';
-						break;	
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 3';
-						texte_corr = 'corr type 3';
-						break;	
-					case 1 : // périmètre d'un carré de côté x			
-						texte = 'type 4';
-						texte_corr = 'corr type 4';
+					case 2 : // avec de plus grands nombre, c'est mieux de décomposer en facteurs premiers
+						nb_dents_r1 = randint(31,80);
+						nb_dents_r2 = randint(31,80,nb_dents_r1);
+						texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 en a $${nb_dents_r2}$ dents.`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)==(nb_dents_r1*nb_dents_r2)) {
+							texte += katex_Popup2(
+								numero_de_l_exercice+2,
+								1,
+								"nombres premiers entre eux",
+								`Définition : Nombres premiers entre eux`,
+								`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							);
+						};
+						//texte += `<br> On cherche à savoir au bout de combien de tours les deux roues seront toutes les deux revenues à leur position initiale.`;
+						texte += `<br>`+num_alpha(0)+` Décomposer $${nb_dents_r1}$ et $${nb_dents_r2}$ en produit de facteurs premiers.`;
+						texte += `<br>`+num_alpha(1)+` En déduire le nombre de tours de chaque roue avant retour à leur position initiale.`;
+						// if (sortie_html) {
+						// 	texte += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`);
+						// 	texte += `<div id="${id_du_div}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;					 
+						// 	SVG_engrenages(id_du_div,200,200);						
+						// };
+						texte_corr = `Pour un nombre de dents plus élevé, il est plus commode d'utiliser les décompositions en produit de facteurs premiers.`
+						//texte_corr = `Correction à détailler, en décomposant chaque nombre de dents en produit de facteurs premiers. Utilisation de la couleur!<br>`;
+						texte_corr += `<br>`+num_alpha(0)+` Décomposition de $${nb_dents_r1}$ en produit de facteurs premiers :  $${nb_dents_r1} = ${decomposition_facteurs_premiers(nb_dents_r1)}$.`;
+						texte_corr += `<br> Décomposition de $${nb_dents_r2}$ en produit de facteurs premiers :  $${nb_dents_r2} = ${decomposition_facteurs_premiers(nb_dents_r2)}$.`;
+						texte_corr += `<br> D'où $ppcm(${nb_dents_r1},${nb_dents_r2})= ${decomposition_facteurs_premiers(ppcm(nb_dents_r1,nb_dents_r2))}$.<br>`;						
+						// texte_corr += `PPCM du nombres de dents puis on calcule le nombre de tours de chaque roue.<br>`;
+						// texte_corr += `chaque roue doit tourner de ppcm(${nb_dents_r1},${nb_dents_r2})=${ppcm(nb_dents_r1,nb_dents_r2)} dents <br>`;
+						// texte_corr += `roue1 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1} tours.<br>`;
+						// texte_corr += `roue2 aura fait ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2} tours.`;
+						texte_corr += `<br>`+num_alpha(1)+` Chaque roue doit tourner de $ppcm(${nb_dents_r1},${nb_dents_r2})=${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents.`;
+						texte_corr += `<br> Cela correspond à $(${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}\\text{ dents})\\div (${nb_dents_r1}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};						
+						texte_corr +=`pour la roue n$\\degree$1.`;						
+						texte_corr += `<br> Cela correspond à $(${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}\\text{ dents})\\div (${nb_dents_r2}\\text{ dents/tour}) = ${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};						
+						texte_corr +=`pour la roue n$\\degree$2.`
+						break;		
+					case 3 : // déterminer le nombre de dents d'une roue connaissant l'autre et le nombre de tours necessaires à la re-synchro
+						nb_dents_r1 = randint(5,80);
+						nb_dents_r2 = randint(5,80,nb_dents_r1);						
+						texte = `La roue n$\\degree$2 a maintenant $${nb_dents_r2}$ dents.`;
+						texte += ` Déterminer le nombre de dents de la roue n$\\degree$1 qui ferait $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$ `;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};	
+						texte_corr += ` pendant que la roue n$\\degree$2 en fait $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$.`
+						texte_corr = `Puisque la roue n$\\degree$2, qui a $${nb_dents_r2}$ dents, fait $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2}$ `;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r2==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};	
+						texte_corr +=`, cela représente $${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents.`;
+						texte_corr += `<br>La roue n$\\degree$1 doit donc aussi tourner de $${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}$ dents, ceci en $${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}$ `;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};							
+						texte_corr += `.`;
+						texte_corr += `<br> on obtient donc $(${tex_nombre(ppcm(nb_dents_r1,nb_dents_r2))}\\text{ dents})\\div (${ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1}\\text{`;
+						if (ppcm(nb_dents_r1,nb_dents_r2)/nb_dents_r1==1) {
+							texte_corr += ` tour `;
+						} else {
+							texte_corr += ` tours `;
+						};
+						texte_corr += `}) = ${nb_dents_r1} \\text{ dents/tour}.$`
+						texte_corr += `<br>La roue n$\\degree$1 a donc : $${nb_dents_r1}$ dents.`;
+						// texte_corr += `<br> roue 2 : ${nb_dents_r2} dents.`;
+						// texte_corr += `<br> ppcm : ${ppcm(nb_dents_r1,nb_dents_r2)}.`;
 						break;		
 				};
 			
