@@ -1,4 +1,3 @@
-
 # Accès interdit à évaluation à la carte
 #<Files alacarte>
 
@@ -13,6 +12,13 @@
 
 # Erreur 404
 ErrorDocument 404 /404.html
+
+
+# http -> https
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
+
 
 # Redirection pour les exercices
 # Une URL qui se termine par ex + 0 ou 1 chiffre + 1 ou 2 lettres + des chiffres + 0 ou 1 tiret + 0 ou 1 tiret bas + 0 ou des chiffres 

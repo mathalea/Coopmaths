@@ -1,30 +1,24 @@
 {{ define "main" }}
 
 
-     {{ partial "header" }}
+{{ partial "header" }}
 
-     <div class="ui text container">
-     {{.Content}}
+<div class="ui text container">
 
-     {{ range (.Data.Pages.GroupByParam "niveau").Reverse }}
-          <h3>Niveau {{ .Key}}</h3>
-          <!-- Il faudra enlever ce lien en dur vers le référentiel 6e pour que ça marche avec les autres niveaux. -->
-          <div class="ui middle aligned animated selection divided list">
-               <a class="item" href="/pdf/CoopMaths-Referentiel-{{.Key}}.pdf" target="_blank"><div class="header content"> Référentiel </div></a> 
-     
-               {{ range .Pages.ByTitle }} <!-- Liste toutes les pages par niveau puis par titre (pour avoir les 6e avant les 5e) -->
-                              <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
-               {{ end }}
-          </div>
-     {{ end }}
+     <h3>Niveau 6e</h3>
+     <div class="ui middle aligned animated selection divided list">
+          <a class="item" href="/pdf/CoopMaths-Referentiel-6e.pdf" target="_blank">
+               <i class="large black file pdf outline icon"></i> <div class="header content"> Télécharger le référentiel </div>
+          </a>
+          {{ range where .Site.Pages "Params.niveau" "6e" }}
+          <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
+          {{ end }}
+
+     </div>
 
      <h3><a href="/CM6" style="color:inherit !important" >Calcul mental - 6e (avec mathsmentales.net)</a></h3>
 
-
- <!--     <h3><a href="/CM5" style="color:inherit !important" >Calcul mental - 5e (avec mathsmentales.net)</a></h3>      -->
-
-
-      </div>    
-     {{ partial "footer" . }}
+</div>    
+{{ partial "footer" . }}
 
 {{ end }}

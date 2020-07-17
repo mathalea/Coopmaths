@@ -416,9 +416,9 @@ function ecriture_nombre_relatif(a) {
 function ecriture_nombre_relatifc(a) { 
 	let result = '';
 	if (a>0) {
-		result =mise_en_evidence('(+'+tex_nombrec(a)+')','green');
+		result =mise_en_evidence('(+'+tex_nombrec(a)+')','blue');
 	}else if (a<0) {
-		result = mise_en_evidence('('+tex_nombrec(a)+')','red');
+		result = mise_en_evidence('('+tex_nombrec(a)+')');
 	}else{ // ne pas mettre de parenthèses pour 0
 		result = mise_en_evidence('0','black');
 	}
@@ -447,9 +447,9 @@ function ecriture_algebrique(a) {
 function ecriture_algebriquec(a) {
 	let result = '';
 	if (a>0) {
-		result = mise_en_evidence('+'+tex_nombrec(a),'green');
+		result = mise_en_evidence('+'+tex_nombrec(a),'blue');
 	}else if (a<0) {
-		result = mise_en_evidence(tex_nombrec(a),'red');
+		result = mise_en_evidence(tex_nombrec(a));
 	} else result = mise_en_evidence(tex_nombrec(a),'black');
 	return result;
 }
@@ -487,6 +487,29 @@ function ecriture_parenthese_si_moins(expr) {
 };
 
 /**
+* Renvoie la valeur du chiffre (8->8, A->10, B->11...)
+* 
+* @Auteur Rémi Angot
+*/
+function valeur_base(n) { 
+	switch (n){
+		case 'A' : return 10
+		break
+		case 'B' : return 11
+		break
+		case 'C' : return 12
+		break
+		case 'D' : return 13
+		break
+		case 'E' : return 14
+		break
+		case 'F' : return 15
+		break
+		default : return n
+	}
+};
+
+/**
 * Convertit un angle de radian vers degrés
 * @Example
 * // PI->180
@@ -495,6 +518,270 @@ function ecriture_parenthese_si_moins(expr) {
 Math.degres = function(radians) {
 	return radians * 180 / Math.PI;
 };
+
+/**
+ * 
+ * @param {array} matrice M tableau 3x3 nombres
+ * @param {array} vecteur A tableau 3 nombres
+ * Fonction pouvant être utilisée en 2d avec des coordonnées homogènes
+ * elle retourne le vecteur [x,y,z] résultat de M.A
+ * @Auteur Jean-Claude Lhote
+ */
+
+function produit_matrice_vecteur_3x3(matrice,vecteur) { // matrice est un tableau 3x3 sous la forme [[ligne 1],[ligne 2],[ligne 3]] et vecteur est un tableau de 3 nombres [x,y,z]
+	let resultat=[0,0,0]
+	for (let j=0;j<3;j++){ // Chaque ligne de la matrice 
+		for (let i=0;i<3;i++){ // On traite la ligne i de la matrice -> résultat = coordonnée i du vecteur résultat
+			resultat[j]+=matrice[j][i]*vecteur[i];
+		}
+	}
+	return resultat
+}
+/**
+ * 
+ * @param {array} matrice1 Matrice A
+ * @param {array} matrice2 Matrice B
+ * retourne la matrice A.B
+ * @Auteur Jean-Claude Lhote
+ */
+
+function produit_matrice_matrice_3x3(matrice1,matrice2) { // les deux matrices sont des tableaux 3x3  [[ligne 1],[ligne 2],[ligne 3]] et le résultat est de la même nature.
+	let resultat = [[0,0,0],[0,0,0],[0,0,0]]
+	for (let j=0;j<3;j++)
+		for (let i=0;i<3;i++)
+			for (let k=0;k<3;k++)
+				resultat[j][i]+=matrice1[j][k]*matrice2[k][i]
+ return resultat
+}
+/**
+ * 
+ * @param {array} point
+ * calcule les coordonnées d'un point donné par ses coordonnées en repère orthonormal en repère (O,I,J) tel que IOJ=60° 
+ * @Auteur Jean-Claude Lhote
+ */
+function changement_de_base_ortho_tri(point) {
+	point.push(1);
+	return produit_matrice_vecteur_3x3([[1,-Math.cos(Math.PI/3)/Math.sin(Math.PI/3),0],[0,1/Math.sin(Math.PI/3),0],[0,0,1]],point)
+}
+/**
+ * 
+ * @param {array} point 
+ * Changement de base inverse de la fonction précédente
+ * @Auteur Jean-CLaude Lhote
+ */
+function changement_de_base_tri_ortho(point) {
+	point.push(1);
+	return produit_matrice_vecteur_3x3([[1,Math.cos(Math.PI/3),0],[0,Math.sin(Math.PI/3),0],[0,0,1]],point)
+}
+
+	/**
+ * 
+ * @param {number} transformation Entier déterminant la transformation voulue 
+ ** 1=symétrie / passant par O
+ **2=symétrie \ passant par O
+ **3=symétrie _ passant par O
+ **4=symétrie | passant par O
+ **5= rotation 90° anti-horaire centre O
+ **6= rotation 90° horaire centre O
+ **7= symétrie centrale centre O
+ **11= rotation 60° anti-horaire centre O
+ **12= rotation 60° horaire centre O
+ **13= rotation 120° anti-horaire centre O
+ **14= rotation 120° horaire centre O
+ **8= translation coordonnées de O = vecteur de translation
+ **9= homothétie. centre O rapport k
+ **10= homothétie. centre O rapport 1/k
+ * @param {array} pointA Point dont on cherche l'image 
+ * @param {array} pointO Centre du repère local pour les symétries, centre pour les rotations et les homothéties
+ * @param {array} vecteur Vecteur de la translation 
+ * @param {number} rapport rapport d'homothétie
+ * @Auteur Jean-Claude Lhote
+ */
+function image_point_par_transformation (transformation,pointA,pointO,vecteur=[],rapport=1){ //pointA,centre et pointO sont des tableaux de deux coordonnées
+	// on les rends homogènes en ajoutant un 1 comme 3ème coordonnée)
+	// nécessite d'être en repère orthonormal...
+	// Point O sert pour les rotations et homothéties en tant que centre (il y a un changement d'origine du repère en O pour simplifier l'expression des matrices de transformations.)
+	
+	let matrice_sym_obl1=[[0,1,0],[1,0,0],[0,0,1]] // x'=y et y'=x
+	let matrice_sym_xxprime=[[1,0,0],[0,-1,0],[0,0,1]] // x'=x et y'=-y
+	let matrice_sym_yyprime=[[-1,0,0],[0,1,0],[0,0,1]] // x'=-x et y'=y
+	let matrice_sym_obl2=[[0,-1,0],[-1,0,0],[0,0,1]] // x'=-y et y'=-x
+	let matrice_quart_de_tour_direct=[[0,-1,0],[1,0,0],[0,0,1]] // x'=-y et y'=x
+	let matrice_quart_de_tour_indirect=[[0,1,0],[-1,0,0],[0,0,1]] // x'=y et y'=-x
+	let matrice_sym_centrale=[[-1,0,0],[0,-1,0],[0,0,1]] // x'=-x et y'=-y
+	let matrice_rot_60_direct=[[0.5,-Math.sin(Math.PI/3),0],[Math.sin(Math.PI/3),0.5,0],[0,0,1]]
+	let matrice_rot_60_indirect=[[0.5,Math.sin(Math.PI/3),0],[-Math.sin(Math.PI/3),0.5,0],[0,0,1]]
+	let matrice_rot_120_direct=[[-0.5,-Math.sin(Math.PI/3),0],[Math.sin(Math.PI/3),-0.5,0],[0,0,1]]
+	let matrice_rot_120_indirect=[[-0.5,Math.sin(Math.PI/3),0],[-Math.sin(Math.PI/3),-0.5,0],[0,0,1]]
+
+	let x,y,x1,y1,u,v,k,pointA1=[0,0,0],pointA2=[0,0,0]
+
+	pointA.push(1)
+	x2=pointO[0]  // Point O' (origine du repère dans lequel les transformations sont simples (centre des rotations et point d'intersection des axes))
+	y2=pointO[1]
+	u=vecteur[0] // (u,v) vecteur de translation.
+	v=vecteur[1]
+	k=rapport // rapport d'homothétie
+
+
+	let matrice_chgt_repere=[[1,0,x2],[0,1,y2],[0,0,1]]
+	let matrice_chgt_repereinv=[[1,0,-x2],[0,1,-y2],[0,0,1]]
+	let matrice_translation=[[1,0,u],[0,1,v],[0,0,1]]
+	let matrice_homothetie=[[k,0,0],[0,k,0],[0,0,1]]
+	let matrice_homothetie2=[[1/k,0,0],[0,1/k,0],[0,0,1]]
+
+	let matrice=[[]]
+
+	switch (transformation) {
+		case 1 : 
+			matrice=produit_matrice_matrice_3x3(matrice_sym_obl1,matrice_chgt_repereinv)
+			break
+		case 2 :
+			matrice=produit_matrice_matrice_3x3(matrice_sym_obl2,matrice_chgt_repereinv)
+			break
+		case 3 : 
+			matrice=produit_matrice_matrice_3x3(matrice_sym_xxprime,matrice_chgt_repereinv)
+			break
+		case 4 :
+			matrice=produit_matrice_matrice_3x3(matrice_sym_yyprime,matrice_chgt_repereinv)
+			break
+		case 5 :
+			matrice=produit_matrice_matrice_3x3(matrice_quart_de_tour_direct,matrice_chgt_repereinv)
+			break
+		case 6 : 
+		matrice=produit_matrice_matrice_3x3(matrice_quart_de_tour_indirect,matrice_chgt_repereinv)
+			break
+		case 7 :
+			matrice=produit_matrice_matrice_3x3(matrice_sym_centrale,matrice_chgt_repereinv)
+			break
+		case 11 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_60_direct,matrice_chgt_repereinv)
+			break
+		case 12 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_60_indirect,matrice_chgt_repereinv)
+			break
+		case 13 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_120_direct,matrice_chgt_repereinv)
+			break
+		case 14 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_120_indirect,matrice_chgt_repereinv)
+			break
+		case 8 :
+			matrice=produit_matrice_matrice_3x3(matrice_translation,matrice_chgt_repereinv)
+			break
+		case 9 :
+			matrice=produit_matrice_matrice_3x3(matrice_homothetie,matrice_chgt_repereinv)
+			break
+		case 10 :
+			matrice=produit_matrice_matrice_3x3(matrice_homothetie2,matrice_chgt_repereinv)
+			break	
+		}
+	pointA1=produit_matrice_vecteur_3x3(matrice,pointA)
+	pointA2=produit_matrice_vecteur_3x3(matrice_chgt_repere,pointA1)
+	return pointA2
+}
+/*
+function image_point_par_transformation_repere_tri (transformation,pointA,pointO,vecteur=[],rapport=1){ //pointA,centre et pointO sont des tableaux de deux coordonnées
+	// on les rends homogènes en ajoutant un 1 comme 3ème coordonnée)
+	// ici le rpeère a des axes formant un angle de 60°
+	// Point O sert pour les rotations et homothéties en tant que centre (il y a un changement d'origine du repère en O pour simplifier l'expression des matrices de transformations.)
+	/* transformations :
+1=symétrie / passant par O
+2=symétrie \ passant par O
+3=symétrie _ passant par O
+4=symétrie | passant par O
+5= rotation 90° anti-horaire centre O
+6= rotation 90° horaire centre O
+7= symétrie centrale centre O
+11= rotation 60° anti-horaire centre O
+12= rotation 60° horaire centre O
+13= rotation 120° anti-horaire centre O
+14= rotation 120° horaire centre O
+8= translation coordonnées de O = vecteur de translation
+9= homothétie. centre O rapport k
+10= homothétie. centre O rapport 1/k
+
+
+
+	let matrice_sym_obl1=[[0,1,0],[1,0,0],[0,0,1]] // x'=y et y'=x
+	let matrice_sym_xxprime=[[1,0,0],[0,-1,0],[0,0,1]] // x'=x et y'=-y
+	let matrice_sym_yyprime=[[-1,0,0],[0,1,0],[0,0,1]] // x'=-x et y'=y
+	let matrice_sym_obl2=[[0,-1,0],[-1,0,0],[0,0,1]] // x'=-y et y'=-x
+	let matrice_quart_de_tour_direct=[[0,-1,0],[1,0,0],[0,0,1]] // x'=-y et y'=x
+	let matrice_quart_de_tour_indirect=[[0,1,0],[-1,0,0],[0,0,1]] // x'=y et y'=-x
+	let matrice_sym_centrale=[[-1,0,0],[0,-1,0],[0,0,1]] // x'=-x et y'=-y
+	let matrice_rot_60_direct=[[0.5,-Math.sin(Math.PI/3),0],[Math.sin(Math.PI/3),0.5,0],[0,0,1]]
+	let matrice_rot_60_indirect=[[0.5,Math.sin(Math.PI/3),0],[-Math.sin(Math.PI/3),0.5,0],[0,0,1]]
+	let matrice_rot_120_direct=[[-0.5,-Math.sin(Math.PI/3),0],[Math.sin(Math.PI/3),-0.5,0],[0,0,1]]
+	let matrice_rot_120_indirect=[[-0.5,Math.sin(Math.PI/3),0],[-Math.sin(Math.PI/3),-0.5,0],[0,0,1]]
+
+	let x,y,x1,y1,u,v,k,pointA1=[0,0,0],pointA2=[0,0,0]
+
+	pointA.push(1)
+	x2=pointO[0]  // Point O' (origine du repère dans lequel les transformations sont simples (centre des rotations et point d'intersection des axes))
+	y2=pointO[1]
+	u=vecteur[0] // (u,v) vecteur de translation.
+	v=vecteur[1]
+	k=rapport // rapport d'homothétie
+
+
+	let matrice_chgt_repere=[[1,0,x2],[0,1,y2],[0,0,1]]
+	let matrice_chgt_repereinv=[[1,0,-x2],[0,1,-y2],[0,0,1]]
+	let matrice_translation=[[1,0,u],[0,1,v],[0,0,1]]
+	let matrice_homothetie=[[k,0,0],[0,k,0],[0,0,1]]
+	let matrice_homothetie2=[[1/k,0,0],[0,1/k,0],[0,0,1]]
+
+	let matrice=[[]]
+
+	switch (transformation) {
+		case 1 : 
+			matrice=produit_matrice_matrice_3x3(matrice_sym_obl1,matrice_chgt_repereinv)
+			break
+		case 2 :
+			matrice=produit_matrice_matrice_3x3(matrice_sym_obl2,matrice_chgt_repereinv)
+			break
+		case 3 : 
+			matrice=produit_matrice_matrice_3x3(matrice_sym_xxprime,matrice_chgt_repereinv)
+			break
+		case 4 :
+			matrice=produit_matrice_matrice_3x3(matrice_sym_yyprime,matrice_chgt_repereinv)
+			break
+		case 5 :
+			matrice=produit_matrice_matrice_3x3(matrice_quart_de_tour_direct,matrice_chgt_repereinv)
+			break
+		case 6 : 
+		matrice=produit_matrice_matrice_3x3(matrice_quart_de_tour_indirect,matrice_chgt_repereinv)
+			break
+		case 7 :
+			matrice=produit_matrice_matrice_3x3(matrice_sym_centrale,matrice_chgt_repereinv)
+			break
+		case 11 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_60_direct,matrice_chgt_repereinv)
+			break
+		case 12 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_60_indirect,matrice_chgt_repereinv)
+			break
+		case 13 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_120_direct,matrice_chgt_repereinv)
+			break
+		case 14 :
+			matrice=produit_matrice_matrice_3x3(matrice_rot_120_indirect,matrice_chgt_repereinv)
+			break
+		case 8 :
+			matrice=produit_matrice_matrice_3x3(matrice_translation,matrice_chgt_repereinv)
+			break
+		case 9 :
+			matrice=produit_matrice_matrice_3x3(matrice_homothetie,matrice_chgt_repereinv)
+			break
+		case 10 :
+			matrice=produit_matrice_matrice_3x3(matrice_homothetie2,matrice_chgt_repereinv)
+			break	
+		}
+	pointA1=produit_matrice_vecteur_3x3(matrice,pointA)
+	pointA2=produit_matrice_vecteur_3x3(matrice_chgt_repere,pointA1)
+	return pointA2
+}
+*/
 
 /**
 * Retourne le signe d'un nombre
@@ -994,7 +1281,8 @@ function tex_enumerate(liste,spacing){
 * @Auteur Rémi Angot
 */
 function tex_enumerate_sans_numero(liste,spacing){
-	return tex_enumerate(liste,spacing).replace('\\begin{enumerate}[label={}]','\\begin{enumerate}[label={}]')
+	//return tex_enumerate(liste,spacing).replace('\\begin{enumerate}[label={}]','\\begin{enumerate}[label={}]')
+	return tex_enumerate(liste,spacing).replace('\\begin{enumerate}','\\begin{enumerate}[label={}]')
 }
 
 /**
@@ -1146,6 +1434,15 @@ function tex_nombre(nb){
 }
 
 /**
+ * Renvoie un espace insécable pour le mode texte suivant la sorite html ou Latex.
+ * @Auteur Jean-Claude Lhote
+ */
+function sp() {
+	if (sortie_html) return `&nbsp`
+	else return `~`
+}
+
+/**
 * Renvoit un nombre dans le format français (séparateur de classes)
 * Fonctionne sans le mode maths contrairement à tex_nombre()
 * @Auteur Rémi Angot
@@ -1184,6 +1481,7 @@ function string_nombre(nb){
 		result=partie_entiere.slice(0,partie_entiere.length-i*3)+result;
 	}
 	else result=partie_entiere;
+	if (result[0]==' ') result=result.substring(1,result.length)
 	if (partie_decimale!=undefined)  result+=','+partie_decimale;
 	return result;
 }
@@ -1245,6 +1543,20 @@ function texte_en_couleur_et_gras(texte,couleur="#f15929"){
 }
 
 /**
+* Met gras un texte
+* @param {string} texte à mettre en gras
+* @Auteur Rémi Angot
+*/
+function texte_gras(texte){
+	if (sortie_html) {
+		return `<b>${texte}</b>`	
+	}
+	else {
+		return `\\textbf${texte}`
+	}	
+}
+
+/**
 * Affiche un lien vers une URL
 * @param {string} texte à afficher
 * @param {string} URL
@@ -1270,7 +1582,7 @@ function tex_prix(nb){
 	if (nombre==nombre.toFixed(0)){
 		result = nombre
 	} else {
-		result = nombre.toFixed(2).toString().replace('.',',');
+		result = nombre.toFixed(2).toString().replace('.',','); //Ne gère pas l'espace des milliers
 	}
 	return result;
 	
@@ -1387,6 +1699,17 @@ function tex_fraction(a,b){
 
 }
 
+
+/**
+* Utilise printlatex et quote de Algebrite
+* @Auteur Rémi Angot
+*/
+
+function printlatex(e){
+	return Algebrite.run(`printlatex(quote(${e}))`)
+}
+
+
 /**
 * Écrit du texte en mode mathématiques
 * @Auteur Rémi Angot
@@ -1463,11 +1786,29 @@ function MG32_ajouter_figure(numero_de_l_exercice) {
   		idSvg: `MG32svg${numero_de_l_exercice}`
   	},
   	mtgOptions: {
-  		fig: exercice[numero_de_l_exercice].MG32codeBase64,
+		  fig: exercice[numero_de_l_exercice].MG32codeBase64,
+		  isEditable: exercice[numero_de_l_exercice].MG32editable
+	  }
+  }
+  )	
+
+	if (exercice[numero_de_l_exercice].MG32codeBase64corr) {
+		MG32_tableau_de_figures.push(
+  // pour chaque figure on précise ici ses options
+  {
+  	idContainer: `MG32divcorr${numero_de_l_exercice}`,
+  	svgOptions: {
+  		width: `${exercice[numero_de_l_exercice].taille_div_MG32[0]}`, 
+  		height: `${exercice[numero_de_l_exercice].taille_div_MG32[1]}`, 
+  		idSvg: `MG32svgcorr${numero_de_l_exercice}`
+  	},
+  	mtgOptions: {
+  		fig: exercice[numero_de_l_exercice].MG32codeBase64corr,
   		isEditable: false
   	}
   }
-  )	
+  )		
+	}
 }
 
 /**
@@ -1919,7 +2260,7 @@ function Latex_repere(Xmin,Xmax,Ymin,Ymax,subX,subY,grille){
 	result +=`\n\t \\tkzInit [xmin=${Xmin},xmax=${Xmax},xstep=1,ymin=${Ymin},ymax=${Ymax},ystep=1]`;
 	if (grille) result +=`\n\t \\tkzGrid[sub,subxstep=${1/subX},subystep=${1/subY},color=lightgray,line width=0.3pt](${Xmin},${Ymin})(${Xmax},${Ymax})`;
 	result +=`\n\t \\tkzAxeXY`;
-	result +=`\n\t \\tkzClip`;
+	result +=`\n\t \\tkzClip[space=1]`;
 		return result;
 }
 	
@@ -2005,11 +2346,11 @@ function Latex_reperage_sur_un_axe(zoom,origine,pas1,pas2,points_inconnus,points
 
 	result+=`\n\t \\tkzInit[xmin=${origine},xmax=${calcul(origine+7/pas1)},ymin=-0.5,ymax=0.5,xstep=${calcul(1/pas1)}]`
 
-	if (origine==0) result +=`\n\t \\tkzDrawX[tickwd=2pt];`
-	else result+=`\n\t \\tkzDrawX[left space=0.2,tickwd=2pt];`
+	if (origine==0) result +=`\n\t \\tkzDrawX[tickwd=2pt,label={}];`
+	else result+=`\n\t \\tkzDrawX[left space=0.2,tickwd=2pt,label={}];`
 	result+=`\n\t \\tikzset{arr/.style={postaction=decorate,	decoration={markings,mark=at position 1 with {\\arrow[thick]{#1}}}}}`
 
-	if (origine<0) decalage=arrondi(origine*pas1)
+	if (origine<0) decalage=origine*pas1
 	else decalage=0
 	result+=`\n\t \\foreach \\x in {0,${calcul(1/pas2)},...,7}`
 	result+=`\n\t {\\draw (${decalage}+\\x,-0.05)--(${decalage}+\\x,0.05);}`  	//result+=`\n\t {\\draw (${origine*pas1}+\\x,-0.05)--(${origine*pas1}+\\x,0.05);}`
@@ -2299,6 +2640,8 @@ function modal_texte_court(numero_de_l_exercice,texte,label_bouton="Aide",icone=
 	return creer_modal(numero_de_l_exercice,contenu,label_bouton,icone)
 }
 
+
+
 /**
 * Créé un bouton pour une aide modale avec un texte et une vidéo YouTube
 * @param numero_de_l_exercice
@@ -2325,6 +2668,20 @@ function modal_youtube(numero_de_l_exercice,id_youtube,texte,label_bouton="Aide 
 function modal_texte_long(numero_de_l_exercice,titre,texte,label_bouton="Aide",icone="info circle"){
 	let contenu = `<div class="header">${titre}</div>`
 	contenu += `<div class="content">${texte}</div>`
+	return creer_modal(numero_de_l_exercice,contenu,label_bouton,icone)
+}
+
+/**
+* Créé un bouton pour une aide modale avec un titre et un texte
+* @param numero_de_l_exercice
+* @param titre
+* @param texte
+* @param label_bouton Titre du bouton (par défaut Aide)
+* @param icone Nom de l'icone (par défaut c'est info circle icon), liste complète sur https://semantic-ui.com/elements/icon.html
+* @Auteur Rémi Angot
+*/	
+function modal_url(numero_de_l_exercice,url,label_bouton="Aide",icone="info circle"){
+	let contenu = `<iframe width="100%" height="600"  src="${url}" frameborder="0" ></iframe>`
 	return creer_modal(numero_de_l_exercice,contenu,label_bouton,icone)
 }
 
@@ -3016,7 +3373,7 @@ function SVG_machine_maths(id_du_div,w,h,nom,etape1,etape2,etape3,x_ligne1,x_lig
 	 
 	 \\setlength{\\fboxrule}{1.5mm}
 	 \\par\\vspace{0.25cm}
-	 \\noindent\\fcolorbox{orangeCoop}{white}{\\parbox{\\linewidth-2\\fboxrule-2\\fboxsep}{`+texte+`}}
+	 \\noindent\\fcolorbox{nombres}{white}{\\parbox{\\linewidth-2\\fboxrule-2\\fboxsep}{`+texte+`}}
 	 \\par\\vspace{0.25cm}		 
 	 `;
 
@@ -3392,12 +3749,15 @@ function d3jsTests(id_du_div) {
 };
 
 /**
- * Renvoie un encart sur fond d'alert semantic ui en HTML ou dans un cadre orange coopmaths en LaTeX avec le texte 
+ * Renvoie un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte 
  * @param {string} texte
  * @author Sébastien Lozano 
  */
-function warn_message(texte) {
+function warn_message(texte,couleur,titre) {
 	'use strict';
+	if( typeof(titre) == 'undefined' ){
+        titre = ``;
+    };
 	if (sortie_html) {
 		return `
 		<br>
@@ -3407,7 +3767,12 @@ function warn_message(texte) {
 		</div>
 		`;
 	} else {
-		return tex_cadre_par_orange(texte);							
+		//return tex_cadre_par_orange(texte);							
+		return `
+		\\begin{bclogo}[couleurBarre=`+couleur+`,couleurBord=`+couleur+`,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
+			`+texte+`
+		\\end{bclogo}
+		`;
 	};
 
 };
@@ -3418,8 +3783,8 @@ function warn_message(texte) {
  * @author Sébastien Lozano
  */
 
-function lampe_message(titre,texte) {
-	'use strict';
+function lampe_message({titre,texte,couleur}) {
+	//'use strict';
 	if (sortie_html) {
 		return `
 		<div class="ui compact icon message">
@@ -3434,7 +3799,7 @@ function lampe_message(titre,texte) {
 		`;
 	} else {
 		return `
-		\\begin{bclogo}[couleurBarre=orangeCoop,couleurBord=orangeCoop,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
+		\\begin{bclogo}[couleurBarre=`+couleur+`,couleurBord=`+couleur+`,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
 			`+texte+`
 		\\end{bclogo}
 		`;
@@ -3491,10 +3856,122 @@ function decomp_fact_prem_array(n) {
 }
 
 
+/**
+ * Classe Triangles 
+ * @author Sébastien Lozano
+ */
+function Triangles(l1,l2,l3,a1,a2,a3) {
+	'use strict';
+	var self = this;
 
+	// liste de noms possibles pour un triangle
+	let nomsPossibles = ['AGE','AIL','AIR','ALU','AME','AMI','ANE','ARC','BAC','BAL','BAR','BEC','BEL','BIO','BIP','BIS','BLE','BOA','BOB','BOF','BOG','BOL','BUT','BYE','COQ','CRI','CRU','DUC','DUO','DUR','EAU','ECU','EGO','EPI','FER','FIL','FUN','GPS','ICE','JET','KIF','KIR','MAC','NEM','PAS','PIC','PIF','PIN','POT','RAI','RAP','RAT','RIF','SEL','TAF','TIC','TAC','TOC','TOP','UNI','WOK','YAK','YEN','ZEN','ZIG','ZAG'];
+
+	this.nom = choice(nomsPossibles);
+
+	// renvoie le nom choisi
+	function getNom() {
+		return '$'+self.nom+'$';
+	}
+
+	// renvoie les noms des côtés du triangle, segments!
+	function getCotes() {
+		let cotes = [];
+		let triangle = self.nom;
+		let sommets = triangle.split('');
+		cotes[0]='$['+sommets[0]+''+sommets[1]+']$';
+		cotes[1]='$['+sommets[1]+''+sommets[2]+']$';
+		cotes[2]='$['+sommets[2]+''+sommets[0]+']$';
+
+		return cotes;
+	};
+
+	// renvoie les noms des longueurs des côtés du triangle.
+	function getLongueurs() {
+		let longueurs = [];
+		let triangle = self.nom;
+		let sommets = triangle.split('');
+		longueurs[0]='$'+sommets[0]+''+sommets[1]+'$';
+		longueurs[1]='$'+sommets[1]+''+sommets[2]+'$';
+		longueurs[2]='$'+sommets[2]+''+sommets[0]+'$';
+
+		return longueurs;
+	};
+
+	// renvoie les noms des angles du triangle.
+	function getAngles() {
+		let angles = [];
+		let triangle = self.nom;
+		let sommets = triangle.split('');
+		angles[0] = `$\\;\\widehat{${sommets[0]+sommets[1]+sommets[2]}}$`;
+		angles[1] = `$\\;\\widehat{${sommets[1]+sommets[2]+sommets[0]}}$`;
+		angles[2] = `$\\;\\widehat{${sommets[2]+sommets[0]+sommets[1]}}$`;
+
+		return angles;
+	};
+
+	// renvoie les noms des angles du triangle.
+	function getSommets() {
+		let triangle = self.nom;
+		let sommets = triangle.split('');
+		sommets[0] = '$'+sommets[0]+'$';
+		sommets[1] = '$'+sommets[1]+'$';
+		sommets[2] = '$'+sommets[2]+'$';
+
+		return sommets;
+	};
+
+	// renvoie un booleen selon que les trois longueurs forment un vrai triangle ou non
+	function isTrueTriangleLongueurs() {
+		let longueurs = [self.l1,self.l2,self.l3];
+		//console.log('longueurs : '+longueurs);
+		longueurs.sort(function(a,b){
+			return a-b;
+		});
+		//console.log('longueurs sort() : '+longueurs);
+		if (longueurs[2] < (longueurs[0]+longueurs[1])) {
+			return true;
+		} else {
+			return false;
+		};
+	};
+
+	// renvoie un booleen selon que les trois angles forment un vrai triangle ou non
+	function isTrueTriangleAngles() {
+		if ((self.a1 + self.a2 + self.a3) == 180) {
+			return true;
+		} else {
+			return false;
+		};
+	};
+
+	// renvoie un booléen selon que le triangle donné à partir de ses trois longueurs ou trois angles est quelconque ou non
+	function isQuelconque() {
+		if ( ( ((self.l1!=self.l2) && (self.l1!=self.l3) && (self.l2!=self.l3) ) || ( (self.a1!=self.a2) && (self.a1!=self.a3) && (self.a2!=self.a3) ) ) && ( (self.a1 != 90) || (self.a2 != 90) || (self.a3 != 90) ) ) {
+			return true
+		} else {
+			return false;
+		};
+	};
+	
+	this.l1 = l1;
+	this.l2 = l2;
+	this.l3 = l3;
+	this.a1 = a1;
+	this.a2 = a2;
+	this.a3 = a3;
+	//this.nom = nom;
+	this.getNom = getNom;
+	this.getCotes = getCotes;
+	this.getLongueurs = getLongueurs;
+	this.getAngles = getAngles;
+	this.getSommets = getSommets;
+	this.isTrueTriangleLongueurs = isTrueTriangleLongueurs;
+	this.isTrueTriangleAngles = isTrueTriangleAngles;
+	this.isQuelconque = isQuelconque;	
+};
 
 // Gestion des styles LaTeX
-
 
 /**
 * Renvoie un texte avec le préambule d'un fichier LaTeX
@@ -3535,7 +4012,7 @@ function intro_LaTeX(entete = "Exercices") {
 	\\definecolor{algo}{cmyk}{.69,.02,.36,0}
 \\definecolor{correction}{cmyk}{.63,.23,.93,.06}
 \\usepackage{pgf,tikz}					
-\\usetikzlibrary{arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
+\\usetikzlibrary{babel,arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
 shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows}
 
 
@@ -3596,7 +4073,7 @@ ${preambule_personnalise(liste_packages)}
 \\usepackage{setspace}
 \\usepackage{xcolor}
 \\usepackage{pgf,tikz}					% Pour les images et figures gÃ©omÃ©triques
-\\usetikzlibrary{arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
+\\usetikzlibrary{babel,arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
 shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows}
 
 \\renewcommand{\\headrulewidth}{0pt}
@@ -3659,25 +4136,55 @@ shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC,
 
 \\newmdenv[roundcorner=0,linewidth=0pt,frametitlerule=false, backgroundcolor=gray!40,leftmargin=8cm]{remarque}
 
-
+% echelle pour le dé
+\\def \\globalscale {0.04}
+% abscisse initiale pour les chevrons
+\\def \\xini {3}
 
 \\newcommand{\\theme}[4]
 {
 	%\\theme{nombres|gestion|grandeurs|geo|algo}{Texte (entrainement, évaluation, mise en route...}{numéro de version ou vide}{titre du thême et niveau}
 	\\fancyhead[C]{
-	\\begin{tikzpicture}[line cap=round,line join=round,remember picture, overlay, shift={(current page.north west)},yshift=-8.5cm]
-    \\fill[fill=couleur_theme] (0,5) rectangle (21,6);
-    \\fill[fill=couleur_theme] (6,6)--(7.5,6)--(8.5,7)--(7.5,8)--(6,8)--(7,7)-- cycle;
-    \\fill[fill=couleur_theme] (8,6)--(8.5,6)--(9.5,7)--(8.5,8)--(8,8)--(9,7)-- cycle;  
-    \\fill[fill=couleur_theme] (9,6)--(9.5,6)--(10.5,7)--(9.5,8)--(9,8)--(10,7)-- cycle;  
-    \\node[color=white] at (10.5,5.5) {\\LARGE \\bfseries \\MakeUppercase #4};
-\\end{tikzpicture}
-	\\begin{tikzpicture}[remember picture,overlay]
-	  \\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(0,-.8cm)$) {};
-	  \\node[anchor=east, fill=white] at ($(current page.north east)+(-2,-1.9cm)$) {\\Huge \\textcolor{couleur_theme}{\\bfseries \\#} #2 \\textcolor{couleur_theme}{\\bfseries \\MakeUppercase{#3}}};
-	\\end{tikzpicture}
+		%Tracé du dé
+		\\begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-\\globalscale, xscale=\\globalscale,remember picture, overlay, shift={(current page.north west)},xshift=17cm,yshift=9.5cm,fill=couleur_theme]
+			%%%%Arc supérieur gauche%%%%
+			\\path[fill](523.5,1424.25)..controls(474.75,1413)and(404.25,1372.5)..(362.25,1333.5)..controls(322.5,1295.25)and(313.5,1272)..(331.5,1254)..controls(348.75,1236.75)and(369.75,1245)..(410.25,1283.25)..controls(458.25,1328.25)and(517.5,1356.75)..(575.25,1362.75)..controls(635.25,1368.75)and(646.5,1375.5)..(643.5,1404.75)..controls(641.25,1428.75)and(641.25,1428.75)..(596.25,1430.25)..controls(571.5,1431)and(538.5,1428)..(523.5,1424.25)--cycle;
+			%%%%Dé face supérieur%%%%
+			\\path[fill](512.25,1272.75)..controls(490.5,1260)and(195,878.25)..(195,861.75)..controls(195,854.25)and(198,846)..(202.5,843.75)..controls(210.75,838.5)and(677.25,772.5)..(707.25,772.5)..controls(720,772.5)and(737.25,781.5)..(753.75,796.5)..controls(792,833.25)and(1057.5,1179)..(1057.5,1193.25)..controls(1057.5,1200)and(1053,1209)..(1048.5,1212.75)..controls(1038,1220.25)and(590.25,1283.25)..(551.25,1282.5)..controls(539.25,1282.5)and(521.25,1278)..(512.25,1272.75)--cycle;
+			%%%%Dé faces gauche et droite%%%%
+			\\path[fill](1061.25,1167.75)..controls(1050.75,1158.75)and(978.75,1068.75)..(900,967.5)..controls(792.75,829.5)and(756,777)..(753,756.75)--(748.5,729)--(724.5,745.5)..controls(704.25,759)and(660,767.25)..(456.75,794.25)..controls(322.5,813)and(207,825.75)..(200.25,822.75)..controls(193.5,820.5)and(187.5,812.25)..(187.5,804.75)..controls(188.25,797.25)and(229.5,688.5)..(279.75,563.25)..controls(349.5,390.75)and(376.5,331.5)..(391.5,320.25)..controls(406.5,309)and(462,299.25)..(649.5,273)..controls(780.75,254.25)and(897,240.75)..(907.5,241.5)..controls(918,243)and(927,249)..(928.5,256.5)..controls(930,264)and(912,315.75)..(889.5,372.75)..controls(866.25,429)and(848.25,476.25)..(849.75,477.75)..controls(851.25,479.25)and(872.25,432)..(897,373.5)..controls(936.75,276.75)and(942.75,266.25)..(960,266.25)..controls(975,266.25)and(999,292.5)..(1089,408.75)..controls(1281,654)and(1290,666.75)..(1290,691.5)..controls(1290,720)and(1104.75,1175.25)..(1090.5,1180.5)..controls(1085.25,1182.75)and (1071.75,1176.75)..(1061.25,1167.75)--cycle;
+			%%%%Arc inférieur bas%%%%
+			\\path[fill](1329,861)..controls(1316.25,848.25)and(1317,844.5)..(1339.5,788.25)..controls(1364.25,726.75)and(1367.25,654)..(1347,591)..controls(1330.5,539.25)and(1338,522.75)..(1375.5,526.5)..controls(1395.75,528.75)and(1400.25,533.25)..(1412.25,566.25)..controls(1432.5,624)and(1426.5,760.5)..(1401.75,821.25)..controls(1386,861)and(1380.75,866.25)..(1361.25,868.5)..controls(1348.5,870)and(1334.25,866.25)..(1329,861)--cycle;
+			%%%%Arc inférieur gauche%%%%
+			\\path[fill](196.5,373.5)..controls(181.5,358.5)and(186,335.25)..(213.75,294.75)..controls(252.75,237)and(304.5,190.5)..(363,161.25)..controls(435,124.5)and(472.5,127.5)..(472.5,170.25)..controls(472.5,183.75)and(462,192)..(414.75,213.75)..controls(350.25,243.75)and(303.75,283.5)..(264.75,343.5)..controls(239.25,383.25)and(216.75,393.75)..(196.5,373.5)--cycle;
+		\\end{tikzpicture}
+		\\begin{tikzpicture}[remember picture,overlay]
+			\\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(0,-.8cm)$) {};
+			\\node[anchor=east, fill=white] at ($(current page.north east)+(-18.8,-2.3cm)$) {\\footnotesize \\bfseries{MathALEA}};
+	  	\\end{tikzpicture}
+		\\begin{tikzpicture}[line cap=round,line join=round,remember picture, overlay, shift={(current page.north west)},yshift=-8.5cm]
+			\\fill[fill=couleur_theme] (0,5) rectangle (21,6);
+			\\fill[fill=couleur_theme] (\\xini,6)--(\\xini+1.5,6)--(\\xini+2.5,7)--(\\xini+1.5,8)--(\\xini,8)--(\\xini+1,7)-- cycle;
+			\\fill[fill=couleur_theme] (\\xini+2,6)--(\\xini+2.5,6)--(\\xini+3.5,7)--(\\xini+2.5,8)--(\\xini+2,8)--(\\xini+3,7)-- cycle;  
+			\\fill[fill=couleur_theme] (\\xini+3,6)--(\\xini+3.5,6)--(\\xini+4.5,7)--(\\xini+3.5,8)--(\\xini+3,8)--(\\xini+4,7)-- cycle;   
+			\\node[color=white] at (10.5,5.5) {\\LARGE \\bfseries{ \\MakeUppercase{ #4}}};
+		\\end{tikzpicture}
+		\\begin{tikzpicture}[remember picture,overlay]
+			\\node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(0,-.8cm)$) {};
+			\\node[anchor=east, fill=white] at ($(current page.north east)+(-2,-1.5cm)$) {\\Huge \\textcolor{couleur_theme}{\\bfseries{\\#}} \\bfseries{#2} \\textcolor{couleur_theme}{\\bfseries \\MakeUppercase{#3}}};
+		\\end{tikzpicture}
 	}
-	\\fancyfoot[R]{\\scriptsize Coopmaths.fr -- CC-BY-SA}
+	\\fancyfoot[R]{
+		%\\scriptsize Coopmaths.fr -- CC-BY-SA
+		\\begin{tikzpicture}[remember picture,overlay]
+	    	\\node[anchor=south east] at ($(current page.south east)+(-2,0.25cm)$) {\\scriptsize {\\bfseries \\href{https://coopmaths.fr/}{Coopmaths.fr} -- \\href{http://creativecommons.fr/licences/}{CC-BY-SA}}};
+	    \\end{tikzpicture}
+		\\begin{tikzpicture}[line cap=round,line join=round,remember picture, overlay,xscale=0.5,yscale=0.5, shift={(current page.south west)},xshift=35.7cm,yshift=-6cm]
+			\\fill[fill=couleur_theme] (\\xini,6)--(\\xini+1.5,6)--(\\xini+2.5,7)--(\\xini+1.5,8)--(\\xini,8)--(\\xini+1,7)-- cycle;
+			\\fill[fill=couleur_theme] (\\xini+2,6)--(\\xini+2.5,6)--(\\xini+3.5,7)--(\\xini+2.5,8)--(\\xini+2,8)--(\\xini+3,7)-- cycle;  
+			\\fill[fill=couleur_theme] (\\xini+3,6)--(\\xini+3.5,6)--(\\xini+4.5,7)--(\\xini+3.5,8)--(\\xini+3,8)--(\\xini+4,7)-- cycle;  
+		\\end{tikzpicture}
+	}
 	\\fancyfoot[C]{}
 	\\colorlet{couleur_theme}{#1}
 	\\colorlet{couleur_numerotation}{couleur_theme}
@@ -3964,6 +4471,9 @@ function preambule_personnalise(){
 		break;
 		case 'bclogo' :
 			result += '\\usepackage[tikz]{bclogo}'
+		break
+		case 'tkz-euclide' :
+			result += '\\usepackage{tkz-euclide}\n\\usetkzobj{all}'
 		break
 		default:
 		    result += `\\usepackage{${packages}}\n`
