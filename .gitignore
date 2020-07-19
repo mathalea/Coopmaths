@@ -1,0 +1,5 @@
+# igonrer le dossier de config de visual studio code
+.vscode/
+# ignorer les fichiers du script de lancement du serveur Hugo
+Zed-PreambuleBash.txt
+Zed-HugoServeur.sh
