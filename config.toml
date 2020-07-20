@@ -15,6 +15,9 @@ publishDir = "../CoopMaths_Public"
 [markup.goldmark.renderer]
   unsafe= true
 
+#[permalinks]
+#  "/" = "/:filename/"
+
 
 ### Pour un fonctionnement en local ###
 #uglyurls = true
