@@ -183,8 +183,8 @@ var liste_des_exercices_disponibles = {
 		'3F12-3' : Tableau_de_valeurs,
 		'3F12-4' : Image_graphique,
 		'3F13' : Antecedent_graphique,
-		'3F20' : Lecture_expression_fonctions_lineaires,
-		'3F20-1' : Lecture_expression_fonctions_affines,
+		'3F21' : Lecture_expression_fonctions_lineaires,
+		'3F21-1' : Lecture_expression_fonctions_affines,
 		'3S15': Calculer_des_etendues,
 		'3S20' : fonctions_probabilite2,
 		//'3SVGtest' : svglibs,
@@ -15580,7 +15580,7 @@ function Egalite_Pythagore(){
 			  <text x="30" y="140" text-anchor="middle" alignment-baseline="central">${C}</text>
 			</svg></div>`
 				if (this.sup2) {
-					texte = `${nom} est rectangle en ${A}.<br>`
+					texte = `${nom} est rectangle en $${A}$.<br>`
 				}
 				if (this.sup==1){
 					texte_corr = texte_corr1;
@@ -15609,7 +15609,7 @@ function Egalite_Pythagore(){
 			  <text x="250" y="140" text-anchor="middle" alignment-baseline="central">${C}</text>
 			</svg></div>`
 			if (this.sup2) {
-					texte = `${nom} est rectangle en ${B}.<br>`
+					texte = `${nom} est rectangle en $${B}$.<br>`
 				}
 				if (this.sup==1){
 					texte_corr = texte_corr2
@@ -15638,7 +15638,7 @@ function Egalite_Pythagore(){
 			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${C}</text>
 			</svg></div>`
 			if (this.sup2) {
-					texte = `${nom} est rectangle en ${C}.<br>`
+					texte = `${nom} est rectangle en $${C}$.<br>`
 				}
 				if (this.sup==1){
 					texte_corr = texte_corr3
@@ -15667,7 +15667,7 @@ function Egalite_Pythagore(){
 			  <text x="150" y="240" text-anchor="middle" alignment-baseline="central">${C}</text>
 			</svg></div>`
 			if (this.sup2) {
-					texte = `${nom} est rectangle en ${B}.<br>`
+					texte = `${nom} est rectangle en $${B}$.<br>`
 				}
 				if (this.sup==1){
 					texte_corr = texte_corr2
@@ -15696,7 +15696,7 @@ function Egalite_Pythagore(){
 			  <text x="-10" y="0" text-anchor="middle" alignment-baseline="central">${C}</text>
 			</svg></div>`
 			if (this.sup2) {
-					texte = `${nom} est rectangle en ${A}.<br>`
+					texte = `${nom} est rectangle en $${A}$.<br>`
 				}
 				if (this.sup==1){
 					texte_corr = texte_corr1;
@@ -15725,7 +15725,7 @@ function Egalite_Pythagore(){
 			  <text x="-10" y="0" text-anchor="middle" alignment-baseline="central">${A}</text>
 			</svg></div>`
 			if (this.sup2) {
-					texte = `${nom} est rectangle en ${C}.<br>`
+					texte = `${nom} est rectangle en $${C}$.<br>`
 				}
 				if (this.sup==1){
 					texte_corr = texte_corr1;
@@ -16166,26 +16166,14 @@ function Lecture_expression_fonctions_affines() {
 		}
 
 		if (sortie_html) {
-			let id_unique = `${Date.now()}`
-			let id_du_div = `div_svg${numero_de_l_exercice}${id_unique}`;
-			this.consigne = `<div id="${id_du_div}" style="width: ${h}px; height: ${h}px; display : table "></div>`;
-			if (!window.SVGExist) { window.SVGExist = {} } // Si SVGExist n'existe pas on le créé
-			// SVGExist est un dictionnaire dans lequel on stocke les listenner sur la création des div
-			window.SVGExist[id_du_div] = setInterval(function () {
-				if ($(`#${id_du_div}`).length) {
-					$(`#${id_du_div}`).html("");//Vide le div pour éviter les SVG en doublon
-					const mon_svg = SVG().addTo(`#${id_du_div}`).viewbox(0, 0, 500, 500).size('100%', '100%')
-
-					SVG_repere(mon_svg, -5, 5, -5, 5, k, k, 500, 500, true);
-					SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[0][0], liste_droites[0][1], 'blue', 'd1');
-					SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd2');
-					SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd3');
-					SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd4');
-					SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd5');
-					clearInterval(SVGExist[id_du_div]);//Arrête le timer
-				}
-
-			}, 100); // Vérifie toutes les 100ms
+			const mon_svg = SVG().viewbox(0, 0, 500, 500).size('100%', '100%')
+			SVG_repere(mon_svg, -5, 5, -5, 5, k, k, 500, 500, true);
+			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[0][0], liste_droites[0][1], 'blue', 'd1');
+			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd2');
+			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd3');
+			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd4');
+			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd5');
+			this.consigne = `<div style="width: 50%; display : table ">${mon_svg.svg()}</div>`;
 
 
 
