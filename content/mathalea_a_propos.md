@@ -34,6 +34,9 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - [TextFill](https://jquery-textfill.github.io) MIT license (pour adapter la taille de la police dans les diaporamas)
 - [SVG.js](https://svgjs.com/) MIT license (pour afficher des figures)
 - Merci à Sébastien Cogez pour ses conseils et à Julien Brunel pour son cours sur la programmation objet.
+- Icone "[Whisper](https://thenounproject.com/term/whisper/21616/)" by Rémy Médard from the Noun Project
+- Icone "[Silence](https://thenounproject.com/term/whisper/77879/)" by Gianluca Manzana from the Noun Project 
+- Icone "[Traffic Light](https://thenounproject.com/term/traffic-lights/1084957/)" by Lukáš Jača from the Noun Project    
 
 
 ### ToDo
