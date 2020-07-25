@@ -19,6 +19,7 @@ var liste_des_exercices_disponibles = {
 		'CM017' : Diviser_decimal_par_10_100_1000,
 		'CM018' : Somme_de_deux_nombres_maries_et_un_entier,
 		'CM019' : Le_compte_est_bonV3,
+		'CM020' : Le_compte_est_bonV4,
 		'6C10' : Additions_soustractions_multiplications_posees,
 		'6C11' : Divisions_euclidiennes,
 		'6C10-1' :Tables_de_multiplications,
@@ -2082,6 +2083,71 @@ function Le_compte_est_bonV3(){
 	this.besoin_formulaire_numerique = ['Limite inférieure',max_solution];
 	this.besoin_formulaire2_numerique = ['Limite supérieure',100];
 }
+function Le_compte_est_bonV4(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Générateur de \"Le compte est bon\" version semi-aléatoire";
+	this.consigne = "Écrire un calcul égal au nombre cible en utilisant les 5 nombres, 4 opérations différentes et éventuellement des parenthèses.";
+	this.nb_questions = 5;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup=1;
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let solution_mathador=[];
+		let tirage,solution,expression,min,max,texte,texte_corr
+		let minmax=[]
+		let a,b,c,d,e
+		if (!this.sup2) { // Si rien n'est saisi
+			min=0
+			max=100
+		}
+		else {
+			if (typeof(this.sup2)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule grandeur
+				min=0
+				max=this.sup2
+			} else {
+				minmax = this.sup2.split("-");// Sinon on créé un tableau à partir des valeurs séparées par des -
+				min=minmax[0]
+				max=minmax[1]
+			}	
+		}
+		if (!this.sup) { // Si rien n'est saisi
+			solution_mathador=Trouver_solution_mathador(min,max)
+		}
+		else {
+			if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule grandeur
+				solution_mathador=Trouver_solution_mathador(min,max,this.sup)
+			} else {
+				tirage = this.sup.split("-");// Sinon on créé un tableau à partir des valeurs séparées par des -
+				for (let i=0;i<tirage.length;i++) tirage[i]=parseInt(tirage[i])
+				solution_mathador=Trouver_solution_mathador(min,max,...tirage)
+			}	
+		}
+
+			tirage=solution_mathador[0]
+			solution=solution_mathador[1]
+			expression=solution_mathador[3]
+
+			texte=`Le tirage est le suivant : $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ <br>La cible est : $${solution}$`
+			texte_corr=`Pour le tirage $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ et pour la cible $${solution}$, la solution est : $${expression}=${solution}$ `
+			texte_corr+=`ou $${solution_mathador[4]}$.<br>`
+			texte_corr+=`En effet : <br>`
+			for (let i=0;i<4;i++) {
+				texte_corr+=`$${solution_mathador[2][i]}$<br>`
+			}
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			
+	liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_texte = ['Choix des nombres du tirage (de aucun à cinq)','Nombres séparés par des tirets'] // Texte, tooltip
+	this.besoin_formulaire2_texte = ['Intervalle pour la cible (ou rien pour cible non contrainte)','Minimum-Maximum (éviter de trop contraindre la cible, cela peut bloquer le programme)'] // Texte, tooltip
+
+	// this.besoin_formulaire2_numerique = ['Limite supérieure',100];
+}
 /**
  * @Auteur Jean-Claude Lhote 
  * @param {number} min Valeur minimum pour la solution
@@ -2090,18 +2156,25 @@ function Le_compte_est_bonV3(){
  * @returns {array} [tirage=[a,b,c,d,e],solution (compris entre min et max),operations_successives=[string1,string2,string3,string4,string5],expression]
  * les string1 à 5 ainsi que l'expresion sont ) mettre en mode maths.
  */
-function Trouver_solution_mathador(min,max) {
-'use strict'
+function Trouver_solution_mathador(min,max,A=1,B=4,C=8,D=3,E=5) {
 	let eureka,a,b,c,d,e,tirage,nombres_restants,operations_restantes,expression_en_cours_f,expression_en_cours_d,op,part1_f,part2_f,part1_d,part2_d,operations_successives=[],solution
 	let liste_choix=[1,2,2,3,3,4,4,4,4,5,6,6,6,6,7,7,8,8,8,8,9,9,9,9,10,11,12,13,14,15,16,17,18,19,20];
 	eureka=false;
+	let nb_determines=arguments.length-2
 	while (eureka==false){
 		tirage=[];
-		a=parseInt(choice(liste_choix))
-		b=parseInt(choice(liste_choix,[13,14,15,16,17,18,19,20,a]))
-		c=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,a,b]))
-		d=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,b,c]))
-		e=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20]))
+		
+		if (nb_determines<1) a=parseInt(choice(liste_choix))
+		else a=A
+		if (nb_determines<2) b=parseInt(choice(liste_choix,[13,14,15,16,17,18,19,20,a]))
+		else b=B
+		if (nb_determines<3) c=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,a,b]))
+		else c=C
+		if (nb_determines<4) d=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,b,c]))
+		else d=D
+		if (nb_determines<5)	e=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20]))
+		else e=E
+		console.log(a,b,c,d,e)
 		tirage.push(a,b,c,d,e);
 		nombres_restants=shuffle(tirage);
 		operations_restantes=['\\times','+','-','\\div'];
@@ -2170,7 +2243,7 @@ function Trouver_solution_mathador(min,max) {
 
 		if (nombres_restants.length==1&&operations_restantes.length==0)	{
 			solution=nombres_restants[0];
-			if (solution>=min&solution<=max) {
+			if (solution>=min&&solution<=max) {
 				eureka=true;
 				if (expression_en_cours_f[0][0]=='\\'&&expression_en_cours_f[0][1]==`l`){
 				expression_en_cours_f[0]=expression_en_cours_f[0].substring(6,expression_en_cours_f[0].length)
@@ -2180,6 +2253,7 @@ function Trouver_solution_mathador(min,max) {
 					expression_en_cours_d[0]=expression_en_cours_d[0].substring(6,expression_en_cours_d[0].length)
 					expression_en_cours_d[0]=expression_en_cours_d[0].substring(0,expression_en_cours_d[0].length-7)
 					}
+				console.log(tirage,solution)
 				return [tirage,solution,operations_successives,expression_en_cours_f,expression_en_cours_d]
 				}
 			else operations_successives=[]		
@@ -3814,12 +3888,14 @@ function Exercice_conversions_aires(niveau=1){
 					 + ' = ' + tex_nombre(resultat) + tex_texte(unite)+ '^2' + '$';
 
 			}else if(div&&type_de_questions<4) {
+				prefixe_div = [[' d','\\div10\\div10',100],[' c','\\div100\\div100',10000],[' m','\\div1~000\\div1~000',1000000]]; 
 				k = randint(0,1); // Pas de conversions de mm^2 en m^2 avec des nombres décimaux car résultat inférieur à 10e-8
-				resultat = Algebrite.eval(a/prefixe_multi[k][2]).toString(); // Attention aux notations scientifiques pour 10e-8
+				resultat = Algebrite.eval(a/prefixe_div[k][2]).toString(); // Attention aux notations scientifiques pour 10e-8
 				texte = '$ '+ tex_nombre(a) + tex_texte(prefixe_div[k][0]+unite)+ '^2' + ' = \\dotfill ' + tex_texte(unite)  + '^2' + '$';
 				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_div[k][0]+unite)+ '^2' + ' =  ' + tex_nombre(a) + prefixe_div[k][1] + tex_texte(unite)  + '^2'
 					 + ' = ' + tex_nombre(resultat) + tex_texte(unite)  + '^2' + '$';
 			}else if(type_de_questions==4){ 
+		
 				let unite1 = randint(0,3);
 				let ecart = randint(1,2); // nombre de multiplication par 10 pour passer de l'un à l'autre
 				if (ecart>4-unite1) {
@@ -3833,6 +3909,7 @@ function Exercice_conversions_aires(niveau=1){
 					 + ' = ' + tex_nombre(resultat) + tex_texte(liste_unite[unite1]) + '^2' + '$';	
 
 				} else {
+		
 					resultat = Algebrite.eval(a/Math.pow(10,2*ecart));
 					texte = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite1]) + '^2' + ' = \\dotfill ' + tex_texte(liste_unite[unite2]) + '^2' + '$';
 					texte_corr = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite1]) + '^2' + ' =  ' + tex_nombre(a) + '\\div' + tex_nombre(Math.pow(10,2*ecart)) + tex_texte(liste_unite[unite2]) + '^2'
@@ -11540,24 +11617,24 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			souscas=randint(0,3)
 			switch (souscas) {
 				case 0 : //somme de deux nombres
-					expf=`La somme de ${tex_nombre(a)} et ${tex_nombre(b)}`
+					expf=`La somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}+${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}+${tex_nombre(b)} = ${tex_nombre(a+b)}$`
 					break
 				case 1 : // différence de deux nombres
 					if(a<b) a=a+b
-					expf=`La différence de ${tex_nombre(a)} et ${tex_nombre(b)}`
+					expf=`La différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}-${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}-${tex_nombre(b)} = ${tex_nombre(a-b)}$`
 					break
 				case 2 : // produit de deux nombres
-					expf=`Le produit de ${tex_nombre(a)} par ${tex_nombre(b)}`
+					expf=`Le produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)} = ${tex_nombrec(a*b)}$`
 					break
 				case 3 : // quotient de deux nombres
 					a=calcul(Math.round(a)*b)
-					expf=`Le quotient de ${tex_nombre(a)} par ${tex_nombre(b)}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}\\div${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}\\div${tex_nombre(b)} = ${tex_nombrec(a)}$`
 					break
@@ -11567,33 +11644,33 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			souscas=randint(0,5)
 			switch (souscas) {
 				case 0 : //a(b+c)
-					expf=`Le produit de ${tex_nombre(a)} par la somme de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le produit de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}(${tex_nombre(b)}+${tex_nombre(c)})$`
 					expc=`$${tex_nombre(a)}(${tex_nombre(b)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\times${tex_nombrec(b+c)}=${tex_nombrec(a*(b+c))}$`
 					break
 				case 1 : // a(b-c)
 					if (b<=c) b=calcul(b+c) // b-c positif
-					expf=`Le produit de ${tex_nombre(a)} par la différence de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le produit de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}(${tex_nombre(b)}-${tex_nombre(c)})$`
 					expc=`$${tex_nombre(a)}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(a)}\\times${tex_nombrec(b-c)}=${tex_nombrec(a*(b-c))}$`
 					break
 				case 2 : // a/(b+c)
 					a=calcul(a*(b+c)) // on s'assure que le quotient tombe juste...
-					expf=`Le quotient de ${tex_nombre(a)} par la somme de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}\\div(${tex_nombre(b)}+${tex_nombre(c)})$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}+${tex_nombre(c)}}$`
 					expc=`$${tex_nombre(a)}\\div(${tex_nombre(b)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\div${tex_nombrec(b+c)}=${tex_nombrec(a/(b+c))}$`
 					break
 				case 3 : // a/(b-c)
 					if (b<=c) b=calcul(b+c) // b-c positif
  					a=calcul(a*(b-c)) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de ${tex_nombre(a)} par la différence de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}\\div(${b}-${tex_nombre(c)})$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}-${tex_nombre(c)}}$`
 					expc=`$${tex_nombre(a)}\\div(${b}-${tex_nombre(c)}) = ${tex_nombre(a)}\\div${tex_nombrec(b-c)}=${tex_nombrec(a/(b-c))}$`
 					break			
 				case 4 : // (a+b)/c
 					a=calcul(a*c)
 					b=calcul(b*c) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)}$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)} = ${tex_nombrec(a+b)}\\div${tex_nombre(c)}=${tex_nombrec((a+b)/c)}$`
 					break
@@ -11601,7 +11678,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b) // a-b positif
 					a=calcul(a*c)
 					b=calcul(b*c) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div${tex_nombre(c)}$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{${tex_nombre(c)}}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div${tex_nombre(c)} = ${tex_nombrec(a-b)}\\div${tex_nombre(c)}=${tex_nombrec((a-b)/c)}$`
 					break			
@@ -11612,33 +11689,33 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			souscas=randint(0,13)
 			switch (souscas) {
 				case 0 : // (a+b)(c+d)
-					expf=`Le produit de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
 					break
 				case 1 : // (a+b)(c-d)
 					if (c<=d) c=calcul(c+d)
-					expf=`Le produit de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
 					break
 				case 2 : // (a-b)(c+d)
 					if (a<=b) a=calcul(a+b)
-					expf=`Le produit de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
 					break
 				case 3 : // (a-b)(c-d)
 					if (a<=b) a=calcul(a+b)
 					if (c<=d) c=calcul(c+d)
-					expf=`Le produit de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
 					break			
 				case 4 : // (a+b)/(c+d)
 					a=calcul(a*(c+d))
 					b=calcul(b*(c+d))
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}+${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div${tex_nombrec(c+d)} = ${tex_nombrec((a+b)/(c+d))}$`
 					break
@@ -11646,7 +11723,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					a=calcul(a*(c+d))
 					b=calcul(b*(c+d))
 					if (a<=b) a=calcul(a+b)
-					expf=`Le quotient de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{${tex_nombre(c)}+${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/(c+d))}$`
 					break			
@@ -11654,7 +11731,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (c<=d) c=calcul(c+d)
 					a=calcul(a*(c-d))
 					b=calcul(b*(c-d))
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}-${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div${tex_nombrec(c-d)} = ${tex_nombrec((a+b)/(c-d))}$`
 					break
@@ -11663,25 +11740,25 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b)
 					a=calcul(a*(c-d))
 					b=calcul(b*(c-d))
-					expf=`Le quotient de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{${tex_nombre(c)}-${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div${tex_nombrec(c-d)} = ${tex_nombrec((a-b)/(c-d))}$`
 					break			
 				case 8 : // ab+cd
-					expf=`La somme du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du produit de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du produit de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c*d)} = ${tex_nombrec(a*b+c*d)}$`
 					break
 				case 9 : // ab-cd
 					if (a*b<d*c) a=calcul(a+c)
 					if (a*b<d*c) b=calcul(b+d)
-					expf=`La différence du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du produit de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du produit de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\times${tex_nombre(d)}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\times${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c*d)} = ${tex_nombrec(a*b-c*d)}$`
 					break			
 				case 10 : // ab+c/d
 					c=calcul(c*d)
-					expf=`La somme du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $${tex_nombre(a)}\\times${tex_nombre(b)}+\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a*b+c/d)}$`
 					break
@@ -11689,14 +11766,14 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					c=c*d
 					if (a*b<c/d) a=calcul(a*c)
 					if (a*b<c/d) b=calcul(b*c)
-					expf=`La différence du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $${tex_nombre(a)}\\times${tex_nombre(b)}-\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a*b-c/d)}$`
 					break	
 				case 12 : // a/b+c/d
 					a=calcul(a*b)
 					c=calcul(c*d)
-					expf=`La somme du quotient de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La somme du quotient de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\div${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}}+\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\div${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a/b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a/b+c/d)}$`
 					break	
@@ -11705,7 +11782,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					c=calcul(c*d)
 					if (a/b<c/d) a=calcul(a*c)
 					if (a/c<c/d) a=calcul(a*d)
-					expf=`La différence du quotient de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La différence du quotient de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\div${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}}-\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\div${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a/b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a/b-c/d)}$`
 					break	
@@ -11715,14 +11792,14 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 		souscas=randint(0,5)
 			switch (souscas) {
 				case 0 : // 2(a+bc)
-					expf=`Le double de la somme de ${tex_nombre(a)} et du produit de ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le double de la somme de ${nombre_avec_espace(a)} et du produit de ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$2(${tex_nombre(a)}+${tex_nombre(b)}\\times${tex_nombre(c)})$`
 					expc=`$2(${tex_nombre(a)}+${tex_nombre(b)}\\times${tex_nombre(c)}) = 2(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times ${tex_nombrec(a+b*c)}$`
 					break
 				case 1 : // 3(a+b)/c
 					a=calcul(a*c)
 					b=calcul(b*c)
-					expf=`Le triple du quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le triple du quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$3(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)}$ ou $3\\times\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}}$`
 					expc=`$3(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)} = 3\\times ${tex_nombre(a+b)}\\div${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
 					break
@@ -11730,7 +11807,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b)
 					a=calcul(3*a)
 					b=calcul(3*b)
-					expf=`Le tiers de la différence de ${tex_nombre(a)} et ${tex_nombre(b)}`
+					expf=`Le tiers de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div 3$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{3}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div 3 = ${tex_nombrec(a-b)}\\div 3 = ${tex_nombrec((a-b)/3)}$`
 					break
@@ -11738,19 +11815,19 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b)
 					a=calcul(3*a)
 					b=calcul(3*b)
-					expf=`Le produit du tiers de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par le double de la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit du tiers de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par le double de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div 3\\right)\\times 2(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div 3\\right)\\times 2(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div 3 \\times 2 \\times${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times 2 \\times ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
 					break			
 				case 4 : // 3(a+b)-2(c+d)
 					if (3*(a+b)<2*(c+d)) a=calcul(a+c+d)
-					expf=`La différence du triple de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} et du double de la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`La différence du triple de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} et du double de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times ${tex_nombrec(a+b)} - 2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
 					break
 				case 5 : // 2(a-b)+3(c+d)
 					if (a<=b) a=calcul(a+b)
-					expf=`La somme du double de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} et du triple de la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`La somme du double de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} et du triple de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times ${tex_nombrec(a-b)} + 3 \\times ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
 					break	
@@ -11762,19 +11839,19 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 				case 1 : // (a+b)/(c(d+e))
 					a=calcul(a*c*(d+e))
 					b=calcul(b*c*(d+e))
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par le produit de ${tex_nombre(c)} par la somme de ${tex_nombre(d)} et ${tex_nombre(e)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par le produit de ${nombre_avec_espace(c)} par la somme de ${nombre_avec_espace(d)} et ${nombre_avec_espace(e)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)}))$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div (${tex_nombre(c)} \\times ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
 					break
 				case 2 : //(a-b)*(c+de)
 					if (a<=b) a=calcul(a+b)
-					expf=`Le produit de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et du produit de ${tex_nombre(d)} par ${tex_nombre(e)}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et du produit de ${nombre_avec_espace(d)} par ${nombre_avec_espace(e)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times${tex_nombre(e)})$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times${tex_nombre(e)}) = ${tex_nombrec(a-b)}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
 					break
 				case 3 : // ab+cd/e
 					c=calcul(c*e)
-					expf=`La somme du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient du produit de ${tex_nombre(c)} et ${tex_nombre(d)} par ${tex_nombre(e)}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient du produit de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)} par ${nombre_avec_espace(e)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)}\\div${tex_nombre(e)}$ ou $${tex_nombre(a)}\\times${tex_nombre(b)}+\\dfrac{${tex_nombre(c)}\\times${tex_nombre(d)}}{${tex_nombre(e)}}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)}\\div${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d)} \\div ${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d/e)} = ${tex_nombrec(a*b+c*d/e)}$`
 					break
