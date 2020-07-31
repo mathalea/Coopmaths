@@ -45,8 +45,6 @@
   
   <!-- MathALEA-->
   <script type="text/javascript">var sortie_html=true;</script>
-  <script src="include/mathalea2d.js" type="text/javascript"></script>
-  
 
   
   <link rel="stylesheet" type="text/css" href="style/style_mathalea.css">
@@ -65,43 +63,7 @@
 
   
 
-  <nav>
-
-<div class="ui top attached five item stackable container menu  ">
-  <div class="ui  dropdown item" class="blanc">CoopMaths <i class="dropdown icon"></i> 
-    <div class="menu">
-      <a href="/" class="item">Sixième</a>
-      <a href="/5e" class="item">Cinquième (en construction)</a>
-      <a href="/4e" class="item">Quatrième (prochainement)</a>
-      <a href="/3e" class="item">Troisième (en construction)</a>
-      <a href="/twitter" class="item">Actualités</a>
-
-    </div>
-  </div> 
-  <!-- <a  href="/" class="ui simple  item">CoopMaths </a>  -->
-
-<!-- <div class="ui  dropdown item" class="blanc">CoopMaths <i class="dropdown icon"></i> 
-    <div class="menu">
-      <a href="/" class="item">Sixième</a>
-      <a href="/angot" class="item">Élèves de Clarensac</a>
-      
-    </div>
-</div> -->
-
-  <a  href="/a_propos/" class="ui simple  item">À propos</a>
-  <a  href="/telechargements"class="ui simple  item">Téléchargements</a> 
-  <a  href="mailto:contact@coopmaths.fr" class="ui simple  item">Contact</a>
-  <div class="ui  dropdown item" class="blanc">MathALEA <i class="dropdown icon"></i> 
-    <div class="menu">
-      <a href="/mathalea.html" class="item">Exercices en ligne</a>
-      <a href="/cm.html" class="item">Diaporama</a>
-      <a href="/mathalealatex.html"class="item">Générateur LaTeX</a>
-      <a href="/alacarte"class="item">Évaluation à la carte</a>
-      <a href="/mathalea_tuto" class="item">Comment l'utiliser ?</a>
-      <a href="/mathalea_a_propos" class="item">À propos</a>
-    </div>
-  </div>
-</div>
+ 
 
 <script type="text/javascript">
      $(document).ready(function(){
@@ -109,7 +71,6 @@
     });     
    </script>
 
-</nav>
 
 <div style="position: fixed;
   top: 10px;
@@ -129,9 +90,6 @@
   cursor:move;" id="signaletique"></div>
 
 
-<div class="ui hidden divider"></div>
-
-<div class="ui hidden divider"></div>
 
 
 <section class="ui container " >
@@ -143,13 +101,7 @@
    </div>
  </div>
 
- <div class="ui floating message">
-  <p>Faire les questions suivantes au brouillon puis cliquer en dessous sur <em>Corrections</em> pour vérifier.</p>
-</div>
-
-<div class="ui hidden divider"></div>
-<div class="ui hidden divider"></div>
-
+ 
 
 
 <div > 
@@ -158,8 +110,8 @@
         <button class="btn ui  right labeled icon button" id="btn_zoom_plus">Zoom<i class="plus icon"></i> </button>
         <button class="btn ui  icon button" id="btn_zoom_moins"><i class="minus icon"></i> </button>  
       </div>
-      <button id="btnCopieURL" style="margin:10px" class="btn ui toggle button labeled icon url" data-clipboard-action="copy" data-clipboard-text=url_courant()><i class="copy icon"></i>Copier le lien vers les exercices sélectionnés</button> 
-      <button id="btnLaTeX"  style="margin:10px" class="btn ui button labeled icon" ><i class="edit icon"></i>Version LaTeX</button> 
+      <button style="display: none;" id="btnCopieURL" style="margin:10px" class="btn ui toggle button labeled icon url" data-clipboard-action="copy" data-clipboard-text=url_courant()><i class="copy icon"></i>Copier le lien vers les exercices sélectionnés</button> 
+      <button style="display: none;" id="btnLaTeX"  style="margin:10px" class="btn ui button labeled icon" ><i class="edit icon"></i>Version LaTeX</button> 
 </div>
 
 <div class="ui hidden divider"></div>
@@ -177,7 +129,7 @@
       <div id="corrections"></div> 
     </div>
   </div>
-  <div class="ui  fluid accordion">
+  <div class="ui  fluid accordion" style="display: none;">
     <div class="title">
       <i class="dropdown icon"></i>
       Paramètres
@@ -185,11 +137,9 @@
     <div class="content" id='parametres_generaux'>
     </div>
   </div>
-  <div class="ui hidden divider"></div>
-  <div class="ui hidden divider"></div>
   <div class="ui right aligned container">
 
-    <img class="ui middle aligned image" height="25" src="/images/logo2.png">
+    <a href="https://coopmaths.fr/mathalea" target="_blank"><img class="ui middle aligned image" height="25" src="/images/logo2.png"></a>
     <span class="ui header"></span>
   </div>
   <div class="ui hidden divider"></div>

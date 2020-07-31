@@ -37,8 +37,8 @@ RedirectMatch 301 pdf([0-9]?[A-Za-z]{1,2}[0-9]+-?_?[0-9]*-?c?o?r?r?)$ /pdf/$1.pd
 RedirectMatch 301 /iep([0-9]*[A-Za-z]*[0-9]*-*_*[0-9]*)$ https://instrumenpoche.sesamath.net/iep/figures_html/scr_iep_$1.html
 
 
-# Classe du CNED
-Redirect permanent /visio https://eu.bbcollab.com/guest/e1cb857ce9a34f0da197d42c64048c08
+# Référentiel
+Redirect permanent /referentiel https://coopmaths.fr/pdf/CoopMaths-Referentiel.pdf
 
 
 ### URL Raccourcies pour les vidéos

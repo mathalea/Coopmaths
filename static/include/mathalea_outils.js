@@ -54,7 +54,39 @@ function liste_de_question_to_contenu_sans_numero_et_sans_consigne(argument) {
 
 	
 }
-
+/**
+ * fonctions de comparaison pour les nombres en virgule flottante afin d'éviter les effets de la conversion en virgule flottante.
+ * @param {number} a premier nombre 
+ * @param {number} b deuxième nombre 
+ * @param {number} tolerance seuil positif en dessous duquel une valeur est considérée comme nulle
+ * valeur de tolérance par défaut : 0.000001 = constante epsilon définie ci-dessous.
+ * @Auteur Jean-Claude Lhote
+ */
+const epsilon=0.000001;
+ function egal(a,b,tolerance=epsilon){
+	if (Math.abs(a-b)<tolerance) return true
+	else return false
+}
+function superieur(a,b,tolerance=epsilon){
+	if (a-b>tolerance&&(!egal(a,b,tolerance))) return true
+	else return false
+}
+function inferieur(a,b,tolerance=epsilon){
+	if (b-a>tolerance&&(!egal(a,b,tolerance))) return true
+	else return false
+}
+function superieurouegal(a,b,tolerance=epsilon) {
+	if (a-b>tolerance||egal(a,b,tolerance)) return true
+	else return false
+}
+function inferieurouegal(a,b,tolerance=epsilon) {
+	if (b-a>tolerance||egal(a,b,tolerance)) return true
+	else return false
+}
+function estentier(a,tolerance=epsilon) {
+	if (Math.abs(calcul(a-Math.round(a)))<tolerance) return true
+	else return false
+}
 
 
 /**
@@ -176,6 +208,44 @@ function enleve_element(array,item){
 		}
 	}
 }
+/**
+ * Enlève toutes les occurences d'un élément d'un tableau donné mais sans modifier le tableau en paramètre et renvoie le tableau modifié
+ * @Auteur Rémi Angot & Jean-Claude Lhote
+ */
+
+function enleve_element_bis(array,item) {
+	let tableaucopie=[]
+	for(i = 0;i<array.length;i++) {
+		tableaucopie.push(array[i])
+		}
+	for(var i = tableaucopie.length - 1; i >= 0; i--){
+		if(tableaucopie[i] == item) {
+			tableaucopie.splice(i, 1);
+		}
+	}
+	return tableaucopie
+}
+
+/**
+ * Enlève l'élément index d'un tableau
+ * @Auteur Jean-Claude Lhote
+ */
+function enleve_element_No(array,index) {
+	array.splice(index,1)
+}
+/**
+ * Enlève l'élément index d'un tableau sans modifier le tableau et retourne le résultat
+ * @Auteur Jean-Claude Lhote
+ */
+function enleve_element_No_bis(array,index){
+	let tableaucopie=[]
+	for(i = 0;i<array.length;i++) {
+		tableaucopie.push(array[i])
+	}
+	tableaucopie.splice(index,1)
+	return tableaucopie
+}
+
 
 /**
 * Retourne un élément au hasard de la liste sans appartenir à une liste donnée
@@ -510,7 +580,7 @@ function valeur_base(n) {
 };
 
 /**
-* Convertit un angle de radian vers degrés
+* Convertit un angle de radian vers degrés et fonction inverse
 * @Example
 * // PI->180
 * @Auteur Jean-Claude Lhote
@@ -518,6 +588,9 @@ function valeur_base(n) {
 Math.degres = function(radians) {
 	return radians * 180 / Math.PI;
 };
+Math.radians = function(degres) {
+	return degres*Math.PI/180
+}
 
 /**
  * 
@@ -798,7 +871,17 @@ function signe(a) { // + ou -
 	}
 	return result;
 };
+/**
+ * 
+ * @param {number} a 
+ * -1 si a est négatif, 1 sinon.
+ * @Auteur Jean-Claude Lhote
+ */
 
+function unSiPositifMoinsUnSinon(a) {
+	if (a<0) return -1;
+	else return 1;
+}
 
 /**
 * Retourne un string avec la somme des chiffres
@@ -1344,6 +1427,22 @@ function html_enumerate(liste,spacing){
 
 
 /**
+* Renvoit une liste HTML ou LaTeX suivant le contexte
+* 
+* @param liste une liste de questions
+* @param spacing interligne (line-height en css)
+* @Auteur Rémi Angot
+*/
+function enumerate(liste,spacing){
+	if (sortie_html) {
+		return html_enumerate(liste,spacing)
+	} else {
+		return tex_enumerate(liste,spacing)
+	}
+}
+
+
+/**
 *  Renvoit un paragraphe HTML à partir d'un string
 * 
 * @param string
@@ -1552,7 +1651,7 @@ function texte_gras(texte){
 		return `<b>${texte}</b>`	
 	}
 	else {
-		return `\\textbf${texte}`
+		return `\\textbf{${texte}}`
 	}	
 }
 
@@ -3758,6 +3857,8 @@ function d3jsTests(id_du_div) {
 /**
  * Renvoie un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte 
  * @param {string} texte
+ * @param {string} couleur
+ * @param {string} titre
  * @author Sébastien Lozano 
  */
 function warn_message(texte,couleur,titre) {
@@ -3785,17 +3886,17 @@ function warn_message(texte,couleur,titre) {
 };
 
 /**
- *  Renvoie un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte + icone lampe
- * @param {string} texte 
+ * @returns un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte + icone info
+ * @param {object} 
  * @author Sébastien Lozano
  */
 
-function lampe_message({titre,texte,couleur}) {
+function info_message({titre,texte,couleur}) {
 	//'use strict';
 	if (sortie_html) {
 		return `
 		<div class="ui compact icon message">
-			<i class="lightbulb outline icon"></i>
+			<i class="info circle icon"></i>
 			<div class="content">
 		  		<div class="header">
 					`+titre+`
@@ -3806,12 +3907,48 @@ function lampe_message({titre,texte,couleur}) {
 		`;
 	} else {
 		return `
-		\\begin{bclogo}[couleurBarre=`+couleur+`,couleurBord=`+couleur+`,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
+		\\begin{bclogo}[couleurBarre=`+couleur+`,couleurBord=`+couleur+`,epBord=2,couleur=gray!10,logo=\\bcinfo,arrondi=0.1]{\\bf `+titre+`}
 			`+texte+`
 		\\end{bclogo}
 		`;
 	};
 };
+
+/**
+ * @returns un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte + icone lampe
+ * @param {object} 
+ * @author Sébastien Lozano
+ */
+
+function lampe_message({titre,texte,couleur}) {
+	//'use strict';
+	// if (sortie_html) {
+	// 	return `
+	// 	<div class="ui compact icon message">
+	// 		<i class="lightbulb outline icon"></i>
+	// 		<div class="content">
+	// 	  		<div class="header">
+	// 				`+titre+`
+	// 	  		</div>
+	// 	  		<p>`+texte+`</p>
+	// 		</div>
+	//   	</div>
+	// 	`;
+	// } else {
+	// 	return `
+	// 	\\begin{bclogo}[couleurBarre=`+couleur+`,couleurBord=`+couleur+`,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
+	// 		`+texte+`
+	// 	\\end{bclogo}
+	// 	`;
+	// };
+	return info_message({
+		titre:titre,
+		texte:texte,
+		couleur:couleur
+	})
+};
+
+
 
 /**
  * Renvoie deux engrenages en HTML pour le moment
@@ -3865,6 +4002,21 @@ function decomp_fact_prem_array(n) {
 
 /**
  * Classe Triangles 
+ * Choisi un nom au hasard dans un tableau statique
+ * La méthode getNom() permet de récupérer ce nom et fournit un string en mode maths. Si le triangle se nomme AGE, alors getNom() renvoit un tableau de 5 éléments $ ; A ; G ; E et $, les $ traduisent le mode maths
+ * Pour l'exemple le triangle se nomme AGE
+ * La méthode getCotes() renvoie un tableau contenant les noms des segments des côtés du triangle en mode maths. [AG], [GE] et [EA] dans cet ordre.
+ * La méthode getLongueurs() renvoie un tableau contenant les noms des longueurs des côtés du triangle en mode maths. AG, GE et EA dans cet ordre.
+ * La méthode getLongueursValeurs() renvoie un tableau contenant les valeurs des longueurs des côtés du triangle.
+ * La méthode getAngles() renvoie un tableau contenant les noms des angles du triangle en mode maths. AGE, GEA et EAG dans cet ordre.
+ * La méthode getAnglesValeurs() renvoie un tableau contenant les valeurs des angles du triangle.
+ * La méthode getSommets() renvoie un tableau contenant les noms des sommets du triangle en mode maths. A, G et E dans cet ordre.
+ * La méthode getPerimetre() renvoie le périmètre du triangle
+ * La méthode isTrueTriangleLongueurs() renvoie un booléen si le triangle définit à partir des longueurs est un vrai triangle non plat.
+ * La méthode isPlatTriangleLongueurs() renvoie un booléen si le triangle définit à partir des longueurs est un triangle plat.
+ * La méthode isTrueTriangleAngles() renvoie un booléen si le triangle définit à partir des angles existe et n'est pas un triangle plat.
+ * La méthode isPlatTriangleAngles() renvoie un booléen si le triangle définit à partir des angles existe et est un triangle plat.
+ * La méthode isQuelconque() renvoie  un booléen si le triangle définit à partir des angles ou des longueurs existe et est quelconque. Non Finalisée
  * @author Sébastien Lozano
  */
 function Triangles(l1,l2,l3,a1,a2,a3) {
@@ -3905,6 +4057,20 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		return longueurs;
 	};
 
+	// renvoie les valeurs des longueurs des côtés du triangle.
+	function getLongueursValeurs() {		
+		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
+			//return false;
+			return ['L\'une des longueurs de l\'objet triangle n\'est pas définie'];
+		}
+		let longueurs = [];
+		longueurs[0]=self.l1;
+		longueurs[1]=self.l2;
+		longueurs[2]=self.l3;
+
+		return longueurs;
+	};
+
 	// renvoie les noms des angles du triangle.
 	function getAngles() {
 		let angles = [];
@@ -3913,6 +4079,20 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		angles[0] = `$\\;\\widehat{${sommets[0]+sommets[1]+sommets[2]}}$`;
 		angles[1] = `$\\;\\widehat{${sommets[1]+sommets[2]+sommets[0]}}$`;
 		angles[2] = `$\\;\\widehat{${sommets[2]+sommets[0]+sommets[1]}}$`;
+
+		return angles;
+	};
+
+	// renvoie les valeurs des angles du triangle.
+	function getAnglesValeurs() {		
+		if ((typeof self.a1 == "undefined") || (typeof self.a2 == "undefined") || (typeof self.a3 == "undefined")) {
+			//return false;
+			return ['L\'un des angles de l\'objet triangle n\'est pas définie'];
+		}
+		let angles = [];
+		angles[0]=self.a1;
+		angles[1]=self.a2;
+		angles[2]=self.a3;
 
 		return angles;
 	};
@@ -3928,25 +4108,89 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		return sommets;
 	};
 
+	// renvoie le périmètre du triangle
+	function getPerimetre() {
+		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
+			//return false;
+			return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
+		} else {
+			return calcul(self.l1 + self.l2 + self.l3);
+		};			
+	};
+
 	// renvoie un booleen selon que les trois longueurs forment un vrai triangle ou non
 	function isTrueTriangleLongueurs() {
+		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
+			return false;
+			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
+		}
 		let longueurs = [self.l1,self.l2,self.l3];
 		//console.log('longueurs : '+longueurs);
 		longueurs.sort(function(a,b){
-			return a-b;
+			return calcul(a-b);
 		});
 		//console.log('longueurs sort() : '+longueurs);
-		if (longueurs[2] < (longueurs[0]+longueurs[1])) {
+		if (longueurs[2] < calcul(longueurs[0]+longueurs[1])) {
 			return true;
 		} else {
 			return false;
 		};
 	};
 
-	// renvoie un booleen selon que les trois angles forment un vrai triangle ou non
-	function isTrueTriangleAngles() {
-		if ((self.a1 + self.a2 + self.a3) == 180) {
+	// renvoie un booleen selon que les trois longueurs forment un triangle plat ou non
+	function isPlatTriangleLongueurs() {
+		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
+			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
+			return false;
+		}
+		let longueurs = [self.l1,self.l2,self.l3];
+		//console.log('longueurs : '+longueurs);
+		longueurs.sort(function(a,b){
+			return calcul(a-b);
+		});
+		//console.log('longueurs sort() : '+longueurs);
+		if (longueurs[2] == calcul(longueurs[0]+longueurs[1])) {
 			return true;
+		} else {
+			return false;
+		};
+	};
+
+	// renvoie un booleen selon que les trois angles forment un vrai triangle non plat ou non
+	function isTrueTriangleAngles() {
+		// si l'un des angles n'est pas defini ça ne va pas
+		if ((typeof self.a1 == "undefined") || (typeof self.a2 == "undefined") || (typeof self.a3 == "undefined")) {
+			return false;
+			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
+		}
+		// si l'un des angles est négatif ça ne va pas
+		if ((self.a1 < 0) || (self.a2 < 0) || (self.a3 < 0)) {
+			return false;
+			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
+		}
+		if ((self.a1 + self.a2 + self.a3) == 180) {
+			if ((self.a1==0 && self.a2==0) || (self.a2==0 && self.a3==0) || (self.a3==0 && self.a1==0)) {
+				return false;
+			} else {
+				return true;
+			};
+		} else {
+			return false;
+		};
+	};
+
+	// renvoie un booleen selon que les trois angles forment un triangle plat ou non
+	function isPlatTriangleAngles() {
+		if ((typeof self.a1 == "undefined") || (typeof self.a2 == "undefined") || (typeof self.a3 == "undefined")) {
+			return false;
+			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
+		};
+		if ((self.a1 + self.a2 + self.a3) == 180) {
+			if ((self.a1==0 && self.a2==0) || (self.a2==0 && self.a3==0) || (self.a3==0 && self.a1==0)) {
+				return true;
+			} else {
+				return false;
+			};
 		} else {
 			return false;
 		};
@@ -3954,6 +4198,7 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 
 	// renvoie un booléen selon que le triangle donné à partir de ses trois longueurs ou trois angles est quelconque ou non
 	function isQuelconque() {
+		// Vérifier que le triangle existe !!!
 		if ( ( ((self.l1!=self.l2) && (self.l1!=self.l3) && (self.l2!=self.l3) ) || ( (self.a1!=self.a2) && (self.a1!=self.a3) && (self.a2!=self.a3) ) ) && ( (self.a1 != 90) || (self.a2 != 90) || (self.a3 != 90) ) ) {
 			return true
 		} else {
@@ -3971,11 +4216,16 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 	this.getNom = getNom;
 	this.getCotes = getCotes;
 	this.getLongueurs = getLongueurs;
+	this.getLongueursValeurs = getLongueursValeurs;
 	this.getAngles = getAngles;
+	this.getAnglesValeurs = getAnglesValeurs;
 	this.getSommets = getSommets;
+	this.getPerimetre = getPerimetre;
 	this.isTrueTriangleLongueurs = isTrueTriangleLongueurs;
+	this.isPlatTriangleLongueurs = isPlatTriangleLongueurs;
 	this.isTrueTriangleAngles = isTrueTriangleAngles;
-	this.isQuelconque = isQuelconque;	
+	this.isPlatTriangleAngles = isPlatTriangleAngles;
+	//this.isQuelconque = isQuelconque;	
 };
 
 // Gestion des styles LaTeX

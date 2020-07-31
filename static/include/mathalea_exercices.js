@@ -19,6 +19,8 @@ var liste_des_exercices_disponibles = {
 		'CM017' : Diviser_decimal_par_10_100_1000,
 		'CM018' : Somme_de_deux_nombres_maries_et_un_entier,
 		'CM019' : Le_compte_est_bonV3,
+		'CM020' : Le_compte_est_bonV4,
+		'BetaCM021' : Compte_Est_Bon,
 		'6C10' : Additions_soustractions_multiplications_posees,
 		'6C11' : Divisions_euclidiennes,
 		'6C10-1' :Tables_de_multiplications,
@@ -37,7 +39,7 @@ var liste_des_exercices_disponibles = {
 		'6D101' : Heures_decimales,
 		'6D11' : Somme_de_durees,
 		'6D12' : Calculs_de_durees_ou_d_horaires,
-		//'6G20' : Vocabulaire_des_triangles_6e_facile,
+		'beta6G10' : Notation_segment_droite_demi_droite,
 		'6G20' : Vocabulaire_des_triangles_6e,
 		'6G24' : Transformations_6e,
 		'6G25-1' : Pavages_et_reflexion,
@@ -91,8 +93,13 @@ var liste_des_exercices_disponibles = {
 		'5G10' : Symetrie_axiale_5e,
 		'5G11' : Transformations_5e,
 		'5G12' : Pavages_et_demi_tour,
+		//'beta5G2' : Constructibilite_des_triangles,// pour développer l'exercice global
+		//'beta5G21-1' : Constructibilite_des_triangles_longueurs,// pour développer l'exercice global		
+		'5G21-1' : Constructibilite_des_triangles_longueurs,		
 		'5G20-1' : Vocabulaire_des_triangles_5e,		   
 		'5G31' : Exercice_angles_triangles,
+		//'beta5G31-1' : Constructibilite_des_triangles_angles,// pour développer l'exercice global
+		'5G31-1' : Constructibilite_des_triangles_angles,
 		'5N13': Exercice_fractions_simplifier,
 		'5N13-2': Egalites_entre_fractions,
 		'5N110' : Variation_en_pourcentages,
@@ -139,6 +146,7 @@ var liste_des_exercices_disponibles = {
 		'4G11' : Pavages_et_translation,
 		'4G20' : Exercice_Pythagore,
 		'4G20-1' : Egalite_Pythagore,
+		'4G20-2' : Racine_caree_de_carres_parfaits,
 		'4G21' : Reciproque_Pythagore,
 		'4G22' : Problemes_Pythagore,
 		'4G30' : Thales_4eme,
@@ -173,6 +181,7 @@ var liste_des_exercices_disponibles = {
 		'3G10-2' : Transformations_3e,
 		'3G12' : Pavages_et_rotation,
 		'3G20' : Exercice_Thales,
+		'3G20-1' : Problemes_Thales,
 		'3G21' : Reciproque_Thales,
 		'3G22' : Agrandissement_reduction,
 		'3G30' : Exercice_Trigo_longueurs,
@@ -189,8 +198,12 @@ var liste_des_exercices_disponibles = {
 		'3S20' : fonctions_probabilite2,
 		//'3SVGtest' : svglibs,
 		//'3Tests' : tester_des_fonctions,
-		'2N10' : Developper_Identites_remarquables2,
-		'2N11' : Factoriser_Identites_remarquables2,
+		'2N10' : proprietes_racine_caree,
+		'2N10-1' : Existence_d_une_racine_caree,
+		'2N10-2' : Extraire_un_carre_parfait_d_une_racine_carree,
+		'2N11' : Simplifier_une_somme_de_racines_carrees,
+		'2L10' : Developper_Identites_remarquables2,
+		'2L11' : Factoriser_Identites_remarquables2,
 		'PEA11': Passer_d_une_base_a_l_autre,
 		'PEA11-1' : Passer_de_la_base_12_ou_16_a_la_10,
 		'P001' : Code_LaTeX_personnalise,
@@ -2028,6 +2041,344 @@ function Vocabulaire_et_operations() {
 	this.besoin_formulaire2_case_a_cocher = ['Décimaux',false];
 
 }
+
+function Compte_Est_Bon() {
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Atteindre le résultat souhaité avec 6 nombres et les 4 opérations";
+	this.consigne = "Trouve le résultat en utilisant les quatre opérations et les nombres du tirage (une seule fois).";
+	this.nb_questions = 5;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup=1; // niveau de calcul souhaité
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		let type_de_questions,a,b,c,d,e,f,cible,tirage,choix
+		if (!this.sup) { // Si rien n'est saisi
+			type_de_questions=combinaison_listes([1,2,3],this.nb_questions)
+		}
+		else {
+			if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule grandeur
+			type_de_questions=combinaison_listes([parseInt(this.sup)],this.nb_questions)
+			} else {
+				type_de_questions = this.sup.split("-");// Sinon on créé un tableau à partir des valeurs séparées par des -
+				for (let i=0;i<type_de_questions.length;i++) type_de_questions[i]=parseInt(type_de_questions[i])
+				this.nb_questions=type_de_questions.length;
+			}	
+		}
+		choix=combinaison_listes(range1(5),this.nb_questions)
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+	
+		for (let i = 0,texte,texte_corr,cpt=0; i < this.nb_questions && cpt<50; ) {
+			switch (type_de_questions[i]) {
+				case 1:
+					a=randint(2,9)
+					b=randint(2,8,a)
+					c=randint(1,9,[a,b])
+					d=randint(1,9,[a,b,c])
+					switch (choix[i]) {
+						case 1 :
+							cible=calcul(a*100+b*10+c+d)
+							tirage = shuffle([100,10,a,b,c,d])
+							texte_corr=`Le compte est bon : $${cible}=100\\times${a}+10\\times${b}+${c}+${d}$`
+							break;
+						case 2 :
+							cible=calcul(a*100+b*10+c-d)
+							tirage = shuffle([100,10,a,b,c,d])
+							texte_corr=`Le compte est bon : $${cible}=100\\times${a}+10\\times${b}+${c}-${d}$`
+							break;
+						case 3 :
+							cible=calcul(a*100-b*10+c+d)
+							tirage = shuffle([100,10,a,b,c,d])
+							texte_corr=`Le compte est bon : $${cible}=100\\times${a}-10\\times${b}+${c}+${d}$`
+							break;
+						case 4 :
+							cible=calcul(a*100-b*10+c-d)
+							tirage = shuffle([100,10,a,b,c,d])
+							texte_corr=`Le compte est bon : $${cible}=100\\times${a}-10\\times${b}+${c}-${d}$`
+							break;
+						default :
+							cible=calcul(a*100+(b+c)*10+d)
+							tirage = shuffle([100,10,a,b,c,d])
+							texte_corr=`Le compte est bon : $${cible}=100\\times${a}+10\\times(${b}+${c})+${d}$`
+							
+					}
+					break
+
+				case 2:
+					a=randint(3,9)
+					b=randint(3,8,a)
+					c=randint(3,9,[a,b])
+					switch (choix[i]) {
+						case 1 :
+							cible=calcul(a*100+b*10+c)
+							tirage = shuffle([50,50,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=(50+50)\\times${a}+10\\times${b}+${c}$`
+							break;
+						case 2 :
+							cible=calcul(a*100+b*10-c)
+							tirage = shuffle([50,50,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=(50+50)\\times${a}+10\\times${b}-${c}$`
+							break;
+						case 3 :
+							cible=calcul(a*100-b*10+c)
+							tirage = shuffle([50,50,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=(50+50)\\times${a}-10\\times${b}+${c}$`
+							break;
+						case 4 :
+							cible=calcul(a*100-b*10-c)
+							tirage = shuffle([50,2,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=2\\times50\\times${a}-10\\times${b}-${c}$`
+							break;
+						default :
+							cible=calcul(a*100+b*10-c)
+							tirage = shuffle([25,4,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=4\\times25\\times${a}+10\\times${b}-${c}$`
+							
+					}
+					break
+				case 3:
+					a=randint(2,5)
+					b=randint(3,8,a)
+					c=randint(3,9,[a,b])
+					switch (choix[i]) {
+						case 1 :
+							cible=calcul(a*(100+b*10)+c)
+							tirage = shuffle([50,2,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=${a}\\times(50\\times2+10\\times${b})+${c}$`
+							break;
+						case 2 :
+							cible=calcul(a*(100+b*10)-c)
+							tirage = shuffle([50,2,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=${a}\\times(50\\times2+10\\times${b})-${c}$`
+							break;
+						case 3 :
+							cible=calcul(a*(100+b*10)+c)
+							tirage = shuffle([25,4,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=${a}\\times(25\\times4+10\\times${b})+${c}$`
+							break;
+						case 4 :
+							cible=calcul(a*(100+b*10)-c)
+							tirage = shuffle([25,4,10,a,b,c])
+							texte_corr=`Le compte est bon : $${cible}=${a}\\times(25\\times4+10\\times${b})-${c}$`
+							break;
+						default :
+						cible=calcul(a*(100+b*10)+c)
+						tirage = shuffle([25,75,10,a,b,c])
+						texte_corr=`Le compte est bon : $${cible}=${a}\\times((25+75)+10\\times${b})+${c}$`
+							
+					}
+					break
+			}
+			texte = `Voici le tirage : `
+			for (let i =0;i<5;i++) texte+=`${tirage[i]} ; `
+			texte+=`${tirage[5]}.<br>`
+			texte+=`Et le nombre à trouver est : ${cible}.`
+
+
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}		
+			cpt++;	
+		}
+	liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_texte = ['Niveaux de difficultés)','Nombres séparés par des tirets'] // Texte, tooltip
+
+}
+/*
+function LeVraiCompteEstBon(){ //en construction
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Générateur de \"Le compte est bon\"";
+	this.consigne = "Écrire un calcul égal au nombre cible en utilisant les nombres du tirage.";
+	this.nb_questions = 1;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup="1-2-3-4-5-6";
+	var max_solution=70;
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		let tirage,tirage2,tirage3,tirage4,tirage5,N1,N2,N3,N4,N5,N6,R1,R2,R3,R4,R5,op1,op2,op3,op4,op5
+		if (!this.sup) tirage = [1,2,3,4,5,6]
+		else tirage = this.sup.split("-");
+		let cible=124;
+		for (let i=0;i<6;i++) tirage[i]=parseInt(tirage[i])
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let calculs=[[],[],[],[],[]],operations=['+','*','-','/','opp+','inv*'],solutions=[[]],liste_index_solution
+		let nb_operande=tirage.length
+		let index=0
+		for (let i=0;i<tirage.length;i++) {  // première opération : N1 op N2 = R1 
+			N1=tirage[i]
+			for (let op=0;op<operations.length;op++) {
+				for (let j=0;j<tirage.length;j++) {
+					if (j!=i) {
+						N2=tirage[j]
+						// On push les index et non les nombres et les opérations seul le résultat est un nombre
+						if (op==0&&j>i) calculs[index].push([i,op,j,calcul(N1+N2)]) // On évite les doublons une fois calculé a+b, on ne fait pas b+a (j>i)
+						if (op==1&&j>i) calculs[index].push([i,op,j,calcul(N1*N2)]) // idem
+						if (op==2&& N1>N2) calculs[index].push([i,op,j,calcul(N1-N2)]) // si on peut calculer a-b, on ne pourra pas calculer b-a (négatif)
+						if (op==3&& estentier(calcul(N1/N2))) calculs[index].push([i,op,j,calcul(N1/N2)]) // si on peut calculer a/b, on ne pourra pas calculer b/a (non entier)
+						// pas de soustraction opposée ni de division inversée, les couples (a,b) et (b,a) sont tous là donc ce serait redondant
+						if (calculs[index][calculs[index].length-1][3]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
+							solutions.push(calculs[index].pop())
+						}
+					}
+				}
+			}
+		}
+		alert('premier niveau passé')
+	
+		index++	// on passe au deuxième niveau.
+		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 1 opération peut générer des calculs de niveau 2 opérations
+			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
+			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
+			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
+			op1=calculs[index-1][i][1]; // index de op1 dans operations
+			tirage2=range(5,[N1,N2])
+			for (let k=0;k<tirage2.length;k++) tirage2[k]=parseInt(tirage2[k])
+			for (let op=0;op<operations.length;op++) {
+				for (let j in tirage2) {
+					// on va prendre N3 autre que N1 et N2 qui ont déjà été utilisés
+						N3=tirage[j];
+						if (op==0) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3+R1)])
+						if (op==1) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3*R1)])
+						if (op==2&&R1>N3) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(R1-N3)])
+						if (op==3&& estentier(R1/N3)) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(R1/N3)])
+						if (op==4&& N3>R1) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3-R1)])
+						if (op==4&& estentier(N3/R1)) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3/R1)])
+						if (calculs[index][calculs[index].length-1][6]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
+							solutions.push(calculs[index].pop())
+						}
+				}
+			}
+		}
+		alert('deuxième niveau passé')
+	
+		index++ // vers l'infini et au delà ! 3ème niveau !
+		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 2 opérations peut générer des calculs de niveau 3 opérations
+			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
+			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
+			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
+			op1=calculs[index-1][i][1]; // index de op1 dans operations
+			N3=calculs[index-1][i][5];
+			op2=calculs[index-1][i][4];
+			R2=calculs[index-1][i][6];
+			tirage3=range(5,[N1,N2,N3])
+			for (let k=0;k<tirage3.length;k++) tirage3[k]=parseInt(tirage2[k])
+				for (let op=0;op<operations.length;op++) {
+					for (let j in tirage3) {
+						N4=tirage[j];
+						if (op==0) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4+R2)])
+						if (op==1) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4*R2)])
+						if (op==2&&R2>N4) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(R2-N4)])
+						if (op==3&& estentier(R2/N4)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(R2/N4)])
+						if (op==4&& N4>R2) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4-R2)])
+						if (op==4&& estentier(N4/R2)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4/R2)])
+						if (calculs[index][calculs[index].length-1][9]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
+							solutions.push(calculs[index].pop())
+						}
+					}
+				}
+			}
+		
+		alert('troisième niveau passé')
+
+		index++ //là ça devient lourd ! 
+		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 3 opérations peut générer des calculs de niveau 4 opérations
+			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
+			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
+			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
+			op1=calculs[index-1][i][1]; // index de op1 dans operations
+			N3=calculs[index-1][i][5];
+			op2=calculs[index-1][i][4];
+			R2=calculs[index-1][i][6];
+			N4=calculs[index-1][i][8];
+			op3=calculs[index-1][i][7];
+			R3=calculs[index-1][i][9];
+			tirage4=range(5,[N1,N2,N3,N4])
+			tirage4[0]=parseInt(tirage2[0])
+			tirage4[1]=parseInt(tirage2[1])
+			
+			for (let op=0;op<operations.length;op++) {
+				for (let j in tirage4) {
+						N5=tirage[j];
+						if (op==0) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5+R3)])
+						if (op==1) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5*R3)])
+						if (op==2&&R3>N5) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(R3-N5)])
+						if (op==3&& estentier(R3/N5)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(R3/N5)])
+						if (op==4&& N5>R3) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5-R3)])
+						if (op==4&& estentier(N5/R3)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5/R3)])
+						if (calculs[index][calculs[index].length-1][12]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
+							solutions.push(calculs[index].pop())
+						}
+					}
+			}
+		}
+		alert('quatrième niveau passé')
+	
+		index++
+		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 3 opérations peut générer des calculs de niveau 4 opérations
+			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
+			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
+			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
+			op1=calculs[index-1][i][1]; // index de op1 dans operations
+			N3=calculs[index-1][i][5];
+			op2=calculs[index-1][i][4];
+			R2=calculs[index-1][i][6];
+			N4=calculs[index-1][i][8];
+			op3=calculs[index-1][i][7];
+			R3=calculs[index-1][i][9];
+			N5=calculs[index-1][i][11];
+			op4=calculs[index-1][i][10];
+			R4=calculs[index-1][i][12];
+			tirage5=range(5,[N1,N2,N3,N4,N5])
+			tirage5[0]=parseInt(tirage5[0])
+			for (let op=0;op<operations.length;op++) {
+				for (let j in tirage5) {
+						N6=tirage[j];
+						if (op==0) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6+R4)])
+						if (op==1) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6*R4)])
+						if (op==2&&R4>N6) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(R4-N6)])
+						if (op==3&& estentier(R4/N6)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(R4/N6)])
+						if (op==4&& N6>R4) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6-R4)])
+						if (op==4&& estentier(N6/R4)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6/R4)])
+						if (calculs[index][calculs[index].length-1][15]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
+							solutions.push(calculs[index].pop())
+						}
+					}
+			}
+		}
+		for (let i = 0, texte, texte_corr,cpt=0; i < this.nb_questions && cpt<50; ) {
+			solution_mathador=Trouver_solution_mathador(min_solution,max_solution)
+			tirage=solution_mathador[0]
+			solution=solution_mathador[1]
+			expression=solution_mathador[3]
+
+			texte=`Le tirage est le suivant : $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ <br>La cible est : $${solution}$`
+			texte_corr=`Pour le tirage $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ et pour la cible $${solution}$, la solution est : $${expression}=${solution}$ `
+			texte_corr+=`ou $${solution_mathador[4]}$.<br>`
+			texte_corr+=`En effet : <br>`
+			for (let i=0;i<4;i++) {
+				texte_corr+=`$${solution_mathador[2][i]}$<br>`
+			}
+						if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+							this.liste_questions.push(texte);
+							this.liste_corrections.push(texte_corr);
+							i++;
+						}		
+			cpt++;	
+		}
+	// liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_texte = ['Choix des nombres du tirage (de aucun à cinq)','Nombres séparés par des tirets'] // Texte, tooltip
+}
+*/
+
 /**
  * Générateur de tirages pour un compte est bon avec en correction la solution mathador (4 opérations différentes).
  * @Auteur Jean-Claude Lhote
@@ -2082,6 +2433,76 @@ function Le_compte_est_bonV3(){
 	this.besoin_formulaire2_numerique = ['Limite supérieure',100];
 }
 /**
+ * @Auteur Jean-Claude Lhote
+ * 
+ * Dans cette version, il est possible de choisir 1,2,3,4 ou 5 nombres du tirage et de contraindre la cible entre deux valeurs
+ */
+ function Le_compte_est_bonV4(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Générateur de \"Le compte est bon\" version semi-aléatoire";
+	this.consigne = "Écrire un calcul égal au nombre cible en utilisant les 5 nombres, 4 opérations différentes et éventuellement des parenthèses.";
+	this.nb_questions = 1;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	this.sup=1;
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let solution_mathador=[];
+		let tirage,solution,expression,min,max,texte,texte_corr
+		let minmax=[]
+		let a,b,c,d,e
+		if (!this.sup2) { // Si rien n'est saisi
+			min=0
+			max=100
+		}
+		else {
+			if (typeof(this.sup2)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule grandeur
+				min=0
+				max=this.sup2
+			} else {
+				minmax = this.sup2.split("-");// Sinon on créé un tableau à partir des valeurs séparées par des -
+				min=minmax[0]
+				max=minmax[1]
+			}	
+		}
+		if (!this.sup) { // Si rien n'est saisi
+			solution_mathador=Trouver_solution_mathador(min,max)
+		}
+		else {
+			if (typeof(this.sup)=='number'){ // Si c'est un nombre c'est qu'il y a qu'une seule grandeur
+				solution_mathador=Trouver_solution_mathador(min,max,this.sup)
+			} else {
+				tirage = this.sup.split("-");// Sinon on créé un tableau à partir des valeurs séparées par des -
+				for (let i=0;i<tirage.length;i++) tirage[i]=parseInt(tirage[i])
+				solution_mathador=Trouver_solution_mathador(min,max,...tirage)
+			}	
+		}
+
+			tirage=solution_mathador[0]
+			solution=solution_mathador[1]
+			expression=solution_mathador[3]
+
+			texte=`Le tirage est le suivant : $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ <br>La cible est : $${solution}$`
+			texte_corr=`Pour le tirage $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ et pour la cible $${solution}$, la solution est : $${expression}=${solution}$ `
+			texte_corr+=`ou $${solution_mathador[4]}$.<br>`
+			texte_corr+=`En effet : <br>`
+			for (let i=0;i<4;i++) {
+				texte_corr+=`$${solution_mathador[2][i]}$<br>`
+			}
+			this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			
+	liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_texte = ['Choix des nombres du tirage (de aucun à cinq)','Nombres séparés par des tirets'] // Texte, tooltip
+	this.besoin_formulaire2_texte = ['Intervalle pour la cible (ou rien pour cible non contrainte)','Minimum-Maximum (éviter de trop contraindre la cible, cela peut bloquer le programme)'] // Texte, tooltip
+
+	// this.besoin_formulaire2_numerique = ['Limite supérieure',100];
+}
+/**
  * @Auteur Jean-Claude Lhote 
  * @param {number} min Valeur minimum pour la solution
  * @param {number} max Valeur maximum pour la solution
@@ -2089,18 +2510,25 @@ function Le_compte_est_bonV3(){
  * @returns {array} [tirage=[a,b,c,d,e],solution (compris entre min et max),operations_successives=[string1,string2,string3,string4,string5],expression]
  * les string1 à 5 ainsi que l'expresion sont ) mettre en mode maths.
  */
-function Trouver_solution_mathador(min,max) {
-'use strict'
+function Trouver_solution_mathador(min,max,A=1,B=4,C=8,D=3,E=5) {
 	let eureka,a,b,c,d,e,tirage,nombres_restants,operations_restantes,expression_en_cours_f,expression_en_cours_d,op,part1_f,part2_f,part1_d,part2_d,operations_successives=[],solution
 	let liste_choix=[1,2,2,3,3,4,4,4,4,5,6,6,6,6,7,7,8,8,8,8,9,9,9,9,10,11,12,13,14,15,16,17,18,19,20];
 	eureka=false;
+	let nb_determines=arguments.length-2
 	while (eureka==false){
 		tirage=[];
-		a=parseInt(choice(liste_choix))
-		b=parseInt(choice(liste_choix,[13,14,15,16,17,18,19,20,a]))
-		c=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,a,b]))
-		d=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,b,c]))
-		e=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20]))
+		
+		if (nb_determines<1) a=parseInt(choice(liste_choix))
+		else a=A
+		if (nb_determines<2) b=parseInt(choice(liste_choix,[13,14,15,16,17,18,19,20,a]))
+		else b=B
+		if (nb_determines<3) c=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,a,b]))
+		else c=C
+		if (nb_determines<4) d=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20,b,c]))
+		else d=D
+		if (nb_determines<5)	e=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20]))
+		else e=E
+		console.log(a,b,c,d,e)
 		tirage.push(a,b,c,d,e);
 		nombres_restants=shuffle(tirage);
 		operations_restantes=['\\times','+','-','\\div'];
@@ -2169,7 +2597,7 @@ function Trouver_solution_mathador(min,max) {
 
 		if (nombres_restants.length==1&&operations_restantes.length==0)	{
 			solution=nombres_restants[0];
-			if (solution>=min&solution<=max) {
+			if (solution>=min&&solution<=max) {
 				eureka=true;
 				if (expression_en_cours_f[0][0]=='\\'&&expression_en_cours_f[0][1]==`l`){
 				expression_en_cours_f[0]=expression_en_cours_f[0].substring(6,expression_en_cours_f[0].length)
@@ -2179,6 +2607,7 @@ function Trouver_solution_mathador(min,max) {
 					expression_en_cours_d[0]=expression_en_cours_d[0].substring(6,expression_en_cours_d[0].length)
 					expression_en_cours_d[0]=expression_en_cours_d[0].substring(0,expression_en_cours_d[0].length-7)
 					}
+				console.log(tirage,solution)
 				return [tirage,solution,operations_successives,expression_en_cours_f,expression_en_cours_d]
 				}
 			else operations_successives=[]		
@@ -3813,12 +4242,14 @@ function Exercice_conversions_aires(niveau=1){
 					 + ' = ' + tex_nombre(resultat) + tex_texte(unite)+ '^2' + '$';
 
 			}else if(div&&type_de_questions<4) {
+				prefixe_div = [[' d','\\div10\\div10',100],[' c','\\div100\\div100',10000],[' m','\\div1~000\\div1~000',1000000]]; 
 				k = randint(0,1); // Pas de conversions de mm^2 en m^2 avec des nombres décimaux car résultat inférieur à 10e-8
-				resultat = Algebrite.eval(a/prefixe_multi[k][2]).toString(); // Attention aux notations scientifiques pour 10e-8
+				resultat = Algebrite.eval(a/prefixe_div[k][2]).toString(); // Attention aux notations scientifiques pour 10e-8
 				texte = '$ '+ tex_nombre(a) + tex_texte(prefixe_div[k][0]+unite)+ '^2' + ' = \\dotfill ' + tex_texte(unite)  + '^2' + '$';
 				texte_corr = '$ '+ tex_nombre(a) + tex_texte(prefixe_div[k][0]+unite)+ '^2' + ' =  ' + tex_nombre(a) + prefixe_div[k][1] + tex_texte(unite)  + '^2'
 					 + ' = ' + tex_nombre(resultat) + tex_texte(unite)  + '^2' + '$';
 			}else if(type_de_questions==4){ 
+		
 				let unite1 = randint(0,3);
 				let ecart = randint(1,2); // nombre de multiplication par 10 pour passer de l'un à l'autre
 				if (ecart>4-unite1) {
@@ -3832,6 +4263,7 @@ function Exercice_conversions_aires(niveau=1){
 					 + ' = ' + tex_nombre(resultat) + tex_texte(liste_unite[unite1]) + '^2' + '$';	
 
 				} else {
+		
 					resultat = Algebrite.eval(a/Math.pow(10,2*ecart));
 					texte = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite1]) + '^2' + ' = \\dotfill ' + tex_texte(liste_unite[unite2]) + '^2' + '$';
 					texte_corr = '$ '+ tex_nombre(a) + tex_texte(liste_unite[unite1]) + '^2' + ' =  ' + tex_nombre(a) + '\\div' + tex_nombre(Math.pow(10,2*ecart)) + tex_texte(liste_unite[unite2]) + '^2'
@@ -7060,7 +7492,8 @@ function Vocabulaire_des_triangles(){
 
 			this.bouton_aide = modal_texte_long(
 				numero_de_l_exercice,
-				`<i class="lightbulb outline icon"></i> Quelques définitions`,
+				//`<i class="lightbulb outline icon"></i> Quelques définitions`,
+				`<i class="info circle icon"></i> Quelques définitions`,
 				texte_intro,
 				"Aide",
 				"info circle"
@@ -7299,6 +7732,56 @@ function Vocabulaire_des_triangles(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : sans conversions de longueurs\n2 : avec conversions de longueurs"];
 	};
 }
+
+/**
+* Décrire segment, droite et demi-droite
+* @Auteur Rémi Angot
+*/
+function  Notation_segment_droite_demi_droite(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Notation des droites, segments et demi-droites";
+	this.consigne = "Décrire la figure";
+	this.nb_questions = 3;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let xA=randint(1,15)
+			let yA=randint(-5,5)
+			let xB=randint(1,15,[xA-1,xA,xA+1])
+			let yB=randint(-5,5,[yA-1,yA,yA+1])
+			let xC=randint(1,15,[xA-1,xA,xA+1,xB-1,xB,xB+1])
+			let yC=randint(-5,5,[yA-1,yA,yA+1,yB-1,yB,yB+1])
+			let A = point(xA,yA,'A')
+			let B = point(xB,yB,'B')
+			let C = point(xC,yC,'C')
+			n = labelPoints(A,B,C)
+			s = segment(A,B)
+			d1 = droite(B,C)
+			d2 = demiDroite(A,C)
+
+			sortie_html ? texte = codeSvg(n,s,d1,d2) : texte = codeTikz(n,s,d1,d2)
+			texte_corr = `Trace $[AB], (BC), [AC).$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
 
 /**
  * Vocabulaire des triangles 
@@ -10642,7 +11125,7 @@ function Liste_des_diviseurs_5e(){
 
 /**
  * 5A11 justifier la non primalité réinvestissement des critères de divisibilité
- * Nombres à 3 ou 4 chiffres, un multiple de 2, de 3, de 5, de 7, de 10, sous forme d'un produit de deux nombres premiers inférieurs à 30
+ * Nombres à 3 ou 4 chiffres, un multiple de 2, de 3, de 5, de 7, de 9, de 10, sous forme d'un produit de deux nombres premiers inférieurs à 30
  * et un nombre premier inferieur à 529 
  * @author Sébastien Lozano
  */
@@ -10703,7 +11186,10 @@ function Premier_ou_pas_5e(){
 						break;		
 					case 2 : // Multiple de 3
 						let sum3=0; // pour la valeur de la somme;
-						N=3*randint(34,3333);
+						N=3*randint(34,3333);// on initialise avant la boucle car on a peut être de la chance
+						while ( (N % 2 == 0) || (N % 5 == 0)) {
+							N = 3 * randint(34, 3333);
+						};
 						texte = nombre_avec_espace(N);
 						texte_corr = `Comme `+ N.toString().charAt(0);
 						sum3 = Number(N.toString().charAt(0));
@@ -10723,7 +11209,10 @@ function Premier_ou_pas_5e(){
 						break;	
 					case 4 : // Multiple de 9
 						let sum9=0; // pour la valeur de la somme;
-						N=9*randint(12,1111);
+						N=9*randint(12,1111);// on initialise avant la boucle car on a peut être de la chance
+						while ( (N % 2 == 0) || (N % 5 == 0)) {
+							N = 9 * randint(34, 3333);
+						};
 						texte = nombre_avec_espace(N);
 						texte_corr = `Comme `+ N.toString().charAt(0);
 						sum9 = Number(N.toString().charAt(0));
@@ -10764,14 +11253,17 @@ function Premier_ou_pas_5e(){
 						N=crible_eratosthene_n(29)[r]; //on choisit un nombre premier inférieur à 529
 						texte = N+``;
 						let tab_premiers_a_tester = crible_eratosthene_n(N);
-						texte_corr = `Testons la divisibilité de ${N} par tous les nombres premiers inférieurs à ${N}, c'est à dire par les nombres `;
+						//texte_corr = `Testons la divisibilité de ${N} par tous les nombres premiers inférieurs à $\\sqrt{${N}}$, c'est à dire par les nombres `;
+						texte_corr = `En effectuant la division euclidienne de ${N} par tous les nombres premiers inférieurs à $\\sqrt{${N}}$, c'est à dire par les nombres `;						
 						texte_corr += tab_premiers_a_tester[0];
 						for (let k=1;k<tab_premiers_a_tester.length;k++) {
 							texte_corr += `, `+tab_premiers_a_tester[k];
 						};
-						texte_corr += `.`;
-						texte_corr += `<br> Aucun de ces nombres premiers ne divise ${N}, `;
-						texte_corr += texte_en_couleur_et_gras(nombre_avec_espace(N)+` est donc premier.`);
+						//texte_corr += `.`;
+						// texte_corr += `<br> Aucun de ces nombres premiers ne divise ${N}, `;
+						texte_corr += `, le reste n'est jamais nul.`;
+						// texte_corr += texte_en_couleur_et_gras(nombre_avec_espace(N) + ` est donc un nombre premier.`);
+						texte_corr += `<br>`+texte_en_couleur_et_gras(nombre_avec_espace(N) + ` est donc un nombre premier.`);
 						break;								
 				};
 			
@@ -11539,24 +12031,24 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			souscas=randint(0,3)
 			switch (souscas) {
 				case 0 : //somme de deux nombres
-					expf=`La somme de ${tex_nombre(a)} et ${tex_nombre(b)}`
+					expf=`La somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}+${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}+${tex_nombre(b)} = ${tex_nombre(a+b)}$`
 					break
 				case 1 : // différence de deux nombres
 					if(a<b) a=a+b
-					expf=`La différence de ${tex_nombre(a)} et ${tex_nombre(b)}`
+					expf=`La différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}-${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}-${tex_nombre(b)} = ${tex_nombre(a-b)}$`
 					break
 				case 2 : // produit de deux nombres
-					expf=`Le produit de ${tex_nombre(a)} par ${tex_nombre(b)}`
+					expf=`Le produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)} = ${tex_nombrec(a*b)}$`
 					break
 				case 3 : // quotient de deux nombres
 					a=calcul(Math.round(a)*b)
-					expf=`Le quotient de ${tex_nombre(a)} par ${tex_nombre(b)}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)}`
 					expn=`$${tex_nombre(a)}\\div${tex_nombre(b)}$`
 					expc=`$${tex_nombre(a)}\\div${tex_nombre(b)} = ${tex_nombrec(a)}$`
 					break
@@ -11566,33 +12058,33 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			souscas=randint(0,5)
 			switch (souscas) {
 				case 0 : //a(b+c)
-					expf=`Le produit de ${tex_nombre(a)} par la somme de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le produit de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}(${tex_nombre(b)}+${tex_nombre(c)})$`
 					expc=`$${tex_nombre(a)}(${tex_nombre(b)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\times${tex_nombrec(b+c)}=${tex_nombrec(a*(b+c))}$`
 					break
 				case 1 : // a(b-c)
 					if (b<=c) b=calcul(b+c) // b-c positif
-					expf=`Le produit de ${tex_nombre(a)} par la différence de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le produit de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}(${tex_nombre(b)}-${tex_nombre(c)})$`
 					expc=`$${tex_nombre(a)}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(a)}\\times${tex_nombrec(b-c)}=${tex_nombrec(a*(b-c))}$`
 					break
 				case 2 : // a/(b+c)
 					a=calcul(a*(b+c)) // on s'assure que le quotient tombe juste...
-					expf=`Le quotient de ${tex_nombre(a)} par la somme de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}\\div(${tex_nombre(b)}+${tex_nombre(c)})$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}+${tex_nombre(c)}}$`
 					expc=`$${tex_nombre(a)}\\div(${tex_nombre(b)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\div${tex_nombrec(b+c)}=${tex_nombrec(a/(b+c))}$`
 					break
 				case 3 : // a/(b-c)
 					if (b<=c) b=calcul(b+c) // b-c positif
  					a=calcul(a*(b-c)) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de ${tex_nombre(a)} par la différence de ${tex_nombre(b)} et ${tex_nombre(c)}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
 					expn=`$${tex_nombre(a)}\\div(${b}-${tex_nombre(c)})$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}-${tex_nombre(c)}}$`
 					expc=`$${tex_nombre(a)}\\div(${b}-${tex_nombre(c)}) = ${tex_nombre(a)}\\div${tex_nombrec(b-c)}=${tex_nombrec(a/(b-c))}$`
 					break			
 				case 4 : // (a+b)/c
 					a=calcul(a*c)
 					b=calcul(b*c) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)}$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)} = ${tex_nombrec(a+b)}\\div${tex_nombre(c)}=${tex_nombrec((a+b)/c)}$`
 					break
@@ -11600,7 +12092,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b) // a-b positif
 					a=calcul(a*c)
 					b=calcul(b*c) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div${tex_nombre(c)}$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{${tex_nombre(c)}}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div${tex_nombre(c)} = ${tex_nombrec(a-b)}\\div${tex_nombre(c)}=${tex_nombrec((a-b)/c)}$`
 					break			
@@ -11611,33 +12103,33 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			souscas=randint(0,13)
 			switch (souscas) {
 				case 0 : // (a+b)(c+d)
-					expf=`Le produit de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
 					break
 				case 1 : // (a+b)(c-d)
 					if (c<=d) c=calcul(c+d)
-					expf=`Le produit de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
 					break
 				case 2 : // (a-b)(c+d)
 					if (a<=b) a=calcul(a+b)
-					expf=`Le produit de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
 					break
 				case 3 : // (a-b)(c-d)
 					if (a<=b) a=calcul(a+b)
 					if (c<=d) c=calcul(c+d)
-					expf=`Le produit de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
 					break			
 				case 4 : // (a+b)/(c+d)
 					a=calcul(a*(c+d))
 					b=calcul(b*(c+d))
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}+${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div${tex_nombrec(c+d)} = ${tex_nombrec((a+b)/(c+d))}$`
 					break
@@ -11645,7 +12137,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					a=calcul(a*(c+d))
 					b=calcul(b*(c+d))
 					if (a<=b) a=calcul(a+b)
-					expf=`Le quotient de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{${tex_nombre(c)}+${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/(c+d))}$`
 					break			
@@ -11653,7 +12145,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (c<=d) c=calcul(c+d)
 					a=calcul(a*(c-d))
 					b=calcul(b*(c-d))
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}-${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div${tex_nombrec(c-d)} = ${tex_nombrec((a+b)/(c-d))}$`
 					break
@@ -11662,25 +12154,25 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b)
 					a=calcul(a*(c-d))
 					b=calcul(b*(c-d))
-					expf=`Le quotient de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la différence de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)})$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{${tex_nombre(c)}-${tex_nombre(d)}}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div${tex_nombrec(c-d)} = ${tex_nombrec((a-b)/(c-d))}$`
 					break			
 				case 8 : // ab+cd
-					expf=`La somme du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du produit de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du produit de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c*d)} = ${tex_nombrec(a*b+c*d)}$`
 					break
 				case 9 : // ab-cd
 					if (a*b<d*c) a=calcul(a+c)
 					if (a*b<d*c) b=calcul(b+d)
-					expf=`La différence du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du produit de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du produit de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\times${tex_nombre(d)}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\times${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c*d)} = ${tex_nombrec(a*b-c*d)}$`
 					break			
 				case 10 : // ab+c/d
 					c=calcul(c*d)
-					expf=`La somme du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $${tex_nombre(a)}\\times${tex_nombre(b)}+\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a*b+c/d)}$`
 					break
@@ -11688,14 +12180,14 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					c=c*d
 					if (a*b<c/d) a=calcul(a*c)
 					if (a*b<c/d) b=calcul(b*c)
-					expf=`La différence du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $${tex_nombre(a)}\\times${tex_nombre(b)}-\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a*b-c/d)}$`
 					break	
 				case 12 : // a/b+c/d
 					a=calcul(a*b)
 					c=calcul(c*d)
-					expf=`La somme du quotient de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La somme du quotient de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\div${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}}+\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\div${tex_nombre(b)}+${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a/b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a/b+c/d)}$`
 					break	
@@ -11704,7 +12196,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					c=calcul(c*d)
 					if (a/b<c/d) a=calcul(a*c)
 					if (a/c<c/d) a=calcul(a*d)
-					expf=`La différence du quotient de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient de ${tex_nombre(c)} par ${tex_nombre(d)}`
+					expf=`La différence du quotient de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient de ${nombre_avec_espace(c)} par ${nombre_avec_espace(d)}`
 					expn=`$${tex_nombre(a)}\\div${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)}$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}}-\\dfrac{${tex_nombre(c)}}{${tex_nombre(d)}}$`
 					expc=`$${tex_nombre(a)}\\div${tex_nombre(b)}-${tex_nombre(c)}\\div${tex_nombre(d)} = ${tex_nombrec(a/b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a/b-c/d)}$`
 					break	
@@ -11714,14 +12206,14 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 		souscas=randint(0,5)
 			switch (souscas) {
 				case 0 : // 2(a+bc)
-					expf=`Le double de la somme de ${tex_nombre(a)} et du produit de ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le double de la somme de ${nombre_avec_espace(a)} et du produit de ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$2(${tex_nombre(a)}+${tex_nombre(b)}\\times${tex_nombre(c)})$`
 					expc=`$2(${tex_nombre(a)}+${tex_nombre(b)}\\times${tex_nombre(c)}) = 2(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times ${tex_nombrec(a+b*c)}$`
 					break
 				case 1 : // 3(a+b)/c
 					a=calcul(a*c)
 					b=calcul(b*c)
-					expf=`Le triple du quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par ${tex_nombre(c)}`
+					expf=`Le triple du quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
 					expn=`$3(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)}$ ou $3\\times\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}}$`
 					expc=`$3(${tex_nombre(a)}+${tex_nombre(b)})\\div${tex_nombre(c)} = 3\\times ${tex_nombre(a+b)}\\div${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
 					break
@@ -11729,7 +12221,7 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b)
 					a=calcul(3*a)
 					b=calcul(3*b)
-					expf=`Le tiers de la différence de ${tex_nombre(a)} et ${tex_nombre(b)}`
+					expf=`Le tiers de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div 3$ ou $\\dfrac{${tex_nombre(a)}-${tex_nombre(b)}}{3}$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})\\div 3 = ${tex_nombrec(a-b)}\\div 3 = ${tex_nombrec((a-b)/3)}$`
 					break
@@ -11737,19 +12229,19 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					if (a<=b) a=calcul(a+b)
 					a=calcul(3*a)
 					b=calcul(3*b)
-					expf=`Le produit du tiers de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par le double de la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`Le produit du tiers de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par le double de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div 3\\right)\\times 2(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div 3\\right)\\times 2(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div 3 \\times 2 \\times${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times 2 \\times ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
 					break			
 				case 4 : // 3(a+b)-2(c+d)
 					if (3*(a+b)<2*(c+d)) a=calcul(a+c+d)
-					expf=`La différence du triple de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} et du double de la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`La différence du triple de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} et du double de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times ${tex_nombrec(a+b)} - 2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
 					break
 				case 5 : // 2(a-b)+3(c+d)
 					if (a<=b) a=calcul(a+b)
-					expf=`La somme du double de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} et du triple de la somme de ${tex_nombre(c)} et ${tex_nombre(d)}`
+					expf=`La somme du double de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} et du triple de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
 					expn=`$2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)})$`
 					expc=`$2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times ${tex_nombrec(a-b)} + 3 \\times ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
 					break	
@@ -11761,19 +12253,19 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 				case 1 : // (a+b)/(c(d+e))
 					a=calcul(a*c*(d+e))
 					b=calcul(b*c*(d+e))
-					expf=`Le quotient de la somme de ${tex_nombre(a)} et ${tex_nombre(b)} par le produit de ${tex_nombre(c)} par la somme de ${tex_nombre(d)} et ${tex_nombre(e)}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par le produit de ${nombre_avec_espace(c)} par la somme de ${nombre_avec_espace(d)} et ${nombre_avec_espace(e)}`
 					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)}))$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div(${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div (${tex_nombre(c)} \\times ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
 					break
 				case 2 : //(a-b)*(c+de)
 					if (a<=b) a=calcul(a+b)
-					expf=`Le produit de la différence de ${tex_nombre(a)} et ${tex_nombre(b)} par la somme de ${tex_nombre(c)} et du produit de ${tex_nombre(d)} par ${tex_nombre(e)}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et du produit de ${nombre_avec_espace(d)} par ${nombre_avec_espace(e)}`
 					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times${tex_nombre(e)})$`
 					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times${tex_nombre(e)}) = ${tex_nombrec(a-b)}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
 					break
 				case 3 : // ab+cd/e
 					c=calcul(c*e)
-					expf=`La somme du produit de ${tex_nombre(a)} par ${tex_nombre(b)} et du quotient du produit de ${tex_nombre(c)} et ${tex_nombre(d)} par ${tex_nombre(e)}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${nombre_avec_espace(b)} et du quotient du produit de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)} par ${nombre_avec_espace(e)}`
 					expn=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)}\\div${tex_nombre(e)}$ ou $${tex_nombre(a)}\\times${tex_nombre(b)}+\\dfrac{${tex_nombre(c)}\\times${tex_nombre(d)}}{${tex_nombre(e)}}$`
 					expc=`$${tex_nombre(a)}\\times${tex_nombre(b)}+${tex_nombre(c)}\\times${tex_nombre(d)}\\div${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d)} \\div ${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d/e)} = ${tex_nombrec(a*b+c*d/e)}$`
 					break
@@ -11782,6 +12274,423 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 		}
 		return [expf,expn,expc,souscas]
 }
+
+/**
+ * Constructibilité des triangles
+ * Préciser ici les numéros des exos 
+ * 5G2 exercice parent il faudra supprimmer la version beta5G2 de la liste des choix du fichier mathalea_exercices.js
+ * 5G21-1
+ * 5G31-1
+ * beta5G2,beta5G21-1,beta5G31-1
+ * @author Sébastien Lozano
+ */
+
+function Constructibilite_des_triangles(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()	
+	this.sup=1;
+	if (this.exo == this.beta+'5G21-1') { // via longueurs
+		this.titre = `Constructibilité des triangles via les longueurs`;
+		//this.consigne = `Justifier si les longueurs données permettent de construire le triangle. <br> Dire chaque fois le nombre de triangles constructibles, ça peut être 0 !`;
+		this.consigne = `Justifier si les longueurs données permettent de construire le triangle.`;
+		//this.consigne += `<br>Dire chaque fois s'il existe plusieurs triangles constructibles ou s'il n'en existe pas.`;
+		this.consigne += `<br>Dire si tous les élèves qui doivent construire ce triangle auront la même figure.`
+		
+	} else if (this.exo == this.beta+'5G31-1') {//via angles
+		this.titre = `Constructibilité des triangles via les angles`;
+		//this.consigne = `Justifier si les angles donnés permettent de construire le triangle. <br> Dire chaque fois le nombre de triangles constructibles, ça peut être 0 !`;
+		this.consigne = `Justifier si les angles donnés permettent de construire le triangle.`;
+		//this.consigne += `<br>Dire chaque fois s'il existe plusieurs triangles constructibles ou s'il n'en existe pas.`;
+		this.consigne += `<br>Dire si tous les élèves qui doivent construire ce triangle auront la même figure.`
+	} else {			
+		this.titre = "Constructibilité des triangles";	
+		//this.consigne = `Justifier si les longueurs ou les angles donnés permettent de construire le triangle. <br> Dire chaque fois le nombre de triangles constructibles, ça peut être 0 !`;
+		this.consigne = `Justifier si les longueurs ou les angles donnés permettent de construire le triangle.`;
+		//this.consigne += `<br>Dire chaque fois s'il existe plusieurs triangles constructibles ou s'il n'en existe pas.`;
+		this.consigne += `<br>Dire si tous les élèves qui doivent construire ce triangle auront la même figure.`
+
+	};
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.nb_questions_modifiable = false;
+
+	this.liste_packages = `bclogo`;
+	
+	let type_de_questions_disponibles;
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		// this.introduction=info_message({
+		// 	titre : "Exercice BETA",
+		// 	texte: "En cours de réalisation <br>Est-il préférable de mettre du conditionnel dans les corrections?"
+
+		// });
+
+		if (this.exo == this.beta+'5G21-1') { // via longueurs
+			if (this.sup ==1) {
+				type_de_questions_disponibles = shuffle([1,2,3]);
+				this.nb_questions = type_de_questions_disponibles.length;	
+			} else if (this.sup ==2) {
+				type_de_questions_disponibles = [choice([1,2,3]),4];
+				this.nb_questions = type_de_questions_disponibles.length;	
+			};
+		} else if (this.exo == this.beta+'5G31-1') {//via angles
+			if (this.sup ==1) {
+				type_de_questions_disponibles = shuffle([5,6,7]);
+				this.nb_questions = type_de_questions_disponibles.length;	
+			} else if (this.sup ==2) {
+				type_de_questions_disponibles = [choice([5,6,7]),8];
+				this.nb_questions = type_de_questions_disponibles.length;	
+			};
+		} else {			
+			type_de_questions_disponibles = [1,2,3,4,5,6,7,8];
+			this.nb_questions = type_de_questions_disponibles.length;
+		};
+
+		//let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = type_de_questions_disponibles // Tous les types de questions sont posées --> à remettre comme ci dessus
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		for (let i = 0, texte, texte_corr,l1,l2,l3,a1,a2,a3, cpt=0; i < this.nb_questions && cpt<50; ) {
+			
+			// on fixe longueur min et max en cm
+			let l_min = 2;
+			let l_max = 20;
+			// on fixe angle min et max en degré
+			let a_min = 0;
+			let a_max = 180;
+
+			// on crée un objet triangle 
+			let triangle = new Triangles();
+			// on crée un tableau pour le triangle courant
+			let current_triangle = [];
+			
+			switch (liste_type_de_questions[i]) {
+				case 1 : // 3 longueurs constructible
+					while (!triangle.isTrueTriangleLongueurs()) {						
+						l1 = randint(l_min,l_max);
+						l2 = randint(l_min,l_max);
+						l3 = randint(l_min,l_max);
+						triangle.l1 = l1;
+						triangle.l2 = l2;
+						triangle.l3 = l3;						
+					};
+					texte = `${triangle.getNom()} tel que ${triangle.getLongueurs()[0]} $= ${triangle.l1}$ cm ; `;					
+					texte += `${triangle.getLongueurs()[1]} $= ${triangle.l2}$ cm et ${triangle.getLongueurs()[2]} $= ${triangle.l3}$ cm.`;
+					// on crée l'objet longueurs + valeurs des côtés du triangle
+					for (let i=0;i<3;i++) {
+						current_triangle.push({longueur: triangle.getLongueurs()[i], cote: triangle.getCotes()[i] , valeur: triangle.getLongueursValeurs()[i]});
+					};
+					// on trie les couples longueurs/valeurs du triangle selon les valeurs croissantes.
+					current_triangle.sort(function (a, b) {
+						return a.valeur - b.valeur;
+					  });
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[2].cote} qui mesure $${current_triangle[2].valeur}$ cm est le plus grand côté.`;
+					texte_corr += `<br> De plus ${current_triangle[0].longueur} + ${current_triangle[1].longueur} = $${current_triangle[0].valeur}$ cm + $${current_triangle[1].valeur}$ cm = $${calcul(current_triangle[0].valeur + current_triangle[1].valeur)}$ cm.`;
+					texte_corr += `<br> On constate que ${current_triangle[0].longueur} + ${current_triangle[1].longueur} > ${current_triangle[2].longueur}.`;
+					texte_corr += `<br> ${texte_en_couleur('On peut donc construire le triangle '+triangle.getNom())}.`;
+					texte_corr += `<br><br>  Si on considère que le triangle nommé dans le sens des aiguilles d'une montre et celui nommé dans le sens inverse sont différents, ${texte_en_couleur('plusieurs tels triangles existent')}.`;
+					texte_corr += `<br> Ils sont obtenus les uns à partir des autres par symétire axiale par rapport à un des côtés.`;
+					break;
+				case 2 : // 3 longueurs plat
+					while (!triangle.isPlatTriangleLongueurs()) {						
+						l1 = randint(l_min,l_max);
+						l2 = randint(l_min,l_max);
+						l3 = calcul(l1+l2);
+						triangle.l1 = l1;
+						triangle.l2 = l2;
+						triangle.l3 = l3;						
+					};
+					texte = `${triangle.getNom()} tel que ${triangle.getLongueurs()[0]} $= ${triangle.l1}$ cm ; `;					
+					texte += `${triangle.getLongueurs()[1]} $= ${triangle.l2}$ cm et ${triangle.getLongueurs()[2]} $= ${triangle.l3}$ cm.`;
+					// on crée l'objet longueurs + valeurs des côtés du triangle
+					for (let i=0;i<3;i++) {
+						current_triangle.push({longueur: triangle.getLongueurs()[i], cote: triangle.getCotes()[i] , valeur: triangle.getLongueursValeurs()[i]});
+					};
+					// on trie les couples longueurs/valeurs du triangle selon les valeurs croissantes.
+					current_triangle.sort(function (a, b) {
+						return a.valeur - b.valeur;
+					});
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[2].cote} qui mesure $${current_triangle[2].valeur}$ cm est le plus grand côté.`;
+					texte_corr += `<br> De plus ${current_triangle[0].longueur} + ${current_triangle[1].longueur} = $${current_triangle[0].valeur}$ cm + $${current_triangle[1].valeur}$ cm = $${current_triangle[2].valeur}$ cm aussi.`;
+					texte_corr += `<br> ${texte_en_couleur('On peut donc construire le triangle '+triangle.getNom()+' c\'est un triangle plat')}.`;
+					texte_corr += `<br><br>${texte_en_couleur('Un seul triangle de ce type existe')}, il s'agit du segment ${current_triangle[2].cote} sur lequel on place le point ${current_triangle[0].longueur.split('')[2]}.`;				
+					break;
+				case 3 : // 3 longueurs non constructible
+				  	// on initialise les longueurs sinon la méthode isTrueTriangleLongueurs() renvoie false!
+					l1 = randint(l_min,l_max);
+					l2 = randint(l_min,l_max);
+					l3 = randint(l_min,l_max);
+					triangle.l1 = l1;
+					triangle.l2 = l2;
+					triangle.l3 = l3;	
+
+					while (triangle.isTrueTriangleLongueurs()) {						
+						l1 = randint(l_min,l_max);
+						l2 = randint(l_min,l_max);
+						l3 = randint(l_min,l_max);
+						triangle.l1 = l1;
+						triangle.l2 = l2;
+						triangle.l3 = l3;						
+					};
+					texte = `${triangle.getNom()} tel que ${triangle.getLongueurs()[0]} $= ${triangle.l1}$ cm ; `;					
+					texte += `${triangle.getLongueurs()[1]} $= ${triangle.l2}$ cm et ${triangle.getLongueurs()[2]} $= ${triangle.l3}$ cm.`;
+					// on crée l'objet longueurs + valeurs des côtés du triangle
+					for (let i=0;i<3;i++) {
+						current_triangle.push({longueur: triangle.getLongueurs()[i], cote: triangle.getCotes()[i] , valeur: triangle.getLongueursValeurs()[i]});
+					};
+					// on trie les couples longueurs/valeurs du triangle selon les valeurs croissantes.
+					current_triangle.sort(function (a, b) {
+						return a.valeur - b.valeur;
+					});
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[2].cote} qui mesure $${current_triangle[2].valeur}$ cm est le plus grand côté.`;
+					texte_corr += `<br> De plus ${current_triangle[0].longueur} + ${current_triangle[1].longueur} = $${current_triangle[0].valeur}$ cm + $${current_triangle[1].valeur}$ cm = $${calcul(current_triangle[0].valeur + current_triangle[1].valeur)}$ cm.`;
+					texte_corr += `<br> On constate que ${current_triangle[0].longueur} + ${current_triangle[1].longueur} < ${current_triangle[2].longueur}, les longueurs données ne permettent donc pas de satisfaire à l'inégalité triangulaire.`;
+					texte_corr += `<br> ${texte_en_couleur('On ne peut donc pas construire le triangle '+triangle.getNom())}.`;
+					texte_corr += `<br><br>  ${texte_en_couleur('Aucun triangle de ce type n\'existe')}.`;
+					break;
+				case 4 : // 2 longueurs et le périmètre
+					// on utilise la méthode isTrueTriangleLongueurs(), le triangle ne sera pas plat.
+					while (!triangle.isTrueTriangleLongueurs()) {						
+						l1 = randint(l_min,l_max);
+						l2 = randint(l_min,l_max);
+						l3 = randint(l_min,l_max);
+						triangle.l1 = l1;
+						triangle.l2 = l2;
+						triangle.l3 = l3;						
+					};
+					texte = `${triangle.getNom()} tel que ${triangle.getLongueurs()[0]} $= ${triangle.l1}$ cm ; `;					
+					texte += `${triangle.getLongueurs()[1]} $= ${triangle.l2}$ cm et dont le périmètre vaut $${triangle.getPerimetre()}$ cm.`;
+					// on crée l'objet longueurs + valeurs des côtés du triangle
+					for (let i=0;i<3;i++) {
+						current_triangle.push({longueur: triangle.getLongueurs()[i], cote: triangle.getCotes()[i] , valeur: triangle.getLongueursValeurs()[i]});
+					};
+					// on trie les couples longueurs/valeurs du triangle selon les valeurs croissantes.
+					current_triangle.sort(function (a, b) {
+						return a.valeur - b.valeur;
+					});
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					texte_corr += `<br>Puisque le périmètre vaut $${triangle.getPerimetre()}$ cm alors la troisième longueur vaut ${triangle.getLongueurs()[2]} = $${triangle.getPerimetre()}$ cm - $${triangle.l1}$ cm - $${triangle.l2}$ cm = $${triangle.l3}$ cm.`
+					texte_corr += `<br> Donc dans le triangle ${triangle.getNom()}, ${current_triangle[2].cote} qui mesure $${current_triangle[2].valeur}$ cm est le plus grand côté.`;
+					texte_corr += `<br> De plus ${current_triangle[0].longueur} + ${current_triangle[1].longueur} = $${current_triangle[0].valeur}$ cm + $${current_triangle[1].valeur}$ cm = $${calcul(current_triangle[0].valeur + current_triangle[1].valeur)}$ cm.`;
+					texte_corr += `<br> On constate que ${current_triangle[0].longueur} + ${current_triangle[1].longueur} > ${current_triangle[2].longueur}`;
+					texte_corr += `<br> ${texte_en_couleur('On peut donc construire le triangle '+triangle.getNom())}.`;
+					// texte_corr += `<br><br>  Si on considère que le triangle nommé dans le sens des aiguilles d'une montre et celui nommé dans le sens inverse sont différents, ${texte_en_couleur('deux tels triangles existent')}.`;
+					// texte_corr += `<br> Les deux étant obtenus l'un à partir de l'autre par symétire axiale.`;
+					texte_corr += `<br><br>  Si on considère que le triangle nommé dans le sens des aiguilles d'une montre et celui nommé dans le sens inverse sont différents, ${texte_en_couleur('plusieurs tels triangles existent')}.`;
+					texte_corr += `<br> Ils sont obtenus les uns à partir des autres par symétire axiale par rapport à un des côtés.`;
+					break;
+				case 5 : //3 angles constructible
+					while (!triangle.isTrueTriangleAngles()) {	
+						a1 = randint(a_min,a_max,[0,180]);
+						a2 = randint(a_min,a_max,[0,180]);
+						a3 = calcul(180-a1-a2);
+						triangle.a1 = a1;
+						triangle.a2 = a2;
+						triangle.a3 = a3;
+					};					
+					texte = ``;
+					texte_corr = ``;
+					texte = `${triangle.getNom()} tel que ${triangle.getAngles()[0]} $= ${triangle.a1}\\degree$ ; `;					
+					texte += `${triangle.getAngles()[1]} $= ${triangle.a2}\\degree$ et ${triangle.getAngles()[2]} $= ${triangle.a3}\\degree$.`;
+					// on crée l'objet longueurs + valeurs des côtés du triangle
+					for (let i=0;i<3;i++) {
+						current_triangle.push({angle: triangle.getAngles()[i], valeur: triangle.getAnglesValeurs()[i]});
+					};
+					// on trie les couples longueurs/valeurs du triangle selon les valeurs croissantes.
+					current_triangle.sort(function (a, b) {
+						return a.valeur - b.valeur;
+					  });
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[0].angle} + ${current_triangle[1].angle} + ${current_triangle[2].angle} = $${current_triangle[0].valeur}\\degree + ${current_triangle[1].valeur}\\degree + ${current_triangle[2].valeur}\\degree = ${calcul(current_triangle[0].valeur + current_triangle[1].valeur + current_triangle[2].valeur)}\\degree$.`;
+					texte_corr += `<br> On constate que la somme des trois angles du triangle vaut bien $180\\degree$.`;
+					texte_corr += `<br> ${texte_en_couleur('On peut donc construire le triangle '+triangle.getNom())}.`;
+					texte_corr += `<br><br>  ${texte_en_couleur('Il existe une infinité de triangles avec ces mesures.')}`;
+					texte_corr += `<br> On les obtient les uns à partir des autres par un agrandissement ou une réduction.`;
+					break;
+				case 6 : // 3 angles plat
+					while (!triangle.isPlatTriangleAngles()) {	
+						a1 = randint(a_min,a_max);
+						a2 = randint(a_min,a_max);
+						a3 = calcul(180-a1-a2);
+						triangle.a1 = a1;
+						triangle.a2 = a2;
+						triangle.a3 = a3;
+					};					
+					texte = ``;
+					texte_corr = ``;
+					texte = `${triangle.getNom()} tel que ${triangle.getAngles()[0]} $= ${triangle.a1}\\degree$ ; `;					
+					texte += `${triangle.getAngles()[1]} $= ${triangle.a2}\\degree$ et ${triangle.getAngles()[2]} $= ${triangle.a3}\\degree$.`;
+					// on crée l'objet longueurs + valeurs des côtés du triangle
+					for (let i=0;i<3;i++) {
+						current_triangle.push({angle: triangle.getAngles()[i] , valeur: triangle.getAnglesValeurs()[i]});
+					};
+					// on trie les couples longueurs/valeurs du triangle selon les valeurs croissantes.
+					current_triangle.sort(function (a, b) {
+						return a.valeur - b.valeur;
+					});
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[0].angle} + ${current_triangle[1].angle} + ${current_triangle[2].angle} = $${current_triangle[0].valeur}\\degree + ${current_triangle[1].valeur}\\degree + ${current_triangle[2].valeur}\\degree = ${calcul(current_triangle[0].valeur + current_triangle[1].valeur + current_triangle[2].valeur)}\\degree$.`;
+					texte_corr += `<br> On constate que la somme des trois angles du triangle vaut bien $180\\degree$.`;
+					texte_corr += `<br> ${texte_en_couleur('On peut donc construire le triangle '+triangle.getNom())}.`;
+					texte_corr += `<br> Deux des trois angles du triangle valent $0\\degree$, ${texte_en_couleur(triangle.getNom()+' est donc un triangle plat')}.`
+					texte_corr += `<br><br>  ${texte_en_couleur('Il existe une infinité de triangles avec ces mesures.')}`;
+					texte_corr += `<br> On les obtient en traçant des segments et en plaçant le troisième sommet sur ce segment, les longueurs n'ayant aucune importance.`;
+					texte_corr += `<br> Dans le cas présent, il s'agit d'un segment $[${current_triangle[2].angle.split('')[12]}${current_triangle[2].angle.split('')[14]}]$ sur lequel on place un point ${current_triangle[2].angle.split('')[13]}.`;
+					//texte_corr += `<br> ${JSON.stringify(current_triangle)}`;
+					break;
+				case 7 : // 3 angles non constructible
+					// on initialise les angles sinon la méthode isTrueTriangleAngles() renvoie false!
+					a1 = randint(a_min,a_max);
+					a2 = randint(a_min,a_max);
+					a3 = randint(a_min,a_max);
+					triangle.a1 = a1;
+					triangle.a2 = a2;
+					triangle.a3 = a3;	
+					while (triangle.isTrueTriangleAngles()) {	
+						a1 = randint(a_min,a_max);
+						a2 = randint(a_min,a_max);
+						a3 = randint(a_min,a_max);
+						triangle.a1 = a1;
+						triangle.a2 = a2;
+						triangle.a3 = a3;
+					};					
+					texte = `${triangle.getNom()} tel que ${triangle.getAngles()[0]} $= ${triangle.a1}\\degree$ ; `;					
+					texte += `${triangle.getAngles()[1]} $= ${triangle.a2}\\degree$ et ${triangle.getAngles()[2]} $= ${triangle.a3}\\degree$.`;
+					// on crée l'objet longueurs + valeurs des côtés du triangle
+					for (let i=0;i<3;i++) {
+						current_triangle.push({angle: triangle.getAngles()[i], valeur: triangle.getAnglesValeurs()[i]});
+					};
+					// on trie les couples longueurs/valeurs du triangle selon les valeurs croissantes.
+					current_triangle.sort(function (a, b) {
+						return a.valeur - b.valeur;
+					});
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[0].angle} + ${current_triangle[1].angle} + ${current_triangle[2].angle} = $${current_triangle[0].valeur}\\degree + ${current_triangle[1].valeur}\\degree + ${current_triangle[2].valeur}\\degree = ${calcul(current_triangle[0].valeur + current_triangle[1].valeur + current_triangle[2].valeur)}\\degree$.`;
+					texte_corr += `<br> Si le triangle était constructible, la somme des trois angles vaudrait $180\\degree$,`;
+					texte_corr += ` or ce n'est pas le cas.`
+					texte_corr += `<br> ${texte_en_couleur('On ne peut donc pas construire le triangle '+triangle.getNom())}.`;
+					texte_corr += `<br><br>  ${texte_en_couleur('Aucun triangle de ce type n\'existe')}.`;
+					break;				
+				case 8 : // 2 angles et le 3e fonction du 1er ou du 2eme
+					let angle_rg = randint(0,1);
+					let operations_possibles = ['triple','quadruple','quart'];
+					let operation = '';					
+					texte = ``;
+					texte_corr = ``;
+					texte_corr = `Supposons que l'on puisse construire un triangle ${triangle.getNom()} avec ces mesures.`;
+					switch (angle_rg) {
+						case 0 :
+							a1 = randint(a_min,a_max);
+							triangle.a1 = a1;
+							operation = operations_possibles[randint(0,2)];
+							texte += `${triangle.getNom()} tel que ${triangle.getAngles()[0]} $= ${tex_nombre(triangle.a1)}\\degree$ ; `;						
+							switch (operation) {
+								case 'triple' :
+									a2 = calcul((180-a1)/4);
+									a3 = calcul(3*a2);				
+									break;
+								case 'quadruple' :
+									a2 = calcul((180-a1)/5);
+									a3 = calcul(4*a2);
+									break;
+								case 'quart' :
+									a2 = calcul(4*(180-a1)/5);
+									a3 = calcul(a2/4);
+									break;
+							};
+							triangle.a2 = a2;
+							triangle.a3 = a3;
+							texte += `${triangle.getAngles()[1]} $= ${tex_nombre(triangle.a2)}\\degree$ et ${triangle.getAngles()[2]} est le ${operation} de ${triangle.getAngles()[1]}.`;
+							// on crée l'objet longueurs + valeurs des côtés du triangle
+							for (let i=0;i<3;i++) {
+								current_triangle.push({angle: triangle.getAngles()[i], valeur: triangle.getAnglesValeurs()[i]});
+							};								
+							texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[2].angle} est le ${operation} de ${current_triangle[1].angle} = $${tex_nombre(current_triangle[1].valeur)}\\degree$  d'où ${current_triangle[2].angle} = $${tex_nombre(current_triangle[2].valeur)}\\degree$.`;
+							break;
+						case 1 : 
+							a2 = randint(a_min,a_max);
+							triangle.a2 = a2;
+							operation = operations_possibles[randint(0,2)];
+							texte += `${triangle.getNom()} tel que ${triangle.getAngles()[1]} $= ${tex_nombre(triangle.a2)}\\degree$ ; `;							
+							switch (operation) {
+								case 'triple' :
+									a1 = calcul((180-a2)/4);
+									a3 = calcul(3*a1);
+									break;
+								case 'quadruple' :
+									a1 = calcul((180-a2)/5);
+									a3 = calcul(4*a1);
+									break;
+								case 'quart' :
+									a1 = calcul(4*(180-a2)/5);
+									a3 = calcul(a1/4);
+									break;
+							};
+							triangle.a1 = a1;
+							triangle.a3 = a3;
+							texte += `${triangle.getAngles()[0]} $= ${tex_nombre(triangle.a1)}\\degree$ et ${triangle.getAngles()[2]} est le ${operation} de ${triangle.getAngles()[0]}.`;
+							// on crée l'objet longueurs + valeurs des côtés du triangle
+							for (let i=0;i<3;i++) {
+								current_triangle.push({angle: triangle.getAngles()[i], valeur: triangle.getAnglesValeurs()[i]});
+							};
+							texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[2].angle} est le ${operation} de ${current_triangle[0].angle} = $${tex_nombre(current_triangle[0].valeur)}\\degree$  d'où ${current_triangle[2].angle} = $${tex_nombre(current_triangle[2].valeur)}\\degree$.`;
+							break;
+					};
+					texte_corr += `<br>Donc ${current_triangle[0].angle} + ${current_triangle[1].angle} + ${current_triangle[2].angle} = $${tex_nombre(current_triangle[0].valeur)}\\degree + ${tex_nombre(current_triangle[1].valeur)}\\degree + ${tex_nombre(current_triangle[2].valeur)}\\degree = ${tex_nombrec(current_triangle[0].valeur + current_triangle[1].valeur + current_triangle[2].valeur)}\\degree$.`;							
+					texte_corr += `<br> On constate que la somme des trois angles du triangle vaut bien $180\\degree$.`;
+					texte_corr += `<br> ${texte_en_couleur('On peut donc construire le triangle '+triangle.getNom())}.`;
+					texte_corr += `<br><br>  ${texte_en_couleur('Il existe une infinité de triangles avec ces mesures.')}`;
+					texte_corr += `<br> On les obtient les uns à partir des autres par un agrandissement ou une réduction.`;
+					break;
+			}
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}	
+			cpt++;	
+		}
+	liste_de_question_to_contenu(this);
+	}
+		if (this.exo == this.beta+'5G21-1') {
+			this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : 3 longueurs\n2 : 2 longueurs et le périmètre"];
+		} else if (this.exo == this.beta+'5G31-1') {
+			this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : 3 angles\n2 : 2 angles et le 3e en fonction du 1er ou du 2eme"];
+		} else {
+			//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : sans conversions de longueurs\n2 : avec conversions de longueurs"];
+		};
+}
+
+/**
+ * Vocabulaire des triangles 
+ * beta5G21-1
+ * @author Sébastien Lozano
+ */
+function Constructibilite_des_triangles_longueurs(){
+	this.beta = ``;
+	this.exo = this.beta+`5G21-1`;
+	//this.titre = `Constructibilité des triangles via les longueurs`;
+	Constructibilite_des_triangles.call(this);
+};
+
+/**
+ * Vocabulaire des triangles 
+ * beta5G31-1
+ * @author Sébastien Lozano
+ */
+function Constructibilite_des_triangles_angles(){
+	this.beta = ``;
+	this.exo = this.beta+`5G31-1`;
+	//this.titre = `Constructibilité des triangles via les angles`;
+	Constructibilite_des_triangles.call(this);
+};
+
 /**
 * * Calcul de l'inverse d'un nombre. 
 *
@@ -14184,6 +15093,43 @@ function Exercice_Trigo_angles() {
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Calcul de l\'angle avec Acos \n 2 : Calcul de l\'angle avec Acos, Asin ou Atan'];
 }
+
+/**
+* Déterminer la racine carrée d'un carré parfait compris entre 4 et 256
+* @auteur Stéphane Guyon
+*/
+function Racine_caree_de_carres_parfaits(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Racine carré d'un carré parfait (calcul mental)";
+	this.consigne = "Calculer de tête les racines suivantes.";
+	this.nb_questions = 4;
+	this.nb_cols = 2;
+	this.nb_cols_corr = 2;
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			a = randint(2,16)
+			c = a*a;
+			texte = `$\\sqrt{${c}}=$`
+			texte_corr = `$\\sqrt{${c}}=${a}$`
+			
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
 
 /**
 * À partir de la donnée des 3 longueurs d'un triangle, déterminer si il est rectangle ou pas.
@@ -16913,9 +17859,9 @@ function Double_distributivite() {
 					break;
 				case 3://(ax-b)(cx+d)
 					texte = `$(${a}x-${b})(${c}x+${d})$`
-					// if (a*d-b*c>0) 
-					texte_corr = `$(${a}x-${b})(${c}x+${d})=${a * c}x^2+${d * a}x-${b * c}x-${b * d}=${printlatex(`${a * c}*x^2+(${d * a-b * c})*x-${b * d}`)}$`;
-					// else texte_corr = `$(${a}x-${b})(${c}x+${d})=${a * c}x^2+${d * a}x-${b * c}x-${b * d}=${a * c}x^2-${b * c - a*d}x-${b * d}$`;
+					if (egal(a*d-b*c,0)) 
+					texte_corr = `$(${a}x-${b})(${c}x+${d})=${a * c}x^2+${d * a}x-${b * c}x-${b * d}=${printlatex(`${a * c}*x^2-${b * d}`)}$`;
+					else texte_corr = `$(${a}x-${b})(${c}x+${d})=${a * c}x^2+${d * a}x-${b * c}x-${b * d}=${printlatex(`${a * c}*x^2+(${d * a-b * c})*x-${b * d}`)}$`;
 					break;
 				case 4://(ax-b)(cx-d)
 					texte = `$(${a}x-${b})(${c}x-${d})$`
@@ -16933,97 +17879,6 @@ function Double_distributivite() {
 		liste_de_question_to_contenu(this);
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : (x+a)(x+b) et (ax+b)(cx+d)\n 2 : (ax-b)(cx+d) et (ax-b)(cx-d)\n 3 : Tous les types'];
-}
-
-/**
- * Développer avec les 3 identités remarquables
-* @auteur Jean-Claude Lhote
-*/
-function Developper_Identites_remarquables2() {
-	'use strict';
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Développer avec les identités remarquables";
-	this.consigne = "Développer les expressions suivantes.";
-	this.nb_cols = 1;
-	this.nb_cols_corr = 1;
-	this.spacing = 1;
-	this.spacing_corr = 1;
-	this.nb_questions = 5;
-	this.sup = 1;
-
-	this.nouvelle_version = function (numero_de_l_exercice) {
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-		let liste_fractions = [[1, 2], [1, 3], [2, 3], [1, 4], [3, 4], [1, 5], [2, 5], [3, 5], [4, 5],
-		[1, 6], [5, 6], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [1, 8], [3, 8], [5, 8], [7, 8],
-		[1, 9], [2, 9], [4, 9], [5, 9], [7, 9], [8, 9], [1, 10], [3, 10], [7, 10], [9, 10]]
-		let type_de_questions_disponibles = [];
-		if (this.sup == 1) {
-			type_de_questions_disponibles = [1, 2, 3] // coef de x = 1
-		}
-		else if (this.sup == 2) {
-			type_de_questions_disponibles = [4, 5, 6]  // coef de x > 1
-		}
-		else { type_de_questions_disponibles = [7, 8, 9] }  // coef de x relatif
-
-		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt = 0, a, b, type_de_questions, fraction = [], ds, ns; i < this.nb_questions && cpt < 50;) {
-			type_de_questions = liste_type_de_questions[i];
-			a = randint(1, 9);
-			b = randint(2, 9);
-			fraction = choice(liste_fractions);
-			ns = fraction[0]
-			ds = fraction[1]
-			switch (type_de_questions) {
-				case 1:
-					texte = `$(x+${a})^2$`; // (x+a)²
-					texte_corr = `$(x+${a})^2=x^2+2 \\times ${a} \\times x+${a}^2=x^2+${2 * a}x+${a * a}$`;
-					break;
-				case 2:
-					texte = `$(x-${a})^2$`  // (x-a)²
-					texte_corr = `$(x-${a})^2=x^2-2 \\times ${a} \\times x+${a}^2=x^2-${2 * a}x+${a * a}$`;
-					break;
-				case 3:
-					texte = `$(x-${a})(x+${a})$`    // (x-a)(x+a)
-					texte_corr = `$(x-${a})(x+${a})=x^2-${a}^2=x^2-${a * a}$`;
-					break;
-				case 4:
-					texte = `$(${b}x+${a})^2$`; //(bx+a)²  b>1
-					texte_corr = `$(${b}x+${a})^2=(${b}x)^2+2 \\times ${b}x \\times ${a} + ${a}^2=${b * b}x^2+${2 * b * a}x+${a * a}$`;
-					break;
-				case 5:
-					texte = `$(${b}x-${a})^2$`; //(bx-a)² b>1
-					texte_corr = `$(${b}x-${a})^2=(${b}x)^2-2 \\times ${b}x \\times ${a} + ${a}^2=${b * b}x^2-${2 * b * a}x+${a * a}$`;
-					break;
-				case 6:
-					texte = `$(${b}x-${a})(${b}x+${a})$`; //(bx-a)(bx+a) b>1
-					texte_corr = `$(${b}x-${a})(${b}x+${a})=(${b}x)^2-${a}^2=${b * b}x^2-${a * a}$`;
-					break;
-				case 7:
-					texte = `$\\left(${tex_fraction(ns, ds)}x+${a}\\right)^2$`; // (kx+a)² k rationnel 
-					texte_corr = `$\\left(${tex_fraction(ns, ds)}x+${a}\\right)^2=\\left(${tex_fraction(ns, ds)}x\\right)^2+2 \\times ${tex_fraction(ns, ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns, ds)}x+${a}\\right)^2=${tex_fraction(ns * ns, ds * ds)}x^2+${tex_fraction_reduite(ns * 2 * a, ds)}x+${a * a}$`;
-					break;
-				case 8:
-					texte = `$\\left(${tex_fraction(ns, ds)}x-${a}\\right)^2$`; // (kx-a)² k rationnel 
-					texte_corr = `$\\left(${tex_fraction(ns, ds)}x-${a}\\right)^2=\\left(${tex_fraction(ns, ds)}x\\right)^2-2 \\times ${tex_fraction(ns, ds)}x \\times ${a} + ${a}^2=${tex_fraction(ns * ns, ds * ds)}x^2-${tex_fraction_reduite(ns * 2 * a, ds)}x+${a * a}$`;
-					break;
-				case 9:
-					//  (bx-a)(bx+a) avec a entier et b rationnel simple
-					texte = `$\\left(${tex_fraction(ns, ds)}x-${a}\\right)\\left(${tex_fraction(ns, ds)}x+${a}\\right)$`; // b>1
-					texte_corr = `$\\left(${tex_fraction(ns, ds)}x-${a}\\right)\\left(${tex_fraction(ns, ds)}x+${a}\\right)=\\left(${tex_fraction(ns, ds)}x\\right)^2-${a}^2=${tex_fraction(ns * ns, ds * ds)}x^2-${a * a}$`;
-					break;
-			}
-			if (this.liste_questions.indexOf(texte) == -1) {
-				// Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte);
-				this.liste_corrections.push(texte_corr);
-				i++;
-			}
-			cpt++;
-		}
-		liste_de_question_to_contenu(this);
-	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x relatif'];
 }
 
 /**
@@ -17140,97 +17995,6 @@ function Factoriser_Identites_remarquables3() {
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'];
 }
 
-/**
- * Factoriser en utilisant les 3 identités remarquables 
-* @auteur Jean-Claude Lhote
-*/
-function Factoriser_Identites_remarquables2() {
-	'use strict';
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Factoriser avec les identités remarquables";
-	this.consigne = "Factoriser les expressions suivantes.";
-	this.nb_cols = 1;
-	this.nb_cols_corr = 1;
-	this.spacing = 1;
-	this.spacing_corr = 1;
-	this.nb_questions = 5;
-	this.sup = 1;
-
-	this.nouvelle_version = function (numero_de_l_exercice) {
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-		let liste_fractions = [[1, 2], [1, 3], [2, 3], [1, 4], [3, 4], [1, 5], [2, 5], [3, 5], [4, 5],
-		[1, 6], [5, 6], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [1, 8], [3, 8], [5, 8], [7, 8],
-		[1, 9], [2, 9], [4, 9], [5, 9], [7, 9], [8, 9], [1, 10], [3, 10], [7, 10], [9, 10]]
-		let type_de_questions_disponibles = [];
-		if (this.sup == 1) {
-			type_de_questions_disponibles = [1, 2, 3] // coef de x = 1
-		}
-		else if (this.sup == 2) {
-			type_de_questions_disponibles = [4, 5, 6]  // coef de x > 1
-		}
-		else { type_de_questions_disponibles = [7, 8, 9] }  // coef de x rationnel
-
-		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
-		for (let i = 0, texte, texte_corr, cpt = 0, a, b, fraction = [], ns, ds, type_de_questions; i < this.nb_questions && cpt < 50;) {
-			type_de_questions = liste_type_de_questions[i];
-			a = randint(1, 9);
-			b = randint(2, 9);
-			fraction = choice(liste_fractions);
-			ns = fraction[0]
-			ds = fraction[1]
-			switch (type_de_questions) {
-				case 1:
-					texte = `$x^2+${2 * a}x+${a * a}$`; // (x+a)²
-					texte_corr = `$x^2+${2 * a}x+${a * a}=x^2+2 \\times ${a} \\times x+${a}^2=(x+${a})^2$`;
-					break;
-				case 2:
-					texte = `$x^2-${2 * a}x+${a * a}$`  // (x-a)²
-					texte_corr = `$x^2-${2 * a}x+${a * a}=(x-${a})^2=x^2-2 \\times ${a} \\times x+${a}^2=(x-${a})^2$`;
-					break;
-				case 3:
-					texte = `$x^2-${a * a}$`    // (x-a)(x+a)
-					texte_corr = `$x^2-${a * a}=x^2-${a}^2=(x-${a})(x+${a})$`;
-					break;
-				case 4:
-					texte = `$${b * b}x^2+${2 * b * a}x+${a * a}$`; //(bx+a)²  b>1
-					texte_corr = `$${b * b}x^2+${2 * b * a}x+${a * a}=(${b}x)^2+2 \\times ${b}x \\times {a} + ${a}^2=(${b}x+${a})^2$`;
-					break;
-				case 5:
-					texte = `$${b * b}x^2-${2 * b * a}x+${a * a}$`; //(bx-a)² b>1
-					texte_corr = `$${b * b}x^2-${2 * b * a}x+${a * a}=(${b}x)^2-2 \\times ${b}x \\times {a} + ${a}^2=(${b}x-${a})^2$`;
-					break;
-				case 6:
-					texte = `$${b * b}x^2-${a * a}$`; //(bx-a)(bx+a) b>1
-					texte_corr = `$${b * b}x^2-${a * a}=(${b}x)^2-${a}^2=(${b}x-${a})(${b}x+${a})$`;
-					break;
-				case 7:
-
-					texte = `$${tex_fraction(ns * ns, ds * ds)}x^2+${tex_fraction(2 * ns * a, ds)}x+${a * a}$`; // (kx+a)² k rationnel 
-					texte_corr = `$${tex_fraction(ns * ns, ds * ds)}x^2+${tex_fraction(ns * 2 * a, ds)}x+${a * a}=\\left(${tex_fraction(ns, ds)}x\\right)^2+2 \\times ${tex_fraction(ns, ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns, ds)}x+${a}\\right)^2$`;
-					break;
-				case 8:
-					texte = `$${tex_fraction(ns * ns, ds * ds)}x^2-${tex_fraction(2 * ns * a, ds)}x+${a * a}$`; // (kx-a)² k rationnel 
-					texte_corr = `$${tex_fraction(ns * ns, ds * ds)}x^2-${tex_fraction(ns * 2 * a, ds)}x+${a * a}=\\left(${tex_fraction(ns, ds)}x\\right)^2-2 \\times ${tex_fraction(ns, ds)}x \\times ${a} + ${a}^2=\\left(${tex_fraction(ns, ds)}x-${a}\\right)^2$`;
-					break;
-				case 9:
-					//  (bx-a)(bx+a) avec a entier et b rationnel simple
-					texte = `$${tex_fraction(ns * ns, ds * ds)}x^2-${a * a}$`; // b>1
-					texte_corr = `$${tex_fraction(ns * ns, ds * ds)}x^2-${a * a}=\\left(${tex_fraction(ns, ds)}x\\right)^2-${a}^2=\\left(${tex_fraction(ns, ds)}x-${a}\\right)\\left(${tex_fraction(ns, ds)}x+${a}\\right)$`;
-					break;
-			}
-			if (this.liste_questions.indexOf(texte) == -1) {
-				// Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte);
-				this.liste_corrections.push(texte_corr);
-				i++;
-			}
-			cpt++;
-		}
-		liste_de_question_to_contenu(this);
-	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'];
-}
 
 
 /**
@@ -17682,7 +18446,7 @@ function fonction_notion_vocabulaire() {
 					// machine						
 					x = randint(2, 99);//augmenter les possibles pour éviter les questions déjà posées?	
 					if (sortie_html) {
-						texte += machine_maths_video(`videos/machineMaths-g.mp4`);
+						texte += machine_maths_video(`videos/machineMaths-f.mp4`);
 					} else { // sortie Latex avec Tikz
 						texte += tikz_machine_maths('f', '---', `P\\acute{e}rim\\grave{e}tre`, `d'un\\,carr\\acute{e}`, `carr\\acute{e}\\,de`, `c\\hat{o}t\\acute{e}\\,${x}\\,cm`, `P\\acute{e}rim\\grave{e}tre`, `???\\,cm`);
 					};
@@ -17795,7 +18559,7 @@ function fonction_notion_vocabulaire() {
 					// machine
 					x = randint(2, 99);//augmenter les possibles pour éviter les questions déjà posées?	
 					if (sortie_html) {
-						texte += machine_maths_video(`videos/machineMaths-f.mp4`);
+						texte += machine_maths_video(`videos/machineMaths-g.mp4`);
 					} else { // sortie Latex avec Tikz
 						texte += tikz_machine_maths('g', '---', `Aire`, `d'un\\,carr\\acute{e}`, `carr\\acute{e}\\,de`, `c\\hat{o}t\\acute{e}\\,${x}\\,cm`, `Aire`, `???\\,cm^2`);
 					};
@@ -18590,9 +19354,10 @@ function DivisionEuclidienne_multiplesDiviseurs_Criteres() {
 	this.titre = "Division Euclidienne - Diviseurs - Multiples";
 	// pas de différence entre la version html et la version latex pour la consigne
 	this.consigne = `Divisions euclidiennes - Diviseurs - Multiples.`;
-	//this.consigne += `<br>`;
-	sortie_html ? this.spacing = 3 : this.spacing = 2;
-	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
+	//sortie_html ? this.spacing = 3 : this.spacing = 2;
+	sortie_html ? this.spacing = 1 : this.spacing = 2;
+	//sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
+	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 2;
 	this.nb_questions = 5;
 	//this.correction_detaillee_disponible = true;
 	this.nb_cols = 1;
@@ -18650,7 +19415,7 @@ function DivisionEuclidienne_multiplesDiviseurs_Criteres() {
 						rg_diviseur = (liste_diviseurs(dividende).length - 1) / 2 + 1;
 					}
 					diviseur = liste_diviseurs(dividende)[rg_diviseur - 1]; // on choisit le diviseur central de dividende, ATTENTION rang des tableaux commence à 0 
-					let candidats_diviseurs = [diviseur - 1, diviseur, diviseur + 1]; // on prend l'entier précédetn et le successeur de ce diviseur
+					let candidats_diviseurs = [diviseur - 1, diviseur, diviseur + 1]; // on prend l'entier précédent et le successeur de ce diviseur
 					// Faut-il que je conditionne pour éviter le diviseur 1 ?
 					candidats_diviseurs = shuffle(candidats_diviseurs); // on mélange le tableau
 					texte = 'Les trois divisions euclidiennes suivantes sont exactes : <br>';
@@ -18662,19 +19427,19 @@ function DivisionEuclidienne_multiplesDiviseurs_Criteres() {
 					texte += `<br>`;
 					texte += `Sans calculer, dire si les nombres ${nombre_avec_espace(candidats_diviseurs[0])}; ${nombre_avec_espace(candidats_diviseurs[1])}; ${nombre_avec_espace(candidats_diviseurs[2])} sont des diviseurs de ${nombre_avec_espace(dividende)}. Justifier.`;
 					texte_corr = ``;
-					if (dividende % candidats_diviseurs[0] == 0) {
+					if (egal(dividende % candidats_diviseurs[0],0)) { //egal() est une fonction de JC pour éviter les problèmes de virgule flottante
 						texte_corr += `Le reste de la division euclienne de ${nombre_avec_espace(dividende)} par ${nombre_avec_espace(candidats_diviseurs[0])} vaut 0 donc ${nombre_avec_espace(candidats_diviseurs[0])} est un diviseur de ${nombre_avec_espace(dividende)}`;
 					} else {
 						texte_corr += `Le reste de la division euclienne de ${nombre_avec_espace(dividende)} par ${nombre_avec_espace(candidats_diviseurs[0])} ne vaut pas 0 donc ${nombre_avec_espace(candidats_diviseurs[0])} n'est pas un diviseur de ${nombre_avec_espace(dividende)}`;
 					}
 					texte_corr += `<br>`;
-					if (dividende % candidats_diviseurs[1] == 0) {
+					if (egal(dividende % candidats_diviseurs[1],0)) { //egal() est une fonction de JC pour éviter les problèmes de virgule flottante
 						texte_corr += `Le reste de la division euclienne de ${nombre_avec_espace(dividende)} par ${nombre_avec_espace(candidats_diviseurs[1])} vaut 0 donc ${nombre_avec_espace(candidats_diviseurs[1])} divise ${nombre_avec_espace(dividende)}`;
 					} else {
 						texte_corr += `Le reste de la division euclienne de ${nombre_avec_espace(dividende)} par ${nombre_avec_espace(candidats_diviseurs[1])} ne vaut pas 0 donc ${nombre_avec_espace(candidats_diviseurs[1])} ne divise pas ${nombre_avec_espace(dividende)}`;
 					}
 					texte_corr += `<br>`;
-					if (dividende % candidats_diviseurs[1] == 0) {
+					if (egal(dividende % candidats_diviseurs[2],0)) { //egal() est une fonction de JC pour éviter les problèmes de virgule flottante
 						texte_corr += `Le reste de la division euclienne de ${nombre_avec_espace(dividende)} par ${nombre_avec_espace(candidats_diviseurs[2])} vaut 0 donc ${nombre_avec_espace(dividende)} est divisible par ${nombre_avec_espace(candidats_diviseurs[2])}`;
 					} else {
 						texte_corr += `Le reste de la division euclienne de ${nombre_avec_espace(dividende)} par ${nombre_avec_espace(candidats_diviseurs[2])} ne vaut pas 0 donc ${nombre_avec_espace(dividende)} n'est pas divisible par ${nombre_avec_espace(candidats_diviseurs[2])}`;
@@ -18722,7 +19487,7 @@ function DivisionEuclidienne_multiplesDiviseurs_Criteres() {
 					textes_corr[5] = `${p2} n'est ni un multiple ni un diviseur de ${p1}`;
 					// on mélange pour que l'ordre change!
 					shuffle2tableaux(textes, textes_corr);
-					texte = `Avec la calculatrice, compléter chaque phrase avec le mot "est un diviseur de" ou "est un multiple de" ou "n'est ni une diviseur ni un multiple de".`;
+					texte = `Avec la calculatrice, compléter chaque phrase avec "est un diviseur de" ou "est un multiple de" ou "n'est ni un diviseur ni un multiple de".`;
 					texte += `<br>`;
 					texte_corr = ``;
 					for (let j = 0; j < 5; j++) {
@@ -18805,8 +19570,8 @@ function Premier_ou_pas() {
 	this.titre = "Primalité ou pas";
 	// pas de différence entre la version html et la version latex pour la consigne
 	this.consigne = `Justifier que les nombres suivants sont premiers ou pas.`;
-	//this.consigne += `<br>`;	
-	sortie_html ? this.spacing = 3 : this.spacing = 2;
+	//sortie_html ? this.spacing = 3 : this.spacing = 2;
+	sortie_html ? this.spacing = 1 : this.spacing = 2;
 	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
 	this.nb_questions = 5;
 	//this.correction_detaillee_disponible = true;
@@ -18857,7 +19622,10 @@ function Premier_ou_pas() {
 					break;
 				case 2: // Multiple de 3
 					let sum = 0; // pour la valeur de la somme;
-					N = 3 * randint(34, 3333);
+					N = 3 * randint(34, 3333); // on initialise avant la boucle car on a peut être de la chance
+					while ( (N % 2 == 0) || (N % 5 == 0)) {
+						N = 3 * randint(34, 3333);
+					};
 					texte = nombre_avec_espace(N);
 					texte_corr = `Comme ` + N.toString().charAt(0);
 					sum = Number(N.toString().charAt(0));
@@ -18985,14 +19753,17 @@ function Premier_ou_pas() {
 					N = crible_eratosthene_n(529)[r]; //on choisit un nombre premier inférieur à 529
 					texte = N + ``;
 					let tab_premiers_a_tester = crible_eratosthene_n(Math.trunc(Math.sqrt(N)));
-					texte_corr = `Testons la divisibilité de ${N} par tous les nombres premiers inférieurs à $\\sqrt{${N}}$, c'est à dire par les nombres `;
+					//texte_corr = `Testons la divisibilité de ${N} par tous les nombres premiers inférieurs à $\\sqrt{${N}}$, c'est à dire par les nombres `;
+					texte_corr = `En effectuant la division euclidienne de ${N} par tous les nombres premiers inférieurs à $\\sqrt{${N}}$, c'est à dire par les nombres `;
 					texte_corr += tab_premiers_a_tester[0];
 					for (let k = 1; k < tab_premiers_a_tester.length; k++) {
 						texte_corr += `, ` + tab_premiers_a_tester[k];
 					};
-					texte_corr += `.`;
-					texte_corr += `<br> Aucun de ces nombres premiers ne divise ${N}, `;
-					texte_corr += texte_en_couleur_et_gras(nombre_avec_espace(N) + ` n'est donc pas premier.`);
+					//texte_corr += `.`;
+					// texte_corr += `<br> Aucun de ces nombres premiers ne divise ${N}, `;
+					texte_corr += `, le reste n'est jamais nul.`;
+					// texte_corr += texte_en_couleur_et_gras(nombre_avec_espace(N) + ` est donc un nombre premier.`);
+					texte_corr += `<br>`+texte_en_couleur_et_gras(nombre_avec_espace(N) + ` est donc un nombre premier.`);
 					break;
 			};
 
@@ -20019,16 +20790,21 @@ function PPCM_Engrenages() {
 		let type_de_questions_disponibles = [1, 2, 3, 4];
 		//let type_de_questions_disponibles = [1];
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles, this.nb_questions);
-		this.introduction = lampe_message({
-			titre : `Arithmétique des engrenages`,
-			texte : `Boîte de vitesse, transmission de vélo, de moto, perceuse electrique, tout ça fonctionne avec des engrenages! Mais au fait, comment ça marche, les engrenages?`,
-			couleur : `nombres`
-		});
+		let txt_intro = `Boîte de vitesse, transmission de vélo, de moto, perceuse electrique, tout ça fonctionne avec des engrenages! Mais au fait, comment ça marche, les engrenages?`;
 		if (sortie_html) {
-			this.introduction += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`, `nombres`, `Coup de pouce`);
-			this.introduction += `<div id="${num_ex}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+			txt_intro += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`, `nombres`, `Coup de pouce`);
+			txt_intro += `<div id="${num_ex}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+			//this.introduction += warn_message(`Attention, les roues ci-dessous ne comportent pas le nombre de dents de l'énoncé!`, `nombres`, `Coup de pouce`);
+			//this.introduction += `<div id="${num_ex}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 			SVG_engrenages(num_ex, 200, 200);
 		};
+		
+		this.introduction = lampe_message({
+			titre : `Arithmétique des engrenages`,
+			texte : txt_intro,
+			couleur : `nombres`
+		});
+
 		for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
 			type_de_questions = liste_type_de_questions[i];
 
@@ -20040,21 +20816,36 @@ function PPCM_Engrenages() {
 
 			var nb_dents_r1;
 			var nb_dents_r2;
+			let txt_popup = `Étant donnés deux nombres entiers a et b, lorsque le plus petit multiple commun à $a$ et $b$ vaut $a \\times b$ ( $ppcm(a,b)=a\\times b$ ), on dit que `;
+						//txt_popup += texte_gras('les nombres a et b sont premiers entre eux');
+						if (sortie_html) {
+							txt_popup += '<b>les nombres a et b sont premiers entre eux</b>';
+						} else {
+							txt_popup += '$\\textbf{les nombres a et b sont premiers entre eux}$';
+						};
 
 			switch (type_de_questions) {
 				case 1: // avec de petits nombres on calcule les mutliples
 					nb_dents_r1 = randint(5, 30);
 					nb_dents_r2 = randint(5, 30, nb_dents_r1);
-					texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 en a $${nb_dents_r2}$ dents.`;
+					texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 a $${nb_dents_r2}$ dents.`;
 					texte += `<br>` + num_alpha(0) + ` Écrire la liste des multiples de $${nb_dents_r1}$ et de $${nb_dents_r2}$.`
 					if (ppcm(nb_dents_r1, nb_dents_r2) == (nb_dents_r1 * nb_dents_r2)) {
 						texte += `<br>Pourquoi peut-on en déduire que ${nb_dents_r1} et ${nb_dents_r2} sont des `;
+						// let txt_popup = `Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que `;
+						// //txt_popup += texte_gras('les nombres a et b sont premiers entre eux');
+						// if (sortie_html) {
+						// 	txt_popup += '<b>les nombres a et b sont premiers entre eux</b>';
+						// } else {
+						// 	txt_popup += '$\\textbf{les nombres a et b sont premiers entre eux}$';
+						// };
+						//${texte_gras('les nombres a et b sont premiers entre eux')}.`;
 						texte += katex_Popup2(
 							numero_de_l_exercice + 1,
 							1,
 							"nombres premiers entre eux ?",
 							`Définition : Nombres premiers entre eux`,
-							`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							txt_popup
 						);
 					};
 					texte += `<br>` + num_alpha(1) + ` En déduire le nombre de tours de chaque roue avant le retour à leur position initiale.`
@@ -20103,7 +20894,7 @@ function PPCM_Engrenages() {
 							1,
 							"nombres premiers entre eux.",
 							`Définition : Nombres premiers entre eux`,
-							`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							txt_popup//`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que ${texte_gras('les nombres a et b sont premiers entre eux')}.`
 						);
 					};
 					texte_corr += `<br><br>` + num_alpha(1) + ` Chaque roue doit tourner de $ppcm(${nb_dents_r1},${nb_dents_r2})=${tex_nombre(ppcm(nb_dents_r1, nb_dents_r2))}$ dents.`;
@@ -20125,7 +20916,7 @@ function PPCM_Engrenages() {
 				case 2: // avec de plus grands nombre, c'est mieux de décomposer en facteurs premiers
 					nb_dents_r1 = randint(31, 80);
 					nb_dents_r2 = randint(31, 80, nb_dents_r1);
-					texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 en a $${nb_dents_r2}$ dents.`;
+					texte = `La roue n$\\degree$1 possède $${nb_dents_r1}$ dents et la roue n$\\degree$2 a $${nb_dents_r2}$ dents.`;
 					texte += `<br>` + num_alpha(0) + ` Décomposer $${nb_dents_r1}$ et $${nb_dents_r2}$ en produit de facteurs premiers.`;
 					if (ppcm(nb_dents_r1, nb_dents_r2) == (nb_dents_r1 * nb_dents_r2)) {
 						texte += `<br>Pourquoi peut-on en déduire que ${nb_dents_r1} et ${nb_dents_r2} sont des `;
@@ -20134,7 +20925,7 @@ function PPCM_Engrenages() {
 							1,
 							"nombres premiers entre eux",
 							`Définition : Nombres premiers entre eux`,
-							`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							txt_popup//`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que ${texte_gras('les nombres a et b sont premiers entre eux')}.`
 						);
 					};
 					texte += `<br>` + num_alpha(1) + ` En déduire le nombre de tours de chaque roue avant le retour à leur position initiale.`;
@@ -20149,7 +20940,7 @@ function PPCM_Engrenages() {
 							1,
 							"nombres premiers entre eux.",
 							`Définition : Nombres premiers entre eux`,
-							`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que \\textbf{les nombres a et b sont premiers entre eux}.`
+							txt_popup//`Étant donnés deux nombres entiers a et b, lorsque $ppcm(a,b)=a\\times b$, on dit que ${texte_gras('les nombres a et b sont premiers entre eux')}.`
 						);
 					};
 					texte_corr += `<br><br>` + num_alpha(1) + ` Chaque roue doit tourner de $ppcm(${nb_dents_r1},${nb_dents_r2})=${tex_nombre(ppcm(nb_dents_r1, nb_dents_r2))}$ dents.`;
@@ -22261,4 +23052,108 @@ function Coefficient_evolution() {
 		liste_de_question_to_contenu(this);
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Déterminer le coefficient\n2 : Exprimer une variation en pourcentage\n3 : Mélange des 2 types de questions'];
+}
+
+/**
+* Banque de problèmes utilisant le théorème de Thalès et différentes propriétés de géométrie
+* @Auteur Rémi Angot
+*/
+function Problemes_Thales(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Problèmes avec le théorème de Thalès";
+	this.nb_questions = 1;
+	this.nb_questions_modifiable = false;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let texte='';
+		let texte_corr='';
+		let type_de_questions = randint(1,1);
+		
+
+			switch (type_de_questions){
+				case 1 :
+				let x = randint(6,10);
+				let k = calcul(randint(12,19)/10);
+				let y = calcul(randint(30,50)/10);
+				let [A,B,C,D,E]=polygone(5)
+				texte = `On sait que $${A}${E}=${tex_nombre(x)}$ cm ; $${A}${D}=${tex_nombrec(k*x)}$ cm et $${E}${B}=${tex_nombre(y)}$ cm.<br>`;
+				texte += `Calculer la valeur exacte de $${D}${C}$.`
+				if (sortie_html) {
+					// Pour le svg toutes les longueurs sont multipliées par 20
+					let fig1 = `<div><svg width="450" height="300" viewBox="-40 -40 450 300" xmlns="http://www.w3.org/2000/svg">
+					  <polygon points="0,0 ${calcul(k*x*20)},0 ${calcul(k*x*20)},${calcul(k*y*20)}  " fill="none" stroke="black" />
+					  <line x1="${calcul(x*20)}" y1="0" x2="${calcul(x*20)}" y2="${calcul(y*20)}" stroke="black" /> //[BE]
+					  <polyline points="${calcul(x*20-10)},0 ${calcul(x*20-10)},10 ${calcul(x*20)},10" fill="none" stroke="black" />  //Angle droit en E
+					  <polyline points="${calcul(k*x*20-10)},0 ${calcul(k*x*20-10)},10 ${calcul(k*x*20)},10" fill="none" stroke="black" />  //Angle droit en D
+					  <text x="-10" y="-10" text-anchor="middle" alignment-baseline="central">${A}</text> 
+					  <text x="${calcul(x*20)}" y="-10" text-anchor="middle" alignment-baseline="central">${E}</text> 
+					  <text x="${calcul(x*20)}" y="${calcul(y*20+10)}" text-anchor="middle" alignment-baseline="central">${B}</text> 
+					  <text x="${calcul(k*x*20+10)}" y="-10" text-anchor="middle" alignment-baseline="central">${D}</text>
+					  <text x="${calcul(k*x*20+10)}" y="${calcul(k*y*20+10)}" text-anchor="middle" alignment-baseline="central">${C}</text>
+					</svg></div>`
+
+					let fig2 = `<div><svg width="450" height="300" viewBox="-40 -260 450 300" xmlns="http://www.w3.org/2000/svg">
+					  <polygon points="0,0 ${calcul(k*x*20)},0 ${calcul(k*x*20)},${calcul(-k*y*20)}  " fill="none" stroke="black" />
+					  <line x1="${calcul(x*20)}" y1="0" x2="${calcul(x*20)}" y2="${calcul(-y*20)}" stroke="black" /> //[BE]
+					  <polyline points="${calcul(x*20-10)},0 ${calcul(x*20-10)},-10 ${calcul(x*20)},-10" fill="none" stroke="black" />  //Angle droit en E
+					  <polyline points="${calcul(k*x*20-10)},0 ${calcul(k*x*20-10)},-10 ${calcul(k*x*20)},-10" fill="none" stroke="black" />  //Angle droit en D
+					  <text x="-10" y="-10" text-anchor="middle" alignment-baseline="central">${A}</text> 
+					  <text x="${calcul(x*20)}" y="10" text-anchor="middle" alignment-baseline="central">${E}</text> 
+					  <text x="${calcul(x*20)}" y="${calcul(-y*20-10)}" text-anchor="middle" alignment-baseline="central">${B}</text> 
+					  <text x="${calcul(k*x*20+10)}" y="10" text-anchor="middle" alignment-baseline="central">${D}</text>
+					  <text x="${calcul(k*x*20+10)}" y="${calcul(-k*y*20-10)}" text-anchor="middle" alignment-baseline="central">${C}</text>
+					</svg></div>`					
+
+					texte += choice([fig1,fig2])
+
+					
+
+				} else {
+					let fig1 = `\\begin{tikzpicture}[scale=.6]
+\\draw (0,0)--(${calcul(k*x)},0)--(${calcul(k*x)},${-k*y})--cycle;
+\\draw (${x},0)--(${x},${-y});
+\\draw (${x},0) rectangle ++(-.5,-.5);
+\\draw (${calcul(k*x)},0) rectangle ++(-.5,-.5);
+\\node [above left] at (0,0) {${A}};
+\\node [above] at (${x},0) {${E}};
+\\node [above right] at (${k*x},0) {${D}};
+\\node [below right] at (${k*x},${-k*y}) {${C}};
+\\node [below] at (${x},${-y}) {${B}};
+\\end{tikzpicture}`
+
+				let fig2 = `\\begin{tikzpicture}[scale=.6]
+\\draw (0,0)--(${calcul(k*x)},0)--(${calcul(k*x)},${k*y})--cycle;
+\\draw (${x},0)--(${x},${y});
+\\draw (${x},0) rectangle ++(.5,.5);
+\\draw (${calcul(k*x)},0) rectangle ++(.5,.5);
+\\node [below left] at (0,0) {${A}};
+\\node [below] at (${x},0) {${E}};
+\\node [below right] at (${k*x},0) {${D}};
+\\node [above right] at (${k*x},${k*y}) {${C}};
+\\node [above] at (${x},${y}) {${B}};
+\\end{tikzpicture}`
+
+				texte += '<br>'+choice([fig1,fig2])
+
+				}
+					
+				texte_corr = `Les droites $(${E}${B})$ et $(${D}${C})$ sont perpendiculaires à la même droite $(${A}${D})$, elles sont donc parallèles entre elles.`
+				texte_corr += `<br>De plus les points $${A}$, $${E}$, $${D}$  et $${A}$, $${B}$, $${C}$ sont alignés dans cet ordre donc d'après le théorème de Thalès on a :`				
+				texte_corr += `<br><br>$\\dfrac{${A}${E}}{${A}${D}}=\\dfrac{${E}${B}}{${D}${C}}=\\dfrac{${A}${B}}{${A}${C}}$`
+				texte_corr += `<br><br>$\\dfrac{${tex_nombre(x)}}{${tex_nombrec(k*x)}}=\\dfrac{${tex_nombre(y)}}{${D}${C}}$`
+				texte_corr += `<br><br>$${D}${C}=\\dfrac{${tex_nombrec(k*x)}\\times${tex_nombre(y)}}{${tex_nombre(x)}}=${tex_nombrec(k*y)}$`
+				break;
+				}
+			
+	this.liste_questions[0]=texte;
+	this.liste_corrections[0]=texte_corr;
+	liste_de_question_to_contenu(this);
+	// this.besoin_formulaire_numerique = ['Type de questions',2,"1 : Donner l'égalité\n2 : Compléter une égalité avec une addition ou une soustraction"];
+	// this.besoin_formulaire2_case_a_cocher = ['Sans figures']
+	}
 }
