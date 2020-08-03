@@ -133,7 +133,7 @@ On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou 
 * `similitude(p,O,a,k)` // Trace l'image de p dans la similitude de centre O, d'angle a et de rapport k
 * `P = projectionOrtho(A,d)` // P est le projeté orthogonal de A sur (d)
 * `affiniteOrtho(p,d,k)` // Trace l'image de p dans l'affinité sur (d) perpendiculairement à (d) de rapport k
-
+{{% alea2d "affinite"  %}}
 
 <h3 class="ui horizontal divider header">Les droites remarquables</h3>
 
