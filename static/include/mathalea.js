@@ -4938,12 +4938,22 @@ var liste_des_exercices_disponibles = {
 		'3S20' : fonctions_probabilite2,
 		//'3SVGtest' : svglibs,
 		//'3Tests' : tester_des_fonctions,
-		'2N10' : proprietes_racine_caree,
-		'2N10-1' : Existence_d_une_racine_caree,
-		'2N10-2' : Extraire_un_carre_parfait_d_une_racine_carree,
-		'2N11' : Simplifier_une_somme_de_racines_carrees,
+		
+		'2N10' : Existence_d_une_racine_carree,
+		'2N10-1' : proprietes_racine_carree,
+		'2N11' : Extraire_un_carre_parfait_d_une_racine_carree,
+		'2N11-1' : Simplifier_une_somme_de_racines_carrees,
+		'2N12' : Double_distributivité_avec_racine_carree,
+		'2N12-1' : identites_remarquables_et_racine_carree,
+		'2N20' : ensemble_de_nombres,
+		'2N21' : parite,
+		'2N22' : valeur_absolue,
+		'2N23' : valeur_absolue_et_equation,
+		'2N24' : intervalles_de_R,
+		'2N25' : union_et_intersection_intervalles_de_R,
 		'2L10' : Developper_Identites_remarquables2,
 		'2L11' : Factoriser_Identites_remarquables2,
+		'betaI' : Exercice_intervalle,
 		'PEA11': Passer_d_une_base_a_l_autre,
 		'PEA11-1' : Passer_de_la_base_12_ou_16_a_la_10,
 		'P001' : Code_LaTeX_personnalise,
@@ -7268,7 +7278,6 @@ function Trouver_solution_mathador(min,max,A=1,B=4,C=8,D=3,E=5) {
 		else d=D
 		if (nb_determines<5)	e=parseInt(choice(liste_choix,[12,13,14,15,16,17,18,19,20]))
 		else e=E
-		console.log(a,b,c,d,e)
 		tirage.push(a,b,c,d,e);
 		nombres_restants=shuffle(tirage);
 		operations_restantes=['\\times','+','-','\\div'];
@@ -7347,7 +7356,6 @@ function Trouver_solution_mathador(min,max,A=1,B=4,C=8,D=3,E=5) {
 					expression_en_cours_d[0]=expression_en_cours_d[0].substring(6,expression_en_cours_d[0].length)
 					expression_en_cours_d[0]=expression_en_cours_d[0].substring(0,expression_en_cours_d[0].length-7)
 					}
-				console.log(tirage,solution)
 				return [tirage,solution,operations_successives,expression_en_cours_f,expression_en_cours_d]
 				}
 			else operations_successives=[]		
@@ -12500,15 +12508,59 @@ function  Notation_segment_droite_demi_droite(){
 			let A = point(xA,yA,'A')
 			let B = point(xB,yB,'B')
 			let C = point(xC,yC,'C')
-			n = labelPoints(A,B,C)
-			s = segment(A,B)
-			d1 = droite(B,C)
-			d2 = demiDroite(A,C)
+			let n = labelPoint(A,B,C)
+			let s = segment(A,B)
+			let d1 = droite(B,C)
+			let d2 = demiDroite(A,C)
 
-			sortie_html ? texte = codeSvg(n,s,d1,d2) : texte = codeTikz(n,s,d1,d2)
+			texte = mathalea2d(-1,-6,15,6,n,s,d1,d2)
 			texte_corr = `Trace $[AB], (BC), [AC).$`
 			
-			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+
+
+
+/**
+* EXERCICE A EFFACER UNE FOIS UTILISE PAR STEPHANE
+* @Auteur Rémi Angot
+*/
+function Exercice_intervalle(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Ajouter 9";
+	this.consigne = "Calculer";
+	this.nb_questions = 10;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 2;
+	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.bouton_aide = modal_texte_court(numero_de_l_exercice,"Ajouter 9 revient à ajouter 10 et à soustraire 1.")
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let d = segment(0,0,10,0)
+			d.styleExtremites = '->'
+			let A = point(2,0,randint(2,10))
+			let B = point(6,0,randint(20,60))
+			let c1 = crochetG(A)
+			let c2 = crochetD(B)
+			let int = intervalle(A,B)
+
+			texte = mathalea2d(-1,-1,12,1,d,c1,c2,int)
+ 			texte_corr = ``
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
@@ -12749,7 +12801,14 @@ jQuery(document).ready(function() {
 		liste_des_exercices = $('#choix_des_exercices').val().replace(/\s/g, "").replace(";", ",").split(",");
 		mise_a_jour_de_la_liste_d_exercice();
 
-
+	// Actualise KaTeX pour les titres d'exercices utilisant LaTeX
+	renderMathInElement(document.body, {
+            delimiters: [
+			{left: "\\[", right: "\\]", display: true},
+			{left: "$", right: "$", display: false}
+			],
+			"throwOnError":true,"errorColor":"#CC0000","strict":"warn","trust":false
+		});
 
 });
 
@@ -21884,7 +21943,7 @@ function Lecture_expression_fonctions_affines() {
 
 		liste_de_question_to_contenu_sans_numero(this);
 		if (!this.lineaire) this.contenu_correction = `Il s’agit de fonctions affines, elles sont donc de la forme $f(x)=ax+b$, $b$ étant l’ordonnée à l’origine et $a$ la pente de la droite.\n` + this.contenu_correction;
-		else this.contenu_correction = `Il s’agit de fonctions linéaires, elles sont donc de la forme $f(x)=ax$, $a$ étant la pente de la droite.\n` + this.contenu_correction;
+		else this.contenu_correction = `Il s’agit de fonctions linéaires, elles sont donc de la forme $f(x)=ax$, $a$ étant la `+katex_Popup2(numero_de_l_exercice,1,`pente`,`pente d'une droite`,`La pente (le a de y=ax ou y=ax+b) d'une droite donne le taux d'accroissement de y par rapport à x : lorsque x augmente de 1, alors y augmente de a.`)+` de la droite.\n` + this.contenu_correction ;
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, "1 : Coefficient directeur entier\n2 : Coefficient directeur 'en demis'\n3 : Coefficient directeur 'en quarts'"];
 }
@@ -22026,7 +22085,7 @@ function Image_fonction_algebrique() {
 					break;
 			}
 
-			texte = `On considère la fonction $${nomdef}$ définie par $${nomdef}(x):x\\mapsto ${expression}$. Calculer $${nomdef}(${x})$.`
+			texte = `On considère la fonction $${nomdef}$ définie par $${nomdef}:x\\mapsto ${expression}$. Calculer $${nomdef}(${x})$.`
 
 
 			if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
@@ -22502,7 +22561,7 @@ function Tableau_de_valeurs() {
 			}
 
 
-			texte = `On considère la fonction $${nomdef}$ définie par $${nomdef}(x):x\\mapsto ${expression}$. Compléter le tableau de valeurs suivant.`
+			texte = `On considère la fonction $${nomdef}$ définie par $${nomdef}:x\\mapsto ${expression}$. Compléter le tableau de valeurs suivant.`
 			texte_corr = ''
 			texte += `<br><br>`
 			if (sortie_html) {
@@ -23172,6 +23231,7 @@ function fonction_notion_vocabulaire() {
 				var id_du_div_diag = `div_svg_diag${numero_de_l_exercice}${id_unique}`;
 				var id_du_div_corr = `div_svg_corr${numero_de_l_exercice}${id_unique}`;
 			}
+			let txt_info;
 
 			switch (type_de_questions) {
 				case 1: // périmètre d'un carré de côté x			
@@ -23245,10 +23305,12 @@ function fonction_notion_vocabulaire() {
 					};
 
 					// sous question e/
+					txt_info =  `Voici le diagramme d'une machine qui triple `;
 					if (sortie_html) {
 						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme.<br>`;
-						texte += `Voici le diagramme d'une machine qui triple `;
-						texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						//texte += `Voici le diagramme d'une machine qui triple `;
+						//texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						SVG_machine_diag_3F1_act_mono(id_du_div_diag, 800, 100, 'f', 'x', [['3', '3x']]);
 						texte_corr += num_alpha(j) + ` C'est une machine qui quadruple, donc sous forme de diagramme.<br>`;
 						texte_corr += `<div id="${id_du_div_corr}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
@@ -23256,11 +23318,17 @@ function fonction_notion_vocabulaire() {
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
 						texte += `\\item   \\'{E}crire la réponse à la question d/ sous forme de diagramme.<br>`;
-						texte += `Voici le diagramme d'une machine qui triple <br> `;
-						texte += tikz_machine_diag(`f`, `x`, [[`\\times 3`, `3x`]]);
+						//texte += `Voici le diagramme d'une machine qui triple <br> `;
+						//texte += tikz_machine_diag(`f`, `x`, [[`\\times 3`, `3x`]]);
+						txt_info += '<br>'+tikz_machine_diag(`f`, `x`, [[`\\times 3`, `3x`]]);
 						texte_corr += `\\item  C'est une machine qui quadruple, donc sous forme de diagramme.<br>`;
 						texte_corr += tikz_machine_diag(`f`, `x`, [[`\\times 4`, `4x`]]);
 					};
+					texte += info_message({
+						titre:'Exemple',
+						texte:txt_info,
+						couleur:'nombres'
+					});
 
 					// sous question f/
 					if (sortie_html) {
@@ -23362,10 +23430,12 @@ function fonction_notion_vocabulaire() {
 					};
 
 					// sous question e/
+					txt_info =  `Voici le diagramme d'une machine qui double `;
 					if (sortie_html) {
 						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme.<br>`;
-						texte += `Voici le diagramme d'une machine qui double `;
-						texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						// texte += `Voici le diagramme d'une machine qui double `;
+						// texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						SVG_machine_diag_3F1_act_mono(id_du_div_diag, 800, 100, 'g', 'x', [['2', '2x']]);
 						texte_corr += num_alpha(j) + ` C'est une machine qui multiplie un nombre par lui-même, donc sous forme de diagramme.<br>`;
 						texte_corr += `<div id="${id_du_div_corr}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
@@ -23373,11 +23443,17 @@ function fonction_notion_vocabulaire() {
 						j++;//incrémente la sous question
 					} else {
 						texte += `\\item  \\'{E}crire la réponse à la question d/ sous forme de diagramme.<br>`;
-						texte += `Voici le diagramme d'une machine qui double <br>`;
-						texte += tikz_machine_diag(`g`, `x`, [[`\\times 2`, `2x`]]);
+						// texte += `Voici le diagramme d'une machine qui double <br>`;
+						// texte += tikz_machine_diag(`g`, `x`, [[`\\times 2`, `2x`]]);
+						txt_info += '<br>'+tikz_machine_diag(`g`, `x`, [[`\\times 2`, `2x`]]);
 						texte_corr += `\\item C'est une machine qui multiplie un nombre par lui-même, donc sous forme de diagramme.<br>`;
 						texte_corr += tikz_machine_diag(`g`, `x`, [[`\\times x`, `x^2`]]);
 					};
+					texte += info_message({
+						titre:'Exemple',
+						texte:txt_info,
+						couleur:'nombres'
+					});
 
 					// sous question f/
 					if (sortie_html) {
@@ -23410,7 +23486,7 @@ function fonction_notion_vocabulaire() {
 				case 3: // somme de 1 et du triple de x
 					var j = 0; // pour la sous-numérotation
 					// consigne
-					texte = `La $\\mathbf{machine\\,h}$ renvoie la somme du triple de du nombre de départ et de 1.`;
+					texte = `La $\\mathbf{machine\\,h}$ renvoie la somme du triple du nombre de départ et de 1.`;
 					texte += `<br>`;
 					// machine
 					x = randint(2, 99);//augmenter les possibles pour éviter les questions déjà posées?	
@@ -23479,10 +23555,12 @@ function fonction_notion_vocabulaire() {
 					};
 
 					// sous question e/
+					txt_info = `Voici le diagramme d'une machine qui double puis qui ajoute 5 `;
 					if (sortie_html) {
 						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme.<br>`;
-						texte += `Voici le diagramme d'une machine qui double puis qui ajoute 5 `;
-						texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						// texte += `Voici le diagramme d'une machine qui double puis qui ajoute 5 `;
+						// texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						SVG_machine_diag_3F12(id_du_div_diag, 800, 100, 'h', 'x', [['2', '2x'], ['5', '2x+5']]);
 						texte_corr += num_alpha(j) + ` C'est une machine qui triple un nombre et ajoute 1, donc sous forme de diagramme.<br>`;
 						texte_corr += `<div id="${id_du_div_corr}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
@@ -23490,11 +23568,17 @@ function fonction_notion_vocabulaire() {
 						j++;//incrémente la sous question
 					} else {
 						texte += `\\item  \\'{E}crire la réponse à la question d/ sous forme de diagramme.<br>`;
-						texte += `Voici le diagramme d'une machine qui double puis qui ajoute 5 <br>`;
-						texte += tikz_machine_diag(`h`, `x`, [[`\\times 2`, `2x`], [`+5`, `2x+5`]]);
+						// texte += `Voici le diagramme d'une machine qui double puis qui ajoute 5 <br>`;
+						// texte += tikz_machine_diag(`h`, `x`, [[`\\times 2`, `2x`], [`+5`, `2x+5`]]);
+						txt_info +='<br>'+tikz_machine_diag(`h`, `x`, [[`\\times 2`, `2x`], [`+5`, `2x+5`]]);
 						texte_corr += `\\item C'est une machine qui triple un nombre et ajoute 1, donc sous forme de diagramme.<br>`;
 						texte_corr += tikz_machine_diag(`h`, `x`, [[`\\times 3`, `3x`], [`+1`, `3x+1`]]);
 					};
+					texte += info_message({
+						titre:'Exemple',
+						texte:txt_info,
+						couleur:'nombres'
+					});
 
 					// sous question f/
 					if (sortie_html) {
@@ -23569,7 +23653,8 @@ function fonction_notion_vocabulaire() {
 					// sous question b/
 					x = randint(1, 9);//augmenter les possibles pour éviter les questions déjà posées?
 					if (sortie_html) {
-						texte += num_alpha(j) + ` Quelle est une valeur possible du nombre de départ si la machine renvoie  2 ?<br>`;
+						//texte += num_alpha(j) + ` Quelle est une valeur possible du nombre de départ si la machine renvoie  2 ?<br>`;
+						texte += num_alpha(j) + ` Quelle est une valeur possible du nombre de départ si la machine renvoie  2 ? En existe-t-il plusieurs ?<br>`;
 						texte_corr += num_alpha(j) + ` Si la machine renvoie 2 alors le nombre de départ  a exactement 2 diviseurs, tous les`;
 						texte_corr += katex_Popup('nombres premiers', 'Nombre premier', 'Un nombre entier est un <b>nombre premier</b> si il a exactement deux diviseurs, 1 et lui-même.');
 						texte_corr += `conviennent.<br>`;
@@ -23577,7 +23662,8 @@ function fonction_notion_vocabulaire() {
 						texte_corr += `7 est premier donc 7 est <b>un autre</b> antécédent de 2 par la fonction d.<br>`;
 						j++;//incrémente la sous question
 					} else {
-						texte += `\\item Quelle est une valeur possible du nombre de départ si la machine renvoie  2 ?`;
+						//texte += `\\item Quelle est une valeur possible du nombre de départ si la machine renvoie  2 ?`;
+						texte += `\\item Quelle est une valeur possible du nombre de départ si la machine renvoie  2 ? En existe-til plusieurs ?`;
 						texte_corr += ` \\item Si la machine renvoie 2 alors le nombre de départ  a exactement 2 diviseurs, tous les`;
 						texte_corr += `\\textbf{nombres premiers} \\footnote{\\textbf{Nombre premier :} Un nombre entier est un \\textbf{nombre premier} si il a exactement deux diviseurs, 1 et lui-même.}`;
 						texte_corr += `conviennent.<br>`;
@@ -23624,11 +23710,13 @@ function fonction_notion_vocabulaire() {
 
 					// sous question d/
 					if (sortie_html) {
-						texte += num_alpha(j) + ` Peut-on trouver deux antécédents de 3 par la fonction d ?<br>`;
+						// texte += num_alpha(j) + ` Peut-on trouver deux antécédents de 3 par la fonction d ?<br>`;
+						texte += num_alpha(j) + ` Peut-on trouver plusieurs antécédents de 3 par la fonction d ? Qu'ont-ils de commun ?<br>`;
 						texte_corr += num_alpha(j) + ` Il faut trouver des nombres qui ont exactement 3 diviseurs.<br>`;
 						j++;//incrémente la sous question
 					} else {
-						texte += `\\item  Peut-on trouver deux antécédents de 3 par la fonction d ?`;
+						//texte += `\\item  Peut-on trouver deux antécédents de 3 par la fonction d ?`;
+						texte += `\\item  Peut-on trouver plusieurs antécédents de 3 par la fonction d ? Qu'ont-ils de commun ?`;
 						texte_corr += `\\item Il faut trouver des nombres qui ont exactement 3 diviseurs.<br>`;
 					}
 					texte_corr += `La liste des diviseurs de 9 est `;
@@ -24222,9 +24310,9 @@ function DivisionEuclidienne_multiplesDiviseurs_Criteres() {
 					let n2 = nombre_avec_espace(randint(2, 999, liste_diviseurs(n1)));
 					let p2 = nombre_avec_espace(randint(2, 999, liste_diviseurs(p1)));
 					textes[4] = `${n1} $\\ldots\\ldots\\ldots\\ldots$ ${n2}`;
-					textes_corr[4] = `${n1} n'est ni un multiple ni un diviseur de ${n2}`;
+					textes_corr[4] = `${n1} n'est ni un multiple ni un diviseur de ${n2} car ${n1}=${n2}$\\times$${Math.trunc(n1/n2)}+${texte_en_couleur(n1%n2)} et ${n2}=${n1}$\\times$${Math.trunc(n2/n1)}+${texte_en_couleur(n2%n1)}`;
 					textes[5] = `${p2} $\\ldots\\ldots\\ldots\\ldots$ ${p1}`;
-					textes_corr[5] = `${p2} n'est ni un multiple ni un diviseur de ${p1}`;
+					textes_corr[5] = `${p2} n'est ni un multiple ni un diviseur de ${p1} car ${p1}=${p2}$\\times$${Math.trunc(p1/p2)}+${texte_en_couleur(p1%p2)} et ${p2}=${p1}$\\times$${Math.trunc(p2/p1)}+${texte_en_couleur(p2%p1)}`;
 					// on mélange pour que l'ordre change!
 					shuffle2tableaux(textes, textes_corr);
 					texte = `Avec la calculatrice, compléter chaque phrase avec "est un diviseur de" ou "est un multiple de" ou "n'est ni un diviseur ni un multiple de".`;
@@ -24603,7 +24691,10 @@ function Premier_ou_pas_critere_par7_par11() {
 					break;
 				case 2: // Multiple de 3
 					let sum = 0; // pour la valeur de la somme;
-					N = 3 * randint(34, 3333);
+					N=3*randint(34,3333);// on initialise avant la boucle car on a peut être de la chance
+					while ( (N % 2 == 0) || (N % 5 == 0)) {
+						N = 3 * randint(34, 3333);
+					};
 					texte = nombre_avec_espace(N);
 					texte_corr = `Comme ` + N.toString().charAt(0);
 					sum = Number(N.toString().charAt(0));
@@ -27896,7 +27987,915 @@ function Problemes_Thales(){
 	// this.besoin_formulaire_numerique = ['Type de questions',2,"1 : Donner l'égalité\n2 : Compléter une égalité avec une addition ou une soustraction"];
 	// this.besoin_formulaire2_case_a_cocher = ['Sans figures']
 	}
-}function proprietes_racine_caree(){
+}/* auteur Stéphane Guyon*/
+function union_et_intersection_intervalles_de_R(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Utiliser et comprendre les symboles $I\\cup J$ et $I\\cap J$ avec les intervalles de $\\mathbb{R}.$";
+    this.consigne = "Répondre aux questions suivantes: :"
+    this.nb_questions = 4;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b,c,d,s, e,f,A,B,c1,c2,int, axe, texte, texte_corr, cpt=0; 
+        i < this.nb_questions && cpt<50; ) {
+            type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+                case 1 : 
+                    a = randint(1,15);
+                        e=a+1;
+                    b = randint(e,25);
+                        e=b+1;
+                    c = randint(e,35);
+                        e=c+1;
+                    d = randint(e,45);
+                    s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetG(A);
+                    c2 = crochetD(B);
+                    int = intervalle(A,B);
+
+                    texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`
+                      ;
+                    texte_corr = `Aucun réel ne peut appartenir à chacun des deux ensembles.<br>
+                    $I=\\emptyset$`;                     
+                    break ;
+                case 2 : 
+                    a = randint(1,15);
+                        e=a+1;
+                    b = randint(e,25);
+                        e=b+1;
+                    c = randint(e,35);
+                        e=c+1;
+                    d = randint(e,45);
+                    texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
+                    texte_corr = `Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
+                    On ne peut pas simplifier l'écriture de $I$ qui s'écrit donc $I=[${a};${b}] \\cup [${c};${d}].$`;                     
+                    break ;
+                case 3 : 
+                    a = randint(1,15);
+                        e=a+4;
+                    b = randint(29,45);
+                        e=b-1;
+                    c = randint(16,e);
+                        e=b+1;
+                    d = randint(e,65);
+                    texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`;
+                    texte_corr = `$I=[${c};${b}]$`;                     
+                    break ;
+                case 4 : 
+                   a = randint(1,15);
+                        e=a+4;
+                    b = randint(29,45);
+                        e=b-1;
+                    c = randint(16,e);
+                        e=b+1;
+                    d = randint(e,65);
+                    texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
+                    texte_corr = `$I=[${a};${d}]$`;                     
+                    break ;
+                case 5 : 
+                    a = randint(1,15);
+                        e=a+15;
+                    b = randint(e,35);
+                        e=a+1;
+                        f=b-10
+                    c = randint(e,f);
+                        e=c+1;
+                    d = randint(e,f);
+                    texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`;
+                    texte_corr = `On $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${c};${d}].$`;                     
+                    break ;
+                 case 6 : 
+                    a = randint(1,15);
+                        e=a+15;
+                    b = randint(e,35);
+                        e=a+1;
+                        f=b-10
+                    c = randint(e,f);
+                        e=c+1;
+                    d = randint(e,f);
+                    texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
+                    texte_corr = `On $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${a};${b}].$`;                     
+                    break ;
+             } 
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+            }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+}
+/* auteur Stéphane Guyon*/
+function intervalles_de_R(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Associer un intervalle de  $\\mathbb{R}$ à une inéquation et son schéma sur une droite graduée";
+    this.consigne = "Répondre aux questions suivantes: :"
+    this.nb_questions = 4;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b,c,d,e, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+            type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+                    a = randint(1,15);
+                    b = randint(a,25);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x>${a}$`;
+                    texte_corr = `$I=]${a};+\\infty[$`;                     
+                    break ;
+                
+                case 2 : 
+                    a = randint(1,15);
+                    b = randint(a,25); 
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\geqslant ${a}$`;
+                    texte_corr = `$I=[${a};+\\infty[$`;
+                    break ;
+
+                case 3 : 
+                    a = randint(1,15);
+                    b = randint(a,25);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x<${a}$`;
+                    texte_corr = `$I=]-\\infty;${a}[$`; 
+                    break ;
+                case 4 : 
+                    a = randint(1,15);
+                    b = randint(a,25);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\leqslant ${a}$`;
+                    texte_corr = `$I=]-\\infty;${a}]$`;
+                    break ;
+                case 5 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);                    
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a} < x < ${b}$`;
+                    texte_corr = `$I=]${a};${b}[$`;
+                    break ;
+
+                case 6 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);                    
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x<${b}$`;
+                    texte_corr = `$I=[${a};${b}[$`;
+                    break ;
+                
+                case 7 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x\\leqslant ${b}$`;
+                    texte_corr = `$I=[${a};${b}]$`;
+                    break ;
+                
+                case 8 :
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}< x\\leqslant ${b}$`;
+                    texte_corr = `$I=]${a};${b}]$`;
+                    break ;
+                
+                case 9 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};${b}]$`;
+                    texte_corr = `$${a}< x\\leqslant ${b}$`;  
+                
+                case 10 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}]$`;
+                    texte_corr = `$${a}\\leqslant x\\leqslant ${b}$`;  
+                case 11 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}[$`;
+                    texte_corr = `$${a}\\leqslant x< ${b}$`; 
+
+                case 12 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};+\\infty[$`;
+                    texte_corr = `$x \\geqslant ${a}$`;  
+
+                case 13 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};+\\infty[$`;
+                    texte_corr = `$x > ${a}$`;    
+                 
+                case 14 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}[$`;
+                    texte_corr = `$x < ${a}$`;    
+                case 15 : 
+                    a = randint(1,15);
+                    c=a+1;
+                    b = randint(c,25);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}]$`;
+                    texte_corr = `$x \\leqslant ${a}$`;    
+             } 
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+            }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+}
+/* auteur Stéphane Guyon*/
+
+
+function valeur_absolue_et_equation(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Résoudre une équation avec des valeurs absolues";
+    this.consigne = "Résoudre dans $\\mathbb{R}$ les équations suivantes  :"
+    this.nb_questions = 4;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,2,2,2,2];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b,c,d,e, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+            type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+        
+                a = randint(1,15)*choice([-1,1]);
+                b = randint(1,15)*(-1);
+                    
+                    texte = `$\\vert x ${ecriture_algebrique(a)}\\vert =${b}$`;
+                    {texte_corr = ` ${b} étant négatif, il n'existe pas de solution à cette équation. $S=\\emptyset$`;}
+                   
+
+                        
+                    break ;
+               case 2 : 
+        
+                a = randint(1,15)*choice([-1,1]);
+                b = randint(1,15);
+                c=-a;
+                      texte = `$\\vert x ${ecriture_algebrique(a)}\\vert =${b}$`;
+                   
+                    texte_corr = `Résoudre cette équation est équivalent à résoudre ces deux équations :<br>
+                    $x ${ecriture_algebrique(a)} =${b}$ et    $x ${ecriture_algebrique(a)} =${-b}$<br>
+                    Il existe donc deux solutions à cette équation :<br>
+                    $x_1=${c} ${ecriture_algebrique(b)}$ et $x_2=${c} -${ecriture_parenthese_si_negatif(b)}$<br>
+                    $S=\\{${c-b};${c+b}\\}$`;
+                            
+                  
+
+                        
+                    break ;
+        
+            }       
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+            }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+}
+/* auteur Stéphane Guyon*/
+
+
+function valeur_absolue(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Utiliser la notion de valeur absolue d'une quantité";
+    this.consigne = "Déterminer la valeur du nombre proposé :"
+    this.nb_questions = 5;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b,c,d,e, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+            type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+        
+                a = randint(1,150)*choice([-1,1]);
+             
+                    
+                    texte = `$\\vert ${a}\\vert = \\dots$`;
+                    if (a>0) {texte_corr = `$\\vert ${a}\\vert = ${a}$`;}
+                    else {texte_corr = `$\\vert ${a}\\vert = ${-a}$`;}
+
+
+                        
+                    break ;
+               case 2 : 
+        
+                a = randint(1,5);
+             
+                    
+                    texte = `$\\vert \\pi - ${a}\\vert = \\dots$`;
+                    if (a>3) {texte_corr = `On a : $\\pi - ${a}<0 $ donc $\\vert \\pi - ${a}\\vert = ${ a}-\\pi$`;}
+                    else {texte_corr = `On a : $\\pi - ${a}>0 $ donc $\\vert \\pi - ${a}\\vert = \\pi - ${a }$`;}
+
+
+                        
+                    break ;
+                 case 3 : 
+        
+                a = randint(2,5);
+                b = randint(2,7,4); 
+                c= Math.sqrt(b);
+
+                    texte = `$\\vert \\sqrt{${b}} - ${a}\\vert = \\dots $`;
+                  
+                    if (c>a) {texte_corr = `On a : $${b} > ${a*a}$ donc $\\sqrt{${b}} > ${a}$ <br>
+                        $\\sqrt{${b}}- ${a}$ est donc un nombre positif, il en resulte que  $\\vert \\sqrt{${b}} - ${a}\\vert = \\sqrt{${b}} - ${a}$`;}
+                    else {texte_corr = `On a : $${b}< ${a*a}$ donc $\\sqrt{${b}} < ${a}$ <br>
+                        $\\sqrt{${b}}- ${a}$ est donc un nombre négatif, il en resulte que  $\\vert \\sqrt{${b}} -${a}\\vert = ${a}-\\sqrt{${b}}  $`;}
+
+
+                        
+                    break ;
+        
+            }       
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+            }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+}
+/* auteur Stéphane Guyon*/
+
+
+function identites_remarquables_et_racine_carree(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Développer les identités remarquables avec des racines carrées";
+    this.consigne = "Effectuer les calculs suivants :"
+    this.nb_questions = 5;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3,4,5];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b,c,d,e, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+            type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+        
+                a = randint(2,6)*choice([-1,1]);
+                b= randint(2,11,[4,8,9]);
+                c = randint(2,6);
+                    
+                    texte = `$\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}$`;
+                    texte_corr = `$\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}=
+                    \\left(${a} \\sqrt{${b}} \\right)^{2}+2\\times ${ecriture_parenthese_si_negatif(a)}\\sqrt{${b}}\\times ${c}+${c}^{2}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}}=${ecriture_parenthese_si_negatif(a)}^{2}\\times ${b} ${ecriture_algebrique(2*a*c)}\\sqrt{${b}}+ ${c*c}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}}=${a*a*b}${ecriture_algebrique(2*a*c)}\\sqrt{${b}}+${c*c}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}}=${a*a*b+c*c}${ecriture_algebrique(2*a*c)}\\sqrt{${b}}$
+                    `;
+
+
+                        
+                    break ;
+                
+            
+                    
+                case 2 : 
+
+        
+                a = randint(2,6)*choice([-1,1]);
+                b= randint(2,11,[4,8,9]);
+                c = randint(2,6);
+                    
+                    texte = `$\\left(${a} \\sqrt{${b}} -${c}\\right)^{2}$`;
+                    texte_corr = `$\\left(${a} \\sqrt{${b}} -${c}\\right)^{2}=\\left(${a} \\sqrt{${b}} \\right)^{2}-2\\times ${ecriture_parenthese_si_negatif(a)}\\sqrt{${b}}\\times ${c}+${c}^{2}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}}=${ecriture_parenthese_si_negatif(a)}^{2}\\times ${b} ${ecriture_algebrique(-2*a*c)}\\sqrt{${b}}+ ${c*c}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}}=${a*a*b}${ecriture_algebrique(-2*a*c)}\\sqrt{${b}}+${c*c}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)^{2}}=${a*a*b+c*c}${ecriture_algebrique(-2*a*c)}\\sqrt{${b}}$
+
+                    `;
+                        break ;
+            case 3 : 
+                a = randint(2,6)*choice([-1,1]);
+                b= randint(2,11,[4,8,9]);
+                c = randint(2,6);
+                    
+                    texte = `$\\left(${a} \\sqrt{${b}} +${c}\\right)\\left(${a} \\sqrt{${b}}-${c}\\right)$`;
+                    texte_corr = `$\\left(${a} \\sqrt{${b}} +${c}\\right)\\left(${a} \\sqrt{${b}}-${c}\\right)=\\left(${a} \\sqrt{${b}} \\right)^{2}-${c}^{2}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)\\left(${a} \\sqrt{${b}}-${c}\\right)}=${ecriture_parenthese_si_negatif(a)}^{2}\\times ${b}-${c*c}$<br>
+                        $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)\\left(${a} \\sqrt{${b}}-${c}\\right)}=${a*a*b}-${c*c}$<br>
+                        $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\right)\\left(${a} \\sqrt{${b}}-${c}\\right)}=${a*a*b-c*c}$
+                    `;
+
+
+                        
+                    break ;
+                case 4 : 
+        
+                a = randint(2,5)*choice([-1,1]);
+                b= randint(3,11,[4,8,9]);
+                c = randint(2,5);
+                d= randint(3,11,[4,8,9,b,b*2,b*3,b*5]);
+                    
+                    texte = `$\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)^{2}$`;
+                    texte_corr = `$\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)^{2}=
+                    \\left(${a} \\sqrt{${b}} \\right)^{2}+2\\times ${ecriture_parenthese_si_negatif(a)}\\sqrt{${b}}\\times ${c}\\sqrt{${d}}+\\left(${c}\\sqrt{${d}}\\right)^{2}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)^{2}}=${ecriture_parenthese_si_negatif(a)}^{2}\\times ${b} +2\\times ${ecriture_parenthese_si_negatif(a)}
+                    \\times \\sqrt{${b}}\\times ${ecriture_parenthese_si_negatif(c)}    \\times\\sqrt{${d}}+ ${c*c}\\times ${d}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)^{2}}=${a*a*b} ${ecriture_algebrique(2*a*c)}\\sqrt{${b}\\times${d}} ${ecriture_algebrique(c*c*d)}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)^{2}}=${a*a*b+c*c*d}${ecriture_algebrique(2*a*c)}\\sqrt{${b*d}}
+
+                    $`;
+
+                        
+                    break ;
+            case 5 : 
+                a = randint(2,6)*choice([-1,1]);
+                b= randint(2,11,[4,8,9]);
+                c = randint(2,6);
+                d= randint(2,11,[4,8,9]);
+                    texte = `$\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)\\left(${a} \\sqrt{${b}}-${c}\\sqrt{${d}}\\right)$`;
+                    texte_corr = `$\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)\\left(${a} \\sqrt{${b}}-${c}\\sqrt{${d}}\\right)=
+                    \\left(${a} \\sqrt{${b}} \\right)^{2}-\\left(${c}\\sqrt{${d}}\\right)^{2}$<br>
+                $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)\\left(${a} \\sqrt{${b}}-${c}\\sqrt{${d}}\\right)}
+                    =${ecriture_parenthese_si_negatif(a)}^{2}\\times ${b}-${c}^{2}\\times ${ecriture_parenthese_si_negatif(d)}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)\\left(${a} \\sqrt{${b}}-${c}\\sqrt{${d}}\\right)}
+                    =${a*a*b}-${c*c*d}$<br>
+                    $\\phantom{\\left(${a} \\sqrt{${b}} +${c}\\sqrt{${d}}\\right)\\left(${a} \\sqrt{${b}}-${c}\\sqrt{${d}}\\right)}
+                    =${a*a*b-c*c*d}$
+                    `;
+
+
+                        
+                    break ;
+            }       
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+            }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+
+}
+function Double_distributivité_avec_racine_carree(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Appliquer la double distributivité avec les racines carrées";
+    this.consigne = " Effectuer les calculs suivants :"
+    this.nb_questions = 5;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+            type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+                case 1 : 
+                    let a1=randint(2,9)*choice([-1,1]);
+                    let a=randint(2,11,[4,8,9]);
+                    let b1=randint(2,9)*choice([-1,1]);
+                    let a2=randint(2,9);
+                    let b2=randint(2,9)*choice([-1,1]);
+                    let aa1=a1*a2*a;
+                    let bb=b1*b2;
+                    let aa2=a1*b2+b1*a2;
+                    let aaa=aa1+bb
+                    if (aa2==0) {
+                            b2=-1*b2;
+                            aa2=a1*b2+b1*a2;                    
+                    }
+                    texte = `$\\left(${a1}\\sqrt{${a}}${ecriture_algebrique(b1)}\\right)\\left(${a2}\\sqrt{${a}}${ecriture_algebrique(b2)}\\right)$`;
+                    texte_corr = `$\\left(${a1}\\sqrt{${a}}${ecriture_algebrique(b1)}\\right)\\left(${a2}\\sqrt{${a}}${ecriture_algebrique(b2)}\\right)$<br>
+                    
+                    $=${a1}\\sqrt{${a}}\\times ${a2}\\sqrt{${a}}${ecriture_algebrique(a1)}\\sqrt{${a}} \\times ${ecriture_parenthese_si_negatif(b2)}
+                    ${ecriture_algebrique(b1)} \\times ${a2}\\sqrt{${a}}${ecriture_algebrique(b1)} \\times ${ecriture_parenthese_si_negatif(b2)}$<br>
+                    $=${a1}\\times ${a}\\times ${a2}+ \\left( ${a1} \\times ${ecriture_parenthese_si_negatif(b2)} 
+                    ${ecriture_algebrique(b1)} \\times ${a2}\\right)\\sqrt{${a}} ${ecriture_algebrique(bb)}$<br>
+                    $= ${aa1}${ecriture_algebrique(aa2)} \\sqrt{${a}}${ecriture_algebrique(bb)}$<br>
+                    $=${aa2} \\sqrt{${a}}${ecriture_algebrique(aaa)}$`;
+
+                        
+                    break ;
+                case 2 : 
+                    let c1=randint(2,9)*choice([-1,1]);
+                    let c=randint(2,11,[4,8,9]);
+                    let d1=randint(2,9)*choice([-1,1]);
+                    let d2=randint(2,9);
+                    let c2=randint(2,9);
+                    let cc1=c1*d2;
+                    let cc2=c1*c2;
+                    let dd=d1*d2;
+                    let dd1 = d1*c2;
+                    let dd2=dd-cc2*c;
+                    let dd3=cc1-dd1;
+                    texte = `$\\left(${c1}\\sqrt{${c}}${ecriture_algebrique(d1)}\\right)\\left(${d2} ${ecriture_algebrique(c2)}\\sqrt{${c}}\\right)$`;
+                    texte_corr = `$\\left(${c1}\\sqrt{${c}}${ecriture_algebrique(d1)}\\right)\\left(${d2}${ecriture_algebrique(c2)}\\sqrt{${c}}\\right)$<br>
+                    $=${c1}\\sqrt{${c}}\\times ${d2}${ecriture_algebrique(c1)}\\sqrt{${c}} \\times ${ecriture_parenthese_si_negatif(c2)}\\sqrt{${c}}${ecriture_algebrique(d1)} \\times ${d2}  ${ecriture_algebrique(d1)}  \\times ${c2}\\sqrt{${c}}$<br>
+                    $= ${cc1}\\sqrt{${c}} ${ecriture_algebrique(cc2)}\\times ${c} ${ecriture_algebrique(dd)} ${ecriture_algebrique(dd1)} \\sqrt{${c}}   $<br>
+                    $=${dd3}\\sqrt{${c}}${ecriture_algebrique(dd2)}$`;
+                    break ;
+
+                    
+            
+            }       
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+            }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+
+}
+
+
+
+function parite()
+{
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Déterminer la parité d'une expression.";
+    this.consigne = "Soit $n$ un entier naturel."
+    this.nb_questions = 4;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice)
+    {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b,c,d,e, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) 
+        {
+            type_de_questions = liste_type_de_questions[i];
+        switch (type_de_questions)
+            {
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+        
+                a = randint(2,6);
+                b= randint(2,11,[4,8,9]);
+                c = randint(2,6);
+                    
+                    texte = `Que peut-on dire de la parité de ${a}$n$ ?`;
+                        if (a%2==0 && a!=2) {
+                        texte_corr = `${a}$n=2\\times ${tex_nombre(a/2)}n$<br>
+                        Comme $${tex_nombre(a/2)}n$ est un entier naturel, ${a}$n$ s'écrit comme le double d'un entier naturel, il est donc pair`;
+                        }
+                        if (a==2) {
+                        texte_corr = `${a}$n=2\\times n$<br>
+                        Comme $n$ est un entier naturel, ${a}$n$ s'écrit comme le double d'un entier naturel, il est donc pair`;
+                        }
+                   
+                        if (a==3) {
+                        texte_corr = `${a}$n=2n+n$<br>
+                            Comme $n$ est un entier naturel, $2 n$ est un nombre pair.<br>
+                            Si $n$ est pair, $2n+n$ est la somme de deux nombres pairs, il sera donc pair. <br>
+                            Si $n$ est impair, $2n+n$ est la somme d'un nombre pair et d'un impair, il sera donc impair. <br>
+                            Au final, ${a}$n$ a donc la même parité que $n$.`;
+                            }
+                        if  (a%2!=0 && a!=3) {
+                        texte_corr = `${a}$n=2\\times ${tex_nombre((a-1)/2)}n+n$<br>
+                            Comme $${tex_nombre((a-1)/2)}n$ est un entier naturel, $2\\times ${tex_nombre((a-1)/2)}n$ est un nombre pair.<br>
+                            Si $n$ est pair, $2\\times${tex_nombre((a-1)/2)}n+n$ est la somme de deux nombres pairs, il sera donc pair. <br>
+                            Si $n$ est impair, $2\\times${tex_nombre((a-1)/2)}n+n$ est la somme d'un nombre pair et d'un impair, il sera donc impair. <br>
+                            Au final, ${a}$n$ a donc la même parité que $n$.`;
+                            }
+                        
+                                        
+                    break ;
+                case 2 : 
+                a = randint(2,6);
+                b= randint(2,11);
+                c = randint(2,6);
+                    
+                    texte = `Que peut-on dire de la parité de $${a}n+${b}$ ?`;
+                
+                    if (a%2==0 && b%2==0 && a!=2) {
+                        texte_corr = `$${a}n+${b}=2\\times ${tex_nombre(a/2)}n+${b}$<br>
+                        Comme $${tex_nombre(a/2)}n$ est un entier naturel, $2\\times ${tex_nombre(a/2)}n$ est donc un nombre pair<br>
+                        ${b} est aussi un nombre pair.
+                        $${a}n+${b}$ est donc la somme de deux nombres pairs, il est donc pair`;}
+                    if (a%2==0 && b%2!=0 && a!=2) {
+                        texte_corr = `$${a}n+${b}=2\\times ${tex_nombre(a/2)}n+${b}$<br>
+                        Comme $${tex_nombre(a/2)}n$ est un entier naturel, $2\\times ${tex_nombre(a/2)}n$ est donc un nombre pair<br>
+                        ${b} est un nombre impair.
+                        $${a}n+${b}$ est donc la somme d'un nombre pair et d'un nombre impair. Il est donc impair`;}
+
+
+                    if (a==2 && b%2==0) {
+                        texte_corr = `Comme $n$ est un entier naturel, $2n$ est un nombre pair<br>
+                        ${b} est aussi un nombre pair.
+                        $${a}n+${b}$ est donc la somme de deux nombres pairs, il est donc pair`;}
+                    
+                    if ( a==2 && b%2!=0) {
+                        texte_corr = `
+                        Comme $n$ est un entier naturel, $2n$ est un nombre pair<br>
+                        ${b} est un nombre impair.<br>
+                        $2n+${b}$ est donc la somme d'un nombre pair et d'un nombre impair. Il est donc impair`;
+                                }
+                    if (a==3 && b%2==0) {                   
+                        texte_corr = `$${a}n+${b}=2n+n+${b}$<br>
+                        Comme $n$ est un entier naturel, $2n$ est un nombre pair.<br>
+                        ${b} est un nombre pair. <br>
+                        $2n + ${b}$ est donc un nombre pair. <br>
+                        $${a}n+${b}=2n+${b}+n$ est donc la somme d'un nombre pair et de $n$, il a donc la même parité que $n$.`;
+                            }
+                    if (a==3 && b%2!=0) {                   
+                        texte_corr = `$${a}n+${b}=2n+n+${b}$<br>
+                        Comme $n$ est un entier naturel, $2n$ est un nombre pair.<br>
+                        ${b} est un nombre impair. <br>
+                        $2n + ${b}$ est donc un nombre impair. <br>
+                        $${a}n+${b}=2n+${b}+n$ est donc la somme d'un nombre impair et de $n$, il a donc la parité contraire de $n$.`;
+                            }
+                    if (a%2!=0 && b%2==0 && a!=3) {
+                        texte_corr = `${a}$n=2\\times ${tex_nombre((a-1)/2)}n+n+${b}$<br>
+                        Comme $${tex_nombre((a-1)/2)}n$ est un entier naturel, $2 ${tex_nombre((a-1)/2)}n$ est donc un nombre pair<br>
+                        ${b} est aussi un nombre pair.<br>
+                        $${tex_nombre((a-1)/2)}n +${b}$ est donc un nombre pair.<br>
+                        $${a}n+${b}=2\\times${tex_nombre((a-1)/2)}n+${b}+n$ est donc la somme d'un nombre pair et de $n$, il a donc la même parité que $n$.`;
+                            }
+                    if (a%2!=0 && b%2!=0 && a!=3) {
+                        texte_corr = `$${a}n+${b}=2\\times ${tex_nombre((a-1)/2)}n+n+${b}$<br>
+                        Comme $${tex_nombre((a-1)/2)}n$ est un entier naturel, $2 \\times ${tex_nombre((a-1)/2)}n$ est donc un nombre pair<br>
+                        ${b} est un nombre impair.<br>
+                        $2\\times${tex_nombre((a-1)/2)}n +${b}$ est une somme d'un nombre pair et d'un nombre impair, c'est donc un nombre impair.<br>
+                        $${a}n+${b}=2\\times${tex_nombre((a-1)/2)}n+${b}+n$ est donc la somme d'un nombre impair et de $n$,  il a donc la parité contraire de $n$.`;
+                            }           
+                        
+                    break ;
+                    
+            case 3 : 
+                a = randint(2,6);
+                b= randint(2,11);
+                c = randint(2,6);
+                    
+                    texte = `Que peut-on dire de la parité de $${a}n^{2}$ ?`;
+                
+            
+                    if (a==2) {
+                        texte_corr = `
+                        Comme $n^{2}$ est un entier naturel, $2n^{2}$ est un nombre pair<br>
+                        `;} 
+                
+                    if (a%2==0 && a!=2) {
+                        texte_corr = `$${a}n^{2}=2\\times ${tex_nombre(a/2)}n^{2}$<br>
+                        Comme $${tex_nombre(a/2)}n^{2}$ est un entier naturel, $2\\times ${tex_nombre(a/2)}n^{2}$ est donc un nombre pair<br>
+                        `;}
+                    if (a%2==2) {
+                        texte_corr = `Comme $n^{2}$ est un entier naturel, $2n^{2}$ est un nombre pair<br>
+                        `;}
+                    if (a%2!=0 && a!=3) {
+                        texte_corr = `$${a}n^{2}=2\\times ${tex_nombre((a-1)/2)}n^{2}+n^{2}$<br>
+                        Comme $${tex_nombre((a-1)/2)}n^{2}$ est un entier naturel, $2\\times ${tex_nombre((a-1)/2)}n^{2}$ est donc un nombre pair<br>
+                        $${a}n^{2}$ est donc la somme d'un nombre pair et de $n^{2}$. Il a donc la même parité que $n^{2}$<br>
+                        Or, on sait d'après le cours (démonstration fondamentale) que $n^{2}$ et $n$ ont la même parité.<br>
+                        Donc $${a}n^{2}$ a la même parité que $n$`;}
+                break ;
+            }       
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+                }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+}
+
+
+
+function ensemble_de_nombres(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Déterminer le plus petit ensemble de nombres dans lequel le nombre proposé appartient.";
+    this.consigne = "Déterminer le plus petit ensemble de nombres dans lequel le nombre proposé appartient. :"
+    this.nb_questions = 5;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3,4,5,6,7,8,9];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b,c,d,e, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+            type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+        
+                a = randint(0,150);
+                
+                    
+                    texte = `$${a} \\in \\dots$`;
+                    texte_corr = `$${a}$ est un entier naturel, on a donc $${a}\\in \\mathbb{N}$
+                    `;
+
+
+                        
+                    break ;
+                case 2 : 
+        
+                a = randint(0,150)*(-1);
+                
+                    
+                    texte = `$${a} \\in \\dots$`;
+                    texte_corr = `$${a}$ est un entier relatif, on a donc $${a}\\in \\mathbb{Z}$
+                    `;
+
+
+                        
+                    break ;
+                case 3 : 
+        
+                d = randint(0,9);
+                b = randint(0,9)*choice([-1,1]);
+                c = randint(0,9);
+                a=b+c/10+d/100;
+                a=a*choice([-1,1])
+                    
+                    texte = `$${tex_nombrec(b+c/10+d/100)}\\in \\dots$`;
+                    texte_corr = `$${tex_nombrec(b+c/10+d/100)}$ est un nombre décimal, on a donc $${tex_nombrec(b+c/10+d/100)}\\in \\mathbb{D}$
+                    `;
+
+
+                        
+                    break ;
+                    case 4 : 
+        
+                a = randint(2,16);
+                b = randint(0,9);
+                c = randint(0,9);
+                
+                    
+                    texte = `$\\sqrt{${tex_nombrec(a*a)}}\\in \\dots$`;
+                    texte_corr = `$\\sqrt{${a*a}}=${a}$  est un entier naturel, on a donc $\\sqrt{${tex_nombrec(a*a)}}\\in \\mathbb{N}$
+                    `;
+
+
+                        
+                    break ; 
+                    case 5 : 
+        
+                a = randint(2,16);
+                b = randint(2,6);
+                c = randint(0,9);
+            
+                    
+                    texte = `$\\dfrac{${tex_nombrec(b*a)}}{${a}}\\in \\dots$`;
+                    texte_corr = `$\\dfrac{${tex_nombrec(b*a)}}{${a}}=\\dfrac{${b}\\times ${a}}{${a}}=${b}$  est un entier naturel, on a donc $\\dfrac{${tex_nombrec(b*a)}}{${a}}\\in \\mathbb{N}$
+                    `;
+
+
+                        
+                    break ; 
+                case 6 : 
+        
+                a = choice([3,5,7,11,13,17,19,23,29,31,37,39,41,43,47,53,57,61,67,71,73,79,83,87,89]);
+                b = choice([3,5,7,11,13,17,19,23,29,31,37,39,41,43,47,53,57,61,67,71,73,79,83,87,89],[a]);
+                
+            
+                    
+                    texte = `$\\dfrac{${a}}{${b}}\\in \\dots$`;
+                    texte_corr = `$\\dfrac{${a}}{${b}}$ n'est pas un nombre décimal. On a donc $\\dfrac{${a}}{${b}}\\in \\mathbb{Q}$
+                    `;
+
+
+                        
+                    break ; 
+                case 7 : 
+        
+                
+                b = choice([4,5,8,10]);
+                a= randint(4,100);
+                while (a%b==0)
+                    {a=randint(4,100);}
+                
+                
+            
+                    
+                    texte = `$\\dfrac{${a}}{${b}}\\in \\dots$`;
+                    texte_corr = `$\\dfrac{${a}}{${b}}=${tex_nombre(a/b)}$  est un nombre décimal. On a donc $\\dfrac{${a}}{${b}}\\in \\mathbb{D}$
+                    `;
+
+
+                        
+                    break ; 
+            case 8 : 
+        
+                
+                a = randint(2,100,[4,9,16,25,36,49,64,81]);
+                texte = `$\\sqrt{${a}} \\in \\dots$`;
+                texte_corr = `$\\sqrt{${a}}$  est un nombre irrationnel. On a donc $\\sqrt{${a}}\\in \\mathbb{R}$
+                    `;
+
+
+                        
+                    break ; 
+            case 9 : 
+                a=randint(2,9)
+                texte = `$${a}\\pi \\in \\dots$`;
+                texte_corr = `$${a}\\pi$   est un nombre irrationnel. On a donc $${a}\\pi \\in \\mathbb{R}$
+                    `;
+
+
+                        
+                    break ; 
+        
+            }       
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+            }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+    
+}
+
+function proprietes_racine_carree(){
     Exercice.call(this); // Héritage de la classe Exercice()
         this.titre = "Connaître les propriétés calculatoires des racines carrées";
         this.consigne = "Effectuer, si possible, les calculs suivants :"
@@ -28013,7 +29012,7 @@ function Problemes_Thales(){
                         $\\phantom{\\sqrt{${d}}\\times \\sqrt{${c}}}=${c}\\sqrt{${b}}$ `;
                             
                         break ;
-                
+                    
                 }		
                 if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
                     this.liste_questions.push(texte);
@@ -28027,45 +29026,7 @@ function Problemes_Thales(){
         
     }
  
-function Extraire_un_carre_parfait_d_une_racine_carree() {
-    Exercice.call(this); // Héritage de la classe Exercice()
-    this.titre = "Extraire un carré parfait d'une racine carrée";
-    this.consigne = " Ecrire le nombre proposé sous la forme $a\\sqrt{b}$ où $a$ est un entier et $b$ le plus petit entier possible:";
-    this.nb_questions = 4;
-    this.nb_cols = 2;
-    this.nb_cols_corr = 2;
-    this.sup = 2; //
 
-    this.nouvelle_version = function (numero_de_l_exercice) {
-        this.liste_questions = []; // Liste de questions
-        this.liste_corrections = []; // Liste de questions corrigées
-
-        for (let i = 0, a, b, c, d, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
-            let a = randint(2, 11)
-            b = a * a
-            c = randint(2, 7, [4])
-            d = c * b
-            if (this.sup == 1)
-                texte = `Ecrire $\\sqrt{${d}}$ sous la forme $a\\sqrt{${c}}$ où $a$ est un entier:`
-            texte_corr = `On cherche le plus grand carré parfait diviseur de ${d}, c'est ${b}.
-				On a donc la décomposition : $${d}=${c} \\times ${b}=${c} \\times ${a}^{2}$ qui permet d'écrire que
-				$\\sqrt{${d}}=\\sqrt{${a}^{2} \\times ${c} }=${a}\\times \\sqrt{${c}}$`
-            if (this.sup == 2)
-                texte = `Ecrire $\\sqrt{${d}}$ sous la forme $a\\sqrt{b}$ où $a$ est un entier et $b$ le plus petit entier possible:`
-            texte_corr = `On cherche le plus grand carré parfait diviseur de ${d}, c'est ${b}.
-				On a donc la décomposition : $${d}=${c} \\times ${b}=${c} \\times ${a}^{2}$ qui permet d'écrire que
-				$\\sqrt{${d}}=\\sqrt{${a}^{2} \\times ${c} }=${a}\\times \\sqrt{${c}}$`
-            if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
-                this.liste_questions.push(texte);
-                this.liste_corrections.push(texte_corr);
-                i++;
-            }
-            cpt++;
-        }
-        liste_de_question_to_contenu(this);
-    }
-    this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, "1 : En donnat la racine carrée unité\n2 : Sans indication"];
-}
 function Simplifier_une_somme_de_racines_carrees() {
     Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Simplifier une somme de racine carrée";
@@ -28119,73 +29080,84 @@ function Simplifier_une_somme_de_racines_carrees() {
     }
     this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, "1 : En donnat la racine carrée unité\n2 : Sans indication"];
 }
-function Existence_d_une_racine_caree() {
-    Exercice.call(this); // Héritage de la classe Exercice()
-    this.titre = "Existence d'une racine carrée";
+
+function Existence_d_une_racine_carree(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Existence d'une racine carrée.";
     this.consigne = " Dire si le nombre proposé existe ou non, en justifiant."
     this.nb_questions = 5;
     this.nb_cols = 2;
     this.nb_cols_corr = 2;
-    this.sup = 1; //
-    this.nouvelle_version = function (numero_de_l_exercice) {
-        this.liste_questions = []; // Liste de questions
-        this.liste_corrections = []; // Liste de questions corrigées
-        let type_de_questions_disponibles = [1, 2, 3, 4, 5, 6, 7];
-        let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions);
-        for (let i = 0, a, b, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3,4,5,6,7,8] ;
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,b, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
             type_de_questions = liste_type_de_questions[i];
-            switch (type_de_questions) {
-                // Cas par cas, on définit le type de nombres que l'on souhaite
-                // Combien de chiffres ? Quelles valeurs ?
-                case 1:
-                    let a = randint(2, 9);
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+                case 1 : 
+                    let a=randint(2,9);
                     texte = `$\\sqrt{\\sqrt{${a}}}$`;
-                    texte_corr = `$\\sqrt{${a}}$ existe car ${a} est un nombre positif, donc $\\sqrt{\\sqrt{${a}}$ existe aussi.`;
-                    break;
-                case 2:
-                    let b = randint(2, 9) * (-1);
+                    texte_corr = `$\\sqrt{${a}}$ existe car ${a} est un nombre positif.<br>
+                    $\\sqrt{${a}}$ est un réel positif donc $\\sqrt{\\sqrt{${a}}}$ existe bien.`;
+                    break ;
+                case 2 :    
+                    let b=randint(2,9)*(-1);
                     texte = `$\\sqrt{${b}}$`;
-                    texte_corr = `$\\sqrt{${b}}$ n'existe pas car ${b} est un nombre négatif. La racine carrée n'est définie que pour les réels positifs ou nul. `;
-                    break;
-                case 3:
-                    let c = randint(2, 9) * (-1);
-                    let d = c * c;
+                    texte_corr =  `$\\sqrt{${b}}$ n'existe pas car $${b}$ est un nombre négatif. La racine carrée n'est définie que pour les réels positifs ou nul. `; 
+                    break ;
+                case 3 :    
+                    let c=randint(2,9)*(-1);
+                    let d=c*c;
                     texte = `$\\sqrt{\\left(${c}\\right)^{2}}$`;
-                    texte_corr = `$\\sqrt{\\left(${c}\\right)^{2}}$ existe pas car $\\left(${c}\\right)^{2}=${d}$ est un nombre positif.`;
-                    break;
-                case 4:
-                    let e = randint(2, 9);
+                    texte_corr =  `$\\sqrt{\\left(${c}\\right)^{2}}$ existe pas car $\\left(${c}\\right)^{2}=${d}$ est un nombre positif.`; 
+                    break ;
+                case 4 :    
+                    let e=randint(2,9);
                     texte = `$-\\sqrt{${e}}$`;
-                    texte_corr = `$-\\sqrt{${e}}$ existe car ${e} est un nombre positif. Le signe - est placé devant le symbole radical, le nombre $-\\sqrt{${e}}$ est donc négatif. `;
-                    break;
-                case 5:
-                    let f = randint(2, 9) * (-1);
-                    let g = f * f;
+                    texte_corr =  `$-\\sqrt{${e}}$ existe car ${e} est un nombre positif. Le signe - est placé devant le symbole radical, le nombre $-\\sqrt{${e}}$ est donc négatif. `; 
+                    break ;
+                case 5 :    
+                    let f=randint(2,9)*(-1);
+                    let g=f*f;
                     texte = `$\\sqrt{-\\left(${f}\\right)^{2}}$`;
-                    texte_corr = `$\\sqrt{-\\left(${f}\\right)^{2}}$ n'existe car $-\\left(${f}\\right)^{2}=-${g}$  est un nombre négatif. La racine carrée n'est définie que pour les réels positifs ou nul. . `;
-                    break;
-                case 6:
-                    let h = randint(2, 3);
+                    texte_corr =  `$\\sqrt{-\\left(${f}\\right)^{2}}$ n'existe pas car $-\\left(${f}\\right)^{2}=-${g}$  est un nombre négatif. La racine carrée n'est définie que pour les réels positifs ou nul. . `; 
+                    break ;
+                case 6 :    
+                    let h=randint(2,3);
                     texte = `$\\sqrt{${h}-\\pi}$`;
-                    texte_corr = `$\\sqrt{${h}-\\pi}$ n'existe pas car $\\pi>3$ donc $${h}-\\pi$  est un nombre négatif. La racine carrée n'est définie que pour les réels positifs ou nul. . `;
-                    break;
-                case 7:
-                    let i = randint(4, 5);
+                    texte_corr =  `$\\sqrt{${h}-\\pi}$ n'existe pas car $\\pi>3$ donc $${h}-\\pi$  est un nombre négatif. La racine carrée n'est définie que pour les réels positifs ou nul. . `; 
+                    break ;
+                case 7 :    
+                    let i=randint(4,5);
                     texte = `$\\sqrt{${i}-\\pi}$`;
-                    texte_corr = `$\\sqrt{${i}-\\pi}$ existe car $\\pi\\approx 3,14$ donc $${i}-\\pi$  est un nombre positif.`;
-                    break;
-            }
-            if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
+                    texte_corr =  `$\\sqrt{${i}-\\pi}$ existe car $\\pi\\approx 3,14$ donc $${i}-\\pi$  est un nombre positif.`; 
+                    break ; 
+                case 8 :    
+                    let j=randint(2,12);
+                    texte = `$\\sqrt{-${j}^{2}}$`;
+                    texte_corr =  `$-${j}^{2}=-${j*j}$ est un réel négatif donc sa racine carrée n'est pas définie.`; 
+                    break ; 
+            }       
+            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
                 this.liste_questions.push(texte);
                 this.liste_corrections.push(texte_corr);
                 i++;
             }
-            cpt++;
+            cpt++;  
         }
         liste_de_question_to_contenu(this);
     }
+    
 
 }
+
+
 function Extraire_un_carre_parfait_d_une_racine_carree() {
     Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Extraire un carré parfait d'une racine carrée";
