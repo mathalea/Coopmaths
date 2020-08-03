@@ -16,17 +16,20 @@ description: "Générateur de code SVG et TikZ"
 
 
 * `A = point('A')` // Un point A sans coordonnées
-* `A = point(x,y)` //Un point de coordonnées (x,y) non nommé
+* `A = point(x,y)` // Un point de coordonnées (x,y) non nommé
 * `A = point(x,y,'A')` // Un point de coordonnées (x,y) nommé A (il ne faut pas oublier les guillemets)
 * `A = point(x,y,'A',below')` //On peut préciser la position de son label (below left, below right, right, above left...)
 * `tracePoint(A)` // Place une croix à l'emplacement du point A
-* `tracePoint(A,.5)` //Place une croix de taille 5 mm à l'emplacement du point A
-* `tracePoint(A,.5,'blue')` //Place une croix bleue de taille 5 mm à l'emplacement du point A
+* `tracePoint(A,.5)` // Place une croix de taille 5 mm à l'emplacement du point A
+* `tracePoint(A,.5,'blue')` // Place une croix bleue de taille 5 mm à l'emplacement du point A
 * `tracePoint(A,B,C,D)` // Place une croix pour les différents points 
 * `tracePoint([A,B,C,D],'blue')` // Place une croix pour les différents points
 * `tracePoint(A,B,C,D,'blue')` // Place une croix pour les différents points
-* `labelPoint(A,B,C,D)` pour nommer les points A, B, C, D
-* `A.positionLabel='left'` place le nom à gauche du point (on peut choisir above ou below suivi de left ou right)
+* `labelPoint(A,B,C,D)` // Pour nommer les points A, B, C, D
+* `A.positionLabel='left'` // Place le nom à gauche du point (on peut choisir above ou below suivi de left ou right)
+* `G = centreGraviteTriangle(A,B,C)` // G est le centre de gravité du triangle ABC
+* `H = orthoCentre(A,B,C)` // H est l'orthocentre du triangle ABC
+* `O = centreCercleCirconscrit(A,B,C)` // O est le centre du cercle circonscrit au triangle ABC.
 
 {{% alea2d "pointSurSegment"  %}}
 
@@ -124,6 +127,10 @@ On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou 
 * `homothetie(p,O,k)` // Trace l'image de p dans l'homothétie de centre O et de rapport k
 * `rotation(p,O,a)` // Trace l'image de p dans la rotation de centre O et d'angle a
 * `symetrieAxiale(p,d)` // Trace l'image de p dans la symétrie d'axe (d)
+* `similitude(p,O,a,k)` // Trace l'image de p dans la similitude de centre O, d'angle a et de rapport k
+* `P = projectionOrtho(A,d)` // P est le projeté orthogonal de A sur (d)
+* `affiniteOrtho(p,d,k)` // Trace l'image de p dans l'affinité sur (d) perpendiculairement à (d) de rapport k
+
 
 <h3 class="ui horizontal divider header">Les droites remarquables</h3>
 
@@ -132,6 +139,8 @@ On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou 
 * `m = codageMediatrice(A,B,'blue')` // Ajoute le codage du milieu et de l'angle droit pour la médiatrice de [AB] en bleu
 * `d = bissectrice(A,B)` // Bissectrice de [AB]
 * `d = bissectrice(A,B,'blue')` // Bissectrice de [AB] en bleu
+* `d = hauteurTriangle(A,B,C)` // (d) est la hauteur issue de A dans le triangle ABC
+* `d = medianeTriangle(A,B,C)` // (d) est la médiane issue de A dans le triangle ABC
 
 
 <h3 class="ui horizontal divider header">Les calculs</h3>
