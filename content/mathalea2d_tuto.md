@@ -144,7 +144,7 @@ On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou 
 * `d = bissectrice(A,B,'blue')` // Bissectrice de [AB] en bleu
 * `d = hauteurTriangle(A,B,C)` // (d) est la hauteur issue de A dans le triangle ABC
 * `d = medianeTriangle(A,B,C)` // (d) est la médiane issue de A dans le triangle ABC
-
+{{% alea2d "hauteurs"  %}}
 
 <h3 class="ui horizontal divider header">Les calculs</h3>
 
