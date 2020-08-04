@@ -21,7 +21,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 ### Crédits
 
 - Moteur développé par Rémi Angot sous licence **CC-By-SA**.
-- Exercices écrits par Rémi Angot, Jean-Claude Lhote et Sébastien Lozano puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
+- Exercices écrits par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano et Stéphane Guyon puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Bitton - Licence GNU AGPLv3 (pour les constructions géométriques).
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
@@ -33,6 +33,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - [Slick](https://kenwheeler.github.io/slick/) MIT license (pour le diaporama).
 - [TextFill](https://jquery-textfill.github.io) MIT license (pour adapter la taille de la police dans les diaporamas)
 - [SVG.js](https://svgjs.com/) MIT license (pour afficher des figures)
+- [CodeMirror](https://codemirror.net) MIT license (pour l'éditeur de MathALEA2D)
 - Merci à Sébastien Cogez pour ses conseils et à Julien Brunel pour son cours sur la programmation objet.
 - Icone "[Whisper](https://thenounproject.com/term/whisper/21616/)" by Rémy Médard from the Noun Project
 - Icone "[Silence](https://thenounproject.com/term/whisper/77879/)" by Gianluca Manzana from the Noun Project 
@@ -53,7 +54,16 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 ### Changelog
 
-### 07/20
+
+#### 08/20
+
+- Développement de MathALEA 2D.
+- Arrivée de Stéphane Guyon pour la programmation d'exercices.
+- Nouveaux exercices en seconde sur les racines carrées et les intervalles.
+- Nouveaux exercices du type « Le compte est bon ».
+
+
+#### 07/20
 
 - [Article](http://revue.sesamath.net/spip.php?article1352) de présentation dans MathémaTICE.
 - Gestion des paramètres des exercices dans alacarte.
