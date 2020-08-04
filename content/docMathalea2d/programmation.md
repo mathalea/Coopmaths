@@ -27,7 +27,7 @@ Toutes les autres fonctions sont décrites dans [le wiki de MathALEA](https://gi
 
 <h3 class="ui horizontal divider header">Les calculs</h3>
 
-Il est également possible d'effectuer des claculs par rapport aux objets créés.
+Il est également possible d'effectuer des calculs par rapport aux objets créés.
 
 * `longueur(A,B)` renvoie la distance de A à B
 * `norme(v)` renvoie la norme du vecteur

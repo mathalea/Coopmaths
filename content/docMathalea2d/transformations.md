@@ -34,9 +34,9 @@ description: "MathALEA 2D - Les transformations"
 Il est possible d'animer les transformations d'un polygone.
 
 * translationAnimee(s,v) // Animation de la translation de vecteur v pour s
-* translationAnimee([a,b,c],v) // Animation de la translation de vecteur v pour les objets a, b et v
-* rotationAnimee(s,O,a,v) // Animation de la rotation de centre O et d'angle a pour s
-* rotationAnimee([a,b,c],O,a,v) // Animation de la rotation de centre O et d'angle a pour les objets a, b et v
+* translationAnimee([a,b,c],v) // Animation de la translation de vecteur v pour les objets a, b et c
+* rotationAnimee(s,O,a) // Animation de la rotation de centre O et d'angle a pour s
+* rotationAnimee([a,b,c],O,a) // Animation de la rotation de centre O et d'angle a pour les objets a, b et c
 * homothetieAnimee(p,O,k) // Animation de la homothetie de centre O et de rapport k pour le polygone p
 * symetrieAnimee(p,d) // Animation de la symetrie d'axe (d) pour le polygone p
 * affiniteOrthoAnimee(p,d,k) // Animation de l'affinité orthogonale de p par rapport à la droite d et de rapport k

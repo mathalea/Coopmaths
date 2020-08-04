@@ -1,5 +1,5 @@
 ---
-title: "Segments, droites et demi-droits"
+title: "Segments, droites et demi-droites"
 niveau:
 description: "MathALEA 2D - Les segments, droites et demi-droites"
 ---
