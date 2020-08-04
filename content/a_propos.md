@@ -35,6 +35,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - DESRUELLE Sophie
 - DUVOID Aude
 - FOURNIER Carine
+- GUYON Sthéphane
 - LACROIX Olivier
 - LEFORT Julie
 - LHOTE Jean-Claude
