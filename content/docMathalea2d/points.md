@@ -59,4 +59,7 @@ Voici d'autres commandes possibles pour les points :
 * `M = milieu(A,B,'M')` // M est le milieu de [AB] et se nomme M
 * `M = milieu(A,B,'M','below')` // M est le milieu de [AB], se nomme M et le nom est en dessous du point
 * `M = pointIntersectionDD(d1,d2,'M','below')` // M est le point d'intersection des droites (d1) et (d2)
+* `M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
+* `M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
+
 

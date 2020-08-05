@@ -43,6 +43,9 @@ description: "Générateur de code SVG et TikZ"
 * `M = milieu(A,B,'M')` // M est le milieu de [AB] et se nomme M
 * `M = milieu(A,B,'M','below')` // M est le milieu de [AB], se nomme M et le nom est en dessous du point
 * `M = pointIntersectionDD(d1,d2,'M','below')` // M est le point d'intersection des droites (d1) et (d2)
+* `M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
+* `M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
+
 
 Remarque :  La taille des croix n'a un effet que sur la sortie SVG
 
@@ -96,6 +99,9 @@ On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou 
 * `p.listePoints` permet d'accéder aux sommets du polygone par ordre de constuction
 * `nommePolygone(p1,'ABCDEF')` // Nomme tous les sommets de p1 (dans l'ordre de création des points)
 * `deplaceLabel(p1,'AB','below')` // Si il y a un point nommé 'A' ou 'B' dans le polygone son nom sera mis en dessous du point
+* `t = triangle2points2longueurs(A,B,4,7)` // Trace le triangle ABC tel que AC = 4 cm et BC = 7 cm (par défaut C a l'ordonnée la plus grande possible)
+* `C = t.listePoints[2]` // Récupère le 3e sommet dans la variable C
+* `t = triangle2points2longueurs(A,B,4,7,2)` // Trace le triangle ABC tel que AC = 4 cm et BC = 7 cm (C aura l'ordonnée la plus petite possible)
 
 
 <h3 class="ui horizontal divider header">Les cercles</h3>

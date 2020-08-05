@@ -30,3 +30,13 @@ Une fois un polygone nommé `p` créé, on peut accéder à la liste de tous ses
 * `deplaceLabel(p,'AB','below')` // Si il y a un point nommé 'A' ou 'B' dans le polygone son nom sera mis en dessous du point
 
 Attention, changer le nom d'un point ne permet pas de changer le nom de la variable de ce point.
+
+<div class="ui hidden divider"></div>
+
+<h2 class="ui horizontal divider header">Constructions particulières</h2>
+
+<div class="ui hidden divider"></div>
+
+* `t = triangle2points2longueurs(A,B,4,7)` // Trace le triangle ABC tel que AC = 4 cm et BC = 7 cm (par défaut C a l'ordonnée la plus grande possible)
+* `C = t.listePoints[2]` // Récupère le 3e sommet dans la variable C
+* `t = triangle2points2longueurs(A,B,4,7,2)` // Trace le triangle ABC tel que AC = 4 cm et BC = 7 cm (C aura l'ordonnée la plus petite possible)
