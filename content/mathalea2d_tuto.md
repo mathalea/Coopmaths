@@ -102,6 +102,8 @@ On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou 
 * `t = triangle2points2longueurs(A,B,4,7)` // Trace le triangle ABC tel que AC = 4 cm et BC = 7 cm (par défaut C a l'ordonnée la plus grande possible)
 * `C = t.listePoints[2]` // Récupère le 3e sommet dans la variable C
 * `t = triangle2points2longueurs(A,B,4,7,2)` // Trace le triangle ABC tel que AC = 4 cm et BC = 7 cm (C aura l'ordonnée la plus petite possible)
+* `t = triangle2points2angles(A,B,40,60)` // Trace le triangle ABC tel que CAB = +40° et CBA = -60°
+* `t = triangle2points2angles(A,B,40,60,2)` // Trace le triangle ABC tel que CAB = -40° et CBA = 60°
 
 
 <h3 class="ui horizontal divider header">Les cercles</h3>
