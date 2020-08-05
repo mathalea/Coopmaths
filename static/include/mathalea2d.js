@@ -347,8 +347,8 @@ function Droite(arg1,arg2,arg3,arg4,color) {
 		}
 		let A = point(this.x1,this.y1);
 		let B = point(this.x2,this.y2);
-		let A1 = pointSurSegment(A,B,-10);
-		let B1 = pointSurSegment(B,A,-10);
+		let A1 = pointSurSegment(A,B,-50);
+		let B1 = pointSurSegment(B,A,-50);
 		return `<line x1="${A1.xSVG()}" y1="${A1.ySVG()}" x2="${B1.xSVG()}" y2="${B1.ySVG()}" stroke="${this.color}" ${this.style} />`
 	}
 	this.tikz = function() {
@@ -455,10 +455,13 @@ function CodageMediatrice(A,B,color='black',mark='X'){
 	this.color = color
 	let O = milieu(A,B)
     let M = rotation(A,O,90)
-	let c = codageAngleDroit(M,O,B,this.color).svg()
-	let v = mark = codeSegments(mark,this.color,A,O, O,B).svg()
+	let c = codageAngleDroit(M,O,B,this.color)
+	let v = mark = codeSegments(mark,this.color,A,O, O,B)
 	this.svg = function(){
-		return c + '\n' + v
+		return c.svg() + '\n' + v.svg()
+	}
+	this.tikz = function(){
+		return c.tikz() + '\n' + v.tikz()
 	}
 }
 
@@ -856,7 +859,6 @@ function carreIndirect(A,B,color){
 }
 
 function CodageCarre(c,color = 'black',mark='X'){
-	ObjetMathalea2D.call(this)
 	let objets = []
 	objets.push(codeSegments(mark,color,c.listePoints))
 	objets.push(codageAngleDroit(c.listePoints[0],c.listePoints[1],c.listePoints[2],color))
@@ -864,10 +866,10 @@ function CodageCarre(c,color = 'black',mark='X'){
 	objets.push(codageAngleDroit(c.listePoints[2],c.listePoints[3],c.listePoints[0],color))
 	objets.push(codageAngleDroit(c.listePoints[3],c.listePoints[0],c.listePoints[1],color))
 	this.svg = function(){
-		return codeSvg(objets)
+		return objets[0].svg()+objets[1].svg()+objets[2].svg()+objets[3].svg()+objets[4].svg()
 	}
 	this.tikz = function(){
-		return codeTikz(objets)
+		return objets[0].tikz()+objets[1].tikz()+objets[2].tikz()+objets[3].tikz()+objets[4].tikz()
 	}
 }
 
@@ -1423,8 +1425,8 @@ function translationAnimee(...args){
 }
 
 /**
-* rotationAnimee(s,O,a,v) //Animation de la rotation de centre O et d'angle a pour s
-* rotationAnimee([a,b,c],O,a,v) //Animation de la rotation de centre O et d'angle a pour les objets a, b et v
+* rotationAnimee(s,O,a) //Animation de la rotation de centre O et d'angle a pour s
+* rotationAnimee([a,b,c],O,a) //Animation de la rotation de centre O et d'angle a pour les objets a, b et c
 * 
 * @Auteur Rémi Angot
 */
@@ -1579,10 +1581,69 @@ function centreGraviteTriangle(A,B,C,nom=''){
  */
 function hauteurTriangle(A,B,C,color='black'){
 	let d = droite(B,C)
-	d.isVisible = false
+	d.isVisible=false
 	let p = projectionOrtho(A,d)
-	let q = rotation(B,p,90)
-	return droite(p,q,'',color)
+	return droite(p,A,'',color)
+}
+function CodageHauteurTriangle(A,B,C,color='black'){
+	ObjetMathalea2D.call(this)
+	this.color = color
+	let d = droite(B,C)
+	let p = projectionOrtho(A,d)
+	let q = rotation(A,p,-90)
+	if (B.x<C.x) {
+		if (p.x>C.x || p.x<B.x) {
+			d.isVisible=true
+			d.pointilles=true
+		}
+		else d.isVisible = false
+	}	
+	else if (C.x<B.x) {
+		if (p.x<C.x || p.x>B.x) {
+		d.isVisible=true
+		d.pointilles=true
+		}
+		else d.isVisible=false
+	}
+	else if (B.y<C.y) {
+		if (p.y>C.y || p.y<B.y) {
+			d.isVisible=true
+			d.pointilles=true
+		}
+		else d.isVisible=false
+	}
+	else if (C.y<B.y) {
+		if (p.y<C.y || p.y>B.y) {
+			d.isVisible=true
+			d.pointilles=true
+		}
+		else d.isVisible=false
+	}
+	let c = codageAngleDroit(A,p,q,this.color).svg()
+	this.svg = function(){
+		return c.svg() + '\n' + d.svg()
+	}
+	this.tikz = function(){
+		return c.tikz() + '\n' + d.tikz()
+	}
+}
+function codageHauteurTriangle(...args) {
+	new CodageHauteurTriangle(...args)
+}
+function CodageMedianeTriangle(A,B,C,color='black',mark='//'){
+	ObjetMathalea2D.call(this)
+	this.color = color
+	let O = milieu(B,C)
+	let c = codeSegments(mark,this.color,B,O,O,C)
+	this.svg = function(){
+		return c.svg()
+	}
+	this.tikz = function(){
+		return c.tikz()
+	}
+}
+function codageMedianeTriangle(...args) {
+	new CodageMedianeTriangle(...args)
 }
 
 /**
