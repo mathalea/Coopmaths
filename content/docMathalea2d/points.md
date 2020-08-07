@@ -62,4 +62,11 @@ Voici d'autres commandes possibles pour les points :
 * `M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
 * `M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
 
+Pour le repère, on peut utiliser les commandes suivantes : 
+
+* `axes()` // Trace les axes des abscisses et des ordonnées
+* `axes(xmin,ymin,xmax,ymax,thick,pas)` où thick est la taille des graduations
+* `grille(xmin,ymin,xmax,ymax,color,opacite,pas)` // Trace une grille (par défaut en gris, opacité 40% et un pas de 1)
+
+
 
