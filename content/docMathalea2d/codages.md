@@ -22,6 +22,7 @@ description: "MathALEA 2D - Les codages"
 * `afficheMesureAngle(A,B,C)` // Affiche la mesure de l'angle ABC arrondie au degré près
 * `codageCarre(c,color = 'black',mark='X')` // Code les longueurs égales et les angles droits du carré c
 * `m = codageMediatrice(A,B,'blue')` // Ajoute le codage du milieu et de l'angle droit pour la médiatrice de [AB] en bleu
- * m = codageMediatrice(A,B,'blue','||') // Ajoute le codage du milieu et de l'angle droit pour la médiatrice de [AB] en bleu
+* `m = codageHauteurTriangle(A,B,C,'blue')` // Code en bleu la hauteur issue de B dans le triangle ABC et trace en pointillés (AC) si le pied de la hauteur est à l'extérieur du triangle
+* `m = codageMedianeTriangle(A,B,C,'blue','//')` // Code en bleu le milieu de [AC]
 
 

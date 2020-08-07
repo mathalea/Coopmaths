@@ -1,4 +1,4 @@
-A = point(3,9,'A')
+A = point(3,10,'A')
 B = point(9,8,'B')
 D = point(4,1,'D')
 C = translation2Points(D,A,B,'C') // C est l'image de D dans la translation qui transforme A en B

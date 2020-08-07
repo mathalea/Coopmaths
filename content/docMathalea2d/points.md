@@ -66,3 +66,4 @@ Voici d'autres commandes possibles pour les points :
 * `M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
 * `M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
 
+
