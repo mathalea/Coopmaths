@@ -5,7 +5,7 @@ niveau: "3e"
 sousniveau: "priorites"
 draft: false
 cycle: 4
-description : "Troisième - Priorités période 1 (septembre octobre)"
+description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre octobre)"
 ---
 
 <h2 class="ui horizontal divider header">Priorités</h2>
