@@ -62,6 +62,13 @@ Par ailleurs, il est possible de coder un segment.
  * `codeSegments('X','blue',s1,s2,s3)` // Code les segments s1, s2 et s3 avec une croix bleue
  * `codeSegments('X','blue',p.listePoints)` // Code tous les segments du polygone avec une croix bleue
 
+ On peut changer l'apparence d'un segment (mais aussi d'une droite, d'une demi-droite, d'un polygone ou d'un cercle) de la manière suivante : 
+
+ * `s.color = 'red'`
+ * `s.epaisseur = 2`
+ * `s.pointilles = true`
+ * `s.opacite = .2`
+
 
 <div class="ui hidden divider"></div>
 

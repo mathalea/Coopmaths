@@ -28,9 +28,21 @@ On peut aussi obtenir ces points particuliers :
 
 
 <div class="ui hidden divider"></div>
-<div class="ui hidden divider"></div>
 
 {{% alea2d "hauteurs"  %}}
 
 <div class="ui hidden divider"></div>
+
+
+<h2 class="ui horizontal divider header">Les constructions</h2>
+
 <div class="ui hidden divider"></div>
+
+On peut laisser apparents certains traits de constructions.
+
+* `constructionMediatrice(A,B,detail = false, color='blue', markmilieu='X', markrayons='//',couleurMediatrice = 'red', epaisseurMediatrice = 2)`
+* `constructionBissectrice(A,O,B,detail = false, color='blue', mark='X',tailleLosange = 5,couleurBissectrice = 'red', epaiseurBissectrice = 2)`
+
+Le booléen détail permet de contrôler si on affiche les segments correspondants aux rayons des arcs de cercles.
+
+{{% alea2d "bissectrice_construction"  %}}
