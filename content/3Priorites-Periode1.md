@@ -1,6 +1,6 @@
 ---
-title: "Priorités période 1 (septembre octobre)"
-ref: "3Priorites-Periode1"
+title: "Période 1 (septembre octobre)"
+ref: "Priorités rentrée 2020"
 niveau: "3e"
 sousniveau: "priorites"
 draft: false
