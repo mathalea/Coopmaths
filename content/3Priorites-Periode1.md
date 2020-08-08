@@ -6,15 +6,6 @@ sousniveau: "priorites"
 draft: false
 cycle: 4
 description : "Troisième - Priorités période 1 (septembre octobre)"
-details_nombresEtCalculs : [
-	"L’élève utilise les nombres décimaux relatifs et les nombres rationnels pour comparer, calculer et résoudre des problèmes.",
-	"Il identifie la structure d’une expression littérale (somme, produit).",
-	"Il utilise la propriété de distributivité simple pour développer un produit.",
-	"Il introduit une lettre pour désigner une valeur inconnue et met un problème en équation.",
-	"Il teste si un nombre est solution d’une équation",
-	"Il résout algébriquement une équation du premier degré."
-]
-
 ---
 
 <h2 class="ui horizontal divider header">Priorités</h2>
