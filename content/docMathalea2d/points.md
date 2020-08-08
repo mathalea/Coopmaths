@@ -46,6 +46,8 @@ Voici d'autres commandes possibles pour les points :
 * `tracePoint([A,B,C,D],'blue')` // Place une croix pour les différents points
 * `tracePoint(A,B,C,D,'blue')` // Place une croix pour les différents points
 * `labelPoint(A,B,C,D)` // Pour nommer les points A, B, C, D
+* `tracePointSurDroite(A,B)` // Marque le point A sur la droite (AB) (plutôt que d'avoir une croix, on a un trait perpendiculaire à la droite)
+* `tracePointSurDroite(A,d)` // Marque le point A sur la droite (d) 
 * `A.positionLabel='left'` // Place le nom à gauche du point (on peut choisir above ou below suivi de left ou right)
 * `G = centreGraviteTriangle(A,B,C)` // G est le centre de gravité du triangle ABC
 * `H = orthoCentre(A,B,C)` // H est l'orthocentre du triangle ABC
