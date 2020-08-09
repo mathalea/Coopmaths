@@ -28,50 +28,28 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 {{< titre1 "Nombres et calculs">}}
 {{< liste_priorites >}}
 	<div class="item">
-		<i class="large black chevron circle right icon"></i> <div class="header content"> Utiliser les nombres pour comparer, calculer et résoudre des problèmes.</div>
-		<div class="ui middle aligned divided list">
+		<i class="large black chevron circle right icon"></i>
+		<div class="header content"> Utiliser les nombres pour comparer, calculer et résoudre des problèmes.</div>
 			{{% priorite "L’élève utilise les nombres décimaux relatifs et les nombres rationnels pour comparer, calculer et résoudre des problèmes." %}}
-		</div>	
-		<div class="ui middle aligned animated selection divided list">			
-			{{% alea "4C10-1 : Déterminer le signe d'un produit de nombres relatifs" "4C10-1" %}}
-			{{% alea "4C10-2 : Déterminer le signe d'un quotient de nombres relatifs" "4C10-2" %}}			
-		</div>	
+			{{% priorite_alea "4C10-1 : Déterminer le signe d'un produit de nombres relatifs" "4C10-1" %}}
+			{{% priorite_alea "4C10-2 : Déterminer le signe d'un quotient de nombres relatifs" "4C10-2" %}}			
 	</div>	
 {{< /liste_priorites >}}
 
 {{< liste_priorites >}}
 	<div class="item">
-		<i class="large black chevron circle right icon"></i> <div class="header content"> Utiliser le calcul littéral.</div>	
-		<div class="ui middle selection divided list">
+		<i class="large black chevron circle right icon"></i>
+		<div class="header content"> Utiliser le calcul littéral.</div>	
 			{{% priorite "Il identifie la structure d’une expression littérale (somme, produit)." %}}
-		</div>
-		<div class="ui middle aligned animated selection divided list">
-			{{% alea "..." "" %}}
-		</div>
-		<div class="ui middle selection divided list">
+			{{% priorite_alea "..." "" %}}
 			{{% priorite "Il utilise la propriété de distributivité simple pour développer un produit." %}}
-		</div>
-		<div class="ui middle aligned animated selection divided list">
-			{{% alea "..." "" %}}
-		</div>
-		<div class="ui middle selection divided list">
+			{{% priorite_alea "..." "" %}}
 			{{% priorite "Il introduit une lettre pour désigner une valeur inconnue et met un problème en équation." %}}
-		</div>
-		<div class="ui middle aligned animated selection divided list">
-			{{% alea "..." "" %}}
-		</div>
-		<div class="ui middle selection divided list">
+			{{% priorite_alea "..." "" %}}
 			{{% priorite "Il teste si un nombre est solution d’une équation" %}}
-		</div>
-		<div class="ui middle aligned animated selection divided list">
-			{{% alea "..." "" %}}
-		</div>
-		<div class="ui middle selection divided list">
+			{{% priorite_alea "..." "" %}}
 			{{% priorite "Il résout algébriquement une équation du premier degré." %}}
-		</div>
-		<div class="ui middle aligned animated selection divided list">
-			{{% alea "..." "" %}}
-		</div>	
+			{{% priorite_alea "..." "" %}}
 	</div>	
 {{< /liste_priorites >}}
 
@@ -80,22 +58,20 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 {{< titre1 "Organisation et gestion des données, fonctions.">}}
 {{< liste_priorites >}}
 	<div class="item">
-		<i class="large black chevron circle right icon"></i> <div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
-		<div class="ui middle aligned animated selection divided list">
+		<i class="large black chevron circle right icon"></i>
+		<div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
 			{{% priorite "Il résout des problèmes en utilisant la proportionnalité." %}}
-			{{% alea "..." "" %}}
-		</div>	
+			{{% priorite_alea "..." "" %}}
 	</div>	
 {{< /liste_priorites >}}
 {{< liste_priorites >}}
 	<div class="item">
-		<i class="large black chevron circle right icon"></i> <div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
-		<div class="ui middle aligned animated selection divided list">
+		<i class="large black chevron circle right icon"></i>
+		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
-			{{% alea "..." "" %}}
+			{{% priorite_alea "..." "" %}}
 			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}
-			{{% alea "..." "" %}}
-		</div>	
+			{{% priorite_alea "..." "" %}}
 	</div>	
 {{< /liste_priorites >}}
 
@@ -103,15 +79,14 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 {{< titre1 "Espace et géométrie">}}
 {{< liste_priorites >}}
 	<div class="item">
-		<i class="large black chevron circle right icon"></i> <div class="header content"> Utiliser les notions de géométrie plane pour démontrer.</div>	
-		<div class="ui middle aligned animated selection divided list">
+		<i class="large black chevron circle right icon"></i>
+		<div class="header content"> Utiliser les notions de géométrie plane pour démontrer.</div>	
 			{{% priorite "L’élève connaît et utilise les cas d’égalité des triangles." %}}
-			{{% alea "..." "" %}}
+			{{% priorite_alea "..." "" %}}
 			{{% priorite "L’élève connaît et utilise le théorème de Thalès dans la configuration des triangles emboîtés." %}}
-			{{% alea "..." "" %}}
+			{{% priorite_alea "..." "" %}}
 			{{% priorite "L’élève connaît et utilise le théorème de Pythagore." %}}
-			{{% alea "..." "" %}}
-		</div>	
+			{{% priorite_alea "..." "" %}}
 	</div>	
 {{< /liste_priorites >}}
 
@@ -119,11 +94,10 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 {{< titre1 "Algorithmique et programmation" >}}
 {{< liste_priorites >}}
 	<div class="item">
-		<i class="large black chevron circle right icon"></i> <div class="header content">Écrire, mettre au point et exécuter un programme.</div>	
-		<div class="ui middle aligned animated selection divided list">
+		<i class="large black chevron circle right icon"></i>
+		<div class="header content">Écrire, mettre au point et exécuter un programme.</div>	
 			{{% priorite "L’élève maîtrise le niveau 1 des attendus du programme." %}}
-			{{% alea "..." "" %}}
-		</div>	
+			{{% priorite_alea "..." "" %}}
 	</div>	
 {{< /liste_priorites >}}
 
