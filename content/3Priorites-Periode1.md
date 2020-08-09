@@ -11,7 +11,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3>
 {{< liste >}}
-	{{% alea_url "docx sur educ-scol..." "https://cache.media.eduscol.education.fr/file/RS2020-Documents_pedagogiques/86/5/outils_positionnement_Mathematiques_3eme_1309865.docx" %}}
+	{{% alea_url "Test de positionnement 3e - docx sur educ-scol ..." "https://cache.media.eduscol.education.fr/file/RS2020-Documents_pedagogiques/86/5/outils_positionnement_Mathematiques_3eme_1309865.docx" %}}
 {{< /liste >}}
 
 
@@ -21,7 +21,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i> <div class="header content"> Utiliser les nombres pour comparer, calculer et résoudre des problèmes.</div>	
 		<div class="ui middle aligned animated selection divided list">
 			{{% priorite "L’élève utilise les nombres décimaux relatifs et les nombres rationnels pour comparer, calculer et résoudre des problèmes." %}}
-			{{% alea "..." "" %}}
+			{{% alea "4C10-1 : Déterminer le signe d'un produit de nombres relatifs" "4C10-1" %}}
+			{{% alea "4C10-2 : Déterminer le signe d'un quotient de nombres relatifs" "4C10-2" %}}			
 		</div>	
 	</div>	
 {{< /liste >}}
