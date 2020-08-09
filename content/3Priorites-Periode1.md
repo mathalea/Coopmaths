@@ -1,5 +1,6 @@
 ---
-title: "Période 1 (septembre octobre)"
+# title: "Période 1 (septembre octobre)"
+title : "Priorités rentrée 2020"
 ref: "Priorités rentrée 2020"
 niveau: "3e"
 sousniveau: "priorites"
@@ -8,14 +9,24 @@ cycle: 4
 description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre octobre)"
 ---
 
-<h2 class="ui horizontal divider header">Priorités</h2>
-<h3 class="ui horizontal divider header">Test de positionnement</h3>
+<!-- <h2 class="ui horizontal divider header">Priorités</h2>
+<h3 class="ui horizontal divider header">Test de positionnement</h3> -->
+
+{{< titre1 "Test de positionnement" >}}
+
 {{< liste >}}
-	{{% alea_url "Test de positionnement 3e - docx sur educ-scol ..." "https://cache.media.eduscol.education.fr/file/RS2020-Documents_pedagogiques/86/5/outils_positionnement_Mathematiques_3eme_1309865.docx" %}}
+	{{%pdf_url "Test de positionnement 3e - pdf temporaire" %}}
+	{{% alea_url "Test de positionnement 3e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=4C10-1,nb_questions=3,sup=4&ex=4C10-2,nb_questions=10,sup=5&serie=9MLK" %}}
+
+	<a class="item" href="https://cache.media.eduscol.education.fr/file/RS2020-Documents_pedagogiques/86/5/outils_positionnement_Mathematiques_3eme_1309865.docx" target="_blank">
+  	<i class="large black file word outline icon"></i> <div class="header content"> Test de positionnement 3e - docx sur educ-scol ... Pense-bête temporaire</div>  	
+	</a>
+
 {{< /liste >}}
 
 
-<h3 class="ui horizontal divider header">Nombres et calculs</h3>
+<!-- <h3 class="ui horizontal divider header">Nombres et calculs</h3> -->
+{{< titre1 "Nombres et calculs">}}
 {{< liste >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i> <div class="header content"> Utiliser les nombres pour comparer, calculer et résoudre des problèmes.</div>	
@@ -45,7 +56,9 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 	</div>	
 {{< /liste >}}
 
-<h3 class="ui horizontal divider header">Organisation et gestion des données, fonctions.</h3>
+
+<!-- <h3 class="ui horizontal divider header">Organisation et gestion des données, fonctions.</h3> -->
+{{< titre1 "Organisation et gestion des données, fonctions.">}}
 {{< liste >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i> <div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
@@ -67,7 +80,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 	</div>	
 {{< /liste >}}
 
-<h3 class="ui horizontal divider header">Espace et géométrie</h3>
+<!-- <h3 class="ui horizontal divider header">Espace et géométrie</h3> -->
+{{< titre1 "Espace et géométrie">}}
 {{< liste >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i> <div class="header content"> Utiliser les notions de géométrie plane pour démontrer.</div>	
@@ -82,7 +96,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 	</div>	
 {{< /liste >}}
 
-<h3 class="ui horizontal divider header">Algorithmique et programmation</h3>
+<!-- <h3 class="ui horizontal divider header">Algorithmique et programmation</h3> -->
+{{< titre1 "Algorithmique et programmation" >}}
 {{< liste >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i> <div class="header content">Écrire, mettre au point et exécuter un programme.</div>	
