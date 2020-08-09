@@ -32,7 +32,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<div class="header content"> Utiliser les nombres pour comparer, calculer et résoudre des problèmes.</div>
 			{{% priorite "L’élève utilise les nombres décimaux relatifs et les nombres rationnels pour comparer, calculer et résoudre des problèmes." %}}
 			{{% priorite_alea "4C10-1 : Déterminer le signe d'un produit de nombres relatifs" "4C10-1" %}}
-			{{% priorite_alea "4C10-2 : Déterminer le signe d'un quotient de nombres relatifs" "4C10-2" %}}			
+			{{% priorite_alea "4C10-2 : Déterminer le signe d'un quotient de nombres relatifs" "4C10-2" %}}
+			{{% priorite_alea "4C30-1 : Encadrer par deux puissances de 10 d'exposants consécutifs" "4C30-1" %}}			
 	</div>	
 {{< /liste_priorites >}}
 
