@@ -57,10 +57,14 @@ Voici d'autres commandes possibles pour les points :
 * `M = pointSurSegment(A,B,l,'M','below')` // M est le point de [AB] à l cm de A, se nomme M et le nom est en dessous du point
 * `M = pointSurSegment(A,B,'','M')` // M est un point au hasard sur [AB] 
 * `M = pointSurSegment(A,B)` // M est un point au hasard sur [AB] 
+* `M = pointSurCercle(c,'','M')` // M est un point choisi au hasard sur le cercle c et se nomme M
+* `N = pointSurCercle(c,90)` // N est le point du cercle c situé à 90° par rapport à l'horizontale, donc au dessus du centre de c
 * `M = milieu(A,B)` // M est le milieu de [AB]
 * `M = milieu(A,B,'M')` // M est le milieu de [AB] et se nomme M
 * `M = milieu(A,B,'M','below')` // M est le milieu de [AB], se nomme M et le nom est en dessous du point
 * `M = pointIntersectionDD(d1,d2,'M','below')` // M est le point d'intersection des droites (d1) et (d2)
+* `I = pointItersectionLC(d,c,'I')` // I est le premier point d'intersection, si il existe, de la droite (d) et du cercle (c)
+* `J = pointItersectionLC(d,c,'J',2)` // I est le deuxième point d'intersection, si il existe, de la droite (d) et du cercle (c)
 * `M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
 * `M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
 
