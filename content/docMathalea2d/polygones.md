@@ -43,6 +43,13 @@ Une fois un polygone nommé `p` créé, on peut accéder à la liste de tous ses
 
 Attention, changer le nom d'un point ne permet pas de changer le nom de la variable de ce point.
 
+On peut changer l'apparence d'un polygone (mais aussi d'une droite, d'une demi-droite, d'un segment ou d'un cercle) de la manière suivante : 
+
+ * `p.color = 'red'`
+ * `p.epaisseur = 2`
+ * `p.pointilles = true`
+ * `p.opacite = .2`
+
 <div class="ui hidden divider"></div>
 
 <h2 class="ui horizontal divider header">Constructions particulières</h2>

@@ -4001,7 +4001,8 @@ function decomp_fact_prem_array(n) {
 
 
 /**
- * Classe Triangles 
+ * @class
+ * @classdesc Classe Triangles - Méthodes utiles pour les triangles *  
  * Choisi un nom au hasard dans un tableau statique
  * La méthode getNom() permet de récupérer ce nom et fournit un string en mode maths. Si le triangle se nomme AGE, alors getNom() renvoit un tableau de 5 éléments $ ; A ; G ; E et $, les $ traduisent le mode maths
  * Pour l'exemple le triangle se nomme AGE
@@ -4024,7 +4025,7 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 	var self = this;
 
 	// liste de noms possibles pour un triangle
-	let nomsPossibles = ['AGE','AIL','AIR','ALU','AME','AMI','ANE','ARC','BAC','BAL','BAR','BEC','BEL','BIO','BIP','BIS','BLE','BOA','BOB','BOF','BOG','BOL','BUT','BYE','COQ','CRI','CRU','DUC','DUO','DUR','EAU','ECU','EGO','EPI','FER','FIL','FUN','GPS','ICE','JET','KIF','KIR','MAC','NEM','PAS','PIC','PIF','PIN','POT','RAI','RAP','RAT','RIF','SEL','TAF','TIC','TAC','TOC','TOP','UNI','WOK','YAK','YEN','ZEN','ZIG','ZAG'];
+	let nomsPossibles = ['AGE','AIL','AIR','ALU','AME','AMI','ANE','ARC','BAC','BAL','BAR','BEC','BEL','BIO','BIP','BIS','BLE','BOA','BOF','BOG','BOL','BUT','BYE','COQ','CRI','CRU','DUC','DUO','DUR','EAU','ECU','EGO','EPI','FER','FIL','FUN','GPS','ICE','JET','KIF','KIR','MAC','NEM','PAS','PIC','PIF','PIN','POT','RAI','RAP','RAT','RIF','SEL','TAF','TIC','TAC','TOC','TOP','UNI','WOK','YAK','YEN','ZEN','ZIG','ZAG'];
 
 	this.nom = choice(nomsPossibles);
 
@@ -4228,6 +4229,137 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 	this.isPlatTriangleAngles = isPlatTriangleAngles;
 	//this.isQuelconque = isQuelconque;	
 };
+
+/**
+ * @class
+ * @classdesc Classe Relatif - Méthodes utiles sur les relatifs
+ * @param {...any} relatifs est un paramètre du reste
+ * @author Sébastien Lozano
+ */
+function Relatif(...relatifs) {
+	//'use strict'; pas de use strict avec un paramètre du reste
+	var self = this;
+	this.relatifs = relatifs;
+
+	/**
+	 * Récupère le signe de chaque relatif déclaré dans le paramètre du reste relatifs, 
+	 * Si 0 fait partie des relatifs on renvoie une erreur
+	 * @return {array} renvoie un tableau de -1 ou 1
+	 */
+	function getSigneNumber() {		
+		let signes = [];
+		try {
+			// port du string interdit !			
+			relatifs.forEach(function(element) {
+				if (typeof element == 'string') {
+					throw new TypeError(`${element} est un string !`);
+				};
+				if (element == 0) {
+					throw new RangeError(`${element} a été exclu des valeurs possibles.`)
+				}
+			});	
+			// Quoi faire sans nombres ?
+			if (relatifs.length == 0) {
+				throw new Error(`C'est mieux avec quelques nombres !`)
+			};
+			relatifs.forEach(function(element){
+				if (element < 0) {
+					signes.push(-1);
+				};
+				if (element > 0 ) {
+					signes.push(1);
+				};
+			})
+		}
+		catch(err) {
+			console.log(err.message);	
+			console.log(err.stack);		
+		}
+		finally {
+			return signes;
+		}
+	};
+
+	/** 
+	 * Récupère le signe de chaque relatif déclaré dans le paramètre du reste relatifs
+	 * @return {array} renvoie un tableau de strings valant 'négatif' ou 'positif'
+	*/
+	function getSigneString() {
+		let signesString = [];
+		let signes = getSigneNumber();
+		signes.forEach(function(element){
+			if (element == -1) {
+				signesString.push('négatif');
+			};
+			if ( element == 1) {
+				signesString.push('positif');
+			};
+		});
+		return signesString;
+	};
+
+	/**
+	 * 	 
+	 * @param  {...any} n deux ou plus de nombres relatifs
+	 * @return {number} le signe du produit 1 ou -1
+	 * @example getSigneProduitNumber(1,-4,-7) renvoie 1
+	 */
+
+	function getSigneProduitNumber(...n) {
+		let produit = 1;
+		try {
+			// port du string interdit !			
+			n.forEach(function(element) {
+				if (typeof element == 'string') {
+					throw new TypeError(`${element} est un string !`);
+				};
+				if (element == 0) {
+					throw new RangeError(`${element} a été exclu des valeurs possibles.`);
+				};
+			});	
+			// Quoi faire sans nombres ?
+			if (n.length == 0) {
+				throw new Error(`C'est mieux avec quelques nombres !`)
+			};
+			n.forEach(function(element){
+				produit = produit * element;	
+			});		
+			if ( produit < 0 ) {
+				return -1;
+			};
+			if ( produit > 0 ) {
+				return 1
+			};			
+		}
+		catch(err) {
+			console.log(err.message);	
+			console.log(err.stack);		
+		};
+	};
+
+		/**
+	 * 	 
+	 * @param  {...any} n deux ou plus de nombres relatifs
+	 * @return {number} le signe du produit 1 ou -1
+	 * @example getSigneProduitNumber(1,-4,-7) renvoie 1
+	 */
+
+	function getSigneProduitString(...n) {
+		let produit = getSigneProduitNumber(...n);
+			if ( produit == -1 ) {
+				return 'négatif';
+			};
+			if ( produit == 1 ) {
+				return 'positif'
+			};			
+	};
+
+	this.getSigneNumber = getSigneNumber;
+	this.getSigneString = getSigneString;
+	this.getSigneProduitNumber = getSigneProduitNumber;
+	this.getSigneProduitString = getSigneProduitString;
+
+}
 
 // Gestion des styles LaTeX
 
@@ -4870,6 +5002,10 @@ var liste_des_exercices_disponibles = {
 		'5S13': Calculer_des_frequences,
 		'5S14': Calculer_des_moyennes,
 		'5S21' : fonctions_probabilite1,
+		'4C1': Signe_produit_quotient_relatifs,
+		'4C10-1': Signe_produit_relatifs,
+		'4C10-2': Signe_quotient_relatifs,
+		'4C10-3': Exercice_multiplications_relatifs,
 		'4G40' : Transformations_4e,
 		'4L10' : Exercice_developper,
 		'4L20' : Exercice_equation1,
@@ -4883,8 +5019,7 @@ var liste_des_exercices_disponibles = {
 		'4N21': Puissances_d_un_relatif_1,
 		'4N21-1': Puissances_d_un_relatif_2,
 		'4N21-2': Puissances_de_dix,
-		'4P10' : Problemes_grandeurs_composees,
-		'4R10': Exercice_multiplications_relatifs,
+		'4P10' : Problemes_grandeurs_composees,		
 		'4G11' : Pavages_et_translation,
 		'4G20' : Exercice_Pythagore,
 		'4G20-1' : Egalite_Pythagore,
@@ -4938,9 +5073,6 @@ var liste_des_exercices_disponibles = {
 		'3F21-1' : Lecture_expression_fonctions_affines,
 		'3S15': Calculer_des_etendues,
 		'3S20' : fonctions_probabilite2,
-		//'3SVGtest' : svglibs,
-		//'3Tests' : tester_des_fonctions,
-		
 		'2N10' : Existence_d_une_racine_carree,
 		'2N10-1' : proprietes_racine_carree,
 		'2N11' : Extraire_un_carre_parfait_d_une_racine_carree,
@@ -4953,6 +5085,8 @@ var liste_des_exercices_disponibles = {
 		'2N23' : valeur_absolue_et_equation,
 		'2N24' : intervalles_de_R,
 		'2N25' : union_et_intersection_intervalles_de_R,
+		'2G10' : Distance,
+		'2G11' : Milieu,
 		'2L10' : Developper_Identites_remarquables2,
 		'2L11' : Factoriser_Identites_remarquables2,
 		'betaI' : Exercice_intervalle,
@@ -17497,6 +17631,8 @@ function DroiteRemarquableDuTriangle(){
 	this.consigne = 'Définir'
 	this.spacing = 2;
 	this.nb_questions=1
+	this.nb_cols=1
+	this.nb_cols_corr=1
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
@@ -17509,13 +17645,22 @@ function DroiteRemarquableDuTriangle(){
 			B[i] = point(randint(5,9),randint(1,4),sommets[i][1],'below right')
 			C[i] = point(randint(A[i].x,B[i].x),randint(6,8),sommets[i][2],'above')
 			t[i] = polygone(A[i],B[i],C[i])
-			d[i] = hauteurTriangle(A[i],B[i],C[i])
 			n[i] = labelPoint(A[i],B[i],C[i])
-			c[i] = codageHauteurTriangle(A[i],B[i],C[i],'red')
+			if (randint(1,2)==1) {
+				d[i] = hauteurTriangle(A[i],B[i],C[i])
+				d[i].epaisseur=2
+				c[i] = codageHauteurTriangle(A[i],B[i],C[i])
+				texte_corr=`La droite tracée est la hauteur issue de $${sommets[i][0]}$ dans le triangle ${triangles[i].getNom()}.`
+			}
+			else {
+				d[i] = mediatrice(A[i],B[i])
+				d[i].epaisseur=2
+				c[i] = codageMediatrice(A[i],B[i])
+				texte_corr=`La droite tracée est la médiatrice du segment [$${sommets[i][0]}${sommets[i][1]}]$.`
+
+			}
 			objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
-			texte = `Quelle est la nature de la
-			 droite tracée pour le triangle ?<br>` + mathalea2d(0,0,10,10,...objets[i])
-			texte_corr = ``
+			texte = `Quelle est la nature de la droite tracée en gras pour le triangle ${triangles[i].getNom()} ?<br>` + mathalea2d(0,0,10,10,...objets[i])
 
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
@@ -21538,6 +21683,201 @@ function Egalite_Pythagore(){
 	this.besoin_formulaire_numerique = ['Type de questions',2,"1 : Donner l'égalité\n2 : Compléter une égalité avec une addition ou une soustraction"];
 	this.besoin_formulaire2_case_a_cocher = ['Sans figures']
 }
+
+/**
+ * Signe d'un produit ou d'on quotient de relatifs
+ * Plusieurs niveaux 2, 3 ou 4 factieurs, un quotient de 2 nombres, 1  nombre sur un produit de deux nombres, un prooduit de 2 nombres sur un nombre, un quotient de produit de 2 nombres
+ * 4C1 exercice parent  ?
+ * @author Sébastien Lozano
+ */
+
+function Signe_produit_quotient_relatifs(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()	
+	this.sup=1;
+	if (this.exo == this.beta+'4C10-1') { 
+		this.sup = 4;
+		this.titre = `Signe d'un produit de nombres relatifs`;			
+	} else if (this.exo == this.beta+'4C10-2') {//via angles
+		this.sup = 5;
+		this.titre = `Signe d'un quotient de nombres relatifs`;
+	} else {			
+		this.titre = `Signe d'un produit ou d'un quotient de nombres relatifs`;	
+	};
+
+	this.consigne = `Donner le signe des expressions numériques.`;
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.nb_questions_modifiable = false;
+
+	//this.liste_packages = `bclogo`;
+	
+	let type_de_questions_disponibles;
+	
+	this.nouvelle_version = function(numero_de_l_exercice){
+		// this.introduction=info_message({
+		// 	titre : "Exercice BETA",
+		// 	texte: "En cours de réalisation "
+
+		// });
+		
+		this.sup=Number(this.sup); // attention le formulaire renvoie un string, on a besoin d'un number pour le switch !
+		//console.log(typeof this.sup)
+
+		if (this.exo == this.beta+'4C10-1') { // signe d'un produit
+			switch(this.sup) {
+				case 1 : // 2 facteurs
+					type_de_questions_disponibles = [1,1,1];
+					//this.nb_questions = type_de_questions_disponibles.length;	
+					this.nb_questions = 3;
+					break;
+				case 2 : // 3 facteurs
+					type_de_questions_disponibles = [2,2,2];
+					//this.nb_questions = type_de_questions_disponibles.length;	
+					this.nb_questions = 3;
+					break;
+				case 3 : // 4 facteurs
+					type_de_questions_disponibles = [3,3,3];
+					//this.nb_questions = type_de_questions_disponibles.length;	
+					this.nb_questions = 3;
+					break;
+				case 4 : // Mélange
+					type_de_questions_disponibles = [1,2,3];
+					this.nb_questions = type_de_questions_disponibles.length;	
+					break;
+			};
+		} else if (this.exo == this.beta+'4C10-2') {// signe d'un quotient
+			switch(this.sup) {
+				case 1 : // quotient de 2 nombres
+					type_de_questions_disponibles = [4,4,4];
+					//this.nb_questions = type_de_questions_disponibles.length;	
+					this.nb_questions = 3;
+					break;
+				case 2 : // quotient d'1 nombre sur un produit de 2 nombres
+					type_de_questions_disponibles = [5,5,5];
+					//this.nb_questions = type_de_questions_disponibles.length;	
+					this.nb_questions = 3;
+					break;
+				case 3 : // quotient d'1 produit de 2 nombres sur 1 nombre
+					type_de_questions_disponibles = [6,6,6];
+					//this.nb_questions = type_de_questions_disponibles.length;	
+					this.nb_questions = 3;
+					break;
+				case 4 : // quotient de 2 produits de 2 nombres
+					type_de_questions_disponibles = [7,7,7];
+					//this.nb_questions = type_de_questions_disponibles.length;	
+					this.nb_questions = 3;
+					break;
+				case 5 : // Mélange
+					type_de_questions_disponibles = [4,5,6,7];
+					this.nb_questions = type_de_questions_disponibles.length;	
+					break;
+			};
+		} else {// signe d'un produit et/ou d'un quotient
+			type_de_questions_disponibles = [1,2,3,4,5,6,7];
+			this.nb_questions = type_de_questions_disponibles.length;
+		};
+
+		//let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = type_de_questions_disponibles // Tous les types de questions sont posées --> à remettre comme ci dessus
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {			
+			// on ne choisit que des nombres compris entre 1 et 20
+			let nb_max = 20;
+			// on choisit un signe au hasard
+			let signe = randint(-1,1,[0]);
+			// Le tableau des relatifs necessaires, il m'en faut max 4 !
+			let num = new Relatif(randint(-1,1,[0])*randint(1,nb_max),randint(-1,1,[0])*randint(1,nb_max),randint(-1,1,[0])*randint(1,nb_max),randint(-1,1,[0])*randint(1,nb_max));
+			
+			switch (liste_type_de_questions[i]) {
+				case 1 : // 2 facteurs
+					texte = `$ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} $`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]} et $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
+					texte_corr+= `<br>donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1]))}.`;
+					//texte = 'tt';
+					//texte_corr = 'tt';
+					break;
+				case 2 : // 3 facteurs
+					texte = `$ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} $`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
+					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}`;
+					texte_corr+= `<br>donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
+					break;
+				case 3 : // 4 facteurs
+					texte = `$ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])} $`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}, `;
+					texte_corr += `$ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]} et $ ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${num.getSigneString()[3]}`;
+					texte_corr+= `<br>donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3]))}.`;
+					break;
+				case 4 : // quotient de 2 nombres
+					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])}} $`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]} et $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
+					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1]))}.`;
+					break;
+				case 5 : // quotient d'1 nombre sur un produit de 2 nombres
+					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])}} $`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
+					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}`;
+					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
+					break;
+				case 6 : // quotient d'1 produit de 2 nombres sur 1 nombre
+					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])}} $`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
+					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}`;
+					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
+					break;
+				case 7 : // quotient de 2 produits de 2 nombres
+					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])}} $`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}, `;
+					texte_corr += `$ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]} et $ ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${num.getSigneString()[3]}`;
+					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3]))}.`;
+					break;
+			
+			};
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}	
+			cpt++;	
+		}
+	liste_de_question_to_contenu(this);
+	}
+		if (this.exo == this.beta+'4C10-1') {
+			this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : deux facteurs\n2 : trois facteurs\n3 : quatre facteurs\n4 : Mélange"];
+		} else if (this.exo == this.beta+'4C10-2') {
+			this.besoin_formulaire_numerique = ['Niveau de difficulté',5,"1 : quotient de deux nombres\n2 : quotient d'un nombre sur un produit de deux facteurs\n3 : quotient d'un produit de deux factueurs sur un nombre\n4 : Quotient de deux produits de deux facteurs\n5 : Mélange"];
+		} else {
+			//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : sans conversions de longueurs\n2 : avec conversions de longueurs"];
+		};
+}
+
+/**
+ * Signe du produit de relatifs
+ * 4C10-1
+ * @author Sébastien Lozano
+ */
+function Signe_produit_relatifs(){
+	this.beta = ``;
+	this.exo = this.beta+`4C10-1`;
+	Signe_produit_quotient_relatifs.call(this);
+};
+
+/**
+ * Signe du produit de relatifs
+ * 4C10-2
+ * @author Sébastien Lozano
+ */
+function Signe_quotient_relatifs(){
+	this.beta = ``;
+	this.exo = this.beta+`4C10-2`;
+	Signe_produit_quotient_relatifs.call(this);
+};
+
 
 /**
  * Calculs de probabilités sur une expérience aléatoire à deux épreuves
@@ -28023,8 +28363,511 @@ function Problemes_Thales(){
 	// this.besoin_formulaire_numerique = ['Type de questions',2,"1 : Donner l'égalité\n2 : Compléter une égalité avec une addition ou une soustraction"];
 	// this.besoin_formulaire2_case_a_cocher = ['Sans figures']
 	}
-}/* auteur Stéphane Guyon*/
-function union_et_intersection_intervalles_de_R(){
+} 
+
+
+function Milieu(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Déterminer les coordonnées du milieu de deux points dans un repère";
+   
+    this.nb_questions = 2;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice)
+    {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2];
+     if (this.sup == 1) {
+            type_de_questions_disponibles = [1] 
+        }
+      if (this.sup == 2) {
+            type_de_questions_disponibles = [2] 
+           }
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,ux,uy,d,e,g,xA,yA,xB,yB,xC,yC,AB,XAB,YAB,XAC,YAC,AC,t,l,xI0,xI1,yI0,yI1, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) 
+    {
+    type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+        
+                    g =grille(-9,-9,9,9)
+                    xA=randint(0,5)*choice([-1,1])
+                    yA=randint(0,5)*choice([-1,1])
+                    xB=randint(0,5)*choice([-1,1])
+                    yB=randint(0,5)*choice([-1,1])
+                    A = point(xA,yA,'A','red')
+                    B = point(xB,yB,'B','red')
+                    t=tracePoint(A,B)
+                    l=labelPoint(A,B)
+                    a=axes(-2,-9,9,9)
+                    XAB=(xB-xA)*(xB-xA)
+                    YAB=(yB-yA)*(yB-yA);
+                    AB=XAB+YAB;
+                    xI0= fraction_simplifiee(xA+xB,2)[0]
+                    xI1= fraction_simplifiee(xA+xB,2)[1]
+                    yI0= fraction_simplifiee(yA+yB,2)[0]
+                    yI1= fraction_simplifiee(yA+yB,2)[1]
+                    texte =`Dans un repère orthonormé $(O,I,J)$, on donne les points suivants :`
+                    texte +=` $A\\left(${xA};${yA}\\right)$ et $B\\left(${xB};${yB}\\right)$`
+                    texte += `<br>Déterminer les coordonnées du point $I$ milieu du segment $[AB]$ `;
+                                   
+                    
+                    texte_corr = `On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
+                    texte_corr +=`<br> alors les coordonnées du point $I$ milieu de $[AB]$ sont `
+                    texte_corr +=`$I\\left(\\dfrac{x_A+x_B}{2};\\dfrac{y_A+y_B}{2}\\right)$ <br>`
+                    texte_corr +=`On applique la relation à l'énoncé : `
+                    texte_corr +=`$\\begin{cases}x_I=\\dfrac{${xA}+${ecriture_parenthese_si_negatif(xB)}}{2} \\\\ y_I=\\dfrac{${yA}+${ecriture_parenthese_si_negatif(yB)}}{2}\\end{cases}$`
+                    texte_corr += `<br>On en déduit :  $\\begin{cases}x_I=\\dfrac{${tex_nombre(xA+xB)}}{2}\\\\y_I=\\dfrac{${tex_nombre(yA+yB)}}{2}\\end{cases}$`
+                    if (xI1!=1 && yI1!=1) {texte_corr += `  <br>Ce qui donne au final : $ I\\left(\\dfrac{${xI0}}{${xI1}};\\dfrac{${yI0}}{${yI1}};\\right)$`}
+                    if (xI1==1 && yI1!=1) {texte_corr += `  <br>Ce qui donne au final : $ I\\left(${xI0};\\dfrac{${yI0}}{${yI1}}\\right)$`}
+                    if (xI1!=1 && yI1==1) {texte_corr += `  <br>Ce qui donne au final : $ I\\left(\\dfrac{${xI0}}{${xI1}};${yI0}\\right)$`}
+                    if (xI1==1 && yI1==1) {texte_corr += `  <br>Ce qui donne au final : $ I\\left(${xI0};${yI0}\\right)$`}
+                   
+
+                     ;   
+                   break ;
+             case 2 : 
+        
+                g =grille(-9,-9,9,9)
+                    xA=randint(0,5)*choice([-1,1])
+                    yA=randint(0,5)*choice([-1,1])
+                    xI=randint(0,5)*choice([-1,1])
+                    yI=randint(0,5)*choice([-1,1])
+                    A = point(xA,yA,'A','red')
+                    B = point(xB,yB,'B','red')
+                    t=tracePoint(A,B)
+                    l=labelPoint(A,B)
+                    a=axes(-2,-9,9,9)
+                    XAB=(xB-xA)*(xB-xA)
+                    YAB=(yB-yA)*(yB-yA);
+                    AB=XAB+YAB;
+                    xI0= fraction_simplifiee(xA+xB,2)[0]
+                    xI1= fraction_simplifiee(xA+xB,2)[1]
+                    yI0= fraction_simplifiee(yA+yB,2)[0]
+                    yI1= fraction_simplifiee(yA+yB,2)[1]
+                    texte =`Dans un repère orthonormé $(O,I,J)$, on donne les points suivants :`
+                    texte +=` $A\\left(${xA};${yA}\\right)$ et $I\\left(${xI};${yI}\\right)$`
+                    texte += `<br>Déterminer les coordonnées du point $B$ tel que I soit le milieu du segment $[AB]$ `;
+                                   
+                    
+                    texte_corr = `On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
+                    texte_corr +=` <br>alors les coordonnées du point $I$ milieu de $[AB]$ sont `
+                    texte_corr +=`$I\\left(\\dfrac{x_A+x_B}{2};\\dfrac{y_A+y_B}{2}\\right)$ <br>`
+                    texte_corr +=`On applique la relation à l'énoncé : `
+                    texte_corr +=`$\\begin{cases}${xI}=\\dfrac{${xA}+x_B}{2} \\\\ ${yI}=\\dfrac{${yA}+y_B}{2}\\end{cases}$`
+                    texte_corr +=`$\\iff \\begin{cases}x_B=2\\times ${xI} -${ecriture_parenthese_si_negatif(xA)} \\\\ y_B=2\\times ${yI}-${ecriture_parenthese_si_negatif(yA)}\\end{cases}$`
+                    texte_corr += `<br>On en déduit :  $\\begin{cases}x_B={${tex_nombre(2*xI-xA)}}\\\\y_B=${tex_nombre(2*yI-yA)}\\end{cases}$`
+                   texte_corr += `<br>Au final : $B\\left( ${tex_nombre(2*xI-xA)};${tex_nombre(2*yI-yA)}\\right)$`
+                   
+
+                     ;   
+                   break ;
+             case 3 : 
+        
+              
+                   xA=randint(0,5)*choice([-1,1])
+                   yA=randint(0,9)*choice([-1,1])
+                   ux=randint(0,9)*choice([-1,1])
+                   uy=randint(0,9)*choice([-1,1])
+                   xB=xA+ux
+                   yB=yA+uy
+                   xC=xA+uy*choice([-1,1])+randint(1,3)
+                   yC=yA+ux*choice([-1,1])
+
+                   XAB=(xB-xA)*(xB-xA)
+                   YAB=(yB-yA)*(yB-yA);
+                   AB=XAB+YAB;
+                   XAC=(xC-xA)*(xC-xA)
+                   YAC=(yC-yA)*(yC-yA);
+                   AC=XAC+YAC;
+                
+                    texte =`Dans un repère orthonormé (O,I,J), on donne les points suivants :`
+                    texte +=` $A\\left(${xA};${yA}\\right)$ ; $B\\left(${xB};${yB}\\right).$`
+                    texte += `<br>Le point $C\\left(${xC};${yC}\\right)$ appartient-il au cercle de centre $A$ passant par $B$ ?`;
+                                   
+                    texte_corr = `Le point $C$ appartient au cercle de centre $A$ passant par $B$ si et seulement si $CA=CB.$`
+                    texte_corr += `<br>On calcule séparément donc ces deux distances :`
+                    texte_corr += `<br>On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
+                    texte_corr +=` <br>alors on a : $AB=\\sqrt{\\left(x_B-x_A\\right)^{2}+\\left(y_B-y_A\\right)^{2}}.$<br>`
+                    texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
+                    texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
+                    texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
+                   
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
+                    texte_corr +=`De même : $AC=\\sqrt{\\left(${xC}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yC}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
+                    texte_corr += `$\\phantom{De même :       } AC=\\sqrt{${XAC}+${YAC}}$<br>`
+                    texte_corr +=`$\\phantom{De même :       } AC=\\sqrt{${tex_nombre(XAC+YAC)}}$<br>`
+                   
+                        { texte_corr +=`$\\phantom{De même :  } AC=2$<br>`}
+                    texte_corr +=`On observe que $AC\\neq AB$ donc le point $C$ n'appartient pas au cercle de centre $A$ et passant par $B$`
+
+                    ;   
+                   break ;
+            } 
+            if (this.liste_questions.indexOf(texte)==-1)
+                { // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+                }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+     this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Application directe de la formule 2 : Application indirecte de la formule '];
+}  
+
+
+function Distance(){
+Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Utiliser la mesure de la distance de deux points dans un repère orthonormé";
+   
+    this.nb_questions = 2;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 1 ; // 
+
+    this.nouvelle_version = function(numero_de_l_exercice)
+    {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3];
+     if (this.sup == 1) {
+            type_de_questions_disponibles = [1] 
+        }
+      if (this.sup == 2) {
+            type_de_questions_disponibles = [2,3] 
+        }
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
+    for (let i = 0, a,ux,uy,d,e,g,xA,yA,xB,yB,xC,yC,AB,XAB,YAB,XAC,YAC,AC,t,l, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) 
+    {
+    type_de_questions = liste_type_de_questions[i];
+    switch (type_de_questions){
+                        // Cas par cas, on définit le type de nombres que l'on souhaite
+                        // Combien de chiffres ? Quelles valeurs ?
+            
+                case 1 : 
+        
+                    g =grille(-9,-9,9,9)
+                    xA=randint(0,5)*choice([-1,1])
+                    yA=randint(0,5)*choice([-1,1])
+                    xB=randint(0,5)*choice([-1,1])
+                    yB=randint(0,5)*choice([-1,1])
+                    A = point(xA,yA,'A','red')
+                    B = point(xB,yB,'B','red')
+                    t=tracePoint(A,B)
+                    l=labelPoint(A,B)
+                    a=axes(-2,-9,9,9)
+                    XAB=(xB-xA)*(xB-xA)
+                    YAB=(yB-yA)*(yB-yA);
+                    AB=XAB+YAB;
+                
+                    texte =`Dans un repère orthonormé $(O,I,J)$, on donne les points suivants :`
+                    texte +=` $A\\left(${xA};${yA}\\right)$ et $B\\left(${xB};${yB}\\right)$`
+                    texte += `<br>Calculer la distance $AB$ en justifiant le calcul.`;
+                                   
+                    
+                    texte_corr = `On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
+                    texte_corr +=` alors on a : $AB=\\sqrt{\\left(x_B-x_A\\right)^{2}+\\left(y_B-y_A\\right)^{2}}.$<br>`
+                    texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
+                    texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
+                    texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
+                    if (AB%100==0 && AB!=100)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
+                    if (AB%81==0 && AB!=81)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
+                    if (AB%64==0 && AB!=64)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
+                    if (AB%49==0 && AB!=49)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
+                     if (AB%36==0&& AB!=36)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
+                     if (AB%25==0 && AB!=25)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
+                     if (AB%64!=0 && AB%16==0&& AB!=16)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
+                    if (AB%81!=0 && AB%9==0 && AB!=9)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
+                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
+                      if (AB==100)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
+                    if (AB==81)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
+                      if (AB==64)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
+                      if (AB==49)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
+                      if (AB==36)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
+                      if (AB==25)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
+                      if (AB==16)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
+                      if (AB==9)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
+                      if (AB==4)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
+                     if (AB==1)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
+
+                     ;   
+                   break ;
+             case 2 : 
+        
+              
+                   xA=randint(0,5)*choice([-1,1])
+                   yA=randint(0,9)*choice([-1,1])
+                   ux=randint(0,9)*choice([-1,1])
+                   uy=randint(0,9)*choice([-1,1])
+                   xB=xA+ux
+                   yB=yA+uy
+                   xC=xA+uy*choice([-1,1])
+                   yC=yA+ux*choice([-1,1])
+
+                   XAB=(xB-xA)*(xB-xA)
+                   YAB=(yB-yA)*(yB-yA);
+                   AB=XAB+YAB;
+                   XAC=(xC-xA)*(xC-xA)
+                   YAC=(yC-yA)*(yC-yA);
+                   AC=XAC+YAC;
+                
+                    texte =`Dans un repère orthonormé (O,I,J), on donne les points suivants :`
+                    texte +=` $A\\left(${xA};${yA}\\right)$ ; $B\\left(${xB};${yB}\\right)$`
+                    texte += `<br>Le point $C\\left(${xC};${yC}\\right)$ appartient-il au cercle de centre $A$ passant par $B$ ?`;
+                                   
+                    texte_corr = `Le point $C$ appartient au cercle de centre $A$ passant par $B$ si et seulement si $CA=CB.$`
+                    texte_corr += `<br>On calcule séparément donc ces deux distances :`
+                    texte_corr += `<br>On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
+                    texte_corr +=` alors on a : $AB=\\sqrt{\\left(x_B-x_A\\right)^{2}+\\left(y_B-y_A\\right)^{2}}$<br>`
+                    texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
+                    texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
+                    texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
+                    if (AB%100==0 && AB!=100)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
+                    if (AB%81==0 && AB!=81)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
+                    if (AB%64==0 && AB!=64)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
+                    if (AB%49==0 && AB!=49)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
+                     if (AB%36==0&& AB!=36)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
+                     if (AB%25==0 && AB!=25)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
+                     if (AB%64!=0 && AB%16==0&& AB!=16)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
+                    if (AB%81!=0 && AB%9==0 && AB!=9)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
+                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
+                      if (AB==100)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
+                    if (AB==81)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
+                      if (AB==64)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
+                      if (AB==49)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
+                      if (AB==36)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
+                      if (AB==25)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
+                      if (AB==16)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
+                      if (AB==9)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
+                      if (AB==4)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
+                      if (AB==1)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
+
+                    texte_corr +=`De même : $AC=\\sqrt{\\left(${xC}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yC}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
+                    texte_corr += `$\\phantom{De même :       } AC=\\sqrt{${XAC}+${YAC}}$<br>`
+                    texte_corr +=`$\\phantom{De même :       } AC=\\sqrt{${tex_nombre(XAC+YAC)}}$<br>`
+                    if (AC%100==0 && AC!=100)
+                        { texte_corr +=`$\\phantom{De même :  } AC=10\\sqrt{${tex_nombre((AC))/100}}$<br>`}
+                    if (AC%81==0 && AC!=81)
+                        { texte_corr +=`$\\phantom{De même :  } AC=9\\sqrt{${tex_nombre((AC))/81}}$<br>`}
+                    if (AC%64==0 && AC!=64)
+                        { texte_corr +=`$\\phantom{De même :  } AC=8\\sqrt{${tex_nombre((AC))/64}}$<br>`}
+                    if (AC%49==0 && AC!=49)
+                        { texte_corr +=`$\\phantom{De même :  } AC=7\\sqrt{${tex_nombre((AC))/49}}$<br>`}
+                     if (AC%36==0&& AC!=36)
+                        { texte_corr +=`$\\phantom{De même :  } AC=6\\sqrt{${tex_nombre((AC))/36}}$<br>`}
+                     if (AC%25==0 && AC!=25)
+                        { texte_corr +=`$\\phantom{De même :  } AC=5\\sqrt{${tex_nombre((AC))/25}}$<br>`}
+                     if (AC%64!=0 && AC%16==0&& AC!=16)
+                        { texte_corr +=`$\\phantom{De même :  } AC=4\\sqrt{${tex_nombre((AC))/16}}$<br>`}
+                    if (AC%81!=0 && AC%9==0 && AC!=9)
+                        { texte_corr +=`$\\phantom{De même :  } AC=3\\sqrt{${tex_nombre((AC))/9}}$<br>`}
+                    if (AC%16!=0 && AC%64!==0 &&AC%4==0 && AC!=4)
+                        { texte_corr +=`$\\phantom{De même :  } AC=2\\sqrt{${tex_nombre((AC))/4}}$<br>`}
+                      if (AC==100)
+                        { texte_corr +=`$\\phantom{De même :  } AC=10$<br>`}
+                    if (AC==81)
+                        { texte_corr +=`$\\phantom{De même :  } AC=9$<br>`}
+                      if (AC==64)
+                        { texte_corr +=`$\\phantom{De même :  } AC=8$<br>`}
+                      if (AC==49)
+                        { texte_corr +=`$\\phantom{De même :  } AC=7$<br>`}
+                      if (AC==36)
+                        { texte_corr +=`$\\phantom{De même :  } AC=6$<br>`}
+                      if (AC==25)
+                        { texte_corr +=`$\\phantom{De même :  } AC=5$<br>`}
+                      if (AC==16)
+                        { texte_corr +=`$\\phantom{De même :  } AC=4$<br>`}
+                      if (AC==9)
+                        { texte_corr +=`$\\phantom{De même :  } AC=3$<br>`}
+                      if (AC==4)
+                        { texte_corr +=`$\\phantom{De même :  } AC=2$<br>`}
+                      if (AC==1)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=1$<br>`}
+
+                    texte_corr +=`On observe que $AC=AB$ donc le point $A$ est équidistant de $B$ et $C$.`
+                     texte_corr +=`<br>Le point $C$ appartient bien au cercle de centre $A$ et passant par $B$.`
+                    ;   
+                   break ;
+             case 3 : 
+        
+              
+                   xA=randint(0,5)*choice([-1,1])
+                   yA=randint(0,9)*choice([-1,1])
+                   ux=randint(0,9)*choice([-1,1])
+                   uy=randint(0,9)*choice([-1,1])
+                   xB=xA+ux
+                   yB=yA+uy
+                   xC=xA+uy*choice([-1,1])+randint(1,3)
+                   yC=yA+ux*choice([-1,1])
+
+                   XAB=(xB-xA)*(xB-xA)
+                   YAB=(yB-yA)*(yB-yA);
+                   AB=XAB+YAB;
+                   XAC=(xC-xA)*(xC-xA)
+                   YAC=(yC-yA)*(yC-yA);
+                   AC=XAC+YAC;
+                
+                    texte =`Dans un repère orthonormé (O,I,J), on donne les points suivants :`
+                    texte +=` $A\\left(${xA};${yA}\\right)$ ; $B\\left(${xB};${yB}\\right).$`
+                    texte += `<br>Le point $C\\left(${xC};${yC}\\right)$ appartient-il au cercle de centre $A$ passant par $B$ ?`;
+                                   
+                    texte_corr = `Le point $C$ appartient au cercle de centre $A$ passant par $B$ si et seulement si $CA=CB.$`
+                    texte_corr += `<br>On calcule séparément donc ces deux distances :`
+                    texte_corr += `<br>On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
+                    texte_corr +=` alors on a : $AB=\\sqrt{\\left(x_B-x_A\\right)^{2}+\\left(y_B-y_A\\right)^{2}}.$<br>`
+                    texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
+                    texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
+                    texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
+                    if (AB%100==0 && AB!=100)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
+                    if (AB%81==0 && AB!=81)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
+                    if (AB%64==0 && AB!=64)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
+                    if (AB%49==0 && AB!=49)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
+                     if (AB%36==0&& AB!=36)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
+                     if (AB%25==0 && AB!=25)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
+                     if (AB%64!=0 && AB%16==0&& AB!=16)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
+                    if (AB%81!=0 && AB%9==0 && AB!=9)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
+                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
+                      if (AB==100)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
+                    if (AB==81)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
+                      if (AB==64)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
+                      if (AB==49)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
+                      if (AB==36)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
+                      if (AB==25)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
+                      if (AB==16)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
+                      if (AB==9)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
+                      if (AB==4)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
+                     if (AB==1)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
+
+                    texte_corr +=`De même : $AC=\\sqrt{\\left(${xC}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yC}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
+                    texte_corr += `$\\phantom{De même :       } AC=\\sqrt{${XAC}+${YAC}}$<br>`
+                    texte_corr +=`$\\phantom{De même :       } AC=\\sqrt{${tex_nombre(XAC+YAC)}}$<br>`
+                    if (AC%100==0 && AC!=100)
+                        { texte_corr +=`$\\phantom{De même :  } AC=10\\sqrt{${tex_nombre((AC))/100}}$<br>`}
+                    if (AC%81==0 && AC!=81)
+                        { texte_corr +=`$\\phantom{De même :  } AC=9\\sqrt{${tex_nombre((AC))/81}}$<br>`}
+                    if (AC%64==0 && AC!=64)
+                        { texte_corr +=`$\\phantom{De même :  } AC=8\\sqrt{${tex_nombre((AC))/64}}$<br>`}
+                    if (AC%49==0 && AC!=49)
+                        { texte_corr +=`$\\phantom{De même :  } AC=7\\sqrt{${tex_nombre((AC))/49}}$<br>`}
+                     if (AC%36==0&& AC!=36)
+                        { texte_corr +=`$\\phantom{De même :  } AC=6\\sqrt{${tex_nombre((AC))/36}}$<br>`}
+                     if (AC%25==0 && AC!=25)
+                        { texte_corr +=`$\\phantom{De même :  } AC=5\\sqrt{${tex_nombre((AC))/25}}$<br>`}
+                     if (AC%64!=0 && AC%16==0&& AC!=16)
+                        { texte_corr +=`$\\phantom{De même :  } AC=4\\sqrt{${tex_nombre((AC))/16}}$<br>`}
+                    if (AC%81!=0 && AC%9==0 && AC!=9)
+                        { texte_corr +=`$\\phantom{De même :  } AC=3\\sqrt{${tex_nombre((AC))/9}}$<br>`}
+                    if (AC%16!=0 && AC%64!==0 &&AC%4==0 && AC!=4)
+                        { texte_corr +=`$\\phantom{De même :  } AC=2\\sqrt{${tex_nombre((AC))/4}}$<br>`}
+                      if (AC==100)
+                        { texte_corr +=`$\\phantom{De même :  } AC=10$<br>`}
+                    if (AC==81)
+                        { texte_corr +=`$\\phantom{De même :  } AC=9$<br>`}
+                      if (AC==64)
+                        { texte_corr +=`$\\phantom{De même :  } AC=8$<br>`}
+                      if (AC==49)
+                        { texte_corr +=`$\\phantom{De même :  } AC=7$<br>`}
+                      if (AC==36)
+                        { texte_corr +=`$\\phantom{De même :  } AC=6$<br>`}
+                      if (AC==25)
+                        { texte_corr +=`$\\phantom{De même :  } AC=5$<br>`}
+                      if (AC==16)
+                        { texte_corr +=`$\\phantom{De même :  } AC=4$<br>`}
+                      if (AC==9)
+                        { texte_corr +=`$\\phantom{De même :  } AC=3$<br>`}
+                      if (AC==4)
+                        { texte_corr +=`$\\phantom{De même :  } AC=2$<br>`}
+                     if (AC==1)
+                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=1$<br>`}
+
+                    texte_corr +=`On observe que $AC\\neq AB$ donc le point $C$ n'appartient pas au cercle de centre $A$ et passant par $B$`
+
+                    ;   
+                   break ;
+            } 
+            if (this.liste_questions.indexOf(texte)==-1)
+                { // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte);
+                this.liste_corrections.push(texte_corr);
+                i++;
+                }
+            cpt++;  
+        }
+        liste_de_question_to_contenu(this);
+    }
+     this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Application directe de la formule 2 : Application en situation'];
+}   
+
+/* auteur Stéphane Guyon*/
+
+
+function union_et_intersection_intervalles_de_R()
+{
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Utiliser et comprendre les symboles $I\\cup J$ et $I\\cap J$ avec les intervalles de $\\mathbb{R}.$";
     this.consigne = "Répondre aux questions suivantes: :"
@@ -28033,15 +28876,18 @@ Exercice.call(this); // Héritage de la classe Exercice()
     this.nb_cols_corr = 2;
     this.sup = 1 ; // 
 
-    this.nouvelle_version = function(numero_de_l_exercice){
+    this.nouvelle_version = function(numero_de_l_exercice)
+    {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let type_de_questions_disponibles = [1];
+    let type_de_questions_disponibles = [1,2,3,4,5,6,7,8,9,10];
     let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
-    for (let i = 0, a,b,c,d,s, e,f,A,B,c1,c2,int, axe, texte, texte_corr, cpt=0; 
-        i < this.nb_questions && cpt<50; ) {
+    for (let i = 0, a,b,c,d,s, e,f,A,B,c1,c2,c3,c4, X1,X2,int,int1,int2, axe, texte, texte_corr, cpt=0; 
+        i < this.nb_questions && cpt<50; ) 
+        {
             type_de_questions = liste_type_de_questions[i];
-    switch (type_de_questions){
+        switch (type_de_questions)
+            {
                         // Cas par cas, on définit le type de nombres que l'on souhaite
                         // Combien de chiffres ? Quelles valeurs ?
                 case 1 : 
@@ -28054,15 +28900,28 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     d = randint(e,45);
                     s = segment(0,0,10,0);
                     s.styleExtremites = '->';
-                    A = point(2,0,a);
-                    B = point(6,0,b);
-                    c1 = crochetG(A);
-                    c2 = crochetD(B);
-                    int = intervalle(A,B);
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a,'red');
+                    B = point(5,0,b);
+                    C = point(6,0,c);
+                    D = point(9,0,d);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',0);
+                    int2 = intervalle(C,D,'blue',0);
+
 
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`
                       ;
-                    texte_corr = `Aucun réel ne peut appartenir à chacun des deux ensembles.<br>
+                        
+                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr += `<br>On cherche les réels qui sont à la fois dans $[${a};${b}]$ et dans $[${c};${d}]$.`
+                    texte_corr += `<br>On regarde la partie de l'intervalle qui est coloriée à la fois en bleu et en rouge :<br>`
+                    texte_corr += `<br>Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
                     $I=\\emptyset$`;                     
                     break ;
                 case 2 : 
@@ -28073,8 +28932,26 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c = randint(e,35);
                         e=c+1;
                     d = randint(e,45);
+                      s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(5,0,b);
+                    C = point(6,0,c);
+                    D = point(9,0,d);
+                     c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',0);
+                    int2 = intervalle(C,D,'blue',0);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
-                    texte_corr = `Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
+                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}]$.`
+                    texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée, soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
+                    texte_corr += `<br>Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
                     On ne peut pas simplifier l'écriture de $I$ qui s'écrit donc $I=[${a};${b}] \\cup [${c};${d}].$`;                     
                     break ;
                 case 3 : 
@@ -28085,8 +28962,27 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c = randint(16,e);
                         e=b+1;
                     d = randint(e,65);
+                    s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    C = point(5,0,c);
+                    D = point(9,0,d);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',-0.1);
+                    int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`;
-                    texte_corr = `$I=[${c};${b}]$`;                     
+                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+
+                    texte_corr += `<br>On cherche les réels qui sont à la fois dans $[${a};${b}]$ et dans $[${c};${d}]$.`
+                    texte_corr += `<br>On regarde la partie de l'intervalle qui est coloriée à la fois en bleu et en rouge :<br>`
+                     texte_corr += `$I=[${c};${b}]$`;                     
                     break ;
                 case 4 : 
                    a = randint(1,15);
@@ -28096,8 +28992,26 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c = randint(16,e);
                         e=b+1;
                     d = randint(e,65);
+                    s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    C = point(5,0,c);
+                    D = point(9,0,d);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',-0.1);
+                    int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
-                    texte_corr = `$I=[${a};${d}]$`;                     
+                     texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                     texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}]$.`
+                    texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée, soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
+                    texte_corr += `$I=[${a};${d}]$`;                     
                     break ;
                 case 5 : 
                     a = randint(1,15);
@@ -28108,8 +29022,26 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c = randint(e,f);
                         e=c+1;
                     d = randint(e,f);
+                     s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(9,0,b);
+                    C = point(5,0,c);
+                    D = point(7,0,d);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',-0.1);
+                    int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`;
-                    texte_corr = `On $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${c};${d}].$`;                     
+                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr += `<br>On cherche les réels qui sont à la fois dans $[${a};${b}]$ et dans $[${c};${d}]$.`
+                    texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée en bleu et rouge :<br>`
+                    texte_corr += `On observe que $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${c};${d}].$`;                     
                     break ;
                  case 6 : 
                     a = randint(1,15);
@@ -28120,21 +29052,163 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c = randint(e,f);
                         e=c+1;
                     d = randint(e,f);
+                       s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(9,0,b);
+                    C = point(5,0,c);
+                    D = point(7,0,d);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',-0.1);
+                    int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
-                    texte_corr = `On $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${a};${b}].$`;                     
+                     texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                     texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}]$.`
+                    texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
+                    texte_corr += `On $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${a};${b}].$`;                     
                     break ;
-             } 
-            if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+                case 7 : 
+                    a = randint(1,15);
+                        e=a+1;
+                    b = randint(e,25);
+                        e=b+1;
+                    c = randint(e,35);
+                        e=c+1;
+                    d = randint(e,45);
+                    s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a,'red');
+                    B = point(5,0,b);
+                    C = point(6,0,c);
+                    D = point(9,0,d);
+                    c1 = crochetG(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',0);
+                    int2 = intervalle(C,D,'blue',0);
+
+
+                    texte = `Donner si possible, une écriture simplifiée de $I=]${a};${b}] \\cap [${c};${d}].$`
+                      ;
+                        
+                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr += `<br>On cherche les réels qui sont à la fois dans $]${a};${b}]$ et dans $[${c};${d}]$.`
+                    texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée en bleu et rouge :<br>`
+                    texte_corr +=`<br>Aucun réel n'appartient aux deux ensembles.<br>
+                    $I=\\emptyset$`;                     
+                    break ;
+                case 8 : 
+                    a = randint(1,15);
+                        e=a+1;
+                    b = randint(e,25);
+                        e=b+1;
+                    c = randint(e,35);
+                        e=c+1;
+                    d = randint(e,45);
+                      s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(5,0,b);
+                    C = point(6,0,c);
+                    D = point(9,0,d);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetD(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',0);
+                    int2 = intervalle(C,D,'blue',0);
+                    texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}[.$`;
+                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}[$.`
+                    texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée soit en bleu, soit en rouge, soit en bleu et rouge :`
+                    texte_corr += `<br>Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
+                    On ne peut pas simplifier l'écriture de $I$ qui s'écrit donc $I=[${a};${b}] \\cup [${c};${d}[.$`;                     
+                    break ;
+                case 9 : 
+                    a = randint(1,15);
+                        e=a+4;
+                    b = randint(29,45);
+                        e=b-1;
+                    c = randint(16,e);
+                        e=b+1;
+                    d = randint(e,65);
+                    s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    C = point(5,0,c);
+                    D = point(9,0,d);
+                    c1 = crochetG(A,'red');
+                    c2 = crochetD(B,'red');
+                    c3 = crochetD(C,'blue');
+                    c4 = crochetG(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',-0.1);
+                    int2 = intervalle(C,D,'blue',0.1);
+                    texte = `Donner si possible, une écriture simplifiée de $I=]${a};${b}[ \\cap [${c};${d}].$`;
+                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+
+                    texte_corr += `<br>On cherche les réels qui sont à la fois dans $]${a};${b}[$ et dans $[${c};${d}]$.`
+                    texte_corr += `<br>On regarde la partie de l'intervalle qui est coloriée à la fois en bleu et en rouge :<br>`
+                     texte_corr += `$I=[${c};${b}[$`;                     
+                    break ;
+                case 10 : 
+                   a = randint(1,15);
+                        e=a+4;
+                    b = randint(29,45);
+                        e=b-1;
+                    c = randint(16,e);
+                        e=b+1;
+                    d = randint(e,65);
+                    s = segment(0,0,10,0);
+                    s.styleExtremites = '->';
+                    X1 = point(0,0);
+                    X2 = point(12,0);
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    C = point(5,0,c);
+                    D = point(9,0,d);
+                    c1 = crochetG(A,'red');
+                    c2 = crochetD(B,'red');
+                    c3 = crochetG(C,'blue');
+                    c4 = crochetD(D,'blue');
+                    int = intervalle(X1,X2,'black',0);
+                    int1 = intervalle(A,B,'red',-0.1);
+                    int2 = intervalle(C,D,'blue',0.1);
+                    texte = `Donner si possible, une écriture simplifiée de $I=]${a};${b}[ \\cup ]${c};${d}[.$`;
+                     texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                     texte_corr += `<br>On cherche les réels qui sont ou bien dans $]${a};${b}[$, ou bien dans $]${c};${d}[$.`
+                    texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée, soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
+                    texte_corr += `$I=]${a};${d}[$`;                     
+                    break ;
+            } 
+            if (this.liste_questions.indexOf(texte)==-1)
+                { // Si la question n'a jamais été posée, on en créé une autre
                 this.liste_questions.push(texte);
                 this.liste_corrections.push(texte_corr);
                 i++;
-            }
+                }
             cpt++;  
         }
         liste_de_question_to_contenu(this);
     }
-    
-}
+}   
+ 
 /* auteur Stéphane Guyon*/
 function intervalles_de_R(){
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -28148,10 +29222,20 @@ Exercice.call(this); // Héritage de la classe Exercice()
     this.nouvelle_version = function(numero_de_l_exercice){
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let type_de_questions_disponibles = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+    let type_de_questions_disponibles = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
     let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) ;
-    for (let i = 0, a,b,c,d,e, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+    for (let i = 0, a,b,c,d,e,s,X1,X2,X,A,B,c1,c2,int,int1, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
             type_de_questions = liste_type_de_questions[i];
+       
+      
+        s = segment(0,0,12,0);
+        s.styleExtremites = '->';
+        X1 = point(0,0);
+        X2 = point(12,0);
+       
+            
+        int = intervalle(X1,X2,'black',0);
+    
     switch (type_de_questions){
                         // Cas par cas, on définit le type de nombres que l'on souhaite
                         // Combien de chiffres ? Quelles valeurs ?
@@ -28159,107 +29243,188 @@ Exercice.call(this); // Héritage de la classe Exercice()
                 case 1 : 
                     a = randint(1,15);
                     b = randint(a,25);
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x>${a}$`;
-                    texte_corr = `$I=]${a};+\\infty[$`;                     
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    X = point(11.5,0);
+                    c1 = crochetG(A,'red');
+                    int1 = intervalle(A,X2,'red',-0.1);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x>${a}$ et représenter l'intervalle sur une droite graduée.`;
+                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)
+                    texte_corr += `<br>$I=]${a};+\\infty[$`;                     
                     break ;
                 
                 case 2 : 
                     a = randint(1,15);
                     b = randint(a,25); 
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\geqslant ${a}$`;
-                    texte_corr = `$I=[${a};+\\infty[$`;
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                     X2 = point(12,0);
+                    c1 = crochetD(A,'red');
+                    int1 = intervalle(A,X2,'red',-0.1);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\geqslant ${a}$ et représenter l'intervalle sur une droite graduée.`;
+                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,c1)
+                    texte_corr += `$I=[${a};+\\infty[$`;
                     break ;
 
                 case 3 : 
                     a = randint(1,15);
                     b = randint(a,25);
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x<${a}$`;
-                    texte_corr = `$I=]-\\infty;${a}[$`; 
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetD(A,'red');
+                    int1 = intervalle(X1,A,'red',-0.1);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x<${a}$ et représenter l'intervalle sur une droite graduée.`;
+                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,c1)
+                    texte_corr += `$I=]-\\infty;${a}[$`; 
                     break ;
+                
                 case 4 : 
                     a = randint(1,15);
                     b = randint(a,25);
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\leqslant ${a}$`;
-                    texte_corr = `$I=]-\\infty;${a}]$`;
+                     A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetG(A,'red');
+                    int1 = intervalle(X1,A,'red',-0.1);
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\leqslant ${a}$ et représenter l'intervalle sur une droite graduée.`;
+                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,c1)
+                    texte_corr += `$I=]-\\infty;${a}]$`;
                     break ;
+                
                 case 5 : 
                     a = randint(1,15);
                     c=a+1;
-                    b = randint(c,25);                    
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a} < x < ${b}$`;
-                    texte_corr = `$I=]${a};${b}[$`;
+                    b = randint(c,25);  
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetG(A,'red');
+                    c2 = crochetD(B,'red');
+                    int1 = intervalle(A,B,'red',-0.1);                  
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a} < x < ${b}$ et représenter l'intervalle sur une droite graduée.`;
+                     texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                     texte_corr += `$I=]${a};${b}[$`;
                     break ;
 
                 case 6 : 
                     a = randint(1,15);
                     c=a+1;
-                    b = randint(c,25);                    
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x<${b}$`;
-                    texte_corr = `$I=[${a};${b}[$`;
+                    b = randint(c,25);    
+                     A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetD(B,'red');
+                    int1 = intervalle(A,B,'red',-0.1);                  
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x<${b}$ et représenter l'intervalle sur une droite graduée.`;
+                                 texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                                 texte_corr += `$I=[${a};${b}[$`;
                     break ;
                 
                 case 7 : 
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x\\leqslant ${b}$`;
-                    texte_corr = `$I=[${a};${b}]$`;
+                       A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    int1 = intervalle(A,B,'red',-0.1);  
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x\\leqslant ${b}$ et représenter l'intervalle sur une droite graduée.`;
+                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                      texte_corr += `$I=[${a};${b}]$`;
                     break ;
                 
                 case 8 :
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}< x\\leqslant ${b}$`;
-                    texte_corr = `$I=]${a};${b}]$`;
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetG(A,'red');
+                    c2 = crochetG(B,'red');
+                    int1 = intervalle(A,B,'red',-0.1);  
+                    texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}< x\\leqslant ${b}$ et représenter l'intervalle sur une droite graduée.`;
+                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                      texte_corr += `$I=]${a};${b}]$`;
                     break ;
                 
                 case 9 : 
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};${b}]$`;
-                    texte_corr = `$${a}< x\\leqslant ${b}$`;  
-                
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetG(A,'red');
+                    c2 = crochetG(B,'red');
+                    int1 = intervalle(A,B,'red',-0.1);  
+                    texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};${b}]$ et représenter l'intervalle sur une droite graduée.`;
+                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                    texte_corr += `$${a}< x\\leqslant ${b}$`;  
+                     break ;
                 case 10 : 
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}]$`;
-                    texte_corr = `$${a}\\leqslant x\\leqslant ${b}$`;  
+                    A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetG(B,'red');
+                    int1 = intervalle(A,B,'red',-0.1);  
+                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}]$ et représenter l'intervalle sur une droite graduée.`; 
+                     texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                     texte_corr += `$${a}\\leqslant x\\leqslant ${b}$`;  
+                     break ;
                 case 11 : 
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}[$`;
-                    texte_corr = `$${a}\\leqslant x< ${b}$`; 
-
+                     A = point(2,0,a);
+                    B = point(6,0,b);
+                    c1 = crochetD(A,'red');
+                    c2 = crochetD(B,'red');
+                    int1 = intervalle(A,B,'red',-0.1);  
+                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}[$ et représenter l'intervalle sur une droite graduée.`;
+                       texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)  
+                     texte_corr += `$${a}\\leqslant x< ${b}$`; 
+                     break ;
                 case 12 : 
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'inéquation correspondant à $x \\in [${a};+\\infty[$`;
-                    texte_corr = `$x \\geqslant ${a}$`;  
-
+                    A = point(2,0,a);
+                    B = point(12,0,b);
+                    c1 = crochetG(A,'red');
+                    
+                    int1 = intervalle(A,B,'red',-0.1);  texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};+\\infty[ et représenter l'intervalle sur une droite graduée.$`;
+                       texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)  
+                       texte_corr += `$x > ${a}$`;    
+                         break ;
                 case 13 : 
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};+\\infty[$`;
-                    texte_corr = `$x > ${a}$`;    
-                 
+                     A = point(7,0,a);
+                    B = point(12,0,b);
+                    c1 = crochetD(A,'red');
+                    
+                    int1 = intervalle(X1,A,'red',-0.1);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}[$ et représenter l'intervalle sur une droite graduée.`;
+                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)  
+                      texte_corr += `$x < ${a}$`; 
+                         break ;   
                 case 14 : 
                     a = randint(1,15);
                     c=a+1;
                     b = randint(c,25);
-                    texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}[$`;
-                    texte_corr = `$x < ${a}$`;    
-                case 15 : 
-                    a = randint(1,15);
-                    c=a+1;
-                    b = randint(c,25);
-                    texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}]$`;
-                    texte_corr = `$x \\leqslant ${a}$`;    
+                       A = point(7,0,a);
+                    B = point(12,0,b);
+                    c1 = crochetG(A,'red');
+                    
+                    int1 = intervalle(X1,A,'red',-0.1);
+                    texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}]$ et représenter l'intervalle sur une droite graduée.`;
+                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)  
+                      texte_corr += `$x \\leqslant ${a}$`;   
+                         break ;
+
+                
              } 
             if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
                 this.liste_questions.push(texte);
@@ -28931,7 +30096,9 @@ Exercice.call(this); // Héritage de la classe Exercice()
     
 }
 
+
 function proprietes_racine_carree(){
+
     Exercice.call(this); // Héritage de la classe Exercice()
         this.titre = "Connaître les propriétés calculatoires des racines carrées";
         this.consigne = "Effectuer, si possible, les calculs suivants :"
@@ -29196,7 +30363,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
 
 function Extraire_un_carre_parfait_d_une_racine_carree() {
     Exercice.call(this); // Héritage de la classe Exercice()
-    this.titre = "Extraire un carré parfait d'une racine carrée";
+    this.titre = "Ecrire le nombre proposé sous la forme $a\\sqrt{b}$";
     this.consigne = " Ecrire le nombre proposé sous la forme $a\\sqrt{b}$ où $a$ est un entier et $b$ le plus petit entier possible:";
     this.nb_questions = 4;
     this.nb_cols = 2;
