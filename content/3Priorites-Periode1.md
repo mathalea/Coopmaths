@@ -11,7 +11,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3>
 {{< liste >}}
-	{{% alea_url "..." "" %}}
+	{{% alea_url "docx sur educ-scol..." "https://cache.media.eduscol.education.fr/file/RS2020-Documents_pedagogiques/86/5/outils_positionnement_Mathematiques_3eme_1309865.docx" %}}
 {{< /liste >}}
 
 
