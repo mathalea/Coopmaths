@@ -6,7 +6,8 @@ description: "MathALEA 2D - Les codages"
 
 
 
-<!-- {{% alea2d "mediatrices"  %}} -->
+
+{{% alea2d "codage"  %}}
 
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>
@@ -24,5 +25,8 @@ description: "MathALEA 2D - Les codages"
 * `m = codageMediatrice(A,B,'blue')` // Ajoute le codage du milieu et de l'angle droit pour la médiatrice de [AB] en bleu
 * `m = codageHauteurTriangle(A,B,C,'blue')` // Code en bleu la hauteur issue de B dans le triangle ABC et trace en pointillés (AC) si le pied de la hauteur est à l'extérieur du triangle
 * `m = codageMedianeTriangle(A,B,C,'blue','//')` // Code en bleu le milieu de [AC]
+* `constructionMediatrice(A,B,detail=true,color='blue',markmilieu='×',markrayons='//',couleurMediatrice='red',epaisseurMediatrice=2)` // Construit en rouge la médiatrice de [AB] avec en pointillés et codés les rayons des arcs de cercles utilisés et le codage du milieu et de l'angle droit.
+* `ConstructionBissectrice(A,O,B,detail=false,color='blue',mark='×',tailleLosange=5,couleurBissectrice='green',epaiseurBissectrice = 2)` // Construit en vert la bissectrice de l'angle AOB en utilisant un écartement de compas de 5cm sans ajouter les deux derniers côtés du losange et le codage des égalités de longueur (detail=true pour les avoir)
+
 
 
