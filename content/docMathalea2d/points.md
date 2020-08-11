@@ -67,6 +67,7 @@ Voici d'autres commandes possibles pour les points :
 * `J = pointItersectionLC(d,c,'J',2)` // I est le deuxième point d'intersection, si il existe, de la droite (d) et du cercle (c)
 * `M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
 * `M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
+ * `P = barycentre(poly,'P','below')` // Crée le point P barycentre du polygone poly, son nom 'P' sera placé sous le point si il est tracé et labelisé.
 
 Pour le repère, on peut utiliser les commandes suivantes : 
 
