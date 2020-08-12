@@ -34,6 +34,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 			{{% priorite_alea "4C10-1 : Déterminer le signe d'un produit de nombres relatifs" "4C10-1" %}}
 			{{% priorite_alea "4C10-2 : Déterminer le signe d'un quotient de nombres relatifs" "4C10-2" %}}
 			{{% priorite_alea "4C30-1 : Encadrer par deux puissances de 10 d'exposants consécutifs" "4C30-1" %}}			
+			{{% priorite_alea "4C25-0 : Problèmes additifs et de comparaison sur les rationnels" "4C25-0" %}}			
 	</div>	
 {{< /liste_priorites >}}
 
@@ -71,8 +72,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
 			{{% priorite_alea "..." "" %}}
-			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}			
+			{{% priorite_alea "4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "4F12" %}}
 	</div>	
 {{< /liste_priorites >}}
 
@@ -82,12 +83,12 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Utiliser les notions de géométrie plane pour démontrer.</div>	
-			{{% priorite "L’élève connaît et utilise les cas d’égalité des triangles." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite "L’élève connaît et utilise les cas d’égalité des triangles." %}}			
+			{{% priorite_alea "3G23 : Reconnaître des triangles semblables dans différentes configurations" "3G23" %}}
 			{{% priorite "L’élève connaît et utilise le théorème de Thalès dans la configuration des triangles emboîtés." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "3G20 : Déterminer une longueur avec la propriété de Thales" "3G20" %}}
 			{{% priorite "L’élève connaît et utilise le théorème de Pythagore." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "4G20 : Déterminer une longueur avec l'égalité de Pythagore" "4G20" %}}
 	</div>	
 {{< /liste_priorites >}}
 
