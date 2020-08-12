@@ -63,7 +63,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
 			{{% priorite "Il résout des problèmes en utilisant la proportionnalité." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "6P11 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "6P11" %}}
 	</div>	
 {{< /liste_priorites >}}
 {{< liste_priorites >}}
