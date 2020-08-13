@@ -29,5 +29,13 @@ Cet outil servira principalement à la création d'exercices pour MathALEA mais 
   	{{% item "La programmation" "/docMathalea2d/programmation" %}}
 {{< /liste >}}
 
-Ce projet est libre de droit sous licence CC-BY-SA et le code est disponible [ici](https://github.com/remiangot/MathALEA/blob/master/include/mathalea2d.js).
+<div class="ui hidden divider"></div>
+
+<h2 class="ui horizontal divider header">À propos</h2>
+
+<div class="ui hidden divider"></div>
+
+MathALEA 2D a été développé par Rémi Angot et Jean-Claude Lhote durant l'été 2020.
+
+Comme le reste du site, MathALEA 2D est libre de droit sous licence CC-BY-SA et le code est disponible [ici](https://github.com/remiangot/MathALEA/blob/master/include/mathalea2d.js).
             
