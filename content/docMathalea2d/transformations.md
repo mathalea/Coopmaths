@@ -43,3 +43,4 @@ Il est possible d'animer les transformations d'un polygone.
 
 
 Pour toutes ces transformations, il est possible d'ajouter un dernier argument pour régler l'animation avec la syntaxe du SVG. Par défaut ce dernier argument est `'begin="0s" dur="2s" repeatCount="indefinite"'` si on met `'begin="1s" dur="5s" repeatCount="2"'` l'animation commencera au bout de 1 seconde, durera 5 secondes et ne se répètera que 2 fois. 
+{{% alea2d "transformations_animees"  %}}

@@ -27,6 +27,6 @@ description: "MathALEA 2D - Les codages"
 * `m = codageMedianeTriangle(A,B,C,'blue','//')` // Code en bleu le milieu de [AC]
 * `constructionMediatrice(A,B,detail=true,color='blue',markmilieu='×',markrayons='//',couleurMediatrice='red',epaisseurMediatrice=2)` // Construit en rouge la médiatrice de [AB] avec en pointillés et codés les rayons des arcs de cercles utilisés et le codage du milieu et de l'angle droit.
 * `ConstructionBissectrice(A,O,B,detail=false,color='blue',mark='×',tailleLosange=5,couleurBissectrice='green',epaiseurBissectrice = 2)` // Construit en vert la bissectrice de l'angle AOB en utilisant un écartement de compas de 5cm sans ajouter les deux derniers côtés du losange et le codage des égalités de longueur (detail=true pour les avoir)
-
+* `traceCompas(O,A,angle=20,color='gray',opacite=.7, epaisseur = 1, pointilles  = false)` // Fait un arc de cercle de 20° centré en A de centre O de couleur grise avec une opacité de 70%, une épaisseur de 1 pixel et en trait continu.
 
 
