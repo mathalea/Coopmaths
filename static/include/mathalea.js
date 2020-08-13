@@ -1126,7 +1126,7 @@ function trie_positifs_negatifs(liste){
 * Créé un string de nbsommets caractères dans l'ordre alphabétique et en majuscule qui ne soit pas dans la liste donnée en 2e argument
 * @Auteur Rémi Angot
 */
-function polygone(nbsommets,liste_a_eviter=[]){ 
+function creerNomDePolygone(nbsommets,liste_a_eviter=[]){ 
 	let premiersommet = randint(65,90-nbsommets);
 	let polygone="";
 	while(est_deja_donne(String.fromCharCode(premiersommet),liste_a_eviter)){
@@ -1520,7 +1520,7 @@ function tex_consigne(consigne){
 function tex_nombre(nb){
 	//Ecrit \nombre{nb} pour tous les nombres supérieurs à 1 000 (pour la gestion des espaces)
 	if (sortie_html) {
-		return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace '); // \nombre n'est pas pris en charge par katex
+		return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace ').replace(',','{,}'); // \nombre n'est pas pris en charge par katex
 	} else {
 		let result;
 		if (nb>999 || nombre_de_chiffres_dans_la_partie_decimale(nb)>3) { 
@@ -4004,38 +4004,43 @@ function decomp_fact_prem_array(n) {
 /**
  * @class
  * @classdesc Classe Triangles - Méthodes utiles pour les triangles *  
- * Choisi un nom au hasard dans un tableau statique
- * La méthode getNom() permet de récupérer ce nom et fournit un string en mode maths. Si le triangle se nomme AGE, alors getNom() renvoit un tableau de 5 éléments $ ; A ; G ; E et $, les $ traduisent le mode maths
- * Pour l'exemple le triangle se nomme AGE
- * La méthode getCotes() renvoie un tableau contenant les noms des segments des côtés du triangle en mode maths. [AG], [GE] et [EA] dans cet ordre.
- * La méthode getLongueurs() renvoie un tableau contenant les noms des longueurs des côtés du triangle en mode maths. AG, GE et EA dans cet ordre.
- * La méthode getLongueursValeurs() renvoie un tableau contenant les valeurs des longueurs des côtés du triangle.
- * La méthode getAngles() renvoie un tableau contenant les noms des angles du triangle en mode maths. AGE, GEA et EAG dans cet ordre.
- * La méthode getAnglesValeurs() renvoie un tableau contenant les valeurs des angles du triangle.
- * La méthode getSommets() renvoie un tableau contenant les noms des sommets du triangle en mode maths. A, G et E dans cet ordre.
- * La méthode getPerimetre() renvoie le périmètre du triangle
- * La méthode isTrueTriangleLongueurs() renvoie un booléen si le triangle définit à partir des longueurs est un vrai triangle non plat.
- * La méthode isPlatTriangleLongueurs() renvoie un booléen si le triangle définit à partir des longueurs est un triangle plat.
- * La méthode isTrueTriangleAngles() renvoie un booléen si le triangle définit à partir des angles existe et n'est pas un triangle plat.
- * La méthode isPlatTriangleAngles() renvoie un booléen si le triangle définit à partir des angles existe et est un triangle plat.
- * La méthode isQuelconque() renvoie  un booléen si le triangle définit à partir des angles ou des longueurs existe et est quelconque. Non Finalisée
+ * * @param {number} l1 une des longueurs du triangle 
+ * * @param {number} l2 une des longueurs du triangle 
+ * * @param {number} l3 une des longueurs du triangle 
+ * * @param {number} a1 un des angles du triangle
+ * * @param {number} a2 un des angles du triangle
+ * * @param {number} a3  un des angles du triangle
  * @author Sébastien Lozano
  */
 function Triangles(l1,l2,l3,a1,a2,a3) {
 	'use strict';
 	var self = this;
 
-	// liste de noms possibles pour un triangle
+	/**
+	 * @constant {array} nomsPossibles liste de noms possibles pour un triangle
+	 */
 	let nomsPossibles = ['AGE','AIL','AIR','ALU','AME','AMI','ANE','ARC','BAC','BAL','BAR','BEC','BEL','BIO','BIP','BIS','BLE','BOA','BOF','BOG','BOL','BUT','BYE','COQ','CRI','CRU','DUC','DUO','DUR','EAU','ECU','EGO','EPI','FER','FIL','FUN','GPS','ICE','JET','KIF','KIR','MAC','NEM','PAS','PIC','PIF','PIN','POT','RAI','RAP','RAT','RIF','SEL','TAF','TIC','TAC','TOC','TOP','UNI','WOK','YAK','YEN','ZEN','ZIG','ZAG'];
 
+	/**
+	 * @property {string} nom nom du triangle, tiré au hasard dans un tableau
+	 */
 	this.nom = choice(nomsPossibles);
 
-	// renvoie le nom choisi
+
+	/**
+	 * @return {string} Renvoie le nom du triangle tiré au hasard 
+	 * * les strings sont EN MODE MATHS le premier caractère du string est un $
+	 * @example si triangle est une instance de la classe Triangle() triangle.getNom() renvoie le string '$AMI$' si AMI est le nom tiré au hasard 
+	 */
 	function getNom() {
 		return '$'+self.nom+'$';
 	}
 
-	// renvoie les noms des côtés du triangle, segments!
+	/**
+	 * @return {array} Renvoie un tableau contenant le nom des côtés, segments, du triangle tiré au hasard
+	 * * les strings sont EN MODE MATHS le premier caractère du string est un $
+	 * @example si triangle est une instance de la classe Triangle() triangle.getCotes() renvoie le tableau de strings ['$[AM]$','$[MI]$','$[IA]$'] dans cet ordre si AMI est le nom tiré au hasard  
+	 */
 	function getCotes() {
 		let cotes = [];
 		let triangle = self.nom;
@@ -4047,7 +4052,11 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		return cotes;
 	};
 
-	// renvoie les noms des longueurs des côtés du triangle.
+	/**
+	 * @return {array} Renvoie un tableau contenant le nom des longueurs des côtés du triangle tiré au hasard
+	 * * les strings sont EN MODE MATHS le premier caractère du string est un $
+	 * @example si triangle est une instance de la classe Triangle() triangle.getCotes() renvoie le tableau de strings ['$AM$','$MI$','$IA$'] dans cet ordre si AMI est le nom tiré au hasard  
+	 */
 	function getLongueurs() {
 		let longueurs = [];
 		let triangle = self.nom;
@@ -4058,8 +4067,10 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 
 		return longueurs;
 	};
-
-	// renvoie les valeurs des longueurs des côtés du triangle.
+	
+	/**
+	 * @return {array} Renvoie un tableau avec les valeurs des longueurs des côtés du triangle passées en paramètre à l'instance de la classe
+	 */
 	function getLongueursValeurs() {		
 		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
 			//return false;
@@ -4073,7 +4084,11 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		return longueurs;
 	};
 
-	// renvoie les noms des angles du triangle.
+
+	/**
+	 * @return {array} Renvoie un tableau de strings avec les noms des angles du triangle.
+	 * * les strings sont EN MODE MATHS le premier caractère du string est un $
+	 */
 	function getAngles() {
 		let angles = [];
 		let triangle = self.nom;
@@ -4085,7 +4100,9 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		return angles;
 	};
 
-	// renvoie les valeurs des angles du triangle.
+	/**
+	 * @return {array} Renvoie un tableau avec les valeurs des angles du triangle passées en paramètre à l'instance de la classe
+	 */
 	function getAnglesValeurs() {		
 		if ((typeof self.a1 == "undefined") || (typeof self.a2 == "undefined") || (typeof self.a3 == "undefined")) {
 			//return false;
@@ -4099,7 +4116,10 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		return angles;
 	};
 
-	// renvoie les noms des angles du triangle.
+	/**
+	 * @return {array} Renvoie un tableau de strings avec les noms des sommets du triangle.
+	 * * les strings sont EN MODE MATHS le premier caractère du string est un $
+	 */
 	function getSommets(math=true) {
 		let triangle = self.nom;
 		let sommets = triangle.split('');
@@ -4111,7 +4131,14 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		return sommets;
 	};
 
-	// renvoie le périmètre du triangle
+	/**
+	 * @return {array} Renvoie le périmètre de l'instance de la classe Triangle() avec les valeurs des longueurs des côtés du triangle passées en paramètre à l'instance 
+	 * @example let triangle = new Triangle();
+	 * * triangle.l1 = 2;
+	 * * triangle.l2 = 3;
+	 * * triangle.l3 = 4
+	 * * triangle.getPerimetre() renvoie 9
+	 */
 	function getPerimetre() {
 		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
 			//return false;
@@ -4121,7 +4148,19 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		};			
 	};
 
-	// renvoie un booleen selon que les trois longueurs forment un vrai triangle ou non
+	/**
+	 * @return {array} Renvoie un booleen selon que les trois longueurs passées à l'instance de la classe forment un vrai triangle ou non
+	 * @example let triangle = new Triangle();
+	 * * triangle.l1 = 2;
+	 * * triangle.l2 = 3;
+	 * * triangle.l3 = 7
+	 * * triangle.isTrueTriangleLongueurs() renvoie false
+	 * @example let triangle = new Triangle();
+	 * * triangle.l1 = 2;
+	 * * triangle.l2 = 3;
+	 * * triangle.l3 = 4
+	 * * triangle.isTrueTriangleLongueurs() renvoie true
+	 */
 	function isTrueTriangleLongueurs() {
 		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
 			return false;
@@ -4140,7 +4179,19 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		};
 	};
 
-	// renvoie un booleen selon que les trois longueurs forment un triangle plat ou non
+	/**
+	 * @return {array} Renvoie un booleen selon que les trois longueurs passées à l'instance de la classe forment un triangle plat ou non
+	 * @example let triangle = new Triangle();
+	 * * triangle.l1 = 2;
+	 * * triangle.l2 = 3;
+	 * * triangle.l3 = 5
+	 * * triangle.isTrueTriangleLongueurs() renvoie true
+	 * @example let triangle = new Triangle();
+	 * * triangle.l1 = 2;
+	 * * triangle.l2 = 3;
+	 * * triangle.l3 = 4
+	 * * triangle.isTrueTriangleLongueurs() renvoie false
+	 */
 	function isPlatTriangleLongueurs() {
 		if ((typeof self.l1 == "undefined") || (typeof self.l2 == "undefined") || (typeof self.l3 == "undefined")) {
 			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
@@ -4159,7 +4210,20 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		};
 	};
 
-	// renvoie un booleen selon que les trois angles forment un vrai triangle non plat ou non
+	/**
+	 * @return {array} Renvoie un booleen selon que les trois angles passés à l'instance de la classe forment un vrai triangle ou non
+	 * @example let triangle = new Triangle();
+	 * * triangle.a1 = 100;
+	 * * triangle.a2 = 40;
+	 * * triangle.a3 = 50
+	 * * triangle.isTrueTriangleAngles() renvoie false
+	 * @example let triangle = new Triangle();
+	 * * triangle.a1 = 80;
+	 * * triangle.a2 = 40;
+	 * * triangle.a3 = 60
+	 * * triangle.isTrueTriangleAngles() renvoie true
+	 */
+
 	function isTrueTriangleAngles() {
 		// si l'un des angles n'est pas defini ça ne va pas
 		if ((typeof self.a1 == "undefined") || (typeof self.a2 == "undefined") || (typeof self.a3 == "undefined")) {
@@ -4183,6 +4247,19 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 	};
 
 	// renvoie un booleen selon que les trois angles forment un triangle plat ou non
+	/**
+	 * @return {array} Renvoie un booleen selon que les trois angles passés à l'instance de la classe forment un triangle plat ou non
+	 * @example let triangle = new Triangle();
+	 * * triangle.a1 = 0;
+	 * * triangle.a2 = 0;
+	 * * triangle.a3 = 180
+	 * * triangle.isTrueTriangleAngles() renvoie true
+	 * @example let triangle = new Triangle();
+	 * * triangle.a1 = 80;
+	 * * triangle.a2 = 40;
+	 * * triangle.a3 = 60
+	 * * triangle.isTrueTriangleAngles() renvoie false
+	 */
 	function isPlatTriangleAngles() {
 		if ((typeof self.a1 == "undefined") || (typeof self.a2 == "undefined") || (typeof self.a3 == "undefined")) {
 			return false;
@@ -4199,7 +4276,9 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 		};
 	};
 
-	// renvoie un booléen selon que le triangle donné à partir de ses trois longueurs ou trois angles est quelconque ou non
+	/**
+	 * Méthode non finalisée
+	 */
 	function isQuelconque() {
 		// Vérifier que le triangle existe !!!
 		if ( ( ((self.l1!=self.l2) && (self.l1!=self.l3) && (self.l2!=self.l3) ) || ( (self.a1!=self.a2) && (self.a1!=self.a3) && (self.a2!=self.a3) ) ) && ( (self.a1 != 90) || (self.a2 != 90) || (self.a3 != 90) ) ) {
@@ -4243,9 +4322,10 @@ function Relatif(...relatifs) {
 	this.relatifs = relatifs;
 
 	/**
-	 * Récupère le signe de chaque relatif déclaré dans le paramètre du reste relatifs, 
-	 * Si 0 fait partie des relatifs on renvoie une erreur
-	 * @return {array} renvoie un tableau de -1 ou 1
+	 * * Récupère le signe de chaque relatif déclaré dans le paramètre du reste relatifs, 
+	 * * Si 0 fait partie des relatifs on renvoie une erreur
+	 * @return {array} Renvoie un tableau de -1 ou 1
+	 * @example getSigneNumber(-1,-2,8,-9,4) renvoie [-1,-1,1,-1,1]
 	 */
 	function getSigneNumber() {		
 		let signes = [];
@@ -4282,8 +4362,9 @@ function Relatif(...relatifs) {
 	};
 
 	/** 
-	 * Récupère le signe de chaque relatif déclaré dans le paramètre du reste relatifs
-	 * @return {array} renvoie un tableau de strings valant 'négatif' ou 'positif'
+	 * * Récupère le signe de chaque relatif déclaré dans le paramètre du reste relatifs
+	 * @return {array} Renvoie un tableau de strings valant 'négatif' ou 'positif'
+	 * @example getSigneNumber(-1,-2,8,-9,4) renvoie le tableau de strings [négatif,négatif,positif,négatif,positif]
 	*/
 	function getSigneString() {
 		let signesString = [];
@@ -4301,8 +4382,8 @@ function Relatif(...relatifs) {
 
 	/**
 	 * 	 
-	 * @param  {...any} n deux ou plus de nombres relatifs
-	 * @return {number} le signe du produit 1 ou -1
+	 * @param  {...any} n une liste de deux ou plus de nombres relatifs
+	 * @return {number} Renvoie le signe du produit des nombres de cette liste. 1 ou -1
 	 * @example getSigneProduitNumber(1,-4,-7) renvoie 1
 	 */
 
@@ -4338,11 +4419,11 @@ function Relatif(...relatifs) {
 		};
 	};
 
-		/**
+	/**
 	 * 	 
-	 * @param  {...any} n deux ou plus de nombres relatifs
-	 * @return {number} le signe du produit 1 ou -1
-	 * @example getSigneProduitNumber(1,-4,-7) renvoie 1
+	 * @param  {...any} n une liste de deux ou plus de nombres relatifs
+	 * @return {string} Renvoie un string désignant le signe du produit des nombres de cette liste. postif1 ou négatif
+	 * @example getSigneProduitNumber(1,-4,-7) renvoie le string positif
 	 */
 
 	function getSigneProduitString(...n) {
@@ -4355,10 +4436,149 @@ function Relatif(...relatifs) {
 			};			
 	};
 
+	/**
+	 * 	 
+	 * @param  {...any} n une liste de deux ou plus de nombres relatifs
+	 * @return {string} Renvoie le nombre d'éléments négatifs des nombres de cette liste.
+	 * * la liste d'entiers doit être passé dans un tableau
+	 * @example getCardNegatifs([1,-4,-7]) renvoie 2
+	 * @example getCardNegatifs([4,-5,7,7,-8,-9]) renvoie 3
+	 */
+
+	function getCardNegatifs([...n]) {
+		let card = 0;
+		try {
+			// port du string interdit !			
+			n.forEach(function(element) {
+				if (typeof element == 'string') {
+					throw new TypeError(`${element} est un string !`);
+				};
+				if (element == 0) {
+					throw new RangeError(`${element} a été exclu des valeurs possibles.`);
+				};
+			});	
+			// Quoi faire sans nombres ?
+			if (n.length == 0) {
+				throw new Error(`C'est mieux avec quelques nombres !`)
+			};
+			n.forEach(function(element){
+				if (element < 0) {
+					card = card +1;
+				};
+			});
+			return card;						
+		}
+		catch(err) {
+			console.log(err.message);	
+		};
+	};
+	
+	/**
+	 * Fonction locale
+	 * @param {integer} n un entier désignant le cardinal de facteurs négatifs dans un produit
+	 * @return un string au singulier ou au pluriel
+	 * @example orth_facteurs_negatifs(0) ou orth_facteurs_negatifs(1) renvoie 'facteur negatif'
+	 * @example orth_facteurs_negatifs(7) renvoie 'facteurs negatifs'
+	 */
+	function orth_facteurs_négatifs(n) {
+		if (n>=2) {
+			return `facteurs négatifs`;
+		} else {
+			return `facteur négatif`;
+		};
+	};
+
+	/** 	 
+	 * @param  {...any} n une liste de deux ou plus de nombres relatifs qui constituent les facteurs du produit
+	 * @return {string} Renvoie la règle qui permet de justifier le signe d'un produit de relatifs adaptée à la liste passée en paramètre.	 
+	 * @example setRegleProduitFacteurs([1,-2,-8,5]) renvoie le string 'Il y a 2 facteurs négatifs, le nombre de facteurs négatifs est pair donc le produit est positif.'
+	 */
+
+	function setRegleSigneProduit(...n) {
+		try {
+			// port du string interdit !			
+			n.forEach(function(element) {
+				if (typeof element == 'string') {
+					throw new TypeError(`${element} est un string !`);
+				};
+			});	
+			// Quoi faire sans nombres ?
+			if (n.length == 0) {
+				throw new Error(`C'est mieux avec quelques nombres !`)
+			};
+			if (n.length == 2) {
+				if ( getCardNegatifs(n)%2 == 0 ) {
+					return `Les deux facteurs sont de même signe donc le produit est positif.`;
+				} else {
+					return `Les deux facteurs sont de signe différent donc le produit est négatif.`;
+				};
+			} else if (n.length > 2 ) {
+				if ( getCardNegatifs(n)%2 == 0 ) {
+					if ( getCardNegatifs(n) == 0 ) {
+						return `Tous les facteurs sont positifs donc le produit est positif.`;
+					} else {
+						return `Il y a ${getCardNegatifs(n)} ${orth_facteurs_négatifs(getCardNegatifs(n))}, le nombre de facteurs négatifs est pair donc le produit est positif.`;
+					};						
+				} else {
+					return `Il y a ${getCardNegatifs(n)} ${orth_facteurs_négatifs(getCardNegatifs(n))}, le nombre de facteurs négatifs est impair donc le produit est négatif.`;
+				};
+			};
+		}
+		catch(err) {
+			console.log(err.message);	
+		};
+	};
+
+		/**
+	 * 	 
+	 * @param  {...any} num une liste de deux ou plus de nombres relatifs qui constituent les facteurs du numérateur
+	 * @param  {...any} den une liste de deux ou plus de nombres relatifs qui constituent les facteurs du dénominateur
+	 * @return {string} Renvoie la règle qui permet de justifier le signe d'un produit de relatifs adaptée à la liste passée en paramètre.	 
+	 * @example setRegleProduitQuotient([1,-2],[-8,5]) renvoie le string 'La somme des facteurs négatifs du numérateur et des facteurs négatifs du dénominateur vaut 2, ce nombre est pair donc le quotient est positif.'
+	 */
+
+	function setRegleSigneQuotient(...n) {
+		try {
+			// port du string interdit !			
+			n.forEach(function(element) {
+				if (typeof element == 'string') {
+					throw new TypeError(`${element} est un string !`);
+				};
+			});	
+			// Quoi faire sans nombres ?
+			if (n.length == 0) {
+				throw new Error(`C'est mieux avec quelques nombres !`)
+			};
+			if (n.length == 2)  {
+				if ( getCardNegatifs(n)%2 == 0 ) {
+					return `Le numératueur et le dénominateur sont de même signe donc le quotient est positif.`;
+				} else {
+					return `Les numérateur et le dénominateur sont de signe différent donc le quotient est négatif.`;
+				};
+			} else if (n.length > 2) {
+				if ( getCardNegatifs(n)%2 == 0 ) {
+					if ( getCardNegatifs(n) == 0 ) {
+						return `Tous les facteurs du numérateur et tous les facteurs du dénominateur sont positifs donc le quotient est positif.`;
+					} else {						
+						return `La somme des facteurs négatifs du numérateur et des facteurs négatifs du dénominateur vaut ${getCardNegatifs(n)}, ce nombre est pair donc le quotient est positif.`;
+					};						
+				} else {
+					return `La somme des facteurs négatifs du numérateur et des facteurs négatifs du dénominateur vaut ${getCardNegatifs(n)}, ce nombre est impair donc le quotient est négatif.`;
+				};
+			};
+		}
+		catch(err) {
+			console.log(err.message);	
+		};
+	};
+
 	this.getSigneNumber = getSigneNumber;
 	this.getSigneString = getSigneString;
 	this.getSigneProduitNumber = getSigneProduitNumber;
 	this.getSigneProduitString = getSigneProduitString;
+	this.getCardNegatifs = getCardNegatifs;
+	this.setRegleSigneProduit = setRegleSigneProduit;
+	this.setRegleSigneQuotient = setRegleSigneQuotient;
 
 };
 
@@ -4371,12 +4591,16 @@ function Relatif(...relatifs) {
  function Fraction() {
 	 //'use strict'; pas de use strict avec un paramètre du reste
 	 var self = this;
+	 /**
+	  * @constant {array} denominateurs_amis tableau de tableaux de dénominateurs qui vont bien ensemble pour les calculs
+	  */
+	 let denominateurs_amis = [[12,2,3,4,6],[16,2,4,8],[18,2,3,6,9],[20,2,4,5,10],[24,2,3,4,8,12],[30,2,3,5,6]]
 
 	/**
 	 * 
-	 * @param  {...any} fractions contient la liste des num et den dans l'ordre n1,d1,n2,d2, ... de deux ou plus de fractions
-	 * @return {array} renvoie un tableau de num et den triés selon la croissance des quotients [[n_frac_min,d_frac_min],...,[n_frac_max,d_frac_max]]
-	 * 
+	 * @param  {...any} fractions contient la liste des numérateurs et denominateurs dans l'ordre n1,d1,n2,d2, ... de deux ou plus de fractions
+	 * @return {array} renvoie un tableau avec les numérateurs et les dénominateurs triés selon la croissance des quotients [n_frac_min,d_frac_min,...,n_frac_max,d_frac_max]
+	 * @example sortFraction(1,2,1,5,1,4,1,3) renvoie [1,5,1,4,1,3,1,2] 
 	 */
 	function sortFractions(...fractions) {
 		try {		
@@ -4388,7 +4612,7 @@ function Relatif(...relatifs) {
 					throw new RangeError(`${element} est exclu des valeurs possibles pour les dénominateurs !`)
 				};
 			});	
-			console.log(fractions.length);
+			//console.log(fractions.length);
 			if (Math.floor(fractions.length/2) <= 1 ) {
 				throw new Error(`Il faut au moins deux fractions !`);
 			};
@@ -4423,8 +4647,10 @@ function Relatif(...relatifs) {
 
 	/**
 	 * fonction locale pour trouver le ppcm d'un nombre indeterminé d'entiers
-	 * @param  {[...integer]} n parametre du reste contenant une liste d'entiers
+	 * @param  {integer} n parametre du reste contenant une liste d'entiers
+	 * * la liste d'entiers doit être passé dans un tableau
 	 * @return {number} renvoie le ppcm des nombres entiers passés dans le paramètre du reste n
+	 * @example ppcm(2,6,4,15) renvoie 60
 	 */
 	function ppcm([...n]) {
 		try {
@@ -4443,15 +4669,15 @@ function Relatif(...relatifs) {
 		catch (e) {
 			console.log(e.message);
 		};
-		
-
 	};
 
 	/**
 	 * 
-	 * @param  {...any} fractions contient la liste des num et den dans l'ordre n1,d1,n2,d2, ... de deux ou plus de fractions
-	 * @return {array} renvoie un tableau de num et den avec le même denom dans l'ordre initial
-	 * 
+	 * @param  {...any} fractions contient la liste des numérateurs et des dénominateurs dans l'ordre n1,d1,n2,d2, ... de deux ou plus de fractions
+	 * @return {array} renvoie un tableau de numérateurs et de dénominateurs avec le même dénominateur dans l'ordre initial.
+	 * * Le dénominateur choisi est toujours le ppcm
+	 * * Les fractions ne sont pas réduites
+	 * @example reduceSameDenominateur(1,2,1,5,2,3) renvoie [15,30,6,30,20,30]
 	 */
 	function reduceSameDenominateur(...fractions) {
 		try {		
@@ -4463,7 +4689,7 @@ function Relatif(...relatifs) {
 					throw new RangeError(`${element} est exclu des valeurs possibles pour les dénominateurs !`)
 				};
 			});	
-			console.log(fractions.length);
+			//console.log(fractions.length);
 			if (Math.floor(fractions.length/2) <= 1 ) {
 				throw new Error(`Il faut au moins deux fractions !`);
 			};
@@ -4494,6 +4720,7 @@ function Relatif(...relatifs) {
 
 	this.sortFractions = sortFractions;
 	this.reduceSameDenominateur = reduceSameDenominateur;
+	this.denominateurs_amis = denominateurs_amis;
 	
 
  };
@@ -5143,11 +5370,11 @@ var liste_des_exercices_disponibles = {
 		'5S13': Calculer_des_frequences,
 		'5S14': Calculer_des_moyennes,
 		'5S21' : fonctions_probabilite1,
-		'4C10-0': Signe_produit_quotient_relatifs,
-		'4C10-1': Signe_produit_relatifs,
-		'4C10-2': Signe_quotient_relatifs,
+		'beta4C10-0': Signe_produit_quotient_relatifs,
+		'beta4C10-1': Signe_produit_relatifs,
+		'beta4C10-2': Signe_quotient_relatifs,
 		'4C10-3': Exercice_multiplications_relatifs,
-		'4C25-0': Problemes_additifs_fractions,
+		'beta4C25-0': Problemes_additifs_fractions,
 		'4C30-1': Puissances_encadrement,
 		'4G40' : Transformations_4e,
 		'4L10' : Exercice_developper,
@@ -5162,6 +5389,7 @@ var liste_des_exercices_disponibles = {
 		'4N21': Puissances_d_un_relatif_1,
 		'4N21-1': Puissances_d_un_relatif_2,
 		'4N21-2': Puissances_de_dix,
+		'beta4F12' : Exploiter_representation_graphique,
 		'4P10' : Problemes_grandeurs_composees,		
 		'4G11' : Pavages_et_translation,
 		'4G20' : Exercice_Pythagore,
@@ -5233,7 +5461,6 @@ var liste_des_exercices_disponibles = {
 		'2G12' : Modelisation_coordonnees,
 		'2L10' : Developper_Identites_remarquables2,
 		'2L11' : Factoriser_Identites_remarquables2,
-		'betaI' : Exercice_intervalle,
 		'PEA11': Passer_d_une_base_a_l_autre,
 		'PEA11-1' : Passer_de_la_base_12_ou_16_a_la_10,
 		'P001' : Code_LaTeX_personnalise,
@@ -5243,7 +5470,7 @@ var liste_des_exercices_disponibles = {
 		'LaTeX' : Code_LaTeX_personnalise,
 		// 'Perso' : HTML_personnalise,
 		// 'TsvgjsKatex' : tests_SVGJS_KATEX,
-		
+		'beta3G23' : TrianglesSemblables,
 	};
 
 //Pour modifier les exercices lorsqu'ils sont en mode diaporama
@@ -9645,7 +9872,7 @@ function Exercice_perimetres_et_aires(difficulte=1){
 			switch (type_de_questions){
 				case 'carre' :
 					let cote = randint(2,11);
-					let nom_carre = polygone(4);
+					let nom_carre = creerNomDePolygone(4);
 					if (choice([true,false])){ // 2 énoncés possibles équiprobables
 						texte = `Un carré $${nom_carre}$ de $${cote}$ cm de côté .`;
 					} else {
@@ -9658,7 +9885,7 @@ function Exercice_perimetres_et_aires(difficulte=1){
 				case 'rectangle' : 
 					let L = randint(3,11);
 					let l = randint(2,L-1);
-					let nom_rectangle = polygone(4);
+					let nom_rectangle = creerNomDePolygone(4);
 					if (choice([true,false])){ // 2 énoncés possibles équiprobables
 							texte = `Un rectangle $${nom_rectangle}$ de $${L}$ cm de longueur et de $${l}$ cm de largeur.`;
 						} else{
@@ -9674,7 +9901,7 @@ function Exercice_perimetres_et_aires(difficulte=1){
 					let a = triplet[0];
 					let b = triplet[1];
 					let c = triplet[2];
-					let nom_triangle = polygone(3);
+					let nom_triangle = creerNomDePolygone(3);
 					if (choice([true,false])){
 						texte = `Un triangle $${nom_triangle}$ rectangle en $${nom_triangle[1]}$ tel que $${nom_triangle[0]+nom_triangle[1]+' = '+a}$ cm, $${nom_triangle[1]+nom_triangle[2]+' = '+b}$ cm\
  et $${nom_triangle[0]+nom_triangle[2]+' = '+c}$ cm.`;
@@ -12808,53 +13035,6 @@ function  Notation_segment_droite_demi_droite(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
-
-
-
-
-/**
-* EXERCICE A EFFACER UNE FOIS UTILISE PAR STEPHANE
-* @Auteur Rémi Angot
-*/
-function Exercice_intervalle(){
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Ajouter 9";
-	this.consigne = "Calculer";
-	this.nb_questions = 10;
-	this.nb_cols = 1;
-	this.nb_cols_corr = 2;
-	
-
-	this.nouvelle_version = function(numero_de_l_exercice){
-		this.bouton_aide = modal_texte_court(numero_de_l_exercice,"Ajouter 9 revient à ajouter 10 et à soustraire 1.")
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-
-		for (let i = 0, texte, texte_corr, a, b, cpt=0; i < this.nb_questions && cpt<50; ) {
-			let d = segment(0,0,10,0)
-			d.styleExtremites = '->'
-			let A = point(2,0,randint(2,10))
-			let B = point(6,0,randint(20,60))
-			let c1 = crochetG(A)
-			let c2 = crochetD(B)
-			let int = intervalle(A,B)
-
-			texte = mathalea2d(-1,-1,12,1,d,c1,c2,int)
- 			texte_corr = ``
-			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte);
-				this.liste_corrections.push(texte_corr);
-				i++;
-			}
-			cpt++;	
-		}
-		liste_de_question_to_contenu(this);
-	}
-	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
-}
-
-
 /**
  * Vocabulaire des triangles 
  * 6G20
@@ -12938,6 +13118,7 @@ jQuery(document).ready(function() {
 	let nombre_d_exercices_disponibles_CM = 0;
 	let nombre_d_exercices_disponibles_prof = 0;
 	let nombre_d_exercices_disponibles_PE = 0;
+	let nombre_d_exercices_disponibles_beta = 0;
 	//debut ajout seb section tests
 	let nombre_d_exercices_disponibles_tests = 0;
 	//fin seb section tests
@@ -12950,9 +13131,8 @@ jQuery(document).ready(function() {
 		if (id[0]=='C') {nombre_d_exercices_disponibles_CM+=1}
 		if (id[0]=='P' && id[1]=='0') {nombre_d_exercices_disponibles_prof+=1}
 		if (id[0]=='P' && id[1]=='E') {nombre_d_exercices_disponibles_PE+=1}
-		//debut ajout seb section tests
-		if (id[0]=='T') {nombre_d_exercices_disponibles_tests+=1}
-		//fin seb section tests
+		if (id[0]=='b' && id[1]=='e') {nombre_d_exercices_disponibles_beta+=1}
+		
 	}
 
 	//
@@ -12964,9 +13144,7 @@ jQuery(document).ready(function() {
 	let liste_html_des_exercices_CM = []
 	let liste_html_des_exercices_prof = []
 	let liste_html_des_exercices_PE = []
-	//debut ajout seb section tests
-	let liste_html_des_exercices_tests = []
-	//fin seb section tests
+	let liste_html_des_exercices_beta = []
 
 
 	// Affiche de la liste des exercices disponibles 
@@ -12997,17 +13175,22 @@ jQuery(document).ready(function() {
 		if (id[0]=='P' && id[1]=='0') {
 			liste_html_des_exercices_prof += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
 		}
-		// //debut ajout seb section tests
-		// if (id[0]=='T') {
-		// 	liste_html_des_exercices_tests += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
-		// }
-		// //fin seb section tests
+		if (id[0]=='b' && id[1]=='e') {
+			liste_html_des_exercices_beta += '<span class="id_exercice">' + id + '</span> - <a class="lien_id_exercice" numero="' + id + '">'  + exercice_tmp.titre + '</a></br>\n';			
+		}
+		
 
 	}
 
 
 	// Change l'ordre des exercices suivant l'URL
-	if (window.location.href.indexOf('cm.html')>0) {
+	if (window.location.href.indexOf('beta')>0) {
+		liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Beta (${nombre_d_exercices_disponibles_beta})</div><div class="active content">`
+		liste_html_des_exercices += liste_html_des_exercices_beta
+		liste_html_des_exercices+=`</div>`
+		liste_html_des_exercices+=`</div>`	
+	}
+	else if (window.location.href.indexOf('cm.html')>0) {
 		liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Calcul mental (${nombre_d_exercices_disponibles_CM})</div><div class="active content">`
 		liste_html_des_exercices += liste_html_des_exercices_CM
 		liste_html_des_exercices+=`</div>`
@@ -13052,11 +13235,6 @@ jQuery(document).ready(function() {
 		liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Calcul mental (${nombre_d_exercices_disponibles_CM})</div><div class="content">`
 		liste_html_des_exercices += liste_html_des_exercices_CM
 		liste_html_des_exercices+=`</div>`
-		// //debut ajout seb section tests
-		// liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Section Tests (${nombre_d_exercices_disponibles_tests})</div><div class="content">`
-		// liste_html_des_exercices += liste_html_des_exercices_tests
-		// liste_html_des_exercices+=`</div>`
-		//fin seb section tests
 		// Ajoute les outils prof sur mathalealatex
 		if (window.location.href.indexOf('mathalealatex.html')>0) {
 			liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Outils pour le professeur (${nombre_d_exercices_disponibles_prof})</div><div class="content">`
@@ -17419,7 +17597,6 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 		case 1 : // expressions de base (1 opération)
 			nbval=1
 			souscas=randint(0,3)
-			console.log('case 1 :',souscas)
 			switch (souscas) {
 				case 0 : //somme de deux nombres
 					expf=`La somme de ${nombre_avec_espace(a)} et ${l1}`
@@ -18140,7 +18317,6 @@ function DroiteRemarquableDuTriangle(){
 	this.sup=1
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		pixelsParCm=30
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		let triangles=[],sommets=[[]],A=[],B=[],C=[],t=[],d=[],n=[],c=[],objets=[],A0,B0,C0,tri,G,g,AA,BB,CC,na=[],nb=[],nc=[]
@@ -18149,7 +18325,6 @@ function DroiteRemarquableDuTriangle(){
 		if (this.sup==2) type_de_questions_disponibles=[3,4]
 		if (this.sup==3) type_de_questions_disponibles=[1,2,3,4]
 		liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions)
-		console.log(liste_type_de_questions)
 		for (let i = 0, a, angle,rapport, texte, texte_corr, cpt=0; i < this.nb_questions;i++) {// this.nb_questions && cpt<50;) { // On limite le nombre d'essais pour chercher des valeurs nouvelles
 			triangles[i] = new Triangles();
 			sommets[i]= triangles[i].getSommets(false);
@@ -18176,40 +18351,36 @@ function DroiteRemarquableDuTriangle(){
 
 			switch (liste_type_de_questions[i]) {
 				case 1 :
-					console.log('case 1')
 					d[i] = hauteurTriangle(C[i],B[i],A[i],'blue')
 					d[i].epaisseur=1
 					c[i] = codageHauteurTriangle(C[i],B[i],A[i])
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
 					texte_corr=`La droite tracée est la hauteur issue de $${sommets[i][0]}$ dans le triangle ${triangles[i].getNom()}.<br>`
-					texte_corr+=mathalea2d(-1,-2,8,8,...objets[i])
+					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i])
 					break
 				case 2 :
-					console.log('case 2')
 					d[i] = mediatrice(A[i],B[i],true,'blue')
 					d[i].epaisseur=1
 					c[i] = codageMediatrice(A[i],B[i])
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
 					texte_corr=`La droite tracée est la médiatrice du segment [$${sommets[i][0]}${sommets[i][1]}]$.<br>`
-					texte_corr+=mathalea2d(-1,-2,8,8,...objets[i],constructionMediatrice(A[i],B[i],true,color='red', markmilieu='×', markrayons='//',couleurMediatrice = 'blue', epaisseurMediatrice = 1))
+					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i],constructionMediatrice(A[i],B[i],true,color='red', markmilieu='×', markrayons='//',couleurMediatrice = 'blue', epaisseurMediatrice = 1))
 					break
 				case 3 :
-					console.log('case 3')
 					d[i] = medianeTriangle(C[i],B[i],A[i],'blue')
 					d[i].epaisseur=1
 					c[i] = codageMedianeTriangle(C[i],B[i],A[i],color='black',mark='//')
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
 					texte_corr=`La droite tracée est la médiane issue de $${sommets[i][0]}$ dans le triangle ${triangles[i].getNom()}.<br>`
-					texte_corr+=mathalea2d(-1,-2,8,8,...objets[i])
+					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i])
 					break
 				case 4 :
-					console.log('case 4')
 					d[i] = bissectrice(A[i],B[i],C[i],'blue')
 					d[i].epaisseur=1
 					c[i] = codageBissectrice(A[i],B[i],C[i])
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
 					texte_corr=`La droite tracée est la bissectrice de l'angle $\\widehat{${sommets[i][0]}${sommets[i][1]}${sommets[i][2]}}$.<br>`
-					texte_corr+=mathalea2d(-1,-2,8,8,...objets[i],constructionBissectrice(A[i],B[i],C[i],detail = false, color='red', mark='×',tailleLosange = 3,couleurBissectrice = 'blue', epaiseurBissectrice = 1))
+					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i],constructionBissectrice(A[i],B[i],C[i],detail = false, color='red', mark='×',tailleLosange = 3,couleurBissectrice = 'blue', epaiseurBissectrice = 1))
 					break
 
 			}
@@ -18222,7 +18393,6 @@ function DroiteRemarquableDuTriangle(){
 			}
 		}
 		liste_de_question_to_contenu(this);
-		pixelsParCm=20
 	}
 	this.besoin_formulaire_numerique = ['Type de droites',3,"1 : Hauteurs et Médiatrices\n2 : Médianes et Bissectrices\n3 : Toutes les droites"]
 }
@@ -20687,7 +20857,7 @@ function Reciproque_Pythagore(){
 		let liste_triplets_pythagoriciens =  [[3,4,5],[5,12,13],[6,8,10],[7,24,25],[8,15,17],[9,12,15],[9,40,41], [10,24,26], [11,60,61], [12,16,20], [12,35,37], [13,84,85], [14,48,50], [15,20,25], [15,36,39], [16,30,34], [16,63,65], [18,24,30], [18,80,82],  [20,21,29], [20,48,52], [21,28,35], [21,72,75], [24,32,40], [24,45,51], [24,70,74], [25,60,65], [27,36,45], [28,45,53], [28,96,100], [30,40,50], [30,72,78], [32,60,68], [33,44,55], [33,56,65], [35,84,91], [36,48,60], [36,77,85], [39,52,65], [39,80,89], [40,42,58], [40,75,85], [42,56,70], [45,60,75], [48,55,73], [48,64,80], [51,68,85], [54,72,90], [57,76,95], [60,63,87], [60,80,100], [65,72,97]]
 		let liste_noms_triangles = []; // on mémorise les noms des triangles pour ne pas les redonner
 		for (let i = 0, texte, texte_corr, AB,BC,AC,a,b,c,nom_triangle,triplet, ordre_des_cotes, cpt=0; i < this.nb_questions && cpt<50; ) {
-			nom_triangle = polygone(3,liste_noms_triangles);
+			nom_triangle = creerNomDePolygone(3,liste_noms_triangles);
 			liste_noms_triangles.push(nom_triangle)
 			A = nom_triangle[0];
 			B = nom_triangle[1];
@@ -20772,7 +20942,7 @@ function Problemes_Pythagore(){
 		let liste_triplets_pythagoriciens =  [[3,4,5],[5,12,13],[6,8,10],[7,24,25],[8,15,17],[9,12,15],[9,40,41], [10,24,26], [11,60,61], [12,16,20], [12,35,37], [13,84,85], [14,48,50], [15,20,25], [15,36,39], [16,30,34], [16,63,65], [18,24,30], [18,80,82],  [20,21,29], [20,48,52], [21,28,35], [21,72,75], [24,32,40], [24,45,51], [24,70,74], [25,60,65], [27,36,45], [28,45,53], [28,96,100], [30,40,50], [30,72,78], [32,60,68], [33,44,55], [33,56,65], [35,84,91], [36,48,60], [36,77,85], [39,52,65], [39,80,89], [40,42,58], [40,75,85], [42,56,70], [45,60,75], [48,55,73], [48,64,80], [51,68,85], [54,72,90], [57,76,95], [60,63,87], [60,80,100], [65,72,97]];
 		let liste_noms_quadrilateres = ['L','M','N','O'] // pour que le O ne soit pas une des 4 lettres
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
-			let nom_quadrilatere = polygone(4,liste_noms_quadrilateres);
+			let nom_quadrilatere = creerNomDePolygone(4,liste_noms_quadrilateres);
 			liste_noms_quadrilateres.push(nom_quadrilatere)
 			let A = nom_quadrilatere[0];
 			let B = nom_quadrilatere[1];
@@ -22333,55 +22503,60 @@ function Signe_produit_quotient_relatifs() {
 
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		
+
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {			
 			// on ne choisit que des nombres compris entre 1 et 20
 			let nb_max = 20;
 			// Le tableau des relatifs necessaires, il m'en faut max 4 !
 			let num = new Relatif(randint(-1,1,[0])*randint(1,nb_max),randint(-1,1,[0])*randint(1,nb_max),randint(-1,1,[0])*randint(1,nb_max),randint(-1,1,[0])*randint(1,nb_max));
-			
+						
 			switch (liste_type_de_questions[i]) {
 				case 1 : // 2 facteurs
 					texte = `$ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} $`;
-					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]} et $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
-					texte_corr+= `<br>donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1]))}.`;
-					//texte = 'tt';
-					//texte_corr = 'tt';
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]} et $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}.`;
+					texte_corr += `<br> ${num.setRegleSigneProduit(num.relatifs[0],num.relatifs[1])}`;					
+					texte_corr+= `<br>Donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1]))}.`;
 					break;
 				case 2 : // 3 facteurs
 					texte = `$ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} $`;
 					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
-					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}`;
-					texte_corr+= `<br>donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
+					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}.`;
+					texte_corr += `<br> ${num.setRegleSigneProduit(num.relatifs[0],num.relatifs[1],num.relatifs[2])}`;					
+					texte_corr+= `<br>Donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
 					break;
 				case 3 : // 4 facteurs
 					texte = `$ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])} $`;
 					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}, `;
-					texte_corr += `$ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]} et $ ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${num.getSigneString()[3]}`;
-					texte_corr+= `<br>donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3]))}.`;
+					texte_corr += `$ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]} et $ ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${num.getSigneString()[3]}.`;
+					texte_corr += `<br> ${num.setRegleSigneProduit(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3])}`;					
+					texte_corr+= `<br>Donc $ ${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3]))}.`;
 					break;
 				case 4 : // quotient de 2 nombres
 					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])}} $`;
-					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]} et $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
-					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1]))}.`;
+					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]} et $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}.`;
+					texte_corr += `<br> ${num.setRegleSigneQuotient(num.relatifs[0],num.relatifs[1])}`;
+					texte_corr+= `<br>Donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1]))}.`;
 					break;
 				case 5 : // quotient d'1 nombre sur un produit de 2 nombres
 					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])}} $`;
 					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
-					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}`;
-					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
+					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}.`;
+					texte_corr += `<br> ${num.setRegleSigneQuotient(num.relatifs[0],num.relatifs[1],num.relatifs[2])}`;
+					texte_corr+= `<br>Donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])}}{${ecriture_nombre_relatif(num.relatifs[1])} \\times ${ecriture_nombre_relatif(num.relatifs[2])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
 					break;
 				case 6 : // quotient d'1 produit de 2 nombres sur 1 nombre
 					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])}} $`;
 					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}`;
-					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}`;
-					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
+					texte_corr += ` et $ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]}.`;
+					texte_corr += `<br> ${num.setRegleSigneQuotient(num.relatifs[0],num.relatifs[1],num.relatifs[2])}`;
+					texte_corr+= `<br>Donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2]))}.`;
 					break;
 				case 7 : // quotient de 2 produits de 2 nombres
 					texte = `$ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])}} $`;
 					texte_corr = `$ ${ecriture_nombre_relatif(num.relatifs[0])} $ est ${num.getSigneString()[0]}, $ ${ecriture_nombre_relatif(num.relatifs[1])} $ est ${num.getSigneString()[1]}, `;
-					texte_corr += `$ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]} et $ ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${num.getSigneString()[3]}`;
-					texte_corr+= `<br>donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3]))}.`;
+					texte_corr += `$ ${ecriture_nombre_relatif(num.relatifs[2])} $ est ${num.getSigneString()[2]} et $ ${ecriture_nombre_relatif(num.relatifs[3])} $ est ${num.getSigneString()[3]}.`;
+					texte_corr += `<br> ${num.setRegleSigneQuotient(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3])}`;
+					texte_corr+= `<br>Donc $ \\dfrac{${ecriture_nombre_relatif(num.relatifs[0])} \\times ${ecriture_nombre_relatif(num.relatifs[1])}}{${ecriture_nombre_relatif(num.relatifs[2])} \\times ${ecriture_nombre_relatif(num.relatifs[3])}} $ est ${texte_en_couleur_et_gras(num.getSigneProduitString(num.relatifs[0],num.relatifs[1],num.relatifs[2],num.relatifs[3]))}.`;
 					break;
 			
 			};
@@ -22472,8 +22647,8 @@ function Puissances_encadrement() {
 					break;
 			};
 
-		//let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		// let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus
 
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
@@ -22485,7 +22660,9 @@ function Puissances_encadrement() {
 				ent_pos.push({
 					val:`$${tex_nombre(randint(10**i+1,10**(i+1)))}$`,
 					puissance_inf:`$10^{${i}}$`,
-					puissance_sup:`$10^{${i+1}}$`
+					puissance_sup:`$10^{${i+1}}$`,
+					puissance_inf_num:`$${tex_nombre(10**i)}$`,
+					puissance_sup_num:`$${tex_nombre(10**(i+1))}$`
 				});
 			};
 
@@ -22495,7 +22672,9 @@ function Puissances_encadrement() {
 				dec_pos.push({
 					val:`$${tex_nombre(randint(10000,100000)/(10**(4-i)))}$`,
 					puissance_inf:`$10^{${i}}$`,
-					puissance_sup:`$10^{${i+1}}$`
+					puissance_sup:`$10^{${i+1}}$`,
+					puissance_inf_num:`$${tex_nombre(10**i)}$`,
+					puissance_sup_num:`$${tex_nombre(10**(i+1))}$`
 				});
 			};			
 			// nombre décimal positif inférieur à 1, entre 0,1 et 1 puis entre 0,01 et 0,1 puis 0,001 et 0,0001
@@ -22504,7 +22683,10 @@ function Puissances_encadrement() {
 				dec_pos_inf_un.push({
 					val:`$${tex_nombre(randint(10**(4-i-1)+1,10**(4-i))/10000)}$`,
 					puissance_inf:`$10^{${-(i+1)}}$`,
-					puissance_sup:`$10^{${-i}}$`
+					puissance_sup:`$10^{${-i}}$`,
+					puissance_inf_num:`$${tex_nombre(10**(-(i+1)))}$`,
+					puissance_sup_num:`$${tex_nombre(10**(-i))}$`
+
 				});
 			};			
 			
@@ -22512,58 +22694,72 @@ function Puissances_encadrement() {
 				case 1 : // nombre enier positif
 					texte = `${ent_pos[0].val}`;
 					texte_corr = `${ent_pos[0].puissance_inf} $\\leqslant$ ${ent_pos[0].val} $\\leqslant$ ${ent_pos[0].puissance_sup}`;
+					texte_corr += ` car ${ent_pos[0].puissance_inf} = ${ent_pos[0].puissance_inf_num} et ${ent_pos[0].puissance_sup} = ${ent_pos[0].puissance_sup_num}`;
 					break;
 				case 2 : // nombre enier positif
 					texte = `${ent_pos[1].val}`;
 					texte_corr = `${ent_pos[1].puissance_inf} $\\leqslant$ ${ent_pos[1].val} $\\leqslant$ ${ent_pos[1].puissance_sup}`;
+					texte_corr += ` car ${ent_pos[1].puissance_inf} = ${ent_pos[1].puissance_inf_num} et ${ent_pos[1].puissance_sup} = ${ent_pos[1].puissance_sup_num}`;
 					break;
 				case 3 : // nombre enier positif
 					texte = `${ent_pos[2].val}`;
 					texte_corr = `${ent_pos[2].puissance_inf} $\\leqslant$ ${ent_pos[2].val} $\\leqslant$ ${ent_pos[2].puissance_sup}`;
+					texte_corr += ` car ${ent_pos[2].puissance_inf} = ${ent_pos[2].puissance_inf_num} et ${ent_pos[2].puissance_sup} = ${ent_pos[2].puissance_sup_num}`;
 					break;
 				case 4 : // nombre enier positif
 					texte = `${ent_pos[3].val}`;
 					texte_corr = `${ent_pos[3].puissance_inf} $\\leqslant$ ${ent_pos[3].val} $\\leqslant$ ${ent_pos[3].puissance_sup}`;
+					texte_corr += ` car ${ent_pos[3].puissance_inf} = ${ent_pos[3].puissance_inf_num} et ${ent_pos[3].puissance_sup} = ${ent_pos[3].puissance_sup_num}`;
 					break;
 				case 5 : // nombre enier positif
 					texte = `${ent_pos[4].val}`;
 					texte_corr = `${ent_pos[4].puissance_inf} $\\leqslant$ ${ent_pos[4].val} $\\leqslant$ ${ent_pos[4].puissance_sup}`;
+					texte_corr += ` car ${ent_pos[4].puissance_inf} = ${ent_pos[4].puissance_inf_num} et ${ent_pos[4].puissance_sup} = ${ent_pos[4].puissance_sup_num}`;
 					break;
 				case 6 : // nombre enier positif
 					texte = `${ent_pos[5].val}`;
 					texte_corr = `${ent_pos[5].puissance_inf} $\\leqslant$ ${ent_pos[5].val} $\\leqslant$ ${ent_pos[5].puissance_sup}`;
+					texte_corr += ` car ${ent_pos[5].puissance_inf} = ${ent_pos[5].puissance_inf_num} et ${ent_pos[5].puissance_sup} = ${ent_pos[5].puissance_sup_num}`;
 					break;																				
 				case 7 : // nombre décimal positif
 					texte = `${dec_pos[0].val}`;
 					texte_corr = `${dec_pos[0].puissance_inf} $\\leqslant$ ${dec_pos[0].val} $\\leqslant$ ${dec_pos[0].puissance_sup}`;
+					texte_corr += ` car ${dec_pos[0].puissance_inf} = ${dec_pos[0].puissance_inf_num} et ${dec_pos[0].puissance_sup} = ${dec_pos[0].puissance_sup_num}`;
 					break;
 				case 8 : // nombre décimal positif
 					texte = `${dec_pos[1].val}`;
 					texte_corr = `${dec_pos[1].puissance_inf} $\\leqslant$ ${dec_pos[1].val} $\\leqslant$ ${dec_pos[1].puissance_sup}`;
+					texte_corr += ` car ${dec_pos[1].puissance_inf} = ${dec_pos[1].puissance_inf_num} et ${dec_pos[1].puissance_sup} = ${dec_pos[1].puissance_sup_num}`;
 					break;
 				case 9 : // nombre décimal positif
 					texte = `${dec_pos[2].val}`;
 					texte_corr = `${dec_pos[2].puissance_inf} $\\leqslant$ ${dec_pos[2].val} $\\leqslant$ ${dec_pos[2].puissance_sup}`;
+					texte_corr += ` car ${dec_pos[2].puissance_inf} = ${dec_pos[2].puissance_inf_num} et ${dec_pos[2].puissance_sup} = ${dec_pos[2].puissance_sup_num}`;
 					break;
 				case 10 : // nombre décimal positif
 					texte = `${dec_pos[3].val}`;
 					texte_corr = `${dec_pos[3].puissance_inf} $\\leqslant$ ${dec_pos[3].val} $\\leqslant$ ${dec_pos[3].puissance_sup}`;
+					texte_corr += ` car ${dec_pos[3].puissance_inf} = ${dec_pos[3].puissance_inf_num} et ${dec_pos[3].puissance_sup} = ${dec_pos[3].puissance_sup_num}`;
 					break;
 				case 11 : // nombre décimal positif inferieur à 1
 					texte = `${dec_pos_inf_un[0].val}`;
 					texte_corr = `${dec_pos_inf_un[0].puissance_inf} $\\leqslant$ ${dec_pos_inf_un[0].val} $\\leqslant$ ${dec_pos_inf_un[0].puissance_sup}`;
+					texte_corr += ` car ${dec_pos_inf_un[0].puissance_inf} = ${dec_pos_inf_un[0].puissance_inf_num} et ${dec_pos_inf_un[0].puissance_sup} = ${dec_pos_inf_un[0].puissance_sup_num}`;
 					break;		
 				case 12 : // nombre décimal positif inferieur à 1
 					texte = `${dec_pos_inf_un[1].val}`;
 					texte_corr = `${dec_pos_inf_un[1].puissance_inf} $\\leqslant$ ${dec_pos_inf_un[1].val} $\\leqslant$ ${dec_pos_inf_un[1].puissance_sup}`;
+					texte_corr += ` car ${dec_pos_inf_un[1].puissance_inf} = ${dec_pos_inf_un[1].puissance_inf_num} et ${dec_pos_inf_un[1].puissance_sup} = ${dec_pos_inf_un[1].puissance_sup_num}`;
 					break;		
 				case 13 : // nombre décimal positif inferieur à 1
 					texte = `${dec_pos_inf_un[2].val}`;
 					texte_corr = `${dec_pos_inf_un[2].puissance_inf} $\\leqslant$ ${dec_pos_inf_un[2].val} $\\leqslant$ ${dec_pos_inf_un[2].puissance_sup}`;
+					texte_corr += ` car ${dec_pos_inf_un[2].puissance_inf} = ${dec_pos_inf_un[2].puissance_inf_num} et ${dec_pos_inf_un[2].puissance_sup} = ${dec_pos_inf_un[2].puissance_sup_num}`;
 					break;		
 				case 14 : // nombre décimal positif inferieur à 1
 					texte = `${dec_pos_inf_un[3].val}`;
 					texte_corr = `${dec_pos_inf_un[3].puissance_inf} $\\leqslant$ ${dec_pos_inf_un[3].val} $\\leqslant$ ${dec_pos_inf_un[3].puissance_sup}`;
+					texte_corr += ` car ${dec_pos_inf_un[3].puissance_inf} = ${dec_pos_inf_un[3].puissance_inf_num} et ${dec_pos_inf_un[3].puissance_sup} = ${dec_pos_inf_un[3].puissance_sup_num}`;
 					break;	
 			};
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -22584,6 +22780,7 @@ function Puissances_encadrement() {
  * @author Sébastien Lozano
  */
 function Problemes_additifs_fractions() {
+	//A la fin ne laisser que 2 questions avec un [choice(1,2),choice(3,4,5)]
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()	
 	this.sup=1;
@@ -22612,17 +22809,21 @@ function Problemes_additifs_fractions() {
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
 			// on aura besoin des méthodes de la classe Fraction()
 			let frac = new Fraction();
-			// le tableau d'objet contenant tout le necesssaire, fractions, énoncé, question ... pour les problème avec 3 fractions
+			// le tableau d'objets contenant tout le necesssaire, fractions, énoncé, question ... pour les problème avec 3 fractions
 			let pb_3_f = [];
 			// les numérateurs et dénominateurs des 3 fractions attention les deux premières doivent être inférieures à 1/2 si on veut qu'elles soient toutes positives !
-			let nt1 = randint(1,6);
-			let dt1 = 2*nt1 + randint(1,3);
-			let nt2 = randint(2,10);
-			let dt2 = 2*nt2 + randint(1,3);
-			let nt3 = dt1*dt2-nt1*dt2-nt2*dt1,//la somme des trois vaut 1 !
-			dt3 = dt1*dt2; 
-			//let prenom = prenomM();
-			pb_3_f.push({
+			// et on veut des fractions distinctes !
+			let nt1,nt2,nt3,dt1,dt2,dt3;
+			while ( (nt1==nt2 && dt1==dt2) || (nt1==nt3 && dt1==dt3) || (nt3==nt2 && dt3==dt2) ) {
+				nt1 = randint(1,6);
+				dt1 = 2*nt1 + randint(1,3);
+				nt2 = randint(2,10);
+				dt2 = 2*nt2 + randint(1,3);
+				nt3 = dt1*dt2-nt1*dt2-nt2*dt1;//la somme des trois vaut 1 !
+				dt3 = dt1*dt2; 
+			};		
+			
+			pb_3_f.push({// indice 0 le triathlon des neiges
 				prenoms: [prenomM()],
 				fractions: [nt1,dt1,'VTT',nt2,dt2,'ski de fond',nt3,dt3,'pied'],
 				enonce: ``,
@@ -22634,7 +22835,7 @@ function Problemes_additifs_fractions() {
 			pb_3_f[0].enonce += `<br>À chaque entraînement, il parcourt le circuit de la façon suivante : $\\dfrac{${pb_3_f[0].fractions[0]}}{${pb_3_f[0].fractions[1]}}$ à ${pb_3_f[0].fractions[2]}, `
 			pb_3_f[0].enonce += `$\\dfrac{${pb_3_f[0].fractions[3]}}{${pb_3_f[0].fractions[4]}}$ à ${pb_3_f[0].fractions[5]} et le reste à ${pb_3_f[0].fractions[8]}.`;
 
-			pb_3_f[0].correction = `Calculons d'abord la distance à pied : $1-\\dfrac{${pb_3_f[0].fractions[0]}}{${pb_3_f[0].fractions[1]}}-\\dfrac{${pb_3_f[0].fractions[3]}}{${pb_3_f[0].fractions[4]}} = \\dfrac{${pb_3_f[0].fractions[6]}}{${pb_3_f[0].fractions[7]}}$`
+			pb_3_f[0].correction = `Calculons d'abord la distance à ${pb_3_f[0].fractions[8]} : $1-\\dfrac{${pb_3_f[0].fractions[0]}}{${pb_3_f[0].fractions[1]}}-\\dfrac{${pb_3_f[0].fractions[3]}}{${pb_3_f[0].fractions[4]}} = \\dfrac{${pb_3_f[0].fractions[6]}}{${pb_3_f[0].fractions[7]}}$`
 			pb_3_f[0].correction += `<br>${pb_3_f[0].prenoms[0]} fait donc $\\dfrac{${pb_3_f[0].fractions[0]}}{${pb_3_f[0].fractions[1]}}$ à ${pb_3_f[0].fractions[2]}, `;
 			pb_3_f[0].correction += `$\\dfrac{${pb_3_f[0].fractions[3]}}{${pb_3_f[0].fractions[4]}}$ à ${pb_3_f[0].fractions[5]} et `;
 			pb_3_f[0].correction += `$\\dfrac{${pb_3_f[0].fractions[6]}}{${pb_3_f[0].fractions[7]}}$ à ${pb_3_f[0].fractions[8]}.`;			
@@ -22647,11 +22848,18 @@ function Problemes_additifs_fractions() {
 			pb_3_f[0].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$.`
 			pb_3_f[0].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc à ${pb_3_f[0].fractions[pb_3_f[0].fractions.indexOf(frac_rangees[5])+1]} que ${pb_3_f[0].prenoms[0]} fait la plus grande distance.`)}`;			
 
-			pb_3_f.push({
+			// les 3 prénomns doivent être distincts
+			let p1,p2,p3; // les 3 prénoms
+			while ( p1==p2 || p1 == p3 || p2 == p3 ) {
+				p1 = prenomF();
+				p2 = prenomF();
+				p3 = prenomF();
+			};
+			pb_3_f.push({// indice 1 Miss Math
 				//prenoms: [prenomF(),prenomF(),prenomF()],
-				fractions: [nt1,dt1,prenomF(),nt2,dt2,prenomF(),nt3,dt3,prenomF()],
+				fractions: [nt1,dt1,p1,nt2,dt2,p2,nt3,dt3,p3],
 				enonce: ``,
-				question: `Qui a été elue ?`,
+				question: `Qui a été élue ?`,
 				correction: ``
 			});
 			let currentDate = new Date();
@@ -22659,7 +22867,123 @@ function Problemes_additifs_fractions() {
 			pb_3_f[1].enonce = `À l'élection de Miss Math ${currentAnnee}, ${pb_3_f[1].fractions[2]} a remporté $\\dfrac{${pb_3_f[1].fractions[0]}}{${pb_3_f[1].fractions[1]}}$ des suffrages, `;
 			pb_3_f[1].enonce += `${pb_3_f[1].fractions[5]} $\\dfrac{${pb_3_f[1].fractions[3]}}{${pb_3_f[1].fractions[4]}}$ et `;
 			pb_3_f[1].enonce += `${pb_3_f[1].fractions[8]} tous les autres.`;
-			//pb_3_f[1].enonce += `<br> ${pb_3_f[1].fractions}`;
+			
+			pb_3_f[1].correction = `Calculons d'abord la fraction des suffrages remportés par ${pb_3_f[1].fractions[8]} : $1-\\dfrac{${pb_3_f[1].fractions[0]}}{${pb_3_f[1].fractions[1]}}-\\dfrac{${pb_3_f[1].fractions[3]}}{${pb_3_f[1].fractions[4]}} = \\dfrac{${pb_3_f[1].fractions[6]}}{${pb_3_f[1].fractions[7]}}$`
+			pb_3_f[1].correction += `<br>${pb_3_f[1].fractions[2]} a donc remporté $\\dfrac{${pb_3_f[1].fractions[0]}}{${pb_3_f[1].fractions[1]}}$, `;
+			pb_3_f[1].correction += `${pb_3_f[1].fractions[5]} a remporté $\\dfrac{${pb_3_f[1].fractions[3]}}{${pb_3_f[1].fractions[4]}}$ et `;
+			pb_3_f[1].correction += `${pb_3_f[1].fractions[8]} $\\dfrac{${pb_3_f[1].fractions[6]}}{${pb_3_f[1].fractions[7]}}$.`;			
+			pb_3_f[1].correction += `<br>Réduisons ces fractions au même dénominateur :`;
+			frac_meme_denom = frac.reduceSameDenominateur(pb_3_f[1].fractions[0],pb_3_f[1].fractions[1],pb_3_f[1].fractions[3],pb_3_f[1].fractions[4],pb_3_f[1].fractions[6],pb_3_f[1].fractions[7]);			
+			pb_3_f[1].correction += `$\\dfrac{${pb_3_f[1].fractions[0]}}{${pb_3_f[1].fractions[1]}} = \\dfrac{${frac_meme_denom[0]}}{${frac_meme_denom[1]}}$ ; `;
+			pb_3_f[1].correction += `$\\dfrac{${pb_3_f[1].fractions[3]}}{${pb_3_f[1].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ et `;
+			pb_3_f[1].correction += `$\\dfrac{${pb_3_f[1].fractions[6]}}{${pb_3_f[1].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$.`;
+			frac_rangees = frac.sortFractions(pb_3_f[1].fractions[0],pb_3_f[1].fractions[1],pb_3_f[1].fractions[3],pb_3_f[1].fractions[4],pb_3_f[1].fractions[6],pb_3_f[1].fractions[7]); 
+			pb_3_f[1].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$.`
+			pb_3_f[1].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc ${pb_3_f[1].fractions[pb_3_f[1].fractions.indexOf(frac_rangees[5])+1]} qui a été élue.`)}`;			
+
+			// le tableau d'objets contenant tout le necesssaire, fractions, énoncé, question ... pour les problème avec 4 fractions
+			let pb_4_f = [];
+			// les numérateurs et dénominateurs des 4 fractions attention les trois premières doivent être inférieures à 1/3 si on veut qu'elles soient toutes positives !
+			// et on veut des fractions distinctes 
+			let nq1,nq2,nq3,nq4,dq1,dq2,dq3,dq4;
+			// on récupère les dénominateurs qui vont bien
+			let denoms_amis = frac.denominateurs_amis;
+			// on choisit un tableau dedans
+			let denoms_cool = denoms_amis[randint(0,denoms_amis.length-1)];
+			while ( (nq1==nq2 && dq1==dq2) || (nq1==nq3 && dq1==dq3) || (nq1==nq4 && dq1==dq4) || (nq2==nq3 && dq2==dq3) || (nq2==nq4 && dq2==dq4) || (nq3==nq4 && dq3==dq4) || (nq1/dq1 >= 1/3) || (nq2/dq2 >= 1/3) || (nq3/dq3 >= 1/3) ) {
+				nq1 = randint(1,4);
+				//dq1 = 3*nq1 + 1;				
+				dq1 = choice(denoms_cool);
+				nq2 = randint(1,4);				
+				//dq2 = 3*nq2 + 1;
+				dq2 = choice(denoms_cool,[dq1]);
+				nq3 = randint(1,4);
+				//dq3 = 3*nq3 + 1;
+				dq3 = choice(denoms_cool,[dq1,dq2]);
+				nq4 = dq1*dq2*dq3-nq1*dq2*dq3 - nq2*dq1*dq3 - nq3*dq1*dq2;//la somme des quatre vaut 1 !
+				dq4 = dq1*dq2*dq3; 
+			};
+			pb_4_f.push({// indice 0 le mandala
+				prenoms: [prenom()],
+				fractions: [nq1,dq1,'carmin',nq2,dq2,'ocre jaune',nq3,dq3,'turquoise',nq4,dq4,'pourpre'],
+				enonce: ``,
+				question: `Quelle est elle la couleur qui recouvre le plus de surface ?`,
+				correction: ``
+			});
+			pb_4_f[0].enonce = `${pb_4_f[0].prenoms[0]} colorie un mandala selon les proportions suivantes :  $\\dfrac{${pb_4_f[0].fractions[0]}}{${pb_4_f[0].fractions[1]}}$ en ${pb_4_f[0].fractions[2]}, `;
+			pb_4_f[0].enonce += `$\\dfrac{${pb_4_f[0].fractions[3]}}{${pb_4_f[0].fractions[4]}}$ en  ${pb_4_f[0].fractions[5]}, `;
+			pb_4_f[0].enonce += `$\\dfrac{${pb_4_f[0].fractions[6]}}{${pb_4_f[0].fractions[7]}}$ en  ${pb_4_f[0].fractions[8]} et `;
+			pb_4_f[0].enonce += `le reste en ${pb_4_f[0].fractions[11]}.`;
+			
+			pb_4_f[0].correction = `Calculons d'abord la fraction du mandala recouverte en ${pb_4_f[0].fractions[11]} : $1-\\dfrac{${pb_4_f[0].fractions[0]}}{${pb_4_f[0].fractions[1]}}-\\dfrac{${pb_4_f[0].fractions[3]}}{${pb_4_f[0].fractions[4]}} -\\dfrac{${pb_4_f[0].fractions[6]}}{${pb_4_f[0].fractions[7]}}= \\dfrac{${pb_4_f[0].fractions[9]}}{${pb_4_f[0].fractions[10]}}$`
+			pb_4_f[0].correction += `<br>Le mandala est donc colorié de la façon suivante : $\\dfrac{${pb_4_f[0].fractions[0]}}{${pb_4_f[0].fractions[1]}}$ en ${pb_4_f[0].fractions[2]}, `;
+			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[3]}}{${pb_4_f[0].fractions[4]}}$ en ${pb_4_f[0].fractions[5]}, `;
+			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[6]}}{${pb_4_f[0].fractions[7]}}$ en ${pb_4_f[0].fractions[8]} et `;			
+			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[9]}}{${pb_4_f[0].fractions[10]}}$ en ${pb_4_f[0].fractions[11]}`;
+			pb_4_f[0].correction += `<br>Réduisons ces fractions au même dénominateur :`;
+			frac_meme_denom = frac.reduceSameDenominateur(pb_4_f[0].fractions[0],pb_4_f[0].fractions[1],pb_4_f[0].fractions[3],pb_4_f[0].fractions[4],pb_4_f[0].fractions[6],pb_4_f[0].fractions[7],pb_4_f[0].fractions[9],pb_4_f[0].fractions[10]);			
+			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[0]}}{${pb_4_f[0].fractions[1]}} = \\dfrac{${frac_meme_denom[0]}}{${frac_meme_denom[1]}}$ ; `;
+			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[3]}}{${pb_4_f[0].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ ; `;
+			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[6]}}{${pb_4_f[0].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$ et `;
+			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[9]}}{${pb_4_f[0].fractions[10]}} = \\dfrac{${frac_meme_denom[6]}}{${frac_meme_denom[7]}}$.`;
+			frac_rangees = frac.sortFractions(pb_4_f[0].fractions[0],pb_4_f[0].fractions[1],pb_4_f[0].fractions[3],pb_4_f[0].fractions[4],pb_4_f[0].fractions[6],pb_4_f[0].fractions[7],pb_4_f[0].fractions[9],pb_4_f[0].fractions[10]);			
+			pb_4_f[0].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
+			pb_4_f[0].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc le ${pb_4_f[0].fractions[pb_4_f[0].fractions.indexOf(frac_rangees[7])+1]} qui recouvre le plus de surface du mandala.`)}`;	
+
+			
+			pb_4_f.push({// indice 1 le jardin
+				//prenoms: [prenomF(),prenomF(),prenomF()],
+				fractions: [nq1,dq1,'la culture des légumes',nq2,dq2,'la culture des plantes aromatiques',nq3,dq3,'une serre servant aux semis',nq4,dq4,'la culture des fraisiers'],
+				enonce: ``,
+				question: `Quelle est la culture qui occupe le plus de surface ?`,
+				correction: ``
+			});
+			pb_4_f[1].enonce = `Un jardin est aménagé selon les proportions suivantes :  $\\dfrac{${pb_4_f[1].fractions[0]}}{${pb_4_f[1].fractions[1]}}$ par ${pb_4_f[1].fractions[2]}, `;
+			pb_4_f[1].enonce += `$\\dfrac{${pb_4_f[1].fractions[3]}}{${pb_4_f[1].fractions[4]}}$ par  ${pb_4_f[1].fractions[5]}, `;
+			pb_4_f[1].enonce += `$\\dfrac{${pb_4_f[1].fractions[6]}}{${pb_4_f[1].fractions[7]}}$ par  ${pb_4_f[1].fractions[8]} et `;
+			pb_4_f[1].enonce += `le reste par ${pb_4_f[1].fractions[11]}.`;
+			
+			pb_4_f[1].correction = `Calculons d'abord la fraction du jardin occupée par ${pb_4_f[1].fractions[11]} : $1-\\dfrac{${pb_4_f[1].fractions[0]}}{${pb_4_f[1].fractions[1]}}-\\dfrac{${pb_4_f[1].fractions[3]}}{${pb_4_f[1].fractions[4]}} -\\dfrac{${pb_4_f[1].fractions[6]}}{${pb_4_f[1].fractions[7]}}= \\dfrac{${pb_4_f[1].fractions[9]}}{${pb_4_f[1].fractions[10]}}$`
+			pb_4_f[1].correction += `<br>Le jardin est donc occupé de la façon suivante : $\\dfrac{${pb_4_f[1].fractions[0]}}{${pb_4_f[1].fractions[1]}}$ par ${pb_4_f[1].fractions[2]}, `;
+			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[3]}}{${pb_4_f[1].fractions[4]}}$ par ${pb_4_f[1].fractions[5]}, `;
+			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[6]}}{${pb_4_f[1].fractions[7]}}$ par ${pb_4_f[1].fractions[8]} et `;			
+			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[9]}}{${pb_4_f[1].fractions[10]}}$ par ${pb_4_f[1].fractions[11]}`;
+			pb_4_f[1].correction += `<br>Réduisons ces fractions au même dénominateur :`;
+			frac_meme_denom = frac.reduceSameDenominateur(pb_4_f[1].fractions[0],pb_4_f[1].fractions[1],pb_4_f[1].fractions[3],pb_4_f[1].fractions[4],pb_4_f[1].fractions[6],pb_4_f[1].fractions[7],pb_4_f[1].fractions[9],pb_4_f[1].fractions[10]);			
+			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[0]}}{${pb_4_f[1].fractions[1]}} = \\dfrac{${frac_meme_denom[0]}}{${frac_meme_denom[1]}}$ ; `;
+			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[3]}}{${pb_4_f[1].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ ; `;
+			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[6]}}{${pb_4_f[1].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$ et `;
+			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[9]}}{${pb_4_f[1].fractions[10]}} = \\dfrac{${frac_meme_denom[6]}}{${frac_meme_denom[7]}}$.`;
+			frac_rangees = frac.sortFractions(pb_4_f[1].fractions[0],pb_4_f[1].fractions[1],pb_4_f[1].fractions[3],pb_4_f[1].fractions[4],pb_4_f[1].fractions[6],pb_4_f[1].fractions[7],pb_4_f[1].fractions[9],pb_4_f[1].fractions[10]);			
+			pb_4_f[1].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
+			pb_4_f[1].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc par ${pb_4_f[1].fractions[pb_4_f[1].fractions.indexOf(frac_rangees[7])+1]} que le jardin est le plus occupé.`)}`;	
+
+			pb_4_f.push({// indice 2 le stade
+				//prenoms: [prenomF(),prenomF(),prenomF()],
+				fractions: [nq1,dq1,'le pays organisateur',nq2,dq2,'l\'ensemble des supporters des deux équipes en jeu',nq3,dq3,'les sponsors et officiels',nq4,dq4,'les places en vente libre'],
+				enonce: ``,
+				question: `Quelle est la catégorie la plus importante dans le stade ?`,
+				correction: ``
+			});
+			pb_4_f[2].enonce = `Pour chaque match, les places du stade sont mises en vente dans les proportions suivantes :  $\\dfrac{${pb_4_f[2].fractions[0]}}{${pb_4_f[2].fractions[1]}}$ pour ${pb_4_f[2].fractions[2]}, `;
+			pb_4_f[2].enonce += `$\\dfrac{${pb_4_f[2].fractions[3]}}{${pb_4_f[2].fractions[4]}}$ pour  ${pb_4_f[2].fractions[5]}, `;
+			pb_4_f[2].enonce += `$\\dfrac{${pb_4_f[2].fractions[6]}}{${pb_4_f[2].fractions[7]}}$ pour  ${pb_4_f[2].fractions[8]} et `;
+			pb_4_f[2].enonce += `le reste pour ${pb_4_f[2].fractions[11]}.`;
+			
+			pb_4_f[2].correction = `Calculons d'abord la fraction du stade occupée par ${pb_4_f[2].fractions[11]} : $1-\\dfrac{${pb_4_f[2].fractions[0]}}{${pb_4_f[2].fractions[1]}}-\\dfrac{${pb_4_f[2].fractions[3]}}{${pb_4_f[2].fractions[4]}} -\\dfrac{${pb_4_f[2].fractions[6]}}{${pb_4_f[2].fractions[7]}}= \\dfrac{${pb_4_f[2].fractions[9]}}{${pb_4_f[2].fractions[10]}}$`
+			pb_4_f[2].correction += `<br>Le stade est donc occupé de la façon suivante : $\\dfrac{${pb_4_f[2].fractions[0]}}{${pb_4_f[2].fractions[1]}}$ pour ${pb_4_f[2].fractions[2]}, `;
+			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[3]}}{${pb_4_f[2].fractions[4]}}$ pour ${pb_4_f[2].fractions[5]}, `;
+			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[6]}}{${pb_4_f[2].fractions[7]}}$ pour ${pb_4_f[2].fractions[8]} et `;			
+			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[9]}}{${pb_4_f[2].fractions[10]}}$ pour ${pb_4_f[2].fractions[11]}`;
+			pb_4_f[2].correction += `<br>Réduisons ces fractions au même dénominateur :`;
+			frac_meme_denom = frac.reduceSameDenominateur(pb_4_f[2].fractions[0],pb_4_f[2].fractions[1],pb_4_f[2].fractions[3],pb_4_f[2].fractions[4],pb_4_f[2].fractions[6],pb_4_f[2].fractions[7],pb_4_f[2].fractions[9],pb_4_f[2].fractions[10]);			
+			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[0]}}{${pb_4_f[2].fractions[1]}} = \\dfrac{${frac_meme_denom[0]}}{${frac_meme_denom[1]}}$ ; `;
+			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[3]}}{${pb_4_f[2].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ ; `;
+			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[6]}}{${pb_4_f[2].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$ et `;
+			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[9]}}{${pb_4_f[2].fractions[10]}} = \\dfrac{${frac_meme_denom[6]}}{${frac_meme_denom[7]}}$.`;
+			frac_rangees = frac.sortFractions(pb_4_f[2].fractions[0],pb_4_f[2].fractions[1],pb_4_f[2].fractions[3],pb_4_f[2].fractions[4],pb_4_f[2].fractions[6],pb_4_f[2].fractions[7],pb_4_f[2].fractions[9],pb_4_f[2].fractions[10]);			
+			pb_4_f[2].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
+			pb_4_f[2].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc pour ${pb_4_f[2].fractions[pb_4_f[2].fractions.indexOf(frac_rangees[7])+1]} que le nombre de places est le plus important.`)}`;	
 
 			switch (liste_type_de_questions[i]) {
 				case 1 : // Triathlon des neiges --> VTT, ski de fond, course
@@ -22675,15 +22999,21 @@ function Problemes_additifs_fractions() {
 					texte_corr = `2`;
 					break;
 				case 3 : // Mandala --> carmin, ocre jaune, turquoise, pourpre
-					texte = `3`;
+					texte = `${pb_4_f[0].enonce} <br> ${pb_4_f[0].question}`;
+					texte += `<br>`;
+					texte += `<br> ${pb_4_f[0].correction}`;
 					texte_corr = `3`;
 					break;
 				case 4 : // Jardin --> légumes, plantes aromatiques, semis, fraisiers
-					texte = `4`;
+					texte = `${pb_4_f[1].enonce} <br> ${pb_4_f[1].question}`;
+					texte += `<br>`;
+					texte += `<br> ${pb_4_f[1].correction}`;
 					texte_corr = `4`;
 					break;
 				case 5 : // Stade --> pays organisatuers, supporters, sponsors, vente libre
-					texte = `5`;
+					texte = `${pb_4_f[2].enonce} <br> ${pb_4_f[2].question}`;
+					texte += `<br>`;
+					texte += `<br> ${pb_4_f[2].correction}`;
 					texte_corr = `5`;
 					break;	
 			};
@@ -22698,6 +23028,184 @@ function Problemes_additifs_fractions() {
 	};
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : nombre enier positif\n2 : nombre décimal positif\n3 : nombre enier positif inférieur à un\n4 : Mélange"];
 };
+
+/**
+* Problème avec lecture de représentation graphique d'une fonction
+* @Auteur Rémi Angot
+*/
+function Exploiter_representation_graphique(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Problème s'appuyant sur la lecture d'une représentation graphique";
+	this.consigne = "";
+	this.nb_questions = 1;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.nb_questions_modifiable = false;
+	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_probleme = choice(['projectile','temperature','velo'])
+		let a,b,c,d,f,t1,t2,l1,l2,l3,g1,g2,graphique,texte1,texte2,fille
+		switch (type_de_probleme){
+			case 'projectile' : 
+				// Parabole qui a pour zéro, 0 et 6,8 ou 10
+				// Et qui a pour maximum un multiple de 5
+				t1 = choice([6,8,10])
+				a = 1/(-t1/2*(t1/2-t1))*choice([10,15,20,25,30]) // on divise par l'image du max et on multiplie par la valeur souhaitée
+				f = x =>calcul(-a*x*(x-t1))
+
+				// Mettre des dixièmes de secondes à la place des secondes
+				let xscale = choice([1,.1])
+				g1 = grille(-1,-1,t1+2,8)
+				g1.color = 'black'
+				g1.opacite = 1
+				g2 = grille(-1,-1,t1+2,8,'gray',.2,.2)
+				g3 = axes(0,0,t1+1,8)
+				texte1 = texteParPosition('hauteur (en mètre)',0.2,7.3,'droite')
+				l1 = labelX(0,t1+1,1,'black',-.6,xscale)
+				l2 = labelY(1,6,1,'black',-.6,5)
+				graphique = courbe(f,0,t1,'blue',2,.1,1,5)
+				texte2 = texteParPosition('temps (en s)',t1+.5,0.4,'droite')
+				
+				this.introduction = 'On a représenté ci-dessous l’évolution de la hauteur d’un projectile lancé depuis le sol (en mètre) en fonction du temps (en seconde).'
+
+				this.introduction += '<br><br>' + mathalea2d({
+					xmin : -1,
+					ymin : -1,
+					xmax : t1+3,
+					ymax : 8,
+					pixelsParCm : 40,
+				},g1,g2,g3,graphique,texte1,texte2,l1,l2)
+
+				this.introduction += '<br><br>' + 'À l’aide de ce graphique, répondre aux questions suivantes :'
+
+				this.liste_questions.push('Au bout de combien de temps le projectile retombe-t-il au sol ?')
+				this.liste_corrections.push(`Au bout de ${tex_nombrec(t1*xscale)} s, le projectile retombe au sol car la courbe passe par le point de coordonnées $(${tex_nombrec(t1*xscale)}~;~0)$.`)
+
+				this.liste_questions.push('Quelle est la hauteur maximale atteinte par le projectile ?')
+				this.liste_corrections.push(`Le point le plus haut de la courbe a pour abscisse $${tex_nombrec(t1/2*xscale)}$ et pour ordonnée $${f(t1/2)}$ donc la hauteur maximale est de $${f(t1/2)}$ m.`)
+
+			break;
+			case 'temperature':
+				let x1 = 4;
+				let x2 = choice([12,14,16]);
+				let x3 = choice([16,18,20,22])
+				let fx1 = randint(-3,-1);
+				let fx2 = randint(4, 7);
+				let fx3 = randint(-1,3);
+				d = randint(1,3);
+				c = randint(-5, 5);
+				let numa,dena,numb,denb,numc,denc
+
+				[[numa, dena], [numb, denb], [numc, denc]] = resol_sys_lineaire_3x3(x1, x2, x3, fx1, fx2, fx3, d)
+
+				a = numa / dena;
+				b = numb / denb;
+				c = numc / denc;
+
+				f = x => a*x**3+b*x**2+c*x+d
+
+				console.log(cherche_min_max_f ([a,b,c,d]))
+
+				g1 = grille(-1,-3,12,8)
+				g1.color = 'black'
+				g1.opacite = 1
+				g2 = grille(-1,-3,12,8,'gray',.2,.2)
+				g3 = axes(0,-3,12,8)
+				texte1 = texteParPosition('température (en °C)',0.2,7.3,'droite')
+				l1 = labelX(1,12,1,'black',-.6,2)
+				l2 = labelY(1,7,1,'black',-.6,1)
+				l3 = labelY(-3,1,1,'black',-.6,1)
+				graphique = courbe(f,0,24,'blue',2,.1,2,1)
+				texte2 = texteParPosition('temps (en h)',12.5,0.4,'droite')
+				this.introduction = 'On a représenté ci-dessous l’évolution de la température sur une journée.'
+				this.introduction += '<br><br>' + mathalea2d({
+					xmin : -1,
+					ymin : -4,
+					xmax : 16,
+					ymax : 8,
+					pixelsParCm : 40,
+				},g1,g2,g3,graphique,texte1,texte2,l1,l2,l3)
+
+				this.introduction += '<br><br>' + 'À l’aide de ce graphique, répondre aux questions suivantes :'
+
+				this.liste_questions.push('Au bout de combien de temps le projectile retombe-t-il au sol ?')
+				//this.liste_corrections.push(`Au bout de ${tex_nombrec(t1*xscale)} s, le projectile retombe au sol car la courbe passe par le point de coordonnées $(${tex_nombrec(t1*xscale)}~;~0)$.`)
+
+				this.liste_questions.push('Quelle est la hauteur maximale atteinte par le projectile ?')
+				//this.liste_corrections.push(`Le point le plus haut de la courbe a pour abscisse $${tex_nombrec(t1/2*xscale)}$ et pour ordonnée $${f(t1/2)}$ donc la hauteur maximale est de $${f(t1/2)}$ m.`)
+
+			break;
+			case 'velo' : 
+				let v1 = randint(1,4)
+				let v2 = randint(1,3,v1)
+				let v3 = v1+v2
+				g1 = grille(-1,-1,6,8)
+				g1.color = 'black'
+				g1.opacite = 1
+				g2 = grille(-1,-1,6,8,'gray',.2,.2)
+				g3 = axes(0,0,6,7)
+				texte1 = texteParPosition('distance (en km)',0.2,7.3,'droite')
+				l1 = labelX(0,5,1,'black',-.6,10)
+				l2 = labelY(1,6,1,'black',-.6)
+				texte2 = texteParPosition('temps (en min)',6.5,0.4,'droite')
+				let situation = randint(1,3)
+				let tempsPause
+				let periodeRapide
+				if (situation==1){
+					l = polyline(point(0,0),point(1,v1),point(2,v1+v2),point(3,v1+v2),point(4,0))
+					tempsPause = 20
+					periodeRapide = 'de la 20e à la 30e minute'
+				}
+				if (situation==2){
+					l = polyline(point(0,0),point(1,v3),point(2,v3),point(3,v2),point(4,0))
+					tempsPause = 10
+					periodeRapide = 'durant les 10 premières minutes'
+
+				}
+				if (situation==3){
+					l = polyline(point(0,0),point(1,v3),point(2,v2),point(3,v2),point(4,0))
+					tempsPause = 20
+					periodeRapide = 'durant les 10 premières minutes'
+				}
+				l.epaisseur=2
+				l.color = 'blue'
+
+				fille = prenomF()
+				this.introduction = `${fille} fait du vélo avec son smartphone sur une voie-verte rectiligne qui part de chez elle. Une application lui permet de voir à quelle distance de chez elle, elle se trouve.`
+
+				this.introduction += '<br><br>' + mathalea2d({
+					xmin : -1,
+					ymin : -1,
+					xmax : 9,
+					ymax : 8,
+					pixelsParCm : 40,
+				},g1,g2,g3,l,texte1,texte2,l1,l2)
+
+				this.introduction += '<br><br>' + 'À l’aide de ce graphique, répondre aux questions suivantes :'
+
+				this.liste_questions.push('Pendant combien de temps a-t-elle fait du vélo ?')
+				this.liste_corrections.push(`Elle a fait du vélo pendant 40 minutes.`)
+
+				this.liste_questions.push('Quelle distance a-t-elle parcourue au total ?')
+				this.liste_corrections.push(`Le point le plus loin de sa maison est à ${v3} km et ensuite elle revient chez elle, donc la distance totale est de ${2*v3} km.`)
+
+				this.liste_questions.push(`Que se passe-t-il après ${tempsPause} minutes de vélo ?`)
+				this.liste_corrections.push(`La distance reste constante alors qu'elle est sur un chemin rectiligne. Elle a donc fait une pause.`)
+			
+				this.liste_questions.push('À quel moment a-t-elle été la plus rapide ?')
+				this.liste_corrections.push(`Elle a été la plus rapide ${periodeRapide} où elle a effectué ${v3} km en 10 minutes.`)
+			
+
+			break;
+		}
+			
+		liste_de_question_to_contenu(this);
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
 
 /**
  * Calculs de probabilités sur une expérience aléatoire à deux épreuves
@@ -26173,7 +26681,6 @@ function Decomposition_facteurs_premiers() {
 					for (let k = 1; k < tab_premiers.length; k++) {
 						if (tab_multiplicites[k] == 1) {
 							texte_corr += `\\times ${tab_premiers[k]}`;
-							//console.log('typeof : '+typeof tab_multiplicites[k]);
 						} else {
 							texte_corr += `\\times ${tab_premiers[k]}^{${tab_multiplicites[k]}}`;
 						};
@@ -29099,15 +29606,16 @@ function Problemes_Thales(){
 		this.liste_corrections = []; // Liste de questions corrigées
 		let texte='';
 		let texte_corr='';
-		let type_de_questions = randint(1,1);
+		let type_de_questions = randint(1,2);
+		let A,B,C,D,M,N,x,k,y,p,p2,codage1,codage2,codage3,codage4,sMN,sBD,sCote,texte1,texte2,texte3,texte4,labels,BC,BD,MN
 		
 
 			switch (type_de_questions){
 				case 1 :
-				let x = randint(6,10);
-				let k = calcul(randint(12,19)/10);
-				let y = calcul(randint(30,50)/10);
-				let [A,B,C,D,E]=polygone(5)
+				x = randint(6,10);
+				k = calcul(randint(12,19)/10);
+				y = calcul(randint(30,50)/10);
+				[A,B,C,D,E]=creerNomDePolygone(5)
 				texte = `On sait que $${A}${E}=${tex_nombre(x)}$ cm ; $${A}${D}=${tex_nombrec(k*x)}$ cm et $${E}${B}=${tex_nombre(y)}$ cm.<br>`;
 				texte += `Calculer la valeur exacte de $${D}${C}$.`
 				if (sortie_html) {
@@ -29175,6 +29683,51 @@ function Problemes_Thales(){
 				texte_corr += `<br><br>$\\dfrac{${tex_nombre(x)}}{${tex_nombrec(k*x)}}=\\dfrac{${tex_nombre(y)}}{${D}${C}}$`
 				texte_corr += `<br><br>$${D}${C}=\\dfrac{${tex_nombrec(k*x)}\\times${tex_nombre(y)}}{${tex_nombre(x)}}=${tex_nombrec(k*y)}$`
 				break;
+
+
+				case 2 : 
+					let [nomA,nomB,nomC,nomD] = creerNomDePolygone(4,['M','N'])
+					BC = randint(2,6)
+					BD = 2*BC
+					MN = calcul(BD*choice([0.2,0.3,0.4]))
+					A = point(0,4,nomA,'above')
+					B = point(7,4,nomB,'above')
+					C = point(7,0,nomC,'below')
+					D = point(0,0,nomD,'below')
+					p = polygone(A,B,C,D)
+					codage1 = codageAngleDroit(D,A,B)
+					codage2 = codageAngleDroit(A,B,C)
+					codage3 = codageAngleDroit(B,C,D)
+					codage4 = codageAngleDroit(C,D,A)
+					M = pointSurSegment(A,B,longueur(A,B)/3,'M','above')
+					N = pointSurSegment(A,D,longueur(A,D)/3,'N','left')
+					sMN = segment(M,N)
+					sBD = segment(B,D)
+					sCote = segment(point(N.x-1.3,N.y),point(D.x-1.3,D.y))
+					sCote.styleExtremites='<->'
+					texte1 = texteParPoint('?',milieu(point(N.x-1.5,N.y),point(D.x-1.5,D.y)),'gauche')
+					texte2 = texteSurSegment(nombre_avec_espace(BD)+' cm',B,D)
+					texte3 = texteSurSegment(nombre_avec_espace(MN)+' cm',M,N)
+					texte4 = texteSurSegment(nombre_avec_espace(BC)+' cm',B,C)
+
+					labels = labelPoint(M,N,A,B,C,D)
+
+					texte = `Sur la figure ci-dessous $${nomA+nomB+nomC+nomD}$ est un rectangle et $(MN)$ est parallèle à la diagonale $(${nomB+nomD})$.`
+					texte += '<br>Calculer la longueur $DN$ au millimètre près.<br><br>'
+					texte += mathalea2d({
+						xmin : -2,
+						xmax : 9,
+						ymin : -1.5,
+						ymax : 5,
+						scale : .8
+					}, p,codage1,codage2,codage3,codage4,sMN,sBD,sCote,texte1,texte2,texte3,texte4,labels)
+
+					texte_corr = `Dans le triangle $${nomA+nomB+nomD}$, $M$ est un point de $[${nomA+nomB}]$, $N$ est un point de $[${nomA+nomD}]$ et $(MN)$ est parallèle à $(${nomB+nomD})$ donc d'après le théorème de Thalès on a : `
+					texte_corr += `<br><br> $${tex_fraction(nomA+'M',nomA+nomB)}=${tex_fraction(nomA+'N',nomA+nomD)}=${tex_fraction('MN',nomB+nomD)}$`
+					texte_corr += `<br><br> $${tex_fraction(nomA+'M',nomA+nomB)}=${tex_fraction(nomA+'N',BC)}=${tex_fraction(tex_nombre(MN),tex_nombre(BD))}$`
+					texte_corr += `<br><br> $${nomA}N = ${tex_fraction(BC+'\\times'+tex_nombre(MN),BD)}=${tex_nombre(arrondi(calcul(BC*MN/BD),1))}$ cm`
+				
+				break;
 				}
 			
 	this.liste_questions[0]=texte;
@@ -29182,6 +29735,67 @@ function Problemes_Thales(){
 	liste_de_question_to_contenu(this);
 	// this.besoin_formulaire_numerique = ['Type de questions',2,"1 : Donner l'égalité\n2 : Compléter une égalité avec une addition ou une soustraction"];
 	// this.besoin_formulaire2_case_a_cocher = ['Sans figures']
+	}
+}
+/**
+ * @Auteur Jean-Claude Lhote
+ */
+function TrianglesSemblables() {
+	'use strict'
+	Exercice.call(this)
+	this.titre = "Reconnaître des triangles semblables dans différentes configurations";
+	this.nb_questions = 1;
+	this.nb_questions_modifiable = false;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.nouvelle_version = function(numero_de_l_exercice){
+		let coeff=50
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		let texte='';
+		let texte_corr='';
+		let type_de_questions = randint(1,1);
+		switch (type_de_questions){
+			case 1 :
+				let trouve=false,aireABC,A,B,C,M,p,q,r,s,X,G,Gq,nom1,grid,tA,sAB,dAB,pABC,lab
+				while (!trouve) {
+				A=point(choice([0,3]),choice([0,3]),'A')
+				B=point(choice([6,9]),choice([6,9]),'B')
+				C=rotation(B,A,90,'C')
+				C.x+=choice([0,3,6])
+				C.y+=choice([-3,0,3])
+				p=polygone(A,B,C)
+				aireABC=aireTriangle(p) // Je savais bien que cette formule servirait un jour !
+				if (aireABC<11&&aireABC>5) trouve=true
+				}
+				G=barycentre(p)
+				p=rotation(p,G,choice([0,90,270]))
+				p.couleurDeRemplissage='gray'
+				p.opaciteDeRemplissage=0.5
+				nom1=nommePolygone(p,'ABC',0.4)
+				grid=grille(-3,-3,27,18, 'gray', .4,1)
+				M=point(9,12)
+				q=rotation(p,M,90)
+				Gq=barycentre(q)
+				r=rotation(q,Gq,choice([0,90,180,270]))
+				X=milieu(r.listePoints[0],r.listePoints[1])
+				s=rotation(r,X,180)
+				r.couleurDeRemplissage='red'
+				r.opaciteDeRemplissage=0.5
+				s.couleurDeRemplissage='blue'
+				s.opaciteDeRemplissage=0.5
+				tA=tracePoint(A,B,C)
+				sAB=segment(A,B)
+				dAB=droite(A,B)
+				pABC=polygone(A,B,C)
+				lab=labelPoint(A,B,C)
+				texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:50,scale:0.5},p,nom1,grid,r,s,tA,sAB,dAB,pABC,lab)
+				this.liste_questions[0]=texte;
+				this.liste_corrections[0]=texte_corr;
+				liste_de_question_to_contenu(this);
+				break;
+			
+		}
 	}
 } 
 
@@ -29404,19 +30018,25 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     yI0= fraction_simplifiee(yA+yB,2)[0]
                     yI1= fraction_simplifiee(yA+yB,2)[1]
                     
-                    g =grille(-9,-9,9,9)               
-                    A = point(xA,yA,'A','red')
-                    B = point(xB,yB,'B','red')
-                    a=axes(xmin=-9,ymin=-9,xmax=9,ymax=9,thick=.2,step=1)
+                    g = grille(-9,-9,9,9)               
+                    A = point(xA,yA,'A')
+                    B = point(xB,yB,'B')
+                    a = axes(-9,-9,9,9)
                     s = segment(A,B,'blue')
-                    T=tracePoint(A,B) // Repère les points avec une croix
-                    L=labelPoint(A,B)
+                    T = tracePoint(A,B) // Repère les points avec une croix
+                    L = labelPoint(A,B)
                     texte =`Dans un repère orthonormé $(O,I,J)$, on donne les points suivants :`
                     texte +=` $A\\left(${xA};${yA}\\right)$ et $B\\left(${xB};${yB}\\right)$`
                     texte += `<br>Déterminer les coordonnées du point $I$ milieu du segment $[AB]$ `;
-                                   
-                    
-                    texte_corr = mathalea2d(-9,-9,9,9,T,L,g,a,s)
+                     
+                    texte_corr = mathalea2d({
+                      xmin : -9,
+                      ymin : -9,
+                      xmax : 9,
+                      ymax : 9
+                    },a,g,T,s,L);
+
+
                     texte_corr += `<br>On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
                     texte_corr +=`<br> alors les coordonnées du point $I$ milieu de $[AB]$ sont `
                     texte_corr +=`$I\\left(\\dfrac{x_A+x_B}{2};\\dfrac{y_A+y_B}{2}\\right)$ <br>`
@@ -29447,10 +30067,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     xI1= fraction_simplifiee(xA+xB,2)[1]
                     yI0= fraction_simplifiee(yA+yB,2)[0]
                     yI1= fraction_simplifiee(yA+yB,2)[1]
-                      g =grille(-9,-9,9,9)               
+                    g = grille(-9,-9,9,9)               
                     A = point(xA,yA,'A','red')
                     B = point(xB,yB,'B','red')
-                    a=axes(xmin=-9,ymin=-9,xmax=9,ymax=9,thick=.2,step=1)
+                    a = axes(-9,-9,9,9)
                     s = segment(A,B,'blue')
                     T=tracePoint(A,B) // Repère les points avec une croix
                     L=labelPoint(A,B)
@@ -29459,7 +30079,14 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte += `<br>Déterminer les coordonnées du point $B$ tel que I soit le milieu du segment $[AB]$ `;
                                    
                     
-                      texte_corr = mathalea2d(-9,-9,9,9,T,L,s,g,a)
+                    texte_corr = mathalea2d({
+                      xmin : -9,
+                      ymin : -9,
+                      xmax : 9,
+                      ymax : 9
+                    },T,L,g,a,s);
+
+                    
                     texte_corr += `<br>On sait d'après le cours, que si $A(x_A;y_A)$ et $B(x_B;y_B)$ sont deux points d'un repère orthonormé,`
                     texte_corr +=` <br>alors les coordonnées du point $I$ milieu de $[AB]$ sont `
                     texte_corr +=`$I\\left(\\dfrac{x_A+x_B}{2};\\dfrac{y_A+y_B}{2}\\right)$ <br>`
@@ -29507,7 +30134,14 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte +=` $C\\left(${xC};${yC}\\right)$ ; $D\\left(${xD};${yD}\\right).$`
                     texte += `<br>Déterminer si le quadrilatère $ABDC$ est un parallélogramme.`;
                                    
-                      texte_corr = mathalea2d(-9,-9,9,9,T,L,s,g,a)
+                      texte_corr = mathalea2d({
+                      xmin : -9,
+                      ymin : -9,
+                      xmax : 9,
+                      ymax : 9
+                    },T,L,g,a,s);
+
+                    
                     texte_corr += `<br>On sait que ABDC est un parallélogramme si et seulement si ses diagonales se coupent en leur milieu.$`
                     texte_corr += `<br>On cherche donc les coordonnées du milieu de chacune des deux diagonales du quadrilatère :`
                     texte_corr += `On sait d'après le cours, que si $A(x_A;y_A)$ et $D(x_D;y_D)$ sont deux points d'un repère ,`
@@ -29557,10 +30191,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
                    xJ1= fraction_simplifiee(xB+xC,2)[1]
                    yJ0= fraction_simplifiee(yB+yC,2)[0]
                    yJ1= fraction_simplifiee(yB+yC,2)[1]
-                       g =grille(-9,-9,9,9)               
+                    g = grille(-9,-9,9,9)               
                     A = point(xA,yA,'A','red')
                     B = point(xB,yB,'B','red')
-                    a=axes(xmin=-9,ymin=-9,xmax=9,ymax=9,thick=.2,step=1)
+                    a=axes(-9,-9,9,9)
                     s = segment(A,B,'blue')
                     T=tracePoint(A,B) // Repère les points avec une croix
                     L=labelPoint(A,B)
@@ -29570,7 +30204,14 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte +=` $C\\left(${xC};${yC}\\right)$ ; $D\\left(${xD};${yD}\\right).$`
                     texte += `<br>Déterminer si le quadrilatère $ABDC$ est un parallélogramme.`;
                                    
-                    texte_corr = mathalea2d(-9,-9,9,9,T,L,s,g,a)
+                    texte_corr = mathalea2d({
+                      xmin : -9,
+                      ymin : -9,
+                      xmax : 9,
+                      ymax : 9
+                    },T,L,g,a,s);
+
+                    
                     texte_corr += `<br>On sait que ABDC est un parallélogramme si et seulement si ses diagonales se coupent en leur milieu.$`
                     texte_corr += `<br>On cherche donc les coordonnées du milieu de chacune des deux diagonales du quadrilatère :`
                     texte_corr += `On sait d'après le cours, que si $A(x_A;y_A)$ et $D(x_D;y_D)$ sont deux points d'un repère ,`
@@ -30007,7 +30648,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`
                       ;
                         
-                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                     texte_corr += `<br>On cherche les réels qui sont à la fois dans $[${a};${b}]$ et dans $[${c};${d}]$.`
                     texte_corr += `<br>On regarde la partie de l'intervalle qui est coloriée à la fois en bleu et en rouge :<br>`
                     texte_corr += `<br>Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
@@ -30037,7 +30683,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',0);
                     int2 = intervalle(C,D,'blue',0);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
-                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                     texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}]$.`
                     texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée, soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
                     texte_corr += `<br>Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
@@ -30067,7 +30718,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',-0.1);
                     int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`;
-                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
 
                     texte_corr += `<br>On cherche les réels qui sont à la fois dans $[${a};${b}]$ et dans $[${c};${d}]$.`
                     texte_corr += `<br>On regarde la partie de l'intervalle qui est coloriée à la fois en bleu et en rouge :<br>`
@@ -30097,7 +30753,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',-0.1);
                     int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
-                     texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                     texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                      texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}]$.`
                     texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée, soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
                     texte_corr += `$I=[${a};${d}]$`;                     
@@ -30127,7 +30788,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',-0.1);
                     int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cap [${c};${d}].$`;
-                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                     texte_corr += `<br>On cherche les réels qui sont à la fois dans $[${a};${b}]$ et dans $[${c};${d}]$.`
                     texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée en bleu et rouge :<br>`
                     texte_corr += `On observe que $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${c};${d}].$`;                     
@@ -30157,7 +30823,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',-0.1);
                     int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}].$`;
-                     texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                     texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                      texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}]$.`
                     texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
                     texte_corr += `On $[${c};${d}]\\subset [${a};${b}]$ donc $I=[${a};${b}].$`;                     
@@ -30190,7 +30861,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte = `Donner si possible, une écriture simplifiée de $I=]${a};${b}] \\cap [${c};${d}].$`
                       ;
                         
-                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                     texte_corr += `<br>On cherche les réels qui sont à la fois dans $]${a};${b}]$ et dans $[${c};${d}]$.`
                     texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée en bleu et rouge :<br>`
                     texte_corr +=`<br>Aucun réel n'appartient aux deux ensembles.<br>
@@ -30220,7 +30896,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',0);
                     int2 = intervalle(C,D,'blue',0);
                     texte = `Donner si possible, une écriture simplifiée de $I=[${a};${b}] \\cup [${c};${d}[.$`;
-                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                     texte_corr += `<br>On cherche les réels qui sont ou bien dans $[${a};${b}]$, ou bien dans $[${c};${d}[$.`
                     texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée soit en bleu, soit en rouge, soit en bleu et rouge :`
                     texte_corr += `<br>Les deux ensembles sont disjoints, ils n'ont aucun élément en commun.<br>
@@ -30250,7 +30931,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',-0.1);
                     int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=]${a};${b}[ \\cap [${c};${d}].$`;
-                    texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
 
                     texte_corr += `<br>On cherche les réels qui sont à la fois dans $]${a};${b}[$ et dans $[${c};${d}]$.`
                     texte_corr += `<br>On regarde la partie de l'intervalle qui est coloriée à la fois en bleu et en rouge :<br>`
@@ -30280,7 +30966,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     int1 = intervalle(A,B,'red',-0.1);
                     int2 = intervalle(C,D,'blue',0.1);
                     texte = `Donner si possible, une écriture simplifiée de $I=]${a};${b}[ \\cup ]${c};${d}[.$`;
-                     texte_corr = mathalea2d(-2,-2,15,2,int,int1,int2,A,B,C,D,c1,c2,c3,c4)
+                     texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },int,int1,int2,A,B,C,D,c1,c2,c3,c4)
                      texte_corr += `<br>On cherche les réels qui sont ou bien dans $]${a};${b}[$, ou bien dans $]${c};${d}[$.`
                     texte_corr += `<br>On donc regarde la partie de l'intervalle qui est coloriée, soit en bleu, soit en rouge, soit en bleu et rouge :<br>`
                     texte_corr += `$I=]${a};${d}[$`;                     
@@ -30338,7 +31029,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c1 = crochetG(A,'red');
                     int1 = intervalle(A,X2,'red',-0.1);
                     texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x>${a}$ et représenter l'intervalle sur une droite graduée.`;
-                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1)
                     texte_corr += `<br>$I=]${a};+\\infty[$`;                     
                     break ;
                 
@@ -30351,7 +31047,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c1 = crochetD(A,'red');
                     int1 = intervalle(A,X2,'red',-0.1);
                     texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\geqslant ${a}$ et représenter l'intervalle sur une droite graduée.`;
-                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,c1)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,c1)
                     texte_corr += `$I=[${a};+\\infty[$`;
                     break ;
 
@@ -30375,7 +31076,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c1 = crochetG(A,'red');
                     int1 = intervalle(X1,A,'red',-0.1);
                     texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $x\\leqslant ${a}$ et représenter l'intervalle sur une droite graduée.`;
-                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,c1)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,c1)
                     texte_corr += `$I=]-\\infty;${a}]$`;
                     break ;
                 
@@ -30389,7 +31095,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c2 = crochetD(B,'red');
                     int1 = intervalle(A,B,'red',-0.1);                  
                     texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a} < x < ${b}$ et représenter l'intervalle sur une droite graduée.`;
-                     texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                     texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1,c2)
                      texte_corr += `$I=]${a};${b}[$`;
                     break ;
 
@@ -30403,7 +31114,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c2 = crochetD(B,'red');
                     int1 = intervalle(A,B,'red',-0.1);                  
                     texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x<${b}$ et représenter l'intervalle sur une droite graduée.`;
-                                 texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                                 texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1,c2)
                                  texte_corr += `$I=[${a};${b}[$`;
                     break ;
                 
@@ -30417,7 +31133,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c2 = crochetG(B,'red');
                     int1 = intervalle(A,B,'red',-0.1);  
                     texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}\\leqslant x\\leqslant ${b}$ et représenter l'intervalle sur une droite graduée.`;
-                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                      texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1,c2)
                       texte_corr += `$I=[${a};${b}]$`;
                     break ;
                 
@@ -30431,7 +31152,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c2 = crochetG(B,'red');
                     int1 = intervalle(A,B,'red',-0.1);  
                     texte = `Déterminer l'intervalle $I$ de $\\mathbb{R}$ correspondant à l'inéquation $${a}< x\\leqslant ${b}$ et représenter l'intervalle sur une droite graduée.`;
-                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                      texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1,c2)
                       texte_corr += `$I=]${a};${b}]$`;
                     break ;
                 
@@ -30445,7 +31171,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c2 = crochetG(B,'red');
                     int1 = intervalle(A,B,'red',-0.1);  
                     texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};${b}]$ et représenter l'intervalle sur une droite graduée.`;
-                    texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                    texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1,c2)
                     texte_corr += `$${a}< x\\leqslant ${b}$`;  
                      break ;
                 case 10 : 
@@ -30458,7 +31189,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c2 = crochetG(B,'red');
                     int1 = intervalle(A,B,'red',-0.1);  
                     texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}]$ et représenter l'intervalle sur une droite graduée.`; 
-                     texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)
+                     texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1,c2)
                      texte_corr += `$${a}\\leqslant x\\leqslant ${b}$`;  
                      break ;
                 case 11 : 
@@ -30471,7 +31207,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c2 = crochetD(B,'red');
                     int1 = intervalle(A,B,'red',-0.1);  
                     texte = `Déterminer l'inéquation correspondant à $x \\in [${a};${b}[$ et représenter l'intervalle sur une droite graduée.`;
-                       texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1,c2)  
+                       texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1,c2)  
                      texte_corr += `$${a}\\leqslant x< ${b}$`; 
                      break ;
                 case 12 : 
@@ -30483,7 +31224,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     c1 = crochetG(A,'red');
                     
                     int1 = intervalle(A,B,'red',-0.1);  texte = `Déterminer l'inéquation correspondant à $x \\in ]${a};+\\infty[ et représenter l'intervalle sur une droite graduée.$`;
-                       texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)  
+                       texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1)  
                        texte_corr += `$x > ${a}$`;    
                          break ;
                 case 13 : 
@@ -30496,7 +31242,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     
                     int1 = intervalle(X1,A,'red',-0.1);
                     texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}[$ et représenter l'intervalle sur une droite graduée.`;
-                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)  
+                      texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1)  
                       texte_corr += `$x < ${a}$`; 
                          break ;   
                 case 14 : 
@@ -30509,7 +31260,12 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     
                     int1 = intervalle(X1,A,'red',-0.1);
                     texte = `Déterminer l'inéquation correspondant à $x \\in ]-\\infty;${a}]$ et représenter l'intervalle sur une droite graduée.`;
-                      texte_corr = mathalea2d(-2,-2,15,2,s,int,int1,A,B,c1)  
+                      texte_corr = mathalea2d({
+                      xmin : -2,
+                      ymin : -2,
+                      xmax : 15,
+                      ymax : 2
+                    },s,int,int1,A,B,c1)  
                       texte_corr += `$x \\leqslant ${a}$`;   
                          break ;
 
