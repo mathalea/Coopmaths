@@ -52,8 +52,9 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 			{{% priorite "Il introduit une lettre pour désigner une valeur inconnue et met un problème en équation." %}}
 			{{% priorite_alea "À FAIRE : Touver la longueur du côté d'un carré de périmètre donné et modéliser par une équation" "" %}}
 			{{% priorite "Il teste si un nombre est solution d’une équation" %}}
-			{{% priorite_alea "À FAIRE à partir de 5L14 : Tester sur une équation du second degré" "" %}}
-			{{% priorite_alea "À FAIRE à partir de 5L14 : Tester sur une équation du premier degré" "" %}}
+			{{% priorite_alea "4L14-2 : Tester sur une équation du second degré" "4L14-2" %}}
+			{{% priorite_alea "4L14-1 : Tester sur une équation du premier degré" "4L14-1" %}}
+			{{% priorite_alea "4L14-0 : Tester sur une équation du premier ou du second degré" "4L14-0" %}}
 
 			{{% priorite "Il résout algébriquement une équation du premier degré." %}}
 			{{% priorite_alea "4L20 : Équation du premier degré" "4L20" %}}			
