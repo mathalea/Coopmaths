@@ -95,7 +95,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 			{{% priorite_alea "3G23 : Reconnaître des triangles semblables dans différentes configurations" "3G23" %}}
 
 			{{% priorite "L’élève connaît et utilise le théorème de Thalès dans la configuration des triangles emboîtés." %}}
-			{{% priorite_alea "3G20 : Déterminer une longueur avec la propriété de Thales" "3G20" %}}
+			{{% priorite_alea "À FAIRE : à partir de 3G20 : Déterminer une longueur avec la propriété de Thales --> Attention à limiter aux triangles emboités" "3G20" %}}
 
 			{{% priorite "L’élève connaît et utilise le théorème de Pythagore." %}}
 			{{% priorite_alea "4G20 : Déterminer une longueur avec l'égalité de Pythagore" "4G20" %}}
