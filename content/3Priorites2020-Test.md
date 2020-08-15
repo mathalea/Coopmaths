@@ -43,15 +43,21 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Utiliser le calcul littéral.</div>	
 			{{% priorite "Il identifie la structure d’une expression littérale (somme, produit)." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "À FAIRE : Déterminer la dernière opération dans une expression littérale" "" %}}
+			{{% priorite_alea "À FAIRE : Réduire le plus possible une expression littérale" "" %}}
+
 			{{% priorite "Il utilise la propriété de distributivité simple pour développer un produit." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "4L10 : Utiliser la simple distributivité" "4L10" %}}	
+
 			{{% priorite "Il introduit une lettre pour désigner une valeur inconnue et met un problème en équation." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "À FAIRE : Touver la longueur du côté d'un carré de périmètre donné et modéliser par une équation" "" %}}
 			{{% priorite "Il teste si un nombre est solution d’une équation" %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "4L14-2 : Tester sur une équation du second degré" "4L14-2" %}}
+			{{% priorite_alea "4L14-1 : Tester sur une équation du premier degré" "4L14-1" %}}
+			{{% priorite_alea "4L14-0 : Tester sur une équation du premier ou du second degré" "4L14-0" %}}
+
 			{{% priorite "Il résout algébriquement une équation du premier degré." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "4L20 : Équation du premier degré" "4L20" %}}			
 	</div>	
 {{< /liste_priorites >}}
 
@@ -64,6 +70,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
 			{{% priorite "Il résout des problèmes en utilisant la proportionnalité." %}}
 			{{% priorite_alea "6P11 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "6P11" %}}
+			{{% priorite_alea "À FAIRE à partir de 6P11 : Donner plusieurs infos pour plusieurs quidam et demander le max oiur une somme donnée" "" %}}
+			{{% priorite_alea "À FAIRE : avec un graphique demandant de justifier si c'est proportionnel puis demandant des lectures graphiques cf fonctions linéaires ?" "" %}}
 	</div>	
 {{< /liste_priorites >}}
 {{< liste_priorites >}}
@@ -71,7 +79,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "À FAIRE : Miriam veut acheter 5 crayons et 3 gommes.Soit c le prix d'un crayon et g le prix d'une gomme.Exprimer le prix total de son achat, en fonction de c et g. Adaptables à partir des 5L de JC ? " "" %}}
+
 			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}			
 			{{% priorite_alea "4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "4F12" %}}
 	</div>	
@@ -85,8 +94,10 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<div class="header content"> Utiliser les notions de géométrie plane pour démontrer.</div>	
 			{{% priorite "L’élève connaît et utilise les cas d’égalité des triangles." %}}			
 			{{% priorite_alea "3G23 : Reconnaître des triangles semblables dans différentes configurations" "3G23" %}}
+
 			{{% priorite "L’élève connaît et utilise le théorème de Thalès dans la configuration des triangles emboîtés." %}}
-			{{% priorite_alea "3G20 : Déterminer une longueur avec la propriété de Thales" "3G20" %}}
+			{{% priorite_alea "À FAIRE : à partir de 3G20 : Déterminer une longueur avec la propriété de Thales --> Attention à limiter aux triangles emboités" "3G20" %}}
+
 			{{% priorite "L’élève connaît et utilise le théorème de Pythagore." %}}
 			{{% priorite_alea "4G20 : Déterminer une longueur avec l'égalité de Pythagore" "4G20" %}}
 	</div>	
@@ -99,7 +110,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Écrire, mettre au point et exécuter un programme.</div>	
 			{{% priorite "L’élève maîtrise le niveau 1 des attendus du programme." %}}
-			{{% priorite_alea "..." "" %}}
+			{{% priorite_alea "À FAIRE : Tout ! utiliser des SVG générés à partir de https://scratchblocks.github.io/#?style=scratch3&script= et des exports Tikz ?" "" %}}
 	</div>	
 {{< /liste_priorites >}}
 
