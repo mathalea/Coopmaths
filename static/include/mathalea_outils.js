@@ -87,7 +87,18 @@ function estentier(a,tolerance=epsilon) {
 	if (Math.abs(calcul(a-Math.round(a)))<tolerance) return true
 	else return false
 }
-
+function quotientier(a, b) {
+	if (a.isInteger && b.isInteger) {
+		let reste = a
+		let quotient = 0
+		while (reste > d) {
+			reste -= d
+			q++
+		}
+		return q
+	}
+	else return false
+}
 
 /**
 * Créé tous les couples possibles avec un élément de E1 et un élément de E2.
@@ -942,6 +953,7 @@ const ppcm = (a,b) => { return parseInt(Algebrite.run(`lcm(${a},${b})`))}
 
 /**
 * Retourne le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
+* * **ATTENTION Fonction clonée dans la classe Fraction()**
 * @Auteur Rémi Angot
 */
 function fraction_simplifiee(n,d){ 
@@ -1129,25 +1141,31 @@ function trie_positifs_negatifs(liste){
 function creerNomDePolygone(nbsommets,liste_a_eviter=[]){ 
 	let premiersommet = randint(65,90-nbsommets);
 	let polygone="";
-	while(est_deja_donne(String.fromCharCode(premiersommet),liste_a_eviter)){
-		premiersommet = randint(65,90-nbsommets);
-	}
-
 	for (let i=0;i<nbsommets;i++){
 		polygone += String.fromCharCode(premiersommet+i)
+	}
+
+	while(possedeUnCaractereInterdit(polygone,liste_a_eviter)){
+		polygone="";
+		premiersommet = randint(65,90-nbsommets);
+		for (let i=0;i<nbsommets;i++){
+			polygone += String.fromCharCode(premiersommet+i)
+		}
 	}
 	return polygone
 }
 
 /**
-* Vérifie dans une liste si un élément commence par premiersommet et renvoit true si c'est le cas
+* Vérifie dans un texte si un de ses caractères appartient à une liste à éviter
 * @Auteur Rémi Angot
 */
-function est_deja_donne(premiersommet,liste_a_eviter) {
+function possedeUnCaractereInterdit(texte,liste_a_eviter) {
 	let result = false
-	for (let i = 0; i < liste_a_eviter.length; i++) {
-		if (premiersommet==liste_a_eviter[i][0]) {
-			result = true;
+	for (mot_a_eviter of liste_a_eviter) {
+		for (let i = 0 ; i < mot_a_eviter.length; i++) {
+			if (texte.indexOf(mot_a_eviter[i])>-1) {
+				result = true
+			}
 		}
 	}
 	return result;
@@ -2602,6 +2620,24 @@ function cherche_min_max_f ([a,b,c,d]) {
 	let x2=(-2*b+Math.sqrt(delta))/(6*a)
 	return  [[x1,a*x1**3+b*x1**2+c*x1+d],[x2,a*x2**3+b*x2**2+c*x2+d]]
 }
+/**
+ * retourne les coefficients d'un polynome de degré 3 dont la dérivée s'annule pour x1 et y2 et tel que f(x1)=y1 ainsi que le minimum local et le maximum local.
+ * le paramètre supplémentaire a (fixé à 1 par défaut) est le facteur par 
+ * @Auteur Jean-Claude Lhote
+ */
+function cherche_polynome_deg3_a_extrema_fixes(x1,x2,y1,a=1) {
+	// a,b et c sont les coefficient de ax^2+bx+c qui s'annullent pour x1 et x2.
+	// a=1 signifie que la dérivée est x^2-(x1+x2)x+(x1*x2) et f(x)=2x^2-3(x1+x2)x+6(x1*x2)x+d
+	// a est le facteur qui multiplie tous les coeffs de f. Si a est entier et que x1 et x2 le sont, alors y2 le sera.
+	// On peut jouer sur a pour agrandir f ou la diminuer... mais alors les valeurs risquent de ne plus être entières.
+	let b=calcul(-a*(x1+x2))
+	let c=a*x1*x2
+	// on a : ax^2+bx+c=0 pour x1 et x2 (c'est la dérivée de f), on va intégrer et ajouter la valeur d pour que y1 soit entier.
+	let d=calcul(y1-(2*a*x1**3+3*b*x1**2+6*c*x1))
+	// on calcule y2=f(x2) qui est l'autre point où la dérivée s'annule.
+	let y2=calcul(d+2*a*x2**3+3*b*x2**2+6*c*x2)
+	return [2*a,3*b,6*c,d,min(y2,y1),max(y2,y1)] // On retourne les 4 coefficients de f suivi du min(y1,y2) et enfin du max(y1,y2)
+}
 
 /**
  * Fonction pour simplifier l'ecriture lorsque l'exposant vaut 0 ou 1
@@ -3795,67 +3831,6 @@ function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 };
 
 /**
- * Pour les tests de la bibliothèque d3.js
- * @param {string} id_du_div 
- * @author Sébastien Lozano 
- */
-
-function d3jsTests(id_du_div) {
-	'use strict';
-	if (!window.SVGExist) {window.SVGExist = {}} // Si SVGExist n'existe pas on le créé
-	// SVGExist est un dictionnaire dans lequel on stocke les listenner sur la création des div
-	window.SVGExist[id_du_div] = setInterval(function() {
-		
-		if ($(`#${id_du_div}`).length ) {
-			$(`#${id_du_div}`).html("");//Vide le div pour éviter les SVG en doublon
-
-			document.getElementById(id_du_div).innerHTML = `8`;
-			var width = 1300;
-			var height = 300;
-			var svg = d3.select('#'+id_du_div)
-				.append("svg")
-				.attr("width", width)
-				.attr("height", height);
-				var circleMove = svg.append("circle")
-				.attr("cx",150)
-				.attr("cy",50)
-				.attr("r",30);
-				
-				 circleMove
-				.transition()
-				 .duration(500)
-				.attr("cx", 850)
-				.transition()
-				.duration(500)
-				.attr("cx",150)
-				.transition()
-				.duration(500)
-				.attr("cx",650)
-				.transition()
-				.duration(500)
-				.attr("cx",350)
-				.transition()
-				.duration(500)
-				.attr("cx",500);
-
-				var positions = [850, 200, 800, 250, 750, 300, 700, 350, 650, 400, 600, 450, 550, 500];
-				function animateMulti(node, positions, i) {
-					node.transition()
-						.duration(300)
-						.attr("cx", positions[i])
-						.on('end',  function() {
-							if (i < (positions.length - 1)) {
-								animateMulti(d3.select(this), positions, ++i);
-							}
-						});
-				}
-				animateMulti(circleMultiTransition, positions, 0);
-		clearInterval(SVGExist[id_du_div]);//Arrête le timer
-		};
-	}, 100); // Vérifie toutes les 100ms
-};
-
-/**
  * Renvoie un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte 
  * @param {string} texte
  * @param {string} couleur
@@ -4583,12 +4558,12 @@ function Relatif(...relatifs) {
 };
 
 /**
- * @class Fraction
+ * @class ListeFraction
  * @classdesc Classe Fraction - Méthodes utiles sur les fractions
  * @author Sébastien Lozano
  */
 
- function Fraction() {
+ function ListeFraction() {
 	 //'use strict'; pas de use strict avec un paramètre du reste
 	 var self = this;
 	 /**
@@ -4718,9 +4693,28 @@ function Relatif(...relatifs) {
 		};
 	};
 
+	/**
+	 * **ATTENTION Fonction clonée dans la boîte à outils**
+	* @return Retourne le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
+	* @author Rémi Angot
+	*/
+	function fraction_simplifiee(n,d){ 
+		let p=pgcd(n,d);
+		let ns = n/p;
+		let ds = d/p;
+		if (ns<0 && ds<0) {
+			[ns,ds] = [-ns,-ds]
+		}
+		if (ns>0 && ds<0) {
+			[ns,ds] = [-ns,-ds]
+		}
+		return [ns,ds];
+	}
+
 	this.sortFractions = sortFractions;
 	this.reduceSameDenominateur = reduceSameDenominateur;
 	this.denominateurs_amis = denominateurs_amis;
+	this.fraction_simplifiee = fraction_simplifiee;
 	
 
  };

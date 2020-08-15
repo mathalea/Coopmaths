@@ -87,7 +87,18 @@ function estentier(a,tolerance=epsilon) {
 	if (Math.abs(calcul(a-Math.round(a)))<tolerance) return true
 	else return false
 }
-
+function quotientier(a, b) {
+	if (a.isInteger && b.isInteger) {
+		let reste = a
+		let quotient = 0
+		while (reste > d) {
+			reste -= d
+			q++
+		}
+		return q
+	}
+	else return false
+}
 
 /**
 * Créé tous les couples possibles avec un élément de E1 et un élément de E2.
@@ -942,6 +953,7 @@ const ppcm = (a,b) => { return parseInt(Algebrite.run(`lcm(${a},${b})`))}
 
 /**
 * Retourne le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
+* * **ATTENTION Fonction clonée dans la classe Fraction()**
 * @Auteur Rémi Angot
 */
 function fraction_simplifiee(n,d){ 
@@ -1129,25 +1141,31 @@ function trie_positifs_negatifs(liste){
 function creerNomDePolygone(nbsommets,liste_a_eviter=[]){ 
 	let premiersommet = randint(65,90-nbsommets);
 	let polygone="";
-	while(est_deja_donne(String.fromCharCode(premiersommet),liste_a_eviter)){
-		premiersommet = randint(65,90-nbsommets);
-	}
-
 	for (let i=0;i<nbsommets;i++){
 		polygone += String.fromCharCode(premiersommet+i)
+	}
+
+	while(possedeUnCaractereInterdit(polygone,liste_a_eviter)){
+		polygone="";
+		premiersommet = randint(65,90-nbsommets);
+		for (let i=0;i<nbsommets;i++){
+			polygone += String.fromCharCode(premiersommet+i)
+		}
 	}
 	return polygone
 }
 
 /**
-* Vérifie dans une liste si un élément commence par premiersommet et renvoit true si c'est le cas
+* Vérifie dans un texte si un de ses caractères appartient à une liste à éviter
 * @Auteur Rémi Angot
 */
-function est_deja_donne(premiersommet,liste_a_eviter) {
+function possedeUnCaractereInterdit(texte,liste_a_eviter) {
 	let result = false
-	for (let i = 0; i < liste_a_eviter.length; i++) {
-		if (premiersommet==liste_a_eviter[i][0]) {
-			result = true;
+	for (mot_a_eviter of liste_a_eviter) {
+		for (let i = 0 ; i < mot_a_eviter.length; i++) {
+			if (texte.indexOf(mot_a_eviter[i])>-1) {
+				result = true
+			}
 		}
 	}
 	return result;
@@ -2602,6 +2620,24 @@ function cherche_min_max_f ([a,b,c,d]) {
 	let x2=(-2*b+Math.sqrt(delta))/(6*a)
 	return  [[x1,a*x1**3+b*x1**2+c*x1+d],[x2,a*x2**3+b*x2**2+c*x2+d]]
 }
+/**
+ * retourne les coefficients d'un polynome de degré 3 dont la dérivée s'annule pour x1 et y2 et tel que f(x1)=y1 ainsi que le minimum local et le maximum local.
+ * le paramètre supplémentaire a (fixé à 1 par défaut) est le facteur par 
+ * @Auteur Jean-Claude Lhote
+ */
+function cherche_polynome_deg3_a_extrema_fixes(x1,x2,y1,a=1) {
+	// a,b et c sont les coefficient de ax^2+bx+c qui s'annullent pour x1 et x2.
+	// a=1 signifie que la dérivée est x^2-(x1+x2)x+(x1*x2) et f(x)=2x^2-3(x1+x2)x+6(x1*x2)x+d
+	// a est le facteur qui multiplie tous les coeffs de f. Si a est entier et que x1 et x2 le sont, alors y2 le sera.
+	// On peut jouer sur a pour agrandir f ou la diminuer... mais alors les valeurs risquent de ne plus être entières.
+	let b=calcul(-a*(x1+x2))
+	let c=a*x1*x2
+	// on a : ax^2+bx+c=0 pour x1 et x2 (c'est la dérivée de f), on va intégrer et ajouter la valeur d pour que y1 soit entier.
+	let d=calcul(y1-(2*a*x1**3+3*b*x1**2+6*c*x1))
+	// on calcule y2=f(x2) qui est l'autre point où la dérivée s'annule.
+	let y2=calcul(d+2*a*x2**3+3*b*x2**2+6*c*x2)
+	return [2*a,3*b,6*c,d,min(y2,y1),max(y2,y1)] // On retourne les 4 coefficients de f suivi du min(y1,y2) et enfin du max(y1,y2)
+}
 
 /**
  * Fonction pour simplifier l'ecriture lorsque l'exposant vaut 0 ou 1
@@ -3795,67 +3831,6 @@ function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 };
 
 /**
- * Pour les tests de la bibliothèque d3.js
- * @param {string} id_du_div 
- * @author Sébastien Lozano 
- */
-
-function d3jsTests(id_du_div) {
-	'use strict';
-	if (!window.SVGExist) {window.SVGExist = {}} // Si SVGExist n'existe pas on le créé
-	// SVGExist est un dictionnaire dans lequel on stocke les listenner sur la création des div
-	window.SVGExist[id_du_div] = setInterval(function() {
-		
-		if ($(`#${id_du_div}`).length ) {
-			$(`#${id_du_div}`).html("");//Vide le div pour éviter les SVG en doublon
-
-			document.getElementById(id_du_div).innerHTML = `8`;
-			var width = 1300;
-			var height = 300;
-			var svg = d3.select('#'+id_du_div)
-				.append("svg")
-				.attr("width", width)
-				.attr("height", height);
-				var circleMove = svg.append("circle")
-				.attr("cx",150)
-				.attr("cy",50)
-				.attr("r",30);
-				
-				 circleMove
-				.transition()
-				 .duration(500)
-				.attr("cx", 850)
-				.transition()
-				.duration(500)
-				.attr("cx",150)
-				.transition()
-				.duration(500)
-				.attr("cx",650)
-				.transition()
-				.duration(500)
-				.attr("cx",350)
-				.transition()
-				.duration(500)
-				.attr("cx",500);
-
-				var positions = [850, 200, 800, 250, 750, 300, 700, 350, 650, 400, 600, 450, 550, 500];
-				function animateMulti(node, positions, i) {
-					node.transition()
-						.duration(300)
-						.attr("cx", positions[i])
-						.on('end',  function() {
-							if (i < (positions.length - 1)) {
-								animateMulti(d3.select(this), positions, ++i);
-							}
-						});
-				}
-				animateMulti(circleMultiTransition, positions, 0);
-		clearInterval(SVGExist[id_du_div]);//Arrête le timer
-		};
-	}, 100); // Vérifie toutes les 100ms
-};
-
-/**
  * Renvoie un encart sur fond d'alert semantic ui en HTML ou dans un cadre bclogo en LaTeX avec le texte 
  * @param {string} texte
  * @param {string} couleur
@@ -4583,12 +4558,12 @@ function Relatif(...relatifs) {
 };
 
 /**
- * @class Fraction
+ * @class ListeFraction
  * @classdesc Classe Fraction - Méthodes utiles sur les fractions
  * @author Sébastien Lozano
  */
 
- function Fraction() {
+ function ListeFraction() {
 	 //'use strict'; pas de use strict avec un paramètre du reste
 	 var self = this;
 	 /**
@@ -4718,9 +4693,28 @@ function Relatif(...relatifs) {
 		};
 	};
 
+	/**
+	 * **ATTENTION Fonction clonée dans la boîte à outils**
+	* @return Retourne le numérateur et le dénominateur de la fraction passée en argument sous la forme (numérateur,dénominateur)réduite au maximum dans un tableau [numérateur,dénominateur]
+	* @author Rémi Angot
+	*/
+	function fraction_simplifiee(n,d){ 
+		let p=pgcd(n,d);
+		let ns = n/p;
+		let ds = d/p;
+		if (ns<0 && ds<0) {
+			[ns,ds] = [-ns,-ds]
+		}
+		if (ns>0 && ds<0) {
+			[ns,ds] = [-ns,-ds]
+		}
+		return [ns,ds];
+	}
+
 	this.sortFractions = sortFractions;
 	this.reduceSameDenominateur = reduceSameDenominateur;
 	this.denominateurs_amis = denominateurs_amis;
+	this.fraction_simplifiee = fraction_simplifiee;
 	
 
  };
@@ -5378,6 +5372,8 @@ var liste_des_exercices_disponibles = {
 		'4C30-1': Puissances_encadrement,
 		'4G40' : Transformations_4e,
 		'4L10' : Exercice_developper,
+		'beta4L14-0-temp' : Tester_si_un_nombre_est_solution_d_une_equation_temp,
+		'beta4L14-0' : Tester_si_un_nombre_est_solution_d_une_equation,
 		'4L20' : Exercice_equation1,
 		'4M30' : Calcul_de_volumes_4e,		
 		'4N10': Exercice_additionner_des_fractions,
@@ -18319,7 +18315,7 @@ function DroiteRemarquableDuTriangle(){
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		let triangles=[],sommets=[[]],A=[],B=[],C=[],t=[],d=[],n=[],c=[],objets=[],A0,B0,C0,tri,G,g,AA,BB,CC,na=[],nb=[],nc=[]
+		let triangles=[],sommets=[[]],A=[],B=[],C=[],t=[],d=[],n=[],c=[],objets=[],A0,B0,C0,tri,G
 		let type_de_questions_disponibles,liste_type_de_questions
 		if (this.sup==1) type_de_questions_disponibles=[1,2]
 		if (this.sup==2) type_de_questions_disponibles=[3,4]
@@ -18336,56 +18332,49 @@ function DroiteRemarquableDuTriangle(){
 			C0 = similitude(B0,A0,angle,rapport)
 			tri = polygone(A0,B0,C0)
 			G = centreGraviteTriangle(A0,B0,C0)
-			a=randint(0,360)
+			a=randint(0,30)*12-180
 			A[i] =rotation(A0,G,a,sommets[i][0],'below left')
 			B[i] = rotation(B0,G,a,sommets[i][1],'below right')
 			C[i] = rotation(C0,G,a,sommets[i][2],'above')
 			t[i] = polygone(A[i],B[i],C[i])
-			AA= homothetie(A[i],G,1.3)
-			BB= homothetie(B[i],G,1.3)
-			CC= homothetie(C[i],G,1.3)
-
-			na[i]=texteParPoint(sommets[i][0],AA,0)
-			nb[i]=texteParPoint(sommets[i][1],BB,0)
-			nc[i]=texteParPoint(sommets[i][2],CC,0)
-
+			n[i] = nommePolygone(t[i],`${sommets[i][0]}${sommets[i][1]}${sommets[i][2]}`)
 			switch (liste_type_de_questions[i]) {
 				case 1 :
 					d[i] = hauteurTriangle(C[i],B[i],A[i],'blue')
 					d[i].epaisseur=1
 					c[i] = codageHauteurTriangle(C[i],B[i],A[i])
-					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
+					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la hauteur issue de $${sommets[i][0]}$ dans le triangle ${triangles[i].getNom()}.<br>`
-					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i])
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i])
 					break
 				case 2 :
 					d[i] = mediatrice(A[i],B[i],true,'blue')
 					d[i].epaisseur=1
 					c[i] = codageMediatrice(A[i],B[i])
-					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
+					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la médiatrice du segment [$${sommets[i][0]}${sommets[i][1]}]$.<br>`
-					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i],constructionMediatrice(A[i],B[i],true,color='red', markmilieu='×', markrayons='//',couleurMediatrice = 'blue', epaisseurMediatrice = 1))
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i],constructionMediatrice(A[i],B[i],true,color='gray', markmilieu='×', markrayons='||',couleurMediatrice = 'blue', epaisseurMediatrice = 1))
 					break
 				case 3 :
 					d[i] = medianeTriangle(C[i],B[i],A[i],'blue')
 					d[i].epaisseur=1
 					c[i] = codageMedianeTriangle(C[i],B[i],A[i],color='black',mark='//')
-					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
+					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la médiane issue de $${sommets[i][0]}$ dans le triangle ${triangles[i].getNom()}.<br>`
-					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i])
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i])
 					break
 				case 4 :
 					d[i] = bissectrice(A[i],B[i],C[i],'blue')
 					d[i].epaisseur=1
 					c[i] = codageBissectrice(A[i],B[i],C[i])
-					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i],na[i],nb[i],nc[i]]
+					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la bissectrice de l'angle $\\widehat{${sommets[i][0]}${sommets[i][1]}${sommets[i][2]}}$.<br>`
-					texte_corr+= mathalea2d({xmin:-1,ymin:-2,xmax:8,ymax:8,scale:.5,ppc:30},...objets[i],constructionBissectrice(A[i],B[i],C[i],detail = false, color='red', mark='×',tailleLosange = 3,couleurBissectrice = 'blue', epaiseurBissectrice = 1))
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i],constructionBissectrice(A[i],B[i],C[i],detail = false, color='red', mark='×',tailleLosange = 3,couleurBissectrice = 'blue', epaiseurBissectrice = 1))
 					break
 
 			}
 
-			texte = `Quelle est la nature de la droite tracée en bleu pour le triangle ${triangles[i].getNom()} ?<br>` + mathalea2d(-1,-2,8,8,...objets[i])
+			texte = `Quelle est la nature de la droite tracée en bleu pour le triangle ${triangles[i].getNom()} ?<br>` + mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i])
 
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
@@ -22808,24 +22797,35 @@ function Problemes_additifs_fractions() {
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
 			// on aura besoin des méthodes de la classe Fraction()
-			let frac = new Fraction();
+			let frac = new ListeFraction();
 			// le tableau d'objets contenant tout le necesssaire, fractions, énoncé, question ... pour les problème avec 3 fractions
 			let pb_3_f = [];
 			// les numérateurs et dénominateurs des 3 fractions attention les deux premières doivent être inférieures à 1/2 si on veut qu'elles soient toutes positives !
 			// et on veut des fractions distinctes !
 			let nt1,nt2,nt3,dt1,dt2,dt3;
-			while ( (nt1==nt2 && dt1==dt2) || (nt1==nt3 && dt1==dt3) || (nt3==nt2 && dt3==dt2) ) {
+			// on aura besoin de simplifier la 3eme fraction
+			let nt4,dt4;
+			// on récupère les dénominateurs qui vont bien
+			let denoms_amis = frac.denominateurs_amis;
+			// on choisit un tableau dedans
+			let denoms_cool_3 = denoms_amis[randint(0,denoms_amis.length-1)];
+			while ( (nt1==nt2 && dt1==dt2) || (nt1==nt3 && dt1==dt3) || (nt3==nt2 && dt3==dt2) || (nt1==nt4 && dt1==dt4) || (nt4==nt2 && dt4==dt2) || (nt1/dt1 >= 1/2) || (nt2/dt2 >= 1/2)) {
 				nt1 = randint(1,6);
-				dt1 = 2*nt1 + randint(1,3);
+				//dt1 = 2*nt1 + randint(1,3);
+				dt1 = choice(denoms_cool_3);
 				nt2 = randint(2,10);
-				dt2 = 2*nt2 + randint(1,3);
+				//dt2 = 2*nt2 + randint(1,3);
+				dt2 = choice(denoms_cool_3,[dt1]);
 				nt3 = dt1*dt2-nt1*dt2-nt2*dt1;//la somme des trois vaut 1 !
 				dt3 = dt1*dt2; 
+				nt4 = frac.fraction_simplifiee(nt3,dt3)[0];
+				dt4 = frac.fraction_simplifiee(nt3,dt3)[1];
 			};		
 			
 			pb_3_f.push({// indice 0 le triathlon des neiges
 				prenoms: [prenomM()],
-				fractions: [nt1,dt1,'VTT',nt2,dt2,'ski de fond',nt3,dt3,'pied'],
+				// fractions: [nt1,dt1,'VTT',nt2,dt2,'ski de fond',nt3,dt3,'pied'],
+				fractions: [nt1,dt1,'VTT',nt2,dt2,'ski de fond',nt4,dt4,'pied'],
 				enonce: ``,
 				question: `Pour quelle discipline, la distance est-elle la plus grande ?`,
 				correction: ``
@@ -22844,8 +22844,12 @@ function Problemes_additifs_fractions() {
 			pb_3_f[0].correction += `$\\dfrac{${pb_3_f[0].fractions[0]}}{${pb_3_f[0].fractions[1]}} = \\dfrac{${frac_meme_denom[0]}}{${frac_meme_denom[1]}}$ ; `;
 			pb_3_f[0].correction += `$\\dfrac{${pb_3_f[0].fractions[3]}}{${pb_3_f[0].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ et `;
 			pb_3_f[0].correction += `$\\dfrac{${pb_3_f[0].fractions[6]}}{${pb_3_f[0].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$.`;
+
+			let frac_meme_denom_rangees = frac.sortFractions(frac_meme_denom[0],frac_meme_denom[1],frac_meme_denom[2],frac_meme_denom[3],frac_meme_denom[4],frac_meme_denom[5]); 
+			pb_3_f[0].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_meme_denom_rangees[0]}}{${frac_meme_denom_rangees[1]}}$, $\\dfrac{${frac_meme_denom_rangees[2]}}{${frac_meme_denom_rangees[3]}}$, $\\dfrac{${frac_meme_denom_rangees[4]}}{${frac_meme_denom_rangees[5]}}$.`
+
 			let frac_rangees = frac.sortFractions(pb_3_f[0].fractions[0],pb_3_f[0].fractions[1],pb_3_f[0].fractions[3],pb_3_f[0].fractions[4],pb_3_f[0].fractions[6],pb_3_f[0].fractions[7]); 
-			pb_3_f[0].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$.`
+			pb_3_f[0].correction += `<br>Enfin, nous pouvons ranger les fractions initiales dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$.`
 			pb_3_f[0].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc à ${pb_3_f[0].fractions[pb_3_f[0].fractions.indexOf(frac_rangees[5])+1]} que ${pb_3_f[0].prenoms[0]} fait la plus grande distance.`)}`;			
 
 			// les 3 prénomns doivent être distincts
@@ -22857,7 +22861,8 @@ function Problemes_additifs_fractions() {
 			};
 			pb_3_f.push({// indice 1 Miss Math
 				//prenoms: [prenomF(),prenomF(),prenomF()],
-				fractions: [nt1,dt1,p1,nt2,dt2,p2,nt3,dt3,p3],
+				//fractions: [nt1,dt1,p1,nt2,dt2,p2,nt3,dt3,p3],
+				fractions: [nt1,dt1,p1,nt2,dt2,p2,nt4,dt4,p3],
 				enonce: ``,
 				question: `Qui a été élue ?`,
 				correction: ``
@@ -22877,8 +22882,12 @@ function Problemes_additifs_fractions() {
 			pb_3_f[1].correction += `$\\dfrac{${pb_3_f[1].fractions[0]}}{${pb_3_f[1].fractions[1]}} = \\dfrac{${frac_meme_denom[0]}}{${frac_meme_denom[1]}}$ ; `;
 			pb_3_f[1].correction += `$\\dfrac{${pb_3_f[1].fractions[3]}}{${pb_3_f[1].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ et `;
 			pb_3_f[1].correction += `$\\dfrac{${pb_3_f[1].fractions[6]}}{${pb_3_f[1].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$.`;
+
+			frac_meme_denom_rangees = frac.sortFractions(frac_meme_denom[0],frac_meme_denom[1],frac_meme_denom[2],frac_meme_denom[3],frac_meme_denom[4],frac_meme_denom[5]); 
+			pb_3_f[1].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_meme_denom_rangees[0]}}{${frac_meme_denom_rangees[1]}}$, $\\dfrac{${frac_meme_denom_rangees[2]}}{${frac_meme_denom_rangees[3]}}$, $\\dfrac{${frac_meme_denom_rangees[4]}}{${frac_meme_denom_rangees[5]}}$.`
+
 			frac_rangees = frac.sortFractions(pb_3_f[1].fractions[0],pb_3_f[1].fractions[1],pb_3_f[1].fractions[3],pb_3_f[1].fractions[4],pb_3_f[1].fractions[6],pb_3_f[1].fractions[7]); 
-			pb_3_f[1].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$.`
+			pb_3_f[1].correction += `<br>Enfin, nous pouvons ranger les fractions initiales dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$.`
 			pb_3_f[1].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc ${pb_3_f[1].fractions[pb_3_f[1].fractions.indexOf(frac_rangees[5])+1]} qui a été élue.`)}`;			
 
 			// le tableau d'objets contenant tout le necesssaire, fractions, énoncé, question ... pour les problème avec 4 fractions
@@ -22886,26 +22895,31 @@ function Problemes_additifs_fractions() {
 			// les numérateurs et dénominateurs des 4 fractions attention les trois premières doivent être inférieures à 1/3 si on veut qu'elles soient toutes positives !
 			// et on veut des fractions distinctes 
 			let nq1,nq2,nq3,nq4,dq1,dq2,dq3,dq4;
+			// on aura besoin de simplifier la 4eme fraction
+			let nq5,dq5;
 			// on récupère les dénominateurs qui vont bien
-			let denoms_amis = frac.denominateurs_amis;
+			//let denoms_amis = frac.denominateurs_amis;
 			// on choisit un tableau dedans
-			let denoms_cool = denoms_amis[randint(0,denoms_amis.length-1)];
-			while ( (nq1==nq2 && dq1==dq2) || (nq1==nq3 && dq1==dq3) || (nq1==nq4 && dq1==dq4) || (nq2==nq3 && dq2==dq3) || (nq2==nq4 && dq2==dq4) || (nq3==nq4 && dq3==dq4) || (nq1/dq1 >= 1/3) || (nq2/dq2 >= 1/3) || (nq3/dq3 >= 1/3) ) {
-				nq1 = randint(1,4);
+			let denoms_cool_4 = denoms_amis[randint(0,denoms_amis.length-1)];
+			while ( (nq1==nq2 && dq1==dq2) || (nq1==nq3 && dq1==dq3) || (nq1==nq4 && dq1==dq4) || (nq1==nq5 && dq1==dq5) || (nq2==nq3 && dq2==dq3) || (nq2==nq4 && dq2==dq4) || (nq2==nq5 && dq2==dq5) || (nq3==nq4 && dq3==dq4) ||  (nq3==nq5 && dq3==dq5) || (nq1/dq1 >= 1/3) || (nq2/dq2 >= 1/3) || (nq3/dq3 >= 1/3) ) {
+				nq1 = randint(1,6);
 				//dq1 = 3*nq1 + 1;				
-				dq1 = choice(denoms_cool);
-				nq2 = randint(1,4);				
+				dq1 = choice(denoms_cool_4);
+				nq2 = randint(1,6);				
 				//dq2 = 3*nq2 + 1;
-				dq2 = choice(denoms_cool,[dq1]);
-				nq3 = randint(1,4);
+				dq2 = choice(denoms_cool_4,[dq1]);
+				nq3 = randint(1,6);
 				//dq3 = 3*nq3 + 1;
-				dq3 = choice(denoms_cool,[dq1,dq2]);
+				dq3 = choice(denoms_cool_4,[dq1,dq2]);
 				nq4 = dq1*dq2*dq3-nq1*dq2*dq3 - nq2*dq1*dq3 - nq3*dq1*dq2;//la somme des quatre vaut 1 !
-				dq4 = dq1*dq2*dq3; 
+				dq4 = dq1*dq2*dq3;
+				nq5 = frac.fraction_simplifiee(nq4,dq4)[0];
+				dq5 = frac.fraction_simplifiee(nq4,dq4)[1];
 			};
 			pb_4_f.push({// indice 0 le mandala
 				prenoms: [prenom()],
-				fractions: [nq1,dq1,'carmin',nq2,dq2,'ocre jaune',nq3,dq3,'turquoise',nq4,dq4,'pourpre'],
+				// fractions: [nq1,dq1,'carmin',nq2,dq2,'ocre jaune',nq3,dq3,'turquoise',nq4,dq4,'pourpre'],
+				fractions: [nq1,dq1,'carmin',nq2,dq2,'ocre jaune',nq3,dq3,'turquoise',nq5,dq5,'pourpre'],
 				enonce: ``,
 				question: `Quelle est elle la couleur qui recouvre le plus de surface ?`,
 				correction: ``
@@ -22926,14 +22940,19 @@ function Problemes_additifs_fractions() {
 			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[3]}}{${pb_4_f[0].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ ; `;
 			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[6]}}{${pb_4_f[0].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$ et `;
 			pb_4_f[0].correction += `$\\dfrac{${pb_4_f[0].fractions[9]}}{${pb_4_f[0].fractions[10]}} = \\dfrac{${frac_meme_denom[6]}}{${frac_meme_denom[7]}}$.`;
+
+			frac_meme_denom_rangees = frac.sortFractions(frac_meme_denom[0],frac_meme_denom[1],frac_meme_denom[2],frac_meme_denom[3],frac_meme_denom[4],frac_meme_denom[5],frac_meme_denom[6],frac_meme_denom[7]); 
+			pb_4_f[0].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_meme_denom_rangees[0]}}{${frac_meme_denom_rangees[1]}}$, $\\dfrac{${frac_meme_denom_rangees[2]}}{${frac_meme_denom_rangees[3]}}$, $\\dfrac{${frac_meme_denom_rangees[4]}}{${frac_meme_denom_rangees[5]}}$, $\\dfrac{${frac_meme_denom_rangees[6]}}{${frac_meme_denom_rangees[7]}}$.`
+			
 			frac_rangees = frac.sortFractions(pb_4_f[0].fractions[0],pb_4_f[0].fractions[1],pb_4_f[0].fractions[3],pb_4_f[0].fractions[4],pb_4_f[0].fractions[6],pb_4_f[0].fractions[7],pb_4_f[0].fractions[9],pb_4_f[0].fractions[10]);			
-			pb_4_f[0].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
-			pb_4_f[0].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc le ${pb_4_f[0].fractions[pb_4_f[0].fractions.indexOf(frac_rangees[7])+1]} qui recouvre le plus de surface du mandala.`)}`;	
+			pb_4_f[0].correction += `<br>Enfin, nous pouvons ranger les fractions initiales dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
+			pb_4_f[0].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc en ${pb_4_f[0].fractions[pb_4_f[0].fractions.indexOf(frac_rangees[7])+1]} que le mandala est le plus recouvert.`)}`;	
 
 			
 			pb_4_f.push({// indice 1 le jardin
 				//prenoms: [prenomF(),prenomF(),prenomF()],
-				fractions: [nq1,dq1,'la culture des légumes',nq2,dq2,'la culture des plantes aromatiques',nq3,dq3,'une serre servant aux semis',nq4,dq4,'la culture des fraisiers'],
+				//fractions: [nq1,dq1,'la culture des légumes',nq2,dq2,'la culture des plantes aromatiques',nq3,dq3,'une serre servant aux semis',nq4,dq4,'la culture des fraisiers'],
+				fractions: [nq1,dq1,'la culture des légumes',nq2,dq2,'la culture des plantes aromatiques',nq3,dq3,'une serre servant aux semis',nq5,dq5,'la culture des fraisiers'],
 				enonce: ``,
 				question: `Quelle est la culture qui occupe le plus de surface ?`,
 				correction: ``
@@ -22954,13 +22973,18 @@ function Problemes_additifs_fractions() {
 			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[3]}}{${pb_4_f[1].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ ; `;
 			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[6]}}{${pb_4_f[1].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$ et `;
 			pb_4_f[1].correction += `$\\dfrac{${pb_4_f[1].fractions[9]}}{${pb_4_f[1].fractions[10]}} = \\dfrac{${frac_meme_denom[6]}}{${frac_meme_denom[7]}}$.`;
+
+			frac_meme_denom_rangees = frac.sortFractions(frac_meme_denom[0],frac_meme_denom[1],frac_meme_denom[2],frac_meme_denom[3],frac_meme_denom[4],frac_meme_denom[5],frac_meme_denom[6],frac_meme_denom[7]); 
+			pb_4_f[1].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_meme_denom_rangees[0]}}{${frac_meme_denom_rangees[1]}}$, $\\dfrac{${frac_meme_denom_rangees[2]}}{${frac_meme_denom_rangees[3]}}$, $\\dfrac{${frac_meme_denom_rangees[4]}}{${frac_meme_denom_rangees[5]}}$, $\\dfrac{${frac_meme_denom_rangees[6]}}{${frac_meme_denom_rangees[7]}}$.`
+
 			frac_rangees = frac.sortFractions(pb_4_f[1].fractions[0],pb_4_f[1].fractions[1],pb_4_f[1].fractions[3],pb_4_f[1].fractions[4],pb_4_f[1].fractions[6],pb_4_f[1].fractions[7],pb_4_f[1].fractions[9],pb_4_f[1].fractions[10]);			
-			pb_4_f[1].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
+			pb_4_f[1].correction += `<br>Enfin, nous pouvons ranger les fractions initiales dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
 			pb_4_f[1].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc par ${pb_4_f[1].fractions[pb_4_f[1].fractions.indexOf(frac_rangees[7])+1]} que le jardin est le plus occupé.`)}`;	
 
 			pb_4_f.push({// indice 2 le stade
 				//prenoms: [prenomF(),prenomF(),prenomF()],
-				fractions: [nq1,dq1,'le pays organisateur',nq2,dq2,'l\'ensemble des supporters des deux équipes en jeu',nq3,dq3,'les sponsors et officiels',nq4,dq4,'les places en vente libre'],
+				//fractions: [nq1,dq1,'le pays organisateur',nq2,dq2,'l\'ensemble des supporters des deux équipes en jeu',nq3,dq3,'les sponsors et officiels',nq4,dq4,'les places en vente libre'],
+				fractions: [nq1,dq1,'le pays organisateur',nq2,dq2,'l\'ensemble des supporters des deux équipes en jeu',nq3,dq3,'les sponsors et officiels',nq5,dq5,'les places en vente libre'],
 				enonce: ``,
 				question: `Quelle est la catégorie la plus importante dans le stade ?`,
 				correction: ``
@@ -22981,8 +23005,12 @@ function Problemes_additifs_fractions() {
 			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[3]}}{${pb_4_f[2].fractions[4]}} = \\dfrac{${frac_meme_denom[2]}}{${frac_meme_denom[3]}}$ ; `;
 			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[6]}}{${pb_4_f[2].fractions[7]}} = \\dfrac{${frac_meme_denom[4]}}{${frac_meme_denom[5]}}$ et `;
 			pb_4_f[2].correction += `$\\dfrac{${pb_4_f[2].fractions[9]}}{${pb_4_f[2].fractions[10]}} = \\dfrac{${frac_meme_denom[6]}}{${frac_meme_denom[7]}}$.`;
+
+			frac_meme_denom_rangees = frac.sortFractions(frac_meme_denom[0],frac_meme_denom[1],frac_meme_denom[2],frac_meme_denom[3],frac_meme_denom[4],frac_meme_denom[5],frac_meme_denom[6],frac_meme_denom[7]); 
+			pb_4_f[2].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_meme_denom_rangees[0]}}{${frac_meme_denom_rangees[1]}}$, $\\dfrac{${frac_meme_denom_rangees[2]}}{${frac_meme_denom_rangees[3]}}$, $\\dfrac{${frac_meme_denom_rangees[4]}}{${frac_meme_denom_rangees[5]}}$, $\\dfrac{${frac_meme_denom_rangees[6]}}{${frac_meme_denom_rangees[7]}}$.`
+
 			frac_rangees = frac.sortFractions(pb_4_f[2].fractions[0],pb_4_f[2].fractions[1],pb_4_f[2].fractions[3],pb_4_f[2].fractions[4],pb_4_f[2].fractions[6],pb_4_f[2].fractions[7],pb_4_f[2].fractions[9],pb_4_f[2].fractions[10]);			
-			pb_4_f[2].correction += `<br>Nous pouvons alors ranger ces fractions dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
+			pb_4_f[2].correction += `<br>Enfin, nous pouvons ranger les fractions initiales dans l'ordre croissant : $\\dfrac{${frac_rangees[0]}}{${frac_rangees[1]}}$, $\\dfrac{${frac_rangees[2]}}{${frac_rangees[3]}}$, $\\dfrac{${frac_rangees[4]}}{${frac_rangees[5]}}$, $\\dfrac{${frac_rangees[6]}}{${frac_rangees[7]}}$.`
 			pb_4_f[2].correction += `<br> ${texte_en_couleur_et_gras(`C'est donc pour ${pb_4_f[2].fractions[pb_4_f[2].fractions.indexOf(frac_rangees[7])+1]} que le nombre de places est le plus important.`)}`;	
 
 			switch (liste_type_de_questions[i]) {
@@ -23205,6 +23233,265 @@ function Exploiter_representation_graphique(){
 		liste_de_question_to_contenu(this);
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+/**
+ * Tester si un nombre est solution d'une équation
+ * * 4L14-0
+ * * adaptation de l'exo 5L14 de Rémi
+ * @author Sébastien Lozano
+ */
+function Tester_si_un_nombre_est_solution_d_une_equation_temp() {
+	Tester_une_egalite.call(this);
+	this.titre = 'Tester si un nombre est solution d\'une équation';
+	this.consigne = `Adapter l'énoncé 5L14 actuel de Rémi afin de tester si 'un nombre est ou non solution d'une équation.`;
+	this.consigne += `<br>LA seule chose à faire c'est d'ajouter un cas pour le second degré de type expression = 0`;
+	this.consigne += `<br> -->puis décliner pour avoir une version sur le second degré`;
+	this.consigne += `<br> -->puis décliner pour avoir une version sur le premier degré`;
+	this.consigne += `<br> Dans l'exercice d'origine, on propose chaque fois une vlaeur qui convient et une qui ne convient pas donc c'est top !`;
+};
+
+/**
+ * Tester si un nombre est solution d'une équation
+ * * 4L14-0
+ * * adaptation de l'exo 5L14 de Rémi Angot
+ * @author Sébastien Lozano
+ */
+function Tester_si_un_nombre_est_solution_d_une_equation(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Tester si un nombre est solution d'une équation";
+	this.consigne = "";
+	//this.nb_questions = 3;
+	this.nb_questions = 6;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup=1;
+	this.sup2=false;
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles; // = range1(5)
+	//	let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		if (this.sup2==false) type_de_questions_disponibles=[1,2,3,4,5,8]
+		else type_de_questions_disponibles=[6,7,3]
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus
+		this.consigne = `Justifier si les nombres proposés sont des solutions de l'équation donnée ou non.`;
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let a, b, x1, x2
+			switch (liste_type_de_questions[i]){
+				case 1 : // 3x-a=2x+b   x=a+b  
+					if (this.sup==1) {
+					a = randint(1,6)
+					b = randint(1,6,[a])
+					x2 = a + b
+					x1 = randint(2,10,[x2])
+	
+					}
+					else {
+						a = randint(-6,6,[0])
+						b = randint(-6,6,[a,0])	
+						x2 = a + b
+						x1 = randint(-10,10,[0,x2])
+						
+					}
+
+					texte = `$3x-${ecriture_parenthese_si_negatif(a)}=2x+${ecriture_parenthese_si_negatif(b)}~$ pour $~x=${x1}~$ puis pour $~x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$3x-${ecriture_parenthese_si_negatif(a)}=3\\times ${ecriture_parenthese_si_negatif(x1)}-${ecriture_parenthese_si_negatif(a)}=${3*x1-a}$ <br> $2x+${ecriture_parenthese_si_negatif(b)}=2\\times ${ecriture_parenthese_si_negatif(x1)}+${ecriture_parenthese_si_negatif(b)}=${2*x1+b}$<br>`
+					texte_corr += `$${3*x1-a}\\not=${2*x1+b}$ donc l'égalité n'est pas vraie.<br>`
+					texte_corr += `${texte_en_couleur(`$x=${x1}$ n'est donc pas solution de l'équation $3x-${ecriture_parenthese_si_negatif(a)}=2x+${ecriture_parenthese_si_negatif(b)}~$`)}<br><br>`
+					texte_corr += `Pour $x=${ecriture_parenthese_si_negatif(x2)}$ : <br>`
+					texte_corr += `$3x-${ecriture_parenthese_si_negatif(a)}=3\\times ${ecriture_parenthese_si_negatif(x2)}-${ecriture_parenthese_si_negatif(a)}=${3*x2-a}$ <br> $2x+${ecriture_parenthese_si_negatif(b)}=2\\times ${ecriture_parenthese_si_negatif(x2)}+${ecriture_parenthese_si_negatif(b)}=${2*x2+b}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br>`
+					texte_corr += `${texte_en_couleur(`$x=${x2}$ est donc solution de l'équation $3x-${ecriture_parenthese_si_negatif(a)}=2x+${ecriture_parenthese_si_negatif(b)}~$`)}`
+					break ;
+				case 2 : // 3x+a=5x-b   x=(a+b)/2 donc a et b impairs pour une solution entière  
+					if (this.sup==1) {
+					a = randint(1,9)
+					b = randint(0,4)*2+a%2;
+					x1 = parseInt(Algebrite.eval((a+b)/2))
+					x2 = randint(1,9,x1)
+					}
+					else {
+						a = randint(-9,9,[0])
+						b = randint(-4,4,[a,0])*2+a%2
+						x1 = parseInt(Algebrite.eval((a+b)/2))
+						x2 = randint(-9,9,[0,x1])	
+					}
+
+					texte = `$3x+${ecriture_parenthese_si_negatif(a)}=5x-${ecriture_parenthese_si_negatif(b)}~$ pour $~x=${x1}~$ puis pour $~x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$3x+${ecriture_parenthese_si_negatif(a)}=3\\times ${ecriture_parenthese_si_negatif(x1)}+${ecriture_parenthese_si_negatif(a)}=${3*x1+a}$ <br> $5x-${ecriture_parenthese_si_negatif(b)}=5\\times ${ecriture_parenthese_si_negatif(x1)}-${ecriture_parenthese_si_negatif(b)}=${5*x1-b}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$3x+${ecriture_parenthese_si_negatif(a)}=3\\times ${ecriture_parenthese_si_negatif(x2)}+${ecriture_parenthese_si_negatif(a)}=${3*x2+a}$ <br> $5x-${ecriture_parenthese_si_negatif(b)}=5\\times ${ecriture_parenthese_si_negatif(x2)}-${ecriture_parenthese_si_negatif(b)}=${5*x2-b}$<br>`
+					texte_corr += `$${3*x2+a}\\not=${5*x2-b}$ donc l'égalité n'est pas vraie.`
+					break ;
+				case 3 : // 10(x-a)=4(2x+b) x=(10a+4b)/2
+					if (this.sup==1) {
+					a = randint(1,3)
+					b = randint(1,3)
+					x2 = parseInt(Algebrite.eval((10*a+4*b)/2))
+					x1 = randint(9,x2)
+					}
+					else {
+						a = randint(-3,3,[0])
+						b = randint(-3,3,[0])	
+						x2 = parseInt(Algebrite.eval((10*a+4*b)/2))
+						x1 = randint(-9,9,[0,x2])
+					}
+
+					texte = `$10(x-${ecriture_parenthese_si_negatif(a)})=4(2x+${ecriture_parenthese_si_negatif(b)})~$ pour $~x=${x1}~$ puis pour $~x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$10(x-${ecriture_parenthese_si_negatif(a)})=10\\times (${ecriture_parenthese_si_negatif(x1)}-${ecriture_parenthese_si_negatif(a)})=10\\times ${x1-a}=${10*(x1-a)}$ <br> $4(2x+${ecriture_parenthese_si_negatif(b)})=4\\times (2\\times ${ecriture_parenthese_si_negatif(x1)}+${ecriture_parenthese_si_negatif(b)})=4\\times ${2*x1+b}=${4*(2*x1+b)}$<br>`
+					texte_corr += `$${10*(x1-a)}\\not=${4*(2*x1+b)}$ donc l'égalité n'est pas vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$10(x-${ecriture_parenthese_si_negatif(a)})=10\\times (${ecriture_parenthese_si_negatif(x2)}-${ecriture_parenthese_si_negatif(a)})=10\\times ${x2-a}=${10*(x2-a)}$ <br> $4(2x+${ecriture_parenthese_si_negatif(b)})=4\\times (2\\times ${ecriture_parenthese_si_negatif(x2)}+${ecriture_parenthese_si_negatif(b)})=4\\times ${2*x2+b}=${4*(2*x2+b)}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.`
+					break ;
+				case 4 : // ax+b=(a+1)x-c x=b+c
+					if (this.sup==1) {
+					a = randint(2,9)
+					b = randint(2,9)
+					c = randint(1,3)
+					x1 = b + c
+					x2 = randint(2,10,x1)
+					}
+					else {
+						a = randint(2,9)
+						b = randint(2,9)*randint(-1,1,0)
+						c = randint(1,3)*randint(-1,1,0)
+						x1 = b + c
+						x2 = randint(2,10,x1)*randint(-1,1,0)
+					}
+
+					texte = `$${ecriture_parenthese_si_negatif(a)}x+${ecriture_parenthese_si_negatif(b)}=${a+1}x-${ecriture_parenthese_si_negatif(c)}~$ pour $~x=${x1}~$ puis pour $~x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$${a}x+${ecriture_parenthese_si_negatif(b)}=${ecriture_parenthese_si_negatif(a)}\\times ${ecriture_parenthese_si_negatif(x1)}+${ecriture_parenthese_si_negatif(b)}=${a*x1+b}$ <br> $${a+1}x-${ecriture_parenthese_si_negatif(c)}=${a+1}\\times ${ecriture_parenthese_si_negatif(x1)}-${ecriture_parenthese_si_negatif(c)}=${(a+1)*x1-c}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$${a}x+${ecriture_parenthese_si_negatif(b)}=${ecriture_parenthese_si_negatif(a)}\\times ${ecriture_parenthese_si_negatif(x2)}+${ecriture_parenthese_si_negatif(b)}=${a*x2+b}$ <br> $${a+1}x-${ecriture_parenthese_si_negatif(c)}=${a+1}\\times ${ecriture_parenthese_si_negatif(x2)}-${ecriture_parenthese_si_negatif(c)}=${(a+1)*x2-c}$<br>`
+					texte_corr += `$${a*x2+b}\\not=${(a+1)*x2-c}$ donc l'égalité n'est pas vraie.`
+					break ;
+				case 5 : // a-2x=b+2x x=(a-b)/4
+					if (this.sup==1) {
+					x1 = randint(1,9)
+					b = randint(1,9)
+					a = b+4*x1
+					x2 = randint(1,11,x1)
+					}
+					else {
+						x1 = randint(-9,9)
+						b = randint(-9,9,0)
+						a = b+4*x1
+						x2 = randint(1,11,x1)
+					}
+
+					texte = `$${a}-2x=${b}+2x~$ pour $~x=${x1}~$ puis pour $~x=${x2}$`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$${a}-2x=${a}-2\\times ${ecriture_parenthese_si_negatif(x1)}=${a-2*x1}$ <br> $${b}+2x=${b}+2\\times ${ecriture_parenthese_si_negatif(x1)}=${b+2*x1}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$${a}-2x=${a}-2\\times ${ecriture_parenthese_si_negatif(x2)}=${a-2*x2}$ <br> $${b}+2x=${b}+2\\times ${ecriture_parenthese_si_negatif(x2)}=${b+2*x2}$<br>`
+					texte_corr += `$${a-2*x2}\\not=${b+2*x2}$ donc l'égalité n'est pas vraie.`
+					break ;
+				case 6 : // ax-ab=x²-bx (a-x)(x-b)=0 solutions a et b.
+					if (this.sup==1) {
+					b = randint(2,9)
+					a = randint(2,9)
+					x3 = b
+					x1 = a
+					x2 = randint(1,9,[x1,x3])
+					}
+					else {
+						a = randint(-9,9,[0,1])
+						b = randint(-9,9,[0,a])
+						x1 = a
+						x3 = b
+						x2 = randint(-9,9,[x1,x3])
+					}
+					texte = `$${a}x-${ecriture_parenthese_si_negatif(a*b)}=x^2-${ecriture_parenthese_si_negatif(b)}x~$ pour $~x=${x1}~$ , pour $~x=${x2}~$ puis pour $~x=${x3}$`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$${a}x-${ecriture_parenthese_si_negatif(a*b)}=${a}\\times ${ecriture_parenthese_si_negatif(x1)}-${ecriture_parenthese_si_negatif(a*b)}=${a*x1-a*b}$ <br> $x^2-${b}\\times  x=${ecriture_parenthese_si_negatif(x1)}^2-${ecriture_parenthese_si_negatif(b)}\\times ${ecriture_parenthese_si_negatif(x1)}=${x1*x1}-${ecriture_parenthese_si_negatif(b*x1)}=${x1*x1-b*x1}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$${a}x-${ecriture_parenthese_si_negatif(a*b)}=${a}\\times ${ecriture_parenthese_si_negatif(x2)}-${ecriture_parenthese_si_negatif(a*b)}=${a*x2-a*b}$ <br> $x^2-${b}\\times  x=${ecriture_parenthese_si_negatif(x2)}^2-${ecriture_parenthese_si_negatif(b)}\\times ${ecriture_parenthese_si_negatif(x2)}=${x2*x2}-${ecriture_parenthese_si_negatif(b*x2)}=${x2*x2-b*x2}$<br>`
+					texte_corr += `$${a*x2-a*b}\\not=${x2*x2-b*x2}$ donc l'égalité n'est pas vraie.<br><br>`
+					texte_corr += `Pour $x=${x3}$ : <br>`
+					texte_corr += `$${a}x-${ecriture_parenthese_si_negatif(a*b)}=${a}\\times ${ecriture_parenthese_si_negatif(x3)}-${ecriture_parenthese_si_negatif(a*b)}=${a*x3-a*b}$ <br> $x^2-${b}\\times  x=${ecriture_parenthese_si_negatif(x3)}^2-${ecriture_parenthese_si_negatif(b)}\\times ${ecriture_parenthese_si_negatif(x3)}=${x3*x3}-${ecriture_parenthese_si_negatif(b*x3)}=${x3*x3-b*x3}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					break ;
+				case 7 : // adx-bd=acx²-bcx  --- (ax-b)(d-cx)=0 solutions b/a et d/c.
+					if (this.sup==1) {
+						c = randint(2,5)
+						a = randint(2,5)
+						x2 = randint(2,6)
+						x3 = randint(2,6,x2)
+						x1 = randint(1,7,[x2,x3])
+						b = a*x2
+						d = c*x3
+					}
+					else {
+						c = randint(2,5)*randint(-1,1,0)
+						a = randint(2,5)*randint(-1,1,0)
+						x2 = randint(1,6)*randint(-1,1,0)
+						x3 = randint(1,6,x2)*randint(-1,1,0)
+						x1 = randint(1,7,[x2,x3])*randint(-1,1,0)
+						b = a*x2
+						d = c*x3
+					}
+					texte = `$${a*d}x-${ecriture_parenthese_si_negatif(b*d)}=${a*c}x^2-${ecriture_parenthese_si_negatif(b*c)}x~$ pour $~x=${x1}~$, pour $~x=${x2}~$ puis pour $~x=${x3}$`
+					texte_corr = `Pour $x=${x1}$ : <br>`
+					texte_corr += `$${a*d}x-${ecriture_parenthese_si_negatif(b*d)}=${a*d}\\times ${ecriture_parenthese_si_negatif(x1)}-${ecriture_parenthese_si_negatif(b*d)}=${a*d*x1-d*b}$ <br> $${a*c}x^2-${ecriture_parenthese_si_negatif(b*c)}x=${a*c}\\times ${ecriture_parenthese_si_negatif(x1)}^2-${ecriture_parenthese_si_negatif(b*c)}\\times ${ecriture_parenthese_si_negatif(x1)}=${a*c*x1*x1}-${ecriture_parenthese_si_negatif(b*c*x1)}=${a*c*x1*x1-b*c*x1}$<br>`
+					texte_corr += `$${a*d*x1-d*b}\\not=${a*c*x1*x1-b*c*x1}$ donc l'égalité n'est pas vraie.<br><br>`
+					texte_corr += `Pour $x=${x2}$ : <br>`
+					texte_corr += `$${a*d}x-${ecriture_parenthese_si_negatif(b*d)}=${a*d}\\times ${ecriture_parenthese_si_negatif(x2)}-${ecriture_parenthese_si_negatif(b*d)}=${a*d*x2-d*b}$ <br> $${a*c}x^2-${ecriture_parenthese_si_negatif(b*c)}x=${a*c}\\times ${ecriture_parenthese_si_negatif(x2)}^2-${ecriture_parenthese_si_negatif(b*c)}\\times ${ecriture_parenthese_si_negatif(x2)}=${a*c*x2*x2}-${ecriture_parenthese_si_negatif(b*c*x2)}=${a*c*x2*x2-b*c*x2}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					texte_corr += `Pour $x=${x3}$ : <br>`
+					texte_corr += `$${a*d}x-${ecriture_parenthese_si_negatif(b*d)}=${a*d}\\times ${ecriture_parenthese_si_negatif(x3)}-${ecriture_parenthese_si_negatif(b*d)}=${a*d*x3-d*b}$ <br> $${a*c}x^2-${ecriture_parenthese_si_negatif(b*c)}x=${a*c}\\times ${ecriture_parenthese_si_negatif(x3)}^2-${ecriture_parenthese_si_negatif(b*c)}\\times ${ecriture_parenthese_si_negatif(x3)}=${a*c*x3*x3}-${ecriture_parenthese_si_negatif(b*c*x3)}=${a*c*x3*x3-b*c*x3}$<br>`
+					texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.<br><br>`
+					break ;
+					case 8 : // 12x-4a=4(2x+b) x=(4a+4b)/4
+						if (this.sup==1) {
+						a = randint(1,3)
+						b = randint(1,3)
+						x2 = parseInt(Algebrite.eval((4*a+4*b)/4))
+						x1 = randint(9,x2)
+						}
+						else {
+							a = randint(-3,3,[0])
+							b = randint(-3,3,[0])	
+							x2 = parseInt(Algebrite.eval((4*a+4*b)/4))
+							x1 = randint(-9,9,[0,x2])
+						}
+
+						texte = `$12x-${ecriture_parenthese_si_negatif(4*a)}=4(2x+${ecriture_parenthese_si_negatif(b)})~$ pour $~x=${x1}~$ puis pour $~x=${x2}$`
+						texte_corr = `Pour $x=${x1}$ : <br>`
+						texte_corr += `$12x-${ecriture_parenthese_si_negatif(4*a)}=12\\times ${ecriture_parenthese_si_negatif(x1)}-${ecriture_parenthese_si_negatif(4*a)}=${12*x1-4*a}$ <br> $4(2x+${ecriture_parenthese_si_negatif(b)})=4\\times (2\\times ${ecriture_parenthese_si_negatif(x1)}+${ecriture_parenthese_si_negatif(b)})=4\\times ${2*x1+b}=${4*(2*x1+b)}$<br>`
+						texte_corr += `$${12*x1-4*a}\\not=${4*(2*x1+b)}$ donc l'égalité n'est pas vraie.<br><br>`
+						texte_corr += `Pour $x=${x2}$ : <br>`
+						texte_corr += `$12x-${ecriture_parenthese_si_negatif(4*a)}=12\\times ${ecriture_parenthese_si_negatif(x2)}-${ecriture_parenthese_si_negatif(4*a)}=${12*x2-4*a}$ <br> $4(2x+${ecriture_parenthese_si_negatif(b)})=4\\times (2\\times ${ecriture_parenthese_si_negatif(x2)}+${ecriture_parenthese_si_negatif(b)})=4\\times ${2*x2+b}=${4*(2*x2+b)}$<br>`
+						texte_corr += `On trouve le même résultat pour le membre de gauche et pour le membre de droite donc l'égalité est vraie.`
+						break ;
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 }
 
 /**
@@ -25674,203 +25961,6 @@ function fonctions_calculs_d_images() {
 		liste_de_question_to_contenu(this);
 	}
 	this.besoin_formulaire_numerique = ['Règle à travailler', 5, "1 : &Agrave; partir d'un programme de calcul\n2 : &Agrave; partir de l'expression algébrique sous forme f(x) = ...\n3 : &Agrave; partir de l'expression algébrique sous forme f : x --> ...\n4 : &Agrave; partir d'un diagramme\n5 : Mélange"];
-};
-
-/**
- * 3F-test test de la bibliotheque d3.js
- */
-
-function svglibs() {
-	'use strict';
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = 1;
-	this.titre = "Tests biblilothèques animations";
-	// pas de différence entre la version html et la version latex pour la consigne
-	this.consigne = ``;
-	// Message Bug SVG qui ne s'affiche pas dans la correction sans rafraichir
-	if (sortie_html) {
-		this.consigne = `
-		<div class="ui compact warning message">		
-			<p>
-			<i class="exclamation triangle icon"></i>
-			ATTENTION BUG CONNU<br>
-			Sous Safari et Edge les animations dysfonctionnent
-			</p>
-			</div>
-			<br>
-		`;
-	}
-	this.consigne += "tests biblios";
-	this.consigne += `<br>`;
-	sortie_html ? this.spacing = 3 : this.spacing = 2;
-	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
-	this.nb_questions = 1;
-	//this.correction_detaillee_disponible = true;
-	this.nb_cols = 1;
-	this.nb_cols_corr = 1;
-	this.sup = 1;
-
-	var num_ex = 'svglibs'; // pour rendre unique les id des SVG, en cas d'utilisation dans plusieurs exercices y faisant appel
-
-	if (sortie_html) {
-		// let id_unique = `_consigne_${num_ex}_${Date.now()}`; // on formatte avec le numéro de l'exercice pour éviter les doublons		
-		// let id_du_div = `div_svg${id_unique}`;
-		var pourcentage = '100%'; // pour l'affichage des svg. On a besoin d'une variable globale
-		var hauteur_svg = 100;
-		this.consigne += `
-		<a href="https://www.datavis.fr/index.php?page=transition" target="_blank">https://www.datavis.fr/index.php?page=transition</a>
-		<br><a href="https://www.pixijs.com/" target="_blank">https://www.pixijs.com/</a>
-		<br><a href="https://d3js.org/" target="_blank">https://d3js.org/</a>
-		`;
-		this.consigne += `<br>Ne pas mettre d'appel aux fonction de mathalea_outils.js avant l'appel de this.nouvelle_version() c'est à dire ici!!!`
-
-	} else { // sortie LaTeX
-
-
-	};
-	this.nouvelle_version = function (numero_de_l_exercice) {
-		let type_de_questions;
-		if (sortie_html) { // les boutons d'aide uniquement pour la version html
-			//this.bouton_aide = modal_pdf(numero_de_l_exercice,"pdf/FicheFonctions-3F1-act.pdf","Aide mémoire sur les fonctions (Sébastien Lozano)","Aide mémoire")		
-			//this.bouton_aide += modal_video('videoTest','videos/Fonctions.mp4','Petit conte mathématique','Intro Vidéo');
-			if (detect_safari_chrome_browser()) {// si c'est safari ou chrome
-				this.consigne += machine_maths_video(`videos/machineMaths-h-1.mp4`);
-			} else {
-				let id_unique = `_consigne_${num_ex}_${Date.now()}`; // on formatte avec le numéro de l'exercice pour éviter les doublons		
-				let id_du_div = `div_svg${id_unique}`;
-				this.consigne += `<div id="${id_du_div}" style="width: ${pourcentage}; height: ${hauteur_svg}px; display : table "></div>`;
-				//SVG_machine_maths(id_du_div,400,hauteur_svg,'machine\\,maths','---','Procédé','de\\,calcul','antécédent','x','image','y');
-				//SVG_machine_maths(id_du_div,400,hauteur_svg,'machine \\, f','---','périmètre','d\'un \\, carré','côté \\, du','carré','périmètre','??? \\, cm');
-				//SVG_machine_maths(id_du_div,400,hauteur_svg,'machine\\,g','---','aire','d\'un \\, carré','côté \\, du','carré','aire','??? \\, cm^2');
-				//SVG_machine_maths(id_du_div,400,hauteur_svg,'machine \\, h','---','multiplier \\, par \\, 3','ajouter \\, 1','nombre \\, de','départ \\, ','nombre \\, de','sortie \\, ?');														
-				SVG_machine_maths(id_du_div, 400, hauteur_svg, 'machine \\, d', '---', 'nombre \\enspace total', 'de  \\, diviseurs', 'nombre \\, de', 'départ', 'nombre \\, de', ' diviseurs');
-
-			};
-
-		} else { // sortie LaTeX
-			// this.consigne += `machine Tikz HEX #F15929 équivaut à rgb(241,89,41)<br>`;
-			this.consigne += tikz_machine_maths('maths', '---', `Proc\\acute{e}d\\acute{e}`, 'de\\,calcul', `ant\\acute{e}c\\acute{e}dent`, `\\textit{x}`, `image`, `\\textit{y}`);
-
-
-		};
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-		this.contenu = ''; // Liste de questions
-		this.contenu_correction = ''; // Liste de questions corrigées
-
-		//let type_de_questions_disponibles = [1,2,3,4];
-		let type_de_questions_disponibles = [1];
-		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles, this.nb_questions);
-
-		for (let i = 0, x, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
-			type_de_questions = liste_type_de_questions[i];
-
-			if (sortie_html) {
-				var id_unique = `${num_ex}_${i}_${Date.now()}`
-				var id_du_div = `div_svg${numero_de_l_exercice}${id_unique}`;
-				//var id_du_div_diag = `div_svg_diag${numero_de_l_exercice}${id_unique}`;
-				var id_du_div_corr = `div_svg_corr${numero_de_l_exercice}${id_unique}`;
-				//texte = machine_maths_video(`videos/machineMaths-h-1.mp4`);
-			}
-
-			switch (type_de_questions) {
-				case 1: // périmètre d'un carré de côté x			
-					var j = 0; // pour la sous-numérotation
-					// question
-					if (sortie_html) {
-						texte += `La $\\mathbf{machine\\,f}$ renvoie le ` + katex_Popup(`périmètre`, `Rappel`, `Le périmètre d'un polygone est égal à la somme des longueurs de ses côtés`) + ` d'un carré de côté $x$`;
-					} else {
-						texte = `La $\\mathbf{machine\\,f}$ renvoie le \\textbf{périmètre} \\footnote{\\textbf{Rappel :} Le périmètre d'un polygone est égal à la somme des longueurs de ses côtés} d'un carré de côté $x$`;
-					}
-					texte += `<br>`;
-					// machine						
-					x = randint(2, 99);//augmenter les possibles pour éviter les questions déjà posées?	
-					if (sortie_html) {
-						//texte += `<br>`;
-						texte += `<div id="${id_du_div}" style="width: ${pourcentage}"; height: ${hauteur_svg}px; display : table "></div>`;
-						texte_corr += `<div id="${id_du_div_corr}" style="width: ${pourcentage}"; height: ${hauteur_svg}px; display : table "></div>`;
-						//SVG_machine_maths(id_du_div,400,hauteur_svg,'machine \\, f','---','périmètre','d\'un \\, carré','carré \\, de','côté \\,'+x+' \\, cm','périmètre','??? \\, cm');							
-					} else { // sortie Latex avec Tikz
-						//texte += tikz_machine_maths('f','---',`P\\acute{e}rim\\grave{e}tre`,`d'un\\,carr\\acute{e}`,`carr\\acute{e}\\,de`,`c\\hat{o}t\\acute{e}\\,${x}\\,cm`,`P\\acute{e}rim\\grave{e}tre`,`???\\,cm`);
-					};
-
-					break;
-			};
-
-			if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte);
-				this.liste_corrections.push(texte_corr);
-				i++;
-			}
-			cpt++
-		}
-
-		liste_de_question_to_contenu(this);
-	}
-	//this.besoin_formulaire_numerique = ['Règle à travailler',5,"1 : Produit de deux puissances de même base\n2 : Quotient de deux puissances de même base\n3 : Puissance de puissance\n4 : Produit de puissances de même exposant\n5 : Mélange"]; 
-};
-
-/**
- * 3Tests tests de fonctions
- */
-
-function tester_des_fonctions() {
-	'use strict';
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = 1;
-	this.titre = "Tests de fonctions";
-	// pas de différence entre la version html et la version latex pour la consigne
-	this.consigne = ``;
-	this.consigne += "tests fonctions";
-	this.consigne += `<br>`;
-	sortie_html ? this.spacing = 3 : this.spacing = 2;
-	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
-	this.nb_questions = 1;
-	//this.correction_detaillee_disponible = true;
-	this.nb_cols = 1;
-	this.nb_cols_corr = 1;
-	this.sup = 1;
-
-
-	this.nouvelle_version = function (numero_de_l_exercice) {
-		let type_de_questions;
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-		this.contenu = ''; // Liste de questions
-		this.contenu_correction = ''; // Liste de questions corrigées
-
-		//let type_de_questions_disponibles = [1,2,3,4];
-		let type_de_questions_disponibles = [1];
-		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles, this.nb_questions);
-
-		for (let i = 0, x, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
-			type_de_questions = liste_type_de_questions[i];
-
-
-			switch (type_de_questions) {
-				case 1: // 
-					texte = ``;
-					//texte +=`katexPopup2`+ katex_Popup2(numero_de_l_exercice+i*3,2,`trébuchet`,`https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/`,`https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/balancoire-a-bascule-trebuchet-baskul-768x768.jpg`);
-					texte += `<br> katextPopup3 modal long : `;
-					texte += katex_Popup3(numero_de_l_exercice + 1, 1, "énergie", `Définition : énergie (grandeur physique)`, `C’est le produit de la puissance électrique (Watt) par le temps (s) et se mesure en Joule (J).<br>1 J=1 W × 1 s.<br>Cependant pour mesurer des énergies plus importantes on utilise plutôt le kiloWattheure (kWh).<br>1 kWh=1000 W × 1 h.`);
-					texte += `<br> katexPopup3 image : `;
-					texte += katex_Popup3(numero_de_l_exercice + 2, 2, `trebuchet`, `https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/`, `https://sitetab3.ac-reims.fr/ec-fayl-billot-elem/-wp-/wp-content/uploads/2018/01/balancoire-a-bascule-trebuchet-baskul-768x768.jpg`);
-					texte_corr = `texte corr`;
-
-					break;
-			};
-
-			if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte);
-				this.liste_corrections.push(texte_corr);
-				i++;
-			}
-			cpt++
-		}
-
-		liste_de_question_to_contenu(this);
-	}
-	//this.besoin_formulaire_numerique = ['Règle à travailler',5,"1 : Produit de deux puissances de même base\n2 : Quotient de deux puissances de même base\n3 : Puissance de puissance\n4 : Produit de puissances de même exposant\n5 : Mélange"]; 
 };
 
 /**
@@ -29757,7 +29847,7 @@ function TrianglesSemblables() {
 		let type_de_questions = randint(1,1);
 		switch (type_de_questions){
 			case 1 :
-				let trouve=false,aireABC,A,B,C,M,p,q,r,s,X,G,Gq,nom1,grid,tA,sAB,dAB,pABC,lab
+				let trouve=false,aireABC,A,B,C,M,p,q,r,s,X,G,Gq,nom1,grid
 				while (!trouve) {
 				A=point(choice([0,3]),choice([0,3]),'A')
 				B=point(choice([6,9]),choice([6,9]),'B')
@@ -29784,12 +29874,7 @@ function TrianglesSemblables() {
 				r.opaciteDeRemplissage=0.5
 				s.couleurDeRemplissage='blue'
 				s.opaciteDeRemplissage=0.5
-				tA=tracePoint(A,B,C)
-				sAB=segment(A,B)
-				dAB=droite(A,B)
-				pABC=polygone(A,B,C)
-				lab=labelPoint(A,B,C)
-				texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:50,scale:0.5},p,nom1,grid,r,s,tA,sAB,dAB,pABC,lab)
+				texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:20,scale:0.5},p,nom1,grid,r,s)
 				this.liste_questions[0]=texte;
 				this.liste_corrections[0]=texte_corr;
 				liste_de_question_to_contenu(this);
