@@ -34,23 +34,6 @@ function ObjetMathalea2D() {
 	mesObjets.push(this);
 }
 
-function initialise(){
-	let txt = `
-alert('ok')
-	function ObjetMathalea2D() {
-	this.positionLabel = 'above';
-	this.isVisible = true;
-	this.color = 'black';
-	this.style = '' //stroke-dasharray="4 3" pour des hachures //stroke-width="2" pour un trait plus épais
-	this.styleTikz = '';
-	coeff = 40; // 1 cm est représenté par 20 pixels
-	this.epaisseur = 1;
-	this.opacite = 1;
-	this.pointilles = false;
-	mesObjets.push(this);
-}`
-	return Function(txt)();
-}
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -572,44 +555,44 @@ function droiteParPointEtPente(A,k,nom='',color='black') {
  		let codes = codeSegments(markrayons,color,A,M, B,M, A,N, B,N)
  		objets.push(sAM,sBM,sAN,sBN,codes)
  	}
- 	this.svg = function(coeff){
- 		code = ''
- 		for (objet of objets){
- 			code += '\n\t' + objet.svg(coeff)
- 		}
- 		return code
- 	}
- 	this.tikz = function(){
- 		code = ''
- 		for (objet of objets){
- 			code += '\n\t' + objet.tikz()
- 		}
- 		return code
- 	}
- }
+	this.svg = function (coeff) {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.svg(coeff);
+		}
+		return code;
+	};
+	this.tikz = function () {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.tikz();
+		}
+		return code;
+	}; }
 
+ 
  function constructionMediatrice(...args){
- 	return new ConstructionMediatrice(...args)
- }
-/**
- * d = bissectrice(A,O,B) // Bissectrice de l'angle AOB
+	 return new ConstructionMediatrice(...args)
+	}
+	/**
+	 * d = bissectrice(A,O,B) // Bissectrice de l'angle AOB
  * d = bissectrice(A,O,B,'blue') // Bissectrice de l'angle AOB en bleu
  * 
  * @Auteur Rémi Angot
  */
- function bissectrice(A,O,B,color = 'black'){
- 	ObjetMathalea2D.call(this)
- 	this.color = color
- 	let demiangle = calcul(angleOriente(A,O,B)/2)
- 	let m = pointSurSegment(O,A,3)
- 	let M = rotation(m,O,demiangle)
- 	return demiDroite(O,M,this.color)	
- }
- /**
-  * m = codagebissectrice(A,O,B) ajoute des arcs marqués de part et d'autres de la bissectrice mais ne trace pas celle-ci.
-  * @Auteur Jean-Claude Lhote
-  */
- function CodageBissectrice(A,O,B,color='black',mark='×'){
+function bissectrice(A,O,B,color = 'black'){
+	ObjetMathalea2D.call(this)
+	this.color = color
+	let demiangle = calcul(angleOriente(A,O,B)/2)
+	let m = pointSurSegment(O,A,3)
+	let M = rotation(m,O,demiangle)
+	return demiDroite(O,M,this.color)	
+}
+/**
+ * m = codagebissectrice(A,O,B) ajoute des arcs marqués de part et d'autres de la bissectrice mais ne trace pas celle-ci.
+ * @Auteur Jean-Claude Lhote
+ */
+function CodageBissectrice(A,O,B,color='black',mark='×'){
 	ObjetMathalea2D.call(this)
 	this.color = color
 	let a = pointSurSegment(O,A,1.5)
@@ -639,14 +622,14 @@ function codageBissectrice(...args){
  * 
  * @Auteur Rémi Angot
  */
- function ConstructionBissectrice(A,O,B,detail = false, color='blue', mark='×',tailleLosange = 5,couleurBissectrice = 'red', epaiseurBissectrice = 2){
- 	ObjetMathalea2D.call(this)
- 	let M = pointSurSegment(O,A,tailleLosange)
- 	let N = pointSurSegment(O,B,tailleLosange)
- 	let sOM = segment(O,M)
- 	let sON = segment(O,N)
- 	sOM.styleExtremites = '-|'
- 	sON.styleExtremites = '-|'
+function ConstructionBissectrice(A,O,B,detail = false, color='blue', mark='×',tailleLosange = 5,couleurBissectrice = 'red', epaiseurBissectrice = 2){
+	ObjetMathalea2D.call(this)
+	let M = pointSurSegment(O,A,tailleLosange)
+	let N = pointSurSegment(O,B,tailleLosange)
+	let sOM = segment(O,M)
+	let sON = segment(O,N)
+	sOM.styleExtremites = '-|'
+	sON.styleExtremites = '-|'
  	let dMN = droite(M,N)
  	dMN.isVisible = false
  	let P = symetrieAxiale(O,dMN)
@@ -657,32 +640,33 @@ function codageBissectrice(...args){
  	d.epaisseur = epaiseurBissectrice
  	let objets = [sOM,sON,tNP,tMP,d]
  	if (detail) {
- 		let sMP = segment(M,P)
+		 let sMP = segment(M,P)
  		let sNP = segment(N,P)
  		sMP.pointilles = true
  		sNP.pointilles = true
  		let codes = codeSegments(mark,color,O,M, M,P, O,N, N,P)
  		objets.push(sMP,sNP,codes)
- 	}
- 	this.svg = function(coeff){
- 		code = ''
- 		for (objet of objets){
- 			code += '\n\t' + objet.svg(coeff)
- 		}
- 		return code
- 	}
- 	this.tikz = function(){
- 		code = ''
- 		for (objet of objets){
- 			code += '\n\t' + objet.tikz()
- 		}
- 		return code
- 	}
- }
+	}
+	this.svg = function (coeff) {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.svg(coeff);
+		}
+		return code;
+	};
+	this.tikz = function () {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.tikz();
+		}
+		return code;
+	};
+}
 
- function constructionBissectrice(...args){
- 	return new ConstructionBissectrice(...args)
- }
+function constructionBissectrice(...args){
+	return new ConstructionBissectrice(...args)
+}
+
 
 
 /*
@@ -1109,12 +1093,21 @@ function CodageCarre(c,color = 'black',mark='×'){
 	objets.push(codageAngleDroit(c.listePoints[1],c.listePoints[2],c.listePoints[3],color))
 	objets.push(codageAngleDroit(c.listePoints[2],c.listePoints[3],c.listePoints[0],color))
 	objets.push(codageAngleDroit(c.listePoints[3],c.listePoints[0],c.listePoints[1],color))
-	this.svg = function(coeff){
-		return objets[0].svg(coeff)+objets[1].svg(coeff)+objets[2].svg(coeff)+objets[3].svg(coeff)+objets[4].svg(coeff)
-	}
-	this.tikz = function(){
-		return objets[0].tikz()+objets[1].tikz()+objets[2].tikz()+objets[3].tikz()+objets[4].tikz()
-	}
+	
+	this.svg = function (coeff) {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.svg(coeff);
+		}
+		return code;
+	};
+	this.tikz = function () {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.tikz();
+		}
+		return code;
+	};
 }
 
 function codageCarre(...args){
@@ -1488,76 +1481,49 @@ function cercleCentrePoint(...args){
  * @param {boolean} fill
  * @param {string} color 
  */
- function Arc(M,Omega,angle,rayon=false,fill='none',color='black') {
- 	ObjetMathalea2D.call(this);
- 	this.color=color;
- 	this.fill=fill;
- 	let l=longueur(Omega,M),large=0,sweep=0
- 	let d=droite(Omega,M)
-	d.isVisible=false
-	let A=point(Omega.x+1,Omega.y)
-	let azimut=angleOriente(A,Omega,M)
-	let anglefin=azimut+angle
- 	if (angle>180) {
- 		angle=angle-360
- 		large=1
- 		sweep=0
- 	}
- 	else if (angle<-180) {
- 		angle=360+angle
- 		large=1
- 		sweep=1
- 	}
- 	else {
- 		large=0
- 		sweep=1-(angle>0)
-	 }
- 	let N=rotation(M,Omega,angle)
- 	if (rayon) 	this.svg = function(coeff){
- 		if (this.epaisseur!=1) {
- 			this.style += ` stroke-width="${this.epaisseur}" `
- 		}
- 		if (this.pointilles) {
- 			this.style += ` stroke-dasharray="4 3" `
- 		}
- 		if (this.opacite !=1) {
- 			this.style += ` stroke-opacity="${this.opacite}" `
- 		}
- 		return `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} A ${l*coeff} ${l*coeff} 0 ${large} ${sweep} ${N.xSVG(coeff)} ${N.ySVG(coeff)} L ${Omega.xSVG(coeff)} ${Omega.ySVG(coeff)} Z" stroke="${this.color}" fill="${fill}" ${this.style}/>`
- 	}
- 	else 	this.svg = function(coeff){
- 		if (this.epaisseur!=1) {
- 			this.style += ` stroke-width="${this.epaisseur}" `
- 		}
- 		if (this.pointilles) {
- 			this.style += ` stroke-dasharray="4 3" `
- 		}
- 		if (this.opacite !=1) {
- 			this.style += ` stroke-opacity="${this.opacite}" `
- 		}
- 		return `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} A ${l*coeff} ${l*coeff} 0 ${large} ${sweep} ${N.xSVG(coeff)} ${N.ySVG(coeff)}" stroke="${this.color}" fill="${fill}" ${this.style}/>`
- 	}
- 	this.tikz = function(){
- 		let optionsDraw = []
-		let tableauOptions = [];
-		if (this.color.length>1 && this.color!=='black'){
-			tableauOptions.push(this.color)
-		}
+function Arc(M,Omega,angle,rayon=false,fill='none',color='black') {
+	ObjetMathalea2D.call(this);
+	this.color=color;
+	this.fill=fill;
+	let l=longueur(Omega,M),large=0,sweep=0
+	let d=droite(Omega,M)
+   d.isVisible=false
+   let A=point(Omega.x+1,Omega.y)
+   let azimut=angleOriente(A,Omega,M)
+   let anglefin=azimut+angle
+	if (angle>180) {
+		angle=angle-360
+		large=1
+		sweep=0
+	}
+	else if (angle<-180) {
+		angle=360+angle
+		large=1
+		sweep=1
+	}
+	else {
+		large=0
+		sweep=1-(angle>0)
+	}
+	let N=rotation(M,Omega,angle)
+	if (rayon) 	this.svg = function(coeff){
 		if (this.epaisseur!=1) {
-			tableauOptions.push(`line width = ${this.epaisseur}`) 
+			this.style += ` stroke-width="${this.epaisseur}" `
 		}
 		if (this.pointilles) {
-			tableauOptions.push(`dashed`) 
+			this.style += ` stroke-dasharray="4 3" `
 		}
 		if (this.opacite !=1) {
-			tableauOptions.push(`opacity = ${this.opacite}`)
+			this.style += ` stroke-opacity="${this.opacite}" `
 		}
-		if (tableauOptions.length>0) {
-			optionsDraw = "["+tableauOptions.join(',')+"]"
+		return `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} A ${l*coeff} ${l*coeff} 0 ${large} ${sweep} ${N.xSVG(coeff)} ${N.ySVG(coeff)} L ${Omega.xSVG(coeff)} ${Omega.ySVG(coeff)} Z" stroke="${this.color}" fill="${fill}" ${this.style}/>`
+	}
+	else 	this.svg = function(coeff){
+		if (this.epaisseur!=1) {
+			this.style += ` stroke-width="${this.epaisseur}" `
 		}
-		let bords=`(${M.x},${M.y})`
-		if (rayon) bords=`(${N.x},${N.y}) -- (${Omega.x},${Omega.y}) -- (${M.x},${M.y}) `
-			return `\\draw${optionsDraw} ${bords} arc (${azimut}:${anglefin}:${longueur(Omega,M)}) ;`
+		if (rayon) `\\fill  ${optionsDraw} (${N.x},${N.y}) -- (${Omega.x},${Omega.y}) -- (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(Omega,M)}) -- cycle ;`
+		else return `\\draw${optionsDraw} (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(Omega,M)}) ;`
  	}
  }
  function arc(...args) {
@@ -2505,41 +2471,53 @@ function codeSegments(...args){
 */
 
 /**
-* axes(xmin,ymin,xmax,ymax,thick) // Trace les axes des abscisses et des ordinnées
+* axes(xmin,ymin,xmax,ymax,thick,xstep,ystep,epaisseur) // Trace les axes des abscisses et des ordonnées
 * 
 * @Auteur Rémi Angot
 */
 
-function Axes(xmin=-30,ymin=-30,xmax=30,ymax=30,thick=0.2,step=1){
+function Axes(xmin=-30,ymin=-30,xmax=30,ymax=30,thick=0.2,xstep=1,ystep=1,epaisseur=2,color='black'){
 	ObjetMathalea2D.call(this)
 	let objets = []
-	let abscisse = segment(xmin,0,xmax,0)
+	let yabscisse
+	ymin > 0 ? yabscisse = ymin : yabscisse = 0
+	let xordonnee
+	xmin > 0 ? xordonnee = xmin : xordonnee = 0
+	let abscisse = segment(xmin,yabscisse,xmax,yabscisse)
 	abscisse.styleExtremites = '->'
-	let ordonnee = segment(0,ymin,0,ymax)
+	abscisse.epaisseur = epaisseur
+	abscisse.color = color
+	let ordonnee = segment(xordonnee,ymin,xordonnee,ymax)
 	ordonnee.styleExtremites = '->'
+	ordonnee.epaisseur = epaisseur
 	objets.push(abscisse,ordonnee)
-	for (let x=xmin ; x<xmax ; x+=step){
-		let s = segment(x,-thick,x,thick)
+	ordonnee.color = color
+	for (let x=xmin ; x<xmax ; x = calcul(x+xstep)){
+		let s = segment(x,yabscisse-thick,x,yabscisse+thick)
+		s.epaisseur = epaisseur
+		s.color = color
 		objets.push(s)
 	}
-	for (let y=ymin ; y<ymax ; y+=step){
-		let s = segment(-thick,y,thick,y)
+	for (let y=ymin ; y<ymax ; y=calcul(y+ystep)){
+		let s = segment(xordonnee-thick,y,xordonnee+thick,y)
+		s.epaisseur = epaisseur
+		s.color = color
 		objets.push(s)
 	}
-	this.svg = function(coeff){
-		let code = ''
-		for (s of objets){
-			code += '\n\t' + s.svg(coeff)
+	this.svg = function (coeff) {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.svg(coeff);
 		}
-		return code
-	}
-	this.tikz = function(){
-		let code = ''
-		for (s of objets){
-			code += '\n\t' + s.tikz()
+		return code;
+	};
+	this.tikz = function () {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.tikz();
 		}
-		return code
-	}
+		return code;
+	};
 	this.commentaire = `Axes(xmin = ${xmin}, ymin = ${ymin}, xmax = ${xmax}, ymax = ${ymax}, thick = ${thick})`
 
 }
@@ -2555,23 +2533,23 @@ function axes(...args){
 function LabelX(xmin=1,xmax=20,step=1,color='black',pos=-.6,coeff=1){
 	ObjetMathalea2D.call(this)
 	let objets = []
-	for (x=xmin ; x<=xmax ; x = calcul(x+step)){
+	for (x=Math.ceil(xmin/coeff) ; calcul(x*coeff)<=xmax ; x = calcul(x+step)){
 		objets.push(texteParPoint(Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(calcul(x*coeff)).toString(),point(x,pos),'milieu',color))
 	}
-	this.svg = function(coeff){
-		code = ''
-		for (objet of objets){
-			code += '\n\t' + objet.svg(coeff)
+	this.svg = function (coeff) {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.svg(coeff);
 		}
-		return code
-	}
-	this.tikz = function(){
-		code = ''
-		for (objet of objets){
-			code += '\n\t' + objet.tikz()
+		return code;
+	};
+	this.tikz = function () {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.tikz();
 		}
-		return code
-	}
+		return code;
+	};
 	this.commentaire = `labelX(xmin=${xmin},xmax=${xmax},step=${step},color=${color},pos=${pos},coeff=${coeff})`
 
 }
@@ -2580,33 +2558,40 @@ function labelX(...args){
 }
 
 /**
-* labelY(ymin,ymax,step,color,pos) // Place des graduations
+* labelY(ymin,ymax,step,color,pos,coeff) // Place des graduations
 * 
 * @Auteur Rémi Angot
 */
 function LabelY(ymin=1,ymax=20,step=1,color='black',pos=-.6,coeff=1){
 	ObjetMathalea2D.call(this)
-	let objets = []
-	for (y=ymin ; y<=ymax ; y = calcul(y+step)){
+	let objets = []	
+	for (y=Math.ceil(ymin/coeff) ; calcul(y*coeff)<=ymax ; y = calcul(y+step)){
 		objets.push(texteParPoint(Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(calcul(y*coeff)).toString(),point(pos,y),'milieu',color))
 	}
-	this.svg = function(coeff){
-		code = ''
-		for (objet of objets){
-			code += '\n\t' + objet.svg(coeff)
+	this.svg = function (coeff) {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.svg(coeff);
 		}
-		return code
-	}
-	this.tikz = function(){
-		code = ''
-		for (objet of objets){
-			code += '\n\t' + objet.tikz()
+		return code;
+	};
+	this.tikz = function () {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.tikz();
 		}
-		return code
-	}
+		return code;
+	};
 	this.commentaire = `labelX(ymin=${ymin},ymax=${ymax},step=${step},color=${color},pos=${pos})`
 
 }
+
+
+/**
+* labelY(ymin,ymax,step,color,pos,coeff) // Place des graduations
+* 
+* @Auteur Rémi Angot
+*/
 function labelY(...args){
 	return new LabelY(...args)
 }
@@ -2616,7 +2601,7 @@ function labelY(...args){
 * 
 * @Auteur Rémi Angot
 */
-function Grille(xmin = -30, ymin = -30, xmax = 30, ymax = 30, color = 'gray', opacite = .4, step = 1){
+function Grille(xmin = -30, ymin = -30, xmax = 30, ymax = 30, color = 'gray', opacite = .4, step = 1,pointilles=false){
 	ObjetMathalea2D.call(this)
 	this.color = color
 	this.opacite = opacite
@@ -2625,34 +2610,105 @@ function Grille(xmin = -30, ymin = -30, xmax = 30, ymax = 30, color = 'gray', op
 		let s = segment(i,ymin,i,ymax)
 		s.color = this.color
 		s.opacite = this.opacite
+		if (pointilles) {
+			s.pointilles = true
+		}
 		objets.push(s)
 	}
 	for (let i = ymin ; i <= ymax ; i+= step){
 		let s = segment(xmin,i,xmax,i)
 		s.color = this.color
 		s.opacite = this.opacite
+		if (pointilles) {
+			s.pointilles = true
+		}
 		objets.push(s)
 	}
 	this.commentaire = `Grille(xmin = ${xmin}, ymin = ${ymin}, xmax = ${xmax}, ymax = ${ymax}, color = ${color}, opacite = ${opacite}, pas = ${step})`
-	this.svg = function(coeff){
-		let code = ''
-		for (s of objets){
-			code += '\n\t' + s.svg(coeff)
+	this.svg = function (coeff) {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.svg(coeff);
 		}
-		return code
-	}
-	this.tikz = function(){
-		let code = ''
-		for (s of objets){
-			code += '\n\t' + s.tikz()
+		return code;
+	};
+	this.tikz = function () {
+		code = '';
+		for (objet of objets) {
+			code += '\n\t' + objet.tikz();
 		}
-		return code
-	}
+		return code;
+	};
 }
 
 function grille(...args){
 	return new Grille(...args)
 }
+
+function Repere({xmin =-10, xmax = 10, ymin =-10, ymax = 10, xscale = 1, yscale = 1, xstep = 1, ystep = 1,
+	graduationColor = 'black', afficheZero = false, axesEpaisseur = 2, axesColor = 'black',
+	grillePrincipaleDistance = 1, grillePrincipaleColor = 'gray', grillePrincipaleOpacite = .7,
+	grillePrincipalePointilles = false, grillePrincipaleVisible = true,
+	grilleSecondaireDistance = .1, grilleSecondaireColor = 'gray', grilleSecondaireOpacite = .3,
+	grilleSecondairePointilles = false, grilleSecondaireVisible = false,
+	graduationsxMin = xmin, graduationsxMax = xmax, graduationsyMin = ymin, graduationsyMax = ymax,
+	positionLabelX = -.6, positionLabelY = -.6, legendeX = 'x', legendeY = 'y', positionLegendeX, 
+	positionLegendeY}={}) {
+		ObjetMathalea2D.call(this)
+		let objets = [];
+		if (grillePrincipaleVisible){
+			objets.push(grille(calcul(xmin/xscale),calcul(ymin/yscale),calcul(xmax/xscale),calcul(ymax/yscale),grillePrincipaleColor,grillePrincipaleOpacite,grillePrincipaleDistance,grillePrincipalePointilles))
+		}
+		if (grilleSecondaireVisible){
+			objets.push(grille(calcul(xmin/xscale),calcul(ymin/yscale),calcul(xmax/xscale),calcul(ymax/yscale),grilleSecondaireColor,grilleSecondaireOpacite,grilleSecondaireDistance,grilleSecondairePointilles))
+		}
+		objets.push(axes(calcul(xmin/xscale),calcul(ymin/yscale),calcul(xmax/xscale),calcul(ymax/yscale),.2,xstep,ystep,axesEpaisseur,axesColor))
+		let yabscisse
+		ymin > 0 ? yabscisse = ymin : yabscisse = 0
+		let xordonnee
+		xmin > 0 ? xordonnee = xmin : xordonnee = 0
+		if (afficheZero){
+			objets.push(labelX(premierMultipleSuperieur(xstep,graduationsxMin),graduationsxMax,xstep,graduationColor,calcul(yabscisse/yscale)+positionLabelX,xscale))
+			objets.push(labelY(premierMultipleSuperieur(ystep,graduationsyMin),graduationsyMax,ystep,graduationColor,calcul(xordonnee/xscale)+positionLabelY,yscale))
+		} else {
+			objets.push(labelX(premierMultipleSuperieur(xstep,graduationsxMin),-1,xstep,graduationColor,calcul(yabscisse/yscale)+positionLabelX,xscale))
+			objets.push(labelY(premierMultipleSuperieur(ystep,graduationsyMin),-1,ystep,graduationColor,calcul(xordonnee/xscale)+positionLabelY,yscale))
+			objets.push(labelX(Math.max(xstep,premierMultipleSuperieur(xstep,graduationsxMin)),graduationsxMax,xstep,graduationColor,calcul(yabscisse/yscale)+positionLabelX,xscale))
+			objets.push(labelY(Math.max(ystep,premierMultipleSuperieur(ystep,graduationsyMin)),graduationsyMax,ystep,graduationColor,calcul(xordonnee/xscale)+positionLabelY,yscale))
+		}
+
+		if (positionLegendeX === undefined){
+			positionLegendeX = [xmax+.2,yabscisse+.3]
+		}
+		if (positionLegendeY === undefined){
+			positionLegendeY = [xordonnee+.3,ymax+.2]
+		}
+		objets.push(texteParPosition(legendeX,calcul(positionLegendeX[0]/xscale),calcul(positionLegendeX[1]/yscale),'droite'))
+		objets.push(texteParPosition(legendeY,calcul(positionLegendeY[0]/xscale),calcul(positionLegendeY[1]/yscale),'droite'))
+
+
+		this.svg = function (coeff) {
+			code = '';
+			for (objet of objets) {
+				code += '\n\t' + objet.svg(coeff);
+			}
+			return code;
+		};
+		this.tikz = function () {
+			code = '';
+			for (objet of objets) {
+				code += '\n\t' + objet.tikz();
+			}
+			return code;
+		};
+
+		return [xscale,yscale]
+
+	}
+
+	function repere(...args){
+		return new Repere(...args)
+	}
 
 
 /*
@@ -2662,14 +2718,16 @@ function grille(...args){
 */
 
 /**
-* courbe(f,xmin,xmax,color,step) // Trace la courbe de f
+* courbe(f,xmin,xmax,color,repere,step) // Trace la courbe de f
 * 
 * @Auteur Rémi Angot
 */
 
-function courbe(f,xmin=-1,xmax=30,color = 'black',epaisseur = 2,step=.1,xscale=1,yscale=1){
+function courbe(f,xmin=-1,xmax=30,color = 'black',epaisseur = 2,r=[1,1],step=.1,){
 	ObjetMathalea2D.call(this)
 	this.color = color
+	let xscale = r[0]
+	let yscale = r[1]
 	let points = []
 	for (let x = calcul(xmin/xscale) ; x<=calcul(xmax/xscale) ; x = calcul(x+step)){
 		if (isFinite(f(x*xscale))) {
@@ -2818,7 +2876,7 @@ function texteParPoint(...args){
 * texteParPoint('mon texte',x,y) // Écrit 'mon texte' avec le point de coordonnées (x,y) au centre du texte
 * texteParPoint('mon texte',x,y,'gauche') // Écrit 'mon texte' à gauche de le point de coordonnées (x,y) (qui sera la fin du texte)
 * texteParPoint('mon texte',x,y,'droite') // Écrit 'mon texte' à droite de le point de coordonnées (x,y) (qui sera le début du texte)
-* texteParPoint('mon texte',x,y,45) // Écrit 'mon texte' à centré sur le point de coordonnées (x,y) avec une rotation de 45°
+* texteParPoint('mon texte',x,y,45) // Écrit 'mon texte'  centré sur le point de coordonnées (x,y) avec une rotation de 45°
 *
 * @Auteur Rémi Angot
 */
@@ -2933,8 +2991,6 @@ function couleurAleatoire() {
 %%%%%%% LES FONCTIONS - FORMATAGE %%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
-
-
 
 /**
 * codeSvg(segment(A,B),polygone(D,E,F),labelPoints(A,B))
