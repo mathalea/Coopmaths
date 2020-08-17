@@ -43,14 +43,14 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Utiliser le calcul littéral.</div>	
 			{{% priorite "Il identifie la structure d’une expression littérale (somme, produit)." %}}
-			{{% priorite_alea "5L13-4 : Déterminer la dernière opération dans une expression littérale" "beta5L13-4" %}}
-			{{% priorite_alea "5L12-1 : Réduire le plus possible une expression littérale" "beta5L12-1" %}}
+			{{% priorite_alea "beta5L13-4 : Déterminer la dernière opération dans une expression littérale" "beta5L13-4" %}}
+			{{% priorite_alea "beta5L12-1 : Réduire le plus possible une expression littérale" "beta5L12-1" %}}
 
 			{{% priorite "Il utilise la propriété de distributivité simple pour développer un produit." %}}
 			{{% priorite_alea "4L10 : Utiliser la simple distributivité" "4L10" %}}	
 
 			{{% priorite "Il introduit une lettre pour désigner une valeur inconnue et met un problème en équation." %}}
-			{{% priorite_alea "À FAIRE : Touver la longueur du côté d'un carré de périmètre donné et modéliser par une équation" "" %}}
+			{{% priorite_alea "beta4L13-0 : Mettre en équation un problème sans objectif de résolution" "beta4L13-0" %}}
 			{{% priorite "Il teste si un nombre est solution d’une équation" %}}
 			{{% priorite_alea "4L14-2 : Tester sur une équation du second degré" "4L14-2" %}}
 			{{% priorite_alea "4L14-1 : Tester sur une équation du premier degré" "4L14-1" %}}
@@ -78,10 +78,10 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
-			{{% priorite_alea "4L13-0 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "beta4L13-0" %}}	
+			{{% priorite_alea "beta4P20-0 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "beta4P20-0" %}}	
 
 			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}			
-			{{% priorite_alea "4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "4F12" %}}
+			{{% priorite_alea "beta4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "beta4F12" %}}
 	</div>	
 {{< /liste_priorites >}}
 
