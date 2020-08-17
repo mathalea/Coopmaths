@@ -80,6 +80,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
 			{{% priorite_alea "À FAIRE : Miriam veut acheter 5 crayons et 3 gommes.Soit c le prix d'un crayon et g le prix d'une gomme.Exprimer le prix total de son achat, en fonction de c et g. Adaptables à partir des 5L de JC ? " "" %}}
+			{{% priorite_alea "4L13-0 : Produire une forme littérale en introduisant une lettre pour désigner une valeur inconnue" "beta4L13-0" %}}	
 
 			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}			
 			{{% priorite_alea "4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "4F12" %}}
