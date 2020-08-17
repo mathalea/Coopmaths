@@ -987,6 +987,21 @@ function calcul(expression,arrondir=false){
 }
 
 /**
+* Utilise Algebrite pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux
+* Le 2e argument facultatif permet de préciser l'arrondi souhaité
+* @Auteur Rémi Angot
+*/
+function nombreDecimal(expression,arrondir=false){
+	if (!arrondir) {
+		return string_nombre(calcul(expression))
+	} else {
+		return string_nombre(calcul(expression,1))
+	}
+}
+
+
+
+/**
 * Utilise Algebrite pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux et retourne un string avec la virgule comme séparateur décimal
 * @Auteur Rémi Angot
 */
@@ -1436,7 +1451,8 @@ function tex_consigne(consigne){
 function tex_nombre(nb){
 	//Ecrit \nombre{nb} pour tous les nombres supérieurs à 1 000 (pour la gestion des espaces)
 	if (sortie_html) {
-		return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace ').replace(',','{,}'); // \nombre n'est pas pris en charge par katex
+		//return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace ').replace(',','{,}'); // .replace(',','{,}') servait à enlever l'espace disgracieux des décimaux mais ne passait qu'en mode LaTeX
+		return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace '); // \nombre n'est pas pris en charge par katex
 	} else {
 		let result;
 		if (nb>999 || nombre_de_chiffres_dans_la_partie_decimale(nb)>3) { 
@@ -2518,7 +2534,6 @@ function MatriceCarree(table){
 			resultat=[[this.table[1][1],-this.table[1][0]],[-this.table[0][1],this.table[0][0]]]
 		}
 		else return false
-		console.log(resultat)
 		return matriceCarree(resultat)
 	}
 	this.transposee=function() { // retourne la matrice transposée
@@ -2671,7 +2686,8 @@ function cherche_polynome_deg3_a_extrema_fixes(x1,x2,y1,y2) {
 	if (!egal(M.determinant(),0)) return M.inverse().multiplieVecteur(R)
 	else return false
 }
-
+// fonction devenue inutile : à remplacer par cherche_polynome_deg3_a_extrema_fixes(x1,x2,y1,y2) qui produit un résultat exact, sans mouliner !
+/*
 function cherche_polynome_deg3_a_extrema_entiers(x1,x2,y1,y2) { // je voulais ajouter "ou presque" dans le nom de fonction, mais ça faisait trop long !
 	let resultat=[],trouve=false
 	for (let a=-1;a<1;a+=0.00005) {
@@ -2690,6 +2706,7 @@ function cherche_polynome_deg3_a_extrema_entiers(x1,x2,y1,y2) { // je voulais aj
 	}
 	if (!trouve) return 'Pas trouvé'
 }
+*/
 
 /**
  * Fonction pour simplifier l'ecriture lorsque l'exposant vaut 0 ou 1
@@ -4889,7 +4906,6 @@ function Fraction(num,den) {
                 }
                 num -= this.denIrred
             }
-            console.log(k,n)
             let O = point(2 + k * 5, 2)
             let C = cercle(O, 2)
             let s, a
