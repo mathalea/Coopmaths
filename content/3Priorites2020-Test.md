@@ -16,7 +16,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 3e - pdf temporaire" "/pdf/2020-3e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 3e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=4C10-1,nb_questions=3,sup=4&ex=4C10-2,nb_questions=10,sup=5&serie=9MLK" %}}
+	{{% alea_url "Test de positionnement 3e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=4C10-1,nb_questions=3,sup=4&ex=4C10-2,nb_questions=4,sup=5&ex=4C30-1,nb_questions=6,sup=4&ex=4C25-0,nb_questions=2,sup=1&ex=beta5L13-4,nb_questions=5,sup=1&ex=4L10,nb_questions=3,sup=1&ex=4L14-2,nb_questions=6,sup=1&ex=4L14-1,nb_questions=6,sup=true,sup2=4&ex=4L20,nb_questions=5&ex=6P11,nb_questions=1,sup=1&ex=beta4L13-0,nb_questions=1,sup=1&ex=3G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=1" %}}
 
 	<a class="item" href="https://cache.media.eduscol.education.fr/file/RS2020-Documents_pedagogiques/86/5/outils_positionnement_Mathematiques_3eme_1309865.docx" target="_blank">  		<i class="large black file word outline icon"></i> <div class="header content"> Test de positionnement 3e - docx sur educ-scol ... Pense-bête temporaire</div>  	
 	</a>
@@ -79,7 +79,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
-			{{% priorite_alea "À FAIRE : Miriam veut acheter 5 crayons et 3 gommes.Soit c le prix d'un crayon et g le prix d'une gomme.Exprimer le prix total de son achat, en fonction de c et g. Adaptables à partir des 5L de JC ? " "" %}}
+			{{% priorite_alea "4L13-0 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "beta4L13-0" %}}	
 
 			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}			
 			{{% priorite_alea "4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "4F12" %}}
