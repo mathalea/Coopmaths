@@ -69,9 +69,8 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
 			{{% priorite "Il résout des problèmes en utilisant la proportionnalité." %}}
-			{{% priorite_alea "6P11 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "6P11" %}}
-			{{% priorite_alea "À FAIRE à partir de 6P11 : Donner plusieurs infos pour plusieurs quidam et demander le max oiur une somme donnée" "" %}}
-			{{% priorite_alea "À FAIRE : avec un graphique demandant de justifier si c'est proportionnel puis demandant des lectures graphiques cf fonctions linéaires ?" "" %}}
+			{{% priorite_alea "À FAIRE à partir de 6P11 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "6P11" %}}
+			{{% priorite_alea "À FAIRE avec mathALEA2D : avec un graphique demandant de justifier si c'est proportionnel puis demandant des lectures graphiques" "" %}}
 	</div>	
 {{< /liste_priorites >}}
 {{< liste_priorites >}}
@@ -96,10 +95,13 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 			{{% priorite_alea "3G23 : Reconnaître des triangles semblables dans différentes configurations" "3G23" %}}
 
 			{{% priorite "L’élève connaît et utilise le théorème de Thalès dans la configuration des triangles emboîtés." %}}
-			{{% priorite_alea "À FAIRE : à partir de 3G20 : Déterminer une longueur avec la propriété de Thales --> Attention à limiter aux triangles emboités" "3G20" %}}
+			{{% priorite_alea "À FAIRE : à partir de 3G20 ? : Déterminer une longueur avec la propriété de Thales --> Attention à limiter aux triangles emboités sinon MathALEA2D " "3G20" %}}
 
 			{{% priorite "L’élève connaît et utilise le théorème de Pythagore." %}}
-			{{% priorite_alea "4G20 : Déterminer une longueur avec l'égalité de Pythagore" "4G20" %}}
+			{{% priorite_alea "4G20 : Déterminer l'hypoténuse avec l'égalité de Pythagore" "4G20,nb_questions=1,sup=1" %}}
+			{{% priorite_alea "4G20 : Déterminer la longueur d'un côté de l'angle droit avec l'égalité de Pythagore" "4G20,nb_questions=1,sup=2" %}}
+			
+
 	</div>	
 {{< /liste_priorites >}}
 
