@@ -69,7 +69,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
 			{{% priorite "Il résout des problèmes en utilisant la proportionnalité." %}}
-			{{% priorite_alea "À FAIRE à partir de 6P11 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "6P11" %}}
+			{{% priorite_alea "beta6P11-1 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "beta6P11" %}}
 			{{% priorite_alea "À FAIRE avec mathALEA2D : avec un graphique demandant de justifier si c'est proportionnel puis demandant des lectures graphiques" "" %}}
 	</div>	
 {{< /liste_priorites >}}
