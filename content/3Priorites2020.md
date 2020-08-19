@@ -74,7 +74,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
-			{{% priorite_alea "beta4P20-0 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "beta4P20-0" %}}	
+			{{% priorite_alea "4P20-0 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "4P20-0" %}}	
 
 			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}			
 			{{% priorite_alea "4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "4F12" %}}
