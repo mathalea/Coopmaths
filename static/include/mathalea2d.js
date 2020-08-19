@@ -192,10 +192,11 @@ function pointSurCercle(c, angle, nom, positionLabel = "above") {
  * P=pointSurDroite(d,x) retourne un point sur la droite d dont l'abscisse est x. Si c'est impossible (droite verticale) alors ce sera le point dont l'ordonnée vaut x.
  * @Auteur Jean-Claude Lhote
  */
-function pointSurDroite(d,x, nom, positionLabel = "above"){ // si d est parallèle à l'axe des ordonnées, le paramètre x servira pour y.
-  if (d.b==0) return point(calcul(-d.c/d.a),x,nom,positionLabel);
-  else if (d.a==0) return point(x,calcul(-d.c/d.b),nom,positionLabel)
-  else return point(x,calcul((-d.c-d.a*x)/d.b),nom,positionLabel)
+function pointSurDroite(d, x, nom, positionLabel = "above") {
+  // si d est parallèle à l'axe des ordonnées, le paramètre x servira pour y.
+  if (d.b == 0) return point(calcul(-d.c / d.a), x, nom, positionLabel);
+  else if (d.a == 0) return point(x, calcul(-d.c / d.b), nom, positionLabel);
+  else return point(x, calcul((-d.c - d.a * x) / d.b), nom, positionLabel);
 }
 
 /**
@@ -977,9 +978,41 @@ function Segment(arg1, arg2, arg3, arg4, color) {
           this.color
         }" />`;
       }
+      if (this.styleExtremites.substr(-1) == "<") {
+        //si ça termine par < on rajoute une flèche inversée en B
+        let M = pointSurSegment(B, A, -0.2);
+        let B1 = rotation(B, M, 90);
+        let B2 = rotation(B, M, -90);
+        code += `<line x1="${B.xSVG(coeff)}" y1="${B.ySVG(
+          coeff
+        )}" x2="${B1.xSVG(coeff)}" y2="${B1.ySVG(coeff)}" stroke="${
+          this.color
+        }" />`;
+        code += `\n\t<line x1="${B.xSVG(coeff)}" y1="${B.ySVG(
+          coeff
+        )}" x2="${B2.xSVG(coeff)}" y2="${B2.ySVG(coeff)}" stroke="${
+          this.color
+        }" />`;
+      }
       if (this.styleExtremites[0] == "<") {
-        //si ça comment par < on rajoute une flèche en A
+        //si ça commence par < on rajoute une flèche en A
         let M = pointSurSegment(A, B, 0.2);
+        let A1 = rotation(A, M, 90);
+        let A2 = rotation(A, M, -90);
+        code += `<line x1="${A.xSVG(coeff)}" y1="${A.ySVG(
+          coeff
+        )}" x2="${A1.xSVG(coeff)}" y2="${A1.ySVG(coeff)}" stroke="${
+          this.color
+        }" />`;
+        code += `\n\t<line x1="${A.xSVG(coeff)}" y1="${A.ySVG(
+          coeff
+        )}" x2="${A2.xSVG(coeff)}" y2="${A2.ySVG(coeff)}" stroke="${
+          this.color
+        }" />`;
+      }
+      if (this.styleExtremites[0] == ">") {
+        //si ça commence par > on rajoute une flèche inversée en A
+        let M = pointSurSegment(A, B, -0.2);
         let A1 = rotation(A, M, 90);
         let A2 = rotation(A, M, -90);
         code += `<line x1="${A.xSVG(coeff)}" y1="${A.ySVG(
@@ -1148,7 +1181,7 @@ function Polygone(...points) {
       tableauOptions.push(`dashed`);
     }
     if (this.opacite != 1) {
-      tableauOptions.push(`opacity=${this.opacity}`);
+      tableauOptions.push(`opacity=${this.opacite}`);
     }
 
     let optionsDraw = [];
@@ -1384,19 +1417,37 @@ function triangle2points1angle1longueurOppose(A, B, a, l, n = 1) {
  * nommePolygone (p,'ABCDE',0.5) nomme les sommets du polygone p. Les labels sont placés à une distance paramètrable en cm des sommets (0.5 par défaut)
  * @Auteur Jean-Claude Lhote
  */
-function nommePolygone(p, nom, k = 0.5) {
+function NommePolygone(p, nom = "", k = 0.5) {
+  ObjetMathalea2D.call(this);
   let G = barycentre(p);
   let V,
     v,
     labels = [];
   for (let i = 0, point; i < p.listePoints.length; i++) {
-    p.listePoints[i].nom = nom[i];
+    if (nom != "") p.listePoints[i].nom = nom[i];
     V = vecteur(G, p.listePoints[i]);
     v = homothetie(V, G, k / V.norme());
     point = translation(p.listePoints[i], v);
     labels.push(texteParPoint(p.listePoints[i].nom, point, "milieu"));
   }
-  return labels;
+  this.svg = function (coeff) {
+    code = "";
+    for (objet of labels) {
+      code += "\n\t" + objet.svg(coeff);
+    }
+    return code;
+  };
+  this.tikz = function () {
+    code = "";
+    for (objet of labels) {
+      code += "\n\t" + objet.tikz();
+    }
+    return code;
+  };
+}
+
+function nommePolygone(...args) {
+  return new NommePolygone(...args);
 }
 
 /**
@@ -1793,6 +1844,28 @@ function traceCompas(
   a.color = color;
   a.pointilles = pointilles;
   return a;
+}
+
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% LES COURBES DE BÉZIER %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+function CourbeDeBezier(A, B, C) {
+  ObjetMathalea2D.call(this);
+  this.svg = function (coeff) {
+    let code = `<path d="M${A.xSVG(coeff)} ${A.ySVG(coeff)} Q ${B.xSVG(
+      coeff
+    )} ${B.ySVG(coeff)}, ${C.xSVG(coeff)} ${C.ySVG(
+      coeff
+    )}" stroke="black" fill="transparent"/>`;
+    return code;
+  };
+}
+
+function courbeDeBezier(...args) {
+  return new CourbeDeBezier(...args);
 }
 
 /*
@@ -2622,11 +2695,69 @@ function afficheMesureAngle(A, B, C, color = "black", distance = 1.5) {
   let d = bissectrice(A, B, C);
   d.isVisible = false;
   let M = pointSurSegment(d.extremite1, d.extremite2, distance);
-  let dessinArc = arc(pointSurSegment(A, B, 0.8), A, angleOriente(B, A, C));
-  let mesureAngle = arrondi_virgule(angle(A, C, B), 0) + "°";
+  let dessinArc = arc(pointSurSegment(B, A, 0.8), B, angleOriente(A,B,C));
+  let mesureAngle = arrondi_virgule(angle(A, B, C), 0) + "°";
   return texteParPoint(mesureAngle, M, "milieu", color);
 }
-
+/**
+ * macote=afficheCoteSegment(s,'x',-1,'red',2) affiche une côte sur une flèche rouge d'epaisseur 2 placée 1cm sous le segment s avec le texte 'x' écrit en noir (par defaut) 0,5cm au-dessus (par defaut)
+ * @Auteur Jean-Claude Lhote
+ */
+function AfficheCoteSegment(
+  s,
+  Cote = "",
+  positionCote = 0.5,
+  couleurCote = "black",
+  epaisseurCote = 1,
+  positionValeur = 0.5,
+  couleurValeur = "black"
+) {
+  // let longueur=s.longueur
+  ObjetMathalea2D.call(this);
+  let objets = [];
+  let valeur;
+  let A = s.extremite1;
+  let B = s.extremite2;
+  let v = similitude(vecteur(A, B), A, 90, positionCote / s.longueur);
+  let cote = segment(translation(A, v), translation(B, v), couleurCote);
+  if (longueur(A, B) > 1) cote.styleExtremites = "<->";
+  else cote.styleExtremites = ">-<";
+  cote.epaisseur = epaisseurCote;
+  if (Cote == "")
+    valeur = afficheLongueurSegment(
+      cote.extremite1,
+      cote.extremite2,
+      couleurValeur,
+      positionValeur
+    );
+  else
+    valeur = texteSurSegment(
+      Cote,
+      cote.extremite1,
+      cote.extremite2,
+      couleurValeur,
+      positionValeur
+    );
+  objets.push(cote);
+  objets.push(valeur);
+  this.svg = function (coeff) {
+    code = "";
+    for (objet of objets) {
+      code += "\n\t" + objet.svg(coeff);
+    }
+    return code;
+  };
+  this.tikz = function () {
+    code = "";
+    for (objet of objets) {
+      code += "\n\t" + objet.tikz();
+    }
+    return code;
+  };
+}
+function afficheCoteSegment(...args) {
+  return new AfficheCoteSegment(...args);
+}
 /**
  * codeSegment(A,B,'×','blue') // Code le segment [AB] avec une croix bleue
  * Attention le premier argument ne peut pas être un segment
@@ -2802,11 +2933,7 @@ function axes(...args) {
   return new Axes(...args);
 }
 
-/**
- * labelX(xmin,xmax,step,color,pos,coeff) // Place des graduations
- *
- * @Auteur Rémi Angot
- */
+
 function LabelX(
   xmin = 1,
   xmax = 20,
@@ -2849,6 +2976,11 @@ function LabelX(
   };
   this.commentaire = `labelX(xmin=${xmin},xmax=${xmax},step=${step},color=${color},pos=${pos},coeff=${coeff})`;
 }
+/**
+ * labelX(xmin,xmax,step,color,pos,coeff) // Place des graduations
+ *
+ * @Auteur Rémi Angot
+ */
 function labelX(...args) {
   return new LabelX(...args);
 }
@@ -2973,28 +3105,18 @@ function grille(...args) {
   return new Grille(...args);
 }
 
-/**
- * Fais un quadrillage avec des grands carreaux.
- *
- * Pour une sortie LaTeX, il faut penser à ajouter scale = .8
- *
- * @param {integer} xmin
- * @param {integer} ymin
- * @param {integer} xmax
- * @param {integer} ymax
- * @auteur Rémi Angot
- */
-function seyes(xmin, ymin, xmax, ymax) {
+
+function Seyes(xmin = 0, ymin = 0, xmax = 15, ymax = 15,opacite1 = .5, opacite2 = .2) {
   objets = [];
   for (let y = ymin; y <= ymax; y = calcul(y + 0.25)) {
     if (y % 1 != 0) {
       let d = segment(xmin, y, xmax, y);
       d.color = "red";
-      d.opacite = 0.2;
+      d.opacite = opacite2;
       objets.push(d);
     }
   }
-  objets.push(grille(xmin, ymin, xmax, ymax, "blue", 0.5, 1));
+  objets.push(grille(xmin, ymin, xmax, ymax, "blue", opacite1, 1));
   this.svg = function (coeff) {
     code = "";
     for (objet of objets) {
@@ -3009,7 +3131,21 @@ function seyes(xmin, ymin, xmax, ymax) {
     }
     return code;
   };
-  return objets
+}
+
+/**
+ * Fais un quadrillage avec des grands carreaux.
+ *
+ * Pour une sortie LaTeX, il faut penser à ajouter scale = .8
+ *
+ * @param {integer} xmin
+ * @param {integer} ymin
+ * @param {integer} xmax
+ * @param {integer} ymax
+ * @auteur Rémi Angot
+ */
+function seyes(...args){
+  return new Seyes(...args)
 }
 
 function Repere({
@@ -3195,7 +3331,8 @@ function Repere({
     return code;
   };
 
-  return [xscale, yscale];
+  this.xscale = xscale;
+  this.yscale = yscale;
 }
 
 function repere(...args) {
@@ -3225,8 +3362,14 @@ function courbe(
 ) {
   ObjetMathalea2D.call(this);
   this.color = color;
-  let xscale = r[0];
-  let yscale = r[1];
+  let xscale, yscale;
+  if (r.constructor === Repere) {
+    xscale = r.xscale;
+    yscale = r.yscale;
+  } else {
+    xscale = r[0];
+    yscale = r[1];
+  }
   let points = [];
   for (
     let x = calcul(xmin / xscale);
@@ -3241,6 +3384,70 @@ function courbe(
   let p = polyline([...points], this.color);
   p.epaisseur = epaisseur;
   return p;
+}
+
+/**
+ * @SOURCE : https://gist.github.com/ericelliott/80905b159e1f3b28634ce0a690682957
+ */
+// y1: start value
+// y2: end value
+// mu: the current frame of the interpolation,
+//     in a linear range from 0-1.
+const cosineInterpolate = (y1, y2, mu) => {
+  const mu2 = (1 - Math.cos(mu * Math.PI)) / 2;
+  return y1 * (1 - mu2) + y2 * mu2;
+};
+
+function CourbeInterpolee(
+  tableau,
+  color = "black",
+  epaisseur = 2,
+  r = [1, 1],
+  xmin,
+  xmax
+) {
+  ObjetMathalea2D.call(this);
+  mesCourbes = [];
+  for (let i = 0; i < tableau.length - 1; i++) {
+    let x0 = tableau[i][0];
+    let y0 = tableau[i][1];
+    let x1 = tableau[i + 1][0];
+    let y1 = tableau[i + 1][1];
+    let f = (x) => cosineInterpolate(y0, y1, calcul((x - x0) / (x1 - x0)));
+    let depart, fin;
+    xmin > x0 ? (depart = xmin) : (depart = x0);
+    xmax < x1 ? (fin = xmax) : (fin = x1);
+    let c = courbe(f, depart, fin, color, epaisseur, r);
+    mesCourbes.push(c);
+    this.svg = function (coeff) {
+      code = "";
+      for (objet of mesCourbes) {
+        code += "\n\t" + objet.svg(coeff);
+      }
+      return code;
+    };
+    this.tikz = function () {
+      code = "";
+      for (objet of mesCourbes) {
+        code += "\n\t" + objet.tikz();
+      }
+      return code;
+    };
+  }
+}
+/**
+ *
+ * @param {array} tableau de coordonnées [x,y]
+ * @param {string} couleur
+ * @param {number} epaisseur
+ * @param {objet} repere (ou tableau [xscale,yscale])
+ * @param {number} xmin
+ * @param {number} xmax
+ *
+ * @auteur Rémi Angot
+ */
+function courbeInterpolee(...args) {
+  return new CourbeInterpolee(...args);
 }
 
 /*
