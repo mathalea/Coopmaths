@@ -46,7 +46,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 			{{% priorite_alea "4L10 : Utiliser la simple distributivité" "4L10" %}}	
 
 			{{% priorite "Il introduit une lettre pour désigner une valeur inconnue et met un problème en équation." %}}
-			{{% priorite_alea "beta4L13-0 : Mettre en équation un problème sans objectif de résolution" "beta4L13-0" %}}
+			{{% priorite_alea "4L13-0 : Mettre en équation un problème sans objectif de résolution" "4L13-0" %}}
 			{{% priorite "Il teste si un nombre est solution d’une équation" %}}
 			{{% priorite_alea "4L14-2 : Tester sur une équation du second degré" "4L14-2" %}}
 			{{% priorite_alea "4L14-1 : Tester sur une équation du premier degré" "4L14-1" %}}
