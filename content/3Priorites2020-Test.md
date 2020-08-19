@@ -17,10 +17,6 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 3e - pdf temporaire" "/pdf/2020-3e-Priorites-Test.pdf"%}}
 	{{% alea_url "Test de positionnement 3e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=4C10-1,nb_questions=3,sup=4&ex=4C10-2,nb_questions=4,sup=5&ex=4C30-1,nb_questions=6,sup=4&ex=4C25-0,nb_questions=2,sup=1&ex=beta5L13-4,nb_questions=5,sup=1&ex=4L10,nb_questions=3,sup=1&ex=4L14-2,nb_questions=6,sup=1&ex=4L14-1,nb_questions=6,sup=true,sup2=4&ex=4L20,nb_questions=5&ex=6P11,nb_questions=1,sup=1&ex=beta4L13-0,nb_questions=1,sup=1&ex=3G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=1" %}}
-
-	<a class="item" href="https://cache.media.eduscol.education.fr/file/RS2020-Documents_pedagogiques/86/5/outils_positionnement_Mathematiques_3eme_1309865.docx" target="_blank">  		<i class="large black file word outline icon"></i> <div class="header content"> Test de positionnement 3e - docx sur educ-scol ... Pense-bête temporaire</div>  	
-	</a>
-
 {{< /liste >}}
 
 
@@ -69,7 +65,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Résoudre des problèmes de proportionnalité.</div>	
 			{{% priorite "Il résout des problèmes en utilisant la proportionnalité." %}}
-			{{% priorite_alea "beta6P11-1 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "beta6P11" %}}
+			{{% priorite_alea "beta6P11-1 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "beta6P11-1" %}}
 			{{% priorite_alea "beta4P10-1 : Résoudre un problème de proportionnalité à l'aide d'un graphique" "beta4P10-1" %}}
 	</div>	
 {{< /liste_priorites >}}
