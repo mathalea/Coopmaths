@@ -40,7 +40,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 		<div class="header content"> Utiliser le calcul littéral.</div>	
 			{{% priorite "Il identifie la structure d’une expression littérale (somme, produit)." %}}
 			{{% priorite_alea "beta5L13-4 : Déterminer la dernière opération dans une expression littérale" "beta5L13-4" %}}
-			{{% priorite_alea "beta5L12-1 : Réduire le plus possible une expression littérale" "beta5L12-1" %}}
+			{{% priorite_alea "5L12-1 : Réduire le plus possible une expression littérale" "5L12-1" %}}
 
 			{{% priorite "Il utilise la propriété de distributivité simple pour développer un produit." %}}
 			{{% priorite_alea "4L10 : Utiliser la simple distributivité" "4L10" %}}	
