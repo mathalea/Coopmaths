@@ -81,7 +81,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 			{{% priorite_alea "beta4P20-0 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "beta4P20-0" %}}	
 
 			{{% priorite "Il exploite la représentation graphique d’une fonction." %}}			
-			{{% priorite_alea "beta4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "beta4F12" %}}
+			{{% priorite_alea "4F12 : Problème s'appuyant sur la lecture d'une représentation graphique" "4F12" %}}
 	</div>	
 {{< /liste_priorites >}}
 

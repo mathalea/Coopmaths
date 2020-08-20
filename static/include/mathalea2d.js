@@ -577,7 +577,29 @@ function CodageMediatrice(A, B, color = "black", mark = "×") {
 function codageMediatrice(...args) {
   return new CodageMediatrice(...args);
 }
-
+/**
+ * c=codageMilieu(A,B,'red','||',false) marque les deux moitiés du segment [AB] avec || en rouge, le milieu n'est pas tracé car dernier argument à false.
+ * m=codageMilieu(C,D) marque l'emplacement du milieu de [CD] et marque avec X les deux moitiés.
+ * @Auteur Jean-Claude Lhote
+ */
+function CodageMilieu(A,B, color = "black", mark = "×",mil=true) {
+  ObjetMathalea2D.call(this);
+  this.color=color
+  let O = milieu(A, B);
+  let M = tracePointSurDroite(O,droite(A,B))
+  let v = codeSegments(mark,color,A,O,O,B);
+  this.svg =function(coeff) {
+    if (mil) return M.svg(coeff) + "\n" +v.svg(coeff);
+    else return v.svg(coeff);
+  }
+  this.tikz = function() {
+    if (mil) return M.tikz()+ "\n" + v.tikz();
+    else return  v.tikz();
+  }
+}
+ function codageMilieu(...args) {
+   return new CodageMilieu(...args)
+ }
 /**
  * m = constructionMediatrice(A,B,false,'blue','×') // Trace et code la médiatrice en laissant apparent les traits de construction au compas
  *
@@ -3107,6 +3129,7 @@ function grille(...args) {
 
 
 function Seyes(xmin = 0, ymin = 0, xmax = 15, ymax = 15,opacite1 = .5, opacite2 = .2) {
+  ObjetMathalea2D.call(this)
   objets = [];
   for (let y = ymin; y <= ymax; y = calcul(y + 0.25)) {
     if (y % 1 != 0) {
@@ -3759,6 +3782,70 @@ function couleurAleatoire() {
   }
   return color;
 }
+
+
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% LES LUTINS %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+function ObjetLutin() {
+  mesObjets.push(this);
+  this.x = 0;
+  this.y = 0;
+  this.xSVG = function (coeff) {
+    return this.x * coeff;
+  };
+  this.ySVG = function (coeff) {
+    return -this.y * coeff;
+  };
+  this.orientation = 0;
+  this.historiquePositions = [];
+  this.crayonBaisse = false;
+  this.isVisible = true;
+  this.costume = "";
+  this.listeTraces = []; // [[x0,y0,x1,y1,style]...]
+  this.color = "black";
+  this.epaisseur = 2;
+  this.pointilles = false;
+  this.svg = function (coeff) {
+    code = "";
+    for (trace of this.listeTraces) {
+      let A = point(trace[0], trace[1]);
+      let B = point(trace[2], trace[3]);
+      code += `\n\t<line x1="${A.xSVG(coeff)}" y1="${A.ySVG(
+        coeff
+      )}" x2="${B.xSVG(coeff)}" y2="${B.ySVG(coeff)}" stroke="black"  />`;
+    }
+    return code;
+  };
+}
+
+function creerLutin(...args) {
+  return new ObjetLutin(...args);
+}
+
+function avance(d, lutin) { // A faire avec pointSurCercle pour tenir compte de l'orientation
+  let xdepart = lutin.x;
+  let ydepart = lutin.y;
+  lutin.x = lutin.x + d;
+  lutin.historiquePositions.push([lutin.x, lutin.y]);
+  if (lutin.crayonBaisse) {
+    lutin.listeTraces.push([xdepart, ydepart, lutin.x, lutin.y]);
+  }
+}
+
+function baisseCrayon(lutin) {
+  lutin.crayonBaisse = true;
+}
+
+function leveCrayon(lutin) {
+  lutin.crayonBaisse = false;
+}
+
+
+
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -5545,6 +5545,7 @@ var liste_des_exercices_disponibles = {
   "6N43-2": Tableau_criteres_de_divisibilite,
   "6P10": Proportionnalite_pas_proportionnalite,
   "6P11": Proportionnalite_par_linearite,
+  "6P11-1": Proportionnalite_par_linearite_bis,
   "5A10": Liste_des_diviseurs_5e,
   "5A11": Premier_ou_pas_5e,
   "5A13": Exercice_decomposer_en_facteurs_premiers,
@@ -5577,12 +5578,12 @@ var liste_des_exercices_disponibles = {
   "5L10-2": Traduire_un_programme_de_calcul,
   "5L10-3": Traduire_une_expression_litterale_par_une_phrase,
   "5L12": Reduire_une_expression_litterale,
-  "beta5L12-1": Reduire_dinstinction_somme_produit,
+  "5L12-1": Reduire_dinstinction_somme_produit,
   "5L13": Calculer_la_valeur_d_une_expression_litterale,
   "5L13-1": Calculer_une_expression_litterale,
   "5L13-2": Exercice_substituer,
   "5L13-3": Traduire_une_phrase_par_une_expression_litterale_et_calculer,
-  "beta5L13-4": Calculer_une_expression_litteraleBis,
+  "5L13-4": Calculer_une_expression_litteraleBis,
   "5L14": Tester_une_egalite,
   "5M10": Aire_du_parallelogramme,
   "5M20": Calcul_de_volumes_5e,
@@ -5607,7 +5608,7 @@ var liste_des_exercices_disponibles = {
   "4C30-1": Puissances_encadrement,
   "4G40": Transformations_4e,
   "4L10": Exercice_developper,
-  "beta4L13-0": Mettre_en_equation_sans_resoudre,
+  "4L13-0": Mettre_en_equation_sans_resoudre,
   "4L14-0": Tester_si_un_nombre_est_solution_d_une_equation,
   "4L14-1": Tester_si_un_nombre_est_solution_d_une_equation_deg1,
   "4L14-2": Tester_si_un_nombre_est_solution_d_une_equation_deg2,
@@ -5624,7 +5625,8 @@ var liste_des_exercices_disponibles = {
   "4N21-2": Puissances_de_dix,
   "4F12": Exploiter_representation_graphique,
   "4P10": Problemes_grandeurs_composees,
-  "beta4P20-0": Forme_litterale_introduire_une_lettre,
+  "4P10-1" : Graphiques_et_proportionnalite,
+  "4P20-0": Forme_litterale_introduire_une_lettre,
   "4G11": Pavages_et_translation,
   "4G20": Exercice_Pythagore,
   "4G20-1": Egalite_Pythagore,
@@ -16939,7 +16941,6 @@ function Description_segment_droite_demi_droite() {
       type_de_questions_disponibles,
       this.nb_questions
     );
-    console.log(liste_type_de_questions);
     for (
       let i = 0, texte, texte_corr, cpt = 0;
       i < this.nb_questions && cpt < 50;
@@ -17148,8 +17149,7 @@ function Parallele_et_Perpendiculaires() {
           cB = codageAngleDroit(A, B, BB);
           cC = codageAngleDroit(C, CC, B);
           cD = codageAngleDroit(D, DD, B);
-          objets_correction.push(
-            s1,
+          objets_correction.push(s1,
             s2,
             dC,
             dD,
@@ -17298,12 +17298,12 @@ function Parallele_et_Perpendiculaires() {
 function Proportionnalite_par_linearite_bis(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 3;
 	} else {
-		this.nb_questions = 3;
+		this.nb_questions = 1;
 	};	
 
 	this.titre = "Résoudre un problème relevant de la proportionnalité avec les propriétés de linéarité.";
@@ -17390,6 +17390,7 @@ function Proportionnalite_par_linearite_bis(){
         enonce:`
           Dans ${situation.lieu}, ${situation.prenom1} achète $${situation.n1}$ ${pluriel(situation.n1,situation)} et paie $${tex_prix(situation.pu*situation.n1)}$ €.
           <br>${situation.prenom2} achète $${situation.n2}$ ${pluriel(situation.n2,situation)} et paie $${tex_prix(situation.pu*situation.n2)}$ €.
+          <br>
           <br>${num_alpha(k++)} Combien paiera ${situation.prenom3} pour $${situation.n3}$ ${pluriel(situation.n3,situation)} ?
           <br>${num_alpha(k++)} Combien paiera ${situation.prenom4} pour $${situation.n4}$ ${pluriel(situation.n4,situation)} ?
           <br>${num_alpha(k++)} Quel est le nombre maximum de ${situation.achat_plur} que ${situation.prenom_max} pourra acheter avec $${tex_prix(situation.pu*situation.n_max)}$ € ?
@@ -17401,12 +17402,12 @@ function Proportionnalite_par_linearite_bis(){
         <br>
         <br>${num_alpha(k_corr++)} Pour $${situation.n1}$ ${pluriel(situation.n1,situation)}, on paie $${tex_prix(situation.pu*situation.n1)}$ €.
         <br> Pour $${situation.n2}$ ${pluriel(situation.n2,situation)}, on paie $${tex_prix(situation.pu*situation.n2)}$ €.
-        <br> Donc pour $${situation.n1}+${situation.n2}$ ${pluriel(situation.n3,situation)}, on paie $${tex_prix(situation.pu*situation.n1)}$ € $+ ${tex_prix(situation.pu*situation.n2)}$ €.
+        <br> Donc pour $${situation.n1}+${situation.n2}$ ${pluriel(situation.n3,situation)}, on paie $${tex_prix(situation.pu*situation.n1)}$ € + $${tex_prix(situation.pu*situation.n2)}$ €.
         <br> ${texte_en_couleur(`${situation.prenom3} paiera donc $${tex_prix(situation.pu*situation.n3)}$ € pour $${situation.n3}$ ${pluriel(situation.n3,situation)}.`)}
         <br>
         <br>${num_alpha(k_corr++)} Pour $${situation.n1}$ ${pluriel(situation.n1,situation)}, on paie $${tex_prix(situation.pu*situation.n1)}$ €.
         <br> Pour $${situation.n2}$ ${pluriel(situation.n2,situation)}, on paie $${tex_prix(situation.pu*situation.n2)}$ €.
-        <br> Donc pour $${situation.n1}-${situation.n2}$ ${pluriel(situation.n4,situation)}, on paie $${tex_prix(situation.pu*situation.n1)}$ € $-${tex_prix(situation.pu*situation.n2)}$ €.
+        <br> Donc pour $${situation.n1}-${situation.n2}$ ${pluriel(situation.n4,situation)}, on paie $${tex_prix(situation.pu*situation.n1)}$ € - $${tex_prix(situation.pu*situation.n2)}$ €.
         <br> ${texte_en_couleur(`${situation.prenom4} paiera donc $${tex_prix(situation.pu*situation.n4)}$ € pour $${situation.n4}$ ${pluriel(situation.n4,situation)}.`)}
         <br>
         <br>${num_alpha(k_corr++)} On peut utiliser l'une ou l'autre des informations de l'énoncé pour répondre en revenant à l'unité.
@@ -21795,7 +21796,7 @@ function Calculer_une_expression_litterale() {
 function Reduire_dinstinction_somme_produit() {
 	'use strict'
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;
+	this.beta = false;
 	if (this.beta) {
 		this.nb_questions = 4;
 	} else {
@@ -21847,8 +21848,8 @@ function Reduire_dinstinction_somme_produit() {
 			enonces.push({
 				enonce:`Simplifier le plus possible le produit puis la somme de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$`,
 				questtion:``,
-				correction_produit:`Le produit de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
-				correction_somme:`La somme de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = (${n}+${p})\\times ${inc}=$ `
+				correction_produit:`Le produit de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${inc}\\times ${p}\\times ${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
+				correction_somme:`La somme de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = ${n}\\times ${inc}+${p}\\times ${inc} = (${n}+${p})\\times ${inc}=$ `
 			});
 			if (isUn(n*p)) {
 				enonces[0].correction_produit += `${texte_en_couleur(`$${n*p}${inc}^2=${inc}^2$`)}`;
@@ -21865,10 +21866,10 @@ function Reduire_dinstinction_somme_produit() {
 			}
 			//===== 1
 			enonces.push({
-				enonce:`Simplifier le plus possible l'expression $${n}${inc}\\times ${p}${inc}$ puis l'expression $${n}${inc}+${p}${inc}$`,
+				enonce:`Simplifier le plus possible l'expression $${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc}$ puis l'expression $${sliceUn(n)}${inc}+${sliceUn(p)}${inc}$`,
 				questtion:``,
-				correction_produit:`$${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
-				correction_somme:`$${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = (${n}+${p})\\times ${inc}=$ `
+				correction_produit:`$${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${inc}\\times ${p}\\times ${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
+				correction_somme:`$${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = ${n}\\times ${inc}+${p}\\times ${inc} = (${n}+${p})\\times ${inc}=$ `
 			});
 
 			if (isUn(n*p)) {
@@ -21886,10 +21887,10 @@ function Reduire_dinstinction_somme_produit() {
 			}
 			//===== 2
 			enonces.push({
-				enonce:`Simplifier le plus possible le produit puis la somme de $${n}${inc}$ et de $${p}${inc}$`,
+				enonce:`Simplifier le plus possible le produit puis la somme de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$`,
 				questtion:``,
-				correction_produit:`Le produit de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
-				correction_somme:`La somme de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = (${n}+${p})\\times ${inc}=$ `
+				correction_produit:`Le produit de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${inc}\\times ${p}\\times ${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
+				correction_somme:`La somme de $${sliceUn(n)}${inc}$ et de $${sliceUn(p)}${inc}$ vaut : $${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = ${n}\\times ${inc}+${p}\\times ${inc} = (${n}+${p})\\times ${inc}=$ `
 			});
 			if (isUn(n*p)) {
 				enonces[2].correction_produit += `${texte_en_couleur(`$${n*p}${inc}^2=${inc}^2$`)}`;
@@ -21906,10 +21907,10 @@ function Reduire_dinstinction_somme_produit() {
 			}
 			//===== 3
 			enonces.push({
-				enonce:`Simplifier le plus possible l'expression $${n}${inc}+${p}${inc}$ puis l'expression $${n}${inc}\\times ${p}${inc}$`,
+				enonce:`Simplifier le plus possible l'expression $${sliceUn(n)}${inc}+${sliceUn(p)}${inc}$ puis l'expression $${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc}$`,
 				questtion:``,
-				correction_produit:`$${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
-				correction_somme:`$${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = (${n}+${p})\\times ${inc}=$ `
+				correction_produit:`$${sliceUn(n)}${inc}\\times ${sliceUn(p)}${inc} = ${n}\\times ${inc}\\times ${p}\\times ${inc} = ${n}\\times ${p}\\times ${inc}\\times ${inc}=$ `,
+				correction_somme:`$${sliceUn(n)}${inc}+${sliceUn(p)}${inc} = ${n}\\times ${inc}+${p}\\times ${inc} = (${n}+${p})\\times ${inc}=$ `
 			});
 			if (isUn(n*p)) {
 				enonces[3].correction_produit += `${texte_en_couleur(`$${inc}^2$`)}`;
@@ -22007,7 +22008,7 @@ function Reduire_dinstinction_somme_produit() {
 function Calculer_une_expression_litteraleBis() {
 	'use strict'
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.consigne = "";
 	this.nb_questions = 4;
 	this.nb_cols = 1;
@@ -22042,16 +22043,16 @@ function Calculer_une_expression_litteraleBis() {
 					texte =`${expn}.`
 					if (this.beta) {
 						texte += `<br><br>=====CORRECTION======<br>`;
-						texte += `Pour fixer les idées, choissions des valeurs pour $x$ et $y$, par exemple $x=${val1}$ et $y=${val2}$<br>`
-						texte += `Le calcul serait le suivant :<br> ${expc}.<br>`;
-						texte += `Pour n'importe quelles valeurs de $x$ et de $y$ choisies, les étapes sont les mêmes, elles respectent les priorités opératoires.<br>`
-						texte += texte_en_couleur(`La dernière opération dans ${expn} est donc une ${last_op}`);
+						texte += `Pour fixer les idées, choissions des valeurs pour $x$ et $y$, par exemple $x=${val1}$ et $y=${val2}$.`
+						texte += `<br>Le calcul serait le suivant :<br> ${expc}.`;
+						texte += `<br>Pour n'importe quelles valeurs de $x$ et de $y$ choisies, les étapes sont les mêmes, elles respectent les priorités opératoires.`
+						texte += texte_en_couleur(`<br>La dernière opération dans ${expn} est donc une ${last_op}.`);
 						texte_corr = ``;	
 					} else {
-						texte_corr = `Pour fixer les idées, choissions des valeurs pour $x$ et $y$, par exemple $x=${val1}$ et $y=${val2}$<br>`
-						texte_corr += `Le calcul serait le suivant : ${expc}.<br>`;
-						texte_corr += `Pour n'importe quelles valeurs de $x$ et de $y$ choisies, les étapes sont les mêmes, elles respectent les priorités opératoires.<br>`
-						texte_corr += texte_en_couleur(`La dernière opération dans ${expn} est donc une ${last_op}`);
+						texte_corr = `Pour fixer les idées, choissions des valeurs pour $x$ et $y$, par exemple $x=${val1}$ et $y=${val2}$.`
+						texte_corr += `<br>Le calcul serait le suivant : ${expc}.`;
+						texte_corr += `<br>Pour n'importe quelles valeurs de $x$ et de $y$ choisies, les étapes sont les mêmes, elles respectent les priorités opératoires.`
+						texte_corr += texte_en_couleur(`<br>La dernière opération dans ${expn} est donc une ${last_op}.`);
 					};
 
 					break;
@@ -23635,7 +23636,7 @@ function Construire_par_Symetrie() {
 	  if (this.sup2 == 1) sc = 0.5;
 	  else sc = 0.8;
   
-	  let A,
+	  let A,AA,cA,sA,
 		B,
 		C,CC,cC,sC,sCE,
 		D,DD,cD,sD,sDE,
@@ -23676,18 +23677,19 @@ function Construire_par_Symetrie() {
 		}
 		switch (liste_type_de_questions[i]) {
 		  case 1:
-			A = point(0, randint(-1,1), "A",'above left');
-			B = point(6, randint(-1,1,A.y), "B",'above left');
+			A = point(0, randint(-1,1), "A",'above');
+			B = point(6, randint(-1,1,A.y), "B",'above');
 			d = droite(A, B);
 			d.isVisible = true;
+			d.epaisseur=2
 			C = point(randint(2, 3), randint(3, 4), "C",'above left');
-			D = point(randint(10, 13), randint(-4, -3), "D",'above right');
+			D = point(randint(10, 13), randint(-4, -3), "D",'below right');
 			dB = droiteParPointEtPerpendiculaire(B, d);
-			E=point(randint(6,8),randint(-8,-5), "E", "above left");
+			E=point(randint(6,8),randint(-8,-5), "E", "left");
 			//F = point(E.x+1,5-B.y,'F','above left');
 			CC=symetrieAxiale(C,d,'C\'','below left')
-			DD=symetrieAxiale(D,d,'D\'','below left')
-			EE=symetrieAxiale(E,d,'E\'','below left')
+			DD=symetrieAxiale(D,d,'D\'','above right')
+			EE=symetrieAxiale(E,d,'E\'','left')
 			//FF=symetrieAxiale(F,d,'F\'','below left')
 			cC=codageMediatrice(C,CC,'red','|')
 			cD=codageMediatrice(D,DD,'blue','X')
@@ -23727,47 +23729,38 @@ function Construire_par_Symetrie() {
 			correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
 			break;
 		  case 2:
-			A = point(2, 0, "A",'above left');
-			B = point(12, randint(-4, 4, 0), "B");
-			d = droite(A, B);
-			d.isVisible = true;
-			C = point(randint(1, 2), randint(3, 4), "C",'above left');
-			D = point(randint(7, 8), randint(-7, -6), "D",'below right');
-			E = point(randint(4, 5), randint(4, 5), "E",'below right');
-			//F = point(2, -3, "F", "above left");
-			dE = droiteParPointEtParallele(E, d);
-			dC = droiteParPointEtParallele(C, d);
-			dD = droiteParPointEtParallele(D, d);
-			p = droite(A, F);
-			p.isVisible = true;
+			A = point(0, randint(-1,1), "A",'left');
+			B = point(7, randint(-1,1,A.y), "O",'above');
+			C = point(randint(2, 3), randint(-4, -2), "C",'left');
+			D = point(randint(10, 13), randint(-6, -5), "D",'below right');
+			CC=rotation(C,B,180,'C\'','right')
+			DD=rotation(D,B,180,'D\'','above left')
+			AA=rotation(A,B,180,'A\'','right')
+			cC=codageMilieu(C,CC,'red','|',false)
+			cD=codageMilieu(D,DD,'blue','X' ,false)
+			cA=codageMilieu(A,AA,'green','O',false)
+			sC=segment(C,CC)
+			sD=segment(D,DD)
+			sA=segment(A,AA)
+		objets_correction.push(g,carreaux,tracePoint(A, C, D,CC,DD,AA),labelPoint(A, B, C, D,CC,DD,AA),cC,cD,cA,sC,sD,sA)
+			objets_enonce.push(tracePoint(A, B, C, D),g,labelPoint(A, B, C, D),carreaux);
 			enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
-			enonce +=num_alpha(1)+`Tracer la droite parallèle à $(AB)$ passant par $C$ et nomme $M$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
-			enonce +=num_alpha(2)+`Tracer la droite parallèle à $(AB)$ passant par $D$ et nomme $N$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
-			enonce +=num_alpha(3)+`Tracer la droite parallèle à $(AB)$ passant par $E$ et nomme $O$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
-			enonce += num_alpha(4)+`Mesurer les distances $AM$, $AN$ et $AO$. Pour l'auto-correction, comparer ces mesures avec celles données par  l'ordinateur dans la correction.<br>`;
-			enonce += mathalea2d(
-			  {
-				xmin: Xmin,
-				ymin: Ymin,
-				xmax: Xmax,
-				ymax: Ymax,
-				pixelsParCm: ppc,
-				scale: sc,
-			  },
+			enonce += num_alpha(1)+`Construire le point $C\'$ symétrique de $C$ par rapport à la droite $(AB)$.<br>`
+			enonce += num_alpha(2)+`Construire le point $D\'$ symétrique de $D$ par rapport à la droite $(AB)$.<br>`
+			enonce += num_alpha(3)+`Construire le point $E\'$ symétrique de $E$ par rapport à la droite $(AB)$.<br>`
+			enonce += num_alpha(4)+`Construire le point $F\'$ symétrique de $E$ par rapport à la droite $(AB)$.<br>`
+			enonce += num_alpha(5)+`Coder la figure.<br>`;
+			enonce += mathalea2d( params
+			  ,
 			  objets_enonce
-			  );
-			correction = mathalea2d(
-			  {
-				xmin: Xmin,
-				ymin: Ymin,
-				xmax: Xmax,
-				ymax: Ymax,
-				pixelsParCm: ppc,
-				scale: sc,
-			  },
-			  objets_correction
 			);
+			correction = mathalea2d(
+			  params,
+			 objets_correction
+			);
+			correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
 			break;
+
 		}
   
 		if (this.liste_questions.indexOf(texte) == -1) {
@@ -23781,7 +23774,7 @@ function Construire_par_Symetrie() {
   
 	  liste_de_question_to_contenu(this);
 	};
-	//	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Perpendiculaires\n 2 : Parallèles\n 3 : Mélange`]
+		this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Symétrie axiale\n 2 : Symétrie centrale\n 3 : Mélange`]
 	this.besoin_formulaire2_numerique = [
 	  "Type de cahier",
 	  3,
@@ -33200,12 +33193,12 @@ function Tester_si_un_nombre_est_solution_d_une_equation_deg2() {
 function Forme_litterale_introduire_une_lettre(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 3;
 	} else {
-		this.nb_questions = 3;
+		this.nb_questions = 2;
 	};	
 
 	this.titre = "Produire une forme littérale en introduisant une lettre pour désigner une valeur inconnue";
@@ -33252,34 +33245,37 @@ function Forme_litterale_introduire_une_lettre(){
 				};
 			};
 
-			// on definit un tableau de couples possibles
-			// par deux
-			let par_deux = [
-				{elt1:{lettre:'c',article:'un',sing:'crayon',plur:'crayons'},elt2:{lettre:'g',article:'une',sing:'gomme',plur:'gommes'}},
-				{elt1:{lettre:'r',article:'une',sing:'règle',plur:'règles'},elt2:{lettre:'e',article:'une',sing:'équerre',plur:'équerres'}},
-				{elt1:{lettre:'p',article:'une',sing:'poire',plur:'poires'},elt2:{lettre:'b',article:'une',sing:'banane',plur:'bananes'}},
-				{elt1:{lettre:'c',article:'un',sing:'couteau',plur:'couteaux'},elt2:{lettre:'f',article:'une',sing:'fourchette',plur:'fourchettes'}},
-				{elt1:{lettre:'m',article:'un',sing:'marteau',plur:'marteaux'},elt2:{lettre:'e',article:'une',sing:'enclume',plur:'enclumes'}},
+			// on definit un tableau de couples possibles			
+			let situations = [
+				{prenom:prenom(),elt1:{lettre:'c',article:'un',sing:'crayon',plur:'crayons'},elt2:{lettre:'g',article:'une',sing:'gomme',plur:'gommes'}},
+				{prenom:prenom(),elt1:{lettre:'r',article:'une',sing:'règle',plur:'règles'},elt2:{lettre:'e',article:'une',sing:'équerre',plur:'équerres'}},
+				{prenom:prenom(),elt1:{lettre:'p',article:'une',sing:'poire',plur:'poires'},elt2:{lettre:'b',article:'une',sing:'banane',plur:'bananes'}},
+				{prenom:prenom(),elt1:{lettre:'c',article:'un',sing:'couteau',plur:'couteaux'},elt2:{lettre:'f',article:'une',sing:'fourchette',plur:'fourchettes'}},
+				{prenom:prenom(),elt1:{lettre:'m',article:'un',sing:'marteau',plur:'marteaux'},elt2:{lettre:'e',article:'une',sing:'enclume',plur:'enclumes'}},
 			]
 			let enonces = [];
 			let n = randint(1,6);
 			let p = randint(1,6);
-			let objets = par_deux[randint(0,par_deux.length-1)];
+			let situation = situations[randint(0,situations.length-1)];
 			enonces.push({
-				enonce:`${prenom()} veut acheter ${n} ${pluriel(n,objets.elt1)} et ${p} ${pluriel(n,objets.elt2)}.
-				<br>On note $${objets.elt1.lettre}$	le prix d'${objets.elt1.article} ${objets.elt1.sing} et $${objets.elt2.lettre}$	le prix d'${objets.elt2.article} ${objets.elt2.sing}.`,
+				enonce:`${situation.prenom} veut acheter ${n} ${pluriel(n,situation.elt1)} et ${p} ${pluriel(n,situation.elt2)}.
+				<br>On note $${situation.elt1.lettre}$	le prix d'${situation.elt1.article} ${situation.elt1.sing} et $${situation.elt2.lettre}$	le prix d'${situation.elt2.article} ${situation.elt2.sing}.`,
 				question:``,
-				correction:`$${n}\\times ${objets.elt1.lettre} + ${p}\\times ${objets.elt2.lettre} = ${sliceUn(n)}${objets.elt1.lettre} + ${sliceUn(p)}${objets.elt2.lettre}$.`
+        correction:`
+        ${situation.prenom} va payer $${n}$ fois le prix d'${situation.elt1.article} ${situation.elt1.sing} et $${p}$ fois le prix d'${situation.elt2.article} ${situation.elt2.sing}.
+        <br> C'est à dire $${n}\\times ${situation.elt1.lettre} + ${p}\\times ${situation.elt2.lettre} = ${sliceUn(n)}${situation.elt1.lettre} + ${sliceUn(p)}${situation.elt2.lettre}$.
+        <br>${texte_en_couleur(`Donc le prix total de l'achat est  $${sliceUn(n)}${situation.elt1.lettre} + ${sliceUn(p)}${situation.elt2.lettre}$.`)}
+        `
 			})
 			switch (liste_type_de_questions[i]){
 				case 1 : 
 					texte = `${enonces[0].enonce}`;
 					if (this.beta) {
 						texte += `<br>`;
-						texte += `<br> =====CORRECTION======<br>${texte_en_couleur(enonces[0].correction)}`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte_corr = ``;	
 					} else {
-						texte_corr = `${ texte_en_couleur(enonces[0].correction)}`;
+						texte_corr = `${enonces[0].correction}`;
 					};
 					break;				
 			}
@@ -33307,7 +33303,7 @@ function Forme_litterale_introduire_une_lettre(){
 function Mettre_en_equation_sans_resoudre(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 9;
@@ -33330,7 +33326,7 @@ function Mettre_en_equation_sans_resoudre(){
 		if (this.beta) {
 			type_de_questions_disponibles = [1];			
 		} else {
-			type_de_questions_disponibles = [1];			
+			type_de_questions_disponibles = [1,2];			
 		};
 
 		this.liste_questions = []; // Liste de questions
@@ -33393,12 +33389,20 @@ function Mettre_en_equation_sans_resoudre(){
       //on pépare la côte
       let s = segment(po.listePoints[0], po.listePoints[1]);
       s.styleExtremites = `<->`;
+      // on fait un test pour coder les angles droits du carré
+      let anglesDroitsIfIsCarre;
+      if (n==4) {
+        anglesDroitsIfIsCarre = codageCarre(po)
+      } else {
+         anglesDroitsIfIsCarre= {}
+      };
       // on finit les appels
       let mesAppels = [
         po,       
         codeSegments('X','blue',po.listePoints),        
         afficheCoteSegment(s,`${inc}`,1,'red',2,0.5,'black'),
-        nommePolygone(po,myPolyName(n).nameParSommets)  
+        nommePolygone(po,myPolyName(n).nameParSommets),
+        anglesDroitsIfIsCarre  
       ];
       // on prépare l'objet polygone
       let polygone = {
@@ -33427,7 +33431,20 @@ function Mettre_en_equation_sans_resoudre(){
         D'après l'énoncé, ce périmètre vaut $${polygone.perimetre}$ $${polygone.unite}$.<br>
         L'équation suivante permet donc de résoudre le problème : <br>
         ${texte_en_couleur(`$${polygone.nb_cotes}\\times$ ${polygone.let_cote} $= ${polygone.perimetre}$.`)}`
-			})
+      });
+      // pour être sûr d'avoir deux figures différentes
+      let p = randint(3, 8,[n]);
+      polygone.nb_cotes = p;
+			enonces.push({
+				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre du ${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
+				question:``,
+        correction:`La figure est un ${polygone.nom}, il a donc ${polygone.nb_cotes} côtés de même longueur.<br>
+        Cette longueur est notée ${polygone.let_cote}, le périmètre de la figure, exprimé en fonction de ${polygone.let_cote}, vaut donc $${polygone.nb_cotes}\\times$ ${polygone.let_cote}.<br>
+        D'après l'énoncé, ce périmètre vaut $${polygone.perimetre}$ $${polygone.unite}$.<br>
+        L'équation suivante permet donc de résoudre le problème : <br>
+        ${texte_en_couleur(`$${polygone.nb_cotes}\\times$ ${polygone.let_cote} $= ${polygone.perimetre}$.`)}`
+      })
+
 			switch (liste_type_de_questions[i]){
 				case 1 : 
 					texte = `${enonces[0].enonce}`;
@@ -33437,6 +33454,16 @@ function Mettre_en_equation_sans_resoudre(){
 						texte_corr = ``;	
 					} else {
 						texte_corr = `${enonces[0].correction}`;
+					};
+          break;	
+        case 2 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
 					};
 					break;				
 			}
@@ -33466,7 +33493,7 @@ function Mettre_en_equation_sans_resoudre(){
 function Graphiques_et_proportionnalite() {
   'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 2;
@@ -40002,34 +40029,196 @@ function TrianglesSemblables() {
 		let type_de_questions = randint(1,1);
 		switch (type_de_questions){
 			case 1 :
-				let trouve=false,aireABC,A,B,C,M,p,q,r,s,X,G,Gq,nom1,grid
+				let trouve=false,aireABC,A,B,C,M,p,q,r,s,X,G,Gq,nom1,grid;
+				// on génère le triangle ABC avec une contrainte sur son aire
 				while (!trouve) {
-				A=point(choice([0,3]),choice([0,3]),'A')
-				B=point(choice([6,9]),choice([6,9]),'B')
-				C=rotation(B,A,90,'C')
-				C.x+=choice([0,3,6])
-				C.y+=choice([-3,0,3])
-				p=polygone(A,B,C)
-				aireABC=aireTriangle(p) // Je savais bien que cette formule servirait un jour !
-				if (aireABC<11&&aireABC>5) trouve=true
+				A=point(choice([0,3]),choice([0,3]),'A'); // le point A !
+				B=point(choice([6,9]),choice([6,9]),'B'); // le point B !
+				C=rotation(B,A,90,'C'); // le point C à partir de B par rotation autour de A!
+				C.x+=choice([0,3,6]); // on décale l'abscise de C de 0, 3 ou 6 !
+				C.y+=choice([-3,0,3]); // on décale l'abscise de C de -3, 0 ou 3 !
+				p=polygone(A,B,C); // on trace le polygone ABC
+				aireABC=aireTriangle(p); // Je savais bien que cette formule servirait un jour !
+				if (aireABC<11&&aireABC>5) trouve=true;
+				};
+				G=barycentre(p); // le barycentre de ABC
+				let angleChoisi1 = choice([0,90,270]); 
+				p=rotation(p,G,angleChoisi1); // on tourne ABC de façon aléatoire autour de son barycentre
+				p.couleurDeRemplissage='gray';//remplissage de ABC
+				p.opaciteDeRemplissage=0.5;//remplissage de ABC
+				nom1=nommePolygone(p,'ABC',0.4); // on  nomme ABC en plaçant A,B et C à 0,4
+				grid=grille(-3,-3,27,18, 'gray',0.4,1); // on trace une grille
+				M=point(9,12); // un point M fixe pour tourner autour				
+				q=rotation(p,M,90); // on fait tourner ABC autour de M de 90°
+				// on a besoin de récupérer le polygone non tracé
+				let q_non_trace = polygone(q.listePoints);
+				Gq=barycentre(q); // on construit son barycentre
+				//let angleChoisi2 = 270; 
+				let angleChoisi2 = choice([0,90,180,270]); 
+				r=rotation(q,Gq,angleChoisi2); // on fait tourner q encore autour de son barycentre
+				X=milieu(r.listePoints[0],r.listePoints[1]); // on place le milieu des deux premiers points de la figure obtenue qui sont les images des points A et B initiaux	
+				s=rotation(r,X,180); // on fait topurner r autour du milieu des deux extremites du plus grand côté
+				r.couleurDeRemplissage='red'; // solution 1 en rouge
+				r.opaciteDeRemplissage=0.5; // 
+				s.couleurDeRemplissage='blue'; //solution 2 en bleu
+				s.opaciteDeRemplissage=0.5; //
+				// mes ajouts par rapport à la figure de JC				
+				// on fixe une place pour D et E
+				let D = r.listePoints[0];
+				D.nom='D';
+				let E = r.listePoints[1];
+				E.nom='E';
+				// on crée un tableau avec les noms proposé pour les points				
+				let tabPointsNames= ['G','H','I','J'];				
+				// on mélange le tableau 
+				tabPointsNames=shuffle(tabPointsNames);
+				//on place les deux solutions
+				let I=r.listePoints[2];
+				//I.nom='I';
+				I.nom=tabPointsNames[0];
+				let I1=rotation(I,X,180)
+				//I1.nom='I1';
+				I1.nom=tabPointsNames[1];
+				// on place les mauvaises solutions
+				let F = point(I1.x+1,I1.y+1);
+				//F.nom='F';
+				F.nom=tabPointsNames[2];
+				let L = point(I.x-1,I.y-3);
+				//L.nom='L';
+				L.nom=tabPointsNames[3];
+				//on trace le segment [DE] en pointillés pour que la figure soit plus lisible
+				let sgmt_DE =  segment(D,E,'blue');
+				sgmt_DE.pointilles = true;
+				sgmt_DE.epaisseur=1.5;
+
+				// on prépare la fenetre mathalea2d
+				let fenetreMathalea2D = {xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:20,scale:0.5}
+
+				// on prépare les corrections
+				let centre_rot = {
+					sol1:pointIntersectionDD(droite(p.listePoints[1],E),droite(D,p.listePoints[0])),
+					sol2:pointIntersectionDD(droite(E,p.listePoints[0]),droite(p.listePoints[1],D))
+				};
+				let vect_trans = {
+					sol1:vecteur(p.listePoints[1],E),
+					sol2:vecteur(p.listePoints[1],D)
+				};
+				let transformationAnimee = {
+					sol1:``,
+					sol2:``
+				};
+				// pour construire les droites et les centres passant par les centres de rotations
+				let d,d1,d2,d3,d4,d5,J1,J2;
+				switch (angleChoisi2) {
+					case 0:
+						transformationAnimee.sol1=rotationAnimee(p,M,90);
+						// la 1ere compo
+						d= droite(M,Gq);
+						d1=rotation(d,M,-45);
+						d2=rotation(d,Gq,0);
+						J1=pointIntersectionDD(d1,d2); // centre de la composée, ici l'angle vaut 90
+						//2eme compo
+						d3=droite(J1,X);
+						d4=rotation(d3,J1,-45);
+						d5=rotation(d3,X,90);
+						J2=pointIntersectionDD(d4,d5);// centre après la seconde composition angle 270 à 2pi près						
+						transformationAnimee.sol2=rotationAnimee(p,J2,-90);//pb composée d'une R, rot(M,90) et R' rot(Gq,0) puis rot(X,180)
+						break;
+					case 90:						
+						transformationAnimee.sol1=rotationAnimee(p,centre_rot.sol1,180);
+						transformationAnimee.sol2=translationAnimee(p,vect_trans.sol2);
+						break;
+					case 180:
+						// la 1ere compo
+						d= droite(M,Gq);
+						d1=rotation(d,M,-45);
+						d2=rotation(d,Gq,90);
+						J1=pointIntersectionDD(d1,d2); // centre de la composée, ici l'angle vaut 270 à 2pi près
+						//2eme compo
+						d3=droite(J1,X);
+						d4=rotation(d3,J1,-135);
+						d5=rotation(d3,X,90);
+						J2=pointIntersectionDD(d4,d5);// centre après la seconde composition angle 450 à 2pi près						
+						transformationAnimee.sol1=rotationAnimee(p,J1,-90);//pb composée rot(M,90) et rot(Gq,180)
+						transformationAnimee.sol2=rotationAnimee(p,J2,90);//pb composée rot(M,90) et rot(Gq,180) et rot(X,180)
+						break;
+					case 270:
+						transformationAnimee.sol1=translationAnimee(p,vect_trans.sol1);						
+						transformationAnimee.sol2=rotationAnimee(p,centre_rot.sol2,180);
+						break; 
+				} 
+
+				// on crée un objet pour stocker les figures et les corrections
+				let figures = {
+					enonce:`
+						Où placer le point M pour que les triangles ABC et DEM soient égaux ? 
+						<br>En F ? En G? En H ? En I ?
+						<br> ${mathalea2d(
+								fenetreMathalea2D,
+								p,
+								nom1,
+								grid,
+								tracePoint(D,E,I,I1,F,L),
+								labelPoint(D,E,I,I1,F,L),
+								sgmt_DE,
+								//r,
+								//s
+							)}
+						`,
+					corr_solution1:`Un solution est donc le point ${I.nom} <br>
+					${mathalea2d(
+						fenetreMathalea2D,
+						p,
+						nom1,
+						grid,
+						tracePoint(D,E,I,I1,F,L),
+						labelPoint(D,E,I,I1,F,L),
+						sgmt_DE,
+						r,
+						//s,
+					)}`,
+					corr_solution2:`Un solution est donc le point ${I1.nom} <br>
+					${mathalea2d(
+						fenetreMathalea2D,
+						p,
+						nom1,
+						grid,
+						tracePoint(D,E,I,I1,F,L),
+						labelPoint(D,E,I,I1,F,L),
+						sgmt_DE,
+						//r,
+						s,
+					)}`,
+					corr_animmee_sol1:`Un solution est donc le point ${I.nom} <br>
+					${mathalea2d(
+						fenetreMathalea2D,
+						p,
+						nom1,
+						grid,
+						tracePoint(D,E,I,I1,F,L),
+						labelPoint(D,E,I,I1,F,L),
+						sgmt_DE,
+						r,
+						transformationAnimee.sol1
+					)}`,
+					corr_animmee_sol2:`Un solution est donc le point ${I1.nom} <br>
+					${mathalea2d(
+						fenetreMathalea2D,
+						p,
+						nom1,
+						grid,
+						tracePoint(D,E,I,I1,F,L),
+						labelPoint(D,E,I,I1,F,L),
+						sgmt_DE,
+						//r,
+						s,
+						transformationAnimee.sol2
+					)}`
 				}
-				G=barycentre(p)
-				p=rotation(p,G,choice([0,90,270]))
-				p.couleurDeRemplissage='gray'
-				p.opaciteDeRemplissage=0.5
-				nom1=nommePolygone(p,'ABC',0.4)
-				grid=grille(-3,-3,27,18, 'gray', .4,1)
-				M=point(9,12)
-				q=rotation(p,M,90)
-				Gq=barycentre(q)
-				r=rotation(q,Gq,choice([0,90,180,270]))
-				X=milieu(r.listePoints[0],r.listePoints[1])
-				s=rotation(r,X,180)
-				r.couleurDeRemplissage='red'
-				r.opaciteDeRemplissage=0.5
-				s.couleurDeRemplissage='blue'
-				s.opaciteDeRemplissage=0.5
-				texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:20,scale:0.5},p,nom1,grid,r,s)
+				//texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:20,scale:0.5},p,nom1,grid,r,s)
+				texte = `${figures.enonce}`;
+				texte += `<br> =====CORRECTION SOLUTION 1  Statique et animée ======<br>${figures.corr_solution1}<br>${figures.corr_animmee_sol1}`;
+				texte += `<br> =====CORRECTION SOLUTION 2  ======<br>${figures.corr_solution2}<br>${figures.corr_animmee_sol2}`;
 				this.liste_questions[0]=texte;
 				this.liste_corrections[0]=texte_corr;
 				liste_de_question_to_contenu(this);
