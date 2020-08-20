@@ -19,15 +19,23 @@ Cet outil servira principalement à la création d'exercices pour MathALEA mais 
 <div class="ui hidden divider"></div>
 
 {{< liste >}}
-  	{{% item "Les points" "/docMathalea2d/points" %}}
-  	{{% item "Les segments, droites et demi-droites" "/docMathalea2d/segments" %}}
-	{{% item "Les cercles et arcs de cercles" "/docMathalea2d/cercles" %}}
-	{{% item "Les polygones" "/docMathalea2d/polygones" %}}
-	{{% item "Les transformations" "/docMathalea2d/transformations" %}}
-  	{{% item "Les droites remarquables" "/docMathalea2d/remarquables" %}}
-  	{{% item "Les codages" "/docMathalea2d/codages" %}}
-  	{{% item "La programmation" "/docMathalea2d/programmation" %}}
+{{% item "Les points" "/docMathalea2d/points" %}}
+{{% item "Les segments, droites et demi-droites" "/docMathalea2d/segments" %}}
+{{% item "Les cercles et arcs de cercles" "/docMathalea2d/cercles" %}}
+{{% item "Les polygones" "/docMathalea2d/polygones" %}}
+{{% item "Les transformations" "/docMathalea2d/transformations" %}}
+{{% item "Les droites remarquables" "/docMathalea2d/remarquables" %}}
+{{% item "Quadrillages, repères et graphiques" "/docMathalea2d/repere" %}}
+{{% item "Les codages" "/docMathalea2d/codages" %}}
+{{% item "La programmation" "/docMathalea2d/programmation" %}}
 {{< /liste >}}
 
-Ce projet est libre de droit sous licence CC-BY-SA et le code est disponible [ici](https://github.com/remiangot/MathALEA/blob/master/include/mathalea2d.js).
-            
+<div class="ui hidden divider"></div>
+
+<h2 class="ui horizontal divider header">À propos</h2>
+
+<div class="ui hidden divider"></div>
+
+MathALEA 2D a été développé par Rémi Angot et Jean-Claude Lhote durant l'été 2020.
+
+Comme le reste du site, MathALEA 2D est libre de droit sous licence CC-BY-SA et le code est disponible [ici](https://github.com/remiangot/MathALEA/blob/master/include/mathalea2d.js).
