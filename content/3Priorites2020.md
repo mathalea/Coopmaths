@@ -53,6 +53,7 @@ description : "Troisième - Priorités rentrée 2020 - Période 1 (septembre oct
 			{{% priorite_alea "4L14-0 : Tester sur une équation du premier ou du second degré" "4L14-0" %}}
 
 			{{% priorite "Il résout algébriquement une équation du premier degré." %}}
+			{{% priorite_alea "4L15-0 : Trouver une erreur de résolution dans une équation du premier degré" "4L15-0" %}}			
 			{{% priorite_alea "4L20 : Équation du premier degré" "4L20" %}}			
 	</div>	
 {{< /liste_priorites >}}
