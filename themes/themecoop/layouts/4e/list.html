@@ -11,12 +11,30 @@
                <i class="large black file pdf outline icon"></i> <div class="header content"> Télécharger le référentiel </div>
           </a>
 
-          {{ range sort (where .Site.Pages "Params.niveau" "4e") "Params.ref" }}
+          <!-- On range les priorités avant les items du référentiel -->
+          <!-- On fait une requete pour filtrer le niveau 4e -->
+          {{ $v1 := where .Site.Pages "Params.niveau" "4e" }}
+          <!-- On fait une requete pour filtrer le sousniveau priorites -->
+          {{ $v2 := where .Site.Pages "Params.sousniveau" "priorites" }}
+          <!-- On fait une requete pour filtrer si le sousniveau n'est pas défini -->
+          {{ $v3 := where .Site.Pages "Params.sousniveau" nil }}
+          <!-- On crée la requete pour filtrer les pages du niveau 3e qui ont le parametre sousniveau priorites -->
+          {{ $filtered_prio := $v1 | intersect $v2 }}
+          <!-- On crée la requete pour filtrer les pages du niveau 3e qui ont le parametre sousniveau non défini -->
+          {{ $filtered_non_prio := $v1 | intersect $v3 }}
+          
+          
+          {{ range sort $filtered_prio }}
+          <!-- <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a> -->
+          <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}}</div></a>
+          {{ end }}  
 
+          <!--pour mémoire   range sort (where .Site.Pages "Params.niveau" "4e") "Params.ref"    -->
+          {{ range sort $filtered_non_prio }}          
           <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
           {{ end }}
 
-     </div>
+      </div>
 
      <!-- <h3><a href="/CM6" style="color:inherit !important" >Calcul mental - 6e (avec mathsmentales.net)</a></h3> -->
 
