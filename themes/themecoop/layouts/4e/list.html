@@ -11,8 +11,8 @@
                <i class="large black file pdf outline icon"></i> <div class="header content"> Télécharger le référentiel </div>
           </a>
 
-                   <!-- On range les priorités avant les items du référentiel -->
-          <!-- On fait une requete pour filtrer le niveau 3e -->
+          <!-- On range les priorités avant les items du référentiel -->
+          <!-- On fait une requete pour filtrer le niveau 4e -->
           {{ $v1 := where .Site.Pages "Params.niveau" "4e" }}
           <!-- On fait une requete pour filtrer le sousniveau priorites -->
           {{ $v2 := where .Site.Pages "Params.sousniveau" "priorites" }}
