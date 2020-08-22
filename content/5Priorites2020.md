@@ -76,7 +76,7 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Reconnaître, décrire, reproduire, représenter, construire des solides et des figures géométriques</div>	
 			{{% priorite "L’élève code des figures simples du plan et de l’espace." %}}
-			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite_alea "6G20 :  Nommer et coder des polygones" "6G20" %}}	
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
 			{{% priorite_alea "... : ..." "" %}}	
