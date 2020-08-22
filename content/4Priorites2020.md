@@ -40,8 +40,11 @@ Pour cela deux options :
 {{< liste_priorites >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
-		<div class="header content"> ...</div>	
-			{{% priorite "..." %}}
+		<div class="header content">Utiliser les nombres pour comparer, calculer et résoudre des problèmes</div>	
+			{{% priorite "L’élèveutilise la notion d’opposé." %}}
+			{{% priorite_alea "... : ..." "" %}}	
+
+			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
 			{{% priorite_alea "... : ..." "" %}}			
 	</div>	
 {{< /liste_priorites >}}
@@ -49,17 +52,11 @@ Pour cela deux options :
 {{< liste_priorites >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
-		<div class="header content"> ...</div>	
-			{{% priorite "..." %}}
+		<div class="header content">Utiliser le calcul littéral</div>	
+			{{% priorite "Il produit une expression littérale pour élaborer une formule ou traduire un programme de calcul." %}}
 			{{% priorite_alea "... : ..." "" %}}			
 
-			{{% priorite "..." %}}
-			{{% priorite_alea "... : ..." "" %}}			
-
-			{{% priorite "..." %}}
-			{{% priorite_alea "... : ..." "" %}}			
-
-			{{% priorite "..." %}}
+			{{% priorite "Il substitue une valeur numérique à une lettre notamment pour tester une égalité." %}}
 			{{% priorite_alea "... : ..." "" %}}			
 	</div>	
 {{< /liste_priorites >}}
@@ -70,20 +67,22 @@ Pour cela deux options :
 {{< liste_priorites >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
-		<div class="header content"> ...</div>	
-			{{% priorite "..." %}}
+		<div class="header content">Résoudre des problèmes de proportionnalité</div>	
+			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité́entre deux grandeurs." %}}
 			{{% priorite_alea "... : ..." "" %}}			
+
+			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
+			{{% priorite_alea "... : ..." "" %}}			
+
 	</div>	
 {{< /liste_priorites >}}
 {{< liste_priorites >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
-		<div class="header content"> ...</div>	
-			{{% priorite "..." %}}
+		<div class="header content">Comprendre et utiliser la notion de fonction</div>	
+			{{% priorite "L’élève comprend et utilise la notion de fonction ; il traduit la dépendance entre deux grandeurs par un tableau de valeurs ; il produit une formule représentant la dépendance entre deux grandeurs." %}}
 			{{% priorite_alea "... : ..." "" %}}			
 
-			{{% priorite "..." %}}
-			{{% priorite_alea "... : ..." "" %}}			
 	</div>	
 {{< /liste_priorites >}}
 
@@ -92,27 +91,16 @@ Pour cela deux options :
 {{< liste_priorites >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
-		<div class="header content"> ...</div>	
-			{{% priorite "..." %}}
+		<div class="header content">Utiliser les notions de géométrie plane pour démontrer</div>	
+			{{% priorite "L’élève connaît et utilise le codage des figures." %}}
 			{{% priorite_alea "... : ..." "" %}}			
 
-			{{% priorite "..." %}}
+			{{% priorite "Il connaît et utilise : la somme des angles d’un triangle; une définition et une propriété caractéristique du parallélogramme." %}}
 			{{% priorite_alea "... : ..." "" %}}			
 
-			{{% priorite "..." %}}
+			{{% priorite "Il transforme une figure par symétrie centrale." %}}
 			{{% priorite_alea "... : ..." "" %}}			
 
-	</div>	
-{{< /liste_priorites >}}
-
-<!-- <h3 class="ui horizontal divider header">Algorithmique et programmation</h3> -->
-{{< titre1 "Algorithmique et programmation" >}}
-{{< liste_priorites >}}
-	<div class="item">
-		<i class="large black chevron circle right icon"></i>
-		<div class="header content">...</div>	
-			{{% priorite "..." %}}
-			{{% priorite_alea "... : ..." "" %}}			
 	</div>	
 {{< /liste_priorites >}}
 
