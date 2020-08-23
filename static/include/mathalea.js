@@ -5499,10 +5499,9 @@ var liste_des_exercices_disponibles = {
   "6D12": Calculs_de_durees_ou_d_horaires,
   "6G10": Notation_segment_droite_demi_droite,
   "6G10-1": Description_segment_droite_demi_droite,
-  beta6G12: Parallele_et_Perpendiculaires,
   "6G11": Tracer_des_perpendiculaires,
-  "6G12-1": Tracer_des_paralleles,
-  "6G12-2": Tracer_des_perpendiculaires_et_des_paralleles,
+  "6G12": Tracer_des_paralleles,
+  "6G12-1": Tracer_des_perpendiculaires_et_des_paralleles,
   "6G20": Vocabulaire_des_triangles_6e,
   "6G23-2": Tracer_triangle_2_angles,
   "6G24": Transformations_6e,
@@ -5557,14 +5556,14 @@ var liste_des_exercices_disponibles = {
   "5G10": Symetrie_axiale_5e,
   "5G12": Pavages_et_demi_tour,
   "5G11": Transformations_5e,
-  'beta5G10-1' : Construire_par_Symetrie,
-  //'beta5G2' : Constructibilite_des_triangles,// pour développer l'exercice global
-  //'beta5G21-1' : Constructibilite_des_triangles_longueurs,// pour développer l'exercice global
+  "5G10-1" : Symetrie_axiale_point_5e,
+  "5G10-2" : Symetrie_axiale_figure_5e,
+  "5G11-1" : Symetrie_centrale_point,
+  "5G11-2" : Symetrie_centrale_figure,
   "5G21-1": Constructibilite_des_triangles_longueurs,
   "5G20-1": Vocabulaire_des_triangles_5e,
   "5G22": DroiteRemarquableDuTriangle,
   "5G31": Exercice_angles_triangles,
-  //'beta5G31-1' : Constructibilite_des_triangles_angles,// pour développer l'exercice global
   "5G31-1": Constructibilite_des_triangles_angles,
   "5N13": Exercice_fractions_simplifier,
   "5N13-2": Egalites_entre_fractions,
@@ -5612,6 +5611,7 @@ var liste_des_exercices_disponibles = {
   "4L14-0": Tester_si_un_nombre_est_solution_d_une_equation,
   "4L14-1": Tester_si_un_nombre_est_solution_d_une_equation_deg1,
   "4L14-2": Tester_si_un_nombre_est_solution_d_une_equation_deg2,
+  "beta4L15-0": Trouver_erreur_resol_eq_deg1,
   "4L20": Exercice_equation1,
   "4M30": Calcul_de_volumes_4e,
   "4N10": Exercice_additionner_des_fractions,
@@ -16156,7 +16156,6 @@ function Tracer_des_perpendiculaires_et_des_paralleles() {
   Parallele_et_Perpendiculaires.call(this);
   this.titre = "Tracer des perpendiculaires et des parallèles";
   this.sup = 3;
-  this.nb_questions = 2;
   this.besoin_formulaire_numerique = false;
 }
 /**
@@ -17030,11 +17029,9 @@ function Parallele_et_Perpendiculaires() {
   this.sup = 1;
   this.sup2 = 1;
   this.nouvelle_version = function (numero_de_l_exercice) {
-    let type_de_questions_disponibles;
-    if (this.sup == 3) type_de_questions_disponibles = [1, 2];
-    //Perpendiculaires ou parallèles
-    else type_de_questions_disponibles = [parseInt(this.sup)]; // Le choix 1 ou 2
-    let liste_type_de_questions = combinaison_listes(
+  let type_de_questions_disponibles;
+  type_de_questions_disponibles = [parseInt(this.sup)]; // Le choix 1 ou 2 ou 3 : 1=perpendiculaires, 2=parallèles, 3=des perpendiculaires et des paralèlles
+  let liste_type_de_questions = combinaison_listes(
       type_de_questions_disponibles,
       this.nb_questions
     );
@@ -17089,6 +17086,10 @@ function Parallele_et_Perpendiculaires() {
       cB,
       cC,
       cD,
+      cE,
+      cF,
+      cG,
+      FF,
       BB,
       carreaux,
       k,
@@ -17268,6 +17269,106 @@ function Parallele_et_Perpendiculaires() {
           )}$ cm.<br>`;
 
           break;
+          case 3:
+            A = point(0, 0, "A", "above left");
+            B = point(10, randint(-4, 4, [-1, 0, 1]), "B", "above right");
+            d = droite(A, B);
+            d.isVisible = true;
+            C = point(randint(2, 3), randint(3, 4), "C", "above left");
+            D = point(randint(7, 8), randint(-7, -6), "D");
+            dB = droiteParPointEtPerpendiculaire(B, d);
+            xE = 11;
+            E = pointSurDroite(dB, 11, "E", "left");
+            while (!Number.isInteger(E.y)) {
+              xE++;
+              E = pointSurDroite(dB, xE, "E", "left");
+            }
+            F = point(E.x, B.y);
+            dE = droiteParPointEtParallele(E, d);
+            dD = droiteParPointEtParallele(D, d);
+            dC = droiteParPointEtPerpendiculaire(C,d)
+            BB = rotation(A, B, 90);
+            CC = pointIntersectionDD(dC, d, "M", "below right");
+            DD = pointIntersectionDD(dD, dB, "N", "above left");
+            EE = pointIntersectionDD(dC,dE ,'O','above left');
+            FF = pointIntersectionDD(dD,dC)
+
+            lC = arrondi(longueur(CC, A) * k, 1);
+            lD = arrondi(longueur(DD, A) * k, 1);
+            lE = arrondi(longueur(EE, A) * k, 1);
+            cB = codageAngleDroit(A, B, BB);
+            cC = codageAngleDroit(C, CC, B);
+            cD = codageAngleDroit(D, DD, B,'red');
+            cE = codageAngleDroit(B,E,EE,'red')
+            cF = codageAngleDroit(C,EE,E,'red')
+            cG = codageAngleDroit(C,FF,D,'red')
+
+            objets_correction.push(dC,dD,dB,dE,cB,cC,cD,cE,cF,cG,d,g,carreaux,tracePoint(A, B, C, D, E, CC, DD,EE),labelPoint(A, B, C, D, E, CC, DD,EE),afficheCoteSegment(
+              segment(A, CC),
+              `${tex_nombre(lC)} cm`,
+              0.5,
+              "red",
+              1,
+              0.5,
+              "red"
+            ),
+            afficheCoteSegment(
+              segment(A, DD),
+              `${tex_nombre(lD)} cm`,
+              0,
+              "blue",
+              1,
+              -0.5,
+              "blue"
+            ),
+            afficheCoteSegment(
+              segment(A, EE),
+              `${tex_nombre(lE)} cm`,
+              0,
+              "green",
+              1,
+              -0.5,
+              "green"
+            ));
+            objets_enonce.push(tracePoint(A, B, C, D,E),labelPoint(A, B, C, D,E),d,g,carreaux);
+            enonce = num_alpha(0)+ `Reproduire la figure ci-dessous.<br>`
+          enonce +=num_alpha(1)+` Tracer la droite perpendiculaire à $(AB)$ passant par $B$.<br>`;
+          enonce +=num_alpha(2)+` Tracer la droite perpendiculaire à $(AB)$ passant par $C$ et nomme $M$, le point d'intersection de cette droite avec la droite $(AB)$.<br>`
+          enonce +=num_alpha(3)+` Tracer la droite parallèle à $(AB)$ passant par $D$ et nomme $N$, le point d'intersection de cette droite avec la droite $(BE)$.<br>`;
+          enonce += num_alpha(4)+ ` Tracer la droite parallèle à $(AB)$ passant par $E$ et nomme $O$, le point d'intersection de cette droite avec la droite $(CM)$.<br>`
+          enonce += num_alpha(5)+` Mesurer les distances $AM$, $AN$ et $AO$. Pour l'auto-correction, comparer ces mesures avec celles données par  l'ordinateur dans la correction.<br>`;
+          enonce += mathalea2d(
+            {
+              xmin: Xmin,
+              ymin: Ymin,
+              xmax: Xmax,
+              ymax: Ymax,
+              pixelsParCm: ppc,
+              scale: sc,
+            },
+           objets_enonce
+          );
+          correction = mathalea2d(
+            {
+              xmin: Xmin,
+              ymin: Ymin,
+              xmax: Xmax,
+              ymax: Ymax,
+              pixelsParCm: ppc,
+              scale: sc,
+            },
+            objets_correction
+          );
+          correction += `<br>$AM \\approx ${tex_nombre(
+            lC
+          )}$ cm, $AN \\approx ${tex_nombre(
+            lD
+          )}$ cm et $AO \\approx${tex_nombre(
+            lE
+          )}$ cm.<br>`;
+          correction+=`Les angle droits en rouge se justifient par la propriété :<br> ${texte_en_couleur(`Si deux droites sont parallèles, toutes droite perpendiculaire à l'une est aussi perpendiculaire à l'autre`,'red')}.<br>`
+          correction +=`Vérifier les angles droits à l'équerre.`
+          break
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
@@ -23593,6 +23694,30 @@ function DroiteRemarquableDuTriangle(){
 	}
 	this.besoin_formulaire_numerique = ['Type de droites',3,"1 : Hauteurs et Médiatrices\n2 : Médianes et Bissectrices\n3 : Toutes les droites"]
 }
+function Symetrie_axiale_point_5e() {
+	Construire_par_Symetrie.call(this)
+	this.titre='Construire le symétrique d\'un point par rapport à une droite'
+	this.figure=false
+	this.sup=1
+}
+function Symetrie_axiale_figure_5e() {
+	Construire_par_Symetrie.call(this)
+	this.titre='Construire le symétrique d\'une figure par rapport à une droite'
+	this.figure=true
+	this.sup=1
+}
+function Symetrie_centrale_point() {
+	Construire_par_Symetrie.call(this)
+	this.titre='Construire le symétrique d\'un point par rapport à un point'
+	this.figure=false
+	this.sup=2
+}
+function Symetrie_centrale_figure() {
+	Construire_par_Symetrie.call(this)
+	this.titre='Construire le symétrique d\'une figure par rapport à un point'
+	this.figure=true
+	this.sup=2
+}
 function Construire_par_Symetrie() {
 	"use strict";
 	Exercice.call(this);
@@ -23602,11 +23727,17 @@ function Construire_par_Symetrie() {
 	this.nb_cols_corr = 1;
 	this.sup = 1;
 	this.sup2 = 1;
+	this.figure = false
 	this.nouvelle_version = function (numero_de_l_exercice) {
 	  let type_de_questions_disponibles;
-	  if (this.sup == 3) type_de_questions_disponibles = [1, 2];
-	  //Symétrie axiale ou centrale
-	  else type_de_questions_disponibles = [parseInt(this.sup)]; // Le choix 1 ou 2
+	  if (this.sup == 3) 	  //Symétrie axiale ou centrale
+		  if (this.figure==false) type_de_questions_disponibles = [1, 2]; // points
+		  else type_de_questions_disponibles = [3,4] // triangle
+
+	  else 
+		  if (this.figure==false) type_de_questions_disponibles = [parseInt(this.sup)]; // Le choix 1 ou 2 : points
+		  else type_de_questions_disponibles = [parseInt(this.sup)+2] //figures
+
 	  let liste_type_de_questions = combinaison_listes(
 		type_de_questions_disponibles,
 		this.nb_questions
@@ -23619,14 +23750,14 @@ function Construire_par_Symetrie() {
 		  // repère -10 || 10
 		  Xmin = -1;
 		  Ymin = -9;
-		  Xmax = 15;
+		  Xmax = 20;
 		  Ymax = 9;
 		  ppc = 20;
 		} else {
 		  // repère -5 || 5
 		  Xmin = -1;
 		  Ymin = -9;
-		  Xmax = 15;
+		  Xmax = 20;
 		  Ymax = 9;
 		  ppc = 20;
 		}
@@ -23666,7 +23797,7 @@ function Construire_par_Symetrie() {
 		i < this.nb_questions && cpt < 50;
   
 	  ) {
-		if (this.sup2<3) g = grille(-1, -15, 15, 15, "gray", 0.7);
+		if (this.sup2<3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
 		else g=''
 		if (this.sup2 == 2) {
 		  k = 0.8;
@@ -23676,20 +23807,21 @@ function Construire_par_Symetrie() {
 		  carreaux = "";
 		}
 		switch (liste_type_de_questions[i]) {
-		  case 1:
-			A = point(0, randint(-1,1), "A",'above');
-			B = point(6, randint(-1,1,A.y), "B",'above');
+		  case 1: // 3 symétries axiales de points
+			p1nom=creerNomDePolygone(5)
+			A = point(0, randint(-1,1), `${p1nom[0]}`,'above');
+			B = point(6, randint(-1,1,A.y), `${p1nom[1]}`,'above');
 			d = droite(A, B);
 			d.isVisible = true;
 			d.epaisseur=2
-			C = point(randint(2, 3), randint(3, 4), "C",'above left');
-			D = point(randint(10, 13), randint(-4, -3), "D",'below right');
+			C = point(randint(2, 3), randint(3, 4), `${p1nom[2]}`,'above left');
+			D = point(randint(10, 13), randint(-4, -3), `${p1nom[3]}`,'below right');
 			dB = droiteParPointEtPerpendiculaire(B, d);
-			E=point(randint(6,8),randint(-8,-5), "E", "left");
+			E=point(randint(6,8),randint(-8,-5), `${p1nom[4]}`, "left");
 			//F = point(E.x+1,5-B.y,'F','above left');
-			CC=symetrieAxiale(C,d,'C\'','below left')
-			DD=symetrieAxiale(D,d,'D\'','above right')
-			EE=symetrieAxiale(E,d,'E\'','left')
+			CC=symetrieAxiale(C,d,`${p1nom[2]}\'`,'below left')
+			DD=symetrieAxiale(D,d,`${p1nom[3]}\'`,'above right')
+			EE=symetrieAxiale(E,d,`${p1nom[4]}\'`,'left')
 			//FF=symetrieAxiale(F,d,'F\'','below left')
 			cC=codageMediatrice(C,CC,'red','|')
 			cD=codageMediatrice(D,DD,'blue','X')
@@ -23712,12 +23844,11 @@ function Construire_par_Symetrie() {
 
 			objets_correction.push(d,g,carreaux,tracePoint(A, B, C, D, E,CC,DD,EE),labelPoint(A, B, C, D, E,CC,DD,EE),cC,cD,cE,sC,sD,sE,sED,sDE,sCE,sEC)
 			objets_enonce.push(tracePoint(A, B, C, D,E),g,labelPoint(A, B, C, D,E),d,carreaux);
-			enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
-			enonce += num_alpha(1)+`Construire le point $C\'$ symétrique de $C$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(2)+`Construire le point $D\'$ symétrique de $D$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(3)+`Construire le point $E\'$ symétrique de $E$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(4)+`Construire le point $F\'$ symétrique de $E$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(5)+`Coder la figure.<br>`;
+			enonce = num_alpha(0)+` Reproduire la figure ci-dessous.<br>`
+			enonce += num_alpha(1)+` Construire le point $${p1nom[2]}\'$ symétrique de $${p1nom[2]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+			enonce += num_alpha(3)+` Construire le point $${p1nom[4]}\'$ symétrique de $${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+			enonce += num_alpha(5)+` Coder la figure.<br>`;
 			enonce += mathalea2d( params
 			  ,
 			  objets_enonce
@@ -23726,30 +23857,31 @@ function Construire_par_Symetrie() {
 			  params,
 			 objets_correction
 			);
-			correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
+			correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$`
 			break;
-		  case 2:
-			A = point(0, randint(-1,1), "A",'left');
-			B = point(7, randint(-1,1,A.y), "O",'above');
-			C = point(randint(2, 3), randint(-4, -2), "C",'left');
-			D = point(randint(10, 13), randint(-6, -5), "D",'below right');
-			CC=rotation(C,B,180,'C\'','right')
-			DD=rotation(D,B,180,'D\'','above left')
-			AA=rotation(A,B,180,'A\'','right')
+		  case 2: // 3 symétries centrales de points
+			p1nom=creerNomDePolygone(4)
+			A = point(0, randint(-1,4), `${p1nom[0]}`,'left');
+			B = point(7, randint(-1,1,A.y), `${p1nom[1]}`,'above');
+			C = point(randint(2, 3), randint(-4, -2), `${p1nom[2]}`,'left');
+			D = point(randint(10, 13), randint(-6, -5), `${p1nom[3]}`,'below right');
+			CC=rotation(C,B,180,`${p1nom[2]}\'`,'right')
+			DD=rotation(D,B,180,`${p1nom[3]}\'`,'above left')
+			AA=rotation(A,B,180,`${p1nom[0]}\'`,'right')
 			cC=codageMilieu(C,CC,'red','|',false)
-			cD=codageMilieu(D,DD,'blue','X' ,false)
-			cA=codageMilieu(A,AA,'green','O',false)
+			cD=codageMilieu(D,DD,'blue','||' ,false)
+			cA=codageMilieu(A,AA,'green','|||',false)
 			sC=segment(C,CC)
 			sD=segment(D,DD)
 			sA=segment(A,AA)
+			
 		objets_correction.push(g,carreaux,tracePoint(A, C, D,CC,DD,AA),labelPoint(A, B, C, D,CC,DD,AA),cC,cD,cA,sC,sD,sA)
 			objets_enonce.push(tracePoint(A, B, C, D),g,labelPoint(A, B, C, D),carreaux);
-			enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
-			enonce += num_alpha(1)+`Construire le point $C\'$ symétrique de $C$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(2)+`Construire le point $D\'$ symétrique de $D$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(3)+`Construire le point $E\'$ symétrique de $E$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(4)+`Construire le point $F\'$ symétrique de $E$ par rapport à la droite $(AB)$.<br>`
-			enonce += num_alpha(5)+`Coder la figure.<br>`;
+			enonce = num_alpha(0)+` Reproduire la figure ci-dessous.<br>`
+			enonce += num_alpha(1)+` Construire le point $${p1nom[2]}\'$ symétrique de $${p1nom[2]}$ par rapport au point $${p1nom[1]}$.<br>`
+			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
+			enonce += num_alpha(3)+` Construire le point $${p1nom[0]}\'$ symétrique de $${p1nom[0]}$ par rapport au point $${p1nom[1]}$.<br>`
+			enonce += num_alpha(4)+` Coder la figure.<br>`;
 			enonce += mathalea2d( params
 			  ,
 			  objets_enonce
@@ -23758,9 +23890,90 @@ function Construire_par_Symetrie() {
 			  params,
 			 objets_correction
 			);
-			correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
+			//correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
 			break;
+			case 3: // symetrie axiale d'un triangle
+				p1nom=creerNomDePolygone(5)
 
+
+				A = point(0, randint(-1,1), `${p1nom[0]}`,'above');
+				B = point(6, randint(-1,1,A.y), `${p1nom[1]}`,'above');
+				d = droite(A, B);
+				d.isVisible = true;
+				d.epaisseur=2
+				C = point(randint(2, 3), randint(3, 4), `${p1nom[2]}`,'above left');
+				D = point(randint(10, 13), randint(-4, -2), `${p1nom[3]}`,'below right');
+				dB = droiteParPointEtPerpendiculaire(B, d);
+				E=point(randint(6,8),randint(-8,-6), `${p1nom[4]}`, "left");
+				p1=polygone(C,D,E)
+				p2=symetrieAxiale(p1,d)
+				p2.listePoints[0].nom=`${p1nom[2]}\'`
+				p2.listePoints[1].nom=`${p1nom[3]}\'`
+				p2.listePoints[2].nom=`${p1nom[4]}\'`
+				CC=nommePolygone(p1)
+				DD=nommePolygone(p2)
+				cC=codageMediatrice(p1.listePoints[0],p2.listePoints[0],'red','|')
+				cD=codageMediatrice(p1.listePoints[1],p2.listePoints[1],'blue','X')
+				cE=codageMediatrice(p1.listePoints[2],p2.listePoints[2],'green','O')			
+				sC=segment(p1.listePoints[0],p2.listePoints[0],'red')
+				sD=segment(p1.listePoints[1],p2.listePoints[1],'blue')
+				sE=segment(p1.listePoints[2],p2.listePoints[2],'green')	
+				sCE=droite(p1.listePoints[2],p1.listePoints[1],'','gray')
+				sCE.pointilles=true
+				sED=droite(p2.listePoints[2],p2.listePoints[1],'','gray')
+				sED.pointilles=true
+				objets_correction.push(d,g,tracePoint(A,B),labelPoint(A,B),carreaux,cC,cD,cE,sC,sD,sE,CC,DD,p1,p2,sCE,sED)
+				objets_enonce.push(g,d,tracePoint(A,B),labelPoint(A,B),carreaux,CC,p1);
+				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
+				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[2]}\'${p1nom[3]}\'${p1nom[4]}\'$ symétrique de $${p1nom[2]}${p1nom[3]}${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+				enonce += num_alpha(2)+` Coder la figure.<br>`;
+				enonce += mathalea2d( params
+				  ,
+				  objets_enonce
+				);
+				correction = mathalea2d(
+				  params,
+				 objets_correction
+				);
+				correction+=`<br>Contrôler la figure en vérifiant que les côtés des deux triangles se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$`
+				break;
+			  case 4:
+				p1nom=creerNomDePolygone(4)
+
+				A = point(0, randint(-1,4), `${p1nom[0]}`,'left');
+				B = point(7, randint(-1,1,A.y), `${p1nom[1]}`,'above');
+				C = point(randint(2, 3), randint(-6, -4), `${p1nom[2]}`,'left');
+				D = point(randint(10, 13), randint(-6, -5), `${p1nom[3]}`,'below right');
+				p1=polygone(A,C,D)
+				p2=rotation(p1,B,180)
+				p2.listePoints[0].nom=`${p1nom[0]}\'`
+				p2.listePoints[1].nom=`${p1nom[2]}\'`
+				p2.listePoints[2].nom=`${p1nom[3]}\'`
+				CC=nommePolygone(p1)
+				DD=nommePolygone(p2)
+				cC=codageMilieu(p1.listePoints[0],p2.listePoints[0],'red','|',false)
+				cD=codageMilieu(p1.listePoints[1],p2.listePoints[1],'blue','X' ,false)
+				cA=codageMilieu(p1.listePoints[2],p2.listePoints[2],'green','O',false)
+				sA=segment(p1.listePoints[0],p2.listePoints[0],'red')
+				sC=segment(p1.listePoints[1],p2.listePoints[1],'blue')
+				sD=segment(p1.listePoints[2],p2.listePoints[2],'green')	
+				
+			objets_correction.push(g,carreaux,tracePoint(B),labelPoint(B),cC,cD,cA,sC,sD,sA,CC,DD,p1,p2)
+				objets_enonce.push(tracePoint(B),g,labelPoint(B),CC,p1,carreaux);
+				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
+				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[0]}\'${p1nom[2]}\'${p1nom[3]}\'$ symétrique de $${p1nom[0]}${p1nom[2]}${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
+				enonce += num_alpha(2)+` Coder la figure.<br>`;
+				enonce += mathalea2d( params
+				  ,
+				  objets_enonce
+				);
+				correction = mathalea2d(
+				  params,
+				 objets_correction
+				);
+				//correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
+				break;
+	
 		}
   
 		if (this.liste_questions.indexOf(texte) == -1) {
@@ -23774,7 +23987,7 @@ function Construire_par_Symetrie() {
   
 	  liste_de_question_to_contenu(this);
 	};
-		this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Symétrie axiale\n 2 : Symétrie centrale\n 3 : Mélange`]
+	//	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Symétrie axiale\n 2 : Symétrie centrale\n 3 : Mélange`]
 	this.besoin_formulaire2_numerique = [
 	  "Type de cahier",
 	  3,
@@ -30786,7 +30999,6 @@ function Signe_produit_quotient_relatifs() {
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.sup = Number(this.sup); // attention le formulaire renvoie un string, on a besoin d'un number pour le switch !
-    //console.log(typeof this.sup)
 
     if (this.exo == this.beta + "4C10-1") {
       // signe d'un produit
@@ -32334,8 +32546,8 @@ function Exploiter_representation_graphique() {
 				g2 = grille(-1,-1,6,8,'gray',.2,.2)
 				g3 = axes(0,0,6,7)
 				texte1 = texteParPosition('distance (en km)',0.2,7.3,'droite')
-				l1 = labelX(0,5,1,'black',-.6,10)
-				l2 = labelY(1,6,1,'black',-.6)
+				l1 = labelX(0,50,1,'black',-.6,10)
+        l2 = labelY(1,6,1,'black',-.6,1)
 				texte2 = texteParPosition('temps (en min)',6.5,0.4,'droite')
 				let situation = randint(1,3)
 				let tempsPause
@@ -33174,7 +33386,7 @@ function Tester_si_un_nombre_est_solution_d_une_equation_deg1() {
 
 /**
  * Tester si un nombre est solution d'une équation degré 2
- * * 4L14-1
+ * * 4L14-2
  * * adaptation de l'exo 5L14 de Rémi Angot
  * @author Sébastien Lozano
  */
@@ -33258,7 +33470,7 @@ function Forme_litterale_introduire_une_lettre(){
 			let p = randint(1,6);
 			let situation = situations[randint(0,situations.length-1)];
 			enonces.push({
-				enonce:`${situation.prenom} veut acheter ${n} ${pluriel(n,situation.elt1)} et ${p} ${pluriel(n,situation.elt2)}.
+				enonce:`${situation.prenom} veut acheter ${n} ${pluriel(n,situation.elt1)} et ${p} ${pluriel(p,situation.elt2)}.
 				<br>On note $${situation.elt1.lettre}$	le prix d'${situation.elt1.article} ${situation.elt1.sing} et $${situation.elt2.lettre}$	le prix d'${situation.elt2.article} ${situation.elt2.sing}.`,
 				question:``,
         correction:`
@@ -33483,8 +33695,6 @@ function Mettre_en_equation_sans_resoudre(){
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 }
 
-
-
 /**
  * Graphiques_et_proportionnalite
  * 4P10-1
@@ -33522,16 +33732,19 @@ function Graphiques_et_proportionnalite() {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 		
-		type_de_questions_disponibles=[1];			
+		//type_de_questions_disponibles=[1];			
 
 		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      // on prévoit un peu d'aléatoire pour les prix unitaires
+      let pu_oranges = choice([1.2,1.4,1.6,1.8]);
+      let pu_baguettes = choice([0.6,0.8,1.2]);
       // on prévoit un tableau avec des situations
       let situations = [
-        {lieu:`l'épicerie`,prenom:prenom(),articles:`oranges`,art_articles:`d'oranges`,prix_unitaire:1.6,qte:`poids`,qte_max:10,qte2:3,unite:`kg d'`,legendeX:`poids en kg`,legendeY:`prix en €`,fig:{},fig_corr:{}},
-        {lieu:`la boulangerie`,prenom:prenom(),articles:`baguettes`,art_articles:`de baguettes`,prix_unitaire:0.8,qte:`nombre`,qte_max:10,qte2:3,unite:``,legendeX:`quantité`,legendeY:`prix en €`,fig:{},fig_corr:{}}
+        {lieu:`l'épicerie`,prenom:prenom(),articles:`oranges`,art_articles:`d'oranges`,prix_unitaire:pu_oranges,qte:`poids`,qte_max:10,qte2:3,unite:`kg d'`,legendeX:`poids en kg`,legendeY:`prix en €`,fig:{},fig_corr:{}},
+        {lieu:`la boulangerie`,prenom:prenom(),articles:`baguettes`,art_articles:`de baguettes`,prix_unitaire:pu_baguettes,qte:`nombre`,qte_max:10,qte2:3,unite:``,legendeX:`quantité`,legendeY:`prix en €`,fig:{},fig_corr:{}}
       ]
       // on en choisit une
       let situation = situations[randint(0,situations.length-1)];    
@@ -33674,6 +33887,102 @@ function Graphiques_et_proportionnalite() {
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	  
+}
+
+/** 
+ * * 4L15-0
+ * @author Sébastien Lozano
+ */
+function Trouver_erreur_resol_eq_deg1(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 2;
+	} else {
+		this.nb_questions = 2;
+	};	
+
+	this.titre = "Trouver l'erreur dans une résolution d'équation du premier degré";
+	this.consigne = "Trouver l'erreur dans les résoltution suivantes.<br>On ne demande pas de résoudre l'équation.";
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	//sortie_html? this.spacing = 3 : this.spacing = 2; 
+	//sortie_html? this.spacing_corr = 3 : this.spacing_corr = 2;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [1,2];			
+		} else {
+			type_de_questions_disponibles = [1,2];			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//type_de_questions_disponibles=[1];			
+
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      
+      // pour les situations
+      let situations = {};
+
+			let enonces = [];
+			enonces.push({
+				enonce:`énoncé type 1`,
+				question:``,
+        correction:`${texte_en_couleur(`correction type1`)}`
+      });
+      enonces.push({
+				enonce:`énoncé type 2`,
+				question:``,
+        correction:`${texte_en_couleur(`correction type2`)}`
+      });
+
+			switch (liste_type_de_questions[i]){
+				case 1 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          break;	
+        case 2 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+					break;				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 }
 
 /**
@@ -40010,11 +40319,13 @@ function Problemes_Thales(){
 	}
 }
 /**
- * @Auteur Jean-Claude Lhote
+ * 3G23 reconnaitre des triangles égaux
+ * @author Jean-Claude Lhote et Sébastien Lozano
  */
 function TrianglesSemblables() {
 	'use strict'
 	Exercice.call(this)
+	this.beta = true;
 	this.titre = "Reconnaître des triangles semblables dans différentes configurations";
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false;
@@ -40069,7 +40380,7 @@ function TrianglesSemblables() {
 				let E = r.listePoints[1];
 				E.nom='E';
 				// on crée un tableau avec les noms proposé pour les points				
-				let tabPointsNames= ['G','H','I','J'];				
+				let tabPointsNames= ['F','G','H','I'];				
 				// on mélange le tableau 
 				tabPointsNames=shuffle(tabPointsNames);
 				//on place les deux solutions
@@ -40105,13 +40416,16 @@ function TrianglesSemblables() {
 				};
 				let transformationAnimee = {
 					sol1:``,
-					sol2:``
+					nature_sol1:``,
+					sol2:``,
+					nature_sol2:``
 				};
 				// pour construire les droites et les centres passant par les centres de rotations
 				let d,d1,d2,d3,d4,d5,J1,J2;
 				switch (angleChoisi2) {
 					case 0:
-						transformationAnimee.sol1=rotationAnimee(p,M,90);
+						transformationAnimee.sol1=rotationAnimee(p,M,90,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol1=`rotation`;
 						// la 1ere compo
 						d= droite(M,Gq);
 						d1=rotation(d,M,-45);
@@ -40122,11 +40436,14 @@ function TrianglesSemblables() {
 						d4=rotation(d3,J1,-45);
 						d5=rotation(d3,X,90);
 						J2=pointIntersectionDD(d4,d5);// centre après la seconde composition angle 270 à 2pi près						
-						transformationAnimee.sol2=rotationAnimee(p,J2,-90);//pb composée d'une R, rot(M,90) et R' rot(Gq,0) puis rot(X,180)
+						transformationAnimee.sol2=rotationAnimee(p,J2,-90,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol2=`rotation`;
 						break;
 					case 90:						
-						transformationAnimee.sol1=rotationAnimee(p,centre_rot.sol1,180);
-						transformationAnimee.sol2=translationAnimee(p,vect_trans.sol2);
+						transformationAnimee.sol1=rotationAnimee(p,centre_rot.sol1,180,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol1=`rotation`;
+						transformationAnimee.sol2=translationAnimee(p,vect_trans.sol2,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol2=`translation`;
 						break;
 					case 180:
 						// la 1ere compo
@@ -40139,12 +40456,16 @@ function TrianglesSemblables() {
 						d4=rotation(d3,J1,-135);
 						d5=rotation(d3,X,90);
 						J2=pointIntersectionDD(d4,d5);// centre après la seconde composition angle 450 à 2pi près						
-						transformationAnimee.sol1=rotationAnimee(p,J1,-90);//pb composée rot(M,90) et rot(Gq,180)
-						transformationAnimee.sol2=rotationAnimee(p,J2,90);//pb composée rot(M,90) et rot(Gq,180) et rot(X,180)
+						transformationAnimee.sol1=rotationAnimee(p,J1,-90,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol1=`rotation`;
+						transformationAnimee.sol2=rotationAnimee(p,J2,90,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol2=`rotation`;
 						break;
 					case 270:
-						transformationAnimee.sol1=translationAnimee(p,vect_trans.sol1);						
-						transformationAnimee.sol2=rotationAnimee(p,centre_rot.sol2,180);
+						transformationAnimee.sol1=translationAnimee(p,vect_trans.sol1,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol1=`translation`;						
+						transformationAnimee.sol2=rotationAnimee(p,centre_rot.sol2,180,'begin="0s" dur="4s" repeatCount="indefinite"');
+						transformationAnimee.nature_sol2=`rotation`;
 						break; 
 				} 
 
@@ -40153,72 +40474,93 @@ function TrianglesSemblables() {
 					enonce:`
 						Où placer le point M pour que les triangles ABC et DEM soient égaux ? 
 						<br>En F ? En G? En H ? En I ?
-						<br> ${mathalea2d(
-								fenetreMathalea2D,
-								p,
-								nom1,
-								grid,
-								tracePoint(D,E,I,I1,F,L),
-								labelPoint(D,E,I,I1,F,L),
-								sgmt_DE,
-								//r,
-								//s
-							)}
-						`,
-					corr_solution1:`Un solution est donc le point ${I.nom} <br>
-					${mathalea2d(
-						fenetreMathalea2D,
-						p,
-						nom1,
-						grid,
-						tracePoint(D,E,I,I1,F,L),
-						labelPoint(D,E,I,I1,F,L),
-						sgmt_DE,
-						r,
-						//s,
-					)}`,
-					corr_solution2:`Un solution est donc le point ${I1.nom} <br>
-					${mathalea2d(
-						fenetreMathalea2D,
-						p,
-						nom1,
-						grid,
-						tracePoint(D,E,I,I1,F,L),
-						labelPoint(D,E,I,I1,F,L),
-						sgmt_DE,
-						//r,
-						s,
-					)}`,
-					corr_animmee_sol1:`Un solution est donc le point ${I.nom} <br>
-					${mathalea2d(
-						fenetreMathalea2D,
-						p,
-						nom1,
-						grid,
-						tracePoint(D,E,I,I1,F,L),
-						labelPoint(D,E,I,I1,F,L),
-						sgmt_DE,
-						r,
-						transformationAnimee.sol1
-					)}`,
-					corr_animmee_sol2:`Un solution est donc le point ${I1.nom} <br>
-					${mathalea2d(
-						fenetreMathalea2D,
-						p,
-						nom1,
-						grid,
-						tracePoint(D,E,I,I1,F,L),
-						labelPoint(D,E,I,I1,F,L),
-						sgmt_DE,
-						//r,
-						s,
-						transformationAnimee.sol2
-					)}`
+						<br>
+						${mathalea2d(
+							fenetreMathalea2D,
+							p,
+							nom1,
+							grid,
+							tracePoint(D,E,I,I1,F,L),
+							labelPoint(D,E,I,I1,F,L),
+							sgmt_DE,
+							//r,
+							//s
+						)}`,
+					corr_solution1:`
+						Une ${transformationAnimee.nature_sol1} permet de superposer les triangles $ABC$ et $DE${I.nom}$
+						<br> ${texte_en_couleur(`Donc le point ${I.nom} est un point qui convient`)}
+						<br>
+						${mathalea2d(
+							fenetreMathalea2D,
+							p,
+							nom1,
+							grid,
+							tracePoint(D,E,I,I1,F,L),
+							labelPoint(D,E,I,I1,F,L),
+							sgmt_DE,
+							r,
+							//s,
+						)}`,
+					corr_solution2:`
+						Une solution est donc le point ${I1.nom}
+						<br>
+						Une ${transformationAnimee.nature_sol2} permet de superposer les triangles $ABC$ et $DE${I1.nom}$
+						<br> ${texte_en_couleur(`Donc le point ${I1.nom} est un point qui convient`)}
+						<br>
+						${mathalea2d(
+							fenetreMathalea2D,
+							p,
+							nom1,
+							grid,
+							tracePoint(D,E,I,I1,F,L),
+							labelPoint(D,E,I,I1,F,L),
+							sgmt_DE,
+							//r,
+							s,
+						)}`,
+					corr_animmee_sol1:`
+						Une ${transformationAnimee.nature_sol1} permet de superposer les triangles $ABC$ et $DE${I.nom}$
+						<br> ${texte_en_couleur(`Donc le point ${I.nom} est un point qui convient`)}
+						<br>
+						${mathalea2d(
+							fenetreMathalea2D,
+							p,
+							nom1,
+							grid,
+							tracePoint(D,E,I,I1,F,L),
+							labelPoint(D,E,I,I1,F,L),
+							sgmt_DE,
+							r,
+							transformationAnimee.sol1
+						)}`,
+					corr_animmee_sol2:`
+						Une ${transformationAnimee.nature_sol2} permet de superposer les triangles $ABC$ et $DE${I1.nom}$
+						<br> ${texte_en_couleur(`Donc le point ${I1.nom} est un point qui convient`)}
+						<br>
+						Une solution est donc le point ${I1.nom}
+						<br>
+						${mathalea2d(
+							fenetreMathalea2D,
+							p,
+							nom1,
+							grid,
+							tracePoint(D,E,I,I1,F,L),
+							labelPoint(D,E,I,I1,F,L),
+							sgmt_DE,
+							//r,
+							s,
+							transformationAnimee.sol2
+						)}`
 				}
 				//texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:20,scale:0.5},p,nom1,grid,r,s)
 				texte = `${figures.enonce}`;
-				texte += `<br> =====CORRECTION SOLUTION 1  Statique et animée ======<br>${figures.corr_solution1}<br>${figures.corr_animmee_sol1}`;
-				texte += `<br> =====CORRECTION SOLUTION 2  ======<br>${figures.corr_solution2}<br>${figures.corr_animmee_sol2}`;
+				if (this.beta) {
+					texte += `<br>${texte_gras(`===== Première solution ======`)}<br>${figures.corr_animmee_sol1}`;
+					texte += `<br><br>${texte_gras(`===== Seconde solution ======`)}<br>${figures.corr_animmee_sol2}`;
+				} else {
+					texte_corr += `<br>${texte_gras(`===== Première solution ======`)}<br>${figures.corr_animmee_sol1}`;
+					texte_corr += `<br><br>${texte_gras(`===== Seconde solution ======`)}<br>${figures.corr_animmee_sol2}`;
+				}
 				this.liste_questions[0]=texte;
 				this.liste_corrections[0]=texte_corr;
 				liste_de_question_to_contenu(this);
