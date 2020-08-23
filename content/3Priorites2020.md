@@ -124,7 +124,7 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Écrire, mettre au point et exécuter un programme.</div>	
 			{{% priorite "L’élève maîtrise le niveau 1 des attendus du programme." %}}
-			{{% priorite_alea "À FAIRE : Tout ! utiliser des SVG générés à partir de https://scratchblocks.github.io/#?style=scratch3&script= et des exports Tikz ?" "" %}}
+			{{% priorite_alea "4Algo1-0 : Dessiner avec Scratch" "4Algo1-0" %}}
 	</div>	
 {{< /liste_priorites >}}
 
