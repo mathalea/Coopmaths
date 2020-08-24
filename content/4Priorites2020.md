@@ -42,7 +42,8 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser les nombres pour comparer, calculer et résoudre des problèmes</div>	
 			{{% priorite "L’élèveutilise la notion d’opposé." %}}
-			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite_alea "5R10-0 : Trouver l'opposé d'un nombre relatif" "5R10-0" %}}	
+			{{% priorite_alea "5R11-2 : Placer un point d'abscisse un nombre relatif" "5R11-2" %}}	
 
 			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
 			{{% priorite_alea "... : ..." "" %}}			
@@ -54,7 +55,9 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser le calcul littéral</div>	
 			{{% priorite "Il produit une expression littérale pour élaborer une formule ou traduire un programme de calcul." %}}
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "4L13-0 : Mettre en équation un problème sans objectif de résolution" "4L13-0" %}}
+
 
 			{{% priorite "Il substitue une valeur numérique à une lettre notamment pour tester une égalité." %}}
 			{{% priorite_alea "... : ..." "" %}}			
