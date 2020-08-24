@@ -42,7 +42,7 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser les nombres pour comparer, calculer et résoudre des problèmes</div>	
 			{{% priorite "L’élèveutilise la notion d’opposé." %}}
-			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite_alea "5R10-0 : Trouver l'opposé d'un nombre relatif" "5R10-0" %}}	
 
 			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
 			{{% priorite_alea "... : ..." "" %}}			
