@@ -436,9 +436,9 @@ function Droite(arg1, arg2, arg3, arg4, color) {
 	}
 	*/
   this.normal = vecteur(this.a, this.b);
-  this.directeur = vecteur(-this.b, this.a);
+  this.directeur = vecteur(this.b,- this.a);
   this.angleAvecHorizontale = angleOriente(
-    point(0, 1),
+    point(1, 0),
     point(0, 0),
     point(this.directeur.x, this.directeur.y)
   );
@@ -1164,6 +1164,13 @@ function Polygone(...points) {
     this.listePoints = points;
     this.nom = this.listePoints.join();
   }
+// for (let point of this.listePoints) { // fausse bonne idée que d'appeler nommePolygone ici.
+//   if (point.nom!="") {
+//     this.sommets=nommePolygone(this)
+//     break
+//   }
+//}
+ 
   this.binomesXY = function (coeff) {
     let liste = "";
     for (let point of this.listePoints) {
@@ -1194,7 +1201,7 @@ function Polygone(...points) {
   };
   this.tikz = function () {
     let tableauOptions = [];
-    if (this.color.length > 1 && this.color !== "black") {
+    if (this.color.length > 1 && this.color !== 'black') {
       tableauOptions.push(this.color);
     }
     if (this.epaisseur != 1) {
@@ -1206,7 +1213,12 @@ function Polygone(...points) {
     if (this.opacite != 1) {
       tableauOptions.push(`opacity=${this.opacite}`);
     }
-
+    if (this.opaciteDeRemplissage !=1) {
+      tableauOptions.push(`fill opacity = ${this.opaciteDeRemplissage}`)
+    }
+    if (this.couleurDeRemplissage !='') {
+      tableauOptions.push(`fill = ${this.couleurDeRemplissage}`)
+    }
     let optionsDraw = [];
     if (tableauOptions.length > 0) {
       optionsDraw = "[" + tableauOptions.join(",") + "]";
@@ -1216,11 +1228,24 @@ function Polygone(...points) {
     for (let point of this.listePoints) {
       binomeXY += `(${point.x},${point.y})--`;
     }
-    return `\\draw${optionsDraw} ${binomeXY}cycle;`;
+    if (this.couleurDeRemplissage == "") {
+      return `\\draw ${optionsDraw} ${binomeXY}cycle;`;
+    } else {
+      return `\\filldraw ${optionsDraw} ${binomeXY}cycle;`;
+    }
+    
   };
 }
 function polygone(...args) {
   return new Polygone(...args);
+}
+
+function polygoneAvecNom(...args) {
+  let groupe
+  let p=polygone(...args)
+  p.sommets=nommePolygone(p)
+  groupe=[p,p.sommets]
+  return groupe
 }
 
 /**
@@ -1741,67 +1766,86 @@ function cercleCentrePoint(...args) {
  * @param {boolean} fill
  * @param {string} color
  */
-function Arc(M, Omega, angle, rayon = false, fill = "none", color = "black") {
-  ObjetMathalea2D.call(this);
-  this.color = color;
-  this.fill = fill;
-  let l = longueur(Omega, M),
-    large = 0,
-    sweep = 0;
-  let d = droite(Omega, M);
-  d.isVisible = false;
-  let A = point(Omega.x + 1, Omega.y);
-  let azimut = angleOriente(A, Omega, M);
-  let anglefin = azimut + angle;
-  if (angle > 180) {
-    angle = angle - 360;
-    large = 1;
-    sweep = 0;
-  } else if (angle < -180) {
-    angle = 360 + angle;
-    large = 1;
-    sweep = 1;
-  } else {
-    large = 0;
-    sweep = 1 - (angle > 0);
-  }
-  let N = rotation(M, Omega, angle);
-  if (rayon)
-    this.svg = function (coeff) {
-      if (this.epaisseur != 1) {
-        this.style += ` stroke-width="${this.epaisseur}" `;
-      }
-      if (this.pointilles) {
-        this.style += ` stroke-dasharray="4 3" `;
-      }
-      if (this.opacite != 1) {
-        this.style += ` stroke-opacity="${this.opacite}" `;
-      }
-      return `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} A ${l * coeff} ${
-        l * coeff
-      } 0 ${large} ${sweep} ${N.xSVG(coeff)} ${N.ySVG(coeff)} L ${Omega.xSVG(
-        coeff
-      )} ${Omega.ySVG(coeff)} Z" stroke="${this.color}" fill="${fill}" ${
-        this.style
-      }/>`;
-    };
-  else
-    this.svg = function (coeff) {
-      if (this.epaisseur != 1) {
-        this.style += ` stroke-width="${this.epaisseur}" `;
-      }
-      if (rayon)
-        `\\fill  ${optionsDraw} (${N.x},${N.y}) -- (${Omega.x},${
-          Omega.y
-        }) -- (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(
-          Omega,
-          M
-        )}) -- cycle ;`;
-      else
-        return `\\draw${optionsDraw} (${M.x},${
-          M.y
-        }) arc (${azimut}:${anglefin}:${longueur(Omega, M)}) ;`;
-    };
+function Arc(M,Omega,angle,rayon=false,fill='none',color='black',fillOpacite=0.2) {
+	ObjetMathalea2D.call(this);
+	this.color=color;
+  this.couleurDeRemplissage=fill;
+  this.opaciteDeRemplissage=fillOpacite
+	let l=longueur(Omega,M),large=0,sweep=0
+	let d=droite(Omega,M)
+   d.isVisible=false
+   let A=point(Omega.x+1,Omega.y)
+   let azimut=angleOriente(A,Omega,M)
+   let anglefin=azimut+angle
+	if (angle>180) {
+		angle=angle-360
+		large=1
+		sweep=0
+	}
+	else if (angle<-180) {
+		angle=360+angle
+		large=1
+		sweep=1
+	}
+	else {
+		large=0
+		sweep=1-(angle>0)
+	}
+	let N=rotation(M,Omega,angle)
+	if (rayon) 	this.svg = function(coeff){
+		if (this.epaisseur!=1) {
+			this.style += ` stroke-width="${this.epaisseur}" `
+		}
+		if (this.pointilles) {
+			this.style += ` stroke-dasharray="4 3" `
+		}
+		if (this.opacite !=1) {
+			this.style += ` stroke-opacity="${this.opacite}" `
+    }
+    if (this.couleurDeRemplissage!='none') {
+      this.style += ` fill-opacity="${this.opaciteDeRemplissage}" `;
+    }
+		return `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} A ${l*coeff} ${l*coeff} 0 ${large} ${sweep} ${N.xSVG(coeff)} ${N.ySVG(coeff)} L ${Omega.xSVG(coeff)} ${Omega.ySVG(coeff)} Z" stroke="${this.color}" fill="${this.couleurDeRemplissage}" ${this.style}/>`
+	}
+	else 	this.svg = function(coeff){
+		if (this.epaisseur!=1) {
+			this.style += ` stroke-width="${this.epaisseur}" `
+		}
+		if (this.pointilles) {
+			this.style += ` stroke-dasharray="4 3" `
+		}
+		if (this.opacite !=1) {
+			this.style += ` stroke-opacity="${this.opacite}" `
+		}
+		return `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} A ${l*coeff} ${l*coeff} 0 ${large} ${sweep} ${N.xSVG(coeff)} ${N.ySVG(coeff)}" stroke="${this.color}" fill="${fill}" ${this.style}/>`
+	}
+	this.tikz = function(){
+		let optionsDraw = []
+	   let tableauOptions = [];
+	   if (this.color.length>1 && this.color!=='black'){
+		   tableauOptions.push(this.color)
+	   }
+	   if (this.epaisseur!=1) {
+		   tableauOptions.push(`line width = ${this.epaisseur}`) 
+	   }
+	   if (this.pointilles) {
+		   tableauOptions.push(`dashed`) 
+	   }
+	   if (this.opacite !=1) {
+		   tableauOptions.push(`opacity = ${this.opacite}`)
+     }
+     if (this.opaciteDeRemplissage !=1) {
+      tableauOptions.push(`fill opacity = ${this.opaciteDeRemplissage}`)
+    }
+    if (this.couleurDeRemplissage !='none') {
+      tableauOptions.push(`fill = ${this.couleurDeRemplissage}`)
+    }
+	   if (tableauOptions.length>0) {
+		   optionsDraw = "["+tableauOptions.join(',')+"]"
+	   }
+	   if (rayon) return `\\filldraw  ${optionsDraw} (${N.x},${N.y}) -- (${Omega.x},${Omega.y}) -- (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(Omega,M)}) -- cycle ;`
+	   else return `\\draw${optionsDraw} (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(Omega,M)}) ;`
+	}
 }
 function arc(...args) {
   return new Arc(...args);
@@ -1914,6 +1958,7 @@ function translation(O, v, nom = "", positionLabel = "above") {
     let p2 = [];
     for (let i = 0; i < O.listePoints.length; i++) {
       p2[i] = translation(O.listePoints[i], v);
+      p2[i].nom = A.listePoints[i].nom+`\'`
     }
     return polygone(p2);
   }
@@ -1960,6 +2005,7 @@ function translation2Points(O, A, B, nom = "", positionLabel = "above") {
     let p2 = [];
     for (let i = 0; i < O.listePoints.length; i++) {
       p2[i] = translation2Points(O.listePoints[i], O, A, B);
+      p2[i].nom = A.listePoints[i].nom+`\'`
     }
     return polygone(p2);
   }
@@ -2013,6 +2059,7 @@ function rotation(A, O, angle, nom, positionLabel) {
     let p2 = [];
     for (let i = 0; i < A.listePoints.length; i++) {
       p2[i] = rotation(A.listePoints[i], O, angle);
+      p2[i].nom = A.listePoints[i].nom+`\'`
     }
     return polygone(p2);
   }
@@ -2067,6 +2114,7 @@ function homothetie(A, O, k, nom, positionLabel) {
     let p2 = [];
     for (let i = 0; i < A.listePoints.length; i++) {
       p2[i] = homothetie(A.listePoints[i], O, k);
+      p2[i].nom = A.listePoints[i].nom+`\'`
     }
     return polygone(p2);
   }
@@ -2131,6 +2179,7 @@ function symetrieAxiale(A, d, nom = "", positionLabel = "above") {
     let p2 = [];
     for (let i = 0; i < A.listePoints.length; i++) {
       p2[i] = symetrieAxiale(A.listePoints[i], d);
+      p2[i].nom = A.listePoints[i].nom+`\'`
     }
     return polygone(p2);
   }
@@ -2230,6 +2279,7 @@ function affiniteOrtho(A, d, k, nom = " ", positionLabel = "above") {
     let p2 = [];
     for (let i = 0; i < A.listePoints.length; i++) {
       p2[i] = affiniteOrtho(A.listePoints[i], d, k);
+      p2[i].nom = A.listePoints[i].nom+`\'`
     }
     return polygone(p2);
   }
@@ -2289,6 +2339,7 @@ function similitude(A, O, a, k, nom = " ", positionLabel = "above") {
     let p2 = [];
     for (let i = 0; i < A.listePoints.length; i++) {
       p2[i] = similitude(A.listePoints[i], O, a, k);
+      p2[i].nom = A.listePoints[i].nom+`\'`
     }
     return polygone(p2);
   }
@@ -2885,7 +2936,53 @@ function CodeSegments(mark = "||", color = "black", ...args) {
 function codeSegments(...args) {
   return new CodeSegments(...args);
 }
+/**
+ * m=codeAngle(A,O,45,'X','black',2,1,'red',0.4) 
+ * code un angle du point A dont le sommet est O et la mesure 45° (sens direct) avec une marque en X.
+ *  la ligne est noire a une épaisseur de 2 une opacité de 100% et le remplissage à 40% d'opacité est rouge.
+ * @Auteur Jean-Claude Lhote
+ */
+function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur=1,opacite=1,fill='none',fillOpacite=0.2) {
+  ObjetMathalea2D.call(this)
+  this.color=color
+  let codage,depart,P,d,arcangle
+  if (fill!='none') {
+    this.couleurDeRemplissage=fill
+    this.opaciteDeRemplissage=fillOpacite
+  }
+  else 
+    this.couleurDeRemplissage='none'
+  let remplir
+  if (fill=='none') 
+    remplir = false
+  else 
+    remplir = true
+  
+  if (typeof(angle)!='number'){
+    angle=angleOriente(debut,centre,angle)
+  }
+  depart=pointSurSegment(centre,debut,taille)
+  P=rotation(depart,centre,angle/2)
+  d=droite(centre,P)
+  d.isVisible=false
+  arcangle=arc(depart,centre,angle,remplir,fill,color)
+  arcangle.opacite=opacite
+  arcangle.epaisseur=epaisseur
+  arcangle.couleurDeRemplissage=this.couleurDeRemplissage
+  arcangle.opaciteDeRemplissage=this.opaciteDeRemplissage
+  if (mark!='') codage=texteParPoint(mark,P,90-d.angleAvecHorizontale,color)
+  else codage=''
+  this.svg=function(coeff){
+    return codage.svg(coeff)+'\n'+arcangle.svg(coeff);
+  }
+  this.tikz=function(){
+    return codage.tikz()+'\n'+arcangle.tikz()
+  }
+}
 
+function codeAngle(...args){
+  return new CodeAngle(...args)
+}
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% LES REPERES ET GRILLE %%%%%%%%%%
@@ -3577,12 +3674,12 @@ function intervalle(A, B, color = "blue", h = 0) {
  *
  * @Auteur Rémi Angot
  */
-function TexteParPoint(texte, A, orientation = "milieu", color) {
+function TexteParPoint(texte, A, orientation = "milieu", color='black') {
   ObjetMathalea2D.call(this);
   this.color = color;
   this.svg = function (coeff) {
     let code = "";
-    if (Number.isInteger(orientation)) {
+    if (typeof(orientation)=='number') {
       code = `<text x="${A.xSVG(coeff)}" y="${A.ySVG(
         coeff
       )}" text-anchor="middle" dominant-baseline="central" fill="${
@@ -3621,7 +3718,7 @@ function TexteParPoint(texte, A, orientation = "milieu", color) {
   this.tikz = function () {
     let code = "";
     if (typeof orientation == "number") {
-      code = `\\draw (${A.x},${
+      code = `\\draw [${color}] (${A.x},${
         A.y
       }) node[anchor = center, rotate = ${-orientation}] {${texte}};`;
     } else {
@@ -3635,7 +3732,7 @@ function TexteParPoint(texte, A, orientation = "milieu", color) {
       if (orientation == "milieu") {
         anchor = "node[anchor = center]";
       }
-      code = `\\draw (${A.x},${A.y}) ${anchor} {${texte}};`;
+      code = `\\draw [${color}] (${A.x},${A.y}) ${anchor} {${texte}};`;
     }
     return code;
   };

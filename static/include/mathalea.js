@@ -5478,7 +5478,8 @@ var liste_des_exercices_disponibles = {
   "CM018": Somme_de_deux_nombres_maries_et_un_entier,
   "CM019": Le_compte_est_bonV3,
   "CM020": Le_compte_est_bonV4,
-  "BetaCM021": Compte_Est_Bon,
+  "CM021": Compte_Est_Bon,
+  "beta6pave" : Solide_6e,
   "6C10": Additions_soustractions_multiplications_posees,
   "6C11": Divisions_euclidiennes,
   "6C10-1": Tables_de_multiplications,
@@ -5502,7 +5503,8 @@ var liste_des_exercices_disponibles = {
   "6G11": Tracer_des_perpendiculaires,
   "6G12": Tracer_des_paralleles,
   "6G12-1": Tracer_des_perpendiculaires_et_des_paralleles,
-  "6G20": Vocabulaire_des_triangles_6e,
+  "6G20" : Nommer_et_coder_des_polygones,
+  "6G20-2": Vocabulaire_des_triangles_6e,
   "6G23-2": Tracer_triangle_2_angles,
   "6G24": Transformations_6e,
   "6G25-1": Pavages_et_reflexion,
@@ -5586,6 +5588,7 @@ var liste_des_exercices_disponibles = {
   "5L14": Tester_une_egalite,
   "5M10": Aire_du_parallelogramme,
   "5M20": Calcul_de_volumes_5e,
+  "beta5R10-0": Trouver_oppose,
   "5R11": Lire_abscisse_relative,
   "5R11-2": Placer_points_sur_axe_relatifs,
   "5R12": Reperage_point_du_quart_de_plan,
@@ -5599,6 +5602,7 @@ var liste_des_exercices_disponibles = {
   "5S13": Calculer_des_frequences,
   "5S14": Calculer_des_moyennes,
   "5S21": fonctions_probabilite1,
+  "beta4Algo1-0": Tracer_avec_scratch,
   "4C10-0": Signe_produit_quotient_relatifs,
   "4C10-1": Signe_produit_relatifs,
   "4C10-2": Signe_quotient_relatifs,
@@ -5668,6 +5672,7 @@ var liste_des_exercices_disponibles = {
   "3G20-1": Problemes_Thales,
   "3G21": Reciproque_Thales,
   "3G22": Agrandissement_reduction,
+  "3G23": TrianglesSemblables,
   "3G30": Exercice_Trigo_longueurs,
   "3G31": Exercice_Trigo_angles,
   "3F1-act": fonction_notion_vocabulaire,
@@ -5697,6 +5702,8 @@ var liste_des_exercices_disponibles = {
   "2G12": Modelisation_coordonnees,
   "2L10": Developper_Identites_remarquables2,
   "2L11": Factoriser_Identites_remarquables2,
+  "beta1N10": Terme_d_une_suite_definie_explicitement,
+  "beta1N11": Terme_d_une_suite_definie_par_recurrence, 
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   P001: Code_LaTeX_personnalise,
@@ -5705,8 +5712,7 @@ var liste_des_exercices_disponibles = {
   cours: Questions_de_cours,
   LaTeX: Code_LaTeX_personnalise,
   // 'Perso' : HTML_personnalise,
-  // 'TsvgjsKatex' : tests_SVGJS_KATEX,
-  "beta3G23": TrianglesSemblables,
+  // 'TsvgjsKatex' : tests_SVGJS_KATEX,  
 };
 
 //Pour modifier les exercices lorsqu'ils sont en mode diaporama
@@ -5775,7 +5781,10 @@ function Exercice() {
   this.nouvelle_version = function (numero_de_l_exercice) {};
   this.liste_packages = []; // string ou liste de string avec le nom des packages spécifiques à ajouter dans le préambule
 }
-
+/**
+ * Pour imprimer des repères vierges pour les élèves.
+ * @Auteur Jean-Claude Lhote
+ */
 function feuille_d_axes_gradues() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -8422,199 +8431,11 @@ function Compte_Est_Bon() {
     liste_de_question_to_contenu(this);
   };
   this.besoin_formulaire_texte = [
-    "Niveaux de difficultés)",
+    "Niveaux de difficultés (1 à 3)",
     "Nombres séparés par des tirets",
   ]; // Texte, tooltip
 }
-/*
-function LeVraiCompteEstBon(){ //en construction
-	'use strict';
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Générateur de \"Le compte est bon\"";
-	this.consigne = "Écrire un calcul égal au nombre cible en utilisant les nombres du tirage.";
-	this.nb_questions = 1;
-	this.nb_cols = 2;
-	this.nb_cols_corr = 2;
-	this.sup="1-2-3-4-5-6";
-	var max_solution=70;
-	
-	this.nouvelle_version = function(numero_de_l_exercice){
-		let tirage,tirage2,tirage3,tirage4,tirage5,N1,N2,N3,N4,N5,N6,R1,R2,R3,R4,R5,op1,op2,op3,op4,op5
-		if (!this.sup) tirage = [1,2,3,4,5,6]
-		else tirage = this.sup.split("-");
-		let cible=124;
-		for (let i=0;i<6;i++) tirage[i]=parseInt(tirage[i])
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-		let calculs=[[],[],[],[],[]],operations=['+','*','-','/','opp+','inv*'],solutions=[[]],liste_index_solution
-		let nb_operande=tirage.length
-		let index=0
-		for (let i=0;i<tirage.length;i++) {  // première opération : N1 op N2 = R1 
-			N1=tirage[i]
-			for (let op=0;op<operations.length;op++) {
-				for (let j=0;j<tirage.length;j++) {
-					if (j!=i) {
-						N2=tirage[j]
-						// On push les index et non les nombres et les opérations seul le résultat est un nombre
-						if (op==0&&j>i) calculs[index].push([i,op,j,calcul(N1+N2)]) // On évite les doublons une fois calculé a+b, on ne fait pas b+a (j>i)
-						if (op==1&&j>i) calculs[index].push([i,op,j,calcul(N1*N2)]) // idem
-						if (op==2&& N1>N2) calculs[index].push([i,op,j,calcul(N1-N2)]) // si on peut calculer a-b, on ne pourra pas calculer b-a (négatif)
-						if (op==3&& estentier(calcul(N1/N2))) calculs[index].push([i,op,j,calcul(N1/N2)]) // si on peut calculer a/b, on ne pourra pas calculer b/a (non entier)
-						// pas de soustraction opposée ni de division inversée, les couples (a,b) et (b,a) sont tous là donc ce serait redondant
-						if (calculs[index][calculs[index].length-1][3]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
-							solutions.push(calculs[index].pop())
-						}
-					}
-				}
-			}
-		}
-		alert('premier niveau passé')
-	
-		index++	// on passe au deuxième niveau.
-		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 1 opération peut générer des calculs de niveau 2 opérations
-			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
-			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
-			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
-			op1=calculs[index-1][i][1]; // index de op1 dans operations
-			tirage2=range(5,[N1,N2])
-			for (let k=0;k<tirage2.length;k++) tirage2[k]=parseInt(tirage2[k])
-			for (let op=0;op<operations.length;op++) {
-				for (let j in tirage2) {
-					// on va prendre N3 autre que N1 et N2 qui ont déjà été utilisés
-						N3=tirage[j];
-						if (op==0) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3+R1)])
-						if (op==1) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3*R1)])
-						if (op==2&&R1>N3) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(R1-N3)])
-						if (op==3&& estentier(R1/N3)) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(R1/N3)])
-						if (op==4&& N3>R1) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3-R1)])
-						if (op==4&& estentier(N3/R1)) calculs[index].push([N1,op1,N2,R1,op,parseInt(j),calcul(N3/R1)])
-						if (calculs[index][calculs[index].length-1][6]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
-							solutions.push(calculs[index].pop())
-						}
-				}
-			}
-		}
-		alert('deuxième niveau passé')
-	
-		index++ // vers l'infini et au delà ! 3ème niveau !
-		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 2 opérations peut générer des calculs de niveau 3 opérations
-			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
-			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
-			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
-			op1=calculs[index-1][i][1]; // index de op1 dans operations
-			N3=calculs[index-1][i][5];
-			op2=calculs[index-1][i][4];
-			R2=calculs[index-1][i][6];
-			tirage3=range(5,[N1,N2,N3])
-			for (let k=0;k<tirage3.length;k++) tirage3[k]=parseInt(tirage2[k])
-				for (let op=0;op<operations.length;op++) {
-					for (let j in tirage3) {
-						N4=tirage[j];
-						if (op==0) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4+R2)])
-						if (op==1) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4*R2)])
-						if (op==2&&R2>N4) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(R2-N4)])
-						if (op==3&& estentier(R2/N4)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(R2/N4)])
-						if (op==4&& N4>R2) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4-R2)])
-						if (op==4&& estentier(N4/R2)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op,parseInt(j),calcul(N4/R2)])
-						if (calculs[index][calculs[index].length-1][9]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
-							solutions.push(calculs[index].pop())
-						}
-					}
-				}
-			}
-		
-		alert('troisième niveau passé')
 
-		index++ //là ça devient lourd ! 
-		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 3 opérations peut générer des calculs de niveau 4 opérations
-			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
-			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
-			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
-			op1=calculs[index-1][i][1]; // index de op1 dans operations
-			N3=calculs[index-1][i][5];
-			op2=calculs[index-1][i][4];
-			R2=calculs[index-1][i][6];
-			N4=calculs[index-1][i][8];
-			op3=calculs[index-1][i][7];
-			R3=calculs[index-1][i][9];
-			tirage4=range(5,[N1,N2,N3,N4])
-			tirage4[0]=parseInt(tirage2[0])
-			tirage4[1]=parseInt(tirage2[1])
-			
-			for (let op=0;op<operations.length;op++) {
-				for (let j in tirage4) {
-						N5=tirage[j];
-						if (op==0) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5+R3)])
-						if (op==1) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5*R3)])
-						if (op==2&&R3>N5) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(R3-N5)])
-						if (op==3&& estentier(R3/N5)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(R3/N5)])
-						if (op==4&& N5>R3) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5-R3)])
-						if (op==4&& estentier(N5/R3)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op,parseInt(j),calcul(N5/R3)])
-						if (calculs[index][calculs[index].length-1][12]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
-							solutions.push(calculs[index].pop())
-						}
-					}
-			}
-		}
-		alert('quatrième niveau passé')
-	
-		index++
-		for (let i=0;i<calculs[index-1].length;i++) { // chaque calcul de niveau 3 opérations peut générer des calculs de niveau 4 opérations
-			N1=calculs[index-1][i][0]; // index de N1 dans le tirage
-			N2=calculs[index-1][i][2]; // index de N2 dans le tirage
-			R1=calculs[index-1][i][3]; // résultat de N1 op1 N2
-			op1=calculs[index-1][i][1]; // index de op1 dans operations
-			N3=calculs[index-1][i][5];
-			op2=calculs[index-1][i][4];
-			R2=calculs[index-1][i][6];
-			N4=calculs[index-1][i][8];
-			op3=calculs[index-1][i][7];
-			R3=calculs[index-1][i][9];
-			N5=calculs[index-1][i][11];
-			op4=calculs[index-1][i][10];
-			R4=calculs[index-1][i][12];
-			tirage5=range(5,[N1,N2,N3,N4,N5])
-			tirage5[0]=parseInt(tirage5[0])
-			for (let op=0;op<operations.length;op++) {
-				for (let j in tirage5) {
-						N6=tirage[j];
-						if (op==0) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6+R4)])
-						if (op==1) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6*R4)])
-						if (op==2&&R4>N6) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(R4-N6)])
-						if (op==3&& estentier(R4/N6)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(R4/N6)])
-						if (op==4&& N6>R4) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6-R4)])
-						if (op==4&& estentier(N6/R4)) calculs[index].push([N1,op1,N2,R1,op2,N3,R2,op3,N4,R3,op4,N5,R4,op,parseInt(j),calcul(N6/R4)])
-						if (calculs[index][calculs[index].length-1][15]==cible) { // si le résultat est la cible, alors on transfert le calcul dans solutions et on le retire des calculs
-							solutions.push(calculs[index].pop())
-						}
-					}
-			}
-		}
-		for (let i = 0, texte, texte_corr,cpt=0; i < this.nb_questions && cpt<50; ) {
-			solution_mathador=Trouver_solution_mathador(min_solution,max_solution)
-			tirage=solution_mathador[0]
-			solution=solution_mathador[1]
-			expression=solution_mathador[3]
-
-			texte=`Le tirage est le suivant : $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ <br>La cible est : $${solution}$`
-			texte_corr=`Pour le tirage $${tirage[0]}~;~${tirage[1]}~;~${tirage[2]}~;~${tirage[3]}~;~${tirage[4]}$ et pour la cible $${solution}$, la solution est : $${expression}=${solution}$ `
-			texte_corr+=`ou $${solution_mathador[4]}$.<br>`
-			texte_corr+=`En effet : <br>`
-			for (let i=0;i<4;i++) {
-				texte_corr+=`$${solution_mathador[2][i]}$<br>`
-			}
-						if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-							this.liste_questions.push(texte);
-							this.liste_corrections.push(texte_corr);
-							i++;
-						}		
-			cpt++;	
-		}
-	// liste_de_question_to_contenu(this);
-	}
-	this.besoin_formulaire_texte = ['Choix des nombres du tirage (de aucun à cinq)','Nombres séparés par des tirets'] // Texte, tooltip
-}
-*/
 
 /**
  * Générateur de tirages pour un compte est bon avec en correction la solution mathador (4 opérations différentes).
@@ -16358,7 +16179,7 @@ function Reciproque_Thales_4eme() {
 
 /**
  * Vocabulaire des triangles
- * 6G20 ; 5G20-1
+ * 6G20-2 ; 5G20-1
  * @author Sébastien Lozano
  */
 
@@ -16547,7 +16368,7 @@ function Vocabulaire_des_triangles() {
             triangle_isocele.l2 = l1;
             triangle_isocele.l3 = l2;
           }
-          texte = `${triangle_isgocele.getNom()} est un triangle tel que ${
+          texte = `${triangle_isocele.getNom()} est un triangle tel que ${
             triangle_isocele.getLongueurs()[0]
           } $= ${triangle_isocele.l1}$ cm ; `;
           texte += `${triangle_isocele.getLongueurs()[1]} $= ${
@@ -16840,7 +16661,205 @@ function Vocabulaire_des_triangles() {
     ];
   }
 }
+function Nommer_et_coder_des_polygones() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Nommer et coder des polygones";
+  this.consigne =
+    "Nommer les figures en fonction de l'énoncé puis ajouter le codage.";
+  this.nb_questions = 4;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.sup2 = 3;
 
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let Xmin, Xmax, Ymin, Ymax, ppc, sc, g, k, carreaux
+    function initialise_variables() {
+      if (sortie_html) {
+        // repère -10 || 10
+        Xmin = 0;
+        Ymin = -6;
+        Xmax = 13;
+        Ymax = 8;
+        ppc = 20;
+        sc=0.5
+      } else {
+        // repère -5 || 5
+        Xmin = 0;
+        Ymin = -6;
+        Xmax = 13;
+        Ymax = 8;
+        ppc = 20;
+        sc=0.4
+      }
+    }
+    initialise_variables();
+    let params = {
+      xmin: Xmin,
+      ymin: Ymin,
+      xmax: Xmax,
+      ymax: Ymax,
+      pixelsParCm: ppc,
+      scale: sc,
+    }
+    if (this.sup2 < 3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
+    else g = ''
+    if (this.sup2 == 2) {
+      k = 0.8;
+      carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
+    } else {
+      k = 0.5;
+      carreaux = "";
+    }
+    let liste = combinaison_listes([1, 2, 3, 4, 5, 6, 7, 8], this.nb_questions);
+
+    for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+      pixelsParCm = 40;
+      let pol, polcode, polsom, polnom
+      function choisir_polygone(n) { // n compris entre 1 et 8 (1 à 4 pour un triangle, 5 à 8 pour une quadrilatère)
+        let A, B, C, D
+        let nom = creerNomDePolygone(4, "PQ"), pnom, q, p, pcode, enonce
+        switch (n) {
+          case 1: // triangle isocèle
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(0, 10) / 10, nom[1])
+            C = rotation(B, A, randint(25, 80), nom[2])
+            q = polygone(A, B, C)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2])
+            pcode = [codeSegments('||', 'blue', A, B, A, C),codeAngle(B,C,A,0.8,'|','blue',2,0.8,'blue',0.2),codeAngle(C,B,A,0.8,'|','blue',2,0.8,'blue',0.2)]
+            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est isocèle en $${nom[0]}$.<br>`
+            break
+          case 2: // triangle équilatéral
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(0, 10) / 10, nom[1])
+            C = rotation(B, A, 60, nom[2])
+            q = polygone(A, B, C)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2])
+            pcode = [codeSegments('||', 'blue', A, B, A, C, B, C),codeAngle(B,C,A,0.8,'|','blue',2,0.8,'blue',0.2),codeAngle(C,B,A,0.8,'|','blue',2,0.8,'blue',0.2),codeAngle(C,A,B,0.8,'|','blue',2,0.8,'blue',0.2)]
+            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est équilatéral.<br>\\phantom{et sa longueur est AB}`
+            break
+          case 3: // triangle rectangle
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(0, 10) / 10, nom[1])
+            C = similitude(B, A, 90, randint(30, 100) / 100, nom[2])
+            q = polygone(A, B, C)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2])
+            pcode = codageAngleDroit(B, A, C)
+            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est rectangle en $${nom[0]}$.<br>\\phantom{et sa longueur est AB}`
+            break
+          case 4: // triangle rectangle isocèle
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(0, 10) / 10, nom[1])
+            C = rotation(B, A, 90, nom[2])
+            q = polygone(A, B, C)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2])
+            pcode = [codeSegments('||', 'blue', A, B, A, C), codageAngleDroit(B, A, C),codeAngle(B,C,A,0.8,'|','blue',2,0.8,'blue',0.2),codeAngle(C,B,A,0.8,'|','blue',2,0.8,'blue',0.2)]
+            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est rectangle et isocèle en $${nom[0]}$.`
+            break
+          //on choisit un quadrilatère 
+          case 5: // carré
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(10, 30) / 10, nom[1])
+            q = carre(A, B)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            D = p.listePoints[3]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2] + nom[3])
+            pcode = [codeSegments('||', 'blue', A, B, B, C, C, D, D, A), codageAngleDroit(B, A, D), codageAngleDroit(A, B, C), codageAngleDroit(B, C, D), codageAngleDroit(A, D, C)]
+            enonce = `le quadrilatère $${nom[0] + nom[1] + nom[2] + nom[3]}$ est un carré.<br>\\phantom{et sa longueur est AB}`
+            break
+          case 6: // rectangle
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(10, 30) / 10, nom[1])
+            C = similitude(A, B, -90, randint(30, 80) / 100, nom[2])
+            D = translation(C, vecteur(B, A), nom[3])
+            q = polygone(A, B, C, D)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            D = p.listePoints[3]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2] + nom[3])
+            pcode = [codeSegments('||', 'blue', A, B, C, D), codeSegments('|', 'red', C, B, A, D), codageAngleDroit(B, A, C), codageAngleDroit(A, B, C), codageAngleDroit(B, C, D), codageAngleDroit(A, D, C)]
+            enonce = `le quadrilatère $${nom[0] + nom[1] + nom[2] + nom[3]}$ est un rectangle et $${nom[0] + nom[1]}$ est sa longueur.`
+            break
+          case 7: // losange
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(10, 30) / 10, nom[1])
+            C = rotation(A, B, randint(100, 150), nom[2])
+            D = translation(C, vecteur(B, A), nom[3])
+            q = polygone(A, B, C, D)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            D = p.listePoints[3]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2] + nom[3])
+            pcode = [codeSegments('O', 'blue', A, B, B, C, C, D, D, A),codeAngle(C,D,A,0.8,'||','red',2,0.8,'red',0.2),codeAngle(C,B,A,0.8,'||','red',2,0.8,'red',0.2),codeAngle(B,C,D,0.8,'|','blue',2,0.8,'blue',0.2),codeAngle(D,A,B,0.8,'|','blue',2,0.8,'blue',0.2)]
+            enonce = `le quadrilatère $${nom[0] + nom[1] + nom[2] + nom[3]}$ est un losange et [$${nom[0] + nom[2]}$] est sa plus grande diagonale.`
+            break
+          case 8: // trapèze rectangle
+            A = point(3, randint(0, 20) / 10, nom[0])
+            B = point(randint(7, 8), randint(10, 30) / 10, nom[1])
+            D = similitude(B, A, 90, randint(30, 80) / 100, nom[3])
+            C = translation(D, homothetie(vecteur(A, B), A, randint(30, 80) / 100), nom[2])
+            q = polygone(A, B, C, D)
+            p = rotation(q, barycentre(q), randint(0, 360))
+            A = p.listePoints[0]
+            B = p.listePoints[1]
+            C = p.listePoints[2]
+            D = p.listePoints[3]
+            pnom = nommePolygone(p, nom[0] + nom[1] + nom[2] + nom[3])
+            pcode = [codageAngleDroit(B, A, D), codageAngleDroit(C, D, A)]
+            enonce = `le quadrilatère $${nom[0] + nom[1] + nom[2] + nom[3]}$ est un trapèze rectangle de grande base $${nom[0] + nom[1]}$ de hauteur $${nom[0] + nom[3]}$.`
+            break
+        }
+        return [p, nom, pcode, pnom, enonce]
+      }
+      [pol, polnom, polcode, polsom, texte] = choisir_polygone(liste[i]);
+      pol.epaisseur=2
+      texte += `<br>` + mathalea2d(params, pol, polnom,g,carreaux)
+      texte_corr = mathalea2d(params, pol, polnom, polcode, polsom,g,carreaux)
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+    pixelsParCm=20
+  };
+  this.besoin_formulaire2_numerique = [
+    "Type de cahier",
+    3,
+    `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
+  ];
+}
 /**
  * Utiliser les notations des segments, droites et demi-droites
  * @Auteur Rémi Angot
@@ -17001,7 +17020,7 @@ function Description_segment_droite_demi_droite() {
 
 /**
  * Vocabulaire des triangles
- * 6G20
+ * 6G20-2
  * @author Sébastien Lozano
  */
 function Vocabulaire_des_triangles_6e() {
@@ -17644,6 +17663,145 @@ function Tracer_triangle_2_angles() {
   //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+function Solide_6e() {
+  "use strict";
+  Exercice.call(this);
+  this.titre = "Connaître les propriétés du cube et du pavé droit";
+  this.nb_questions = 1;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1;
+  this.sup2 = 1;
+  this.nouvelle_version = function (numero_de_l_exercice) {
+  let type_de_questions_disponibles;
+  type_de_questions_disponibles = [parseInt(this.sup)]; 
+  let liste_type_de_questions = combinaison_listes(
+      type_de_questions_disponibles,
+      this.nb_questions
+    );
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let Xmin, Xmax, Ymin, Ymax, ppc, sc;
+    function initialise_variables() {
+      if (sortie_html) {
+        // repère -10 || 10
+        Xmin = -1;
+        Ymin = -4;
+        Xmax = 15;
+        Ymax = 11;
+        ppc = 20;
+      } else {
+        // repère -5 || 5
+        Xmin = -1;
+        Ymin = -4;
+        Xmax = 15;
+        Ymax =11;
+        ppc = 20;
+      }
+    }
+
+    initialise_variables();
+    if (this.sup2 == 1) sc = 0.5;
+    else sc = 0.8;
+
+    let A,B,C,D,E,F,G,H,
+      AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,
+      lAB,lBC,lAE,anglepersp,coeffpersp,
+      codesseg=[],
+      enonce,
+      correction,
+      carreaux,g,
+      objets_enonce = [],
+      objets_correction = [],
+      params = {
+        xmin: Xmin,
+        ymin: Ymin,
+        xmax: Xmax,
+        ymax: Ymax,
+        pixelsParCm: ppc,
+        scale: sc,
+      },k,
+      p;
+    for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+      if (this.sup2 < 3) g = grille(-1, -15, 15, 15, "gray", 0.7);
+      else g = "";
+      if (this.sup2 == 2) {
+        k = 0.8;
+        carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
+      } else {
+        k = 0.5;
+        carreaux = "";
+      }
+      let nom = creerNomDePolygone(8, "PQ"),
+      anglepersp=choice([30,45,-30,-45])
+      if (anglepersp%10==0) coeffpersp=0.7
+      else coeffpersp=0.5
+         switch (liste_type_de_questions[i]) {
+        case 1: //cube
+          A = point(0, 0, nom[0], "below left");
+          B = point(7, 0, nom[1], "below right");
+          C = point(7,7, nom[2], "above right");
+          D = point(0,7, nom[3],"above left");
+          E = similitude(B,A,anglepersp,coeffpersp,nom[4])
+          F = translation2Points(E,A,B,nom[5])
+          G = translation2Points(F,B,C,nom[6])
+          H = translation2Points(G,C,D,nom[7])
+          AB=segment(A,B)
+          BC=segment(B,C)
+          CD=segment(C,D)
+          DA=segment(D,A)
+          EF=segment(E,F)
+          FG=segment(F,G)
+          GH=segment(G,H)
+          HE=segment(H,E)
+          AE=segment(A,E)
+          BF=segment(B,F)
+          CG=segment(C,G)
+          DH=segment(D,H)
+
+        objets_correction.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,
+            g,
+            carreaux
+          );
+          objets_enonce.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,
+            g,
+            carreaux
+          );
+          enonce = num_alpha(0) + ` Reproduire la figure ci-dessous.<br>`;
+          enonce +=
+            num_alpha(1) +
+            ` Repasse tous les segments de même longueur dans une même couleur.<br>`;
+          enonce += mathalea2d(params, objets_enonce);
+          correction = mathalea2d(params, objets_correction);
+          break;
+        case 2:
+           break
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(enonce + "<br>");
+        this.liste_corrections.push(correction + "<br>");
+        i++;
+      }
+      cpt++;
+    }
+
+    liste_de_question_to_contenu(this);
+  };
+  //	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Perpendiculaires\n 2 : Parallèles\n 3 : Mélange`]
+  this.besoin_formulaire2_numerique = [
+    "Type de cahier",
+    3,
+    `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
+  ];
+}
+
+
 /**
  * @Auteur Rémi Angot
  */
@@ -17705,6 +17863,8 @@ jQuery(document).ready(function () {
   let nombre_d_exercices_disponibles_4 = 0;
   let nombre_d_exercices_disponibles_3 = 0;
   let nombre_d_exercices_disponibles_2 = 0;
+  let nombre_d_exercices_disponibles_1 = 0;
+  let nombre_d_exercices_disponibles_T = 0;
   let nombre_d_exercices_disponibles_CM = 0;
   let nombre_d_exercices_disponibles_prof = 0;
   let nombre_d_exercices_disponibles_PE = 0;
@@ -17728,6 +17888,12 @@ jQuery(document).ready(function () {
     if (id[0] == 2) {
       nombre_d_exercices_disponibles_2 += 1;
     }
+    if (id[0] == 1) {
+      nombre_d_exercices_disponibles_1 += 1;
+    }
+    if (id[0] == "T") {
+      nombre_d_exercices_disponibles_T += 1;
+    }
     if (id[0] == "C") {
       nombre_d_exercices_disponibles_CM += 1;
     }
@@ -17748,6 +17914,8 @@ jQuery(document).ready(function () {
   let liste_html_des_exercices_4 = [];
   let liste_html_des_exercices_3 = [];
   let liste_html_des_exercices_2 = [];
+  let liste_html_des_exercices_1 = [];
+  let liste_html_des_exercices_T = [];
   let liste_html_des_exercices_CM = [];
   let liste_html_des_exercices_prof = [];
   let liste_html_des_exercices_PE = [];
@@ -17800,6 +17968,26 @@ jQuery(document).ready(function () {
     }
     if (id[0] == 2) {
       liste_html_des_exercices_2 +=
+        '<span class="id_exercice">' +
+        id +
+        '</span> - <a class="lien_id_exercice" numero="' +
+        id +
+        '">' +
+        exercice_tmp.titre +
+        "</a></br>\n";
+    }
+    if (id[0] == 1) {
+      liste_html_des_exercices_1 +=
+        '<span class="id_exercice">' +
+        id +
+        '</span> - <a class="lien_id_exercice" numero="' +
+        id +
+        '">' +
+        exercice_tmp.titre +
+        "</a></br>\n";
+    }
+    if (id[0] == 'T') {
+      liste_html_des_exercices_T +=
         '<span class="id_exercice">' +
         id +
         '</span> - <a class="lien_id_exercice" numero="' +
@@ -17875,6 +18063,12 @@ jQuery(document).ready(function () {
     liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Seconde (${nombre_d_exercices_disponibles_2})</div><div class="content">`;
     liste_html_des_exercices += liste_html_des_exercices_2;
     liste_html_des_exercices += `</div>`;
+    liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Première (${nombre_d_exercices_disponibles_1})</div><div class="content">`;
+    liste_html_des_exercices += liste_html_des_exercices_1;
+    liste_html_des_exercices += `</div>`;
+    liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Terminale (${nombre_d_exercices_disponibles_T})</div><div class="content">`;
+    liste_html_des_exercices += liste_html_des_exercices_T;
+    liste_html_des_exercices += `</div>`;
     liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>CRPE (${nombre_d_exercices_disponibles_PE})</div><div class="content">`;
     liste_html_des_exercices += liste_html_des_exercices_PE;
     liste_html_des_exercices += `</div>`;
@@ -17894,6 +18088,12 @@ jQuery(document).ready(function () {
     liste_html_des_exercices += `</div>`;
     liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Seconde (${nombre_d_exercices_disponibles_2})</div><div class="content">`;
     liste_html_des_exercices += liste_html_des_exercices_2;
+    liste_html_des_exercices += `</div>`;
+    liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Première (${nombre_d_exercices_disponibles_1})</div><div class="content">`;
+    liste_html_des_exercices += liste_html_des_exercices_1;
+    liste_html_des_exercices += `</div>`;
+    liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Terminale (${nombre_d_exercices_disponibles_T})</div><div class="content">`;
+    liste_html_des_exercices += liste_html_des_exercices_T;
     liste_html_des_exercices += `</div>`;
     liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>CRPE (${nombre_d_exercices_disponibles_PE})</div><div class="content">`;
     liste_html_des_exercices += liste_html_des_exercices_PE;
@@ -20488,7 +20688,7 @@ function Lire_abscisse_relative(){
 			l3=lettre_depuis_chiffre(i*3+3)
 			switch (type_de_questions[i]) {
 				case 1: // Placer des décimaux relatifs sur un axe (1 décimale)
-					abs0 = randint(-7, -3);
+					abs0 = randint(-6, -3);
 					pas1 = 1;
 					pas2 = 10;
 					break;
@@ -20500,7 +20700,7 @@ function Lire_abscisse_relative(){
 					break;
 
 				case 3: // Placer des décimaux relatifs sur un axe (3 décimales)
-					abs0 = randint(-10, -2) / 100;
+					abs0 = randint(-6, -2) / 100;
 					pas1 = 100;
 					pas2 = 10;
 					break;
@@ -23910,8 +24110,8 @@ function Construire_par_Symetrie() {
 				p2.listePoints[0].nom=`${p1nom[2]}\'`
 				p2.listePoints[1].nom=`${p1nom[3]}\'`
 				p2.listePoints[2].nom=`${p1nom[4]}\'`
-				CC=nommePolygone(p1)
-				DD=nommePolygone(p2)
+				//CC=nommePolygone(p1)
+				//DD=nommePolygone(p2)
 				cC=codageMediatrice(p1.listePoints[0],p2.listePoints[0],'red','|')
 				cD=codageMediatrice(p1.listePoints[1],p2.listePoints[1],'blue','X')
 				cE=codageMediatrice(p1.listePoints[2],p2.listePoints[2],'green','O')			
@@ -23922,7 +24122,7 @@ function Construire_par_Symetrie() {
 				sCE.pointilles=true
 				sED=droite(p2.listePoints[2],p2.listePoints[1],'','gray')
 				sED.pointilles=true
-				objets_correction.push(d,g,tracePoint(A,B),labelPoint(A,B),carreaux,cC,cD,cE,sC,sD,sE,CC,DD,p1,p2,sCE,sED)
+				objets_correction.push(d,g,tracePoint(A,B),labelPoint(A,B),carreaux,cC,cD,cE,sC,sD,sE,CC,DD,p1,p1.sommets,p2,p2.sommets,sCE,sED)
 				objets_enonce.push(g,d,tracePoint(A,B),labelPoint(A,B),carreaux,CC,p1);
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[2]}\'${p1nom[3]}\'${p1nom[4]}\'$ symétrique de $${p1nom[2]}${p1nom[3]}${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
@@ -23949,8 +24149,8 @@ function Construire_par_Symetrie() {
 				p2.listePoints[0].nom=`${p1nom[0]}\'`
 				p2.listePoints[1].nom=`${p1nom[2]}\'`
 				p2.listePoints[2].nom=`${p1nom[3]}\'`
-				CC=nommePolygone(p1)
-				DD=nommePolygone(p2)
+				//CC=nommePolygone(p1)
+				//DD=nommePolygone(p2)
 				cC=codageMilieu(p1.listePoints[0],p2.listePoints[0],'red','|',false)
 				cD=codageMilieu(p1.listePoints[1],p2.listePoints[1],'blue','X' ,false)
 				cA=codageMilieu(p1.listePoints[2],p2.listePoints[2],'green','O',false)
@@ -23958,7 +24158,7 @@ function Construire_par_Symetrie() {
 				sC=segment(p1.listePoints[1],p2.listePoints[1],'blue')
 				sD=segment(p1.listePoints[2],p2.listePoints[2],'green')	
 				
-			objets_correction.push(g,carreaux,tracePoint(B),labelPoint(B),cC,cD,cA,sC,sD,sA,CC,DD,p1,p2)
+			objets_correction.push(g,carreaux,tracePoint(B),labelPoint(B),cC,cD,cA,sC,sD,sA,p1.sommets,p2.sommets,p1,p2)
 				objets_enonce.push(tracePoint(B),g,labelPoint(B),CC,p1,carreaux);
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[0]}\'${p1nom[2]}\'${p1nom[3]}\'$ symétrique de $${p1nom[0]}${p1nom[2]}${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
@@ -23994,6 +24194,101 @@ function Construire_par_Symetrie() {
 	  `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
 	];
   }
+
+  
+  /** 
+ * * Dessiner selon un programme scratch
+ * * 5R10-0
+ * @author Sébastien Lozano
+ */
+function Trouver_oppose(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 1;
+	} else {
+		this.nb_questions = 1;
+	};	
+
+	this.titre = "Trouver l'opposé d'un nombre relatif";
+	this.consigne = "Compléter le tableau suivant.";
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	//sortie_html? this.spacing = 3 : this.spacing = 2; 
+  //sortie_html? this.spacing_corr = 3 : this.spacing_corr = 2;
+  
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [1];			
+		} else {
+			type_de_questions_disponibles = [1];			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//type_de_questions_disponibles=[1];			
+
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+
+			let enonces = [];
+			enonces.push({
+				enonce:`énoncé type 1`,
+				question:``,
+				correction:`${texte_en_couleur(`correction type1`)}`
+			  });
+			enonces.push({
+				enonce:`énoncé type 2`,
+				question:``,
+				correction:`${texte_en_couleur(`correction type2`)}`
+			});
+
+			switch (liste_type_de_questions[i]){
+				case 1 : 
+          texte = `${enonces[0].enonce}`;
+          if (this.beta) {
+            texte += `<br>`;
+            texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+            texte_corr = ``;	
+          } else {
+            texte_corr = `${enonces[0].correction}`;
+          };
+          break;	
+        case 2 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+					break;				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+}
   /**
  * * Calcul de l'inverse d'un nombre.
  *
@@ -33890,6 +34185,7 @@ function Graphiques_et_proportionnalite() {
 }
 
 /** 
+ * * Trouver l'erreur dans une equation
  * * 4L15-0
  * @author Sébastien Lozano
  */
@@ -33905,7 +34201,7 @@ function Trouver_erreur_resol_eq_deg1(){
 	};	
 
 	this.titre = "Trouver l'erreur dans une résolution d'équation du premier degré";
-	this.consigne = "Trouver l'erreur dans les résoltution suivantes.<br>On ne demande pas de résoudre l'équation.";
+	this.consigne = "Trouver l'erreur dans les résoltutions suivantes.<br>On ne demande pas de résoudre l'équation.";
 	
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
@@ -33931,15 +34227,79 @@ function Trouver_erreur_resol_eq_deg1(){
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      //on choisit un nom pour l'inconnue
+      let variables = ['x','t','u','v','w','y','z'];
+      let inc = variables[randint(0,variables.length-1)];
       
+      // on choisit les paramètres
+      let a = randint(-9,9,[-1,0,1]);
+      let b = randint(-9,9,[-1,0,1]);
+      let c = randint(-9,9,[-1,0,1]);
+      let d = randint(-9,9,[-1,0,1]);
+
+      // une fonction pour gérer le signe
+      function signeDansEq(nb) {
+        if (nb > 0) {
+          return {signe:`+`,operation:`soustraire`,chgt_signe:nb};
+        } else {
+          return {signe:``,operation:`ajouter`,chgt_signe:nb*(-1)};
+        };
+      };
+
+      // une fonction pour gérer le genre du prénom et le pronom associé
+      function genreEtPrenom() {
+        let n = randint(0,1);
+        if (n==0) {
+          return {prenom:prenomM(),pronom:`il`};
+        } else {
+          return {prenom:prenomF(),pronom:`elle`};
+        };
+      }
+
+      let currentGenreEtPrenom = genreEtPrenom();
+
       // pour les situations
-      let situations = {};
+      let situations = [
+        {
+          pronom:currentGenreEtPrenom.pronom,
+          prenom:currentGenreEtPrenom.prenom,
+          a:a,
+          b:b,
+          c:c,
+          d:d,
+          inc:inc,
+          eq:`$${a}${inc} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc}$`,
+          et1:`$${a}${inc} ${signeDansEq(c).signe} ${c}${inc} ${signeDansEq(b).signe} ${b} = ${d} $`,// l'erreur est là, on passe de l'autre côté d'où l'oubli du chgt de signe
+          et2:`$${a}${inc} ${signeDansEq(c).signe} ${c}${inc} = ${d} ${signeDansEq(-b).signe} ${-b} $`,
+          et3:`$${a+c}${inc} = ${d} ${signeDansEq(-b).signe} ${-b} $`,
+          et4:`$${inc} = \\dfrac{${d} ${signeDansEq(-b).signe} ${-b}}{${a+c}} $`,
+          err:`
+            L'erreur se situe à l'étape 1.
+            <br>${currentGenreEtPrenom.prenom} "a fait passer" le terme $${signeDansEq(c).signe} ${c}${inc}$ "de l'autre côté"
+            or pour obtenir une équation équivalente, il s'agit d'opérer de la même manière sur les deux membres de l'équation.
+            <br>Ici il faut ${signeDansEq(c).operation} $${signeDansEq(c).chgt_signe}${inc}$ aux deux membres.
+            `
+        }
+      ];
+
+
 
 			let enonces = [];
 			enonces.push({
-				enonce:`énoncé type 1`,
+        enonce:`
+          ${situations[0].prenom} doit résoudre l'équation suivante : ${situations[0].eq}.
+          <br> Voilà ce qu'${situations[0].pronom} écrit :
+          <br>${texte_gras(`Étape 1 :`)} ${situations[0].et1}
+          <br>${texte_gras(`Étape 2 :`)} ${situations[0].et2}
+          <br>${texte_gras(`Étape 3 :`)} ${situations[0].et3}
+          <br>${texte_gras(`Étape 4 :`)} ${situations[0].et4}
+        `,
 				question:``,
-        correction:`${texte_en_couleur(`correction type1`)}`
+        correction:`
+        ${situations[0].err}
+        <br>
+        ${texte_en_couleur(`correction type1`)}
+        `
       });
       enonces.push({
 				enonce:`énoncé type 2`,
@@ -33952,11 +34312,265 @@ function Trouver_erreur_resol_eq_deg1(){
 					texte = `${enonces[0].enonce}`;
 					if (this.beta) {
 						texte += `<br>`;
-						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+            texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+            texte += `
+             `
 						texte_corr = ``;	
 					} else {
 						texte_corr = `${enonces[0].correction}`;
 					};
+          break;	
+        case 2 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+					break;				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+}
+
+/** 
+ * * Dessiner selon un programme scratch
+ * * 4Algo1-0
+ * @author Sébastien Lozano
+ */
+function Tracer_avec_scratch(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 1;
+	} else {
+		this.nb_questions = 1;
+	};	
+
+	this.titre = "Dessiner avec scratch";
+	this.consigne = "Dessiner la figure qui va être tracée avec le script fourni.";
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	//sortie_html? this.spacing = 3 : this.spacing = 2; 
+  //sortie_html? this.spacing_corr = 3 : this.spacing_corr = 2;
+  
+  this.liste_packages = "scratch3";
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [1];			
+		} else {
+			type_de_questions_disponibles = [1];			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//type_de_questions_disponibles=[1];			
+
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      // une fonction pour gérer la sortie HTML/LaTeX
+      // code est un string contenant le code svg ou tikz
+      function scratchblocks_Tikz(code_svg,code_tikz) {
+        if (sortie_html) {
+          return code_svg;
+        } else {
+          return code_tikz;
+        };
+      };
+
+    // une fonction pour dire le nom du polygone
+    function myPolyName(n) {
+      let sortie = {
+        name: ``,
+        nameParSommets: ``,
+        nb_pas:``
+      };
+      switch (n) {
+        case 3:
+          sortie.name = `triangle équilatéral`;
+          sortie.nameParSommets = `ABC`;
+          sortie.nb_pas = 400;
+          break;
+        case 4:
+          sortie.name = `carré`;
+          sortie.nameParSommets = `ABCD`;
+          sortie.nb_pas = 400;
+          break;
+        case 5:
+          sortie.name = `pentagone régulier`;
+          sortie.nameParSommets = `ABCDE`;
+          sortie.nb_pas = 300;
+          break;
+        case 6:
+          sortie.name = `hexagone régulier`;
+          sortie.nameParSommets = `ABCDEF`;
+          sortie.nb_pas = 250;
+          break;
+        case 7:
+          sortie.name = `heptagone régulier`;
+          sortie.nameParSommets = `ABCDEFG`;
+          sortie.nb_pas = 200;
+          break;
+        case 8:
+          sortie.name = `octogone régulier`;
+          sortie.nameParSommets = `ABCDEFGH`;
+          sortie.nb_pas = 200;
+          break;
+        case 9:
+          sortie.name = `ennéagone régulier`;
+          sortie.nameParSommets = `ABCDEFGHI`;
+          sortie.nb_pas = 175;
+          break;
+
+      }
+      return sortie;
+    }
+
+
+      // on définit le nombre de côtés du polygone régulier
+      let n = randint(3,8,[7]);
+
+      let situations = [
+        {//polygones réguliers
+          nb_cotes:n,
+          nom:myPolyName(n).name,
+          code_svg:`
+          <pre class='blocks'>
+          quand le drapeau vert pressé
+          stylo en position d'écriture
+          répéter (${n}) fois
+            avancer de (${myPolyName(n).nb_pas}) pas
+            tourner droite de (${360/n}) degrés
+          fin                  
+          </pre>          
+          `,
+          code_tikz:`
+          \\begin{scratch}
+            \\blockinit{quand \\greenflag est cliqué}
+            \\blockpen{stylo en position d’écriture}
+            \\blockrepeat{répéter \\ovalnum{${n}} fois}
+              {
+                \\blockmove{avancer de \\ovalnum{${myPolyName(n).nb_pas}}}
+                \\blockmove{tourner \\turnright{} de \\ovalnum{${360/n}} degrés}
+              }
+          \\end{scratch}
+          `,
+          fig_corr:``,
+          fig_corr_fake1:``,
+          fir_gorr_fake2:``
+        },
+      ];
+      // on prépare la fenetre mathalea2d
+      let fenetreMathalea2D = {xmin:-4,ymin:-10,xmax:18,ymax:2,pixelsParCm:20}
+      pixelsParCm = 50;
+      unitesLutinParCm = 50;
+      // le lutin2 est celui qui fait la bonne figure
+      let lutin2=creerLutin();
+      lutin2.color="blue";
+      lutin2.pointilles=true;
+      allerA(fenetreMathalea2D.xmin*pixelsParCm,fenetreMathalea2D.ymax*pixelsParCm,lutin2);
+      baisseCrayon(lutin2);
+      allerA(fenetreMathalea2D.xmax*pixelsParCm,fenetreMathalea2D.ymax*pixelsParCm,lutin2);
+      allerA(fenetreMathalea2D.xmax*pixelsParCm,fenetreMathalea2D.ymin*pixelsParCm,lutin2);
+      allerA(fenetreMathalea2D.xmin*pixelsParCm,fenetreMathalea2D.ymin*pixelsParCm,lutin2);
+      allerA(fenetreMathalea2D.xmin*pixelsParCm,fenetreMathalea2D.ymax*pixelsParCm,lutin2);
+      leveCrayon(lutin2);
+      lutin2.pointilles = false;
+      allerA(0,0,lutin2);
+      baisseCrayon(lutin2);      
+      for (let k=1;k<n+1; k++) {
+        avance(myPolyName(n).nb_pas,lutin2);
+        tournerD(calcul(360/n),lutin2);
+      };
+      let mesAppels_corr = [
+        lutin2,
+      ]
+      situations[0].fig_corr = mathalea2d(
+        fenetreMathalea2D,
+        mesAppels_corr
+        );
+
+            // fake1 avec n+1 côtés on utilise le lutin2 pour les dessins
+            let lutin2_f1=creerLutin();
+            lutin2_f1.color="blue";
+            lutin2_f1.pointilles=true;
+            allerA(fenetreMathalea2D.xmin*pixelsParCm,fenetreMathalea2D.ymax*pixelsParCm,lutin2_f1);
+            baisseCrayon(lutin2_f1);
+            allerA(fenetreMathalea2D.xmax*pixelsParCm,fenetreMathalea2D.ymax*pixelsParCm,lutin2_f1);
+            allerA(fenetreMathalea2D.xmax*pixelsParCm,fenetreMathalea2D.ymin*pixelsParCm,lutin2_f1);
+            allerA(fenetreMathalea2D.xmin*pixelsParCm,fenetreMathalea2D.ymin*pixelsParCm,lutin2_f1);
+            allerA(fenetreMathalea2D.xmin*pixelsParCm,fenetreMathalea2D.ymax*pixelsParCm,lutin2_f1);
+            leveCrayon(lutin2_f1);
+            lutin2_f1.pointilles = false;
+            allerA(0,0,lutin2_f1);
+            baisseCrayon(lutin2_f1);      
+            for (let k=1;k<n+2; k++) {
+              avance(myPolyName(n+1).nb_pas,lutin2_f1);
+              tournerD(calcul(360/(n+1)),lutin2_f1);
+            };
+            situations[0].fig_corr_fake1 = mathalea2d(
+              fenetreMathalea2D,
+              lutin2_f1
+            )
+
+			let enonces = [];
+			enonces.push({
+        enonce:`
+        ${scratchblocks_Tikz(situations[0].code_svg,situations[0].code_tikz)}
+        <br>
+        Quelle est la bonne fiure ?
+        <br>Fig1
+        ${situations[0].fig_corr}
+        <br>Fig2        
+        ${situations[0].fig_corr_fake1}        
+        `,
+				question:``,
+        correction:`
+        ${texte_en_couleur(`La figure tracée est donc un ${situations[0].nom}.`)}
+        <br>
+        ${situations[0].fig_corr}
+        `
+      });
+      enonces.push({
+				enonce:`énoncé type 2`,
+				question:``,
+        correction:`${texte_en_couleur(`correction type2`)}`
+      });
+
+			switch (liste_type_de_questions[i]){
+				case 1 : 
+          texte = `${enonces[0].enonce}`;
+          if (this.beta) {
+            texte += `<br>`;
+            texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+            texte_corr = ``;	
+          } else {
+            texte_corr = `${enonces[0].correction}`;
+          };
           break;	
         case 2 : 
 					texte = `${enonces[1].enonce}`;
@@ -40325,7 +40939,7 @@ function Problemes_Thales(){
 function TrianglesSemblables() {
 	'use strict'
 	Exercice.call(this)
-	this.beta = true;
+	this.beta = false;
 	this.titre = "Reconnaître des triangles semblables dans différentes configurations";
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false;
@@ -40356,7 +40970,7 @@ function TrianglesSemblables() {
 				let angleChoisi1 = choice([0,90,270]); 
 				p=rotation(p,G,angleChoisi1); // on tourne ABC de façon aléatoire autour de son barycentre
 				p.couleurDeRemplissage='gray';//remplissage de ABC
-				p.opaciteDeRemplissage=0.5;//remplissage de ABC
+				p.opaciteDeRemplissage=0.2;//0.5;//remplissage de ABC
 				nom1=nommePolygone(p,'ABC',0.4); // on  nomme ABC en plaçant A,B et C à 0,4
 				grid=grille(-3,-3,27,18, 'gray',0.4,1); // on trace une grille
 				M=point(9,12); // un point M fixe pour tourner autour				
@@ -40370,9 +40984,9 @@ function TrianglesSemblables() {
 				X=milieu(r.listePoints[0],r.listePoints[1]); // on place le milieu des deux premiers points de la figure obtenue qui sont les images des points A et B initiaux	
 				s=rotation(r,X,180); // on fait topurner r autour du milieu des deux extremites du plus grand côté
 				r.couleurDeRemplissage='red'; // solution 1 en rouge
-				r.opaciteDeRemplissage=0.5; // 
+				r.opaciteDeRemplissage=0.2;//0.5; // 
 				s.couleurDeRemplissage='blue'; //solution 2 en bleu
-				s.opaciteDeRemplissage=0.5; //
+				s.opaciteDeRemplissage=0.2;//0.5; //
 				// mes ajouts par rapport à la figure de JC				
 				// on fixe une place pour D et E
 				let D = r.listePoints[0];
@@ -40416,16 +41030,16 @@ function TrianglesSemblables() {
 				};
 				let transformationAnimee = {
 					sol1:``,
-					nature_sol1:``,
+					//nature_sol1:``,
 					sol2:``,
-					nature_sol2:``
+					//nature_sol2:``
 				};
 				// pour construire les droites et les centres passant par les centres de rotations
 				let d,d1,d2,d3,d4,d5,J1,J2;
 				switch (angleChoisi2) {
 					case 0:
 						transformationAnimee.sol1=rotationAnimee(p,M,90,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol1=`rotation`;
+						//transformationAnimee.nature_sol1=`rotation`;
 						// la 1ere compo
 						d= droite(M,Gq);
 						d1=rotation(d,M,-45);
@@ -40437,13 +41051,13 @@ function TrianglesSemblables() {
 						d5=rotation(d3,X,90);
 						J2=pointIntersectionDD(d4,d5);// centre après la seconde composition angle 270 à 2pi près						
 						transformationAnimee.sol2=rotationAnimee(p,J2,-90,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol2=`rotation`;
+						//transformationAnimee.nature_sol2=`rotation`;
 						break;
 					case 90:						
 						transformationAnimee.sol1=rotationAnimee(p,centre_rot.sol1,180,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol1=`rotation`;
+						//transformationAnimee.nature_sol1=`rotation`;
 						transformationAnimee.sol2=translationAnimee(p,vect_trans.sol2,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol2=`translation`;
+						//transformationAnimee.nature_sol2=`translation`;
 						break;
 					case 180:
 						// la 1ere compo
@@ -40457,17 +41071,89 @@ function TrianglesSemblables() {
 						d5=rotation(d3,X,90);
 						J2=pointIntersectionDD(d4,d5);// centre après la seconde composition angle 450 à 2pi près						
 						transformationAnimee.sol1=rotationAnimee(p,J1,-90,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol1=`rotation`;
+						//transformationAnimee.nature_sol1=`rotation`;
 						transformationAnimee.sol2=rotationAnimee(p,J2,90,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol2=`rotation`;
+						//transformationAnimee.nature_sol2=`rotation`;
 						break;
 					case 270:
 						transformationAnimee.sol1=translationAnimee(p,vect_trans.sol1,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol1=`translation`;						
+						//transformationAnimee.nature_sol1=`translation`;						
 						transformationAnimee.sol2=rotationAnimee(p,centre_rot.sol2,180,'begin="0s" dur="4s" repeatCount="indefinite"');
-						transformationAnimee.nature_sol2=`rotation`;
+						//transformationAnimee.nature_sol2=`rotation`;
 						break; 
-				} 
+				}
+				// DE = AB
+				let seg_DE_corr = segment(D,E,'blue');
+				seg_DE_corr.epaisseur = 2;
+				let seg_AB_corr = segment(p.listePoints[0],p.listePoints[1],'blue');
+				seg_AB_corr.epaisseur = 2;
+				//DI = AC ou EI1 = AC
+				let seg_DI_corr = segment(D,I,'red');
+				let seg_EI1_corr = segment(E,I1,'red');
+				seg_DI_corr.epaisseur = 2;
+				seg_EI1_corr.epaisseur = 2;
+				let seg_AC_corr = segment(p.listePoints[0],p.listePoints[2],'red');
+				seg_AC_corr.epaisseur = 2;
+				//EI = BC ou DI1 = BC
+				let seg_EI_corr = segment(E,I,'green');
+				let seg_DI1_corr = segment(D,I1,'green');
+				seg_EI_corr.epaisseur = 2;
+				seg_DI1_corr.epaisseur = 2;
+				let seg_BC_corr = segment(p.listePoints[1],p.listePoints[2],'green');				
+				seg_BC_corr.epaisseur = 2;
+				// angle ABC = DEI ou ABC = EDI1
+				let ang_ABC = angleOriente(p.listePoints[0],p.listePoints[1],p.listePoints[2]);
+				let ang_DEI = angleOriente(D,E,I);
+				let ang_EDI1 = angleOriente(E,D,I1);
+				// angle BCA = EID ou  BCA = DI1E
+				let ang_BCA = angleOriente(p.listePoints[1],p.listePoints[2],p.listePoints[0]);
+				let ang_EID = angleOriente(E,I,D);
+				let ang_EI1D = angleOriente(E,I1,D);
+				// angle CAB = IDE ou CAB = I1ED
+				let ang_CAB = angleOriente(p.listePoints[2],p.listePoints[0],p.listePoints[1]);
+				let ang_IDE = angleOriente(I,D,E);
+				let ang_I1ED = angleOriente(I1,E,D);				
+
+				let codages_correction = {
+					sol1:[
+						// les segments						
+						seg_AB_corr,
+						seg_DE_corr,						
+						codeSegments('×', 'blue', p.listePoints[0], p.listePoints[1], D,E ),
+						seg_AC_corr,
+						seg_DI_corr,
+						codeSegments('||', 'red', p.listePoints[0], p.listePoints[2], D,I ),
+						seg_BC_corr,
+						seg_EI_corr,						
+						codeSegments('O', 'green', p.listePoints[1], p.listePoints[2], I,E ),
+						//les angles
+						arc(pointSurSegment(p.listePoints[1], p.listePoints[0], 0.8), p.listePoints[1], ang_ABC,true,'red'),
+						arc(pointSurSegment(E, D, 0.8), E, ang_DEI,true,'red'),
+						arc(pointSurSegment(p.listePoints[2], p.listePoints[1], 0.8), p.listePoints[2], ang_BCA,true,'blue'),
+						arc(pointSurSegment(I, E, 0.8), I, ang_EID,true,'blue'),
+						arc(pointSurSegment(p.listePoints[0], p.listePoints[2], 0.8), p.listePoints[0], ang_CAB,true,'green'),
+						arc(pointSurSegment(D, I, 0.8), D, ang_IDE,true,'green')
+					],
+					sol2:[
+						//les segments
+						seg_AB_corr,
+						seg_DE_corr,						
+						codeSegments('×', 'blue', p.listePoints[0], p.listePoints[1], D,E ),
+						seg_BC_corr,
+						seg_DI1_corr,
+						codeSegments('O', 'green', p.listePoints[1], p.listePoints[2], D,I1 ),
+						seg_AC_corr,
+						seg_EI1_corr,
+						codeSegments('||', 'red', p.listePoints[0], p.listePoints[2], E,I1 ),
+						// les angles
+						arc(pointSurSegment(p.listePoints[1], p.listePoints[0], 0.8), p.listePoints[1], ang_ABC,true,'red'),
+						arc(pointSurSegment(D, E, 0.8), D, ang_EDI1,true,'red'),
+						arc(pointSurSegment(p.listePoints[2], p.listePoints[1], 0.8), p.listePoints[2], ang_BCA,true,'blue'),
+						arc(pointSurSegment(I1, E, 0.8), I1, ang_EI1D,true,'blue'),
+						arc(pointSurSegment(p.listePoints[0], p.listePoints[2], 0.8), p.listePoints[0], ang_CAB,true,'green'),
+						arc(pointSurSegment(E, I1, 0.8), E, ang_I1ED,true,'green')
+					]
+				}
 
 				// on crée un objet pour stocker les figures et les corrections
 				let figures = {
@@ -40487,7 +41173,7 @@ function TrianglesSemblables() {
 							//s
 						)}`,
 					corr_solution1:`
-						Une ${transformationAnimee.nature_sol1} permet de superposer les triangles $ABC$ et $DE${I.nom}$
+						Les triangles $ABC$ et $DE${I.nom}$ ont les mêmes longueurs et les mêmes angles.
 						<br> ${texte_en_couleur(`Donc le point ${I.nom} est un point qui convient`)}
 						<br>
 						${mathalea2d(
@@ -40500,11 +41186,10 @@ function TrianglesSemblables() {
 							sgmt_DE,
 							r,
 							//s,
+							codages_correction.sol1
 						)}`,
 					corr_solution2:`
-						Une solution est donc le point ${I1.nom}
-						<br>
-						Une ${transformationAnimee.nature_sol2} permet de superposer les triangles $ABC$ et $DE${I1.nom}$
+						Les triangles $ABC$ et $DE${I1.nom}$ ont les mêmes longueurs et les mêmes angles.		
 						<br> ${texte_en_couleur(`Donc le point ${I1.nom} est un point qui convient`)}
 						<br>
 						${mathalea2d(
@@ -40517,24 +41202,29 @@ function TrianglesSemblables() {
 							sgmt_DE,
 							//r,
 							s,
+							codages_correction.sol2
 						)}`,
 					corr_animmee_sol1:`
-						Une ${transformationAnimee.nature_sol1} permet de superposer les triangles $ABC$ et $DE${I.nom}$
+						Les triangles $ABC$ et $DE${I.nom}$ ont les mêmes longueurs et les mêmes angles.						
 						<br> ${texte_en_couleur(`Donc le point ${I.nom} est un point qui convient`)}
-						<br>
+						<br>						
 						${mathalea2d(
 							fenetreMathalea2D,
 							p,
 							nom1,
 							grid,
-							tracePoint(D,E,I,I1,F,L),
-							labelPoint(D,E,I,I1,F,L),
-							sgmt_DE,
+							//tracePoint(D,E,I,I1,F,L),
+							tracePoint(I1,F,L),
+							//labelPoint(D,E,I,I1,F,L),
+							labelPoint(I1,F,L),
+							nommePolygone(r,'DE'+I.nom,0.4),
+							//sgmt_DE,
 							r,
-							transformationAnimee.sol1
+							transformationAnimee.sol1,
+							codages_correction.sol1
 						)}`,
 					corr_animmee_sol2:`
-						Une ${transformationAnimee.nature_sol2} permet de superposer les triangles $ABC$ et $DE${I1.nom}$
+						Les triangles $ABC$ et $DE${I1.nom}$ ont les mêmes longueurs et les mêmes angles.
 						<br> ${texte_en_couleur(`Donc le point ${I1.nom} est un point qui convient`)}
 						<br>
 						Une solution est donc le point ${I1.nom}
@@ -40544,12 +41234,16 @@ function TrianglesSemblables() {
 							p,
 							nom1,
 							grid,
-							tracePoint(D,E,I,I1,F,L),
-							labelPoint(D,E,I,I1,F,L),
-							sgmt_DE,
+							//tracePoint(D,E,I,I1,F,L),
+							tracePoint(I,F,L),
+							//labelPoint(D,E,I,I1,F,L),
+							labelPoint(I,F,L),
+							nommePolygone(s,'DE'+I1.nom,0.4),
+							//sgmt_DE,
 							//r,
 							s,
-							transformationAnimee.sol2
+							transformationAnimee.sol2,
+							codages_correction.sol2
 						)}`
 				}
 				//texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:20,scale:0.5},p,nom1,grid,r,s)
@@ -43197,7 +43891,205 @@ function Factoriser_Identites_remarquables2() {
     }
     this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'];
 }
-/*
+function Terme_d_une_suite_definie_explicitement(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Déterminer les termes d'une suite définie de façon explicite";
+	this.consigne = "Une suite étant donnée, calculer le terme demandé.";
+	this.nb_questions = 4;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Vide la liste de questions
+    this.liste_corrections = []; // Vide la liste de questions corrigées
+    
+    let type_de_questions_disponibles = [1, 2, 3];
+    let liste_type_de_questions = combinaison_listes(
+      type_de_questions_disponibles,
+      this.nb_questions
+    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+    for (
+      let i = 0, texte, texte_corr, cpt = 0, a, b, c, d, k;
+      i < this.nb_questions && cpt < 50;
+
+      ) {
+      switch (liste_type_de_questions[i]) {
+        case 1: //fonction affine
+          a = randint(1, 7)*choice([-1,1]);
+          b = randint(1, 10)*choice([-1,1]);
+          k = randint(0, 20);
+			
+          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = `;
+          if (a == 1) {texte += `n`}
+          else 
+            if (a == -1) {texte += `-n`}
+            else {texte += `${a}n`};
+
+          if (b > 0) {texte += `+${b}$.`} 
+          else {texte += `${b}$.`};
+          texte += `<br>Calculer $u_{${k}}$.`;
+			
+          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par ${k}, on obtient : $u_{${k}} = ${a*k+b}$`;
+          break;
+        
+        case 2: //fonction polynome de degré 2
+          a = randint(1,5)*choice([-1,1]);
+          b = randint(0,5)*choice([-1,1]);
+          c = randint(0,9)*choice([-1,1]);
+          k = randint(0,9);
+
+          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = ${a}n^2$`;
+          if (b == 1) {texte += `$+n$`};
+          if (b > 1) {texte += `$+${b}n$`};
+          if (b == -1) {texte += `$-n$`};
+          if (b < -1) {texte += `$${b}n$`};
+          if (c > 0) {texte += `$+${c}$.`};
+          if (c < 0) {texte += `$${c}$.`}
+          texte += `<br>Calculer $u_{${k}}$.`;
+			
+          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par $${k}$, on obtient : $u_{${k}} = ${a*k*k+b*k+c}$`;
+          break;
+        
+        case 3: //fonction homographique
+          a = randint(1,5)*choice([-1,1]);
+          b = randint(1,5)*choice([-1,1]);
+          c = randint(1,5)*choice([-1,1]);
+          d = randint(1,5)*choice([-1,1]);
+          k = randint(1,9);
+
+          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = \\dfrac{`;
+          if (a == 1) {texte += `n`}
+          else 
+            if (a == -1) {texte += `-n`}
+            else {texte += `${a}n`};
+          if (b > 0) {texte += `+${b}}{`}
+          else {texte += `${b}}{`};
+          if (c == 1) {texte += `n`}
+          else   
+            if (c == -1) {texte += `-n`}
+            else {texte += `${c}n`};
+          if (d > 0) {texte += `+${d}}$.`}
+          else {texte += `${d}}$.`};
+          
+          texte += `<br>Calculer $u_{${k}}$.`;
+			
+          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par $${k}$, on obtient : $u_{${k}} = ${(a*k+b)/(c*k+d)}$.`;
+          break;
+      }
+      
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte); // Sinon on enregistre la question dans liste_questions
+				this.liste_corrections.push(texte_corr); // On fait pareil pour la correction
+				i++; // On passe à la question suivante
+			}
+			cpt++;	// Sinon on incrémente le compteur d'essai pour avoir une question nouvelle
+		}
+		liste_de_question_to_contenu(this); // La liste de question et la liste de la correction
+		// sont transformés en chaine de caractère (avec une liste HTML ou LaTeX suivant le contexte)
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
+}
+
+
+
+function Terme_d_une_suite_definie_par_recurrence(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Déterminer les termes d'une suite définie par récurrence";
+	this.consigne = "Une suite étant donnée, calculer le terme demandé.";
+	this.nb_questions = 4;
+
+	this.nouvelle_version = function(){
+		this.liste_questions = []; // Vide la liste de questions
+    this.liste_corrections = []; // Vide la liste de questions corrigées
+    
+    let type_de_questions_disponibles = [1, 2, 3, 3];
+    let liste_type_de_questions = combinaison_listes(
+      type_de_questions_disponibles,
+      this.nb_questions
+    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+    for (
+      let i = 0, texte, texte_corr, cpt = 0, u, a, b, k;
+      i < this.nb_questions && cpt < 50;
+
+      ) {
+      switch (liste_type_de_questions[i]) {
+        case 1: //suite arithmétique
+          a = randint(1, 10)*choice([-1,1]);
+          u = randint(0, 10)*choice([-1,1]);
+          k = randint(1, 10);
+			
+          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n`;
+          if (a > 0) {texte += `+${a}$.`}
+          else {texte += `${a}$.`};
+
+          texte += `<br>Calculer $u_{${k}}$.`;
+			
+          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
+          for (
+            let indice =0; indice < k; indice++ 
+          ){
+            texte_corr += `<br> $u_{${indice+1}} = u_{${indice}}`;
+            if (a > 0) {texte_corr += `+ ${a} = ${u} + ${a} = ${u}$`}
+            else {texte_corr += ` ${a} = ${u}  ${a} = ${u}$`}; // a étant négatif l'opérateur est intégré dans la variable
+            u = u + a;
+          }
+          break;
+        
+        case 2: //suite géométrique
+          a = randint(2,5)*choice([-1,1]);
+          u = randint(1,9)*choice([-1,1]);
+          k = randint(1,9);
+
+          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n \\times ${ecriture_parenthese_si_negatif(a)}$.`;
+
+          texte += `<br>Calculer $u_{${k}}$.`;
+			
+          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
+          for (
+            let indice =0; indice < k; indice++ 
+          ){
+            texte_corr += `<br> $u_{${indice+1}} = u_{${indice}} \\times ${ecriture_parenthese_si_negatif(a)} = ${u} \\times ${ecriture_parenthese_si_negatif(a)} = ${u*a}$`;
+            u = u * a;
+          }
+          break;
+        
+        case 3: //suite arithmético-géométrique
+          a = randint(1,5)*choice([-1,1]);
+          b = randint(1,5)*choice([-1,1]);
+          u = randint(1,5)*choice([-1,1]);
+          k = randint(1,9);
+
+          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = ${a} u_n ${ecriture_algebrique(b)}$.`;
+          
+          texte += `<br>Calculer $u_{${k}}$.`;
+			
+          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
+          for (
+            let indice =0; indice < k; indice++ 
+          ){
+            texte_corr += `<br> $u_{${indice+1}} = ${a}\\times u_{${indice}} ${ecriture_algebrique(b)}=`;
+            texte_corr += `${a} \\times ${ecriture_parenthese_si_negatif(u)} ${ecriture_algebrique(b)} = ${a*u+b}$`;
+            u = u * a + b;
+          }
+          break;
+      }
+      
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte); // Sinon on enregistre la question dans liste_questions
+				this.liste_corrections.push(texte_corr); // On fait pareil pour la correction
+				i++; // On passe à la question suivante
+			}
+			cpt++;	// Sinon on incrémente le compteur d'essai pour avoir une question nouvelle
+		}
+		liste_de_question_to_contenu(this); // La liste de question et la liste de la correction
+		// sont transformés en chaine de caractère (avec une liste HTML ou LaTeX suivant le contexte)
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
+}/*
 MathALEA
 Rémi Angot --- CC-By-SA
 coopmaths.fr
@@ -43654,64 +44546,85 @@ function mise_a_jour_du_code(){
       	});
 		
 	}
+
 	
 	// création des figures MG32 (géométrie dynamique)	
 	
 	window.MG32_tableau_de_figures = []
-	if (sortie_html){ // code pour la sortie HTML
-		
-		let code1 ='', code2='', code_LaTeX = '';
-		if (liste_des_exercices.length > 0) {
-			for (let i = 0; i < liste_des_exercices.length; i++) {
-				exercice[i].nouvelle_version(i);
-				code1 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
-				if (exercice[i].bouton_aide){
-					code1+= `<div id=aide${i}> ${exercice[i].bouton_aide}</div>`
-				}
-				code1 +=  exercice[i].contenu;
-				if (exercice[i].type_exercice=='MG32'){
-					code1 += `<div id="MG32div${i}" class="MG32"></div>`;
-					
-				}
-				code2 += '<h3 class="ui dividing header">Exercice '+(i+1)+'</h3>';
-				code2 +=  exercice[i].contenu_correction;
-				if (exercice[i].type_exercice=='MG32' && exercice[i].MG32codeBase64corr){
-					code2 += `<div id="MG32divcorr${i}" class="MG32"></div>`;
-				}
-			}
-			code1 = '<ol>' + code1 + '</ol>';
-			code2 = '<ol>' + code2 + '</ol>'; 
-			$( "#message_liste_exercice_vide" ).hide();
-			$('#cache').dimmer('hide');
-		} else {
-			$( "#message_liste_exercice_vide" ).show(); // Message au dessus de la liste des exercices
-			$('#cache').dimmer('show'); // Cache au dessus du code LaTeX
-		}
-		
-		$('#exercices').html(code1);
-		$('#corrections').html(code2);
-		renderMathInElement(document.body, {
-            delimiters: [
-			{left: "\\[", right: "\\]", display: true},
-			{left: "$", right: "$", display: false}
-			],
-			"throwOnError":true,"errorColor":"#CC0000","strict":"warn","trust":false
-		});
-		$('.katexPopup').popup({
-			popup: '.special.popup',
-			on: 'hover',
-			variation: 'inverted',
-			inline: true
-		 });
-		//Ajoute figures MG32
-		for (let i = 0; i < liste_des_exercices.length; i++) {
-			if (exercice[i].type_exercice=='MG32'){
-				MG32_ajouter_figure(i)
-			}
-		}
-		MG32_tracer_toutes_les_figures()		
+	if (sortie_html){
+                    // code pour la sortie HTML
 
-	} else { // code pour la sortie LaTeX
+                    let code1 = "",
+                      code2 = "",
+                      code_LaTeX = "";
+                    if (liste_des_exercices.length > 0) {
+                      for (let i = 0; i < liste_des_exercices.length; i++) {
+                        exercice[i].nouvelle_version(i);
+                        code1 +=
+                          '<h3 class="ui dividing header">Exercice ' +
+                          (i + 1) +
+                          "</h3>";
+                        if (exercice[i].bouton_aide) {
+                          code1 += `<div id=aide${i}> ${exercice[i].bouton_aide}</div>`;
+                        }
+                        code1 += exercice[i].contenu;
+                        if (exercice[i].type_exercice == "MG32") {
+                          code1 += `<div id="MG32div${i}" class="MG32"></div>`;
+                        }
+                        code2 +=
+                          '<h3 class="ui dividing header">Exercice ' +
+                          (i + 1) +
+                          "</h3>";
+                        code2 += exercice[i].contenu_correction;
+                        if (
+                          exercice[i].type_exercice == "MG32" &&
+                          exercice[i].MG32codeBase64corr
+                        ) {
+                          code2 += `<div id="MG32divcorr${i}" class="MG32"></div>`;
+                        }
+                      }
+                      code1 = "<ol>" + code1 + "</ol>";
+                      code2 = "<ol>" + code2 + "</ol>";
+                      $("#message_liste_exercice_vide").hide();
+                      $("#cache").dimmer("hide");
+                    } else {
+                      $("#message_liste_exercice_vide").show(); // Message au dessus de la liste des exercices
+                      $("#cache").dimmer("show"); // Cache au dessus du code LaTeX
+                    }
+
+                    $("#exercices").html(code1);
+					$("#corrections").html(code2);
+					if (sortie_html){
+						renderMathInElement(document.body, {
+						delimiters: [
+							{ left: "\\[", right: "\\]", display: true },
+							{ left: "$", right: "$", display: false },
+						],
+						throwOnError: true,
+						errorColor: "#CC0000",
+						strict: "warn",
+						trust: false,
+						});
+						// Interprete toutes les balises <pre class="blocks">
+						scratchblocks.renderMatching("pre.blocks", {
+						style: "scratch3",
+						languages: ["fr"],
+						});
+					}
+                    $(".katexPopup").popup({
+                      popup: ".special.popup",
+                      on: "hover",
+                      variation: "inverted",
+                      inline: true,
+                    });
+                    //Ajoute figures MG32
+                    for (let i = 0; i < liste_des_exercices.length; i++) {
+                      if (exercice[i].type_exercice == "MG32") {
+                        MG32_ajouter_figure(i);
+                      }
+                    }
+                    MG32_tracer_toutes_les_figures();
+                  } else { // code pour la sortie LaTeX
 		let code1 ='', code2='';
 		code_LaTeX = '';
 		if (liste_des_exercices.length > 0) {
@@ -43949,7 +44862,6 @@ window.onload = function()  {
 		horloge(); // Mettre à jour l'heure
 	}
 	
-
 	$('.ui.dropdown').dropdown(); // Pour le menu des exercices
 	$('.ui.accordion').accordion('refresh');
 	$('.ui.checkbox').checkbox();
@@ -44165,4 +45077,212 @@ if (div_signaletique && div_horloge) {
 }
 	
 
-  
+// Gestion des blocs Scratch
+if (sortie_html){
+	window.scratchblocks.loadLanguages({
+		fr: {
+			"commands": {
+			"move %1 steps": "avancer de %1 pas",
+			"turn @turnRight %1 degrees": "tourner @turnRight de %1 degrés",
+			"turn @turnLeft %1 degrees": "tourner @turnLeft de %1 degrés",
+			"point in direction %1": "s'orienter à %1",
+			"point towards %1": "s'orienter vers %1",
+			"go to x:%1 y:%2": "aller à x: %1 y: %2",
+			"go to %1": "aller à %1",
+			"glide %1 secs to x:%2 y:%3": "glisser en %1 secondes à x: %2 y: %3",
+			"glide %1 secs to %2": "glisser en %1 secondes à %2",
+			"change x by %1": "ajouter %1 à x",
+			"set x to %1": "mettre x à %1",
+			"change y by %1": "ajouter %1 à y",
+			"set y to %1": "mettre y à %1",
+			"set rotation style %1": "fixer le sens de rotation %1",
+			"say %1 for %2 seconds": "dire %1 pendant %2 secondes",
+			"say %1": "dire %1",
+			"think %1 for %2 seconds": "penser à %1 pendant %2 secondes",
+			"think %1": "penser à %1",
+			"show": "montrer",
+			"hide": "cacher",
+			"switch costume to %1": "basculer sur le costume %1",
+			"next costume": "costume suivant",
+			"next backdrop": "arrière-plan suivant",
+			"switch backdrop to %1": "basculer sur l'arrière-plan %1",
+			"switch backdrop to %1 and wait": "basculer sur l'arrière-plan %1 et attendre",
+			"change %1 effect by %2": "ajouter %2 à l'effet %1",
+			"set %1 effect to %2": "mettre l'effet %1 à %2",
+			"clear graphic effects": "annuler les effets graphiques",
+			"change size by %1": "ajouter %1 à la taille",
+			"set size to %1%": "mettre la taille à %1 % de la taille initiale",
+			"go to %1 layer": "aller à l'%1 plan",
+			"go %1 %2 layers": "déplacer de %2 plans vers l'%1",
+			"start sound %1": "jouer le son %1",
+			"clear sound effects": "annuler tous les effets sonores",
+			"play sound %1 until done": "jouer le son %1 jusqu'au bout",
+			"stop all sounds": "arrêter tous les sons",
+			"play drum %1 for %2 beats": "jouer du tambour %1 pendant %2 temps",
+			"rest for %1 beats": "faire une pause pendant %1 temps",
+			"play note %1 for %2 beats": "jouer la note %1 pendant %2 temps",
+			"set instrument to %1": "choisir l'instrument n° %1",
+			"change volume by %1": "ajouter %1 au volume",
+			"set volume to %1%": "mettre le volume à %1%",
+			"change tempo by %1": "ajouter %1 au tempo",
+			"set tempo to %1": "mettre le tempo à %1",
+			"erase all": "effacer tout",
+			"stamp": "estampiller",
+			"pen down": "stylo en position d'écriture",
+			"pen up": "relever le stylo",
+			"set pen color to %1": "mettre la couleur du stylo à %1",
+			"change pen color by %1": "ajouter %1 à la couleur du stylo",
+			"set pen %1 to %2": "mettre la %1 du stylo à %2",
+			"change pen %1 by %2": "ajouter %2 à la %1 du stylo",
+			"change pen shade by %1": "ajouter %1 à l'intensité du stylo",
+			"set pen shade to %1": "mettre l'intensité du stylo à %1",
+			"change pen size by %1": "ajouter %1 à la taille du stylo",
+			"set pen size to %1": "mettre la taille du stylo à %1",
+			"when @greenFlag clicked": "quand @greenFlag est cliqué",
+			"when %1 key pressed": "quand la touche %1 est pressée",
+			"when this sprite clicked": "quand ce sprite est cliqué",
+			"when stage clicked": "quand la scène est cliquée",
+			"when backdrop switches to %1": "quand l'arrière-plan bascule sur %1",
+			"when %1 > %2": "quand le %1 > %2",
+			"when I receive %1": "quand je reçois %1",
+			"broadcast %1": "envoyer à tous %1",
+			"broadcast %1 and wait": "envoyer à tous %1 et attendre",
+			"wait %1 seconds": "attendre %1 secondes",
+			"repeat %1": "répéter %1 fois",
+			"forever": "répéter indéfiniment",
+			"if %1 then": "si %1 alors",
+			"wait until %1": "attendre jusqu'à ce que %1",
+			"repeat until %1": "répéter jusqu'à ce que %1",
+			"stop %1": "stop %1",
+			"when I start as a clone": "quand je commence comme un clone",
+			"create clone of %1": "créer un clone de %1",
+			"delete this clone": "supprimer ce clone",
+			"ask %1 and wait": "demander %1 et attendre",
+			"turn video %1": "vidéo %1",
+			"set video transparency to %1%": "mettre la transparence vidéo sur %1",
+			"when video motion > %1": "quand mouvement vidéo > %1",
+			"reset timer": "réinitialiser le chronomètre",
+			"set %1 to %2": "mettre %1 à %2",
+			"change %1 by %2": "ajouter %2 à %1",
+			"show variable %1": "montrer la variable %1",
+			"hide variable %1": "cacher la variable %1",
+			"add %1 to %2": "ajouter %1 à %2",
+			"delete %1 of %2": "supprimer l'élément %1 de %2",
+			"delete all of %1": "supprimer tous les éléments de la liste %1",
+			"if on edge, bounce": "rebondir si le bord est atteint",
+			"insert %1 at %2 of %3": "insérer %1 en position %2 de %3",
+			"replace item %1 of %2 with %3": "remplacer l'élément %1 de la liste %2 par %3",
+			"show list %1": "montrer la liste %1",
+			"hide list %1": "cacher la liste %1",
+			"x position": "abscisse x",
+			"y position": "ordonnée y",
+			"direction": "direction",
+			"costume #": "numéro de costume",
+			"costume %1": "%1 du costume",
+			"size": "taille",
+			"backdrop name": "nom de l'arrière-plan",
+			"backdrop %1": "%1 de l'arrière-plan",
+			"backdrop #": "numéro de l'arrière-plan",
+			"volume": "volume",
+			"tempo": "tempo",
+			"touching %1?": "touche le %1 ?",
+			"touching color %1?": "couleur %1 touchée ?",
+			"color %1 is touching %2?": "couleur %1 touche %2 ?",
+			"distance to %1": "distance de %1",
+			"answer": "réponse",
+			"key %1 pressed?": "touche %1 pressée ?",
+			"mouse down?": "souris pressée ?",
+			"mouse x": "souris x",
+			"mouse y": "souris y",
+			"set drag mode %1": "mettre mode de glissement à %1",
+			"loudness": "volume sonore",
+			"video %1 on %2": "vidéo %1 sur %2",
+			"timer": "chronomètre",
+			"%1 of %2": "%1 de %2",
+			"current %1": "%1 actuelle",
+			"days since 2000": "jours depuis 2000",
+			"username": "nom d'utilisateur",
+			"%1 + %2": "%1 + %2",
+			"%1 - %2": "%1 - %2",
+			"%1 * %2": "%1 * %2",
+			"%1 / %2": "%1 / %2",
+			"pick random %1 to %2": "nombre aléatoire entre %1 et %2",
+			"%1 < %2": "%1 < %2",
+			"%1 = %2": "%1 = %2",
+			"%1 > %2": "%1 > %2",
+			"%1 and %2": "%1 et %2",
+			"%1 or %2": "%1 ou %2",
+			"not %1": "non %1",
+			"join %1 %2": "regrouper %1 et %2",
+			"letter %1 of %2": "lettre %1 de %2",
+			"length of %1": "longueur de %1",
+			"%1 mod %2": "%1 modulo %2",
+			"round %1": "arrondi de %1",
+			"%1 contains %2?": "%1 contient %2 ?",
+			"item %1 of %2": "élément %1 de %2",
+			"item # of %1 in %2": "position de %1 dans %2",
+			"turn %1 on": "allumer le moteur %1",
+			"turn %1 off": "éteindre le moteur %1",
+			"set %1 power to %2": "mettre la puissance du moteur %1 à %2",
+			"set %1 direction to %2": "mettre la direction du moteur %1 à %2",
+			"when distance %1 %2": "quand la distance %1 %2",
+			"distance": "distance",
+			"turn %1 on for %2 seconds": "allumer le moteur %1 pendant %2 secondes",
+			"set light color to %1": "mettre la couleur de la lampe à %1",
+			"play note %1 for %2 seconds": "jouer la note %1 pendant %2 secondes",
+			"when tilted %1": "quand incliné %1",
+			"tilt angle %1": "angle d'inclinaison %1",
+			"else": "sinon",
+			"user id": "id de l'utilisateur",
+			"loud?": "fort ?"
+			},
+			"dropdowns": {},
+			"ignorelt": [],
+			"soundEffects": [
+			"hauteur",
+			"stéréo gauche/droite"
+			],
+			"osis": [
+			"autres scripts dans sprite"
+			],
+			"definePrefix": [
+			"définir"
+			],
+			"defineSuffix": [],
+			"palette": {
+			"Motion": "Mouvement",
+			"Looks": "Apparence",
+			"Sound": "Son",
+			"Events": "Événements",
+			"Control": "Contrôle",
+			"Sensing": "Capteurs",
+			"Operators": "Opérateurs",
+			"Variables": "Variables",
+			"My Blocks": "Mes Blocs"
+			},
+			"math": [
+			"abs",
+			"plancher",
+			"plafond",
+			"racine",
+			"sin",
+			"cos",
+			"tan",
+			"asin",
+			"acos",
+			"atan",
+			"ln",
+			"log",
+			"e^",
+			"10^"
+			],
+			"aliases": {
+			"tourner gauche de %1 degrés": "turn @turnLeft %1 degrees",
+			"tourner droite de %1 degrés": "turn @turnRight %1 degrees",
+			"quand le drapeau vert pressé": "when @greenFlag clicked",
+			"fin": "end"
+			},
+			"name": "Français",
+			"percentTranslated": 100
+		}})
+}
