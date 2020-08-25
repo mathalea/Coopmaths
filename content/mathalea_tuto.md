@@ -75,9 +75,11 @@ On peut donner un lien vers ce diaporama aux élèves en recopiant l'adresse int
 Pour pouvoir mettre en place la boucle évaluative, il peut être utile de préparer une évaluation individualisée avec les besoins de chaque élève.
 
 - Se rendre sur MathALEA > Évaluation à la carte.
-- Chaque ligne correspond à un élève et doit être de la forme "Nom;Prénom;6N10;6C12;6C30".
+- Chaque ligne correspond à un élève et doit être de la forme « Nom ; Prénom ; 6C11 ; 6C12 ; 6C30 ».
 - Choisir son en-tête.
 - Cliquer sur "Complier avec Overleaf"
+
+Il est possible de paramétrer un exercice en choisissant le niveau de difficulté et le nombre de questions en écrivant : « Nom ; Prénom ; 6C11,sup=2,nb_questions=3 ; 6C12 ; 6C30 » (l'exercice 6C11 sera de niveau 2 avec 3 questions).
 
 {{% video "/video/alacarte.mp4"  %}}
 

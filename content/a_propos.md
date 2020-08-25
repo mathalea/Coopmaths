@@ -9,7 +9,7 @@ description : "Présentation du projet COOPMaths - Personnalisation des apprenti
 **Coopmaths** est né d’une volonté de créer et **mutualiser** des outils calibrés pour s’intégrer dans une logique de **personnalisation des apprentissages**.
 Les fichiers de travail proposés ici permettent la mise en place du travail individualisé et s’intègrent parfaitement à l’utilisation de plans de travail. 
 
-Un référentiel décline des niveaux de maîtrise pour différentes thématiques. Pour chaque niveau, des fiches de « _mise en route_ », d’« _entraînement_ » et d’« _évaluation_ », accompagnées de leur correction, sont disponibles afin que chaque élève puisse avancer à son rythme.
+Un [référentiel](/pdf/CoopMaths-Referentiel.pdf) décline des niveaux de maîtrise pour différentes thématiques. Pour chaque niveau, des fiches de « _mise en route_ », d’« _entraînement_ » et d’« _évaluation_ », accompagnées de leur correction, sont disponibles afin que chaque élève puisse avancer à son rythme.
 
 
 Ces ressources s’inscrivent dans une démarche plus globale que les auteurs mettent en œuvre : celle des **pédagogies coopératives**. Les fichiers disponibles sur ce site ne sont donc qu’une pierre à l'édifice. En effet, la personnalisation des apprentissages articule trois éléments : les situations collectives, le travail individualisé et la coopération (_Connac, 2012_[^1]). 
@@ -35,6 +35,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - DESRUELLE Sophie
 - DUVOID Aude
 - FOURNIER Carine
+- GUYON Sthéphane
 - LACROIX Olivier
 - LEFORT Julie
 - LHOTE Jean-Claude
