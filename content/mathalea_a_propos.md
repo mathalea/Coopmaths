@@ -31,19 +31,20 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - [Clipboard.js](https://clipboardjs.com/) MIT license (pour le bouton copier le code LaTeX).
 - [prismjs](http://prismjs.com/) MIT license (pour la coloration syntaxique du code LaTeX).
 - [Slick](https://kenwheeler.github.io/slick/) MIT license (pour le diaporama).
-- [TextFill](https://jquery-textfill.github.io) MIT license (pour adapter la taille de la police dans les diaporamas)
-- [SVG.js](https://svgjs.com/) MIT license (pour afficher des figures)
-- [CodeMirror](https://codemirror.net) MIT license (pour l'éditeur de MathALEA2D)
+- [TextFill](https://jquery-textfill.github.io) MIT license (pour adapter la taille de la police dans les diaporamas).
+- [SVG.js](https://svgjs.com/) MIT license (pour afficher des figures).
+- [CodeMirror](https://codemirror.net) MIT license (pour l'éditeur de MathALEA2D).
+- [Scratchblocks](https://scratchblocks.github.io/) MIT license (pour le rendu des blocs Scratch).
 - Merci à Sébastien Cogez pour ses conseils et à Julien Brunel pour son cours sur la programmation objet.
-- Icone "[Whisper](https://thenounproject.com/term/whisper/21616/)" by Rémy Médard from the Noun Project
-- Icone "[Silence](https://thenounproject.com/term/whisper/77879/)" by Gianluca Manzana from the Noun Project 
-- Icone "[Traffic Light](https://thenounproject.com/term/traffic-lights/1084957/)" by Lukáš Jača from the Noun Project    
+- Icone "[Whisper](https://thenounproject.com/term/whisper/21616/)" by Rémy Médard from the Noun Project.
+- Icone "[Silence](https://thenounproject.com/term/whisper/77879/)" by Gianluca Manzana from the Noun Project.
+- Icone "[Traffic Light](https://thenounproject.com/term/traffic-lights/1084957/)" by Lukáš Jača from the Noun Project.
 
 
 ### ToDo
 
-- Nouveaux exercices (notamment en cycle 4).
-- Gestion des catégories des exercices.
+- Nouveaux exercices (notamment en cycle 4 et lycée).
+- Meilleur rangement des exercices (moteur de recherche, mots-clés...)
 - Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome).
 - ~~Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535) sur MathémaTICE).~~
 - ~~Améliorer l'export sur overleaf.com avec support du thème CoopMaths.~~
@@ -58,6 +59,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 #### 08/20
 
 - Développement de MathALEA 2D.
+- Test de positionnement en cycle 4.
 - Arrivée de Stéphane Guyon pour la programmation d'exercices.
 - Nouveaux exercices en seconde sur les racines carrées et les intervalles.
 - Nouveaux exercices du type « Le compte est bon ».

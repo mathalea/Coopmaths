@@ -11,5 +11,9 @@ niveau:
 
 {{< liste_des_fichiers path="/static/telechargements_latex" pathURL="/telechargements_latex" >}}
 
+## Sources LaTeX des référentiels
+
+{{< liste_des_fichiers path="/static/telechargements_referentiels" pathURL="/telechargements_referentiel" >}}
+
 
 
