@@ -48,6 +48,7 @@ Pour cela deux options :
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 1 décimale" "6N30,sup=1" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 2 décimales" "6N30,sup=2" %}}
 			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N23-1 : Différentes écritures des nombres décimaux" "6N23-1" %}}			
 			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
@@ -62,15 +63,20 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Résoudre des problèmes en utilisant des fractions simples, les nombres décimaux et le calcul.</div>	
 			{{% priorite "Il connaît la priorité de la multiplication sur l’addition et la soustraction." %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6C33 : Calculer en utilisant les priorités opératoires" "6C33" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			
 			{{% priorite "Il résout des problèmes relevant des structures additives et multiplicatives et mobilisant une ou plusieurs étapes de raisonnement." %}}
+			{{% priorite_alea "6C32 : Problème - Les courses" "6C32" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il  résout des problèmes de proportionnalité, notamment en utilisant le coefficient de proportionnalité." %}}
+
+			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}
+			{{% priorite_alea "6P11 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "6P11,nb_questions=2" %}}
+			{{% priorite_alea "6P11-1 : Problème relevant de la proportionnalité avec les propriétés de linéarité" "6P11-1" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
@@ -91,19 +97,23 @@ Pour cela deux options :
 		<div class="header content">Reconnaître, décrire, reproduire, représenter, construire des solides et des figures géométriques</div>	
 			{{% priorite "L’élève code des figures simples du plan et de l’espace." %}}
 			{{% priorite_alea "6G20 :  Nommer et coder des polygones" "6G20" %}}	
-			{{% priorite_alea "6pave :  Connaître les propriétés du cube et du pavé droit" "6pave" %}}
+			{{% priorite_alea "6G42 :  Connaître les propriétés du cube et du pavé droit" "6G42" %}}
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
 			{{% priorite_alea "... : ..." "" %}}	
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
+			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - gros carreaux" "6G12-1,sup2=2" %}}
+			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - pas de carreaux" "6G12-1,sup2=3" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}	
 
-			{{% priorite "Il complète une figure par symétrie axiale." %}}
-			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite "Il complète une figure par symétrie axiale." %}}			
+			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}			
+			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - petits carreaux" "5G10-2,sup2=1" %}}
+			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - gros carreaux" "5G10-2,sup2=2" %}}
+			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - pas de carreaux" "5G10-2,sup2=3" %}}
 
 	</div>	
 {{< /liste_priorites >}}
