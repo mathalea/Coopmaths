@@ -48,7 +48,7 @@ graduationColor : "black", // couleur de la graduation
 afficheZero : false, // par défaut on n'affiche pas le 0 sur l'axes des abscisses et des ordonnées
 axesEpaisseur : 2, // épaisseur des 2 axes et des graduations sur les axes
 axesColor : "black", // couleur des axes
-grillePrincipaleDistance : 1, // un carreau par unité
+grillePrincipaleDistance : 1, // un carreau par unité ; avec 0.5 comme valeur on a deux carreaux par unité ; avec 0.1 on a 10 carreaux
 grillePrincipaleColor : "gray", 
 grillePrincipaleOpacite : 0.7,
 grillePrincipalePointilles : false, // avec grillePrincipalePointilles : true le quadrillage serait en pointillés
@@ -62,7 +62,7 @@ graduationsxMin : xmin,
 graduationsxMax : xmax,
 graduationsyMin : ymin,
 graduationsyMax : ymax,
-positionLabelX : -0.6, // distance entre l'axe est la numérotation
+positionLabelX : -0.6, // position relative de la numérotation par rapport à l'axe
 positionLabelY : -0.6,
 legendeX : "x", // texte à la fin de l'axe des abscisses
 legendeY : "y", // texte à la fin de l'axe des ordonnées

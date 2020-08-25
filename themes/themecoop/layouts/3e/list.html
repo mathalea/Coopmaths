@@ -30,7 +30,7 @@
           {{ end }}  
 
           <!--pour mémoire   range sort (where .Site.Pages "Params.niveau" "3e") "Params.ref"    -->
-          {{ range sort $filtered_non_prio }}          
+          {{ range sort $filtered_non_prio "Params.ref"}}          
           <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
           {{ end }}
 
