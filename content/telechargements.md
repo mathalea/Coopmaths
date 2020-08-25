@@ -13,7 +13,7 @@ niveau:
 
 ## Sources LaTeX des référentiels
 
-{{< liste_des_fichiers path="/static/telechargements_referentiels" pathURL="/telechargements_referentiel" >}}
+{{< liste_des_fichiers path="/static/telechargements_referentiels" pathURL="/telechargements_referentiels" >}}
 
 
 
