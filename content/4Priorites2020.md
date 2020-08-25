@@ -47,6 +47,7 @@ Pour cela deux options :
 
 			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
 			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "... : ..." "" %}}
 	</div>	
 {{< /liste_priorites >}}
 
@@ -55,7 +56,7 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser le calcul littéral</div>	
 			{{% priorite "Il produit une expression littérale pour élaborer une formule ou traduire un programme de calcul." %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "5L10-2 : Traduire un programme de calcul par une expression littérale" "5L10-2" %}}
 			{{% priorite_alea "4L13-0 : Mettre en équation un problème sans objectif de résolution" "4L13-0" %}}
 
 
@@ -72,9 +73,13 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Résoudre des problèmes de proportionnalité</div>	
 			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité́entre deux grandeurs." %}}
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}			
 
 			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "... : ..." "" %}}						
 			{{% priorite_alea "... : ..." "" %}}			
 
 	</div>	
@@ -99,10 +104,17 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}			
 
 			{{% priorite "Il connaît et utilise : la somme des angles d’un triangle; une définition et une propriété caractéristique du parallélogramme." %}}
+			{{% priorite_alea "5G31 : Somme des angles dans un triangle" "5G31" %}}			
+			{{% priorite_alea "... : ..." "" %}}			
 			{{% priorite_alea "... : ..." "" %}}			
 
 			{{% priorite "Il transforme une figure par symétrie centrale." %}}
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "5G12 : Trouver l'image d'une figure par une symétrie centrale dans un pavage" "5G12" %}}
+			{{% priorite_alea "5G11-2 : Construire le symétrique d'une figure par rapport à un point - petits carreaux" "5G11-2,sup2=1" %}}						
+			{{% priorite_alea "5G11-2 : Construire le symétrique d'une figure par rapport à un point - gros carreaux" "5G11-2,sup2=2" %}}
+			{{% priorite_alea "5G11-2 : Construire le symétrique d'une figure par rapport à un point - sans carreaux" "5G11-2,sup2=3" %}}						
+						
+
 
 	</div>	
 {{< /liste_priorites >}}

@@ -43,8 +43,15 @@ Pour cela deux options :
 		<div class="header content">Utiliser et représenter les grands nombres entiers, des fractions simples, les nombres décimaux.</div>	
 			{{% priorite "L’élève utilise les grands nombres entiers et des nombres décimaux ayant au plus quatre décimales." %}}
 			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 		</div>	
 {{< /liste_priorites >}}
@@ -55,15 +62,21 @@ Pour cela deux options :
 		<div class="header content">Résoudre des problèmes en utilisant des fractions simples, les nombres décimaux et le calcul.</div>	
 			{{% priorite "Il connaît la priorité de la multiplication sur l’addition et la soustraction." %}}
 			{{% priorite_alea "... : ..." "" %}}
-
+			{{% priorite_alea "... : ..." "" %}}
+			
 			{{% priorite "Il résout des problèmes relevant des structures additives et multiplicatives et mobilisant une ou plusieurs étapes de raisonnement." %}}
 			{{% priorite_alea "... : ..." "" %}}
-
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il  résout des problèmes de proportionnalité, notamment en utilisant le coefficient de proportionnalité." %}}
 			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
 		</div>	
@@ -77,6 +90,7 @@ Pour cela deux options :
 		<div class="header content">Reconnaître, décrire, reproduire, représenter, construire des solides et des figures géométriques</div>	
 			{{% priorite "L’élève code des figures simples du plan et de l’espace." %}}
 			{{% priorite_alea "6G20 :  Nommer et coder des polygones" "6G20" %}}	
+			{{% priorite_alea "6pave :  Connaître les propriétés du cube et du pavé droit" "6pave" %}}
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
 			{{% priorite_alea "... : ..." "" %}}	
