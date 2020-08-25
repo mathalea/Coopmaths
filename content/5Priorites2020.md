@@ -42,10 +42,11 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser et représenter les grands nombres entiers, des fractions simples, les nombres décimaux.</div>	
 			{{% priorite "L’élève utilise les grands nombres entiers et des nombres décimaux ayant au plus quatre décimales." %}}
+			{{% priorite_alea "6C30-1 : Multiplications d'un nombre décimal par 10, 100 ou 1 000." "6C30-1,sup=1" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 1 décimale" "6N30,sup=1" %}}
+			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 2 décimales" "6N30,sup=2" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
@@ -96,9 +97,12 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}	
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
+			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}	
 
 			{{% priorite "Il complète une figure par symétrie axiale." %}}
+			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}	
 
 	</div>	
