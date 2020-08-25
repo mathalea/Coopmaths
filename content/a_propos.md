@@ -40,6 +40,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - LEFORT Julie
 - LHOTE Jean-Claude
 - LOZANO Sébastien
+- MORVAN Gaelle
 - ROUBIN Sophie
 - UZU Anne
 
