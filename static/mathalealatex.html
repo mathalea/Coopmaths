@@ -11,23 +11,38 @@
       gtag('config', 'UA-5318292-3');
     </script>
   <meta charset="utf-8">
+  <!-- JQuery-->
+  <script   src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
+
+  <!-- Prism-->
+  <script src="include/prism.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="style/prism.css">
-  <link rel="stylesheet" type="text/css" href="style/semantic.css">
+
+
+  <!-- Semantic UI-->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/state.min.js"></script> 
+
+  <!-- Algebrite-->
+  <script src="include/algebrite.bundle-compressed.js" type="text/javascript" ></script>
+
+  <!-- Clipboard-->
+  <script src="include/clipboard.min.js" type="text/javascript"></script>
+  
+
+  
+  <!-- MathALEA-->
+  <script type="text/javascript">var sortie_html=false;</script>
+ <!--  <script src="include/mathalea_exercices.min.js" type="text/javascript"></script>
+ 
+  <script src="include/mathalea_outils.js" type="text/javascript"></script> -->
+  
   <link rel="stylesheet" type="text/css" href="style/style_mathalea.css">
 
- 
-  <script src="include/jquery-3.3.1.min.js" type="text/javascript"></script>
-  <script src="include/semantic.min.js" type="text/javascript"></script>
-  <script src="include/algebrite.bundle-compressed.js" type="text/javascript" ></script>
-  <script src="include/prism.js" type="text/javascript"></script>
-  <script src="include/clipboard.min.js" type="text/javascript"></script>
-  <script src="include/download.js" type="text/javascript"></script>
-  <script src="include/math.min.js" type="text/javascript"></script>
-
-  <script type="text/javascript">var sortie_html=false;</script> 
+  <!-- Download-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js" type="text/javascript"></script>
   
-  <script src="include/mathalea_exercices.js" type="text/javascript"></script>
-  <script src="include/mathalea_outils.js" type="text/javascript"></script>
 
 
 
@@ -44,11 +59,12 @@
   <a  href="mailto:contact@coopmaths.fr" class="ui simple  item">Contact</a>
   <div class="ui  dropdown item" class="blanc">MathALEA <i class="dropdown icon"></i> 
     <div class="menu">
-      <a href="/mathalea_a_propos" class="item">Présentation</a>
       <a href="/mathalea.html" class="item">Exercices en ligne</a>
       <a href="/cm.html" class="item">Diaporama</a>
       <a href="/mathalealatex.html"class="item">Générateur LaTeX</a>
       <a href="/alacarte"class="item">Évaluation à la carte</a>
+      <a href="/mathalea_tuto" class="item">Comment l'utiliser ?</a>
+      <a href="/mathalea_a_propos" class="item">À propos</a>
     </div>
   </div>
 </div>
@@ -200,9 +216,15 @@
                       <input type="text" id="domaine" placeholder="Numération" >
                     </div>
                 </div>
-
+                </div>
+                <div class="field">
+                  <div class="ui checkbox">
+                    <input type="checkbox" tabindex="0" id="supprimer_correction" class="hidden">
+                    <label>Supprimer la correction</label>
+                  </div>
                 </div>
                 </form>
+                <div class="ui hidden divider"></div>
                 <div>
                  	<a href="fichiers/preambule.tex" class="lien_preambule"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Préambule</button></a>
                   <a href="fichiers/images.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images</button></a>

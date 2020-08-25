@@ -64,6 +64,12 @@ Redirect permanent /video6C20-2 https://www.youtube-nocookie.com/embed/CFKUxlh6R
 # Multiplications de décimaux Monka
 Redirect permanent /video6C30 https://www.youtube-nocookie.com/embed/4YQi_icWTTI
 
+# Longueur du cercle Monka
+Redirect permanent /video6M22 https://www.youtube-nocookie.com/embed/iKyAfCzKnu4
+
+# Aire du disque Monka
+Redirect permanent /video6M22-1 https://www.youtube-nocookie.com/embed/0E8h5WWf4NM
+
 
 
 
