@@ -60,8 +60,9 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 - Développement de MathALEA 2D.
 - Test de positionnement en cycle 4.
-- Arrivée de Stéphane Guyon pour la programmation d'exercices.
+- Arrivée de Stéphane Guyon et de Gaelle Morvan pour la programmation d'exercices.
 - Nouveaux exercices en seconde sur les racines carrées et les intervalles.
+- Nouveaux exercices de géométrie.
 - Nouveaux exercices du type « Le compte est bon ».
 
 

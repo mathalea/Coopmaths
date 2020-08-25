@@ -5,8 +5,7 @@
 
 
 % Remarques : 
-%		* changements importants le 28 juillet 2018 pour faciliter la lecture. La police Myriade Pro est utilisée.
-%
+%		
 %		* il faut penser à  doubler l'interligne le plus souvent possible avec \begin{spacing}{2} ou \begin{enumerate}[itemsep=1em]
 %
 %
@@ -66,7 +65,7 @@
 % Inutile avec XeTeX ?
 %\usepackage[T1]{fontenc}		        		% Encodage des caractêres
 \usepackage{lmodern}			        		% Choix de la fonte (Latin Modern de D. Knuth)
-\usepackage[francais]{babel}	        		% Les rêgles de typo. franà§aises
+\usepackage[french]{babel}	        		% Les rêgles de typo. franà§aises
 \usepackage{multicol} 					% Multi-colonnes
 \usepackage{calc} 						% Calculs 
 \usepackage{enumerate}					% Pour modifier les numérotations
@@ -75,9 +74,9 @@
 \usepackage{tabularx}					% Pour faire des tableaux
 \usepackage{pgf,tikz}					% Pour les images et figures géométriques
 \usetikzlibrary{arrows,calc,fit,patterns,plotmarks,shapes.geometric,shapes.misc,shapes.symbols,shapes.arrows,
-shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows} % Charge toutes les librairies de Tikz
-\usepackage{tkz-tab,tkz-euclide,tkz-fct}	% Géométrie euclidienne avec TikZ
-\usetkzobj{all}				
+shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC, er, automata,backgrounds,chains,topaths,trees,petri,mindmap,matrix, calendar, folding,fadings,through,positioning,scopes,decorations.fractals,decorations.shapes,decorations.text,decorations.pathmorphing,decorations.pathreplacing,decorations.footprints,decorations.markings,shadows}
+\usepackage{tkz-euclide}				% Géométrie euclidienne avec TikZ
+\usepackage{pgfplots}					% Représentations graphiques de fonctions
 \usepackage{amsmath,amsfonts,amssymb,mathrsfs}  % Spécial math
 \usepackage[squaren]{SIunits}			% Pour les unités (gêre le conflits avec  \square de l'extension amssymb)
 \usepackage{pifont}						% Pour les symboles "ding"
@@ -124,19 +123,6 @@ shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC,
 
 \spaceskip=2\fontdimen2\font plus 3\fontdimen3\font minus3\fontdimen4\font\relax %Pour doubler l'espace entre les mots
 
-%\doublespacing %double l'interligne
-
-
-
-%\usepackage{fontspec}
-%\usepackage{mathspec}
-
-%\setmainfont{Raleway}
-
-%\setallmainfonts(Digits,Latin){Raleway}
-
-%\setmathrm{latinmodern}
-%\setmathfont(Digits,Latin){latinmodern}
 
 %%% Mise en forme
 
@@ -196,6 +182,7 @@ shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC,
 
 \newcommand{\theme}[4]
 {
+	%\theme{nombres|gestion|grandeurs|geo|algo}{Texte (entrainement, évaluation, mise en route...}{numéro de version ou vide}{titre du thême et niveau}
 	\fancyhead[C]{
 	\begin{tikzpicture}[remember picture,overlay]
 	  \node[anchor=north east,inner sep=0pt] at ($(current page.north east)+(0,-.8cm)$) {\includegraphics{header-#1}};
@@ -237,12 +224,9 @@ shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC,
 
 
 \usepackage{titlesec} % Le titre de section est en fait un numéro d'exercice avec sa consigne alignée à  gauche.
-% Avant le titre était plus gros
-%\titleformat{\section}{\bfseries\large}{\numb{\arabic{section}}}{1cm}{\hspace{0em}}{}
+
 
 \titleformat{\section}{}{\numb{\arabic{section}}}{1cm}{\hspace{0em}}{}
-
-
 
 
 \newcommand{\exo}[1]{ % Un titre d'exercice est en f	ait une nouvelle section avec la consigne écrite en caractêres normaux
@@ -350,8 +334,3 @@ shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC,
 
 \renewcommand{\deg}{\ensuremath{^\circ}}
 
-% Pour les corrigés avec xlop : utilisation de la police du document.
-% Toujours utile avec le passage à  Myriad ??? NON !
-%\newcommand{\police}[1]{ 
-%{\fontfamily{lmr}\selectfont #1}
-%}
