@@ -100,7 +100,7 @@ Pour cela deux options :
 			{{% priorite_alea "6G42 :  Connaître les propriétés du cube et du pavé droit" "6G42" %}}
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
-			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite_alea "6G43 : Utiliser le vocabulaire associé au pavé droit" "6G43" %}}	
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
