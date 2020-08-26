@@ -15,7 +15,8 @@ description : "Cinquième - Priorités rentrée 2020 - Période 1 (septembre oct
 Cette page a pour but de permettre l'exploitation de plusieurs manières du test de positionnement que l'on peut trouver [ici sur eduscol](https://eduscol.education.fr/cid152895/rentree-2020-priorites-et-positionnement.html#lien1).
 
 * En utilisant [cette version statique du test de positionnement](/pdf/2020-5e-Priorites-Test.pdf) ainsi que sa correction.
-* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?ex=6C30-1,nb_questions=4,sup=3,sup2=3&ex=6N30,nb_questions=3,sup=2&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=undefined,sup2=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=3&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=3), principalement afin de générer une nouvelle version PDF.
+* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1), principalement afin de générer une nouvelle version PDF.
+
 
 Une fois que les élèves ont passé le test, l'idée est de pouvoir cibler le travail de chacun à partir des mêmes exercices proposés dans la liste détaillée ci-dessous.
 
@@ -31,7 +32,7 @@ Pour cela deux options :
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 5e - version pdf " "/pdf/2020-5e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?ex=6C30-1,nb_questions=4,sup=3,sup2=3&ex=6N30,nb_questions=3,sup=2&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=undefined,sup2=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=3&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=3" %}}
+	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1" %}}
 {{< /liste >}}
 
 
