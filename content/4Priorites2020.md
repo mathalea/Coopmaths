@@ -46,7 +46,7 @@ Pour cela deux options :
 			{{% priorite_alea "5R11-2 : Placer un point d'abscisse un nombre relatif" "5R11-2" %}}	
 
 			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "5N20-0 : Résoudre un problème en utilisant des fractions" "5N20-0" %}}			
 			{{% priorite_alea "... : ..." "" %}}
 	</div>	
 {{< /liste_priorites >}}
