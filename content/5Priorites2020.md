@@ -17,7 +17,6 @@ Cette page a pour but de permettre l'exploitation de plusieurs manières du test
 * En utilisant [cette version statique du test de positionnement](/pdf/2020-5e-Priorites-Test.pdf) ainsi que sa correction.
 * En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1), principalement afin de générer une nouvelle version PDF.
 
-
 Une fois que les élèves ont passé le test, l'idée est de pouvoir cibler le travail de chacun à partir des mêmes exercices proposés dans la liste détaillée ci-dessous.
 
 Pour cela deux options :
@@ -25,14 +24,11 @@ Pour cela deux options :
 * L'enseignant génère une version PDF à partir de la version LaTeX proposée au bout du lien MathALEA :
 	* Cliquer sur l'un des liens MathALEA.
 	* Cliquer sur le bouton **Version LaTeX**
-	* Cliquer sur le bouton **Obtenir le PDF via OverLeaf.com**, la création d'un compte est gratuite. 
 
 
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
-	{{%pdf_url "Test de positionnement 5e - version pdf " "/pdf/2020-5e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1" %}}
 {{< /liste >}}
 
 
@@ -53,7 +49,7 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 		</div>	
@@ -83,7 +79,7 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N33-1 : Calculer le pourcentage d'un nombre de tête" "6N33-1" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
@@ -101,20 +97,23 @@ Pour cela deux options :
 			{{% priorite_alea "6G42 :  Connaître les propriétés du cube et du pavé droit" "6G42" %}}
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
-			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite_alea "6G43 : Utiliser le vocabulaire associé au pavé droit" "6G43" %}}	
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - gros carreaux" "6G12-1,sup2=2" %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - pas de carreaux" "6G12-1,sup2=3" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6G23-2 :  Tracer un triangle dont on connait une longueur et 2 angles" "6G23-2" %}}
 			{{% priorite_alea "... : ..." "" %}}	
 
 			{{% priorite "Il complète une figure par symétrie axiale." %}}			
-			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}			
-			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - petits carreaux" "5G10-2,sup2=1" %}}
-			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - gros carreaux" "5G10-2,sup2=2" %}}
-			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - pas de carreaux" "5G10-2,sup2=3" %}}
+			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}	
+			{{% priorite_alea "6G24-1 : Construire le symétrique d'un point par rapport à une droite - petits carreaux" "6G24-1,sup2=1" %}}
+			{{% priorite_alea "6G24-1 : Construire le symétrique d'un point par rapport à une droite - gros carreaux" "6G24-1,sup2=2" %}}
+			{{% priorite_alea "6G24-1 : Construire le symétrique d'un point par rapport à une droite - pas de carreaux" "6G24-1,sup2=3" %}}		
+			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - petits carreaux" "6G24-2,sup2=1" %}}
+			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - gros carreaux" "6G24-2,sup2=2" %}}
+			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - pas de carreaux" "6G24-2,sup2=3" %}}
 
 	</div>	
 {{< /liste_priorites >}}
