@@ -52,7 +52,7 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 		</div>	
@@ -82,7 +82,7 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N33-1 : Calculer le pourcentage d'un nombre de tête" "6N33-1" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
@@ -106,14 +106,17 @@ Pour cela deux options :
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - gros carreaux" "6G12-1,sup2=2" %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - pas de carreaux" "6G12-1,sup2=3" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6G23-2 :  Tracer un triangle dont on connait une longueur et 2 angles" "6G23-2" %}}
 			{{% priorite_alea "... : ..." "" %}}	
 
 			{{% priorite "Il complète une figure par symétrie axiale." %}}			
-			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}			
-			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - petits carreaux" "5G10-2,sup2=1" %}}
-			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - gros carreaux" "5G10-2,sup2=2" %}}
-			{{% priorite_alea "5G10-2 : Construire le symétrique d'une figure par rapport à une droite - pas de carreaux" "5G10-2,sup2=3" %}}
+			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}	
+			{{% priorite_alea "6G24-1 : Construire le symétrique d'un point par rapport à une droite - petits carreaux" "6G24-1,sup2=1" %}}
+			{{% priorite_alea "6G24-1 : Construire le symétrique d'un point par rapport à une droite - gros carreaux" "6G24-1,sup2=2" %}}
+			{{% priorite_alea "6G24-1 : Construire le symétrique d'un point par rapport à une droite - pas de carreaux" "6G24-1,sup2=3" %}}		
+			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - petits carreaux" "6G24-2,sup2=1" %}}
+			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - gros carreaux" "6G24-2,sup2=2" %}}
+			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - pas de carreaux" "6G24-2,sup2=3" %}}
 
 	</div>	
 {{< /liste_priorites >}}
