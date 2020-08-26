@@ -24,14 +24,14 @@ Pour cela deux options :
 * L'enseignant génère une version PDF à partir de la version LaTeX proposée au bout du lien MathALEA :
 	* Cliquer sur l'un des liens MathALEA.
 	* Cliquer sur le bouton **Version LaTeX**
-	* Cliquer sur le bouton **Compiler sur OverLeaf.com**, la création d'un compte est gratuite. 
+	* Cliquer sur le bouton **Obtenir le PDF via OverLeaf.com**, la création d'un compte est gratuite. 
 
 
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
-	{{%pdf_url "Test de positionnement 5e - pdf temporaire --> non encore généré" ""%}}
-	{{% alea_url "Test de positionnement 5e - mathalea temporaire --> non encore généré" "" %}}
+	{{%pdf_url "Test de positionnement 5e  - version pdf" "/pdf/2020-3e-Priorites-Test.pdf"%}}
+	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1" %}}
 {{< /liste >}}
 
 
