@@ -53,7 +53,7 @@ Pour cela deux options :
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
 			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea ".... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 		</div>	
 {{< /liste_priorites >}}
