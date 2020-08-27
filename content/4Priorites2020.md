@@ -61,7 +61,7 @@ Pour cela deux options :
 
 
 			{{% priorite "Il substitue une valeur numérique à une lettre notamment pour tester une égalité." %}}
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "5L13-5 : Calculer la valeur d'une expression littérale de degré 1 à 1 inconnue" "5L13-5" %}}			
 	</div>	
 {{< /liste_priorites >}}
 
