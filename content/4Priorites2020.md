@@ -100,12 +100,11 @@ Pour cela deux options :
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser les notions de géométrie plane pour démontrer</div>	
-			{{% priorite "L’élève connaît et utilise le codage des figures." %}}
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite "L'élève connaît et utilise la somme des angles d’un triangle." %}}
+			{{% priorite_alea "5G31 : Somme des angles dans un triangle" "5G31" %}}						
 
-			{{% priorite "Il connaît et utilise : la somme des angles d’un triangle; une définition et une propriété caractéristique du parallélogramme." %}}
-			{{% priorite_alea "5G31 : Somme des angles dans un triangle" "5G31" %}}			
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite "L’élève connaît et utilise  une définition et une propriété caractéristique du parallélogramme, le codage des figures." %}}
+			{{% priorite_alea "... : ..." "" %}}	
 			{{% priorite_alea "... : ..." "" %}}			
 
 			{{% priorite "Il transforme une figure par symétrie centrale." %}}
