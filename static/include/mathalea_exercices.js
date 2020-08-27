@@ -125,7 +125,7 @@ var liste_des_exercices_disponibles = {
   "5L10-1": Traduire_une_phrase_par_une_expression_litterale,
   "5L10-2": Traduire_un_programme_de_calcul,
   "5L10-3": Traduire_une_expression_litterale_par_une_phrase,
-  "beta5N20-0": Problemes_additifs_fractions_5e,
+  "5N20-0": Problemes_additifs_fractions_5e,
   "5L12": Reduire_une_expression_litterale,
   "5L12-1": Reduire_dinstinction_somme_produit,
   "5L13": Calculer_la_valeur_d_une_expression_litterale,
@@ -18913,12 +18913,12 @@ function Trouver_oppose(){
 function Problemes_additifs_fractions_5e(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 1;
 	} else {
-		this.nb_questions = 3;
+		this.nb_questions = 1;
 	};	
 
 	this.titre = "Résoudre un problème en utilisant des fractions";	
@@ -18936,8 +18936,8 @@ function Problemes_additifs_fractions_5e(){
 		if (this.beta) {
 			type_de_questions_disponibles = [0];			
 		} else {
-      type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
-      			
+			  // type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+			  type_de_questions_disponibles = [0];      			
 		};
 
 		this.liste_questions = []; // Liste de questions
@@ -19067,11 +19067,14 @@ function Problemes_additifs_fractions_5e(){
 			function myTexte_vols_corr(angle) {
 				switch (angle) {
 					case 90:
-						return `du secteur est un angle droit, il vaut $${angle}\\degree$.<br> L'angle pour un tour complet vaut $360\\degree$.`;
+						return `du secteur est un angle droit, il mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{4}$.`;
 					case 30:
-						return ` rouge apparaît 3 fois, l'angle vert vaut $180\\degree$ et il y a un angle droit.<br> L'angle pour un tour complet vaut $360\\degree$, donc l'angle rouge vaut $(360-180-90)\\div 3 = ${angle}\\degree$.`;
+						return `rouge apparaît 3 fois, l'angle vert vaut $180\\degree$ et il y a un angle droit.
+							<br> L'angle pour un tour complet vaut $360\\degree$, donc l'angle rouge vaut $(360-180-90)\\div 3 = ${angle}\\degree$.
+							<br> L'angle rouge mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{12}$.
+							`;
 					case 180:
-						return `du secteur est un angle plat, il vaut $${angle}\\degree$.<br> L'angle pour un tour complet vaut $360\\degree$.`;
+						return `du secteur est un angle plat, il mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{2}$.`;
 		
 				}
 			};
@@ -19192,12 +19195,10 @@ function Problemes_additifs_fractions_5e(){
 												
 					`,
 					correction:`
-					${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat1.destination} l'angle ${myTexte_vols_corr(situations[k].cat1.angle)}					
-					<br>D'où la fraction $\\dfrac{${situations[k].cat1.angle}}{360}=\\dfrac{${situations[k].cat1.frac[0]}}{${situations[k].cat1.frac[1]}}$.
+					${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat1.destination} l'angle ${myTexte_vols_corr(situations[k].cat1.angle)}						
 					<br>${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat1.destination} vaut donc $\\dfrac{${situations[k].cat1.frac[0]}}{${situations[k].cat1.frac[1]}}$`)}.
 					
-					<br>${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat2.destination} l'angle ${myTexte_vols_corr(situations[k].cat2.angle)}
-					<br> D'où la fraction $\\dfrac{${situations[k].cat2.angle}}{360}=\\dfrac{${situations[k].cat2.frac[0]}}{${situations[k].cat2.frac[1]}}$.
+					<br>${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat2.destination} l'angle ${myTexte_vols_corr(situations[k].cat2.angle)}				
 					<br>${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat2.destination} vaut donc $\\dfrac{${situations[k].cat2.frac[0]}}{${situations[k].cat2.frac[1]}}$`)}
 
 					<br>${num_alpha(i_sous_question_corr++)} Calculons $\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}$ de ${situations[k].nb_total} : 
