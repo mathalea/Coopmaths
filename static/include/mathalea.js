@@ -4922,7 +4922,7 @@ function Fraction(num,den) {
 		}
 		else if (type == 'segment') {
 			for (k = 0; k < n; k++) {
-				O = point(x + k * (rayon + 0.5), y)
+				O = point(x + k *rayon, y)
 				C = translation(O, vecteur(rayon, 0))
 				s = segment(O, C)
 				s.styleExtremites = '-|'
@@ -4939,7 +4939,7 @@ function Fraction(num,den) {
 				objets.push(a)
 				num -= this.denIrred
 			}
-			O = point(x + k * (rayon + 0.5), y)
+			O = point(x + k * rayon, y)
 			C = translation(O, vecteur(rayon, 0))
 			s = segment(O, C)
 			s.styleExtremites = '-|'
@@ -4954,6 +4954,8 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
+
 		}
 		else {
 			let diviseur
@@ -4998,11 +5000,18 @@ function Fraction(num,den) {
 		}
 		return objets
 	}
-	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray') {
+	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.num, this.den)
 		num = this.num
-
+		unegraduation=function(x,y,couleur='black',epaisseur=1){
+			let A=point(x,y+0.2)
+			let B=point(x,y-0.2)
+			let g=segment(A,B)
+			g.color=couleur
+			g.epaisseur=epaisseur
+			return g
+		}
 		if (type == 'gateau') {
 			k, dep
 			for (k = 0; k < n; k++) {
@@ -5041,7 +5050,7 @@ function Fraction(num,den) {
 		}
 		else if (type == 'segment') {
 			for (k = 0; k < n; k++) {
-				O = point(x + k * (rayon + 1), y)
+				O = point(x + k * rayon, y)
 				C = translation(O, vecteur(rayon, 0))
 				s = segment(O, C)
 				s.styleExtremites = '-|'
@@ -5058,7 +5067,7 @@ function Fraction(num,den) {
 				objets.push(a)
 				num -= this.den
 			}
-			O = point(x + k * (rayon + 1), y)
+			O = point(x + k * rayon , y)
 			C = translation(O, vecteur(rayon, 0))
 			s = segment(O, C)
 			s.styleExtremites = '-|'
@@ -5073,6 +5082,7 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
 
 		}
 		else { //Type bâtons
@@ -5783,6 +5793,7 @@ var liste_des_exercices_disponibles = {
   "5L13-2": Exercice_substituer,
   "5L13-3": Traduire_une_phrase_par_une_expression_litterale_et_calculer,
   "5L13-4": Calculer_une_expression_litteraleBis,
+  "5L13-5":Calculer_la_valeur_d_une_expression_litterale_deg1_inc1,
   "5L14": Tester_une_egalite,
   "5M10": Aire_du_parallelogramme,
   "5M20": Calcul_de_volumes_5e,
@@ -20622,7 +20633,15 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 
-		let type_de_questions_disponibles = range1(10)
+		//let type_de_questions_disponibles = range1(10)
+		let type_de_questions_disponibles;
+		
+		if (this.version=="5L13-5") {
+			type_de_questions_disponibles = range1(2)
+		} else {
+			type_de_questions_disponibles = range1(10)			
+		};
+
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
 
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
@@ -24940,13 +24959,13 @@ function Problemes_additifs_relatifs_5e(){
 	this.beta = true;	
 	this.sup=1;
 	if (this.beta) {
-		this.nb_questions = 5;
+		this.nb_questions = 1;
 	} else {
-		this.nb_questions = 3;
+		this.nb_questions = 1;
 	};	
 
 	this.titre = "Résoudre un problème en utilisant une somme algébrique de relatifs";	
-	this.consigne = `Consigne somme relatifs`;	
+	this.consigne = ``;	
 	
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
@@ -24958,10 +24977,10 @@ function Problemes_additifs_relatifs_5e(){
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		if (this.beta) {
-			type_de_questions_disponibles = [0,1,2,3,4];			
+			type_de_questions_disponibles = [0];			
 		} else {
-      type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
-      			
+			//   type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+			  type_de_questions_disponibles = [0];			      			
 		};
 
 		this.liste_questions = []; // Liste de questions
@@ -24973,31 +24992,133 @@ function Problemes_additifs_relatifs_5e(){
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let g_p_u; //pour le gain/perte unitaire
+			let g_m; //pour le gain multiple
+			// on veut des multiples de 5 pour n'avoir que des demis entiers ou des entiers
+			do {
+				g_p_u = randint(10,30);
+				g_m = randint(10,30);
+			} while (g_p_u%5 != 0 || g_m%5 != 0 || g_m <= g_p_u) 
 
+			let n_tot=randint(10,15); // nombre totale de lancers
+			let n_g_u; // nb de gains untitaires
+			let n_p; // nb de pertes
+			do {
+				n_g_u = randint(2,10);
+				n_p = randint(2,10);
+			} while (n_g_u+n_p >= n_tot)
+
+			// on échange parfois le nombre de gain unitaire et le nombre de perte pour avoir un bilan négatif plus souvent
+			if (n_p<n_g_u) {
+				if (randint(0,1)==0) {
+					let temp = n_p;
+					n_p=n_g_u;
+					n_g_u=temp;
+				};
+			};
+
+			let prenoms = [[prenomF(),'Elle','elle'],[prenomM(),'Il','il']];
+			let currentPrenom = choice(prenoms);
+
+			// une fonction pour écrire les chaine correctives
+			function myGainPerteString(nb,type,valeur) {
+				let sortie=``;
+				switch (type) {
+					case 'gain':						
+						sortie = `(+${valeur}€)`;
+						for (let m=1;m<nb;m++) {
+							sortie +=`+(+${valeur}€)`;
+						};
+						break;
+					case 'perte':
+						sortie = `(-${valeur}€)`;
+						for (let m=1;m<nb;m++) {
+							sortie +=`+(-${valeur}€)`;
+						};
+						break;					
+				};
+				return sortie;
+			}
+
+			// une fonction pour dire si le bilan est positif ou négatif
+			function isBilanPositif(tot) {
+				if (tot >= 0) {
+					return true;
+				} else {
+					return false;
+				};
+			};
+
+			let bilan;			
+			if ( isBilanPositif( calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10))) ) {
+				bilan = [`Globalement, le montant des gains`,`est supérieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc positif.`)}`,`a gagné`,calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10))];
+			} else {
+				bilan = [`Globalement, le montant des gains`,`est inférieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc négatif.`)}`,`a perdu`,(-1)*(calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10)))];
+			}
 			// pour les situations
 			let situations = [
-				{//case 0 -->
-				},
-				{//case 1 -->
-				},
-				{//case 2 -->
-				},
-				{//case 3 -->
-				},
-				{//case 4 -->
-				},
-		
+				{//case 0 --> les quilles
+					nb_tot_lancers:n_tot,
+					nb_gains_unitaires:n_g_u,
+					nb_pertes:n_p,
+					nb_gains:n_tot-n_g_u-n_p,
+					perte:calcul(g_p_u/10),
+					gain_unitaire:calcul(g_p_u/10),
+					gain_multiple:calcul(g_m/10),
+					enonce_1:`lancer une balle sur des quilles.`,
+					enonce_2:`- Si la balle touche plusieurs quilles, le joueur gagne `,
+					enonce_3:`- Si la balle ne touche qu'une quille, le joueur gagne `,
+					enonce_4:`- Si la balle ne touche aucune quille, le joueur perd `,
+					enonce_5:`a lancé`,
+					enonce_6:`la balle`,
+					correction_1:`touché plusieurs quilles`,
+					correction_2:`touché qu'une seule quille`,
+					prenom:currentPrenom[0],//prenoms[choice([0,1])][0],
+					pronomMaj:currentPrenom[1],//prenoms[choice([0,1])][1],
+					pronomMin:currentPrenom[2],//prenoms[choice([0,1])][2],
+					bilan:bilan,
+				},		
 			];
 
 			let enonces = [];
-			for (let k=0;k<5;k++) {
+			let i_sous_question;
+			let i_sous_question_corr;
+			for (let k=0;k<situations.length;k++) {
+				i_sous_question = 0;
+				i_sous_question_corr = 0;
 				enonces.push({
 					enonce:`
-					Type ${k}				
+					Un jeu consiste à ${situations[k].enonce_1}
+					<br>${situations[0].enonce_2} $${tex_nombre(situations[0].gain_multiple)}$€.				
+					<br>${situations[0].enonce_3} $${tex_nombre(situations[0].gain_unitaire)}$€.
+					<br>${situations[0].enonce_4} $${tex_nombre(situations[0].perte)}$€.
+					<br>${situations[k].prenom} ${situations[k].enonce_5} $${situations[k].nb_tot_lancers}$ fois ${situations[k].enonce_6}.
+					${situations[k].pronomMaj} a perdu de l'argent $${situations[k].nb_pertes}$ fois et a gagné $${situations[k].nb_gains_unitaires}$ fois $${tex_nombre(situations[k].gain_unitaire)}$€.
+					<br> ${num_alpha(i_sous_question++)} A-t-${situations[k].pronomMin} globalement gagné ou perdu de l'argent ?
+					<br> ${num_alpha(i_sous_question++)} Combien a-t-${situations[k].pronomMin} globalement gagné ou perdu ?
 					`,
 					question:``,
 					correction:`
-					Correction type ${k}
+					${situations[k].prenom} ${situations[k].enonce_5} $${situations[k].nb_tot_lancers}$ fois ${situations[k].enonce_6}, 
+					sur ces $${situations[k].nb_tot_lancers}$ fois,  ${situations[k].pronomMin} a perdu de l'argent $${situations[k].nb_pertes}$ fois et a gagné $${situations[k].nb_gains_unitaires}$ fois $${tex_nombre(situations[k].gain_unitaire)}$€.
+					<br> $${situations[k].nb_tot_lancers}-${situations[k].nb_pertes}-${situations[k].nb_gains_unitaires} = ${situations[k].nb_tot_lancers-situations[k].nb_pertes-situations[k].nb_gains_unitaires}$,
+					${situations[k].pronomMin} a donc ${situations[k].correction_1} ${situations[k].nb_gains} fois.
+					<br>${texte_gras(`Gains lorsqu'${situations[k].pronomMin} a ${situations[k].correction_1} :`)}
+					<br>$${myGainPerteString(situations[k].nb_gains,'gain',situations[k].gain_multiple)} = ${situations[k].nb_gains}\\times (+${situations[k].gain_multiple}€) = +${situations[k].nb_gains*situations[k].gain_multiple}$€
+
+					<br>${texte_gras(`Gains lorsqu'${situations[k].pronomMin} n'a ${situations[k].correction_2} :`)}
+					<br>$${myGainPerteString(situations[k].nb_gains_unitaires,'gain',situations[k].gain_unitaire)} = ${situations[k].nb_gains_unitaires}\\times (+${situations[k].gain_unitaire}€) = +${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}$€
+
+					<br>${texte_gras(`Pertes :`)}
+					<br>$${myGainPerteString(situations[k].nb_pertes,'perte',situations[k].perte)} = ${situations[k].nb_pertes}\\times (-${situations[k].perte}€) = -${situations[k].nb_pertes*situations[k].perte}$€
+
+					<br>${num_alpha(i_sous_question_corr++)} ${situations[k].bilan[0]}, $(+${situations[k].nb_gains*situations[k].gain_multiple}€)$ et $(+${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}€)$, ${situations[k].bilan[1]}, $(-${situations[k].nb_pertes*situations[k].perte}€)$.
+					<br> ${situations[k].bilan[2]}   
+
+					<br>${num_alpha(i_sous_question_corr++)} 
+					$(+${situations[k].nb_gains*situations[k].gain_multiple}€)+(+${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}€)+(-${situations[k].nb_pertes*situations[k].perte}€) = (${situations[k].nb_gains*situations[k].gain_multiple+situations[k].nb_gains_unitaires*situations[k].gain_unitaire-situations[k].nb_pertes*situations[k].perte}€)$
+					<br>${texte_en_couleur(`Globalement ${situations[k].prenom} ${situations[k].bilan[3]} $${situations[k].bilan[4]}€$`)} 
+
 					`
 				});
 			};
@@ -25014,46 +25135,46 @@ function Problemes_additifs_relatifs_5e(){
 						texte_corr = `${enonces[0].correction}`;
 					};
           			break;	
-        		case 1 : 
-					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
-						texte += `<br>`;
-						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
-						texte_corr = ``;	
-					} else {
-						texte_corr = `${enonces[1].correction}`;
-					};
-          			break;
-        		case 2 : 
-					texte = `${enonces[2].enonce}`;
-					if (this.beta) {
-						texte += `<br>`;
-						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
-						texte_corr = ``;	
-					} else {
-						texte_corr = `${enonces[2].correction}`;
-					};
-          			break;				
-        		case 3 : 
-					texte = `${enonces[3].enonce}`;
-					if (this.beta) {
-						texte += `<br>`;
-						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
-						texte_corr = ``;	
-					} else {
-						texte_corr = `${enonces[3].correction}`;
-					};
-					break;				
-         		case 4 : 
-					texte = `${enonces[4].enonce}`;
-					if (this.beta) {
-						texte += `<br>`;
-						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
-						texte_corr = ``;	
-					} else {
-						texte_corr = `${enonces[4].correction}`;
-					};
-					break;				
+        		// case 1 : 
+				// 	texte = `${enonces[1].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[1].correction}`;
+				// 	};
+          		// 	break;
+        		// case 2 : 
+				// 	texte = `${enonces[2].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[2].correction}`;
+				// 	};
+          		// 	break;				
+        		// case 3 : 
+				// 	texte = `${enonces[3].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[3].correction}`;
+				// 	};
+				// 	break;				
+         		// case 4 : 
+				// 	texte = `${enonces[4].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[4].correction}`;
+				// 	};
+				// 	break;				
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -25068,7 +25189,21 @@ function Problemes_additifs_relatifs_5e(){
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
-};/**
+};
+
+
+/**
+ * Caculer la valeur d'une expression littérale de degré 1 à une inconnue
+ * 5L13-5
+ * @author Sébastien Lozano forking 5L13 of Rémi Angot
+ */  
+function Calculer_la_valeur_d_une_expression_litterale_deg1_inc1() {
+	Calculer_la_valeur_d_une_expression_litterale.call(this)
+	this.version="5L13-5";	
+	this.titre="Calculer la valeur d'une expression littérale de degré 1 à 1 inconnue";
+	this.nb_questions=2;
+
+}/**
  * * Calcul de l'inverse d'un nombre.
  *
  * Paramétrages possibles :
