@@ -47,7 +47,7 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 1 décimale" "6N30,sup=1" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 2 décimales" "6N30,sup=2" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N31-1 : Encadrer un décimal par deux entiers consécutifs" "6N31-1" %}}
 			{{% priorite_alea "6N23-1 : Différentes écritures des nombres décimaux" "6N23-1" %}}			
 			{{% priorite_alea "... : ..." "" %}}
 
