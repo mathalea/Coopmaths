@@ -47,7 +47,7 @@ Pour cela deux options :
 
 			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
 			{{% priorite_alea "5N20-0 : Résoudre un problème en utilisant des fractions" "5N20-0" %}}			
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "5R20-4 : soudre un problème en utilisant une somme algébrique de relatifs" "5R20-4" %}}
 	</div>	
 {{< /liste_priorites >}}
 
