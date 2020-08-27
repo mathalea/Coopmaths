@@ -33,6 +33,7 @@ var liste_des_exercices_disponibles = {
   "6C23" : Exercice_additionner_des_fractions_6e,
   "6C30": Multiplier_decimaux,
   "6C30-1": Multiplier_decimaux_par_10_100_1000,
+  "6C30-2": Produit_de_decimaux_a_partir_d_un_produit_connu,
   "6C31": Division_decimale,
   "6C32": Probleme_course,
   "6C33": Priorites,
@@ -85,6 +86,7 @@ var liste_des_exercices_disponibles = {
   "6N30": Lire_abscisse_decimale,
   "6N30-2": Placer_points_sur_axe,
   "6N31": Comparer_decimaux,
+  "beta6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
   "6N33": Fraction_d_un_nombre,
   "6N33-1": Pourcentage_d_un_nombre,
   "6N34": Reglages_6N34,
@@ -145,7 +147,7 @@ var liste_des_exercices_disponibles = {
   "5R20": Exercice_additions_relatifs,
   "5R20-2": Exercice_additions_relatifs_a_trou,
   "5R20-3": Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe 
-  "beta5R20-4": Problemes_additifs_relatifs_5e, 
+  "5R20-4": Problemes_additifs_relatifs_5e, 
   "5R21": Exercice_soustractions_relatifs,
   "5R22": Exercice_additions_et_soustraction_de_relatifsV2,
   "5R22-2": Exercice_simplification_somme_algebrique,
@@ -12881,7 +12883,310 @@ jQuery(document).ready(function () {
     });
   });
 });
-/**
+
+/** 
+ * * Calculer le produit de deux décimaux à partir d'un produit de deux entiers
+ * * 6C30-2
+ * @author Sébastien Lozano
+ */
+
+function Produit_de_decimaux_a_partir_d_un_produit_connu(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = false;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 3;
+	} else {
+		this.nb_questions = 3;
+	};	
+
+	this.titre = "Calculer le produit de deux décimaux connaissant le produit de deux entiers";	
+	this.consigne = ``;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0,1,2];			
+		} else {
+      //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+      type_de_questions_disponibles = shuffle([0,1,2]);			
+      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+
+      // pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+        {//case 0 --> (d1u1xp1)xd2u2
+          d1:randint(1,9),
+          u1:randint(1,9),
+          d2:randint(1,9),
+          u2:randint(1,9),
+          p1:randint(-3,3,[0]),
+          p2:randint(-3,3,[0]),
+				},	
+			];      
+			let enonces = [];
+			//for (let k=0;k<3;k++) {
+				enonces.push({
+          enonce:`
+            Sachant que $${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}$,
+            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${calcul(situations[0].d2*10+situations[0].u2)}$
+					`,
+					question:``,
+					correction:`
+					$${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${calcul(situations[0].d1*10+situations[0].u1)}\\times ${tex_nombrec(10**situations[0].p1)} \\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)}\\times ${tex_nombrec(10**situations[0].p1)} =  ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}\\times ${tex_nombrec(10**situations[0].p1)} = ${tex_nombrec(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2))*calcul(10**situations[0].p1))}$
+					`
+        });
+        enonces.push({
+          enonce:`
+            Sachant que $${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}$,
+            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))}$
+					`,
+					question:``,
+					correction:`
+					$${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))} = ${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)}\\times ${tex_nombrec(10**situations[0].p2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}\\times ${tex_nombrec(10**situations[0].p2)} = ${tex_nombrec(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2))*calcul(10**situations[0].p2))}$
+					`
+				});
+				enonces.push({
+          enonce:`
+            Sachant que $${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}$,
+            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))}$
+					`,
+					question:``,
+					correction:`
+					$${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))} = ${calcul(situations[0].d1*10+situations[0].u1)}\\times ${tex_nombrec(10**situations[0].p1)} \\times ${calcul(situations[0].d2*10+situations[0].u2)}\\times ${tex_nombrec(10**situations[0].p2)} = ${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)}\\times ${tex_nombrec(10**situations[0].p1)}\\times ${tex_nombrec(10**situations[0].p2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}\\times ${tex_nombrec(10**situations[0].p1)}\\times ${tex_nombrec(10**situations[0].p2)} = ${tex_nombrec(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2))*calcul(10**situations[0].p1)*calcul(10**situations[0].p2))}$
+					`
+				});
+
+			//};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+        		case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          			break;
+        		case 2 : 
+					texte = `${enonces[2].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[2].correction}`;
+					};
+          			break;				
+        	// 	case 3 : 
+					// texte = `${enonces[3].enonce}`;
+					// if (this.beta) {
+					// 	texte += `<br>`;
+					// 	texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+					// 	texte_corr = ``;	
+					// } else {
+					// 	texte_corr = `${enonces[3].correction}`;
+					// };
+					// break;				
+         	// 	case 4 : 
+					// texte = `${enonces[4].enonce}`;
+					// if (this.beta) {
+					// 	texte += `<br>`;
+					// 	texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+					// 	texte_corr = ``;	
+					// } else {
+					// 	texte_corr = `${enonces[4].correction}`;
+					// };
+					// break;				
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+
+/** 
+ * * Encadrer_un_decimal_par_deux_entiers_consecutifs
+ * * beta6N31-1
+ * @author Sébastien Lozano
+ */
+
+function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 3;
+	} else {
+		this.nb_questions = 3;
+	};	
+
+	this.titre = "Encadrer un décimal par deux entiers consécutifs";	
+	this.consigne = `Encadrer chaque nombre proposé par deux nombres entiers consécutifs.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0,1,2];			
+		} else {
+      //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+      type_de_questions_disponibles = shuffle([0,1,2]);			
+      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      let m=randint(1,9),
+      c=randint(1,9),
+      d=randint(1,9),
+      u=randint(1,9),
+      di=randint(1,9),
+      ci=randint(1,9),
+      mi=randint(1,9);
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+        {//case 0 -->
+          p_entiere:calcul(m*1000 + c*100 + d*10 + u*1),
+          p_decimale:calcul(di*0.1 + ci*0.01 + mi*0.001),
+				},		
+			];
+
+			let enonces = [];
+			for (let k=0;k<3;k++) {
+				enonces.push({
+					enonce:`
+          $\\ldots<${m*1000+c*100+d*10+u*1+situations[0].p_decimale} <\\ldots$
+          
+					`,
+					question:``,
+					correction:`
+					Correction type ${k}
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          break;	
+        case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          break;
+        case 2 : 
+					texte = `${enonces[2].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[2].correction}`;
+					};
+        	break;				
+        // case 3 : 
+				// 	texte = `${enonces[3].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[3].correction}`;
+				// 	};
+				// 	break;				
+     		// case 4 : 
+				// 	texte = `${enonces[4].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[4].correction}`;
+				// 	};
+				// 	break;				
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};/**
 * Décomposer en produit de facteurs premiers un nombre (la décomposition aura 3, 4 ou 5 facteurs premiers)
 * @Auteur Rémi Angot
 */
@@ -19296,7 +19601,7 @@ function Problemes_additifs_fractions_5e(){
 function Problemes_additifs_relatifs_5e(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 1;
@@ -19304,7 +19609,7 @@ function Problemes_additifs_relatifs_5e(){
 		this.nb_questions = 1;
 	};	
 
-	this.titre = "Résoudre un problème en utilisant une somme algébrique de relatifs";	
+	this.titre = "Résoudre un problème en utilisant une somme algébrique de relatifs.";	
 	this.consigne = ``;	
 	
 	this.nb_cols = 1;
@@ -19365,15 +19670,15 @@ function Problemes_additifs_relatifs_5e(){
 				let sortie=``;
 				switch (type) {
 					case 'gain':						
-						sortie = `(+${valeur}€)`;
+						sortie = `(+${tex_prix(valeur)}$€$)`;
 						for (let m=1;m<nb;m++) {
-							sortie +=`+(+${valeur}€)`;
+							sortie +=`+(+${tex_prix(valeur)}$€$)`;
 						};
 						break;
 					case 'perte':
-						sortie = `(-${valeur}€)`;
+						sortie = `(-${tex_prix(valeur)}$€$)`;
 						for (let m=1;m<nb;m++) {
-							sortie +=`+(-${valeur}€)`;
+							sortie +=`+(-${tex_prix(valeur)}$€$)`;
 						};
 						break;					
 				};
@@ -19391,9 +19696,9 @@ function Problemes_additifs_relatifs_5e(){
 
 			let bilan;			
 			if ( isBilanPositif( calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10))) ) {
-				bilan = [`Globalement, le montant des gains`,`est supérieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc positif.`)}`,`a gagné`,calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10))];
+				bilan = [`Globalement, le montant des gains`,`est supérieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc positif.`)}`,`a gagné`,tex_prix(calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10)))];
 			} else {
-				bilan = [`Globalement, le montant des gains`,`est inférieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc négatif.`)}`,`a perdu`,(-1)*(calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10)))];
+				bilan = [`Globalement, le montant des gains`,`est inférieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc négatif.`)}`,`a perdu`,tex_prix((-1)*(calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10))))];
 			}
 			// pour les situations
 			let situations = [
@@ -19429,35 +19734,36 @@ function Problemes_additifs_relatifs_5e(){
 				enonces.push({
 					enonce:`
 					Un jeu consiste à ${situations[k].enonce_1}
-					<br>${situations[0].enonce_2} $${tex_nombre(situations[0].gain_multiple)}$€.				
-					<br>${situations[0].enonce_3} $${tex_nombre(situations[0].gain_unitaire)}$€.
-					<br>${situations[0].enonce_4} $${tex_nombre(situations[0].perte)}$€.
+					<br>${situations[0].enonce_2} $${tex_prix(situations[0].gain_multiple)}$€.				
+					<br>${situations[0].enonce_3} $${tex_prix(situations[0].gain_unitaire)}$€.
+					<br>${situations[0].enonce_4} $${tex_prix(situations[0].perte)}$€.
 					<br>${situations[k].prenom} ${situations[k].enonce_5} $${situations[k].nb_tot_lancers}$ fois ${situations[k].enonce_6}.
-					${situations[k].pronomMaj} a perdu de l'argent $${situations[k].nb_pertes}$ fois et a gagné $${situations[k].nb_gains_unitaires}$ fois $${tex_nombre(situations[k].gain_unitaire)}$€.
+					${situations[k].pronomMaj} a perdu de l'argent $${situations[k].nb_pertes}$ fois et a gagné $${situations[k].nb_gains_unitaires}$ fois $${tex_prix(situations[k].gain_unitaire)}$€.
 					<br> ${num_alpha(i_sous_question++)} A-t-${situations[k].pronomMin} globalement gagné ou perdu de l'argent ?
 					<br> ${num_alpha(i_sous_question++)} Combien a-t-${situations[k].pronomMin} globalement gagné ou perdu ?
 					`,
 					question:``,
 					correction:`
-					${situations[k].prenom} ${situations[k].enonce_5} $${situations[k].nb_tot_lancers}$ fois ${situations[k].enonce_6}, 
-					sur ces $${situations[k].nb_tot_lancers}$ fois,  ${situations[k].pronomMin} a perdu de l'argent $${situations[k].nb_pertes}$ fois et a gagné $${situations[k].nb_gains_unitaires}$ fois $${tex_nombre(situations[k].gain_unitaire)}$€.
+					${situations[k].prenom} ${situations[k].enonce_5} $${situations[k].nb_tot_lancers}$ fois ${situations[k].enonce_6},
+					sur les $${situations[k].nb_tot_lancers}$ lancers, on sait combien de fois ${situations[k].pronomMin} a perdu de l'argent et combien de fois ${situations[k].pronomMin} a gagné $${tex_prix(situations[k].gain_unitaire)}$€, les autres lancers correspondent donc au nombre de fois où ${situations[k].pronomMin} a ${situations[k].correction_1} et qu'${situations[k].pronomMin} a gagné $${tex_prix(situations[k].gain_multiple)}$€ 
 					<br> $${situations[k].nb_tot_lancers}-${situations[k].nb_pertes}-${situations[k].nb_gains_unitaires} = ${situations[k].nb_tot_lancers-situations[k].nb_pertes-situations[k].nb_gains_unitaires}$,
-					${situations[k].pronomMin} a donc ${situations[k].correction_1} ${situations[k].nb_gains} fois.
+					${situations[k].pronomMin} a donc ${situations[k].correction_1} $${situations[k].nb_gains}$ fois.
+
 					<br>${texte_gras(`Gains lorsqu'${situations[k].pronomMin} a ${situations[k].correction_1} :`)}
-					<br>$${myGainPerteString(situations[k].nb_gains,'gain',situations[k].gain_multiple)} = ${situations[k].nb_gains}\\times (+${situations[k].gain_multiple}€) = +${situations[k].nb_gains*situations[k].gain_multiple}$€
+					<br>$${myGainPerteString(situations[k].nb_gains,'gain',situations[k].gain_multiple)} = ${situations[k].nb_gains}\\times (+${tex_prix(situations[k].gain_multiple)}$€$) = +${tex_prix(situations[k].nb_gains*situations[k].gain_multiple)}$€
 
 					<br>${texte_gras(`Gains lorsqu'${situations[k].pronomMin} n'a ${situations[k].correction_2} :`)}
-					<br>$${myGainPerteString(situations[k].nb_gains_unitaires,'gain',situations[k].gain_unitaire)} = ${situations[k].nb_gains_unitaires}\\times (+${situations[k].gain_unitaire}€) = +${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}$€
+					<br>$${myGainPerteString(situations[k].nb_gains_unitaires,'gain',situations[k].gain_unitaire)} = ${situations[k].nb_gains_unitaires}\\times (+${tex_prix(situations[k].gain_unitaire)}$€$) = +${tex_prix(situations[k].nb_gains_unitaires*situations[k].gain_unitaire)}$€
 
 					<br>${texte_gras(`Pertes :`)}
-					<br>$${myGainPerteString(situations[k].nb_pertes,'perte',situations[k].perte)} = ${situations[k].nb_pertes}\\times (-${situations[k].perte}€) = -${situations[k].nb_pertes*situations[k].perte}$€
+					<br>$${myGainPerteString(situations[k].nb_pertes,'perte',situations[k].perte)} = ${situations[k].nb_pertes}\\times (-${tex_prix(situations[k].perte)}$€$) = -${tex_prix(situations[k].nb_pertes*situations[k].perte)}$€
 
-					<br>${num_alpha(i_sous_question_corr++)} ${situations[k].bilan[0]}, $(+${situations[k].nb_gains*situations[k].gain_multiple}€)$ et $(+${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}€)$, ${situations[k].bilan[1]}, $(-${situations[k].nb_pertes*situations[k].perte}€)$.
+					<br>${num_alpha(i_sous_question_corr++)} ${situations[k].bilan[0]}, $(+${tex_prix(situations[k].nb_gains*situations[k].gain_multiple)}$€$)$ et $(+${tex_prix(situations[k].nb_gains_unitaires*situations[k].gain_unitaire)}$€$)$, ${situations[k].bilan[1]}, $(-${tex_prix(situations[k].nb_pertes*situations[k].perte)}$€$)$.
 					<br> ${situations[k].bilan[2]}   
 
 					<br>${num_alpha(i_sous_question_corr++)} 
-					$(+${situations[k].nb_gains*situations[k].gain_multiple}€)+(+${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}€)+(-${situations[k].nb_pertes*situations[k].perte}€) = (${situations[k].nb_gains*situations[k].gain_multiple+situations[k].nb_gains_unitaires*situations[k].gain_unitaire-situations[k].nb_pertes*situations[k].perte}€)$
-					<br>${texte_en_couleur(`Globalement ${situations[k].prenom} ${situations[k].bilan[3]} $${situations[k].bilan[4]}€$`)} 
+					$(+${tex_prix(situations[k].nb_gains*situations[k].gain_multiple)}$€$)+(+${tex_prix(situations[k].nb_gains_unitaires*situations[k].gain_unitaire)}$€$)+(-${tex_prix(situations[k].nb_pertes*situations[k].perte)}$€$) = (${tex_prix(situations[k].nb_gains*situations[k].gain_multiple+situations[k].nb_gains_unitaires*situations[k].gain_unitaire-situations[k].nb_pertes*situations[k].perte)}$€$)$
+					<br>${texte_en_couleur(`Globalement ${situations[k].prenom} ${situations[k].bilan[3]} $${situations[k].bilan[4]}$€`)} 
 
 					`
 				});
@@ -27089,7 +27395,7 @@ function Puissances_encadrement() {
   this.besoin_formulaire_numerique = [
     "Niveau de difficulté",
     4,
-    "1 : nombre enier positif\n2 : nombre décimal positif\n3 : nombre enier positif inférieur à un\n4 : Mélange",
+    "1 : nombre entier positif\n2 : nombre décimal positif\n3 : nombre entier positif inférieur à un\n4 : Mélange",
   ];
 }
 
@@ -29573,8 +29879,8 @@ function Trouver_erreur_resol_eq_deg1(){
             `,
           eq_corr:`${texte_gras(`Équation d'origine : `)} $${a}${inc} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc}$`,          
           eq_corr_et1:`
-          ${texte_gras(`Étape 1 : `)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}${mise_en_evidence(inc)}$ aux deux membres. 
-          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)}$
+          ${texte_gras(`Étape 1 : `)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}$${texte_en_couleur(`$${inc}$`)} aux deux membres. 
+          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)} $${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)} 
           <br>${texte_gras(`Étape 2 : `)} On réduit.
           <br> $${a-c}${inc} ${signeDansEq(b).signe} ${b} = ${d}$
           `,// l'erreur est là, on passe de l'autre côté d'où l'oubli du chgt de signe
@@ -29612,8 +29918,8 @@ function Trouver_erreur_resol_eq_deg1(){
             `,
           eq_corr:`${texte_gras(`Équation d'origine : `)} $${a}${inc} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc}$`,          
           eq_corr_et1:`
-          ${texte_gras(`Étape 1 :`)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}${mise_en_evidence(inc)}$ aux deux membres 
-          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)}$
+          ${texte_gras(`Étape 1 :`)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}$${texte_en_couleur(`$${inc}$`)} aux deux membres 
+          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)} $ ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)} 
           <br>${texte_gras(`Étape 2 : `)} On réduit.
           <br> $${a-c}${inc} ${signeDansEq(b).signe} ${b} = ${d}$
           `,// l'erreur est là, on passe de l'autre côté d'où l'oubli du chgt de signe
@@ -29651,8 +29957,8 @@ function Trouver_erreur_resol_eq_deg1(){
             `,
           eq_corr:`${texte_gras(`Équation d'origine : `)} $${a}${inc} ${signeDansEq(b).signe} ${b} = ${c}${inc} ${signeDansEq(d).signe} ${d} $`,
           eq_corr_et1:`
-          ${texte_gras(`Étape 1 :`)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}${mise_en_evidence(inc)}$ aux deux membres 
-          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)}$
+          ${texte_gras(`Étape 1 :`)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}$${texte_en_couleur(`$${inc}$`)} aux deux membres 
+          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)} $${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)}
           <br>${texte_gras(`Étape 2 : `)} On réduit.
           <br> $${a-c}${inc} ${signeDansEq(b).signe} ${b} = ${d}$
           `,// l'erreur est là, on passe de l'autre côté d'où l'oubli du chgt de signe
@@ -29690,8 +29996,8 @@ function Trouver_erreur_resol_eq_deg1(){
             `,
           eq_corr:`${texte_gras(`Équation d'origine : `)} $${a}${inc} ${signeDansEq(b).signe} ${b} = ${c}${inc} ${signeDansEq(d).signe} ${d} $`,
           eq_corr_et1:`
-          ${texte_gras(`Étape 1 :`)}$${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}${mise_en_evidence(inc)}$ aux deux membres 
-          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)}$
+          ${texte_gras(`Étape 1 :`)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}$${texte_en_couleur(`$${inc}$`)} aux deux membres 
+          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)} $${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)}
           <br>${texte_gras(`Étape 2 : `)} On réduit.
           <br> $${a-c}${inc} ${signeDansEq(b).signe} ${b} = ${d}$
           `,// l'erreur est là, on passe de l'autre côté d'où l'oubli du chgt de signe
@@ -29729,8 +30035,8 @@ function Trouver_erreur_resol_eq_deg1(){
             `,
           eq_corr:`${texte_gras(`Équation d'origine : `)} $${a}${inc} ${signeDansEq(b).signe} ${b} = ${c}${inc} ${signeDansEq(d).signe} ${d} $`,
           eq_corr_et1:`
-          ${texte_gras(`Étape 1 :`)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}${mise_en_evidence(inc)}$ aux deux membres 
-          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)} ${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}${mise_en_evidence(inc)}$
+          ${texte_gras(`Étape 1 :`)} $${mise_en_evidence(signeDansEq(c).operation)}$ $${mise_en_evidence(signeDansEq(c).chgt_signe)}$${texte_en_couleur(`$${inc}$`)} aux deux membres 
+          <br> $${a}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)} $${signeDansEq(b).signe} ${b} = ${d} ${signeDansEq(c).signe} ${c}${inc} ${mise_en_evidence(signeDansEq(-c).signe)} ${mise_en_evidence(-c)}$${texte_en_couleur(`$${inc}$`)}
           <br>${texte_gras(`Étape 2 : `)} On réduit.
           <br> $${a-c}${inc} ${signeDansEq(b).signe} ${b} = ${d}$
           `,// l'erreur est là, on passe de l'autre côté d'où l'oubli du chgt de signe
