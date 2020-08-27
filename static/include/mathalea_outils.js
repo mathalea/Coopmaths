@@ -91,7 +91,7 @@ function quotientier(a, b) {
 	if (Number.isInteger(a) && Number.isInteger(b)) {
 		let reste = a
 		let quotient = 0
-		while (reste > b) {
+		while (reste >= b) {
 			reste -= b
 			quotient++
 		}
@@ -341,7 +341,16 @@ function compare_fractions(a,b){
 function compare_nombres(a,b){ 
 	return a - b ;
 }
-
+/**
+ * 
+ * Copié sur https://delicious-insights.com/fr/articles/le-piege-de-array-sort/
+ */
+function numTrie(arr) {
+	return arr.sort(function(a, b) {
+	  return +a - +b
+	})
+  }
+  
 /*
 * Mélange les items d'un tableau, sans modifier le tableau passé en argument
 *
@@ -644,7 +653,7 @@ function produit_matrice_matrice_3x3(matrice1,matrice2) { // les deux matrices s
  * @Auteur Jean-Claude Lhote
  */
 function changement_de_base_ortho_tri(point) {
-	point.push(1);
+	if (point.length==2) point.push(1);
 	return produit_matrice_vecteur_3x3([[1,-Math.cos(Math.PI/3)/Math.sin(Math.PI/3),0],[0,1/Math.sin(Math.PI/3),0],[0,0,1]],point)
 }
 /**
@@ -654,7 +663,7 @@ function changement_de_base_ortho_tri(point) {
  * @Auteur Jean-CLaude Lhote
  */
 function changement_de_base_tri_ortho(point) {
-	point.push(1);
+	if (point.length==2) point.push(1);
 	return produit_matrice_vecteur_3x3([[1,Math.cos(Math.PI/3),0],[0,Math.sin(Math.PI/3),0],[0,0,1]],point)
 }
 
@@ -700,7 +709,7 @@ function image_point_par_transformation (transformation,pointA,pointO,vecteur=[]
 
 	let x,y,x1,y1,u,v,k,pointA1=[0,0,0],pointA2=[0,0,0]
 
-	pointA.push(1)
+	if (pointA.length==2) pointA.push(1)
 	x2=pointO[0]  // Point O' (origine du repère dans lequel les transformations sont simples (centre des rotations et point d'intersection des axes))
 	y2=pointO[1]
 	u=vecteur[0] // (u,v) vecteur de translation.
@@ -4225,11 +4234,9 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
 		}
 		let longueurs = [self.l1,self.l2,self.l3];
-		//console.log('longueurs : '+longueurs);
 		longueurs.sort(function(a,b){
 			return calcul(a-b);
 		});
-		//console.log('longueurs sort() : '+longueurs);
 		if (longueurs[2] < calcul(longueurs[0]+longueurs[1])) {
 			return true;
 		} else {
@@ -4256,11 +4263,9 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 			return false;
 		}
 		let longueurs = [self.l1,self.l2,self.l3];
-		//console.log('longueurs : '+longueurs);
 		longueurs.sort(function(a,b){
 			return calcul(a-b);
 		});
-		//console.log('longueurs sort() : '+longueurs);
 		if (longueurs[2] == calcul(longueurs[0]+longueurs[1])) {
 			return true;
 		} else {
@@ -4674,7 +4679,6 @@ function Relatif(...relatifs) {
 					throw new RangeError(`${element} est exclu des valeurs possibles pour les dénominateurs !`)
 				};
 			});	
-			//console.log(fractions.length);
 			if (Math.floor(fractions.length/2) <= 1 ) {
 				throw new Error(`Il faut au moins deux fractions !`);
 			};
@@ -4685,11 +4689,6 @@ function Relatif(...relatifs) {
 			do{
 			 	changed = false;
 			 	for (let i=0; i<(fractions.length-1); i+=2) {
-					//  console.log('i'+i);
-					//  console.log(fractions[i]);
-					//  console.log(fractions[i+1]);
-					//  console.log(fractions[i+2]);
-					//  console.log(fractions[i+3]);
 					if ((fractions[i]/fractions[i+1]) > (fractions[i+2]/fractions[i+3])) {
 						let tmp = [fractions[i],fractions[i+1]];
 						fractions[i]=fractions[i+2];
@@ -4751,7 +4750,6 @@ function Relatif(...relatifs) {
 					throw new RangeError(`${element} est exclu des valeurs possibles pour les dénominateurs !`)
 				};
 			});	
-			//console.log(fractions.length);
 			if (Math.floor(fractions.length/2) <= 1 ) {
 				throw new Error(`Il faut au moins deux fractions !`);
 			};
@@ -4885,47 +4883,251 @@ function Fraction(num,den) {
      * @param {number} depart N° de la première part coloriée (0 correspond à la droite du centre) 
      * @param {*} type 'gateau' ou 'segment' ou 'barre'
      */
-    this.representation = function (depart = 0, type = 'gateau',couleur='gray') {
+	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray') {
+		let objets = [], n, num, k, dep, s, a, O, C
+		n = quotientier(this.numIrred, this.denIrred)
+		num = this.numIrred
+		if (type == 'gateau') {
+			for (k = 0; k < n; k++) {
+				O = point(x + k * 2 * (rayon + 0.5), y)
+				C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.denIrred; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					objets.push(s)
+				}
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
+					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.denIrred)
+					objets.push(a)
+				}
+				num -= this.denIrred
+			}
+			O = point(x + k * 2 * (rayon + 0.5), y)
+			C = cercle(O, rayon)
+			objets.push(C)
+			for (let i = 0; i < this.denIrred; i++) {
+				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+				objets.push(s)
+			}
+			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+			for (let j = 0; j < Math.min(this.denIrred, num); j++) {
+				a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+				a.opacite = 0.3
+				dep = rotation(dep, O, 360 / this.denIrred)
+				objets.push(a)
+			}
+		}
+		else if (type == 'segment') {
+			for (k = 0; k < n; k++) {
+				O = point(x + k *rayon, y)
+				C = translation(O, vecteur(rayon, 0))
+				s = segment(O, C)
+				s.styleExtremites = '-|'
+				objets.push(s)
+				for (let i = 0; i < this.denIrred; i++) {
+					s = segment(translation(O, vecteur(i * rayon / this.denIrred, 0)), translation(O, vecteur((i + 1) * rayon / this.denIrred, 0)))
+					s.styleExtremites = '|-'
+					objets.push(s)
+				}
+				a = segment(O, point(O.x + Math.min(num, this.denIrred) * rayon / this.denIrred, O.y))
+				a.color = couleur
+				a.opacite = 0.4
+				a.epaisseur = 4
+				objets.push(a)
+				num -= this.denIrred
+			}
+			O = point(x + k * rayon, y)
+			C = translation(O, vecteur(rayon, 0))
+			s = segment(O, C)
+			s.styleExtremites = '-|'
+			objets.push(s)
+			for (let i = 0; i < this.denIrred; i++) {
+				s = segment(translation(O, vecteur(i * rayon / this.denIrred, 0)), translation(O, vecteur((i + 1) * rayon / this.denIrred, 0)))
+				s.styleExtremites = '|-'
+				objets.push(s)
+			}
+			a = segment(O, point(O.x + Math.min(num, this.denIrred) * rayon / this.denIrred, O.y))
+			a.color = couleur
+			a.opacite = 0.4
+			a.epaisseur = 4
+			objets.push(a)
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
 
-        if (type == 'gateau') {
-            let n = quotientier(this.numIrred, this.denIrred)
-            let num = this.numIrred
-            let k,dep
-            for (k = 0; k < n; k++) {
-                let O = point(2 + k * 5, 2)
-                let C = cercle(O, 2)
-                let s, a
-                for (let i = 0; i < this.denIrred; i++) {
-                    s = segment(O, rotation(point(4+k*5, 2), O, i * 360 / this.denIrred))
-                }
-                dep = rotation(point(4 + k * 5, 2), O, depart * 360 / this.denIrred)
-                for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-                    a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
-                    a.opacite=0.3
-                    dep = rotation(dep, O, 360 / this.denIrred)
-                }
-                num -= this.denIrred
-            }
-            let O = point(2 + k * 5, 2)
-            let C = cercle(O, 2)
-            let s, a
-            for (let i = 0; i < this.denIrred; i++) {
-                s = segment(O, rotation(point(4+k*5, 2), O, i * 360 / this.denIrred))
-            }
-            dep = rotation(point(4 + k * 5, 2), O, depart * 360 / this.denIrred)
-            for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-                a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
-                a.opacite=0.3
-                dep = rotation(dep, O, 360 / this.denIrred)
-            }
-        }
-        else if (type == 'segment') {
+		}
+		else {
+			let diviseur
+			if (this.denIrred % 3 == 0) diviseur = 3
+			else if (this.denIrred % 2 == 0) diviseur = 2
+			else diviseur = 1
 
-        }
-        else {
+			for (k = 0; k < n; k++) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.denIrred / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						dep.couleurDeRemplissage = couleur
+						dep.opaciteDeRemplissage=0.4
+						objets.push(dep)
+					}
+				}
+				num -= this.denIrred
+			}
+			if (num>0) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.denIrred / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						objets.push(dep)
+					}
+				}
+				for (let i = 0; i < num; i++) {
+				O = point(x + k * (rayon + 1) + (i % diviseur) * rayon / diviseur, y + quotientier(i, diviseur) * rayon / diviseur)
+				C = translation(O, vecteur(rayon / diviseur, 0))
+				dep = carre(O, C)
+				dep.color = 'black'
+				dep.couleurDeRemplissage = couleur
+				dep.opaciteDeRemplissage=0.4
+				objets.push(dep)
+			}
+		}
+		}
+		return objets
+	}
+	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1) {
+		let objets = [], n, num, k, dep, s, a, O, C
+		n = quotientier(this.num, this.den)
+		num = this.num
+		unegraduation=function(x,y,couleur='black',epaisseur=1){
+			let A=point(x,y+0.2)
+			let B=point(x,y-0.2)
+			let g=segment(A,B)
+			g.color=couleur
+			g.epaisseur=epaisseur
+			return g
+		}
+		if (type == 'gateau') {
+			k, dep
+			for (k = 0; k < n; k++) {
+				let O = point(x + k * 2 * (rayon + 0.5), y)
+				let C = cercle(O, rayon)
+				objets.push(C)
+				let s, a
+				for (let i = 0; i < this.den; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					objets.push(s)
+				}
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				for (let j = 0; j < Math.min(this.den, num); j++) {
+					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.den)
+					objets.push(a)
+				}
+				num -= this.den
+			}
+			let O = point(x + k * 2 * (rayon + 0.5), y)
+			let C = cercle(O, rayon)
+			objets.push(C)
+			let s, a
+			for (let i = 0; i < this.den; i++) {
+				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+				objets.push(s)
+			}
+			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+			for (let j = 0; j < Math.min(this.den, num); j++) {
+				a = arc(dep, O, 360 / this.den, true, fill = couleur)
+				a.opacite = 0.3
+				dep = rotation(dep, O, 360 / this.den)
+				objets.push(a)
+			}
+		}
+		else if (type == 'segment') {
+			for (k = 0; k < n; k++) {
+				O = point(x + k * rayon, y)
+				C = translation(O, vecteur(rayon, 0))
+				s = segment(O, C)
+				s.styleExtremites = '-|'
+				objets.push(s)
+				for (let i = 0; i < this.den; i++) {
+					s = segment(translation(O, vecteur(i * rayon / this.den, 0)), translation(O, vecteur((i + 1) * rayon / this.den, 0)))
+					s.styleExtremites = '|-'
+					objets.push(s)
+				}
+				a = segment(O, point(O.x + Math.min(num, this.den) * rayon / this.den, O.y))
+				a.color = couleur
+				a.opacite = 0.4
+				a.epaisseur = 4
+				objets.push(a)
+				num -= this.den
+			}
+			O = point(x + k * rayon , y)
+			C = translation(O, vecteur(rayon, 0))
+			s = segment(O, C)
+			s.styleExtremites = '-|'
+			objets.push(s)
+			for (let i = 0; i < this.den; i++) {
+				s = segment(translation(O, vecteur(i * rayon / this.den, 0)), translation(O, vecteur((i + 1) * rayon / this.den, 0)))
+				s.styleExtremites = '|-'
+				objets.push(s)
+			}
+			a = segment(O, point(O.x + Math.min(num, this.den) * rayon / this.den, O.y))
+			a.color = couleur
+			a.opacite = 0.4
+			a.epaisseur = 4
+			objets.push(a)
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
 
-        }
-    }
+		}
+		else { //Type bâtons
+			let diviseur
+			if (this.den % 3 == 0) diviseur = 3
+			else if (this.den % 2 == 0) diviseur = 2
+			else diviseur = 1
+
+			for (k = 0; k < n; k++) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.den / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						dep.couleurDeRemplissage = couleur
+						dep.opaciteDeRemplissage=0.4
+						objets.push(dep)
+					}
+				}
+				num -= this.den
+			}
+			if (num>0) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.den / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						objets.push(dep)
+					}
+				}
+				for (let i = 0; i < num; i++) {
+				O = point(x + k * (rayon + 1) + (i % diviseur) * rayon / diviseur, y + quotientier(i, diviseur) * rayon / diviseur)
+				C = translation(O, vecteur(rayon / diviseur, 0))
+				dep = carre(O, C)
+				dep.color = 'black'
+				dep.couleurDeRemplissage = couleur
+				dep.opaciteDeRemplissage=0.4
+				objets.push(dep)
+			}
+		}
+		}
+		return objets
+	}
 
     /**
      * 
