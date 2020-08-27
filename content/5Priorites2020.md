@@ -81,9 +81,9 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
-			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}
-			{{% priorite_alea "6N33-1 : Calculer le pourcentage d'un nombre de tête" "6N33-1" %}}
+			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}			
 			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N33-1 : Calculer le pourcentage d'un nombre de tête" "6N33-1" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
 		</div>	
@@ -101,6 +101,7 @@ Pour cela deux options :
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
 			{{% priorite_alea "6G43 : Utiliser le vocabulaire associé au pavé droit" "6G43" %}}	
+			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
@@ -108,6 +109,7 @@ Pour cela deux options :
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - pas de carreaux" "6G12-1,sup2=3" %}}
 			{{% priorite_alea "6G23-2 :  Tracer un triangle dont on connait une longueur et 2 angles" "6G23-2" %}}
 			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il complète une figure par symétrie axiale." %}}			
 			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}	
