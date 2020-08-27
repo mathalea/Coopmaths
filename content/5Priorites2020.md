@@ -30,8 +30,8 @@ Pour cela deux options :
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
-	{{%pdf_url "Test de positionnement 5e  - version pdf" "/pdf/2020-3e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1" %}}
+	{{%pdf_url "Test de positionnement 5e  - version pdf non complète" "/pdf/2020-5e-Priorites-Test.pdf"%}}
+	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1" %}}
 {{< /liste >}}
 
 
@@ -43,7 +43,7 @@ Pour cela deux options :
 		<div class="header content">Utiliser et représenter les grands nombres entiers, des fractions simples, les nombres décimaux.</div>	
 			{{% priorite "L’élève utilise les grands nombres entiers et des nombres décimaux ayant au plus quatre décimales." %}}
 			{{% priorite_alea "6C30-1 : Multiplications d'un nombre décimal par 10, 100 ou 1 000." "6C30-1,sup=1" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6C30-2 : Calculer le produit de deux décimaux connaissant le produit de deux entiers" "6C30-2" %}}
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 1 décimale" "6N30,sup=1" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 2 décimales" "6N30,sup=2" %}}
@@ -53,7 +53,7 @@ Pour cela deux options :
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
 			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea ".... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 		</div>	
 {{< /liste_priorites >}}
@@ -81,9 +81,9 @@ Pour cela deux options :
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
-			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}
-			{{% priorite_alea "6N33-1 : Calculer le pourcentage d'un nombre de tête" "6N33-1" %}}
+			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}			
 			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N33-1 : Calculer le pourcentage d'un nombre de tête" "6N33-1" %}}
 			{{% priorite_alea "... : ..." "" %}}
 
 		</div>	
@@ -101,6 +101,7 @@ Pour cela deux options :
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
 			{{% priorite_alea "6G43 : Utiliser le vocabulaire associé au pavé droit" "6G43" %}}	
+			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
@@ -108,6 +109,7 @@ Pour cela deux options :
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - pas de carreaux" "6G12-1,sup2=3" %}}
 			{{% priorite_alea "6G23-2 :  Tracer un triangle dont on connait une longueur et 2 angles" "6G23-2" %}}
 			{{% priorite_alea "... : ..." "" %}}	
+			{{% priorite_alea "... : ..." "" %}}
 
 			{{% priorite "Il complète une figure par symétrie axiale." %}}			
 			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}	

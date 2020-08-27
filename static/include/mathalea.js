@@ -91,7 +91,7 @@ function quotientier(a, b) {
 	if (Number.isInteger(a) && Number.isInteger(b)) {
 		let reste = a
 		let quotient = 0
-		while (reste > b) {
+		while (reste >= b) {
 			reste -= b
 			quotient++
 		}
@@ -341,7 +341,16 @@ function compare_fractions(a,b){
 function compare_nombres(a,b){ 
 	return a - b ;
 }
-
+/**
+ * 
+ * Copié sur https://delicious-insights.com/fr/articles/le-piege-de-array-sort/
+ */
+function numTrie(arr) {
+	return arr.sort(function(a, b) {
+	  return +a - +b
+	})
+  }
+  
 /*
 * Mélange les items d'un tableau, sans modifier le tableau passé en argument
 *
@@ -644,7 +653,7 @@ function produit_matrice_matrice_3x3(matrice1,matrice2) { // les deux matrices s
  * @Auteur Jean-Claude Lhote
  */
 function changement_de_base_ortho_tri(point) {
-	point.push(1);
+	if (point.length==2) point.push(1);
 	return produit_matrice_vecteur_3x3([[1,-Math.cos(Math.PI/3)/Math.sin(Math.PI/3),0],[0,1/Math.sin(Math.PI/3),0],[0,0,1]],point)
 }
 /**
@@ -654,7 +663,7 @@ function changement_de_base_ortho_tri(point) {
  * @Auteur Jean-CLaude Lhote
  */
 function changement_de_base_tri_ortho(point) {
-	point.push(1);
+	if (point.length==2) point.push(1);
 	return produit_matrice_vecteur_3x3([[1,Math.cos(Math.PI/3),0],[0,Math.sin(Math.PI/3),0],[0,0,1]],point)
 }
 
@@ -700,7 +709,7 @@ function image_point_par_transformation (transformation,pointA,pointO,vecteur=[]
 
 	let x,y,x1,y1,u,v,k,pointA1=[0,0,0],pointA2=[0,0,0]
 
-	pointA.push(1)
+	if (pointA.length==2) pointA.push(1)
 	x2=pointO[0]  // Point O' (origine du repère dans lequel les transformations sont simples (centre des rotations et point d'intersection des axes))
 	y2=pointO[1]
 	u=vecteur[0] // (u,v) vecteur de translation.
@@ -4225,11 +4234,9 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 			//return 'L\'une des longueurs de l\'objet triangle n\'est pas définie';
 		}
 		let longueurs = [self.l1,self.l2,self.l3];
-		//console.log('longueurs : '+longueurs);
 		longueurs.sort(function(a,b){
 			return calcul(a-b);
 		});
-		//console.log('longueurs sort() : '+longueurs);
 		if (longueurs[2] < calcul(longueurs[0]+longueurs[1])) {
 			return true;
 		} else {
@@ -4256,11 +4263,9 @@ function Triangles(l1,l2,l3,a1,a2,a3) {
 			return false;
 		}
 		let longueurs = [self.l1,self.l2,self.l3];
-		//console.log('longueurs : '+longueurs);
 		longueurs.sort(function(a,b){
 			return calcul(a-b);
 		});
-		//console.log('longueurs sort() : '+longueurs);
 		if (longueurs[2] == calcul(longueurs[0]+longueurs[1])) {
 			return true;
 		} else {
@@ -4674,7 +4679,6 @@ function Relatif(...relatifs) {
 					throw new RangeError(`${element} est exclu des valeurs possibles pour les dénominateurs !`)
 				};
 			});	
-			//console.log(fractions.length);
 			if (Math.floor(fractions.length/2) <= 1 ) {
 				throw new Error(`Il faut au moins deux fractions !`);
 			};
@@ -4685,11 +4689,6 @@ function Relatif(...relatifs) {
 			do{
 			 	changed = false;
 			 	for (let i=0; i<(fractions.length-1); i+=2) {
-					//  console.log('i'+i);
-					//  console.log(fractions[i]);
-					//  console.log(fractions[i+1]);
-					//  console.log(fractions[i+2]);
-					//  console.log(fractions[i+3]);
 					if ((fractions[i]/fractions[i+1]) > (fractions[i+2]/fractions[i+3])) {
 						let tmp = [fractions[i],fractions[i+1]];
 						fractions[i]=fractions[i+2];
@@ -4751,7 +4750,6 @@ function Relatif(...relatifs) {
 					throw new RangeError(`${element} est exclu des valeurs possibles pour les dénominateurs !`)
 				};
 			});	
-			//console.log(fractions.length);
 			if (Math.floor(fractions.length/2) <= 1 ) {
 				throw new Error(`Il faut au moins deux fractions !`);
 			};
@@ -4885,47 +4883,251 @@ function Fraction(num,den) {
      * @param {number} depart N° de la première part coloriée (0 correspond à la droite du centre) 
      * @param {*} type 'gateau' ou 'segment' ou 'barre'
      */
-    this.representation = function (depart = 0, type = 'gateau',couleur='gray') {
+	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray') {
+		let objets = [], n, num, k, dep, s, a, O, C
+		n = quotientier(this.numIrred, this.denIrred)
+		num = this.numIrred
+		if (type == 'gateau') {
+			for (k = 0; k < n; k++) {
+				O = point(x + k * 2 * (rayon + 0.5), y)
+				C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.denIrred; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					objets.push(s)
+				}
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
+					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.denIrred)
+					objets.push(a)
+				}
+				num -= this.denIrred
+			}
+			O = point(x + k * 2 * (rayon + 0.5), y)
+			C = cercle(O, rayon)
+			objets.push(C)
+			for (let i = 0; i < this.denIrred; i++) {
+				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+				objets.push(s)
+			}
+			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+			for (let j = 0; j < Math.min(this.denIrred, num); j++) {
+				a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+				a.opacite = 0.3
+				dep = rotation(dep, O, 360 / this.denIrred)
+				objets.push(a)
+			}
+		}
+		else if (type == 'segment') {
+			for (k = 0; k < n; k++) {
+				O = point(x + k *rayon, y)
+				C = translation(O, vecteur(rayon, 0))
+				s = segment(O, C)
+				s.styleExtremites = '-|'
+				objets.push(s)
+				for (let i = 0; i < this.denIrred; i++) {
+					s = segment(translation(O, vecteur(i * rayon / this.denIrred, 0)), translation(O, vecteur((i + 1) * rayon / this.denIrred, 0)))
+					s.styleExtremites = '|-'
+					objets.push(s)
+				}
+				a = segment(O, point(O.x + Math.min(num, this.denIrred) * rayon / this.denIrred, O.y))
+				a.color = couleur
+				a.opacite = 0.4
+				a.epaisseur = 4
+				objets.push(a)
+				num -= this.denIrred
+			}
+			O = point(x + k * rayon, y)
+			C = translation(O, vecteur(rayon, 0))
+			s = segment(O, C)
+			s.styleExtremites = '-|'
+			objets.push(s)
+			for (let i = 0; i < this.denIrred; i++) {
+				s = segment(translation(O, vecteur(i * rayon / this.denIrred, 0)), translation(O, vecteur((i + 1) * rayon / this.denIrred, 0)))
+				s.styleExtremites = '|-'
+				objets.push(s)
+			}
+			a = segment(O, point(O.x + Math.min(num, this.denIrred) * rayon / this.denIrred, O.y))
+			a.color = couleur
+			a.opacite = 0.4
+			a.epaisseur = 4
+			objets.push(a)
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
 
-        if (type == 'gateau') {
-            let n = quotientier(this.numIrred, this.denIrred)
-            let num = this.numIrred
-            let k,dep
-            for (k = 0; k < n; k++) {
-                let O = point(2 + k * 5, 2)
-                let C = cercle(O, 2)
-                let s, a
-                for (let i = 0; i < this.denIrred; i++) {
-                    s = segment(O, rotation(point(4+k*5, 2), O, i * 360 / this.denIrred))
-                }
-                dep = rotation(point(4 + k * 5, 2), O, depart * 360 / this.denIrred)
-                for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-                    a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
-                    a.opacite=0.3
-                    dep = rotation(dep, O, 360 / this.denIrred)
-                }
-                num -= this.denIrred
-            }
-            let O = point(2 + k * 5, 2)
-            let C = cercle(O, 2)
-            let s, a
-            for (let i = 0; i < this.denIrred; i++) {
-                s = segment(O, rotation(point(4+k*5, 2), O, i * 360 / this.denIrred))
-            }
-            dep = rotation(point(4 + k * 5, 2), O, depart * 360 / this.denIrred)
-            for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-                a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
-                a.opacite=0.3
-                dep = rotation(dep, O, 360 / this.denIrred)
-            }
-        }
-        else if (type == 'segment') {
+		}
+		else {
+			let diviseur
+			if (this.denIrred % 3 == 0) diviseur = 3
+			else if (this.denIrred % 2 == 0) diviseur = 2
+			else diviseur = 1
 
-        }
-        else {
+			for (k = 0; k < n; k++) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.denIrred / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						dep.couleurDeRemplissage = couleur
+						dep.opaciteDeRemplissage=0.4
+						objets.push(dep)
+					}
+				}
+				num -= this.denIrred
+			}
+			if (num>0) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.denIrred / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						objets.push(dep)
+					}
+				}
+				for (let i = 0; i < num; i++) {
+				O = point(x + k * (rayon + 1) + (i % diviseur) * rayon / diviseur, y + quotientier(i, diviseur) * rayon / diviseur)
+				C = translation(O, vecteur(rayon / diviseur, 0))
+				dep = carre(O, C)
+				dep.color = 'black'
+				dep.couleurDeRemplissage = couleur
+				dep.opaciteDeRemplissage=0.4
+				objets.push(dep)
+			}
+		}
+		}
+		return objets
+	}
+	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1) {
+		let objets = [], n, num, k, dep, s, a, O, C
+		n = quotientier(this.num, this.den)
+		num = this.num
+		unegraduation=function(x,y,couleur='black',epaisseur=1){
+			let A=point(x,y+0.2)
+			let B=point(x,y-0.2)
+			let g=segment(A,B)
+			g.color=couleur
+			g.epaisseur=epaisseur
+			return g
+		}
+		if (type == 'gateau') {
+			k, dep
+			for (k = 0; k < n; k++) {
+				let O = point(x + k * 2 * (rayon + 0.5), y)
+				let C = cercle(O, rayon)
+				objets.push(C)
+				let s, a
+				for (let i = 0; i < this.den; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					objets.push(s)
+				}
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				for (let j = 0; j < Math.min(this.den, num); j++) {
+					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.den)
+					objets.push(a)
+				}
+				num -= this.den
+			}
+			let O = point(x + k * 2 * (rayon + 0.5), y)
+			let C = cercle(O, rayon)
+			objets.push(C)
+			let s, a
+			for (let i = 0; i < this.den; i++) {
+				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+				objets.push(s)
+			}
+			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+			for (let j = 0; j < Math.min(this.den, num); j++) {
+				a = arc(dep, O, 360 / this.den, true, fill = couleur)
+				a.opacite = 0.3
+				dep = rotation(dep, O, 360 / this.den)
+				objets.push(a)
+			}
+		}
+		else if (type == 'segment') {
+			for (k = 0; k < n; k++) {
+				O = point(x + k * rayon, y)
+				C = translation(O, vecteur(rayon, 0))
+				s = segment(O, C)
+				s.styleExtremites = '-|'
+				objets.push(s)
+				for (let i = 0; i < this.den; i++) {
+					s = segment(translation(O, vecteur(i * rayon / this.den, 0)), translation(O, vecteur((i + 1) * rayon / this.den, 0)))
+					s.styleExtremites = '|-'
+					objets.push(s)
+				}
+				a = segment(O, point(O.x + Math.min(num, this.den) * rayon / this.den, O.y))
+				a.color = couleur
+				a.opacite = 0.4
+				a.epaisseur = 4
+				objets.push(a)
+				num -= this.den
+			}
+			O = point(x + k * rayon , y)
+			C = translation(O, vecteur(rayon, 0))
+			s = segment(O, C)
+			s.styleExtremites = '-|'
+			objets.push(s)
+			for (let i = 0; i < this.den; i++) {
+				s = segment(translation(O, vecteur(i * rayon / this.den, 0)), translation(O, vecteur((i + 1) * rayon / this.den, 0)))
+				s.styleExtremites = '|-'
+				objets.push(s)
+			}
+			a = segment(O, point(O.x + Math.min(num, this.den) * rayon / this.den, O.y))
+			a.color = couleur
+			a.opacite = 0.4
+			a.epaisseur = 4
+			objets.push(a)
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
 
-        }
-    }
+		}
+		else { //Type bâtons
+			let diviseur
+			if (this.den % 3 == 0) diviseur = 3
+			else if (this.den % 2 == 0) diviseur = 2
+			else diviseur = 1
+
+			for (k = 0; k < n; k++) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.den / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						dep.couleurDeRemplissage = couleur
+						dep.opaciteDeRemplissage=0.4
+						objets.push(dep)
+					}
+				}
+				num -= this.den
+			}
+			if (num>0) {
+				for (let j = 0; j < diviseur; j++) {
+					for (let h = 0; h < calcul(this.den / diviseur); h++) {
+						O = point(x + k * (rayon + 1)+j*rayon/diviseur, y + h * rayon / diviseur)
+						C = translation(O, vecteur(rayon / diviseur, 0))
+						dep = carre(O, C)
+						dep.color = 'black'
+						objets.push(dep)
+					}
+				}
+				for (let i = 0; i < num; i++) {
+				O = point(x + k * (rayon + 1) + (i % diviseur) * rayon / diviseur, y + quotientier(i, diviseur) * rayon / diviseur)
+				C = translation(O, vecteur(rayon / diviseur, 0))
+				dep = carre(O, C)
+				dep.color = 'black'
+				dep.couleurDeRemplissage = couleur
+				dep.opaciteDeRemplissage=0.4
+				objets.push(dep)
+			}
+		}
+		}
+		return objets
+	}
 
     /**
      * 
@@ -5479,7 +5681,6 @@ var liste_des_exercices_disponibles = {
   "CM019": Le_compte_est_bonV3,
   "CM020": Le_compte_est_bonV4,
   "CM021": Compte_Est_Bon,
-  "beta6pave" : Solide_6e,
   "6C10": Additions_soustractions_multiplications_posees,
   "6C11": Divisions_euclidiennes,
   "6C10-1": Tables_de_multiplications,
@@ -5489,6 +5690,7 @@ var liste_des_exercices_disponibles = {
   "6C13": Vocabulaire_et_operations,
   "6C20": Additionner_soustraires_decimaux,
   "6C21": Divisions_euclidiennes_niv2,
+  "6C23" : Exercice_additionner_des_fractions_6e,
   "6C30": Multiplier_decimaux,
   "6C30-1": Multiplier_decimaux_par_10_100_1000,
   "6C31": Division_decimale,
@@ -5507,8 +5709,12 @@ var liste_des_exercices_disponibles = {
   "6G20-2": Vocabulaire_des_triangles_6e,
   "6G23-2": Tracer_triangle_2_angles,
   "6G24": Transformations_6e,
+  "6G24-1" : Symetrie_axiale_point_6e,
+  "6G24-2" : Symetrie_axiale_figure_6e,
   "6G25-1": Pavages_et_reflexion,
   "6G25-2": Pavages_et_symetries,
+  "6G42" : Solide_6e,
+  "6G43" : Utiliser_vocabulaire_pave,
   "6M11-1": Perimetre_ou_aire_de_carres_rectangles_triangles,
   "6M11-2": Perimetre_ou_aire_de_figures_composees,
   "6M10": Reglages_6M10,
@@ -5528,6 +5734,7 @@ var liste_des_exercices_disponibles = {
   "6N11-2": Placer_un_point_abscisse_entiere,
   "6N12": Exercice_6N12,
   "6N13": Exercice_6N13,
+  "beta6N14" : Representer_une_fraction,
   "6N20": Exercice_fractions_decomposer,
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
@@ -5578,6 +5785,7 @@ var liste_des_exercices_disponibles = {
   "5L10-1": Traduire_une_phrase_par_une_expression_litterale,
   "5L10-2": Traduire_un_programme_de_calcul,
   "5L10-3": Traduire_une_expression_litterale_par_une_phrase,
+  "5N20-0": Problemes_additifs_fractions_5e,
   "5L12": Reduire_une_expression_litterale,
   "5L12-1": Reduire_dinstinction_somme_produit,
   "5L13": Calculer_la_valeur_d_une_expression_litterale,
@@ -5585,6 +5793,7 @@ var liste_des_exercices_disponibles = {
   "5L13-2": Exercice_substituer,
   "5L13-3": Traduire_une_phrase_par_une_expression_litterale_et_calculer,
   "5L13-4": Calculer_une_expression_litteraleBis,
+  "5L13-5":Calculer_la_valeur_d_une_expression_litterale_deg1_inc1,
   "5L14": Tester_une_egalite,
   "5M10": Aire_du_parallelogramme,
   "5M20": Calcul_de_volumes_5e,
@@ -5595,7 +5804,8 @@ var liste_des_exercices_disponibles = {
   "5R12-2": Reperage_point_du_plan,
   "5R20": Exercice_additions_relatifs,
   "5R20-2": Exercice_additions_relatifs_a_trou,
-  "5R20-3": Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe
+  "5R20-3": Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe 
+  "beta5R20-4": Problemes_additifs_relatifs_5e, 
   "5R21": Exercice_soustractions_relatifs,
   "5R22": Exercice_additions_et_soustraction_de_relatifsV2,
   "5R22-2": Exercice_simplification_somme_algebrique,
@@ -5615,7 +5825,7 @@ var liste_des_exercices_disponibles = {
   "4L14-0": Tester_si_un_nombre_est_solution_d_une_equation,
   "4L14-1": Tester_si_un_nombre_est_solution_d_une_equation_deg1,
   "4L14-2": Tester_si_un_nombre_est_solution_d_une_equation_deg2,
-  "beta4L15-0": Trouver_erreur_resol_eq_deg1,
+  "4L15-0": Trouver_erreur_resol_eq_deg1,
   "4L20": Exercice_equation1,
   "4M30": Calcul_de_volumes_4e,
   "4N10": Exercice_additionner_des_fractions,
@@ -5784,6 +5994,7 @@ function Exercice() {
 /**
  * Pour imprimer des repères vierges pour les élèves.
  * @Auteur Jean-Claude Lhote
+ * référence : P003
  */
 function feuille_d_axes_gradues() {
   "use strict";
@@ -5840,6 +6051,7 @@ function feuille_d_axes_gradues() {
 /**
  * Lire l'abscisse entière d'un point
  * @Auteur Jean-Claude Lhote et Rémi Angot
+ * référence 6N11
  */
 function Lire_abscisse_entiere() {
   "use strict";
@@ -6006,6 +6218,7 @@ function Lire_abscisse_entiere() {
 /**
  * Placer un point d'abscisse entière
  * @Auteur Jean-Claude Lhote et Rémi Angot
+ * référence 6N11-2
  */
 function Placer_un_point_abscisse_entiere() {
   "use strict";
@@ -6332,6 +6545,7 @@ function Questions_de_cours() {
 /**
  * Lire l'abscisse décimale d'un point
  * @Auteur Jean-Claude Lhote et Rémi Angot
+ * référence 6N30
  */
 function Lire_abscisse_decimale() {
   "use strict";
@@ -6498,6 +6712,7 @@ function Lire_abscisse_decimale() {
 /**
  * Lire l'abscisse fractionnaire d'un point
  * @Auteur Jean-Claude Lhote et Rémi Angot
+ * référence 6N21
  */
 function Lire_abscisse_fractionnaire() {
   "use strict";
@@ -6673,6 +6888,7 @@ function Lire_abscisse_fractionnaire() {
 /**
  * Placer un point d'abscisse décimale
  * @Auteur Jean-Claude Lhote et Rémi Angot
+ * référence 6N30-2
  */
 function Placer_points_sur_axe() {
   "use strict";
@@ -8440,6 +8656,7 @@ function Compte_Est_Bon() {
 /**
  * Générateur de tirages pour un compte est bon avec en correction la solution mathador (4 opérations différentes).
  * @Auteur Jean-Claude Lhote
+ * référence CM019
  */
 
 function Le_compte_est_bonV3() {
@@ -8498,7 +8715,7 @@ function Le_compte_est_bonV3() {
 }
 /**
  * @Auteur Jean-Claude Lhote
- *
+  * référence CM020
  * Dans cette version, il est possible de choisir 1,2,3,4 ou 5 nombres du tirage et de contraindre la cible entre deux valeurs
  */
 function Le_compte_est_bonV4() {
@@ -8582,6 +8799,7 @@ function Le_compte_est_bonV4() {
  * Cette fonction produit aléatoirement un tirage de 5 nombres, une solution, un tableau contenant les calculs successifs, une chaine contenant l'expression mathador correspondante
  * @returns {array} [tirage=[a,b,c,d,e],solution (compris entre min et max),operations_successives=[string1,string2,string3,string4,string5],expression]
  * les string1 à 5 ainsi que l'expresion sont ) mettre en mode maths.
+ * sert dans les exercices CM019,
  */
 function Trouver_solution_mathador(
   min,
@@ -10234,6 +10452,7 @@ function Tableau_criteres_de_divisibilite() {
 /**
  * Exercice sur la notion de proportionnalité (ou pas)
  * @Auteur Jean-Claude Lhote
+ * référence 6P10
  */
 function Proportionnalite_pas_proportionnalite() {
   "use strict";
@@ -10567,7 +10786,8 @@ function Proportionnalite_pas_proportionnalite() {
  * On donne une relation de proportionnalité du type n objets coûtent x€ et on demande le prix de y objets
  * et le nombre d'objets qu'on peut acheter avec z€.
  * @Auteur Jean-Claude Lhote
- */
+ * référence 6P11
+*/
 function Proportionnalite_par_linearite() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -10929,6 +11149,10 @@ function Exercice_fractions_decomposer() {
     }
     liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
   };
+}
+
+function Representer_une_fraction() {
+
 }
 
 /**
@@ -12664,6 +12888,7 @@ function Pourcentage_d_un_nombre() {
  *
  * Par défaut la division du nombre par le dénominateur est inférieure à 11
  * @Auteur Rémi Angot + Jean-Claude Lhote
+ * référence 6N33
  */
 function Fraction_d_un_nombre(max = 11) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -14998,8 +15223,8 @@ function HTML_personnalise() {
 
 /**
  * Pavages et symétrie axiale.
- * @Auteur Jean-Claude Lhote
  * Pas de version LaTeX
+ * référence 6G25-1
  */
 function Pavages_et_reflexion() {
   "use strict";
@@ -15298,6 +15523,7 @@ function Pavages_et_reflexion() {
 /**
  * Calcul de volumes (cube et pavé droit).
  * @Auteur Jean-Claude Lhote
+ * référence 6M30
  */
 
 function Calcul_de_volumes() {
@@ -15577,7 +15803,7 @@ function Calcul_de_volumes() {
 }
 
 /**
- * Transformations : trouvers un point numéroté par une des transformations du plan.
+ * Transformations : trouvers un point numéroté par une des transformations du plan. Fonction générale utilisée sur tous les niveaux
  * @Auteur Jean-Claude Lhote
  * Pas de version LaTeX
  */
@@ -15961,18 +16187,44 @@ function Transformations() {
 }
 
 // Exercices paramétrés pour correspondre au référentiel
+function Exercice_additionner_des_fractions_6e() {
+  Exercice_additionner_des_fractions_5e.call(this);
+  this.level=6
+  this.titre= "Additionner des fractions de même dénominateur"
+}
+/**
+ * @Auteur Jean-Claude Lhote
+ * vocabulaire arête, face, perpendicularité dans l'espace, parallélisme dans l'espace
+ * référence : 6G43
+ */
+function Utiliser_vocabulaire_pave() {
+  Solide_6e.call(this);
+  this.titre = "Utiliser le vocabulaire associé au pavé droit"
+}
+/**
+ * @Auteur Jean-Claude Lhote
+ * référence 6G11
+ */
 function Tracer_des_perpendiculaires() {
   Parallele_et_Perpendiculaires.call(this);
   this.titre = "Tracer des perpendiculaires";
   this.sup = 1;
   this.besoin_formulaire_numerique = false;
 }
+/**
+ * @Auteur Jean-Claude Lhote
+ * référence 6G12
+ */
 function Tracer_des_paralleles() {
   Parallele_et_Perpendiculaires.call(this);
   this.titre = "Tracer des parallèles";
   this.sup = 2;
   this.besoin_formulaire_numerique = false;
 }
+/**
+ * @Auteur Jean-Claude Lhote
+ * référence 6G12-1
+ */
 function Tracer_des_perpendiculaires_et_des_paralleles() {
   Parallele_et_Perpendiculaires.call(this);
   this.titre = "Tracer des perpendiculaires et des parallèles";
@@ -15982,6 +16234,7 @@ function Tracer_des_perpendiculaires_et_des_paralleles() {
 /**
  * Exercice en html seulement. Symétrie centrale dans un pavage.
  * @Auteur Jean-Claude Lhote
+ * référence 5G12
  */
 function Pavages_et_demi_tour() {
   Pavages_et_transformations.call(this);
@@ -15992,6 +16245,7 @@ function Pavages_et_demi_tour() {
 /**
  * Exercice en html seulement. Symétrie axiale dans un pavage.
  * @Auteur Jean-Claude Lhote
+ * référence 6G25-2
  */
 function Pavages_et_symetries() {
   Pavages_et_transformations.call(this);
@@ -16002,6 +16256,7 @@ function Pavages_et_symetries() {
 /**
  * Exercice en html seulement. Translations dans un pavage.
  * @Auteur Jean-Claude Lhote
+ * référence 4G11
  */
 function Pavages_et_translation() {
   Pavages_et_transformations.call(this);
@@ -16012,6 +16267,7 @@ function Pavages_et_translation() {
 /**
  * Exercice en html seulement. Rotationss dans un pavage.
  * @Auteur Jean-Claude Lhote
+ * référence 3G12
  */
 function Pavages_et_rotation() {
   Pavages_et_transformations.call(this);
@@ -16023,6 +16279,7 @@ function Pavages_et_rotation() {
 /**
  * Lire les coordonnées d'un point du quart de plan positif avec une précision allant de l'unité à 0,25.
  * @Auteur Jean-Claude Lhote
+ * référence 6N33
  */
 function Reperage_point_du_quart_de_plan() {
   Reperage_point_du_plan.call(this);
@@ -16669,49 +16926,21 @@ function Nommer_et_coder_des_polygones() {
   this.nb_questions = 4;
   this.nb_cols = 2;
   this.nb_cols_corr = 2;
-  this.sup2 = 3;
+  this.sup = 3;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let Xmin, Xmax, Ymin, Ymax, ppc, sc, g, k, carreaux
-    function initialise_variables() {
+    ppc=20
       if (sortie_html) {
-        // repère -10 || 10
-        Xmin = 0;
-        Ymin = -6;
-        Xmax = 13;
-        Ymax = 8;
-        ppc = 20;
         sc=0.5
       } else {
-        // repère -5 || 5
-        Xmin = 0;
-        Ymin = -6;
-        Xmax = 13;
-        Ymax = 8;
-        ppc = 20;
         sc=0.4
       }
-    }
-    initialise_variables();
-    let params = {
-      xmin: Xmin,
-      ymin: Ymin,
-      xmax: Xmax,
-      ymax: Ymax,
-      pixelsParCm: ppc,
-      scale: sc,
-    }
-    if (this.sup2 < 3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
-    else g = ''
-    if (this.sup2 == 2) {
-      k = 0.8;
-      carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
-    } else {
-      k = 0.5;
-      carreaux = "";
-    }
+
+    let params 
+    
     let liste = combinaison_listes([1, 2, 3, 4, 5, 6, 7, 8], this.nb_questions);
 
     for (
@@ -16749,7 +16978,7 @@ function Nommer_et_coder_des_polygones() {
             C = p.listePoints[2]
             pnom = nommePolygone(p, nom[0] + nom[1] + nom[2])
             pcode = [codeSegments('||', 'blue', A, B, A, C, B, C),codeAngle(B,C,A,0.8,'|','blue',2,0.8,'blue',0.2),codeAngle(C,B,A,0.8,'|','blue',2,0.8,'blue',0.2),codeAngle(C,A,B,0.8,'|','blue',2,0.8,'blue',0.2)]
-            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est équilatéral.<br>\\phantom{et sa longueur est AB}`
+            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est équilatéral.<br>$\\phantom{et sa longueur est AB}$`
             break
           case 3: // triangle rectangle
             A = point(3, randint(0, 20) / 10, nom[0])
@@ -16762,7 +16991,7 @@ function Nommer_et_coder_des_polygones() {
             C = p.listePoints[2]
             pnom = nommePolygone(p, nom[0] + nom[1] + nom[2])
             pcode = codageAngleDroit(B, A, C)
-            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est rectangle en $${nom[0]}$.<br>\\phantom{et sa longueur est AB}`
+            enonce = `le triangle $${nom[0] + nom[1] + nom[2]}$ est rectangle en $${nom[0]}$.<br>$\\phantom{et sa longueur est AB}$`
             break
           case 4: // triangle rectangle isocèle
             A = point(3, randint(0, 20) / 10, nom[0])
@@ -16789,7 +17018,7 @@ function Nommer_et_coder_des_polygones() {
             D = p.listePoints[3]
             pnom = nommePolygone(p, nom[0] + nom[1] + nom[2] + nom[3])
             pcode = [codeSegments('||', 'blue', A, B, B, C, C, D, D, A), codageAngleDroit(B, A, D), codageAngleDroit(A, B, C), codageAngleDroit(B, C, D), codageAngleDroit(A, D, C)]
-            enonce = `le quadrilatère $${nom[0] + nom[1] + nom[2] + nom[3]}$ est un carré.<br>\\phantom{et sa longueur est AB}`
+            enonce = `le quadrilatère $${nom[0] + nom[1] + nom[2] + nom[3]}$ est un carré.<br>$\\phantom{et sa longueur est AB}$`
             break
           case 6: // rectangle
             A = point(3, randint(0, 20) / 10, nom[0])
@@ -16840,6 +17069,37 @@ function Nommer_et_coder_des_polygones() {
         return [p, nom, pcode, pnom, enonce]
       }
       [pol, polnom, polcode, polsom, texte] = choisir_polygone(liste[i]);
+      if (pol.listePoints.length==4){
+      Xmin=Math.min(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x,pol.listePoints[3].x)-1
+      Ymin=Math.min(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y,pol.listePoints[3].y)-1
+      Xmax=Math.max(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x,pol.listePoints[3].x)+1
+      Ymax=Math.max(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y,pol.listePoints[3].y)+1
+      }
+      else{
+        Xmin=Math.min(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x)-1
+        Ymin=Math.min(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y)-1
+        Xmax=Math.max(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x)+1
+        Ymax=Math.max(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y)+1
+   
+      }
+      params = {
+        xmin: Xmin,
+        ymin: Ymin,
+        xmax: Xmax,
+        ymax: Ymax,
+        pixelsParCm: ppc,
+        scale: sc,
+      }
+      if (this.sup < 3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
+    else g = ''
+    if (this.sup == 2) {
+      k = 0.8;
+      carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
+    } else {
+      k = 0.5;
+      carreaux = "";
+    }
+
       pol.epaisseur=2
       texte += `<br>` + mathalea2d(params, pol, polnom,g,carreaux)
       texte_corr = mathalea2d(params, pol, polnom, polcode, polsom,g,carreaux)
@@ -16854,7 +17114,7 @@ function Nommer_et_coder_des_polygones() {
     liste_de_question_to_contenu(this);
     pixelsParCm=20
   };
-  this.besoin_formulaire2_numerique = [
+  this.besoin_formulaire_numerique = [
     "Type de cahier",
     3,
     `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
@@ -17037,7 +17297,10 @@ function Vocabulaire_des_triangles_5e() {
   this.classe = 5;
   Vocabulaire_des_triangles.call(this);
 }
-
+/**
+ * Fonction générale pour exercices de constructions de parallèles et perpendiculaires
+ * références 6G11, 6G12 et 6G12-1
+ */
 function Parallele_et_Perpendiculaires() {
   "use strict";
   Exercice.call(this);
@@ -17056,29 +17319,8 @@ function Parallele_et_Perpendiculaires() {
     );
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let Xmin, Xmax, Ymin, Ymax, ppc, sc;
-    function initialise_variables() {
-      if (sortie_html) {
-        // repère -10 || 10
-        Xmin = -1;
-        Ymin = -9;
-        Xmax = 15;
-        Ymax = 9;
-        ppc = 20;
-      } else {
-        // repère -5 || 5
-        Xmin = -1;
-        Ymin = -9;
-        Xmax = 15;
-        Ymax = 9;
-        ppc = 20;
-      }
-    }
-
-    initialise_variables();
-    if (this.sup2 == 1) sc = 0.5;
-    else sc = 0.8;
-
+    let Xmin, Xmax, Ymin, Ymax, ppc=20, sc;
+   
     let A,
       B,
       C,
@@ -17114,29 +17356,17 @@ function Parallele_et_Perpendiculaires() {
       k,
       objets_enonce = [],
       objets_correction = [],
-      params = {
-        xmin: Xmin,
-        ymin: Ymin,
-        xmax: Xmax,
-        ymax: Ymax,
-        pixelsParCm: ppc,
-        scale: sc,
-      },
+      
       p;
     for (
       let i = 0, texte, texte_corr, cpt = 0;
       i < this.nb_questions && cpt < 50;
 
     ) {
-      if (this.sup2 < 3) g = grille(-1, -15, 15, 15, "gray", 0.7);
-      else g = "";
-      if (this.sup2 == 2) {
+      if (this.sup2 == 2) 
         k = 0.8;
-        carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
-      } else {
+      else 
         k = 0.5;
-        carreaux = "";
-      }
       switch (liste_type_de_questions[i]) {
         case 1:
           A = point(0, 0, "A", "above left");
@@ -17178,8 +17408,6 @@ function Parallele_et_Perpendiculaires() {
             cC,
             cD,
             d,
-            g,
-            carreaux,
             tracePoint(A, B, C, D, E, CC, DD),
             labelPoint(A, B, C, D, E, CC, DD),
             afficheCoteSegment(
@@ -17205,10 +17433,9 @@ function Parallele_et_Perpendiculaires() {
             tracePoint(A, B, C, D),
             labelPoint(A, B, C, D),
             d,
-            g,
-            carreaux
           );
-          enonce = num_alpha(0) + ` Reproduire la figure ci-dessous.<br>`;
+          if (sortie_html) enonce = num_alpha(0) + ` Reproduire la figure ci-dessous.<br>`;
+          else enonce = num_alpha(0) + ` Utiliser un crayon à papier afin de pouvoir gommer si besoin.<br>`;
           enonce +=
             num_alpha(1) +
             ` Tracer la droite perpendiculaire à $(AB)$ passant par $B$.<br>`;
@@ -17221,12 +17448,14 @@ function Parallele_et_Perpendiculaires() {
           enonce +=
             num_alpha(4) +
             ` Mesurer ensuite les distances $AM$ et $AN$.<br> Pour l'auto-correction comparer ces mesures avec celles données dans la correction<br>`;
-          enonce += mathalea2d(params, objets_enonce);
-          correction = mathalea2d(params, objets_correction);
-          correction += `<br>$AM \\approx ${tex_nombre(
+               correction = `<br>$AM \\approx ${tex_nombre(
             lC
           )}$ cm et $AN \\approx ${tex_nombre(lD)}$ cm.<br>`;
           correction += `Pour la perpendiculaire en $B$, contrôle la position du point $E$.<br>`;
+          Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,CC.x,DD.x)-1
+          Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,CC.x,DD.x)+1
+          Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,CC.y,DD.y)-1
+          Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,CC.y,DD.y)+1
           break;
         case 2:
           A = point(2, 0, "A",'below left');
@@ -17249,44 +17478,27 @@ function Parallele_et_Perpendiculaires() {
           lC = arrondi(longueur(CC, A) * k, 1);
           lD = arrondi(longueur(DD, A) * k, 1);
           lE = arrondi(longueur(EE, A) * k, 1);
-          objets_correction.push(dC,dD,dE,d,p,g,carreaux,tracePoint(A, B, C, D, E,F),labelPoint(A, B, C, D, E,F,CC,DD,EE),afficheCoteSegment(segment(A,CC),`${tex_nombre(lC)} cm`,.2,'red',1,0.5,'red'),afficheCoteSegment(segment(DD,A),`${tex_nombre(lD)} cm`,-0.2,'green',1,-0.5,'green'),afficheCoteSegment(segment(A,EE),`${tex_nombre(lE)} cm`,-0.2,'blue',1,-0.5,'blue'))
-          objets_enonce.push(tracePoint(A, B, C, D,E,F),labelPoint(A, B, C, D,E,F),d,g,p,carreaux);
+          objets_correction.push(dC,dD,dE,d,p,tracePoint(A, B, C, D, E,F),labelPoint(A, B, C, D, E,F,CC,DD,EE),afficheCoteSegment(segment(A,CC),`${tex_nombre(lC)} cm`,.2,'red',1,0.5,'red'),afficheCoteSegment(segment(DD,A),`${tex_nombre(lD)} cm`,-0.2,'green',1,-0.5,'green'),afficheCoteSegment(segment(A,EE),`${tex_nombre(lE)} cm`,-0.2,'blue',1,-0.5,'blue'))
+          objets_enonce.push(tracePoint(A, B, C, D,E,F),labelPoint(A, B, C, D,E,F),d,p);
         
-          enonce = num_alpha(0)+ `Reproduire la figure ci-dessous.<br>`
+          if (sortie_html) enonce = num_alpha(0) + ` Reproduire la figure ci-dessous.<br>`;
+          else enonce = num_alpha(0) + ` Utiliser un crayon à papier afin de pouvoir gommer si besoin.<br>`;
           enonce +=num_alpha(1)+` Tracer la droite parallèle à $(AB)$ passant par $C$ et nomme $M$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
           enonce +=num_alpha(2)+` Tracer la droite parallèle à $(AB)$ passant par $D$ et nomme $N$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
           enonce +=num_alpha(3)+` Tracer la droite parallèle à $(AB)$ passant par $E$ et nomme $O$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
           enonce += num_alpha(4)+` Mesurer les distances $AM$, $AN$ et $AO$. Pour l'auto-correction, comparer ces mesures avec celles données par  l'ordinateur dans la correction.<br>`;
-          enonce += mathalea2d(
-            {
-              xmin: Xmin,
-              ymin: Ymin,
-              xmax: Xmax,
-              ymax: Ymax,
-              pixelsParCm: ppc,
-              scale: sc,
-            },
-           objets_enonce
-          );
-          correction = mathalea2d(
-            {
-              xmin: Xmin,
-              ymin: Ymin,
-              xmax: Xmax,
-              ymax: Ymax,
-              pixelsParCm: ppc,
-              scale: sc,
-            },
-            objets_correction
-          );
-          correction += `<br>$AM \\approx ${tex_nombre(
+         
+          correction = `<br>$AM \\approx ${tex_nombre(
             lC
           )}$ cm, $AN \\approx ${tex_nombre(
             lD
           )}$ cm et $AO \\approx${tex_nombre(
             lE
           )}$ cm.<br>`;
-
+          Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)-1
+          Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)+1
+          Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)-1
+          Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)+1
           break;
           case 3:
             A = point(0, 0, "A", "above left");
@@ -17322,7 +17534,7 @@ function Parallele_et_Perpendiculaires() {
             cF = codageAngleDroit(C,EE,E,'red')
             cG = codageAngleDroit(C,FF,D,'red')
 
-            objets_correction.push(dC,dD,dB,dE,cB,cC,cD,cE,cF,cG,d,g,carreaux,tracePoint(A, B, C, D, E, CC, DD,EE),labelPoint(A, B, C, D, E, CC, DD,EE),afficheCoteSegment(
+            objets_correction.push(dC,dD,dB,dE,cB,cC,cD,cE,cF,cG,d,tracePoint(A, B, C, D, E, CC, DD,EE),labelPoint(A, B, C, D, E, CC, DD,EE),afficheCoteSegment(
               segment(A, CC),
               `${tex_nombre(lC)} cm`,
               0.5,
@@ -17349,36 +17561,16 @@ function Parallele_et_Perpendiculaires() {
               -0.5,
               "green"
             ));
-            objets_enonce.push(tracePoint(A, B, C, D,E),labelPoint(A, B, C, D,E),d,g,carreaux);
-            enonce = num_alpha(0)+ `Reproduire la figure ci-dessous.<br>`
-          enonce +=num_alpha(1)+` Tracer la droite perpendiculaire à $(AB)$ passant par $B$.<br>`;
+            objets_enonce.push(tracePoint(A, B, C, D,E),labelPoint(A, B, C, D,E),d);
+            if (sortie_html) enonce = num_alpha(0) + ` Reproduire la figure ci-dessous.<br>`;
+            else enonce = num_alpha(0) + ` Utiliser un crayon à papier afin de pouvoir gommer si besoin.<br>`;
+             enonce +=num_alpha(1)+` Tracer la droite perpendiculaire à $(AB)$ passant par $B$.<br>`;
           enonce +=num_alpha(2)+` Tracer la droite perpendiculaire à $(AB)$ passant par $C$ et nomme $M$, le point d'intersection de cette droite avec la droite $(AB)$.<br>`
           enonce +=num_alpha(3)+` Tracer la droite parallèle à $(AB)$ passant par $D$ et nomme $N$, le point d'intersection de cette droite avec la droite $(BE)$.<br>`;
           enonce += num_alpha(4)+ ` Tracer la droite parallèle à $(AB)$ passant par $E$ et nomme $O$, le point d'intersection de cette droite avec la droite $(CM)$.<br>`
           enonce += num_alpha(5)+` Mesurer les distances $AM$, $AN$ et $AO$. Pour l'auto-correction, comparer ces mesures avec celles données par  l'ordinateur dans la correction.<br>`;
-          enonce += mathalea2d(
-            {
-              xmin: Xmin,
-              ymin: Ymin,
-              xmax: Xmax,
-              ymax: Ymax,
-              pixelsParCm: ppc,
-              scale: sc,
-            },
-           objets_enonce
-          );
-          correction = mathalea2d(
-            {
-              xmin: Xmin,
-              ymin: Ymin,
-              xmax: Xmax,
-              ymax: Ymax,
-              pixelsParCm: ppc,
-              scale: sc,
-            },
-            objets_correction
-          );
-          correction += `<br>$AM \\approx ${tex_nombre(
+         
+          correction = `<br>$AM \\approx ${tex_nombre(
             lC
           )}$ cm, $AN \\approx ${tex_nombre(
             lD
@@ -17387,9 +17579,47 @@ function Parallele_et_Perpendiculaires() {
           )}$ cm.<br>`;
           correction+=`Les angle droits en rouge se justifient par la propriété :<br> ${texte_en_couleur(`Si deux droites sont parallèles, toutes droite perpendiculaire à l'une est aussi perpendiculaire à l'autre`,'red')}.<br>`
           correction +=`Vérifier les angles droits à l'équerre.`
+          Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)-1
+          Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)+1
+          Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)-1
+          Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)+1
+
           break
       }
-
+      if (this.sup2 < 3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
+      else g = "";
+      if (this.sup2 == 2) {
+        sc = 0.8;
+        carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
+      } else {
+        sc = 0.5;
+        carreaux = "";
+      }
+      objets_enonce.push(g,carreaux)
+      objets_correction.push(g,carreaux)
+      
+      enonce += mathalea2d(
+        {
+          xmin: Xmin,
+          ymin: Ymin,
+          xmax: Xmax,
+          ymax: Ymax,
+          pixelsParCm: ppc,
+          scale: sc,
+        },
+       objets_enonce
+      );
+      correction += mathalea2d(
+        {
+          xmin: Xmin,
+          ymin: Ymin,
+          xmax: Xmax,
+          ymax: Ymax,
+          pixelsParCm: ppc,
+          scale: sc,
+        },
+        objets_correction
+      );
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(enonce + "<br>");
@@ -17663,6 +17893,11 @@ function Tracer_triangle_2_angles() {
   //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
 
+/**
+ * fonction servant à plusieurs exercice autour du cube et du pavé droit
+ * références : 6G42 et 6G43
+ * @Auteur Jean-Claude Lhote
+ */
 function Solide_6e() {
   "use strict";
   Exercice.call(this);
@@ -17674,7 +17909,11 @@ function Solide_6e() {
   this.sup2 = 1;
   this.nouvelle_version = function (numero_de_l_exercice) {
   let type_de_questions_disponibles;
-  type_de_questions_disponibles = [parseInt(this.sup)]; 
+  if (this.sup==3) type_de_questions_disponibles=[1,2]
+ else type_de_questions_disponibles = [parseInt(this.sup)]; 
+ if (this.titre=="Utiliser le vocabulaire associé au pavé droit") 
+    for (let n=0;n<type_de_questions_disponibles.length;n++)
+      type_de_questions_disponibles[n]+=2
   let liste_type_de_questions = combinaison_listes(
       type_de_questions_disponibles,
       this.nb_questions
@@ -17682,25 +17921,7 @@ function Solide_6e() {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let Xmin, Xmax, Ymin, Ymax, ppc, sc;
-    function initialise_variables() {
-      if (sortie_html) {
-        // repère -10 || 10
-        Xmin = -1;
-        Ymin = -4;
-        Xmax = 15;
-        Ymax = 11;
-        ppc = 20;
-      } else {
-        // repère -5 || 5
-        Xmin = -1;
-        Ymin = -4;
-        Xmax = 15;
-        Ymax =11;
-        ppc = 20;
-      }
-    }
-
-    initialise_variables();
+ 
     if (this.sup2 == 1) sc = 0.5;
     else sc = 0.8;
 
@@ -17713,75 +17934,253 @@ function Solide_6e() {
       carreaux,g,
       objets_enonce = [],
       objets_correction = [],
-      params = {
-        xmin: Xmin,
-        ymin: Ymin,
-        xmax: Xmax,
-        ymax: Ymax,
-        pixelsParCm: ppc,
-        scale: sc,
-      },k,
+     k,
       p;
     for (
       let i = 0, texte, texte_corr, cpt = 0;
       i < this.nb_questions && cpt < 50;
 
     ) {
-      if (this.sup2 < 3) g = grille(-1, -15, 15, 15, "gray", 0.7);
-      else g = "";
-      if (this.sup2 == 2) {
-        k = 0.8;
-        carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
-      } else {
-        k = 0.5;
-        carreaux = "";
-      }
-      let nom = creerNomDePolygone(8, "PQ"),
-      anglepersp=choice([30,45,-30,-45])
-      if (anglepersp%10==0) coeffpersp=0.7
-      else coeffpersp=0.5
-         switch (liste_type_de_questions[i]) {
+     let nom = creerNomDePolygone(8, "PQ"),
+     anglepersp=choice([30,45,-30,-45,150,135,-150,-135])
+      if (anglepersp%10==0) coeffpersp=0.6
+      else coeffpersp=0.4
+      objets_correction=[]
+      objets_enonce=[]
+      switch (liste_type_de_questions[i]) {
         case 1: //cube
-          A = point(0, 0, nom[0], "below left");
-          B = point(7, 0, nom[1], "below right");
-          C = point(7,7, nom[2], "above right");
-          D = point(0,7, nom[3],"above left");
-          E = similitude(B,A,anglepersp,coeffpersp,nom[4])
-          F = translation2Points(E,A,B,nom[5])
-          G = translation2Points(F,B,C,nom[6])
-          H = translation2Points(G,C,D,nom[7])
-          AB=segment(A,B)
-          BC=segment(B,C)
-          CD=segment(C,D)
-          DA=segment(D,A)
-          EF=segment(E,F)
-          FG=segment(F,G)
-          GH=segment(G,H)
-          HE=segment(H,E)
-          AE=segment(A,E)
-          BF=segment(B,F)
-          CG=segment(C,G)
-          DH=segment(D,H)
+          enonce=`${nom} est un cube.<br>`
+          if (sortie_html) enonce +=` Reproduire la figure ci-dessous sur le cahier.<br>`;
+          enonce += ` Repasse tous les segments de même longueur dans une même couleur.<br>`;
+          correction=`Le cube ${nom}.<br>`
 
-        objets_correction.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,
-            g,
-            carreaux
-          );
-          objets_enonce.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,
-            g,
-            carreaux
-          );
-          enonce = num_alpha(0) + ` Reproduire la figure ci-dessous.<br>`;
-          enonce +=
-            num_alpha(1) +
-            ` Repasse tous les segments de même longueur dans une même couleur.<br>`;
-          enonce += mathalea2d(params, objets_enonce);
-          correction = mathalea2d(params, objets_correction);
           break;
         case 2:
-           break
+
+          enonce=`${nom} est un pavé droit.<br>`
+          if (sortie_html) enonce += ` Reproduire la figure ci-dessous sur le cahier.<br>`;
+          enonce += ` Repasse tous les segments de même longueur dans une même couleur.<br>`;
+          correction=`Le pavé droit ${nom}.<br>`
+
+           break;
+        case 3 :
+          enonce=`${nom} est un cube.<br>`
+          break;
+ 
+        case 4 :
+          enonce=`${nom} est un pavé droit.<br>`
+          break;
+      }
+      let aretes_paralleles=[[[0,1],[3,2],[4,5],[7,6]],[[0,3],[1,2],[4,7],[5,6]],[[0,4],[1,5],[2,6],[3,7]]]
+      let faces_paralleles=[[[0,1,2,3],[4,5,6,7]],[[0,4,7,3],[1,5,6,2]],[[0,1,5,4],[3,2,6,7]]]
+      let aretes_perp=[[[0,1],[0,4],[0,3],[1,5],[1,2]],[[0,4],[0,1],[0,3],[4,5],[4,7]],[[0,3],[0,1],[0,4],[3,2],[3,7]],[[1,2],[1,0],[1,5],[2,3],[2,6]],[[1,5],[1,0],[1,2],
+      [5,4],[5,6]],[[5,4],[5,1],[5,6],[4,0],[4,7]],[[5,6],[5,1],[5,4],[6,2],[6,7]]
+      ,[[6,2],[6,5],[6,7],[2,1],[2,3]],[[2,3],[2,1],[2,6],[3,0],[3,7]],[[3,7],[3,2],[3,0],[7,4],[7,6]],[[7,4],[4,0],[4,5],[7,3],[7,6]],[[7,6],[6,2],[6,5],[7,3],[7,4]]]
+      let faces_perp=[[[0,1,2,3],[1,5,6,2],[2,6,7,3],[3,7,4,0],[0,1,5,4]],[[1,5,6,2],[0,1,2,3],[2,6,7,3],[5,6,7,4],[1,5,4,0]],[[0,1,5,4],[1,5,6,2],[4,5,6,7],[0,4,7,3],[0,1,2,3]],
+      [[4,5,6,7],[0,1,5,4],[1,5,6,2],[2,6,7,3],[0,4,7,3]],[[0,4,7,3],[0,1,2,3],[0,1,5,4],[4,5,6,7],[3,2,6,7]],[[3,2,6,7],[0,1,2,3],[1,5,6,2],[4,5,6,7],[0,4,7,3]]]
+      let k,l,s
+      switch (randint(1,4)) {
+        case 1 : // citer les arêtes parallèles à une arrête donnée
+        [k,l,s]=[randint(0,2),randint(0,3),randint(0,1)]
+          enonce+=`Citer toutes les arêtes parallèles à [$${nom[aretes_paralleles[k][l][s]]+nom[aretes_paralleles[k][l][(s+1)%2]]}$].<br>`
+        correction = `Les arêtes parallèles à [$${nom[aretes_paralleles[k][l][s]]+nom[aretes_paralleles[k][l][(s+1)%2]]}$] sont [$${nom[aretes_paralleles[k][(l+1)%4][s]]+nom[aretes_paralleles[k][(l+1)%4][(s+1)%2]]}$], [$${nom[aretes_paralleles[k][(l+2)%4][s]]+nom[aretes_paralleles[k][(l+2)%4][(s+1)%2]]}$] et [$${nom[aretes_paralleles[k][(l+3)%4][s]]+nom[aretes_paralleles[k][(l+3)%4][(s+1)%2]]}$].<br>`
+      break;
+      case 2: // coter la face parallèle à une face donnée
+       [k,l,s]=[randint(0,2),randint(0,1),randint(0,3)]
+       enonce+=`Quelle est la face parallèle à $${nom[faces_paralleles[k][l][s]]+nom[faces_paralleles[k][l][(s+1)%4]]+nom[faces_paralleles[k][l][(s+2)%4]]+nom[faces_paralleles[k][l][(s+3)%4]]}$ ?<br>`
+       correction = `La face parallèle à $${nom[faces_paralleles[k][l][s]]+nom[faces_paralleles[k][l][(s+1)%4]]+nom[faces_paralleles[k][l][(s+2)%4]]+nom[faces_paralleles[k][l][(s+3)%4]]}$ est la face $${nom[faces_paralleles[k][(l+1)%2][s]]+nom[faces_paralleles[k][(l+1)%2][(s+1)%4]]+nom[faces_paralleles[k][(l+1)%2][(s+2)%4]]+nom[faces_paralleles[k][(l+1)%2][(s+3)%4]]}$.<br>`
+      break;
+      case 3: // citer les arêtes perpendiculaires à une arête donnée
+        [k,l,s]=[randint(0,11),0,randint(0,1)]
+        enonce+=`Quelles sont les arêtes peprendiculaires à l'arête [$${nom[aretes_perp[k][l][s]]+nom[aretes_perp[k][l][(s+1)%2]]}$] ?<br>`
+        correction = `Les arêtes perpendiculaires à l'arête [$${nom[aretes_perp[k][l][s]]+nom[aretes_perp[k][l][(s+1)%2]]}$] sont [$${nom[aretes_perp[k][1][s]]+nom[aretes_perp[k][1][(s+1)%2]]}$], [$${nom[aretes_perp[k][2][s]]+nom[aretes_perp[k][2][(s+1)%2]]}$], [$${nom[aretes_perp[k][3][s]]+nom[aretes_perp[k][3][(s+1)%2]]}$] et [$${nom[aretes_perp[k][4][s]]+nom[aretes_perp[k][4][(s+1)%2]]}$].`
+      break;
+      case 4 : // citer les faces perpendiculaires à une face donnée
+        [k,l,s]=[randint(0,5),0,randint(0,3)]
+        enonce+=`Quelles sont les faces perpendiculaires à la face $${nom[faces_perp[k][l][s]]+nom[faces_perp[k][l][(s+1)%4]]+nom[faces_perp[k][l][(s+2)%4]]+nom[faces_perp[k][l][(s+3)%4]]}$ ?<br>` 
+        correction =`Les faces perpendiculaires à la face $${nom[faces_perp[k][l][s]]+nom[faces_perp[k][l][(s+1)%4]]+nom[faces_perp[k][l][(s+2)%4]]+nom[faces_perp[k][l][(s+3)%4]]}$ `
+        correction +=`sont les faces $${nom[faces_perp[k][l+1][s]]+nom[faces_perp[k][l+1][(s+1)%4]]+nom[faces_perp[k][l+1][(s+2)%4]]+nom[faces_perp[k][l+1][(s+3)%4]]}$, `
+        correction+=`$${nom[faces_perp[k][l+2][s]]+nom[faces_perp[k][l+2][(s+1)%4]]+nom[faces_perp[k][l+2][(s+2)%4]]+nom[faces_perp[k][l+2][(s+3)%4]]}$, `
+        correction+=`$${nom[faces_perp[k][l+3][s]]+nom[faces_perp[k][l+3][(s+1)%4]]+nom[faces_perp[k][l+3][(s+2)%4]]+nom[faces_perp[k][l+3][(s+3)%4]]}$ et `
+        correction+=`$${nom[faces_perp[k][l+4][s]]+nom[faces_perp[k][l+4][(s+1)%4]]+nom[faces_perp[k][l+4][(s+2)%4]]+nom[faces_perp[k][l+4][(s+3)%4]]}$.`
+    
+        break;
       }
 
+        switch (liste_type_de_questions[i]%2) {
+          case 1 :
+      A = point(6, 0, nom[0], "left");
+      B = point(11, 0, nom[1], "right");
+      C = point(11,5, nom[2], "right");
+      D = point(6,5, nom[3],"left");
+      p=polygone(A,B,C,D)
+      E = similitude(B,A,anglepersp,coeffpersp,nom[4],'left')
+      E.x=Math.round(E.x)
+      E.y=Math.round(E.y)
+          break;
+          case 0:
+            A = point(5, 0, nom[0], "left");
+            B = point(9+randint(1,3), 0, nom[1], "right");
+            C = point(B.x,randint(3,7), nom[2], "right");
+            D = point(A.x,C.y, nom[3],"left");
+            p=polygone(A,B,C,D)
+            E = similitude(B,A,anglepersp,coeffpersp*randint(5,12)/10,nom[4],'left')
+            E.x=Math.round(E.x)
+            E.y=Math.round(E.y)
+            break ;
+        }  
+      p=polygone(A,B,C,D)
+      F = translation2Points(E,A,B,nom[5],'right')
+      G = translation2Points(F,B,C,nom[6],'right')
+      H = translation2Points(G,C,D,nom[7],'left')
+      AB=segment(A,B)
+      BC=segment(B,C)
+      CD=segment(C,D)
+      DA=segment(D,A)
+      EF=segment(E,F)
+      FG=segment(F,G)
+      GH=segment(G,H)
+      HE=segment(H,E)
+      AE=segment(A,E)
+      BF=segment(B,F)
+      CG=segment(C,G)
+      DH=segment(D,H)
+      AB.epaisseur=2
+      BC.epaisseur=2
+      CD.epaisseur=2
+      DA.epaisseur=2
+      EF.epaisseur=2
+      FG.epaisseur=2
+      GH.epaisseur=2
+      HE.epaisseur=2
+      AE.epaisseur=2
+      BF.epaisseur=2
+      CG.epaisseur=2
+      DH.epaisseur=2
+      AB.color='black'
+      BC.color='black'
+      CD.color='black'
+      DA.color='black'
+      EF.color='black'
+      FG.color='black'
+      GH.color='black'
+      HE.color='black'
+      AE.color='black'
+      BF.color='black'
+      CG.color='black'
+      DH.color='black'
+      if (G.y<C.y&&G.x<C.x) {
+        CG.pointilles=true
+        CG.color='gray'
+        CG.opacite=0.7
+        GH.pointilles=true
+        GH.color='gray'
+        GH.opacite=0.7
+        FG.pointilles=true
+        FG.color='gray'
+        FG.opacite=0.7
+      }
+      else if (E.y>A.y&&E.x>A.x) {
+        AE.pointilles=true
+        EF.pointilles=true
+        HE.pointilles=true
+        AE.color='gray'
+        EF.color='gray'
+        HE.color='gray'
+        AE.opacite=0.7
+        EF.opacite=0.7
+        HE.opacite=0.7
+      }
+      else if (F.x<B.x&&F.y>B.y) {
+        BF.pointilles=true
+        FG.pointilles=true
+        EF.pointilles=true
+        BF.color='gray'
+        FG.color='gray'
+        EF.color='gray'
+        BF.opacite=0.7
+        FG.opacite=0.7
+        EF.opacite=0.7
+      }
+      else if (H.x>D.x&&H.y<D.y) {
+        DH.pointilles=true
+        GH.pointilles=true
+        HE.pointilles=true
+        DH.color='gray'
+        GH.color='gray'
+        HE.color='gray'
+        DH.opacite=0.7
+        GH.opacite=0.7
+        HE.opacite=0.7
+      }
+      Xmin = Math.min(A.x,E.x)-1;
+      Ymin = Math.min(A.y,E.y)-1;
+      Xmax = Math.max(B.x,F.x)+2;
+      Ymax = Math.max(D.y,H.y)+1;
+      ppc = 20;
+
+      if (this.sup2 < 3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
+      else g = "";
+      if (this.sup2 == 2) {
+        carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
+        sc=0.8
+      }
+      else {
+        carreaux = "";
+        sc=0.5
+      }
+      objets_enonce.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,labelPoint(A,B,C,D,E,F,G,H),p,
+        g,
+        carreaux
+      );
+     
+    let  params = {
+      xmin: Xmin,
+      ymin: Ymin,
+      xmax: Xmax,
+      ymax: Ymax,
+      pixelsParCm: ppc,
+      scale: sc,
+    }
+  
+   
+        enonce += mathalea2d(params, objets_enonce);
+      if (liste_type_de_questions[i]==1) {
+        codesseg=[codeSegments('||','green',[A,B,C,D,A,E,F,G,H,E]),codeSegments('||','green',B,F,C,G,D,H)]
+        AB.color='green'
+        BC.color='green'
+        CD.color='green'
+        DA.color='green'
+        EF.color='green'
+        FG.color='green'
+        GH.color='green'
+        HE.color='green'
+        AE.color='green'
+        BF.color='green'
+        CG.color='green'
+        DH.color='green'
+      }
+      else {
+        codesseg=[codeSegments('||','green',A,B,C,D,E,F,G,H),codeSegments('O','red',A,E,B,F,C,G,D,H),codeSegments('×','blue',D,A,B,C,F,G,H,E)]
+        AB.color='green'
+        BC.color='blue'
+        CD.color='green'
+        DA.color='blue'
+        EF.color='green'
+        FG.color='blue'
+        GH.color='green'
+        HE.color='blue'
+        AE.color='red'
+        BF.color='red'
+        CG.color='red'
+        DH.color='red'
+      }
+    objets_correction.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,labelPoint(A,B,C,D,E,F,G,H),
+        g,
+        carreaux
+      );
+      if (liste_type_de_questions[i]<3) correction += mathalea2d(params, objets_correction,codesseg);
+    
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(enonce + "<br>");
@@ -17793,7 +18192,7 @@ function Solide_6e() {
 
     liste_de_question_to_contenu(this);
   };
-  //	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Perpendiculaires\n 2 : Parallèles\n 3 : Mélange`]
+  this.besoin_formulaire_numerique = ['Type de solides', 3, `1 : Cubes\n 2 : Pavés droits\n 3 : Mélange`]
   this.besoin_formulaire2_numerique = [
     "Type de cahier",
     3,
@@ -18560,11 +18959,14 @@ function Exercice_additionner_des_fractions_5e(max=11){
 			a = randint (1,9);
 			c = randint (1,9);
 			// les dénominateurs
-			b = randint(2,9);
+			if (this.level!=6) b = randint(2,9);
+			else b = randint(2,5)
 			while (b==a){
-				b = randint(2,9); // pas de fraction avec numérateur et dénominateur égaux
+				if (this.level!=6) b = randint(2,9); // pas de fraction avec numérateur et dénominateur égaux
+				else b = randint(2,5)
 			}
-			k = randint(2,this.sup);
+			if (this.level!=6) k = randint(2,this.sup);
+			else k=1
 			d = b*k
 			ordre_des_fractions = randint(1,2)
 			if (ordre_des_fractions==1) {
@@ -18573,10 +18975,12 @@ function Exercice_additionner_des_fractions_5e(max=11){
 				texte = texte = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=$`;
 			}
 			if (ordre_des_fractions==1) {
-				texte_corr = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}+${tex_fraction(c,d)}`
+				if (this.level!=6) texte_corr = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}+${tex_fraction(c,d)}`
+				else texte_corr =`$`
 				texte_corr += `=${tex_fraction(a*k,b*k)}+${tex_fraction(c,d)}=${tex_fraction(a*k+`+`+c,d)}=${tex_fraction(a*k+c,d)}$`;
 			} else {
-				texte_corr = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=${tex_fraction(c,d)}+${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}`
+				if (this.level!=6) texte_corr = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=${tex_fraction(c,d)}+${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}`
+				else texte_corr =`$`
 				texte_corr += `=${tex_fraction(c,d)}+${tex_fraction(a*k,b*k)}=${tex_fraction(c+'+'+a*k,d)}=${tex_fraction(a*k+c,d)}$`;
 			}
 			// Est-ce que le résultat est simplifiable ?
@@ -19109,6 +19513,7 @@ function Exercice_simplification_somme_algebrique(max=20){
 * * On peut paramétrer les distances à zéro qui sont par défaut inférieures à 20
 * * On peut utiliser des écritures simplifiées (ce qui n'est pas le cas par défaut)
 * @Auteur Rémi Angot modifications par Jean-Claude Lhote
+* Référence 5R22
 */
 function Exercice_additions_et_soustraction_de_relatifsV2(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -19399,6 +19804,7 @@ function Exercice_substituer(difficulte=1){
 * * Un triangle a 3 angles égaux.
 * * Dans un triangle rectangle, un angle mesure le tiers de l'autre.
 * @Auteur Jean-Claude Lhote
+* Référence 5G31
 */
 function Exercice_angles_triangles(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -19605,6 +20011,7 @@ function Exercice_angles_triangles(){
 /**
  * Calculs de fréquences dans des séries statistiques
 * @auteur Jean-Claude Lhote
+* Référence 5S13
 */
  function Calculer_des_frequences(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -19753,6 +20160,7 @@ function Exercice_angles_triangles(){
  /**
   * Calcul de moyennes de série statistiques
 * @auteur Jean-Claude Lhote
+* Référence 5S14
 */
 function Calculer_des_moyennes(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -19841,6 +20249,7 @@ function Calculer_des_moyennes(){
  /**
   * Calculer des étendues de séries statistiques
 * @auteur Jean-Claude Lhote
+* Référence 3S15
 */
 function Calculer_des_etendues(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -20224,7 +20633,15 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
 
-		let type_de_questions_disponibles = range1(10)
+		//let type_de_questions_disponibles = range1(10)
+		let type_de_questions_disponibles;
+		
+		if (this.version=="5L13-5") {
+			type_de_questions_disponibles = range1(2)
+		} else {
+			type_de_questions_disponibles = range1(10)			
+		};
+
 		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
 
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
@@ -20656,6 +21073,7 @@ function Reduire_une_expression_litterale(){
 /**
 * Lire l'abscisse décimale d'un point
 * @Auteur Jean-Claude Lhote et Rémi Angot
+* Référence 5R11
 */
 function Lire_abscisse_relative(){
 	'use strict';
@@ -20730,6 +21148,7 @@ function Lire_abscisse_relative(){
 /**
 * Placer un point d'abscisse un nombre relatif
 * @Auteur Jean-Claude Lhote et Rémi Angot
+* Référence 5R11-2
 */
 function Placer_points_sur_axe_relatifs(){
 	'use strict';
@@ -20817,6 +21236,7 @@ function Placer_points_sur_axe_relatifs(){
 /**
  * Lire les coordonnées d'un point du plan avec une précision allant de l'unité à 0,25.
  * @Auteur Jean-Claude Lhote
+ * Références 5R12-2 6N33
  */
 function Reperage_point_du_plan(){
 	'use strict';
@@ -20941,6 +21361,7 @@ function Reperage_point_du_plan(){
 /**
  * Calculs de probabilités sur une expérience aléatoire à une épreuve.
  * @Auteur Jean-Claude Lhote
+ * Référence 5S21
  */
 function fonctions_probabilite1(){
 	'use strict';
@@ -21409,6 +21830,8 @@ function Premier_ou_pas_5e(){
 /**
  * Trouver l'image d'une figure par une symétrie centrale dans un pavage (7 motifs différents)
  * @Auteur Jean-Claude Lhote
+ * fonction servant à tous les niveaux
+ * Références 5G12, 6G25-2, 4G11, 3G12
  */
 function Pavages_et_transformations() {
 	'use strict';
@@ -21974,6 +22397,7 @@ function Pavages_et_transformations() {
 /**
  * Transformer un programme de calcul avec les 4 opérations dans un ordre aléatoire en un seul calcul.
  * @Auteur Jean-Claude Lhote
+ * Référence 5C11-2
  */
 function Ecrire_une_expression_mathador(){
 	'use strict'
@@ -22015,6 +22439,7 @@ function Ecrire_une_expression_mathador(){
 
 /**
  * @Auteur Jean-Claude Lhote
+ * Référence 5C11
  */
 function Traduire_une_phrase_par_une_expression() {
 	Ecrire_une_expression_numerique.call(this)
@@ -22025,6 +22450,7 @@ function Traduire_une_phrase_par_une_expression() {
 }
 /**
  * @Auteur Jean-Claude Lhote
+ * Référence 5L10-1
  */
 function Traduire_une_phrase_par_une_expression_litterale() {
 	Ecrire_une_expression_numerique.call(this)
@@ -22036,6 +22462,7 @@ function Traduire_une_phrase_par_une_expression_litterale() {
 }
 /**
  * @Auteur Jean-Claude Lhote
+ * Référence 5C11-1
  */
 function Traduire_une_expression_par_une_phrase() {
 	Ecrire_une_expression_numerique.call(this)
@@ -22044,6 +22471,7 @@ function Traduire_une_expression_par_une_phrase() {
 }
 /**
  * @Auteur Jean-Claude Lhote
+ * Référence 5L10-3
  */
 function Traduire_une_expression_litterale_par_une_phrase() {
 	Ecrire_une_expression_numerique.call(this)
@@ -22054,6 +22482,7 @@ function Traduire_une_expression_litterale_par_une_phrase() {
 
 /**
  * @Auteur Jean-Claude Lhote
+ * Référence 5C12-1
  */
 function Traduire_une_phrase_par_une_expression_et_calculer() {
 	Ecrire_une_expression_numerique.call(this)
@@ -22062,6 +22491,7 @@ function Traduire_une_phrase_par_une_expression_et_calculer() {
 }
 /**
  * @Auteur Jean-Claude Lhote
+ * Référence 5L13-3
  */
 function Traduire_une_phrase_par_une_expression_litterale_et_calculer() {
 	Ecrire_une_expression_numerique.call(this)
@@ -22071,6 +22501,7 @@ function Traduire_une_phrase_par_une_expression_litterale_et_calculer() {
 }
 /**
  * @Auteur Jean-Claude Lhote
+ * Référence 5C12
  */
 function Calculer_une_expression_numerique() {
 	Ecrire_une_expression_numerique.call(this)
@@ -22079,7 +22510,8 @@ function Calculer_une_expression_numerique() {
 }
 /**
  * @Auteur Jean-Claude Lhote
- */
+  * Référence 5L13-1
+*/
 function Calculer_une_expression_litterale() {
 	Ecrire_une_expression_numerique.call(this)
 	this.version=4
@@ -22302,7 +22734,7 @@ function Reduire_dinstinction_somme_produit() {
 
 
 /**
- * 5L13-4
+ * Référence 5L13-4
  * Déterminer la dernière opération à effectuer dans une expression littéral
  * @author Sébastien Lozano fork Jean-Claude Lhote
  */
@@ -22380,6 +22812,7 @@ function Calculer_une_expression_litteraleBis() {
  * @param {number} val2 
  * @returns [expf,expl,expc,nbval,last_op]
  * @author Jean Claude Lhote forked by Sébastien LOZANO
+ * Référence 5C11,5C11-1, 5C11-2, 5L13, 5L13-1, 5L13-2, 5L13-3
  */
 //function Choisir_expression_litteraleBis(nb_operations,decimal,val1=1,val2=2) {
 function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
@@ -22724,9 +23157,10 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 
 
 /**
- * Fonction noyau pour les 7 fonctions précédentes qui utilisent les mêmes variables et la fonction Choisir_expression_numerique
- * @Auteur Jean-Claude Lhote
- */
+* Fonction noyau pour 7 fonctions qui utilisent les mêmes variables et la fonction Choisir_expression_numerique
+* @Auteur Jean-Claude Lhote
+* Référence 5C11,5C11-1, 5C11-2, 5C12, 5C12-1, 5L13, 5L13-1, 5L13-2, 5L13-3
+*/
 function Ecrire_une_expression_numerique(){
 	'use strict'
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -22828,6 +23262,7 @@ function Ecrire_une_expression_numerique(){
  * * l'expression en mode maths LaTex
  * * Le détaillé du calcul en mode maths LaTex 
  * @Auteur Jean-Claude Lhote
+ * Fonction utilisée dans plusieurs exercices.
  */
 function Choisir_expression_numerique(nb_operations,decimal) {
 	let expf,expn,expc,arrondir=Math.log10(decimal)
@@ -23086,313 +23521,6 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 		}
 		return [expf,expn,expc,souscas]
 }
-// function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
-// 	let expf,expl,expc,arrondir=Math.log10(decimal)
-// 	let a=arrondi(randint(2*decimal,10*decimal)/decimal,arrondir)
-// 	let b=arrondi(randint(2*decimal,10*decimal,[a*decimal])/decimal,arrondir)
-// 	let c=arrondi(randint(2*decimal,10*decimal)/decimal,arrondir)
-// 	let d=arrondi(randint(2*decimal,10*decimal,[c*decimal])/decimal,arrondir)
-// 	let e=arrondi(randint(2*decimal,10*decimal)/decimal,arrondir)  
-// 	let f=arrondi(randint(2*decimal,10*decimal,[e*decimal])/decimal,arrondir)
-//     let souscas
-//     let l1 = 'x'
-// 	let l2 = 'y'
-// 	let nbval
-// 	switch (nb_operations){
-// 		case 1 : // expressions de base (1 opération)
-// 			nbval=1
-// 			souscas=randint(0,3)
-// 			switch (souscas) {
-// 				case 0 : //somme de deux nombres
-// 					expf=`La somme de ${nombre_avec_espace(a)} et ${l1}`
-// 					expl=`$${tex_nombre(a)}+${l1}$`
-// 					expc=`$${tex_nombre(a)}+${l1}=${tex_nombre(a)}+${tex_nombre(val1)}=${tex_nombre(a+val1)}$`
-// 					break
-// 				case 1 : // différence de deux nombres
-// 					if (val1>b) {
-// 					expf=`La différence de ${l1} et ${nombre_avec_espace(b)}`
-// 					expl=`$${l1}-${tex_nombre(b)}$`
-// 					expc=`$${l1}-${tex_nombre(b)}=${tex_nombre(val1)}-${tex_nombre(b)}=${tex_nombre(val1-b)}$`
-// 					}
-// 					else {
-// 					expf=`La différence de ${nombre_avec_espace(b)} et ${l1}`
-// 					expl=`$${tex_nombre(b)}-${l1}$`
-// 					expc=`$${tex_nombre(b)}-${l1}=${tex_nombre(b)}-${tex_nombre(val1)}=${tex_nombre(b-val1)}$`
-// 					}
-// 					break
-// 				case 2 : // produit de deux nombres
-// 					expf=`Le produit de ${l1} par ${nombre_avec_espace(b)}`
-// 					expl=`$${l1}\\times ${tex_nombre(b)} = ${tex_nombrec(b)}${l1}$`
-// 					expc=`$${tex_nombrec(b)}${l1} = ${tex_nombrec(b)}\\times ${val1}=${tex_nombre(b*val1)}$`
-// 					break
-// 				case 3 : // quotient de deux nombres
-
-// 					expf=`Le quotient de ${l1} par ${nombre_avec_espace(b)}`
-// 					expl=`$${l1}\\div ${tex_nombre(b)}$`
-// 					if (estentier(val1/b*1000))	expc=`$${l1}\\div ${tex_nombre(b)} = ${val1}\\div ${tex_nombre(b)} = ${tex_nombrec(val1/b)}$`
-// 					else expc=`$${l1}\\div ${tex_nombre(b)} = ${val1}\\div ${tex_nombre(b)}=${tex_fraction(val1,tex_nombre(b))}${simplification_de_fraction_avec_etapes(val1,tex_nombre(b))}$`
-// 					break
-// 			}
-// 			break
-// 		case 2 : // expressions de niveau 1 (2 opérations)
-// 			souscas=randint(0,5)
-// 			nbval=1
-// 			switch (souscas) {
-// 				case 0 : //a(b+c)
-// 					expf=`Le produit de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et ${l1}`
-// 					expl=`$${tex_nombre(a)}(${tex_nombre(b)}+${l1})$`
-// 					expc=`$${tex_nombre(a)}(${tex_nombre(b)}+${l1})=${tex_nombre(a)}(${tex_nombre(b)}+${val1})=${tex_nombre(a)}\\times ${tex_nombre(b+val1)} = ${tex_nombre(a*(b+val1))}$`
-// 					break
-// 				case 1 : // a(b-c)
-// 					if (b<=c) b=calcul(b+c) // b-c positif
-// 					expf=`Le produit de ${l1} par la différence de ${b} et ${nombre_avec_espace(c)}`
-// 					expl=`$${l1}(${tex_nombre(b)}-${tex_nombre(c)})=${l1}\\times ${tex_nombrec(b-c)}=${tex_nombrec(b-c)}${l1}$`
-// 					expc=`$${l1}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(val1)}(${tex_nombre(b)}-${tex_nombre(c)})=${tex_nombre(val1)}\\times ${tex_nombrec(b-c)}=${tex_nombrec(val1*(b-c))}$`
-// 					break
-// 				case 2 : // a/(b+c)
-// 					a=calcul(a*(val1+c)) // on s'assure que le quotient tombe juste...
-// 					expf=`Le quotient de ${nombre_avec_espace(a)} par la somme de ${l1} et ${nombre_avec_espace(c)}`
-// 					expl=`$${tex_nombre(a)}\\div (${l1}+${tex_nombre(c)})$ ou $\\dfrac{${tex_nombre(a)}}{${l1}+${tex_nombre(c)}}$`
-// 					expc=`$${tex_nombre(a)}\\div (${l1}+${tex_nombre(c)})=${tex_nombre(a)}\\div (${tex_nombre(val1)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\div ${tex_nombrec(val1+c)}=${tex_nombrec(a/(val1+c))}$`
-// 					break
-// 				case 3 : // a/(b-c)
-// 					if (b<=val1) b=calcul(b+val1) // b-c positif
-//  					a=calcul(a*(b-val1)) // on s'assure que le quotient tombe juste
-// 					expf=`Le quotient de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et ${l1}`
-// 					expl=`$${tex_nombre(a)}\\div (${b}-${l1})$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}-${l1}}$`
-// 					expc=`$${tex_nombre(a)}\\div (${b}-${l1})=${tex_nombre(a)}\\div (${b}-${val1})=${tex_nombre(a)}\\div ${tex_nombrec(b-val1)}=${tex_nombrec(a/(b-val1))}$`
-// 					break			
-// 				case 4 : // (a+b)/c
-// 					a=calcul(a*val1)
-// 					b=calcul(b*val1) // on s'assure que le quotient tombe juste
-// 					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${l1}`
-// 					expl=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div  ${l1}$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${l1}}$`
-// 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div  ${l1}=(${tex_nombre(a)}+${tex_nombre(b)})\\div ${val1}= ${tex_nombrec(a+b)}\\div ${val1}=${tex_nombrec((a+b)/val1)}$`
-// 					break
-// 				case 5 : // (a-b)/c
-// 					a=calcul(a*c)+val1 // on s'assure que le quotient tombe juste et que a-b>0
-// 					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${l1} par ${nombre_avec_espace(c)}`
-// 					expl=`$(${tex_nombre(a)}-${l1})\\div ${tex_nombre(c)}$ ou $\\dfrac{${tex_nombre(a)}-${l1}}{${tex_nombre(c)}}$`
-// 					expc=`$(${tex_nombre(a)}-${l1})\\div ${tex_nombre(c)}=(${tex_nombre(a)}-${val1})\\div ${tex_nombre(c)}= ${tex_nombrec(a-val1)}\\div ${tex_nombre(c)}=${tex_nombrec((a-val1)/c)}$`
-// 					break			
-							
-// 			}
-// 			break
-// 		case 3 : // expressions de niveau 2 (3 opérations)
-// 			souscas=randint(0,13)
-// 			nbval=2
-// 			switch (souscas) {
-// 				case 0 : // (a+b)(c+d)
-// 					a=val1
-// 					d=val2
-// 					expf=`Le produit de la somme de ${l1} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${l2}`
-// 					expl=`$(${l1}+${tex_nombre(b)})(${tex_nombre(c)}+${l2})$`
-// 					expc=`$(${l1}+${tex_nombre(b)})(${tex_nombre(c)}+${l2})=(${a}+${tex_nombre(b)})(${tex_nombre(c)}+${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
-// 					break
-// 				case 1 : // (a+b)(c-d)
-// 					d=val2
-// 					b=val1
-// 					if (c<=d) c=calcul(c+d)
-// 					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
-// 					expl=`$(${tex_nombre(a)}+${l1})(${tex_nombre(c)}-${l2})$`
-// 					expc=`$(${tex_nombre(a)}+${l1})(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}+${b})(${tex_nombre(c)}-${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
-// 					break
-// 				case 2 : // (a-b)(c+d)
-// 				b=val2
-// 				c=val1
-// 					if (a<=b) a=calcul(a+b)
-// 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${l2} par la somme de ${l1} et ${nombre_avec_espace(d)}`
-// 					expl=`$(${tex_nombre(a)}-${l2})(${l1}+${tex_nombre(d)})$`
-// 					expc=`$(${tex_nombre(a)}-${l2})(${l1}+${tex_nombre(d)})=(${tex_nombre(a)}-${b})(${c}+${tex_nombre(d)})=${tex_nombrec(a-b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
-// 					break
-// 				case 3 : // (a-b)(c-d)
-// 					b=val1
-// 					d=val2
-// 					if (a<=b) a=calcul(a+b)
-// 					if (c<=d) c=calcul(c+d)
-// 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
-// 					expl=`$(${tex_nombre(a)}-${l1})(${tex_nombre(c)}-${l2})$`
-// 					expc=`$(${tex_nombre(a)}-${l1})(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}-${b})(${tex_nombre(c)}-${d})= ${tex_nombrec(a-b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
-// 					break			
-// 				case 4 : // (a+b)/(c+d)
-// 					d=val2
-// 					b=val1
-// 					if (!estentier((a+b)/(c+d))) a=calcul(a*(c+d)-b)
-// 					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par la somme de ${nombre_avec_espace(c)} et ${l2}`
-// 					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}+${l2})$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}+${l2}}$`
-// 					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}+${l2})=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)/(c+d))}$`
-// 					break
-// 				case 5 : // (a-b)/(c+d)
-// 					d=val1
-// 					b=val2
-// 					if (a-b<=0||!estentier((a-b)/(c+d))) a=calcul(a*(c+d)+b)
-// 					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${l2} par la somme de ${nombre_avec_espace(c)} et ${l1}`
-// 					expl=`$(${tex_nombre(a)}-${l2})\\div (${tex_nombre(c)}+${l1})$ ou $\\dfrac{${tex_nombre(a)}-${l2}}{${tex_nombre(c)}+${l1}}$`
-// 					expc=`$(${tex_nombre(a)}-${l2})\\div (${tex_nombre(c)}+${l1})=(${tex_nombre(a)}-${tex_nombre(b)})\\div (${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/(c+d))}$`
-// 					break			
-// 				case 6 : // (a+b)/(c-d)
-// 					b=val1
-// 					d=val2
-// 					if (c<=d) c=calcul(c+d)
-// 					if (!estentier((a+b)/(c-d))) 
-// 						if (a*(c-d)>b ) a=calcul(a*(c-d)-b)
-// 						else a=calcul((a+b)*(c-d)-b)
-// 					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
-// 					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}-${l2})$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}-${l2}}$`
-// 					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}-${l2})=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)/(c-d))}$`
-// 					break
-// 				case 7 : // (a-b)/(c-d)
-// 					d=val2;
-// 					b=val1;
-// 					if (c<=d) c=calcul(c+d)
-// 					if (a<=b) a=calcul(a+b)
-// 					if (!estentier((a-b)/(c-d))) a=calcul(a*(c-d)+b)
-// 					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
-// 					expl=`$(${tex_nombre(a)}-${l1})\\div (${tex_nombre(c)}-${l2})$ ou $\\dfrac{${tex_nombre(a)}-${l1}}{${tex_nombre(c)}-${l2}}$`
-// 					expc=`$(${tex_nombre(a)}-${l1})\\div (${tex_nombre(c)}-${l2})=(${tex_nombre(a)}-${tex_nombre(b)})\\div (${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)/(c-d))}$`
-// 					break			
-// 				case 8 : // ab+cd
-// 					b=val1;
-// 					d=val2;
-// 					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${l1} et du produit de ${nombre_avec_espace(c)} par ${l2}`
-// 					expl=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}$`
-// 					expc=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}=${tex_nombre(a)}\\times ${tex_nombre(b)}+${tex_nombre(c)}\\times ${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c*d)} = ${tex_nombrec(a*b+c*d)}$`
-// 					break
-// 				case 9 : // ab-cd
-// 				d=val2
-// 				b=val1
-// 					if (a*b<d*c) a=calcul(a+c)
-// 					while (a*b<d*c) a=calcul(a+c)
-// 					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${l1} et du produit de ${nombre_avec_espace(c)} par ${l2}`
-// 					expl=`$${tex_nombre(a)}${l1}-${tex_nombre(c)}${l2}$`
-// 					expc=`$${tex_nombre(a)}${l1}-${tex_nombre(c)}${l2}=${tex_nombre(a)}\\times ${tex_nombre(b)}-${tex_nombre(c)}\\times ${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c*d)} = ${tex_nombrec(a*b-c*d)}$`
-// 					break			
-// 				case 10 : // ab+c/d
-// 					d=val1
-// 					b=val2
-// 					if (!estentier(c/d)) c=calcul(c*d)
-// 					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${l2} et du quotient de ${nombre_avec_espace(c)} par ${l1}`
-// 					expl=`$${tex_nombre(a)}${l2}+${tex_nombre(c)}\\div ${l1}$ ou $${tex_nombre(a)}${l2}+\\dfrac{${tex_nombre(c)}}{${l1}}$`
-// 					expc=`$${tex_nombre(a)}${l2}+${tex_nombre(c)}\\div ${l1}=${tex_nombre(a)}\\times ${tex_nombre(b)}+${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a*b+c/d)}$`
-// 					break
-// 				case 11 : // ab-c/d
-// 					d=val2
-// 					b=val1
-// 					if (!estentier(c/d)) c=calcul(c*d)
-// 					while (a*b<c/d) a=calcul(a*c)
-// 					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${l1} et du quotient de ${nombre_avec_espace(c)} par ${l2}`
-// 					expl=`$${tex_nombre(a)}${l1}-${tex_nombre(c)}\\div ${l2}$ ou $${tex_nombre(a)}\\times ${l1}-\\dfrac{${tex_nombre(c)}}{${l2}}$`
-// 					expc=`${tex_nombre(a)}${l1}-${tex_nombre(c)}\\div ${l2}=${tex_nombre(a)}\\times ${tex_nombre(b)}-${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a*b-c/d)}$`
-// 					break	
-// 				case 12 : // a/b+c/d
-// 					d=val1
-// 					b=val2
-// 					if(!estentier(a/b)) a=calcul(a*b)
-// 					if (!estentier(c/d)) c=calcul(c*d)
-// 					expf=`La somme du quotient de ${nombre_avec_espace(a)} par ${l2} et du quotient de ${nombre_avec_espace(c)} par ${l1}`
-// 					expl=`$${tex_nombre(a)}\\div ${l2}+${tex_nombre(c)}\\div ${l1}$ ou $\\dfrac{${tex_nombre(a)}}{${l2}}+\\dfrac{${tex_nombre(c)}}{${l1}}$`
-// 					expc=`$${tex_nombre(a)}\\div ${l2}+${tex_nombre(c)}\\div ${l1}=${tex_nombre(a)}\\div ${tex_nombre(b)}+${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a/b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a/b+c/d)}$`
-// 					break	
-// 				case 13 : // a/b-c/d
-// 					d=val2
-// 					b=val1		
-// 					if(!estentier(a/b)) a=calcul(a*b)
-// 					if (!estentier(c/d)) c=calcul(c*d)
-// 					while (a/b<c/d) a=calcul(a*c)
-// 					expf=`La différence du quotient de ${nombre_avec_espace(a)} par ${l1} et du quotient de ${nombre_avec_espace(c)} par ${l2}`
-// 					expl=`$${tex_nombre(a)}\\div ${l1}-${tex_nombre(c)}\\div ${l2}$ ou $\\dfrac{${tex_nombre(a)}}{${l1}}-\\dfrac{${tex_nombre(c)}}{${l2}}$`
-// 					expc=`$${tex_nombre(a)}\\div ${l1}-${tex_nombre(c)}\\div ${l2}=${tex_nombre(a)}\\div ${tex_nombre(b)}-${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a/b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a/b-c/d)}$`
-// 					break	
-// 			}
-// 			break ;
-// 		case 5 : // expressions complexes
-// 		souscas=randint(0,5)
-// 		nbval=2
-// 			switch (souscas) {
-// 				case 0 : // 2(a+bc)
-// 					a=val1
-// 					c=val2
-// 					expf=`Le double de la somme de ${l1} et du produit de ${nombre_avec_espace(b)} par ${l2}`
-// 					expl=`$2(${l1}+${tex_nombre(b)}${l2})$`
-// 					expc=`$2(${l1}+${tex_nombre(b)}${l2})=2(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)}) = 2(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times ${tex_nombrec(a+b*c)}=${tex_nombrec(2*(a+b*c))}$`
-// 					break
-// 				case 1 : // 3(a+b)/c
-// 					b=val1
-// 					c=val2
-// 					if (!estentier(3*(a+b)/c)) a=calcul(a*c-b)
-// 					while (a<b) a=calcul(a*c-b)
-// 					expf=`Le triple du quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par ${l2}`
-// 					expl=`$3(${tex_nombre(a)}+${l1})\\div ${l2}$ ou $3\\times \\dfrac{${tex_nombre(a)}+${l1}}{${l2}}$`
-// 					expc=`$3(${tex_nombre(a)}+${l1})\\div ${l2}=3(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)} = 3\\times  ${tex_nombre(a+b)}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
-// 					break
-// 				case 2 : // (a-b)/3
-// 					nbval=1
-// 					b=val1
-// 					if (!estentier((a-b)/3)) a=calcul(3*a+b)
-// 					expf=`Le tiers de la différence de ${nombre_avec_espace(a)} et ${l1}`
-// 					expl=`$(${tex_nombre(a)}-${l1})\\div  3$ ou $\\dfrac{${tex_nombre(a)}-${l1}}{3}$`
-// 					expc=`$(${tex_nombre(a)}-${l1})\\div  3=(${tex_nombre(a)}-${tex_nombre(b)})\\div  3 = ${tex_nombrec(a-b)}\\div  3 = ${tex_nombrec((a-b)/3)}$`
-// 					break
-// 				case 3 : // (a-b)/3*2(c+d)
-// 					c=val1
-// 					b=val2
-// 					if (a<=b) a=calcul(a+b)
-// 					if (!estentier((a-b)/3)) a=calcul(3*a+b)
-// 					expf=`Le produit du tiers de la différence de ${nombre_avec_espace(a)} et ${l2} par le double de la somme de ${l1} et ${nombre_avec_espace(d)}`
-// 					expl=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2(${l1}+${tex_nombre(d)})$`
-// 					expc=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2(${l1}+${tex_nombre(d)})=\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div  3 \\times  2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times  2 \\times  ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
-// 					break			
-// 				case 4 : // 3(a+b)-2(c+d)
-// 					b=val1
-// 					c=val2
-// 					if (3*(a+b)<2*(c+d)) a=calcul(a+c+d)
-// 					expf=`La différence du triple de la somme de ${nombre_avec_espace(a)} et ${l1} et du double de la somme de ${l2} et ${nombre_avec_espace(d)}`
-// 					expl=`$3(${tex_nombre(a)}+${l1})-2(${l2}+${tex_nombre(d)})$`
-// 					expc=`$3(${tex_nombre(a)}+${l1})-2(${l2}+${tex_nombre(d)})=3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times  ${tex_nombrec(a+b)} - 2 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
-// 					break
-// 				case 5 : // 2(a-b)+3(c+d)
-// 					d=val2
-// 					b=val1
-// 					if (a<=b) a=calcul(a+b)
-// 					expf=`La somme du double de la différence de ${nombre_avec_espace(a)} et ${l1} et du triple de la somme de ${nombre_avec_espace(c)} et ${l2}`
-// 					expl=`$2(${tex_nombre(a)}-${l1})+3(${tex_nombre(c)}+${l2})$`
-// 					expc=`$2(${tex_nombre(a)}-${l1})+3(${tex_nombre(c)}+${l2})=2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times  ${tex_nombrec(a-b)} + 3 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
-// 					break	
-// 			}		
-// 			break ;
-// 		case 4 : // 4 opérations
-// 		souscas=randint(1,3)
-// 		nbval=2
-// 			switch (souscas) {
-// 				case 1 : // (a+b)/(c(d+e))
-// 					b=val1
-// 					e=val2
-// 					if (!estentier((a+b)/(c*(d+e)))) a=calcul(a*c*(d+e)-b)
-// 					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par le produit de ${nombre_avec_espace(c)} par la somme de ${nombre_avec_espace(d)} et ${l2}`
-// 					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${l2}))$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}(${tex_nombre(d)}+${l2})}$`
-// 					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${l2}))=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div  (${tex_nombre(c)} \\times  ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div  ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
-// 					break
-// 				case 2 : //(a-b)*(c+de)
-// 					e=val1
-// 					b=val2
-// 					if (a<=b) a=calcul(a+b)
-// 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${l2} par la somme de ${nombre_avec_espace(c)} et du produit de ${nombre_avec_espace(d)} par ${l1}`
-// 					expl=`$(${tex_nombre(a)}-${l2})(${tex_nombre(c)}+${tex_nombre(d)}${l1})$`
-// 					expc=`$(${tex_nombre(a)}-${l2})(${tex_nombre(c)}+${tex_nombre(d)}${l1})=(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)}) = ${tex_nombrec(a-b)}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times  ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
-// 					break
-// 				case 3 : // ab+cd/e
-// 					d=val2
-// 					b=val1
-// 					if (!estentier(c*d/e)) c=calcul(c*e)
-// 					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${l1} et du quotient du produit de ${nombre_avec_espace(c)} et ${l2} par ${nombre_avec_espace(e)}`
-// 					expl=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}\\div ${tex_nombre(e)}$ ou $${tex_nombre(a)}${l1}+\\dfrac{${tex_nombre(c)}${l2}}{${tex_nombre(e)}}$`
-// 					expc=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}\\div ${tex_nombre(e)}=${tex_nombre(a)}\\times ${tex_nombre(b)}+${tex_nombre(c)}\\times ${tex_nombre(d)}\\div ${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d)} \\div  ${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d/e)} = ${tex_nombrec(a*b+c*d/e)}$`
-// 					break
-// 			}
-// 			break
-// 		}
-// 		return [expf,expl,expc,nbval]
-// }
 
 /**
  * Constructibilité des triangles
@@ -23894,30 +24022,73 @@ function DroiteRemarquableDuTriangle(){
 	}
 	this.besoin_formulaire_numerique = ['Type de droites',3,"1 : Hauteurs et Médiatrices\n2 : Médianes et Bissectrices\n3 : Toutes les droites"]
 }
+/**
+ * Référence 6G24-1
+ * @Auteur Jean-Claude Lhote
+ */
+function Symetrie_axiale_point_6e() {
+	Construire_par_Symetrie.call(this)
+	this.titre='Construire le symétrique d\'un point par rapport à une droite (cas simples)'
+	this.figure=false
+	this.sup=0
+}
+/**
+ * Référence 6G24-2
+ * @Auteur Jean-Claude Lhote
+ */
+function Symetrie_axiale_figure_6e() {
+	Construire_par_Symetrie.call(this)
+	this.titre='Construire le symétrique d\'une figure par rapport à une droite (cas simples)'
+	this.figure=true
+	this.sup=0
+}
+/**
+ * Référence 6G10-1
+ * @Auteur Jean-Claude Lhote
+ */
 function Symetrie_axiale_point_5e() {
 	Construire_par_Symetrie.call(this)
 	this.titre='Construire le symétrique d\'un point par rapport à une droite'
 	this.figure=false
 	this.sup=1
 }
+/**
+ * Référence 6G10-2
+ * @Auteur Jean-Claude Lhote
+ */
 function Symetrie_axiale_figure_5e() {
 	Construire_par_Symetrie.call(this)
 	this.titre='Construire le symétrique d\'une figure par rapport à une droite'
 	this.figure=true
 	this.sup=1
 }
+/**
+ * Référence 6G11-1
+ * @Auteur Jean-Claude Lhote
+ */
 function Symetrie_centrale_point() {
 	Construire_par_Symetrie.call(this)
 	this.titre='Construire le symétrique d\'un point par rapport à un point'
 	this.figure=false
 	this.sup=2
 }
+/**
+ * Référence 6G11-2
+ * @Auteur Jean-Claude Lhote
+ */
 function Symetrie_centrale_figure() {
 	Construire_par_Symetrie.call(this)
 	this.titre='Construire le symétrique d\'une figure par rapport à un point'
 	this.figure=true
 	this.sup=2
 }
+/**
+ * @Auteur Jean-Claude Lhote
+ * Fonction générale pour les exercices de construction de symétriques (centrale/axiale et points/triangles)
+ * références  6G24-1, 6G24-2, 5G10-1, 5G10-2, 5G11-1 et 5G11-2
+ * Permet une sortie html/pdf sur petits carreaux/gros carreaux/papier blanc
+ */
+
 function Construire_par_Symetrie() {
 	"use strict";
 	Exercice.call(this);
@@ -23931,12 +24102,12 @@ function Construire_par_Symetrie() {
 	this.nouvelle_version = function (numero_de_l_exercice) {
 	  let type_de_questions_disponibles;
 	  if (this.sup == 3) 	  //Symétrie axiale ou centrale
-		  if (this.figure==false) type_de_questions_disponibles = [1, 2]; // points
-		  else type_de_questions_disponibles = [3,4] // triangle
+		  if (this.figure==false) type_de_questions_disponibles = [0,1, 2]; // points
+		  else type_de_questions_disponibles = [3,4,5] // triangle
 
 	  else 
 		  if (this.figure==false) type_de_questions_disponibles = [parseInt(this.sup)]; // Le choix 1 ou 2 : points
-		  else type_de_questions_disponibles = [parseInt(this.sup)+2] //figures
+		  else type_de_questions_disponibles = [parseInt(this.sup)+3] //figures
 
 	  let liste_type_de_questions = combinaison_listes(
 		type_de_questions_disponibles,
@@ -23945,27 +24116,8 @@ function Construire_par_Symetrie() {
 	  this.liste_questions = []; // Liste de questions
 	  this.liste_corrections = []; // Liste de questions corrigées
 	  let Xmin, Xmax, Ymin, Ymax, ppc, sc;
-	  function initialise_variables() {
-		if (sortie_html) {
-		  // repère -10 || 10
-		  Xmin = -1;
-		  Ymin = -9;
-		  Xmax = 20;
-		  Ymax = 9;
-		  ppc = 20;
-		} else {
-		  // repère -5 || 5
-		  Xmin = -1;
-		  Ymin = -9;
-		  Xmax = 20;
-		  Ymax = 9;
-		  ppc = 20;
-		}
-	  }
-  
-	  initialise_variables();
-	  if (this.sup2 == 1) sc = 0.5;
-	  else sc = 0.8;
+	  if (this.sup2 == 2) sc = 0.8;
+	  else sc = 0.5;
   
 	  let A,AA,cA,sA,
 		B,
@@ -23983,40 +24135,82 @@ function Construire_par_Symetrie() {
 		k,
 		objets_enonce=[],
 		objets_correction=[],
-		params={
-		  xmin: Xmin,
-		  ymin: Ymin,
-		  xmax: Xmax,
-		  ymax: Ymax,
-		  pixelsParCm: ppc,
-		  scale: sc,
-		},
 		p1,p2,p1nom,p2nom;
 	  for (
 		let i = 0, texte, texte_corr, cpt = 0;
 		i < this.nb_questions && cpt < 50;
   
 	  ) {
-		if (this.sup2<3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
-		else g=''
-		if (this.sup2 == 2) {
-		  k = 0.8;
-		  carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
-		} else {
-		  k = 0.5;
-		  carreaux = "";
-		}
+		
 		switch (liste_type_de_questions[i]) {
+			case 0 : // 3 symétries axiales simples de points (6ème)
+			p1nom=creerNomDePolygone(5,"PQ")
+			A = point(0, 0, `${p1nom[0]}`,'above');
+			k=choice([-1,0,1,2])
+
+			if (k<2) d = droiteParPointEtPente(A,k);
+			else d=droiteVerticaleParPoint(A)
+			B = pointSurDroite(d,6,`${p1nom[1]}`,'above');
+			d.isVisible = true;
+			d.epaisseur=1
+			if (k==2) {
+				A.positionLabel='left'
+				B.positionLabel='left'
+			}
+			C = point(randint(2, 3), randint(3, 4), `${p1nom[2]}`,'above left');
+			D = point(randint(3, 5), randint(-4, -3), `${p1nom[3]}`,'below right');
+//			dB = droiteParPointEtPerpendiculaire(B, d);
+			E=point(randint(6,7),randint(5,6), `${p1nom[4]}`, "left");
+			//F = point(E.x+1,5-B.y,'F','above left');
+			CC=symetrieAxiale(C,d,`${p1nom[2]}\'`,'below left')
+			DD=symetrieAxiale(D,d,`${p1nom[3]}\'`,'above right')
+			EE=symetrieAxiale(E,d,`${p1nom[4]}\'`,'left')
+			//FF=symetrieAxiale(F,d,'F\'','below left')
+			cC=codageMediatrice(C,CC,'red','|')
+			cD=codageMediatrice(D,DD,'blue','X')
+			cE=codageMediatrice(E,EE,'green','O')
+			//cF=codageMediatrice(F,FF,'purple','V')
+			sC=segment(C,CC)
+			sD=segment(D,DD)
+			sE=segment(E,EE)
+			//sF=segment(F,FF)
+			sCE=droite(CC,EE,'','gray')
+			sCE.pointilles=true
+			sED=droite(EE,D,'','gray')
+			sED.pointilles=true
+			sDE=droite(DD,E,'','gray')
+			sDE.pointilles=true
+			sEC=droite(C,E,'','gray')
+			sEC.pointilles=true
+
+
+
+			objets_correction.push(d,tracePoint(A, B, C, D, E,CC,DD,EE),labelPoint(A, B, C, D, E,CC,DD,EE),cC,cD,cE,sC,sD,sE,sED,sDE,sCE,sEC)
+			objets_enonce.push(tracePoint(A, B, C, D,E),labelPoint(A, B, C, D,E),d);
+			enonce = num_alpha(0)+` Reproduire la figure ci-dessous.<br>`
+			enonce += num_alpha(1)+` Construire le point $${p1nom[2]}\'$ symétrique de $${p1nom[2]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+			enonce += num_alpha(3)+` Construire le point $${p1nom[4]}\'$ symétrique de $${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+			enonce += num_alpha(5)+` Coder la figure.<br>`;
+			Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)-1
+			Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)+1
+			Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)-1
+			Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)+1
+		
+			
+			correction=`Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$<br>`
+
+			break;
 		  case 1: // 3 symétries axiales de points
 			p1nom=creerNomDePolygone(5)
 			A = point(0, randint(-1,1), `${p1nom[0]}`,'above');
 			B = point(6, randint(-1,1,A.y), `${p1nom[1]}`,'above');
 			d = droite(A, B);
 			d.isVisible = true;
-			d.epaisseur=2
+			d.epaisseur=1
 			C = point(randint(2, 3), randint(3, 4), `${p1nom[2]}`,'above left');
 			D = point(randint(10, 13), randint(-4, -3), `${p1nom[3]}`,'below right');
-			dB = droiteParPointEtPerpendiculaire(B, d);
+//			dB = droiteParPointEtPerpendiculaire(B, d);
 			E=point(randint(6,8),randint(-8,-5), `${p1nom[4]}`, "left");
 			//F = point(E.x+1,5-B.y,'F','above left');
 			CC=symetrieAxiale(C,d,`${p1nom[2]}\'`,'below left')
@@ -24042,22 +24236,20 @@ function Construire_par_Symetrie() {
 
 
 
-			objets_correction.push(d,g,carreaux,tracePoint(A, B, C, D, E,CC,DD,EE),labelPoint(A, B, C, D, E,CC,DD,EE),cC,cD,cE,sC,sD,sE,sED,sDE,sCE,sEC)
-			objets_enonce.push(tracePoint(A, B, C, D,E),g,labelPoint(A, B, C, D,E),d,carreaux);
+			objets_correction.push(d,tracePoint(A, B, C, D, E,CC,DD,EE),labelPoint(A, B, C, D, E,CC,DD,EE),cC,cD,cE,sC,sD,sE,sED,sDE,sCE,sEC)
+			objets_enonce.push(tracePoint(A, B, C, D,E),labelPoint(A, B, C, D,E),d);
 			enonce = num_alpha(0)+` Reproduire la figure ci-dessous.<br>`
 			enonce += num_alpha(1)+` Construire le point $${p1nom[2]}\'$ symétrique de $${p1nom[2]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(3)+` Construire le point $${p1nom[4]}\'$ symétrique de $${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(5)+` Coder la figure.<br>`;
-			enonce += mathalea2d( params
-			  ,
-			  objets_enonce
-			);
-			correction = mathalea2d(
-			  params,
-			 objets_correction
-			);
-			correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$`
+			Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)-1
+			Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)+1
+			Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)-1
+			Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)+1
+		
+			
+			correction=`Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$<br>`
 			break;
 		  case 2: // 3 symétries centrales de points
 			p1nom=creerNomDePolygone(4)
@@ -24075,24 +24267,64 @@ function Construire_par_Symetrie() {
 			sD=segment(D,DD)
 			sA=segment(A,AA)
 			
-		objets_correction.push(g,carreaux,tracePoint(A, C, D,CC,DD,AA),labelPoint(A, B, C, D,CC,DD,AA),cC,cD,cA,sC,sD,sA)
-			objets_enonce.push(tracePoint(A, B, C, D),g,labelPoint(A, B, C, D),carreaux);
+		objets_correction.push(tracePoint(A, C, D,CC,DD,AA),labelPoint(A, B, C, D,CC,DD,AA),cC,cD,cA,sC,sD,sA)
+			objets_enonce.push(tracePoint(A, B, C, D),labelPoint(A, B, C, D));
 			enonce = num_alpha(0)+` Reproduire la figure ci-dessous.<br>`
 			enonce += num_alpha(1)+` Construire le point $${p1nom[2]}\'$ symétrique de $${p1nom[2]}$ par rapport au point $${p1nom[1]}$.<br>`
 			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
 			enonce += num_alpha(3)+` Construire le point $${p1nom[0]}\'$ symétrique de $${p1nom[0]}$ par rapport au point $${p1nom[1]}$.<br>`
 			enonce += num_alpha(4)+` Coder la figure.<br>`;
-			enonce += mathalea2d( params
-			  ,
-			  objets_enonce
-			);
-			correction = mathalea2d(
-			  params,
-			 objets_correction
-			);
-			//correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
+			Xmin=Math.min(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)-1
+			Xmax=Math.max(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)+1
+			Ymin=Math.min(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)-1
+			Ymax=Math.max(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)+1
+			correction=''
 			break;
-			case 3: // symetrie axiale d'un triangle
+
+			case 3 : // symétrie axiale simple d'un triangle
+			p1nom=creerNomDePolygone(5,"PQ")
+			A = point(0, 0, `${p1nom[0]}`,'above');
+			k=choice([-1,0,1,2])
+
+			if (k<2) d = droiteParPointEtPente(A,k);
+			else d=droiteVerticaleParPoint(A)
+			B = pointSurDroite(d,6,`${p1nom[1]}`,'above');
+			d.isVisible = true;
+			d.epaisseur=1
+			C = point(randint(2, 3), randint(3, 4), `${p1nom[2]}`,'above left');
+			D = point(randint(3, 5), randint(-4, -3), `${p1nom[3]}`,'below right');
+//			dB = droiteParPointEtPerpendiculaire(B, d);
+			E=point(randint(6,7),randint(5,6), `${p1nom[4]}`, "left");
+			p1=polygone(C,D,E)
+			p2=symetrieAxiale(p1,d)
+			p2.listePoints[0].nom=`${p1nom[2]}\'`
+			p2.listePoints[1].nom=`${p1nom[3]}\'`
+			p2.listePoints[2].nom=`${p1nom[4]}\'`
+			//CC=nommePolygone(p1)
+			//DD=nommePolygone(p2)
+			cC=codageMediatrice(p1.listePoints[0],p2.listePoints[0],'red','|')
+			cD=codageMediatrice(p1.listePoints[1],p2.listePoints[1],'blue','X')
+			cE=codageMediatrice(p1.listePoints[2],p2.listePoints[2],'green','O')			
+			sC=segment(p1.listePoints[0],p2.listePoints[0],'red')
+			sD=segment(p1.listePoints[1],p2.listePoints[1],'blue')
+			sE=segment(p1.listePoints[2],p2.listePoints[2],'green')	
+			sCE=droite(p1.listePoints[2],p1.listePoints[1],'','gray')
+			sCE.pointilles=true
+			sED=droite(p2.listePoints[2],p2.listePoints[1],'','gray')
+			sED.pointilles=true
+			objets_correction.push(d,tracePoint(A,B),labelPoint(A,B),cC,cD,cE,sC,sD,sE,CC,DD,p1,p1.sommets,p2,p2.sommets,sCE,sED)
+			objets_enonce.push(d,tracePoint(A,B),labelPoint(A,B),CC,p1);
+			enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
+			enonce += num_alpha(1)+` Construire le triangle  $${p1nom[2]}\'${p1nom[3]}\'${p1nom[4]}\'$ symétrique de $${p1nom[2]}${p1nom[3]}${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
+			enonce += num_alpha(2)+` Coder la figure.<br>`;
+			Xmin=Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1
+			Xmax=Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1
+			Ymin=Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1
+			Ymax=Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1
+			correction=''
+	
+			break
+			case 4: // symetrie axiale d'un triangle
 				p1nom=creerNomDePolygone(5)
 
 
@@ -24100,7 +24332,7 @@ function Construire_par_Symetrie() {
 				B = point(6, randint(-1,1,A.y), `${p1nom[1]}`,'above');
 				d = droite(A, B);
 				d.isVisible = true;
-				d.epaisseur=2
+				d.epaisseur=1
 				C = point(randint(2, 3), randint(3, 4), `${p1nom[2]}`,'above left');
 				D = point(randint(10, 13), randint(-4, -2), `${p1nom[3]}`,'below right');
 				dB = droiteParPointEtPerpendiculaire(B, d);
@@ -24122,22 +24354,19 @@ function Construire_par_Symetrie() {
 				sCE.pointilles=true
 				sED=droite(p2.listePoints[2],p2.listePoints[1],'','gray')
 				sED.pointilles=true
-				objets_correction.push(d,g,tracePoint(A,B),labelPoint(A,B),carreaux,cC,cD,cE,sC,sD,sE,CC,DD,p1,p1.sommets,p2,p2.sommets,sCE,sED)
-				objets_enonce.push(g,d,tracePoint(A,B),labelPoint(A,B),carreaux,CC,p1);
+				objets_correction.push(d,tracePoint(A,B),labelPoint(A,B),cC,cD,cE,sC,sD,sE,CC,DD,p1,p1.sommets,p2,p2.sommets,sCE,sED)
+				objets_enonce.push(d,tracePoint(A,B),labelPoint(A,B),CC,p1);
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[2]}\'${p1nom[3]}\'${p1nom[4]}\'$ symétrique de $${p1nom[2]}${p1nom[3]}${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 				enonce += num_alpha(2)+` Coder la figure.<br>`;
-				enonce += mathalea2d( params
-				  ,
-				  objets_enonce
-				);
-				correction = mathalea2d(
-				  params,
-				 objets_correction
-				);
-				correction+=`<br>Contrôler la figure en vérifiant que les côtés des deux triangles se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$`
+				Xmin=Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1
+				Xmax=Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1
+				Ymin=Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1
+				Ymax=Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1
+
+				correction=`Contrôler la figure en vérifiant que les côtés des deux triangles se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$<br>`
 				break;
-			  case 4:
+			  case 5:
 				p1nom=creerNomDePolygone(4)
 
 				A = point(0, randint(-1,4), `${p1nom[0]}`,'left');
@@ -24158,24 +24387,47 @@ function Construire_par_Symetrie() {
 				sC=segment(p1.listePoints[1],p2.listePoints[1],'blue')
 				sD=segment(p1.listePoints[2],p2.listePoints[2],'green')	
 				
-			objets_correction.push(g,carreaux,tracePoint(B),labelPoint(B),cC,cD,cA,sC,sD,sA,p1.sommets,p2.sommets,p1,p2)
-				objets_enonce.push(tracePoint(B),g,labelPoint(B),CC,p1,carreaux);
+				objets_correction.push(tracePoint(B),labelPoint(B),cC,cD,cA,sC,sD,sA,p1.sommets,p2.sommets,p1,p2)
+				objets_enonce.push(tracePoint(B),labelPoint(B),CC,p1);
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[0]}\'${p1nom[2]}\'${p1nom[3]}\'$ symétrique de $${p1nom[0]}${p1nom[2]}${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
 				enonce += num_alpha(2)+` Coder la figure.<br>`;
-				enonce += mathalea2d( params
-				  ,
-				  objets_enonce
-				);
-				correction = mathalea2d(
-				  params,
-				 objets_correction
-				);
-				//correction+=`<br>Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(AB)$`
+				Xmin=Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1
+				Xmax=Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1
+				Ymin=Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1
+				Ymax=Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1
+				correction=''	
 				break;
-	
+
 		}
-  
+		
+		let params={
+			xmin: Xmin,
+			ymin: Ymin,
+			xmax: Xmax,
+			ymax: Ymax,
+			pixelsParCm: ppc,
+			scale: sc,
+		  }
+		  if (this.sup2<3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
+		else g=''
+		if (this.sup2 == 2) {
+		  k = 0.8;
+		  carreaux = seyes(Xmin, Ymin, Xmax, Ymax);
+		} else {
+		  k = 0.5;
+		  carreaux = "";
+		}
+		objets_enonce.push(g,carreaux)
+		objets_correction.push(g,carreaux)
+		  enonce += mathalea2d( params
+			,
+			objets_enonce
+		  );
+		  correction += mathalea2d(
+			params,
+		   objets_correction
+		  );
 		if (this.liste_questions.indexOf(texte) == -1) {
 		  // Si la question n'a jamais été posée, on en créé une autre
 		  this.liste_questions.push(enonce + "<br>");
@@ -24187,7 +24439,7 @@ function Construire_par_Symetrie() {
   
 	  liste_de_question_to_contenu(this);
 	};
-	//	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Symétrie axiale\n 2 : Symétrie centrale\n 3 : Mélange`]
+	this.besoin_formulaire_numerique = ['Type de questions', 4, `0 : symétries axiales simples\n 1 : Symétrie axiale\n 2 : Symétrie centrale\n 3 : Mélange`]
 	this.besoin_formulaire2_numerique = [
 	  "Type de cahier",
 	  3,
@@ -24197,7 +24449,7 @@ function Construire_par_Symetrie() {
 
   
   /** 
- * * Dessiner selon un programme scratch
+ * * Remplir un tableau en utilisant la notion d'opposé
  * * 5R10-0
  * @author Sébastien Lozano
  */
@@ -24321,7 +24573,637 @@ function Trouver_oppose(){
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 }
-  /**
+
+/** 
+ * * résoudre un problème additif de fractions niv 5e
+ * * 5N20-0
+ * @author Sébastien Lozano
+ */
+function Problemes_additifs_fractions_5e(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = false;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 1;
+	} else {
+		this.nb_questions = 1;
+	};	
+
+	this.titre = "Résoudre un problème en utilisant des fractions";	
+	this.consigne = `Calculatrice autorisée.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+			  // type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+			  type_de_questions_disponibles = [0];      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées		
+
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			// on définit les fractions pour les vols et les arguments pour le graphique
+			let frac_vols = [
+				[1,12,[1.8,' ','black',2,1,'red',0.4]],
+				[1,12,[1.8,' ','black',2,1,'red',0.4]],
+				[1,12,[1.8,' ','black',2,1,'red',0.4]],
+				[1,4,[1.8,' ','black',2,1,'blue',0.4]],
+				[1,2,[1.8,' ','black',2,1,'green',0.4]]
+			];
+			// on mélange pour l'aléatoire tant que les deux premieres fractions sont égales
+			do {
+				frac_vols = shuffle(frac_vols);
+			} while (frac_vols[0][1] == frac_vols[1][1]);
+			
+
+			// let q1a = randint(1,5); // indice pour faire varier la 1ere question sur la destination
+			// let q1b = randint(1,5,[q1a]); // indice pour faire varier la 2eme question sur la destination
+			let nb_vols_total;
+			let destinations_vols = [[`l'`,`Afrique`],[`l'`,`Asie`],[`l'`,`Amérique`],[`l'`,`Europe`],[`la`,` France`]];
+			destinations_vols = shuffle(destinations_vols);
+			do {		
+				nb_vols_total = randint(200,600);
+				console.log(nb_vols_total%2);
+				console.log(nb_vols_total%3);
+				console.log(nb_vols_total%4);
+				console.log(nb_vols_total%2 != 0 && nb_vols_total%3 != 0 && nb_vols_total%4 != 0)
+			} while (nb_vols_total%2 != 0 || nb_vols_total%3 != 0 || nb_vols_total%4 != 0)
+
+			// pour les situations
+			let situations = [
+				{//case 0 --> vols
+					fin_enonce_situation:`vols d'une compagnie aérienne selon la destination`,
+					nom_enonce:`vols`,
+					last_question:[`cette compagnie a affrété`,`vols`,`le nombre de vols`,`Le nombre de vols`],
+					cat1:{
+						destination:destinations_vols[0][0]+destinations_vols[0][1],
+						article:destinations_vols[0][0],
+						nom: destinations_vols[0][1],
+						frac: frac_vols[0],
+						angle: calcul(360/frac_vols[0][1]),
+						arg_graph: frac_vols[0][2],
+					},
+					cat2:{
+						destination:destinations_vols[1][0]+destinations_vols[1][1],
+						article:destinations_vols[1][0],
+						nom: destinations_vols[1][1],
+						frac: frac_vols[1],
+						angle: calcul(360/frac_vols[1][1]),
+						arg_graph: frac_vols[1][2],
+					},
+					cat3:{
+						destination:destinations_vols[2][0]+destinations_vols[2][1],
+						article:destinations_vols[2][0],
+						nom: destinations_vols[2][1],
+						frac: frac_vols[2],
+						angle: calcul(360/frac_vols[2][1]),
+						arg_graph: frac_vols[2][2],
+					},
+					cat4:{
+						destination:destinations_vols[3][0]+destinations_vols[3][1],
+						article:destinations_vols[3][0],
+						nom: destinations_vols[3][1],
+						frac: frac_vols[3],
+						angle: calcul(360/frac_vols[3][1]),
+						arg_graph: frac_vols[3][2],
+					},
+					cat5:{
+						destination:destinations_vols[4][0]+destinations_vols[4][1],
+						article:destinations_vols[4][0],
+						nom: destinations_vols[4][1],
+						frac: frac_vols[4],
+						angle: calcul(360/frac_vols[4][1]),
+						arg_graph: frac_vols[4][2],
+					},
+					// q1a:q1a,
+					// q1b:q1b,
+					nb_total:nb_vols_total,
+					fig:``,
+				},
+				{//case 1 --> courses
+				},
+				{//case 2 --> activités sportives
+				},
+				{//case 3 -->
+				},
+				{//case 4 -->
+				},		
+			];
+			// une fonction pour gérer le codage des angles
+			function myCodageAngle(A,O,B,angle,[...args]) {
+				if (angle == 90) {
+					return codageAngleDroit(A,O,B);
+				} else {
+					return codeAngle(A,O,angle,...args)
+				};
+			};
+
+			// une fonction pour gérer l'affichage correct de la légende
+			//param est l'ordonnée du point qui sert à la mediatrice !
+			function myLegendeOK(param) {
+				if (param<0) {
+					return 2;
+				} else {
+					return 1;
+				};
+			};
+
+			//une fonction pour positionner le label
+			// y est l'ordonnée du point
+			function myLabelPosition(y) {
+				if (y<0) {
+					return 'below';
+				} else {
+					return 'above';
+				};
+			};
+
+			// une fonction pour gérer le texte en fonction de l'angle
+			function myTexte_vols_corr(angle) {
+				switch (angle) {
+					case 90:
+						return `du secteur est un angle droit, il mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{4}$.`;
+					case 30:
+						return `rouge apparaît 3 fois, l'angle vert vaut $180\\degree$ et il y a un angle droit.
+							<br> L'angle pour un tour complet vaut $360\\degree$, donc l'angle rouge vaut $(360-180-90)\\div 3 = ${angle}\\degree$.
+							<br> L'angle rouge mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{12}$.
+							`;
+					case 180:
+						return `du secteur est un angle plat, il mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{2}$.`;
+		
+				}
+			};
+
+			// on prépare la fenetre mathalea2d
+			let fenetreMathalea2D = {xmin:-10,ymin:-8,xmax:10,ymax:8,pixelsParCm:20,scale:0.5}
+			let O_vols = point(0,0);
+			let A_vols = point(fenetreMathalea2D.xmin+6,0);
+			let c_vols = cercleCentrePoint(O_vols,A_vols,'blue');
+			c_vols.epaisseur = 2;
+			// on trace les quartiers
+			//cat1
+			let B_vols = rotation(A_vols,O_vols,situations[0].cat1.angle);
+			let s_OA_vols = segment(O_vols,A_vols);
+			let s_OB_vols = segment(O_vols,B_vols);			
+			let codage_AOB = myCodageAngle(A_vols,O_vols,B_vols,situations[0].cat1.angle,situations[0].cat1.arg_graph)
+			//cat2
+			let C_vols = rotation(B_vols,O_vols,situations[0].cat2.angle);			
+			let s_OC_vols = segment(O_vols,C_vols);			
+			let codage_BOC = myCodageAngle(B_vols,O_vols,C_vols,situations[0].cat2.angle,situations[0].cat2.arg_graph)
+			//cat3
+			let D_vols = rotation(C_vols,O_vols,situations[0].cat3.angle);			
+			let s_OD_vols = segment(O_vols,D_vols);			
+			let codage_COD = myCodageAngle(C_vols,O_vols,D_vols,situations[0].cat3.angle,situations[0].cat3.arg_graph)
+			//cat4
+			let E_vols = rotation(D_vols,O_vols,situations[0].cat4.angle);			
+			let s_OE_vols = segment(O_vols,E_vols);			
+			let codage_DOE = myCodageAngle(D_vols,O_vols,E_vols,situations[0].cat4.angle,situations[0].cat4.arg_graph)
+			//cat5
+			let F_vols = rotation(E_vols,O_vols,situations[0].cat5.angle);			
+			let s_OF_vols = segment(O_vols,F_vols);			
+			let codage_EOF = myCodageAngle(E_vols,O_vols,F_vols,situations[0].cat5.angle,situations[0].cat5.arg_graph)
+
+			// légende 
+			let A_legende = point(fenetreMathalea2D.xmin+4,0);
+			let L_vols_cat1 = rotation(A_legende,O_vols,situations[0].cat1.angle/2,situations[0].cat1.nom);
+			L_vols_cat1.positionLabel = myLabelPosition(L_vols_cat1.y);
+			let LL_vols_cat1 = rotation(A_vols,O_vols,situations[0].cat1.angle/2,situations[0].cat1.nom);
+			let s_legende_cat1 = segment (L_vols_cat1,LL_vols_cat1);
+			s_legende_cat1.styleExtremites = '->';
+			s_legende_cat1.pointilles = true;
+
+			let L_vols_cat2 = rotation(L_vols_cat1,O_vols,situations[0].cat1.angle/2+situations[0].cat2.angle/2,situations[0].cat2.nom);
+			L_vols_cat2.positionLabel = myLabelPosition(L_vols_cat2.y);
+			let LL_vols_cat2 = rotation(B_vols,O_vols,situations[0].cat2.angle/2,situations[0].cat2.nom);
+			let s_legende_cat2 = segment (L_vols_cat2,LL_vols_cat2);
+			s_legende_cat2.styleExtremites = '->';
+			s_legende_cat2.pointilles = true;
+
+			let L_vols_cat3 = rotation(L_vols_cat2,O_vols,situations[0].cat2.angle/2+situations[0].cat3.angle/2,situations[0].cat3.nom);
+			L_vols_cat3.positionLabel = myLabelPosition(L_vols_cat3.y);
+			let LL_vols_cat3 = rotation(C_vols,O_vols,situations[0].cat3.angle/2,situations[0].cat3.nom);
+			let s_legende_cat3 = segment (L_vols_cat3,LL_vols_cat3);
+			s_legende_cat3.styleExtremites = '->';
+			s_legende_cat3.pointilles = true;
+
+			let L_vols_cat4 = rotation(L_vols_cat3,O_vols,situations[0].cat3.angle/2+situations[0].cat4.angle/2,situations[0].cat4.nom);
+			L_vols_cat4.positionLabel = myLabelPosition(L_vols_cat4.y);
+			let LL_vols_cat4 = rotation(D_vols,O_vols,situations[0].cat4.angle/2,situations[0].cat4.nom);
+			let s_legende_cat4 = segment (L_vols_cat4,LL_vols_cat4);
+			s_legende_cat4.styleExtremites = '->';
+			s_legende_cat4.pointilles = true;
+
+			let L_vols_cat5 = rotation(L_vols_cat4,O_vols,situations[0].cat4.angle/2+situations[0].cat5.angle/2,situations[0].cat5.nom);
+			L_vols_cat5.positionLabel = myLabelPosition(L_vols_cat5.y);
+			let LL_vols_cat5 = rotation(E_vols,O_vols,situations[0].cat5.angle/2,situations[0].cat5.nom);
+			let s_legende_cat5 = segment (L_vols_cat5,LL_vols_cat5);
+			s_legende_cat5.styleExtremites = '->';
+			s_legende_cat5.pointilles = true;
+
+			
+			let mesAppels = [
+				c_vols,
+				s_OA_vols,
+				s_OB_vols,
+				s_OC_vols,
+				s_OD_vols,
+				s_OE_vols,
+				s_OF_vols,
+				codage_AOB,
+				codage_BOC,				
+				codage_COD,				
+				codage_DOE,				
+				codage_EOF,				
+				labelPoint(L_vols_cat1),
+				labelPoint(L_vols_cat2),
+				labelPoint(L_vols_cat3),
+				labelPoint(L_vols_cat4),
+				labelPoint(L_vols_cat5),
+				s_legende_cat1,
+				s_legende_cat2,
+				s_legende_cat3,
+				s_legende_cat4,
+				s_legende_cat5,
+			];
+			let fig_vols = mathalea2d(
+				fenetreMathalea2D,
+				mesAppels
+			);
+			situations[0].fig = fig_vols;
+
+			let enonces = [];			
+			let i_sous_question=0;
+			let i_sous_question_corr=0;
+
+			for (let k=0;k<1;k++) {
+				enonces.push({
+					enonce:`
+					On a représenté sur le diagramme circulaire ci-contre la répartition des ${situations[k].fin_enonce_situation}.
+					<br>${texte_gras(`Les angles de même couleur ont la même mesure.`)}
+					<br>${texte_gras(`L'angle vert est un angle plat.`)}
+					<br> ${situations[k].fig}
+					<br>${num_alpha(i_sous_question++)} Quelle fraction représente les ${situations[k].nom_enonce} vers ${situations[k].cat1.destination} ?
+					<br>${num_alpha(i_sous_question++)} Quelle fraction représente les ${situations[k].nom_enonce} vers ${situations[k].cat2.destination} ?
+					<br>${num_alpha(i_sous_question++)} Sachant que ${situations[k].last_question[0]} ${situations[k].nb_total} ${situations[k].last_question[1]}
+					et que les ${situations[k].nom_enonce} vers ${situations[k].cat3.destination} représentent $\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}$ de ce total,
+					caluler ${situations[k].last_question[2]} vers ${situations[k].cat3.destination}?
+												
+					`,
+					correction:`
+					${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat1.destination} l'angle ${myTexte_vols_corr(situations[k].cat1.angle)}						
+					<br>${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat1.destination} vaut donc $\\dfrac{${situations[k].cat1.frac[0]}}{${situations[k].cat1.frac[1]}}$`)}.
+					
+					<br>${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat2.destination} l'angle ${myTexte_vols_corr(situations[k].cat2.angle)}				
+					<br>${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat2.destination} vaut donc $\\dfrac{${situations[k].cat2.frac[0]}}{${situations[k].cat2.frac[1]}}$`)}
+
+					<br>${num_alpha(i_sous_question_corr++)} Calculons $\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}$ de ${situations[k].nb_total} : 
+					<br>$\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}\\times ${situations[k].nb_total} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${situations[k].nb_total}}{${situations[k].cat3.frac[1]}} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}\\times ${situations[k].cat3.frac[1]}}{${situations[k].cat3.frac[1]}} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}\\times \\cancel{${situations[k].cat3.frac[1]}}}{\\cancel{${situations[k].cat3.frac[1]}}} = ${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])} = ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}$
+					<br>${texte_en_couleur(`${situations[k].last_question[3]} vers ${situations[k].cat3.destination} vaut donc ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}.`)}
+					`
+				});
+			};
+		
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+        		// case 1 : 
+				// 	texte = `${enonces[1].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[1].correction}`;
+				// 	};
+          		// 	break;
+        		// case 2 : 
+				// 	texte = `${enonces[2].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[2].correction}`;
+				// 	};
+          		// 	break;				
+        		// case 3 : 
+				// 	texte = `${enonces[3].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[3].correction}`;
+				// 	};
+				// 	break;				
+         		// case 4 : 
+				// 	texte = `${enonces[4].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[4].correction}`;
+				// 	};
+				// 	break;				
+			}
+			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+  
+
+/** 
+ * * résoudre un problème additif avec des relatifs
+ * * 5R20-4
+ * @author Sébastien Lozano
+ */
+
+function Problemes_additifs_relatifs_5e(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 1;
+	} else {
+		this.nb_questions = 1;
+	};	
+
+	this.titre = "Résoudre un problème en utilisant une somme algébrique de relatifs";	
+	this.consigne = ``;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+			//   type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+			  type_de_questions_disponibles = [0];			      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//type_de_questions_disponibles=[1];			
+
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let g_p_u; //pour le gain/perte unitaire
+			let g_m; //pour le gain multiple
+			// on veut des multiples de 5 pour n'avoir que des demis entiers ou des entiers
+			do {
+				g_p_u = randint(10,30);
+				g_m = randint(10,30);
+			} while (g_p_u%5 != 0 || g_m%5 != 0 || g_m <= g_p_u) 
+
+			let n_tot=randint(10,15); // nombre totale de lancers
+			let n_g_u; // nb de gains untitaires
+			let n_p; // nb de pertes
+			do {
+				n_g_u = randint(2,10);
+				n_p = randint(2,10);
+			} while (n_g_u+n_p >= n_tot)
+
+			// on échange parfois le nombre de gain unitaire et le nombre de perte pour avoir un bilan négatif plus souvent
+			if (n_p<n_g_u) {
+				if (randint(0,1)==0) {
+					let temp = n_p;
+					n_p=n_g_u;
+					n_g_u=temp;
+				};
+			};
+
+			let prenoms = [[prenomF(),'Elle','elle'],[prenomM(),'Il','il']];
+			let currentPrenom = choice(prenoms);
+
+			// une fonction pour écrire les chaine correctives
+			function myGainPerteString(nb,type,valeur) {
+				let sortie=``;
+				switch (type) {
+					case 'gain':						
+						sortie = `(+${valeur}€)`;
+						for (let m=1;m<nb;m++) {
+							sortie +=`+(+${valeur}€)`;
+						};
+						break;
+					case 'perte':
+						sortie = `(-${valeur}€)`;
+						for (let m=1;m<nb;m++) {
+							sortie +=`+(-${valeur}€)`;
+						};
+						break;					
+				};
+				return sortie;
+			}
+
+			// une fonction pour dire si le bilan est positif ou négatif
+			function isBilanPositif(tot) {
+				if (tot >= 0) {
+					return true;
+				} else {
+					return false;
+				};
+			};
+
+			let bilan;			
+			if ( isBilanPositif( calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10))) ) {
+				bilan = [`Globalement, le montant des gains`,`est supérieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc positif.`)}`,`a gagné`,calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10))];
+			} else {
+				bilan = [`Globalement, le montant des gains`,`est inférieur au montant des pertes`,`${texte_en_couleur(`Le bilan est donc négatif.`)}`,`a perdu`,(-1)*(calcul((n_tot-n_g_u-n_p)*calcul(g_m/10)) + calcul(n_g_u*calcul(g_p_u/10)) - calcul(n_p*calcul(g_p_u/10)))];
+			}
+			// pour les situations
+			let situations = [
+				{//case 0 --> les quilles
+					nb_tot_lancers:n_tot,
+					nb_gains_unitaires:n_g_u,
+					nb_pertes:n_p,
+					nb_gains:n_tot-n_g_u-n_p,
+					perte:calcul(g_p_u/10),
+					gain_unitaire:calcul(g_p_u/10),
+					gain_multiple:calcul(g_m/10),
+					enonce_1:`lancer une balle sur des quilles.`,
+					enonce_2:`- Si la balle touche plusieurs quilles, le joueur gagne `,
+					enonce_3:`- Si la balle ne touche qu'une quille, le joueur gagne `,
+					enonce_4:`- Si la balle ne touche aucune quille, le joueur perd `,
+					enonce_5:`a lancé`,
+					enonce_6:`la balle`,
+					correction_1:`touché plusieurs quilles`,
+					correction_2:`touché qu'une seule quille`,
+					prenom:currentPrenom[0],//prenoms[choice([0,1])][0],
+					pronomMaj:currentPrenom[1],//prenoms[choice([0,1])][1],
+					pronomMin:currentPrenom[2],//prenoms[choice([0,1])][2],
+					bilan:bilan,
+				},		
+			];
+
+			let enonces = [];
+			let i_sous_question;
+			let i_sous_question_corr;
+			for (let k=0;k<situations.length;k++) {
+				i_sous_question = 0;
+				i_sous_question_corr = 0;
+				enonces.push({
+					enonce:`
+					Un jeu consiste à ${situations[k].enonce_1}
+					<br>${situations[0].enonce_2} $${tex_nombre(situations[0].gain_multiple)}$€.				
+					<br>${situations[0].enonce_3} $${tex_nombre(situations[0].gain_unitaire)}$€.
+					<br>${situations[0].enonce_4} $${tex_nombre(situations[0].perte)}$€.
+					<br>${situations[k].prenom} ${situations[k].enonce_5} $${situations[k].nb_tot_lancers}$ fois ${situations[k].enonce_6}.
+					${situations[k].pronomMaj} a perdu de l'argent $${situations[k].nb_pertes}$ fois et a gagné $${situations[k].nb_gains_unitaires}$ fois $${tex_nombre(situations[k].gain_unitaire)}$€.
+					<br> ${num_alpha(i_sous_question++)} A-t-${situations[k].pronomMin} globalement gagné ou perdu de l'argent ?
+					<br> ${num_alpha(i_sous_question++)} Combien a-t-${situations[k].pronomMin} globalement gagné ou perdu ?
+					`,
+					question:``,
+					correction:`
+					${situations[k].prenom} ${situations[k].enonce_5} $${situations[k].nb_tot_lancers}$ fois ${situations[k].enonce_6}, 
+					sur ces $${situations[k].nb_tot_lancers}$ fois,  ${situations[k].pronomMin} a perdu de l'argent $${situations[k].nb_pertes}$ fois et a gagné $${situations[k].nb_gains_unitaires}$ fois $${tex_nombre(situations[k].gain_unitaire)}$€.
+					<br> $${situations[k].nb_tot_lancers}-${situations[k].nb_pertes}-${situations[k].nb_gains_unitaires} = ${situations[k].nb_tot_lancers-situations[k].nb_pertes-situations[k].nb_gains_unitaires}$,
+					${situations[k].pronomMin} a donc ${situations[k].correction_1} ${situations[k].nb_gains} fois.
+					<br>${texte_gras(`Gains lorsqu'${situations[k].pronomMin} a ${situations[k].correction_1} :`)}
+					<br>$${myGainPerteString(situations[k].nb_gains,'gain',situations[k].gain_multiple)} = ${situations[k].nb_gains}\\times (+${situations[k].gain_multiple}€) = +${situations[k].nb_gains*situations[k].gain_multiple}$€
+
+					<br>${texte_gras(`Gains lorsqu'${situations[k].pronomMin} n'a ${situations[k].correction_2} :`)}
+					<br>$${myGainPerteString(situations[k].nb_gains_unitaires,'gain',situations[k].gain_unitaire)} = ${situations[k].nb_gains_unitaires}\\times (+${situations[k].gain_unitaire}€) = +${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}$€
+
+					<br>${texte_gras(`Pertes :`)}
+					<br>$${myGainPerteString(situations[k].nb_pertes,'perte',situations[k].perte)} = ${situations[k].nb_pertes}\\times (-${situations[k].perte}€) = -${situations[k].nb_pertes*situations[k].perte}$€
+
+					<br>${num_alpha(i_sous_question_corr++)} ${situations[k].bilan[0]}, $(+${situations[k].nb_gains*situations[k].gain_multiple}€)$ et $(+${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}€)$, ${situations[k].bilan[1]}, $(-${situations[k].nb_pertes*situations[k].perte}€)$.
+					<br> ${situations[k].bilan[2]}   
+
+					<br>${num_alpha(i_sous_question_corr++)} 
+					$(+${situations[k].nb_gains*situations[k].gain_multiple}€)+(+${situations[k].nb_gains_unitaires*situations[k].gain_unitaire}€)+(-${situations[k].nb_pertes*situations[k].perte}€) = (${situations[k].nb_gains*situations[k].gain_multiple+situations[k].nb_gains_unitaires*situations[k].gain_unitaire-situations[k].nb_pertes*situations[k].perte}€)$
+					<br>${texte_en_couleur(`Globalement ${situations[k].prenom} ${situations[k].bilan[3]} $${situations[k].bilan[4]}€$`)} 
+
+					`
+				});
+			};
+		
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+        		// case 1 : 
+				// 	texte = `${enonces[1].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[1].correction}`;
+				// 	};
+          		// 	break;
+        		// case 2 : 
+				// 	texte = `${enonces[2].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[2].correction}`;
+				// 	};
+          		// 	break;				
+        		// case 3 : 
+				// 	texte = `${enonces[3].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[3].correction}`;
+				// 	};
+				// 	break;				
+         		// case 4 : 
+				// 	texte = `${enonces[4].enonce}`;
+				// 	if (this.beta) {
+				// 		texte += `<br>`;
+				// 		texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+				// 		texte_corr = ``;	
+				// 	} else {
+				// 		texte_corr = `${enonces[4].correction}`;
+				// 	};
+				// 	break;				
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+
+/**
+ * Caculer la valeur d'une expression littérale de degré 1 à une inconnue
+ * 5L13-5
+ * @author Sébastien Lozano forking 5L13 of Rémi Angot
+ */  
+function Calculer_la_valeur_d_une_expression_litterale_deg1_inc1() {
+	Calculer_la_valeur_d_une_expression_litterale.call(this)
+	this.version="5L13-5";	
+	this.titre="Calculer la valeur d'une expression littérale de degré 1 à 1 inconnue";
+	this.nb_questions=2;
+
+}/**
  * * Calcul de l'inverse d'un nombre.
  *
  * Paramétrages possibles :
@@ -34226,7 +35108,7 @@ function Graphiques_et_proportionnalite() {
 function Trouver_erreur_resol_eq_deg1(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 5;
@@ -34329,7 +35211,7 @@ function Trouver_erreur_resol_eq_deg1(){
 
       // pour les situations
       let situations = [
-        {//case 0 --> ax+b=d+cx  erreur à l'étape 1 on passe cx de l'autre côté
+        {//case 1 --> ax+b=d+cx  erreur à l'étape 1 on passe cx de l'autre côté
           pronom:currentGenreEtPrenom.pronom,
           prenom:currentGenreEtPrenom.prenom,
           a:a,
@@ -34368,7 +35250,7 @@ function Trouver_erreur_resol_eq_deg1(){
           <br>$${inc} = \\dfrac{${d-b}}{${a-c}}$ ${simpFrac(d-b,a-c)}
           `,
         },
-        {//case 1 --> ax+b=d+cx  erreur à l'étape 2 on passe b de l'autre côté
+        {//case 2 --> ax+b=d+cx  erreur à l'étape 2 on passe b de l'autre côté
           pronom:currentGenreEtPrenom.pronom,
           prenom:currentGenreEtPrenom.prenom,
           a:a,
@@ -34407,7 +35289,7 @@ function Trouver_erreur_resol_eq_deg1(){
           <br>$${inc} = \\dfrac{${d-b}}{${a-c}}$ ${simpFrac(d-b,a-c)}
           `,
         },
-        {//case 2 --> ax+b=cx+d  erreur à l'étape 2 on passe cx de l'autre côté
+        {//case 3 --> ax+b=cx+d  erreur à l'étape 2 on passe cx de l'autre côté
           pronom:currentGenreEtPrenom.pronom,
           prenom:currentGenreEtPrenom.prenom,
           a:a,
@@ -34446,7 +35328,7 @@ function Trouver_erreur_resol_eq_deg1(){
           <br>$${inc} = \\dfrac{${d-b}}{${a-c}}$ ${simpFrac(d-b,a-c)}
           `,
         },
-        {//case 3 --> ax+b=cx+d  erreur à l'étape 1 on passe b de l'autre côté
+        {//case 4 --> ax+b=cx+d  erreur à l'étape 1 on passe b de l'autre côté
           pronom:currentGenreEtPrenom.pronom,
           prenom:currentGenreEtPrenom.prenom,
           a:a,
@@ -34485,7 +35367,7 @@ function Trouver_erreur_resol_eq_deg1(){
           <br>$${inc} = \\dfrac{${d-b}}{${a-c}}$ ${simpFrac(d-b,a-c)}
           `,
         },
-        {//case 4 --> ax+b=cx+d  erreur à l'étape 4 on soustrait au lieu de diviser
+        {//case 5 --> ax+b=cx+d  erreur à l'étape 4 on soustrait au lieu de diviser
           pronom:currentGenreEtPrenom.pronom,
           prenom:currentGenreEtPrenom.prenom,
           a:a,
@@ -34531,7 +35413,7 @@ function Trouver_erreur_resol_eq_deg1(){
 
       let enonces = [];
       for (let k=0;k<5;k++) {
-        enonces.push({// case 0 --> ax+b=d+cx  erreur à l'étape 1 on passe cx de l'autre côté
+        enonces.push({
         enonce:`
           ${situations[k].prenom} doit résoudre l'équation suivante : ${situations[k].eq}.
           <br> Voilà ce qu'${situations[k].pronom} écrit :
