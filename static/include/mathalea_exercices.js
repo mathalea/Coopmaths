@@ -75,8 +75,8 @@ var liste_des_exercices_disponibles = {
   "6N11-2": Placer_un_point_abscisse_entiere,
   "6N12": Exercice_6N12,
   "6N13": Exercice_6N13,
-  "beta6N14" : Representer_une_fraction,
-  "beta6N14-2" : Ajouter_des_fractions_d_unite,
+  "6N14" : Representer_une_fraction,
+  "6N14-2" : Ajouter_des_fractions_d_unite,
   "6N20": Exercice_fractions_decomposer,
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
@@ -89,7 +89,7 @@ var liste_des_exercices_disponibles = {
   "6N30-2": Placer_points_sur_axe,
   "6N31": Comparer_decimaux,
   "6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
-  "beta6N31-2":Ordre_de_grandeur_operations_decimaux,
+  "6N31-2":Ordre_de_grandeur_operations_decimaux,
   "6N33": Fraction_d_un_nombre,
   "6N33-1": Pourcentage_d_un_nombre,
   "6N34": Reglages_6N34,
@@ -5710,8 +5710,8 @@ function Representer_une_fraction() {
         }
   
       let  params = {
-        xmin: -2.5,
-        ymin: -2,
+        xmin: -2.2,
+        ymin: -2.2,
         xmax: 18,
         ymax: 3,
         pixelsParCm: ppc,
@@ -11732,7 +11732,7 @@ function Ajouter_des_fractions_d_unite() {
       if (sortie_html) {
         sc=0.5
       } else {
-        sc=0.4
+        sc=0.3
       }
 
     let params,den,num=[0,0,0,0],f=[]
@@ -11756,27 +11756,26 @@ function Ajouter_des_fractions_d_unite() {
       texte+=`Quelle est la longueur du segment obtenu ?`
       texte_corr =`Voici sur ces dessins, coloriés en rouge, les différents segments :<br>`
       for (let j=0;j<4;j++) 
-        objets.push(f[j].representation(0,5-j*1.25,5,0,'segment','red',0,1))
+        objets.push(f[j].representation(0,5-j*1.25,5,0,'segment','red',0,1,1))
       params = {
-        xmin: -1,
-        ymin: -1,
+        xmin: -0.4,
+        ymin: -1.5,
         xmax: 6,
         ymax: 6,
         pixelsParCm: ppc,
-        scale: sc,
+        scale: 0.5,
       }
-      console.log(objets)
       texte_corr += mathalea2d(params,...objets)
       texte_corr+=`<br>Ce qui donne en les mettant bout à bout :<br>`
       params = {
-        xmin: -1,
-        ymin: -1,
+        xmin: -0.4,
+        ymin: -1.5,
         xmax: 20,
         ymax: 1,
         pixelsParCm: ppc,
         scale: sc,
       }
-      texte_corr+=mathalea2d(params,fraction(num[0]+num[1]+num[2]+num[3],den).representation(0,0,5,0,'segment','red',0,1))
+      texte_corr+=mathalea2d(params,fraction(num[0]+num[1]+num[2]+num[3],den).representation(0,0,5,0,'segment','red',0,1,0.6))
       texte_corr+=`<br>La longueur du segment ainsi obtenu est : $${fraction(num[0]+num[1]+num[2]+num[3],den).texFraction()}$`
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
@@ -13543,7 +13542,7 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 function Ordre_de_grandeur_operations_decimaux(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 1;
@@ -13579,8 +13578,8 @@ function Ordre_de_grandeur_operations_decimaux(){
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
 
-      let ligne_entete = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000')];
-      let ligne_entete_corr = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000')];
+      let ligne_entete = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000'),tex_nombre('100000')];
+      let ligne_entete_corr = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000'),tex_nombre('100000')];
 
       let m=randint(1,9,[4,5,6]),
       c=randint(1,9),
@@ -13597,16 +13596,40 @@ function Ordre_de_grandeur_operations_decimaux(){
       u2=randint(1,9),
       u3=randint(1,9);
 
+      let cbis,d1bis;
+      do {
+        cbis = randint(2,9);
+        d1bis = randint(2,9);
+      } while (cbis*d1bis>3 && cbis*d1bis<7);
+
       let div_aleatoire_ope_3 = choice([10,100]);
       let div_aleatoire_ope_5 = choice([1,10,100,1000]);
       let mult_aleatoire_ope_4 = choice([0.1,0.01,0.001]);
 
+      // une fonction pour ordre de grandeur en fonction de ... opération 1
+      function myOrdreOpe1(c,d) {
+        if (c*d>=60) {
+          return ['','','','','',mise_en_evidence(`\\times`)]; 
+        } else {
+          return ['','','','',mise_en_evidence(`\\times`),'']; 
+        };
+      };
+      
+      // une fonction pour ordre de grandeur en fonction de ... opération 2
+      function myOrdreOpe2(c1,c2) {
+        if (c1+c2/10>=600) {
+          return ['','','',mise_en_evidence(`\\times`),'','']; 
+        } else {
+          return ['','',mise_en_evidence(`\\times`),'','','']; 
+        };
+      };
+
       // une fonction pour ordre de grandeur en fonction de ... opération 3
       function myOrdreOpe3(n) {
         if (n>=7) {
-          return ['','','',mise_en_evidence(`\\times`),'']; 
+          return ['','','',mise_en_evidence(`\\times`),'','']; 
         } else {
-          return ['','',mise_en_evidence(`\\times`),'','']; 
+          return ['','',mise_en_evidence(`\\times`),'','','']; 
         };
       };
 
@@ -13616,23 +13639,23 @@ function Ordre_de_grandeur_operations_decimaux(){
         switch (d) {
           case 0.1:
             if (n>=7) {
-              sortie = ['','','',mise_en_evidence(`\\times`),''];
+              sortie = ['','','',mise_en_evidence(`\\times`),'',''];
             } else {
-              sortie = ['','',mise_en_evidence(`\\times`),'',''];
+              sortie = ['','',mise_en_evidence(`\\times`),'','',''];
             };            
             break;
           case 0.01: 
             if (n>=7) {
-              sortie = ['','',mise_en_evidence(`\\times`),'',''];              
+              sortie = ['','',mise_en_evidence(`\\times`),'','',''];              
             } else {
-              sortie = ['',mise_en_evidence(`\\times`),'','',''];
+              sortie = ['',mise_en_evidence(`\\times`),'','','',''];
             };            
             break;
           case 0.001: 
             if (n>=7) {
-              sortie = ['',mise_en_evidence(`\\times`),'','',''];
+              sortie = ['',mise_en_evidence(`\\times`),'','','',''];
             } else {
-              sortie = [mise_en_evidence(`\\times`),'','','',''];
+              sortie = [mise_en_evidence(`\\times`),'','','','',''];
             };       
             break;            
         }
@@ -13644,16 +13667,16 @@ function Ordre_de_grandeur_operations_decimaux(){
         let sortie;
         switch (mult) {
           case 1:
-            return sortie = ['','','',mise_en_evidence(`\\times`),'']; 
+            return sortie = ['','','',mise_en_evidence(`\\times`),'','']; 
             break;
           case 10:
-            return sortie = ['','',mise_en_evidence(`\\times`),'','']; 
+            return sortie = ['','',mise_en_evidence(`\\times`),'','','']; 
             break;
           case 100:
-            return sortie = ['',mise_en_evidence(`\\times`),'','','']; 
+            return sortie = ['',mise_en_evidence(`\\times`),'','','','']; 
             break;
           case 1000:
-            return sortie = [mise_en_evidence(`\\times`),'','','','']; 
+            return sortie = [mise_en_evidence(`\\times`),'','','','','']; 
             break;        
         };
         return sortie;
@@ -13661,14 +13684,14 @@ function Ordre_de_grandeur_operations_decimaux(){
 
       let situations = [
         {
-          operation:`${c*100+d*10+u*1}\\times ${d1*10+u1*1}`,
-          operation_corr:`${c*100+d*10+u*1}\\times ${d1*10+u1*1} \\simeq  ${(c*100)}\\times ${(d1*10)} \\text{ soit } ${tex_nombre((c*100)*(d1*10))}`,
-          operation_coche:['','','','',mise_en_evidence(`\\times`)],
+          operation:`${cbis*100+d*10+u*1}\\times ${d1bis*10+u1*1}`,
+          operation_corr:`${cbis*100+d*10+u*1}\\times ${d1bis*10+u1*1} \\simeq  ${(cbis*100)}\\times ${(d1bis*10)} \\text{ soit } ${tex_nombre((cbis*100)*(d1bis*10))}`,
+          operation_coche:myOrdreOpe1(cbis,d1bis),//['','','','',mise_en_evidence(`\\times`),''],
         },
         {
           operation:`${tex_nombre((c2*100+d2*10+u1*1)/10)}+${c1*100+d1*10+u1*1}`,
           operation_corr:`${tex_nombre((c2*100+d2*10+u1*1)/10)}+${c1*100+d1*10+u1*1} \\simeq ${c2*100/10}+${c1*100} \\text{ soit } ${c2*100/10 + c1*100}`,
-          operation_coche:['','',mise_en_evidence(`\\times`),'',''],
+          operation_coche:myOrdreOpe2(c1*100,c2*100),//['','',mise_en_evidence(`\\times`),'','',''],
         },
         {
           operation:`${c3*100+d3*10+u3*1}-${tex_nombre((c2*100+d2*10+u2*1)/div_aleatoire_ope_3)}`,
@@ -13691,7 +13714,7 @@ function Ordre_de_grandeur_operations_decimaux(){
 
       ];
 
-      //situations = shuffle(situations);
+      situations = shuffle(situations);
             
 			let enonces = [];
 			for (let k=0;k<1;k++) {
@@ -13699,11 +13722,11 @@ function Ordre_de_grandeur_operations_decimaux(){
           enonce:`
           ${tab_C_L(ligne_entete,[situations[0].operation,situations[1].operation,situations[2].operation,situations[3].operation,situations[4].operation],
           [            
-            '','','','','',
-            '','','','','',
-            '','','','','',
-            '','','','','',
-            '','','','',''
+            '','','','','','',
+            '','','','','','',
+            '','','','','','',
+            '','','','','','',
+            '','','','','','',
           ]
           )}
           `,
@@ -13713,11 +13736,11 @@ function Ordre_de_grandeur_operations_decimaux(){
           <br>
           ${tab_C_L(ligne_entete_corr,[situations[0].operation_corr,situations[1].operation_corr,situations[2].operation_corr,situations[3].operation_corr,situations[4].operation_corr,],
           [            
-            situations[0].operation_coche[0],situations[0].operation_coche[1],situations[0].operation_coche[2],situations[0].operation_coche[3],situations[0].operation_coche[4],
-            situations[1].operation_coche[0],situations[1].operation_coche[1],situations[1].operation_coche[2],situations[1].operation_coche[3],situations[1].operation_coche[4],
-            situations[2].operation_coche[0],situations[2].operation_coche[1],situations[2].operation_coche[2],situations[2].operation_coche[3],situations[2].operation_coche[4],
-            situations[3].operation_coche[0],situations[3].operation_coche[1],situations[3].operation_coche[2],situations[3].operation_coche[3],situations[3].operation_coche[4],
-            situations[4].operation_coche[0],situations[4].operation_coche[1],situations[4].operation_coche[2],situations[4].operation_coche[3],situations[4].operation_coche[4],
+            situations[0].operation_coche[0],situations[0].operation_coche[1],situations[0].operation_coche[2],situations[0].operation_coche[3],situations[0].operation_coche[4],situations[0].operation_coche[5],
+            situations[1].operation_coche[0],situations[1].operation_coche[1],situations[1].operation_coche[2],situations[1].operation_coche[3],situations[1].operation_coche[4],situations[1].operation_coche[5],
+            situations[2].operation_coche[0],situations[2].operation_coche[1],situations[2].operation_coche[2],situations[2].operation_coche[3],situations[2].operation_coche[4],situations[2].operation_coche[5],
+            situations[3].operation_coche[0],situations[3].operation_coche[1],situations[3].operation_coche[2],situations[3].operation_coche[3],situations[3].operation_coche[4],situations[3].operation_coche[5],
+            situations[4].operation_coche[0],situations[4].operation_coche[1],situations[4].operation_coche[2],situations[4].operation_coche[3],situations[4].operation_coche[4],situations[4].operation_coche[5],
           ]
           )}				
           `
@@ -40347,203 +40370,4 @@ function Factoriser_Identites_remarquables2() {
         liste_de_question_to_contenu(this);
     }
     this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'];
-}
-function Terme_d_une_suite_definie_explicitement(){
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Déterminer les termes d'une suite définie de façon explicite";
-	this.consigne = "Une suite étant donnée, calculer le terme demandé.";
-	this.nb_questions = 4;
-
-	this.nouvelle_version = function(){
-		this.liste_questions = []; // Vide la liste de questions
-    this.liste_corrections = []; // Vide la liste de questions corrigées
-    
-    let type_de_questions_disponibles = [1, 2, 3];
-    let liste_type_de_questions = combinaison_listes(
-      type_de_questions_disponibles,
-      this.nb_questions
-    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-
-    for (
-      let i = 0, texte, texte_corr, cpt = 0, a, b, c, d, k;
-      i < this.nb_questions && cpt < 50;
-
-      ) {
-      switch (liste_type_de_questions[i]) {
-        case 1: //fonction affine
-          a = randint(1, 7)*choice([-1,1]);
-          b = randint(1, 10)*choice([-1,1]);
-          k = randint(0, 20);
-			
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = `;
-          if (a == 1) {texte += `n`}
-          else 
-            if (a == -1) {texte += `-n`}
-            else {texte += `${a}n`};
-
-          if (b > 0) {texte += `+${b}$.`} 
-          else {texte += `${b}$.`};
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par ${k}, on obtient : $u_{${k}} = ${a*k+b}$`;
-          break;
-        
-        case 2: //fonction polynome de degré 2
-          a = randint(1,5)*choice([-1,1]);
-          b = randint(0,5)*choice([-1,1]);
-          c = randint(0,9)*choice([-1,1]);
-          k = randint(0,9);
-
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = ${a}n^2$`;
-          if (b == 1) {texte += `$+n$`};
-          if (b > 1) {texte += `$+${b}n$`};
-          if (b == -1) {texte += `$-n$`};
-          if (b < -1) {texte += `$${b}n$`};
-          if (c > 0) {texte += `$+${c}$.`};
-          if (c < 0) {texte += `$${c}$.`}
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par $${k}$, on obtient : $u_{${k}} = ${a*k*k+b*k+c}$`;
-          break;
-        
-        case 3: //fonction homographique
-          a = randint(1,5)*choice([-1,1]);
-          b = randint(1,5)*choice([-1,1]);
-          c = randint(1,5)*choice([-1,1]);
-          d = randint(1,5)*choice([-1,1]);
-          k = randint(1,9);
-
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = \\dfrac{`;
-          if (a == 1) {texte += `n`}
-          else 
-            if (a == -1) {texte += `-n`}
-            else {texte += `${a}n`};
-          if (b > 0) {texte += `+${b}}{`}
-          else {texte += `${b}}{`};
-          if (c == 1) {texte += `n`}
-          else   
-            if (c == -1) {texte += `-n`}
-            else {texte += `${c}n`};
-          if (d > 0) {texte += `+${d}}$.`}
-          else {texte += `${d}}$.`};
-          
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par $${k}$, on obtient : $u_{${k}} = ${(a*k+b)/(c*k+d)}$.`;
-          break;
-      }
-      
-			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte); // Sinon on enregistre la question dans liste_questions
-				this.liste_corrections.push(texte_corr); // On fait pareil pour la correction
-				i++; // On passe à la question suivante
-			}
-			cpt++;	// Sinon on incrémente le compteur d'essai pour avoir une question nouvelle
-		}
-		liste_de_question_to_contenu(this); // La liste de question et la liste de la correction
-		// sont transformés en chaine de caractère (avec une liste HTML ou LaTeX suivant le contexte)
-	}
-	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
-	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
-}
-
-
-
-function Terme_d_une_suite_definie_par_recurrence(){
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Déterminer les termes d'une suite définie par récurrence";
-	this.consigne = "Une suite étant donnée, calculer le terme demandé.";
-	this.nb_questions = 4;
-
-	this.nouvelle_version = function(){
-		this.liste_questions = []; // Vide la liste de questions
-    this.liste_corrections = []; // Vide la liste de questions corrigées
-    
-    let type_de_questions_disponibles = [1, 2, 3, 3];
-    let liste_type_de_questions = combinaison_listes(
-      type_de_questions_disponibles,
-      this.nb_questions
-    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-
-    for (
-      let i = 0, texte, texte_corr, cpt = 0, u, a, b, k;
-      i < this.nb_questions && cpt < 50;
-
-      ) {
-      switch (liste_type_de_questions[i]) {
-        case 1: //suite arithmétique
-          a = randint(1, 10)*choice([-1,1]);
-          u = randint(0, 10)*choice([-1,1]);
-          k = randint(1, 10);
-			
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n`;
-          if (a > 0) {texte += `+${a}$.`}
-          else {texte += `${a}$.`};
-
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
-          for (
-            let indice =0; indice < k; indice++ 
-          ){
-            texte_corr += `<br> $u_{${indice+1}} = u_{${indice}}`;
-            if (a > 0) {texte_corr += `+ ${a} = ${u} + ${a} = ${u}$`}
-            else {texte_corr += ` ${a} = ${u}  ${a} = ${u}$`}; // a étant négatif l'opérateur est intégré dans la variable
-            u = u + a;
-          }
-          break;
-        
-        case 2: //suite géométrique
-          a = randint(2,5)*choice([-1,1]);
-          u = randint(1,9)*choice([-1,1]);
-          k = randint(1,9);
-
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n \\times ${ecriture_parenthese_si_negatif(a)}$.`;
-
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
-          for (
-            let indice =0; indice < k; indice++ 
-          ){
-            texte_corr += `<br> $u_{${indice+1}} = u_{${indice}} \\times ${ecriture_parenthese_si_negatif(a)} = ${u} \\times ${ecriture_parenthese_si_negatif(a)} = ${u*a}$`;
-            u = u * a;
-          }
-          break;
-        
-        case 3: //suite arithmético-géométrique
-          a = randint(1,5)*choice([-1,1]);
-          b = randint(1,5)*choice([-1,1]);
-          u = randint(1,5)*choice([-1,1]);
-          k = randint(1,9);
-
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = ${a} u_n ${ecriture_algebrique(b)}$.`;
-          
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
-          for (
-            let indice =0; indice < k; indice++ 
-          ){
-            texte_corr += `<br> $u_{${indice+1}} = ${a}\\times u_{${indice}} ${ecriture_algebrique(b)}=`;
-            texte_corr += `${a} \\times ${ecriture_parenthese_si_negatif(u)} ${ecriture_algebrique(b)} = ${a*u+b}$`;
-            u = u * a + b;
-          }
-          break;
-      }
-      
-			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte); // Sinon on enregistre la question dans liste_questions
-				this.liste_corrections.push(texte_corr); // On fait pareil pour la correction
-				i++; // On passe à la question suivante
-			}
-			cpt++;	// Sinon on incrémente le compteur d'essai pour avoir une question nouvelle
-		}
-		liste_de_question_to_contenu(this); // La liste de question et la liste de la correction
-		// sont transformés en chaine de caractère (avec une liste HTML ou LaTeX suivant le contexte)
-	}
-	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
-	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
 }
