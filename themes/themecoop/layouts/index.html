@@ -1,0 +1,82 @@
+{{ define "main" }}
+
+
+{{ partial "header" }}
+
+<div class="ui text container">
+
+
+    <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+
+
+     <div class="ui four raised stackable cards">
+        <a class="card " href="/6e">
+            <div class="content">
+                <div class="ui huge center aligned header" style="color: #f15929;">6e</div>
+            </div> 
+        </a>
+        <a class="card " href="/5e">
+            <div class="content">
+                <div class="ui huge center aligned header" style="color: #f15929;">5e</div>
+            </div> 
+        </a>
+        <a class="card " href="/4e">
+            <div class="content">
+                <div class="ui huge center aligned header" style="color: #f15929;">4e</div>
+            </div> 
+        </a>
+        <a class="card " href="/3e">
+            <div class="content">
+                <div class="ui huge center aligned header" style="color: #f15929;">3e</div>
+            </div> 
+        </a>
+         
+     </div>
+
+     <div class="ui hidden divider"></div>
+     <div class="ui hidden divider"></div>
+     <div class="ui hidden divider"></div>
+
+
+     <div class="ui three raised stackable cards">
+        <a class="card" href="/mathalea.html">
+            <div class="content">
+                <div class="center aligned header"><img class="ui small avatar image" src="/images/dice.png">MathALEA</div>
+                <div class="description">Exercices à données aléatoires</div>   
+            </div> 
+        </a>
+        <a class="card" href="/cm.html">
+            <div class="content">
+                <div class="center aligned header"><i class="stopwatch icon"></i>MathALEA</div>
+                <div class="description">Diaporama chronométré des exercices à données aléatoires</div>   
+            </div> 
+        </a>
+        <a class="card" href="/mathalealatex.html">
+            <div class="content">
+                <div class="center aligned header"><i class="file pdf outline icon"></i>PDF / LaTeX</div>
+                <div class="description">Créer un fichier avec des exercices à données aléatoires</div>
+                
+            </div> 
+        </a>
+        <a class="card" href="/mathalea2d.html">
+            <div class="content">
+                <div class="center aligned header"><i class="pencil alternate icon"></i>MathALEA2D</div>
+                <div class="description">Générer des figures géométriques à  partir de lignes de code</div>  
+            </div> 
+        </a>
+        <a class="card" href="/alacarte">
+            <div class="content">
+                <div class="center aligned header"><i class="user outline icon"></i>À la carte</div>
+                <div class="description">Créer un fichier avec des exercices personnalisé pour chaque élève</div>   
+            </div> 
+        </a>
+         
+     </div>
+     
+     
+
+</div>    
+{{ partial "footer" . }}
+
+{{ end }}
