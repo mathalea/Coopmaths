@@ -30,7 +30,7 @@ Pour cela deux options :
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
-	{{%pdf_url "Test de positionnement 4e - pdf temporaire --> non encore généré" ""%}}
+	{{%pdf_url "Test de positionnement 4e - pdf temporaire --> non encore généré" "/pdf/2020-4e-Priorites-Test.pdf"%}}
 	{{% alea_url "Test de positionnement 4e - mathalea temporaire --> non encore généré" "" %}}
 {{< /liste >}}
 
