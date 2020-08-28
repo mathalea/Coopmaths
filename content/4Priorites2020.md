@@ -74,6 +74,7 @@ Pour cela deux options :
 		<div class="header content">Résoudre des problèmes de proportionnalité</div>	
 			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité́entre deux grandeurs." %}}
 			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}			
+			{{% priorite_alea "5P10-1 : Tableaux et proportionnalité" "5P10-1" %}}
 
 			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
 			{{% priorite_alea "... : ..." "" %}}
