@@ -44,7 +44,7 @@ Pour cela deux options :
 			{{% priorite "L’élève utilise les grands nombres entiers et des nombres décimaux ayant au plus quatre décimales." %}}
 			{{% priorite_alea "6C30-1 : Multiplications d'un nombre décimal par 10, 100 ou 1 000." "6C30-1,sup=1" %}}
 			{{% priorite_alea "6C30-2 : Calculer le produit de deux décimaux connaissant le produit de deux entiers" "6C30-2" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N31-2 : Ordre de grandeur et opérations sur les décimaux" "6N31-2" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 1 décimale" "6N30,sup=1" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 2 décimales" "6N30,sup=2" %}}
 			{{% priorite_alea "6N31-1 : Encadrer un décimal par deux entiers consécutifs" "6N31-1" %}}
