@@ -4929,19 +4929,21 @@ function Fraction(num,den) {
 				}
 				num -= this.denIrred
 			}
-			O = point(x + k * 2 * (rayon + 0.5), y)
-			C = cercle(O, rayon)
-			objets.push(C)
-			for (let i = 0; i < this.denIrred; i++) {
-				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
-				objets.push(s)
-			}
-			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
-			for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-				a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
-				a.opacite = 0.3
-				dep = rotation(dep, O, 360 / this.denIrred)
-				objets.push(a)
+			if (this.num%this.den!=0) { 
+				O = point(x + k * 2 * (rayon + 0.5), y)
+				C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.denIrred; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					objets.push(s)
+				}
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
+					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.denIrred)
+					objets.push(a)
+				}
 			}
 		}
 		else if (type == 'segment') {
@@ -5056,20 +5058,22 @@ function Fraction(num,den) {
 				}
 				num -= this.den
 			}
-			let O = point(x + k * 2 * (rayon + 0.5), y)
-			let C = cercle(O, rayon)
-			objets.push(C)
-			let s, a
-			for (let i = 0; i < this.den; i++) {
-				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
-				objets.push(s)
-			}
-			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
-			for (let j = 0; j < Math.min(this.den, num); j++) {
-				a = arc(dep, O, 360 / this.den, true, fill = couleur)
-				a.opacite = 0.3
-				dep = rotation(dep, O, 360 / this.den)
-				objets.push(a)
+			if (this.num%this.den!=0) { 
+				let O = point(x + k * 2 * (rayon + 0.5), y)
+				let C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.den; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					objets.push(s)
+				}
+			
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				if (this.num%this.den!=0) for (let j = 0; j < Math.min(this.den, num); j++) {
+					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.den)
+					objets.push(a)
+				}
 			}
 		}
 		else if (type == 'segment') {
@@ -6747,7 +6751,7 @@ function Lire_abscisse_fractionnaire() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Lire l'abscisse fractionnaire d'un point";
-  this.consigne = "Lire l'abscisse de chacun des points suivants.";
+  this.consigne = "Lire l'abscisse de chacun des points suivants et donner le résultat sous la forme d'une fraction.";
   this.nb_questions = 3;
   this.nb_questions_modifiable = true;
   this.nb_cols = 1;
@@ -6867,6 +6871,12 @@ function Lire_abscisse_fractionnaire() {
           ],
           true
         );
+        this.contenu_correction+=`<br>`
+        if (pgcd(x11,pas2)!=1||pgcd(x22,pas2)!=1||pgcd(x33,pas2)!=1) this.contenu_correction+=`Remarque : `
+        if (pgcd(x11,pas2)!=1) this.contenu_correction+=`$${tex_fraction(x1*pas2+x11,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x1*pas2+x11,pas2)}\\phantom{espace}$`
+        if (pgcd(x22,pas2)!=1) this.contenu_correction+=`$${tex_fraction(x2*pas2+x22,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x2*pas2+x22,pas2)}\\phantom{espace}$`
+        if (pgcd(x33,pas2)!=1) this.contenu_correction+=`$${tex_fraction(x3*pas2+x33,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x3*pas2+x33,pas2)}\\phantom{espace}$`
+  
       } else {
         //sortie Latex
         texte = Latex_reperage_sur_un_axe(
@@ -6901,9 +6911,15 @@ function Lire_abscisse_fractionnaire() {
           ],
           true
         );
+        if (pgcd(x11,pas2)!=1) texte_corr+=`<br>$\\left(${tex_fraction(x1*pas2+x11,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x1*pas2+x11,pas2)}\\right)$.`
+        if (pgcd(x22,pas2)!=1) texte_corr+=`<br>$\\left(${tex_fraction(x2*pas2+x22,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x2*pas2+x22,pas2)}\\right)$.`
+        if (pgcd(x33,pas2)!=1) texte_corr+=`<br>$\\left(${tex_fraction(x3*pas2+x33,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x3*pas2+x33,pas2)}\\right)$.`
+  
         this.liste_questions.push(texte);
-        this.liste_corrections.push(texte_corr);
+       this.liste_corrections.push(texte_corr);
       }
+      console.log(x11,x22,x33,pas2)
+     
     }
     if (!sortie_html) liste_de_question_to_contenu(this);
   };
@@ -6923,7 +6939,7 @@ function Lire_abscisse_decimale_bis() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Lire l'abscisse décimale d'un point repéré par une fraction";
-  this.consigne = "Lire l'abscisse de chacun des points suivants.";
+  this.consigne = "Lire l\’abscisse de chacun des points suivants et donner le résultat sous la forme d\’un nombre en écriture décimale.";
   this.nb_questions = 3;
   this.nb_questions_modifiable = true;
   this.nb_cols = 1;
@@ -11362,7 +11378,64 @@ function Exercice_fractions_decomposer() {
 }
 
 function Representer_une_fraction() {
+    Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Représenter des fractions";
+    this.consigne = "";
+    this.nb_questions = 4;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 3;
+  
+    this.nouvelle_version = function (numero_de_l_exercice) {
+      this.liste_questions = []; // Liste de questions
+      this.liste_corrections = []; // Liste de questions corrigées
+      let Xmin, Xmax, Ymin, Ymax, ppc, sc, g, k, carreaux,objets
+      ppc=20
+        if (sortie_html) {
+          sc=0.5
+        } else {
+          sc=0.4
+        }
+  
+      let  params = {
+        xmin: -2.5,
+        ymin: -2,
+        xmax: 18,
+        ymax: 3,
+        pixelsParCm: ppc,
+        scale: sc,
+      },den,num,f
+      
+      let liste = combinaison_listes([2,3,4,5,6], this.nb_questions);
+  
+      for (
+        let i = 0, texte, texte_corr, cpt = 0;
+        i < this.nb_questions && cpt < 50;) {
+        objets=[]
+        den=liste[i]
+        num=randint(1,den*3)
+        f=fraction(num,den)
+        texte=`Sachant qu'un disque représente une unité, représenter la fraction $${f.texFraction()}$ en coloriant la part correspondante.<br>`
+        texte+=mathalea2d(params,fraction(den*3,den).representation(0,0,2,0,'gateau','white'))
+        texte_corr =`Voici sur ces dessins, colorié en bleu, la part correspondante à la fraction $${f.texFraction()}$ :<br>`
+        texte_corr += mathalea2d(params,f.representation(0,0,2,randint(0,den-1),'gateau','blue'))
+        if (this.liste_questions.indexOf(texte) == -1) {
+          // Si la question n'a jamais été posée, on en créé une autre
+          this.liste_questions.push(texte);
+          this.liste_corrections.push(texte_corr);
+          i++;
+        }
+        cpt++;
+      }
+      liste_de_question_to_contenu(this);
+    };
+    this.besoin_formulaire_numerique = [
+      "Type de cahier",
+      3,
+      `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
+    ];
 
+  
 }
 
 /**
@@ -19161,9 +19234,9 @@ function Ordre_de_grandeur_operations_decimaux(){
 	this.beta = true;	
 	this.sup=1;
 	if (this.beta) {
-		this.nb_questions = 3;
+		this.nb_questions = 1;
 	} else {
-		this.nb_questions = 3;
+		this.nb_questions = 1;
 	};	
 
 	this.titre = "Ordre de grandeur et opérations sur les décimaux";	
@@ -19197,11 +19270,12 @@ function Ordre_de_grandeur_operations_decimaux(){
       let ligne_entete = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000')];
       let ligne_entete_corr = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000')];
 
-      let m=randint(1,9),
+      let m=randint(1,9,[4,5,6]),
       c=randint(1,9),
       c1=randint(1,9),
       c2=randint(1,9),
-      c3=randint(1,9),
+      c3=randint(1,9,[4,5,6]),
+      c4=randint(1,4),
       d=randint(1,9),
       d1=randint(1,9),
       d2=randint(1,9),
@@ -19212,21 +19286,106 @@ function Ordre_de_grandeur_operations_decimaux(){
       u3=randint(1,9);
 
       let div_aleatoire_ope_3 = choice([10,100]);
+      let div_aleatoire_ope_5 = choice([1,10,100,1000]);
       let mult_aleatoire_ope_4 = choice([0.1,0.01,0.001]);
 
-      let operations = [];
-      operations.push(`${c*100+d*10+u*1}\\times ${d1*10+u1*1}`);
-      operations.push(`${tex_nombre((c2*100+d2*10+u1*1)/10)}+${c1*100+d1*10+u1*1}`);
-      operations.push(`${c3*100+d3*10+u3*1}-${tex_nombre((c2*100+d2*10+u2*1)/div_aleatoire_ope_3)}`);
-      operations.push(`${tex_nombre(m*1000+c3*100+d2*10+u1*1)}\\times ${tex_nombre(mult_aleatoire_ope_4)}`);
-      operations.push(`${tex_nombre((m*1000+c1*100+d3*10+u*1)/100)}\\div ${m}`);
-      //operations = shuffle(operations);
+      // une fonction pour ordre de grandeur en fonction de ... opération 3
+      function myOrdreOpe3(n) {
+        if (n>=7) {
+          return ['','','',mise_en_evidence(`\\times`),'']; 
+        } else {
+          return ['','',mise_en_evidence(`\\times`),'','']; 
+        };
+      };
 
+      // une fonction pour ordre de grandeur en fonction de ... opération 4
+      function myOrdreOpe4(d,n) {
+        let sortie;
+        switch (d) {
+          case 0.1:
+            if (n>=7) {
+              sortie = ['','','',mise_en_evidence(`\\times`),''];
+            } else {
+              sortie = ['','',mise_en_evidence(`\\times`),'',''];
+            };            
+            break;
+          case 0.01: 
+            if (n>=7) {
+              sortie = ['','',mise_en_evidence(`\\times`),'',''];              
+            } else {
+              sortie = ['',mise_en_evidence(`\\times`),'','',''];
+            };            
+            break;
+          case 0.001: 
+            if (n>=7) {
+              sortie = ['',mise_en_evidence(`\\times`),'','',''];
+            } else {
+              sortie = [mise_en_evidence(`\\times`),'','','',''];
+            };       
+            break;            
+        }
+        return sortie;
+      };
+
+      // une fonction pour ordre de grandeur en fonction de ... opération 5
+      function myOrdreOpe5(mult) {
+        let sortie;
+        switch (mult) {
+          case 1:
+            return sortie = ['','','',mise_en_evidence(`\\times`),'']; 
+            break;
+          case 10:
+            return sortie = ['','',mise_en_evidence(`\\times`),'','']; 
+            break;
+          case 100:
+            return sortie = ['',mise_en_evidence(`\\times`),'','','']; 
+            break;
+          case 1000:
+            return sortie = [mise_en_evidence(`\\times`),'','','','']; 
+            break;        
+        };
+        return sortie;
+      };
+
+      let situations = [
+        {
+          operation:`${c*100+d*10+u*1}\\times ${d1*10+u1*1}`,
+          operation_corr:`${c*100+d*10+u*1}\\times ${d1*10+u1*1} \\simeq  ${(c*100)}\\times ${(d1*10)} \\text{ soit } ${tex_nombre((c*100)*(d1*10))}`,
+          operation_coche:['','','','',mise_en_evidence(`\\times`)],
+        },
+        {
+          operation:`${tex_nombre((c2*100+d2*10+u1*1)/10)}+${c1*100+d1*10+u1*1}`,
+          operation_corr:`${tex_nombre((c2*100+d2*10+u1*1)/10)}+${c1*100+d1*10+u1*1} \\simeq ${c2*100/10}+${c1*100} \\text{ soit } ${c2*100/10 + c1*100}`,
+          operation_coche:['','',mise_en_evidence(`\\times`),'',''],
+        },
+        {
+          operation:`${c3*100+d3*10+u3*1}-${tex_nombre((c2*100+d2*10+u2*1)/div_aleatoire_ope_3)}`,
+          operation_corr:`${c3*100+d3*10+u3*1}-${tex_nombre((c2*100+d2*10+u2*1)/div_aleatoire_ope_3)} \\simeq ${c3*100+d3*10}-${tex_nombre((c2*100)/div_aleatoire_ope_3)} \\text{ soit } ${c3*100+d3*10-(c2*100)/div_aleatoire_ope_3}`,
+          operation_coche:myOrdreOpe3(c3),//['','',mise_en_evidence(`\\times`),'',''],
+        },
+        {
+          operation:`${tex_nombre(m*1000+c3*100+d2*10+u1*1)}\\times ${tex_nombre(mult_aleatoire_ope_4)}`,
+          operation_corr:`${tex_nombre(m*1000+c3*100+d2*10+u1*1)}\\times ${tex_nombre(mult_aleatoire_ope_4)} \\simeq ${tex_nombre(m*1000)}\\times ${tex_nombre(mult_aleatoire_ope_4)} \\text{ soit } ${tex_nombre(m*1000*mult_aleatoire_ope_4)}`,
+          operation_coche:myOrdreOpe4(mult_aleatoire_ope_4,m),//['','','','',mise_en_evidence(`\\times`)],
+        },
+        {
+          // operation:`${tex_nombre((m*1000+c1*100+d3*10+u*1)/100)}\\div ${m}`,
+          // operation_corr:`${tex_nombre((m*1000+c1*100+d3*10+u*1)/100)}\\div ${m} \\simeq ${tex_nombre((m*1000)/100)}\\div ${m} \\text{ soit } ${tex_nombre((m*1000)/100/m)}`,
+          // operation_coche:['',mise_en_evidence(`\\times`),'','',''],
+          operation:`${tex_nombre((m*1000+c4*100+d3*10+u*1)/div_aleatoire_ope_5)}\\div ${m}`,
+          operation_corr:`${tex_nombre((m*1000+c4*100+d3*10+u*1)/div_aleatoire_ope_5)}\\div ${m} \\simeq ${tex_nombre((m*1000)/div_aleatoire_ope_5)}\\div ${m} \\text{ soit } ${tex_nombre((m*1000)/div_aleatoire_ope_5/m)}`,
+          operation_coche:myOrdreOpe5(div_aleatoire_ope_5),//['',mise_en_evidence(`\\times`),'','',''],
+        },
+
+      ];
+
+      //situations = shuffle(situations);
+            
 			let enonces = [];
 			for (let k=0;k<1;k++) {
 				enonces.push({
           enonce:`
-          ${tab_C_L(ligne_entete,[operations[0],operations[1],operations[2],operations[3],operations[4]],
+          ${tab_C_L(ligne_entete,[situations[0].operation,situations[1].operation,situations[2].operation,situations[3].operation,situations[4].operation],
           [            
             '','','','','',
             '','','','','',
@@ -19238,13 +19397,15 @@ function Ordre_de_grandeur_operations_decimaux(){
           `,
           question:``,
           correction:`
-          ${tab_C_L(ligne_entete_corr,['\\text{Opé1}','\\text{Opé2}','\\text{Opé3}','\\text{Opé4}','\\text{Opé5}'],
+          Commençons par calculer un ordre de grandeur du résultat de chaque opération dans la première colonne du tableau.
+          <br>
+          ${tab_C_L(ligne_entete_corr,[situations[0].operation_corr,situations[1].operation_corr,situations[2].operation_corr,situations[3].operation_corr,situations[4].operation_corr,],
           [            
-            '','','','','',
-            '','','','','',
-            '','','','','',
-            '','','','','',
-            '','','','',''
+            situations[0].operation_coche[0],situations[0].operation_coche[1],situations[0].operation_coche[2],situations[0].operation_coche[3],situations[0].operation_coche[4],
+            situations[1].operation_coche[0],situations[1].operation_coche[1],situations[1].operation_coche[2],situations[1].operation_coche[3],situations[1].operation_coche[4],
+            situations[2].operation_coche[0],situations[2].operation_coche[1],situations[2].operation_coche[2],situations[2].operation_coche[3],situations[2].operation_coche[4],
+            situations[3].operation_coche[0],situations[3].operation_coche[1],situations[3].operation_coche[2],situations[3].operation_coche[3],situations[3].operation_coche[4],
+            situations[4].operation_coche[0],situations[4].operation_coche[1],situations[4].operation_coche[2],situations[4].operation_coche[3],situations[4].operation_coche[4],
           ]
           )}				
           `
@@ -19264,46 +19425,6 @@ function Ordre_de_grandeur_operations_decimaux(){
 						texte_corr = `${enonces[0].correction}`;
 					};
           			break;	
-        	// 	case 1 : 
-					// texte = `${enonces[1].enonce}`;
-					// if (this.beta) {
-					// 	texte += `<br>`;
-					// 	texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
-					// 	texte_corr = ``;	
-					// } else {
-					// 	texte_corr = `${enonces[1].correction}`;
-					// };
-          // 			break;
-        	// 	case 2 : 
-					// texte = `${enonces[2].enonce}`;
-					// if (this.beta) {
-					// 	texte += `<br>`;
-					// 	texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
-					// 	texte_corr = ``;	
-					// } else {
-					// 	texte_corr = `${enonces[2].correction}`;
-					// };
-          // 			break;				
-        	// 	case 3 : 
-					// texte = `${enonces[3].enonce}`;
-					// if (this.beta) {
-					// 	texte += `<br>`;
-					// 	texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
-					// 	texte_corr = ``;	
-					// } else {
-					// 	texte_corr = `${enonces[3].correction}`;
-					// };
-					// break;				
-         	// 	case 4 : 
-					// texte = `${enonces[4].enonce}`;
-					// if (this.beta) {
-					// 	texte += `<br>`;
-					// 	texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
-					// 	texte_corr = ``;	
-					// } else {
-					// 	texte_corr = `${enonces[4].correction}`;
-					// };
-					// break;				
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
