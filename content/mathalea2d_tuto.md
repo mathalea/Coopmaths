@@ -45,6 +45,7 @@ description: "Générateur de code SVG et TikZ"
 * `M = pointIntersectionDD(d1,d2,'M','below')` // M est le point d'intersection des droites (d1) et (d2)
 * `M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
 * `M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
+* `M=pointAdistance(A,5,'M')` // M est un point choisi aléatoirement à 5 unités de A se nomme M.
 
 
 Remarque :  La taille des croix n'a un effet que sur la sortie SVG
