@@ -47,6 +47,7 @@ Pour cela deux options :
 	* Cliquer sur le bouton **Version LaTeX**
 	* Cliquer sur le bouton **Obtenir le PDF via OverLeaf.com**, la création d'un compte est gratuite. 
 
+{{% priorite_intro "lienpdf" "lienmathalea"  %}}
 
 {{< titre1 "Test de positionnement" >}}
 
