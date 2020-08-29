@@ -1911,6 +1911,58 @@ function courbeDeBezier(...args) {
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% LE DESSIN A MAIN LEVEE %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/**
+ * Trace un segment entre A et B qui donne l'impression d'être fait à main levée.
+ * @Auteur Jean-Claude Lhote
+ */
+function SegmentMainLevee(A,B) {
+  ObjetMathalea2D.call(this);
+  this.svg = function (coeff) {
+    let l=longueur(A,B),dx=(B.xSVG(coeff)-A.xSVG(coeff))/l,dy=(B.ySVG(coeff)-A.ySVG(coeff))/l
+    let code =`<path d="M${A.xSVG(coeff)} ${A.ySVG(coeff)} C `
+    for (let k=1;k<l;k++) {
+      code +=`${A.xSVG(coeff)+k*dx} ${A.ySVG(coeff)+k*dy+randint(-3,3,0)}, `
+    }
+    code +=`${B.xSVG(coeff)} ${B.ySVG(coeff)}" stroke="black" fill="transparent"/>`
+    return code;
+  };
+  this.tikz = function() {
+    let code=`\\draw[decorate,decoration={random steps , amplitude = .5pt }] (${A.x},${A.y})--(${B.x},${B.y});`
+    return code
+  }
+}
+function segmentMainLevee(...args) {
+  return new SegmentMainLevee(...args)
+}
+
+function CercleMainLevee(A,r) {
+  ObjetMathalea2D.call(this);
+  this.svg = function (coeff) {
+    let code =`<path d="M ${A.xSVG(coeff)+r*coeff} ${A.ySVG(coeff)} C `
+    for (let k=1;k<100;k++) {
+      code +=`${arrondi(A.xSVG(coeff)+r*Math.cos(2*k*Math.PI/100)*coeff+randint(-1,1),1)} ${arrondi(A.ySVG(coeff)+r*Math.sin(2*k*Math.PI/100)*coeff+randint(-1,1),1)}, `
+    }
+    code +=` ${A.xSVG(coeff)+r*coeff} ${A.ySVG(coeff)} Z" stroke="black" fill="transparent"/>`
+    return code;
+  };
+  this.tikz = function() {
+    let code=`\\draw[decorate,decoration={random steps , amplitude = .5pt }] (${A.x},${A.y}) circle (r);`
+    return code
+  }
+}
+function cercleMainLevee(A,r) {
+  return new CercleMainLevee(A,r)
+}
+
+
+
+
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%% LES TRANSFORMATIONS %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
