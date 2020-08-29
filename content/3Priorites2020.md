@@ -84,8 +84,8 @@ Pour cela deux options :
 			{{% priorite "Il introduit une lettre pour désigner une valeur inconnue et met un problème en équation." %}}
 			{{% priorite_alea "4L13-0 : Mettre en équation un problème sans objectif de résolution" "4L13-0" %}}
 			{{% priorite "Il teste si un nombre est solution d’une équation" %}}
-			{{% priorite_alea "4L14-2 : Tester sur une équation du second degré" "4L14-2" %}}
 			{{% priorite_alea "4L14-1 : Tester sur une équation du premier degré" "4L14-1" %}}
+			{{% priorite_alea "4L14-2 : Tester sur une équation du second degré" "4L14-2" %}}
 			{{% priorite_alea "4L14-0 : Tester sur une équation du premier ou du second degré" "4L14-0" %}}
 
 			{{% priorite "Il résout algébriquement une équation du premier degré." %}}
@@ -125,7 +125,7 @@ Pour cela deux options :
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Utiliser les notions de géométrie plane pour démontrer.</div>	
 			{{% priorite "L’élève connaît et utilise les cas d’égalité des triangles." %}}			
-			{{% priorite_alea "3G23 : Reconnaître des triangles semblables dans différentes configurations" "3G23" %}}
+			{{% priorite_alea "3G23 : Reconnaître des triangles superposables dans différentes configurations" "3G23" %}}
 
 			{{% priorite "L’élève connaît et utilise le théorème de Thalès dans la configuration des triangles emboîtés." %}}
 			{{% priorite_alea "4G30 : Déterminer une longueur avec la propriété de Thales" "4G30" %}}

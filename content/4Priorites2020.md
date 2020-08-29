@@ -57,7 +57,7 @@ Pour cela deux options :
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser les nombres pour comparer, calculer et résoudre des problèmes</div>	
-			{{% priorite "L’élèveutilise la notion d’opposé." %}}
+			{{% priorite "L’élève utilise la notion d’opposé." %}}
 			{{% priorite_alea "5R10-0 : Trouver l'opposé d'un nombre relatif" "5R10-0" %}}	
 			{{% priorite_alea "5R11-2 : Placer un point d'abscisse un nombre relatif" "5R11-2" %}}	
 
@@ -88,7 +88,7 @@ Pour cela deux options :
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Résoudre des problèmes de proportionnalité</div>	
-			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité́entre deux grandeurs." %}}
+			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité entre deux grandeurs." %}}
 			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}			
 			{{% priorite_alea "5P10-1 : Tableaux et proportionnalité" "5P10-1" %}}
 
