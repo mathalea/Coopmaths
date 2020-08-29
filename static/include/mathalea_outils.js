@@ -4838,7 +4838,11 @@ function Fraction(num,den) {
 	this.den=den || 1;
 	
     this.numIrred=fraction_simplifiee(this.num,this.den)[0]
-    this.denIrred=fraction_simplifiee(this.num,this.den)[1]   
+	this.denIrred=fraction_simplifiee(this.num,this.den)[1]
+	this.pourcentage=calcul(this.numIrred*100/this.denIrred)
+	this.fractionEgale = function(k){
+		return fraction(calcul(this.numIrred*k),calcul(this.denIrred*k))
+	}   
     this.oppose = function(){
         return fraction(-this.num,this.den)
     }
@@ -4877,7 +4881,32 @@ function Fraction(num,den) {
     }
     this.differenceFraction = function(f2) {
         return this.sommeFraction(f2.oppose())
-    }
+	}
+	this.fractionDecimale = function(){
+		let den=this.denIrred
+		let num=this.numIrred
+		let liste=obtenir_liste_facteurs_premiers(den)
+		let n2=0,n5=0
+		for (let n of liste) {
+			if (n==2) n2++
+			else if (n==5) n5++
+			else return 'NaN'
+		}
+		if (n5==n2) return fraction(this.numIrred,this.fractionDecimale.denIrred)
+		else if (n5>n2) return fraction(this.numIrred*2**(n5-n2),this.denIrred*2**(n5-n2))
+		else return fraction(this.numIrred*5**(n2-n5),this.denIrred*5**(n2-n5))
+	}
+	this.valeurDecimale = function(){
+		if (this.fractionDecimale()!='NaN') return calcul(this.fractionDecimale().num/this.fractionDecimale().den)
+		else return `Ce n\'est pas un nombre décimal`
+	}
+	this.texFraction = function(){
+		return tex_fraction(this.num,this.den)
+	}
+	this.texFractionSimplifiee = function(){
+		return tex_fraction(this.numIrred,this.denIrred)
+	}
+
     /**
      * 
      * @param {number} depart N° de la première part coloriée (0 correspond à la droite du centre) 
@@ -4887,6 +4916,14 @@ function Fraction(num,den) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.numIrred, this.denIrred)
 		num = this.numIrred
+		unegraduation=function(x,y,couleur='black',epaisseur=1){
+			let A=point(x,y+0.2)
+			let B=point(x,y-0.2)
+			let g=segment(A,B)
+			g.color=couleur
+			g.epaisseur=epaisseur
+			return g
+		}
 		if (type == 'gateau') {
 			for (k = 0; k < n; k++) {
 				O = point(x + k * 2 * (rayon + 0.5), y)
@@ -4905,19 +4942,21 @@ function Fraction(num,den) {
 				}
 				num -= this.denIrred
 			}
-			O = point(x + k * 2 * (rayon + 0.5), y)
-			C = cercle(O, rayon)
-			objets.push(C)
-			for (let i = 0; i < this.denIrred; i++) {
-				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
-				objets.push(s)
-			}
-			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
-			for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-				a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
-				a.opacite = 0.3
-				dep = rotation(dep, O, 360 / this.denIrred)
-				objets.push(a)
+			if (this.num%this.den!=0) { 
+				O = point(x + k * 2 * (rayon + 0.5), y)
+				C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.denIrred; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					objets.push(s)
+				}
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
+					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.denIrred)
+					objets.push(a)
+				}
 			}
 		}
 		else if (type == 'segment') {
@@ -4954,7 +4993,7 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else {
@@ -5000,7 +5039,7 @@ function Fraction(num,den) {
 		}
 		return objets
 	}
-	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1) {
+	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.num, this.den)
 		num = this.num
@@ -5032,20 +5071,22 @@ function Fraction(num,den) {
 				}
 				num -= this.den
 			}
-			let O = point(x + k * 2 * (rayon + 0.5), y)
-			let C = cercle(O, rayon)
-			objets.push(C)
-			let s, a
-			for (let i = 0; i < this.den; i++) {
-				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
-				objets.push(s)
-			}
-			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
-			for (let j = 0; j < Math.min(this.den, num); j++) {
-				a = arc(dep, O, 360 / this.den, true, fill = couleur)
-				a.opacite = 0.3
-				dep = rotation(dep, O, 360 / this.den)
-				objets.push(a)
+			if (this.num%this.den!=0) { 
+				let O = point(x + k * 2 * (rayon + 0.5), y)
+				let C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.den; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					objets.push(s)
+				}
+			
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				if (this.num%this.den!=0) for (let j = 0; j < Math.min(this.den, num); j++) {
+					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.den)
+					objets.push(a)
+				}
 			}
 		}
 		else if (type == 'segment') {
@@ -5082,7 +5123,7 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else { //Type bâtons

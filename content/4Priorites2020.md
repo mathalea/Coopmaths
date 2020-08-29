@@ -8,6 +8,22 @@ draft: false
 cycle: 4
 description : "Quatrième - Priorités rentrée 2020 - Période 1 (septembre octobre)"
 ---
+<!-- 
+Début de l'url commune 
+https://coopmaths.fr/exercice.html?
+
+Tous les exos actuellement dispos
+ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
+
+Nombres et calculs
+ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5
+
+Organisation et gestion de données
+ex=6P10&ex=5P10-1
+
+Espace et géométrie
+ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
+ -->
 
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
@@ -15,7 +31,7 @@ description : "Quatrième - Priorités rentrée 2020 - Période 1 (septembre oct
 Cette page a pour but de permettre l'exploitation de plusieurs manières du test de positionnement que l'on peut trouver [ici sur eduscol](https://eduscol.education.fr/cid152895/rentree-2020-priorites-et-positionnement.html#lien1).
 
 * En utilisant [cette version statique du test de positionnement](/pdf/2020-4e-Priorites-Test.pdf) ainsi que sa correction.
-* En utilisant [une version MathALEA du test de positionnement](), principalement afin de générer une nouvelle version PDF.
+* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3), principalement afin de générer une nouvelle version PDF.
 
 Une fois que les élèves ont passé le test, l'idée est de pouvoir cibler le travail de chacun à partir des mêmes exercices proposés dans la liste détaillée ci-dessous.
 
@@ -30,8 +46,8 @@ Pour cela deux options :
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
-	{{%pdf_url "Test de positionnement 4e - pdf temporaire --> non encore généré" ""%}}
-	{{% alea_url "Test de positionnement 4e - mathalea temporaire --> non encore généré" "" %}}
+	{{%pdf_url "Test de positionnement 4e - pdf temporaire" "/pdf/2020-4e-Priorites-Test.pdf"%}}
+	{{% alea_url "Test de positionnement 4e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}
 {{< /liste >}}
 
 
@@ -74,6 +90,7 @@ Pour cela deux options :
 		<div class="header content">Résoudre des problèmes de proportionnalité</div>	
 			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité́entre deux grandeurs." %}}
 			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}			
+			{{% priorite_alea "5P10-1 : Tableaux et proportionnalité" "5P10-1" %}}
 
 			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
 			{{% priorite_alea "... : ..." "" %}}

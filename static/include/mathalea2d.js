@@ -1911,6 +1911,58 @@ function courbeDeBezier(...args) {
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% LE DESSIN A MAIN LEVEE %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/**
+ * Trace un segment entre A et B qui donne l'impression d'être fait à main levée.
+ * @Auteur Jean-Claude Lhote
+ */
+function SegmentMainLevee(A,B) {
+  ObjetMathalea2D.call(this);
+  this.svg = function (coeff) {
+    let l=longueur(A,B),dx=(B.xSVG(coeff)-A.xSVG(coeff))/l,dy=(B.ySVG(coeff)-A.ySVG(coeff))/l
+    let code =`<path d="M${A.xSVG(coeff)} ${A.ySVG(coeff)} C `
+    for (let k=1;k<l;k++) {
+      code +=`${A.xSVG(coeff)+k*dx} ${A.ySVG(coeff)+k*dy+randint(-3,3,0)}, `
+    }
+    code +=`${B.xSVG(coeff)} ${B.ySVG(coeff)}" stroke="black" fill="transparent"/>`
+    return code;
+  };
+  this.tikz = function() {
+    let code=`\\draw[decorate,decoration={random steps , amplitude = .5pt }] (${A.x},${A.y})--(${B.x},${B.y});`
+    return code
+  }
+}
+function segmentMainLevee(...args) {
+  return new SegmentMainLevee(...args)
+}
+
+function CercleMainLevee(A,r) {
+  ObjetMathalea2D.call(this);
+  this.svg = function (coeff) {
+    let code =`<path d="M ${A.xSVG(coeff)+r*coeff} ${A.ySVG(coeff)} C `
+    for (let k=1;k<100;k++) {
+      code +=`${arrondi(A.xSVG(coeff)+r*Math.cos(2*k*Math.PI/100)*coeff+randint(-1,1),1)} ${arrondi(A.ySVG(coeff)+r*Math.sin(2*k*Math.PI/100)*coeff+randint(-1,1),1)}, `
+    }
+    code +=` ${A.xSVG(coeff)+r*coeff} ${A.ySVG(coeff)} Z" stroke="black" fill="transparent"/>`
+    return code;
+  };
+  this.tikz = function() {
+    let code=`\\draw[decorate,decoration={random steps , amplitude = .5pt }] (${A.x},${A.y}) circle (r);`
+    return code
+  }
+}
+function cercleMainLevee(A,r) {
+  return new CercleMainLevee(A,r)
+}
+
+
+
+
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%% LES TRANSFORMATIONS %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
@@ -3650,7 +3702,7 @@ function intervalle(A, B, color = "blue", h = 0) {
  *
  * @Auteur Rémi Angot
  */
-function TexteParPoint(texte, A, orientation = "milieu", color='black') {
+function TexteParPoint(texte, A, orientation = "milieu", color='black',scale=1) {
   ObjetMathalea2D.call(this);
   this.color = color;
   this.svg = function (coeff) {
@@ -3700,13 +3752,13 @@ function TexteParPoint(texte, A, orientation = "milieu", color='black') {
     } else {
       let anchor = "";
       if (orientation == "gauche") {
-        anchor = "node[anchor = east]";
+        anchor = `node[anchor = east,scale=${scale}]`;
       }
       if (orientation == "droite") {
-        anchor = "node[anchor = west]";
+        anchor = `node[anchor = west,scale=${scale}]`;
       }
       if (orientation == "milieu") {
-        anchor = "node[anchor = center]";
+        anchor = `node[anchor = center,scale=${scale}]`;
       }
       code = `\\draw [${color}] (${A.x},${A.y}) ${anchor} {${texte}};`;
     }
@@ -3725,8 +3777,8 @@ function texteParPoint(...args) {
  *
  * @Auteur Rémi Angot
  */
-function texteParPosition(texte, x, y, orientation = "milieu", color) {
-  return new TexteParPoint(texte, point(x, y), orientation, color);
+function texteParPosition(texte, x, y, orientation = "milieu", color,scale=1) {
+  return new TexteParPoint(texte, point(x, y), orientation, color,scale);
 }
 
 /**

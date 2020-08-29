@@ -4838,7 +4838,11 @@ function Fraction(num,den) {
 	this.den=den || 1;
 	
     this.numIrred=fraction_simplifiee(this.num,this.den)[0]
-    this.denIrred=fraction_simplifiee(this.num,this.den)[1]   
+	this.denIrred=fraction_simplifiee(this.num,this.den)[1]
+	this.pourcentage=calcul(this.numIrred*100/this.denIrred)
+	this.fractionEgale = function(k){
+		return fraction(calcul(this.numIrred*k),calcul(this.denIrred*k))
+	}   
     this.oppose = function(){
         return fraction(-this.num,this.den)
     }
@@ -4877,7 +4881,32 @@ function Fraction(num,den) {
     }
     this.differenceFraction = function(f2) {
         return this.sommeFraction(f2.oppose())
-    }
+	}
+	this.fractionDecimale = function(){
+		let den=this.denIrred
+		let num=this.numIrred
+		let liste=obtenir_liste_facteurs_premiers(den)
+		let n2=0,n5=0
+		for (let n of liste) {
+			if (n==2) n2++
+			else if (n==5) n5++
+			else return 'NaN'
+		}
+		if (n5==n2) return fraction(this.numIrred,this.fractionDecimale.denIrred)
+		else if (n5>n2) return fraction(this.numIrred*2**(n5-n2),this.denIrred*2**(n5-n2))
+		else return fraction(this.numIrred*5**(n2-n5),this.denIrred*5**(n2-n5))
+	}
+	this.valeurDecimale = function(){
+		if (this.fractionDecimale()!='NaN') return calcul(this.fractionDecimale().num/this.fractionDecimale().den)
+		else return `Ce n\'est pas un nombre décimal`
+	}
+	this.texFraction = function(){
+		return tex_fraction(this.num,this.den)
+	}
+	this.texFractionSimplifiee = function(){
+		return tex_fraction(this.numIrred,this.denIrred)
+	}
+
     /**
      * 
      * @param {number} depart N° de la première part coloriée (0 correspond à la droite du centre) 
@@ -4887,6 +4916,14 @@ function Fraction(num,den) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.numIrred, this.denIrred)
 		num = this.numIrred
+		unegraduation=function(x,y,couleur='black',epaisseur=1){
+			let A=point(x,y+0.2)
+			let B=point(x,y-0.2)
+			let g=segment(A,B)
+			g.color=couleur
+			g.epaisseur=epaisseur
+			return g
+		}
 		if (type == 'gateau') {
 			for (k = 0; k < n; k++) {
 				O = point(x + k * 2 * (rayon + 0.5), y)
@@ -4905,19 +4942,21 @@ function Fraction(num,den) {
 				}
 				num -= this.denIrred
 			}
-			O = point(x + k * 2 * (rayon + 0.5), y)
-			C = cercle(O, rayon)
-			objets.push(C)
-			for (let i = 0; i < this.denIrred; i++) {
-				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
-				objets.push(s)
-			}
-			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
-			for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-				a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
-				a.opacite = 0.3
-				dep = rotation(dep, O, 360 / this.denIrred)
-				objets.push(a)
+			if (this.num%this.den!=0) { 
+				O = point(x + k * 2 * (rayon + 0.5), y)
+				C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.denIrred; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					objets.push(s)
+				}
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
+					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.denIrred)
+					objets.push(a)
+				}
 			}
 		}
 		else if (type == 'segment') {
@@ -4954,7 +4993,7 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else {
@@ -5000,7 +5039,7 @@ function Fraction(num,den) {
 		}
 		return objets
 	}
-	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1) {
+	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.num, this.den)
 		num = this.num
@@ -5032,20 +5071,22 @@ function Fraction(num,den) {
 				}
 				num -= this.den
 			}
-			let O = point(x + k * 2 * (rayon + 0.5), y)
-			let C = cercle(O, rayon)
-			objets.push(C)
-			let s, a
-			for (let i = 0; i < this.den; i++) {
-				s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
-				objets.push(s)
-			}
-			dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
-			for (let j = 0; j < Math.min(this.den, num); j++) {
-				a = arc(dep, O, 360 / this.den, true, fill = couleur)
-				a.opacite = 0.3
-				dep = rotation(dep, O, 360 / this.den)
-				objets.push(a)
+			if (this.num%this.den!=0) { 
+				let O = point(x + k * 2 * (rayon + 0.5), y)
+				let C = cercle(O, rayon)
+				objets.push(C)
+				for (let i = 0; i < this.den; i++) {
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					objets.push(s)
+				}
+			
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				if (this.num%this.den!=0) for (let j = 0; j < Math.min(this.den, num); j++) {
+					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a.opacite = 0.3
+					dep = rotation(dep, O, 360 / this.den)
+					objets.push(a)
+				}
 			}
 		}
 		else if (type == 'segment') {
@@ -5082,7 +5123,7 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.5,'milieu','blue'),texteParPosition(unite1,x+rayon,y-0.5,'milieu','blue'))
+			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else { //Type bâtons
@@ -5735,7 +5776,8 @@ var liste_des_exercices_disponibles = {
   "6N11-2": Placer_un_point_abscisse_entiere,
   "6N12": Exercice_6N12,
   "6N13": Exercice_6N13,
-  "beta6N14" : Representer_une_fraction,
+  "6N14" : Representer_une_fraction,
+  "6N14-2" : Ajouter_des_fractions_d_unite,
   "6N20": Exercice_fractions_decomposer,
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
@@ -5744,11 +5786,15 @@ var liste_des_exercices_disponibles = {
   "6N24": Exercice_6N24,
   "6N24-1": Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
   "6N30": Lire_abscisse_decimale,
+  "6N30-1" : Lire_abscisse_decimale_bis,
   "6N30-2": Placer_points_sur_axe,
   "6N31": Comparer_decimaux,
-  "beta6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
+  "6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
+  "6N31-2":Ordre_de_grandeur_operations_decimaux,
   "6N33": Fraction_d_un_nombre,
   "6N33-1": Pourcentage_d_un_nombre,
+  "beta6N33-2" : Calculer_un_pourcentage,
+  "beta6N33-3" : Appliquer_un_pourcentage,
   "6N34": Reglages_6N34,
   "6N41": Egalites_entre_fractions,
   "6N43": Criteres_de_divisibilite,
@@ -5799,6 +5845,7 @@ var liste_des_exercices_disponibles = {
   "5L14": Tester_une_egalite,
   "5M10": Aire_du_parallelogramme,
   "5M20": Calcul_de_volumes_5e,
+  "5P10-1": Tableaux_et_proportionnalite,
   "5R10-0": Trouver_oppose,
   "5R11": Lire_abscisse_relative,
   "5R11-2": Placer_points_sur_axe_relatifs,
@@ -6720,7 +6767,7 @@ function Lire_abscisse_fractionnaire() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Lire l'abscisse fractionnaire d'un point";
-  this.consigne = "Lire l'abscisse de chacun des points suivants.";
+  this.consigne = "Lire l'abscisse de chacun des points suivants et donner le résultat sous la forme d'une fraction.";
   this.nb_questions = 3;
   this.nb_questions_modifiable = true;
   this.nb_cols = 1;
@@ -6840,6 +6887,12 @@ function Lire_abscisse_fractionnaire() {
           ],
           true
         );
+        this.contenu_correction+=`<br>`
+        if (pgcd(x11,pas2)!=1||pgcd(x22,pas2)!=1||pgcd(x33,pas2)!=1) this.contenu_correction+=`Remarque : `
+        if (pgcd(x11,pas2)!=1) this.contenu_correction+=`$${tex_fraction(x1*pas2+x11,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x1*pas2+x11,pas2)}\\phantom{espace}$`
+        if (pgcd(x22,pas2)!=1) this.contenu_correction+=`$${tex_fraction(x2*pas2+x22,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x2*pas2+x22,pas2)}\\phantom{espace}$`
+        if (pgcd(x33,pas2)!=1) this.contenu_correction+=`$${tex_fraction(x3*pas2+x33,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x3*pas2+x33,pas2)}\\phantom{espace}$`
+  
       } else {
         //sortie Latex
         texte = Latex_reperage_sur_un_axe(
@@ -6874,6 +6927,193 @@ function Lire_abscisse_fractionnaire() {
           ],
           true
         );
+        if (pgcd(x11,pas2)!=1) texte_corr+=`<br>$\\left(${tex_fraction(x1*pas2+x11,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x1*pas2+x11,pas2)}\\right)$.`
+        if (pgcd(x22,pas2)!=1) texte_corr+=`<br>$\\left(${tex_fraction(x2*pas2+x22,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x2*pas2+x22,pas2)}\\right)$.`
+        if (pgcd(x33,pas2)!=1) texte_corr+=`<br>$\\left(${tex_fraction(x3*pas2+x33,pas2)}$ peut se simplifier en $${tex_fraction_reduite(x3*pas2+x33,pas2)}\\right)$.`
+  
+        this.liste_questions.push(texte);
+       this.liste_corrections.push(texte_corr);
+      }
+      console.log(x11,x22,x33,pas2)
+     
+    }
+    if (!sortie_html) liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = [
+    "Niveau de difficulté",
+    4,
+    "1 : Demis, tiers ou quarts avec zéro placé\n2 : Des cinquièmes aux neuvièmes avec zéro placé \n3 : Toutes les fractions précédentes mais zéro non visible\n4 : Mélange",
+  ];
+}
+/**
+ * Exercice calqué sur lire abscisse fractionnaire sauf que le résultat attendu est en écriture décimale.
+ * demis, quart, cinquièmes dixièmes et centièmes
+ * @Auteur Jean-Claude Lhote
+ * Référence 6N30-1
+ */
+function Lire_abscisse_decimale_bis() {
+  "use strict";
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Lire l'abscisse décimale d'un point repéré par une fraction";
+  this.consigne = "Lire l\’abscisse de chacun des points suivants et donner le résultat sous la forme d\’un nombre en écriture décimale.";
+  this.nb_questions = 3;
+  this.nb_questions_modifiable = true;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.spacing = 1;
+  this.spacing_corr = 1;
+  this.sup = 1;
+  this.liste_packages = "tkz-euclide";
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    // numero_de_l_exercice est 0 pour l'exercice 1
+    let type_de_questions;
+    this.liste_questions = [];
+    this.liste_corrections = [];
+    this.contenu = ""; // Liste de questions
+    this.contenu_correction = ""; // Liste de questions corrigées
+    if (this.sup == 5)
+      type_de_questions = combinaison_listes([1, 2, 3], this.nb_questions);
+    else
+      type_de_questions = combinaison_listes(
+        [parseInt(this.sup)],
+        this.nb_questions
+      );
+
+    this.contenu = html_consigne(this.consigne);
+    for (
+      let i = 0,
+        abs0,
+        l1,
+        l2,
+        l3,
+        x1,
+        x2,
+        x3,
+        x11,
+        x22,
+        x33,
+        pas1,
+        pas2,
+        id_unique,
+        texte,
+        texte_corr;
+      i < this.nb_questions;
+      i++
+    ) {
+      l1 = lettre_depuis_chiffre(i * 3 + 1);
+      l2 = lettre_depuis_chiffre(i * 3 + 2);
+      l3 = lettre_depuis_chiffre(i * 3 + 3);
+      switch (type_de_questions[i]) {
+        case 3: // Placer des demis ou des quarts sur un axe
+          abs0 = 0;
+          pas1 = 1;
+          pas2 = choice([2,4]);
+          break;
+
+        case 4: // Placer des cinquièmes 
+          abs0 = 0;
+          pas1 = 1;
+          pas2 = 5
+          break;
+
+        case 1: // Placer des dixièmes
+          abs0 = randint(1, 5);
+          pas1 = 1;
+          pas2 = 10
+          break;
+        case 2: // Placer des centièmes
+          abs0 = calcul(randint(10, 50)/10);
+          pas1 = 10;
+          pas2 = 10
+          break;       
+      }
+      x1 = randint(0, 1);
+      x2 = randint(2, 3);
+      x3 = randint(4, 5);
+      x11 = randint(1, pas2 - 1);
+      x22 = randint(1, pas2 - 1);
+      x33 = randint(1, pas2 - 1);
+      if (sortie_html) {
+        id_unique = `${i}_${Date.now()}`;
+        this.contenu += `<div id="div_svg${numero_de_l_exercice}${id_unique}" style="width: 90%; height: 200px;  "></div>`;
+        SVG_reperage_sur_un_axe(
+          `div_svg${numero_de_l_exercice}${id_unique}`,
+          abs0,
+          6,
+          pas1,
+          pas2,
+          [
+            [l1, x1, x11],
+            [l2, x2, x22],
+            [l3, x3, x33],
+          ],
+          [
+            [calcul(abs0 + 1 / pas1), 1, 0],
+            [calcul(abs0 + 2 / pas1), 2, 0],
+            [calcul(abs0 + 3 / pas1), 3, 0],
+            [calcul(abs0 + 4 / pas1), 4, 0],
+            [calcul(abs0 + 5 / pas1), 5, 0],
+            [calcul(abs0 + 6 / pas1), 6, 0],
+          ],
+          false
+        );
+        this.contenu_correction += `<div id="div_svg_corr${numero_de_l_exercice}${id_unique}" style="width: 90%; height: 200px;  "></div>`;
+        SVG_reperage_sur_un_axe(
+          `div_svg_corr${numero_de_l_exercice}${id_unique}`,
+          abs0,
+          6,
+          pas1,
+          pas2,
+          [
+            [l1, x1, x11, true],
+            [l2, x2, x22, true],
+            [l3, x3, x33, true],
+          ],
+          [
+            [calcul(abs0 + 1 / pas1), 1, 0],
+            [calcul(abs0 + 2 / pas1), 2, 0],
+            [calcul(abs0 + 3 / pas1), 3, 0],
+            [calcul(abs0 + 4 / pas1), 4, 0],
+            [calcul(abs0 + 5 / pas1), 5, 0],
+            [calcul(abs0 + 6 / pas1), 6, 0],
+          ],
+          false
+        );
+      } else {
+        //sortie Latex
+        texte = Latex_reperage_sur_un_axe(
+          2,
+          abs0,
+          pas1,
+          pas2,
+          [
+            [l1, x1, x11],
+            [l2, x2, x22],
+            [l3, x3, x33],
+          ],
+          [
+            [calcul(abs0, 0), 0, 0],
+            [calcul(abs0 + 1 / pas1, 0), 1, 0],
+          ],
+          false
+        );
+        texte_corr = Latex_reperage_sur_un_axe(
+          2,
+          abs0,
+          pas1,
+          pas2,
+          [
+            [l1, x1, x11, true],
+            [l2, x2, x22, true],
+            [l3, x3, x33, true],
+          ],
+          [
+            [calcul(abs0, 0), 0, 0],
+            [calcul(abs0 + 1 / pas1, 0), 1, 0],
+          ],
+          false
+        );
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
       }
@@ -6882,8 +7122,8 @@ function Lire_abscisse_fractionnaire() {
   };
   this.besoin_formulaire_numerique = [
     "Niveau de difficulté",
-    4,
-    "1 : Demis, tiers ou quarts avec zéro placé\n2 : Des cinquièmes aux neuvièmes avec zéro placé \n3 : Toutes les fractions précédentes mais zéro non visible\n4 : Mélange",
+    5,
+    "1 : Dixièmes\n2 : Centièmes\n3 : Demis et quarts\n4 : Cinquièmes\n5 : Mélange",
   ];
 }
 
@@ -10461,8 +10701,8 @@ function Proportionnalite_pas_proportionnalite() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Reconnaître une situation de proportionnalité";
   this.consigne = "Répondre aux questions posées en justifiant";
-  this.spacing = 1.5;
-  this.spacing_corr = 1.5;
+  sortie_html ? this.spacing = 1.5 : this.spacing = 1.4;
+  sortie_html ? this.spacing_corr = 1.5 : this.spacing_corr = 1;
   this.nb_questions = 5;
   this.nb_cols_corr = 1;
   this.nb_cols = 1;
@@ -11154,7 +11394,64 @@ function Exercice_fractions_decomposer() {
 }
 
 function Representer_une_fraction() {
+    Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Représenter des fractions";
+    this.consigne = "";
+    this.nb_questions = 4;
+    this.nb_cols = 2;
+    this.nb_cols_corr = 2;
+    this.sup = 3;
+  
+    this.nouvelle_version = function (numero_de_l_exercice) {
+      this.liste_questions = []; // Liste de questions
+      this.liste_corrections = []; // Liste de questions corrigées
+      let Xmin, Xmax, Ymin, Ymax, ppc, sc, g, k, carreaux,objets
+      ppc=20
+        if (sortie_html) {
+          sc=0.5
+        } else {
+          sc=0.4
+        }
+  
+      let  params = {
+        xmin: -2.2,
+        ymin: -2.2,
+        xmax: 18,
+        ymax: 3,
+        pixelsParCm: ppc,
+        scale: sc,
+      },den,num,f
+      
+      let liste = combinaison_listes([2,3,4,5,6], this.nb_questions);
+  
+      for (
+        let i = 0, texte, texte_corr, cpt = 0;
+        i < this.nb_questions && cpt < 50;) {
+        objets=[]
+        den=liste[i]
+        num=randint(1,den*3)
+        f=fraction(num,den)
+        texte=`Sachant qu'un disque représente une unité, représenter la fraction $${f.texFraction()}$ en coloriant la part correspondante.<br>`
+        texte+=mathalea2d(params,fraction(den*3,den).representation(0,0,2,0,'gateau','white'))
+        texte_corr =`Voici sur ces dessins, colorié en bleu, la part correspondante à la fraction $${f.texFraction()}$ :<br>`
+        texte_corr += mathalea2d(params,f.representation(0,0,2,randint(0,den-1),'gateau','blue'))
+        if (this.liste_questions.indexOf(texte) == -1) {
+          // Si la question n'a jamais été posée, on en créé une autre
+          this.liste_questions.push(texte);
+          this.liste_corrections.push(texte_corr);
+          i++;
+        }
+        cpt++;
+      }
+      liste_de_question_to_contenu(this);
+    };
+    this.besoin_formulaire_numerique = [
+      "Type de cahier",
+      3,
+      `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
+    ];
 
+  
 }
 
 /**
@@ -12813,6 +13110,146 @@ function Comparer_decimaux() {
 }
 
 /**
+ * Déduire un pourcentage par complément à 100%
+ * @Auteur Jean-Claude Lhote
+ * Référence 6N33-2
+ */
+function Calculer_un_pourcentage() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Problèmes de calcul de pourcentage par complément à 100%";
+  this.nb_questions = 3;
+  this.consigne = "Calculer";
+  this.spacing = 2;
+  this.spacing_corr = 2;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 1;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let type_de_questions_disponibles=[1,2,3]
+    let liste_choix=combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_moyens=[`en bus`,`en deux-roues`,`à  pieds`,`en voiture`]
+    let liste_sports=[`le foot`,`la natation`,`le basket`,`le ping-pong`,`le volley`,`la gym`]
+    let liste_hobbies=[`la couture`,`le cinéma`,`la musique`,`le sport`,`la programmation`,`le jardinage`,`la cuisine`]
+    let p1,p2,p3,moy1,moy2,moy3
+    let objets,centre=point(5,5),depart=point(10,5)
+
+    for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+    ) {
+      objets=[]
+      p1=randint(6,9)*5
+      p2=randint(6,9)*5
+      p3=100-p1-p2
+      switch(liste_choix[i]) {
+        case 1: // Les moyens de déplacement maison collège
+          [moy1,moy2,moy3]=combinaison_listes(liste_moyens,3)
+          texte = `Dans un collège, ${p1}% des élèves ${moy1}, ${p2}% ${moy2} et les autres ${moy3}.<br>`
+          texte += `Quel est le pourcentage des élèves qui ${moy3} ?`
+          texte_corr=`Les élèves qui ${moy1} ou qui ${moy2} représentent ${p1}% + ${p2}% = ${p1+p2}%.<br>`
+          texte_corr+=`Donc on calcule : 100 - ${p1+p2}% = ${p3}%<br>`
+          texte_corr+=`${p3}% des élèves ${moy3}.<br>`
+          break;
+          case 2: // Les sports pratiqués par les ados
+          [moy1,moy2,moy3]=combinaison_listes(liste_sports,3)
+          texte = `Dans une association sportive, ${p1}% des ados pratiquent ${moy1}, ${p2}% ${moy2} et les autres ${moy3}.<br>`
+          texte += `Quel est le pourcentage des ados qui pratiquent ${moy3} ?`
+          texte_corr=`Les ados qui pratiquent ${moy1} ou ${moy2} représentent ${p1}% + ${p2}% = ${p1+p2}%.<br>`
+          texte_corr+=`Donc on calcule : 100 - ${p1+p2}% = ${p3}%<br>`
+          texte_corr+=`${p3}% des ados de cette association sportive pratiquent ${moy3}.<br>`
+          break;
+          case 3: // Les sports pratiqués par les ados
+          [moy1,moy2,moy3]=combinaison_listes(liste_hobbies,3)
+          texte = `Dans une association culturelle, ${p1}% des membres ont comme passe-temps favorit ${moy1}, pour ${p2}% c'est ${moy2} et pour les autres ${moy3}.<br>`
+          texte += `Quel est le pourcentage des membres qui préfèrent ${moy3} ?`
+          texte_corr=`Les membres qui préfère ${moy1} ou ${moy2} représentent ${p1}% + ${p2}% = ${p1+p2}%.<br>`
+          texte_corr+=`Donc on calcule : 100 - ${p1+p2}% = ${p3}%<br>`
+          texte_corr+=`${p3}% des membres de cette association culturelle préfèrent ${moy3}.<br>`
+          break;
+
+      }
+      objets.push(codeAngle(depart,centre,p1*3.6,4.9,'','black',2,1,'red',0.4),texteParPoint(`${moy1.substring(3)}`,pointSurSegment(centre,rotation(depart,centre,p1*1.8),3),0) )
+      objets.push(codeAngle(rotation(depart,centre,p1*3.6),centre,p2*3.6,4.9,'','black',2,1,'blue',0.4),texteParPoint(`${moy2.substring(3)}`,pointSurSegment(centre,rotation(depart,centre,p1*3.6+p2*1.8),3),0) )
+      objets.push(codeAngle(depart,centre,-p3*3.6,4.9,'','black',2,1,'yellow',0.4),texteParPoint(`${moy3.substring(3)}`,pointSurSegment(centre,rotation(depart,centre,-p3*1.8),3),0) )
+      texte_corr+=mathalea2d({xmin : 0,ymin : 0,xmax : 10, ymax : 10,pixelsParCm : 20,scale : 1}, ...objets)
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+}
+/**
+ * Calculer le montant d'une réduction donnée en pourcentage d'un prix initial
+ * @Auteur Jean-Claude Lhote
+ * Référence 6N33-3
+ */
+function Appliquer_un_pourcentage() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Problèmes avec des calculs de pourcentages";
+  this.nb_questions = 5;
+  this.consigne = "Calculer";
+  this.spacing = 2;
+  this.spacing_corr = 2;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 1;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles=[1,2]
+    let choix=combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+    liste_pourcentages = [10, 20, 30, 40, 50];
+    let article=[[`Un pull`,20,40],[`Une chemise`,15,35],[`Un pantalon`,30,60],[`Un T-shirt`,15,25],[`Une jupe`,20,40]]
+    let legume=[[`Une aubergine`,100,200],[`Un melon`,200,300],[`Une tomate`,50,100],[`Une betterave`,75,100],[`Une carotte`,30,50]]
+    let liste_index=[0,1,2,3,4]
+    let prix=[],pourcent=[],masse=[]
+    let index=combinaison_listes(liste_index,this.nb_questions)
+    for (
+      let i = 0, p, n, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+      pourcent[i]=choice(liste_pourcentages)
+      switch(choix[i]){
+      case 1 :
+      prix[i]=randint(article[index[i]][1],article[index[i]][2])
+      texte=`${article[index[i]][0]} coûtant ${prix[i]} € bénéficie d'une réduction de ${pourcent[i]}%.<br>`
+      texte+=`Quel est le montant en euro de cette réduction ?`
+      texte_corr=`On doit calculer ${pourcent[i]}% de ${prix[i]} :<br>`
+      texte_corr+= `$${pourcent[i]}~\\%~\\text{de }${prix[i]}=${tex_fraction(pourcent[i],100)}\\times${prix[i]}=(${pourcent[i]}\\times${prix[i]})\\div100=${tex_nombre(pourcent[i] * prix[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * prix[i]) / 100))}$<br>`;
+      texte_corr+=`Le montant de la réduction est de ${tex_prix(calcul(prix[i]*pourcent[i]/100))} €`
+      break;
+      case 2 :
+        masse[i]=randint(legume[index[i]][1],article[index[i]][2])
+        texte=`${legume[index[i]][0]} pesant ${masse[i]} grammes a subit une croissance de ${pourcent[i]}%.<br>`
+        texte+=`Quel est la masse supplémentaire en grammes correspondant à cette croissance ?`
+        texte_corr=`On doit calculer ${pourcent[i]}% de ${masse[i]} :<br>`
+        texte_corr+= `$${pourcent[i]}~\\%~\\text{de }${masse[i]}=${tex_fraction(pourcent[i],100)}\\times${masse[i]}=(${pourcent[i]}\\times${masse[i]})\\div100=${tex_nombre(pourcent[i] * masse[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * masse[i]) / 100))}$<br>`;
+        texte_corr+=`La masse a augmenté de ${tex_nombre(calcul(masse[i]*pourcent[i]/100))} g.`
+         
+      break;
+      }
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+}
+
+/**
  * Calculer 10, 20, 30, 40 ou 50% d'un nombre
  * @Auteur Rémi Angot + Jean-claude Lhote
  */
@@ -12822,7 +13259,7 @@ function Pourcentage_d_un_nombre() {
   this.nb_questions = 5;
   this.consigne = "Calculer";
   this.spacing = 2;
-  this.spacing_corr = 2;
+  this.spacing_corr = 2.5;
   this.nb_cols = 2;
   this.nb_cols_corr = 1;
 
@@ -12856,7 +13293,7 @@ function Pourcentage_d_un_nombre() {
         )}\\div100=${tex_nombre(Algebrite.eval((p * n) / 100))}$`;
         //		texte_corr += `$\\phantom {Blanc}${p}~\\%~\\text{de }${n}=${tex_fraction(p,100)}\\times${n}=\\dfrac{${p}\\times${n}}{100}=${tex_fraction(p*n,100)}=${tex_nombre(Algebrite.eval(p*n/100))}$`
         if (this.sup2)
-          texte_corr += `$${p}~\\%~\\text{de }${n}=${tex_fraction(
+          texte_corr += `<br>$${p}~\\%~\\text{de }${n}=${tex_fraction(
             p,
             100
           )}\\times${n}=(${n}\\div100)\\times${p}=${tex_nombrec(
@@ -12864,7 +13301,7 @@ function Pourcentage_d_un_nombre() {
           )}\\times${p}=${tex_nombre(Algebrite.eval((p * n) / 100))}$`;
         //		texte_corr += `$\\phantom {Blanc}${p}~\\%~\\text{de }${n}=${tex_fraction(p,100)}\\times${n}=${tex_fraction(n,100)}\\times${p}=${tex_nombrec(calcul(n/100))}\\times${p}=${tex_nombre(Algebrite.eval(p*n/100))}$<br>`
         if (this.sup2)
-          texte_corr += `$${p}~\\%~\\text{de }${n}=${tex_fraction(
+          texte_corr += `<br>$${p}~\\%~\\text{de }${n}=${tex_fraction(
             p,
             100
           )}\\times${n}=${tex_nombrec(calcul(p / 100))}\\times${n}=${tex_nombre(
@@ -17122,6 +17559,85 @@ function Nommer_et_coder_des_polygones() {
     `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
   ];
 }
+function Ajouter_des_fractions_d_unite() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "mettre bout à bout des segments";
+  this.consigne = "";
+  this.nb_questions = 4;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.sup = 3;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let Xmin, Xmax, Ymin, Ymax, ppc, sc, g, k, carreaux,objets
+    ppc=20
+      if (sortie_html) {
+        sc=0.5
+      } else {
+        sc=0.3
+      }
+
+    let params,den,num=[0,0,0,0],f=[]
+    
+    let liste = combinaison_listes([5,6,7,8], this.nb_questions);
+
+    for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;) {
+      objets=[]
+      den=liste[i]
+      num[0]=randint(1,den-1)
+      num[1]=randint(1,den-1,num[0])
+      num[2]=randint(1,den-1,num[1])
+      num[3]=randint(1,den-1,[num[2],num[0]])
+      for (let j=0;j<4;j++)
+        f[j]=fraction(num[j],den)
+
+           
+      texte=`On place bout à bout 4 segments de longueurs respectives$ ${f[0].texFraction()}$, $${f[1].texFraction()}$, $${f[2].texFraction()}$ et $${f[3].texFraction()}$.<br>`
+      texte+=`Quelle est la longueur du segment obtenu ?`
+      texte_corr =`Voici sur ces dessins, coloriés en rouge, les différents segments :<br>`
+      for (let j=0;j<4;j++) 
+        objets.push(f[j].representation(0,5-j*1.25,5,0,'segment','red',0,1,1))
+      params = {
+        xmin: -0.4,
+        ymin: -1.5,
+        xmax: 6,
+        ymax: 6,
+        pixelsParCm: ppc,
+        scale: 0.5,
+      }
+      texte_corr += mathalea2d(params,...objets)
+      texte_corr+=`<br>Ce qui donne en les mettant bout à bout :<br>`
+      params = {
+        xmin: -0.4,
+        ymin: -1.5,
+        xmax: 20,
+        ymax: 1,
+        pixelsParCm: ppc,
+        scale: sc,
+      }
+      texte_corr+=mathalea2d(params,fraction(num[0]+num[1]+num[2]+num[3],den).representation(0,0,5,0,'segment','red',0,1,0.6))
+      texte_corr+=`<br>La longueur du segment ainsi obtenu est : $${fraction(num[0]+num[1]+num[2]+num[3],den).texFraction()}$`
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = [
+    "Type de cahier",
+    3,
+    `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
+  ];
+}
+
 /**
  * Utiliser les notations des segments, droites et demi-droites
  * @Auteur Rémi Angot
@@ -18707,14 +19223,14 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
 
 /** 
  * * Encadrer_un_decimal_par_deux_entiers_consecutifs
- * * beta6N31-1
+ * * 6N31-1
  * @author Sébastien Lozano
  */
 
 function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 3;
@@ -18760,24 +19276,37 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 			// pour les situations, autant de situations que de cas dans le switch !
 			let situations = [
         {//case 0 -->
-          p_entiere:calcul(m*1000 + c*100 + d*10 + u*1),
-          p_decimale:calcul(di*0.1 + ci*0.01 + mi*0.001),
 				},		
 			];
 
 			let enonces = [];
-			for (let k=0;k<3;k++) {
+			//for (let k=0;k<3;k++) {
 				enonces.push({
 					enonce:`
-          $\\ldots<${m*1000+c*100+d*10+u*1+situations[0].p_decimale} <\\ldots$
-          
+          $\\ldots < ${tex_nombre(m*1000 + c*100 + d*10 + u*1 + calcul(di*0.1 + ci*0.01 + mi*0.001))} < \\ldots$          
 					`,
 					question:``,
 					correction:`
-					Correction type ${k}
-					`
+					$${mise_en_evidence(tex_nombre(m*1000 + c*100 + d*10 + u*1))} < ${tex_nombre(m*1000 + c*100 + d*10 + u*1 + calcul(di*0.1 + ci*0.01 + mi*0.001))} < ${mise_en_evidence(tex_nombre(m*1000 + c*100 + d*10 + u*1 + 1))}$					`
 				});
-			};
+				enonces.push({
+					enonce:`
+          $\\ldots < ${tex_nombre(m*1000 + c*100 + d*10 + u*1 + calcul(di*0.1 + ci*0.01))} < \\ldots$          
+					`,
+					question:``,
+					correction:`
+					$${mise_en_evidence(tex_nombre(m*1000 + c*100 + d*10 + u*1))} < ${tex_nombre(m*1000 + c*100 + d*10 + u*1 + calcul(di*0.1 + ci*0.01))} < ${mise_en_evidence(tex_nombre(m*1000 + c*100 + d*10 + u*1 + 1))}$					`
+				});
+				enonces.push({
+					enonce:`
+          $\\ldots < ${tex_nombre(m*1000 + c*100 + d*10 + u*1 + calcul(di*0.1))} < \\ldots$          
+					`,
+					question:``,
+					correction:`
+					$${mise_en_evidence(tex_nombre(m*1000 + c*100 + d*10 + u*1))} < ${tex_nombre(m*1000 + c*100 + d*10 + u*1 + calcul(di*0.1))} < ${mise_en_evidence(tex_nombre(m*1000 + c*100 + d*10 + u*1 + 1))}$					`
+				});
+
+        //};
             
             // autant de case que d'elements dans le tableau des situations
 			switch (liste_type_de_questions[i]){
@@ -18832,6 +19361,249 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 				// 		texte_corr = `${enonces[4].correction}`;
 				// 	};
 				// 	break;				
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+/** 
+ * * Ordre de grandeur d'une opération entre décimaux
+ * * 6N31-2
+ * @author Sébastien Lozano
+ */
+
+function Ordre_de_grandeur_operations_decimaux(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = false;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 1;
+	} else {
+		this.nb_questions = 1;
+	};	
+
+	this.titre = "Ordre de grandeur et opérations sur les décimaux";	
+	this.consigne = `Pour chaque opération proposée dans la première colonne, cocher la case correspondant à l'ordre de grandeur du résultat.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+      //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+      type_de_questions_disponibles = shuffle([0]);
+      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+
+      let ligne_entete = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000'),tex_nombre('100000')];
+      let ligne_entete_corr = ['\\text{Opération}',`\\phantom{000}`+tex_nombre('1')+`\\phantom{000}`,`\\phantom{00}`+tex_nombre('10')+`\\phantom{00}`,`\\phantom{00}`+tex_nombre('100')+`\\phantom{00}`,`\\phantom{0}`+tex_nombre('1000')+`\\phantom{0}`,tex_nombre('10000'),tex_nombre('100000')];
+
+      let m=randint(1,9,[4,5,6]),
+      c=randint(1,9),
+      c1=randint(1,9),
+      c2=randint(1,9),
+      c3=randint(1,9,[4,5,6]),
+      c4=randint(1,4),
+      d=randint(1,9),
+      d1=randint(1,9),
+      d2=randint(1,9),
+      d3=randint(1,9),
+      u=randint(1,9),
+      u1=randint(1,9),
+      u2=randint(1,9),
+      u3=randint(1,9);
+
+      let cbis,d1bis;
+      do {
+        cbis = randint(2,9);
+        d1bis = randint(2,9);
+      } while (cbis*d1bis>3 && cbis*d1bis<7);
+
+      let div_aleatoire_ope_3 = choice([10,100]);
+      let div_aleatoire_ope_5 = choice([1,10,100,1000]);
+      let mult_aleatoire_ope_4 = choice([0.1,0.01,0.001]);
+
+      // une fonction pour ordre de grandeur en fonction de ... opération 1
+      function myOrdreOpe1(c,d) {
+        if (c*d>=60) {
+          return ['','','','','',mise_en_evidence(`X`)]; 
+        } else {
+          return ['','','','',mise_en_evidence(`X`),'']; 
+        };
+      };
+      
+      // une fonction pour ordre de grandeur en fonction de ... opération 2
+      function myOrdreOpe2(c1,c2) {
+        if (c1+c2/10>=600) {
+          return ['','','',mise_en_evidence(`X`),'','']; 
+        } else {
+          return ['','',mise_en_evidence(`X`),'','','']; 
+        };
+      };
+
+      // une fonction pour ordre de grandeur en fonction de ... opération 3
+      function myOrdreOpe3(n) {
+        if (n>=7) {
+          return ['','','',mise_en_evidence(`X`),'','']; 
+        } else {
+          return ['','',mise_en_evidence(`X`),'','','']; 
+        };
+      };
+
+      // une fonction pour ordre de grandeur en fonction de ... opération 4
+      function myOrdreOpe4(d,n) {
+        let sortie;
+        switch (d) {
+          case 0.1:
+            if (n>=7) {
+              sortie = ['','','',mise_en_evidence(`X`),'',''];
+            } else {
+              sortie = ['','',mise_en_evidence(`X`),'','',''];
+            };            
+            break;
+          case 0.01: 
+            if (n>=7) {
+              sortie = ['','',mise_en_evidence(`X`),'','',''];              
+            } else {
+              sortie = ['',mise_en_evidence(`X`),'','','',''];
+            };            
+            break;
+          case 0.001: 
+            if (n>=7) {
+              sortie = ['',mise_en_evidence(`X`),'','','',''];
+            } else {
+              sortie = [mise_en_evidence(`X`),'','','','',''];
+            };       
+            break;            
+        }
+        return sortie;
+      };
+
+      // une fonction pour ordre de grandeur en fonction de ... opération 5
+      function myOrdreOpe5(mult) {
+        let sortie;
+        switch (mult) {
+          case 1:
+            return sortie = ['','','',mise_en_evidence(`X`),'','']; 
+            break;
+          case 10:
+            return sortie = ['','',mise_en_evidence(`X`),'','','']; 
+            break;
+          case 100:
+            return sortie = ['',mise_en_evidence(`X`),'','','','']; 
+            break;
+          case 1000:
+            return sortie = [mise_en_evidence(`X`),'','','','','']; 
+            break;        
+        };
+        return sortie;
+      };
+
+      let situations = [
+        {
+          operation:`${cbis*100+d*10+u*1}\\times ${d1bis*10+u1*1}`,
+          operation_corr:`${cbis*100+d*10+u*1}\\times ${d1bis*10+u1*1} \\simeq  ${(cbis*100)}\\times ${(d1bis*10)} \\text{ soit } ${tex_nombre((cbis*100)*(d1bis*10))}`,
+          operation_coche:myOrdreOpe1(cbis,d1bis),//['','','','',mise_en_evidence(`X`),''],
+        },
+        {
+          operation:`${tex_nombre((c2*100+d2*10+u1*1)/10)}+${c1*100+d1*10+u1*1}`,
+          operation_corr:`${tex_nombre((c2*100+d2*10+u1*1)/10)}+${c1*100+d1*10+u1*1} \\simeq ${c2*100/10}+${c1*100} \\text{ soit } ${c2*100/10 + c1*100}`,
+          operation_coche:myOrdreOpe2(c1*100,c2*100),//['','',mise_en_evidence(`X`),'','',''],
+        },
+        {
+          operation:`${c3*100+d3*10+u3*1}-${tex_nombre((c2*100+d2*10+u2*1)/div_aleatoire_ope_3)}`,
+          operation_corr:`${c3*100+d3*10+u3*1}-${tex_nombre((c2*100+d2*10+u2*1)/div_aleatoire_ope_3)} \\simeq ${c3*100+d3*10}-${tex_nombre((c2*100)/div_aleatoire_ope_3)} \\text{ soit } ${c3*100+d3*10-(c2*100)/div_aleatoire_ope_3}`,
+          operation_coche:myOrdreOpe3(c3),//['','',mise_en_evidence(`X`),'',''],
+        },
+        {
+          operation:`${tex_nombre(m*1000+c3*100+d2*10+u1*1)}\\times ${tex_nombre(mult_aleatoire_ope_4)}`,
+          operation_corr:`${tex_nombre(m*1000+c3*100+d2*10+u1*1)}\\times ${tex_nombre(mult_aleatoire_ope_4)} \\simeq ${tex_nombre(m*1000)}\\times ${tex_nombre(mult_aleatoire_ope_4)} \\text{ soit } ${tex_nombre(m*1000*mult_aleatoire_ope_4)}`,
+          operation_coche:myOrdreOpe4(mult_aleatoire_ope_4,m),//['','','','',mise_en_evidence(`X`)],
+        },
+        {
+          // operation:`${tex_nombre((m*1000+c1*100+d3*10+u*1)/100)}\\div ${m}`,
+          // operation_corr:`${tex_nombre((m*1000+c1*100+d3*10+u*1)/100)}\\div ${m} \\simeq ${tex_nombre((m*1000)/100)}\\div ${m} \\text{ soit } ${tex_nombre((m*1000)/100/m)}`,
+          // operation_coche:['',mise_en_evidence(`X`),'','',''],
+          operation:`${tex_nombre((m*1000+c4*100+d3*10+u*1)/div_aleatoire_ope_5)}\\div ${m}`,
+          operation_corr:`${tex_nombre((m*1000+c4*100+d3*10+u*1)/div_aleatoire_ope_5)}\\div ${m} \\simeq ${tex_nombre((m*1000)/div_aleatoire_ope_5)}\\div ${m} \\text{ soit } ${tex_nombre((m*1000)/div_aleatoire_ope_5/m)}`,
+          operation_coche:myOrdreOpe5(div_aleatoire_ope_5),//['',mise_en_evidence(`X`),'','',''],
+        },
+
+      ];
+
+      situations = shuffle(situations);
+            
+			let enonces = [];
+			for (let k=0;k<1;k++) {
+				enonces.push({
+          enonce:`
+          ${tab_C_L(ligne_entete,[situations[0].operation,situations[1].operation,situations[2].operation,situations[3].operation,situations[4].operation],
+          [            
+            '','','','','','',
+            '','','','','','',
+            '','','','','','',
+            '','','','','','',
+            '','','','','','',
+          ]
+          )}
+          `,
+          question:``,
+          correction:`
+          Commençons par calculer un ordre de grandeur du résultat de chaque opération dans la première colonne du tableau.
+          <br>
+          ${tab_C_L(ligne_entete_corr,[situations[0].operation_corr,situations[1].operation_corr,situations[2].operation_corr,situations[3].operation_corr,situations[4].operation_corr,],
+          [            
+            situations[0].operation_coche[0],situations[0].operation_coche[1],situations[0].operation_coche[2],situations[0].operation_coche[3],situations[0].operation_coche[4],situations[0].operation_coche[5],
+            situations[1].operation_coche[0],situations[1].operation_coche[1],situations[1].operation_coche[2],situations[1].operation_coche[3],situations[1].operation_coche[4],situations[1].operation_coche[5],
+            situations[2].operation_coche[0],situations[2].operation_coche[1],situations[2].operation_coche[2],situations[2].operation_coche[3],situations[2].operation_coche[4],situations[2].operation_coche[5],
+            situations[3].operation_coche[0],situations[3].operation_coche[1],situations[3].operation_coche[2],situations[3].operation_coche[3],situations[3].operation_coche[4],situations[3].operation_coche[5],
+            situations[4].operation_coche[0],situations[4].operation_coche[1],situations[4].operation_coche[2],situations[4].operation_coche[3],situations[4].operation_coche[4],situations[4].operation_coche[5],
+          ]
+          )}				
+          `
+          });
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -25509,7 +26281,291 @@ function Calculer_la_valeur_d_une_expression_litterale_deg1_inc1() {
 	this.titre="Calculer la valeur d'une expression littérale de degré 1 à 1 inconnue";
 	this.nb_questions=2;
 
-}/**
+}
+
+
+/** 
+ * * Justifier qu'un tableau est un tableau de proportionnalité ou non
+ * * 5P10-1
+ * @author Sébastien Lozano
+ */
+
+function Tableaux_et_proportionnalite(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = false;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 6;
+	} else {
+		this.nb_questions = 4;
+	};	
+
+	this.titre = "Tableaux et proportionnalité.";	
+	this.consigne = `Dire si les tableaux suivants sont de tableaux de proportionnalité. Justifier.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0,1,2,3,4,5];			
+		} else {
+			  //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
+			  type_de_questions_disponibles = [choice([0,1]),2,choice([3,4]),5];			      			
+			  type_de_questions_disponibles = shuffle(type_de_questions_disponibles);
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+
+			let n1 = randint(5,9);
+			let n2 = randint(5,9,[n1]);
+			let n3 = randint(5,9,[n1,n2]);
+			let coeff = randint(2,9);
+			let coeff_soust = randint(2,4);
+
+			// pour les décimaux seulement en demis
+			let u1 = randint(1,9);
+			let ci1 = choice([0,5]); 					
+			let u2 = randint(1,9);
+			let ci2 = choice([0,5]); 					
+			let u3 = randint(1,9);
+			let ci3 = choice([0,5]);
+			
+			while ( ci1==0 && ci2 == 0 && ci3 == 0) {
+				ci1 = choice([0,5]); 					
+				ci2 = choice([0,5]); 					
+				ci3 = choice([0,5]); 					
+			};
+
+			// une fonction pour la justification
+			function justifications_OK(n1,n2,n3,coeff,sens) {
+				let sortie;
+				switch (sens) {
+					case 'L1L2':
+						sortie = `$\\dfrac{\\textcolor{blue}{${tex_nombre(n1)}}}{\\textcolor{red}{${tex_nombre(n1*coeff)}}} = \\dfrac{\\textcolor{blue}{${tex_nombre(n2)}}}{\\textcolor{red}{${tex_nombre(n2*coeff)}}} = \\dfrac{\\textcolor{blue}{${tex_nombre(n3)}}}{\\textcolor{red}{${tex_nombre(n3*coeff)}}}$`;
+						break;
+					case 'L2L1':
+						sortie = `$\\dfrac{\\textcolor{red}{${tex_nombre(n1*coeff)}}}{\\textcolor{blue}{${tex_nombre(n1)}}} = \\dfrac{\\textcolor{red}{${tex_nombre(n2*coeff)}}}{\\textcolor{blue}{${tex_nombre(n2)}}} = \\dfrac{\\textcolor{red}{${tex_nombre(n3*coeff)}}}{\\textcolor{blue}{${tex_nombre(n3)}}}$`;
+						break;
+				};
+				return sortie;				
+			};
+
+			// une fonction pour la justification sens1
+			function justifications_KO(n1,n2,n3,coeff,operation,sens) {
+				let sortie;
+				let isEq = function(n1,n2,coeff) {
+					if ( calcul(n1/(n1+coeff)) == calcul(n2/(n2+coeff)) ) {
+						return `=`;
+					} else {
+						return `\\neq`;
+					};
+				};
+				let color1,color2;
+				switch (sens) {
+					case 'L1L2':
+						color1 = 'red';
+						color2 = 'blue';
+						break;
+					case 'L2L1':
+						color1 = 'blue';
+						color2 = 'red';
+						break;				
+				};
+				switch (operation) {
+					case '+':						
+						sortie = `$\\dfrac{\\textcolor{${color2}}{${tex_nombre(n1)}}}{\\textcolor{${color1}}{${tex_nombre(n1+coeff)}}}`;
+						sortie += isEq(n1,n2,coeff);
+						sortie += `\\dfrac{\\textcolor{${color2}}{${tex_nombre(n2)}}}{\\textcolor{${color1}}{${tex_nombre(n2+coeff)}}}`;	
+						sortie += isEq(n2,n3,coeff);
+						sortie += `\\dfrac{\\textcolor{${color2}}{${tex_nombre(n3)}}}{\\textcolor{${color1}}{${tex_nombre(n3+coeff)}}}$`;	
+						break;
+					case '-':
+						sortie = `$\\dfrac{\\textcolor{${color2}}{${tex_nombre(n1)}}}{\\textcolor{${color1}}{${tex_nombre(n1-coeff)}}}`;
+						sortie += isEq(n1,n2,coeff);
+						sortie += `\\dfrac{\\textcolor{${color2}}{${tex_nombre(n2)}}}{\\textcolor{${color1}}{${tex_nombre(n2-coeff)}}}`;	
+						sortie += isEq(n2,n3,coeff);
+						sortie += `\\dfrac{\\textcolor{${color2}}{${tex_nombre(n3)}}}{\\textcolor{${color1}}{${tex_nombre(n3-coeff)}}}$`;	
+						break;
+				};
+				return sortie;				
+			};
+
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+				{//case 0 --> multiplication ligne1 vers ligne2
+					tableau:tab_C_L(
+						[`\\phantom{000}`+n1+`\\phantom{000}`,`\\phantom{000}`+n2+`\\phantom{000}`,`\\phantom{000}`+n3+`\\phantom{000}`],
+						[n1*coeff],[n2*coeff,n3*coeff]
+						),
+					justification_L1_L2:justifications_OK(n1,n2,n3,coeff,'L1L2'),
+					justification_L2_L1:justifications_OK(n1,n2,n3,coeff,'L2L1'),
+					isProportionnel:texte_en_couleur_et_gras(`C'est donc un tableau de proportionnalité.`),
+					areEgaux:`égaux`,
+
+				},
+				{//case 1 --> multiplication ligne1 vers ligne2 Décimaux
+					tableau:tab_C_L(
+						[`\\phantom{000}`+tex_nombre(u1+ci1/10)+`\\phantom{000}`,`\\phantom{000}`+tex_nombre(u2+ci2/10)+`\\phantom{000}`,`\\phantom{000}`+tex_nombre(u3+ci3/10)+`\\phantom{000}`],
+						[tex_nombre((u1+ci1/10)*coeff)],[tex_nombre((u2+ci2/10)*coeff),tex_nombre((u3+ci3/10)*coeff)]
+						),
+					justification_L1_L2:justifications_OK(u1+ci1/10,u2+ci2/10,u3+ci3/10,coeff,'L1L2'),
+					justification_L2_L1:justifications_OK(u1+ci1/10,u2+ci2/10,u3+ci3/10,coeff,'L2L1'),
+					isProportionnel:texte_en_couleur_et_gras(`C'est donc un tableau de proportionnalité.`),
+					areEgaux:`égaux`,
+
+				},
+				{//case 2 --> division ligne1 vers ligne2
+						tableau:tab_C_L(
+							[`\\phantom{000}`+n1*coeff+`\\phantom{000}`,`\\phantom{000}`+n2*coeff+`\\phantom{000}`,`\\phantom{000}`+n3*coeff+`\\phantom{000}`],
+							[n1],[n2,n3]
+							),
+						justification_L1_L2:justifications_OK(n1*coeff,n2*coeff,n3*coeff,1/coeff,'L1L2'),
+						justification_L2_L1:justifications_OK(n1*coeff,n2*coeff,n3*coeff,1/coeff,'L2L1'),
+						isProportionnel:texte_en_couleur_et_gras(`C'est donc un tableau de proportionnalité.`),
+						areEgaux:`égaux`,
+							
+				},
+				{//case 3 --> addition ligne1 vers ligne2
+					tableau:tab_C_L(
+						[`\\phantom{000}`+n1+`\\phantom{000}`,`\\phantom{000}`+n2+`\\phantom{000}`,`\\phantom{000}`+n3+`\\phantom{000}`],
+						[n1+coeff],[n2+coeff,n3+coeff]
+						),
+					justification_L1_L2:justifications_KO(n1,n2,n3,coeff,'+','L1L2'),
+					justification_L2_L1:justifications_KO(n1+coeff,n2+coeff,n3+coeff,-coeff,'+','L2L1'),
+					isProportionnel:texte_en_couleur_et_gras(`Ce n'est donc pas un tableau de proportionnalité.`),
+					areEgaux:`différents`,
+				},
+				{//case 4 --> addition ligne1 vers ligne2 Décimaux
+					tableau:tab_C_L(
+						[`\\phantom{000}`+tex_nombre(u1+ci1/10)+`\\phantom{000}`,`\\phantom{000}`+tex_nombre(u2+ci2/10)+`\\phantom{000}`,`\\phantom{000}`+tex_nombre(u3+ci3/10)+`\\phantom{000}`],
+						[tex_nombre((u1+ci1/10)+coeff)],[tex_nombre((u2+ci2/10)+coeff),tex_nombre((u3+ci3/10)+coeff)]
+						),
+					justification_L1_L2:justifications_KO(u1+ci1/10,u2+ci2/10,u3+ci3/10,coeff,'+','L1L2'),
+					justification_L2_L1:justifications_KO(u1+ci1/10,u2+ci2/10,u3+ci3/10,coeff,'+','L2L1'),
+					isProportionnel:texte_en_couleur_et_gras(`Ce n'est donc pas un tableau de proportionnalité.`),
+					areEgaux:`différents`,
+
+				},
+				{//case 5 --> soustraction ligne1 vers ligne2
+					tableau:tab_C_L(
+						[`\\phantom{000}`+n1+`\\phantom{000}`,`\\phantom{000}`+n2+`\\phantom{000}`,`\\phantom{000}`+n3+`\\phantom{000}`],
+						[n1-coeff_soust],[n2-coeff_soust,n3-coeff_soust]
+						),
+					justification_L1_L2:justifications_KO(n1,n2,n3,coeff_soust,'-','L1L2'),
+					justification_L2_L1:justifications_KO(n1-coeff_soust,n2-coeff_soust,n3-coeff_soust,-coeff_soust,'-','L2L1'),
+					isProportionnel:texte_en_couleur_et_gras(`Ce n'est donc pas un tableau de proportionnalité.`),
+					areEgaux:`différents`,
+				},
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`					
+					${situations[k].tableau}				
+					`,
+					question:``,
+					correction:`
+					Pour déterminer si c'est un tableau de proportionnalité, il suffit de comparer les quotients d'un nombre de la première ligne par le nombre correspondant de la seconde ligne ou inversement.
+					<br> Soit ${situations[k].justification_L1_L2}, on constate qu'ils sont ${situations[k].areEgaux}.
+					<br>Ou bien ${situations[k].justification_L2_L1}, on constate aussi qu'ils sont ${situations[k].areEgaux}.
+					<br>${situations[k].isProportionnel}
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+        		case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          			break;
+        		case 2 : 
+					texte = `${enonces[2].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[2].correction}`;
+					};
+          			break;				
+        		case 3 : 
+					texte = `${enonces[3].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[3].correction}`;
+					};
+					break;	
+				case 4 : 
+					texte = `${enonces[4].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[4].correction}`;
+					};
+					break;
+				case 5 : 
+					texte = `${enonces[5].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[5].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[5].correction}`;
+					};
+					break;					
+ 			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};/**
  * * Calcul de l'inverse d'un nombre.
  *
  * Paramétrages possibles :
@@ -42460,7 +43516,7 @@ function Problemes_Thales(){
 					labels = labelPoint(M,N,A,B,C,D)
 
 					texte = `Sur la figure ci-dessous $${nomA+nomB+nomC+nomD}$ est un rectangle et $(MN)$ est parallèle à la diagonale $(${nomB+nomD})$.`
-					texte += '<br>Calculer la longueur $DN$ au millimètre près.<br><br>'
+					texte += `<br>Calculer la longueur $${nomD+'N'}$ au millimètre près.<br><br>`
 					texte += mathalea2d({
 						xmin : -2,
 						xmax : 9,
@@ -42473,7 +43529,7 @@ function Problemes_Thales(){
 					texte_corr += `<br><br> $${tex_fraction(nomA+'M',nomA+nomB)}=${tex_fraction(nomA+'N',nomA+nomD)}=${tex_fraction('MN',nomB+nomD)}$`
 					texte_corr += `<br><br> $${tex_fraction(nomA+'M',nomA+nomB)}=${tex_fraction(nomA+'N',BC)}=${tex_fraction(tex_nombre(MN),tex_nombre(BD))}$`
 					texte_corr += `<br><br> $${nomA}N = ${tex_fraction(BC+'\\times'+tex_nombre(MN),BD)}=${tex_nombre(arrondi(calcul(BC*MN/BD),1))}$ cm`
-				
+					texte_corr += `<br><br> Les points $${nomA}$, $N$ et $${nomD}$ sont alignés dans cet ordre donc $N${nomD}=${nomA+nomD}-${nomA}N= ${BC}-${tex_nombre(arrondi(calcul(BC*MN/BD),1))}=${tex_nombre(arrondi(calcul(BC-BC*MN/BD),1))}$ cm.`
 				break;
 				}
 			

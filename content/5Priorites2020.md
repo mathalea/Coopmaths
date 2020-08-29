@@ -8,6 +8,20 @@ draft: false
 cycle: 4
 description : "Cinquième - Priorités rentrée 2020 - Période 1 (septembre octobre)"
 ---
+<!-- 
+Début de l'url commune 
+https://coopmaths.fr/exercice.html?
+
+Tous les exos actuellement dispos
+ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
+
+Nombres et calculs
+ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1
+
+Espace et géométrie
+ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
+ -->
+
 
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
@@ -15,7 +29,8 @@ description : "Cinquième - Priorités rentrée 2020 - Période 1 (septembre oct
 Cette page a pour but de permettre l'exploitation de plusieurs manières du test de positionnement que l'on peut trouver [ici sur eduscol](https://eduscol.education.fr/cid152895/rentree-2020-priorites-et-positionnement.html#lien1).
 
 * En utilisant [cette version statique du test de positionnement](/pdf/2020-5e-Priorites-Test.pdf) ainsi que sa correction.
-* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1), principalement afin de générer une nouvelle version PDF.
+* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
+), principalement afin de générer une nouvelle version PDF.
 
 Une fois que les élèves ont passé le test, l'idée est de pouvoir cibler le travail de chacun à partir des mêmes exercices proposés dans la liste détaillée ci-dessous.
 
@@ -31,7 +46,7 @@ Pour cela deux options :
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 5e  - version pdf non complète" "/pdf/2020-5e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?6C30-1,nb_questions=8,sup=3&ex=6N30,nb_questions=3,sup=1&ex=6N23-1,nb_questions=10&ex=6C23,nb_questions=5,sup=11&ex=6C33,nb_questions=5,sup=3&ex=6C32,nb_questions=1&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1&ex=6N33-1,nb_questions=5&ex=6G20,nb_questions=4,sup=3&ex=6G42,nb_questions=1,sup=1,sup2=1&ex=6G43,nb_questions=1,sup=1,sup2=1&ex=6G12-1,nb_questions=1,sup=3,sup2=1&ex=6G23-2,nb_questions=3&ex=6G24-1,nb_questions=1,sup=0,sup2=1&ex=6G24-2,nb_questions=1,sup=0,sup2=1" %}}
+	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}
 {{< /liste >}}
 
 
@@ -44,16 +59,16 @@ Pour cela deux options :
 			{{% priorite "L’élève utilise les grands nombres entiers et des nombres décimaux ayant au plus quatre décimales." %}}
 			{{% priorite_alea "6C30-1 : Multiplications d'un nombre décimal par 10, 100 ou 1 000." "6C30-1,sup=1" %}}
 			{{% priorite_alea "6C30-2 : Calculer le produit de deux décimaux connaissant le produit de deux entiers" "6C30-2" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N31-2 : Ordre de grandeur et opérations sur les décimaux" "6N31-2" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 1 décimale" "6N30,sup=1" %}}
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 2 décimales" "6N30,sup=2" %}}
 			{{% priorite_alea "6N31-1 : Encadrer un décimal par deux entiers consécutifs" "6N31-1" %}}
-			{{% priorite_alea "6N23-1 : Différentes écritures des nombres décimaux" "6N23-1" %}}			
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N23-1 : Différentes écritures des nombres décimaux" "6N23-1" %}}
+			{{% priorite_alea "6N30-1 : Connaître la valeur décimale de fractions simples" "6N30-1,sup=3" %}}						
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
-			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}
-			{{% priorite_alea "6N30-1 : Connaître la valeur décimale de fractions simples" "6N30-1,sup=3" %}}
+			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}			
+			{{% priorite_alea "6N14-2 : Mettre bout à bout des segments" "6N14-2" %}}
 			{{% priorite_alea "... : ..." "" %}}
 		</div>	
 {{< /liste_priorites >}}
@@ -76,10 +91,7 @@ Pour cela deux options :
 
 			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}
 			{{% priorite_alea "6P11 : Résoudre des problèmes de proportionnalité en utilisant la linéarité simple" "6P11,nb_questions=2" %}}
-			{{% priorite_alea "6P11-1 : Problème relevant de la proportionnalité avec les propriétés de linéarité" "6P11-1" %}}
-			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6P11-1 : Problème relevant de la proportionnalité avec les propriétés de linéarité" "6P11-1" %}}	
 
 			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}			
 			{{% priorite_alea "... : ..." "" %}}
