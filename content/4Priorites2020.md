@@ -9,12 +9,19 @@ cycle: 4
 description : "Quatrième - Priorités rentrée 2020 - Période 1 (septembre octobre)"
 ---
 <!-- 
+Tous les exos actuellement dispos
 https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
+Nombres et calculs
 https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5
+
+Organisation et gestion de données
 https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10-1
+
+Espace et géométrie
 https://coopmaths.fr/exercice.html?ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
  -->
+
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
 ### Objectifs de cette page
