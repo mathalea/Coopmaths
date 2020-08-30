@@ -34,9 +34,16 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 4e - pdf temporaire" "/pdf/2020-4e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 4e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}
+	{{% alea_url "Test de positionnement 4e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
 {{< /liste >}}
 
+**Compilation des exercices par thème**
+{{< liste>}}
+{{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?" %}}	
+{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?" %}}	
+{{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?" %}}	
+{{% alea_url "Algorithmique" "https://coopmaths.fr/exercice.html?" %}}	
+{{< /liste>}}
 
 <!-- <h3 class="ui horizontal divider header">Nombres et calculs</h3> -->
 {{< titre1 "Nombres et calculs">}}
@@ -70,7 +77,7 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 
 <!-- <h3 class="ui horizontal divider header">Organisation et gestion des données, fonctions.</h3> -->
-{{< titre1 "Organisation et gestion des données, fonctions.">}}
+{{< titre1 "Organisation et gestion des données, fonctions">}}
 {{< liste_priorites >}}
 	<div class="item">
 		<i class="large black chevron circle right icon"></i>
