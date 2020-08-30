@@ -13,10 +13,10 @@ Début de l'url commune
 https://coopmaths.fr/exercice.html?
 
 Tous les exos actuellement dispos
-ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
+ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6N33-2&ex=6N33-3&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
 
 Nombres et calculs
-ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1
+ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6N33-2&ex=6N33-3
 
 Espace et géométrie
 ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
@@ -25,13 +25,13 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G
 
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
-{{% prioriteIntro "/pdf/2020-5e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3"  %}}
+{{% prioriteIntro "/pdf/2020-5e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N33-2&ex=6N33-3&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3"  %}}
 
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 5e  - version pdf non complète" "/pdf/2020-5e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}
+	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6N33-2&ex=6N33-3&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}
 {{< /liste >}}
 
 
@@ -79,9 +79,9 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G
 			{{% priorite_alea "6P11-1 : Problème relevant de la proportionnalité avec les propriétés de linéarité" "6P11-1" %}}	
 
 			{{% priorite "Il sait appliquer un pourcentage dans des cas simples." %}}			
-			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "6N33-1 : Calculer le pourcentage d'un nombre de tête" "6N33-1" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N33-2 : Problèmes de calcul de pourcentage par complément à 100%" "6N33-2" %}}			
+			{{% priorite_alea "6N33-3 : Problèmes avec des calculs de pourcentages" "6N33-3" %}}
 
 		</div>	
 {{< /liste_priorites >}}
