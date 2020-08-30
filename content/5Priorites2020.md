@@ -13,13 +13,13 @@ Début de l'url commune
 https://coopmaths.fr/exercice.html?
 
 Tous les exos actuellement dispos
-ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
+ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
 
 Nombres et calculs
 ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1
 
 Espace et géométrie
-ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
+ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
  -->
 
 
@@ -29,8 +29,7 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G
 Cette page a pour but de permettre l'exploitation de plusieurs manières du test de positionnement que l'on peut trouver [ici sur eduscol](https://eduscol.education.fr/cid152895/rentree-2020-priorites-et-positionnement.html#lien1).
 
 * En utilisant [cette version statique du test de positionnement](/pdf/2020-5e-Priorites-Test.pdf) ainsi que sa correction.
-* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
-), principalement afin de générer une nouvelle version PDF.
+* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3), principalement afin de générer une nouvelle version PDF.
 
 Une fois que les élèves ont passé le test, l'idée est de pouvoir cibler le travail de chacun à partir des mêmes exercices proposés dans la liste détaillée ci-dessous.
 
@@ -46,7 +45,7 @@ Pour cela deux options :
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 5e  - version pdf non complète" "/pdf/2020-5e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}
+	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}
 {{< /liste >}}
 
 
@@ -119,6 +118,7 @@ Pour cela deux options :
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - gros carreaux" "6G12-1,sup2=2" %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - pas de carreaux" "6G12-1,sup2=3" %}}
+			{{% priorite_alea "6G21 :  Tracer un triangle dont on connaît les trois longueurs" "6G21" %}}
 			{{% priorite_alea "6G23-2 :  Tracer un triangle dont on connait une longueur et 2 angles" "6G23-2" %}}
 			{{% priorite_alea "... : ..." "" %}}	
 			{{% priorite_alea "... : ..." "" %}}
