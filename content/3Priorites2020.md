@@ -43,10 +43,10 @@ ex=4Algo1-0
 
 **Compilation des exercices par thème**
 {{< liste>}}
-{{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?" %}}	
-{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?" %}}	
-{{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?" %}}	
-{{% alea_url "Algorithmique" "https://coopmaths.fr/exercice.html?" %}}	
+{{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20" %}}	
+{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P11-1&ex=4P10-1&ex=4P20-0&ex=4F12" %}}	
+{{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2" %}}	
+{{% alea_url "Algorithmique" "https://coopmaths.fr/exercice.html?ex=4Algo1-0" %}}	
 {{< /liste>}}
 
 
