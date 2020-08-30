@@ -39,10 +39,9 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 **Compilation des exercices par thème**
 {{< liste>}}
-{{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?" %}}	
-{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?" %}}	
-{{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?" %}}	
-{{% alea_url "Algorithmique" "https://coopmaths.fr/exercice.html?" %}}	
+{{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5" %}}	
+{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10-1" %}}	
+{{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
 {{< /liste>}}
 
 <!-- <h3 class="ui horizontal divider header">Nombres et calculs</h3> -->
