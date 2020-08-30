@@ -27,20 +27,7 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
-### Objectifs de cette page
-Cette page a pour but de permettre l'exploitation de plusieurs manières du test de positionnement que l'on peut trouver [ici sur eduscol](https://eduscol.education.fr/cid152895/rentree-2020-priorites-et-positionnement.html#lien1).
-
-* En utilisant [cette version statique du test de positionnement](/pdf/2020-4e-Priorites-Test.pdf) ainsi que sa correction.
-* En utilisant [une version MathALEA du test de positionnement](https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3), principalement afin de générer une nouvelle version PDF.
-
-Une fois que les élèves ont passé le test, l'idée est de pouvoir cibler le travail de chacun à partir des mêmes exercices proposés dans la liste détaillée ci-dessous.
-
-Pour cela deux options :
-* L'élève travaille en autonomie directement à partir des liens MathALEA.
-* L'enseignant génère une version PDF à partir de la version LaTeX proposée au bout du lien MathALEA :
-	* Cliquer sur l'un des liens MathALEA.
-	* Cliquer sur le bouton **Version LaTeX**
-	* Cliquer sur le bouton **Obtenir le PDF via OverLeaf.com**, la création d'un compte est gratuite. 
+{{% prioriteIntro "/pdf/2020-4e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3"  %}}
 
 
 {{< titre1 "Test de positionnement" >}}
