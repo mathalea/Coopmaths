@@ -19,7 +19,7 @@ Nombres et calculs
 ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6N33-2&ex=6N33-3
 
 Espace et géométrie
-ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
+ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3
  -->
 
 
@@ -31,13 +31,13 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 5e  - version pdf du 30 août 2020" "/pdf/2020-5e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6N33-2&ex=6N33-3&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}
+	{{% alea_url "Test de positionnement 5e - version MathALEA (en ligne) non complète" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6N33-2&ex=6N33-3&ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}
 {{< /liste >}}
 
 **Liens MathALEA vers l'ensemble des exercices par thème**
 {{< liste>}}
 {{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6N33-2&ex=6N33-3" %}}	
-{{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}	
+{{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}	
 {{< /liste>}}
 
 
@@ -104,7 +104,7 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
 			{{% priorite_alea "6G43 : Utiliser le vocabulaire associé au pavé droit" "6G43" %}}	
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6G10-2 : Utiliser le codage pour décrire une figure" "6G10-2" %}}
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
