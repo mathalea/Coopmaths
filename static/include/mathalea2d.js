@@ -17,6 +17,8 @@ let mesObjets = []; // Liste de tous les objets construits
 
 let pixelsParCm = 20;
 let unitesLutinParCm = 50;
+let mainlevee=false
+let amplitude=1
 
 /*
  * Classe parente de tous les objets de MathALEA2D
@@ -206,8 +208,17 @@ function pointSurDroite(d, x, nom, positionLabel = "above") {
  * @Auteur Jean-Claude Lhote
  */
 function pointIntersectionDD(d, f, nom = "", positionLabel = "above") {
-  let y = calcul((-f.c + (d.c * f.a) / d.a) / (f.b - (f.a * d.b) / d.a));
-  let x = calcul(-d.c / d.a - (d.b * y) / d.a);
+  let x,y
+  if (f.a*d.b-f.b*d.a==0) {
+    console.log('Les droites sont parallèles, pas de point d\'intersection')
+    return false
+  }
+  else
+  y = calcul((f.c*d.a-d.c*f.a) / (f.a*d.b-f.b*d.a));
+  if (d.a==0) // si d est horizontale alors f ne l'est pas donc f.a<>0
+    x=calcul((-f.c-f.b*y)/f.a)
+  else // d n'est pas horizontale donc ...
+    x=calcul((-d.c-d.b*y)/d.a)
   return point(x, y, nom, positionLabel);
 }
 /**
@@ -241,7 +252,7 @@ function pointAdistance(...args) {
           return similitude(B, A, angle, d, args[2], args[3])
       }
       else
-        return similitude(B, A, arags[2], d, args[3], args[4])
+        return similitude(B, A, args[2], d, args[3], args[4])
 }
 
 
@@ -905,6 +916,42 @@ function Polyline(...points) {
     binomeXY = binomeXY.substr(0, binomeXY.length - 2);
     return `\\draw${optionsDraw} ${binomeXY};`;
   };
+  this.svgml=function(coeff,amp) {
+    let code="",s
+    for (let k=1;k<this.listePoints.length;k++) {
+      s=segment(this.listePoints[k-1],this.listePoints[k])
+      s.epaisseur=this.epaisseur
+      s.color=this.color
+      s.opacite=this.opacite
+      code+=s.svgml(coeff,amp)
+    }
+    return code;
+  
+  }
+  this.tikzml=function(amp) {
+    let tableauOptions = [];
+    if (this.color.length > 1 && this.color !== "black") {
+      tableauOptions.push(this.color);
+    }
+    if (this.epaisseur != 1) {
+      tableauOptions.push(`line width = ${this.epaisseur}`);
+    }
+    if (this.opacite != 1) {
+      tableauOptions.push(`opacity = ${this.opacite}`);
+    }
+    tableauOptions.push(`decorate,decoration={random steps , amplitude = ${amp}pt}`);
+
+    let optionsDraw = [];
+    if (tableauOptions.length > 0) {
+      optionsDraw = "[" + tableauOptions.join(",") + "]";
+    }
+    let binomeXY = "";
+    for (let point of this.listePoints) {
+      binomeXY += `(${point.x},${point.y})--`;
+    }
+    binomeXY = binomeXY.substr(0, binomeXY.length - 2);
+    return `\\draw${optionsDraw} ${binomeXY};`;
+  }
 }
 function polyline(...args) {
   return new Polyline(...args);
@@ -1152,10 +1199,10 @@ function Segment(arg1, arg2, arg3, arg4, color) {
  
     let A = point(this.x1, this.y1);
     let B = point(this.x2, this.y2);
-    let l=Math.round(longueur(A,B))
-    let dx=(B.xSVG(coeff)-A.xSVG(coeff))/(4*l),dy=(B.ySVG(coeff)-A.ySVG(coeff))/(4*l)
+    let l=longueur(A,B)
+    let dx=(B.xSVG(coeff)-A.xSVG(coeff))/(10*l),dy=(B.ySVG(coeff)-A.ySVG(coeff))/(10*l)
     let code =`<path d="M${A.xSVG(coeff)} ${A.ySVG(coeff)} C `
-    for (let k=0;k<=4*l;k++) {
+    for (let k=0;k<=10*l+1;k++) {
       code +=`${arrondi(A.xSVG(coeff)+k*dx+randint(-1,1)*amp,0)} ${arrondi(A.ySVG(coeff)+k*dy+randint(-1,1)*amp,0)}, `
     }
     code +=`${B.xSVG(coeff)} ${B.ySVG(coeff)}" stroke="${this.color}" ${this.style}"/>`
@@ -1356,7 +1403,7 @@ function Polygone(...points) {
       segment_courant.epaisseur=this.epaisseur
       segment_courant.color=this.color
       segment_courant.opacite=this.opacite
-      code+=segment_courant.tikzml(amp)
+      code+='\t'+segment_courant.tikzml(amp)+'\n'
     }
     return code
   }
@@ -1936,19 +1983,17 @@ function cercleCentrePoint(...args) {
  * @param {number} fillOpacite // transparence de remplissage de 0 à 1.
  */
 
-function Arc(M, Omega, alpha, rayon = false, fill = 'none', color = 'black', fillOpacite = 0.2) {
+function Arc(M, Omega, angle, rayon = false, fill = 'none', color = 'black', fillOpacite = 0.2) {
   ObjetMathalea2D.call(this);
   this.color = color;
   this.couleurDeRemplissage = fill;
   this.opaciteDeRemplissage = fillOpacite
-  let angle
-  if (typeof(alpha)!='number'){
-    angle=angleOriente(M,Omega,alpha)
+  if (typeof(angle)!='number'){
+    angle=angleOriente(M,Omega,angle)
   }
-  else angle = alpha
   let l = longueur(Omega, M), large = 0, sweep = 0
-  let d = droite(Omega, M)
-  d.isVisible = false
+ // let d = droite(Omega, M)
+  //d.isVisible = false
   let A = point(Omega.x + 1, Omega.y)
   let azimut = angleOriente(A, Omega, M)
   let anglefin = azimut + angle
@@ -2021,30 +2066,54 @@ function Arc(M, Omega, alpha, rayon = false, fill = 'none', color = 'black', fil
     if (rayon) return `\\filldraw  ${optionsDraw} (${N.x},${N.y}) -- (${Omega.x},${Omega.y}) -- (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(Omega, M)}) -- cycle ;`
     else return `\\draw${optionsDraw} (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(Omega, M)}) ;`
   }
-  this.svgml = function (coeff, amp) {
+  let la,da,code,P,dMx,dMy,dPx,dPy
+  if (!rayon)  this.svgml = function (coeff, amp) {
     if (this.epaisseur != 1) {
       this.style += ` stroke-width="${this.epaisseur}" `;
     }
     if (this.opacite != 1) {
       this.style += ` stroke-opacity="${this.opacite}" `;
     }
-    if (this.couleurDeRemplissage == "" || this.couleurDeRemplissage == 'none') {
-      this.style += ` fill="none" `;
-    } else {
-      this.style += ` fill="${this.couleurDeRemplissage}" `;
-      this.style += ` fill-opacity="${this.opaciteDeRemplissage}" `;
-    }
-    let la = Math.round(longueur(M, Omega) * 2 * Math.PI * angle / 360) //longueur de l'arc pour obtenir le nombre de points intermédiaires proportionnel au rayon
-    let da = angle / la, P
-    let code = `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} C `
+    this.style += ` fill="none" `;
+    la = Math.abs(Math.round(longueur(M, Omega) * 2 * Math.PI * angle / 360)) //longueur de l'arc pour obtenir le nombre de points intermédiaires proportionnel au rayon
+    da = angle / la
+    code = `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} C `
     for (let k = 0; k <= la; k++) {
       P = rotation(M, Omega, k * da)
-      code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)}, `
+      code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 2)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 2)}, `
     }
-    code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)} `
-    let l = Math.round(longueur(Omega, M))
-    let dMx = (M.xSVG(coeff) - Omega.xSVG(coeff)) / (4 * l), dMy = (M.ySVG(coeff) - Omega.ySVG(coeff)) / (4 * l)
-    let dPx = (Omega.xSVG(coeff) - P.xSVG(coeff)) / (4 * l), dPy = (Omega.ySVG(coeff) - P.ySVG(coeff)) / (4 * l)
+    code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 2)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 2)} `
+    code += `" stroke="${color}" ${this.style}"/>`
+    return code
+  }
+  else 
+    this.svgml=function (coeff,amp) {
+      if (this.epaisseur != 1) {
+        this.style += ` stroke-width="${this.epaisseur}" `;
+      }
+      if (this.opacite != 1) {
+        this.style += ` stroke-opacity="${this.opacite}" `;
+      }
+      if (this.couleurDeRemplissage == "" || this.couleurDeRemplissage == 'none') {
+        this.style += ` fill="none" `;
+      } else {
+        this.style += ` fill="${this.couleurDeRemplissage}" `;
+        this.style += ` fill-opacity="${this.opaciteDeRemplissage}" `;
+      }
+      la = Math.abs(longueur(M, Omega) * 2 * Math.PI * angle / 360) //longueur de l'arc pour obtenir le nombre de points intermédiaires proportionnel au rayon
+      da = angle / la
+      code = `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} C `
+      for (let k = 0; k <= la; k++) {
+        P = rotation(M, Omega, k * da)
+        code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)}, `
+      }
+      code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)} `
+    
+    l = longueur(Omega, M)
+    dMx = (M.xSVG(coeff) - Omega.xSVG(coeff)) / (4 * l)
+    dMy = (M.ySVG(coeff) - Omega.ySVG(coeff)) / (4 * l)
+    dPx = (Omega.xSVG(coeff) - P.xSVG(coeff)) / (4 * l)
+    dPy = (Omega.ySVG(coeff) - P.ySVG(coeff)) / (4 * l)
     if (rayon) {
       for (let k = 0; k <= 4 * l; k++) {
         code += `${arrondi(P.xSVG(coeff) + k * dPx + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + k * dPy + randint(-1, 1) * amp, 0)}, `
@@ -2360,7 +2429,7 @@ function ArcMainLevee(M,Omega,angle,amp,rayon=false,fill='none',color='black',fi
       code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)}, `
     }
     code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)} `
-    let l = Math.round(longueur(Omega, M))
+    let l = Math.abs(Math.round(longueur(Omega, M)))
     let dMx = (M.xSVG(coeff) - Omega.xSVG(coeff)) / (4 * l), dMy = (M.ySVG(coeff) - Omega.ySVG(coeff)) / (4 * l)
     let dPx = (Omega.xSVG(coeff) - P.xSVG(coeff)) / (4 * l), dPy = (Omega.ySVG(coeff) - P.ySVG(coeff)) / (4 * l)
     if (rayon) {
@@ -3171,7 +3240,7 @@ function centreCercleCirconscrit(A, B, C, nom = "", positionLabel = "above") {
  *
  * @Auteur Rémi Angot
  */
-function codageAngleDroit(A, O, B, color = "black", d = 0.4) {
+function CodageAngleDroit(A, O, B, color = "black", d = 0.4) {
   ObjetMathalea2D.call(this);
   this.color = color;
   let a = pointSurSegment(O, A, d);
@@ -3184,7 +3253,9 @@ function codageAngleDroit(A, O, B, color = "black", d = 0.4) {
   }
   return polyline([a, o, b], color);
 }
-
+function codageAngleDroit(A, O, B, color = "black", d = 0.4){
+  return new CodageAngleDroit(A, O, B, color , d )
+}
 /**
  * afficheLongueurSegment(A,B) // Note la longueur de [AB] au dessus si A est le point le plus à gauche sinon au dessous
  *
@@ -3409,8 +3480,8 @@ function CodeSegments(mark = "||", color = "black", ...args) {
     return code;
   };
 }
-function codeSegments(...args) {
-  return new CodeSegments(...args);
+function codeSegments(mark = "||", color = "black", ...args) {
+  return new CodeSegments(mark, color , ...args);
 }
 /**
  * m=codeAngle(A,O,45,'X','black',2,1,'red',0.4) 
@@ -3418,7 +3489,7 @@ function codeSegments(...args) {
  *  la ligne est noire a une épaisseur de 2 une opacité de 100% et le remplissage à 40% d'opacité est rouge.
  * @Auteur Jean-Claude Lhote
  */
-function CodeAngle(debut,centre,alpha,taille=0.8,mark='',color='black',epaisseur=1,opacite=1,fill='none',fillOpacite=0.2) {
+function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur=1,opacite=1,fill='none',fillOpacite=0.2) {
   ObjetMathalea2D.call(this)
   this.color=color
   let codage,depart,P,d,arcangle
@@ -3428,16 +3499,15 @@ function CodeAngle(debut,centre,alpha,taille=0.8,mark='',color='black',epaisseur
   }
   else 
     this.couleurDeRemplissage='none'
-  let remplir,angle
+  let remplir
   if (fill=='none') 
     remplir = false
   else 
     remplir = true
   
-  if (typeof(alpha)!='number'){
-    angle=angleOriente(debut,centre,alpha)
+  if (typeof(angle)!='number'){
+    angle=angleOriente(debut,centre,angle)
   }
-  else angle=alpha
   depart=pointSurSegment(centre,debut,taille)
   P=rotation(depart,centre,angle/2)
   d=droite(centre,P)
@@ -4309,7 +4379,11 @@ function angle(A, O, B) {
   let OA = longueur(O, A);
   let OB = longueur(O, B);
   let AB = longueur(A, B);
-  return calcul(
+  let v=vecteur(O,A)
+  let w=vecteur(O,B)
+  if (v.x*w.y-v.y*w.x==0) return 0;
+  else 
+   return calcul(
     (Math.acos((AB ** 2 - OA ** 2 - OB ** 2) / (-2 * OA * OB)) * 180) / Math.PI,
     2
   );
@@ -4558,14 +4632,16 @@ function codeSvg(...objets) {
       for (let i = 0; i < objet.length; i++) {
         try {
           if (objet[i].isVisible) {
-            code += "\t" + objet[i].svg(pixelsParCm) + "\n";
+            if (!mainlevee||typeof(objet[i].svgml)=='undefined') code += "\t" + objet[i].svg(pixelsParCm) + "\n";
+            else code += "\t" + objet[i].svgml(pixelsParCm,amplitude) + "\n";
           }
         } catch (error) {}
       }
     }
     try {
       if (objet.isVisible) {
-        code += "\t" + objet.svg(pixelsParCm) + "\n";
+        if (!mainlevee||typeof(objet.svgml)=='undefined') code += "\t" + objet.svg(pixelsParCm) + "\n";
+        else code += "\t" + objet.svgml(pixelsParCm,amplitude) + "\n";
       }
     } catch (error) {}
   }
@@ -4599,14 +4675,16 @@ function codeTikz(...objets) {
       for (let i = 0; i < objet.length; i++) {
         try {
           if (objet[i].isVisible) {
-            code += "\t" + objet[i].tikz() + "\n";
+           if (!mainlevee||typeof(objet[i].tikzml)=='undefined') code += "\t" + objet[i].tikz() + "\n";
+           else code += "\t" + objet[i].tikzml(amplitude) + "\n";
           }
         } catch (error) {}
       }
     }
     try {
-      if (objet[i].isVisible) {
-        code += "\t" + objet.tikz() + "\n";
+      if (objet.isVisible) {
+        if (!mainlevee||typeof(objet.tikzml)=='undefined') code += "\t" + objet.tikz() + "\n";
+        else code += "\t" + objet.tikzml(amplitude) + "\n";
       }
     } catch (error) {}
   }
@@ -4642,17 +4720,17 @@ function mathalea2d(
              else
                   code += "\t" + objet[i].svgml(pixelsParCm,amplitude) + "\n";
             }
-          } catch (error) {}
+          } catch (error) {console.log('premiere boucle',error.message,i)}
 
         }
       }
       try {
-        if (objet[i].isVisible) {
-          if ((!mainlevee)||typeof(objet[i].svgml)=='undefined') code += "\t" + objet[i].svg(pixelsParCm) + "\n";
+        if (objet.isVisible) {
+          if ((!mainlevee)||typeof(objet.svgml)=='undefined') code += "\t" + objet.svg(pixelsParCm) + "\n";
           else
-               code += "\t" + objet[i].svgml(pixelsParCm,amplitude) + "\n";
+               code += "\t" + objet.svgml(pixelsParCm,amplitude) + "\n";
          }
-    } catch (error) {}
+    } catch (error) {console.log('le try tout seul',error.message,i)}
     }
     code += `\n</svg>`;
     //		pixelsParCm = 20;
@@ -4691,9 +4769,9 @@ function mathalea2d(
         }
       }
       try {
-        if (objet[i].isVisible) {
-          if (!mainlevee||typeof(objet[i].tikzml)=='undefined') code += "\t" + objet[i].tikz() + "\n";
-          else code += "\t" + objet[i].tikzml(amplitude) + "\n";
+        if (objet.isVisible) {
+          if (!mainlevee||typeof(objet.tikzml)=='undefined') code += "\t" + objet.tikz() + "\n";
+          else code += "\t" + objet.tikzml(amplitude) + "\n";
         }
      } catch (error) {}
     }

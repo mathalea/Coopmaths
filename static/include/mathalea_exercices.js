@@ -43,13 +43,14 @@ var liste_des_exercices_disponibles = {
   "6D12": Calculs_de_durees_ou_d_horaires,
   "6G10": Notation_segment_droite_demi_droite,
   "6G10-1": Description_segment_droite_demi_droite,
+  "6G10-2" : Utiliser_le_codage_pour_decrire_6e,
   "6G11": Tracer_des_perpendiculaires,
   "6G12": Tracer_des_paralleles,
   "6G12-1": Tracer_des_perpendiculaires_et_des_paralleles,
   "beta6G14" : Test_main_levee,
   "6G20" : Nommer_et_coder_des_polygones,
   "6G20-2": Vocabulaire_des_triangles_6e,
-  "beta6G21" : Construire_un_triangle_6e,
+  "6G21" : Construire_un_triangle_6e,
   "6G23-2": Tracer_triangle_2_angles,
   "6G24": Transformations_6e,
   "6G24-1" : Symetrie_axiale_point_6e,
@@ -121,8 +122,10 @@ var liste_des_exercices_disponibles = {
   "5G21-1": Constructibilite_des_triangles_longueurs,
   "5G20-1": Vocabulaire_des_triangles_5e,
   "5G22": DroiteRemarquableDuTriangle,
+  "5G30" : Utiliser_le_codage_pour_decrire_5e,
   "5G31": Exercice_angles_triangles,
   "5G31-1": Constructibilite_des_triangles_angles,
+  "beta5N11-1": Tableaux_et_pourcentages,
   "5N13": Exercice_fractions_simplifier,
   "5N13-2": Egalites_entre_fractions,
   "5N110": Variation_en_pourcentages,
@@ -262,7 +265,7 @@ var liste_des_exercices_disponibles = {
   "2G12": Modelisation_coordonnees,
   "2L10": Developper_Identites_remarquables2,
   "2L11": Factoriser_Identites_remarquables2,
-  "beta1N10": Terme_d_une_suite_definie_explicitement,
+  "1N10": Terme_d_une_suite_definie_explicitement,
   "beta1N11": Terme_d_une_suite_definie_par_recurrence, 
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
@@ -7447,34 +7450,34 @@ function Calculer_un_pourcentage() {
       switch(liste_choix[i]) {
         case 1: // Les moyens de déplacement maison collège
           [moy1,moy2,moy3]=combinaison_listes(liste_moyens,3)
-          texte = `Dans un collège, ${p1} \\% des élèves ${moy1}, ${p2} \\% ${moy2} et les autres ${moy3}.<br>`
+          texte = `Dans un collège, $${p1}\\%$ des élèves ${moy1}, $${p2}\\%$ ${moy2} et les autres ${moy3}.<br>`
           texte += `Quel est le pourcentage des élèves qui ${moy3} ?` 
-          texte_corr=`Les élèves qui ${moy1} ou qui ${moy2} représentent ${p1} \\% + ${p2} \\% = ${p1+p2} \\%.<br>`
-          texte_corr+=`Donc on calcule : 100 - ${p1+p2} \\% = ${p3} \\%<br>`
-          texte_corr+=`${p3} \\% des élèves ${moy3}.<br>`
+          texte_corr=`Les élèves qui ${moy1} ou qui ${moy2} représentent $${p1}\\%$ + $${p2}\\% = ${p1+p2}\\%$.<br>`
+          texte_corr+=`Donc on calcule : $100 - ${p1+p2}\\% = ${p3}\\%$<br>`
+          texte_corr+=`$${p3}\\%$ des élèves ${moy3}.<br>`
           break;
           case 2: // Les sports pratiqués par les ados
           [moy1,moy2,moy3]=combinaison_listes(liste_sports,3)
-          texte = `Dans une association sportive, ${p1} \\% des ados pratiquent ${moy1}, ${p2} \\% ${moy2} et les autres ${moy3}.<br>`
+          texte = `Dans une association sportive, $${p1}\\%$ des ados pratiquent ${moy1}, $${p2}\\%$ ${moy2} et les autres ${moy3}.<br>`
           texte += `Quel est le pourcentage des ados qui pratiquent ${moy3} ?`
-          texte_corr=`Les ados qui pratiquent ${moy1} ou ${moy2} représentent ${p1} \\% + ${p2} \\% = ${p1+p2} \\%.<br>`
-          texte_corr+=`Donc on calcule : 100 - ${p1+p2} \\% = ${p3} \\%<br>`
-          texte_corr+=`${p3} \\% des ados de cette association sportive pratiquent ${moy3}.<br>`
+          texte_corr=`Les ados qui pratiquent ${moy1} ou ${moy2} représentent $${p1}\\% + ${p2}\\% = ${p1+p2}\\%$.<br>`
+          texte_corr+=`Donc on calcule : $100\\% - ${p1+p2}\\% = ${p3}\\%$<br>`
+          texte_corr+=`$${p3}\\%$ des ados de cette association sportive pratiquent ${moy3}.<br>`
           break;
           case 3: // Les sports pratiqués par les ados
           [moy1,moy2,moy3]=combinaison_listes(liste_hobbies,3)
-          texte = `Dans une association culturelle, ${p1} \\% des membres ont comme passe-temps favorit ${moy1}, pour ${p2} \\% c'est ${moy2} et pour les autres ${moy3}.<br>`
+          texte = `Dans une association culturelle, $${p1}\\%$ des membres ont comme passe-temps favorit ${moy1}, pour $${p2}\\%$ c'est ${moy2} et pour les autres ${moy3}.<br>`
           texte += `Quel est le pourcentage des membres qui préfèrent ${moy3} ?`
-          texte_corr=`Les membres qui préfère ${moy1} ou ${moy2} représentent ${p1} \\% + ${p2} \\% = ${p1+p2} \\%.<br>`
-          texte_corr+=`Donc on calcule : 100 - ${p1+p2} \\% = ${p3} \\%<br>`
-          texte_corr+=`${p3} \\% des membres de cette association culturelle préfèrent ${moy3}.<br>`
+          texte_corr=`Les membres qui préfère ${moy1} ou ${moy2} représentent $${p1}\\% + ${p2}\\% = ${p1+p2}\\%$.<br>`
+          texte_corr+=`Donc on calcule : $100\\% - ${p1+p2}\\% = ${p3}\\%$<br>`
+          texte_corr+=`$${p3}\\%$ des membres de cette association culturelle préfèrent ${moy3}.<br>`
           break;
 
       }
       objets.push(codeAngle(depart,centre,p1*3.6,4.9,'','black',2,1,'red',0.4),texteParPoint(`${moy1.substring(3)}`,pointSurSegment(centre,rotation(depart,centre,p1*1.8),3),0) )
       objets.push(codeAngle(rotation(depart,centre,p1*3.6),centre,p2*3.6,4.9,'','black',2,1,'blue',0.4),texteParPoint(`${moy2.substring(3)}`,pointSurSegment(centre,rotation(depart,centre,p1*3.6+p2*1.8),3),0) )
       objets.push(codeAngle(depart,centre,-p3*3.6,4.9,'','black',2,1,'yellow',0.4),texteParPoint(`${moy3.substring(3)}`,pointSurSegment(centre,rotation(depart,centre,-p3*1.8),3),0) )
-      texte_corr+=mathalea2d({xmin : 0,ymin : 0,xmax : 10, ymax : 10,pixelsParCm : 20,scale : 1}, ...objets)
+      texte_corr+=mathalea2d({xmin : 0,ymin : 0,xmax : 10, ymax : 10,pixelsParCm : 20,scale : 0.5,mainlevee:false,amplitude:1}, ...objets)
 
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
@@ -7522,19 +7525,19 @@ function Appliquer_un_pourcentage() {
       switch(choix[i]){
       case 1 :
       prix[i]=randint(article[index[i]][1],article[index[i]][2])
-      texte=`${article[index[i]][0]} coûtant ${prix[i]} € bénéficie d'une réduction de ${pourcent[i]} \\%.<br>`
+      texte=`${article[index[i]][0]} coûtant $${prix[i]}$€ bénéficie d'une réduction de $${pourcent[i]} \\%$.<br>`
       texte+=`Quel est le montant en euro de cette réduction ?`
-      texte_corr=`On doit calculer ${pourcent[i]} \\% de ${prix[i]} :<br>`
-      texte_corr+= `$${pourcent[i]}~\\%~\\text{de }${prix[i]}=${tex_fraction(pourcent[i],100)}\\times${prix[i]}=(${pourcent[i]}\\times${prix[i]})\\div100=${tex_nombre(pourcent[i] * prix[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * prix[i]) / 100))}$<br>`;
-      texte_corr+=`Le montant de la réduction est de ${tex_prix(calcul(prix[i]*pourcent[i]/100))} €`
+      texte_corr=`On doit calculer $${pourcent[i]}\\%$ de $${prix[i]}$€ :<br>`
+      texte_corr+= `$${pourcent[i]}\\%\\text{ de }${prix[i]}=${tex_fraction(pourcent[i],100)}\\times${prix[i]}=(${pourcent[i]}\\times${prix[i]})\\div100=${tex_nombre(pourcent[i] * prix[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * prix[i]) / 100))}$<br>`;
+      texte_corr+=`Le montant de la réduction est de ${tex_prix(calcul(prix[i]*pourcent[i]/100))}€`
       break;
       case 2 :
         masse[i]=randint(legume[index[i]][1],article[index[i]][2])
-        texte=`${legume[index[i]][0]} pesant ${masse[i]} grammes a subit une croissance de ${pourcent[i]} \\%.<br>`
+        texte=`${legume[index[i]][0]} pesant $${masse[i]}$ grammes a subit une croissance de $${pourcent[i]} \\%$.<br>`
         texte+=`Quel est la masse supplémentaire en grammes correspondant à cette croissance ?`
-        texte_corr=`On doit calculer ${pourcent[i]} \\% de ${masse[i]} :<br>`
-        texte_corr+= `$${pourcent[i]}~\\%~\\text{de }${masse[i]}=${tex_fraction(pourcent[i],100)}\\times${masse[i]}=(${pourcent[i]}\\times${masse[i]})\\div100=${tex_nombre(pourcent[i] * masse[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * masse[i]) / 100))}$<br>`;
-        texte_corr+=`La masse a augmenté de ${tex_nombre(calcul(masse[i]*pourcent[i]/100))} g.`
+        texte_corr=`On doit calculer $${pourcent[i]}\\%$ de $${masse[i]}$ grammes :<br>`
+        texte_corr+= `$${pourcent[i]}\\%\\text{ de }${masse[i]}=${tex_fraction(pourcent[i],100)}\\times${masse[i]}=(${pourcent[i]}\\times${masse[i]})\\div100=${tex_nombre(pourcent[i] * masse[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * masse[i]) / 100))}$<br>`;
+        texte_corr+=`La masse a augmenté de $${tex_nombre(calcul(masse[i]*pourcent[i]/100))}$ g.`
          
       break;
       }
@@ -12126,15 +12129,15 @@ function Construire_un_triangle() {
   "use strict"
   Exercice.call(this)
   this.titre = "Construire un triangle aux instruments";
-  this.nb_questions = 1;
+  this.nb_questions = 2;
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
   this.sup = false;
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []
     this.liste_corrections = []
-    let type_de_questions_disponibles,A,B,C,lAB,lBC,lAC,cA,cB,T,objets_enonce,objets_correction,params_enonce,params_correction,nom,sommets
-    if (this.classe == 6) type_de_questions_disponibles = [1]
+    let type_de_questions_disponibles,A,B,C,lAB,lBC,lAC,cA,cB,T,dBC,dAB,objets_enonce,objets_correction,params_enonce,params_correction,nom,sommets
+    if (this.classe == 6) type_de_questions_disponibles = [1,2]
     else type_de_questions_disponibles = [1, 2, 3, 4, 5, 6]
     let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
     for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
@@ -12142,13 +12145,13 @@ function Construire_un_triangle() {
       objets_correction=[]
       texte =`Le triangle ci-dessous a été réalisé à main levée.<br>Construire ce triangle avec les instruments de géométrie en respectant les mesures indiquées.<br>`
       texte_corr=`Voici la construction que tu devais réaliser.<br>`
+      nom=creerNomDePolygone(3,"PQ")
+      sommets=[]
+      for(let i=0;i<3;i++) sommets.push(nom[i])
+      sommets=shuffle(sommets)
+      A=point(0,0,sommets[0])
       switch (liste_type_de_questions[i]) {
         case 1:
-          nom=creerNomDePolygone(3,"PQ")
-          sommets=[]
-          for(let i=0;i<3;i++) sommets.push(nom[i])
-          sommets=shuffle(sommets)
-          A=point(0,0,sommets[0])
           lAC=randint(35,45)
           lBC=calcul(randint(35,45,lAC)/10)
           lAB=calcul(randint(46,60)/10)
@@ -12156,25 +12159,34 @@ function Construire_un_triangle() {
           B=pointAdistance(A,lAB,randint(-45,45),sommets[1])
           cA=cercle(A,lAC)
           cB=cercle(B,lBC)
-          C=pointIntersectionCC(cA,cB,sommets[2])
-          T=polygoneAvecNom(A,B,C)
-          objets_enonce.push(T[0],T[1])
+          C=pointIntersectionCC(cA,cB,sommets[2],1)
           objets_enonce.push(afficheLongueurSegment(B,A),afficheLongueurSegment(C,B),afficheLongueurSegment(A,C))
-          objets_correction.push(T[0],T[1],traceCompas(A,C,30,'gray',1,2),traceCompas(B,C,30,'gray',1,2),afficheLongueurSegment(B,A),afficheLongueurSegment(C,B),afficheLongueurSegment(A,C))
+          objets_correction.push(traceCompas(A,C,30,'gray',1,2),traceCompas(B,C,30,'gray',1,2),afficheLongueurSegment(B,A),afficheLongueurSegment(C,B),afficheLongueurSegment(A,C))
           texte_corr+=`Pour cette construction, nous avons utilisé le compas et la règle graduée.<br>`
-          params_enonce={xmin : Math.min(A.x-1,B.x-1,C.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1),xmax : Math.max(A.x+1,B.x+1,C.x+1),ymax : Math.max(A.y+1,B.y+1,C.y+1),pixelsParCm : 30, scale : 1,mainlevee : true,amplitude : 1}
-          params_correction={xmin : Math.min(A.x-1,B.x-1,C.x-2),ymin : Math.min(A.y-1,B.y-1,C.y-2),xmax : Math.max(A.x+1,B.x+1,C.x+2),ymax : Math.max(A.y+1,B.y+1,C.y+2),pixelsParCm : 30, scale : 1}
-
-          break
+          break;
 
         case 2:
-
+          lAC=randint(70,80)/10
+          lAB=calcul(randint(46,60)/10)
+          B=pointAdistance(A,lAB,randint(-45,45),sommets[1])
+          cA=cercle(A,lAC)
+          dAB=droite(A,B)
+          dBC=droiteParPointEtPerpendiculaire(B,dAB)
+          C=pointIntersectionLC(dBC,cA,sommets[2],1)
+          objets_enonce.push(afficheLongueurSegment(B,A),afficheLongueurSegment(C,A),codageAngleDroit(A,B,C))
+          objets_correction.push(traceCompas(A,C,30,'gray',1,2),codageAngleDroit(A,B,C),afficheLongueurSegment(B,A),afficheLongueurSegment(C,A))
+          texte_corr+=`Pour cette construction, nous avons utilisé la règle graduée, l'équerre et le compas.<br>`
           break
 
         case 3:
 
           break
       }
+      T=polygoneAvecNom(A,B,C)
+      objets_enonce.push(T[0],T[1])
+      objets_correction.push(T[0],T[1])
+      params_enonce={xmin : Math.min(A.x-1,B.x-1,C.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1),xmax : Math.max(A.x+1,B.x+1,C.x+1),ymax : Math.max(A.y+1,B.y+1,C.y+1),pixelsParCm : 30, scale : 1,mainlevee : true,amplitude : 1}
+      params_correction={xmin : Math.min(A.x-1,B.x-1,C.x-2),ymin : Math.min(A.y-1,B.y-1,C.y-2),xmax : Math.max(A.x+1,B.x+1,C.x+2),ymax : Math.max(A.y+1,B.y+1,C.y+2),pixelsParCm : 30, scale : 1}
       texte+=mathalea2d(params_enonce,objets_enonce)
       texte_corr+=mathalea2d(params_correction,objets_correction)
       if (this.liste_questions.indexOf(texte) == -1) {
@@ -12221,7 +12233,7 @@ function Test_main_levee() {
     s.opacite=0.4
  //   let m=mediatrice(A,B,'d','purple')
     let cons=constructionMediatrice(A,B,true,'orange','//','O','black',2)
-    let texte=mathalea2d({xmin:-1,ymin:0,xmax:16,ymax:11,pixelsParCm:20,scale:1,mainlevee:this.sup,amplitude:1},[codeAngle(A,B,45,3,'||','black',2,1,'yellow',0.5),C,s,E,tracePoint(A,B,D)])
+    let texte=mathalea2d({xmin:-1,ymin:0,xmax:16,ymax:11,pixelsParCm:20,scale:1,mainlevee:this.sup,amplitude:1},[codeAngle(A,B,-90,3,'||','black',2,1,'yellow',0.5),C,s,E,tracePoint(A,B,D)])
     let texte_corr=""
     this.liste_questions.push(texte );
     this.liste_corrections.push(texte_corr );
@@ -12229,6 +12241,178 @@ function Test_main_levee() {
   }
   this.besoin_formulaire_case_a_cocher = ["main levee"];	
 }
+
+/**
+ * Exercice du test de positionnement 5e
+ * Variantes à venir...
+ * @Auteur Jean-Claude Lhote
+ * Référence 6G10-2
+ */
+function Utiliser_le_codage_pour_decrire_6e(){
+  Utiliser_le_codage_pour_decrire.call(this)
+  this.classe=6
+}
+function Utiliser_le_codage_pour_decrire_5e(){
+  Utiliser_le_codage_pour_decrire.call(this)
+  this.classe=5
+}
+function Utiliser_le_codage_pour_decrire(){
+  "use strict"
+  Exercice.call(this);
+  this.titre = "Utiliser le codage pour décrire une figure";
+  this.nb_questions = 1;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1;
+  this.sup2 = 1;
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let type_de_questions_disponibles;
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let Xmin, Xmax, Ymin, Ymax, ppc=20, sc,nom,sommets=[],params_enonce,params_correction,objets_enonce,objets_correction
+    let A,B,C,D,E,F,s1,s2,s3,s4,s5,s6,s7,s8,medAC,medBC,dBD,dBC,dAC,dAF
+    if (this.classe==6) type_de_questions_disponibles=[1,2,3]
+    else type_de_questions_disponibles=[1,2,3,4]
+    let liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+    for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+      objets_enonce=[]
+      objets_correction=[]
+      params_enonce={}
+      params_correction={}
+/*      nom=creerNomDePolygone(6,"PQ")
+      for (let i=0;i<6;i++) 
+        sommets.push(nom[i])
+      sommets=shuffle(sommets)
+*/
+      sommets.push('A','B','C','D','E','F')
+      A=point(0,0,sommets[0],'left')
+      switch (liste_type_de_questions[i]){
+      case 1 :
+      C=pointAdistance(A,randint(5,7),randint(-45,45),sommets[2],'right')
+      s2=segment(A,C)
+      B=similitude(C,A,-85,randint(5,7)/10,sommets[1],'below')
+      s1=segment(A,B)
+      E=pointSurSegment(A,hC,longueur(A,C)/2.2,sommets[4],'below')
+      medBC=mediatrice(C,B)
+      medAC=mediatrice(A,C)
+      dBC=droite(C,B)
+      dBD=rotation(dBC,B,randint(-40,-20))
+      dAC=droite(A,C)
+      dAF=rotation(dAC,A,randint(30,40))
+      D=pointIntersectionDD(dBD,medBC,sommets[3],'below')
+      D.x+=randint(-2,2,0)/5
+      F=pointIntersectionDD(dAF,medAC,sommets[5],'above')
+      F.x+=randint(-2,2,0)/5
+      s5=segment(B,D)
+      s6=segment(C,D)
+      s3=segment(A,F)
+      s7=segment(C,F)
+      s8=segment(E,F)
+      s4=segment(B,C)
+        params_enonce={xmin:Math.min(A.x-1,B.x-1,C.x-1,D.x-1,E.x-1,F.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1,D.y-1,E.y-1,F.y-1),xmax:Math.max(A.x+1,B.x+1,C.x+1,D.x+1,E.x+1,F.x+1),ymax:Math.max(A.y+1,B.y+1,C.y+1,D.y+1,E.y+1,F.y+1),pixelsParCm:20,scale:1,mainlevee:true,amplitude:1}
+        objets_enonce.push(s1,s2,s4,s8,s7,s3,s6,s5,codageAngleDroit(B,A,C),codeSegments('//','black',A,F,F,C),codeSegments('|||','black',A,E,E,C),codeSegments('O','black',B,D,D,C),labelPoint(A,B,C,D,E,F),codageAngleDroit(A,E,F))
+        texte=`<br>À l'aide du schéma ci-dessous, déterminer :<br>`
+        texte+=`- deux segments de même longueur ;<br>`
+        texte+=`- le milieu d'un segment ;<br>`
+        texte+=`- un triangle rectangle ;<br>`
+        texte+=`- un triangle isocèle ;<br>`
+        texte_corr=`- Deux segments de même mesure : [$${sommets[0]+sommets[4]}$] et $[${sommets[4]+sommets[2]}]$ ou $[${sommets[0]+sommets[5]}]$ et $[${sommets[5]+sommets[2]}]$`
+        texte_corr+=` ou $[${sommets[1]+sommets[3]}]$ et $[${sommets[3]+sommets[2]}]$.<br>`
+        texte_corr+=`- $E$ est le milieu du segment $[${sommets[0]+sommets[2]}]$.<br>`
+        texte_corr+=`- $${sommets[0]+sommets[1]+sommets[2]}$ est un triangle rectangle en $${sommets[0]}$, $${sommets[0]+sommets[4]+sommets[5]}$ est un triangle rectangle en $${sommets[4]}$ et $${sommets[2]+sommets[4]+sommets[5]}$ est un triangle rectangle en $${sommets[4]}$.<br>`
+        texte_corr+=`- $${sommets[0]+sommets[5]+sommets[2]}$ est un triangle isocèle en $${sommets[5]}$ et $${sommets[1]+sommets[3]+sommets[2]}$ est un triangle isocèle en $${sommets[3]}$.<br>`
+        break
+        case 2 : 
+        B=pointAdistance(A,randint(5,7),randint(-45,45),sommets[1],'above')
+        C=similitude(A,B,randint(85,90),0.95,sommets[2],'below')
+        D=similitude(B,A,randint(-93,-87),1,sommets[3],'below')
+        F=similitude(B,C,-55,0.8,sommets[5],'right')
+        E=similitude(C,D,57,randint(85,115)/100,sommets[4],'right')
+        s1=segment(D,E)
+        s2=segment(C,E)
+        s4=segment(C,F)
+        s5=segment(B,F)
+        s6=polygone(A,B,C,D)
+        params_correction={xmin:Math.min(A.x-1,B.x-1,C.x-1,D.x-1,E.x-1,F.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1,D.y-1,E.y-1,F.y-1),xmax:Math.max(A.x+1,B.x+1,C.x+1,D.x+1,E.x+1,F.x+1),ymax:Math.max(A.y+1,B.y+1,C.y+1,D.y+1,E.y+1,F.y+1),pixelsParCm:20,scale:1,mainlevee:true,amplitude:1}
+        objets_correction.push(labelPoint(A,B,C,D,E,F),s1,s2,s4,s5,s6)
+        objets_correction.push(codageAngleDroit(D,A,B),codageAngleDroit(A,B,C),codageAngleDroit(B,C,D),codageAngleDroit(C,D,A))
+        objets_correction.push(codeSegments('||','black',D,E,C,E),codeSegments('O','black',A,B,B,C,C,D,D,A),codeSegments('|||','black',F,C,B,F))
+        texte=`$${sommets[0]+sommets[1]+sommets[2]+sommets[3]}$ est un carré et $${sommets[3]+sommets[2]+sommets[4]}$ est un triangle équilatéral ($${sommets[4]}$ est à l'intérieur du carré $${sommets[0]+sommets[1]+sommets[2]+sommets[3]}$).<br>`
+        texte+=` $${sommets[1]+sommets[2]+sommets[5]}$ est un triangle isocèle en $${sommets[5]}$ ($${sommets[5]}$ est à l'extérieur du carré $${sommets[0]+sommets[1]+sommets[2]+sommets[3]}$).<br>`
+        texte+=`Représenter cette configuration par un schéma à main levée et ajouter les codages nécéssaires.`
+        texte_corr=`Voilà ci-dessous un schéma qui pourrait convenir à la situation.<br>`
+        break
+        case 3:
+          B=pointAdistance(A,randint(5,7),randint(-45,45),sommets[1],'above')
+          C=similitude(A,B,randint(85,90),0.5,sommets[2],'below')
+          D=similitude(B,A,randint(-93,-87),0.53,sommets[3],'below')
+          s1=segment(D,B)
+          s2=segment(A,C)
+          E=pointIntersectionDD(droite(A,C),droite(D,B),sommets[4],'above')
+          F=affiniteOrtho(E,droite(B,C),-1.1,sommets[5],'right')
+          s3=polygone(A,B,C,D)
+          s4=segment(B,F)
+          s5=segment(C,F)
+          params_correction={xmin:Math.min(A.x-1,B.x-1,C.x-1,D.x-1,E.x-1,F.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1,D.y-1,E.y-1,F.y-1),xmax:Math.max(A.x+1,B.x+1,C.x+1,D.x+1,E.x+1,F.x+1),ymax:Math.max(A.y+1,B.y+1,C.y+1,D.y+1,E.y+1,F.y+1),pixelsParCm:20,scale:1,mainlevee:true,amplitude:1}
+          objets_correction.push(labelPoint(A,B,C,D,E,F),s1,s2,s3,s4,s5)
+          objets_correction.push(codageAngleDroit(D,A,B),codageAngleDroit(A,B,C),codageAngleDroit(B,C,D),codageAngleDroit(C,D,A))
+          objets_correction.push(codeSegments('||','black',D,E,E,B,A,E,E,C,F,C,B,F),codeSegments('O','black',A,B,D,C),codeSegments('/','black',A,D,B,C))
+          texte=`$${sommets[0]+sommets[1]+sommets[2]+sommets[3]}$ est un rectangle. Ses diagonales se coupent en $${sommets[4]}$.<br>`
+          texte+=`$${sommets[4]+sommets[1]+sommets[5]+sommets[2]}$ est un losange.<br>`
+          texte+=`Représenter cette configuration par un schéma à main levée et ajouter les codages nécéssaires.`
+          texte_corr=`Voilà ci-dessous un schéma qui pourrait convenir à la situation.<br>`
+        break
+        case 4 :
+          B=pointAdistance(A,randint(6,7),randint(-30,30),sommets[1],'above right')
+          F=similitude(A,B,randint(-70,-50),randint(80,90)/100,sommets[5],'left')
+          D=similitude(B,A,angleOriente(A,B,F)+randint (3,5),randint(15,20)/10,sommets[3],'below')
+          C=translation2Points(point(B.x+1,B.y+1),A,D,sommets[2],'below right')
+          E=pointIntersectionDD(droite(A,C),droite(D,B),sommets[4],'above right')
+          s3=polygone(A,B,C,D)
+          s4=segment(B,F)
+          s5=segment(A,F)
+          s1=segment(B,D)
+          s2=segment(A,C)
+          params_enonce={xmin:Math.min(A.x-1,B.x-1,C.x-1,D.x-1,E.x-1,F.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1,D.y-1,E.y-1,F.y-1),xmax:Math.max(A.x+1,B.x+1,C.x+1,D.x+1,E.x+1,F.x+1),ymax:Math.max(A.y+1,B.y+1,C.y+1,D.y+1,E.y+1,F.y+1),pixelsParCm:20,scale:1,mainlevee:true,amplitude:1}
+          objets_enonce.push(labelPoint(A,B,C,D,E,F),s1,s2,s3,s4,s5)
+          objets_enonce.push(codeAngle(D,A,B,2,'|','red',2),codeAngle(B,C,D,2,'|','red',2),codeAngle(A,B,F,2,'|','red',2))
+          objets_enonce.push(codeAngle(A,B,C,2,'||','blue',2),codeAngle(A,D,C,2,'||','blue',2))
+          objets_enonce.push(codeAngle(B,A,F,2,'','green',3),codeAngle(B,F,A,2,'','green',3))
+          
+          objets_enonce.push(codeSegments('||','black',B,E,E,D),codeSegments('O','black',A,E,E,C))
+          texte=`$${sommets[0]+sommets[1]+sommets[2]+sommets[3]}$ est un rectangle. Ses diagonales se coupent en $${sommets[4]}$.<br>`
+          texte+=`$${sommets[4]+sommets[1]+sommets[5]+sommets[2]}$ est un losange.<br>`
+          texte=`<br>À l'aide du schéma ci-dessous, déterminer :<br>`
+        texte+=`- la nature du triangle $${sommets[0]+sommets[1]+sommets[5]}$ ;<br>`
+        texte+=`- la nature du quadrilatère $${sommets[0]+sommets[1]+sommets[2]+sommets[3]}$ ;<br>`
+        texte+=`- la nature de l'angle $\\widehat{FBC}$ ;<br>`
+          texte_corr=`Le triangle $${sommets[0]+sommets[1]+sommets[5]}$ a deux angles de même mesure, c'est donc un triangle isocèle en $${sommets[1]}$.<br>`
+          texte_corr+=`Le quadrilatère  $${sommets[0]+sommets[1]+sommets[2]+sommets[3]}$ a des diagonales qui se coupent en leur milieu, c'est donc un parallélogramme.<br>`
+          texte_corr+=`Dans un parallélogramme, les angles consécutifs sont supplémentaires (leur somme vaut 180°).<br`
+          texte_corr+=` D'après le codage, l'angle \\widehat{${sommets[2]+sommets[1]+sommets[5]}$} est la somme de deux angles supplémentaires. C'est donc un angle plat.<br>`
+          
+         
+        break
+      }
+        if (objets_enonce.length>0) texte+=mathalea2d(params_enonce,objets_enonce)
+        if (objets_correction.length>0) texte_corr+=mathalea2d(params_correction,objets_correction)
+        if (this.liste_questions.indexOf(texte) == -1) {
+          // Si la question n'a jamais été posée, on en créé une autre
+          this.liste_questions.push(texte);
+          this.liste_corrections.push(texte_corr);
+          i++;
+        }
+        cpt++;
+      }
+      liste_de_question_to_contenu(this);
+   };
+}
+
+
 /**
  * Fonction générale pour exercices de constructions de parallèles et perpendiculaires
  * références 6G11, 6G12 et 6G12-1
@@ -20980,6 +21164,119 @@ function Tableaux_et_proportionnalite(){
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+/** 
+ * * Tableaux et pourcentages
+ * * 5N11-1
+ * @author Sébastien Lozano
+ */
+
+function Tableaux_et_pourcentages(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 1;
+	} else {
+		this.nb_questions = 1;
+	};	
+
+	this.titre = "Tableaux et pourcentages";	
+	this.consigne = `Compléter le tableau suivant.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	// sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	// sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+			  //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+			  type_de_questions_disponibles = [0];			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let prix,remises;
+			do {
+				prix = randint(150,300);
+			} while (prix%5 != 0)
+			
+			remises = choice([
+				[{str:'10\\%',nb:10},{str:'20\\%',nb:20},{str:'30\\%',nb:30}],
+				[{str:'10\\%',nb:10},{str:'5\\%',nb:5},{str:'15\\%',nb:15}],
+				[{str:'5\\%',nb:5},{str:'10\\%',nb:10},{str:'35\\%',nb:35}]
+			]);
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+				{//case 0 -->
+					tableau:tab_C_L([`\\text{Prix en euro}`,tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en euro}`,`\\text{Nouveau prix}`],[
+						remises[0].str,remises[1].str,remises[2].str,
+						tex_prix(prix*remises[0].nb/100),'','',
+						tex_prix(prix-prix*remises[0].nb/100),'','',
+					]),
+					tableau_corr:tab_C_L([`\\text{Prix en euro}`,tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en euro}`,`\\text{Nouveau prix}`],[
+						remises[0].str,remises[1].str,remises[2].str,
+						tex_prix(prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${remises[1].nb/remises[0].nb} = ${tex_prix(prix*remises[1].nb/100)}`),'',
+						tex_prix(prix-prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[1].nb/100)} = ${tex_prix(prix-prix*remises[1].nb/100)}`),'',
+					]),
+				},	
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`					
+					${situations[k].tableau}	
+					`,
+					question:``,
+					correction:`
+					${situations[k].tableau_corr}
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+			
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 };/**
  * * Calcul de l'inverse d'un nombre.
  *
@@ -29421,6 +29718,7 @@ function Problemes_additifs_fractions() {
 /**
  * Problème avec lecture de représentation graphique d'une fonction
  * @Auteur Rémi Angot
+ * Référence 4F12
  */
 function Exploiter_representation_graphique() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -40951,7 +41249,17 @@ function Terme_d_une_suite_definie_explicitement(){
           else {texte += `${b}$.`};
           texte += `<br>Calculer $u_{${k}}$.`;
 			
-          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par ${k}, on obtient : $u_{${k}} = ${a*k+b}$`;
+          texte_corr = `Dans l'expression de $u_n$ on remplace $n$ par ${k}, on obtient : $u_{${k}} =`;
+          if (a == 1) {
+            texte_corr += `${k} ${ecriture_algebrique(b)}`
+          } else {
+            if (a == -1) {
+              texte_corr += `-${k} ${ecriture_algebrique(b)}`
+            } else {
+              texte_corr += `${a} \\times ${k} ${ecriture_algebrique(b)}`
+            }
+          }
+          texte_corr += `=${a*k+b}$.`;
           break;
         
         case 2: //fonction polynome de degré 2
@@ -40960,7 +41268,16 @@ function Terme_d_une_suite_definie_explicitement(){
           c = randint(0,9)*choice([-1,1]);
           k = randint(0,9);
 
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = ${a}n^2$`;
+          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = `;
+          if (a == 1) {
+            texte += `n^2$`
+          } else {
+            if (a == -1) {
+              texte += `-n^2$`
+            } else {
+              texte += `${a}n^2$`
+            }
+          };
           if (b == 1) {texte += `$+n$`};
           if (b > 1) {texte += `$+${b}n$`};
           if (b == -1) {texte += `$-n$`};
@@ -40969,14 +41286,31 @@ function Terme_d_une_suite_definie_explicitement(){
           if (c < 0) {texte += `$${c}$.`}
           texte += `<br>Calculer $u_{${k}}$.`;
 			
-          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par $${k}$, on obtient : $u_{${k}} = ${a*k*k+b*k+c}$`;
+          texte_corr = `Dans l'expression de $u_n$ on remplace $n$ par $${k}$, on obtient : $u_{${k}} = `;
+          if (a == 1) {texte_corr += `${k}^2`}
+          else {
+            if (a == -1) {texte_corr += `-${k}^2`} 
+            else {
+              texte_corr += `${a}\\times ${k}^2`
+            }
+          };
+          if (b == 1) {
+            texte_corr += `+${k}`
+          } else {
+            if (b == -1) {
+              texte_corr += `-${k}`
+            } else {
+              texte_corr += `${ecriture_algebrique(b)}\\times ${k}`
+            }            
+          }
+          texte_corr += `${ecriture_algebrique(c)}=${a*k*k+b*k+c}$.`;
           break;
         
         case 3: //fonction homographique
           a = randint(1,5)*choice([-1,1]);
           b = randint(1,5)*choice([-1,1]);
-          c = randint(1,5)*choice([-1,1]);
-          d = randint(1,5)*choice([-1,1]);
+          c = randint(2,4);
+          d = randint(1,7);
           k = randint(1,9);
 
           texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = \\dfrac{`;
@@ -40994,8 +41328,11 @@ function Terme_d_une_suite_definie_explicitement(){
           else {texte += `${d}}$.`};
           
           texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `Dans l'expression de $u_n$ on remplasse $n$ par $${k}$, on obtient : $u_{${k}} = ${(a*k+b)/(c*k+d)}$.`;
+          frac=fraction(a*k+b,c*k+d)
+          texte_corr = `Dans l'expression de $u_n$ on remplace $n$ par $${k}$, on obtient : $u_{${k}} = \\dfrac{${a}\\times ${k} ${ecriture_algebrique(b)}}{${c}\\times ${k}
+          ${ecriture_algebrique(d)}} = ` +frac.texFraction()
+          if (pgcd(a*k+b,c*k+d)!=1) texte_corr+=`=`+frac.texFractionSimplifiee()
+          texte_corr+=`$.`
           break;
       }
       
