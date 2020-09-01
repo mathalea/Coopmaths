@@ -95,6 +95,11 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6N33-2 : Problèmes de calcul de pourcentage par complément à 100%" "6N33-2" %}}			
 			{{% priorite_alea "6N33-3 : Problèmes avec des calculs de pourcentages" "6N33-3" %}}
 
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 3 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6P10,nb_questions=5&ex=6P11,nb_questions=5&ex=6P11-1,nb_questions=1,sup=1" %}}	
+				{{% pdf_url_color "#f15929" "Les 3 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-5.pdf" %}}
+			{{< /liste >}}
+
 		</div>	
 {{< /liste_priorites >}}
 
