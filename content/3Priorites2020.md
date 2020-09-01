@@ -37,7 +37,7 @@ ex=4Algo1-0
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
-	{{%pdf_url "Test de positionnement 3e - version pdf du 30 août 2020" "/pdf/2020-3e-Priorites-Test.pdf"%}}
+	{{% pdf_url "Test de positionnement 3e - version pdf du 30 août 2020" "/pdf/2020-3e-Priorites-Test.pdf"%}}
 	{{% alea_url "Test de positionnement 3e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20&ex=6P11-1&ex=4P10-1&ex=4P20-0&ex=4F12&ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2&ex=4Algo1-0" %}}	
 {{< /liste >}}
 
@@ -64,7 +64,7 @@ ex=4Algo1-0
 
 			{{< liste >}}
 				{{% alea_url_color "#f15929" "Les 4 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0" %}}
-				{{%pdf_url_color "#f15929" "Les 4 exercices ci-dessus - version pdf" "/pdf/2020-3e-Test-1.pdf"%}}
+				{{% pdf_url_color "#f15929" "Les 4 exercices ci-dessus - version pdf" "/pdf/2020-3e-Test-1.pdf"%}}
 			{{< /liste >}}			
 	</div>	
 {{< /liste_priorites >}}
