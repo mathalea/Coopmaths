@@ -55,7 +55,12 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6N30 : Lire l'abscisse décimale d'un point - 2 décimales" "6N30,sup=2" %}}
 			{{% priorite_alea "6N31-1 : Encadrer un décimal par deux entiers consécutifs" "6N31-1" %}}
 			{{% priorite_alea "6N23-1 : Différentes écritures des nombres décimaux" "6N23-1" %}}
-			{{% priorite_alea "6N30-1 : Connaître la valeur décimale de fractions simples" "6N30-1,sup=3" %}}						
+			{{% priorite_alea "6N30-1 : Connaître la valeur décimale de fractions simples" "6N30-1,sup=3" %}}
+
+			{{< liste >}}
+			{{% alea_url_color "#f15929" "Les 8 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3" %}}	
+			{{< /liste >}}
+						
 
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
 			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}			
