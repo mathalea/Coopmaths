@@ -58,7 +58,7 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6N30-1 : Connaître la valeur décimale de fractions simples" "6N30-1,sup=3" %}}
 
 			{{< liste >}}
-			{{% alea_url_color "#f15929" "Les 8 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3" %}}	
+				{{% alea_url_color "#f15929" "Les 8 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N23-1&ex=6N30-1,sup=3" %}}	
 			{{< /liste >}}
 						
 

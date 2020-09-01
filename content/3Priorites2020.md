@@ -60,7 +60,11 @@ ex=4Algo1-0
 			{{% priorite_alea "4C10-1 : Déterminer le signe d'un produit de nombres relatifs" "4C10-1" %}}
 			{{% priorite_alea "4C10-2 : Déterminer le signe d'un quotient de nombres relatifs" "4C10-2" %}}
 			{{% priorite_alea "4C30-1 : Encadrer par deux puissances de 10 d'exposants consécutifs" "4C30-1" %}}			
-			{{% priorite_alea "4C25-0 : Problèmes additifs et de comparaison sur les rationnels" "4C25-0" %}}			
+			{{% priorite_alea "4C25-0 : Problèmes additifs et de comparaison sur les rationnels" "4C25-0" %}}
+
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 4 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=&ex=4C10-2&ex=4C30-1&ex=4C25-0" %}}
+			{{< /liste >}}			
 	</div>	
 {{< /liste_priorites >}}
 

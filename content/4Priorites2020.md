@@ -63,7 +63,7 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{% priorite_alea "5R20-4 : Résoudre un problème en utilisant une somme algébrique de relatifs" "5R20-4" %}}
 
 			{{< liste >}}
-			{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5N20-0&ex=5R20-4" %}}	
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5N20-0&ex=5R20-4" %}}
 			{{< /liste >}}
 	</div>	
 {{< /liste_priorites >}}
