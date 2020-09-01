@@ -54,9 +54,17 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{% priorite_alea "5R10-0 : Trouver l'opposé d'un nombre relatif" "5R10-0" %}}	
 			{{% priorite_alea "5R11-2 : Placer un point d'abscisse un nombre relatif" "5R11-2" %}}	
 
+			{{< liste >}}
+			{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2" %}}	
+			{{< /liste >}}
+
 			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
 			{{% priorite_alea "5N20-0 : Résoudre un problème en utilisant des fractions" "5N20-0" %}}			
 			{{% priorite_alea "5R20-4 : Résoudre un problème en utilisant une somme algébrique de relatifs" "5R20-4" %}}
+
+			{{< liste >}}
+			{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5N20-0&ex=5R20-4" %}}	
+			{{< /liste >}}
 	</div>	
 {{< /liste_priorites >}}
 
@@ -67,7 +75,6 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{% priorite "Il produit une expression littérale pour élaborer une formule ou traduire un programme de calcul." %}}
 			{{% priorite_alea "5L10-2 : Traduire un programme de calcul par une expression littérale" "5L10-2" %}}
 			{{% priorite_alea "4L13-0 : Mettre en équation un problème sans objectif de résolution" "4L13-0" %}}
-
 
 			{{% priorite "Il substitue une valeur numérique à une lettre notamment pour tester une égalité." %}}
 			{{% priorite_alea "5L13-5 : Calculer la valeur d'une expression littérale de degré 1 à 1 inconnue" "5L13-5" %}}			
