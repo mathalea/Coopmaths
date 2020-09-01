@@ -64,7 +64,8 @@ ex=4Algo1-0
 
 			{{< liste >}}
 				{{% alea_url_color "#f15929" "Les 4 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0" %}}
-				{{% pdf_url_color "#f15929" "Les 4 exercices ci-dessus - version pdf" "/pdf/2020-3e-Test-1.pdf"%}}
+
+				{{% pdf_url_color "#f15929" "Les 4 exercices ci-dessus - version pdf" "/pdf/2020-3e-Test-1.pdf" %}}
 			{{< /liste >}}			
 	</div>	
 {{< /liste_priorites >}}
