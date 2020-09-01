@@ -56,6 +56,8 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 			{{< liste >}}
 			{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2" %}}	
+
+			{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-4e-Test-1.pdf" %}}
 			{{< /liste >}}
 
 			{{% priorite "Il résout des problèmes faisant intervenir des nombres décimaux relatifs et des fractions." %}}
@@ -64,6 +66,8 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 			{{< liste >}}
 				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5N20-0&ex=5R20-4" %}}
+
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-4e-Test-2.pdf" %}}
 			{{< /liste >}}
 	</div>	
 {{< /liste_priorites >}}
