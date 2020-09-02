@@ -78,6 +78,13 @@ ex=4Algo1-0
 			{{% priorite_alea "5L13-4 : Déterminer la dernière opération dans une expression littérale" "5L13-4" %}}
 			{{% priorite_alea "5L12-1 : Réduire le plus possible une expression littérale" "5L12-1" %}}
 
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5L13-4&ex=5L12-1" %}}
+
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-3e-Test-2.pdf" %}}
+			{{< /liste >}}			
+
+
 			{{% priorite "Il utilise la propriété de distributivité simple pour développer un produit." %}}
 			{{% priorite_alea "4L10 : Utiliser la simple distributivité" "4L10" %}}	
 
