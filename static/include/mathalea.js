@@ -5747,8 +5747,10 @@ var liste_des_exercices_disponibles = {
   "6G11": Tracer_des_perpendiculaires,
   "6G12": Tracer_des_paralleles,
   "6G12-1": Tracer_des_perpendiculaires_et_des_paralleles,
+  "beta6G14" : Test_main_levee,
   "6G20" : Nommer_et_coder_des_polygones,
   "6G20-2": Vocabulaire_des_triangles_6e,
+  "beta6G21" : Construire_un_triangle_6e,
   "6G23-2": Tracer_triangle_2_angles,
   "6G24": Transformations_6e,
   "6G24-1" : Symetrie_axiale_point_6e,
@@ -5793,8 +5795,8 @@ var liste_des_exercices_disponibles = {
   "6N31-2":Ordre_de_grandeur_operations_decimaux,
   "6N33": Fraction_d_un_nombre,
   "6N33-1": Pourcentage_d_un_nombre,
-  "beta6N33-2" : Calculer_un_pourcentage,
-  "beta6N33-3" : Appliquer_un_pourcentage,
+  "6N33-2" : Calculer_un_pourcentage,
+  "6N33-3" : Appliquer_un_pourcentage,
   "6N34": Reglages_6N34,
   "6N41": Egalites_entre_fractions,
   "6N43": Criteres_de_divisibilite,
@@ -13117,11 +13119,11 @@ function Comparer_decimaux() {
 function Calculer_un_pourcentage() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Problèmes de calcul de pourcentage par complément à 100%";
-  this.nb_questions = 3;
+  this.nb_questions = 1;
   this.consigne = "Calculer";
   this.spacing = 2;
   this.spacing_corr = 2;
-  this.nb_cols = 2;
+  this.nb_cols = 1;
   this.nb_cols_corr = 1;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
@@ -13146,27 +13148,27 @@ function Calculer_un_pourcentage() {
       switch(liste_choix[i]) {
         case 1: // Les moyens de déplacement maison collège
           [moy1,moy2,moy3]=combinaison_listes(liste_moyens,3)
-          texte = `Dans un collège, ${p1}% des élèves ${moy1}, ${p2}% ${moy2} et les autres ${moy3}.<br>`
-          texte += `Quel est le pourcentage des élèves qui ${moy3} ?`
-          texte_corr=`Les élèves qui ${moy1} ou qui ${moy2} représentent ${p1}% + ${p2}% = ${p1+p2}%.<br>`
-          texte_corr+=`Donc on calcule : 100 - ${p1+p2}% = ${p3}%<br>`
-          texte_corr+=`${p3}% des élèves ${moy3}.<br>`
+          texte = `Dans un collège, ${p1} \\% des élèves ${moy1}, ${p2} \\% ${moy2} et les autres ${moy3}.<br>`
+          texte += `Quel est le pourcentage des élèves qui ${moy3} ?` 
+          texte_corr=`Les élèves qui ${moy1} ou qui ${moy2} représentent ${p1} \\% + ${p2} \\% = ${p1+p2} \\%.<br>`
+          texte_corr+=`Donc on calcule : 100 - ${p1+p2} \\% = ${p3} \\%<br>`
+          texte_corr+=`${p3} \\% des élèves ${moy3}.<br>`
           break;
           case 2: // Les sports pratiqués par les ados
           [moy1,moy2,moy3]=combinaison_listes(liste_sports,3)
-          texte = `Dans une association sportive, ${p1}% des ados pratiquent ${moy1}, ${p2}% ${moy2} et les autres ${moy3}.<br>`
+          texte = `Dans une association sportive, ${p1} \\% des ados pratiquent ${moy1}, ${p2} \\% ${moy2} et les autres ${moy3}.<br>`
           texte += `Quel est le pourcentage des ados qui pratiquent ${moy3} ?`
-          texte_corr=`Les ados qui pratiquent ${moy1} ou ${moy2} représentent ${p1}% + ${p2}% = ${p1+p2}%.<br>`
-          texte_corr+=`Donc on calcule : 100 - ${p1+p2}% = ${p3}%<br>`
-          texte_corr+=`${p3}% des ados de cette association sportive pratiquent ${moy3}.<br>`
+          texte_corr=`Les ados qui pratiquent ${moy1} ou ${moy2} représentent ${p1} \\% + ${p2} \\% = ${p1+p2} \\%.<br>`
+          texte_corr+=`Donc on calcule : 100 - ${p1+p2} \\% = ${p3} \\%<br>`
+          texte_corr+=`${p3} \\% des ados de cette association sportive pratiquent ${moy3}.<br>`
           break;
           case 3: // Les sports pratiqués par les ados
           [moy1,moy2,moy3]=combinaison_listes(liste_hobbies,3)
-          texte = `Dans une association culturelle, ${p1}% des membres ont comme passe-temps favorit ${moy1}, pour ${p2}% c'est ${moy2} et pour les autres ${moy3}.<br>`
+          texte = `Dans une association culturelle, ${p1} \\% des membres ont comme passe-temps favorit ${moy1}, pour ${p2} \\% c'est ${moy2} et pour les autres ${moy3}.<br>`
           texte += `Quel est le pourcentage des membres qui préfèrent ${moy3} ?`
-          texte_corr=`Les membres qui préfère ${moy1} ou ${moy2} représentent ${p1}% + ${p2}% = ${p1+p2}%.<br>`
-          texte_corr+=`Donc on calcule : 100 - ${p1+p2}% = ${p3}%<br>`
-          texte_corr+=`${p3}% des membres de cette association culturelle préfèrent ${moy3}.<br>`
+          texte_corr=`Les membres qui préfère ${moy1} ou ${moy2} représentent ${p1} \\% + ${p2} \\% = ${p1+p2} \\%.<br>`
+          texte_corr+=`Donc on calcule : 100 - ${p1+p2} \\% = ${p3} \\%<br>`
+          texte_corr+=`${p3} \\% des membres de cette association culturelle préfèrent ${moy3}.<br>`
           break;
 
       }
@@ -13194,11 +13196,11 @@ function Calculer_un_pourcentage() {
 function Appliquer_un_pourcentage() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Problèmes avec des calculs de pourcentages";
-  this.nb_questions = 5;
+  this.nb_questions = 1;
   this.consigne = "Calculer";
   this.spacing = 2;
   this.spacing_corr = 2;
-  this.nb_cols = 2;
+  this.nb_cols = 1;
   this.nb_cols_corr = 1;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
@@ -13221,17 +13223,17 @@ function Appliquer_un_pourcentage() {
       switch(choix[i]){
       case 1 :
       prix[i]=randint(article[index[i]][1],article[index[i]][2])
-      texte=`${article[index[i]][0]} coûtant ${prix[i]} € bénéficie d'une réduction de ${pourcent[i]}%.<br>`
+      texte=`${article[index[i]][0]} coûtant ${prix[i]} € bénéficie d'une réduction de ${pourcent[i]} \\%.<br>`
       texte+=`Quel est le montant en euro de cette réduction ?`
-      texte_corr=`On doit calculer ${pourcent[i]}% de ${prix[i]} :<br>`
+      texte_corr=`On doit calculer ${pourcent[i]} \\% de ${prix[i]} :<br>`
       texte_corr+= `$${pourcent[i]}~\\%~\\text{de }${prix[i]}=${tex_fraction(pourcent[i],100)}\\times${prix[i]}=(${pourcent[i]}\\times${prix[i]})\\div100=${tex_nombre(pourcent[i] * prix[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * prix[i]) / 100))}$<br>`;
       texte_corr+=`Le montant de la réduction est de ${tex_prix(calcul(prix[i]*pourcent[i]/100))} €`
       break;
       case 2 :
         masse[i]=randint(legume[index[i]][1],article[index[i]][2])
-        texte=`${legume[index[i]][0]} pesant ${masse[i]} grammes a subit une croissance de ${pourcent[i]}%.<br>`
+        texte=`${legume[index[i]][0]} pesant ${masse[i]} grammes a subit une croissance de ${pourcent[i]} \\%.<br>`
         texte+=`Quel est la masse supplémentaire en grammes correspondant à cette croissance ?`
-        texte_corr=`On doit calculer ${pourcent[i]}% de ${masse[i]} :<br>`
+        texte_corr=`On doit calculer ${pourcent[i]} \\% de ${masse[i]} :<br>`
         texte_corr+= `$${pourcent[i]}~\\%~\\text{de }${masse[i]}=${tex_fraction(pourcent[i],100)}\\times${masse[i]}=(${pourcent[i]}\\times${masse[i]})\\div100=${tex_nombre(pourcent[i] * masse[i])}\\div100=${tex_nombre(Algebrite.eval((pourcent[i] * masse[i]) / 100))}$<br>`;
         texte_corr+=`La masse a augmenté de ${tex_nombre(calcul(masse[i]*pourcent[i]/100))} g.`
          
@@ -16866,6 +16868,7 @@ function Thales_4eme() {
   //Dans cette version, pas de configuration papillon reservée aux 3èmes.
   Exercice_Thales.call(this);
   this.quatrieme = true;
+  sortie_html? this.spacing = 1.5 : this.spacing = 1; 
 }
 
 function Reciproque_Thales_4eme() {
@@ -17815,6 +17818,118 @@ function Vocabulaire_des_triangles_5e() {
   this.classe = 5;
   Vocabulaire_des_triangles.call(this);
 }
+function Construire_un_triangle_6e() {
+  Construire_un_triangle.call(this)
+  this.classe=6
+}
+
+function Construire_un_triangle() {
+  "use strict"
+  Exercice.call(this)
+  this.titre = "Construire un triangle aux instruments";
+  this.nb_questions = 1;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = false;
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []
+    this.liste_corrections = []
+    let type_de_questions_disponibles,A,B,C,lAB,lBC,lAC,cA,cB,T,objets_enonce,objets_correction,params_enonce,params_correction,nom,sommets
+    if (this.classe == 6) type_de_questions_disponibles = [1]
+    else type_de_questions_disponibles = [1, 2, 3, 4, 5, 6]
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
+    for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
+      objets_enonce=[]
+      objets_correction=[]
+      texte =`Le triangle ci-dessous a été réalisé à main levée.<br>Construire ce triangle avec les instruments de géométrie en respectant les mesures indiquées.<br>`
+      texte_corr=`Voici la construction que tu devais réaliser.<br>`
+      switch (liste_type_de_questions[i]) {
+        case 1:
+          nom=creerNomDePolygone(3,"PQ")
+          sommets=[]
+          for(let i=0;i<3;i++) sommets.push(nom[i])
+          sommets=shuffle(sommets)
+          A=point(0,0,sommets[0])
+          lAC=randint(35,45)
+          lBC=calcul(randint(35,45,lAC)/10)
+          lAB=calcul(randint(46,60)/10)
+          lAC=calcul(lAC/10)
+          B=pointAdistance(A,lAB,randint(-45,45),sommets[1])
+          cA=cercle(A,lAC)
+          cB=cercle(B,lBC)
+          C=pointIntersectionCC(cA,cB,sommets[2])
+          T=polygoneAvecNom(A,B,C)
+          objets_enonce.push(T[0],T[1])
+          objets_enonce.push(afficheLongueurSegment(B,A),afficheLongueurSegment(C,B),afficheLongueurSegment(A,C))
+          objets_correction.push(T[0],T[1],traceCompas(A,C,30,'gray',1,2),traceCompas(B,C,30,'gray',1,2),afficheLongueurSegment(B,A),afficheLongueurSegment(C,B),afficheLongueurSegment(A,C))
+          texte_corr+=`Pour cette construction, nous avons utilisé le compas et la règle graduée.<br>`
+          params_enonce={xmin : Math.min(A.x-1,B.x-1,C.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1),xmax : Math.max(A.x+1,B.x+1,C.x+1),ymax : Math.max(A.y+1,B.y+1,C.y+1),pixelsParCm : 30, scale : 1,mainlevee : true,amplitude : 1}
+          params_correction={xmin : Math.min(A.x-1,B.x-1,C.x-2),ymin : Math.min(A.y-1,B.y-1,C.y-2),xmax : Math.max(A.x+1,B.x+1,C.x+2),ymax : Math.max(A.y+1,B.y+1,C.y+2),pixelsParCm : 30, scale : 1}
+
+          break
+
+        case 2:
+
+          break
+
+        case 3:
+
+          break
+      }
+      texte+=mathalea2d(params_enonce,objets_enonce)
+      texte_corr+=mathalea2d(params_correction,objets_correction)
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Perpendiculaires\n 2 : Parallèles\n 3 : Mélange`]
+  this.besoin_formulaire2_numerique = [
+    "Type de cahier",
+    3,
+    `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
+  ];
+}
+
+function Test_main_levee() {
+  "use strict";
+  Exercice.call(this);
+  this.titre = "Test de main levée";
+  this.nb_questions = 1;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = false;
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions=[]
+    this.liste_corrections=[]
+    let A=point(5,5)
+    let B=point(10,5)
+    let D=point(10,10)
+//    let a=codeAngle(B,A,D,4)
+    let C=cercleCentrePoint(A,B,'green')
+    C.epaisseur=2
+    C.opacite=0.5
+    let E=cercleCentrePoint(B,A,'red')
+    E.epaisseur=2
+    E.opacite=0.5
+    let s=segment(A,B,'red')
+    s.epaisseur=5
+    s.opacite=0.4
+ //   let m=mediatrice(A,B,'d','purple')
+    let cons=constructionMediatrice(A,B,true,'orange','//','O','black',2)
+    let texte=mathalea2d({xmin:-1,ymin:0,xmax:16,ymax:11,pixelsParCm:20,scale:1,mainlevee:this.sup,amplitude:1},[codeAngle(A,B,45,3,'||','black',2,1,'yellow',0.5),C,s,E,tracePoint(A,B,D)])
+    let texte_corr=""
+    this.liste_questions.push(texte );
+    this.liste_corrections.push(texte_corr );
+   liste_de_question_to_contenu(this)  
+  }
+  this.besoin_formulaire_case_a_cocher = ["main levee"];	
+}
 /**
  * Fonction générale pour exercices de constructions de parallèles et perpendiculaires
  * références 6G11, 6G12 et 6G12-1
@@ -18175,7 +18290,8 @@ function Proportionnalite_par_linearite_bis(){
 	};	
 
 	this.titre = "Résoudre un problème relevant de la proportionnalité avec les propriétés de linéarité.";
-	this.consigne = "";
+  this.consigne = "";
+  sortie_html ? this.spacing = 1.5 : this.spacing = 1;
 	
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
@@ -18266,7 +18382,7 @@ function Proportionnalite_par_linearite_bis(){
 				question:``,
         correction:`
         C'est une situation de proportionnalité. Nous pouvons donc utiliser les propriétés de linéarité de la proportionnalité.
-        <br>C'est ce que nous allons faire pour les deux premères questions.
+        <br>C'est ce que nous allons faire pour les deux premières questions.
         <br>
         <br>${num_alpha(k_corr++)} Pour $${situation.n1}$ ${pluriel(situation.n1,situation)}, on paie $${tex_prix(situation.pu*situation.n1)}$ €.
         <br> Pour $${situation.n2}$ ${pluriel(situation.n2,situation)}, on paie $${tex_prix(situation.pu*situation.n2)}$ €.
@@ -36202,7 +36318,7 @@ function Mettre_en_equation_sans_resoudre(){
           xmax : 7,
           ymax : 5,
           pixelsParCm : 20,
-          scale:0.7
+          scale:0.5//0.7
           },
           mesAppels          
         )};      
@@ -36290,7 +36406,7 @@ function Graphiques_et_proportionnalite() {
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	//this.nb_questions_modifiable = false;
-	//sortie_html? this.spacing = 3 : this.spacing = 2; 
+	sortie_html? this.spacing = 1.5 : this.spacing = 1; 
 	//sortie_html? this.spacing_corr = 3 : this.spacing_corr = 2;
 
 	let type_de_questions_disponibles;	
@@ -36412,7 +36528,7 @@ function Graphiques_et_proportionnalite() {
 			enonces.push({
         enonce:`
           À ${situation.lieu}, ${situation.prenom} utilise le graphique ci-dessous pour indiquer le prix de ses ${situation.articles} en fonction du ${situation.qte} ${situation.art_articles}.
-          <br> <br> ${situation.fig}
+          <br>${situation.fig}
           <br> ${num_alpha(k++)} Justifier que c'est une situation de proportionnalité à l'aide du graphique.
           <br> ${num_alpha(k++)} Quel est le prix de $${situation.qte_max}$ ${situation.unite}  ${situation.articles}?
           <br> ${num_alpha(k++)} Quel est le prix de $${situation.qte2}$ ${situation.unite}  ${situation.articles}?
@@ -36422,9 +36538,9 @@ function Graphiques_et_proportionnalite() {
         <br> ${num_alpha(k_corr++)} Ce graphique est une droite qui passe par l'origine.
         <br> ${texte_en_couleur(`C'est donc bien le graphique d'une situation de proportionnalité.`)}
 
-        <br><br> ${num_alpha(k_corr++)} Par lecture graphique, en utilisant les pointillés rouges du graphe ci-dessous, ${texte_en_couleur(`$${situation.qte_max}$ ${situation.unite}  ${situation.articles} coûtent $${tex_prix(calcul(situation.qte_max*situation.prix_unitaire))}$ €.`)}
-        <br> <br> ${situation.fig_corr}
-        <br> <br> ${num_alpha(k_corr++)} Pour $${situation.qte2}$ ${situation.unite}  ${situation.articles}, la lecture graphique est moins facile, nous allons détailler deux méthodes.
+        <br> ${num_alpha(k_corr++)} Par lecture graphique, en utilisant les pointillés rouges du graphe ci-dessous, ${texte_en_couleur(`$${situation.qte_max}$ ${situation.unite}  ${situation.articles} coûtent $${tex_prix(calcul(situation.qte_max*situation.prix_unitaire))}$ €.`)}
+        <br> ${situation.fig_corr}
+        <br> ${num_alpha(k_corr++)} Pour $${situation.qte2}$ ${situation.unite}  ${situation.articles}, la lecture graphique est moins facile, nous allons détailler deux méthodes.
         <br><br> ${texte_gras(`Première méthode par lecture graphique :`)} 
         <br> Il faut prendre en compte que chaque petit carreau représente $${tex_prix(0.4)}$ € et utiliser les pointillés bleus.
         <br><br> ${texte_gras(`Seconde méthode en calculant une quatrième proportionnelle :`)}
@@ -36479,7 +36595,7 @@ function Trouver_erreur_resol_eq_deg1(){
 	};	
 
 	this.titre = "Trouver l'erreur dans une résolution d'équation du premier degré";
-	this.consigne = "Trouver l'erreur dans les résoltutions suivantes.<br>On ne demande pas de résoudre l'équation.";
+	this.consigne = "Trouver l'erreur dans les résolutions suivantes.<br>On ne demande pas de résoudre l'équation.";
 	
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
