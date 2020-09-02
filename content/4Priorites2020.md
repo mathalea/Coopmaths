@@ -13,13 +13,13 @@ Début de l'url commune
 https://coopmaths.fr/exercice.html?
 
 Tous les exos actuellement dispos
-ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
+ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5N11-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 Nombres et calculs
 ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5
 
 Organisation et gestion de données
-ex=6P10&ex=5P10-1
+ex=6P10&ex=5P10-1&ex=5N11-1
 
 Espace et géométrie
 ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
@@ -34,13 +34,13 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 4e - version pdf du 30 août 2020" "/pdf/2020-4e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 4e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
+	{{% alea_url "Test de positionnement 4e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5N11-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
 {{< /liste >}}
 
 **Liens MathALEA vers l'ensemble des exercices par thème**
 {{< liste>}}
 {{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5" %}}	
-{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10-1" %}}	
+{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10-1&ex=5N11-1" %}}	
 {{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
 {{< /liste>}}
 
@@ -98,8 +98,9 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
 			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}			
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient entier" "5N11-1,sup=1" %}}			
+			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient décimal" "5N11-1,sup=2" %}}			
+			{{% priorite_alea "6N33-3 : Problèmes avec des calculs de pourcentages" "6N33-3,nb_questions=2" %}}			
 			{{% priorite_alea "... : ..." "" %}}						
 			{{% priorite_alea "... : ..." "" %}}			
 
