@@ -100,7 +100,7 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{% priorite_alea "... : ..." "" %}}
 			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient entier" "5N11-1,sup=1" %}}			
 			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient décimal" "5N11-1,sup=2" %}}			
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "6N33-3 : Problèmes avec des calculs de pourcentages" "6N33-3,nb_questions=2" %}}			
 			{{% priorite_alea "... : ..." "" %}}						
 			{{% priorite_alea "... : ..." "" %}}			
 
