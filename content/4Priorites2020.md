@@ -98,7 +98,8 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
 			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "5N11-1 : Tableaux et pourcentages" "5N11-1" %}}			
+			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient entier" "5N11-1,sup=1" %}}			
+			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient décimal" "5N11-1,sup=2" %}}			
 			{{% priorite_alea "... : ..." "" %}}			
 			{{% priorite_alea "... : ..." "" %}}						
 			{{% priorite_alea "... : ..." "" %}}			
