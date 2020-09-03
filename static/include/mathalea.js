@@ -1581,6 +1581,46 @@ function texte_en_couleur_et_gras(texte,couleur="#f15929"){
 	}
 	
 }
+/**
+ * couleurAleatoire() renvoie le code d'une couleur au hasard
+ *
+ * @Auteur Rémi Angot
+ */
+function couleurAleatoire() {
+	// let color = "#";
+	// for (let i = 0; i < 6; i++) {
+	//   color += choice([
+	//     0,
+	//     1,
+	//     2,
+	//     3,
+	//     4,
+	//     5,
+	//     6,
+	//     7,
+	//     8,
+	//     9,
+	//     "A",
+	//     "B",
+	//     "C",
+	//     "D",
+	//     "E",
+	//     "F",
+	//   ]);
+	// }
+	// return color;
+	return choice(['white', 'black', 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'])
+  }
+
+  function arcenciel(i) {
+	  let couleurs=['violet','indigo',  'blue', 'green', 'yellow', 'orange', 'red']
+	  return couleurs[i%7]
+  }
+  function texcolors(i,fondblanc="true") {
+	  let couleurs=['black', 'blue', 'brown', 'cyan', 'darkgray', 'gray', 'green', 'lightgray', 'lime', 'magenta', 'olive', 'orange', 'pink', 'purple', 'red', 'teal', 'violet', 'white', 'yellow']
+	  if (fondblanc&&i%19>=17) i+=2
+	  return couleurs[i%19]
+  }
 
 /**
 * Met gras un texte
@@ -6050,7 +6090,7 @@ var liste_des_exercices_disponibles = {
   "2N25": union_et_intersection_intervalles_de_R,
   "2G10": Distance,
   "2G11": Milieu,
- // "2G12": Modelisation_coordonnees,
+  "2G12": Nature_polygone,
   "2L10": Developper_Identites_remarquables2,
   "2L11": Factoriser_Identites_remarquables2,
   "1N10": Terme_d_une_suite_definie_explicitement,
@@ -44556,7 +44596,6 @@ Exercice.call(this); // Héritage de la classe Exercice()
         liste_de_question_to_contenu(this);
     }
 }
-
 
 function Nature_polygone(){
 Exercice.call(this); // Héritage de la classe Exercice()
