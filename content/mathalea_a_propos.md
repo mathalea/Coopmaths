@@ -35,6 +35,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - [SVG.js](https://svgjs.com/) MIT license (pour afficher des figures).
 - [CodeMirror](https://codemirror.net) MIT license (pour l'éditeur de MathALEA2D).
 - [Scratchblocks](https://scratchblocks.github.io/) MIT license (pour le rendu des blocs Scratch).
+- [QRCode.js](https://davidshimjs.github.io/qrcodejs/) MIT license (pour l'affichage d'un QRCode dynamique).
 - Merci à Sébastien Cogez pour ses conseils et à Julien Brunel pour son cours sur la programmation objet.
 - Icone "[Whisper](https://thenounproject.com/term/whisper/21616/)" by Rémy Médard from the Noun Project.
 - Icone "[Silence](https://thenounproject.com/term/whisper/77879/)" by Gianluca Manzana from the Noun Project.
