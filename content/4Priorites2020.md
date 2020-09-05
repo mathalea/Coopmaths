@@ -111,7 +111,8 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Comprendre et utiliser la notion de fonction</div>	
 			{{% priorite "L’élève comprend et utilise la notion de fonction ; il traduit la dépendance entre deux grandeurs par un tableau de valeurs ; il produit une formule représentant la dépendance entre deux grandeurs." %}}
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "5L10-4 : Produire une formule à partir d'un tableau - mêmes unités" "5L10-',sup=1" %}}			
+			{{% priorite_alea "5L10-4 : Produire une formule à partir d'un tableau - unités différentes" "5L10-',sup=2" %}}			
 
 	</div>	
 {{< /liste_priorites >}}
