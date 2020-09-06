@@ -25,7 +25,7 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
-{{% prioriteIntro "/pdf/2020-5e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N33-2&ex=6N33-3&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3"  %}}
+{{% prioriteIntro "/pdf/2020-5e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=6C30-1,sup=1&ex=6C30-2&ex=6N31-2&ex=6N30,sup=1&ex=6N30,sup=2&ex=6N31-1&ex=6N33-2&ex=6N33-3&ex=6N23-1&ex=6N30-1,sup=3&ex=6C23&ex=6N14-2&ex=6N33-0,sup=5&ex=6C33&ex=6C32&ex=6P10&ex=6P11&ex=6P11-1&ex=6N33-1&ex=6G20&ex=6G42&ex=6G43&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2&ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3"  %}}
 
 {{< titre1 "Test de positionnement" >}}
 
