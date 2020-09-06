@@ -37,6 +37,7 @@ var liste_des_exercices_disponibles = {
   "6C31": Division_decimale,
   "6C32": Probleme_course,
   "6C33": Priorites,
+  //"6C99" : separation6C,
   "6D10": Conversions_de_durees,
   "6D101": Heures_decimales,
   "6D11": Somme_de_durees,
@@ -76,7 +77,7 @@ var liste_des_exercices_disponibles = {
   "6N10-2": Decomposition_nombre_decimal,
   "6N11": Lire_abscisse_entiere,
   "6N11-2": Placer_un_point_abscisse_entiere,
-  "6N12": Exercice_6N12,
+  "6N12": Multiplier_entier_par_10_100_1000,
   "6N13": Exercice_6N13,
   "6N14" : Representer_une_fraction,
   "6N14-2" : Ajouter_des_fractions_d_unite,
@@ -137,7 +138,7 @@ var liste_des_exercices_disponibles = {
   "5L10-1": Traduire_une_phrase_par_une_expression_litterale,
   "5L10-2": Traduire_un_programme_de_calcul,
   "5L10-3": Traduire_une_expression_litterale_par_une_phrase,
-  "beta5L10-4": Tableaux_et_fonction,
+  "5L10-4": Tableaux_et_fonction,
   "5N20-0": Problemes_additifs_fractions_5e,
   "5L12": Reduire_une_expression_litterale,
   "5L12-1": Reduire_dinstinction_somme_produit,
@@ -2734,6 +2735,93 @@ function Ajouter9() {
     liste_de_question_to_contenu(this);
   };
   //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+/**
+ * Un nombre à 2 chiffres (non multiple de 10) + 9
+ * @Auteur Rémi Angot
+ */
+function Multiplier_entier_par_10_100_1000() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Multiplier un entier par 10, 100, 1 000...";
+  this.consigne = "Calculer";
+  this.nb_questions = 8;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.sup = 2;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.bouton_aide = modal_url(numero_de_l_exercice,'https://mathix.org/glisse-nombre/index.html',
+      "Glisse-nombre"
+    );
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1,2,3,4,choice([5,6]),7,8,9];
+    let liste_type_de_questions = combinaison_listes(
+      type_de_questions_disponibles,
+      this.nb_questions
+    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+    let liste_de_b = []
+      if (this.sup==2){
+        liste_de_b = combinaison_listes([10,100,1000,10000,100000],this.nb_questions)
+      } else {
+        liste_de_b = combinaison_listes([10,100,1000],this.nb_questions)
+      }
+    for (
+      let i = 0, texte, texte_corr, a, b, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+      switch (liste_type_de_questions[i]) {
+        case 1:
+          a = randint(1,9)
+          break;
+        case 2:
+          a = randint(2,9)*10
+          break;
+        case 3:
+          a = randint(2,9)*100
+          break;
+        case 4:
+          a = randint(2,9)*1000
+          break;
+        case 5:
+          a = randint(1,9)*100+randint(1,9)
+          break;
+        case 6:
+          a = randint(1,9)*1000+randint(1,9)
+          break;
+        case 7:
+          a = randint(1,9)*100 + randint(1,9)*10 + randint(1,9)
+          break;
+          case 8:
+            a = randint(1,9)*10000+randint(1,9)*100
+            break;
+        case 9:
+          a = randint(1,9)*10 + randint(1,9)
+          break;
+            
+      }
+      
+      b = liste_de_b[i]
+      if (choice([true,false])) {
+        texte = `$${tex_nombre(a)}\\times${tex_nombre(b)}$`
+        texte_corr = `$${tex_nombre(a)}\\times${tex_nombre(b)}=${tex_nombre(a*b)}$`
+      } else {
+        texte = `$${tex_nombre(b)}\\times${tex_nombre(a)}$`
+        texte_corr = `$${tex_nombre(b)}\\times${tex_nombre(a)}=${tex_nombre(a*b)}$`
+      }
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par 10, 100 ou 1 000\n2 : Multiplication par 10, 100, 1 000, 10 000 ou 100 000'];
 }
 
 /**
@@ -11117,11 +11205,6 @@ function Calcul_de_volumes_3e() {
   Calcul_de_volumes.call(this);
 }
 
-function Exercice_6N12() {
-  Tables_de_multiplications.call(this);
-  this.sup = "10-100-1000";
-  this.titre = "Multiplier un entier par 10, 100, 1 000...";
-}
 
 function Exercice_6N13() {
   this.sup = 1;
@@ -13441,48 +13524,59 @@ jQuery(document).ready(function () {
   // Affiche de la liste des exercices disponibles
   let liste_html_des_exercices =
     '<h3 class="ui block header">Exercices disponibles</h3>\n\n';
+
+  function liste_html_des_exercices_d_un_theme(theme){
+    let liste = '';
+    let dictionnaire = filtreDictionnaire(liste_des_exercices_disponibles,theme);
+    for (let id in dictionnaire) {
+      let exercice_tmp = new dictionnaire[id]();
+      liste +=
+        `<span class="id_exercice">${id}</span> - <a class="lien_id_exercice" numero="${id}">${exercice_tmp.titre}</a></br>\n`;
+    }
+    return liste;
+  }
+
+  function liste_html_des_exercices_d_un_niveau(liste_de_themes){ // liste_de_themes = [['6N1','6N1 - Numérations et fractions niveau 1'] , [' ',' '] ]
+    let liste = '';
+    for (let theme of liste_de_themes){
+      console.log(theme,theme[0],theme[1])
+      // liste += `<div class="ui hidden divider"></div>\n`;
+      liste += `<h3>${theme[1]}</h3>`;
+      liste += liste_html_des_exercices_d_un_theme(theme[0]);
+    }
+    return liste;
+  }
+
+
+    
   for (var id in liste_des_exercices_disponibles) {
     let exercice_tmp = new liste_des_exercices_disponibles[id]();
-    if (id[0] == 6) {
-      liste_html_des_exercices_6 +=
-        '<span class="id_exercice">' +
-        id +
-        '</span> - <a class="lien_id_exercice" numero="' +
-        id +
-        '">' +
-        exercice_tmp.titre +
-        "</a></br>\n";
-    }
-    if (id[0] == 5) {
-      liste_html_des_exercices_5 +=
-        '<span class="id_exercice">' +
-        id +
-        '</span> - <a class="lien_id_exercice" numero="' +
-        id +
-        '">' +
-        exercice_tmp.titre +
-        "</a></br>\n";
-    }
-    if (id[0] == 4) {
-      liste_html_des_exercices_4 +=
-        '<span class="id_exercice">' +
-        id +
-        '</span> - <a class="lien_id_exercice" numero="' +
-        id +
-        '">' +
-        exercice_tmp.titre +
-        "</a></br>\n";
-    }
-    if (id[0] == 3) {
-      liste_html_des_exercices_3 +=
-        '<span class="id_exercice">' +
-        id +
-        '</span> - <a class="lien_id_exercice" numero="' +
-        id +
-        '">' +
-        exercice_tmp.titre +
-        "</a></br>\n";
-    }
+    liste_html_des_exercices_6 = liste_html_des_exercices_d_un_niveau([
+      ['6C1','6C1 - Calculs niveau 1'],['6C2','6C2 - Calculs niveau 2'],['6C3','6C3 - Calculs niveau 3'],
+      ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],
+      ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
+      ['6D1','6D1 - Les durées'],
+      ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3']])
+      liste_html_des_exercices_5 = liste_html_des_exercices_d_un_niveau([
+        ['5A1','5A1 - Arithmetique'],['5C1','5C1 - Calculs'],
+        ['5G1','5G1 - Symétries'],['5G2','5G2 - Triangles'],['5G3','5G3 - Angles'],['5G4','5G4 - Parallélogrammes'],['5G5','5G5 - Espace'],
+        ['5L1','5L1 - Calcul littéral'],
+        ['5M1','5M1 - Périmètres et aires'],['5M2','5M2 - Volumes'],['5M3','5M3 - Durées'],
+        ['5N1','5N1 - Numération et fractions niveau 1'],['5N2','5N2 - Calculs avec les fractions'],
+        ['5P1','5P1 - Proportionnalité'],['5R1','5R1 - Relatifs niveau 1'],['5R2','5R2 - Relatifs niveau 2'],
+        ['5S1','5S1 - Statistiques'],['5S2','5S2 - Probabilités']
+      ])
+      liste_html_des_exercices_4 = liste_html_des_exercices_d_un_niveau([
+        ['4C1','4C1 - Relatifs'],['4C2','4C2 - Fractions'],['4C3','4C3 - Puissances'],
+        ['4F1','4F1 - Notion de fonction'],
+        ['4G1','4G1 - Translation et rotation'],['4G2','4G2 - Théorème de Pythagore'],['4G3','4G3 - Théorème de Thalès'],['4G4',"4G4 - Cosinus d'un angle"],['4G5',"4G5 - Espace"],
+        ['4L1','4L1 - Calcul littéral'],['4P1','4P1 - Proportionnalité'],['4S1','4S1 - Statistiques'],['4S2','4S2 - Probabilités']
+      ])
+      liste_html_des_exercices_3 = liste_html_des_exercices_d_un_niveau([
+        ['3F1','3F1 - Généralités sur les fonctions'],['3F2','3F2 - Fonctions affines et linéaires'],
+        ['3G1','3G1 - Homothétie et rotation'],['3G2','3G2 - Théorème de Thalès'],['3G3','3G3 - Trigonométrie'],['3G4',"3G4 - Espace"],
+        ['3L1','3L1 - Calcul littéral'],['3P1','3P1 - Proportionnalité'],['3S1','3S1 - Statistiques'],['3S2','3S2 - Probabilités']
+      ])
     if (id[0] == 2) {
       liste_html_des_exercices_2 +=
         '<span class="id_exercice">' +
@@ -14204,6 +14298,99 @@ function Ordre_de_grandeur_operations_decimaux(){
 						texte_corr = `${enonces[0].correction}`;
 					};
           			break;	
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+/** 
+ * * séparation6C
+ * * 6C99
+ * @author Sébastien Lozano
+ */
+
+function separation6C(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = false;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 5;
+	} else {
+		this.nb_questions = 3;
+	};	
+
+	this.titre = "===================================================================================================================";	
+	this.consigne = ` `;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+          //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+          type_de_questions_disponibles = [0];			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+				{//case 0 -->
+				},
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`
+					Exercice factice pour faire une séparation temporairement
+					`,
+					question:``,
+					correction:`
+					
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -20310,7 +20497,7 @@ function Problemes_additifs_fractions_5e(){
 			// let q1a = randint(1,5); // indice pour faire varier la 1ere question sur la destination
 			// let q1b = randint(1,5,[q1a]); // indice pour faire varier la 2eme question sur la destination
 			let nb_vols_total;
-			let destinations_vols = [[`l'`,`Afrique`],[`l'`,`Asie`],[`l'`,`Amérique`],[`l'`,`Europe`],[`la`,` France`]];
+			let destinations_vols = [[`l'`,`Afrique`],[`l'`,`Asie`],[`l'`,`Amerique`],[`l'`,`Europe`],[`la`,` France`]];
 			destinations_vols = shuffle(destinations_vols);
 			do {		
 				nb_vols_total = randint(200,600);
@@ -20415,9 +20602,9 @@ function Problemes_additifs_fractions_5e(){
 					case 90:
 						return `du secteur est un angle droit, il mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{4}$.`;
 					case 30:
-						return `rouge apparaît 3 fois, l'angle vert vaut $180\\degree$ et il y a un angle droit.
-							<br> L'angle pour un tour complet vaut $360\\degree$, donc l'angle rouge vaut $(360-180-90)\\div 3 = ${angle}\\degree$.
-							<br> L'angle rouge mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{12}$.
+						return `rouge apparaît 3 fois, l'angle vert vaut $180\\degree$ et il y a un angle droit.<br>
+							L'angle pour un tour complet vaut $360\\degree$, donc l'angle rouge vaut $(360-180-90)\\div 3 = ${angle}\\degree$.<br>
+							L'angle rouge mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{12}$.
 							`;
 					case 180:
 						return `du secteur est un angle plat, il mesure $${angle}\\degree$ sur les $360\\degree$ d'un tour complet, donc il représente $\\dfrac{${angle}}{360}$ du disque soit $\\dfrac{1}{2}$.`;
@@ -20529,27 +20716,27 @@ function Problemes_additifs_fractions_5e(){
 			for (let k=0;k<1;k++) {
 				enonces.push({
 					enonce:`
-					On a représenté sur le diagramme circulaire ci-contre la répartition des ${situations[k].fin_enonce_situation}.
-					<br>${texte_gras(`Les angles de même couleur ont la même mesure.`)}
-					<br>${texte_gras(`L'angle vert est un angle plat.`)}
-					<br> ${situations[k].fig}
-					<br>${num_alpha(i_sous_question++)} Quelle fraction représente les ${situations[k].nom_enonce} vers ${situations[k].cat1.destination} ?
-					<br>${num_alpha(i_sous_question++)} Quelle fraction représente les ${situations[k].nom_enonce} vers ${situations[k].cat2.destination} ?
-					<br>${num_alpha(i_sous_question++)} Sachant que ${situations[k].last_question[0]} ${situations[k].nb_total} ${situations[k].last_question[1]}
+					On a représenté sur le diagramme circulaire ci-contre la répartition des ${situations[k].fin_enonce_situation}.<br>
+					${texte_gras(`Les angles de même couleur ont la même mesure.`)}<br>
+					${texte_gras(`L'angle vert est un angle plat.`)}<br>
+					${situations[k].fig}<br>
+					${num_alpha(i_sous_question++)} Quelle fraction représente les ${situations[k].nom_enonce} vers ${situations[k].cat1.destination} ?<br>
+					${num_alpha(i_sous_question++)} Quelle fraction représente les ${situations[k].nom_enonce} vers ${situations[k].cat2.destination} ?<br>
+					${num_alpha(i_sous_question++)} Sachant que ${situations[k].last_question[0]} ${situations[k].nb_total} ${situations[k].last_question[1]}
 					et que les ${situations[k].nom_enonce} vers ${situations[k].cat3.destination} représentent $\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}$ de ce total,
 					caluler ${situations[k].last_question[2]} vers ${situations[k].cat3.destination}?
 												
 					`,
 					correction:`
-					${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat1.destination} l'angle ${myTexte_vols_corr(situations[k].cat1.angle)}						
-					<br>${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat1.destination} vaut donc $\\dfrac{${situations[k].cat1.frac[0]}}{${situations[k].cat1.frac[1]}}$`)}.
+					${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat1.destination} l'angle ${myTexte_vols_corr(situations[k].cat1.angle)}<br>					
+					${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat1.destination} vaut donc $\\dfrac{${situations[k].cat1.frac[0]}}{${situations[k].cat1.frac[1]}}$`)}.<br>
 					
-					<br>${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat2.destination} l'angle ${myTexte_vols_corr(situations[k].cat2.angle)}				
-					<br>${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat2.destination} vaut donc $\\dfrac{${situations[k].cat2.frac[0]}}{${situations[k].cat2.frac[1]}}$`)}
+					${num_alpha(i_sous_question_corr++)} Pour ${situations[k].cat2.destination} l'angle ${myTexte_vols_corr(situations[k].cat2.angle)}<br>				
+					${texte_en_couleur(`La fraction qui représente les ${situations[k].nom_enonce} vers ${situations[k].cat2.destination} vaut donc $\\dfrac{${situations[k].cat2.frac[0]}}{${situations[k].cat2.frac[1]}}$`)}<br>
 
-					<br>${num_alpha(i_sous_question_corr++)} Calculons $\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}$ de ${situations[k].nb_total} : 
-					<br>$\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}\\times ${situations[k].nb_total} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${situations[k].nb_total}}{${situations[k].cat3.frac[1]}} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}\\times ${situations[k].cat3.frac[1]}}{${situations[k].cat3.frac[1]}} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}\\times \\cancel{${situations[k].cat3.frac[1]}}}{\\cancel{${situations[k].cat3.frac[1]}}} = ${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])} = ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}$
-					<br>${texte_en_couleur(`${situations[k].last_question[3]} vers ${situations[k].cat3.destination} vaut donc ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}.`)}
+					${num_alpha(i_sous_question_corr++)} Calculons $\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}$ de ${situations[k].nb_total} :<br> 
+					$\\dfrac{${situations[k].cat3.frac[0]}}{${situations[k].cat3.frac[1]}}\\times ${situations[k].nb_total} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${situations[k].nb_total}}{${situations[k].cat3.frac[1]}} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}\\times ${situations[k].cat3.frac[1]}}{${situations[k].cat3.frac[1]}} = \\dfrac{${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}\\times \\cancel{${situations[k].cat3.frac[1]}}}{\\cancel{${situations[k].cat3.frac[1]}}} = ${situations[k].cat3.frac[0]}\\times ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])} = ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}$<br>
+					${texte_en_couleur(`${situations[k].last_question[3]} vers ${situations[k].cat3.destination} vaut donc ${calcul(situations[k].nb_total/situations[k].cat3.frac[1])}.`)}
 					`
 				});
 			};
@@ -20565,47 +20752,7 @@ function Problemes_additifs_fractions_5e(){
 					} else {
 						texte_corr = `${enonces[0].correction}`;
 					};
-          			break;	
-        		// case 1 : 
-				// 	texte = `${enonces[1].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[1].correction}`;
-				// 	};
-          		// 	break;
-        		// case 2 : 
-				// 	texte = `${enonces[2].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[2].correction}`;
-				// 	};
-          		// 	break;				
-        		// case 3 : 
-				// 	texte = `${enonces[3].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[3].correction}`;
-				// 	};
-				// 	break;				
-         		// case 4 : 
-				// 	texte = `${enonces[4].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[4].correction}`;
-				// 	};
-				// 	break;				
+          			break;		
 			}
 			
 			
@@ -20812,47 +20959,7 @@ function Problemes_additifs_relatifs_5e(){
 					} else {
 						texte_corr = `${enonces[0].correction}`;
 					};
-          			break;	
-        		// case 1 : 
-				// 	texte = `${enonces[1].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[1].correction}`;
-				// 	};
-          		// 	break;
-        		// case 2 : 
-				// 	texte = `${enonces[2].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[2].correction}`;
-				// 	};
-          		// 	break;				
-        		// case 3 : 
-				// 	texte = `${enonces[3].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[3].correction}`;
-				// 	};
-				// 	break;				
-         		// case 4 : 
-				// 	texte = `${enonces[4].enonce}`;
-				// 	if (this.beta) {
-				// 		texte += `<br>`;
-				// 		texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
-				// 		texte_corr = ``;	
-				// 	} else {
-				// 		texte_corr = `${enonces[4].correction}`;
-				// 	};
-				// 	break;				
+          			break;				
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -21312,7 +21419,7 @@ function Tableaux_et_pourcentages(){
 function Tableaux_et_fonction(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 1;
@@ -21346,22 +21453,151 @@ function Tableaux_et_fonction(){
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			let L1 = randint(3,7);
+			let L2 = L1+1;
+			let L3 = L2*2;
+			let L4 = L2*3;
+
+			let cote_inconnu = choice(['L']);	
+			let cote_inconnu_corr;		
+			let cote_inconnu_corr_num;	
+			let cote_connu = randint(3,7);
+
+			let unites;
+			let grand_L;
+			let grand_L_num;
+			let petit_l;
+			let petit_l_num;
+			let unite_grand_L;
+			let unite_petit_l; 
+			let txt_corr;			
+			if (this.sup == 1) {//même unités
+				unites = choice([['cm','cm'],['m','m']]);
+				grand_L = [`${L1}`,`${L2}`,`${L3}`,`${L4}`];
+				grand_L_num = [`${L1}`,`${L2}`,`${L3}`,`${L4}`]; 
+				petit_l = [`${cote_connu}`,``,``,``]; 
+				petit_l_num = [`${cote_connu}`,``,``,``];
+				unite_grand_L = unites[0];
+				unite_petit_l = unites[1];
+				cote_inconnu_corr  = cote_inconnu;
+				cote_inconnu_corr_num =  `2`+cote_inconnu;
+				txt_corr = `Les unités sont les mêmes il n'est donc pas necessaire de convertir.`;
+			};
+			if (this.sup == 2) {// unités différentes
+				unites = choice([['cm','m'],['m','cm']]);
+				if (unites[0]=='cm') {
+					grand_L =[`${L1}`,`${L2}`,`${L3}`,`${L4}`];
+					grand_L_num =[`${L1}`,`${L2}`,`${L3}`,`${L4}`];
+					petit_l = [`${cote_connu}\\times 100`,``,``,``];					
+					petit_l_num =[`${100*cote_connu}`,``,``,``]; 
+					unite_grand_L = unites[0];
+					unite_petit_l = unites[0];
+					cote_inconnu_corr =  cote_inconnu;
+					cote_inconnu_corr_num =  `2`+cote_inconnu;
+					txt_corr = `Les unités sont différentes, pour plus de confort, nous pouvons les convertir dans la même unité, ici en cm.`;
+				};
+				if (unites[0]=='m') {					
+					grand_L = [`${L1}\\times 100`,`${L2}\\times 100`,`${L3}\\times 100`,`${L4}\\times 100`];
+					grand_L_num = [`${100*L1}`,`${100*L2}`,`${100*L3}`,`${100*L4}`];
+					petit_l = [`${cote_connu}`,``,``,``];
+					petit_l_num =[`${cote_connu}`,``,``,``]; 					
+					unite_grand_L = unites[1];
+					unite_petit_l = unites[1];
+					cote_inconnu_corr = cote_inconnu+`\\times 100`;
+					cote_inconnu_corr_num = `200`+cote_inconnu;
+					
+					txt_corr = `Les unités sont différentes, pour plus de confort, nous pouvons les convertir dans la même unité, ici en cm.`;
+				};
+
+			};			
+			
+			
+
+			// on prépare la fenetre mathalea2d
+			let fenetreMathalea2D = {xmin:-5,ymin:-3,xmax:5,ymax:3,pixelsParCm:20,scale:0.5}
+			let A = point(-4,2);
+			let B = point(-4,-2);
+			let C = point(4,-2);
+			let D = point(4,2);
+			let mesAppels = [
+				polygone(A,B,C,D),		
+			];
+			let figure = mathalea2d(
+				fenetreMathalea2D,
+				mesAppels
+			);
+
+			// une fonction pour moduler l'affichage d'une étape dans la correction
+			function etapeCorrective(str,sup) {
+				let sortie;
+				if (sup == 1) {
+					sortie = ``;
+				};
+				if (sup == 2) {
+					sortie = str;
+				};
+				return sortie;
+
+			};
 
 			// pour les situations, autant de situations que de cas dans le switch !
 			let situations = [
 				{//case 0 -->
+					unites:unites,
+					cote_connu:cote_connu,
+					cote_inconnu:cote_inconnu,
+					tableau:tab_C_L([`\\text{Longueur $${cote_inconnu}$ du côté (en $${unites[0]}$)}`,`\\phantom{000}${L1}\\phantom{000}`,`\\phantom{000}${L2}\\phantom{000}`,`\\phantom{000}${L3}\\phantom{000}`,`\\phantom{000}${L4}\\phantom{000}`],[`\\text{Périmètre du rectangle (en $${unites[1]}$)}`],
+					['','','','']
+					),
+					tableau_corr_p1:tab_C_L([`\\text{Longueur $${cote_inconnu_corr}$ du côté (en $${unite_grand_L}$)}`,`\\phantom{000}${grand_L[0]}\\phantom{000}`,`\\phantom{000}${grand_L[1]}\\phantom{000}`],//,`\\phantom{000}${grand_L[2]}\\phantom{000}`,`\\phantom{000}${grand_L[3]}\\phantom{000}`],
+					[`\\text{Périmètre du rectangle (en $${unite_petit_l}$)}`],
+					[
+						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L1} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,
+						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L2} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L3} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[2]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[3]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} \\color{black}{ = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[3]} \\; \\text{${unite_grand_L}} = \\color{black}{${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}}`,
+					],
+					),
+					tableau_corr_p2:tab_C_L([`\\text{Longueur $${cote_inconnu_corr}$ du côté (en $${unite_grand_L}$)}`,`\\phantom{000}${grand_L[2]}\\phantom{000}`,`\\phantom{000}${grand_L[3]}\\phantom{000}`],//,`\\phantom{000}${grand_L[2]}\\phantom{000}`,`\\phantom{000}${grand_L[3]}\\phantom{000}`],
+					[`\\text{Périmètre du rectangle (en $${unite_petit_l}$)}`],
+					[
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L1} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[0]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L2} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[1]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,
+						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L3} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,
+						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,
+					],
+					),
+					secondeQ:`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${cote_inconnu} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${cote_inconnu_corr} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0])} + ${cote_inconnu_corr_num} \\; \\text{exprimé en ${unite_grand_L}}}`,
+					intro:txt_corr,
+					fig:figure,
 				},	
 			];
 
 			let enonces = [];
+			let i_sous_question=0;
+			let i_sous_question_corr=0;
+
 			for (let k=0;k<situations.length;k++) {
 				enonces.push({					
 					enonce:`
-					Type ${k}				
+					On considère le rectangle ci-dessous dont l'un des côtés mesure $${situations[k].cote_connu}$ $${unites[1]}$ et l'autre mesure $${situations[k].cote_inconnu}$ $${unites[0]}$.<br>
+					${situations[k].fig}<br>
+					${num_alpha(i_sous_question++)} Compléter le tableau suivant :<br><br>
+					${situations[k].tableau}<br><br>
+					${num_alpha(i_sous_question++)} Quelle formule permet de calculer le périmètre de ce rectangle en fonction de $${situations[k].cote_inconnu}$ ?								
 					`,
 					question:``,
 					correction:`
-					Correction type ${k}
+					${num_alpha(i_sous_question_corr++)} ${situations[k].intro}<br>
+					Il y a plusieurs façons de calculer le périmètre d'un rectangle, par exemple $2\\times largeur + 2\\times Longueur$.<br>
+					Ici l'un des côtés mesure toujours $\\textcolor{blue}{${petit_l[0]}}$ $${unite_petit_l}$<br>
+					${texte_gras(`=========== première partie du tableau ===============`)}<br>
+					${situations[k].tableau_corr_p1}<br>
+					${texte_gras(`=========== seconde partie du tableau ===============`)}<br>
+					${situations[k].tableau_corr_p2}<br>
+					${num_alpha(i_sous_question_corr++)} On peut généraliser le raisonnement des calculs du périmètre, et ainsi obtenir une formule.<br>
+					$${situations[k].secondeQ}$
+
 					`
 				});
 			};
@@ -21392,7 +21628,7 @@ function Tableaux_et_fonction(){
 		liste_de_question_to_contenu(this);
 
 	}
-	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : les mêmes unités\n2 : unités différentes"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 };/**
  * * Calcul de l'inverse d'un nombre.

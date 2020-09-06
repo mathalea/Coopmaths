@@ -4,18 +4,32 @@ niveau:
 description: "Générateur d'exercices de mathématiques à données aléatoires"
 ---
 
+### Présentation
+
+Ce générateur d'exercices à données aléatoires est présenté dans cet <a href="http://revue.sesamath.net/spip.php?article1352" target="_blank">article de MathémaTICE</a> (écrit en juin 2020).
+
+
+### Soutien
+
+Depuis l'été 2020, MathALEA est un projet soutenu par l'association <a href="https://www.sesamath.net" target="_blank">Sésamath</a>.
+
+<a href="https://www.sesamath.net" target="_blank"><img src="/images/sesamath_logo.png"></a>
+
+
 ### Objectifs
 
 - Une interface professeur :
-	- Générer des exercices de mathématiques (niveau collège) avec des données pseudo-aléatoires.
+	- Générer des exercices de mathématiques (niveau collège et bientôt lycée et école primaire) avec des données pseudo-aléatoires.
 	- Créer un fichier LaTeX prêt à être compilé en pdf avec plusieurs versions des mêmes exercices (par exemple pour créer différents sujets d'un contrôle).
-	- Créer des URL vers des exercices en ligne et leur corrigé.
+	- Créer des URL vers des exercices en ligne et leurs corrections.
 - Une interface élève :
 	- Voir les exercices et les corrections directement en ligne .
+
 
 ### Pour participer
 
 Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/remiangot/Coopmaths) et lire la documentation sur le [wiki](https://github.com/remiangot/Coopmaths/wiki). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tout ceux qui souhaiteraient participer.
+
 
 
 ### Crédits
@@ -23,10 +37,10 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - Moteur développé par Rémi Angot sous licence **CC-By-SA**.
 - Exercices écrits par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano et Stéphane Guyon puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
-- [MathGraph32](https://www.mathgraph32.org) développé par Yves Bitton - Licence GNU AGPLv3 (pour les constructions géométriques).
+- [MathGraph32](https://www.mathgraph32.org) développé par Yves Biton - Licence GNU AGPLv3 (pour les constructions géométriques).
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
 - [KaTeX](https://khan.github.io/KaTeX/) LPPL (pour le rendu LaTeX des exercices en ligne).
-- [Dowload.js](http://danml.com/download.html) CCBY2 (pour le téléchargment du fichier LaTeX généré).
+- [Dowload.js](http://danml.com/download.html) CCBY2 (pour le téléchargement du fichier LaTeX généré).
 - [jQuery](https://jquery.com/) MIT license (pour alléger la programmation).
 - [Clipboard.js](https://clipboardjs.com/) MIT license (pour le bouton copier le code LaTeX).
 - [prismjs](http://prismjs.com/) MIT license (pour la coloration syntaxique du code LaTeX).
