@@ -69,8 +69,8 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6N33-0 : Prendre une fraction d'une quantité" "6N33-0,sup=5" %}}
 
 			{{< liste >}}
-				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6C23,nb_questions=5,sup=11&ex=6N14-2,nb_questions=4,sup=3&serie=eun1" %}}	
-				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-2.pdf" %}}
+				{{% alea_url_color "#f15929" "Les 3 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6C23,nb_questions=5,sup=11&ex=6N14-2,nb_questions=4,sup=3&ex=6N33-0,nb_questions=5,sup=5,sup2=true" %}}	
+				{{% pdf_url_color "#f15929" "Les 3 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-2.pdf" %}}
 			{{< /liste >}}
 		</div>	
 {{< /liste_priorites >}}
