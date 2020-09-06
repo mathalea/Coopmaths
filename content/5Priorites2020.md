@@ -67,6 +67,11 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}			
 			{{% priorite_alea "6N14-2 : Mettre bout à bout des segments" "6N14-2" %}}
 			{{% priorite_alea "... : ..." "" %}}
+
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6C23,nb_questions=5,sup=11&ex=6N14-2,nb_questions=4,sup=3&serie=eun1" %}}	
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-2.pdf" %}}
+			{{< /liste >}}
 		</div>	
 {{< /liste_priorites >}}
 
