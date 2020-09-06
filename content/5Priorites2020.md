@@ -66,7 +66,7 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite "Il ajoute des fractions de même dénominateur. " %}}
 			{{% priorite_alea "6C23 : Additionner des fractions de même dénominateur" "6C23" %}}			
 			{{% priorite_alea "6N14-2 : Mettre bout à bout des segments" "6N14-2" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "6N33-0 : Prendre une fraction d'une quantité" "6N33-0,sup=5" %}}
 
 			{{< liste >}}
 				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6C23,nb_questions=5,sup=11&ex=6N14-2,nb_questions=4,sup=3&serie=eun1" %}}	
