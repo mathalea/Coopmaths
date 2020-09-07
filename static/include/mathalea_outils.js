@@ -5068,7 +5068,7 @@ function Fraction(num,den) {
      * @param {number} depart N° de la première part coloriée (0 correspond à la droite du centre) 
      * @param {*} type 'gateau' ou 'segment' ou 'barre'
      */
-	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray') {
+	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.numIrred, this.denIrred)
 		num = this.numIrred
@@ -5086,14 +5086,14 @@ function Fraction(num,den) {
 				C = cercle(O, rayon)
 				objets.push(C)
 				for (let i = 0; i < this.denIrred; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- i * 360 / this.denIrred))
 					objets.push(s)
 				}
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- depart * 360 / this.denIrred)
 				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a = arc(dep, O, -360 / this.denIrred, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.denIrred)
+					dep = rotation(dep, O, -360 / this.denIrred)
 					objets.push(a)
 				}
 				num -= this.denIrred
@@ -5103,14 +5103,14 @@ function Fraction(num,den) {
 				C = cercle(O, rayon)
 				objets.push(C)
 				for (let i = 0; i < this.denIrred; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-i * 360 / this.denIrred))
 					objets.push(s)
 				}
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- depart * 360 / this.denIrred)
 				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a = arc(dep, O, -360 / this.denIrred, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.denIrred)
+					dep = rotation(dep, O, -360 / this.denIrred)
 					objets.push(a)
 				}
 			}
@@ -5144,18 +5144,23 @@ function Fraction(num,den) {
 				s.styleExtremites = '|-'
 				objets.push(s)
 			}
-			a = segment(O, point(O.x + Math.min(num, this.denIrred) * rayon / this.denIrred, O.y))
+			a = segment(O, point(O.x + Math.min(this.numIrred, this.denIrred) * rayon / this.denIrred, O.y))
 			a.color = couleur
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
+			objets.push(unegraduation(x,y))
+			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','blue',scale))
+			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else {
 			let diviseur
-			if (this.denIrred % 3 == 0) diviseur = 3
-			else if (this.denIrred % 2 == 0) diviseur = 2
+			if (this.denIrred % 6 == 0) diviseur=6
+			else if (this.denIrred % 5 == 0) diviseur=5
+			else if (this.denIrred % 4 == 0) diviseur=4
+			else if (this.denIrred % 3 == 0) diviseur=3
+			else if (this.denIrred % 2 == 0) diviseur=2
 			else diviseur = 1
 
 			for (k = 0; k < n; k++) {
@@ -5170,7 +5175,7 @@ function Fraction(num,den) {
 						objets.push(dep)
 					}
 				}
-				num -= this.denIrred
+				num -= this.den
 			}
 			if (num>0) {
 				for (let j = 0; j < diviseur; j++) {
@@ -5215,32 +5220,32 @@ function Fraction(num,den) {
 				objets.push(C)
 				let s, a
 				for (let i = 0; i < this.den; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-i * 360 / this.den))
 					objets.push(s)
 				}
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-depart * 360 / this.den)
 				for (let j = 0; j < Math.min(this.den, num); j++) {
-					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a = arc(dep, O,- 360 / this.den, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.den)
+					dep = rotation(dep, O, -360 / this.den)
 					objets.push(a)
 				}
 				num -= this.den
 			}
-			if (this.num%this.den!=0) { 
+			if (this.num%this.den!=0) { $
 				let O = point(x + k * 2 * (rayon + 0.5), y)
 				let C = cercle(O, rayon)
 				objets.push(C)
 				for (let i = 0; i < this.den; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-i * 360 / this.den))
 					objets.push(s)
 				}
 			
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- depart * 360 / this.den)
 				if (this.num%this.den!=0) for (let j = 0; j < Math.min(this.den, num); j++) {
-					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a = arc(dep, O, -360 / this.den, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.den)
+					dep = rotation(dep, O, -360 / this.den)
 					objets.push(a)
 				}
 			}
@@ -5279,13 +5284,18 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
+			objets.push(unegraduation(x,y))
+			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','blue',scale))
+			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else { //Type bâtons
 			let diviseur
-			if (this.den % 3 == 0) diviseur = 3
-			else if (this.den % 2 == 0) diviseur = 2
+			if (this.den % 6 == 0) diviseur=6
+			else if (this.den % 5 == 0) diviseur=5
+			else if (this.den % 4 == 0) diviseur=4
+			else if (this.den % 3 == 0) diviseur=3
+			else if (this.den % 2 == 0) diviseur=2
 			else diviseur = 1
 
 			for (k = 0; k < n; k++) {
