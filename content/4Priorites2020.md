@@ -79,9 +79,17 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{% priorite "Il produit une expression littérale pour élaborer une formule ou traduire un programme de calcul." %}}
 			{{% priorite_alea "5L10-2 : Traduire un programme de calcul par une expression littérale" "5L10-2" %}}
 			{{% priorite_alea "4L13-0 : Mettre en équation un problème sans objectif de résolution" "4L13-0" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5L10-2&ex=4L13-0" %}}
+
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-4e-Test-3.pdf" %}}
+			{{< /liste >}}
 
 			{{% priorite "Il substitue une valeur numérique à une lettre notamment pour tester une égalité." %}}
-			{{% priorite_alea "5L13-5 : Calculer la valeur d'une expression littérale de degré 1 à 1 inconnue" "5L13-5" %}}			
+			{{% priorite_alea "5L13-5 : Calculer la valeur d'une expression littérale de degré 1 à 1 inconnue" "5L13-5" %}}		
+			{{< liste >}}
+				{{% pdf_url_color "#f15929" "L'exercice ci-dessus - version pdf" "/pdf/2020-4e-Test-4.pdf" %}}
+			{{< /liste >}}		
 	</div>	
 {{< /liste_priorites >}}
 
@@ -95,6 +103,11 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité entre deux grandeurs." %}}
 			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}			
 			{{% priorite_alea "5P10-1 : Tableaux et proportionnalité" "5P10-1" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10-1" %}}
+
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-4e-Test-5.pdf" %}}
+			{{< /liste >}}
 
 			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
 			{{% priorite_alea "... : ..." "" %}}
@@ -112,7 +125,12 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 		<div class="header content">Comprendre et utiliser la notion de fonction</div>	
 			{{% priorite "L’élève comprend et utilise la notion de fonction ; il traduit la dépendance entre deux grandeurs par un tableau de valeurs ; il produit une formule représentant la dépendance entre deux grandeurs." %}}
 			{{% priorite_alea "5L10-4 : Produire une formule à partir d'un tableau - mêmes unités" "5L10-4',sup=1" %}}			
-			{{% priorite_alea "5L10-4 : Produire une formule à partir d'un tableau - unités différentes" "5L10-4',sup=2" %}}			
+			{{% priorite_alea "5L10-4 : Produire une formule à partir d'un tableau - unités différentes" "5L10-4',sup=2" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5L10-4,sup=1&ex=5L10-4,sup=2" %}}
+
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-4e-Test-7.pdf" %}}
+			{{< /liste >}}			
 
 	</div>	
 {{< /liste_priorites >}}
@@ -124,7 +142,10 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content">Utiliser les notions de géométrie plane pour démontrer</div>	
 			{{% priorite "L'élève connaît et utilise la somme des angles d’un triangle." %}}
-			{{% priorite_alea "5G31 : Somme des angles dans un triangle" "5G31" %}}						
+			{{% priorite_alea "5G31 : Somme des angles dans un triangle" "5G31" %}}	
+			{{< liste >}}
+				{{% pdf_url_color "#f15929" "L'exercice ci-dessus - version pdf" "/pdf/2020-4e-Test-8.pdf" %}}
+			{{< /liste >}}					
 
 			{{% priorite "L’élève connaît et utilise  une définition et une propriété caractéristique du parallélogramme, le codage des figures." %}}
 			{{% priorite_alea "... : ..." "" %}}	
@@ -134,7 +155,12 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{% priorite_alea "5G12 : Trouver l'image d'une figure par une symétrie centrale dans un pavage" "5G12" %}}
 			{{% priorite_alea "5G11-2 : Construire le symétrique d'une figure par rapport à un point - petits carreaux" "5G11-2,sup2=1" %}}						
 			{{% priorite_alea "5G11-2 : Construire le symétrique d'une figure par rapport à un point - gros carreaux" "5G11-2,sup2=2" %}}
-			{{% priorite_alea "5G11-2 : Construire le symétrique d'une figure par rapport à un point - sans carreaux" "5G11-2,sup2=3" %}}						
+			{{% priorite_alea "5G11-2 : Construire le symétrique d'une figure par rapport à un point - sans carreaux" "5G11-2,sup2=3" %}}	
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 3 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5G11-2,sup2=1&ex=5G11-2,sup2=2&ex=5G11-2,sup2=3" %}}
+
+				{{% pdf_url_color "#f15929" "Les 3 exercices ci-dessus - version pdf" "/pdf/2020-4e-Test-10.pdf" %}}
+			{{< /liste >}}					
 						
 
 

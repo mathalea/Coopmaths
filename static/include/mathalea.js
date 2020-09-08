@@ -5068,7 +5068,7 @@ function Fraction(num,den) {
      * @param {number} depart N° de la première part coloriée (0 correspond à la droite du centre) 
      * @param {*} type 'gateau' ou 'segment' ou 'barre'
      */
-	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray') {
+	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.numIrred, this.denIrred)
 		num = this.numIrred
@@ -5086,14 +5086,14 @@ function Fraction(num,den) {
 				C = cercle(O, rayon)
 				objets.push(C)
 				for (let i = 0; i < this.denIrred; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- i * 360 / this.denIrred))
 					objets.push(s)
 				}
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- depart * 360 / this.denIrred)
 				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a = arc(dep, O, -360 / this.denIrred, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.denIrred)
+					dep = rotation(dep, O, -360 / this.denIrred)
 					objets.push(a)
 				}
 				num -= this.denIrred
@@ -5103,14 +5103,14 @@ function Fraction(num,den) {
 				C = cercle(O, rayon)
 				objets.push(C)
 				for (let i = 0; i < this.denIrred; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.denIrred))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-i * 360 / this.denIrred))
 					objets.push(s)
 				}
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.denIrred)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- depart * 360 / this.denIrred)
 				for (let j = 0; j < Math.min(this.denIrred, num); j++) {
-					a = arc(dep, O, 360 / this.denIrred, true, fill = couleur)
+					a = arc(dep, O, -360 / this.denIrred, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.denIrred)
+					dep = rotation(dep, O, -360 / this.denIrred)
 					objets.push(a)
 				}
 			}
@@ -5144,18 +5144,23 @@ function Fraction(num,den) {
 				s.styleExtremites = '|-'
 				objets.push(s)
 			}
-			a = segment(O, point(O.x + Math.min(num, this.denIrred) * rayon / this.denIrred, O.y))
+			a = segment(O, point(O.x + Math.min(this.numIrred, this.denIrred) * rayon / this.denIrred, O.y))
 			a.color = couleur
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
+			objets.push(unegraduation(x,y))
+			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','blue',scale))
+			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else {
 			let diviseur
-			if (this.denIrred % 3 == 0) diviseur = 3
-			else if (this.denIrred % 2 == 0) diviseur = 2
+			if (this.denIrred % 6 == 0) diviseur=6
+			else if (this.denIrred % 5 == 0) diviseur=5
+			else if (this.denIrred % 4 == 0) diviseur=4
+			else if (this.denIrred % 3 == 0) diviseur=3
+			else if (this.denIrred % 2 == 0) diviseur=2
 			else diviseur = 1
 
 			for (k = 0; k < n; k++) {
@@ -5170,7 +5175,7 @@ function Fraction(num,den) {
 						objets.push(dep)
 					}
 				}
-				num -= this.denIrred
+				num -= this.den
 			}
 			if (num>0) {
 				for (let j = 0; j < diviseur; j++) {
@@ -5215,32 +5220,32 @@ function Fraction(num,den) {
 				objets.push(C)
 				let s, a
 				for (let i = 0; i < this.den; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-i * 360 / this.den))
 					objets.push(s)
 				}
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-depart * 360 / this.den)
 				for (let j = 0; j < Math.min(this.den, num); j++) {
-					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a = arc(dep, O,- 360 / this.den, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.den)
+					dep = rotation(dep, O, -360 / this.den)
 					objets.push(a)
 				}
 				num -= this.den
 			}
-			if (this.num%this.den!=0) { 
+			if (this.num%this.den!=0) { $
 				let O = point(x + k * 2 * (rayon + 0.5), y)
 				let C = cercle(O, rayon)
 				objets.push(C)
 				for (let i = 0; i < this.den; i++) {
-					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, i * 360 / this.den))
+					s = segment(O, rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, 90-i * 360 / this.den))
 					objets.push(s)
 				}
 			
-				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O, depart * 360 / this.den)
+				dep = rotation(point(x + rayon + k * 2 * (rayon + 0.5), y), O,90- depart * 360 / this.den)
 				if (this.num%this.den!=0) for (let j = 0; j < Math.min(this.den, num); j++) {
-					a = arc(dep, O, 360 / this.den, true, fill = couleur)
+					a = arc(dep, O, -360 / this.den, true, fill = couleur)
 					a.opacite = 0.3
-					dep = rotation(dep, O, 360 / this.den)
+					dep = rotation(dep, O, -360 / this.den)
 					objets.push(a)
 				}
 			}
@@ -5279,13 +5284,18 @@ function Fraction(num,den) {
 			a.opacite = 0.4
 			a.epaisseur = 4
 			objets.push(a)
-			objets.push(unegraduation(x,y),texteParPosition(unite0,x,y-0.6,'milieu','blue',scale),texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
+			objets.push(unegraduation(x,y))
+			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','blue',scale))
+			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
 
 		}
 		else { //Type bâtons
 			let diviseur
-			if (this.den % 3 == 0) diviseur = 3
-			else if (this.den % 2 == 0) diviseur = 2
+			if (this.den % 6 == 0) diviseur=6
+			else if (this.den % 5 == 0) diviseur=5
+			else if (this.den % 4 == 0) diviseur=4
+			else if (this.den % 3 == 0) diviseur=3
+			else if (this.den % 2 == 0) diviseur=2
 			else diviseur = 1
 
 			for (k = 0; k < n; k++) {
@@ -5936,6 +5946,7 @@ var liste_des_exercices_disponibles = {
   "6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
   "6N31-2":Ordre_de_grandeur_operations_decimaux,
   "6N33": Fraction_d_un_nombre,
+  "6N33-0" : Fraction_d_un_nombre_bis,
   "6N33-1": Pourcentage_d_un_nombre,
   "6N33-2" : Calculer_un_pourcentage,
   "6N33-3" : Appliquer_un_pourcentage,
@@ -6002,6 +6013,7 @@ var liste_des_exercices_disponibles = {
   "5R20-2": Exercice_additions_relatifs_a_trou,
   "5R20-3": Exercice_additions_de_5_relatifs, //on pourrait le corriger avec regroupement des termes de même signe 
   "5R20-4": Problemes_additifs_relatifs_5e, 
+  "5R20-5": Exercice_tableau_additions_relatifs,
   "5R21": Exercice_soustractions_relatifs,
   "5R22": Exercice_additions_et_soustraction_de_relatifsV2,
   "5R22-2": Exercice_simplification_somme_algebrique,
@@ -6013,6 +6025,9 @@ var liste_des_exercices_disponibles = {
   "4C10-1": Signe_produit_relatifs,
   "4C10-2": Signe_quotient_relatifs,
   "4C10-3": Exercice_multiplications_relatifs,
+  "4C10-4": Exercice_quotients_relatifs,
+  "4C10-5": Exercice_tableau_multiplications_relatifs,
+  "4C11": Priorites_et_relatifs,
   "4C25-0": Problemes_additifs_fractions,
   "4C30-1": Puissances_encadrement,
   "4G40": Transformations_4e,
@@ -7080,9 +7095,7 @@ function Lire_abscisse_fractionnaire() {
   
         this.liste_questions.push(texte);
        this.liste_corrections.push(texte_corr);
-      }
-      console.log(x11,x22,x33,pas2)
-     
+      }     
     }
     if (!sortie_html) liste_de_question_to_contenu(this);
   };
@@ -13555,7 +13568,144 @@ function Pourcentage_d_un_nombre() {
   //	this.besoin_formulaire_numerique = ['Valeur maximale',99999];
   this.besoin_formulaire2_case_a_cocher = ["Plusieurs méthodes"];
 }
+/**
+ * Calculer la fracton d'une quantité avec ou sans dessin.
+ * @Auteur Jean-Claude Lhote
+ * référence 6N33-0
+ */
+function Fraction_d_un_nombre_bis() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Calculer la fraction d'un nombre";
+  this.nb_questions = 5;
+  this.consigne = "Calculer";
+  sortie_html ? (this.spacing_corr = 3.5) : (this.spacing_corr = 2);
+  sortie_html ? (this.spacing = 2) : (this.spacing = 2);
+  this.sup = 1;
+  this.sup2=true
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
 
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles
+    let liste_type_de_questions=[]
+    if (this.sup<5)
+      type_de_questions_disponibles=[parseInt(this.sup)]
+    else
+      type_de_questions_disponibles=[1,2,3,4]
+    liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+    for (
+      let i = 0, den,num ,choix,longueur,numIrred,denIrred,k, masse,frac, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+      switch (liste_type_de_questions[i]){
+        case 1 :
+          den=choice([2,3,4,5,10])
+          num=randint(1,den-1)
+          frac=fraction(num,den)
+          texte=`À combien de minutes correspondent $${frac.texFraction()}$ d\'heure ?<br>`
+          if (this.sup2){
+            texte+=`cette fraction est représentée ci dessous :<br>`
+            texte+=mathalea2d({xmin:0,ymin:0,xmax:15,ymax:5},frac.representation(2.5,2.5,2,0,'gateau','blue'))
+          }
+          texte_corr=`Comme l\'heure est partagée en ${den} parts égales, chaque part représente $${tex_fraction(1,den)}$ d\'heure, soit $${calcul(60/den)}$ minutes.<br>`
+          texte_corr+=`Ici, il y a $${tex_fraction(num,den)}$ d\'heure, ce qui représente $${num}$ fois plus, soit $${num}\\times${calcul(60/den)}=${calcul(num*60/den)}$.<br>`
+          texte_corr+=`$${frac.texFraction()}$ d\'heure correspond donc à $${calcul(num*60/den)}$ minutes.`
+        break
+        case 2 :
+          den=choice([2,3,4,5,10])
+          num=randint(1,3*den,den)
+          frac=fraction(num,den)
+          texte=`À combien de minutes correspondent $${frac.texFraction()}$ d\'heure ?<br>`
+          if (this.sup2){
+            texte+=`cette fraction est représentée ci dessous :<br>`
+            texte+=mathalea2d({xmin:0,ymin:0,xmax:15,ymax:5},frac.representation(2.5,2.5,2,0,'gateau','blue'))
+          }
+          texte_corr=`Comme l\'heure est partagée en ${den} parts égales, chaque part représente $${tex_fraction(1,den)}$ d\'heure, soit $${calcul(60/den)}$ minutes.<br>`
+          texte_corr+=`Ici, il y a $${tex_fraction(num,den)}$ d\'heure, ce qui représente $${num}$ fois plus, soit $${num}\\times${calcul(60/den)}=${calcul(num*60/den)}$.<br>`
+          texte_corr+=`$${frac.texFraction()}$ d\'heure correspond donc à $${calcul(num*60/den)}$ minutes.`
+        break
+        case 3 :
+          masse=choice([120,180,240,300])
+          denIrred=choice([2,3,4,5,10])
+          numIrred=randint(1,denIrred-1)
+          while (pgcd(denIrred,numIrred)!=1||calcul(denIrred/numIrred)==2){
+            denIrred=choice([2,3,4,5,10])
+            numIrred=randint(1,denIrred-1)      
+          }
+          k=calcul(60/denIrred)
+          den=calcul(denIrred*k)
+          num=calcul(numIrred*k)
+          frac=fraction(num,den)
+          frac2=frac.entierMoinsFraction(1)
+          texte=`Voici une tablette de chocolat dont la masse totale est de $${masse}$ grammes. Quelqu'un en a déjà consommé les $${frac.texFractionSimplifiee()}$.<br>`
+          choix=randint(1,2)
+          if (choix==1) {
+            texte+=`Quelle masse de chocoloat a-t-elle été consommée ?<br>`
+            texte_corr=`Comme la tablette a une masse de $${masse}$ grammes, $${tex_fraction(1,denIrred)}$ de la tablette représente une masse de $${calcul(masse/denIrred)}$ grammes.<br>`
+            texte_corr+=`Ici, il y a $${frac.texFractionSimplifiee()}$ de la tablette qui a été consommé, ce qui représente $${numIrred}$ fois plus, soit $${numIrred}\\times${calcul(masse/denIrred)}=${calcul(num*masse/den)}$.<br>`
+            texte_corr+=`La masse de chocolat consommée est $${calcul(numIrred*masse/denIrred)}$ grammes.`
+          }
+          else {
+            texte+=`Quelle masse de chocolat reste-t-il ?<br>`
+            texte_corr=`Comme la tablette a une masse de $${masse}$ grammes, $${tex_fraction(1,denIrred)}$ de la tablette représente une masse de $${calcul(masse/denIrred)}$ grammes.<br>`
+            texte_corr+=`Ici, il y a $${frac.texFractionSimplifiee()}$ de la tablette qui a été consommé, ce qui représente $${numIrred}$ fois plus, soit $${numIrred}\\times${calcul(masse/denIrred)}=${calcul(num*masse/den)}$.<br>`
+            texte_corr+=`La masse de chocolat consommée est $${calcul(numIrred*masse/denIrred)}$ grammes.<br>`
+            texte_corr+=`Il reste donc : $${masse}-${calcul(numIrred*masse/denIrred)}=${calcul(masse-numIrred*masse/denIrred)}$ grammes de chocolat.<br>`
+            texte_corr+=`une autre façon de faire est d'utiliser la fraction restante : $${tex_fraction(denIrred,denIrred)}-${frac.texFractionSimplifiee()}=${tex_fraction(denIrred-numIrred,denIrred)}$.<br>`
+            texte_corr+=`$${tex_fraction(denIrred-numIrred,denIrred)}$ de $${masse}$ grammes c\'est $${denIrred-numIrred}$ fois $${calcul(masse/denIrred)}$ grammes.<br>`
+            texte_corr+=`Il reste donc : $${denIrred-numIrred}\\times${calcul(masse/denIrred)}=${(denIrred-numIrred)*masse/denIrred}$ grammes de chocolat.`
+
+           }
+          if (this.sup2){
+          texte+=`la tablette de chocolat est représentée ci dessous :<br>`
+          texte+=mathalea2d({xmin:-0.5,ymin:-0.5,xmax:5,ymax:7},frac2.representation(0,0,4,0,'baton','brown'))
+         }
+        break
+        case 4:
+          den=choice([2,3,4,5,10])
+          num=randint(1,den-1)
+          longueur=choice([120,180,240,300])
+          denIrred=choice([2,3,4,5,10])
+          numIrred=randint(1,denIrred-1)
+          while (pgcd(denIrred,numIrred)!=1||calcul(denIrred/numIrred)==2){
+            denIrred=choice([2,3,4,5,10])
+            numIrred=randint(1,denIrred-1)      
+          }
+          k=calcul(300/denIrred)
+          den=calcul(denIrred*k)
+          num=calcul(numIrred*k)
+          frac=fraction(num,den)
+          texte=`Un bâton de $${tex_nombrec(longueur/100)}$ mètres de longueur est coupé à $${frac.texFractionSimplifiee()}$ de sa longueur.<br>`
+          texte+=`Calculer la longueur de chacun des morceaux.<br>`
+          if (this.sup2){
+            texte+=`ce bâton est représenté ci dessous est représentée ci dessous :<br>`
+          texte+=mathalea2d({xmin:-0.5,ymin:0,xmax:10,ymax:2},frac.representationIrred(0,1,8,0,'segment','blue',"0",`${tex_nombre(calcul(longueur/100))}`))
+          }
+          texte_corr=`$${tex_fraction(1,denIrred)}$ de $${tex_nombrec(longueur/100)}$ mètres représente $${tex_nombrec(longueur/100)} \\div ${denIrred} = ${tex_nombrec(longueur/100/denIrred)}$ mètres.<br>`
+          texte_corr+=`Le premier morceau du bâton correspondant à $${frac.texFractionSimplifiee()}$ du bâton mesure : $${numIrred} \\times ${tex_nombrec(longueur/100/denIrred)}=${tex_nombrec(numIrred*longueur/100/denIrred)}$ mètres.<br>`
+          texte_corr+=`Le deuxième morceau mesure donc : $${tex_nombrec(longueur/100)}-${tex_nombrec(numIrred*longueur/100/denIrred)}=${tex_nombrec(longueur/100-numIrred*longueur/100/denIrred)}$ mètres.`
+
+        break
+      }
+
+
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+    cpt++;
+  }
+  liste_de_question_to_contenu(this);
+};
+this.besoin_formulaire_numerique = ["Type d\'exercices",5,"1 : Heures & minutes (inférieur à 1h)\n2 : Heures & minutes (jusqu\'à 3h)\n3 : tablettes de chocolat\n4 : Bâton cassé\n5 : Mélange"];
+this.besoin_formulaire2_case_a_cocher = ["Avec Dessin", true];
+}
 /**
  * Calculer la fracton d'un nombre divisible par le dénominateur ... ou pas.
  *
@@ -18135,6 +18285,7 @@ function Construire_un_triangle() {
 function Test_main_levee() {
   "use strict";
   Exercice.call(this);
+
   this.titre = "Test de main levée";
   this.nb_questions = 1;
   this.nb_cols = 1;
@@ -18156,14 +18307,23 @@ function Test_main_levee() {
     let s=segment(A,B,'red')
     s.epaisseur=5
     s.opacite=0.4
+    pixelsParCm=20
+    scale=3
+    let cote=afficheCoteSegment(s)
+    let crochD=crochetD(B)
+    let crochG=crochetG(A)
+
  //   let m=mediatrice(A,B,'d','purple')
     let cons=constructionMediatrice(A,B,true,'orange','//','O','black',2)
-    let texte=mathalea2d({xmin:-1,ymin:0,xmax:16,ymax:11,pixelsParCm:20,scale:1,mainlevee:this.sup,amplitude:1},[codeAngle(A,B,-90,3,'||','black',2,1,'yellow',0.5),C,s,E,tracePoint(A,B,D)])
+
+    let texte=mathalea2d({xmin:-1,ymin:0,xmax:16,ymax:11,pixelsParCm:20,scale:3,mainlevee:this.sup,amplitude:1},[cote,crochD,crochG,codeAngle(A,B,-90,3,'||','black',2,1,'yellow',0.5),C,s,E,tracePoint(A,B,D)])
+    pixelsParCm=20
     let texte_corr=""
     this.liste_questions.push(texte );
     this.liste_corrections.push(texte_corr );
    liste_de_question_to_contenu(this)  
   }
+
   this.besoin_formulaire_case_a_cocher = ["main levee"];	
 }
 
@@ -18619,7 +18779,7 @@ function Parallele_et_Perpendiculaires() {
             lE
           )}$ cm.<br>`;
           correction+=`Les angle droits en rouge se justifient par la propriété :<br> ${texte_en_couleur(`Si deux droites sont parallèles, toutes droite perpendiculaire à l'une est aussi perpendiculaire à l'autre`,'red')}.<br>`
-          correction +=`Vérifier les angles droits à l'équerre.`
+          correction +=`Vérifier les angles droits à l'équerre.<br>`
           Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)-1
           Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)+1
           Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)-1
@@ -19380,8 +19540,6 @@ jQuery(document).ready(function () {
   function liste_html_des_exercices_d_un_niveau(liste_de_themes){ // liste_de_themes = [['6N1','6N1 - Numérations et fractions niveau 1'] , [' ',' '] ]
     let liste = '';
     for (let theme of liste_de_themes){
-      console.log(theme,theme[0],theme[1])
-      // liste += `<div class="ui hidden divider"></div>\n`;
       liste += `<h3>${theme[1]}</h3>`;
       liste += liste_html_des_exercices_d_un_theme(theme[0]);
     }
@@ -25687,7 +25845,7 @@ function DroiteRemarquableDuTriangle(){
 					c[i] = codageHauteurTriangle(C[i],B[i],A[i])
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la hauteur issue de $${sommets[i][0]}$ dans le triangle ${triangles[i].getNom()}.<br>`
-					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i])
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,pixelsParCm:20},...objets[i])
 					break
 				case 2 :
 					d[i] = mediatrice(A[i],B[i],true,'blue')
@@ -25695,7 +25853,7 @@ function DroiteRemarquableDuTriangle(){
 					c[i] = codageMediatrice(A[i],B[i])
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la médiatrice du segment [$${sommets[i][0]}${sommets[i][1]}]$.<br>`
-					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i],constructionMediatrice(A[i],B[i],true,color='gray', markmilieu='×', markrayons='||',couleurMediatrice = 'blue', epaisseurMediatrice = 1))
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,pixelsParCm:20},...objets[i],constructionMediatrice(A[i],B[i],true,color='gray', markmilieu='×', markrayons='||',couleurMediatrice = 'blue', epaisseurMediatrice = 1))
 					break
 				case 3 :
 					d[i] = medianeTriangle(C[i],B[i],A[i],'blue')
@@ -25703,7 +25861,7 @@ function DroiteRemarquableDuTriangle(){
 					c[i] = codageMedianeTriangle(C[i],B[i],A[i],color='black',mark='//')
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la médiane issue de $${sommets[i][0]}$ dans le triangle ${triangles[i].getNom()}.<br>`
-					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i])
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,pixelsParCm:20},...objets[i])
 					break
 				case 4 :
 					d[i] = bissectrice(A[i],B[i],C[i],'blue')
@@ -25711,12 +25869,12 @@ function DroiteRemarquableDuTriangle(){
 					c[i] = codageBissectrice(A[i],B[i],C[i])
 					objets[i]=[A[i],B[i],C[i],t[i],d[i],n[i],c[i]]
 					texte_corr=`La droite tracée est la bissectrice de l'angle $\\widehat{${sommets[i][0]}${sommets[i][1]}${sommets[i][2]}}$.<br>`
-					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i],constructionBissectrice(A[i],B[i],C[i],detail = false, color='red', mark='×',tailleLosange = 3,couleurBissectrice = 'blue', epaiseurBissectrice = 1))
+					texte_corr+= mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,pixelsParCm:20},...objets[i],constructionBissectrice(A[i],B[i],C[i],detail = false, color='red', mark='×',tailleLosange = 3,couleurBissectrice = 'blue', epaiseurBissectrice = 1))
 					break
 
 			}
 
-			texte = `Quelle est la nature de la droite tracée en bleu pour le triangle ${triangles[i].getNom()} ?<br>` + mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,ppc:20},...objets[i])
+			texte = `Quelle est la nature de la droite tracée en bleu pour le triangle ${triangles[i].getNom()} ?<br>` + mathalea2d({xmin:-3,ymin:-3,xmax:8,ymax:8,scale:.5,pixelsParCm:20},...objets[i])
 
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
@@ -25820,7 +25978,7 @@ function Construire_par_Symetrie() {
 	  );
 	  this.liste_questions = []; // Liste de questions
 	  this.liste_corrections = []; // Liste de questions corrigées
-	  let Xmin, Xmax, Ymin, Ymax, ppc, sc;
+	  let Xmin, Xmax, Ymin, Ymax, sc;
 	  if (this.sup2 == 2) sc = 0.8;
 	  else sc = 0.5;
   
@@ -26111,7 +26269,7 @@ function Construire_par_Symetrie() {
 			ymin: Ymin,
 			xmax: Xmax,
 			ymax: Ymax,
-			pixelsParCm: ppc,
+			pixelsParCm: 20,
 			scale: sc,
 		  }
 		  if (this.sup2<3) g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);
@@ -27274,8 +27432,8 @@ function Tableaux_et_fonction(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	//this.nb_questions_modifiable = false;
-	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
-	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+	sortie_html? this.spacing = 2.5 : this.spacing = 2; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1;
 
 	let type_de_questions_disponibles;	
 
@@ -27387,14 +27545,27 @@ function Tableaux_et_fonction(){
 					unites:unites,
 					cote_connu:cote_connu,
 					cote_inconnu:cote_inconnu,
-					tableau:tab_C_L([`\\text{Longueur $${cote_inconnu}$ du côté (en $${unites[0]}$)}`,`\\phantom{000}${L1}\\phantom{000}`,`\\phantom{000}${L2}\\phantom{000}`,`\\phantom{000}${L3}\\phantom{000}`,`\\phantom{000}${L4}\\phantom{000}`],[`\\text{Périmètre du rectangle (en $${unites[1]}$)}`],
+					tableau:tab_C_L([`\\text{Longueur $${cote_inconnu}$ du côté (en ${unites[0]})}`,`\\phantom{000}${L1}\\phantom{000}`,`\\phantom{000}${L2}\\phantom{000}`,`\\phantom{000}${L3}\\phantom{000}`,`\\phantom{000}${L4}\\phantom{000}`],[`\\text{Périmètre du rectangle (en $${unites[1]}$)}`],
 					['','','','']
 					),
-					tableau_corr_p1:tab_C_L([`\\text{Longueur $${cote_inconnu_corr}$ du côté (en $${unite_grand_L}$)}`,`\\phantom{000}${grand_L[0]}\\phantom{000}`,`\\phantom{000}${grand_L[1]}\\phantom{000}`],//,`\\phantom{000}${grand_L[2]}\\phantom{000}`,`\\phantom{000}${grand_L[3]}\\phantom{000}`],
-					[`\\text{Périmètre du rectangle (en $${unite_petit_l}$)}`],
+					calculL1:`Pour ${L1} ${unites[0]} : $2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L1} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[0])} \\; \\text{${unite_grand_L}}}$.`,
+					calculL2:`Pour ${L2} ${unites[0]} : $2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L2} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[1])} \\; \\text{${unite_grand_L}}}$.`,
+					calculL3:`Pour ${L3} ${unites[0]} : $2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L3} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[2])} \\; \\text{${unite_grand_L}}}$.`,
+					calculL4:`Pour ${L4} ${unites[0]} : $2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}$.`,
+					tableau_corr:tab_C_L([`\\text{Longueur $${cote_inconnu_corr}$ du côté (en ${unite_grand_L})}`,`\\phantom{0}${grand_L[0]}\\phantom{0}`,`\\phantom{0}${grand_L[1]}\\phantom{0}`,`\\phantom{0}${grand_L[2]}\\phantom{0}`,`\\phantom{0}${grand_L[3]}\\phantom{0}`],
+					[`\\text{Périmètre du rectangle (en ${unite_petit_l})}`],
 					[
-						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L1} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,
-						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L2} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,
+						`${tex_nombre(2*petit_l_num[0]+2*grand_L_num[0])} \\; \\text{${unite_grand_L}}`,
+						`${tex_nombre(2*petit_l_num[0]+2*grand_L_num[1])} \\; \\text{${unite_grand_L}}`,
+						`${tex_nombre(2*petit_l_num[0]+2*grand_L_num[2])} \\; \\text{${unite_grand_L}}`,
+						`${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}`,
+					],
+					),
+					tableau_corr_p1:tab_C_L([`\\text{Longueur $${cote_inconnu_corr}$ du côté (en $${unite_grand_L}$)}`,`\\phantom{000}${grand_L[0]}\\phantom{000}`,`\\phantom{000}${grand_L[1]}\\phantom{000}`],//,`\\phantom{000}${grand_L[2]}\\phantom{000}`,`\\phantom{000}${grand_L[3]}\\phantom{000}`],
+					[`\\text{Périmètre du rectangle (en ${unite_petit_l})}`],
+					[
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L1} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L2} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,
 						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L3} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[2]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,
 						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[3]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} \\color{black}{ = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[3]} \\; \\text{${unite_grand_L}} = \\color{black}{${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}}`,
 					],
@@ -27404,8 +27575,8 @@ function Tableaux_et_fonction(){
 					[
 						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L1} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[0]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[0])} \\; \\text{${unite_grand_L}}}`,
 						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L2} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${grand_L_num[1]} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[1])} \\; \\text{${unite_grand_L}}}`,
-						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L3} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,
-						`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L3} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[2])} \\; \\text{${unite_grand_L}}}`,
+						//`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${L4} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${tex_nombre(grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0]+2*grand_L_num[3])} \\; \\text{${unite_grand_L}}}`,
 					],
 					),
 					secondeQ:`2\\times \\color{blue}{${cote_connu} \\; \\text{${unites[1]}}} \\color{black}{+2\\times} \\color{red}{${cote_inconnu} \\; \\text{${unites[0]}}} ${etapeCorrective(`\\color{black}{\\; = 2\\times} \\color{blue}{${petit_l_num[0]} \\; \\text{${unite_petit_l}}} \\color{black}{+2\\times} \\color{red}{${cote_inconnu_corr} \\; \\text{${unite_grand_L}}}`,this.sup)} \\color{black}{ \\;= ${tex_nombre(2*petit_l_num[0])} + ${cote_inconnu_corr_num} \\; \\text{exprimé en ${unite_grand_L}}}`,
@@ -27430,12 +27601,15 @@ function Tableaux_et_fonction(){
 					question:``,
 					correction:`
 					${num_alpha(i_sous_question_corr++)} ${situations[k].intro}<br>
-					Il y a plusieurs façons de calculer le périmètre d'un rectangle, par exemple $2\\times largeur + 2\\times Longueur$.<br>
+					Il y a plusieurs façons de calculer le périmètre d'un rectangle, par exemple : <br> $2\\times largeur + 2\\times Longueur$.<br>
 					Ici l'un des côtés mesure toujours $\\textcolor{blue}{${petit_l[0]}}$ $${unite_petit_l}$<br>
-					${texte_gras(`=========== première partie du tableau ===============`)}<br>
-					${situations[k].tableau_corr_p1}<br>
-					${texte_gras(`=========== seconde partie du tableau ===============`)}<br>
-					${situations[k].tableau_corr_p2}<br>
+					Calculons les périmètres pour chacune des valeurs données :<br>
+					${situations[k].calculL1}<br>
+					${situations[k].calculL2}<br>
+					${situations[k].calculL3}<br>
+					${situations[k].calculL4}<br>
+					Nous pouvons alors remplir le tableau<br>
+					${situations[k].tableau_corr}<br><br>
 					${num_alpha(i_sous_question_corr++)} On peut généraliser le raisonnement des calculs du périmètre, et ainsi obtenir une formule.<br>
 					$${situations[k].secondeQ}$
 
@@ -27471,7 +27645,78 @@ function Tableaux_et_fonction(){
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : les mêmes unités\n2 : unités différentes"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
-};/**
+};
+
+/**
+* Effectuer des additions de relatifs dans un tableau à double entrée
+*
+* @Auteur Rémi Angot
+*/
+function Exercice_tableau_additions_relatifs (){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = false ;
+	this.titre = "Additions de deux entiers relatifs dans un tableau à double entrée"
+	this.consigne = 'Calculer'
+  	this.spacing = 1;
+  	this.nb_questions = 1;
+  	this.nb_questions_modifiable = false;
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_signes1 = combinaison_listes([-1,1],4);
+    let liste_signes2 = combinaison_listes([-1,1],4);
+    let a1 = randint(2,9);
+    let a2 = randint(2,9,a1);
+    let a3 = randint(2,9,[a1,a2]);
+    let a4 = randint(2,9,[a1,a2,a3]);
+    let b1 = randint(2,9);
+    let b2 = randint(2,9,b1);
+    let b3 = randint(2,9,[b1,b2]);
+    let b4 = randint(2,9,[b1,b2,b3]);
+    a1 *= liste_signes1[0]
+    a2 *= liste_signes1[1]
+    a3 *= liste_signes1[2]
+    a4 *= liste_signes1[3]
+    b1 *= liste_signes1[0]
+    b2 *= liste_signes1[1]
+    b3 *= liste_signes1[2]
+    b4 *= liste_signes1[3]
+
+    let texte = `$\\def\\arraystretch{1.5}\\begin{array}{|c|c|c|c|c|}
+    \\hline
+    + & ${ecriture_algebrique(a1)} & ${ecriture_algebrique(a2)} & ${ecriture_algebrique(a3)} & ${ecriture_algebrique(a4)} \\\\
+    \\hline
+    ${ecriture_algebrique(b1)} &  &  & &  \\\\
+    \\hline
+    ${ecriture_algebrique(b2)} & & & & \\\\
+    \\hline
+    ${ecriture_algebrique(b3)} & & & & \\\\
+    \\hline
+    ${ecriture_algebrique(b4)} & & & & \\\\
+    \\hline
+    \\end{array}$`
+
+    let texte_corr = `$\\def\\arraystretch{1.5}\\begin{array}{|c|c|c|c|c|}
+    \\hline
+    + & ${ecriture_algebrique(a1)} & ${ecriture_algebrique(a2)} & ${ecriture_algebrique(a3)} & ${ecriture_algebrique(a4)} \\\\
+    \\hline
+    ${ecriture_algebrique(b1)} & ${ecriture_algebrique(a1+b1)} & ${ecriture_algebrique(a2+b1)} & ${ecriture_algebrique(a3+b1)} & ${ecriture_algebrique(a4+b1)} \\\\
+    \\hline
+    ${ecriture_algebrique(b2)} & ${ecriture_algebrique(a1+b2)} & ${ecriture_algebrique(a2+b2)} & ${ecriture_algebrique(a3+b2)} & ${ecriture_algebrique(a4+b2)} \\\\
+    \\hline
+    ${ecriture_algebrique(b3)} & ${ecriture_algebrique(a1+b3)} & ${ecriture_algebrique(a2+b3)} & ${ecriture_algebrique(a3+b3)} & ${ecriture_algebrique(a4+b3)} \\\\
+    \\hline
+    ${ecriture_algebrique(b4)} & ${ecriture_algebrique(a1+b4)} & ${ecriture_algebrique(a2+b4)} & ${ecriture_algebrique(a3+b4)} & ${ecriture_algebrique(a4+b4)} \\\\
+    \\hline
+	\\end{array}$`
+	this.liste_questions.push(texte);
+	this.liste_corrections.push(texte_corr);
+	liste_de_question_to_contenu(this);
+	}
+}
+
+/**
  * * Calcul de l'inverse d'un nombre.
  *
  * Paramétrages possibles :
@@ -36489,7 +36734,7 @@ function Tester_si_un_nombre_est_solution_d_une_equation() {
         case 6: // ax-ab=x²-bx (a-x)(x-b)=0 solutions a et b.
           if (this.sup == 1) {
             b = randint(2, 9);
-            a = randint(2, 9);
+            a = randint(2, 9, [b]);
             x3 = b;
             x1 = a;
             x2 = randint(1, 9, [x1, x3]);
@@ -38112,6 +38357,522 @@ function Tracer_avec_scratch(){
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+}
+
+/**
+* Effectuer une division entre 2 nombres relatifs écrite sous la forme d'une fraction.
+*
+* * On peut choisir de n'avoir que des tables de multiplications, par défaut il y a aussi des divisions simples par 2, 3 ou 4
+* @Auteur Rémi Angot
+*/
+function Exercice_quotients_relatifs(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = false ;
+	this.titre = "Quotient de deux entiers relatifs"
+	this.consigne = 'Calculer'
+  this.spacing = 2;
+  this.nb_questions = 6;
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_type_de_questions = combinaison_listes(['-+','+-','--','++'],this.nb_questions);
+    let liste_type_de_nombres = combinaison_listes(['tables','horstables'],this.nb_questions);
+    if (this.sup){
+      liste_type_de_nombres = combinaison_listes(['tables'],this.nb_questions);
+    }
+		for (let i = 0, a, b, q, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50;) { // On limite le nombre d'essais pour chercher des valeurs nouvelles
+      if (liste_type_de_nombres[i]=='tables'){
+        b = randint(2,9);
+        a = b * randint(2,9);
+      } else {
+        b = choice([11,12,13,14,15,16,20,60,80]);
+        a = b * randint(2,4)
+      }
+      switch (liste_type_de_questions[i]) {
+        case '-+':
+          a *= -1;
+          break;
+        case '+-':
+          b *= -1;
+          break;
+        case '--':
+          a *= -1;
+          b *= -1;
+        default:
+          break;
+      }
+      texte = `$\\dfrac{${a}}{${b}}$`
+      texte_corr = `$\\dfrac{${a}}{${b}}=${calcul(a/b)}$`
+				
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_case_a_cocher = ['Utiliser seulement les tables de multiplications de 2 à 9'];		
+}
+
+/**
+* Effectuer des multiplications de relatifs dans un tableau à double entrée
+*
+* @Auteur Rémi Angot
+*/
+function Exercice_tableau_multiplications_relatifs (){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.sup = false ;
+	this.titre = "Multiplications de deux entiers relatifs dans un tableau à double entrée"
+	this.consigne = 'Calculer'
+  this.spacing = 1;
+  this.nb_questions = 1;
+  this.nb_questions_modifiable = false;
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_signes1 = combinaison_listes([-1,1],4);
+    let liste_signes2 = combinaison_listes([-1,1],4);
+    let a1 = randint(2,9);
+    let a2 = randint(2,9,a1);
+    let a3 = randint(2,9,[a1,a2]);
+    let a4 = randint(2,9,[a1,a2,a3]);
+    let b1 = randint(2,9);
+    let b2 = randint(2,9,b1);
+    let b3 = randint(2,9,[b1,b2]);
+    let b4 = randint(2,9,[b1,b2,b3]);
+    a1 *= liste_signes1[0]
+    a2 *= liste_signes1[1]
+    a3 *= liste_signes1[2]
+    a4 *= liste_signes1[3]
+    b1 *= liste_signes1[0]
+    b2 *= liste_signes1[1]
+    b3 *= liste_signes1[2]
+    b4 *= liste_signes1[3]
+
+    let texte = `$\\def\\arraystretch{1.5}\\begin{array}{|c|c|c|c|c|}
+    \\hline
+    \\times & ${ecriture_algebrique(a1)} & ${ecriture_algebrique(a2)} & ${ecriture_algebrique(a3)} & ${ecriture_algebrique(a4)} \\\\
+    \\hline
+    ${ecriture_algebrique(b1)} &  &  & &  \\\\
+    \\hline
+    ${ecriture_algebrique(b2)} & & & & \\\\
+    \\hline
+    ${ecriture_algebrique(b3)} & & & & \\\\
+    \\hline
+    ${ecriture_algebrique(b4)} & & & & \\\\
+    \\hline
+    \\end{array}$`
+
+    let texte_corr = `$\\def\\arraystretch{1.5}\\begin{array}{|c|c|c|c|c|}
+    \\hline
+    \\times & ${ecriture_algebrique(a1)} & ${ecriture_algebrique(a2)} & ${ecriture_algebrique(a3)} & ${ecriture_algebrique(a4)} \\\\
+    \\hline
+    ${ecriture_algebrique(b1)} & ${ecriture_algebrique(a1*b1)} & ${ecriture_algebrique(a2*b1)} & ${ecriture_algebrique(a3*b1)} & ${ecriture_algebrique(a4*b1)} \\\\
+    \\hline
+    ${ecriture_algebrique(b2)} & ${ecriture_algebrique(a1*b2)} & ${ecriture_algebrique(a2*b2)} & ${ecriture_algebrique(a3*b2)} & ${ecriture_algebrique(a4*b2)} \\\\
+    \\hline
+    ${ecriture_algebrique(b3)} & ${ecriture_algebrique(a1*b3)} & ${ecriture_algebrique(a2*b3)} & ${ecriture_algebrique(a3*b3)} & ${ecriture_algebrique(a4*b3)} \\\\
+    \\hline
+    ${ecriture_algebrique(b4)} & ${ecriture_algebrique(a1*b4)} & ${ecriture_algebrique(a2*b4)} & ${ecriture_algebrique(a3*b4)} & ${ecriture_algebrique(a4*b4)} \\\\
+    \\hline
+    \\end{array}$`
+    this.liste_questions.push(texte);
+	  this.liste_corrections.push(texte_corr);
+	  liste_de_question_to_contenu(this);
+    
+	}
+}
+
+
+/**
+ * Plusieurs type de calcul avec des entiers.
+ *
+ * Sans parenthèses :
+ * * a+b*c
+ * * a+b÷c
+ * * a/b*c
+ * * a*b÷c
+ * * a*b+c
+ * * a-b+c
+ * * a+b+c*d
+ * * a*b+c*d
+ * * a*b*c+d
+ * * a*b-c÷d
+ * * a*b+c÷d
+ *
+ * Avec parenthèses :
+ * * a*(b-c)
+ * * (a-b)*c
+ * * (a-b)÷c
+ * * a÷(b+c)
+ * * (a-b)÷c
+ * * a*(b-c)*d
+ * * a*b*(c-d)
+ * * a*(b-c*d)
+ * * (a+b*c)÷d
+ * * a*(b-c*d)
+ * * a*b÷(c+d)
+ * * a*(b÷c+d)
+ * * a-(b+c)
+ * * (a+b+c)*d
+ * @Auteur Rémi Angot
+ */
+function Priorites_et_relatifs() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Calculer en utilisant les priorités opératoires";
+  this.consigne = "Calculer";
+  this.nb_questions = 5;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 1;
+  this.sup = 3;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    if (this.sup == 1) {
+      liste_questions_disponibles = range1(11);
+    } else if (this.sup == 2) {
+      liste_questions_disponibles = range1(20, range1(11));
+    } else {
+      liste_questions_disponibles = range1(20);
+    }
+    let liste_type_de_questions = combinaison_listes(
+      liste_questions_disponibles,
+      this.nb_questions
+    );
+    for (
+      let i = 0, texte, texte_corr, a, b, c, d, signes, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+      switch (liste_type_de_questions[i]) {
+        case 1: //a+b*c
+          a = randint(2, 11)*choice([-1,1]);
+          b = randint(2, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0) {
+            a = randint(2, 11)*choice([-1,1]);
+            b = randint(2, 11)*choice([-1,1]);
+            c = randint(2, 11)*choice([-1,1]); 
+          }
+          texte = `$${a}${ecriture_algebrique(b)}\\times${ecriture_parenthese_si_negatif(c)}$`;
+          texte_corr = `$${a}${mise_en_evidence('~' + ecriture_algebrique(b) + "\\times" + ecriture_parenthese_si_negatif(c))}=${a}${ecriture_algebrique(b * c)
+          }=${a + b * c}$`;
+          break;
+        case 2: //a+b/c
+          a = randint(2, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          b = c * randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0) {
+            a = randint(2, 11)*choice([-1,1]);
+            c = randint(2, 11)*choice([-1,1]);
+            b = c * randint(2, 11)*choice([-1,1]);
+          }
+          texte = `$${a}${ecriture_algebrique(b)}\\div${ecriture_parenthese_si_negatif(c)}$`;
+          texte_corr = `$${a}${mise_en_evidence('~' + ecriture_algebrique(b) + "\\div" + ecriture_parenthese_si_negatif(c))}=${a}${
+            ecriture_algebrique(b/c)
+          }=${a + b / c}$`;
+          break;
+        case 3: //a/b*c
+          b = randint(2, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          a = b * randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0) {
+            b = randint(2, 11)*choice([-1,1]);
+            c = randint(2, 11)*choice([-1,1]);
+            a = b * randint(2, 11)*choice([-1,1]);
+          }
+          texte = `$${a}\\div${ecriture_parenthese_si_negatif(b)}\\times${ecriture_parenthese_si_negatif(c)}$`;
+          texte_corr = `$${mise_en_evidence(a + "\\div" + ecriture_parenthese_si_negatif(b))}\\times${ecriture_parenthese_si_negatif(c)}=${
+            a / b
+          }\\times${ecriture_parenthese_si_negatif(c)}=${(a / b) * c}$`;
+          break;
+        case 4: // a*b/c
+          if (choice([true, false])) {
+            //a est un multiple de c
+            c = randint(2, 6)*choice([-1,1]);
+            a = c * randint(2, 5)*choice([-1,1]);
+            b = randint(2, 6)*choice([-1,1]);
+            while (a>0 && b>0 && c>0) {
+              c = randint(2, 6)*choice([-1,1]);
+              a = c * randint(2, 5)*choice([-1,1]);
+              b = randint(2, 6)*choice([-1,1]);
+            }
+          } else {
+            // b est un multiple de c
+            c = randint(2, 6)*choice([-1,1]);
+            b = c * randint(2, 5)*choice([-1,1]);
+            a = randint(2, 6)*choice([-1,1]);
+            while (a>0 && b>0 && c>0) {
+              c = randint(2, 6)*choice([-1,1]);
+              b = c * randint(2, 5)*choice([-1,1]);
+              a = randint(2, 6)*choice([-1,1]);
+            }
+          }
+          texte = `$${a}\\times${ecriture_parenthese_si_negatif(b)}\\div${ecriture_parenthese_si_negatif(c)}$`;
+          texte_corr = `$${mise_en_evidence(a + "\\times" + ecriture_parenthese_si_negatif(b))}\\div${ecriture_parenthese_si_negatif(c)}=${
+            a * b
+          }\\div${ecriture_parenthese_si_negatif(c)}=${(a * b) / c}$`;
+          break;
+        case 5: //a*b+c
+          a = randint(2, 11)*choice([-1,1]);
+          b = randint(2, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0) {
+            a = randint(2, 11)*choice([-1,1]);
+            b = randint(2, 11)*choice([-1,1]);
+            c = randint(2, 11)*choice([-1,1]);
+          }
+          texte = `$${a}\\times${ecriture_parenthese_si_negatif(b)}${ecriture_algebrique(c)}$`;
+          texte_corr = `$${mise_en_evidence(a + "\\times" + ecriture_parenthese_si_negatif(b))}${ecriture_algebrique(c)}=${
+            a * b
+          }${ecriture_algebrique(c)}=${a * b + c}$`;
+          break;
+        case 6: //a-b+c
+          a = randint(2, 11)*choice([-1,1]);
+          b = randint(2, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0) {
+            a = randint(2, 11)*choice([-1,1]);
+            b = randint(2, 11)*choice([-1,1]);
+            c = randint(2, 11)*choice([-1,1]);
+          }
+          texte = `$${a}-(${ecriture_algebrique(b)})${ecriture_algebrique(c)}$`;
+          texte_corr = `$${a}${mise_en_evidence(ecriture_algebrique(-b))}${ecriture_algebrique(c)}=${a - b}${ecriture_algebrique(c)}=${
+            a - b + c
+          }$`;
+          break;
+        case 7: //a+b+c*d
+          a = randint(2, 20)*choice([-1,1]);
+          b = randint(2, 20)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          d = randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0 && d>0) {
+            a = randint(2, 20)*choice([-1,1]);
+            b = randint(2, 20)*choice([-1,1]);
+            c = randint(2, 11)*choice([-1,1]);
+            d = randint(2, 11)*choice([-1,1]);
+          }
+          texte = `$${a}${ecriture_algebrique(b)}${ecriture_algebrique(c)}\\times${ecriture_parenthese_si_negatif(d)}$`;
+          texte_corr = `$${a}${ecriture_algebrique(b)}${mise_en_evidence(
+            ecriture_algebrique(c) + "\\times" + ecriture_parenthese_si_negatif(d)
+          )}=${a}${ecriture_algebrique(b)}${ecriture_algebrique(c * d)}=${a + b + c * d}$`;
+          break;
+        case 8: //a*b+c*d
+          a = randint(2, 11)*choice([-1,1]);
+          b = randint(2, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          d = randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0 && d>0) {
+            a = randint(2, 20)*choice([-1,1]);
+            b = randint(2, 20)*choice([-1,1]);
+            c = randint(2, 11)*choice([-1,1]);
+            d = randint(2, 11)*choice([-1,1]);
+          }
+          texte = `$${a}\\times${ecriture_parenthese_si_negatif(b)}${ecriture_algebrique(c)}\\times${ecriture_parenthese_si_negatif(d)}$`;
+          texte_corr = `$${
+            a + mise_en_evidence("\\times") + ecriture_parenthese_si_negatif(b)
+          }${ecriture_algebrique(c) + mise_en_evidence("\\times") + ecriture_parenthese_si_negatif(d)}=${a * b}${ecriture_algebrique(c * d)}=${
+            a * b + c * d
+          }$`;
+          break;
+        case 9:  //a*b*c+d
+          a = randint(2, 5)*choice([-1,1]);
+          b = randint(2, 5)*choice([-1,1]);
+          c = randint(2, 5)*choice([-1,1]);
+          d = randint(2, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0 && d>0) {
+            a = randint(2, 5)*choice([-1,1]);
+            b = randint(2, 5)*choice([-1,1]);
+            c = randint(2, 5)*choice([-1,1]);
+            d = randint(2, 11)*choice([-1,1]);
+          }
+          texte = `$${a}\\times${ecriture_parenthese_si_negatif(b)}\\times${ecriture_parenthese_si_negatif(c)}${ecriture_algebrique(d)}$`;
+          texte_corr = `$${mise_en_evidence(
+            a + "\\times" + ecriture_parenthese_si_negatif(b)
+          )}\\times${ecriture_parenthese_si_negatif(c)}${ecriture_algebrique(d)}=${mise_en_evidence(a * b + "\\times" + ecriture_parenthese_si_negatif(c))}${ecriture_algebrique(d)}
+          =${a * b * c}${ecriture_algebrique(d)}
+          =${a * b * c + d}$`;
+          break;
+        case 10: 
+          a = randint(2, 11)*choice([-1,1]);
+          b = randint(2, 11)*choice([-1,1]);
+          d = randint(2, 11)*choice([-1,1]);
+          c = d * randint(2, 8)*choice([-1,1]);
+          texte = `$${a}\\times${ecriture_parenthese_si_negatif(b)}${ecriture_algebrique(c)}\\div${ecriture_parenthese_si_negatif(d)}$`;
+          texte_corr = `$${
+            a + mise_en_evidence("\\times") + ecriture_parenthese_si_negatif(b)
+          + ecriture_algebrique(c) + mise_en_evidence("\\div") + ecriture_parenthese_si_negatif(d)}=${a * b}${ecriture_algebrique(c/d)}=${
+            a * b + c / d
+          }$`;
+          break;
+        case 11: // a*(b+c)
+          a = randint(2, 11)*choice([-1,1]);
+          b = randint(1, 11)*choice([-1,1]);
+          c = randint(1, 11)*choice([-1,1]);
+          while (a>0 && b>0 && c>0){
+            a = randint(2, 11)*choice([-1,1]);
+            b = randint(1, 11)*choice([-1,1]);
+            c = randint(1, 11)*choice([-1,1]);
+          }
+          texte = `$${a}\\times(${b}${ecriture_algebrique(c)})$`;
+          texte_corr = `$${a}\\times(${mise_en_evidence(b + ecriture_algebrique(c))})=${a}\\times${ecriture_parenthese_si_negatif(b+c)}=${a * (b + c)}$`;
+          break;
+        case 12: // (a+b)*c
+        a = randint(1, 11)*choice([-1,1]);
+        b = randint(1, 11)*choice([-1,1]);
+        c = randint(2, 11)*choice([-1,1]);
+        while (a>0 && b>0 && c>0){
+          a = randint(1, 11)*choice([-1,1]);
+          b = randint(1, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+        }
+          texte = `$(${a}${ecriture_algebrique(b)})\\times${ecriture_parenthese_si_negatif(c)}$`;
+          texte_corr = `$(${mise_en_evidence(a + ecriture_algebrique(b))})\\times${ecriture_parenthese_si_negatif(c)}=${
+            a + b }\\times${ecriture_parenthese_si_negatif(c)}=${(a + b) * c}$`;
+          break;
+        case 13: // (a+b)/c
+          c = randint(2, 11)*choice([-1,1]);
+          b = randint(11, 39)*choice([-1,1]);
+          a = c * randint(2, 9)*[choice([-1,1])] - b;
+          while (a>0 && b>0 && c>0) {
+            c = randint(2, 11)*choice([-1,1]);
+            b = randint(11, 39)*choice([-1,1]);
+            a = c * randint(2, 9)*[choice([-1,1])] - b;
+          }
+          texte = `$(${a}${ecriture_algebrique(b)})\\div${ecriture_parenthese_si_negatif(c)}$`;
+          texte_corr = `$(${mise_en_evidence(a  + ecriture_algebrique(b))})\\div${ecriture_parenthese_si_negatif(c)}=${
+            a + b
+          }\\div${ecriture_parenthese_si_negatif(c)}=${(a + b) / c}$`;
+          break;
+        case 14: // a/(b+c)
+          b = randint(2, 5)*choice([-1,1]);
+          c = randint(2, 6)*choice([-1,1]);
+          a = (b + c) * randint(2, 9)*choice([-1,1]);
+          while (a>0 && b>0 && c>0){
+            b = randint(2, 5)*choice([-1,1]);
+            c = randint(2, 6)*choice([-1,1]);
+            a = (b + c) * randint(2, 9)*choice([-1,1]);
+          }
+          texte = `$${a}\\div(${b}${ecriture_algebrique(c)})$`;
+          texte_corr = `$${a}\\div(${mise_en_evidence(b + ecriture_algebrique(c))})=${a}\\div${
+            ecriture_parenthese_si_negatif(b + c)}=${a / (b + c)}$`;
+          break;
+        case 15: // a(b+c)*d
+          c = randint(11, 39)*choice([-1,1]);
+          b = randint(2, 5)*choice([-1,1]) - c;
+          a = randint(2, 5)*choice([-1,1]);
+          d = randint(2, 5)*choice([-1,1]);
+          while (a>0 && b>0 && c>0 && d>0){
+            c = randint(11, 39)*choice([-1,1]);
+            b = (randint(2, 5) - c)*choice([-1,1]);
+            a = randint(2, 5)*choice([-1,1]);
+            d = randint(2, 5)*choice([-1,1]);
+          }
+          texte = `$${a}\\times(${b}${ecriture_algebrique(c)})\\times${ecriture_parenthese_si_negatif(d)}$`;
+          texte_corr = `$${a}\\times(${mise_en_evidence(b + ecriture_algebrique(c))})\\times${ecriture_parenthese_si_negatif(d)}=${a}\\times${ecriture_parenthese_si_negatif(b + c)}\\times${ecriture_parenthese_si_negatif(d)}=${a * (b + c) * d}$`;
+          break;
+        case 16: //a*b*(c+d)
+          d = randint(11, 39)*choice([-1,1]);
+          c = randint(2, 5)*choice([-1,1])-d;
+          a = randint(2, 5)*choice([-1,1]);
+          b = randint(2, 5)*choice([-1,1]);
+          while (a>0 && b>0 && c>0 && d>0) {
+            d = randint(11, 39)*choice([-1,1]);
+            c = randint(2, 5)*choice([-1,1])-d;
+            a = randint(2, 5)*choice([-1,1]);
+            b = randint(2, 5)*choice([-1,1]);
+          }
+          texte = `$${a}\\times${ecriture_parenthese_si_negatif(b)}\\times(${c}${ecriture_algebrique(d)})$`;
+          texte_corr = `$${a}\\times${ecriture_parenthese_si_negatif(b)}\\times(${mise_en_evidence(
+            c + ecriture_algebrique(d))})=${a}\\times${ecriture_parenthese_si_negatif(b)}\\times${ecriture_parenthese_si_negatif(c+d)}=${a * b * (c + d)}$`;
+          break;
+        case 17: // a*(b/c+d)
+          a = randint(2, 11)*choice([-1,1]);
+          c = randint(2, 11)*choice([-1,1]);
+          b = c * randint(2, 5)*choice([-1,1]);
+          d = randint(2, 6)*choice([-1,1]);
+          texte = `$${a}\\times(${b}\\div${ecriture_parenthese_si_negatif(c)}${ecriture_algebrique(d)})$`;
+          texte_corr = `$${a}\\times(${mise_en_evidence(
+            b + `\\div` + ecriture_parenthese_si_negatif(c)
+          )}${ecriture_algebrique(d)})=${a}\\times(${mise_en_evidence(
+            b / c + ecriture_algebrique(d)
+          )})=${a}\\times${ecriture_parenthese_si_negatif(b / c + d)}=${a * (b / c + d)}$`;
+          break;
+          case 18: //a*b/(c+d)
+          a = randint(2, 11);
+          b = randint(2, 11);
+          while (liste_des_diviseurs(a * b).length < 5) {
+            a = randint(2, 11);
+            b = randint(2, 11);
+          }
+          let liste = liste_des_diviseurs(a * b);
+          if (liste.length > 2) {
+            liste.pop(); //on supprime le plus grand diviseur qui est le produit
+            enleve_element(liste, a); //on supprime a
+            enleve_element(liste, b); //on supprime b
+
+          }
+          let somme = choice(liste, [1])*choice([-1,1]); // la somme doit être un diviseur différent de 1
+          c = randint(-30, 30,[0]);
+          d = somme - c;
+          
+          while (a>0 && b>0 && c>0 && d>0) {
+            a *= choice([-1,1]);
+            b *= choice([-1,1]);
+          }
+          texte = `$${a}\\times${ecriture_parenthese_si_negatif(b)}\\div(${c}${ecriture_algebrique(d)})$`;
+          texte_corr = `$${a}\\times${ecriture_parenthese_si_negatif(b)}\\div(${mise_en_evidence(
+            c + ecriture_algebrique(d))})=${mise_en_evidence(a + "\\times" + ecriture_parenthese_si_negatif(b))}\\div${ecriture_parenthese_si_negatif(c+d)}=${
+            a * b
+          }\\div${ecriture_parenthese_si_negatif(c + d)}=${(a * b) / (c + d)}$`;
+          break;
+        case 19: // a-(b+c)
+          a = randint(1, 9)*choice([-1,1]);
+          b = randint(1, 9)*choice([-1,1]);
+          c = randint(1, 9)*choice([-1,1]);
+          while (a>0 && b>0 && c>0){
+            a = randint(1, 9)*choice([-1,1]);
+            b = randint(1, 9)*choice([-1,1]);
+            c = randint(1, 9)*choice([-1,1]);
+          }
+          texte = `$${a}-(${b}${ecriture_algebrique(c)})$`;
+          texte_corr = `$${a}-(${mise_en_evidence(b + ecriture_algebrique(c))})=${a}-(${ecriture_algebrique(b+c)})=${a+ecriture_algebrique(-b-c)}=${a-b-c}$`;
+          break;
+        case 20: // (a+b+c)*d
+          a = randint(1, 9)*choice([-1,1]);
+          b = randint(1, 9)*choice([-1,1]);
+          c = randint(1, 9)*choice([-1,1]);
+          d = randint(2,5)*choice([-1,1])
+          while (a>0 && b>0 && c>0){
+            a = randint(1, 9)*choice([-1,1]);
+            b = randint(1, 9)*choice([-1,1]);
+            c = randint(1, 9)*choice([-1,1]);
+          }
+          texte = `$(${a+ecriture_algebrique(b)+ecriture_algebrique(c)})\\times${ecriture_parenthese_si_negatif(d)}$`;
+          texte_corr = `$(${mise_en_evidence(a+ecriture_algebrique(b)+ecriture_algebrique(c))})\\times${ecriture_parenthese_si_negatif(d)}=${a+b+c}\\times${ecriture_parenthese_si_negatif(d)}=${(a+b+c)*d} $`;
+          break;
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = [
+    "Type de calculs",
+    3,
+    "1 : Sans opérations entre parenthèses\n2: Avec des opérations entre parenthèses\n3: Avec ou sans opérations entre parenthèses",
+  ];
 }
 
 /**
