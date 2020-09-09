@@ -202,9 +202,10 @@ var liste_des_exercices_disponibles = {
   "4P10-1" : Graphiques_et_proportionnalite,
   "4P20-0": Forme_litterale_introduire_une_lettre,
   "4G11": Pavages_et_translation,
-  "4G20": Exercice_Pythagore,
+  "4G20" : Pythagore2D,
   "4G20-1": Egalite_Pythagore,
   "4G20-2": Racine_caree_de_carres_parfaits,
+  "4G20-3": Exercice_Pythagore,
   "4G21": Reciproque_Pythagore,
   "4G22": Problemes_Pythagore,
   "4G30": Thales_4eme,
@@ -7724,7 +7725,7 @@ function Pourcentage_d_un_nombre() {
  */
 function Fraction_d_un_nombre_bis() {
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Calculer la fraction d'un nombre";
+  this.titre = "Calculer la fraction d'une quantité";
   this.nb_questions = 5;
   this.consigne = "Calculer";
   sortie_html ? (this.spacing_corr = 3.5) : (this.spacing_corr = 2);
@@ -7769,7 +7770,7 @@ function Fraction_d_un_nombre_bis() {
           frac=fraction(num,den)
           texte=`À combien de minutes correspondent $${frac.texFraction()}$ d\'heure ?<br>`
           if (this.sup2){
-            texte+=`cette fraction est représentée ci dessous :<br>`
+            texte+=`Cette fraction est représentée ci dessous :<br>`
             texte+=mathalea2d({xmin:0,ymin:0,xmax:15,ymax:5},frac.representation(2.5,2.5,2,0,'gateau','blue'))
           }
           texte_corr=`Comme l\'heure est partagée en ${den} parts égales, chaque part représente $${tex_fraction(1,den)}$ d\'heure, soit $${calcul(60/den)}$ minutes.<br>`
@@ -7784,23 +7785,20 @@ function Fraction_d_un_nombre_bis() {
             denIrred=choice([2,3,4,5,10])
             numIrred=randint(1,denIrred-1)      
           }
-          k=calcul(60/denIrred)
-          den=calcul(denIrred*k)
-          num=calcul(numIrred*k)
-          frac=fraction(num,den)
+          frac=fraction(numIrred,denIrred)
           frac2=frac.entierMoinsFraction(1)
           texte=`Voici une tablette de chocolat dont la masse totale est de $${masse}$ grammes. Quelqu'un en a déjà consommé les $${frac.texFractionSimplifiee()}$.<br>`
           choix=randint(1,2)
           if (choix==1) {
             texte+=`Quelle masse de chocoloat a-t-elle été consommée ?<br>`
             texte_corr=`Comme la tablette a une masse de $${masse}$ grammes, $${tex_fraction(1,denIrred)}$ de la tablette représente une masse de $${calcul(masse/denIrred)}$ grammes.<br>`
-            texte_corr+=`Ici, il y a $${frac.texFractionSimplifiee()}$ de la tablette qui a été consommé, ce qui représente $${numIrred}$ fois plus, soit $${numIrred}\\times${calcul(masse/denIrred)}=${calcul(num*masse/den)}$.<br>`
+            texte_corr+=`Ici, il y a $${frac.texFractionSimplifiee()}$ de la tablette qui a été consommé, ce qui représente $${numIrred}$ fois plus, soit $${numIrred}\\times${calcul(masse/denIrred)}=${calcul(numIrred*masse/denIrred)}$.<br>`
             texte_corr+=`La masse de chocolat consommée est $${calcul(numIrred*masse/denIrred)}$ grammes.`
           }
           else {
             texte+=`Quelle masse de chocolat reste-t-il ?<br>`
             texte_corr=`Comme la tablette a une masse de $${masse}$ grammes, $${tex_fraction(1,denIrred)}$ de la tablette représente une masse de $${calcul(masse/denIrred)}$ grammes.<br>`
-            texte_corr+=`Ici, il y a $${frac.texFractionSimplifiee()}$ de la tablette qui a été consommé, ce qui représente $${numIrred}$ fois plus, soit $${numIrred}\\times${calcul(masse/denIrred)}=${calcul(num*masse/den)}$.<br>`
+            texte_corr+=`Ici, il y a $${frac.texFractionSimplifiee()}$ de la tablette qui a été consommé, ce qui représente $${numIrred}$ fois plus, soit $${numIrred}\\times${calcul(masse/denIrred)}=${calcul(numIrred*masse/denIrred)}$.<br>`
             texte_corr+=`La masse de chocolat consommée est $${calcul(numIrred*masse/denIrred)}$ grammes.<br>`
             texte_corr+=`Il reste donc : $${masse}-${calcul(numIrred*masse/denIrred)}=${calcul(masse-numIrred*masse/denIrred)}$ grammes de chocolat.<br>`
             texte_corr+=`une autre façon de faire est d'utiliser la fraction restante : $${tex_fraction(denIrred,denIrred)}-${frac.texFractionSimplifiee()}=${tex_fraction(denIrred-numIrred,denIrred)}$.<br>`
@@ -7809,8 +7807,8 @@ function Fraction_d_un_nombre_bis() {
 
            }
           if (this.sup2){
-          texte+=`la tablette de chocolat est représentée ci dessous :<br>`
-          texte+=mathalea2d({xmin:-0.5,ymin:-0.5,xmax:5,ymax:7},frac2.representation(0,0,4,0,'baton','brown'))
+          texte+=`La tablette de chocolat est représentée ci dessous :<br>`
+          texte+=mathalea2d({xmin:-0.5,ymin:-0.5,xmax:5,ymax:7},frac2.representationIrred(0,0,4,0,'baton','brown'))
          }
         break
         case 4:
@@ -7827,15 +7825,17 @@ function Fraction_d_un_nombre_bis() {
           den=calcul(denIrred*k)
           num=calcul(numIrred*k)
           frac=fraction(num,den)
-          texte=`Un bâton de $${tex_nombrec(longueur/100)}$ mètres de longueur est coupé à $${frac.texFractionSimplifiee()}$ de sa longueur.<br>`
-          texte+=`Calculer la longueur de chacun des morceaux.<br>`
+          texte=`Un bâton de $${tex_nombrec(longueur/100)}$ mètre`
+          if (longueur>=200) texte+=`s`
+          texte+=` de longueur est coupé à $${frac.texFractionSimplifiee()}$ de sa longueur.<br>`
+          texte+=`Calculer la longueur de chacun des morceaux en mètres.<br>`
           if (this.sup2){
-            texte+=`ce bâton est représenté ci dessous est représentée ci dessous :<br>`
+            texte+=`Ce bâton est représenté ci dessous est représentée ci dessous :<br>`
           texte+=mathalea2d({xmin:-0.5,ymin:0,xmax:10,ymax:2},frac.representationIrred(0,1,8,0,'segment','blue',"0",`${tex_nombre(calcul(longueur/100))}`))
           }
-          texte_corr=`$${tex_fraction(1,denIrred)}$ de $${tex_nombrec(longueur/100)}$ mètres représente $${tex_nombrec(longueur/100)} \\div ${denIrred} = ${tex_nombrec(longueur/100/denIrred)}$ mètres.<br>`
-          texte_corr+=`Le premier morceau du bâton correspondant à $${frac.texFractionSimplifiee()}$ du bâton mesure : $${numIrred} \\times ${tex_nombrec(longueur/100/denIrred)}=${tex_nombrec(numIrred*longueur/100/denIrred)}$ mètres.<br>`
-          texte_corr+=`Le deuxième morceau mesure donc : $${tex_nombrec(longueur/100)}-${tex_nombrec(numIrred*longueur/100/denIrred)}=${tex_nombrec(longueur/100-numIrred*longueur/100/denIrred)}$ mètres.`
+          texte_corr=`$${tex_fraction(1,denIrred)}$ de $${tex_nombrec(longueur/100)}$ représente $${tex_nombrec(longueur/100)} \\div ${denIrred} = ${tex_nombrec(longueur/100/denIrred)}$.<br>`
+          texte_corr+=`Le premier morceau du bâton correspondant à $${frac.texFractionSimplifiee()}$ du bâton mesure : $${numIrred} \\times ${tex_nombrec(longueur/100/denIrred)}=${tex_nombrec(numIrred*longueur/100/denIrred)}$ m.<br>`
+          texte_corr+=`Le deuxième morceau mesure donc : $${tex_nombrec(longueur/100)}-${tex_nombrec(numIrred*longueur/100/denIrred)}=${tex_nombrec(longueur/100-numIrred*longueur/100/denIrred)}$ m.`
 
         break
       }
@@ -7853,7 +7853,7 @@ function Fraction_d_un_nombre_bis() {
   liste_de_question_to_contenu(this);
 };
 this.besoin_formulaire_numerique = ["Type d\'exercices",5,"1 : Heures & minutes (inférieur à 1h)\n2 : Heures & minutes (jusqu\'à 3h)\n3 : tablettes de chocolat\n4 : Bâton cassé\n5 : Mélange"];
-this.besoin_formulaire2_case_a_cocher = ["Avec Dessin", true];
+this.besoin_formulaire2_case_a_cocher = ["Avec dessin", true];
 }
 /**
  * Calculer la fracton d'un nombre divisible par le dénominateur ... ou pas.
@@ -13704,7 +13704,7 @@ jQuery(document).ready(function () {
       ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],
       ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
       ['6D1','6D1 - Les durées'],
-      ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3']])
+      ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3'],['6N4','6N4 - Numération et fractions niveau 4']])
       liste_html_des_exercices_5 = liste_html_des_exercices_d_un_niveau([
         ['5A1','5A1 - Arithmetique'],['5C1','5C1 - Calculs'],
         ['5G1','5G1 - Symétries'],['5G2','5G2 - Triangles'],['5G3','5G3 - Angles'],['5G4','5G4 - Parallélogrammes'],['5G5','5G5 - Espace'],
@@ -32672,7 +32672,7 @@ function Exercice_tableau_multiplications_relatifs (){
  */
 function Priorites_et_relatifs() {
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Calculer en utilisant les priorités opératoires";
+  this.titre = "Calculs utilisant les priorités opératoires";
   this.consigne = "Calculer";
   this.nb_questions = 5;
   this.nb_cols = 2;
@@ -33022,6 +33022,142 @@ function Priorites_et_relatifs() {
     3,
     "1 : Sans opérations entre parenthèses\n2: Avec des opérations entre parenthèses\n3: Avec ou sans opérations entre parenthèses",
   ];
+}
+
+/**
+ * Exercices sur le théorème de Pythagore avec MathALEA2D
+ * @Auteur Rémi Angot
+ */
+function Pythagore2D() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Utiliser le théorème de Pythagore";
+  this.nb_questions = 3;
+  this.nb_cols = 3;
+  this.nb_cols_corr = 1;
+  this.sup = 3;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_type_de_questions = [];
+    if (this.sup==1) {
+      this.consigne = "Dans chaque cas, donner l'égalité de Pythagore."
+    }
+    if (this.sup==2){
+      this.consigne = "Dans chaque cas, compléter l'égalité en utilisant le théorème de Pythagore."
+    }
+    if (this.sup==3 || this.sup==4){
+      this.consigne = "Dans chaque cas, calculer la longueur manquante."
+    }
+    if (this.sup == 2 || this.sup == 3 ){
+      liste_type_de_questions = combinaison_listes(['AB','BC','AC'],this.nb_questions) 
+    }
+    for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;)
+     {
+      texte = '';
+      texte_corr = '';
+      let A1 = point(0,0)
+      let B1 = point(calcul(randint(22,50)/10),0)
+      let C1 = similitude(B1,A1,90,calcul(randint(22,50)/10)/longueur(A1,B1))
+      let p1 = polygone(A1,B1,C1)
+      p1.isVisible = false
+      let p2 = rotation(p1,A1,randint(0,360))
+      let A = p2.listePoints[0]
+      let B = p2.listePoints[1]
+      let C = p2.listePoints[2]
+      let codage = codageAngleDroit(B,A,C)
+      let xmin = Math.min(A.x,B.x,C.x)-1
+      let ymin = Math.min(A.y,B.y,C.y)-1
+      let xmax = Math.max(A.x,B.x,C.x)+1
+      let ymax = Math.max(A.y,B.y,C.y)+1
+      let nomDuPolygone = creerNomDePolygone(3)
+      let nomme = nommePolygone(p2,nomDuPolygone)
+      let affAB = afficheLongueurSegment(B,A)
+      let affAC = afficheLongueurSegment(A,C)
+      let affBC = afficheLongueurSegment(C,B)
+      let longueurAB = longueur(A,B,1)
+      let longueurAC = longueur(A,C,1)
+      let longueurBC = longueur(B,C,1)
+      let mesObjetsATracer = [codage,p2,nomme]
+
+      if (this.sup==3 && liste_type_de_questions[i]=='AB'){
+        mesObjetsATracer.push(affAC,affBC)
+      }
+      if (this.sup==3 && liste_type_de_questions[i]=='BC'){
+        mesObjetsATracer.push(affAC,affAB)
+      }
+      if (this.sup==3 && liste_type_de_questions[i]=='AC'){
+        mesObjetsATracer.push(affAB,affBC)
+      }
+
+      if (!sortie_html) {texte = '~\\\\'}
+      texte += mathalea2d({xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax, scale:.6},mesObjetsATracer) ;
+      if (this.sup==2){
+        if (liste_type_de_questions[i]=='AB'){
+          texte += `<br>$${A.nom+B.nom}^2=\\ldots$`
+        }
+        if (liste_type_de_questions[i]=='BC'){
+          texte += `<br>$${B.nom+C.nom}^2=\\ldots$`
+        }
+        if (liste_type_de_questions[i]=='AC'){
+          texte += `<br>$${A.nom+C.nom}^2=\\ldots$`
+        }
+      }
+      if (!sortie_html && i!=this.nb_questions-1) {texte += '\\columnbreak'} //pour la sortie LaTeX sauf la dernière question
+      
+      texte_corr = `Le triangle $${nomDuPolygone}$ est rectangle en $${A.nom}$ donc d'après le théorème de Pythagore, on a : `;
+      texte_corr += `$${B.nom+C.nom}^2=${A.nom+B.nom}^2+${A.nom+C.nom}^2$`
+      if (this.sup==2){
+        if (liste_type_de_questions[i]=='AB'){
+          texte_corr += ` d'où $${A.nom+B.nom}^2=${B.nom+C.nom}^2-${A.nom+C.nom}^2$.`
+        }
+        if (liste_type_de_questions[i]=='BC'){
+          texte_corr += `.`
+        }
+        if (liste_type_de_questions[i]=='AC'){
+          texte_corr += ` d'où $${A.nom+C.nom}^2=${B.nom+C.nom}^2-${A.nom+B.nom}^2$.`
+        }
+      }
+      if (this.sup==3){
+        if (liste_type_de_questions[i]=='AB'){
+          texte_corr += ` donc $${A.nom+B.nom}^2=${B.nom+C.nom}^2-${A.nom+C.nom}^2$`
+          texte_corr += `<br> $${A.nom+B.nom}^2=${tex_nombre(longueurBC)}^2-${tex_nombre(longueurAC)}^2=${tex_nombrec(longueurBC**2-longueurAC**2)}$`
+          if (calcul(Math.sqrt(longueurBC**2-longueurAC**2),1)==calcul(Math.sqrt(longueurBC**2-longueurAC**2),2)){
+            texte_corr += `<br> $${A.nom+B.nom}=${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAC**2),1))}$ cm.`
+          } else {
+            texte_corr += `<br> $${A.nom+B.nom}\\approx${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAC**2),1))}$ cm.`
+          }
+        }
+        if (liste_type_de_questions[i]=='BC'){
+          texte_corr += `<br> $${B.nom+C.nom}^2=${tex_nombre(longueurAB)}^2+${tex_nombre(longueurAC)}^2=${tex_nombrec(longueurAB**2+longueurAC**2)}$`
+          if (calcul(Math.sqrt(longueurAB**2+longueurAC**2),1)==calcul(Math.sqrt(longueurAB**2+longueurAC**2),2)){
+            texte_corr += `<br> $${B.nom+C.nom}=${tex_nombre(calcul(Math.sqrt(longueurAB**2+longueurAC**2),1))}$ cm.`
+          } else {
+            texte_corr += `<br> $${B.nom+C.nom}\\approx${tex_nombre(calcul(Math.sqrt(longueurAB**2+longueurAC**2),1))}$ cm.`
+          }
+        }
+        if (liste_type_de_questions[i]=='AC'){
+          texte_corr += ` donc $${A.nom+C.nom}^2=${B.nom+C.nom}^2-${A.nom+B.nom}^2$`
+          texte_corr += `<br> $${A.nom+C.nom}^2=${tex_nombre(longueurBC)}^2-${tex_nombre(longueurAB)}^2=${tex_nombrec(longueurBC**2-longueurAB**2)}$`
+          if (calcul(Math.sqrt(longueurBC**2-longueurAB**2),1)==calcul(Math.sqrt(longueurBC**2-longueurAB**2),2)){
+            texte_corr += `<br> $${A.nom+C.nom}=${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAB**2),1))}$ cm.`
+          } else {
+            texte_corr += `<br> $${A.nom+C.nom}\\approx${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAB**2),1))}$ cm.`
+          }
+        }
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Donner l'égalité de Pythagore\n2 : Compléter l'égalité de Pythagore\n3 : Calculer une longueur manquante"];
 }
 
 /**
