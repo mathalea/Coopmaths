@@ -1629,11 +1629,13 @@ function couleurAleatoire() {
 	return choice(['white', 'black', 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'])
   }
 
-  function arcenciel(i) {
-	  let couleurs=['violet','indigo',  'blue', 'green', 'yellow', 'orange', 'red']
+  function arcenciel(i,fondblanc=true) {
+	  let couleurs
+	  if (fondblanc) couleurs=['violet','indigo',  'blue', 'green', 'lime', 'orange', 'red']
+	  else couleurs=['violet','indigo',  'blue', 'green', 'yellow', 'orange', 'red']
 	  return couleurs[i%7]
   }
-  function texcolors(i,fondblanc="true") {
+  function texcolors(i,fondblanc=true) {
 	  let couleurs=['black', 'blue', 'brown', 'cyan', 'darkgray', 'gray', 'green', 'lightgray', 'lime', 'magenta', 'olive', 'orange', 'pink', 'purple', 'red', 'teal', 'violet', 'white', 'yellow']
 	  if (fondblanc&&i%19>=17) i+=2
 	  return couleurs[i%19]
@@ -5070,6 +5072,7 @@ function Fraction(num,den) {
      * 
      * @param {number} depart N° de la première part coloriée (0 correspond à la droite du centre) 
      * @param {*} type 'gateau' ou 'segment' ou 'barre'
+	 * @Auteur Jean-Claude Lhote
      */
 	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
 		let objets = [], n, num, k, dep, s, a, O, C
@@ -5133,7 +5136,7 @@ function Fraction(num,den) {
 				a = segment(O, point(O.x + Math.min(num, this.denIrred) * rayon / this.denIrred, O.y))
 				a.color = couleur
 				a.opacite = 0.4
-				a.epaisseur = 4
+				a.epaisseur = 6
 				objets.push(a)
 				num -= this.denIrred
 			}
@@ -5150,11 +5153,18 @@ function Fraction(num,den) {
 			a = segment(O, point(O.x + Math.min(this.numIrred, this.denIrred) * rayon / this.denIrred, O.y))
 			a.color = couleur
 			a.opacite = 0.4
-			a.epaisseur = 4
+			a.epaisseur = 6
 			objets.push(a)
 			objets.push(unegraduation(x,y))
-			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','blue',scale))
-			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
+			if (typeof(unite0)=='number'&&typeof(unite1)=='number') {
+				for (k=0;k<=n+1;k++) {
+					objets.push(texteParPosition(unite0+k*(unite1-unite0),x+rayon*k,y-0.6,'milieu','black',scale))
+				}
+			}
+			else {
+			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','black',scale))
+			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','black',scale))
+			}
 
 		}
 		else {
@@ -5203,6 +5213,14 @@ function Fraction(num,den) {
 		}
 		return objets
 	}
+	/**
+	 * 
+	 * Représente une fraction sous forme de disque (gateau), de segment ou de rectangle
+	 * le type peut être : 'gateau', 'segment' ou 'barre'
+	 * l'argument départ sert pour la représentation disque à fixer l'azimut du premier secteur : 0 correspond à 12h.
+	 * les arguments unite0 et unite1 servent pour la représentation 'segment'. On peut ainsi choisir les délimiteurs de l'unité, ce sont habituellement 0 et 1, à ce moment la, chaque entier est affiché sous sa graduation.
+	 * Si ce sont des variable de type string, il n'y a que ces deux étiquettes qui sont écrites.
+	 */
 	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.num, this.den)
@@ -5216,7 +5234,6 @@ function Fraction(num,den) {
 			return g
 		}
 		if (type == 'gateau') {
-			k, dep
 			for (k = 0; k < n; k++) {
 				let O = point(x + k * 2 * (rayon + 0.5), y)
 				let C = cercle(O, rayon)
@@ -5268,7 +5285,7 @@ function Fraction(num,den) {
 				a = segment(O, point(O.x + Math.min(num, this.den) * rayon / this.den, O.y))
 				a.color = couleur
 				a.opacite = 0.4
-				a.epaisseur = 4
+				a.epaisseur = 6
 				objets.push(a)
 				num -= this.den
 			}
@@ -5285,14 +5302,20 @@ function Fraction(num,den) {
 			a = segment(O, point(O.x + Math.min(num, this.den) * rayon / this.den, O.y))
 			a.color = couleur
 			a.opacite = 0.4
-			a.epaisseur = 4
+			a.epaisseur = 6
 			objets.push(a)
 			objets.push(unegraduation(x,y))
-			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','blue',scale))
-			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','blue',scale))
-
+			if (typeof(unite0)=='number'&&typeof(unite1)=='number') {
+				for (k=0;k<=n+1;k++) {
+					objets.push(texteParPosition(unite0+k*(unite1-unite0),x+rayon*k,y-0.6,'milieu','black',scale))
+				}
+			}
+			else {
+			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','black',scale))
+			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','black',scale))
+			}
 		}
-		else { //Type bâtons
+		else { //Type barre
 			let diviseur
 			if (this.den % 6 == 0) diviseur=6
 			else if (this.den % 5 == 0) diviseur=5
@@ -5341,7 +5364,36 @@ function Fraction(num,den) {
 
 
 }
+function nombreEnLettres(nb,type=1) {
+	let partie_entiere,partie_decimale,nbstring,nb_dec,decstring
+	if (estentier(nb)) return partieEntiereEnLettres(nb)
+	else {
+		partie_entiere=Math.floor(nb)
+		partie_decimale=calcul(nb-partie_entiere)
+		nb_dec=partie_decimale.toString().replace(/\d*\./,'').length;
+		partie_decimale=calcul(partie_decimale*10**nb_dec)
 
+		switch (nb_dec) {
+			case 1:
+				if (partie_decimale>1) decstring=` dixièmes`
+				else decstring=` dixième`
+				break
+			case 2:
+				if (partie_decimale>1) decstring=` centièmes`
+				else decstring=` centième`
+				break
+			case 3:
+				if (partie_decimale>1) decstring=` millièmes`
+				else decstring=` millième`
+				break
+												
+		}
+
+		if (type==1) nbstring=partieEntiereEnLettres(partie_entiere)+` unités et `+partieEntiereEnLettres(partie_decimale)+ decstring
+		else nbstring=partieEntiereEnLettres(partie_entiere)+` virgule `+partieEntiereEnLettres(partie_decimale)
+	}
+	return nbstring
+}
 /**
  * 
  * 
@@ -5349,7 +5401,7 @@ function Fraction(num,den) {
 
  * 
  */
-function nombreEnLettres(nb) {
+function partieEntiereEnLettres(nb) {
 	let dictionnaire = {
 0 : "zéro",
 "000" : "",
@@ -6364,7 +6416,12 @@ function nombreEnLettres(nb) {
 		classeDesMillions =  dictionnaire[nbString.substring(nbString.length-9,nbString.length-6).replace(/^0{1,2}/,'')].replaceAll(' ','-')
 	}
 	let classeDesMilliers = '';
-	if (nbString.substring(nbString.length-6,nbString.length-3).length>0) {
+	if (nbString.substring(nbString.length-6,nbString.length-3)=="080" || nbString.substring(nbString.length-6,nbString.length-3)=="80" ){
+		classeDesMilliers = "quatre-vingt"
+	} else if (nbString.substring(nbString.length-5,nbString.length-3)=="00" && nbString.substring(nbString.length-6,nbString.length-5)!="1" ){
+		classeDesMilliers =  dictionnaire[nbString.substring(nbString.length-6,nbString.length-3).replace(/^0{1,2}/,'')].replaceAll(' ','-').replace('cents','cent')
+	} 
+	else if (nbString.substring(nbString.length-6,nbString.length-3).length>0) {
 		classeDesMilliers =  dictionnaire[nbString.substring(nbString.length-6,nbString.length-3).replace(/^0{1,2}/,'')].replaceAll(' ','-')
 	}
 	let classeDesUnites = '';
@@ -6372,21 +6429,22 @@ function nombreEnLettres(nb) {
 		classeDesUnites =  dictionnaire[nbString.substring(nbString.length-3,nbString.length).replace(/^0{1,2}/,'')].replaceAll(' ','-')
 	}
 	let result = ''
+	console.log(classeDesMilliards,classeDesMillions,classeDesMilliers,classeDesUnites)
 	if (classeDesMilliards.length>1){
 		classeDesMilliards == 'un' ? result += classeDesMilliards+'-milliard' : result += classeDesMilliards+'-milliards'
-		if (classeDesMillions.length>1 || classeDesMilliers.length>1 || classeDesUnites.length>1){
+		if (classeDesMillions!="zéro" || classeDesMilliers!="zéro" || classeDesUnites!="zéro"){
 			result +='-'
 		}
 	}
 	if (classeDesMillions.length>1 && classeDesMillions !="zéro"){
 		classeDesMillions == 'un' ? result += classeDesMillions+'-million' : result += classeDesMillions+'-millions'
-		if (classeDesMilliers.length>1 || classeDesUnites.length>1){
+		if (classeDesMilliers!="zéro" || classeDesUnites!="zéro"){
 			result +='-'
 		}
 	}
 	if (classeDesMilliers.length>1 && classeDesMilliers !="zéro"){
-		result += classeDesMilliers+'-mille'
-		if (classeDesUnites.length>1){
+		classeDesMilliers== 'un' ? result += 'mille' : result += classeDesMilliers+'-mille'
+		if (classeDesUnites!="zéro"){
 			result +='-'
 		}
 	}
