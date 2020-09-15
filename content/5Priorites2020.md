@@ -127,10 +127,18 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite "L’élève code des figures simples du plan et de l’espace." %}}
 			{{% priorite_alea "6G20 :  Nommer et coder des polygones" "6G20" %}}	
 			{{% priorite_alea "6G42 :  Connaître les propriétés du cube et du pavé droit" "6G42" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6G20&ex=6G42" %}}	
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-7.pdf" %}}
+			{{< /liste >}}
 			
 			{{% priorite "Il utilise le vocabulaire associé à ces figures pour les décrire." %}}
 			{{% priorite_alea "6G43 : Utiliser le vocabulaire associé au pavé droit" "6G43" %}}	
 			{{% priorite_alea "6G10-2 : Utiliser le codage pour décrire une figure" "6G10-2" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6G43&ex=6G10-2" %}}	
+				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-8.pdf" %}}
+			{{< /liste >}}
 
 			{{% priorite "Il reproduit ou construit des figures simples ou complexes." %}}
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - petits carreaux" "6G12-1,sup2=1" %}}
@@ -138,8 +146,10 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6G12-1 :  Tracer des perpendiculaires et des parallèles - pas de carreaux" "6G12-1,sup2=3" %}}
 			{{% priorite_alea "6G21 :  Tracer un triangle dont on connaît les trois longueurs" "6G21" %}}
 			{{% priorite_alea "6G23-2 :  Tracer un triangle dont on connait une longueur et 2 angles" "6G23-2" %}}
-			{{% priorite_alea "... : ..." "" %}}	
-			{{% priorite_alea "... : ..." "" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 5 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,sup2=3&ex=6G21&ex=6G23-2" %}}	
+				{{% pdf_url_color "#f15929" "Les 5 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-9.pdf" %}}
+			{{< /liste >}}
 
 			{{% priorite "Il complète une figure par symétrie axiale." %}}			
 			{{% priorite_alea "6G25-2 : Trouver l'image d'une figure par une symétrie axiale dans un pavage carré" "6G25-2" %}}	
@@ -149,6 +159,10 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - petits carreaux" "6G24-2,sup2=1" %}}
 			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - gros carreaux" "6G24-2,sup2=2" %}}
 			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - pas de carreaux" "6G24-2,sup2=3" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 7 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}	
+				{{% pdf_url_color "#f15929" "Les 7 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-10.pdf" %}}
+			{{< /liste >}}
 
 	</div>	
 {{< /liste_priorites >}}
