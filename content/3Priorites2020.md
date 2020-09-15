@@ -13,13 +13,13 @@ Début de l'url commune
 https://coopmaths.fr/exercice.html?
 
 Tous les exos actuellement dispos
-ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20&ex=6P11-1&ex=4P10-1&ex=4P20-0&ex=4F12&ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2&ex=4Algo1-0
+ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20&ex=6P11-1&ex=4P10-1&ex=4L13-1&ex=4F12&ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2&ex=4Algo1-0
 
 Nombres et calculs
 ex=4C10-1&ex=&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20
 
 Organisation et gestion de données
-ex=6P11-1&ex=4P10-1&ex=4P20-0&ex=4F12
+ex=6P11-1&ex=4P10-1&ex=4L13-1&ex=4F12
 
 Espace et géométrie
 ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2
@@ -32,19 +32,19 @@ ex=4Algo1-0
 
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
-{{% prioriteIntro "/pdf/2020-3e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20&ex=6P11-1&ex=4P10-1&ex=4P20-0&ex=4F12&ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2&ex=4Algo1-0"  %}}
+{{% prioriteIntro "/pdf/2020-3e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20&ex=6P11-1&ex=4P10-1&ex=4L13-1&ex=4F12&ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2&ex=4Algo1-0"  %}}
 
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
 	{{% pdf_url "Test de positionnement 3e - version pdf du 30 août 2020" "/pdf/2020-3e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 3e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20&ex=6P11-1&ex=4P10-1&ex=4P20-0&ex=4F12&ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2&ex=4Algo1-0" %}}	
+	{{% alea_url "Test de positionnement 3e - version MathALEA (en ligne)" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20&ex=6P11-1&ex=4P10-1&ex=4L13-1&ex=4F12&ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2&ex=4Algo1-0" %}}	
 {{< /liste >}}
 
 **Liens MathALEA vers l'ensemble des exercices par thème**
 {{< liste>}}
 {{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?ex=4C10-1&ex=&ex=4C10-2&ex=4C30-1&ex=4C25-0&ex=5L13-4&ex=5L12-1&ex=4L10&ex=4L13-0&ex=4L14-2&ex=4L14-1&ex=4L14-0&ex=4L15-0&ex=4L20" %}}	
-{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P11-1&ex=4P10-1&ex=4P20-0&ex=4F12" %}}	
+{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P11-1&ex=4P10-1&ex=4L13-1&ex=4F12" %}}	
 {{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?ex=3G23&ex=4G30&ex=4G20,nb_questions=1,sup=1&ex=4G20,nb_questions=1,sup=2" %}}	
 {{% alea_url "Algorithmique" "https://coopmaths.fr/exercice.html?ex=4Algo1-0" %}}	
 {{< /liste>}}
@@ -138,7 +138,7 @@ ex=4Algo1-0
 		<i class="large black chevron circle right icon"></i>
 		<div class="header content"> Comprendre et utiliser la notion de fonction.</div>	
 			{{% priorite "Il produit une forme littérale représentant la dépendance de deux grandeurs." %}}
-			{{% priorite_alea "4P20-0 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "4P20-0" %}}{{< liste >}}
+			{{% priorite_alea "4L13-1 : Produire une expression utilisant des lettres pour désigner une valeur inconnue" "4L13-1" %}}{{< liste >}}
 				{{% pdf_url_color "#f15929" "L'exercice ci-dessus - version pdf" "/pdf/2020-3e-Test-8.pdf" %}}
 			{{< /liste >}}	
 	
