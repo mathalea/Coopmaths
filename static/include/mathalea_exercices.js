@@ -99,9 +99,9 @@ var liste_des_exercices_disponibles = {
   "6N31": Comparer_decimaux,
   "6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
   "6N31-2":Ordre_de_grandeur_operations_decimaux,
+  "6N32" :Fractions_d_unite,
   "6N33": Fraction_d_un_nombre,
-  "6N33-0" : Fraction_d_un_nombre_bis,
-  "beta6N33-01" :Fractions_d_unite,
+  "6N33-0" : Fraction_d_une_quantite,
   "6N33-1": Pourcentage_d_un_nombre,
   "6N33-2" : Calculer_un_pourcentage,
   "6N33-3" : Appliquer_un_pourcentage,
@@ -184,29 +184,31 @@ var liste_des_exercices_disponibles = {
   "4C10-5": Exercice_tableau_multiplications_relatifs,
   "4C11": Priorites_et_relatifs,
   "4C25-0": Problemes_additifs_fractions,
+  "4C30": Puissances_de_dix,
   "4C30-1": Puissances_encadrement,
+  "4C32" : Notation_scientifique,
+  "beta4C32-1" : Calculs_avec_puissances_de_dix,
+  "4C33-1": Puissances_d_un_relatif_1,
+  "4C33-3": Puissances_d_un_relatif_2,
   "4G40": Transformations_4e,
   "4L10": Exercice_developper,
   "4L13-0": Mettre_en_equation_sans_resoudre,
+  "4L13-1": Forme_litterale_introduire_une_lettre,
   "4L14-0": Tester_si_un_nombre_est_solution_d_une_equation,
   "4L14-1": Tester_si_un_nombre_est_solution_d_une_equation_deg1,
   "4L14-2": Tester_si_un_nombre_est_solution_d_une_equation_deg2,
   "4L15-0": Trouver_erreur_resol_eq_deg1,
   "4L20": Exercice_equation1,
-  "4M30": Calcul_de_volumes_4e,
-  "4N10": Exercice_additionner_des_fractions,
-  "4N11": Exercice_additionner_ou_soustraire_des_fractions,
-  "4N12": Exercice_trouver_l_inverse,
-  "4N13": Exercice_multiplier_fractions,
-  "4N14": Exercice_diviser_fractions,
-  "4N15": Exercice_additionner_fraction_produit,
-  "4N21": Puissances_d_un_relatif_1,
-  "4N21-1": Puissances_d_un_relatif_2,
-  "4N21-2": Puissances_de_dix,
+  "4G53": Calcul_de_volumes_4e,
+  "4C21-1": Exercice_additionner_des_fractions,
+  "4C21": Exercice_additionner_ou_soustraire_des_fractions,
+  "4C22-1": Exercice_trouver_l_inverse,
+  "4C22": Exercice_multiplier_fractions,
+  "4C22-2": Exercice_diviser_fractions,
+  "4C23": Exercice_additionner_fraction_produit,
   "4F12": Exploiter_representation_graphique,
   "4P10": Problemes_grandeurs_composees,
-  "4P10-1" : Graphiques_et_proportionnalite,
-  "4P20-0": Forme_litterale_introduire_une_lettre,
+  "4P10-1" : Graphiques_et_proportionnalite,  
   "4G11": Pavages_et_translation,
   "4G20" : Pythagore2D,
   "4G20-1": Egalite_Pythagore2D, // Anciennement Egalite_Pythagore,
@@ -225,7 +227,7 @@ var liste_des_exercices_disponibles = {
   "3A11-3": Lister_Diviseurs_Par_Decomposition_facteurs_premiers,
   "3A12": Fractions_irreductibles,
   "3A13": PPCM_Engrenages,
-  "3M30": Calcul_de_volumes_3e,
+  "3G43": Calcul_de_volumes_3e,
   "3L10": Oppose_expression,
   "3L10-1": Parentheses_precedes_de_moins_ou_plus,
   "3L11": Exercice_developper,
@@ -280,9 +282,10 @@ var liste_des_exercices_disponibles = {
   "2L10": Developper_Identites_remarquables2,
   "2L11": Factoriser_Identites_remarquables2,
   "1N10": Terme_d_une_suite_definie_explicitement,
-  "beta1N11": Terme_d_une_suite_definie_par_recurrence, 
+  "1N11": Terme_d_une_suite_definie_par_recurrence, 
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
+  "betaTESTseb": Tests_du_Seb,
   P001: Code_LaTeX_personnalise,
   // 'P002': LaTeX_static,
   P003: feuille_d_axes_gradues,
@@ -5469,21 +5472,13 @@ function Proportionnalite_pas_proportionnalite() {
           index1 = calcul(x / n); //vitesse fille
           index2 = calcul(y / p); //vitesse garçon
 
-          texte = `${prenoms[0]} habite à ${x} m du collège. Elle met ${n} minutes pour s'y rendre depuis chez elle.<br>`;
-          texte += `${prenoms[1]}, lui, habite à ${tex_nombre(
-            y
-          )} m du collège. Il met ${p} minutes pour s'y rendre depuis chez lui.<br>`;
+          texte = `${prenoms[0]} habite à $${tex_nombre(x)}$ m du collège. Elle met ${n} minutes pour s'y rendre depuis chez elle.<br>`;
+          texte += `${prenoms[1]}, lui, habite à $${tex_nombre(y)}$ m du collège. Il met ${p} minutes pour s'y rendre depuis chez lui.<br>`;
           texte += `Le temps mis pour venir au collège est-il proportionnel à la distance du foyer au collège ?<br>`;
-          texte_corr = `${
-            prenoms[0]
-          } parcourt chaque minute environ ${tex_nombrec(
-            arrondi(index1, 1)
-          )} m.<br>`;
+          texte_corr = `${prenoms[0]} parcourt chaque minute environ $${tex_nombrec(arrondi(index1, 1))}$ m.<br>`;
           texte_corr += `${
             prenoms[1]
-          } parcourt chaque minute environ ${tex_nombrec(
-            arrondi(index2, 1)
-          )} m.<br>`;
+          } parcourt chaque minute environ $${tex_nombrec(arrondi(index2, 1))}$ m.<br>`;
           if (index1 == index2)
             texte_corr += `Pour ces deux élèves le temps mis et la distance parcourue sont proportionnelles (si l'on compare leur vitesse moyenne)`;
           else
@@ -7947,9 +7942,6 @@ function Fractions_d_unite() {
       frac=fraction(num,den)
       frac_unite=fraction(3*den-1,den)
       texte=`$${frac.texFraction()}$ unité en prenant ${unit} carreaux pour une unité.`
-      //if (num/den>=2) texte+=`s`
-      texte+=`.<br>`
-      //texte+=mathalea2d({xmin:0,ymin:0,xmax:16,ymax:2},frac_unite.representation(0.5,1.5,5,0,'segment','',"0","1"))
       if (this.sup2 < 3) g = grille(0, 0,26, 2, "gray", 0.7);
       else g = "";
       if (this.sup2 == 2) {
@@ -7976,14 +7968,14 @@ function Fractions_d_unite() {
   liste_de_question_to_contenu(this);
 };
 this.besoin_formulaire_numerique = ["Type d\'exercices",4,"1 : fracion inférieure à 1\n2 : demis, tiers et quarts\n3 : quarts, cinquièmes, sixièmes et dixièmes\n4 : toutes les fractions entre 1 et 3"];
-this.besoin_formulaire2_numerique = ["Type de cahier",3,"1 :  petits carreaux\n2 Cahier gros carreaux type Seyes:\n3 : Sans carreau,papier blanc"];
+this.besoin_formulaire2_numerique = ["Type de cahier",2,"1 :  petits carreaux\n2 : Cahier gros carreaux type Seyes"];
 }
 /**
  * Calculer la fracton d'une quantité avec ou sans dessin.
  * @Auteur Jean-Claude Lhote
  * référence 6N33-0
  */
-function Fraction_d_un_nombre_bis() {
+function Fraction_d_une_quantite() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Calculer la fraction d'une quantité";
   this.nb_questions = 5;
@@ -14838,7 +14830,7 @@ function Ranger_ordre_croissant_decroissant(){
  };	
 
  this.titre = "Ranger une liste de nombres entiers dans l'ordre croissant ou décroissant";	
- this.consigne = `Classer les nombres suivants dans l'ordre indiqué.`;	
+ //this.consigne = `Classer les nombres suivants dans l'ordre indiqué.`;	
  
  this.nb_cols = 1;
  this.nb_cols_corr = 1;
@@ -14915,7 +14907,7 @@ function Ranger_ordre_croissant_decroissant(){
       });      
       myOrdre(situations[k].ordre,nombres_ranges);   
       enonces.push({
-        enonce:`Dans l'ordre ${situations[k].ordre}<br>
+        enonce:`Classer les nombres suivants dans l'ordre ${situations[k].ordre} :<br>
         $${tex_nombre(nombres[0])}$   ;   $${tex_nombre(nombres[1])}$   ;   $${tex_nombre(nombres[2])}$   ;   $${tex_nombre(nombres[3])}$   ;   $${tex_nombre(nombres[4])}$   ;   $${tex_nombre(nombres[5])}$          
         `,
         question:``,
@@ -14961,6 +14953,117 @@ function Ranger_ordre_croissant_decroissant(){
  }
  //this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
  //this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+
+/** 
+ * * Exo test pour quand j'en ai besoin
+ * * pas de numéro
+ * * Tests
+ * @author Sébastien Lozano
+ */
+
+function Tests_du_Seb(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 2;
+	} else {
+		this.nb_questions = 2;
+	};	
+
+	this.titre = "Exo test pour quand j'en ai besoin";	
+	this.consigne = `Consigne `;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0,1];			
+		} else {
+          //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+          type_de_questions_disponibles = [0,1];	
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+				{//case 0 -->
+				},
+				{//case 1 -->
+				},
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`
+          Type ${k}<br>	
+          ${JSON.stringify(decomp_fact_prem_array(238))}<br>			
+          ${typeof decomp_fact_prem_array(238)}<br>
+          ${JSON.stringify(obtenir_liste_facteurs_premiers(238))}<br>
+          ${typeof obtenir_liste_facteurs_premiers(238)}<br>
+					`,
+					question:``,
+					correction:`
+					Correction type ${k}
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          break;	
+        case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          break;
+			
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 };
 
 /**
@@ -15109,7 +15212,7 @@ jQuery(document).ready(function () {
     let exercice_tmp = new liste_des_exercices_disponibles[id]();
     liste_html_des_exercices_6 = liste_html_des_exercices_d_un_niveau([
       ['6C1','6C1 - Calculs niveau 1'],['6C2','6C2 - Calculs niveau 2'],['6C3','6C3 - Calculs niveau 3'],
-      ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],
+      ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],['6M3', '6M3 - Volumes'],['6P1','6P1 - Proportionnalité'],
       ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
       ['6D1','6D1 - Les durées'],
       ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3'],['6N4','6N4 - Numération et fractions niveau 4']])
@@ -15126,7 +15229,7 @@ jQuery(document).ready(function () {
         ['4C1','4C1 - Relatifs'],['4C2','4C2 - Fractions'],['4C3','4C3 - Puissances'],
         ['4F1','4F1 - Notion de fonction'],
         ['4G1','4G1 - Translation et rotation'],['4G2','4G2 - Théorème de Pythagore'],['4G3','4G3 - Théorème de Thalès'],['4G4',"4G4 - Cosinus d'un angle"],['4G5',"4G5 - Espace"],
-        ['4L1','4L1 - Calcul littéral'],['4P1','4P1 - Proportionnalité'],['4S1','4S1 - Statistiques'],['4S2','4S2 - Probabilités'],
+        ['4L1','4L1 - Calcul littéral'],['4L2','4L2 - Équation'],['4P1','4P1 - Proportionnalité'],['4S1','4S1 - Statistiques'],['4S2','4S2 - Probabilités'],
         ['4Algo1','4Algo1 - Algorithmique']
       ])
       liste_html_des_exercices_3 = liste_html_des_exercices_d_un_niveau([
@@ -28103,6 +28206,7 @@ function Puissances_de_dix() {
 /**
  * problèmes de grandeurs composées
  * @Auteur Jean-Claude Lhote
+ * Référence : 4P10
  */
 function Problemes_grandeurs_composees() {
   "use strict";
@@ -29355,6 +29459,152 @@ function Problemes_grandeurs_composees() {
   ]; // Texte, tooltip
 }
 
+function Calculs_avec_puissances_de_dix() {
+  "use strict"
+  Exercice.call(this)
+  this.sup = 1;
+  this.sup2 =1;
+  this.titre = `Notation scientifique`;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.nb_questions=5
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    if (this.sup == 1) this.consigne = `Donner l\'écriture scientifique des nombres suivants.`;
+    else this.consigne = `Donner l\'écriture décimale des nombres suivants.`;
+    let type_de_questions_disponibles;
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    if (this.sup2==1) type_de_questions_disponibles=[0,0,0,1,1];
+    else if (this.sup2==2) type_de_questions_disponibles=[0,1,1,2,2];
+    else type_de_questions_disponibles=[2,2,3,3,3];
+
+    let liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions);
+    for (let i = 0, texte, texte_corr,nombre,mantisse1,exp1,decalage,mantisse,exp,decimalstring,scientifiquestring, cpt = 0;
+      i < this.nb_questions && cpt < 50;) {
+//        nombre=calcul(randint(1001,9999)/10**randint(1,6))
+//      mantisse=calcul(nombre/10**(Math.floor(Math.log10(nombre))))
+//        exp=Math.floor(Math.log10(nombre))
+      switch (liste_type_de_questions[i]) {
+        case 0 :
+          decalage=randint(-1,1,0)
+        mantisse = randint(1,9)
+        exp=randint(1,5)
+        break
+        case 1: 
+        decalage=randint(-2,2,0)
+        mantisse=calcul(randint(11,99)/10)
+          exp=randint(1,5)
+        break;
+        case 2:
+          decalage=randint(-3,3,0)
+          if (randint(0,1)==1) mantisse=calcul(randint(111,999)/100)
+          else mantisse=calcul((randint(1,9)*100+randint(1,9))/100)
+          exp=randint(1,7)*choice([-1,1])
+        break;
+        case 3:
+          decalage=randint(-4,4,0)
+          if (randint(0,1)==1) mantisse=calcul((randint(1,9)*1000+randint(1,19)*5)/1000)
+          else mantisse=calcul(randint(1111,9999)/1000)
+          exp=randint(3,7)*choice([-1,1])
+        break;
+      }
+      nombre=calcul(mantisse*10**exp)
+      mantisse1=calcul(mantisse*10**decalage)
+      exp1=exp-decalage
+      console.log(nombre,`=`,mantisse1,`x10^`,exp1)
+
+      decimalstring=`${tex_nombrec(mantisse1)} \\times 10^{${exp1}}`
+      scientifiquestring=`${tex_nombre(mantisse)} \\times 10^{${exp}}`
+      if (this.sup==1) {
+        texte= `$${decimalstring}$`
+        texte_corr=`$${decimalstring} = ${scientifiquestring}$`
+      }
+      else {
+        texte_corr= `$${scientifiquestring} = ${decimalstring}$`
+        texte=`$${scientifiquestring}$`
+
+      }
+      if (this.liste_questions.indexOf(texte) == -1) {
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ["Type d\'exercices", 2, "1 : Traduire en notation scientifique\n2 : Traduire en notation décimale"];
+  this.besoin_formulaire2_numerique = ["Niveaux de difficulté",3, "1 : Facile\n2 : Moyen\n3 : Difficile"];
+}
+
+
+function Notation_scientifique() {
+  "use strict"
+  Exercice.call(this)
+  this.sup = 1;
+  this.sup2 =1;
+  this.titre = `Notation scientifique`;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.nb_questions=5
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    if (this.sup == 1) this.consigne = `Donner l\'écriture scientifique des nombres suivants.`;
+    else this.consigne = `Donner l\'écriture décimale des nombres suivants.`;
+    let type_de_questions_disponibles;
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    if (this.sup2==1) type_de_questions_disponibles=[0,0,0,1,1];
+    else if (this.sup2==2) type_de_questions_disponibles=[0,1,1,2,2];
+    else type_de_questions_disponibles=[2,2,3,3,3];
+
+    let liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions);
+    for (let i = 0, texte, texte_corr,mantisse,exp,decimalstring,scientifiquestring, cpt = 0;
+      i < this.nb_questions && cpt < 50;) {
+      switch (liste_type_de_questions[i]) {
+        case 0 :
+        mantisse = randint(1,9)
+        exp=randint(1,5)
+        break
+        case 1: 
+          mantisse=calcul(randint(11,99)/10)
+          exp=randint(1,5)
+        break;
+        case 2:
+          if (randint(0,1)==1) mantisse=calcul(randint(111,999)/100)
+          else mantisse=calcul((randint(1,9)*100+randint(1,9))/100)
+          exp=randint(1,7)*choice([-1,1])
+        break;
+        case 3:
+          if (randint(0,1)==1) mantisse=calcul((randint(1,9)*1000+randint(1,19)*5)/1000)
+          else mantisse=calcul(randint(1111,9999)/1000)
+          exp=randint(3,7)*choice([-1,1])
+        break;
+      }
+      decimalstring=tex_nombrec(mantisse*10**exp)
+      scientifiquestring=`${tex_nombre(mantisse)}\\times 10^{${exp}}`
+      if (this.sup==1) {
+        texte= `$${decimalstring}$`
+        texte_corr=`$${decimalstring} = ${scientifiquestring}$`
+      }
+      else {
+        texte_corr= `$${scientifiquestring} = ${decimalstring}$`
+        texte=`$${scientifiquestring}$`
+
+      }
+      if (this.liste_questions.indexOf(texte) == -1) {
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ["Type d\'exercices", 2, "1 : Traduire en notation scientifique\n2 : Traduire en notation décimale"];
+  this.besoin_formulaire2_numerique = ["Niveaux de difficulté",3, "1 : Facile\n2 : Moyen\n3 : Difficile"];
+}
 /**
  * À partir d'un triangle rectangle, il faut donner l'égalité de Pythagore ou compléter une égalité.
  * @Auteur Rémi Angot
@@ -30052,11 +30302,11 @@ function Puissances_encadrement() {
       let ent_pos = [];
       for (let i = 0; i < 6; i++) {
         ent_pos.push({
-          val: `$${tex_nombre(randint(10 ** i + 1, 10 ** (i + 1)))}$`,
+          val: `$${tex_nombre(calcul(randint(10 ** i + 1, 10 ** (i + 1))))}$`,
           puissance_inf: `$10^{${i}}$`,
           puissance_sup: `$10^{${i + 1}}$`,
-          puissance_inf_num: `$${tex_nombre(10 ** i)}$`,
-          puissance_sup_num: `$${tex_nombre(10 ** (i + 1))}$`,
+          puissance_inf_num: `$${tex_nombre(calcul(10 ** i))}$`,
+          puissance_sup_num: `$${tex_nombre(calcul(10 ** (i + 1)))}$`,
         });
       }
 
@@ -30064,24 +30314,22 @@ function Puissances_encadrement() {
       let dec_pos = [];
       for (let i = 0; i < 4; i++) {
         dec_pos.push({
-          val: `$${tex_nombre(randint(10000, 100000) / 10 ** (4 - i))}$`,
+          val: `$${tex_nombre(calcul(randint(10000, 100000) / 10 ** (4 - i)))}$`,
           puissance_inf: `$10^{${i}}$`,
           puissance_sup: `$10^{${i + 1}}$`,
-          puissance_inf_num: `$${tex_nombre(10 ** i)}$`,
-          puissance_sup_num: `$${tex_nombre(10 ** (i + 1))}$`,
+          puissance_inf_num: `$${tex_nombre(calcul(10 ** i))}$`,
+          puissance_sup_num: `$${tex_nombre(calcul(10 ** (i + 1)))}$`,
         });
       }
       // nombre décimal positif inférieur à 1, entre 0,1 et 1 puis entre 0,01 et 0,1 puis 0,001 et 0,0001
       let dec_pos_inf_un = [];
       for (let i = 0; i < 4; i++) {
         dec_pos_inf_un.push({
-          val: `$${tex_nombre(
-            randint(10 ** (4 - i - 1) + 1, 10 ** (4 - i)) / 10000
-          )}$`,
+          val: `$${tex_nombre(calcul(randint(10 ** (4 - i - 1) + 1, 10 ** (4 - i)) / 10000))}$`,
           puissance_inf: `$10^{${-(i + 1)}}$`,
           puissance_sup: `$10^{${-i}}$`,
-          puissance_inf_num: `$${tex_nombre(10 ** -(i + 1))}$`,
-          puissance_sup_num: `$${tex_nombre(10 ** -i)}$`,
+          puissance_inf_num: `$${tex_nombre(calcul(10 ** -(i + 1)))}$`,
+          puissance_sup_num: `$${tex_nombre(calcul(10 ** -i))}$`,
         });
       }
 
@@ -32147,7 +32395,7 @@ function Forme_litterale_introduire_une_lettre(){
 function Mettre_en_equation_sans_resoudre(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.beta = true;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 9;
@@ -32186,31 +32434,38 @@ function Mettre_en_equation_sans_resoudre(){
       // une fonction pour dire le nom du polygone
       function myPolyName(n) {
         let sortie = {
+          article:``,
           name: ``,
           nameParSommets: ``,
         };
         switch (n) {
           case 3:
+            sortie.article = `du `;
             sortie.name = `triangle équilatéral`;
             sortie.nameParSommets = `ABC`;
             break;
           case 4:
+            sortie.article = `du `;
             sortie.name = `carré`;
             sortie.nameParSommets = `ABCD`;
             break;
           case 5:
+            sortie.article = `du `;
             sortie.name = `pentagone régulier`;
             sortie.nameParSommets = `ABCDE`;
             break;
           case 6:
+            sortie.article = `de l'`;
             sortie.name = `hexagone régulier`;
             sortie.nameParSommets = `ABCDEF`;
             break;
           case 7:
+            sortie.article = `de l'`;
             sortie.name = `heptagone régulier`;
             sortie.nameParSommets = `ABCDEFG`;
             break;
           case 8:
+            sortie.article = `de l'`;
             sortie.name = `octogone régulier`;
             sortie.nameParSommets = `ABCDEFGH`;
             break;
@@ -32252,6 +32507,7 @@ function Mettre_en_equation_sans_resoudre(){
       let polygone = {
         nb_cotes: n,
         unite: unite,
+        article:myPolyName(n).article,
         nom: myPolyName(n).name,
         let_cote: inc,
         perimetre: randint(200, 500),
@@ -32269,7 +32525,7 @@ function Mettre_en_equation_sans_resoudre(){
       
 			let enonces = [];
 			enonces.push({
-				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre du ${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
+				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre ${polygone.article}${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
 				question:``,
         correction:`La figure est un ${polygone.nom}, il a donc ${polygone.nb_cotes} côtés de même longueur.<br>
         Cette longueur est notée ${polygone.let_cote}, le périmètre de la figure, exprimé en fonction de ${polygone.let_cote}, vaut donc $${polygone.nb_cotes}\\times$ ${polygone.let_cote}.<br>
@@ -32281,7 +32537,7 @@ function Mettre_en_equation_sans_resoudre(){
       let p = randint(3, 8,[n]);
       polygone.nb_cotes = p;
 			enonces.push({
-				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre du ${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
+				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre ${polygone.article}${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
 				question:``,
         correction:`La figure est un ${polygone.nom}, il a donc ${polygone.nb_cotes} côtés de même longueur.<br>
         Cette longueur est notée ${polygone.let_cote}, le périmètre de la figure, exprimé en fonction de ${polygone.let_cote}, vaut donc $${polygone.nb_cotes}\\times$ ${polygone.let_cote}.<br>
@@ -32605,8 +32861,6 @@ function Trouver_erreur_resol_eq_deg1(){
       };
 
       function simpFrac(n,d) {  
-        console.log(isSimp(n,d));
-        console.log(n,d)      
         if (isSimp(n,d)) {
           if (fraction_simplifiee(n,d)[1]==1) {
             return `$= ${fraction_simplifiee(n,d)[0]}$`;
@@ -33849,7 +34103,7 @@ function Pythagore2D() {
       }
 
       if (!sortie_html) {texte = '~\\\\'}
-      texte += mathalea2d({xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax, scale:.6,mainlevee:true,amplitude:1},mesObjetsATracer) ;
+      texte += mathalea2d({xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax, scale:.6},mesObjetsATracer) ;
       if (this.sup==2){
         if (liste_type_de_questions[i]=='AB'){
           texte += `<br>$${A.nom+B.nom}^2=\\ldots$`
@@ -34286,6 +34540,7 @@ function fonctions_probabilite2() {
 /**
  * Trace 5 droites et demande l'expression de la fonction affine ou linéaire correspondante
  * @Auteur Jean-Claude Lhote
+ * Référence : 3F21
  */
 function Lecture_expression_fonctions_affines() {
 	'use strict';
@@ -34299,12 +34554,14 @@ function Lecture_expression_fonctions_affines() {
 	sortie_html ? this.spacing = 2 : this.spacing = 1;
 	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
 	this.sup = 1;
+	this.sup2 =3
 	this.lineaire = false;
 	this.liste_packages = 'tkz-euclide';
 
 
 	this.nouvelle_version = function (numero_de_l_exercice) { // numero_de_l_exercice est 0 pour l'exercice 1
 		let k = Math.pow(2, parseInt(this.sup) - 1);
+		let nb_droites=parseInt(this.sup2)
 		this.liste_questions = [];
 		this.liste_corrections = [];
 		this.contenu = ''; // Liste de questions
@@ -34338,10 +34595,10 @@ function Lecture_expression_fonctions_affines() {
 			const mon_svg = SVG().viewbox(0, 0, 500, 500).size('100%', '100%')
 			SVG_repere(mon_svg, -5, 5, -5, 5, k, k, 500, 500, true);
 			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[0][0], liste_droites[0][1], 'blue', 'd1');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd2');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd3');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd4');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd5');
+			if (nb_droites>1) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd2');
+			if (nb_droites>2) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd3');
+			if (nb_droites>3) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd4');
+			if (nb_droites>4) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd5');
 			this.consigne = `<div style="width: 50%; display : table ">${mon_svg.svg()}</div>`;
 
 
@@ -34351,14 +34608,14 @@ function Lecture_expression_fonctions_affines() {
 			let texte = `\\begin{tikzpicture}`;
 			texte += Latex_repere(-5, 5, -5, 5, k, k, true);
 			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[0][0], liste_droites[0][1], 'blue', 'd_1');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd_2');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd_3');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd_4');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd_5');
+			if (nb_droites>1) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd_2');
+			if (nb_droites>2) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd_3');
+			if (nb_droites>3) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd_4');
+			if (nb_droites>4) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd_5');
 			texte += `\n\t \\end{tikzpicture}`;
 			this.liste_questions.push(texte);
 		}
-		for (i = 0; i < 5; i++) {
+		for (i = 0; i < nb_droites; i++) {
 			this.liste_questions.push(`Déterminer l'expression de la fonction $f_${i + 1}$ représentée par la droite $d_${i + 1}$.`)
 			if (this.lineaire || liste_droites[i][0] == 0) this.liste_corrections.push(`La droite $d_${i + 1}$ passe par l'origine et son coefficient directeur est $${tex_nombre(liste_droites[i][1])}$.<br>Elle représente la fonction linéaire $f_${i + 1}(x)=${reduire_ax_plus_b(liste_droites[i][1], 0)}$.`)
 			else this.liste_corrections.push(`La droite $d_${i + 1}$ passe par le point de coordonnées $(0;${liste_droites[i][0]})$ et son coefficient directeur est $${tex_nombre(liste_droites[i][1])}$.<br>Elle représente la fonction affine $f_${i + 1}(x)=${reduire_ax_plus_b(liste_droites[i][1], liste_droites[i][0])}$.`)
@@ -34370,6 +34627,7 @@ function Lecture_expression_fonctions_affines() {
 		else this.contenu_correction = `Il s’agit de fonctions linéaires, elles sont donc de la forme $f(x)=ax$, $a$ étant la `+katex_Popup2(numero_de_l_exercice,1,`pente`,`pente d'une droite`,`La pente (le a de y=ax ou y=ax+b) d'une droite donne le taux d'accroissement de y par rapport à x : lorsque x augmente de 1, alors y augmente de a.`)+` de la droite.\n` + this.contenu_correction ;
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, "1 : Coefficient directeur entier\n2 : Coefficient directeur 'en demis'\n3 : Coefficient directeur 'en quarts'"];
+	this.besoin_formulaire2_numerique =['Nombre de droites (1 à 5)',5];
 }
 
 
@@ -39681,6 +39939,7 @@ function Passer_de_la_base_12_ou_16_a_la_10() {
 						chiffre3 = choice(['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9']);
 					}
 					n = valeur_base(chiffre1)*b**2+valeur_base(chiffre2)*b+valeur_base(chiffre3);
+					console.log(n,chiffre1,chiffre2,chiffre3)
 					texte = `Écrire en base ${b} le nombre ${nombre_avec_espace(n)}.`;
 					texte_corr = `$${tex_nombre(n)}=${b}\\times${Math.floor(n/b)}+${mise_en_evidence(n%b)}$`;
 					texte_corr += `<br>$${Math.floor(n/b)}=${b}\\times${mise_en_evidence(valeur_base(chiffre1))}+${mise_en_evidence(valeur_base(chiffre2))}$`;
@@ -41783,46 +42042,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
                     texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
-                    if (AB%100==0 && AB!=100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
-                    if (AB%81==0 && AB!=81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
-                    if (AB%64==0 && AB!=64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
-                    if (AB%49==0 && AB!=49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
-                     if (AB%36==0&& AB!=36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
-                     if (AB%25==0 && AB!=25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
-                     if (AB%64!=0 && AB%16==0&& AB!=16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
-                    if (AB%81!=0 && AB%9==0 && AB!=9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
-                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
-                      if (AB==100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
-                    if (AB==81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
-                      if (AB==64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
-                      if (AB==49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
-                      if (AB==36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
-                      if (AB==25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
-                      if (AB==16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
-                      if (AB==9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
-                      if (AB==4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
-                     if (AB==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
-
-                     ;   
+                    if (extraire_racine_carree(AB)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=${tex_racine_carree(AB)}$<br>`
                    break ;
              case 2 : 
         
@@ -41854,87 +42074,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
                     texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
-                    if (AB%100==0 && AB!=100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
-                    if (AB%81==0 && AB!=81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
-                    if (AB%64==0 && AB!=64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
-                    if (AB%49==0 && AB!=49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
-                     if (AB%36==0&& AB!=36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
-                     if (AB%25==0 && AB!=25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
-                     if (AB%64!=0 && AB%16==0&& AB!=16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
-                    if (AB%81!=0 && AB%9==0 && AB!=9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
-                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
-                      if (AB==100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
-                    if (AB==81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
-                      if (AB==64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
-                      if (AB==49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
-                      if (AB==36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
-                      if (AB==25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
-                      if (AB==16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
-                      if (AB==9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
-                      if (AB==4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
-                      if (AB==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
-
+                    texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=${tex_racine_carree(AB)}$<br>`
                     texte_corr +=`De même : $AC=\\sqrt{\\left(${xC}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yC}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{De même :       } AC=\\sqrt{${XAC}+${YAC}}$<br>`
                     texte_corr +=`$\\phantom{De même :       } AC=\\sqrt{${tex_nombre(XAC+YAC)}}$<br>`
-                    if (AC%100==0 && AC!=100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10\\sqrt{${tex_nombre((AC))/100}}$<br>`}
-                    if (AC%81==0 && AC!=81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9\\sqrt{${tex_nombre((AC))/81}}$<br>`}
-                    if (AC%64==0 && AC!=64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8\\sqrt{${tex_nombre((AC))/64}}$<br>`}
-                    if (AC%49==0 && AC!=49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7\\sqrt{${tex_nombre((AC))/49}}$<br>`}
-                     if (AC%36==0&& AC!=36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6\\sqrt{${tex_nombre((AC))/36}}$<br>`}
-                     if (AC%25==0 && AC!=25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5\\sqrt{${tex_nombre((AC))/25}}$<br>`}
-                     if (AC%64!=0 && AC%16==0&& AC!=16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4\\sqrt{${tex_nombre((AC))/16}}$<br>`}
-                    if (AC%81!=0 && AC%9==0 && AC!=9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3\\sqrt{${tex_nombre((AC))/9}}$<br>`}
-                    if (AC%16!=0 && AC%64!==0 &&AC%4==0 && AC!=4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2\\sqrt{${tex_nombre((AC))/4}}$<br>`}
-                      if (AC==100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10$<br>`}
-                    if (AC==81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9$<br>`}
-                      if (AC==64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8$<br>`}
-                      if (AC==49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7$<br>`}
-                      if (AC==36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6$<br>`}
-                      if (AC==25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5$<br>`}
-                      if (AC==16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4$<br>`}
-                      if (AC==9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3$<br>`}
-                      if (AC==4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2$<br>`}
-                      if (AC==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=1$<br>`}
-
+                    if (extraire_racine_carree(AC)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=${tex_racine_carree(AC)}$<br>`
                     texte_corr +=`On observe que $AC=AB$ donc le point $A$ est équidistant de $B$ et $C$.`
                      texte_corr +=`<br>Le point $C$ appartient bien au cercle de centre $A$ et passant par $B$.`
                     ;   
@@ -41969,87 +42113,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
                     texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
-                    if (AB%100==0 && AB!=100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
-                    if (AB%81==0 && AB!=81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
-                    if (AB%64==0 && AB!=64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
-                    if (AB%49==0 && AB!=49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
-                     if (AB%36==0&& AB!=36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
-                     if (AB%25==0 && AB!=25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
-                     if (AB%64!=0 && AB%16==0&& AB!=16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
-                    if (AB%81!=0 && AB%9==0 && AB!=9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
-                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
-                      if (AB==100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
-                    if (AB==81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
-                      if (AB==64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
-                      if (AB==49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
-                      if (AB==36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
-                      if (AB==25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
-                      if (AB==16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
-                      if (AB==9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
-                      if (AB==4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
-                     if (AB==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
-
+                    if (extraire_racine_carree(AB)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=${tex_racine_carree(AB)}$<br>`
                     texte_corr +=`De même : $AC=\\sqrt{\\left(${xC}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yC}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{De même :       } AC=\\sqrt{${XAC}+${YAC}}$<br>`
                     texte_corr +=`$\\phantom{De même :       } AC=\\sqrt{${tex_nombre(XAC+YAC)}}$<br>`
-                    if (AC%100==0 && AC!=100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10\\sqrt{${tex_nombre((AC))/100}}$<br>`}
-                    if (AC%81==0 && AC!=81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9\\sqrt{${tex_nombre((AC))/81}}$<br>`}
-                    if (AC%64==0 && AC!=64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8\\sqrt{${tex_nombre((AC))/64}}$<br>`}
-                    if (AC%49==0 && AC!=49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7\\sqrt{${tex_nombre((AC))/49}}$<br>`}
-                     if (AC%36==0&& AC!=36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6\\sqrt{${tex_nombre((AC))/36}}$<br>`}
-                     if (AC%25==0 && AC!=25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5\\sqrt{${tex_nombre((AC))/25}}$<br>`}
-                     if (AC%64!=0 && AC%16==0&& AC!=16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4\\sqrt{${tex_nombre((AC))/16}}$<br>`}
-                    if (AC%81!=0 && AC%9==0 && AC!=9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3\\sqrt{${tex_nombre((AC))/9}}$<br>`}
-                    if (AC%16!=0 && AC%64!==0 &&AC%4==0 && AC!=4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2\\sqrt{${tex_nombre((AC))/4}}$<br>`}
-                      if (AC==100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10$<br>`}
-                    if (AC==81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9$<br>`}
-                      if (AC==64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8$<br>`}
-                      if (AC==49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7$<br>`}
-                      if (AC==36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6$<br>`}
-                      if (AC==25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5$<br>`}
-                      if (AC==16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4$<br>`}
-                      if (AC==9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3$<br>`}
-                      if (AC==4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2$<br>`}
-                     if (AC==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=1$<br>`}
-
+                    if (extraire_racine_carree(AC)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=${tex_racine_carree(AC)}$<br>`    
                     texte_corr +=`On observe que $AC\\neq AB$ donc le point $C$ n'appartient pas au cercle de centre $A$ et passant par $B$`
 
                     ;   
