@@ -161,7 +161,7 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			{{% priorite_alea "6G24-2 : Construire le symétrique d'une figure par rapport à une droite - pas de carreaux" "6G24-2,sup2=3" %}}
 			{{< liste >}}
 				{{% alea_url_color "#f15929" "Les 7 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6G25-2&ex=6G24-1,sup2=1&ex=6G24-1,sup2=2&ex=6G24-1,sup2=3&ex=6G24-2,sup2=1&ex=6G24-2,sup2=2&ex=6G24-2,sup2=3" %}}	
-				{{% pdf_url_color "#f15929" "Les 7 exercices ci-dessus - version pdf" "/pdf/2020-5e-Test-10.pdf" %}}
+				{{% pdf_url_color "#f15929" "Les 6 exercices ci-dessus (6G25-2 n'a pas de version LaTeX) - version pdf" "/pdf/2020-5e-Test-10.pdf" %}}
 			{{< /liste >}}
 
 	</div>	
