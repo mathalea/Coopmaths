@@ -88,11 +88,11 @@ ex=6G20&ex=6G42&ex=6G43&ex=6G10-2&ex=6G12-1,sup2=1&ex=6G12-1,sup2=2&ex=6G12-1,su
 			
 			{{% priorite "Il résout des problèmes relevant des structures additives et multiplicatives et mobilisant une ou plusieurs étapes de raisonnement." %}}
 			{{% priorite_alea "6C32 : Problème - Les courses" "6C32" %}}
-			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : problème des cahiers -> non codé" "" %}}
+			{{% priorite_alea "... : problème du maçon -> non codé" "" %}}
+			{{% priorite_alea "... : problème du croissant -> non codé" "" %}}
 			{{< liste >}}
-				{{% pdf_url_color "#f15929" "L'exercice ci-dessus - version pdf" "/pdf/2020-5e-Test-4.pdf" %}}
+				{{% pdf_url_color "#f15929" "L'exercice ci-dessus et les 3 exercices d'eduscol - version pdf" "/pdf/2020-5e-Test-4.pdf" %}}
 			{{< /liste >}}
 
 
