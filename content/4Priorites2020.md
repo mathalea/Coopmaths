@@ -110,12 +110,17 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{< /liste >}}
 
 			{{% priorite "Il résout des problèmes de proportionnalité, notamment en utilisant des pourcentages ou des échelles." %}}
-			{{% priorite_alea "... : ..." "" %}}
+			{{% priorite_alea "... : problème des yaourts -> non codé" "" %}}
 			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient entier" "5N11-1,sup=1" %}}			
 			{{% priorite_alea "5N11-1 : Tableaux et pourcentages - coefficient décimal" "5N11-1,sup=2" %}}			
 			{{% priorite_alea "6N33-3 : Problèmes avec des calculs de pourcentages" "6N33-3,nb_questions=2" %}}			
-			{{% priorite_alea "... : ..." "" %}}						
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "... : Problème d'échelle, la Tour Eiffel --> non codé" "" %}}						
+			{{% priorite_alea "... : Problème d'échelle, la maison --> non codé" "" %}}
+			{{< liste >}}
+				{{% alea_url_color "#f15929" "Les 3 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=5N11-1,sup=1&ex=5N11-1,sup=2&ex=6N33-3,nb_questions=2" %}}
+				{{% pdf_url_color "#f15929" "Les 3 exercices ci-dessus et les 3 exercices d'eduscol - version pdf" "/pdf/2020-4e-Test-6.pdf" %}}
+			{{< /liste >}}
+			
 
 	</div>	
 {{< /liste_priorites >}}
@@ -148,8 +153,11 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 			{{< /liste >}}					
 
 			{{% priorite "L’élève connaît et utilise  une définition et une propriété caractéristique du parallélogramme, le codage des figures." %}}
-			{{% priorite_alea "... : ..." "" %}}	
-			{{% priorite_alea "... : ..." "" %}}			
+			{{% priorite_alea "... : Définition du parallélogramme --> non codé" "" %}}	
+			{{% priorite_alea "... : Utilisation d'une propriété du parallélogramme --> non codé" "" %}}			
+			{{< liste >}}
+				{{% pdf_url_color "#f15929" "Les 2 exercices d'eduscol - version pdf" "/pdf/2020-4e-Test-9.pdf" %}}
+			{{< /liste >}}					
 
 			{{% priorite "Il transforme une figure par symétrie centrale." %}}
 			{{% priorite_alea "5G12 : Trouver l'image d'une figure par une symétrie centrale dans un pavage" "5G12" %}}

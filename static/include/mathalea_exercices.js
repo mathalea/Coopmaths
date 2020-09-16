@@ -76,11 +76,11 @@ var liste_des_exercices_disponibles = {
   "6N10" : Ecrire_nombres_entiers,
   "6N10-1": Exercice_numeration_entier,
   "6N10-2": Decomposition_nombre_decimal,
-  "beta6N10-3": chiffre_nombre_de,
+  "6N10-3": chiffre_nombre_de,
   "6N11": Lire_abscisse_entiere,
   "6N11-2": Placer_un_point_abscisse_entiere,
-  "beta6N11-3": Encadrer_un_entier_par_deux_entiers_consecutifs,
-  "beta6N11-4": Ranger_ordre_croissant_decroissant,
+  "6N11-3": Encadrer_un_entier_par_deux_entiers_consecutifs,
+  "6N11-4": Ranger_ordre_croissant_decroissant,
   "6N12": Multiplier_entier_par_10_100_1000,
   "6N13": Exercice_6N13,
   "6N14" : Representer_une_fraction,
@@ -89,6 +89,7 @@ var liste_des_exercices_disponibles = {
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
   "6N23": Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
+  "beta6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
   "6N24": Exercice_6N24,
   "6N24-1": Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
@@ -208,7 +209,7 @@ var liste_des_exercices_disponibles = {
   "4P20-0": Forme_litterale_introduire_une_lettre,
   "4G11": Pavages_et_translation,
   "4G20" : Pythagore2D,
-  "4G20-1": Egalite_Pythagore,
+  "4G20-1": Egalite_Pythagore2D, // Anciennement Egalite_Pythagore,
   "4G20-2": Racine_caree_de_carres_parfaits,
   "4G20-3": Exercice_Pythagore,
   "4G21": Reciproque_Pythagore,
@@ -3649,6 +3650,11 @@ function Trouver_solution_mathador(
     } else operations_successives = [];
   }
 }
+/**
+ * Lire un nombre / écrire un nombre : passer d'une écriture à une autre et inversement
+ * On peut fixer la classe maximale : unités, miliers, millions, milliards
+ * @Auteur Jean-Claude Lhote
+ */
 
 function Ecrire_nombres_entiers() {
   "use strict"
@@ -3658,7 +3664,7 @@ function Ecrire_nombres_entiers() {
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
   this.sup = 1
-  this.sup2 = 1
+  this.sup2 = 2
   this.nouvelle_version = function (numero_de_l_exercice) {
     if (this.sup == 2)
       this.consigne = "Écrire le nombre en chiffres"
@@ -3666,7 +3672,12 @@ function Ecrire_nombres_entiers() {
       this.consigne = "Écrire le nombre en lettres"
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées 
-    let type_de_questions_disponibles = [parseInt(this.sup2)]; // <1 000, <1 000 000, < 1 000 000 000, >1 000 000 000) 
+    let type_de_questions_disponibles;
+   
+    if (this.sup2==1) type_de_questions_disponibles=[1,1,1,2,2]
+    else if (this.sup2==2)  type_de_questions_disponibles=[2,2,3,3,4]
+    else type_de_questions_disponibles=[2,3,3,4,4]
+
     let liste_type_de_questions = combinaison_listes(
       type_de_questions_disponibles,
       this.nb_questions
@@ -3692,17 +3703,16 @@ function Ecrire_nombres_entiers() {
         }
         if (tranche[liste_type_de_questions[i]-1]==0) nombre=0
       }
-      console.log(tranche,nombre)
       if (this.sup == 1) {
-        if (!est_diaporama) texte = `$${tex_nombre(nombre)}$ s'écrit \\dotfill`
+        if (!est_diaporama) texte = `$${tex_nombre(nombre)}$ : \\dotfill`
         else texte =`$${tex_nombre(nombre)}$`
-       if (!est_diaporama) texte_corr = `$${tex_nombre(nombre)}$ s'écrit ${nombreEnLettres(nombre)}`
-       else texte_corr = `${nombreEnLettres(nombre)}`
+       if (!est_diaporama) texte_corr = `$${tex_nombre(nombre)}$ : ${nombreEnLettres(nombre)}.`
+       else texte_corr = `${nombreEnLettres(nombre)}.`
       }
       else {
-        if (!est_diaporama) texte = `${nombreEnLettres(nombre)} s'écrit \\dotfill`
+        if (!est_diaporama) texte = `${nombreEnLettres(nombre)} : \\dotfill`
         else texte = `${nombreEnLettres(nombre)}`
-        if (!est_diaporama) texte_corr = `${nombreEnLettres(nombre)} s'écrit $${tex_nombre(nombre)}$.`
+        if (!est_diaporama) texte_corr = `${nombreEnLettres(nombre)} : $${tex_nombre(nombre)}$.`
         else texte_corr = `$${tex_nombre(nombre)}$.`
       }
       if (this.liste_questions.indexOf(texte) == -1) {
@@ -3715,8 +3725,93 @@ function Ecrire_nombres_entiers() {
     }
     liste_de_question_to_contenu(this);
   };
-  this.besoin_formulaire_numerique = ['type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
-  this.besoin_formulaire2_numerique = ['Classe maximum', 4, '1 : Unités\n2 : Milliers\n3 : Millions\n4 : Milliards']
+  this.besoin_formulaire_numerique = ['Type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
+  this.besoin_formulaire2_numerique = ['Niveau', 3, '1 : Facile\n2 : Moyen\n3 : Difficile']
+}
+/**
+ * Lire un nombre / écrire un nombre : passer d'une écriture à une autre et inversement
+ * On peut fixer la classe maximale : unités, miliers, millions, milliards
+ * @Auteur Jean-Claude Lhote
+ */
+
+function Ecrire_nombres_decimal() {
+  "use strict"
+  Exercice.call(this)
+  this.titre = "Écrire un nombre décimal en chiffres ou en lettres"
+  this.nb_questions = 5;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1
+  this.sup2 = 1
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    if (this.sup == 2)
+      this.consigne = "Écrire le nombre en chiffres"
+    else
+      this.consigne = "Écrire le nombre en lettres"
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées 
+    let type_de_questions_disponibles = [parseInt(this.sup2)+1]; // <1 000, <1 000 000) 
+    let liste_type_de_questions = combinaison_listes(
+      type_de_questions_disponibles,
+      this.nb_questions
+    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+    for (
+      let i = 0, texte, texte_corr, a, b,c,nombre,tranche,part_ent,part_dec,nb_dec, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+  
+      nombre = 0
+      tranche=[]
+      while (nombre == 0) {
+        tranche.splice(0)
+        part_ent=0
+        part_dec=0
+        for (let j = 0; j < liste_type_de_questions[i]; j++) {
+          a = randint(1,9)
+          b=randint(1,9)
+          c=randint(1,9)
+          tranche.push(choice([0,100,20,80,a,a*100,a*100+b*10+c,a*100+80+b,a*10,a*100+b*10+1]))
+        }
+        for (let j = 1; j < liste_type_de_questions[i]; j++) {
+          part_ent+= tranche[j] * 10 ** ((j-1)*3)
+         // nombre += tranche[j] * 10 ** ((j-1)*3)
+        }
+        part_dec=tranche[0]
+        nombre=calcul(part_ent+part_dec/1000)
+        // if (tranche[liste_type_de_questions[i]-1]==0) nombre=0
+        if (tranche[1]<2) nombre=0
+        if (tranche[0]==0) nombre=0
+        
+      }
+      if (part_dec%10!=0) nb_dec=3
+      else if (part_dec%100!=0) nb_dec=2
+      if (this.sup == 1) {
+        if (!est_diaporama) texte = `$${tex_nombre(nombre)}$ : \\dotfill`
+        else texte =`$${tex_nombre(nombre)}$`
+       if (!est_diaporama) texte_corr = `$${tex_nombre(nombre)}$ : ${nombreEnLettres(nombre)}.`
+       else texte_corr = `${nombreEnLettres(part_ent)} unités et ${nombreEnLettres(part_dec)}.`
+      }
+      else {
+        if (!est_diaporama) texte = `${nombreEnLettres(part_ent)} unités et ${nombreEnLettres(part_dec)} : \\dotfill`
+        else texte = `${nombreEnLettres(part_ent)} unités et ${nombreEnLettres(part_dec)}`
+        if (!est_diaporama) texte_corr = `${nombreEnLettres(part_ent)} unités et ${nombreEnLettres(part_dec)} : $${tex_nombre(nombre)}$.`
+        else texte_corr = `$${tex_nombre(nombre)}$.`
+      }
+      texte=texte.replace('et-un unités','et-une unités')
+      texte_corr=texte_corr.replace('et-un unités','et-une unités')
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
+  this.besoin_formulaire2_numerique = ['Classe maximum', 2, '1 : Unités\n2 : Milliers']
 }
 
 /**
@@ -7792,23 +7887,28 @@ function Pourcentage_d_un_nombre() {
   //	this.besoin_formulaire_numerique = ['Valeur maximale',99999];
   this.besoin_formulaire2_case_a_cocher = ["Plusieurs méthodes"];
 }
+/**
+ * Tracer un segment de longueur une fraction de l'unité.
+ * @Auteur Jean-Claude Lhote
+ */
 
 function Fractions_d_unite() {
+  "use strict"
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Représenter une fraction de l\'unité";
   this.nb_questions = 5;
-  this.consigne = "Tracer un segment de longueur ...";
+  this.consigne = "Colorier en bleu un segment de longueur ...";
   sortie_html ? (this.spacing_corr = 3.5) : (this.spacing_corr = 2);
   sortie_html ? (this.spacing = 2) : (this.spacing = 2);
   this.sup = 1;
-  this.sup2=true
+  this.sup2=1;
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let type_de_questions_disponibles
+    let type_de_questions_disponibles,g,carreaux,sc,unit
     let liste_type_de_questions=[]
     if (this.sup<5)
       type_de_questions_disponibles=[parseInt(this.sup)]
@@ -7827,22 +7927,41 @@ function Fractions_d_unite() {
      break
         case 2 :
           den=choice([2,3,4])
-          num=randint(3,3*den-1,den)
+          if (den==3)  num=randint(3,2*den-1,den)
+          else num=randint(3,3*den-1,den)
          break
         case 3 :
           den=choice([4,5,6,10])
-          num=randint(3,3*den-1,den)
+          if (den==4) num=randint(5,3*den-1,den)
+          else num=randint(5,2*den-1,den)
         break
         case 4:
           den=choice([2,3,4,5,6,10])
-          num=randint(den+1,3*den-1,den)
+          if (den==2||den==4) num=randint(den+1,3*den-1,den)
+          else num=randint(den+1,2*den-1,den)
         break
       }
+      if (den%3==0) unit=12
+      else if (den%5==0) unit=10
+      else unit=8
       frac=fraction(num,den)
       frac_unite=fraction(3*den-1,den)
-      texte=`$${frac.texFraction()}$ d\'unité.<br>`
-      texte+=mathalea2d({xmin:0,ymin:0,xmax:16,ymax:2},frac_unite.representation(0.5,1.5,5,0,'segment','',"0","1"))
-      texte_corr=mathalea2d({xmin:0,ymin:0,xmax:16,ymax:2},frac.representation(0.5,1.5,5,0,'segment','blue',"0","1"))
+      texte=`$${frac.texFraction()}$ unité en prenant ${unit} carreaux pour une unité.`
+      //if (num/den>=2) texte+=`s`
+      texte+=`.<br>`
+      //texte+=mathalea2d({xmin:0,ymin:0,xmax:16,ymax:2},frac_unite.representation(0.5,1.5,5,0,'segment','',"0","1"))
+      if (this.sup2 < 3) g = grille(0, 0,26, 2, "gray", 0.7);
+      else g = "";
+      if (this.sup2 == 2) {
+        sc = 0.6;
+        carreaux = seyes(0, 0, 26, 2);
+      } else {
+        sc = 0.5;
+        carreaux = "";
+      }
+ 
+      
+      texte_corr=mathalea2d({xmin:0,ymin:0,xmax:26,ymax:2,pixelsParCm:20,scale:sc},frac.representation(1,1,unit,0,'segment','blue',0,1),g,carreaux)
 
 
 
@@ -7857,7 +7976,7 @@ function Fractions_d_unite() {
   liste_de_question_to_contenu(this);
 };
 this.besoin_formulaire_numerique = ["Type d\'exercices",4,"1 : fracion inférieure à 1\n2 : demis, tiers et quarts\n3 : quarts, cinquièmes, sixièmes et dixièmes\n4 : toutes les fractions entre 1 et 3"];
-this.besoin_formulaire2_case_a_cocher = ["Avec dessin", true];
+this.besoin_formulaire2_numerique = ["Type de cahier",3,"1 :  petits carreaux\n2 Cahier gros carreaux type Seyes:\n3 : Sans carreau,papier blanc"];
 }
 /**
  * Calculer la fracton d'une quantité avec ou sans dessin.
@@ -7971,7 +8090,7 @@ function Fraction_d_un_nombre_bis() {
           texte+=` de longueur est coupé à $${frac.texFractionSimplifiee()}$ de sa longueur.<br>`
           texte+=`Calculer la longueur de chacun des morceaux en mètres.<br>`
           if (this.sup2){
-            texte+=`Ce bâton est représenté ci dessous est représentée ci dessous :<br>`
+            texte+=`Ce bâton est représenté ci dessous :<br>`
           texte+=mathalea2d({xmin:-0.5,ymin:0,xmax:10,ymax:2},frac.representationIrred(0,1,8,0,'segment','blue',"0",`${tex_nombre(calcul(longueur/100))}`))
           }
           texte_corr=`$${tex_fraction(1,denIrred)}$ de $${tex_nombrec(longueur/100)}$ représente $${tex_nombrec(longueur/100)} \\div ${denIrred} = ${tex_nombrec(longueur/100/denIrred)}$.<br>`
@@ -10929,6 +11048,7 @@ function Transformations() {
   this.nb_questions_modifiable = false;
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
+  this.pas_de_version_LaTeX = true;
   // this.sup = 1; // 1 pour les 6ème, 2 pour les 5èmes, 3 pour les 4èmes, et 4 pour les 3èmes.
   sortie_html ? (this.spacing_corr = 2.5) : (this.spacing_corr = 1.5);
   this.liste_packages = "tkz-euclide";
@@ -11290,7 +11410,7 @@ function Transformations() {
       liste_de_question_to_contenu_sans_numero(this);
     } else {
       texte = ``;
-      texte_cor = ``;
+      texte_corr = ``;
       this.liste_questions.push(texte); // on envoie la question
       this.liste_corrections.push(texte_corr);
       liste_de_question_to_contenu_sans_numero(this);
@@ -11436,30 +11556,35 @@ function Transformations_6e() {
   Transformations.call(this);
   this.sup = 1;
   this.titre = `Trouver l'image d'un point par une symétrie axiale`;
+  this.pas_de_version_LaTeX = true;
 }
 
 function Symetrie_axiale_5e() {
   Transformations.call(this);
   this.sup = 1;
   this.titre = `Trouver l'image d'un point par une symétrie axiale`;
+  this.pas_de_version_LaTeX = true;
 }
 
 function Transformations_5e() {
   Transformations.call(this);
   this.sup = 2;
   this.titre = `Trouver l'image d'un point par une symétrie axiale ou centrale`;
+  this.pas_de_version_LaTeX = true;
 }
 
 function Transformations_4e() {
   Transformations.call(this);
   this.sup = 3;
   this.titre = `Trouver l'image d'un point par une symétrie axiale ou centrale ou par une translation`;
+  this.pas_de_version_LaTeX = true;
 }
 
 function Transformations_3e() {
   Transformations.call(this);
   this.sup = 4;
   this.titre = `Trouver l'image d'un point par une transformation choisie aléatoirement`;
+  this.pas_de_version_LaTeX = true;
 }
 
 function Calcul_de_volumes_6e() {
@@ -14205,7 +14330,7 @@ function Ordre_de_grandeur_operations_decimaux(){
 function chiffre_nombre_de(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 6;
@@ -14355,13 +14480,12 @@ function chiffre_nombre_de(){
           };
           let j = rang[rang.length-1];
           j++;
-          //console.log(j);
           let nb_de_reste = '';
           while (j != 9) {            
             nb_de_reste += str.split('')[j];
             j++;
           };
-          sortie = `comme $${tex_nombre(str)} = ${tex_nombre(nb_de)}\\times ${tex_nombre(cdu_num)}+${tex_nombre(nb_de_reste)}$`;
+          sortie = `comme $${tex_nombre(str)} = ${tex_nombre(nb_de)}\\times ${tex_nombre(cdu_num)}+${tex_nombre(nb_de_reste)}$ alors `;
         };
         return sortie;
       };
@@ -14370,7 +14494,7 @@ function chiffre_nombre_de(){
 			for (let k=0;k<situations.length;k++) {
 				enonces.push({
           enonce:`
-          Dans $${tex_nombre(nb)}$, quel est le ${situations[k].type} ${chiffre_nombre[situations[k].type][situations[k].tranche][situations[k].cdu].determinant}  ${chiffre_nombre[situations[k].type][situations[k].tranche][situations[k].cdu].cdu[0]} ?					
+          Dans $${tex_nombre(nb)}$, quel est le ${situations[k].type} ${chiffre_nombre[situations[k].type][situations[k].tranche][situations[k].cdu].determinant} ${chiffre_nombre[situations[k].type][situations[k].tranche][situations[k].cdu].cdu[0]} ?					
 					`,
 					question:``,
           correction:`
@@ -14382,7 +14506,7 @@ function chiffre_nombre_de(){
 				});
 			};
             
-            // autant de case que d'elements dans le tableau des situations
+      // autant de case que d'elements dans le tableau des situations
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
@@ -14470,16 +14594,16 @@ function chiffre_nombre_de(){
 function Encadrer_un_entier_par_deux_entiers_consecutifs(){
   'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.beta = false;	
 	this.sup=1;
 	if (this.beta) {
 		this.nb_questions = 6;
 	} else {
-		this.nb_questions = 6;
+		this.nb_questions = 3;
 	};	
 
   this.titre = "Encadrer un entier entre deux entiers consécutifs";	
-  this.consigne = `Compléter avec le nombre entier qui précède et le nombre entier qui suit.`;	
+  this.consigne = ``;	
 	
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
@@ -14493,9 +14617,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 		if (this.beta) {
 			type_de_questions_disponibles = [0,1,2,3,4,5];			
 		} else {
-      //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
-      type_de_questions_disponibles = shuffle([0,1,2,3,4,5]);			
-      			
+      type_de_questions_disponibles = shuffle([choice([0,1]),choice([2,3]),choice([4,5])]);      			
 		};
 
 		this.liste_questions = []; // Liste de questions
@@ -14505,72 +14627,121 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
-        let m = randint(1000,9999);
-        let dm = randint(10000,99999);
-        let cm = randint(100000,999999);
-        let mi = randint(1000000,9999999); 
-        let dmi = randint(10000000,99999999); 
-        let cmi = randint(100000000,999999999); 
+        // on déclare des variables pour avoir des nombres entre 1000 et 9999 puis 10000 et 99999 etc ...
+        let m,dm,cm,mi,dmi,cmi;
+        //pour la précision d'encadrement
+        let precision;
+
+        //selon la precision on veut certains chiffres plus souvant que d'autres ...
+        function myNombres(nb_chiffres) {
+          let sortie = '';
+          // on fabrique le nombre à partir de ses chiffres et on veut des cas limites
+          let u,d,c,mu,md,mc,mmu,mmd,mmc;
+          let N = choice([[randint(0,9,[0]),0,0,0,0,0,0,0,0],[randint(0,9,[0]),9,9,9,9,9,9,9,9],[randint(0,9,[0]),randint(0,9),randint(0,9),randint(0,9),randint(0,9),randint(0,9),randint(0,9),randint(0,9),randint(0,9)]]);
+          mmc = N[0];
+          mmd = N[1];
+          mmu = N[2];
+          mc = N[3];
+          md = N[4];
+          mu = N[5];
+          c = N[6];
+          d = N[7];
+          u = N[8];
+          switch (nb_chiffres) {
+            case 4:
+              mu = randint(0,9,[0]);
+              sortie = mu.toString()+c.toString()+d.toString()+u.toString();
+              break;
+            case 5:
+              md = randint(0,9,[0]);
+              sortie = md.toString()+mu.toString()+c.toString()+d.toString()+u.toString();
+              break;
+            case 6:
+              mc = randint(0,9,[0]);
+              sortie = mc.toString()+md.toString()+mu.toString()+c.toString()+d.toString()+u.toString();
+              break;
+            case 7:
+              mmu = randint(0,9,[0]);
+              sortie = mmu.toString()+mc.toString()+md.toString()+mu.toString()+c.toString()+d.toString()+u.toString();
+              break;
+            case 8:
+              mmd = randint(0,9,[0]);
+              sortie = mmd.toString()+mmu.toString()+mc.toString()+md.toString()+mu.toString()+c.toString()+d.toString()+u.toString();
+              break;
+            case 9:
+              mmc = randint(0,9,[0]);
+              sortie = mmc.toString()+mmd.toString()+mmu.toString()+mc.toString()+md.toString()+mu.toString()+c.toString()+d.toString()+u.toString();
+              break;
+                
+          };
+          return sortie;
+        };
+
+        this.sup = Number(this.sup); // attention le formulaire renvoie un string, on a besoin d'un number pour le switch !
+        switch (this.sup) {
+          case 1:
+            this.consigne = `Compléter avec le nombre entier qui précède et le nombre entier qui suit.`;
+            precision=1;
+            break;
+          case 2:
+            this.consigne = `Compléter avec le multiple de 10 qui précède et le multiple de 10 qui suit.`;
+            precision=10;
+            break;
+          case 3:
+            this.consigne = `Compléter avec le multiple de 100 qui précède et le multiple de 100 qui suit.`;
+            precision=100;
+            break;
+        };
+
 			// pour les situations, autant de situations que de cas dans le switch !
 			let situations = [
         {//case 0 -->
-				},		
-			];
+          nombre: Number(myNombres(4)),
+        },
+        {//case 1 -->
+          nombre: Number(myNombres(5)),
+        },
+        {//case 2 -->
+          nombre: Number(myNombres(6)),
+        },
+        {//case 3 -->
+          nombre: Number(myNombres(7)),
+        },
+        {//case 4 -->
+          nombre: Number(myNombres(8)),
+        },
+        {//case 5 -->
+          nombre: Number(myNombres(9)),
+        },
+      ];
+      
+      // une fonction pour les correction à la precision près
+      function encadrement_corr(nb,precision) {
+          if (precision == 1) {
+            return `$${mise_en_evidence(tex_nombre(Math.trunc(nb/precision)*precision-precision))} < ${tex_nombre(nb)} < ${mise_en_evidence(tex_nombre(Math.trunc(nb/precision)*precision+precision))}$`;
+          } else if(precision == 10 || precision == 100) {
+            if (nb%precision == 0) {
+              return `$${mise_en_evidence(tex_nombre(Math.trunc(nb/precision)*precision-precision))} < ${tex_nombre(nb)} < ${mise_en_evidence(tex_nombre(Math.trunc(nb/precision)*precision+precision))}$`;
+            } else {
+              return `$${mise_en_evidence(tex_nombre(Math.trunc(nb/precision)*precision))} < ${tex_nombre(nb)} < ${mise_en_evidence(tex_nombre(Math.trunc(nb/precision)*precision+precision))}$`;
+            };
+          };       
+      };
 
-			let enonces = [];
-			//for (let k=0;k<3;k++) {
-				enonces.push({
-					enonce:`
-          $\\ldots < ${tex_nombre(m)} < \\ldots$          
-					`,
-					question:``,
-					correction:`
-					$${mise_en_evidence(tex_nombre(m-1))} < ${tex_nombre(m)} < ${mise_en_evidence(tex_nombre(m + 1 ))}$					`
-				});
-				enonces.push({
-					enonce:`
-          $\\ldots < ${tex_nombre(dm)} < \\ldots$          
-					`,
-					question:``,
-					correction:`
-					$${mise_en_evidence(tex_nombre(dm-1))} < ${tex_nombre(dm)} < ${mise_en_evidence(tex_nombre(dm + 1 ))}$					`
-				});
-				enonces.push({
-					enonce:`
-          $\\ldots < ${tex_nombre(cm)} < \\ldots$          
-					`,
-					question:``,
-					correction:`
-					$${mise_en_evidence(tex_nombre(cm-1))} < ${tex_nombre(cm)} < ${mise_en_evidence(tex_nombre(cm + 1 ))}$					`
-				});
-				enonces.push({
-					enonce:`
-          $\\ldots < ${tex_nombre(mi)} < \\ldots$          
-					`,
-					question:``,
-					correction:`
-					$${mise_en_evidence(tex_nombre(mi-1))} < ${tex_nombre(mi)} < ${mise_en_evidence(tex_nombre(mi + 1 ))}$					`
-				});
-				enonces.push({
-					enonce:`
-          $\\ldots < ${tex_nombre(dmi)} < \\ldots$          
-					`,
-					question:``,
-					correction:`
-					$${mise_en_evidence(tex_nombre(dmi-1))} < ${tex_nombre(dmi)} < ${mise_en_evidence(tex_nombre(dmi + 1 ))}$					`
-				});
-				enonces.push({
-					enonce:`
-          $\\ldots < ${tex_nombre(cmi)} < \\ldots$          
-					`,
-					question:``,
-					correction:`
-					$${mise_en_evidence(tex_nombre(cmi-1))} < ${tex_nombre(cmi)} < ${mise_en_evidence(tex_nombre(cmi + 1 ))}$					`
-				});
-
-        //};
-            
-            // autant de case que d'elements dans le tableau des situations
+      let enonces = [];
+      for (let k=0;k<situations.length;k++) {
+        enonces.push({
+          enonce:`
+          $\\ldots < ${tex_nombre(situations[k].nombre)} < \\ldots$		
+          `,
+          question:``,
+          correction:`
+          ${encadrement_corr(situations[k].nombre,precision)}
+          `
+        });
+      };
+          
+      // autant de case que d'elements dans le tableau des situations
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
@@ -14643,7 +14814,9 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 			cpt++;	
 		}
 		liste_de_question_to_contenu(this);
-	}
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Encadrer entre deux entiers consécutifs\n2 : Encadrer entre deux multiples consécutifs de dix\n3 : Encadrer entre deux multiples consécutifs de cent"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 
 };
 
@@ -14656,16 +14829,16 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 function Ranger_ordre_croissant_decroissant(){
  'use strict';
  Exercice.call(this); // Héritage de la classe Exercice()
- this.beta = true;	
+ this.beta = false;	
  this.sup=1;
  if (this.beta) {
-   this.nb_questions = 5;
+   this.nb_questions = 2;
  } else {
-   this.nb_questions = 3;
+   this.nb_questions = 2;
  };	
 
  this.titre = "Ranger une liste de nombres entiers dans l'ordre croissant ou décroissant";	
- this.consigne = `Classer les nombres suivants dans l'ordre indiqué. `;	
+ this.consigne = `Classer les nombres suivants dans l'ordre indiqué.`;	
  
  this.nb_cols = 1;
  this.nb_cols_corr = 1;
@@ -14677,9 +14850,10 @@ function Ranger_ordre_croissant_decroissant(){
 
  this.nouvelle_version = function(numero_de_l_exercice){
    if (this.beta) {
-     type_de_questions_disponibles = [0,1,2,3,4];			
+     type_de_questions_disponibles = [0,1];			
    } else {
-         type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+         //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+         type_de_questions_disponibles = [0,1];			
    };
 
    this.liste_questions = []; // Liste de questions
@@ -14689,88 +14863,91 @@ function Ranger_ordre_croissant_decroissant(){
    let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
    
    for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+     // les chiffres
+     let c1 = randint(1,9);
+     let c2 = randint(1,9,[c1]);
+     let c3 = randint(1,9,[c1,c2]);
+     let c4 = randint(1,9,[c1,c2,c3]);
+     let c5 = randint(1,9,[c1,c2,c3,c4]);
 
      // pour les situations, autant de situations que de cas dans le switch !
      let situations = [
        {//case 0 -->
+        ordre:'croissant',
+        symbole: `$${mise_en_evidence('<')}$`,
+        n1: Number(c1.toString()+c2.toString()+c3.toString()+c4.toString()+c5.toString()),
+        n2: Number(c1.toString()+c3.toString()+c2.toString()+c4.toString()+c5.toString()),
+        n3: Number(c1.toString()+c2.toString()+c5.toString()+c4.toString()+c3.toString()),
+        n4: Number(c1.toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()),
+        n5: Number('1'.toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()),
+        n6: Number(c1.toString()+c2.toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()),
        },
        {//case 1 -->
-       },
-       {//case 2 -->
-       },
-       {//case 3 -->
-       },
-       {//case 4 -->
-       },
-   
+        ordre:'décroissant',
+        symbole: `$${mise_en_evidence('>')}$`,
+        n1: Number(c1.toString()+c2.toString()+c3.toString()+c4.toString()+c5.toString()),
+        n2: Number(c1.toString()+c3.toString()+c2.toString()+c4.toString()+c5.toString()),
+        n3: Number(c1.toString()+c2.toString()+c5.toString()+c4.toString()+c3.toString()),
+        n4: Number(c1.toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()),
+        n5: Number('1'.toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()),
+        n6: Number(c1.toString()+c2.toString()+randint(0,9).toString()+randint(0,9).toString()+randint(0,9).toString()),
+       },   
      ];
 
+     // une fonction pour gérer l'ordre
+     function myOrdre(ordre,tab) {
+      tab.sort((a,b) => a - b);          
+      switch (ordre) {
+        case 'croissant':
+          return tab;
+        case 'décroissant':
+          return tab.reverse();          
+      };
+     };
+
      let enonces = [];
+     let nombres = [];
+     let nombres_ranges = [];
      for (let k=0;k<situations.length;k++) {
-       enonces.push({
-         enonce:`
-         Type ${k}				
-         `,
-         question:``,
-         correction:`
-         Correction type ${k}
-         `
-       });
+      nombres = shuffle([situations[k].n1,situations[k].n2,situations[k].n3,situations[k].n4,situations[k].n5,situations[k].n6]);
+      nombres.forEach(element => {
+        nombres_ranges.push(element);        
+      });      
+      myOrdre(situations[k].ordre,nombres_ranges);   
+      enonces.push({
+        enonce:`Dans l'ordre ${situations[k].ordre}<br>
+        $${tex_nombre(nombres[0])}$   ;   $${tex_nombre(nombres[1])}$   ;   $${tex_nombre(nombres[2])}$   ;   $${tex_nombre(nombres[3])}$   ;   $${tex_nombre(nombres[4])}$   ;   $${tex_nombre(nombres[5])}$          
+        `,
+        question:``,
+        correction:`Les nombres rangés dans l'ordre ${texte_en_couleur_et_gras(situations[k].ordre)} :<br>
+        $${tex_nombre(nombres_ranges[0])}$   ${situations[k].symbole}   $${tex_nombre(nombres_ranges[1])}$   ${situations[k].symbole}   $${tex_nombre(nombres_ranges[2])}$   ${situations[k].symbole}   $${tex_nombre(nombres_ranges[3])}$   ${situations[k].symbole}   $${tex_nombre(nombres_ranges[4])}$   ${situations[k].symbole}   $${tex_nombre(nombres_ranges[5])}$
+        `
+      });
      };
            
            // autant de case que d'elements dans le tableau des situations
      switch (liste_type_de_questions[i]){
-       case 0 : 
-         texte = `${enonces[0].enonce}`;
-         if (this.beta) {
-           texte += `<br>`;
-           texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
-           texte += `             `
-           texte_corr = ``;	
-         } else {
-           texte_corr = `${enonces[0].correction}`;
-         };
-               break;	
-           case 1 : 
-         texte = `${enonces[1].enonce}`;
-         if (this.beta) {
-           texte += `<br>`;
-           texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
-           texte_corr = ``;	
-         } else {
-           texte_corr = `${enonces[1].correction}`;
-         };
-               break;
-           case 2 : 
-         texte = `${enonces[2].enonce}`;
-         if (this.beta) {
-           texte += `<br>`;
-           texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
-           texte_corr = ``;	
-         } else {
-           texte_corr = `${enonces[2].correction}`;
-         };
-               break;				
-           case 3 : 
-         texte = `${enonces[3].enonce}`;
-         if (this.beta) {
-           texte += `<br>`;
-           texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
-           texte_corr = ``;	
-         } else {
-           texte_corr = `${enonces[3].correction}`;
-         };
-         break;				
-            case 4 : 
-         texte = `${enonces[4].enonce}`;
-         if (this.beta) {
-           texte += `<br>`;
-           texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
-           texte_corr = ``;	
-         } else {
-           texte_corr = `${enonces[4].correction}`;
-         };
-         break;				
+      case 0 : 
+        texte = `${enonces[0].enonce}`;
+        if (this.beta) {
+          texte += `<br>`;
+          texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+          texte += `             `
+          texte_corr = ``;	
+        } else {
+          texte_corr = `${enonces[0].correction}`;
+        };
+        break;	
+      case 1 : 
+        texte = `${enonces[1].enonce}`;
+        if (this.beta) {
+          texte += `<br>`;
+          texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+          texte_corr = ``;	
+        } else {
+          texte_corr = `${enonces[1].correction}`;
+        };
+        break;			
      };			
      
      if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -14781,7 +14958,6 @@ function Ranger_ordre_croissant_decroissant(){
      cpt++;	
    }
    liste_de_question_to_contenu(this);
-
  }
  //this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
  //this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
@@ -25350,7 +25526,7 @@ function Reciproque_Thales() {
  */
 function Exercice_Pythagore() {
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Déterminer une longueur avec l'égalité de Pythagore";
+  this.titre = "Calculer une longueur avec l'égalité de Pythagore (MG32)";
   this.consigne = "";
   this.nb_questions = 1;
   this.nb_questions_modifiable = false;
@@ -29184,243 +29360,243 @@ function Problemes_grandeurs_composees() {
  * @Auteur Rémi Angot
  * SVG Benjamin Angot
  */
-function Egalite_Pythagore() {
-  Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Égalité de Pythagore";
-  this.nb_questions = 4;
-  this.nb_cols = 2;
-  this.nb_cols_corr = 2;
-  this.pas_de_version_LaTeX = true;
-  this.sup = 1;
-  this.sup2 = false;
+// function Egalite_Pythagore() { // Remplacée par Pythagore2D
+//   Exercice.call(this); // Héritage de la classe Exercice()
+//   this.titre = "Égalité de Pythagore";
+//   this.nb_questions = 4;
+//   this.nb_cols = 2;
+//   this.nb_cols_corr = 2;
+//   this.pas_de_version_LaTeX = true;
+//   this.sup = 1;
+//   this.sup2 = false;
 
-  this.nouvelle_version = function (numero_de_l_exercice) {
-    // this.bouton_aide = modal_texte_court(numero_de_l_exercice,"Ajouter 9 revient à ajouter 10 et à soustraire 1.")
-    this.liste_questions = []; // Liste de questions
-    this.liste_corrections = []; // Liste de questions corrigées
-    let liste_type_de_questions = combinaison_listes(
-      range1(6),
-      this.nb_questions
-    );
-    if (this.sup == 1) {
-      this.consigne = "Pour chaque triangle, donner l'égalité de Pythagore.";
-    } else {
-      this.consigne = "Compléter.";
-    }
+//   this.nouvelle_version = function (numero_de_l_exercice) {
+//     // this.bouton_aide = modal_texte_court(numero_de_l_exercice,"Ajouter 9 revient à ajouter 10 et à soustraire 1.")
+//     this.liste_questions = []; // Liste de questions
+//     this.liste_corrections = []; // Liste de questions corrigées
+//     let liste_type_de_questions = combinaison_listes(
+//       range1(6),
+//       this.nb_questions
+//     );
+//     if (this.sup == 1) {
+//       this.consigne = "Pour chaque triangle, donner l'égalité de Pythagore.";
+//     } else {
+//       this.consigne = "Compléter.";
+//     }
 
-    for (
-      let i = 0, texte, texte_corr, a, b, cpt = 0;
-      i < this.nb_questions && cpt < 50;
+//     for (
+//       let i = 0, texte, texte_corr, a, b, cpt = 0;
+//       i < this.nb_questions && cpt < 50;
 
-    ) {
-      const triangle = new Triangles();
+//     ) {
+//       const triangle = new Triangles();
 
-      let nom = triangle.getNom();
-      let A = nom[1];
-      let B = nom[2];
-      let C = nom[3];
-      let texte_corr1 = `${nom} est rectangle en ${A}, donc d'après le théorème de Pythagore, on a : $${B}${C}^2=${A}${C}^2+${A}${B}^2$.`;
-      let texte_corr1AB = `${nom} est rectangle en ${A}, donc d'après le théorème de Pythagore, on a : $${B}${C}^2=${A}${C}^2+${A}${B}^2$ d'où $${A}${B}^2=${B}${C}^2-${A}${C}^2$.`;
-      let texte_corr1AC = `${nom} est rectangle en ${A}, donc d'après le théorème de Pythagore, on a : $${B}${C}^2=${A}${C}^2+${A}${B}^2$ d'où $${A}${C}^2=${B}${C}^2-${A}${B}^2$.`;
-      let texte_corr2 = `${nom} est rectangle en ${B}, donc d'après le théorème de Pythagore, on a : $${A}${C}^2=${B}${C}^2+${B}${A}^2$.`;
-      let texte_corr2AB = `${nom} est rectangle en ${B}, donc d'après le théorème de Pythagore, on a : $${A}${C}^2=${B}${C}^2+${A}${B}^2$ d'où $${A}${B}^2=${A}${C}^2-${B}${C}^2$.`;
-      let texte_corr2BC = `${nom} est rectangle en ${B}, donc d'après le théorème de Pythagore, on a : $${A}${C}^2=${B}${C}^2+${A}${B}^2$ d'où $${B}${C}^2=${A}${C}^2-${A}${B}^2$.`;
-      let texte_corr3 = `${nom} est rectangle en ${C}, donc d'après le théorème de Pythagore, on a : $${A}${B}^2=${C}${A}^2+${C}${B}^2$.`;
-      let texte_corr3BC = `${nom} est rectangle en ${C}, donc d'après le théorème de Pythagore, on a : $${A}${B}^2=${A}${C}^2+${B}${C}^2$ d'où $${B}${C}^2=${A}${B}^2-${A}${C}^2$.`;
-      let texte_corr3AC = `${nom} est rectangle en ${C}, donc d'après le théorème de Pythagore, on a : $${A}${B}^2=${A}${C}^2+${B}${C}^2$ d'où $${A}${C}^2=${A}${B}^2-${B}${C}^2$.`;
+//       let nom = triangle.getNom();
+//       let A = nom[1];
+//       let B = nom[2];
+//       let C = nom[3];
+//       let texte_corr1 = `${nom} est rectangle en ${A}, donc d'après le théorème de Pythagore, on a : $${B}${C}^2=${A}${C}^2+${A}${B}^2$.`;
+//       let texte_corr1AB = `${nom} est rectangle en ${A}, donc d'après le théorème de Pythagore, on a : $${B}${C}^2=${A}${C}^2+${A}${B}^2$ d'où $${A}${B}^2=${B}${C}^2-${A}${C}^2$.`;
+//       let texte_corr1AC = `${nom} est rectangle en ${A}, donc d'après le théorème de Pythagore, on a : $${B}${C}^2=${A}${C}^2+${A}${B}^2$ d'où $${A}${C}^2=${B}${C}^2-${A}${B}^2$.`;
+//       let texte_corr2 = `${nom} est rectangle en ${B}, donc d'après le théorème de Pythagore, on a : $${A}${C}^2=${B}${C}^2+${B}${A}^2$.`;
+//       let texte_corr2AB = `${nom} est rectangle en ${B}, donc d'après le théorème de Pythagore, on a : $${A}${C}^2=${B}${C}^2+${A}${B}^2$ d'où $${A}${B}^2=${A}${C}^2-${B}${C}^2$.`;
+//       let texte_corr2BC = `${nom} est rectangle en ${B}, donc d'après le théorème de Pythagore, on a : $${A}${C}^2=${B}${C}^2+${A}${B}^2$ d'où $${B}${C}^2=${A}${C}^2-${A}${B}^2$.`;
+//       let texte_corr3 = `${nom} est rectangle en ${C}, donc d'après le théorème de Pythagore, on a : $${A}${B}^2=${C}${A}^2+${C}${B}^2$.`;
+//       let texte_corr3BC = `${nom} est rectangle en ${C}, donc d'après le théorème de Pythagore, on a : $${A}${B}^2=${A}${C}^2+${B}${C}^2$ d'où $${B}${C}^2=${A}${B}^2-${A}${C}^2$.`;
+//       let texte_corr3AC = `${nom} est rectangle en ${C}, donc d'après le théorème de Pythagore, on a : $${A}${B}^2=${A}${C}^2+${B}${C}^2$ d'où $${A}${C}^2=${A}${B}^2-${B}${C}^2$.`;
 
-      switch (liste_type_de_questions[i]) {
-        case 1:
-          texte = `<div><svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-			  <polygon points="40,40 240,40 40,140 " fill="none" stroke="black" />
-			  <polygon points="40,40 50,40 50,50 40,50" fill="none" stroke="black" />
-			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${A}</text> 
-			  <text x="250" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
-			  <text x="30" y="140" text-anchor="middle" alignment-baseline="central">${C}</text>
-			</svg></div>`;
-          if (this.sup2) {
-            texte = `${nom} est rectangle en $${A}$.<br>`;
-          }
-          if (this.sup == 1) {
-            texte_corr = texte_corr1;
-          } else {
-            let cas = randint(1, 3);
-            if (cas == 1) {
-              texte += `$${A}${B}^2=\\ldots$`;
-              texte_corr = texte_corr1AB;
-            }
-            if (cas == 2) {
-              texte += `$${A}${C}^2=\\ldots$`;
-              texte_corr = texte_corr1AC;
-            }
-            if (cas == 3) {
-              texte += `$${B}${C}^2=\\ldots$`;
-              texte_corr = texte_corr1;
-            }
-          }
-          break;
-        case 2:
-          texte = `<div><svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-			  <polygon points="40,40 240,40 240,140 " fill="none" stroke="black" />
-			  <polygon points="240,40 230,40 230,50 240,50" fill="none" stroke="black" />
-			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${A}</text> 
-			  <text x="250" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
-			  <text x="250" y="140" text-anchor="middle" alignment-baseline="central">${C}</text>
-			</svg></div>`;
-          if (this.sup2) {
-            texte = `${nom} est rectangle en $${B}$.<br>`;
-          }
-          if (this.sup == 1) {
-            texte_corr = texte_corr2;
-          } else {
-            let cas = randint(1, 3);
-            if (cas == 1) {
-              texte += `$${A}${B}^2=\\ldots$`;
-              texte_corr = texte_corr2AB;
-            }
-            if (cas == 2) {
-              texte += `$${A}${C}^2=\\ldots$`;
-              texte_corr = texte_corr2;
-            }
-            if (cas == 3) {
-              texte += `$${B}${C}^2=\\ldots$`;
-              texte_corr = texte_corr2BC;
-            }
-          }
-          break;
-        case 3:
-          texte = `<div><svg width="200" height"300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
-			  <polygon points="40,40 140,40 40,240" fill="none" stroke="black" />
-			  <polygon points="40,40 50,40 50,50 40,50" fill="none" stroke="black" />
-			  <text x="30" y="240" text-anchor="middle" alignment-baseline="central">${A}</text> 
-			  <text x="150" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
-			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${C}</text>
-			</svg></div>`;
-          if (this.sup2) {
-            texte = `${nom} est rectangle en $${C}$.<br>`;
-          }
-          if (this.sup == 1) {
-            texte_corr = texte_corr3;
-          } else {
-            let cas = randint(1, 3);
-            if (cas == 1) {
-              texte += `$${A}${B}^2=\\ldots$`;
-              texte_corr = texte_corr3;
-            }
-            if (cas == 2) {
-              texte += `$${A}${C}^2=\\ldots$`;
-              texte_corr = texte_corr3AC;
-            }
-            if (cas == 3) {
-              texte += `$${B}${C}^2=\\ldots$`;
-              texte_corr = texte_corr3BC;
-            }
-          }
-          break;
-        case 4:
-          texte = `<div><svg width="200" height"300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
-			  <polygon points="40,40 140,40 140,240" fill="none" stroke="black" />
-			  <polygon points="140,40 140,50 130,50 130,40" fill="none" stroke="black" />
-			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${A}</text> 
-			  <text x="150" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
-			  <text x="150" y="240" text-anchor="middle" alignment-baseline="central">${C}</text>
-			</svg></div>`;
-          if (this.sup2) {
-            texte = `${nom} est rectangle en $${B}$.<br>`;
-          }
-          if (this.sup == 1) {
-            texte_corr = texte_corr2;
-          } else {
-            let cas = randint(1, 3);
-            if (cas == 1) {
-              texte += `$${A}${B}^2=\\ldots$`;
-              texte_corr = texte_corr2AB;
-            }
-            if (cas == 2) {
-              texte += `$${A}${C}^2=\\ldots$`;
-              texte_corr = texte_corr2;
-            }
-            if (cas == 3) {
-              texte += `$${B}${C}^2=\\ldots$`;
-              texte_corr = texte_corr2BC;
-            }
-          }
-          break;
-        case 5:
-          texte = `<div><svg width="400" height"200" viewBox="-40 -40 400 200" xmlns="http://www.w3.org/2000/svg">
-			  <polygon points="0,0 200,0 40,80.6" fill="none" stroke="black" />
-			  <polygon points="40,80.6 50,76.2 46,67.2 36,71.8" fill="none" stroke="black" />
-			  <text x="40" y="90.6" text-anchor="middle" alignment-baseline="central">${A}</text> 
-			  <text x="210" y="0" text-anchor="middle" alignment-baseline="central">${B}</text>
-			  <text x="-10" y="0" text-anchor="middle" alignment-baseline="central">${C}</text>
-			</svg></div>`;
-          if (this.sup2) {
-            texte = `${nom} est rectangle en $${A}$.<br>`;
-          }
-          if (this.sup == 1) {
-            texte_corr = texte_corr1;
-          } else {
-            let cas = randint(1, 3);
-            if (cas == 1) {
-              texte += `$${A}${B}^2=\\ldots$`;
-              texte_corr = texte_corr1AB;
-            }
-            if (cas == 2) {
-              texte += `$${A}${C}^2=\\ldots$`;
-              texte_corr = texte_corr1AC;
-            }
-            if (cas == 3) {
-              texte += `$${B}${C}^2=\\ldots$`;
-              texte_corr = texte_corr1;
-            }
-          }
-          break;
-        case 6:
-          texte = `<div><svg width="400" height"200" viewBox="-40 -140 400 200"  xmlns="http://www.w3.org/2000/svg">
-			  <polygon points="0,0 200,0 40,-80.6" fill="none" stroke="black" />
-			  <polygon points="40,-80.6 50,-76.2 46,-67.2 36,-71.8" fill="none" stroke="black" />
-			  <text x="40" y="-90.6" text-anchor="middle" alignment-baseline="central">${C}</text> 
-			  <text x="210" y="0" text-anchor="middle" alignment-baseline="central">${B}</text>
-			  <text x="-10" y="0" text-anchor="middle" alignment-baseline="central">${A}</text>
-			</svg></div>`;
-          if (this.sup2) {
-            texte = `${nom} est rectangle en $${C}$.<br>`;
-          }
-          if (this.sup == 1) {
-            texte_corr = texte_corr1;
-          } else {
-            let cas = randint(1, 3);
-            if (cas == 1) {
-              texte += `$${A}${B}^2=\\ldots$`;
-              texte_corr = texte_corr1AB;
-            }
-            if (cas == 2) {
-              texte += `$${A}${C}^2=\\ldots$`;
-              texte_corr = texte_corr1AC;
-            }
-            if (cas == 3) {
-              texte += `$${B}${C}^2=\\ldots$`;
-              texte_corr = texte_corr1;
-            }
-          }
-      }
-      if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
-        this.liste_questions.push(texte);
-        this.liste_corrections.push(texte_corr);
-        i++;
-      }
-      cpt++;
-    }
-    liste_de_question_to_contenu(this);
-  };
-  this.besoin_formulaire_numerique = [
-    "Type de questions",
-    2,
-    "1 : Donner l'égalité\n2 : Compléter une égalité avec une addition ou une soustraction",
-  ];
-  this.besoin_formulaire2_case_a_cocher = ["Sans figures"];
-}
+//       switch (liste_type_de_questions[i]) {
+//         case 1:
+//           texte = `<div><svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+// 			  <polygon points="40,40 240,40 40,140 " fill="none" stroke="black" />
+// 			  <polygon points="40,40 50,40 50,50 40,50" fill="none" stroke="black" />
+// 			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${A}</text> 
+// 			  <text x="250" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
+// 			  <text x="30" y="140" text-anchor="middle" alignment-baseline="central">${C}</text>
+// 			</svg></div>`;
+//           if (this.sup2) {
+//             texte = `${nom} est rectangle en $${A}$.<br>`;
+//           }
+//           if (this.sup == 1) {
+//             texte_corr = texte_corr1;
+//           } else {
+//             let cas = randint(1, 3);
+//             if (cas == 1) {
+//               texte += `$${A}${B}^2=\\ldots$`;
+//               texte_corr = texte_corr1AB;
+//             }
+//             if (cas == 2) {
+//               texte += `$${A}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr1AC;
+//             }
+//             if (cas == 3) {
+//               texte += `$${B}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr1;
+//             }
+//           }
+//           break;
+//         case 2:
+//           texte = `<div><svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+// 			  <polygon points="40,40 240,40 240,140 " fill="none" stroke="black" />
+// 			  <polygon points="240,40 230,40 230,50 240,50" fill="none" stroke="black" />
+// 			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${A}</text> 
+// 			  <text x="250" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
+// 			  <text x="250" y="140" text-anchor="middle" alignment-baseline="central">${C}</text>
+// 			</svg></div>`;
+//           if (this.sup2) {
+//             texte = `${nom} est rectangle en $${B}$.<br>`;
+//           }
+//           if (this.sup == 1) {
+//             texte_corr = texte_corr2;
+//           } else {
+//             let cas = randint(1, 3);
+//             if (cas == 1) {
+//               texte += `$${A}${B}^2=\\ldots$`;
+//               texte_corr = texte_corr2AB;
+//             }
+//             if (cas == 2) {
+//               texte += `$${A}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr2;
+//             }
+//             if (cas == 3) {
+//               texte += `$${B}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr2BC;
+//             }
+//           }
+//           break;
+//         case 3:
+//           texte = `<div><svg width="200" height"300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+// 			  <polygon points="40,40 140,40 40,240" fill="none" stroke="black" />
+// 			  <polygon points="40,40 50,40 50,50 40,50" fill="none" stroke="black" />
+// 			  <text x="30" y="240" text-anchor="middle" alignment-baseline="central">${A}</text> 
+// 			  <text x="150" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
+// 			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${C}</text>
+// 			</svg></div>`;
+//           if (this.sup2) {
+//             texte = `${nom} est rectangle en $${C}$.<br>`;
+//           }
+//           if (this.sup == 1) {
+//             texte_corr = texte_corr3;
+//           } else {
+//             let cas = randint(1, 3);
+//             if (cas == 1) {
+//               texte += `$${A}${B}^2=\\ldots$`;
+//               texte_corr = texte_corr3;
+//             }
+//             if (cas == 2) {
+//               texte += `$${A}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr3AC;
+//             }
+//             if (cas == 3) {
+//               texte += `$${B}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr3BC;
+//             }
+//           }
+//           break;
+//         case 4:
+//           texte = `<div><svg width="200" height"300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+// 			  <polygon points="40,40 140,40 140,240" fill="none" stroke="black" />
+// 			  <polygon points="140,40 140,50 130,50 130,40" fill="none" stroke="black" />
+// 			  <text x="30" y="40" text-anchor="middle" alignment-baseline="central">${A}</text> 
+// 			  <text x="150" y="40" text-anchor="middle" alignment-baseline="central">${B}</text>
+// 			  <text x="150" y="240" text-anchor="middle" alignment-baseline="central">${C}</text>
+// 			</svg></div>`;
+//           if (this.sup2) {
+//             texte = `${nom} est rectangle en $${B}$.<br>`;
+//           }
+//           if (this.sup == 1) {
+//             texte_corr = texte_corr2;
+//           } else {
+//             let cas = randint(1, 3);
+//             if (cas == 1) {
+//               texte += `$${A}${B}^2=\\ldots$`;
+//               texte_corr = texte_corr2AB;
+//             }
+//             if (cas == 2) {
+//               texte += `$${A}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr2;
+//             }
+//             if (cas == 3) {
+//               texte += `$${B}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr2BC;
+//             }
+//           }
+//           break;
+//         case 5:
+//           texte = `<div><svg width="400" height"200" viewBox="-40 -40 400 200" xmlns="http://www.w3.org/2000/svg">
+// 			  <polygon points="0,0 200,0 40,80.6" fill="none" stroke="black" />
+// 			  <polygon points="40,80.6 50,76.2 46,67.2 36,71.8" fill="none" stroke="black" />
+// 			  <text x="40" y="90.6" text-anchor="middle" alignment-baseline="central">${A}</text> 
+// 			  <text x="210" y="0" text-anchor="middle" alignment-baseline="central">${B}</text>
+// 			  <text x="-10" y="0" text-anchor="middle" alignment-baseline="central">${C}</text>
+// 			</svg></div>`;
+//           if (this.sup2) {
+//             texte = `${nom} est rectangle en $${A}$.<br>`;
+//           }
+//           if (this.sup == 1) {
+//             texte_corr = texte_corr1;
+//           } else {
+//             let cas = randint(1, 3);
+//             if (cas == 1) {
+//               texte += `$${A}${B}^2=\\ldots$`;
+//               texte_corr = texte_corr1AB;
+//             }
+//             if (cas == 2) {
+//               texte += `$${A}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr1AC;
+//             }
+//             if (cas == 3) {
+//               texte += `$${B}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr1;
+//             }
+//           }
+//           break;
+//         case 6:
+//           texte = `<div><svg width="400" height"200" viewBox="-40 -140 400 200"  xmlns="http://www.w3.org/2000/svg">
+// 			  <polygon points="0,0 200,0 40,-80.6" fill="none" stroke="black" />
+// 			  <polygon points="40,-80.6 50,-76.2 46,-67.2 36,-71.8" fill="none" stroke="black" />
+// 			  <text x="40" y="-90.6" text-anchor="middle" alignment-baseline="central">${C}</text> 
+// 			  <text x="210" y="0" text-anchor="middle" alignment-baseline="central">${B}</text>
+// 			  <text x="-10" y="0" text-anchor="middle" alignment-baseline="central">${A}</text>
+// 			</svg></div>`;
+//           if (this.sup2) {
+//             texte = `${nom} est rectangle en $${C}$.<br>`;
+//           }
+//           if (this.sup == 1) {
+//             texte_corr = texte_corr1;
+//           } else {
+//             let cas = randint(1, 3);
+//             if (cas == 1) {
+//               texte += `$${A}${B}^2=\\ldots$`;
+//               texte_corr = texte_corr1AB;
+//             }
+//             if (cas == 2) {
+//               texte += `$${A}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr1AC;
+//             }
+//             if (cas == 3) {
+//               texte += `$${B}${C}^2=\\ldots$`;
+//               texte_corr = texte_corr1;
+//             }
+//           }
+//       }
+//       if (this.liste_questions.indexOf(texte) == -1) {
+//         // Si la question n'a jamais été posée, on en créé une autre
+//         this.liste_questions.push(texte);
+//         this.liste_corrections.push(texte_corr);
+//         i++;
+//       }
+//       cpt++;
+//     }
+//     liste_de_question_to_contenu(this);
+//   };
+//   this.besoin_formulaire_numerique = [
+//     "Type de questions",
+//     2,
+//     "1 : Donner l'égalité\n2 : Compléter une égalité avec une addition ou une soustraction",
+//   ];
+//   this.besoin_formulaire2_case_a_cocher = ["Sans figures"];
+// }
 
 /**
  * Signe d'un produit ou d'on quotient de relatifs
@@ -33613,11 +33789,11 @@ function Priorites_et_relatifs() {
  */
 function Pythagore2D() {
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Utiliser le théorème de Pythagore";
+  this.titre = "Calculer une longueur avec le théorème de Pythagore";
   this.nb_questions = 3;
   this.nb_cols = 3;
   this.nb_cols_corr = 1;
-  this.sup = 3;
+  let type_exercice = 'Calculer'
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
@@ -33625,14 +33801,12 @@ function Pythagore2D() {
     let liste_type_de_questions = [];
     if (this.sup==1) {
       this.consigne = "Dans chaque cas, donner l'égalité de Pythagore."
-    }
-    if (this.sup==2){
+    } else if (this.sup==2){
       this.consigne = "Dans chaque cas, compléter l'égalité en utilisant le théorème de Pythagore."
+    } else {
+         this.consigne = "Dans chaque cas, calculer la longueur manquante."
     }
-    if (this.sup==3 || this.sup==4){
-      this.consigne = "Dans chaque cas, calculer la longueur manquante."
-    }
-    if (this.sup == 2 || this.sup == 3 ){
+    if (this.sup == 2 || type_exercice == 'Calculer' ){
       liste_type_de_questions = combinaison_listes(['AB','BC','AC'],this.nb_questions) 
     }
     for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;)
@@ -33662,19 +33836,20 @@ function Pythagore2D() {
       let longueurAC = longueur(A,C,1)
       let longueurBC = longueur(B,C,1)
       let mesObjetsATracer = [codage,p2,nomme]
+  
 
-      if (this.sup==3 && liste_type_de_questions[i]=='AB'){
+      if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='AB'){
         mesObjetsATracer.push(affAC,affBC)
       }
-      if (this.sup==3 && liste_type_de_questions[i]=='BC'){
+      if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='BC'){
         mesObjetsATracer.push(affAC,affAB)
       }
-      if (this.sup==3 && liste_type_de_questions[i]=='AC'){
+      if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='AC'){
         mesObjetsATracer.push(affAB,affBC)
       }
 
       if (!sortie_html) {texte = '~\\\\'}
-      texte += mathalea2d({xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax, scale:.6},mesObjetsATracer) ;
+      texte += mathalea2d({xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax, scale:.6,mainlevee:true,amplitude:1},mesObjetsATracer) ;
       if (this.sup==2){
         if (liste_type_de_questions[i]=='AB'){
           texte += `<br>$${A.nom+B.nom}^2=\\ldots$`
@@ -33701,7 +33876,7 @@ function Pythagore2D() {
           texte_corr += ` d'où $${A.nom+C.nom}^2=${B.nom+C.nom}^2-${A.nom+B.nom}^2$.`
         }
       }
-      if (this.sup==3){
+      if (type_exercice == "Calculer"){
         if (liste_type_de_questions[i]=='AB'){
           texte_corr += ` donc $${A.nom+B.nom}^2=${B.nom+C.nom}^2-${A.nom+C.nom}^2$`
           texte_corr += `<br> $${A.nom+B.nom}^2=${tex_nombre(longueurBC)}^2-${tex_nombre(longueurAC)}^2=${tex_nombrec(longueurBC**2-longueurAC**2)}$`
@@ -33740,7 +33915,16 @@ function Pythagore2D() {
     }
     liste_de_question_to_contenu(this);
   };
-  this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Donner l'égalité de Pythagore\n2 : Compléter l'égalité de Pythagore\n3 : Calculer une longueur manquante"];
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Donner l'égalité de Pythagore\n2 : Compléter l'égalité de Pythagore\n3 : Calculer une longueur manquante"];
+}
+
+function Egalite_Pythagore2D(){
+  Pythagore2D.call(this);
+  this.titre = "Donner ou compléter une égalité de Pythagore"
+  this.sup = 1;
+  type_exercice = ''
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Donner l'égalité de Pythagore\n2 : Compléter l'égalité de Pythagore"];
+
 }
 
 /**
@@ -43868,7 +44052,7 @@ function Terme_d_une_suite_definie_par_recurrence(){
 		this.liste_questions = []; // Vide la liste de questions
     this.liste_corrections = []; // Vide la liste de questions corrigées
     
-    let type_de_questions_disponibles = [1, 2, 3, 3];
+    let type_de_questions_disponibles = [1, 2, 3, 4];
     let liste_type_de_questions = combinaison_listes(
       type_de_questions_disponibles,
       this.nb_questions
@@ -43883,21 +44067,18 @@ function Terme_d_une_suite_definie_par_recurrence(){
         case 1: //suite arithmétique
           a = randint(1, 10)*choice([-1,1]);
           u = randint(0, 10)*choice([-1,1]);
-          k = randint(1, 10);
+          k = randint(2, 10);
 			
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n`;
-          if (a > 0) {texte += `+${a}$.`}
-          else {texte += `${a}$.`};
+          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n ${ecriture_algebrique(a)}$.`;
 
           texte += `<br>Calculer $u_{${k}}$.`;
 			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
+          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_{${k}}$ :`;
           for (
             let indice =0; indice < k; indice++ 
           ){
-            texte_corr += `<br> $u_{${indice+1}} = u_{${indice}}`;
-            if (a > 0) {texte_corr += `+ ${a} = ${u} + ${a} = ${u}$`}
-            else {texte_corr += ` ${a} = ${u}  ${a} = ${u}$`}; // a étant négatif l'opérateur est intégré dans la variable
+            texte_corr += `<br> $u_{${indice+1}} = ${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))} ${ecriture_algebrique(a)} = 
+              ${mise_en_evidence(u, arcenciel(indice,true))} + ${a} = ${mise_en_evidence(u + a, arcenciel(indice+1,true))}$`;
             u = u + a;
           }
           break;
@@ -43905,9 +44086,9 @@ function Terme_d_une_suite_definie_par_recurrence(){
         case 2: //suite géométrique
           a = randint(2,5)*choice([-1,1]);
           u = randint(1,9)*choice([-1,1]);
-          k = randint(1,9);
+          k = randint(2,6);
 
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n \\times ${ecriture_parenthese_si_negatif(a)}$.`;
+          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n \\times ${ecriture_parenthese_si_negatif(a)}$.`;
 
           texte += `<br>Calculer $u_{${k}}$.`;
 			
@@ -43915,18 +44096,19 @@ function Terme_d_une_suite_definie_par_recurrence(){
           for (
             let indice =0; indice < k; indice++ 
           ){
-            texte_corr += `<br> $u_{${indice+1}} = u_{${indice}} \\times ${ecriture_parenthese_si_negatif(a)} = ${u} \\times ${ecriture_parenthese_si_negatif(a)} = ${u*a}$`;
+            texte_corr += `<br> $u_{${indice+1}} = ${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))} \\times ${ecriture_parenthese_si_negatif(a)} = 
+              ${mise_en_evidence(u, arcenciel(indice,true))} \\times ${ecriture_parenthese_si_negatif(a)} = ${mise_en_evidence(u * a, arcenciel(indice+1,true))}$`;
             u = u * a;
           }
           break;
         
         case 3: //suite arithmético-géométrique
-          a = randint(1,5)*choice([-1,1]);
+          a = randint(2,5)*choice([-1,1]);
           b = randint(1,5)*choice([-1,1]);
           u = randint(1,5)*choice([-1,1]);
-          k = randint(1,9);
+          k = randint(2,6);
 
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = ${a} u_n ${ecriture_algebrique(b)}$.`;
+          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = ${a} u_n ${ecriture_algebrique(b)}$.`;
           
           texte += `<br>Calculer $u_{${k}}$.`;
 			
@@ -43934,9 +44116,31 @@ function Terme_d_une_suite_definie_par_recurrence(){
           for (
             let indice =0; indice < k; indice++ 
           ){
-            texte_corr += `<br> $u_{${indice+1}} = ${a}\\times u_{${indice}} ${ecriture_algebrique(b)}=`;
-            texte_corr += `${a} \\times ${ecriture_parenthese_si_negatif(u)} ${ecriture_algebrique(b)} = ${a*u+b}$`;
+            texte_corr += `<br> $u_{${indice+1}} = ${a}\\times ${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))} ${ecriture_algebrique(b)}=`;
+            texte_corr += `${a} \\times ${ecriture_parenthese_si_negatif(mise_en_evidence(u, arcenciel(indice,true)))} ${ecriture_algebrique(b)} = 
+            ${mise_en_evidence(a*u+b, arcenciel(indice+1,true))}$`;
             u = u * a + b;
+          }
+          break;
+
+        case 4: // suite de la forme u(n+1) = a +- u(n)^2
+          a = randint(1,5)*choice([-1,1]);
+          b = choice([-1,1]);
+          u = randint(1,5)*choice([-1,1]);
+          k = randint(2,3);
+
+          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = ${a} ${signe(b)} u_n^2$.`;
+                    
+          texte += `<br>Calculer $u_{${k}}$.`;
+			
+          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
+          for (
+            let indice =0; indice < k; indice++ 
+          ){
+            texte_corr += `<br> $u_{${indice+1}} = ${a} ${signe(b)} (${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))})^2=`;
+            texte_corr += `${a} ${signe(b)} ${ecriture_parenthese_si_negatif(mise_en_evidence(u, arcenciel(indice,true)))}^2 = 
+              ${mise_en_evidence(tex_nombre(a+b*u*u), arcenciel(indice+1,true))}$`;
+            u = a + b * u * u;
           }
           break;
       }
