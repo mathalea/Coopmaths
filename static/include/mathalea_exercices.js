@@ -77,6 +77,7 @@ var liste_des_exercices_disponibles = {
   "6N10-1": Exercice_numeration_entier,
   "6N10-2": Decomposition_nombre_decimal,
   "6N10-3": chiffre_nombre_de,
+  "beta6N10-4" : Ecrire_nombres_entiers_formates,
   "6N11": Lire_abscisse_entiere,
   "6N11-2": Placer_un_point_abscisse_entiere,
   "6N11-3": Encadrer_un_entier_par_deux_entiers_consecutifs,
@@ -99,9 +100,9 @@ var liste_des_exercices_disponibles = {
   "6N31": Comparer_decimaux,
   "6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
   "6N31-2":Ordre_de_grandeur_operations_decimaux,
+  "6N32" :Fractions_d_unite,
   "6N33": Fraction_d_un_nombre,
-  "6N33-0" : Fraction_d_un_nombre_bis,
-  "beta6N33-01" :Fractions_d_unite,
+  "6N33-0" : Fraction_d_une_quantite,
   "6N33-1": Pourcentage_d_un_nombre,
   "6N33-2" : Calculer_un_pourcentage,
   "6N33-3" : Appliquer_un_pourcentage,
@@ -184,29 +185,31 @@ var liste_des_exercices_disponibles = {
   "4C10-5": Exercice_tableau_multiplications_relatifs,
   "4C11": Priorites_et_relatifs,
   "4C25-0": Problemes_additifs_fractions,
+  "4C30": Puissances_de_dix,
   "4C30-1": Puissances_encadrement,
+  "4C32" : Notation_scientifique,
+  "4C32-1" : Calculs_avec_puissances_de_dix,
+  "4C33-1": Puissances_d_un_relatif_1,
+  "4C33-3": Puissances_d_un_relatif_2,
   "4G40": Transformations_4e,
   "4L10": Exercice_developper,
   "4L13-0": Mettre_en_equation_sans_resoudre,
+  "4L13-1": Forme_litterale_introduire_une_lettre,
   "4L14-0": Tester_si_un_nombre_est_solution_d_une_equation,
   "4L14-1": Tester_si_un_nombre_est_solution_d_une_equation_deg1,
   "4L14-2": Tester_si_un_nombre_est_solution_d_une_equation_deg2,
   "4L15-0": Trouver_erreur_resol_eq_deg1,
   "4L20": Exercice_equation1,
-  "4M30": Calcul_de_volumes_4e,
-  "4N10": Exercice_additionner_des_fractions,
-  "4N11": Exercice_additionner_ou_soustraire_des_fractions,
-  "4N12": Exercice_trouver_l_inverse,
-  "4N13": Exercice_multiplier_fractions,
-  "4N14": Exercice_diviser_fractions,
-  "4N15": Exercice_additionner_fraction_produit,
-  "4N21": Puissances_d_un_relatif_1,
-  "4N21-1": Puissances_d_un_relatif_2,
-  "4N21-2": Puissances_de_dix,
+  "4G53": Calcul_de_volumes_4e,
+  "4C21-1": Exercice_additionner_des_fractions,
+  "4C21": Exercice_additionner_ou_soustraire_des_fractions,
+  "4C22-1": Exercice_trouver_l_inverse,
+  "4C22": Exercice_multiplier_fractions,
+  "4C22-2": Exercice_diviser_fractions,
+  "4C23": Exercice_additionner_fraction_produit,
   "4F12": Exploiter_representation_graphique,
   "4P10": Problemes_grandeurs_composees,
-  "4P10-1" : Graphiques_et_proportionnalite,
-  "4P20-0": Forme_litterale_introduire_une_lettre,
+  "4P10-1" : Graphiques_et_proportionnalite,  
   "4G11": Pavages_et_translation,
   "4G20" : Pythagore2D,
   "4G20-1": Egalite_Pythagore2D, // Anciennement Egalite_Pythagore,
@@ -225,7 +228,7 @@ var liste_des_exercices_disponibles = {
   "3A11-3": Lister_Diviseurs_Par_Decomposition_facteurs_premiers,
   "3A12": Fractions_irreductibles,
   "3A13": PPCM_Engrenages,
-  "3M30": Calcul_de_volumes_3e,
+  "3G43": Calcul_de_volumes_3e,
   "3L10": Oppose_expression,
   "3L10-1": Parentheses_precedes_de_moins_ou_plus,
   "3L11": Exercice_developper,
@@ -280,9 +283,10 @@ var liste_des_exercices_disponibles = {
   "2L10": Developper_Identites_remarquables2,
   "2L11": Factoriser_Identites_remarquables2,
   "1N10": Terme_d_une_suite_definie_explicitement,
-  "beta1N11": Terme_d_une_suite_definie_par_recurrence, 
+  "1N11": Terme_d_une_suite_definie_par_recurrence, 
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
+  "betaTESTseb": Tests_du_Seb,
   P001: Code_LaTeX_personnalise,
   // 'P002': LaTeX_static,
   P003: feuille_d_axes_gradues,
@@ -780,6 +784,7 @@ function Placer_un_point_abscisse_entiere() {
  *
  * suivies d'une liste qui alterne question et réponse
  * @Auteur Rémi Angot
+ * Référence : cours
  */
 function Questions_de_cours() {
   "use strict";
@@ -1642,6 +1647,7 @@ function Placer_points_sur_axe() {
  * * 4 : h vers semaines j h
  * * 5 : toutes les conversions
  * @Auteur Rémi Angot
+ * Référence 6D10
  */
 function Conversions_de_durees() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -1785,6 +1791,7 @@ function Conversions_de_durees() {
  *
  * La partie décimale est 25, 75 ou un seul chiffre
  * @Auteur Rémi Angot
+ * Référence 6D101
  */
 function Heures_decimales() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -1845,6 +1852,7 @@ function Heures_decimales() {
  * * HMS+HMS avec retenue sur les min
  * * HMS+HMS avec retenues min et s
  * @Auteur Rémi Angot
+ * Référence 6D11
  */
 function Somme_de_durees() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -1968,6 +1976,7 @@ function Somme_de_durees() {
  * * 3 : calculer l'heure de fin
  * * 4 : mélange des 3 types précédents
  * @Auteur Rémi Angot
+ * Référence 6D12
  */
 function Calculs_de_durees_ou_d_horaires() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -2214,6 +2223,7 @@ function Calculs_de_durees_ou_d_horaires() {
  *
  * Par défaut c'est un mélange d'additions, soustractions avec et sans trou avec des nombres jusqu'à 20.
  * @Auteur Rémi Angot
+ * Référence 6D12
  */
 function Tables_additions_soustractions() {
   "use strict";
@@ -2320,6 +2330,7 @@ function Tables_additions_soustractions() {
  *
  * Par défaut ce sont les tables de 2 à 9 mais on peut choisir les tables que l'on veut
  * @Auteur Rémi Angot
+ * Référence 6C10-1
  */
 function Tables_de_multiplications(tables_par_defaut = "2-3-4-5-6-7-8-9") {
   //Multiplier deux nombres
@@ -2412,7 +2423,8 @@ function Tables_de_multiplications(tables_par_defaut = "2-3-4-5-6-7-8-9") {
  *
  * Par défaut ce sont les tables de 2 à 9 mais on peut choisir les tables que l'on veut
  * @Auteur Rémi Angot
- */
+* Référence CM002
+  */
 function Tables_de_divisions(tables_par_defaut = "2-3-4-5-6-7-8-9") {
   //Diviser deux nombres
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -2492,6 +2504,7 @@ function Tables_de_divisions(tables_par_defaut = "2-3-4-5-6-7-8-9") {
  *
  * Par défaut ce sont les tables de 2 à 9 mais on peut choisir les tables que l'on veut
  * @Auteur Rémi Angot
+ * Référence CM003
  */
 function Tables_de_multiplications_et_divisions(
   tables_par_defaut = "2-3-4-5-6-7-8-9"
@@ -2600,7 +2613,8 @@ function Tables_de_multiplications_et_divisions(
  * * Niveau 2 Addition 2 chiffres + 2 chiffres ne dépassant pas 100, soustraction dont le résultat est entre 11 et 19, tables de 6 à 9
  * * Niveau 3 Addition 2 chiffre + 2 chiffres dépassant 100, soustraction dont le résultat est entre 21 et 39, table de 7, 8, 11 ou 12,
  * @Auteur Rémi Angot
- */
+* Référence CM004
+  */
 function Quatre_operations() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Les quatre opérations";
@@ -2708,7 +2722,8 @@ function Quatre_operations() {
 /**
  * Un nombre à 2 chiffres (non multiple de 10) + 9
  * @Auteur Rémi Angot
- */
+ * Référence CM005
+*/
 function Ajouter9() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Ajouter 9";
@@ -2750,6 +2765,7 @@ function Ajouter9() {
 /**
  * Un nombre à 2 chiffres (non multiple de 10) + 9
  * @Auteur Rémi Angot
+ * Référence 6N12
  */
 function Multiplier_entier_par_10_100_1000() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -2837,7 +2853,8 @@ function Multiplier_entier_par_10_100_1000() {
 /**
  * Un nombre à 2 chiffres ne terminant pas par 9 - 9
  * @Auteur Rémi Angot
- */
+ * Référence CM006
+*/
 function Soustraire9() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Soustraire 9";
@@ -2875,7 +2892,8 @@ function Soustraire9() {
 /**
  * Un nombre à 2 chiffres non multiple de 10 + 11
  * @Auteur Rémi Angot
- */
+ * Référence CM007
+*/
 function Ajouter11() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Ajouter 11";
@@ -2913,7 +2931,8 @@ function Ajouter11() {
 /**
  * Un nombre à 2 chiffres -11
  * @Auteur Rémi Angot
- */
+ * Référence CM008
+*/
 function Soustraire11() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Soustraire 11";
@@ -2961,7 +2980,8 @@ function Soustraire11() {
 /**
  * Somme de deux nombres dont les chiffres des unités sont des compléments à 10
  * @Auteur Rémi Angot
- */
+ * Référence CM015
+*/
 function Somme_de_deux_nombres_maries() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Somme de deux nombres mariés";
@@ -3003,7 +3023,8 @@ function Somme_de_deux_nombres_maries() {
 /**
  * Somme de 3 nombres dont 2 ont des chiffres des unités compléments à 10
  * @Auteur Rémi Angot
- */
+ * Référence CM018
+*/
 function Somme_de_deux_nombres_maries_et_un_entier() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Somme de deux nombres mariés et un entier";
@@ -3055,6 +3076,13 @@ function Somme_de_deux_nombres_maries_et_un_entier() {
   };
   //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
+
+/**
+ * Mettre en relation un calcul, une traduction en français, une expression, un résultat, pour les décliner dans différents exercices.
+ * Exercice sur le vocabulaire : somme,différence, produit, quotient...
+ * @Auteur Jean-Claude Lhote
+ * Référence 6C13
+ */
 function Vocabulaire_et_operations() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -3139,6 +3167,11 @@ function Vocabulaire_et_operations() {
   this.besoin_formulaire2_case_a_cocher = ["Décimaux", false];
 }
 
+/**
+ * Un "Le compte est bon" avec des solutions "formatées" pour travailler certains incontournables du calcul mental
+ *  @Auteur Jean-Claude Lhote
+ * Référence CM020
+ */
 function Compte_Est_Bon() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -3654,6 +3687,7 @@ function Trouver_solution_mathador(
  * Lire un nombre / écrire un nombre : passer d'une écriture à une autre et inversement
  * On peut fixer la classe maximale : unités, miliers, millions, milliards
  * @Auteur Jean-Claude Lhote
+ * Référence 6N10
  */
 
 function Ecrire_nombres_entiers() {
@@ -3728,10 +3762,74 @@ function Ecrire_nombres_entiers() {
   this.besoin_formulaire_numerique = ['Type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
   this.besoin_formulaire2_numerique = ['Niveau', 3, '1 : Facile\n2 : Moyen\n3 : Difficile']
 }
+
+/**
+ * 6N10-4
+ * Supprimer les zéros inutiles, séparer les classes d'un nombre entier.
+ * @Auteur Jean-Claude Lhote
+ */
+function Ecrire_nombres_entiers_formates() {
+  "use strict"
+  Exercice.call(this)
+  this.titre = "Écrire correctement les grands nombres entiers."
+  this.nb_questions = 5;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1
+  this.sup2 = 2
+  this.nouvelle_version = function (numero_de_l_exercice) {
+  this.consigne=`Écrire les nombres en chiffres en supprimant les zéros inutiles et en séparant les classes.`
+  this.liste_questions = []; // Liste de questions
+  this.liste_corrections = []; // Liste de questions corrigées 
+  function zeroSuperflus(n) {
+    let nzero=randint(0,2),nombrestring=n.toString()
+    for (let k=0;k<nzero;k++) nombrestring=`0`+nombrestring
+    return nombrestring
+  }
+  for (
+      let i = 0, texte, texte_corr, a, b,c,nombre,tranche,nombrestring, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+  
+      nombre = 0
+      tranche=[]
+      while (nombre == 0) {
+        tranche.splice(0)
+        for (let j = 0; j < 3; j++) {
+          a = randint(1,9)
+          b=randint(1,9)
+          c=randint(1,9)
+          tranche.push(choice([0,100,20,80,a,a*100,a*100+b*10+c,a*100+80+b,a*10,a*100+b*10+1]))
+        }
+        for (let j = 0; j < 3; j++) {
+          nombre += tranche[j] * 10 ** (j*3)
+        }
+        if (tranche[2]==0) nombre=0
+      }
+      nombrestring=zeroSuperflus(nombre)
+        if (!est_diaporama) texte = `$${nombrestring}$ : \\dotfill`
+        else texte =`$${nombrestring}$`
+       if (!est_diaporama) texte_corr = `$${nombrestring}=${tex_nombre(nombre)}$.`
+       else texte_corr = `${tex_nombre(nombre)}.`
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //this.besoin_formulaire_numerique = ['Type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
+  //this.besoin_formulaire2_numerique = ['Niveau', 3, '1 : Facile\n2 : Moyen\n3 : Difficile']
+}
 /**
  * Lire un nombre / écrire un nombre : passer d'une écriture à une autre et inversement
  * On peut fixer la classe maximale : unités, miliers, millions, milliards
  * @Auteur Jean-Claude Lhote
+ * 6N23-0
  */
 
 function Ecrire_nombres_decimal() {
@@ -3819,6 +3917,7 @@ function Ecrire_nombres_decimal() {
  *
  * 2 fois sur 5 il y a chevauchement entre les classes
  * @Auteur Rémi Angot
+ * 6N10-1
  */
 function Exercice_numeration_entier() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -3884,6 +3983,7 @@ function Exercice_numeration_entier() {
 /**
  * Des questions sur le nombre ou le chiffre de centaines, de dizaines, de dixièmes, de centièmes...
  * @Auteur Rémi Angot
+ * Référence 6N10-2
  */
 function Decomposition_nombre_decimal() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -4010,6 +4110,7 @@ function Decomposition_nombre_decimal() {
 /**
  * 100-...=
  * @Auteur Rémi Angot
+* Référence CM012
  */
 function Complement_a_100() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -4048,7 +4149,8 @@ function Complement_a_100() {
 /**
  * Une soustraction dont le premier terme est un multiple de 10
  * @Auteur Rémi Angot
- */
+ * Référence CM013
+*/
 function Complement_a_une_dizaine() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Complément à une dizaine";
@@ -4087,7 +4189,8 @@ function Complement_a_une_dizaine() {
 /**
  * Division d'un entier par 10, 100, 1000
  * @Auteur Rémi Angot
- */
+ * Référence CM016
+*/
 function Diviser_par_10_100_1000() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Diviser un entier par 10, 100 ou 1000";
@@ -4127,7 +4230,8 @@ function Diviser_par_10_100_1000() {
 /**
  * Un entier à un 1 ou 2 chiffres, un nombre décimal avec une partie décimale à un ou 2 chiffres à diviser par 10, 100 ou 1000
  * @Auteur Rémi Angot
- */
+ * Référence CM017
+*/
 function Diviser_decimal_par_10_100_1000() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Diviser un nombre décimal par 10, 100 ou 1000";
@@ -4175,7 +4279,8 @@ function Diviser_decimal_par_10_100_1000() {
  * Calculer la moitié d'un nombre pair, d'un impair inférieur à 20, d'un multiple de 200, d'un nombre de la forme a00 avec a impair, d'un nombre de la forme
  *  a,b avec a et b pairs ou 1xx avec xx un nombre pair
  * @Auteur Rémi Angot
- */
+ * Référence CM009
+*/
 function Moitie() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Moitié";
@@ -4261,6 +4366,7 @@ function Moitie() {
 /**
  * Calculer le tiers d'un multiple de 3, d'un multiple de 300, d'un multiple de 30 ou d'un nombre a,b avec a et b multiples de 3
  * @Auteur Rémi Angot
+* Référence CM010
  */
 function Tiers() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -4331,7 +4437,8 @@ function Tiers() {
 /**
  * Calculer le quart d'un multiple de 4, d'un impair, d'un multiple de 400, d'un multiple de 40, d'un nombre a,b avec a et b multiples de 4
  * @Auteur Rémi Angot
- */
+ * Référence CM011
+*/
 function Quart() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Quart";
@@ -4409,6 +4516,7 @@ function Quart() {
 /**
  * Calculer le double ou le triple d'un nombre, calculer la moitié d'un nombre pair ou le tiers d'un multiple de 3
  * @Auteur Rémi Angot
+* Référence CM014
  */
 function Double_moitie_tiers_triple() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -4472,6 +4580,7 @@ function Double_moitie_tiers_triple() {
 /**
  * Les 2 facteurs peuvent terminer par aucun, 1, 2 ou 3 zéros
  * @Auteur Rémi Angot
+* Référence 6C10-2
  */
 function Exercice_tables_de_multiplications_et_multiples_de_10(
   tables_par_defaut = "2-3-4-5-6-7-8-9"
@@ -4549,6 +4658,7 @@ function Exercice_tables_de_multiplications_et_multiples_de_10(
 /**
  * Multiplier deux nombres décimaux
  * @Auteur Rémi Angot
+ * Référence 6C10-3
  */
 function Exercice_tables_de_multiplications_et_decimaux(
   tables_par_defaut = "2-3-4-5-6-7-8-9"
@@ -4629,6 +4739,7 @@ function Exercice_tables_de_multiplications_et_decimaux(
 /**
  * Additionner deux entiers
  * @Auteur Rémi Angot
+ * Référence 6C10-4
  */
 function Exercice_tables_d_additions(max = 20) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -4672,6 +4783,7 @@ function Exercice_tables_d_additions(max = 20) {
 /**
  * Simplifier une fraction, le facteur commun est inférieur à une valeur donnée en paramètre qui est 11 par défaut
  * @Auteur Rémi Angot
+ *  5N13
  */
 function Exercice_fractions_simplifier(max = 11) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -4757,6 +4869,7 @@ function Exercice_fractions_simplifier(max = 11) {
 /**
  * Écrire une fraction avec un nouveau dénominateur qui est un multiple de son dénominateur (ce multiple est inférieur à une valeur maximale de 11 par défaut)
  * @Auteur Rémi Angot
+ * 5N13-2 et 6N41
  */
 function Egalites_entre_fractions() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -4859,6 +4972,7 @@ function Egalites_entre_fractions() {
  * * 2, 3, 5, 9, 10 ?
  * * 2, 3, 5, 9, 10  et un autre nombre qui peut être 7, 13, 17, ou 19 ?
  * @Auteur Rémi Angot
+ * 6N43
  */
 function Criteres_de_divisibilite() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -5058,6 +5172,7 @@ function Criteres_de_divisibilite() {
  *
  *
  * @Auteur Rémi Angot
+ * 6N43-2
  */
 function Tableau_criteres_de_divisibilite() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -5469,21 +5584,13 @@ function Proportionnalite_pas_proportionnalite() {
           index1 = calcul(x / n); //vitesse fille
           index2 = calcul(y / p); //vitesse garçon
 
-          texte = `${prenoms[0]} habite à ${x} m du collège. Elle met ${n} minutes pour s'y rendre depuis chez elle.<br>`;
-          texte += `${prenoms[1]}, lui, habite à ${tex_nombre(
-            y
-          )} m du collège. Il met ${p} minutes pour s'y rendre depuis chez lui.<br>`;
+          texte = `${prenoms[0]} habite à $${tex_nombre(x)}$ m du collège. Elle met ${n} minutes pour s'y rendre depuis chez elle.<br>`;
+          texte += `${prenoms[1]}, lui, habite à $${tex_nombre(y)}$ m du collège. Il met ${p} minutes pour s'y rendre depuis chez lui.<br>`;
           texte += `Le temps mis pour venir au collège est-il proportionnel à la distance du foyer au collège ?<br>`;
-          texte_corr = `${
-            prenoms[0]
-          } parcourt chaque minute environ ${tex_nombrec(
-            arrondi(index1, 1)
-          )} m.<br>`;
+          texte_corr = `${prenoms[0]} parcourt chaque minute environ $${tex_nombrec(arrondi(index1, 1))}$ m.<br>`;
           texte_corr += `${
             prenoms[1]
-          } parcourt chaque minute environ ${tex_nombrec(
-            arrondi(index2, 1)
-          )} m.<br>`;
+          } parcourt chaque minute environ $${tex_nombrec(arrondi(index2, 1))}$ m.<br>`;
           if (index1 == index2)
             texte_corr += `Pour ces deux élèves le temps mis et la distance parcourue sont proportionnelles (si l'on compare leur vitesse moyenne)`;
           else
@@ -5774,6 +5881,7 @@ function Proportionnalite_par_linearite() {
 /**
  * Décomposer une fraction (partie entière + fraction inférieure à 1) puis donner l'écriture décimale.
  * @Auteur Rémi Angot
+ * 6N20-2
  */
 function Exercice_fractions_differentes_ecritures() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -5874,6 +5982,7 @@ function Exercice_fractions_differentes_ecritures() {
 
 /**
  * @Auteur Rémi Angot
+ * 6N20
  */
 function Exercice_fractions_decomposer() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -5958,7 +6067,11 @@ function Exercice_fractions_decomposer() {
     liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
   };
 }
-
+/**
+ * 6N14
+ * Représenter des fractions simples avec des disques partagés de façon adéquate.
+ * @Auteur Jean-Claude Lhote
+ */
 function Representer_une_fraction() {
     Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Représenter des fractions";
@@ -6500,6 +6613,7 @@ function Exercice_conversions(niveau = 1) {
  * * 6 : Un mélange de toutes les conversions
  * * Paramètre supplémentaire : utiliser des nombres décimaux (par défaut tous les nombres sont entiers)
  * @Auteur Rémi Angot
+ * Référence 6M23
  */
 function Exercice_conversions_aires(niveau = 1) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -6779,6 +6893,7 @@ function Exercice_conversions_aires(niveau = 1) {
  * * 4 : Conversions avec des multiplications ou divisions
  * * Paramètre supplémentaire : utiliser des nombres décimaux (par défaut tous les nombres sont entiers)
  * @Auteur Rémi Angot
+ * Référence 6M31
  */
 function Exercice_conversions_volumes(niveau = 1) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -7049,6 +7164,7 @@ function Exercice_conversions_volumes(niveau = 1) {
  * * 6 : Un mélange de toutes les conversions
  * * Paramètre supplémentaire : utiliser des nombres décimaux (par défaut tous les nombres sont entiers)
  * @Auteur Rémi Angot
+ * Référence 6M31-2
  */
 function Unites_de_volumes_et_de_capacite(niveau = 1) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -7386,6 +7502,7 @@ function Exercice_perimetres_et_aires(difficulte = 1) {
  *
  * Le numérateur est de la forme X, XX, X0X, X00X ou XXX
  * @Auteur Rémi Angot
+ * 6N23
  */
 function Exercice_ecriture_decimale_a_partir_de_fraction_decimale() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -7442,6 +7559,7 @@ function Exercice_ecriture_decimale_a_partir_de_fraction_decimale() {
  *
  * Le nombre entier est de la forme X, XX, X0X, X00X ou XXX
  * @Auteur Rémi Angot
+ * 6N24-1
  */
 function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -7520,6 +7638,7 @@ function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000() {
  *
  * aa, bb, cc correspondent à des nombres à 2 chiffres (ces 2 chiffres pouvant être distincts)
  * @Auteur Rémi Angot
+ * 6N31
  */
 function Comparer_decimaux() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -7818,6 +7937,7 @@ function Appliquer_un_pourcentage() {
 /**
  * Calculer 10, 20, 30, 40 ou 50% d'un nombre
  * @Auteur Rémi Angot + Jean-claude Lhote
+ * 6N33-1
  */
 function Pourcentage_d_un_nombre() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -7890,6 +8010,7 @@ function Pourcentage_d_un_nombre() {
 /**
  * Tracer un segment de longueur une fraction de l'unité.
  * @Auteur Jean-Claude Lhote
+ * 6N32
  */
 
 function Fractions_d_unite() {
@@ -7947,9 +8068,6 @@ function Fractions_d_unite() {
       frac=fraction(num,den)
       frac_unite=fraction(3*den-1,den)
       texte=`$${frac.texFraction()}$ unité en prenant ${unit} carreaux pour une unité.`
-      //if (num/den>=2) texte+=`s`
-      texte+=`.<br>`
-      //texte+=mathalea2d({xmin:0,ymin:0,xmax:16,ymax:2},frac_unite.representation(0.5,1.5,5,0,'segment','',"0","1"))
       if (this.sup2 < 3) g = grille(0, 0,26, 2, "gray", 0.7);
       else g = "";
       if (this.sup2 == 2) {
@@ -7976,14 +8094,14 @@ function Fractions_d_unite() {
   liste_de_question_to_contenu(this);
 };
 this.besoin_formulaire_numerique = ["Type d\'exercices",4,"1 : fracion inférieure à 1\n2 : demis, tiers et quarts\n3 : quarts, cinquièmes, sixièmes et dixièmes\n4 : toutes les fractions entre 1 et 3"];
-this.besoin_formulaire2_numerique = ["Type de cahier",3,"1 :  petits carreaux\n2 Cahier gros carreaux type Seyes:\n3 : Sans carreau,papier blanc"];
+this.besoin_formulaire2_numerique = ["Type de cahier",2,"1 :  petits carreaux\n2 : Cahier gros carreaux type Seyes"];
 }
 /**
  * Calculer la fracton d'une quantité avec ou sans dessin.
  * @Auteur Jean-Claude Lhote
  * référence 6N33-0
  */
-function Fraction_d_un_nombre_bis() {
+function Fraction_d_une_quantite() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Calculer la fraction d'une quantité";
   this.nb_questions = 5;
@@ -8290,6 +8408,7 @@ function Fraction_d_un_nombre(max = 11) {
 /**
  * On achète 2 aliments dont on connait la masse (un en grammes et l'autre en kilogrammes) et le prix au kilogramme. Il faut calculer le prix total.
  * @Auteur Rémi Angot
+ * Référence 6C32
  */
 function Probleme_course() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -8405,6 +8524,7 @@ function Probleme_course() {
  *
  * Il n'existe pas de version LaTeX de cet exercice.
  * @Auteur Rémi Angot
+ * Référence 6M20
  */
 function Aire_de_triangles() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -8475,6 +8595,7 @@ function Aire_de_triangles() {
  *
  * Pas de version LaTeX
  * @Auteur Rémi Angot
+ * Référence 6M22-1
  */
 function Perimetre_aire_disques(pa = 3) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -8639,6 +8760,7 @@ function Perimetre_aire_disques(pa = 3) {
  * * 3 : Calculer les périmètres et aires
  * Pas de version LaTeX
  * @Auteur Rémi Angot
+ * Rééférence 6M22-2
  */
 function Perimetre_aire_et_portions_de_disques(pa = 3) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -8884,6 +9006,7 @@ function Perimetre_aire_et_portions_de_disques(pa = 3) {
  *
  * Pas de version LaTeX
  * @Auteur Rémi Angot
+ * Référence 6M11-1
  */
 function Perimetre_ou_aire_de_carres_rectangles_triangles() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -8960,6 +9083,7 @@ function Perimetre_ou_aire_de_carres_rectangles_triangles() {
  *
  * Un seul type de figure pour l'instant.
  * @Auteur Rémi Angot
+ * Référence 6M11-2
  */
 function Perimetre_ou_aire_de_figures_composees() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9028,6 +9152,7 @@ function Perimetre_ou_aire_de_figures_composees() {
 /**
  * Citer des formules de périmètre, des formules d'aire ou la définition de π
  * @Auteur Rémi Angot
+ * Référence 6M25
  */
 function Connaitre_formules_de_perimetre_et_aires() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9137,6 +9262,7 @@ function Connaitre_formules_de_perimetre_et_aires() {
  * * u = .../100
  * * n/10 = ... + .../10 + .../100
  * @Auteur Rémi Angot
+ * 6N23-1
  */
 function Exercice_differentes_ecritures_nombres_decimaux() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9244,6 +9370,7 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
  * * abc*d0e tables de 2 à 5
  * * abc*de tables de 5 à 9
  * @Auteur Rémi Angot
+ * Référence 6C10 
  */
 function Additions_soustractions_multiplications_posees() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9379,6 +9506,7 @@ function Additions_soustractions_multiplications_posees() {
  * * xxx,x+xxx
  * * x0x+xx9,x
  * @Auteur Rémi Angot
+ * Référence 6C20
  */
 function Additionner_soustraires_decimaux() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9548,6 +9676,7 @@ function Additionner_soustraires_decimaux() {
  * * division par 13,14,21,22,23 ou 24 et un 0 dans le quotient
  * * division par un multiple de 10 et un 0 dans le quotient
  * @Auteur Rémi Angot
+ * Référence 6C11
  */
 function Divisions_euclidiennes() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9655,6 +9784,7 @@ function Divisions_euclidiennes() {
  *
  * Niveau de difficulté 2 : division par 3, 7 ou 9
  * @Auteur Rémi Angot
+ * Référence 6C31
  */
 function Division_decimale() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9797,6 +9927,7 @@ function Division_decimale() {
  * * x,xx * x0x
  * * 0,xx * x,x
  * @Auteur Rémi Angot
+ * Référence 6C30
  */
 function Multiplier_decimaux() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -9871,7 +10002,8 @@ function Multiplier_decimaux() {
  *
  *  * Sup2 : avec ou sans calculs à trous
  * @Auteur Rémi Angot
- *
+* Référence 6C30-1
+  *
  */
 function Multiplier_decimaux_par_10_100_1000() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -10075,6 +10207,7 @@ function Multiplier_decimaux_par_10_100_1000() {
  * * a*b÷(c+d)
  * * a*(b÷c+d)
  * @Auteur Rémi Angot
+ * Référence 6C33
  */
 function Priorites() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -11420,6 +11553,8 @@ function Transformations() {
 }
 
 // Exercices paramétrés pour correspondre au référentiel
+
+// Référence 6C23
 function Exercice_additionner_des_fractions_6e() {
   Exercice_additionner_des_fractions_5e.call(this);
   this.level=6
@@ -11519,23 +11654,26 @@ function Reperage_point_du_quart_de_plan() {
   this.titre = "Déterminer les coordonnées (positives) d'un point";
   this.quart_de_plan = true;
 }
+// 3F21
 function Lecture_expression_fonctions_lineaires() {
   Lecture_expression_fonctions_affines.call(this);
   this.titre = "Déterminer une fonction linéaire";
   this.lineaire = true;
 }
-
+// 3L14-1
 function Resoudre_une_equation_produit_nul_niv2() {
   Resoudre_une_equation_produit_nul.call(this);
   this.titre = "Résoudre une équation produit nul (niveau 2)";
   this.sup = 2;
 }
+// Référence 6C21
 
 function Divisions_euclidiennes_niv2() {
   Divisions_euclidiennes.call(this);
   this.sup = 2;
   this.titre = "Divisions euclidiennes - Niveau 2";
 }
+//4G40
 function Exercice_Trigo_longueurs_4e() {
   Exercice_Trigo_longueurs.call(this);
   this.sup = 1;
@@ -11543,7 +11681,7 @@ function Exercice_Trigo_longueurs_4e() {
   this.titre =
     "Utiliser le cosinus pour calculer une longueur dans un triangle rectangle";
 }
-
+// 4G41
 function Exercice_Trigo_angles_4e() {
   this.sup = 1;
   this.quatrieme = true;
@@ -11551,7 +11689,7 @@ function Exercice_Trigo_angles_4e() {
     "Utiliser le cosinus pour calculer la mesure d'un angle dans un triangle rectangle";
   Exercice_Trigo_angles.call(this);
 }
-
+// référence 6G24
 function Transformations_6e() {
   Transformations.call(this);
   this.sup = 1;
@@ -11559,52 +11697,54 @@ function Transformations_6e() {
   this.pas_de_version_LaTeX = true;
 }
 
+// 5G10
 function Symetrie_axiale_5e() {
   Transformations.call(this);
   this.sup = 1;
   this.titre = `Trouver l'image d'un point par une symétrie axiale`;
   this.pas_de_version_LaTeX = true;
 }
-
+// 5G11
 function Transformations_5e() {
   Transformations.call(this);
   this.sup = 2;
   this.titre = `Trouver l'image d'un point par une symétrie axiale ou centrale`;
   this.pas_de_version_LaTeX = true;
 }
-
+// 4G40
 function Transformations_4e() {
   Transformations.call(this);
   this.sup = 3;
   this.titre = `Trouver l'image d'un point par une symétrie axiale ou centrale ou par une translation`;
   this.pas_de_version_LaTeX = true;
 }
-
+// 3G10-2
 function Transformations_3e() {
   Transformations.call(this);
   this.sup = 4;
   this.titre = `Trouver l'image d'un point par une transformation choisie aléatoirement`;
   this.pas_de_version_LaTeX = true;
 }
-
+// Référence 6M30
 function Calcul_de_volumes_6e() {
   this.sup = 1;
   this.classe = 6;
   Calcul_de_volumes.call(this);
 }
 
+// 5M20
 function Calcul_de_volumes_5e() {
   this.sup = 1;
   this.classe = 5;
   Calcul_de_volumes.call(this);
 }
-
+// 4G53
 function Calcul_de_volumes_4e() {
   this.sup = 1;
   this.classe = 4;
   Calcul_de_volumes.call(this);
 }
-
+// 3G43
 function Calcul_de_volumes_3e() {
   this.sup = 1;
   this.classe = 3;
@@ -11617,7 +11757,7 @@ function Exercice_6N13() {
   this.titre = "Utiliser les préfixes multiplicateurs (déca à kilo)";
   Exercice_conversions.call(this);
 }
-
+// 6N24
 function Exercice_6N24() {
   Exercice_conversions.call(this);
   this.sup = 3;
@@ -11626,7 +11766,7 @@ function Exercice_6N24() {
   this.correction_avec_des_fractions = true;
   this.spacing_corr = 2;
 }
-
+// Référence 6M12
 function Reglages_6M12() {
   Exercice_conversions_de_longueurs.call(this);
   this.sup = 3;
@@ -11638,12 +11778,12 @@ function Reglages_6M23() {
   this.sup = 3;
   this.nb_cols_corr = 1;
 }
-
+// Référence 6M10
 function Reglages_6M10() {
   Exercice_perimetres_et_aires.call(this);
   this.sup = 1;
 }
-
+// Référence 6M22
 function Reglages_6M22() {
   Exercice_perimetres_et_aires.call(this);
   this.sup = 2;
@@ -11656,13 +11796,14 @@ function Reglages_6N34() {
   this.titre = "Conversions avec tous les préfixes de milli à tera.";
 }
 
+// 4G30
 function Thales_4eme() {
   //Dans cette version, pas de configuration papillon reservée aux 3èmes.
   Exercice_Thales.call(this);
   this.quatrieme = true;
   sortie_html? this.spacing = 1.5 : this.spacing = 1; 
 }
-
+// 4G31
 function Reciproque_Thales_4eme() {
   Reciproque_Thales.call(this);
   this.quatrieme = true;
@@ -12152,6 +12293,12 @@ function Vocabulaire_des_triangles() {
     ];
   }
 }
+
+/**
+ * @Auteur Jean-Claude Lhote
+ * Placer les sommets et les égalités de longueur...
+ * Référence 6G20
+ */
 function Nommer_et_coder_des_polygones() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Nommer et coder des polygones";
@@ -12354,6 +12501,12 @@ function Nommer_et_coder_des_polygones() {
     `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
   ];
 }
+
+/**
+ * Représenter une somme de fracions de même dénominateur sur un segment gradué de façon adaptée.
+ * @Auteur Jean-Claude Lhote
+ * 6N14-2
+ */
 function Ajouter_des_fractions_d_unite() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "mettre bout à bout des segments";
@@ -12436,6 +12589,7 @@ function Ajouter_des_fractions_d_unite() {
 /**
  * Utiliser les notations des segments, droites et demi-droites
  * @Auteur Rémi Angot
+ * Référence 6G10
  */
 function Notation_segment_droite_demi_droite() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -12514,6 +12668,7 @@ function Notation_segment_droite_demi_droite() {
 /**
  * Utiliser les notations des segments, droites et demi-droites
  * @Auteur Rémi Angot
+ * Référence 6G10-1
  */
 function Description_segment_droite_demi_droite() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -12610,11 +12765,16 @@ function Vocabulaire_des_triangles_5e() {
   this.classe = 5;
   Vocabulaire_des_triangles.call(this);
 }
+// Référence 6G21
 function Construire_un_triangle_6e() {
   Construire_un_triangle.call(this)
   this.classe=6
 }
-
+/**
+ * 
+ * 
+ * Réfrence 6G21 et ... (exercice en 5e ? pas encore fait)
+ */
 function Construire_un_triangle() {
   "use strict"
   Exercice.call(this)
@@ -12752,6 +12912,7 @@ function Utiliser_le_codage_pour_decrire_6e(){
   Utiliser_le_codage_pour_decrire.call(this)
   this.classe=6
 }
+// 5G30
 function Utiliser_le_codage_pour_decrire_5e(){
   Utiliser_le_codage_pour_decrire.call(this)
   this.classe=5
@@ -12979,6 +13140,8 @@ function Parallele_et_Perpendiculaires() {
       i < this.nb_questions && cpt < 50;
 
     ) {
+      objets_enonce.splice(0)
+      objets_correction.splice(0)
       if (this.sup2 == 2) 
         k = 0.8;
       else 
@@ -13195,10 +13358,10 @@ function Parallele_et_Perpendiculaires() {
           )}$ cm.<br>`;
           correction+=`Les angle droits en rouge se justifient par la propriété :<br> ${texte_en_couleur(`Si deux droites sont parallèles, toutes droite perpendiculaire à l'une est aussi perpendiculaire à l'autre`,'red')}.<br>`
           correction +=`Vérifier les angles droits à l'équerre.<br>`
-          Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)-1
-          Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)+1
-          Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)-1
-          Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)+1
+          Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)-1)
+          Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)+1)
+          Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)-1)
+          Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)+1)
 
           break
       }
@@ -13236,6 +13399,7 @@ function Parallele_et_Perpendiculaires() {
         },
         objets_correction
       );
+      console.log(Xmin,Ymin,Xmax,Ymax)
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(enonce + "<br>");
@@ -13411,6 +13575,7 @@ function Proportionnalite_par_linearite_bis(){
 /**
  * Un nombre à 2 chiffres (non multiple de 10) + 9
  * @Auteur Rémi Angot
+ * Référence 6G23-2
  */
 function Tracer_triangle_2_angles() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -14838,7 +15003,7 @@ function Ranger_ordre_croissant_decroissant(){
  };	
 
  this.titre = "Ranger une liste de nombres entiers dans l'ordre croissant ou décroissant";	
- this.consigne = `Classer les nombres suivants dans l'ordre indiqué.`;	
+ //this.consigne = `Classer les nombres suivants dans l'ordre indiqué.`;	
  
  this.nb_cols = 1;
  this.nb_cols_corr = 1;
@@ -14915,7 +15080,7 @@ function Ranger_ordre_croissant_decroissant(){
       });      
       myOrdre(situations[k].ordre,nombres_ranges);   
       enonces.push({
-        enonce:`Dans l'ordre ${situations[k].ordre}<br>
+        enonce:`Classer les nombres suivants dans l'ordre ${situations[k].ordre} :<br>
         $${tex_nombre(nombres[0])}$   ;   $${tex_nombre(nombres[1])}$   ;   $${tex_nombre(nombres[2])}$   ;   $${tex_nombre(nombres[3])}$   ;   $${tex_nombre(nombres[4])}$   ;   $${tex_nombre(nombres[5])}$          
         `,
         question:``,
@@ -14961,6 +15126,117 @@ function Ranger_ordre_croissant_decroissant(){
  }
  //this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
  //this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+
+/** 
+ * * Exo test pour quand j'en ai besoin
+ * * pas de numéro
+ * * Tests
+ * @author Sébastien Lozano
+ */
+
+function Tests_du_Seb(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 2;
+	} else {
+		this.nb_questions = 2;
+	};	
+
+	this.titre = "Exo test pour quand j'en ai besoin";	
+	this.consigne = `Consigne `;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0,1];			
+		} else {
+          //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+          type_de_questions_disponibles = [0,1];	
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+				{//case 0 -->
+				},
+				{//case 1 -->
+				},
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`
+          Type ${k}<br>	
+          ${JSON.stringify(decomp_fact_prem_array(238))}<br>			
+          ${typeof decomp_fact_prem_array(238)}<br>
+          ${JSON.stringify(obtenir_liste_facteurs_premiers(238))}<br>
+          ${typeof obtenir_liste_facteurs_premiers(238)}<br>
+					`,
+					question:``,
+					correction:`
+					Correction type ${k}
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          break;	
+        case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          break;
+			
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 };
 
 /**
@@ -15109,7 +15385,7 @@ jQuery(document).ready(function () {
     let exercice_tmp = new liste_des_exercices_disponibles[id]();
     liste_html_des_exercices_6 = liste_html_des_exercices_d_un_niveau([
       ['6C1','6C1 - Calculs niveau 1'],['6C2','6C2 - Calculs niveau 2'],['6C3','6C3 - Calculs niveau 3'],
-      ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],
+      ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],['6M3', '6M3 - Volumes'],['6P1','6P1 - Proportionnalité'],
       ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
       ['6D1','6D1 - Les durées'],
       ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3'],['6N4','6N4 - Numération et fractions niveau 4']])
@@ -15126,7 +15402,7 @@ jQuery(document).ready(function () {
         ['4C1','4C1 - Relatifs'],['4C2','4C2 - Fractions'],['4C3','4C3 - Puissances'],
         ['4F1','4F1 - Notion de fonction'],
         ['4G1','4G1 - Translation et rotation'],['4G2','4G2 - Théorème de Pythagore'],['4G3','4G3 - Théorème de Thalès'],['4G4',"4G4 - Cosinus d'un angle"],['4G5',"4G5 - Espace"],
-        ['4L1','4L1 - Calcul littéral'],['4P1','4P1 - Proportionnalité'],['4S1','4S1 - Statistiques'],['4S2','4S2 - Probabilités'],
+        ['4L1','4L1 - Calcul littéral'],['4L2','4L2 - Équation'],['4P1','4P1 - Proportionnalité'],['4S1','4S1 - Statistiques'],['4S2','4S2 - Probabilités'],
         ['4Algo1','4Algo1 - Algorithmique']
       ])
       liste_html_des_exercices_3 = liste_html_des_exercices_d_un_niveau([
@@ -15315,6 +15591,7 @@ jQuery(document).ready(function () {
 /**
 * Décomposer en produit de facteurs premiers un nombre (la décomposition aura 3, 4 ou 5 facteurs premiers)
 * @Auteur Rémi Angot
+5A13
 */
 function Exercice_decomposer_en_facteurs_premiers(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15381,6 +15658,7 @@ function Exercice_decomposer_en_facteurs_premiers(){
 *
 * Paramètre supplémentaire ; utilisation des écritures simplifiées
 * @Auteur Rémi Angot
+* 5R20
 */
 function Exercice_additions_relatifs(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15426,6 +15704,7 @@ function Exercice_additions_relatifs(max=20){
 * * On peut paramétrer la distance à zéro maximale des deux termes (par défaut égale à 20)
 * * On peut choisir d'avoir une écriture simplifiée  (par défaut ce n'est pas le cas)
 * @Auteur Rémi Angot
+* 5R20-2
 */
 function Exercice_additions_relatifs_a_trou(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15471,6 +15750,7 @@ function Exercice_additions_relatifs_a_trou(max=20){
 * * On peut paramétrer la distance à zéro maximale des deux termes (par défaut égale à 20)
 * * On peut choisir d'avoir une écriture simplifiée  (par défaut ce n'est pas le cas)
 * @Auteur Rémi Angot
+* 5R21
 */
 function Exercice_soustractions_relatifs(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15519,6 +15799,7 @@ function Exercice_soustractions_relatifs(max=20){
 * * On peut paramétrer la distance à zéro maximale des deux termes (par défaut égale à 20)
 * * On peut choisir d'avoir une écriture simplifiée  (par défaut ce n'est pas le cas)
 * @Auteur Rémi Angot
+* 4C10-3
 */
 function Exercice_multiplications_relatifs(max=10){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15566,6 +15847,7 @@ function Exercice_multiplications_relatifs(max=10){
 /**
 * Comparer deux fractions dont les dénominateurs sont multiples (avec un coefficient paramétrable qui est par défaut inférieur à 11)
 * @Auteur Rémi Angot
+* 5N14
 */
 function Exercice_comparer_deux_fractions (max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15628,6 +15910,7 @@ function Exercice_comparer_deux_fractions (max=11){
 * 
 * Pour la correction, les fractions sont toute écrites avec un dénominateur commun avant d'être classées
 * @Auteur Rémi Angot
+* 5N14-2
 */
 function Exercice_comparer_quatre_fractions (){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15711,6 +15994,7 @@ function Exercice_comparer_quatre_fractions (){
 *
 * Le coefficient est paramétrable, par défaut il est inférieur à 11.
 * @Auteur Rémi Angot
+* 5N20
 */
 function Exercice_additionner_des_fractions_5e(max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15778,6 +16062,7 @@ function Exercice_additionner_des_fractions_5e(max=11){
 *
 * On peut paramétrer de n'avoir que des soustractions.
 * @Auteur Rémi Angot
+* 5N20-2
 */
 function Exercice_additionner_ou_soustraire_des_fractions_5e(max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -15862,6 +16147,7 @@ function Exercice_additionner_ou_soustraire_des_fractions_5e(max=11){
 * * Niveau 2 : 2 fois sur 5, il faut trouver le ppcm, 1 fois sur 5 le ppcm correspond à leur produit, 1 fois sur 5 un dénominateur est multiple de l'autre, 1 fois sur 5 il faut additionner une fraction et un entier
 * * Paramètre supplémentaire : utiliser des nommbres relatifs (par défaut tous les nombres sont positifs)
 * @Auteur Rémi Angot
+* 4C21-1
 */
 function Exercice_additionner_des_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -16007,6 +16293,7 @@ function Exercice_additionner_des_fractions(){
 * * Paramètre supplémentaire : utiliser des nommbres relatifs (par défaut tous les nombres sont positifs)
 * * 2 fois sur 4 il faut faire une soustraction
 * @Auteur Rémi Angot
+* 4C21
 */
 function Exercice_additionner_ou_soustraire_des_fractions(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -16169,6 +16456,7 @@ function Exercice_additionner_ou_soustraire_des_fractions(){
 *
 * On peut paramétrer les distances à zéro qui sont par défaut inférieures à 20
 * @Auteur Rémi Angot
+* 5R22-2
 */
 function Exercice_simplification_somme_algebrique(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -16387,6 +16675,7 @@ function Exercice_additions_et_soustraction_de_relatifsV2(max=20){
 * * On peut paramétrer les distances à zéro qui sont par défaut inférieures à 20
 * * On peut utiliser des écritures simplifiées (ce qui n'est pas le cas par défaut)
 * @Auteur Rémi Angot
+* 5R20-3
 */
 function Exercice_additions_de_5_relatifs(max=20){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -16470,6 +16759,7 @@ function Exercice_additions_de_5_relatifs(max=20){
 * * ax^2+y^2
 * * ax^2+bx+c
 * @Auteur Rémi Angot
+* 5L13-2
 */
 function Exercice_substituer(difficulte=1){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -17112,6 +17402,7 @@ function Calculer_des_etendues(){
 /**
 * Calculer +/- 20, 30, 40 ou 60 %
 * @Auteur Rémi Angot
+* 5N110
 */
 function Variation_en_pourcentages(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -17170,6 +17461,7 @@ function Variation_en_pourcentages(){
 * * Somme, produit, quotient
 * * Nombre pair, nombre impair, multiple d'un nombre donné
 * @Auteur Rémi Angot
+* 5L10
 */
 function Ecrire_une_expression_litterale(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -17285,6 +17577,7 @@ function Ecrire_une_expression_litterale(){
 /**
 * Traduire un programme de calcul par une expression littérale de la forme ax+b après simplification
 * @Auteur Rémi Angot
+* 5L10-2
 */
 function Traduire_un_programme_de_calcul(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -17391,6 +17684,7 @@ function Traduire_un_programme_de_calcul(){
 * * axy+x+y
 * * (ax+b)(cy-d)
 * @Auteur Rémi Angot
+* 5L13
 */
 function Calculer_la_valeur_d_une_expression_litterale(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -17530,6 +17824,7 @@ function Calculer_la_valeur_d_une_expression_litterale(){
 * * ax+b=(a+1)x-c
 * * a-2x=b+2x
 * @Auteur Rémi Angot
+* 5L14
 */
 function Tester_une_egalite(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -17751,6 +18046,7 @@ function Tester_une_egalite(){
 * * ax+y+bx+c+dy
 * * ax+b-cx
 * @Auteur Rémi Angot
+* 5L12
 */
 function Reduire_une_expression_litterale(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -18208,6 +18504,7 @@ function fonctions_probabilite1(){
 *
 * Pas de version LaTeX
 * @Auteur Rémi Angot
+* 5M10
 */
 function Aire_du_parallelogramme(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -20709,6 +21006,11 @@ function Constructibilite_des_triangles_angles(){
 	Constructibilite_des_triangles.call(this);
 };
 
+/**
+ * 5G22
+ * @Auteur Jean-Claude Lhote
+ * Les droites remarquables du triangle : hauteurs médiatrices....médianes et bissectrices
+ */
 function DroiteRemarquableDuTriangle(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 
@@ -20963,10 +21265,10 @@ function Construire_par_Symetrie() {
 			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(3)+` Construire le point $${p1nom[4]}\'$ symétrique de $${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(5)+` Coder la figure.<br>`;
-			Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)-1
-			Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)+1
-			Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)-1
-			Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)+1
+			Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)-1)
+			Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)+1)
+			Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)-1)
+			Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)+1)
 		
 			
 			correction=`Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$<br>`
@@ -21014,10 +21316,10 @@ function Construire_par_Symetrie() {
 			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(3)+` Construire le point $${p1nom[4]}\'$ symétrique de $${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(5)+` Coder la figure.<br>`;
-			Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)-1
-			Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)+1
-			Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)-1
-			Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)+1
+			Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)-1)
+			Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,E.x,EE.x,CC.x,DD.x)+1)
+			Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)-1)
+			Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,E.y,EE.y,CC.y,DD.y)+1)
 		
 			
 			correction=`Contrôler la figure en vérifiant que les segments en pointillés se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$<br>`
@@ -21045,10 +21347,10 @@ function Construire_par_Symetrie() {
 			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
 			enonce += num_alpha(3)+` Construire le point $${p1nom[0]}\'$ symétrique de $${p1nom[0]}$ par rapport au point $${p1nom[1]}$.<br>`
 			enonce += num_alpha(4)+` Coder la figure.<br>`;
-			Xmin=Math.min(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)-1
-			Xmax=Math.max(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)+1
-			Ymin=Math.min(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)-1
-			Ymax=Math.max(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)+1
+			Xmin=MAth.floor(Math.min(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)-1)
+			Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)+1)
+			Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)-1)
+			Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)+1)
 			correction=''
 			break;
 
@@ -21088,10 +21390,10 @@ function Construire_par_Symetrie() {
 			enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 			enonce += num_alpha(1)+` Construire le triangle  $${p1nom[2]}\'${p1nom[3]}\'${p1nom[4]}\'$ symétrique de $${p1nom[2]}${p1nom[3]}${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 			enonce += num_alpha(2)+` Coder la figure.<br>`;
-			Xmin=Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1
-			Xmax=Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1
-			Ymin=Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1
-			Ymax=Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1
+			Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1)
+			Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1)
+			Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1)
+			Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1)
 			correction=''
 	
 			break
@@ -21130,10 +21432,10 @@ function Construire_par_Symetrie() {
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[2]}\'${p1nom[3]}\'${p1nom[4]}\'$ symétrique de $${p1nom[2]}${p1nom[3]}${p1nom[4]}$ par rapport à la droite $(${p1nom[0]}${p1nom[1]})$.<br>`
 				enonce += num_alpha(2)+` Coder la figure.<br>`;
-				Xmin=Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1
-				Xmax=Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1
-				Ymin=Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1
-				Ymax=Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1
+				Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1)
+				Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1)
+				Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1)
+				Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1)
 
 				correction=`Contrôler la figure en vérifiant que les côtés des deux triangles se coupent bien sur la droite $(${p1nom[0]}${p1nom[1]})$<br>`
 				break;
@@ -21163,10 +21465,10 @@ function Construire_par_Symetrie() {
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[0]}\'${p1nom[2]}\'${p1nom[3]}\'$ symétrique de $${p1nom[0]}${p1nom[2]}${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
 				enonce += num_alpha(2)+` Coder la figure.<br>`;
-				Xmin=Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1
-				Xmax=Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1
-				Ymin=Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1
-				Ymax=Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1
+				MAth.floor(Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1)
+				Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1)
+				Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1)
+				Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1)
 				correction=''	
 				break;
 
@@ -22559,6 +22861,7 @@ function Tableaux_et_fonction(){
 * Effectuer des additions de relatifs dans un tableau à double entrée
 *
 * @Auteur Rémi Angot
+* 5R20-5
 */
 function Exercice_tableau_additions_relatifs (){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -22633,6 +22936,7 @@ function Exercice_tableau_additions_relatifs (){
  * * 3 : inverse d'un nombre décimal
  * * 4 : mélange des trois autres niveaux
  * @auteur Jean-Claude Lhote
+ * 4C22-1
  */
 function Exercice_trouver_l_inverse() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -22995,6 +23299,7 @@ function Exercice_trouver_l_inverse() {
  * * 3 : Produits de nombres relatifs
  * * Si décomposition cochée : les nombres utilisés sont plus importants.
  * @auteur Jean-Claude Lhote
+ * 4C22
  */
 function Exercice_multiplier_fractions() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -23427,6 +23732,7 @@ function Exercice_multiplier_fractions() {
  * * 1 : Nombres positifs exclusivement
  * * 2 : nombres relatifs
  * @auteur Jean-Claude Lhote
+ * 4C22-2
  */
 function Exercice_diviser_fractions() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -23582,6 +23888,7 @@ function Exercice_diviser_fractions() {
  * * 2 : Calcul avec nombres positifs avec piège
  * * 3 : Calcul avec nombres relatifs
  * @auteur Jean-Claude Lhote
+ * 4C23
  */
 function Exercice_additionner_fraction_produit() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -23991,6 +24298,7 @@ function Exercice_additionner_fraction_produit() {
  *
  *
  * @Auteur Rémi Angot
+ * 3L10
  */
 function Oppose_expression() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -24055,6 +24363,7 @@ function Oppose_expression() {
  *
  *
  * @Auteur Rémi Angot
+ * 3L10-1
  */
 function Parentheses_precedes_de_moins_ou_plus() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -24137,6 +24446,7 @@ function Parentheses_precedes_de_moins_ou_plus() {
  * * 1 : Multiplication par un facteur positif
  * * 2: Multiplication par un facteur relatif
  * @Auteur Rémi Angot
+ * 4L10 et 3L11
  */
 function Exercice_developper(difficulte = 1) {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -24365,6 +24675,7 @@ function Exercice_developper(difficulte = 1) {
  * * Type 3 : ax+b=cx+d
  * * Tous les types
  * @Auteur Rémi Angot
+ * 4L20 et 3L13
  */
 function Exercice_equation1() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -24592,6 +24903,7 @@ function Exercice_equation1() {
 
 /**
  * @auteur Jean-Claude Lhote
+ * 3G20
  */
 function Exercice_Thales() {
   "use strict";
@@ -25112,6 +25424,7 @@ function Exercice_Thales() {
 /**
  * Reciproque_Thales
  * @Auteur Jean-Claude Lhote
+ * 3G21
  */
 function Reciproque_Thales() {
   "use strict";
@@ -25523,6 +25836,7 @@ function Reciproque_Thales() {
 
 /**
  * @auteur Jean-Claude Lhote
+ * 4G20-3
  */
 function Exercice_Pythagore() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -25870,6 +26184,7 @@ function Exercice_Pythagore() {
 
 /**
  * @auteur Jean-Claude Lhote
+ * 3G30
  */
 function Exercice_Trigo_longueurs() {
   "use strict";
@@ -26258,6 +26573,7 @@ function Exercice_Trigo_longueurs() {
 }
 /**
  * @auteur Jean-Claude Lhote
+ * 3G31
  * Calcul d'angle dans le triangle rectangle
  * Le niveau 1 se limite à l'utilisation de Arccos
  * Le niveau 2 utilise la fonction trigo la plus pertinente pour un calcul direct
@@ -26631,6 +26947,7 @@ function Exercice_Trigo_angles() {
 /**
  * Déterminer la racine carrée d'un carré parfait compris entre 4 et 256
  * @auteur Stéphane Guyon
+ * 4G20-2
  */
 function Racine_caree_de_carres_parfaits() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -26669,6 +26986,7 @@ function Racine_caree_de_carres_parfaits() {
 /**
  * À partir de la donnée des 3 longueurs d'un triangle, déterminer si il est rectangle ou pas.
  * @Auteur Rémi Angot
+ * 4G21
  */
 function Reciproque_Pythagore() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -26848,6 +27166,7 @@ function Reciproque_Pythagore() {
  * * Est-ce qu'un parallélogramme est un losange ? On peut démontrer que les diagonales sont perpendiculaires ou pas.
  * * Est-ce qu'un parallélogramme est un rectangle ? On peut démontrer qu'il possède un angle droit ou pas .
  * @Auteur Rémi Angot
+ * 4G22
  */
 function Problemes_Pythagore() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -27194,6 +27513,7 @@ function Problemes_Pythagore() {
  * * 4 : produit de puissances de même exposant
  * * 5 : mélange des trois autres niveaux
  * @Auteur Sébastien Lozano
+ * 4C33-1
  */
 function Puissances_d_un_relatif_1() {
   "use strict";
@@ -27493,6 +27813,7 @@ function Puissances_d_un_relatif_1() {
  * * Travailler des résultats automatisés
  * * mais aussi d'utiliser les propriétés du produit de puissance, du quotient de puissances et des puissances de puissances
  * @Auteur Sébastien Lozano
+ * 4C33-3
  */
 function Puissances_d_un_relatif_2() {
   "use strict";
@@ -27725,7 +28046,7 @@ function Puissances_d_un_relatif_2() {
 }
 
 /**
- * 4N21-2 -- Puissances de 10
+ * 4C30 -- Puissances de 10
  * * Travailler des résultats automatisés
  * @author Sébastien Lozano
  */
@@ -28103,6 +28424,7 @@ function Puissances_de_dix() {
 /**
  * problèmes de grandeurs composées
  * @Auteur Jean-Claude Lhote
+ * Référence : 4P10
  */
 function Problemes_grandeurs_composees() {
   "use strict";
@@ -29354,7 +29676,163 @@ function Problemes_grandeurs_composees() {
     "Nombres séparés par des tirets\n 1 : Energie consommée\n 2 :  Volumes\n 3 : Quantité de mouvement & Energie cinétique\n 4 : Moment de force\n 5 : Trafic de voyageurs\n 6 : Puissance électrique\n 7 : Vitesses\n 8 : Prix massique\n 9 : Prix horaire\n 10 : Densité de population\n 11 : Masse volumique\n 12 : Concentration massique\n 13 : Débits\n 14 : Transfert de fichiers",
   ]; // Texte, tooltip
 }
+/**
+ * type 1 : Un nombre est donné par le produit d'un décimal par une puissance de dix, il faut l'écrire en notation scientifique
+ * type 2 : On donne la notation scientifique d'un nombre et on doit trouver l'exposant manquant de 10 dans le membre de gauche.
+ * @Auteur Jean-Claude Lhote 
+ * 4C32-1
+ */
+function Calculs_avec_puissances_de_dix() {
+  "use strict"
+  Exercice.call(this)
+  this.sup = 1;
+  this.sup2 =1;
+  this.titre = `Calcul avec les puissances de dix`;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.nb_questions=5
 
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    if (this.sup == 1) this.consigne = `Donner l\'écriture scientifique des nombres suivants.`;
+    else this.consigne = `Compléter l'égalité des nombres suivants.`;
+    let type_de_questions_disponibles;
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    if (this.sup2==1) type_de_questions_disponibles=[0,0,0,1,1];
+    else if (this.sup2==2) type_de_questions_disponibles=[0,1,1,2,2];
+    else type_de_questions_disponibles=[2,2,3,3,3];
+
+    let liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions);
+    for (let i = 0, texte, texte_corr,nombre,mantisse1,exp1,decalage,mantisse,exp,decimalstring,scientifiquestring, cpt = 0;
+      i < this.nb_questions && cpt < 50;) {
+//        nombre=calcul(randint(1001,9999)/10**randint(1,6))
+//      mantisse=calcul(nombre/10**(Math.floor(Math.log10(nombre))))
+//        exp=Math.floor(Math.log10(nombre))
+      switch (liste_type_de_questions[i]) {
+        case 0 :
+          decalage=randint(-1,1,0)
+        mantisse = randint(1,9)
+        exp=randint(1,5)
+        break
+        case 1: 
+        decalage=randint(-2,2,0)
+        mantisse=calcul(randint(11,99)/10)
+          exp=randint(1,5)
+        break;
+        case 2:
+          decalage=randint(-3,3,0)
+          if (randint(0,1)==1) mantisse=calcul(randint(111,999)/100)
+          else mantisse=calcul((randint(1,9)*100+randint(1,9))/100)
+          exp=randint(1,7)*choice([-1,1])
+        break;
+        case 3:
+          decalage=randint(-4,4,0)
+          if (randint(0,1)==1) mantisse=calcul((randint(1,9)*1000+randint(1,19)*5)/1000)
+          else mantisse=calcul(randint(1111,9999)/1000)
+          exp=randint(3,7)*choice([-1,1])
+        break;
+      }
+      nombre=calcul(mantisse*10**exp)
+      mantisse1=calcul(mantisse*10**decalage)
+      exp1=exp-decalage
+      console.log(nombre,`=`,mantisse1,`x10^`,exp1)
+
+      decimalstring=`${tex_nombrec(mantisse1)} \\times 10^{${exp1}}`
+      scientifiquestring=`${tex_nombre(mantisse)} \\times 10^{${exp}}`
+      if (this.sup==1) {
+        texte= `$${decimalstring}$`
+        texte_corr=`$${mise_en_evidence(`${tex_nombrec(mantisse1)}`,'blue')}\\times ${mise_en_evidence(`10^{${exp1}}`)} = ${mise_en_evidence(`${tex_nombre(mantisse)}\\times 10^{${decalage}}`,'blue')}\\times  ${mise_en_evidence(`10^{${exp1}}`)} = ${scientifiquestring}$`
+      }
+      else {
+        texte_corr= `$${mise_en_evidence(tex_nombre(mantisse1),'blue')}\\times  ${mise_en_evidence(`10^{${exp1}}`)}=${mise_en_evidence(tex_nombre(mantisse)+`\\times 10^{${decalage}}`,'blue')}\\times  ${mise_en_evidence(`10^{${exp1}}`)} =${scientifiquestring}$`
+        texte=`$${tex_nombre(mantisse1)}\\times 10^{${mise_en_evidence(`....`)}}=${scientifiquestring}$`
+
+      }
+      if (this.liste_questions.indexOf(texte) == -1) {
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ["Type d\'exercices", 2, "1 : Traduire en notation scientifique\n2 : Exercice à trou"];
+  this.besoin_formulaire2_numerique = ["Niveaux de difficulté",3, "1 : Facile\n2 : Moyen\n3 : Difficile"];
+}
+
+/**
+ * Ecrire un nombre décimal en notation scientifique et inversement
+ * @Auteur Jean-Claude Lhote
+ * 4C32
+ */
+
+function Notation_scientifique() {
+  "use strict"
+  Exercice.call(this)
+  this.sup = 1;
+  this.sup2 =1;
+  this.titre = `Notation scientifique`;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.nb_questions=5
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    if (this.sup == 1) this.consigne = `Donner l\'écriture scientifique des nombres suivants.`;
+    else this.consigne = `Donner l\'écriture décimale des nombres suivants.`;
+    let type_de_questions_disponibles;
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    if (this.sup2==1) type_de_questions_disponibles=[0,0,0,1,1];
+    else if (this.sup2==2) type_de_questions_disponibles=[0,1,1,2,2];
+    else type_de_questions_disponibles=[2,2,3,3,3];
+
+    let liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions);
+    for (let i = 0, texte, texte_corr,mantisse,exp,decimalstring,scientifiquestring, cpt = 0;
+      i < this.nb_questions && cpt < 50;) {
+      switch (liste_type_de_questions[i]) {
+        case 0 :
+        mantisse = randint(1,9)
+        exp=randint(1,5)
+        break
+        case 1: 
+          mantisse=calcul(randint(11,99)/10)
+          exp=randint(1,5)
+        break;
+        case 2:
+          if (randint(0,1)==1) mantisse=calcul(randint(111,999)/100)
+          else mantisse=calcul((randint(1,9)*100+randint(1,9))/100)
+          exp=randint(1,7)*choice([-1,1])
+        break;
+        case 3:
+          if (randint(0,1)==1) mantisse=calcul((randint(1,9)*1000+randint(1,19)*5)/1000)
+          else mantisse=calcul(randint(1111,9999)/1000)
+          exp=randint(3,7)*choice([-1,1])
+        break;
+      }
+      decimalstring=tex_nombrec(mantisse*10**exp)
+      scientifiquestring=`${tex_nombre(mantisse)}\\times 10^{${exp}}`
+      if (this.sup==1) {
+        texte= `$${decimalstring}$`
+        texte_corr=`$${decimalstring} = ${scientifiquestring}$`
+      }
+      else {
+        texte_corr= `$${scientifiquestring} = ${decimalstring}$`
+        texte=`$${scientifiquestring}$`
+
+      }
+      if (this.liste_questions.indexOf(texte) == -1) {
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ["Type d\'exercices", 2, "1 : Traduire en notation scientifique\n2 : Traduire en notation décimale"];
+  this.besoin_formulaire2_numerique = ["Niveaux de difficulté",3, "1 : Facile\n2 : Moyen\n3 : Difficile"];
+}
 /**
  * À partir d'un triangle rectangle, il faut donner l'égalité de Pythagore ou compléter une égalité.
  * @Auteur Rémi Angot
@@ -30052,11 +30530,11 @@ function Puissances_encadrement() {
       let ent_pos = [];
       for (let i = 0; i < 6; i++) {
         ent_pos.push({
-          val: `$${tex_nombre(randint(10 ** i + 1, 10 ** (i + 1)))}$`,
+          val: `$${tex_nombre(calcul(randint(10 ** i + 1, 10 ** (i + 1))))}$`,
           puissance_inf: `$10^{${i}}$`,
           puissance_sup: `$10^{${i + 1}}$`,
-          puissance_inf_num: `$${tex_nombre(10 ** i)}$`,
-          puissance_sup_num: `$${tex_nombre(10 ** (i + 1))}$`,
+          puissance_inf_num: `$${tex_nombre(calcul(10 ** i))}$`,
+          puissance_sup_num: `$${tex_nombre(calcul(10 ** (i + 1)))}$`,
         });
       }
 
@@ -30064,24 +30542,22 @@ function Puissances_encadrement() {
       let dec_pos = [];
       for (let i = 0; i < 4; i++) {
         dec_pos.push({
-          val: `$${tex_nombre(randint(10000, 100000) / 10 ** (4 - i))}$`,
+          val: `$${tex_nombre(calcul(randint(10000, 100000) / 10 ** (4 - i)))}$`,
           puissance_inf: `$10^{${i}}$`,
           puissance_sup: `$10^{${i + 1}}$`,
-          puissance_inf_num: `$${tex_nombre(10 ** i)}$`,
-          puissance_sup_num: `$${tex_nombre(10 ** (i + 1))}$`,
+          puissance_inf_num: `$${tex_nombre(calcul(10 ** i))}$`,
+          puissance_sup_num: `$${tex_nombre(calcul(10 ** (i + 1)))}$`,
         });
       }
       // nombre décimal positif inférieur à 1, entre 0,1 et 1 puis entre 0,01 et 0,1 puis 0,001 et 0,0001
       let dec_pos_inf_un = [];
       for (let i = 0; i < 4; i++) {
         dec_pos_inf_un.push({
-          val: `$${tex_nombre(
-            randint(10 ** (4 - i - 1) + 1, 10 ** (4 - i)) / 10000
-          )}$`,
+          val: `$${tex_nombre(calcul(randint(10 ** (4 - i - 1) + 1, 10 ** (4 - i)) / 10000))}$`,
           puissance_inf: `$10^{${-(i + 1)}}$`,
           puissance_sup: `$10^{${-i}}$`,
-          puissance_inf_num: `$${tex_nombre(10 ** -(i + 1))}$`,
-          puissance_sup_num: `$${tex_nombre(10 ** -i)}$`,
+          puissance_inf_num: `$${tex_nombre(calcul(10 ** -(i + 1)))}$`,
+          puissance_sup_num: `$${tex_nombre(calcul(10 ** -i))}$`,
         });
       }
 
@@ -32031,7 +32507,7 @@ function Tester_si_un_nombre_est_solution_d_une_equation_deg2() {
 
 /**
  * Produire une forme littérale en introduisant une lettre pour désigner une valeur inconnue
- * * 4P20-0
+ * * 4L13-1
  * @author Sébastien Lozano
  */
 function Forme_litterale_introduire_une_lettre(){
@@ -32186,31 +32662,38 @@ function Mettre_en_equation_sans_resoudre(){
       // une fonction pour dire le nom du polygone
       function myPolyName(n) {
         let sortie = {
+          article:``,
           name: ``,
           nameParSommets: ``,
         };
         switch (n) {
           case 3:
+            sortie.article = `du `;
             sortie.name = `triangle équilatéral`;
             sortie.nameParSommets = `ABC`;
             break;
           case 4:
+            sortie.article = `du `;
             sortie.name = `carré`;
             sortie.nameParSommets = `ABCD`;
             break;
           case 5:
+            sortie.article = `du `;
             sortie.name = `pentagone régulier`;
             sortie.nameParSommets = `ABCDE`;
             break;
           case 6:
+            sortie.article = `de l'`;
             sortie.name = `hexagone régulier`;
             sortie.nameParSommets = `ABCDEF`;
             break;
           case 7:
+            sortie.article = `de l'`;
             sortie.name = `heptagone régulier`;
             sortie.nameParSommets = `ABCDEFG`;
             break;
           case 8:
+            sortie.article = `de l'`;
             sortie.name = `octogone régulier`;
             sortie.nameParSommets = `ABCDEFGH`;
             break;
@@ -32252,6 +32735,7 @@ function Mettre_en_equation_sans_resoudre(){
       let polygone = {
         nb_cotes: n,
         unite: unite,
+        article:myPolyName(n).article,
         nom: myPolyName(n).name,
         let_cote: inc,
         perimetre: randint(200, 500),
@@ -32269,7 +32753,7 @@ function Mettre_en_equation_sans_resoudre(){
       
 			let enonces = [];
 			enonces.push({
-				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre du ${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
+				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre ${polygone.article}${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
 				question:``,
         correction:`La figure est un ${polygone.nom}, il a donc ${polygone.nb_cotes} côtés de même longueur.<br>
         Cette longueur est notée ${polygone.let_cote}, le périmètre de la figure, exprimé en fonction de ${polygone.let_cote}, vaut donc $${polygone.nb_cotes}\\times$ ${polygone.let_cote}.<br>
@@ -32281,7 +32765,7 @@ function Mettre_en_equation_sans_resoudre(){
       let p = randint(3, 8,[n]);
       polygone.nb_cotes = p;
 			enonces.push({
-				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre du ${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
+				enonce:`On considère la figure suivante où l'unité est le $${polygone.unite}$.<br>${prenom()} se demande pour quelle valeur de ${polygone.let_cote}, exprimée en $${polygone.unite}$, le périmètre ${polygone.article}${polygone.nom} est égal à $${polygone.perimetre}$ $${polygone.unite}$ .<br> ${polygone.fig}`,
 				question:``,
         correction:`La figure est un ${polygone.nom}, il a donc ${polygone.nb_cotes} côtés de même longueur.<br>
         Cette longueur est notée ${polygone.let_cote}, le périmètre de la figure, exprimé en fonction de ${polygone.let_cote}, vaut donc $${polygone.nb_cotes}\\times$ ${polygone.let_cote}.<br>
@@ -32605,8 +33089,6 @@ function Trouver_erreur_resol_eq_deg1(){
       };
 
       function simpFrac(n,d) {  
-        console.log(isSimp(n,d));
-        console.log(n,d)      
         if (isSimp(n,d)) {
           if (fraction_simplifiee(n,d)[1]==1) {
             return `$= ${fraction_simplifiee(n,d)[0]}$`;
@@ -33272,6 +33754,7 @@ function Tracer_avec_scratch(){
 *
 * * On peut choisir de n'avoir que des tables de multiplications, par défaut il y a aussi des divisions simples par 2, 3 ou 4
 * @Auteur Rémi Angot
+* 4C10-4
 */
 function Exercice_quotients_relatifs(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -33329,6 +33812,7 @@ function Exercice_quotients_relatifs(){
 * Effectuer des multiplications de relatifs dans un tableau à double entrée
 *
 * @Auteur Rémi Angot
+* 4C10-5
 */
 function Exercice_tableau_multiplications_relatifs (){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -33428,6 +33912,7 @@ function Exercice_tableau_multiplications_relatifs (){
  * * a-(b+c)
  * * (a+b+c)*d
  * @Auteur Rémi Angot
+ * 4C11
  */
 function Priorites_et_relatifs() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -33786,6 +34271,7 @@ function Priorites_et_relatifs() {
 /**
  * Exercices sur le théorème de Pythagore avec MathALEA2D
  * @Auteur Rémi Angot
+ * 4G20
  */
 function Pythagore2D() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -33849,7 +34335,7 @@ function Pythagore2D() {
       }
 
       if (!sortie_html) {texte = '~\\\\'}
-      texte += mathalea2d({xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax, scale:.6,mainlevee:true,amplitude:1},mesObjetsATracer) ;
+      texte += mathalea2d({xmin:xmin, xmax:xmax, ymin:ymin, ymax:ymax, scale:.6},mesObjetsATracer) ;
       if (this.sup==2){
         if (liste_type_de_questions[i]=='AB'){
           texte += `<br>$${A.nom+B.nom}^2=\\ldots$`
@@ -33917,7 +34403,7 @@ function Pythagore2D() {
   };
   //this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Donner l'égalité de Pythagore\n2 : Compléter l'égalité de Pythagore\n3 : Calculer une longueur manquante"];
 }
-
+// 4G20-1
 function Egalite_Pythagore2D(){
   Pythagore2D.call(this);
   this.titre = "Donner ou compléter une égalité de Pythagore"
@@ -33930,6 +34416,7 @@ function Egalite_Pythagore2D(){
 /**
  * Calculs de probabilités sur une expérience aléatoire à deux épreuves
  * @Auteur Jean-Claude Lhote
+ * 3S20
  */
 function fonctions_probabilite2() {
 	'use strict';
@@ -34286,6 +34773,7 @@ function fonctions_probabilite2() {
 /**
  * Trace 5 droites et demande l'expression de la fonction affine ou linéaire correspondante
  * @Auteur Jean-Claude Lhote
+ * Référence : 3F21
  */
 function Lecture_expression_fonctions_affines() {
 	'use strict';
@@ -34299,12 +34787,14 @@ function Lecture_expression_fonctions_affines() {
 	sortie_html ? this.spacing = 2 : this.spacing = 1;
 	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
 	this.sup = 1;
+	this.sup2 =3
 	this.lineaire = false;
 	this.liste_packages = 'tkz-euclide';
 
 
 	this.nouvelle_version = function (numero_de_l_exercice) { // numero_de_l_exercice est 0 pour l'exercice 1
 		let k = Math.pow(2, parseInt(this.sup) - 1);
+		let nb_droites=parseInt(this.sup2)
 		this.liste_questions = [];
 		this.liste_corrections = [];
 		this.contenu = ''; // Liste de questions
@@ -34338,10 +34828,10 @@ function Lecture_expression_fonctions_affines() {
 			const mon_svg = SVG().viewbox(0, 0, 500, 500).size('100%', '100%')
 			SVG_repere(mon_svg, -5, 5, -5, 5, k, k, 500, 500, true);
 			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[0][0], liste_droites[0][1], 'blue', 'd1');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd2');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd3');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd4');
-			SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd5');
+			if (nb_droites>1) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd2');
+			if (nb_droites>2) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd3');
+			if (nb_droites>3) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd4');
+			if (nb_droites>4) SVG_Tracer_droite(mon_svg, 500, 500, -5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd5');
 			this.consigne = `<div style="width: 50%; display : table ">${mon_svg.svg()}</div>`;
 
 
@@ -34351,14 +34841,14 @@ function Lecture_expression_fonctions_affines() {
 			let texte = `\\begin{tikzpicture}`;
 			texte += Latex_repere(-5, 5, -5, 5, k, k, true);
 			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[0][0], liste_droites[0][1], 'blue', 'd_1');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd_2');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd_3');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd_4');
-			texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd_5');
+			if (nb_droites>1) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[1][0], liste_droites[1][1], 'red', 'd_2');
+			if (nb_droites>2) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[2][0], liste_droites[2][1], 'green', 'd_3');
+			if (nb_droites>3) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[3][0], liste_droites[3][1], 'brown', 'd_4');
+			if (nb_droites>4) texte += Latex_Tracer_droite(-5, 5, -5, 5, liste_droites[4][0], liste_droites[4][1], 'purple', 'd_5');
 			texte += `\n\t \\end{tikzpicture}`;
 			this.liste_questions.push(texte);
 		}
-		for (i = 0; i < 5; i++) {
+		for (i = 0; i < nb_droites; i++) {
 			this.liste_questions.push(`Déterminer l'expression de la fonction $f_${i + 1}$ représentée par la droite $d_${i + 1}$.`)
 			if (this.lineaire || liste_droites[i][0] == 0) this.liste_corrections.push(`La droite $d_${i + 1}$ passe par l'origine et son coefficient directeur est $${tex_nombre(liste_droites[i][1])}$.<br>Elle représente la fonction linéaire $f_${i + 1}(x)=${reduire_ax_plus_b(liste_droites[i][1], 0)}$.`)
 			else this.liste_corrections.push(`La droite $d_${i + 1}$ passe par le point de coordonnées $(0;${liste_droites[i][0]})$ et son coefficient directeur est $${tex_nombre(liste_droites[i][1])}$.<br>Elle représente la fonction affine $f_${i + 1}(x)=${reduire_ax_plus_b(liste_droites[i][1], liste_droites[i][0])}$.`)
@@ -34370,6 +34860,7 @@ function Lecture_expression_fonctions_affines() {
 		else this.contenu_correction = `Il s’agit de fonctions linéaires, elles sont donc de la forme $f(x)=ax$, $a$ étant la `+katex_Popup2(numero_de_l_exercice,1,`pente`,`pente d'une droite`,`La pente (le a de y=ax ou y=ax+b) d'une droite donne le taux d'accroissement de y par rapport à x : lorsque x augmente de 1, alors y augmente de a.`)+` de la droite.\n` + this.contenu_correction ;
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, "1 : Coefficient directeur entier\n2 : Coefficient directeur 'en demis'\n3 : Coefficient directeur 'en quarts'"];
+	this.besoin_formulaire2_numerique =['Nombre de droites (1 à 5)',5];
 }
 
 
@@ -34382,6 +34873,7 @@ function Lecture_expression_fonctions_affines() {
 * * Niveau 4 : (ax+b)(cx+d)
 * * Niveau 5 : Mélange 
 * @Auteur Rémi Angot
+* 3F12-2
 */
 function Image_fonction_algebrique() {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -34530,6 +35022,7 @@ function Image_fonction_algebrique() {
 * Réduire des expressions lorsque c'est possible
 *
 * @Auteur Rémi Angot
+* 3L11-2
 */
 function Reduction_si_possible() {
 	'use strict';
@@ -34630,6 +35123,7 @@ function Reduction_si_possible() {
 * Utiliser la simple ou la double distributivité et réduire l'expression
 *
 * @Auteur Rémi Angot
+* 3L11-3
 */
 function Distributivite_simple_double_reduction() {
 	'use strict';
@@ -34712,6 +35206,7 @@ function Distributivite_simple_double_reduction() {
 * Utiliser la simple ou la double distributivité et réduire l'expression
 *
 * @Auteur Rémi Angot
+* 3L11-4
 */
 function Factoriser_par_nombre_ou_x() {
 	'use strict';
@@ -34815,6 +35310,7 @@ function Factoriser_par_nombre_ou_x() {
 * * Niveau 4 : (ax+b)(cx+d)
 * * Niveau 5 : Mélange 
 * @Auteur Rémi Angot
+* 3F12-3
 */
 function Tableau_de_valeurs() {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -35037,6 +35533,7 @@ function Tableau_de_valeurs() {
 /**
  * Développer des expressions de la forme(ax+ou-b)(cx+ou-d)
 * @auteur Jean-Claude Lhote
+* 3L11-1
 */
 function Double_distributivite() {
 	'use strict';
@@ -35107,6 +35604,7 @@ function Double_distributivite() {
 /**
  * Développer (ax-b)(ax+b)
 * @auteur Jean-Claude Lhote
+* 3L12-1
 */
 function Developper_Identites_remarquables3() {
 	'use strict';
@@ -35164,6 +35662,7 @@ function Developper_Identites_remarquables3() {
 /**
  * Factoriser a²-b²
 * @auteur Jean-Claude Lhote
+* 3L12
 */
 function Factoriser_Identites_remarquables3() {
 	'use strict';
@@ -35227,6 +35726,7 @@ function Factoriser_Identites_remarquables3() {
 * * Type 3 : k-(ax+b)=cx+d
 * * Tous les types
 * @Auteur Rémi Angot
+* 3L13-1
 */
 function Exercice_equation1_2(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -35381,6 +35881,7 @@ function Exercice_equation1_2(){
  * Résolution d'équations de type (ax+b)(cx+d)=0
 * @auteur Jean-Claude Lhote
 * Tout est dans le nom de la fonction.
+* 3L14
 */
 function Resoudre_une_equation_produit_nul() {
 	'use strict';
@@ -35510,6 +36011,7 @@ function Resoudre_une_equation_produit_nul() {
 /**
  * Résoudre une équation de type x²=a
 * @auteur Jean-Claude Lhote
+* 3L15
 */
 
 function Resoudre_une_equation_x2_egal_A() {
@@ -38071,6 +38573,7 @@ function PPCM_Engrenages() {
 * La fonction est un polynome de degré 1, 2 ou 3 et les nombres des questions ne sont que des entiers.
 *
 * @Auteur Rémi Angot
+* 3F12-4
 */
 function Image_graphique() {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -38209,6 +38712,7 @@ function Image_graphique() {
 * La fonction est un polynome de degré 1, 2 ou 3 et les nombres des questions ne sont que des entiers.
 *
 * @Auteur Rémi Angot
+* 3F13
 */
 function Antecedent_graphique() {
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -38334,6 +38838,7 @@ function Antecedent_graphique() {
 /**
 * Problèmes calculs d'aire et de volumes utilisant l'effet d'une réduction sur les aires et les volumes 
 * @auteur Jean-Claude Lhote
+* 3G22
 */
 function Agrandissement_reduction() {
 	'use strict';
@@ -39003,6 +39508,7 @@ function Agrandissement_reduction() {
 /**
  * Trouver les coordonnées d'un point transformé d'un autre par une des transformations du plan
  * @Auteur Jean-Claude Lhote
+ * 3G10-1
  */
 function Transformations_du_plan_et_coordonnees() {
 	'use strict';
@@ -39681,6 +40187,7 @@ function Passer_de_la_base_12_ou_16_a_la_10() {
 						chiffre3 = choice(['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9']);
 					}
 					n = valeur_base(chiffre1)*b**2+valeur_base(chiffre2)*b+valeur_base(chiffre3);
+					console.log(n,chiffre1,chiffre2,chiffre3)
 					texte = `Écrire en base ${b} le nombre ${nombre_avec_espace(n)}.`;
 					texte_corr = `$${tex_nombre(n)}=${b}\\times${Math.floor(n/b)}+${mise_en_evidence(n%b)}$`;
 					texte_corr += `<br>$${Math.floor(n/b)}=${b}\\times${mise_en_evidence(valeur_base(chiffre1))}+${mise_en_evidence(valeur_base(chiffre2))}$`;
@@ -39782,6 +40289,7 @@ function Passer_de_la_base_12_ou_16_a_la_10() {
 * * Retrouver la situation initiale
 * * Mélange des 3 types de problèmes
 * @Auteur Rémi Angot
+* 3P10
 */
 function Evolutions_en_pourcentage() {
 	'use strict';
@@ -40040,6 +40548,7 @@ function Evolutions_en_pourcentage() {
 *
 * 
 * @Auteur Rémi Angot
+* 3P10-1
 */
 function Coefficient_evolution() {
 	'use strict';
@@ -40114,6 +40623,7 @@ function Coefficient_evolution() {
 /**
 * Banque de problèmes utilisant le théorème de Thalès et différentes propriétés de géométrie
 * @Auteur Rémi Angot
+* 3G20-1
 */
 function Problemes_Thales(){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -40590,7 +41100,11 @@ function TrianglesSemblables() {
 			
 		}
 	}
-} function calcul_coordonnees_vecteurs(){
+}
+/**
+ * @Auteur Stéphane Guyon
+ */
+function calcul_coordonnees_vecteurs(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Déterminer les coordonnées d'un vecteur.";
    
@@ -40659,7 +41173,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
         liste_de_question_to_contenu(this);
     }
 }
-
+/**
+ * 2G12
+ * @Auteur Stéphane Guyon
+ */
 function Nature_polygone(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Déterminer la nature d'un polygone.";
@@ -41445,7 +41962,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
     }
 }
 
-
+/**
+ * 2G11
+ * @Auteur Stéphane Guyon
+ */
 function Milieu(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Déterminer les coordonnées milieu d’un segment dans un repère";
@@ -41727,7 +42247,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
      this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Application directe de la formule 2 : Application indirecte de la formule 3: Caractériser un parallélogramme.'];
 }  
 
-
+/**
+ * 2G10
+ * @Auteur Stéphane Guyon
+ */
 function Distance(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Utiliser la distance entre deux points dans un repère orthonormé";
@@ -41783,46 +42306,7 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
                     texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
-                    if (AB%100==0 && AB!=100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
-                    if (AB%81==0 && AB!=81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
-                    if (AB%64==0 && AB!=64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
-                    if (AB%49==0 && AB!=49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
-                     if (AB%36==0&& AB!=36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
-                     if (AB%25==0 && AB!=25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
-                     if (AB%64!=0 && AB%16==0&& AB!=16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
-                    if (AB%81!=0 && AB%9==0 && AB!=9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
-                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
-                      if (AB==100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
-                    if (AB==81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
-                      if (AB==64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
-                      if (AB==49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
-                      if (AB==36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
-                      if (AB==25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
-                      if (AB==16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
-                      if (AB==9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
-                      if (AB==4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
-                     if (AB==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
-
-                     ;   
+                    if (extraire_racine_carree(AB)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=${tex_racine_carree(AB)}$<br>`
                    break ;
              case 2 : 
         
@@ -41854,87 +42338,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
                     texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
-                    if (AB%100==0 && AB!=100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
-                    if (AB%81==0 && AB!=81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
-                    if (AB%64==0 && AB!=64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
-                    if (AB%49==0 && AB!=49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
-                     if (AB%36==0&& AB!=36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
-                     if (AB%25==0 && AB!=25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
-                     if (AB%64!=0 && AB%16==0&& AB!=16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
-                    if (AB%81!=0 && AB%9==0 && AB!=9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
-                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
-                      if (AB==100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
-                    if (AB==81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
-                      if (AB==64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
-                      if (AB==49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
-                      if (AB==36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
-                      if (AB==25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
-                      if (AB==16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
-                      if (AB==9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
-                      if (AB==4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
-                      if (AB==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
-
+                    texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=${tex_racine_carree(AB)}$<br>`
                     texte_corr +=`De même : $AC=\\sqrt{\\left(${xC}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yC}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{De même :       } AC=\\sqrt{${XAC}+${YAC}}$<br>`
                     texte_corr +=`$\\phantom{De même :       } AC=\\sqrt{${tex_nombre(XAC+YAC)}}$<br>`
-                    if (AC%100==0 && AC!=100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10\\sqrt{${tex_nombre((AC))/100}}$<br>`}
-                    if (AC%81==0 && AC!=81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9\\sqrt{${tex_nombre((AC))/81}}$<br>`}
-                    if (AC%64==0 && AC!=64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8\\sqrt{${tex_nombre((AC))/64}}$<br>`}
-                    if (AC%49==0 && AC!=49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7\\sqrt{${tex_nombre((AC))/49}}$<br>`}
-                     if (AC%36==0&& AC!=36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6\\sqrt{${tex_nombre((AC))/36}}$<br>`}
-                     if (AC%25==0 && AC!=25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5\\sqrt{${tex_nombre((AC))/25}}$<br>`}
-                     if (AC%64!=0 && AC%16==0&& AC!=16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4\\sqrt{${tex_nombre((AC))/16}}$<br>`}
-                    if (AC%81!=0 && AC%9==0 && AC!=9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3\\sqrt{${tex_nombre((AC))/9}}$<br>`}
-                    if (AC%16!=0 && AC%64!==0 &&AC%4==0 && AC!=4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2\\sqrt{${tex_nombre((AC))/4}}$<br>`}
-                      if (AC==100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10$<br>`}
-                    if (AC==81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9$<br>`}
-                      if (AC==64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8$<br>`}
-                      if (AC==49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7$<br>`}
-                      if (AC==36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6$<br>`}
-                      if (AC==25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5$<br>`}
-                      if (AC==16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4$<br>`}
-                      if (AC==9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3$<br>`}
-                      if (AC==4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2$<br>`}
-                      if (AC==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=1$<br>`}
-
+                    if (extraire_racine_carree(AC)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=${tex_racine_carree(AC)}$<br>`
                     texte_corr +=`On observe que $AC=AB$ donc le point $A$ est équidistant de $B$ et $C$.`
                      texte_corr +=`<br>Le point $C$ appartient bien au cercle de centre $A$ et passant par $B$.`
                     ;   
@@ -41969,87 +42377,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
                     texte_corr +=`On applique la relation à l'énoncé : $AB=\\sqrt{\\left(${xB}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yB}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${XAB}+${YAB}}$<br>`
                     texte_corr +=`$\\phantom{On applique la relation à l'énoncé :        } AB=\\sqrt{${tex_nombre(XAB+YAB)}}$<br>`
-                    if (AB%100==0 && AB!=100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10\\sqrt{${tex_nombre((AB))/100}}$<br>`}
-                    if (AB%81==0 && AB!=81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9\\sqrt{${tex_nombre((AB))/81}}$<br>`}
-                    if (AB%64==0 && AB!=64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8\\sqrt{${tex_nombre((AB))/64}}$<br>`}
-                    if (AB%49==0 && AB!=49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7\\sqrt{${tex_nombre((AB))/49}}$<br>`}
-                     if (AB%36==0&& AB!=36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6\\sqrt{${tex_nombre((AB))/36}}$<br>`}
-                     if (AB%25==0 && AB!=25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5\\sqrt{${tex_nombre((AB))/25}}$<br>`}
-                     if (AB%64!=0 && AB%16==0&& AB!=16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4\\sqrt{${tex_nombre((AB))/16}}$<br>`}
-                    if (AB%81!=0 && AB%9==0 && AB!=9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3\\sqrt{${tex_nombre((AB))/9}}$<br>`}
-                    if (AB%16!=0 && AB%64!==0 &&AB%4==0 && AB!=4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2\\sqrt{${tex_nombre((AB))/4}}$<br>`}
-                      if (AB==100)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=10$<br>`}
-                    if (AB==81)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=9$<br>`}
-                      if (AB==64)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=8$<br>`}
-                      if (AB==49)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=7$<br>`}
-                      if (AB==36)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=6$<br>`}
-                      if (AB==25)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=5$<br>`}
-                      if (AB==16)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=4$<br>`}
-                      if (AB==9)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=3$<br>`}
-                      if (AB==4)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=2$<br>`}
-                     if (AB==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=1$<br>`}
-
+                    if (extraire_racine_carree(AB)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AB=${tex_racine_carree(AB)}$<br>`
                     texte_corr +=`De même : $AC=\\sqrt{\\left(${xC}-${ecriture_parenthese_si_negatif(xA)}\\right)^{2}+\\left(${yC}-${ecriture_parenthese_si_negatif(yA)}\\right)^{2}}$<br>`
                     texte_corr += `$\\phantom{De même :       } AC=\\sqrt{${XAC}+${YAC}}$<br>`
                     texte_corr +=`$\\phantom{De même :       } AC=\\sqrt{${tex_nombre(XAC+YAC)}}$<br>`
-                    if (AC%100==0 && AC!=100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10\\sqrt{${tex_nombre((AC))/100}}$<br>`}
-                    if (AC%81==0 && AC!=81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9\\sqrt{${tex_nombre((AC))/81}}$<br>`}
-                    if (AC%64==0 && AC!=64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8\\sqrt{${tex_nombre((AC))/64}}$<br>`}
-                    if (AC%49==0 && AC!=49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7\\sqrt{${tex_nombre((AC))/49}}$<br>`}
-                     if (AC%36==0&& AC!=36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6\\sqrt{${tex_nombre((AC))/36}}$<br>`}
-                     if (AC%25==0 && AC!=25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5\\sqrt{${tex_nombre((AC))/25}}$<br>`}
-                     if (AC%64!=0 && AC%16==0&& AC!=16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4\\sqrt{${tex_nombre((AC))/16}}$<br>`}
-                    if (AC%81!=0 && AC%9==0 && AC!=9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3\\sqrt{${tex_nombre((AC))/9}}$<br>`}
-                    if (AC%16!=0 && AC%64!==0 &&AC%4==0 && AC!=4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2\\sqrt{${tex_nombre((AC))/4}}$<br>`}
-                      if (AC==100)
-                        { texte_corr +=`$\\phantom{De même :  } AC=10$<br>`}
-                    if (AC==81)
-                        { texte_corr +=`$\\phantom{De même :  } AC=9$<br>`}
-                      if (AC==64)
-                        { texte_corr +=`$\\phantom{De même :  } AC=8$<br>`}
-                      if (AC==49)
-                        { texte_corr +=`$\\phantom{De même :  } AC=7$<br>`}
-                      if (AC==36)
-                        { texte_corr +=`$\\phantom{De même :  } AC=6$<br>`}
-                      if (AC==25)
-                        { texte_corr +=`$\\phantom{De même :  } AC=5$<br>`}
-                      if (AC==16)
-                        { texte_corr +=`$\\phantom{De même :  } AC=4$<br>`}
-                      if (AC==9)
-                        { texte_corr +=`$\\phantom{De même :  } AC=3$<br>`}
-                      if (AC==4)
-                        { texte_corr +=`$\\phantom{De même :  } AC=2$<br>`}
-                     if (AC==1)
-                        { texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=1$<br>`}
-
+                    if (extraire_racine_carree(AC)[0]!=1) texte_corr +=`$\\phantom{On applique la relation à l'énoncé :   } AC=${tex_racine_carree(AC)}$<br>`    
                     texte_corr +=`On observe que $AC\\neq AB$ donc le point $C$ n'appartient pas au cercle de centre $A$ et passant par $B$`
 
                     ;   
@@ -42068,9 +42400,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
      this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Application directe de la formule 2 : Application en situation'];
 }   
 
-/* auteur Stéphane Guyon*/
-
-
+/**
+ * 2N25
+ * @Auteur Stéphane Guyon
+ */
 function union_et_intersection_intervalles_de_R()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -42464,7 +42797,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
     }
 }   
  
-/* auteur Stéphane Guyon*/
+/**
+ * 2N24
+ * @Stéphane Guyon
+ */
 function intervalles_de_R(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Associer un intervalle de  $\\mathbb{R}$ à une inéquation et son schéma sur une droite graduée";
@@ -42759,7 +43095,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 }
 /* auteur Stéphane Guyon*/
 
-
+/**
+ * 2N23
+ * @Auteur Stéphane Guyon
+ */
 function valeur_absolue_et_equation(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Résoudre une équation avec des valeurs absolues";
@@ -42821,9 +43160,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
     }
     
 }
-/* auteur Stéphane Guyon*/
 
-
+/**
+ * 2N22
+ * @Auteur Stéphane Guyon
+ */
 function valeur_absolue(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Utiliser la notion de valeur absolue d'une quantité";
@@ -42897,9 +43238,11 @@ Exercice.call(this); // Héritage de la classe Exercice()
     }
     
 }
-/* auteur Stéphane Guyon*/
 
-
+/**
+ * 2N12-1
+ * @Auteur Stéphane Guyon
+ */
 function identites_remarquables_et_racine_carree(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Développer les identités remarquables avec des racines carrées";
@@ -43021,6 +43364,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
     
 
 }
+/**
+ * 2N12
+ * @Auteur Stéphane Guyon
+ */
 function Double_distributivité_avec_racine_carree(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Appliquer la double distributivité avec les racines carrées";
@@ -43102,7 +43449,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 }
 
 
-
+/**
+ * 2N21
+ * @Auteur Stéphane Guyon
+ */
 function parite()
 {
 Exercice.call(this); // Héritage de la classe Exercice()
@@ -43262,7 +43612,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 }
 
 
-
+/**
+ * 2N20
+ * @Auteur Stéphane Guyon
+ */
 function ensemble_de_nombres(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Déterminer le plus petit ensemble de nombres dans lequel le nombre proposé appartient";
@@ -43416,7 +43769,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
     
 }
 
-
+/**
+ * 2N10-1
+ * @Auteur Stéphane Guyon
+ */
 function proprietes_racine_carree(){
 
     Exercice.call(this); // Héritage de la classe Exercice()
@@ -43549,7 +43905,10 @@ function proprietes_racine_carree(){
         
     }
  
-
+/**
+ * 2N11-1
+ * @Auteur Stéphane Guyon
+ */
 function Simplifier_une_somme_de_racines_carrees() {
     Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Simplifier une somme de racines carrées";
@@ -43603,7 +43962,10 @@ function Simplifier_une_somme_de_racines_carrees() {
     }
     this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, "1 : En donnat la racine carrée unité\n2 : Sans indication"];
 }
-
+/**
+ * 2N10
+ * @Auteur Stéphane Guyon
+ */
 function Existence_d_une_racine_carree(){
 Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Existence d'une racine carrée";
@@ -43680,7 +44042,10 @@ Exercice.call(this); // Héritage de la classe Exercice()
 
 }
 
-
+/**
+ * 2N11
+ * @Auteur Stéphane Guyon
+ */
 function Extraire_un_carre_parfait_d_une_racine_carree() {
     Exercice.call(this); // Héritage de la classe Exercice()
     this.titre = "Ecrire le nombre proposé sous la forme $a\\sqrt{b}$";
@@ -43723,6 +44088,7 @@ function Extraire_un_carre_parfait_d_une_racine_carree() {
 /**
  * Développer avec les 3 identités remarquables
 * @auteur Jean-Claude Lhote
+* 2L10
 */
 function Developper_Identites_remarquables2() {
     'use strict';
@@ -43813,6 +44179,7 @@ function Developper_Identites_remarquables2() {
 /**
  * Factoriser en utilisant les 3 identités remarquables 
 * @auteur Jean-Claude Lhote
+* 2L11
 */
 function Factoriser_Identites_remarquables2() {
     'use strict';
@@ -43901,6 +44268,10 @@ function Factoriser_Identites_remarquables2() {
     }
     this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Coefficient de x égal à 1\n 2 : Coefficient de x supérieur à 1\n 3 : Coefficient de x rationnel'];
 }
+/**
+ * 1N10
+ * @Auteur Gaelle Morvan
+ */
 function Terme_d_une_suite_definie_explicitement(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Déterminer les termes d'une suite définie de façon explicite";
@@ -44041,7 +44412,10 @@ function Terme_d_une_suite_definie_explicitement(){
 }
 
 
-
+/**
+ * 1N11
+ * @Auteur Gaelle Morvan
+ */
 function Terme_d_une_suite_definie_par_recurrence(){
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Déterminer les termes d'une suite définie par récurrence";
