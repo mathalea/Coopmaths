@@ -547,6 +547,30 @@ function ecriture_algebrique(a) {
 	}
 	return result;
 };
+
+/**
+* Ajoute le + devant les nombres positifs, n'écrit rien si 1
+* @Example
+* //+3 ou -3
+* @Auteur Rémi Angot
+*/
+function ecriture_algebrique_sauf1(a) { 
+	let result = '';
+	if (a>=0) {
+		result = '+'+tex_nombrec(a);
+	}
+	if (a<0) {
+		result = tex_nombrec(a);
+	}
+	if (a==1) {
+		result = '+';
+	}
+	if (a==-1){
+		result = '-';
+	}
+	return result;
+};
+
 /**
  * Idem ecriture_algebrique mais retourne le nombre en couleur (vert si positif, rouge si négatif et noir si nul)
  * @param {number} a 
@@ -2592,6 +2616,8 @@ function tex_graphique(f,xmin=-5,xmax=5,ymin=-5,ymax=5,xstep=1,ystep=1) {
 
 /**
  *  Classe MatriceCarree
+ * Générateur de Matrice :
+ * Si l'argument est un nombre, alors 
  *  @Auteur Jean-Claude Lhote
  */
 function MatriceCarree(table){
@@ -2646,6 +2672,9 @@ function MatriceCarree(table){
 		}
 		return matriceCarree(resultat)
 	}
+	/**
+	 * Méthode : m=M.cofacteurs() retourne la matrice des cofacteurs de M utilisée dans l'inversion de M.
+	 */
 	this.cofacteurs = function () { // renvoie la matrice des cofacteurs. 
 		let n = this.dim, resultat = [], ligne, M
 		if (n > 2) {
@@ -2664,6 +2693,9 @@ function MatriceCarree(table){
 		else return false
 		return matriceCarree(resultat)
 	}
+	/**
+	 * Méthode : m=M.transposee() retourne la matrice transposée de M utilisée pour l'inversion de M
+	 */
 	this.transposee=function() { // retourne la matrice transposée
 		let n=this.dim,resultat=[],ligne
 		for (let i=0;i<n;i++) {
@@ -2675,6 +2707,10 @@ function MatriceCarree(table){
 		}
 		return matriceCarree(resultat)
 	}
+	/**
+	 * m=M.multiplieParReel(k) Multiplie tous les éléments de la matrice par k. Utilisée pour l'inversion de M
+	 * @param {*} k 
+	 */
 	this.multiplieParReel=function(k){ // retourne k * la matrice
 		let n=this.dim,resultat=[],ligne
 		for (let i=0;i<n;i++) {
@@ -2686,6 +2722,11 @@ function MatriceCarree(table){
 		}
 		return matriceCarree(resultat)
 	}
+
+	/**
+	 * Méthode : Calcule le produit d'une matrice nxn par un vecteur 1xn (matrice colonne): retourne un vecteur 1xn.
+	 * 
+	 */
 	this.multiplieVecteur = function (V) { // Vecteur est un simple array pour l'instant
 		let n = this.dim, resultat=[], somme
 		if (n == V.length) {
@@ -2700,6 +2741,9 @@ function MatriceCarree(table){
 		}
 		else return false
 	}
+	/**
+	 * Méthode : m=M.inverse() Retourne la matrice inverse de M. Utilisation : résolution de systèmes linéaires 
+	 */
 	this.inverse=function() { // retourne la matrice inverse (si elle existe)
 		let n=this.dim,resultat=[],ligne
 		let d=this.determinant()
@@ -2708,6 +2752,10 @@ function MatriceCarree(table){
 		}
 		else return false
 	}
+	/**
+	 * Méthode : m=M.multiplieMatriceCarree(P) : retourne m = M.P
+	 *
+	 */
 	this.multiplieMatriceCarree=function(M){
 		let n=this.dim,resultat=[],ligne,somme
 		for (let i=0;i<n;i++) {
@@ -2723,6 +2771,10 @@ function MatriceCarree(table){
 	}
 }
 
+/**
+ * Crée une nouvelle instance de la classe MatriceCarree à partir d'un tableau.
+ * 
+ */
 function matriceCarree(table){
 	return new MatriceCarree(table)
 }
@@ -6489,7 +6541,6 @@ function partieEntiereEnLettres(nb) {
 		classeDesUnites =  dictionnaire[nbString.substring(nbString.length-3,nbString.length).replace(/^0{1,2}/,'')].replaceAll(' ','-')
 	}
 	let result = ''
-	console.log(classeDesMilliards,classeDesMillions,classeDesMilliers,classeDesUnites)
 	if (classeDesMilliards.length>1){
 		classeDesMilliards == 'un' ? result += classeDesMilliards+'-milliard' : result += classeDesMilliards+'-milliards'
 		if (classeDesMillions!="zéro" || classeDesMilliers!="zéro" || classeDesUnites!="zéro"){
@@ -7047,6 +7098,8 @@ var liste_des_exercices_disponibles = {
   "CM019": Le_compte_est_bonV3,
   "CM020": Le_compte_est_bonV4,
   "CM021": Compte_Est_Bon,
+  "c3C11" : Division_cycle3,
+  "c3N10" : Ecrire_entiers_cycle3,
   "6C10": Additions_soustractions_multiplications_posees,
   "6C11": Divisions_euclidiennes,
   "6C10-1": Tables_de_multiplications,
@@ -7310,6 +7363,8 @@ var liste_des_exercices_disponibles = {
   "2L11": Factoriser_Identites_remarquables2,
   "1N10": Terme_d_une_suite_definie_explicitement,
   "1N11": Terme_d_une_suite_definie_par_recurrence, 
+  "beta1E10" : Calcul_discriminant,
+  "beta1E11" : Resoudre_equation_degre_2,
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   "betaTESTseb": Tests_du_Seb,
@@ -8991,7 +9046,7 @@ function Somme_de_durees() {
     }
     liste_de_question_to_contenu(this);
   };
-  this.besoin_formulaire_numerique = ["Niveau de difficulté", 2]; //"1 : Additions simples\n2 : Additions avec d'éventuelles conversions"]
+  this.besoin_formulaire_numerique = ["Niveau de difficulté", 2]; //"1 : Additions simples\n2 : Additions avec d'��ventuelles conversions"]
 }
 
 /**
@@ -16384,7 +16439,6 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
     }
     liste_de_question_to_contenu(this);
   };
-  //this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif']
 }
 
 /**
@@ -16518,7 +16572,6 @@ function Additions_soustractions_multiplications_posees() {
     }
     liste_de_question_to_contenu(this);
   };
-  //this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif']
 }
 
 /**
@@ -19477,16 +19530,16 @@ function Nommer_et_coder_des_polygones() {
       }
       [pol, polnom, polcode, polsom, texte] = choisir_polygone(liste[i]);
       if (pol.listePoints.length==4){
-      Xmin=Math.min(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x,pol.listePoints[3].x)-1
-      Ymin=Math.min(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y,pol.listePoints[3].y)-1
-      Xmax=Math.max(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x,pol.listePoints[3].x)+1
-      Ymax=Math.max(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y,pol.listePoints[3].y)+1
+      Xmin=Math.floor(Math.min(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x,pol.listePoints[3].x)-1)
+      Ymin=Math.floor(Math.min(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y,pol.listePoints[3].y)-1)
+      Xmax=Math.ceil(Math.max(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x,pol.listePoints[3].x)+1)
+      Ymax=Math.ceil(Math.max(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y,pol.listePoints[3].y)+1)
       }
       else{
-        Xmin=Math.min(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x)-1
-        Ymin=Math.min(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y)-1
-        Xmax=Math.max(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x)+1
-        Ymax=Math.max(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y)+1
+        Xmin=Math.floor(Math.min(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x)-1)
+        Ymin=Math.floor(Math.min(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y)-1)
+        Xmax=Math.ceil(Math.max(pol.listePoints[0].x,pol.listePoints[1].x,pol.listePoints[2].x)+1)
+        Ymax=Math.ceil(Math.max(pol.listePoints[0].y,pol.listePoints[1].y,pol.listePoints[2].y)+1)
    
       }
       params = {
@@ -19676,7 +19729,7 @@ function Notation_segment_droite_demi_droite() {
         dAC,
         labels
       );
-      texte_corr = `...tracer $${dABCorr}, ${dBCCorr}, ${dACCorr}.$`;
+      texte_corr = `...tracer ${dABCorr}, ${dBCCorr}, ${dACCorr}.`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
@@ -20257,10 +20310,10 @@ function Parallele_et_Perpendiculaires() {
             lC
           )}$ cm et $AN \\approx ${tex_nombre(lD)}$ cm.<br>`;
           correction += `Pour la perpendiculaire en $B$, contrôle la position du point $E$.<br>`;
-          Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,CC.x,DD.x)-1
-          Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,CC.x,DD.x)+1
-          Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,CC.y,DD.y)-1
-          Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,CC.y,DD.y)+1
+          Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,E.x,CC.x,DD.x)-1)
+          Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,E.x,CC.x,DD.x)+1)
+          Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,E.y,CC.y,DD.y)-1)
+          Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,E.y,CC.y,DD.y)+1)
           break;
         case 2:
           A = point(2, 0, "A",'below left');
@@ -20300,10 +20353,10 @@ function Parallele_et_Perpendiculaires() {
           )}$ cm et $AO \\approx${tex_nombre(
             lE
           )}$ cm.<br>`;
-          Xmin=Math.min(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)-1
-          Xmax=Math.max(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)+1
-          Ymin=Math.min(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)-1
-          Ymax=Math.max(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)+1
+          Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)-1)
+          Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,E.x,F.x,EE.x,CC.x,DD.x)+1)
+          Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)-1)
+          Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,E.y,F.y,EE.y,CC.y,DD.y)+1)
           break;
           case 3:
             A = point(0, 0, "A", "above left");
@@ -20425,7 +20478,6 @@ function Parallele_et_Perpendiculaires() {
         },
         objets_correction
       );
-      console.log(Xmin,Ymin,Xmax,Ymax)
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(enonce + "<br>");
@@ -22321,6 +22373,7 @@ jQuery(document).ready(function () {
   );
 
   // Détermine le nombre d'exercices par niveaux
+  let nombre_d_exercices_disponibles_c3 = 0;
   let nombre_d_exercices_disponibles_6 = 0;
   let nombre_d_exercices_disponibles_5 = 0;
   let nombre_d_exercices_disponibles_4 = 0;
@@ -22333,6 +22386,9 @@ jQuery(document).ready(function () {
   let nombre_d_exercices_disponibles_PE = 0;
   let nombre_d_exercices_disponibles_beta = 0;
   for (var id in liste_des_exercices_disponibles) {
+    if (id[0] == "c" && id[1] == "3") {
+      nombre_d_exercices_disponibles_c3 += 1;
+    }
     if (id[0] == 6) {
       nombre_d_exercices_disponibles_6 += 1;
     }
@@ -22369,6 +22425,7 @@ jQuery(document).ready(function () {
   }
 
   //
+  let liste_html_des_exercices_c3 =[];
   let liste_html_des_exercices_6 = [];
   let liste_html_des_exercices_5 = [];
   let liste_html_des_exercices_4 = [];
@@ -22405,38 +22462,41 @@ jQuery(document).ready(function () {
     return liste;
   }
 
+  liste_html_des_exercices_c3 = liste_html_des_exercices_d_un_niveau([
+    ['c3C1','c3C1 - Calculs niveau 1'],['c3N1','c3N1 - Numération Niveau 1']])
+  
+  liste_html_des_exercices_6 = liste_html_des_exercices_d_un_niveau([
+    ['6C1','6C1 - Calculs niveau 1'],['6C2','6C2 - Calculs niveau 2'],['6C3','6C3 - Calculs niveau 3'],
+    ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],['6M3', '6M3 - Volumes'],['6P1','6P1 - Proportionnalité'],
+    ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
+    ['6D1','6D1 - Les durées'],
+    ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3'],['6N4','6N4 - Numération et fractions niveau 4']])
+    liste_html_des_exercices_5 = liste_html_des_exercices_d_un_niveau([
+      ['5A1','5A1 - Arithmetique'],['5C1','5C1 - Calculs'],
+      ['5G1','5G1 - Symétries'],['5G2','5G2 - Triangles'],['5G3','5G3 - Angles'],['5G4','5G4 - Parallélogrammes'],['5G5','5G5 - Espace'],
+      ['5L1','5L1 - Calcul littéral'],
+      ['5M1','5M1 - Périmètres et aires'],['5M2','5M2 - Volumes'],['5M3','5M3 - Durées'],
+      ['5N1','5N1 - Numération et fractions niveau 1'],['5N2','5N2 - Calculs avec les fractions'],
+      ['5P1','5P1 - Proportionnalité'],['5R1','5R1 - Relatifs niveau 1'],['5R2','5R2 - Relatifs niveau 2'],
+      ['5S1','5S1 - Statistiques'],['5S2','5S2 - Probabilités']
+    ])
+    liste_html_des_exercices_4 = liste_html_des_exercices_d_un_niveau([
+      ['4C1','4C1 - Relatifs'],['4C2','4C2 - Fractions'],['4C3','4C3 - Puissances'],
+      ['4F1','4F1 - Notion de fonction'],
+      ['4G1','4G1 - Translation et rotation'],['4G2','4G2 - Théorème de Pythagore'],['4G3','4G3 - Théorème de Thalès'],['4G4',"4G4 - Cosinus d'un angle"],['4G5',"4G5 - Espace"],
+      ['4L1','4L1 - Calcul littéral'],['4L2','4L2 - Équation'],['4P1','4P1 - Proportionnalité'],['4S1','4S1 - Statistiques'],['4S2','4S2 - Probabilités'],
+      ['4Algo1','4Algo1 - Algorithmique']
+    ])
+    liste_html_des_exercices_3 = liste_html_des_exercices_d_un_niveau([
+      ['3A1','3A1 - Arithmetique'],
+      ['3F1','3F1 - Généralités sur les fonctions'],['3F2','3F2 - Fonctions affines et linéaires'],
+      ['3G1','3G1 - Homothétie et rotation'],['3G2','3G2 - Théorème de Thalès'],['3G3','3G3 - Trigonométrie'],['3G4',"3G4 - Espace"],
+      ['3L1','3L1 - Calcul littéral'],['3P1','3P1 - Proportionnalité'],['3S1','3S1 - Statistiques'],['3S2','3S2 - Probabilités']
+    ])
 
-    
   for (var id in liste_des_exercices_disponibles) {
     let exercice_tmp = new liste_des_exercices_disponibles[id]();
-    liste_html_des_exercices_6 = liste_html_des_exercices_d_un_niveau([
-      ['6C1','6C1 - Calculs niveau 1'],['6C2','6C2 - Calculs niveau 2'],['6C3','6C3 - Calculs niveau 3'],
-      ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],['6M3', '6M3 - Volumes'],['6P1','6P1 - Proportionnalité'],
-      ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
-      ['6D1','6D1 - Les durées'],
-      ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3'],['6N4','6N4 - Numération et fractions niveau 4']])
-      liste_html_des_exercices_5 = liste_html_des_exercices_d_un_niveau([
-        ['5A1','5A1 - Arithmetique'],['5C1','5C1 - Calculs'],
-        ['5G1','5G1 - Symétries'],['5G2','5G2 - Triangles'],['5G3','5G3 - Angles'],['5G4','5G4 - Parallélogrammes'],['5G5','5G5 - Espace'],
-        ['5L1','5L1 - Calcul littéral'],
-        ['5M1','5M1 - Périmètres et aires'],['5M2','5M2 - Volumes'],['5M3','5M3 - Durées'],
-        ['5N1','5N1 - Numération et fractions niveau 1'],['5N2','5N2 - Calculs avec les fractions'],
-        ['5P1','5P1 - Proportionnalité'],['5R1','5R1 - Relatifs niveau 1'],['5R2','5R2 - Relatifs niveau 2'],
-        ['5S1','5S1 - Statistiques'],['5S2','5S2 - Probabilités']
-      ])
-      liste_html_des_exercices_4 = liste_html_des_exercices_d_un_niveau([
-        ['4C1','4C1 - Relatifs'],['4C2','4C2 - Fractions'],['4C3','4C3 - Puissances'],
-        ['4F1','4F1 - Notion de fonction'],
-        ['4G1','4G1 - Translation et rotation'],['4G2','4G2 - Théorème de Pythagore'],['4G3','4G3 - Théorème de Thalès'],['4G4',"4G4 - Cosinus d'un angle"],['4G5',"4G5 - Espace"],
-        ['4L1','4L1 - Calcul littéral'],['4L2','4L2 - Équation'],['4P1','4P1 - Proportionnalité'],['4S1','4S1 - Statistiques'],['4S2','4S2 - Probabilités'],
-        ['4Algo1','4Algo1 - Algorithmique']
-      ])
-      liste_html_des_exercices_3 = liste_html_des_exercices_d_un_niveau([
-        ['3A1','3A1 - Arithmetique'],
-        ['3F1','3F1 - Généralités sur les fonctions'],['3F2','3F2 - Fonctions affines et linéaires'],
-        ['3G1','3G1 - Homothétie et rotation'],['3G2','3G2 - Théorème de Thalès'],['3G3','3G3 - Trigonométrie'],['3G4',"3G4 - Espace"],
-        ['3L1','3L1 - Calcul littéral'],['3P1','3P1 - Proportionnalité'],['3S1','3S1 - Statistiques'],['3S2','3S2 - Probabilités']
-      ])
+    
     if (id[0] == 2) {
       liste_html_des_exercices_2 +=
         '<span class="id_exercice">' +
@@ -22519,6 +22579,9 @@ jQuery(document).ready(function () {
     liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Calcul mental (${nombre_d_exercices_disponibles_CM})</div><div class="active content">`;
     liste_html_des_exercices += liste_html_des_exercices_CM;
     liste_html_des_exercices += `</div>`;
+    liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Cours Moyen(${nombre_d_exercices_disponibles_c3})</div><div class="content">`;
+    liste_html_des_exercices += liste_html_des_exercices_c3;
+    liste_html_des_exercices += `</div>`;
     liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="content">`;
     liste_html_des_exercices += liste_html_des_exercices_6;
     liste_html_des_exercices += `</div>`;
@@ -22545,7 +22608,10 @@ jQuery(document).ready(function () {
     liste_html_des_exercices += `</div>`;
     liste_html_des_exercices += `</div>`;
   } else {
-    liste_html_des_exercices += `<div class="ui accordion"><div class="title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="content">`;
+    liste_html_des_exercices += `<div class="ui accordion"><div class="title"><i class="dropdown icon"></i>Cours Moyen (${nombre_d_exercices_disponibles_c3})</div><div class="content">`;
+    liste_html_des_exercices += liste_html_des_exercices_c3;
+    liste_html_des_exercices += `</div>`;
+    liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Sixième (${nombre_d_exercices_disponibles_6})</div><div class="content">`;
     liste_html_des_exercices += liste_html_des_exercices_6;
     liste_html_des_exercices += `</div>`;
     liste_html_des_exercices += `<div class="title"><i class="dropdown icon"></i>Cinquième (${nombre_d_exercices_disponibles_5})</div><div class="content">`;
@@ -22614,7 +22680,16 @@ jQuery(document).ready(function () {
   });
 });
 
-/**
+// Exercices de 6ème déclinés en cycle3
+function Ecrire_entiers_cycle3(){
+    Ecrire_nombres_entiers.call(this)
+    this.sup=1
+    this.sup2=1
+}
+function Division_cycle3(){
+    Divisions_euclidiennes.call(this)
+    this.sup=1
+}/**
 * Décomposer en produit de facteurs premiers un nombre (la décomposition aura 3, 4 ou 5 facteurs premiers)
 * @Auteur Rémi Angot
 5A13
@@ -28373,7 +28448,7 @@ function Construire_par_Symetrie() {
 			enonce += num_alpha(2)+` Construire le point $${p1nom[3]}\'$ symétrique de $${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
 			enonce += num_alpha(3)+` Construire le point $${p1nom[0]}\'$ symétrique de $${p1nom[0]}$ par rapport au point $${p1nom[1]}$.<br>`
 			enonce += num_alpha(4)+` Coder la figure.<br>`;
-			Xmin=MAth.floor(Math.min(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)-1)
+			Xmin=Math.floor(Math.min(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)-1)
 			Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,AA.x,CC.x,DD.x)+1)
 			Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)-1)
 			Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,AA.y,CC.y,DD.y)+1)
@@ -28491,7 +28566,7 @@ function Construire_par_Symetrie() {
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[0]}\'${p1nom[2]}\'${p1nom[3]}\'$ symétrique de $${p1nom[0]}${p1nom[2]}${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
 				enonce += num_alpha(2)+` Coder la figure.<br>`;
-				MAth.floor(Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1)
+				Math.floor(Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1)
 				Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1)
 				Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1)
 				Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1)
@@ -28736,10 +28811,6 @@ function Problemes_additifs_fractions_5e(){
 			destinations_vols = shuffle(destinations_vols);
 			do {		
 				nb_vols_total = randint(200,600);
-				console.log(nb_vols_total%2);
-				console.log(nb_vols_total%3);
-				console.log(nb_vols_total%4);
-				console.log(nb_vols_total%2 != 0 && nb_vols_total%3 != 0 && nb_vols_total%4 != 0)
 			} while (nb_vols_total%2 != 0 || nb_vols_total%3 != 0 || nb_vols_total%4 != 0)
 
 			// pour les situations
@@ -36761,7 +36832,6 @@ function Calculs_avec_puissances_de_dix() {
       nombre=calcul(mantisse*10**exp)
       mantisse1=calcul(mantisse*10**decalage)
       exp1=exp-decalage
-      console.log(nombre,`=`,mantisse1,`x10^`,exp1)
 
       decimalstring=`${tex_nombrec(mantisse1)} \\times 10^{${exp1}}`
       scientifiquestring=`${tex_nombre(mantisse)} \\times 10^{${exp}}`
@@ -47213,7 +47283,6 @@ function Passer_de_la_base_12_ou_16_a_la_10() {
 						chiffre3 = choice(['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9']);
 					}
 					n = valeur_base(chiffre1)*b**2+valeur_base(chiffre2)*b+valeur_base(chiffre3);
-					console.log(n,chiffre1,chiffre2,chiffre3)
 					texte = `Écrire en base ${b} le nombre ${nombre_avec_espace(n)}.`;
 					texte_corr = `$${tex_nombre(n)}=${b}\\times${Math.floor(n/b)}+${mise_en_evidence(n%b)}$`;
 					texte_corr += `<br>$${Math.floor(n/b)}=${b}\\times${mise_en_evidence(valeur_base(chiffre1))}+${mise_en_evidence(valeur_base(chiffre2))}$`;
@@ -51558,6 +51627,156 @@ function Terme_d_une_suite_definie_par_recurrence(){
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
+}
+
+
+/**
+ * Calcul de discriminant pour identifier la forme graphique associée (0 solution dans IR, 1 ou 2)
+ * @Auteur Rémi Angot
+ * Référence 1E10
+*/
+function Calcul_discriminant() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Calcul du discriminant d'une équation du second degré";
+  this.consigne = "Pour chaque équation, calculer le discriminant et déterminer le nombre de solutions de cette équation dans $\\mathbb{R}$.";
+  this.nb_questions = 6;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  if (sortie_html) {
+    this.spacing_corr = 2
+  }
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_types_equations = combinaison_listes(["0solution","1solution","2solutions"],this.nb_questions)
+    for (let i = 0, texte, texte_corr, a, b, c, delta, x1, x2, y1, y2, cpt = 0;i < this.nb_questions && cpt < 50;) {
+      switch (liste_types_equations[i]) {
+        case "0solution": 
+          k = randint(1,5);
+          x1 = randint(-3,3);
+          y1 = randint(1,5);
+          if (choice(['+','-'])=='+') { // k(x-x1)^2 + y1 avec k>0 et y1>0
+            a = k;
+            b = -2 * k * x1;
+            c = k * x1 * x1 + y1;
+          } else { // -k(x-x1)^2 -y1 avec k>0 et y1>0
+            a = -k;
+            b = 2 * k * x1;
+            c = - k * x1 * x1 + y1
+          }
+          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+          if (b == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
+          }
+          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+          texte_corr += `<br>$\\Delta<0$ donc l'équation n'admet pas de solution.`
+          texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
+          break;
+        case "1solution": // k(x-x1)^2
+          k = randint(-5,5,[0]);
+          x1 = randint(-5,5,[0]);
+          a = k;
+          b = -2 * k * x1;
+          c = k * x1 * x1;
+          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+          if (b == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
+          }
+          if (c == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x=0$`
+          }
+          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+          texte_corr += `<br>$\\Delta=0$ donc l'équation admet une unique solution.`
+          //texte_corr += `<br>$\\mathcal{S}={${x1}}$`
+          break;
+          case "2solutions": // k(x-x1)^2
+          k = randint(1,5);
+          x1 = randint(-3,3);
+          y1 = randint(1,5);
+          if (choice(['+','-'])=='+') { // k(x-x1)^2 + y1 avec k>0 et y1<0
+            y1 *=-1;
+            a = k;
+            b = -2 * k * x1;
+            c = k * x1 * x1 + y1;
+          } else { // -k(x-x1)^2 -y1 avec k>0 et y1>0
+            a = -k;
+            b = 2 * k * x1;
+            c = - k * x1 * x1 + y1
+          }
+          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+          if (b == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
+          }
+          if (c == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x=0$`
+          }
+          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+          texte_corr += `<br>$\\Delta>0$ donc l'équation admet deux solutions.`
+          //texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
+          break;
+        default:
+          break;
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+/**
+ * Calcul de discriminant pour identifier la forme graphique associée (0 solution dans IR, 1 ou 2)
+ * @Auteur Rémi Angot
+ * Référence 1E11
+*/
+function Resoudre_equation_degre_2() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Résoudre une équation du second degré";
+  this.consigne = "Résoudre dans $\\mathbb{R}$ les équations suivantes.";
+  this.nb_questions = 4;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.spacing_corr = 3
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    for (let i = 0, texte, texte_corr, a, b, c, delta, x1, x2, y1, y2, cpt = 0;i < this.nb_questions && cpt < 50;) {
+      // k(x-x1)(x-x2)
+      x1 = randint(-5,2,[0]);
+      x2 = randint(x1+1,5,[0,-x1]);
+      k = randint(-4,4,[0]);
+      a = k;
+      b = -k * x1 -k * x2;
+      c = k * x1 * x2
+      texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+      
+      texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+      texte_corr += `<br>$\\Delta>0$ donc l'équation admet deux solutions : $x_1 = \\dfrac{-b-\\sqrt{\\Delta}}{2a}$ et $x_2 = \\dfrac{-b+\\sqrt{\\Delta}}{2a}$`
+      texte_corr += `<br>$x_1 =\\dfrac{${-b}-\\sqrt{${b*b-4*a*c}}}{${2*a}}=${x1}$`
+      texte_corr += `<br>$x_2 =\\dfrac{${-b}+\\sqrt{${b*b-4*a*c}}}{${2*a}}=${x2}$`
+      texte_corr += `<br>L'ensemble des solutions de cette équation est : $\\mathcal{S}=\\{${x1} ; ${x2}\\}$.`  
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }/*
 MathALEA
 Rémi Angot --- CC-By-SA
@@ -51912,8 +52131,10 @@ form_choix_des_exercices = document.getElementById('choix_des_exercices');
 form_choix_des_exercices.addEventListener('change', function(e) { // Changement du texte
 	if (e.target.value=='') {
 		liste_des_exercices = [];
+		exercice = []
 	} else {
 		liste_des_exercices = [];
+		exercice = []
 		liste_des_exercices = e.target.value.replace(/\s/g, "").replace(";", ",").split(",");// Récupère  la saisie de l'utilisateur
 		//en supprimant les espaces et en remplaçant les points-virgules par des virgules.	
 	}
@@ -52014,6 +52235,8 @@ function mise_a_jour_du_code(){
           }
       	});
 		
+	} else {
+		// liste d'exercice vide à l'arrivée ou liste d'exercice vide par modification
 	}
 
 	

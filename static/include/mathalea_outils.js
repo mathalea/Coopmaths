@@ -547,6 +547,30 @@ function ecriture_algebrique(a) {
 	}
 	return result;
 };
+
+/**
+* Ajoute le + devant les nombres positifs, n'écrit rien si 1
+* @Example
+* //+3 ou -3
+* @Auteur Rémi Angot
+*/
+function ecriture_algebrique_sauf1(a) { 
+	let result = '';
+	if (a>=0) {
+		result = '+'+tex_nombrec(a);
+	}
+	if (a<0) {
+		result = tex_nombrec(a);
+	}
+	if (a==1) {
+		result = '+';
+	}
+	if (a==-1){
+		result = '-';
+	}
+	return result;
+};
+
 /**
  * Idem ecriture_algebrique mais retourne le nombre en couleur (vert si positif, rouge si négatif et noir si nul)
  * @param {number} a 
@@ -2592,6 +2616,8 @@ function tex_graphique(f,xmin=-5,xmax=5,ymin=-5,ymax=5,xstep=1,ystep=1) {
 
 /**
  *  Classe MatriceCarree
+ * Générateur de Matrice :
+ * Si l'argument est un nombre, alors 
  *  @Auteur Jean-Claude Lhote
  */
 function MatriceCarree(table){
@@ -2646,6 +2672,9 @@ function MatriceCarree(table){
 		}
 		return matriceCarree(resultat)
 	}
+	/**
+	 * Méthode : m=M.cofacteurs() retourne la matrice des cofacteurs de M utilisée dans l'inversion de M.
+	 */
 	this.cofacteurs = function () { // renvoie la matrice des cofacteurs. 
 		let n = this.dim, resultat = [], ligne, M
 		if (n > 2) {
@@ -2664,6 +2693,9 @@ function MatriceCarree(table){
 		else return false
 		return matriceCarree(resultat)
 	}
+	/**
+	 * Méthode : m=M.transposee() retourne la matrice transposée de M utilisée pour l'inversion de M
+	 */
 	this.transposee=function() { // retourne la matrice transposée
 		let n=this.dim,resultat=[],ligne
 		for (let i=0;i<n;i++) {
@@ -2675,6 +2707,10 @@ function MatriceCarree(table){
 		}
 		return matriceCarree(resultat)
 	}
+	/**
+	 * m=M.multiplieParReel(k) Multiplie tous les éléments de la matrice par k. Utilisée pour l'inversion de M
+	 * @param {*} k 
+	 */
 	this.multiplieParReel=function(k){ // retourne k * la matrice
 		let n=this.dim,resultat=[],ligne
 		for (let i=0;i<n;i++) {
@@ -2686,6 +2722,11 @@ function MatriceCarree(table){
 		}
 		return matriceCarree(resultat)
 	}
+
+	/**
+	 * Méthode : Calcule le produit d'une matrice nxn par un vecteur 1xn (matrice colonne): retourne un vecteur 1xn.
+	 * 
+	 */
 	this.multiplieVecteur = function (V) { // Vecteur est un simple array pour l'instant
 		let n = this.dim, resultat=[], somme
 		if (n == V.length) {
@@ -2700,6 +2741,9 @@ function MatriceCarree(table){
 		}
 		else return false
 	}
+	/**
+	 * Méthode : m=M.inverse() Retourne la matrice inverse de M. Utilisation : résolution de systèmes linéaires 
+	 */
 	this.inverse=function() { // retourne la matrice inverse (si elle existe)
 		let n=this.dim,resultat=[],ligne
 		let d=this.determinant()
@@ -2708,6 +2752,10 @@ function MatriceCarree(table){
 		}
 		else return false
 	}
+	/**
+	 * Méthode : m=M.multiplieMatriceCarree(P) : retourne m = M.P
+	 *
+	 */
 	this.multiplieMatriceCarree=function(M){
 		let n=this.dim,resultat=[],ligne,somme
 		for (let i=0;i<n;i++) {
@@ -2723,6 +2771,10 @@ function MatriceCarree(table){
 	}
 }
 
+/**
+ * Crée une nouvelle instance de la classe MatriceCarree à partir d'un tableau.
+ * 
+ */
 function matriceCarree(table){
 	return new MatriceCarree(table)
 }
@@ -6489,7 +6541,6 @@ function partieEntiereEnLettres(nb) {
 		classeDesUnites =  dictionnaire[nbString.substring(nbString.length-3,nbString.length).replace(/^0{1,2}/,'')].replaceAll(' ','-')
 	}
 	let result = ''
-	console.log(classeDesMilliards,classeDesMillions,classeDesMilliers,classeDesUnites)
 	if (classeDesMilliards.length>1){
 		classeDesMilliards == 'un' ? result += classeDesMilliards+'-milliard' : result += classeDesMilliards+'-milliards'
 		if (classeDesMillions!="zéro" || classeDesMilliers!="zéro" || classeDesUnites!="zéro"){
