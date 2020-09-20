@@ -21,6 +21,8 @@ var liste_des_exercices_disponibles = {
   "CM019": Le_compte_est_bonV3,
   "CM020": Le_compte_est_bonV4,
   "CM021": Compte_Est_Bon,
+  "c3C10-1" : Tables_de_multiplications,
+  "c3C10-4" : Exercice_tables_d_additions_cycle3,
   "c3C11" : Division_cycle3,
   "c3N10" : Ecrire_entiers_cycle3,
   "6C10": Additions_soustractions_multiplications_posees,
@@ -87,10 +89,10 @@ var liste_des_exercices_disponibles = {
   "6N12": Multiplier_entier_par_10_100_1000,
   "6N13": Exercice_6N13,
   "6N14" : Representer_une_fraction,
-  "6N14-2" : Ajouter_des_fractions_d_unite,
   "6N20": Exercice_fractions_decomposer,
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
+  "6N22" : Ajouter_des_fractions_d_unite,
   "6N23": Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
   "beta6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
@@ -116,7 +118,8 @@ var liste_des_exercices_disponibles = {
   "6P11": Proportionnalite_par_linearite,
   "6P11-1": Proportionnalite_par_linearite_bis,
   "5A10": Liste_des_diviseurs_5e,
-  "5A11": Premier_ou_pas_5e,
+  "5A11": Tableau_criteres_de_divisibilite,
+  "5A12-1": Premier_ou_pas_5e,
   "5A13": Exercice_decomposer_en_facteurs_premiers,
   "5C11": Traduire_une_phrase_par_une_expression,
   "5C11-1": Traduire_une_expression_par_une_phrase,
@@ -161,7 +164,7 @@ var liste_des_exercices_disponibles = {
   "5L14": Tester_une_egalite,
   "5M10": Aire_du_parallelogramme,
   "5M20": Calcul_de_volumes_5e,
-  "5P10-1": Tableaux_et_proportionnalite,
+  "5P10": Tableaux_et_proportionnalite,
   "5R10-0": Trouver_oppose,
   "5R11": Lire_abscisse_relative,
   "5R11-2": Placer_points_sur_axe_relatifs,
@@ -216,7 +219,7 @@ var liste_des_exercices_disponibles = {
   "4G20" : Pythagore2D,
   "4G20-1": Egalite_Pythagore2D, // Anciennement Egalite_Pythagore,
   "4G20-2": Racine_caree_de_carres_parfaits,
-  "4G20-3": Exercice_Pythagore,
+  "4G20MG32": Exercice_Pythagore,
   "4G21": Reciproque_Pythagore,
   "4G22": Problemes_Pythagore,
   "4G30": Thales_4eme,
@@ -9694,10 +9697,9 @@ function Divisions_euclidiennes() {
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-
-    this.sup == 1
-      ? (type_de_questions_disponibles = [1, 2, 2, 3])
-      : (type_de_questions_disponibles = [4, 4, 5, 6]);
+    if (this.sup==0) type_de_questions_disponibles=[1,1,1,1]
+    else if (this.sup ==1)  type_de_questions_disponibles = [1, 2, 2, 3]
+    else if  (this.sup==2) type_de_questions_disponibles = [4, 4, 5, 6];
     let liste_type_de_questions = combinaison_listes(
       type_de_questions_disponibles,
       this.nb_questions
@@ -11555,6 +11557,11 @@ function Transformations() {
 }
 
 // Exercices paramétrés pour correspondre au référentiel
+// Référence 5P10
+//function Proportionnalite_pas_proportionnalite_5e(){
+//  Proportionnalite_pas_proportionnalite.call(this)
+  // Pas de paramètres Sup
+//}
 
 // Référence 6C23
 function Exercice_additionner_des_fractions_6e() {
@@ -15611,8 +15618,12 @@ function Ecrire_entiers_cycle3(){
 }
 function Division_cycle3(){
     Divisions_euclidiennes.call(this)
-    this.sup=1
-}/**
+    this.sup=0
+}
+function Exercice_tables_d_additions_cycle3() {
+    Exercice_tables_d_additions.call(this,10)
+}
+/**
 * Décomposer en produit de facteurs premiers un nombre (la décomposition aura 3, 4 ou 5 facteurs premiers)
 * @Auteur Rémi Angot
 5A13
@@ -25856,7 +25867,7 @@ function Reciproque_Thales() {
 
 /**
  * @auteur Jean-Claude Lhote
- * 4G20-3
+ * 4G20MG32
  */
 function Exercice_Pythagore() {
   Exercice.call(this); // Héritage de la classe Exercice()
@@ -44568,6 +44579,8 @@ function Calcul_discriminant() {
   if (sortie_html) {
     this.spacing_corr = 2
   }
+  this.correction_detaillee_disponible = true;
+  sortie_html ? correction_detaillee = true : correction_detaillee = false ;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
@@ -44586,7 +44599,7 @@ function Calcul_discriminant() {
           } else { // -k(x-x1)^2 -y1 avec k>0 et y1>0
             a = -k;
             b = 2 * k * x1;
-            c = - k * x1 * x1 + y1
+            c = - k * x1 * x1 - y1
           }
           texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
           if (b == 0) {
@@ -44641,7 +44654,17 @@ function Calcul_discriminant() {
         default:
           break;
       }
-
+      if (this.correction_detaillee){
+        let f = x => a * x**2 + b * x + c
+        let graphique = courbe(f)
+        graphique.color = 'blue';
+        let r = repere({afficheNumeros:false,legendeX : '', legendeY : ''})
+        texte_corr += '<br><br>'
+        texte_corr += `Représentation graphique de $f : x \\mapsto ${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique_sauf1(c)}$ : `
+        texte_corr +='<br><br>'
+        texte_corr += mathalea2d({xmin : -10, ymin : -10, xmax : 10, ymax : 10 , pixelsParCm : 15},
+          graphique,r) 
+      }
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(texte);
