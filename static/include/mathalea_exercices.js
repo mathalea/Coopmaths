@@ -286,6 +286,8 @@ var liste_des_exercices_disponibles = {
   "2L11": Factoriser_Identites_remarquables2,
   "1N10": Terme_d_une_suite_definie_explicitement,
   "1N11": Terme_d_une_suite_definie_par_recurrence, 
+  "beta1E10" : Calcul_discriminant,
+  "beta1E11" : Resoudre_equation_degre_2,
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   "betaTESTseb": Tests_du_Seb,
@@ -12650,7 +12652,7 @@ function Notation_segment_droite_demi_droite() {
         dAC,
         labels
       );
-      texte_corr = `...tracer $${dABCorr}, ${dBCCorr}, ${dACCorr}.$`;
+      texte_corr = `...tracer ${dABCorr}, ${dBCCorr}, ${dACCorr}.`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
@@ -13399,7 +13401,6 @@ function Parallele_et_Perpendiculaires() {
         },
         objets_correction
       );
-      console.log(Xmin,Ymin,Xmax,Ymax)
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(enonce + "<br>");
@@ -15471,6 +15472,16 @@ jQuery(document).ready(function () {
     }
     if (id[0] == "P" && id[1] == "0") {
       liste_html_des_exercices_prof +=
+        '<span class="id_exercice">' +
+        id +
+        '</span> - <a class="lien_id_exercice" numero="' +
+        id +
+        '">' +
+        exercice_tmp.titre +
+        "</a></br>\n";
+    }
+    if (id[0] == "b" && id[1] == "e") {
+      liste_html_des_exercices_beta +=
         '<span class="id_exercice">' +
         id +
         '</span> - <a class="lien_id_exercice" numero="' +
@@ -21478,7 +21489,7 @@ function Construire_par_Symetrie() {
 				enonce = num_alpha(0)+`Reproduire la figure ci-dessous.<br>`
 				enonce += num_alpha(1)+` Construire le triangle  $${p1nom[0]}\'${p1nom[2]}\'${p1nom[3]}\'$ symétrique de $${p1nom[0]}${p1nom[2]}${p1nom[3]}$ par rapport au point $${p1nom[1]}$.<br>`
 				enonce += num_alpha(2)+` Coder la figure.<br>`;
-				MAth.floor(Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1)
+				Math.floor(Math.min(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)-1)
 				Xmax=Math.ceil(Math.max(A.x,B.x,C.x,D.x,p1.listePoints[0].x,p1.listePoints[1].x,p1.listePoints[2].x,p2.listePoints[0].x,p2.listePoints[1].x,p2.listePoints[2].x)+1)
 				Ymin=Math.floor(Math.min(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)-1)
 				Ymax=Math.ceil(Math.max(A.y,B.y,C.y,D.y,p1.listePoints[0].y,p1.listePoints[1].y,p1.listePoints[2].y,p2.listePoints[0].y,p2.listePoints[1].y,p2.listePoints[2].y)+1)
@@ -21723,10 +21734,6 @@ function Problemes_additifs_fractions_5e(){
 			destinations_vols = shuffle(destinations_vols);
 			do {		
 				nb_vols_total = randint(200,600);
-				console.log(nb_vols_total%2);
-				console.log(nb_vols_total%3);
-				console.log(nb_vols_total%4);
-				console.log(nb_vols_total%2 != 0 && nb_vols_total%3 != 0 && nb_vols_total%4 != 0)
 			} while (nb_vols_total%2 != 0 || nb_vols_total%3 != 0 || nb_vols_total%4 != 0)
 
 			// pour les situations
@@ -29748,7 +29755,6 @@ function Calculs_avec_puissances_de_dix() {
       nombre=calcul(mantisse*10**exp)
       mantisse1=calcul(mantisse*10**decalage)
       exp1=exp-decalage
-      console.log(nombre,`=`,mantisse1,`x10^`,exp1)
 
       decimalstring=`${tex_nombrec(mantisse1)} \\times 10^{${exp1}}`
       scientifiquestring=`${tex_nombre(mantisse)} \\times 10^{${exp}}`
@@ -40200,7 +40206,6 @@ function Passer_de_la_base_12_ou_16_a_la_10() {
 						chiffre3 = choice(['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9']);
 					}
 					n = valeur_base(chiffre1)*b**2+valeur_base(chiffre2)*b+valeur_base(chiffre3);
-					console.log(n,chiffre1,chiffre2,chiffre3)
 					texte = `Écrire en base ${b} le nombre ${nombre_avec_espace(n)}.`;
 					texte_corr = `$${tex_nombre(n)}=${b}\\times${Math.floor(n/b)}+${mise_en_evidence(n%b)}$`;
 					texte_corr += `<br>$${Math.floor(n/b)}=${b}\\times${mise_en_evidence(valeur_base(chiffre1))}+${mise_en_evidence(valeur_base(chiffre2))}$`;
@@ -44545,4 +44550,154 @@ function Terme_d_une_suite_definie_par_recurrence(){
 	}
 	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
+}
+
+
+/**
+ * Calcul de discriminant pour identifier la forme graphique associée (0 solution dans IR, 1 ou 2)
+ * @Auteur Rémi Angot
+ * Référence 1E10
+*/
+function Calcul_discriminant() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Calcul du discriminant d'une équation du second degré";
+  this.consigne = "Pour chaque équation, calculer le discriminant et déterminer le nombre de solutions de cette équation dans $\\mathbb{R}$.";
+  this.nb_questions = 6;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  if (sortie_html) {
+    this.spacing_corr = 2
+  }
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_types_equations = combinaison_listes(["0solution","1solution","2solutions"],this.nb_questions)
+    for (let i = 0, texte, texte_corr, a, b, c, delta, x1, x2, y1, y2, cpt = 0;i < this.nb_questions && cpt < 50;) {
+      switch (liste_types_equations[i]) {
+        case "0solution": 
+          k = randint(1,5);
+          x1 = randint(-3,3);
+          y1 = randint(1,5);
+          if (choice(['+','-'])=='+') { // k(x-x1)^2 + y1 avec k>0 et y1>0
+            a = k;
+            b = -2 * k * x1;
+            c = k * x1 * x1 + y1;
+          } else { // -k(x-x1)^2 -y1 avec k>0 et y1>0
+            a = -k;
+            b = 2 * k * x1;
+            c = - k * x1 * x1 + y1
+          }
+          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+          if (b == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
+          }
+          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+          texte_corr += `<br>$\\Delta<0$ donc l'équation n'admet pas de solution.`
+          texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
+          break;
+        case "1solution": // k(x-x1)^2
+          k = randint(-5,5,[0]);
+          x1 = randint(-5,5,[0]);
+          a = k;
+          b = -2 * k * x1;
+          c = k * x1 * x1;
+          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+          if (b == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
+          }
+          if (c == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x=0$`
+          }
+          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+          texte_corr += `<br>$\\Delta=0$ donc l'équation admet une unique solution.`
+          //texte_corr += `<br>$\\mathcal{S}={${x1}}$`
+          break;
+          case "2solutions": // k(x-x1)^2
+          k = randint(1,5);
+          x1 = randint(-3,3);
+          y1 = randint(1,5);
+          if (choice(['+','-'])=='+') { // k(x-x1)^2 + y1 avec k>0 et y1<0
+            y1 *=-1;
+            a = k;
+            b = -2 * k * x1;
+            c = k * x1 * x1 + y1;
+          } else { // -k(x-x1)^2 -y1 avec k>0 et y1>0
+            a = -k;
+            b = 2 * k * x1;
+            c = - k * x1 * x1 + y1
+          }
+          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+          if (b == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
+          }
+          if (c == 0) {
+            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x=0$`
+          }
+          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+          texte_corr += `<br>$\\Delta>0$ donc l'équation admet deux solutions.`
+          //texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
+          break;
+        default:
+          break;
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
+/**
+ * Calcul de discriminant pour identifier la forme graphique associée (0 solution dans IR, 1 ou 2)
+ * @Auteur Rémi Angot
+ * Référence 1E11
+*/
+function Resoudre_equation_degre_2() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Résoudre une équation du second degré";
+  this.consigne = "Résoudre dans $\\mathbb{R}$ les équations suivantes.";
+  this.nb_questions = 4;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.spacing_corr = 3
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    for (let i = 0, texte, texte_corr, a, b, c, delta, x1, x2, y1, y2, cpt = 0;i < this.nb_questions && cpt < 50;) {
+      // k(x-x1)(x-x2)
+      x1 = randint(-5,2,[0]);
+      x2 = randint(x1+1,5,[0,-x1]);
+      k = randint(-4,4,[0]);
+      a = k;
+      b = -k * x1 -k * x2;
+      c = k * x1 * x2
+      texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
+      
+      texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
+      texte_corr += `<br>$\\Delta>0$ donc l'équation admet deux solutions : $x_1 = \\dfrac{-b-\\sqrt{\\Delta}}{2a}$ et $x_2 = \\dfrac{-b+\\sqrt{\\Delta}}{2a}$`
+      texte_corr += `<br>$x_1 =\\dfrac{${-b}-\\sqrt{${b*b-4*a*c}}}{${2*a}}=${x1}$`
+      texte_corr += `<br>$x_2 =\\dfrac{${-b}+\\sqrt{${b*b-4*a*c}}}{${2*a}}=${x2}$`
+      texte_corr += `<br>L'ensemble des solutions de cette équation est : $\\mathcal{S}=\\{${x1} ; ${x2}\\}$.`  
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
 }
