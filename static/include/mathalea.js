@@ -103,6 +103,33 @@ function carreParfait(x) {
 	if (estentier(Math.sqrt(x))) return true
 	else return false
 }
+
+// Petite fonction pour écrire des nombres avec Mathalea2d en vue de poser des opérations...
+function ecrireNombre2D(x,y,n){
+	let nString=nombre_avec_espace(n);
+	let nombre2D=[]
+	for (let k=0;k<nString.length;k++) {
+		nombre2D.push(texteParPosition(nString[k],x+k*0.8,y))
+	}
+	return nombre2D
+}
+/*
+Pour l'instant, je commente... Faut que je réfléchisse et que je prenne mon temps (que je n'ai pas actuellement)
+On verra ça plus tard. La nuit porte conseil.
+function ecrireAdditionPosee(x,y,...args){
+	let nString=[],n=[]
+	for (k=0;k<args.length;k++) {
+		nString.push(tex_nombre(args[k]))
+		n.push(args[k])
+	}
+	let nb_chiffres_pe=Math.log10(Math.floor(Math.max(n)))
+
+	for (let k=0;k<args.length;k++){
+
+	}
+}
+*/
+
 /**
 * Créé tous les couples possibles avec un élément de E1 et un élément de E2.
 * L'ordre est pris en compte, donc on pourra avoir (3,4) et (4,3).
@@ -2556,16 +2583,16 @@ function Latex_reperage_sur_un_axe(zoom,origine,pas1,pas2,points_inconnus,points
 		valeur=calcul(origine+points_inconnus[i][1]/pas1+calcul(points_inconnus[i][2]/pas1/pas2))
 		result+=`\n\t \\tkzDefPoint(${valeur},0){A}`
 		result+=`\n\t \\tkzDefPoint(${valeur},-0.3-${position*0.02}){B}`
-		result +=`\n\t \\tkzDrawPoint[shape=cross out,color=orange,size=6](A)`
+		result +=`\n\t \\tkzDrawPoint[shape=cross out,color=blue,size=8](A)`
 		result +=`\n\t \\tkzLabelPoint[above](A){$${points_inconnus[i][0]}$}`
 		if (points_inconnus[i][3]) {	
 			if (!fraction) { // affichage décimal 
-				result +=`\n\t \\tkzLabelPoint[color = orange,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_nombrec(valeur)}$}`	
-				result+=`\n\t \\tkzDrawSegment[color=orange,arr=stealth](B,A)`
+				result +=`\n\t \\tkzLabelPoint[color = blue,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_nombrec(valeur)}$}`	
+				result+=`\n\t \\tkzDrawSegment[color=blue,arr=stealth](B,A)`
 			}
 			else { //affichage fractionnaire
-				result +=`\n\t \\tkzLabelPoint[color = orange,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_fraction_signe((origine+points_inconnus[i][1])*pas2+points_inconnus[i][2],pas2)}$}`	
-				result+=`\n\t \\tkzDrawSegment[color=orange,arr=stealth](B,A)`
+				result +=`\n\t \\tkzLabelPoint[color = blue,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_fraction_signe((origine+points_inconnus[i][1])*pas2+points_inconnus[i][2],pas2)}$}`	
+				result+=`\n\t \\tkzDrawSegment[color=blue,arr=stealth](B,A)`
 			}
 	}
 		position=6-position;
@@ -19737,6 +19764,7 @@ function Notation_segment_droite_demi_droite() {
  * Référence 6G10-1
  */
 function Description_segment_droite_demi_droite() {
+  "use strict"
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Description et notation des droites, segments et demi-droites";
   this.consigne =
@@ -19789,7 +19817,6 @@ function Description_segment_droite_demi_droite() {
       }
       [dAB, dABCorr] = creerDroiteDemiSegment(A, B);
       let labels = labelPoint(A, B);
-
       texte = mathalea2d(
         { xmin: -2, ymin: -1, xmax: 7, ymax: 3, pixelsParCm: 40, scale: 0.6 },
         dAB,
@@ -29290,7 +29317,7 @@ function Calculer_la_valeur_d_une_expression_litterale_deg1_inc1() {
 
 /** 
  * * Justifier qu'un tableau est un tableau de proportionnalité ou non
- * * 5P10-1
+ * * 5P10
  * @author Sébastien Lozano
  */
 
@@ -51647,7 +51674,7 @@ function Calcul_discriminant() {
       switch (liste_types_equations[i]) {
         case "0solution": 
           k = randint(1,5);
-          x1 = randint(-3,3);
+          x1 = randint(-3,3,[0]);
           y1 = randint(1,5);
           if (choice(['+','-'])=='+') { // k(x-x1)^2 + y1 avec k>0 et y1>0
             a = k;
@@ -51715,12 +51742,15 @@ function Calcul_discriminant() {
         let f = x => a * x**2 + b * x + c
         let graphique = courbe(f)
         graphique.color = 'blue';
+        let s = segment(point(-10,0),point(10,0));
+        s.epaisseur = 3;
+        s.color = 'red';
         let r = repere({afficheNumeros:false,legendeX : '', legendeY : ''})
         texte_corr += '<br><br>'
         texte_corr += `Représentation graphique de $f : x \\mapsto ${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique_sauf1(c)}$ : `
         texte_corr +='<br><br>'
         texte_corr += mathalea2d({xmin : -10, ymin : -10, xmax : 10, ymax : 10 , pixelsParCm : 15},
-          graphique,r) 
+          graphique,r,s) 
       }
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
