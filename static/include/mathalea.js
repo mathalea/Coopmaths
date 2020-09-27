@@ -129,7 +129,48 @@ function ecrireAdditionPosee(x,y,...args){
 	}
 }
 */
+class NombreDecimal {
+	constructor(nombre){
+		this.partieEntiere=[]
+		this.partieDecimale=[]
+		if (nombre<0) {
+			this.signe=`-`
+			nombre=calcul(-nombre)
+		}
+		else this.signe=`+`
+		let ent=Math.floor(nombre)
+		let partiedecimale=calcul(nombre-ent)
+		let nbcPE=Math.ceil(Math.log10(ent))
+		for (let i=0;i<nbcPE;i++){
+			this.partieEntiere.push(ent%10)
+			ent=(ent-(ent%10))/10
+		}
 
+		let k=0
+		while (!egal(partiedecimale,0)){
+			partiedecimale=arrondi(partiedecimale*10,10)
+			this.partieDecimale.push(Math.floor(partiedecimale))
+			partiedecimale=(partiedecimale-Math.floor(partiedecimale))
+			k++
+		}
+	}
+	get valeur() {
+		return this.recompose()
+	}
+	recompose() {
+		let val=0
+		for (let i=0;i<this.partieEntiere.length;i++)
+			val+=this.partieEntiere[i]*10**i
+		for (let j=0;j<this.partieDecimale.length;j++) 
+			val+=this.partieDecimale[j]*10**(-1-j)
+		if (this.signe==`+`) return val
+		else return calcul(-val)
+	}
+
+}
+function decimal(n) {
+	return new NombreDecimal(n)
+}
 /**
 * Créé tous les couples possibles avec un élément de E1 et un élément de E2.
 * L'ordre est pris en compte, donc on pourra avoir (3,4) et (4,3).
@@ -5193,7 +5234,7 @@ function Fraction(num,den) {
      * @param {*} type 'gateau' ou 'segment' ou 'barre'
 	 * @Auteur Jean-Claude Lhote
      */
-	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
+	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1,label="") {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.numIrred, this.denIrred)
 		num = this.numIrred
@@ -5283,6 +5324,7 @@ function Fraction(num,den) {
 			else {
 			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','black',scale))
 			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','black',scale))
+			if (label!="") objets.push(texteParPosition(label,x+rayon*this.numIrred/this.denIrred,y-0.6,'milieu','black',scale))
 			}
 
 		}
@@ -5340,7 +5382,7 @@ function Fraction(num,den) {
 	 * les arguments unite0 et unite1 servent pour la représentation 'segment'. On peut ainsi choisir les délimiteurs de l'unité, ce sont habituellement 0 et 1, à ce moment la, chaque entier est affiché sous sa graduation.
 	 * Si ce sont des variable de type string, il n'y a que ces deux étiquettes qui sont écrites.
 	 */
-	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
+	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1,label="") {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.num, this.den)
 		num = this.num
@@ -5432,6 +5474,7 @@ function Fraction(num,den) {
 			else {
 			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','black',scale))
 			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','black',scale))
+			if (label!="") objets.push(texteParPosition(label,x+rayon*this.num/this.den,y-0.6,'milieu','black',scale))
 			}
 		}
 		else { //Type barre
@@ -7177,6 +7220,7 @@ var liste_des_exercices_disponibles = {
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
   "6N22" : Ajouter_des_fractions_d_unite,
+  "beta6N22-1" : Rapports_sur_un_segment,
   "6N23": Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
   "beta6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
@@ -10789,7 +10833,7 @@ function Ecrire_nombres_entiers() {
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
   this.sup = 1
-  this.sup2 = 2
+  this.sup2 = 3
   this.nouvelle_version = function (numero_de_l_exercice) {
     if (this.sup == 2)
       this.consigne = "Écrire le nombre en chiffres"
@@ -10798,9 +10842,9 @@ function Ecrire_nombres_entiers() {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées 
     let type_de_questions_disponibles;
-   
     if (this.sup2==1) type_de_questions_disponibles=[1,1,1,2,2]
-    else if (this.sup2==2)  type_de_questions_disponibles=[2,2,3,3,4]
+    else if (this.sup2==2) type_de_questions_disponibles=[1,2,2,2,3]
+    else if (this.sup2==3)  type_de_questions_disponibles=[2,2,3,3,4]
     else type_de_questions_disponibles=[2,3,3,4,4]
 
     let liste_type_de_questions = combinaison_listes(
@@ -10851,7 +10895,7 @@ function Ecrire_nombres_entiers() {
     liste_de_question_to_contenu(this);
   };
   this.besoin_formulaire_numerique = ['Type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
-  this.besoin_formulaire2_numerique = ['Niveau', 3, '1 : Facile\n2 : Moyen\n3 : Difficile']
+  this.besoin_formulaire2_numerique = ['Niveau', 4, '1 : Élémentaire\n2 : Facile\n3 : Moyen\n4 : Difficile']
 }
 
 /**
@@ -11054,7 +11098,7 @@ function Exercice_numeration_entier() {
       texte = `$\\text{${b}  ${rangs[rang_b]} et ${a} ${rangs[rang_a]}}$`;
       texte_corr = `$${b} \\text{ ${rangs[rang_b]} et }${a} \\text{ ${
         rangs[rang_a]
-      } : } ${tex_nombre(
+      } : } ${tex_nombre(b*Math.pow(10, rang_b))} + ${a*tex_nombre(Math.pow(10, rang_a))} =${tex_nombre(
         b * Math.pow(10, rang_b) + a * Math.pow(10, rang_a)
       )}$`;
 
@@ -22167,10 +22211,11 @@ function Ranger_ordre_croissant_decroissant(){
      let nombres_ranges = [];
      for (let k=0;k<situations.length;k++) {
       nombres = shuffle([situations[k].n1,situations[k].n2,situations[k].n3,situations[k].n4,situations[k].n5,situations[k].n6]);
+      nombres_ranges = [];
       nombres.forEach(element => {
         nombres_ranges.push(element);        
-      });      
-      myOrdre(situations[k].ordre,nombres_ranges);   
+      });           
+      myOrdre(situations[k].ordre,nombres_ranges);         
       enonces.push({
         enonce:`Classer les nombres suivants dans l'ordre ${situations[k].ordre} :<br>
         $${tex_nombre(nombres[0])}$   ;   $${tex_nombre(nombres[1])}$   ;   $${tex_nombre(nombres[2])}$   ;   $${tex_nombre(nombres[3])}$   ;   $${tex_nombre(nombres[4])}$   ;   $${tex_nombre(nombres[5])}$          
@@ -22315,6 +22360,188 @@ function Tests_du_Seb(){
 					};
           break;
 			
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+/** 
+ * * Exprimer un rapport de longueurs sur un segment
+ * * 6N22-1
+ * @author Sébastien Lozano
+ */
+
+function Rapports_sur_un_segment(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 3;
+	} else {
+		this.nb_questions = 3;
+	};	
+
+	this.titre = "Titre dans la liste de choix des exos";	
+	this.consigne = `Dans chaque cas, sachant que les graduations sont régulières, exprimer le rapport de longueurs $\\dfrac{AC}{AB}$.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+     		 type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      let params = {
+        xmin: -0.4,
+        ymin: -1.5,
+        xmax: 50,
+        ymax: 1,
+        pixelsParCm: 20,
+        scale: 1,
+      }
+      let fig = [];
+      // mathalea2d(
+      //   params,
+      //   fraction(8,9).representation(0,0,15,0,'segment','red','A','B',1,'C'),
+      //   fraction(1,9).representation(0,-1.5,15,0,'segment','blue','A','B',1,'C')
+      // )
+      let m = randint(1,5);
+      let n = randint(1,5,m);
+      // let coeff = (m,n) => {
+      //   if (m>n) {
+      //     return m/n
+      //   } else {
+      //     return m/n
+      //   }
+      // };
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+        {//case 0 -->
+          fig:mathalea2d(
+              params,
+              fraction(m,n).representation(0,0,5,0,'segment','','A','B',1,'C'),             
+            ),
+          m:m,
+          n:n,
+          fig_corr1:mathalea2d(
+            params,
+            fraction(m,n).representation(0,0,5,0,'segment','red','A','B',1,'C'),             
+          ),
+          fig_corr2:mathalea2d(
+            params,
+            fraction(n,m).representation(0,0,(m/n)*5,0,'segment','blue','A','C',1,'B'),             
+          )
+				},
+		
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`
+          Type ${k}
+          <br>
+          ${situations[k].fig}
+          			
+					`,
+					question:``,
+					correction:`
+          Correction type ${k}
+          <br>
+          m : ${situations[k].m}
+          <br>
+          n : ${situations[k].n}
+          <br>
+          ${situations[k].fig_corr1}
+          <br>
+          ${situations[k].fig_corr2}
+
+
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+        		case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          			break;
+        		case 2 : 
+					texte = `${enonces[2].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[2].correction}`;
+					};
+          			break;				
+        		case 3 : 
+					texte = `${enonces[3].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[3].correction}`;
+					};
+					break;				
+         		case 4 : 
+					texte = `${enonces[4].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[4].correction}`;
+					};
+					break;				
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -22698,7 +22925,7 @@ jQuery(document).ready(function () {
 function Ecrire_entiers_cycle3(){
     Ecrire_nombres_entiers.call(this)
     this.sup=1
-    this.sup2=1
+    this.sup2=0
 }
 function Division_cycle3(){
     Divisions_euclidiennes.call(this)
@@ -27339,7 +27566,14 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 			}
 			break
 		}
-		return [expf,expl,expc,nbval,last_op]
+		let pos1=0
+		for (;pos1<expc.length;pos1++)
+			if (expc[pos1]=='=') break
+		let pos2=pos1+1
+		for (;pos2<expc.length;pos2++)
+			if (expc[pos2]=='=') break
+		let expn='$'+expc.substring(pos1+1,pos2-1)+'$'
+		return [expf,expl,expc,nbval,last_op,expn]
 }
 
 
@@ -41393,7 +41627,7 @@ function Pythagore2D() {
   this.nb_questions = 3;
   this.nb_cols = 3;
   this.nb_cols_corr = 1;
-  let type_exercice = 'Calculer'
+  type_exercice = 'Calculer'
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
@@ -41436,7 +41670,6 @@ function Pythagore2D() {
       let longueurAC = longueur(A,C,1)
       let longueurBC = longueur(B,C,1)
       let mesObjetsATracer = [codage,p2,nomme]
-  
 
       if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='AB'){
         mesObjetsATracer.push(affAC,affBC)

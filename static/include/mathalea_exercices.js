@@ -93,6 +93,7 @@ var liste_des_exercices_disponibles = {
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
   "6N22" : Ajouter_des_fractions_d_unite,
+  "beta6N22-1" : Rapports_sur_un_segment,
   "6N23": Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
   "beta6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
@@ -3705,7 +3706,7 @@ function Ecrire_nombres_entiers() {
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
   this.sup = 1
-  this.sup2 = 2
+  this.sup2 = 3
   this.nouvelle_version = function (numero_de_l_exercice) {
     if (this.sup == 2)
       this.consigne = "Écrire le nombre en chiffres"
@@ -3714,9 +3715,9 @@ function Ecrire_nombres_entiers() {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées 
     let type_de_questions_disponibles;
-   
     if (this.sup2==1) type_de_questions_disponibles=[1,1,1,2,2]
-    else if (this.sup2==2)  type_de_questions_disponibles=[2,2,3,3,4]
+    else if (this.sup2==2) type_de_questions_disponibles=[1,2,2,2,3]
+    else if (this.sup2==3)  type_de_questions_disponibles=[2,2,3,3,4]
     else type_de_questions_disponibles=[2,3,3,4,4]
 
     let liste_type_de_questions = combinaison_listes(
@@ -3767,7 +3768,7 @@ function Ecrire_nombres_entiers() {
     liste_de_question_to_contenu(this);
   };
   this.besoin_formulaire_numerique = ['Type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
-  this.besoin_formulaire2_numerique = ['Niveau', 3, '1 : Facile\n2 : Moyen\n3 : Difficile']
+  this.besoin_formulaire2_numerique = ['Niveau', 4, '1 : Élémentaire\n2 : Facile\n3 : Moyen\n4 : Difficile']
 }
 
 /**
@@ -3970,7 +3971,7 @@ function Exercice_numeration_entier() {
       texte = `$\\text{${b}  ${rangs[rang_b]} et ${a} ${rangs[rang_a]}}$`;
       texte_corr = `$${b} \\text{ ${rangs[rang_b]} et }${a} \\text{ ${
         rangs[rang_a]
-      } : } ${tex_nombre(
+      } : } ${tex_nombre(b*Math.pow(10, rang_b))} + ${a*tex_nombre(Math.pow(10, rang_a))} =${tex_nombre(
         b * Math.pow(10, rang_b) + a * Math.pow(10, rang_a)
       )}$`;
 
@@ -15083,10 +15084,11 @@ function Ranger_ordre_croissant_decroissant(){
      let nombres_ranges = [];
      for (let k=0;k<situations.length;k++) {
       nombres = shuffle([situations[k].n1,situations[k].n2,situations[k].n3,situations[k].n4,situations[k].n5,situations[k].n6]);
+      nombres_ranges = [];
       nombres.forEach(element => {
         nombres_ranges.push(element);        
-      });      
-      myOrdre(situations[k].ordre,nombres_ranges);   
+      });           
+      myOrdre(situations[k].ordre,nombres_ranges);         
       enonces.push({
         enonce:`Classer les nombres suivants dans l'ordre ${situations[k].ordre} :<br>
         $${tex_nombre(nombres[0])}$   ;   $${tex_nombre(nombres[1])}$   ;   $${tex_nombre(nombres[2])}$   ;   $${tex_nombre(nombres[3])}$   ;   $${tex_nombre(nombres[4])}$   ;   $${tex_nombre(nombres[5])}$          
@@ -15231,6 +15233,188 @@ function Tests_du_Seb(){
 					};
           break;
 			
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+/** 
+ * * Exprimer un rapport de longueurs sur un segment
+ * * 6N22-1
+ * @author Sébastien Lozano
+ */
+
+function Rapports_sur_un_segment(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 3;
+	} else {
+		this.nb_questions = 3;
+	};	
+
+	this.titre = "Titre dans la liste de choix des exos";	
+	this.consigne = `Dans chaque cas, sachant que les graduations sont régulières, exprimer le rapport de longueurs $\\dfrac{AC}{AB}$.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+     		 type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      let params = {
+        xmin: -0.4,
+        ymin: -1.5,
+        xmax: 50,
+        ymax: 1,
+        pixelsParCm: 20,
+        scale: 1,
+      }
+      let fig = [];
+      // mathalea2d(
+      //   params,
+      //   fraction(8,9).representation(0,0,15,0,'segment','red','A','B',1,'C'),
+      //   fraction(1,9).representation(0,-1.5,15,0,'segment','blue','A','B',1,'C')
+      // )
+      let m = randint(1,5);
+      let n = randint(1,5,m);
+      // let coeff = (m,n) => {
+      //   if (m>n) {
+      //     return m/n
+      //   } else {
+      //     return m/n
+      //   }
+      // };
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+        {//case 0 -->
+          fig:mathalea2d(
+              params,
+              fraction(m,n).representation(0,0,5,0,'segment','','A','B',1,'C'),             
+            ),
+          m:m,
+          n:n,
+          fig_corr1:mathalea2d(
+            params,
+            fraction(m,n).representation(0,0,5,0,'segment','red','A','B',1,'C'),             
+          ),
+          fig_corr2:mathalea2d(
+            params,
+            fraction(n,m).representation(0,0,(m/n)*5,0,'segment','blue','A','C',1,'B'),             
+          )
+				},
+		
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`
+          Type ${k}
+          <br>
+          ${situations[k].fig}
+          			
+					`,
+					question:``,
+					correction:`
+          Correction type ${k}
+          <br>
+          m : ${situations[k].m}
+          <br>
+          n : ${situations[k].n}
+          <br>
+          ${situations[k].fig_corr1}
+          <br>
+          ${situations[k].fig_corr2}
+
+
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+        		case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          			break;
+        		case 2 : 
+					texte = `${enonces[2].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[2].correction}`;
+					};
+          			break;				
+        		case 3 : 
+					texte = `${enonces[3].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[3].correction}`;
+					};
+					break;				
+         		case 4 : 
+					texte = `${enonces[4].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[4].correction}`;
+					};
+					break;				
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -15614,7 +15798,7 @@ jQuery(document).ready(function () {
 function Ecrire_entiers_cycle3(){
     Ecrire_nombres_entiers.call(this)
     this.sup=1
-    this.sup2=1
+    this.sup2=0
 }
 function Division_cycle3(){
     Divisions_euclidiennes.call(this)
@@ -20255,7 +20439,14 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 			}
 			break
 		}
-		return [expf,expl,expc,nbval,last_op]
+		let pos1=0
+		for (;pos1<expc.length;pos1++)
+			if (expc[pos1]=='=') break
+		let pos2=pos1+1
+		for (;pos2<expc.length;pos2++)
+			if (expc[pos2]=='=') break
+		let expn='$'+expc.substring(pos1+1,pos2-1)+'$'
+		return [expf,expl,expc,nbval,last_op,expn]
 }
 
 
@@ -34309,7 +34500,7 @@ function Pythagore2D() {
   this.nb_questions = 3;
   this.nb_cols = 3;
   this.nb_cols_corr = 1;
-  let type_exercice = 'Calculer'
+  type_exercice = 'Calculer'
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
@@ -34352,7 +34543,6 @@ function Pythagore2D() {
       let longueurAC = longueur(A,C,1)
       let longueurBC = longueur(B,C,1)
       let mesObjetsATracer = [codage,p2,nomme]
-  
 
       if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='AB'){
         mesObjetsATracer.push(affAC,affBC)
@@ -34536,6 +34726,7 @@ function Egalite_Pythagore2D(){
   "6N20-2": Exercice_fractions_differentes_ecritures,
   "6N21": Lire_abscisse_fractionnaire,
   "6N22" : Ajouter_des_fractions_d_unite,
+  "beta6N22-1" : Rapports_sur_un_segment,
   "6N23": Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
   "beta6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
@@ -38148,7 +38339,7 @@ function Ecrire_nombres_entiers() {
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
   this.sup = 1
-  this.sup2 = 2
+  this.sup2 = 3
   this.nouvelle_version = function (numero_de_l_exercice) {
     if (this.sup == 2)
       this.consigne = "Écrire le nombre en chiffres"
@@ -38157,9 +38348,9 @@ function Ecrire_nombres_entiers() {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées 
     let type_de_questions_disponibles;
-   
     if (this.sup2==1) type_de_questions_disponibles=[1,1,1,2,2]
-    else if (this.sup2==2)  type_de_questions_disponibles=[2,2,3,3,4]
+    else if (this.sup2==2) type_de_questions_disponibles=[1,2,2,2,3]
+    else if (this.sup2==3)  type_de_questions_disponibles=[2,2,3,3,4]
     else type_de_questions_disponibles=[2,3,3,4,4]
 
     let liste_type_de_questions = combinaison_listes(
@@ -38210,7 +38401,7 @@ function Ecrire_nombres_entiers() {
     liste_de_question_to_contenu(this);
   };
   this.besoin_formulaire_numerique = ['Type d\'exercice', 2, '1 : Écrire en lettres un nombre donné en chiffres\n2 : Écrire en chiffres un nombre donné en lettres'];
-  this.besoin_formulaire2_numerique = ['Niveau', 3, '1 : Facile\n2 : Moyen\n3 : Difficile']
+  this.besoin_formulaire2_numerique = ['Niveau', 4, '1 : Élémentaire\n2 : Facile\n3 : Moyen\n4 : Difficile']
 }
 
 /**
@@ -38413,7 +38604,7 @@ function Exercice_numeration_entier() {
       texte = `$\\text{${b}  ${rangs[rang_b]} et ${a} ${rangs[rang_a]}}$`;
       texte_corr = `$${b} \\text{ ${rangs[rang_b]} et }${a} \\text{ ${
         rangs[rang_a]
-      } : } ${tex_nombre(
+      } : } ${tex_nombre(b*Math.pow(10, rang_b))} + ${a*tex_nombre(Math.pow(10, rang_a))} =${tex_nombre(
         b * Math.pow(10, rang_b) + a * Math.pow(10, rang_a)
       )}$`;
 
@@ -49526,10 +49717,11 @@ function Ranger_ordre_croissant_decroissant(){
      let nombres_ranges = [];
      for (let k=0;k<situations.length;k++) {
       nombres = shuffle([situations[k].n1,situations[k].n2,situations[k].n3,situations[k].n4,situations[k].n5,situations[k].n6]);
+      nombres_ranges = [];
       nombres.forEach(element => {
         nombres_ranges.push(element);        
-      });      
-      myOrdre(situations[k].ordre,nombres_ranges);   
+      });           
+      myOrdre(situations[k].ordre,nombres_ranges);         
       enonces.push({
         enonce:`Classer les nombres suivants dans l'ordre ${situations[k].ordre} :<br>
         $${tex_nombre(nombres[0])}$   ;   $${tex_nombre(nombres[1])}$   ;   $${tex_nombre(nombres[2])}$   ;   $${tex_nombre(nombres[3])}$   ;   $${tex_nombre(nombres[4])}$   ;   $${tex_nombre(nombres[5])}$          
@@ -49674,6 +49866,188 @@ function Tests_du_Seb(){
 					};
           break;
 			
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+};
+
+/** 
+ * * Exprimer un rapport de longueurs sur un segment
+ * * 6N22-1
+ * @author Sébastien Lozano
+ */
+
+function Rapports_sur_un_segment(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.beta = true;	
+	this.sup=1;
+	if (this.beta) {
+		this.nb_questions = 3;
+	} else {
+		this.nb_questions = 3;
+	};	
+
+	this.titre = "Titre dans la liste de choix des exos";	
+	this.consigne = `Dans chaque cas, sachant que les graduations sont régulières, exprimer le rapport de longueurs $\\dfrac{AC}{AB}$.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;
+	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
+	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		if (this.beta) {
+			type_de_questions_disponibles = [0];			
+		} else {
+     		 type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
+		};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+      let params = {
+        xmin: -0.4,
+        ymin: -1.5,
+        xmax: 50,
+        ymax: 1,
+        pixelsParCm: 20,
+        scale: 1,
+      }
+      let fig = [];
+      // mathalea2d(
+      //   params,
+      //   fraction(8,9).representation(0,0,15,0,'segment','red','A','B',1,'C'),
+      //   fraction(1,9).representation(0,-1.5,15,0,'segment','blue','A','B',1,'C')
+      // )
+      let m = randint(1,5);
+      let n = randint(1,5,m);
+      // let coeff = (m,n) => {
+      //   if (m>n) {
+      //     return m/n
+      //   } else {
+      //     return m/n
+      //   }
+      // };
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+        {//case 0 -->
+          fig:mathalea2d(
+              params,
+              fraction(m,n).representation(0,0,5,0,'segment','','A','B',1,'C'),             
+            ),
+          m:m,
+          n:n,
+          fig_corr1:mathalea2d(
+            params,
+            fraction(m,n).representation(0,0,5,0,'segment','red','A','B',1,'C'),             
+          ),
+          fig_corr2:mathalea2d(
+            params,
+            fraction(n,m).representation(0,0,(m/n)*5,0,'segment','blue','A','C',1,'B'),             
+          )
+				},
+		
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`
+          Type ${k}
+          <br>
+          ${situations[k].fig}
+          			
+					`,
+					question:``,
+					correction:`
+          Correction type ${k}
+          <br>
+          m : ${situations[k].m}
+          <br>
+          n : ${situations[k].n}
+          <br>
+          ${situations[k].fig_corr1}
+          <br>
+          ${situations[k].fig_corr2}
+
+
+					`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : 
+					texte = `${enonces[0].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[0].correction}`;
+					};
+          			break;	
+        		case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+          			break;
+        		case 2 : 
+					texte = `${enonces[2].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[2].correction}`;
+					};
+          			break;				
+        		case 3 : 
+					texte = `${enonces[3].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[3].correction}`;
+					};
+					break;				
+         		case 4 : 
+					texte = `${enonces[4].enonce}`;
+					if (this.beta) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[4].correction}`;
+					};
+					break;				
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -50053,433 +50427,16 @@ jQuery(document).ready(function () {
   });
 });
 
-/**
- * 1N10
- * @Auteur Gaelle Morvan
- */
-function Terme_d_une_suite_definie_explicitement(){
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Déterminer les termes d'une suite définie de façon explicite";
-	this.consigne = "Une suite étant donnée, calculer le terme demandé.";
-	this.nb_questions = 4;
-
-	this.nouvelle_version = function(){
-		this.liste_questions = []; // Vide la liste de questions
-    this.liste_corrections = []; // Vide la liste de questions corrigées
-    
-    let type_de_questions_disponibles = [1, 2, 3];
-    let liste_type_de_questions = combinaison_listes(
-      type_de_questions_disponibles,
-      this.nb_questions
-    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-
-    for (
-      let i = 0, texte, texte_corr, cpt = 0, a, b, c, d, k;
-      i < this.nb_questions && cpt < 50;
-
-      ) {
-      switch (liste_type_de_questions[i]) {
-        case 1: //fonction affine
-          a = randint(1, 7)*choice([-1,1]);
-          b = randint(1, 10)*choice([-1,1]);
-          k = randint(0, 20);
-			
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = `;
-          if (a == 1) {texte += `n`}
-          else 
-            if (a == -1) {texte += `-n`}
-            else {texte += `${a}n`};
-
-          if (b > 0) {texte += `+${b}$.`} 
-          else {texte += `${b}$.`};
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `Dans l'expression de $u_n$ on remplace $n$ par ${k}, on obtient : $u_{${k}} =`;
-          if (a == 1) {
-            texte_corr += `${k} ${ecriture_algebrique(b)}`
-          } else {
-            if (a == -1) {
-              texte_corr += `-${k} ${ecriture_algebrique(b)}`
-            } else {
-              texte_corr += `${a} \\times ${k} ${ecriture_algebrique(b)}`
-            }
-          }
-          texte_corr += `=${a*k+b}$.`;
-          break;
-        
-        case 2: //fonction polynome de degré 2
-          a = randint(1,5)*choice([-1,1]);
-          b = randint(0,5)*choice([-1,1]);
-          c = randint(0,9)*choice([-1,1]);
-          k = randint(0,9);
-
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = `;
-          if (a == 1) {
-            texte += `n^2$`
-          } else {
-            if (a == -1) {
-              texte += `-n^2$`
-            } else {
-              texte += `${a}n^2$`
-            }
-          };
-          if (b == 1) {texte += `$+n$`};
-          if (b > 1) {texte += `$+${b}n$`};
-          if (b == -1) {texte += `$-n$`};
-          if (b < -1) {texte += `$${b}n$`};
-          if (c > 0) {texte += `$+${c}$.`};
-          if (c < 0) {texte += `$${c}$.`}
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `Dans l'expression de $u_n$ on remplace $n$ par $${k}$, on obtient : $u_{${k}} = `;
-          if (a == 1) {texte_corr += `${k}^2`}
-          else {
-            if (a == -1) {texte_corr += `-${k}^2`} 
-            else {
-              texte_corr += `${a}\\times ${k}^2`
-            }
-          };
-          if (b == 1) {
-            texte_corr += `+${k}`
-          } else {
-            if (b == -1) {
-              texte_corr += `-${k}`
-            } else {
-              texte_corr += `${ecriture_algebrique(b)}\\times ${k}`
-            }            
-          }
-          texte_corr += `${ecriture_algebrique(c)}=${a*k*k+b*k+c}$.`;
-          break;
-        
-        case 3: //fonction homographique
-          a = randint(1,5)*choice([-1,1]);
-          b = randint(1,5)*choice([-1,1]);
-          c = randint(2,4);
-          d = randint(1,7);
-          k = randint(1,9);
-
-          texte = `Soit $(u_n)$ une suite définie pour tout entier $n\\in\\mathbb{N}$ par $u_n = \\dfrac{`;
-          if (a == 1) {texte += `n`}
-          else 
-            if (a == -1) {texte += `-n`}
-            else {texte += `${a}n`};
-          if (b > 0) {texte += `+${b}}{`}
-          else {texte += `${b}}{`};
-          if (c == 1) {texte += `n`}
-          else   
-            if (c == -1) {texte += `-n`}
-            else {texte += `${c}n`};
-          if (d > 0) {texte += `+${d}}$.`}
-          else {texte += `${d}}$.`};
-          
-          texte += `<br>Calculer $u_{${k}}$.`;
-          frac=fraction(a*k+b,c*k+d)
-          texte_corr = `Dans l'expression de $u_n$ on remplace $n$ par $${k}$, on obtient : $u_{${k}} = \\dfrac{${a}\\times ${k} ${ecriture_algebrique(b)}}{${c}\\times ${k}
-          ${ecriture_algebrique(d)}} = ` +frac.texFraction()
-          if (pgcd(a*k+b,c*k+d)!=1) texte_corr+=`=`+frac.texFractionSimplifiee()
-          texte_corr+=`$.`
-          break;
-      }
-      
-			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte); // Sinon on enregistre la question dans liste_questions
-				this.liste_corrections.push(texte_corr); // On fait pareil pour la correction
-				i++; // On passe à la question suivante
-			}
-			cpt++;	// Sinon on incrémente le compteur d'essai pour avoir une question nouvelle
-		}
-		liste_de_question_to_contenu(this); // La liste de question et la liste de la correction
-		// sont transformés en chaine de caractère (avec une liste HTML ou LaTeX suivant le contexte)
-	}
-	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
-	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
+// Exercices de 6ème déclinés en cycle3
+function Ecrire_entiers_cycle3(){
+    Ecrire_nombres_entiers.call(this)
+    this.sup=1
+    this.sup2=0
 }
-
-
-/**
- * 1N11
- * @Auteur Gaelle Morvan
- */
-function Terme_d_une_suite_definie_par_recurrence(){
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.titre = "Déterminer les termes d'une suite définie par récurrence";
-	this.consigne = "Une suite étant donnée, calculer le terme demandé.";
-	this.nb_questions = 4;
-
-	this.nouvelle_version = function(){
-		this.liste_questions = []; // Vide la liste de questions
-    this.liste_corrections = []; // Vide la liste de questions corrigées
-    
-    let type_de_questions_disponibles = [1, 2, 3, 4];
-    let liste_type_de_questions = combinaison_listes(
-      type_de_questions_disponibles,
-      this.nb_questions
-    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-
-    for (
-      let i = 0, texte, texte_corr, cpt = 0, u, a, b, k;
-      i < this.nb_questions && cpt < 50;
-
-      ) {
-      switch (liste_type_de_questions[i]) {
-        case 1: //suite arithmétique
-          a = randint(1, 10)*choice([-1,1]);
-          u = randint(0, 10)*choice([-1,1]);
-          k = randint(2, 10);
-			
-          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n ${ecriture_algebrique(a)}$.`;
-
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_{${k}}$ :`;
-          for (
-            let indice =0; indice < k; indice++ 
-          ){
-            texte_corr += `<br> $u_{${indice+1}} = ${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))} ${ecriture_algebrique(a)} = 
-              ${mise_en_evidence(u, arcenciel(indice,true))} + ${a} = ${mise_en_evidence(u + a, arcenciel(indice+1,true))}$`;
-            u = u + a;
-          }
-          break;
-        
-        case 2: //suite géométrique
-          a = randint(2,5)*choice([-1,1]);
-          u = randint(1,9)*choice([-1,1]);
-          k = randint(2,6);
-
-          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = u_n \\times ${ecriture_parenthese_si_negatif(a)}$.`;
-
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
-          for (
-            let indice =0; indice < k; indice++ 
-          ){
-            texte_corr += `<br> $u_{${indice+1}} = ${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))} \\times ${ecriture_parenthese_si_negatif(a)} = 
-              ${mise_en_evidence(u, arcenciel(indice,true))} \\times ${ecriture_parenthese_si_negatif(a)} = ${mise_en_evidence(u * a, arcenciel(indice+1,true))}$`;
-            u = u * a;
-          }
-          break;
-        
-        case 3: //suite arithmético-géométrique
-          a = randint(2,5)*choice([-1,1]);
-          b = randint(1,5)*choice([-1,1]);
-          u = randint(1,5)*choice([-1,1]);
-          k = randint(2,6);
-
-          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = ${a} u_n ${ecriture_algebrique(b)}$.`;
-          
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
-          for (
-            let indice =0; indice < k; indice++ 
-          ){
-            texte_corr += `<br> $u_{${indice+1}} = ${a}\\times ${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))} ${ecriture_algebrique(b)}=`;
-            texte_corr += `${a} \\times ${ecriture_parenthese_si_negatif(mise_en_evidence(u, arcenciel(indice,true)))} ${ecriture_algebrique(b)} = 
-            ${mise_en_evidence(a*u+b, arcenciel(indice+1,true))}$`;
-            u = u * a + b;
-          }
-          break;
-
-        case 4: // suite de la forme u(n+1) = a +- u(n)^2
-          a = randint(1,5)*choice([-1,1]);
-          b = choice([-1,1]);
-          u = randint(1,5)*choice([-1,1]);
-          k = randint(2,3);
-
-          texte = `Soit $(u_n)$ une suite définie par $u_0=${u}$ et pour tout entier $n\\in\\mathbb{N}$ par $u_{n+1} = ${a} ${signe(b)} u_n^2$.`;
-                    
-          texte += `<br>Calculer $u_{${k}}$.`;
-			
-          texte_corr = `On calcule successivent les termes jusqu'à obtenir $u_${k}$ :`;
-          for (
-            let indice =0; indice < k; indice++ 
-          ){
-            texte_corr += `<br> $u_{${indice+1}} = ${a} ${signe(b)} (${mise_en_evidence('u_{' + indice + '}', arcenciel(indice,true))})^2=`;
-            texte_corr += `${a} ${signe(b)} ${ecriture_parenthese_si_negatif(mise_en_evidence(u, arcenciel(indice,true)))}^2 = 
-              ${mise_en_evidence(tex_nombre(a+b*u*u), arcenciel(indice+1,true))}$`;
-            u = a + b * u * u;
-          }
-          break;
-      }
-      
-			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
-				this.liste_questions.push(texte); // Sinon on enregistre la question dans liste_questions
-				this.liste_corrections.push(texte_corr); // On fait pareil pour la correction
-				i++; // On passe à la question suivante
-			}
-			cpt++;	// Sinon on incrémente le compteur d'essai pour avoir une question nouvelle
-		}
-		liste_de_question_to_contenu(this); // La liste de question et la liste de la correction
-		// sont transformés en chaine de caractère (avec une liste HTML ou LaTeX suivant le contexte)
-	}
-	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
-	// On aurait pu ajouter un formulaire pour régler le niveau de difficulté à l'aide de l'attribut this.sup
+function Division_cycle3(){
+    Divisions_euclidiennes.call(this)
+    this.sup=0
 }
-
-
-/**
- * Calcul de discriminant pour identifier la forme graphique associée (0 solution dans IR, 1 ou 2)
- * @Auteur Rémi Angot
- * Référence 1E10
-*/
-function Calcul_discriminant() {
-  Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Calcul du discriminant d'une équation du second degré";
-  this.consigne = "Pour chaque équation, calculer le discriminant et déterminer le nombre de solutions de cette équation dans $\\mathbb{R}$.";
-  this.nb_questions = 6;
-  this.nb_cols = 2;
-  this.nb_cols_corr = 2;
-  if (sortie_html) {
-    this.spacing_corr = 2
-  }
-  this.correction_detaillee_disponible = true;
-  sortie_html ? correction_detaillee = true : correction_detaillee = false ;
-
-  this.nouvelle_version = function (numero_de_l_exercice) {
-    this.liste_questions = []; // Liste de questions
-    this.liste_corrections = []; // Liste de questions corrigées
-    let liste_types_equations = combinaison_listes(["0solution","1solution","2solutions"],this.nb_questions)
-    for (let i = 0, texte, texte_corr, a, b, c, delta, x1, x2, y1, y2, cpt = 0;i < this.nb_questions && cpt < 50;) {
-      switch (liste_types_equations[i]) {
-        case "0solution": 
-          k = randint(1,5);
-          x1 = randint(-3,3,[0]);
-          y1 = randint(1,5);
-          if (choice(['+','-'])=='+') { // k(x-x1)^2 + y1 avec k>0 et y1>0
-            a = k;
-            b = -2 * k * x1;
-            c = k * x1 * x1 + y1;
-          } else { // -k(x-x1)^2 -y1 avec k>0 et y1>0
-            a = -k;
-            b = 2 * k * x1;
-            c = - k * x1 * x1 - y1
-          }
-          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
-          if (b == 0) {
-            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
-          }
-          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
-          texte_corr += `<br>$\\Delta<0$ donc l'équation n'admet pas de solution.`
-          texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
-          break;
-        case "1solution": // k(x-x1)^2
-          k = randint(-5,5,[0]);
-          x1 = randint(-5,5,[0]);
-          a = k;
-          b = -2 * k * x1;
-          c = k * x1 * x1;
-          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
-          if (b == 0) {
-            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
-          }
-          if (c == 0) {
-            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x=0$`
-          }
-          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
-          texte_corr += `<br>$\\Delta=0$ donc l'équation admet une unique solution.`
-          //texte_corr += `<br>$\\mathcal{S}={${x1}}$`
-          break;
-          case "2solutions": // k(x-x1)^2
-          k = randint(1,5);
-          x1 = randint(-3,3);
-          y1 = randint(1,5);
-          if (choice(['+','-'])=='+') { // k(x-x1)^2 + y1 avec k>0 et y1<0
-            y1 *=-1;
-            a = k;
-            b = -2 * k * x1;
-            c = k * x1 * x1 + y1;
-          } else { // -k(x-x1)^2 -y1 avec k>0 et y1>0
-            a = -k;
-            b = 2 * k * x1;
-            c = - k * x1 * x1 + y1
-          }
-          texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
-          if (b == 0) {
-            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique(c)}=0$`
-          }
-          if (c == 0) {
-            texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x=0$`
-          }
-          texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
-          texte_corr += `<br>$\\Delta>0$ donc l'équation admet deux solutions.`
-          //texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
-          break;
-        default:
-          break;
-      }
-      if (this.correction_detaillee){
-        let f = x => a * x**2 + b * x + c
-        let graphique = courbe(f)
-        graphique.color = 'blue';
-        let s = segment(point(-10,0),point(10,0));
-        s.epaisseur = 3;
-        s.color = 'red';
-        let r = repere({afficheNumeros:false,legendeX : '', legendeY : ''})
-        texte_corr += '<br><br>'
-        texte_corr += `Représentation graphique de $f : x \\mapsto ${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique_sauf1(c)}$ : `
-        texte_corr +='<br><br>'
-        texte_corr += mathalea2d({xmin : -10, ymin : -10, xmax : 10, ymax : 10 , pixelsParCm : 15},
-          graphique,r,s) 
-      }
-      if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
-        this.liste_questions.push(texte);
-        this.liste_corrections.push(texte_corr);
-        i++;
-      }
-      cpt++;
-    }
-    liste_de_question_to_contenu(this);
-  };
-  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
-}
-
-
-/**
- * Calcul de discriminant pour identifier la forme graphique associée (0 solution dans IR, 1 ou 2)
- * @Auteur Rémi Angot
- * Référence 1E11
-*/
-function Resoudre_equation_degre_2() {
-  Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Résoudre une équation du second degré";
-  this.consigne = "Résoudre dans $\\mathbb{R}$ les équations suivantes.";
-  this.nb_questions = 4;
-  this.nb_cols = 2;
-  this.nb_cols_corr = 2;
-  this.spacing_corr = 3
-
-  this.nouvelle_version = function (numero_de_l_exercice) {
-    this.liste_questions = []; // Liste de questions
-    this.liste_corrections = []; // Liste de questions corrigées
-    for (let i = 0, texte, texte_corr, a, b, c, delta, x1, x2, y1, y2, cpt = 0;i < this.nb_questions && cpt < 50;) {
-      // k(x-x1)(x-x2)
-      x1 = randint(-5,2,[0]);
-      x2 = randint(x1+1,5,[0,-x1]);
-      k = randint(-4,4,[0]);
-      a = k;
-      b = -k * x1 -k * x2;
-      c = k * x1 * x2
-      texte = `$${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique(c)}=0$`
-      
-      texte_corr = `$\\Delta = ${ecriture_parenthese_si_negatif(b)}^2-4\\times${ecriture_parenthese_si_negatif(a)}\\times${ecriture_parenthese_si_negatif(c)}=${b*b-4*a*c}$`
-      texte_corr += `<br>$\\Delta>0$ donc l'équation admet deux solutions : $x_1 = \\dfrac{-b-\\sqrt{\\Delta}}{2a}$ et $x_2 = \\dfrac{-b+\\sqrt{\\Delta}}{2a}$`
-      texte_corr += `<br>$x_1 =\\dfrac{${-b}-\\sqrt{${b*b-4*a*c}}}{${2*a}}=${x1}$`
-      texte_corr += `<br>$x_2 =\\dfrac{${-b}+\\sqrt{${b*b-4*a*c}}}{${2*a}}=${x2}$`
-      texte_corr += `<br>L'ensemble des solutions de cette équation est : $\\mathcal{S}=\\{${x1} ; ${x2}\\}$.`  
-
-      if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
-        this.liste_questions.push(texte);
-        this.liste_corrections.push(texte_corr);
-        i++;
-      }
-      cpt++;
-    }
-    liste_de_question_to_contenu(this);
-  };
-  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+function Exercice_tables_d_additions_cycle3() {
+    Exercice_tables_d_additions.call(this,10)
 }
