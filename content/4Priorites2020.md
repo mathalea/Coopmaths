@@ -13,13 +13,13 @@ Début de l'url commune
 https://coopmaths.fr/exercice.html?
 
 Tous les exos actuellement dispos
-ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5N11-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
+ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10&ex=5N11-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 Nombres et calculs
 ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5
 
 Organisation et gestion de données
-ex=6P10&ex=5P10-1&ex=5N11-1
+ex=6P10&ex=5P10&ex=5N11-1
 
 Espace et géométrie
 ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
@@ -27,20 +27,20 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 
 <!-- <h2 class="ui horizontal divider header">Priorités</h2>
 <h3 class="ui horizontal divider header">Test de positionnement</h3> -->
-{{% prioriteIntro "/pdf/2020-4e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3"  %}}
+{{% prioriteIntro "/pdf/2020-4e-Priorites-Test.pdf" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3"  %}}
 
 
 {{< titre1 "Test de positionnement" >}}
 
 {{< liste >}}
 	{{%pdf_url "Test de positionnement 4e - version pdf du 30 août 2020" "/pdf/2020-4e-Priorites-Test.pdf"%}}
-	{{% alea_url "Test de positionnement 4e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10-1&ex=5N11-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
+	{{% alea_url "Test de positionnement 4e - mathalea temporaire" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5&ex=6P10&ex=5P10&ex=5N11-1&ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
 {{< /liste >}}
 
 **Liens MathALEA vers l'ensemble des exercices par thème**
 {{< liste>}}
 {{% alea_url "Nombres et calculs" "https://coopmaths.fr/exercice.html?ex=5R10-0&ex=5R11-2&ex=5N20-0&ex=5R20-4&ex=5L10-2&ex=4L13-0&ex=5L13-5" %}}	
-{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10-1&ex=5N11-1" %}}	
+{{% alea_url "Organisation et gestion de données, fonctions" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10&ex=5N11-1" %}}	
 {{% alea_url "Espace et géométrie" "https://coopmaths.fr/exercice.html?ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3" %}}	
 {{< /liste>}}
 
@@ -102,9 +102,9 @@ ex=5G31&ex=5G12&ex=5G11-2,sup=1&ex=5G11-2,sup=2&ex=5G11-2,sup=3
 		<div class="header content">Résoudre des problèmes de proportionnalité</div>	
 			{{% priorite "L’élève reconnaît une situation de proportionnalité ou de non proportionnalité entre deux grandeurs." %}}
 			{{% priorite_alea "6P10 : Reconnaître une situation de proportionnalité" "6P10" %}}			
-			{{% priorite_alea "5P10-1 : Tableaux et proportionnalité" "5P10-1" %}}
+			{{% priorite_alea "5P10 : Tableaux et proportionnalité" "5P10" %}}
 			{{< liste >}}
-				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10-1" %}}
+				{{% alea_url_color "#f15929" "Les 2 exercices ci-dessus" "https://coopmaths.fr/exercice.html?ex=6P10&ex=5P10" %}}
 
 				{{% pdf_url_color "#f15929" "Les 2 exercices ci-dessus - version pdf" "/pdf/2020-4e-Test-5.pdf" %}}
 			{{< /liste >}}
