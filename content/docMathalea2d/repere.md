@@ -76,6 +76,7 @@ positionLegendeY : [0.3n ymax + 0.2],
 <div class="ui hidden divider"></div>
 
 `droiteGraduee()` est une fonction qui permet de tracer une droite ou une demi-droite graduée horizontale ou verticale.
+Exemple : droiteGraduee(0,0,'H','dd',5,2,15,0,1,'0','1',true,['M',1.5],['N',3.5],['P',4.25])
 
 Vous pouvez placer des points sur cette droite.
 Voici tous les paramètres par défaut que vous pouvez changer : 
