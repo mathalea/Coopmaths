@@ -82,7 +82,7 @@ Exemple : droiteGraduee(0,0,'H','dd',5,2,15,0,1,'0','1',true,['M',1.5],['N',3.5]
 Vous pouvez placer des points sur cette droite.
 
 Voici tous les paramètres par défaut que vous pouvez changer : 
-
+````
 Xorigine : 0,
 Yorigine : 0,
 Position : 'H' // 'V' ou n'importe quoi d'autre donnera une position verticale,
@@ -96,5 +96,5 @@ labelgauche : 'O' // Ce qui est écrit sous la première graduation,
 labelUnite : 'I' // Ce qui est écrit sous la deuxième graduation,
 gradue : true // true=compléter les graduations principales à partir de la 3ème avec leur abscisse, false=pas de graduations automatiques,
 ...args : vide // liste de points à placer au format ['Nom',abscisse]
-
+````
 {{% alea2d "droitegraduee"  %}}
