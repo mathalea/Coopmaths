@@ -72,5 +72,29 @@ positionLegendeY : [0.3n ymax + 0.2],
 ````
 {{% alea2d "cf3"  %}}
 
+
 <div class="ui hidden divider"></div>
 
+`droiteGraduee()` est une fonction qui permet de tracer une droite ou une demi-droite graduée horizontale ou verticale.
+
+Exemple : droiteGraduee(0,0,'H','dd',5,2,15,0,1,'0','1',true,['M',1.5],['N',3.5],['P',4.25])
+
+Vous pouvez placer des points sur cette droite.
+
+Voici tous les paramètres par défaut que vous pouvez changer : 
+````
+Xorigine : 0,
+Yorigine : 0,
+Position : 'H' // 'V' ou n'importe quoi d'autre donnera une position verticale,
+Type : 'dd' // 'd' ou n'importe quoi d'autre donnera une droite qui commence 0,5cm avant la première graduation,
+LongueurUnite : 10 // distance en cm entre deux "grosses" graduations,
+Division : 10 // nombre de parts/unité,
+LongueurTotale : 15 // longeur totale en cm,
+origin : 0 // abscisse 1ère graduation,
+unite : 1 // abscisse 2ème graduation,
+labelgauche : 'O' // Ce qui est écrit sous la première graduation,
+labelUnite : 'I' // Ce qui est écrit sous la deuxième graduation,
+gradue : true // true=compléter les graduations principales à partir de la 3ème avec leur abscisse, false=pas de graduations automatiques,
+...args : vide // liste de points à placer au format ['Nom',abscisse]
+````
+{{% alea2d "droitegraduee"  %}}

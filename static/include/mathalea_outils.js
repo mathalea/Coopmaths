@@ -103,6 +103,74 @@ function carreParfait(x) {
 	if (estentier(Math.sqrt(x))) return true
 	else return false
 }
+
+// Petite fonction pour écrire des nombres avec Mathalea2d en vue de poser des opérations...
+function ecrireNombre2D(x,y,n){
+	let nString=nombre_avec_espace(n);
+	let nombre2D=[]
+	for (let k=0;k<nString.length;k++) {
+		nombre2D.push(texteParPosition(nString[k],x+k*0.8,y))
+	}
+	return nombre2D
+}
+/*
+Pour l'instant, je commente... Faut que je réfléchisse et que je prenne mon temps (que je n'ai pas actuellement)
+On verra ça plus tard. La nuit porte conseil.
+function ecrireAdditionPosee(x,y,...args){
+	let nString=[],n=[]
+	for (k=0;k<args.length;k++) {
+		nString.push(tex_nombre(args[k]))
+		n.push(args[k])
+	}
+	let nb_chiffres_pe=Math.log10(Math.floor(Math.max(n)))
+
+	for (let k=0;k<args.length;k++){
+
+	}
+}
+*/
+class NombreDecimal {
+	constructor(nombre){
+		this.partieEntiere=[]
+		this.partieDecimale=[]
+		if (nombre<0) {
+			this.signe=`-`
+			nombre=calcul(-nombre)
+		}
+		else this.signe=`+`
+		let ent=Math.floor(nombre)
+		let partiedecimale=calcul(nombre-ent)
+		let nbcPE=Math.ceil(Math.log10(ent))
+		for (let i=0;i<nbcPE;i++){
+			this.partieEntiere.push(ent%10)
+			ent=(ent-(ent%10))/10
+		}
+
+		let k=0
+		while (!egal(partiedecimale,0)){
+			partiedecimale=arrondi(partiedecimale*10,10)
+			this.partieDecimale.push(Math.floor(partiedecimale))
+			partiedecimale=(partiedecimale-Math.floor(partiedecimale))
+			k++
+		}
+	}
+	get valeur() {
+		return this.recompose()
+	}
+	recompose() {
+		let val=0
+		for (let i=0;i<this.partieEntiere.length;i++)
+			val+=this.partieEntiere[i]*10**i
+		for (let j=0;j<this.partieDecimale.length;j++) 
+			val+=this.partieDecimale[j]*10**(-1-j)
+		if (this.signe==`+`) return val
+		else return calcul(-val)
+	}
+
+}
+function decimal(n) {
+	return new NombreDecimal(n)
+}
 /**
 * Créé tous les couples possibles avec un élément de E1 et un élément de E2.
 * L'ordre est pris en compte, donc on pourra avoir (3,4) et (4,3).
@@ -384,7 +452,7 @@ return array_bis;
 
 
 /*
-* Mélange les items de deux tableaux de la même manière, sans modifier le tableau passé en argument
+* Mélange les items de deux tableaux de la même manière
 *
 * 
 * @Source https://stackoverflow.com/questions/18194745/shuffle-multiple-javascript-arrays-in-the-same-way
@@ -2556,16 +2624,16 @@ function Latex_reperage_sur_un_axe(zoom,origine,pas1,pas2,points_inconnus,points
 		valeur=calcul(origine+points_inconnus[i][1]/pas1+calcul(points_inconnus[i][2]/pas1/pas2))
 		result+=`\n\t \\tkzDefPoint(${valeur},0){A}`
 		result+=`\n\t \\tkzDefPoint(${valeur},-0.3-${position*0.02}){B}`
-		result +=`\n\t \\tkzDrawPoint[shape=cross out,color=orange,size=6](A)`
+		result +=`\n\t \\tkzDrawPoint[shape=cross out,color=blue,size=8](A)`
 		result +=`\n\t \\tkzLabelPoint[above](A){$${points_inconnus[i][0]}$}`
 		if (points_inconnus[i][3]) {	
 			if (!fraction) { // affichage décimal 
-				result +=`\n\t \\tkzLabelPoint[color = orange,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_nombrec(valeur)}$}`	
-				result+=`\n\t \\tkzDrawSegment[color=orange,arr=stealth](B,A)`
+				result +=`\n\t \\tkzLabelPoint[color = blue,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_nombrec(valeur)}$}`	
+				result+=`\n\t \\tkzDrawSegment[color=blue,arr=stealth](B,A)`
 			}
 			else { //affichage fractionnaire
-				result +=`\n\t \\tkzLabelPoint[color = orange,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_fraction_signe((origine+points_inconnus[i][1])*pas2+points_inconnus[i][2],pas2)}$}`	
-				result+=`\n\t \\tkzDrawSegment[color=orange,arr=stealth](B,A)`
+				result +=`\n\t \\tkzLabelPoint[color = blue,below=${15+position}pt,inner sep = 5pt,font=\\scriptsize](A){$${tex_fraction_signe((origine+points_inconnus[i][1])*pas2+points_inconnus[i][2],pas2)}$}`	
+				result+=`\n\t \\tkzDrawSegment[color=blue,arr=stealth](B,A)`
 			}
 	}
 		position=6-position;
@@ -5166,7 +5234,7 @@ function Fraction(num,den) {
      * @param {*} type 'gateau' ou 'segment' ou 'barre'
 	 * @Auteur Jean-Claude Lhote
      */
-	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
+	this.representationIrred = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1,label="") {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.numIrred, this.denIrred)
 		num = this.numIrred
@@ -5256,6 +5324,7 @@ function Fraction(num,den) {
 			else {
 			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','black',scale))
 			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','black',scale))
+			if (label!="") objets.push(texteParPosition(label,x+rayon*this.numIrred/this.denIrred,y-0.6,'milieu','black',scale))
 			}
 
 		}
@@ -5313,7 +5382,7 @@ function Fraction(num,den) {
 	 * les arguments unite0 et unite1 servent pour la représentation 'segment'. On peut ainsi choisir les délimiteurs de l'unité, ce sont habituellement 0 et 1, à ce moment la, chaque entier est affiché sous sa graduation.
 	 * Si ce sont des variable de type string, il n'y a que ces deux étiquettes qui sont écrites.
 	 */
-	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1) {
+	this.representation = function (x, y, rayon, depart = 0, type = 'gateau', couleur = 'gray',unite0=0,unite1=1,scale=1,label="") {
 		let objets = [], n, num, k, dep, s, a, O, C
 		n = quotientier(this.num, this.den)
 		num = this.num
@@ -5405,6 +5474,7 @@ function Fraction(num,den) {
 			else {
 			if (unite0!="") objets.push(texteParPosition(unite0,x,y-0.6,'milieu','black',scale))
 			if (unite1!="") objets.push(texteParPosition(unite1,x+rayon,y-0.6,'milieu','black',scale))
+			if (label!="") objets.push(texteParPosition(label,x+rayon*this.num/this.den,y-0.6,'milieu','black',scale))
 			}
 		}
 		else { //Type barre
