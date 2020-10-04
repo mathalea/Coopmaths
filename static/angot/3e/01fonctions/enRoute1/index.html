@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>En route - Le vocabulaire des fonctions</title>
+
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="/include/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="/include/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="/include/reveal.js/dist/theme/white.css" id="theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section>
+                    <p>$f$ est la fonction qui double.</p>
+					<p>Calculer les <strong>images</strong> de $4$ ; $5$ ; $-2$ et $-3,6$.</p>
+					<p class="fragment" >$f:4\longmapsto$ <span class="fragment">$8$</span></p>
+					<p class="fragment" >$f:5\longmapsto$ <span class="fragment">$10$</span></p>
+					<p class="fragment" >$f:-2\longmapsto$ <span class="fragment">$-4$</span></p>
+					<p class="fragment" >$f:-3,6\longmapsto$ <span class="fragment">$-7,2$</span></p>
+                </section>
+				<section>
+                    <p>$f$ est la fonction qui double.</p>
+					<p>Calculer les <strong>antécédents</strong> de $4$ ; $20$ ; $-14$ et $-7$.</p>
+					<p class="fragment" >$f:$<span class="fragment">$2$</span> $\longmapsto 4$</p>
+					<p class="fragment" >$f:$<span class="fragment">$10$</span> $\longmapsto 20$</p>
+					<p class="fragment" >$f:$<span class="fragment">$-7$</span> $\longmapsto -14$</p>
+					<p class="fragment" >$f:$<span class="fragment">$-3,5$</span> $\longmapsto -7$</p>	
+                </section>
+				<section>
+                    <p>$f$ est la fonction qui double.</p>
+					<p>Donner sa forme algébrique.</p>
+					<p class="fragment" >$f:$<span class="fragment">$x$</span> <span class="fragment">$\longmapsto 2x$</span></p>
+                </section>
+				<section>
+                    <p>$g$ est la fonction qui multiplie un nombre par $-3$ puis luis ajoute 2.</p>
+					<p>Donner sa forme algébrique puis calculer les images de $5$ ; $-10$ ; $1,5$ et $0$.</p>
+					<p class="fragment" >$g:$<span class="fragment">$x$</span> <span class="fragment">$\longmapsto -3x$</span><span class="fragment">$+2$</span></p>
+					<p class="fragment" >$g:5 \longmapsto $<span class="fragment"> $-13$</span></p>
+					<p class="fragment" >$g:-10 \longmapsto $<span class="fragment"> $32$</span></p>
+					<p class="fragment" >$g:1,5 \longmapsto $<span class="fragment"> $-2,5$</span></p>
+					<p class="fragment" >$g:0 \longmapsto $<span class="fragment"> $2$</span></p>
+				</section>
+				<section>
+                    <p>Les deux notations suivantes sont équivalentes</p>
+					<p class="fragment" >$g:x\longmapsto -3x+2$ et $g(x) = -3x+2$</p>
+					<p class="fragment" >$g:5 \longmapsto -13$ et $g(5) = -13$</p>
+				</section>
+				<section>
+                    <p>Soit $h:x\longmapsto 30-x^2$, compléter le tableau de valeurs suivant.</p>
+					<table>
+						<tbody>
+							<tr>
+								<td>$x$</td>
+								<td>1</td>
+								<td>4</td>
+								<td>6</td>
+								<td>10</td>
+								<td>-1</td>
+								<td>-10</td>
+							</tr>
+							<tr>
+								<td>$h(x)$</td>
+								<td class="fragment">29</td>
+								<td class="fragment">14</td>
+								<td class="fragment">-6</td>
+								<td class="fragment">-70</td>
+								<td class="fragment">29</td>
+								<td class="fragment">-70</td>
+								<td class=></td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="fragment">L'image de $4$ est <span class="fragment">$14$</span>.</p>
+					<p class="fragment">Un antécédent de $14$ est <span class="fragment">$4$</span>.</p>
+					<p class="fragment">Les antécédents de $-70$ sont <span class="fragment">$-10$ et $10$</span>.</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="/include/reveal.js/dist/reveal.js"></script>
+		<script src="/include/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="/include/reveal.js/plugin/notes/notes.js"></script>
+		<script src="/include/reveal.js/plugin/search/search.js"></script>
+		<script src="/include/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="/include/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="/include/reveal.js/plugin/math/math.js"></script>
+<script>
+  Reveal.initialize({
+    math: {
+      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+      config: 'TeX-AMS_HTML-full',
+      // pass other options into `MathJax.Hub.Config()`
+      TeX: { Macros: { RR: "{\\bf R}" } }
+    },
+    plugins: [ RevealMath ]
+  });
+</script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>

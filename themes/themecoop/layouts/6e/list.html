@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+
+{{ partial "header" }}
+
+<div class="ui text container">
+
+
+     <h1 class="ui block center aligned header">Niveau 6e<a href="/"><i class="small level up alternate icon" style="color: black"></i></a> </h1>
+     
+     <div class="ui middle aligned animated selection divided list">
+          <a class="item" href="/pdf/CoopMaths-Referentiel-6e.pdf" target="_blank">
+               <i class="large black file pdf outline icon"></i> <div class="header content"> Télécharger le référentiel </div>
+          </a>
+          {{ range where .Site.Pages "Params.niveau" "6e" }}
+          <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
+          {{ end }}
+
+     </div>
+
+     <h3><a href="/CM6" style="color:inherit !important" >Calcul mental - 6e (avec mathsmentales.net)</a></h3>
+
+     <!-- <a class="twitter-timeline" data-lang="fr" data-width="300" data-height="500" data-dnt="true" data-theme="light" href="https://twitter.com/CoopMaths_fr?ref_src=twsrc%5Etfw">Tweets by CoopMaths_fr</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+
+</div>    
+{{ partial "footer" . }}
+
+{{ end }}
