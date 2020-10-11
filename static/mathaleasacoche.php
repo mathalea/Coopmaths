@@ -16,12 +16,11 @@
 
  <script type="text/javascript">   
    var tableauSACoche = <?php echo $file_data ?>;
-   console.log(tableauSACoche)
    // on récupère le contenu du tableau json dans notre variable JS
 
    // pour tous les élèves qui sont dans le tableau panier...
   let texte_des_demandes = ''
-  if (tableauSACoche.panier.length>1){
+  if (Object.keys(tableauSACoche.panier).length>1){
     for (const numeroEleve in tableauSACoche.panier) {
         texte_des_demandes += `${tableauSACoche.eleve[numeroEleve].nom};${tableauSACoche.eleve[numeroEleve].prenom}`;
         
