@@ -131,38 +131,38 @@ function ecrireAdditionPosee(x,y,...args){
 */
 class NombreDecimal {
 	constructor(nombre){
-		this.partieEntiere=[]
-		this.partieDecimale=[]
 		if (nombre<0) {
 			this.signe=`-`
 			nombre=calcul(-nombre)
 		}
 		else this.signe=`+`
-		let ent=Math.floor(nombre)
-		let partiedecimale=calcul(nombre-ent)
-		let nbcPE=Math.ceil(Math.log10(ent))
-		for (let i=0;i<nbcPE;i++){
-			this.partieEntiere.push(ent%10)
-			ent=(ent-(ent%10))/10
+		console.log(nombre)
+		this.exposant=Math.floor(Math.log10(nombre))
+		nombre=nombre/10**this.exposant
+		console.log(nombre)
+		this.mantisse=[]
+		for (let k=0;k<16;k++) {
+			if (egal(Math.ceil(nombre)-nombre,0,0.00001)) {
+				this.mantisse.push(Math.ceil(nombre))
+				nombre=(this.mantisse[k]-nombre)*10
+			}
+			else {
+				this.mantisse.push(Math.floor(nombre))
+				nombre=(nombre-this.mantisse[k])*10
+			}
+			console.log(nombre)
+			if (egal(nombre,0,0.001)) break
 		}
-
-		let k=0
-		while (!egal(partiedecimale,0)){
-			partiedecimale=arrondi(partiedecimale*10,10)
-			this.partieDecimale.push(Math.floor(partiedecimale))
-			partiedecimale=(partiedecimale-Math.floor(partiedecimale))
-			k++
-		}
+		
 	}
 	get valeur() {
 		return this.recompose()
 	}
 	recompose() {
 		let val=0
-		for (let i=0;i<this.partieEntiere.length;i++)
-			val+=this.partieEntiere[i]*10**i
-		for (let j=0;j<this.partieDecimale.length;j++) 
-			val+=this.partieDecimale[j]*10**(-1-j)
+		for (let i=0;i<10;i++)
+			val+=this.mantisse[i]*10**(-i)
+		val=val*10**this.exposant
 		if (this.signe==`+`) return val
 		else return calcul(-val)
 	}
@@ -5066,51 +5066,51 @@ function Fraction(num,den) {
 	 * @return {object} La fraction "complexifiée" d'un rapport k
 	 * @param {number} k Le nombre par lequel, le numérateur et le dénominateur sont multipliés.
 	 */
-	this.fractionEgale = function(k){
+	this.egal = function(k){
 		return fraction(calcul(this.numIrred*k),calcul(this.denIrred*k))
 	}   
-	this.simplifie=function() {
+	this.simp=function() {
 		return fraction(this.numIrred,this.denIrred)
 	}
 	/**
 	 * @return {object} L'opposé de la fraction
 	 */
-    this.oppose = function(){
+    this.opp = function(){
         return fraction(-this.num,this.den)
 	}
 	/**
 	 * @return {object]} L'opposé de la fracion réduite
 	 */
-    this.opposeIrred = function(){
+    this.oppIr = function(){
         return fraction(-this.numIrred,this.denIrred)
     }
 	/**
 	 * @return {object]} L'inverse de la fraction
 	 */
-    this.inverse = function(){
+    this.inv = function(){
         return fraction(this.den,this.num)
 	}
 	/**
 	 * @return {object} L'inverse de la fraction simplifiée
 	 */
-    this.inverseIrred = function(){
+    this.invIr = function(){
         return fraction(this.denIrred,this.numIrred)
 	}
 	/**
 	 * @return {object} La somme des fractions
 	 * @param {object} f2 La fraction qui s'ajoute
 	 */
-    this.sommeFraction =function(f2) {
+    this.add =function(f2) {
         return fraction(this.num*f2.den+f2.num*this.den,this.den*f2.den)
 	}
 	/**
 	 * @return {object} La somme de toutes les fractions
 	 * @param  {...any} fractions Liste des fractions à ajouter à la fraction
 	 */
-    this.sommeFractions = function(...fractions){
+    this.adds = function(...fractions){
         let s=fraction(this.num,this.den)
         for (let f of fractions) {
-            s=s.sommeFraction(f)
+            s=s.add(f)
         }
         return s
 	}
@@ -5118,24 +5118,29 @@ function Fraction(num,den) {
 	 * @return {object} Le produit des deux fractions
 	 * @param {object} f2  LA fraction par laquelle est multipliée la fraction
 	 */
-    this.produitFraction = function(f2) {
+    this.mul = function(f2) {
+
         return fraction(this.num*f2.num,this.den*f2.den)
 	}
+	this.texmul = function(f2) {
+			return `${tex_fraction(this.num,this.den)}\\times ${tex_fraction(f2.num,f2.den)}=${tex_fraction(this.num+`\\times`+f2.num,this.den+`\\times`+f2.den)}=${tex_fraction(this.num*f2.num,this.den*f2.den)}`
+	} 
+
 	/**
 	 * @return {object} La puissance n de la fraction
 	 * @param {integer} n l'exposant de la fraction 
 	 */
-    this.puissanceFraction = function(n) {
+    this.pow = function(n) {
         return fraction(this.num**n,this.den**n)
 	}
 	/**
 	 * @param  {...any} fractions Les fractions qui multiplient la fraction
 	 * @return Le produit des fractions
 	 */
-    this.produitFractions = function(...fractions){
+    this.muls = function(...fractions){
         let p=fraction(this.num,this.den)
         for (let f of fractions) {
-            p=p.produitFraction(f)
+            p=p.mul(f)
     }
         return p
 	}
@@ -5143,14 +5148,14 @@ function Fraction(num,den) {
 	 * @param {object} f2 est la fracion qui est soustraite de la fraction
 	 * @return {objet} La différence des deux fractions
 	 */
-    this.differenceFraction = function(f2) {
-        return this.sommeFraction(f2.oppose())
+    this.sub = function(f2) {
+        return this.add(f2.opp())
 	}
 
 /**
  * @return {object}  Renvoie une fraction avec comme dénominateur une puissance de 10 ou 'NaN' si la fraction n'a pas de valeur décimale
  */
-	this.fractionDecimale = function(){
+	this.fr10 = function(){
 		let den=this.denIrred
 		let num=this.numIrred
 		let liste=obtenir_liste_facteurs_premiers(den)
@@ -5167,20 +5172,20 @@ function Fraction(num,den) {
 	/**
 	 * @return {number} La valeur décimale de la fraction
 	 */
-	this.valeurDecimale = function(){
-		if (this.fractionDecimale()!='NaN') return calcul(this.fractionDecimale().num/this.fractionDecimale().den)
+	this.val10 = function(){
+		if (this.fr10()!='NaN') return calcul(this.fr10().num/this.fr10().den)
 		else return `Ce n\'est pas un nombre décimal`
 	}
 	/**
 	 * @return {string} Code Latex de la fraction
 	 */
-	this.texFraction = function(){
+	this.texfr = function(){
 		return tex_fraction_signe(this.num,this.den)
 	}
 	/**
 	 * @return {string} code Latex de lafraction simplifiée
 	 */
-	this.texFractionSimplifiee = function(){
+	this.texfrsimp = function(){
 		return tex_fraction_signe(this.numIrred,this.denIrred)
 	}
     /**
@@ -5188,7 +5193,7 @@ function Fraction(num,den) {
      * @param {integer} n entier par lequel multiplier la fraction 
      * @return {object} fraction multipliée par n
      */
-    this.multiplieEntier = function(n) {
+    this.muln = function(n) {
         return fraction(n*this.num,this.den);
     };
 
@@ -5197,35 +5202,35 @@ function Fraction(num,den) {
      * @param {integer} n entier par lequel multiplier la fraction 
      * @return {object} fraction multipliée par n simplifiée
      */
-    this.multiplieEntierIrred = function(n) {
+    this.mulnIr = function(n) {
         return fraction(fraction_simplifiee(n*this.num,this.den)[0],fraction_simplifiee(n*this.num,this.den)[1]);
 	};
 	/**
 	 * @return fraction divisée par n
 	 * @param {integer} n entier qui divise la fraction 
 	 */
-	this.entierDivise=function(n){
+	this.divn=function(n){
 		return fraction(this.num,n*this.den)
 	}
 	/**
 	 * @return fraction divisée par n et réduite si possible
 	 * @param {integer} n entier qui divise la fraction 
 	 */
-	this.entierDiviseIrred=function(n){
+	this.dinIr=function(n){
 		return fraction(fraction(this.num,n*this.den).numIrred,fraction(this.num,n*this.den).denIrred)
 	}
 	/**
 	 * @return {object} la fraction augmentée de n
 	 * @param {integer} n entier à ajouter à la fraction 
 	 */
-	this.ajouteEntier=function(n){
+	this.addn=function(n){
 		return fraction(this.num+this.den*n,this.den)
 	}
 /**
  * @return {object} n moins la fraction
  * @param {integer} n l'entier duqel on soustrait la fraction 
  */
-	this.entierMoinsFraction=function(n){
+	this.nsub=function(n){
 		return (fraction(n*this.den-this.num,this.den))
 	}
     /**
@@ -7424,6 +7429,7 @@ var liste_des_exercices_disponibles = {
   "1N11": Terme_d_une_suite_definie_par_recurrence, 
   "1E10" : Calcul_discriminant,
   "1E11" : Resoudre_equation_degre_2,
+  "beta1E12" : Trouver_equation_parabole,
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   "betaTESTseb": Tests_du_Seb,
@@ -52753,6 +52759,112 @@ function Resoudre_equation_degre_2() {
           texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
       }
 
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Solutions entières\n2 : Solutions réelles et calcul du discriminant non obligatoire"];
+}
+function Trouver_equation_parabole() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Trouver l'équation d'une parabole";
+  this.consigne = "Trouver l'expression de la fonction f.";
+  this.nb_questions = 4;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.spacing_corr = 3;
+  this.sup = 1;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_type_de_questions,type_de_questions_disponibles;
+    if (this.sup==1) type_de_questions_disponibles=[2,3]
+    else if (this.sup==2) type_de_questions_disponibles=[1,2]
+    else if (this.sup==3) type_de_questions_disponibles=[1,2,3]
+    liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+    for (let i = 0, texte, texte_corr, a, b, c, x1, x2,x3,f,r, cpt = 0;i < this.nb_questions && cpt < 50;) {
+
+      if (liste_type_de_questions[i]<3) {
+        a=choice([-1,1])
+        b=randint(-3,3)*2
+        c=randint(-10,10)
+        x1=randint(-10,10)
+        x2=randint(-10,10,x1)
+        x3=randint(-10,10,[x1,x2])
+      }
+      else {
+        x1=randint(-4,-1)
+        x2=randint(1,4)
+        x3=randint(-5,5,[x1,x2])
+        a=randint(-2,2,0)
+        b=calcul(-a*(x1+x2))
+        c=a*x1*x2
+      }
+      FdeX = function(x) {
+        return calcul(a*x**2+b*x+c)
+      }
+      texte = `Quelle est l'équation de la fonction f du second degré telle que :<br>`
+      switch (liste_type_de_questions[i]) {
+        case 1 : // passe par 3 points à coordonnées entières dont -x1, 0 et x1.
+          if (x1<0) x1=-x1
+          texte+=`$f(${x1})=${FdeX(x1)}$ ; $f(0)=${FdeX(0)}$ et $f(${-x1})=${FdeX(-x1)}$ <br>`
+          texte_corr=`Soit $f(x)=ax^2+bx+c$ , l'expression de la fonction cherchée, nous avons immédiatement :<br>`
+          texte_corr+=`$f(0)=c=${FdeX(0)}$ donc $f(x)=ax^2+bx${ecriture_algebrique(FdeX(0))}$.<br>`
+          texte_corr+=`En substituant dans cette expression les valeurs de l'énoncé, nous obtenons :<br>`
+          texte_corr+=`$\\begin{cases}
+          ${FdeX(x1)}=a\\times${x1}^2+b\\times${x1}${ecriture_algebrique(FdeX(0))}=${x1**2}a+${x1}b${ecriture_algebrique(FdeX(0))} \\\\
+          ${FdeX(-x1)}=a\\times(${-x1})^2+b\\times(${-x1})${ecriture_algebrique(FdeX(0))}=${x1**2}a-${x1}b${ecriture_algebrique(FdeX(0))}
+       \\end{cases}$<br>`
+       texte_corr+=`La résolution de ce système donne $a=${a}$ et $b=${b}$.<br>`
+       texte_corr+=`D'où $f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$<br>`
+ 
+          break;
+        case 2 : // Passant par le sommet (x1,y1) et par le point (x2,y2)
+          x1=calcul(-b/(2*a))
+          texte+=`sa courbe atteint son `;
+          if (a>0) texte+=`minimum `;
+          else texte+=`maximum `;
+          texte +=`en (${x1};${FdeX(x1)}) et passe par le point de coordonnées (${x2};${FdeX(x2)})<br>`
+          texte_corr=`$f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$`
+           break;
+        case 3:
+          texte+=`$f(${x1})=${FdeX(x1)}$ ; $f(${x2})=${FdeX(x2)}$ et $f(${x3})=${FdeX(x3)}$ <br>`
+          texte_corr=`$f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$`
+          break;
+
+      }
+      if (a<0) {
+        Ymax=Math.ceil(FdeX(-b/(2*a))+2)
+        Ymin=Math.min(FdeX(x1),FdeX(x2),FdeX(x3))
+      }
+      else {
+        Ymin=Math.floor(FdeX(-b/(2*a))-2)
+        Ymax=Math.max(FdeX(x1),FdeX(x2),FdeX(x3))
+      }
+      if (Ymin>0) Ymin=0
+      if (Ymax<0) Ymax=0
+      if (Ymax-Ymin<10) Yscale=1
+      else Yscale =Math.ceil((Ymax-Ymin)/10)
+      console.log(i,Ymin,Ymax,Yscale) // Pour deboguer le décalage des graduations en Y
+      r = repere({
+        xmin: -10,
+        ymin: (Ymin-2)-(Ymin-2)%Yscale,
+        ymax: Ymax+2+(Ymax+2)%Yscale,
+        xmax: 10,
+        xscale: 1,
+        yscale:Yscale,
+      })
+      svgYmin=Math.round(((Ymin-2)-(Ymin-2)%Yscale)/Yscale-0.5)
+      svgYmax=Math.round((Ymax+2+(Ymax+2)%Yscale)/Yscale+0.5)
+      f = x => a*x**2+b*x+c;
+      texte+=mathalea2d({xmin:-10, xmax:10,ymin:svgYmin,ymax:svgYmax,scale:.6},courbe(f,-10,10,'black',1.5,r),r)
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(texte);

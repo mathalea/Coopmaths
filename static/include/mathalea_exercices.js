@@ -297,6 +297,7 @@ var liste_des_exercices_disponibles = {
   "1N11": Terme_d_une_suite_definie_par_recurrence, 
   "1E10" : Calcul_discriminant,
   "1E11" : Resoudre_equation_degre_2,
+  "beta1E12" : Trouver_equation_parabole,
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   "betaTESTseb": Tests_du_Seb,
@@ -45626,6 +45627,112 @@ function Resoudre_equation_degre_2() {
           texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
       }
 
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Solutions entières\n2 : Solutions réelles et calcul du discriminant non obligatoire"];
+}
+function Trouver_equation_parabole() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Trouver l'équation d'une parabole";
+  this.consigne = "Trouver l'expression de la fonction f.";
+  this.nb_questions = 4;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.spacing_corr = 3;
+  this.sup = 1;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_type_de_questions,type_de_questions_disponibles;
+    if (this.sup==1) type_de_questions_disponibles=[2,3]
+    else if (this.sup==2) type_de_questions_disponibles=[1,2]
+    else if (this.sup==3) type_de_questions_disponibles=[1,2,3]
+    liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions)
+    for (let i = 0, texte, texte_corr, a, b, c, x1, x2,x3,f,r, cpt = 0;i < this.nb_questions && cpt < 50;) {
+
+      if (liste_type_de_questions[i]<3) {
+        a=choice([-1,1])
+        b=randint(-3,3)*2
+        c=randint(-10,10)
+        x1=randint(-10,10)
+        x2=randint(-10,10,x1)
+        x3=randint(-10,10,[x1,x2])
+      }
+      else {
+        x1=randint(-4,-1)
+        x2=randint(1,4)
+        x3=randint(-5,5,[x1,x2])
+        a=randint(-2,2,0)
+        b=calcul(-a*(x1+x2))
+        c=a*x1*x2
+      }
+      FdeX = function(x) {
+        return calcul(a*x**2+b*x+c)
+      }
+      texte = `Quelle est l'équation de la fonction f du second degré telle que :<br>`
+      switch (liste_type_de_questions[i]) {
+        case 1 : // passe par 3 points à coordonnées entières dont -x1, 0 et x1.
+          if (x1<0) x1=-x1
+          texte+=`$f(${x1})=${FdeX(x1)}$ ; $f(0)=${FdeX(0)}$ et $f(${-x1})=${FdeX(-x1)}$ <br>`
+          texte_corr=`Soit $f(x)=ax^2+bx+c$ , l'expression de la fonction cherchée, nous avons immédiatement :<br>`
+          texte_corr+=`$f(0)=c=${FdeX(0)}$ donc $f(x)=ax^2+bx${ecriture_algebrique(FdeX(0))}$.<br>`
+          texte_corr+=`En substituant dans cette expression les valeurs de l'énoncé, nous obtenons :<br>`
+          texte_corr+=`$\\begin{cases}
+          ${FdeX(x1)}=a\\times${x1}^2+b\\times${x1}${ecriture_algebrique(FdeX(0))}=${x1**2}a+${x1}b${ecriture_algebrique(FdeX(0))} \\\\
+          ${FdeX(-x1)}=a\\times(${-x1})^2+b\\times(${-x1})${ecriture_algebrique(FdeX(0))}=${x1**2}a-${x1}b${ecriture_algebrique(FdeX(0))}
+       \\end{cases}$<br>`
+       texte_corr+=`La résolution de ce système donne $a=${a}$ et $b=${b}$.<br>`
+       texte_corr+=`D'où $f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$<br>`
+ 
+          break;
+        case 2 : // Passant par le sommet (x1,y1) et par le point (x2,y2)
+          x1=calcul(-b/(2*a))
+          texte+=`sa courbe atteint son `;
+          if (a>0) texte+=`minimum `;
+          else texte+=`maximum `;
+          texte +=`en (${x1};${FdeX(x1)}) et passe par le point de coordonnées (${x2};${FdeX(x2)})<br>`
+          texte_corr=`$f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$`
+           break;
+        case 3:
+          texte+=`$f(${x1})=${FdeX(x1)}$ ; $f(${x2})=${FdeX(x2)}$ et $f(${x3})=${FdeX(x3)}$ <br>`
+          texte_corr=`$f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$`
+          break;
+
+      }
+      if (a<0) {
+        Ymax=Math.ceil(FdeX(-b/(2*a))+2)
+        Ymin=Math.min(FdeX(x1),FdeX(x2),FdeX(x3))
+      }
+      else {
+        Ymin=Math.floor(FdeX(-b/(2*a))-2)
+        Ymax=Math.max(FdeX(x1),FdeX(x2),FdeX(x3))
+      }
+      if (Ymin>0) Ymin=0
+      if (Ymax<0) Ymax=0
+      if (Ymax-Ymin<10) Yscale=1
+      else Yscale =Math.ceil((Ymax-Ymin)/10)
+      console.log(i,Ymin,Ymax,Yscale) // Pour deboguer le décalage des graduations en Y
+      r = repere({
+        xmin: -10,
+        ymin: (Ymin-2)-(Ymin-2)%Yscale,
+        ymax: Ymax+2+(Ymax+2)%Yscale,
+        xmax: 10,
+        xscale: 1,
+        yscale:Yscale,
+      })
+      svgYmin=Math.round(((Ymin-2)-(Ymin-2)%Yscale)/Yscale-0.5)
+      svgYmax=Math.round((Ymax+2+(Ymax+2)%Yscale)/Yscale+0.5)
+      f = x => a*x**2+b*x+c;
+      texte+=mathalea2d({xmin:-10, xmax:10,ymin:svgYmin,ymax:svgYmax,scale:.6},courbe(f,-10,10,'black',1.5,r),r)
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(texte);
