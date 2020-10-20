@@ -7352,7 +7352,8 @@ var liste_des_exercices_disponibles = {
   "4G20MG32": Exercice_Pythagore,
   "4G21": Reciproque_Pythagore,
   "4G22": Problemes_Pythagore,
-  "4G30": Thales_4eme,
+  "4G30-1": Thales2D,
+  "4G30" : Thales_4eme,
   "4G31": Reciproque_Thales_4eme,
   "4G40": Exercice_Trigo_longueurs_4e,
   "4G41": Exercice_Trigo_angles_4e,
@@ -9251,7 +9252,7 @@ function Calculs_de_durees_ou_d_horaires() {
           texte_corr += `L'émission s'achèvera à ${d2}.`;
         }
         if (type_de_questions[i] == 3) {
-          texte = `${prenom()} termine de regarder une émission de ${d} à ${d2}. À quelle heure l'émission a-t-elle commencé ?`;
+          texte = `À ${d2}, ${prenom()} termine de regarder une émission de ${d}. À quelle heure l'émission a-t-elle commencé ?`;
           texte_corr = `${d2} - ${d} = ${d1}`;
           texte_corr += "<br>";
           texte_corr += `L'émission a commencé à ${d1}.`;
@@ -13236,7 +13237,7 @@ function Encadrer_fraction_entre_2_entiers() {
       texte = `$\\ldots < \\dfrac{${n}}{${d}} < \\ldots$`;
       texte_corr = `$${k} < \\dfrac{${n}}{${d}} < ${k+1}$`;
       if (correction_detaillee){
-        texte_corr += ` $\\qquad$ car $${k}=\\dfrac{${k*d}}{${d}}\\quad$ et $\\quad${k+1}=\\dfrac{${(k+1)*d}}{${d}}$ `;
+        texte_corr += ` $\\qquad$ car $\\quad ${k}=\\dfrac{${k*d}}{${d}}\\quad$ et $\\quad${k+1}=\\dfrac{${(k+1)*d}}{${d}}$ `;
         texte_corr += `<br><br>`
         texte_corr += mathalea2d({xmin:-.5, xmax:24,ymax:1.5,scale:.6},fraction(n,d).representation(0,0,3,0,'barre','blue')
         )
@@ -18988,10 +18989,11 @@ function Reglages_6N34() {
   this.titre = "Conversions avec tous les préfixes de milli à tera.";
 }
 
-// 4G30
+// 4G30-1
 function Thales_4eme() {
   //Dans cette version, pas de configuration papillon reservée aux 3èmes.
   Exercice_Thales.call(this);
+  this.titre = "Calculer des longueurs avec la propriété de Thalès (MG32)"
   this.quatrieme = true;
   sortie_html? this.spacing = 1.5 : this.spacing = 1; 
 }
@@ -19012,6 +19014,7 @@ function Vocabulaire_des_triangles() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.consigne = "Donner la nature des triangles en justifiant.";
   this.sup = 1;
+  this.sup2=false;
   this.titre = "Vocabulaire des triangles";
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
@@ -19141,25 +19144,35 @@ function Vocabulaire_des_triangles() {
       let triangle_equilateral = new Triangles();
       let triangle_rectangle = new Triangles();
       let triangle_isocele_rectangle = new Triangles();
-
+      let partieDecimale1,partieDecimale2,partieDecimale3;
+      if (this.sup2) {
+        partieDecimale1=calcul(randint(1,9)/10*randint(0,1));
+        partieDecimale2=calcul(randint(1,9)/10*randint(0,1));
+        partieDecimale3=calcul(randint(1,9)/10*randint(0,1));
+      }
+      else {
+        partieDecimale1=0;
+        partieDecimale2=0;
+        partieDecimale3=0;
+      }
       switch (liste_type_de_questions[i]) {
         case 1: // triangle quelconque par les longueurs sans conversion
           while (!triangle_quelconque.isTrueTriangleLongueurs()) {
             l1 = randint(l_min, l_max);
             l2 = randint(l_min, l_max, l1);
             l3 = randint(l_min, l_max, [l1, l2]);
-            triangle_quelconque.l1 = l1;
-            triangle_quelconque.l2 = l2;
-            triangle_quelconque.l3 = l3;
+            triangle_quelconque.l1 = l1+partieDecimale1;
+            triangle_quelconque.l2 = l2+partieDecimale2;
+            triangle_quelconque.l3 = l3+partieDecimale3;
           }
 
           texte = `${triangle_quelconque.getNom()} est un triangle tel que ${
             triangle_quelconque.getLongueurs()[0]
-          } $= ${triangle_quelconque.l1}$ cm ; `;
+          } $= ${tex_nombre(triangle_quelconque.l1)}$ cm ; `;
           texte += `${triangle_quelconque.getLongueurs()[1]} $= ${
-            triangle_quelconque.l2
-          }$ cm et ${triangle_quelconque.getLongueurs()[2]} $= ${
-            triangle_quelconque.l3
+            tex_nombre(triangle_quelconque.l2)
+          }$ cm et ${triangle_quelconque.getLongueurs()[2]} $= ${tex_nombre(
+            triangle_quelconque.l3)
           }$ cm.`;
           texte_corr = `Les 3 côtés du triangle ${triangle_quelconque.getNom()} sont différents donc ${triangle_quelconque.getNom()} est un triangle quelconque.`;
           break;
@@ -19188,24 +19201,24 @@ function Vocabulaire_des_triangles() {
           while (!triangle_isocele.isTrueTriangleLongueurs()) {
             l1 = randint(l_min, l_max);
             l2 = randint(l_min, l_max, l1);
-            triangle_isocele.l1 = l1;
-            triangle_isocele.l2 = l1;
-            triangle_isocele.l3 = l2;
+            triangle_isocele.l1 = l1+partieDecimale1;
+            triangle_isocele.l2 = l1+partieDecimale1;
+            triangle_isocele.l3 = l2+partieDecimale2;
           }
           texte = `${triangle_isocele.getNom()} est un triangle tel que ${
             triangle_isocele.getLongueurs()[0]
-          } $= ${triangle_isocele.l1}$ cm ; `;
+          } $= ${tex_nombre(triangle_isocele.l1)}$ cm ; `;
           texte += `${triangle_isocele.getLongueurs()[1]} $= ${
-            triangle_isocele.l2
+            tex_nombre(triangle_isocele.l2)
           }$ cm et ${triangle_isocele.getLongueurs()[2]} $= ${
-            triangle_isocele.l3
+            tex_nombre(triangle_isocele.l3)
           }$ cm.`;
           texte_corr = `Les longueurs des côtés ${
             triangle_isocele.getCotes()[0]
           } et ${
             triangle_isocele.getCotes()[1]
           } du triangle ${triangle_isocele.getNom()} valent toutes les deux $${
-            triangle_isocele.l1
+            tex_nombre(triangle_isocele.l1)
           }$ cm donc ${triangle_isocele.getNom()} est un triangle isocèle en ${
             triangle_isocele.getSommets()[1]
           }.`;
@@ -19214,21 +19227,21 @@ function Vocabulaire_des_triangles() {
           while (!triangle_isocele.isTrueTriangleLongueurs()) {
             l1 = randint(l_min, l_max);
             l2 = randint(l_min, l_max, l1);
-            triangle_isocele.l1 = l1;
-            triangle_isocele.l2 = l1;
-            triangle_isocele.l3 = l2;
+            triangle_isocele.l1 = l1+partieDecimale1;
+            triangle_isocele.l2 = l1+partieDecimale1;
+            triangle_isocele.l3 = l2+partieDecimale2;
           }
           texte = `${triangle_isocele.getNom()} est un triangle tel que ${
             triangle_isocele.getLongueurs()[0]
           } $= ${triangle_isocele.l1 * 10}$ mm ; `;
           texte += `${triangle_isocele.getLongueurs()[1]} $= ${
-            triangle_isocele.l2
+            tex_nombre(triangle_isocele.l2)
           }$ cm et ${triangle_isocele.getLongueurs()[2]} $= ${
-            triangle_isocele.l3
+            tex_nombre(triangle_isocele.l3)
           }$ cm.`;
           texte_corr = `${triangle_isocele.getLongueurs()[0]} $= ${
-            triangle_isocele.l1 * 10
-          }$ mm $= ${triangle_isocele.l1}$ cm = ${
+            tex_nombre(triangle_isocele.l1 * 10)
+          }$ mm $= ${tex_nombre(triangle_isocele.l1)}$ cm = ${
             triangle_isocele.getLongueurs()[1]
           }, ${triangle_isocele.getNom()} a donc deux côtés égaux, c'est un triangle isocèle en ${
             triangle_isocele.getSommets()[1]
@@ -19237,58 +19250,59 @@ function Vocabulaire_des_triangles() {
         case 5: // triangle équilatéral sans conversion
           while (!triangle_equilateral.isTrueTriangleLongueurs()) {
             l1 = randint(l_min, l_max);
-            triangle_equilateral.l1 = l1;
-            triangle_equilateral.l2 = l1;
-            triangle_equilateral.l3 = l1;
+            triangle_equilateral.l1 = l1+partieDecimale1;
+            triangle_equilateral.l2 = l1+partieDecimale1;
+            triangle_equilateral.l3 = l1+partieDecimale1;
           }
           texte = `${triangle_equilateral.getNom()} est un triangle tel que ${
             triangle_equilateral.getLongueurs()[0]
-          } $= ${triangle_equilateral.l1}$ cm ; `;
+          } $= ${tex_nombre(triangle_equilateral.l1)}$ cm ; `;
           texte += `${triangle_equilateral.getLongueurs()[1]} $= ${
-            triangle_equilateral.l2
+            tex_nombre(triangle_equilateral.l2)
           }$ cm et ${triangle_equilateral.getLongueurs()[2]} $= ${
-            triangle_equilateral.l3
+            tex_nombre(triangle_equilateral.l3)
           }$ cm.`;
           texte_corr = `Les longeurs des trois côtés du triangle ${triangle_equilateral.getNom()} sont égales donc c'est un triangle équilatéral.`;
           break;
         case 6: // triangle équilatéral avec conversion
           while (!triangle_equilateral.isTrueTriangleLongueurs()) {
             l1 = randint(l_min, l_max);
-            triangle_equilateral.l1 = l1;
-            triangle_equilateral.l2 = l1;
-            triangle_equilateral.l3 = l1;
+            triangle_equilateral.l1 = l1+partieDecimale1;
+            triangle_equilateral.l2 = l1+partieDecimale1;
+            triangle_equilateral.l3 = l1+partieDecimale1;
           }
           texte = `${triangle_equilateral.getNom()} est un triangle tel que ${
             triangle_equilateral.getLongueurs()[0]
-          } $= ${triangle_equilateral.l1}$ cm ; `;
+          } $= ${tex_nombre(triangle_equilateral.l1)}$ cm ; `;
           texte += `${triangle_equilateral.getLongueurs()[1]} $= ${
-            triangle_equilateral.l2 * 10
+            tex_nombre(triangle_equilateral.l2 * 10)
           }$ mm et ${triangle_equilateral.getLongueurs()[2]} $= ${tex_nombre(
             triangle_equilateral.l3 / 10
           )}$ dm.`;
           texte_corr = `${triangle_equilateral.getLongueurs()[1]} $= ${
-            triangle_equilateral.l2 * 10
+            tex_nombre(triangle_equilateral.l2 * 10)
           }$ mm $= ${triangle_equilateral.l2}$ cm.`;
           texte_corr += `<br> ${
             triangle_equilateral.getLongueurs()[2]
           } $= ${tex_nombre(triangle_equilateral.l3 / 10)}$ dm $= ${
-            triangle_equilateral.l3
+            tex_nombre(triangle_equilateral.l3)
           }$ cm.`;
           texte_corr += `<br> ${triangle_equilateral.getLongueurs()[0]} $= ${
-            triangle_equilateral.l1
+            tex_nombre(triangle_equilateral.l1)
           }$ cm.`;
           texte_corr += `<br> Les longeurs des trois côtés du triangle ${triangle_equilateral.getNom()} sont égales donc c'est un triangle équilatéral.`;
           break;
         case 7: // triangle rectangle pas de conversion necessaire
-          triangle_rectangle.l1 = randint(l_min, l_max);
-          triangle_rectangle.l2 = randint(l_min, l_max, l1);
+          l1=randint(l_min, l_max);
+          triangle_rectangle.l1 = l1+partieDecimale1;
+          triangle_rectangle.l2 = randint(l_min, l_max, l1)+partieDecimale2;
           triangle_rectangle.a1 = 90;
 
           texte = `${triangle_rectangle.getNom()} est un triangle tel que ${
             triangle_rectangle.getLongueurs()[0]
-          } $= ${triangle_rectangle.l1}$ cm ; `;
+          } $= ${tex_nombre(triangle_rectangle.l1)}$ cm ; `;
           texte += `${triangle_rectangle.getLongueurs()[1]} $= ${
-            triangle_rectangle.l2
+            tex_nombre(triangle_rectangle.l2)
           }$ cm `;
           texte += `et `;
           if (this.classe == 6) {
@@ -19313,15 +19327,16 @@ function Vocabulaire_des_triangles() {
 
           break;
         case 8: // triangle isocèle rectangle sans conversion
-          triangle_isocele_rectangle.l1 = randint(l_min, l_max);
+        l1=randint(l_min, l_max);
+          triangle_isocele_rectangle.l1 = l1+partieDecimale1;
           triangle_isocele_rectangle.l2 = triangle_isocele_rectangle.l1;
           triangle_isocele_rectangle.a1 = 90;
 
           texte = `${triangle_isocele_rectangle.getNom()} est un triangle tel que ${
             triangle_isocele_rectangle.getLongueurs()[0]
-          }$= ${triangle_isocele_rectangle.l1}$ cm ; `;
+          }$= ${tex_nombre(triangle_isocele_rectangle.l1)}$ cm ; `;
           texte += `${triangle_isocele_rectangle.getLongueurs()[1]} $= ${
-            triangle_isocele_rectangle.l2
+            tex_nombre(triangle_isocele_rectangle.l2)
           }$ cm `;
           texte += `et `;
           if (this.classe == 6) {
@@ -19336,7 +19351,7 @@ function Vocabulaire_des_triangles() {
             texte_corr += `<br> ${
               triangle_isocele_rectangle.getLongueurs()[0]
             } $=$ ${triangle_isocele_rectangle.getLongueurs()[1]} $= ${
-              triangle_isocele_rectangle.l1
+              tex_nombre(triangle_isocele_rectangle.l1)
             }$ cm donc ${triangle_isocele_rectangle.getNom()} est isocèle en ${
               triangle_isocele_rectangle.getSommets()[1]
             }.`;
@@ -19365,15 +19380,15 @@ function Vocabulaire_des_triangles() {
           }
           break;
         case 9: // triangle isocèle rectangle avec conversion
-          triangle_isocele_rectangle.l1 = randint(l_min, l_max);
+          triangle_isocele_rectangle.l1 = randint(l_min, l_max)+partieDecimale1;
           triangle_isocele_rectangle.l2 = triangle_isocele_rectangle.l1;
           triangle_isocele_rectangle.a1 = 90;
 
           texte = `${triangle_isocele_rectangle.getNom()} est un triangle tel que ${
             triangle_isocele_rectangle.getLongueurs()[0]
-          } $= ${triangle_isocele_rectangle.l1 * 10}$ mm ; `;
+          } $= ${tex_nombre(triangle_isocele_rectangle.l1 * 10)}$ mm ; `;
           texte += `${triangle_isocele_rectangle.getLongueurs()[1]} $= ${
-            triangle_isocele_rectangle.l2
+            tex_nombre(triangle_isocele_rectangle.l2)
           }$ cm`;
           texte += ` et `;
           if (this.classe == 6) {
@@ -19388,7 +19403,7 @@ function Vocabulaire_des_triangles() {
             texte_corr += `<br> ${
               triangle_isocele_rectangle.getLongueurs()[0]
             } $= ${triangle_isocele_rectangle.l1 * 10}$ mm $= ${
-              triangle_isocele_rectangle.l1
+              tex_nombre(triangle_isocele_rectangle.l1)
             }$ cm =${
               triangle_isocele_rectangle.getLongueurs()[1]
             } donc ${triangle_isocele_rectangle.getNom()} est isocèle en ${
@@ -19408,8 +19423,8 @@ function Vocabulaire_des_triangles() {
             }.`;
             texte_corr += `<br> ${
               triangle_isocele_rectangle.getLongueurs()[0]
-            } $= ${triangle_isocele_rectangle.l1 * 10}$ mm $= ${
-              triangle_isocele_rectangle.l1
+            } $= ${tex_nombre(triangle_isocele_rectangle.l1 * 10)}$ mm $= ${
+              tex_nombre(triangle_isocele_rectangle.l1)
             }$ cm =${
               triangle_isocele_rectangle.getLongueurs()[1]
             } donc ${triangle_isocele_rectangle.getNom()} est isocèle en ${
@@ -19484,6 +19499,7 @@ function Vocabulaire_des_triangles() {
       "1 : sans conversions de longueurs\n2 : avec conversions de longueurs",
     ];
   }
+  this.besoin_formulaire2_case_a_cocher = ["Avec des décimaux",false];
 }
 
 /**
@@ -32947,6 +32963,90 @@ function Exercice_Thales() {
     "1 : Calcul direct de deux longueurs \n 2 : Avec calcul intermédiaire\n 3 : Sans figure",
   ];
 }
+
+
+/**
+ * Calcul de longueurs avec le théorème de Thalès
+ * @Auteur Rémi Angot
+ * Référence 4G30
+*/
+function Thales2D() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Calculer des longueurs avec la propriété de Thalès";
+  this.consigne = "";
+  this.nb_questions = 1;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let liste_de_noms_de_polygones = []
+
+    for (let i = 0, texte, texte_corr, cpt = 0;i < this.nb_questions && cpt < 50;)
+     {
+      let nomDesPoints = creerNomDePolygone(5,liste_de_noms_de_polygones);
+      liste_de_noms_de_polygones.push(nomDesPoints);
+      let nomA = nomDesPoints[0];
+      let nomB = nomDesPoints[1];
+      let nomC = nomDesPoints[2];
+      let nomM = nomDesPoints[3];
+      let nomN = nomDesPoints[4];
+      let ab = randint(5, 10);
+      let ac = randint(5, 10,ab);
+      if(!sortie_html){
+        ab = randint(3, 7);
+        ac = randint(3, 7,ab);
+      }
+      let bc = randint(Math.max(ab - ac, ac - ab) + 1, ab + ac - 1,[ab,ac]); // Pas de triangle isocèle ou équilatéral
+      let A = point(0, 0, nomA);
+      let B = pointAdistance(A, ab, nomB);
+      let ABC = triangle2points2longueurs(A, B, ac, bc);
+      let C = ABC.listePoints[2];
+      C.nom = nomC;
+      let k = calcul(randint(2, 8,5) / 10);
+      let M = homothetie(A, C, k);
+      let N = homothetie(B, C, k);
+      let s = segment(M, N);
+      let marqueNomABC = nommePolygone(ABC, nomA+nomB+nomC);
+      let m = pointSurSegment(M, N, -1);
+      let n = pointSurSegment(N, M, -1);
+      let marqueNomM = texteParPoint(nomM, m);
+      let marqueNomN = texteParPoint(nomN, n);
+
+
+      texte = `Sur la figure suivante, $${nomA+nomC}=${ac}~\\text{cm}$, $${nomA+nomB}=${ab}~\\text{cm}$, $${nomC+nomM}=${tex_nombrec(k*ac)}~\\text{cm}$, $${nomC+nomN}=${tex_nombrec(k*bc)}~\\text{cm}$ et $(${nomA+nomB})//(${nomM+nomN})$.<br>`
+      texte+= `Calculer $${nomM+nomN}$ et $${nomC+nomB}$.<br><br>`
+      texte += mathalea2d({xmin : Math.min(A.x, B.x, C.x) - 1.5,
+        ymin : Math.min(A.y, B.y, C.y) - 1.5,
+        xmax : Math.max(A.x, B.x, C.x) + 1.5,
+        ymax : Math.max(A.y, B.y, C.y) + 1.5},
+
+        ABC, s, marqueNomABC, marqueNomM, marqueNomN
+      );
+      texte_corr = `Dans le triangle $${nomA+nomB+nomC}$, $${nomM}\\in${"["+nomC+nomA+"]"}$, $${nomN}\\in${"["+nomC+nomB+"]"}$ et $(${nomA+nomB})//(${nomM+nomN})$ donc d'après le théorème de Thalès les triangles $${nomA+nomB+nomC}$ et $${nomM+nomN+nomC}$ ont des longueurs proportionnelles.`;
+      texte_corr += `<br><br>`
+      texte_corr += `$\\dfrac{${nomC+nomM}}{${nomC+nomA}}=\\dfrac{${nomC+nomN}}{${nomC+nomB}}=\\dfrac{${nomM+nomN}}{${nomA+nomB}}$`  
+      texte_corr += `<br><br>`
+      texte_corr += `$\\dfrac{${tex_nombrec(k*ac)}}{${tex_nombre(ac)}}=\\dfrac{${tex_nombrec(k*bc)}}{${nomC+nomB}}=\\dfrac{${nomM+nomN}}{${tex_nombre(ab)}}$`  
+      texte_corr += `<br><br>`
+      texte_corr += `$${nomM+nomN}=\\dfrac{${tex_nombrec(k*ac)}\\times${tex_nombre(ab)}}{${tex_nombre(ac)}}=${tex_nombrec(k*ab)}$ cm`
+      texte_corr += `<br><br>`
+      texte_corr += `$${nomC+nomB}=\\dfrac{${tex_nombrec(k*bc)}\\times${tex_nombre(ac)}}{${tex_nombrec(k*ac)}}=${tex_nombrec(bc)}$ cm`
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+
 /**
  * Reciproque_Thales
  * @Auteur Jean-Claude Lhote
@@ -32965,6 +33065,7 @@ function Reciproque_Thales() {
   this.nb_cols_corr = 1;
   this.quatrieme = false;
   this.sup = 1;
+  this.sup2 = 1;
   this.liste_packages = "tkz-euclide";
 
   // let s1='A',s2='B',s3='C',s4='M',s5='N'
@@ -32987,25 +33088,29 @@ function Reciproque_Thales() {
     let x3 = randint(5, 6);
     let y3 = randint(-2, 1);
     let k = (randint(2, 8) * randint(-1, 1, [0])) / 10;
-    let k2 = k * (1 + randint(0, 1) * 0.1);
+    let k2 
+    if (this.sup2==1) k2=k
+    else if (this.sup2==3) k2=k * (1 + randint(0, 1) * 0.1);
+    else k2= k * (1 + randint(-1, 1,0) * 0.1);
+
     if (this.quatrieme) {
       k = abs(k);
       k2 = abs(k2);
     }
     let dist24;
-    let dist12 = arrondi(Math.sqrt(x2 * x2 + y2 * y2), 1);
-    let dist13 = arrondi(Math.sqrt(x3 * x3 + y3 * y3), 1);
+    let dist12 = Math.round(Math.sqrt(x2 * x2 + y2 * y2));
+    let dist13 = Math.round(Math.sqrt(x3 * x3 + y3 * y3));
     while (dist12 == dist13) {
       //éviter les triangles isocèles imbriqués qui ne nécéssitent aucun calculs.
       x2 = randint(2, 4);
       y2 = randint(3, 5);
       x3 = randint(5, 6);
       y3 = randint(-2, 1);
-      dist12 = arrondi(Math.sqrt(x2 * x2 + y2 * y2), 1);
-      dist13 = arrondi(Math.sqrt(x3 * x3 + y3 * y3), 1);
+      dist12 = Math.round(Math.sqrt(x2 * x2 + y2 * y2));
+      dist13 = Math.round(Math.sqrt(x3 * x3 + y3 * y3));
     }
-    let dist15 = arrondi(dist13 * abs(k), 2);
-    let dist14 = arrondi(dist12 * abs(k2), 2);
+    let dist15 = arrondi(dist13 * abs(k), 1);
+    let dist14 = arrondi(dist12 * abs(k2), 1);
     let dist35;
 
     let num1, num2, den1, den2;
@@ -33021,20 +33126,20 @@ function Reciproque_Thales() {
     // On ne garde qu'une approximation au dixième pour l'exercice
 
     // mise en texte avec 1 chiffres après la virgule pour énoncé
-    let s13 = tex_nombrec(dist13);
-    let s12 = tex_nombrec(dist12);
-    let s15 = tex_nombrec(dist15);
-    let s14 = tex_nombrec(dist14);
-    let s24 = tex_nombrec(dist24);
-    let s35 = tex_nombrec(dist35);
-    num1 = arrondi(dist12 * 100);
-    den1 = arrondi(dist14 * 100);
-    num2 = arrondi(dist13 * 100);
-    den2 = arrondi(dist15 * 100);
-    let fraction1 = [],
-      fraction2 = [];
-    fraction1 = fraction_simplifiee(num1, den1);
-    fraction2 = fraction_simplifiee(num2, den2);
+    let s13 = tex_nombre(dist13);
+    let s12 = tex_nombre(dist12);
+    let s15 = tex_nombre(dist15);
+    let s14 = tex_nombre(dist14);
+    let s24 = tex_nombre(dist24);
+    let s35 = tex_nombre(dist35);
+   // num1 = arrondi(dist12 * 100);
+   // den1 = arrondi(dist14 * 100);
+   // num2 = arrondi(dist13 * 100);
+   // den2 = arrondi(dist15 * 100);
+   // let fraction1 = [],
+   //   fraction2 = [];
+   //  fraction1 = fraction_simplifiee(num1, den1);
+   // fraction2 = fraction_simplifiee(num2, den2);
 
     if (sortie_html) {
       this.type_exercice = "MG32";
@@ -33106,18 +33211,17 @@ function Reciproque_Thales() {
         s1 + s4
       }}=\\dfrac{${s12}}{${s14}}=\\dfrac{${s12}\\times${mise_en_evidence(
         s15
-      )}}{${s14}\\times${mise_en_evidence(s15)}}=${tex_fraction(
-        tex_nombrec(arrondi(dist12 * dist15, 3)),
-        tex_nombrec(arrondi(dist14 * dist15, 4))
-      )}$`;
+      )}}{${s14}\\times${mise_en_evidence(s15)}}=\\dfrac{
+        ${tex_nombrec(arrondi(dist12 * dist15, 3))}}
+        {${s14}\\times${s15}}
+      $`;
       texte_corr += `<br>D'autre part on a $\\dfrac{${s1 + s3}}{${
         s1 + s5
       }}=\\dfrac{${s13}}{${s15}}=\\dfrac{${s13}\\times${mise_en_evidence(
         s14
-      )}}{${s15}\\times${mise_en_evidence(s14)}}=${tex_fraction(
-        tex_nombrec(arrondi(dist13 * dist14, 3)),
-        tex_nombrec(arrondi(dist14 * dist15, 4))
-      )}$`;
+      )}}{${s15}\\times${mise_en_evidence(s14)}}=\\dfrac{${tex_nombrec(arrondi(dist13 * dist14, 3))}}
+        {${s14}\\times${s15}}
+      $`;
 
       if (k != k2) {
         // droites non parallèles
@@ -33358,6 +33462,11 @@ function Reciproque_Thales() {
     3,
     "1 : Cas simple \n 2 : Complication \n 3 : Sans figure",
   ];
+  this.besoin_formulaire2_numerique = [
+    "Réciproque ou contraposée ? ",
+    3,
+    "1 : Réciproque \n 2 : Contraposée \n 3 : Aléatoire",
+  ];
 }
 
 /**
@@ -33409,7 +33518,7 @@ function Exercice_Pythagore() {
       s2 + s1 + s0,
     ]);
     let k1 = Math.round((Math.random() * 3 + 3) * 10) / 10;
-    let k2 = Math.round((Math.random() * 3 + 1) * 10) / 10;
+    let k2 = Math.round((Math.random() * 3 + 2) * 10) / 10;
     let alpha1 = Math.random() * Math.PI - Math.PI / 2;
     let alpha1deg = Math.round((alpha1 * 180) / Math.PI);
     let x1 = k1; // coordonnées des deux sommets du triangle
@@ -33438,6 +33547,7 @@ function Exercice_Pythagore() {
       }
 
       if (type_de_questions == 1) {
+        
         // calcul direct de l'hypoténuse
         texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$, $${
           s0 + s1
@@ -33517,7 +33627,7 @@ function Exercice_Pythagore() {
     } else {
       if (type_de_questions < 3) {
         texte =
-          "\\begin{minipage}{.7 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre, on a  : \\begin{itemize}";
+          "\\begin{minipage}{.7 \\linewidth} 	\\vspace{0cm} Sur la figure ci-contre (qui n'est pas en vraie grandeur), on a  : \\begin{itemize}";
         texte +=
           "\n\t\\item Le côté " +
           `$[${s0 + s1}]$` +
@@ -33551,7 +33661,8 @@ function Exercice_Pythagore() {
         }
         texte += "\\begin{minipage}{0.3 \\linewidth}";
         // dessin de la figure
-        texte += "\n \\begin{tikzpicture}[scale=0.7]"; // Balise début de figure
+        let scale=0.7*6/Math.max(x1,y2)
+        texte += `\n \\begin{tikzpicture}[scale=${scale}]`; // Balise début de figure
         texte +=
           "\n\t \\tkzDefPoints{0/0/" + s0 + "," + x1 + "/0/B,0/" + y2 + "/C}"; // créer les points du triangle initial
         // Définit les points M et N par homothétie de centre C et de rapport 0,3<k<0,8
@@ -34521,15 +34632,22 @@ function Reciproque_Pythagore() {
   this.nb_questions = 3;
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
+  this.sup = 3;
   sortie_html ? (this.spacing_corr = 2) : (this.spacing_corr = 1);
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let liste_type_de_questions = combinaison_listes(
-      ["rectangle", "rectangle", "pas_rectangle", "pas_rectangle"],
-      this.nb_questions
-    );
+    let liste_type_de_questions = []
+    if (this.sup == 1){
+      liste_type_de_questions = combinaison_listes(["rectangle"],this.nb_questions);
+    }
+    if (this.sup == 2){
+      liste_type_de_questions = combinaison_listes(["pas_rectangle"],this.nb_questions);
+    }
+    if (this.sup == 3){
+      liste_type_de_questions = combinaison_listes(["rectangle", "pas_rectangle"],this.nb_questions);
+    }
     let liste_triplets_pythagoriciens = [
       [3, 4, 5],
       [5, 12, 13],
@@ -34613,11 +34731,10 @@ function Reciproque_Pythagore() {
       b = triplet[1];
       c = triplet[2];
       if (liste_type_de_questions[i] == "pas_rectangle") {
-        c += randint(-3, 3, [0]); // on change la valeur de c
+        c = randint(Math.max(c-3,b+1),c+3) // on modifie c en faisant attention à ce qu'il reste plus grand que b
         while (a ** 2 + b ** 2 == c ** 2) {
           // si par hasard (est-ce possible ?) on retombe sur un triplet pythagoricien on change les valeurs
-          c += randint(-3, 3, [0]); // on change la valeur de c
-          b += randint(-3, 3, [0]); // on change la valeur de b
+          c = randint(Math.max(c-3,b+1),c+3) // on modifie c en faisant attention à ce qu'il reste plus grand que b
         }
       }
       if (a > 9 && choice([true, true, true, false])) {
@@ -34680,7 +34797,7 @@ function Reciproque_Pythagore() {
     }
     liste_de_question_to_contenu(this);
   };
-  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+  this.besoin_formulaire_numerique = ['Type de questions',3,"1 : Démontrer qu'un triangle est rectangle\n2 : Démontrer qu'un triangle n'est pas rectangle\n3 : Déterminer si un triangle est rectangle ou pas "];
 }
 
 /**
@@ -34707,15 +34824,27 @@ function Problemes_Pythagore() {
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let type_de_questions_disponibles = [
-      "losange",
-      "rectangle_diagonale_connue",
-      "rectangle_diagonale_a_trouver",
-      "parallelogramme_est_losange",
-      "parallelogramme_n_est_pas_losange",
-      "parallelogramme_est_rectangle",
-      "parallelogramme_n_est_pas_rectangle",
-    ];
+    let type_de_questions_disponibles;
+    if (this.nb_questions >=5){
+      type_de_questions_disponibles = [
+        "losange",
+        "rectangle_diagonale_connue",
+        "rectangle_diagonale_a_trouver",
+        "parallelogramme_est_losange",
+        "parallelogramme_n_est_pas_losange",
+        "parallelogramme_est_rectangle",
+        "parallelogramme_n_est_pas_rectangle",
+      ];
+    } else {
+      type_de_questions_disponibles = [
+        "losange",
+        "rectangle_diagonale_connue",
+        "rectangle_diagonale_a_trouver",
+        choice(["parallelogramme_est_losange","parallelogramme_n_est_pas_losange",]),
+        choice(["parallelogramme_est_rectangle",
+        "parallelogramme_n_est_pas_rectangle",])
+      ];
+    }
     let liste_type_de_questions = combinaison_listes(
       type_de_questions_disponibles,
       this.nb_questions
@@ -34835,7 +34964,7 @@ function Problemes_Pythagore() {
           }^2=${A + B}^2$.<br>`;
           texte_corr += `Donc $${O + B}^2=${A + B}^2-${A + O}^2=${tex_nombre(
             c
-          )}^2-${tex_nombre(a)}^2=${tex_nombre(b ** 2)}$.<br>`;
+          )}^2-${tex_nombre(a)}^2=${tex_nombrec(b ** 2)}$.<br>`;
           texte_corr += `On a alors $${O + B}=\\sqrt{${tex_nombrec(
             b ** 2
           )}}=${tex_nombre(b)}$ cm.<br>`;
@@ -34843,7 +34972,7 @@ function Problemes_Pythagore() {
             D + B
           }]$ : $${D + B}=2\\times ${O + B}=2\\times${tex_nombre(
             b
-          )}=${tex_nombre(2 * b)}$ cm.`;
+          )}=${tex_nombrec(2 * b)}$ cm.`;
           break;
 
         case "rectangle_diagonale_connue":
@@ -41810,6 +41939,7 @@ function Pythagore2D() {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let liste_type_de_questions = [];
+    let liste_de_noms_de_polygones = [];
     if (this.sup==1) {
       this.consigne = "Dans chaque cas, donner l'égalité de Pythagore."
     } else if (this.sup==2){
@@ -41838,7 +41968,8 @@ function Pythagore2D() {
       let ymin = Math.min(A.y,B.y,C.y)-1
       let xmax = Math.max(A.x,B.x,C.x)+1
       let ymax = Math.max(A.y,B.y,C.y)+1
-      let nomDuPolygone = creerNomDePolygone(3)
+      let nomDuPolygone = creerNomDePolygone(3,liste_de_noms_de_polygones);
+      liste_de_noms_de_polygones.push(nomDuPolygone)
       let nomme = nommePolygone(p2,nomDuPolygone)
       let affAB = afficheLongueurSegment(B,A)
       let affAC = afficheLongueurSegment(A,C)
