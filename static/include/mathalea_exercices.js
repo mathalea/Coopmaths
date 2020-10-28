@@ -62,6 +62,7 @@ var liste_des_exercices_disponibles = {
   "6G24-2" : Symetrie_axiale_figure_6e,
   "6G25-1": Pavages_et_reflexion,
   "6G25-2": Pavages_et_symetries,
+  "beta6G33" : Symetrie_axiale_conservation1,
   "6G42" : Solide_6e,
   "6G43" : Utiliser_vocabulaire_pave,
   "6M11-1": Perimetre_ou_aire_de_carres_rectangles_triangles,
@@ -98,6 +99,7 @@ var liste_des_exercices_disponibles = {
   "6N23": Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
   "beta6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
+  "beta6N23-2" : Lire_abscisse_decimale_trois_formes,
   "6N24": Exercice_6N24,
   "6N24-1": Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
   "6N30": Lire_abscisse_decimale,
@@ -119,6 +121,7 @@ var liste_des_exercices_disponibles = {
   "6P10": Proportionnalite_pas_proportionnalite,
   "6P11": Proportionnalite_par_linearite,
   "6P11-1": Proportionnalite_par_linearite_bis,
+  "6S10":Lecture_diagramme_barre,
   "5A10": Liste_des_diviseurs_5e,
   "5A11": Tableau_criteres_de_divisibilite,
   "5A12-1": Premier_ou_pas_5e,
@@ -249,7 +252,7 @@ var liste_des_exercices_disponibles = {
   "3L12": Factoriser_Identites_remarquables3,
   "3L13": Exercice_equation1, //identique à 4L20
   "3L13-1": Exercice_equation1_2,
-  "beta3L13-2": Eq_resolvantes_Thales,
+  "3L13-2": Eq_resolvantes_Thales,
   "3L14": Resoudre_une_equation_produit_nul,
   "3L14-1": Resoudre_une_equation_produit_nul_niv2,
   "3L15": Resoudre_une_equation_x2_egal_A,
@@ -297,7 +300,7 @@ var liste_des_exercices_disponibles = {
   "1N11": Terme_d_une_suite_definie_par_recurrence, 
   "1E10" : Calcul_discriminant,
   "1E11" : Resoudre_equation_degre_2,
-  "beta1E12" : Trouver_equation_parabole,
+  "1E12" : Trouver_equation_parabole,
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   "betaTESTseb": Tests_du_Seb,
@@ -9425,6 +9428,44 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
   };
 }
 
+
+function Lire_abscisse_decimale_trois_formes() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Différentes écritures des nombres décimaux";
+  this.consigne = "Compléter l'égalité puis donner l'écriture décimale.";
+  this.spacing = 2;
+  this.spacing_corr = 2;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let type_de_questions_disponibles = [1, 2, 3, 4, 5, 6];
+    let liste_type_de_questions = combinaison_listes(
+      type_de_questions_disponibles,
+      this.nb_questions
+    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+    for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) {
+
+
+      
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+}
+
+
 /**
  * Additions, soustractions et multiplications posées de nombres entiers
  *
@@ -9578,6 +9619,7 @@ function Additionner_soustraires_decimaux() {
   this.spacing = 2;
   sortie_html ? (this.spacing_corr = 2) : (this.spacing_corr = 1); //Important sinon les opérations posées ne sont pas jolies
   this.nb_questions = 4;
+  this.sup = 3;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
@@ -9592,12 +9634,18 @@ function Additionner_soustraires_decimaux() {
       this.nb_questions
     );
     let liste_type_de_questions = [];
-    for (let i = 0; i < this.nb_questions; i++) {
-      if (i + 1 < this.nb_questions / 2) {
-        // première moitié sont des additions mais si c'est impair on prendra plus de soustractions
-        liste_type_de_questions.push(liste_de_type_d_additions[i]);
-      } else {
-        liste_type_de_questions.push(liste_de_type_de_soustractions[i]);
+    if (this.sup == 1) {
+      liste_type_de_questions = combinaison_listes([5, 6, 7, 8],this.nb_questions)
+    } else if (this.sup == 2) {
+      liste_type_de_questions = combinaison_listes([1, 2, 3, 4],this.nb_questions)
+    } else {
+      for (let i = 0; i < this.nb_questions; i++) {
+        if (i + 1 <= this.nb_questions / 2) {
+          // première moitié sont des additions mais si c'est impair on prendra plus de soustractions
+          liste_type_de_questions.push(liste_de_type_d_additions[i]);
+        } else {
+          liste_type_de_questions.push(liste_de_type_de_soustractions[i]);
+        }
       }
     }
 
@@ -9724,6 +9772,7 @@ function Additionner_soustraires_decimaux() {
     }
     liste_de_question_to_contenu(this);
   };
+  this.besoin_formulaire_numerique = ["Niveau de difficulté",3,"1 : Additions de décimaux\n2: Soustraction de décimaux\n3 : Additions et soustraction de décimaux"];
 }
 
 /**
@@ -10949,7 +10998,7 @@ function Pavages_et_reflexion() {
 
 /**
  * Calcul de volumes (cube et pavé droit).
- * @Auteur Jean-Claude Lhote
+ * @Auteur Jean-Claude Lhote // modifié par Mireille Gain pour y ajouter les décimaux
  * référence 6M30
  */
 
@@ -10957,7 +11006,7 @@ function Calcul_de_volumes() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Calculs de volumes";
-  this.consigne = "Calculer en détaillant le volume des solides donnés";
+  this.consigne = "Calculer, en détaillant, le volume des solides donnés.";
   this.nb_questions = 4;
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
@@ -10987,19 +11036,29 @@ function Calcul_de_volumes() {
       [`~\\text{cm}`, `~\\text{cm}^3`],
       [`~\\text{mm}`, `~\\text{mm}^3`],
     ];
+    let partieDecimale1,partieDecimale2,partieDecimale3;
+    if (this.sup2) {
+      partieDecimale1=calcul(randint(1,9)/10*randint(0,1));
+      partieDecimale2=calcul(randint(1,9)/10*randint(0,1));
+      partieDecimale3=calcul(randint(1,9)/10*randint(0,1));
+    }
+    else {
+      partieDecimale1=0;
+      partieDecimale2=0;
+      partieDecimale3=0;
+    }
     for (
       let i = 0, texte, texte_corr, L, l, h, c, r, A, j, cpt = 0;
       i < this.nb_questions && cpt < 50;
-
     ) {
       switch (liste_type_de_questions[i]) {
         case 1: // cube
-          c = randint(2, 10);
+          c = calcul(randint(2,10)+partieDecimale1);
           j = randint(0, 3); // pour le choix de l'unité
-          texte = `Un cube de $${c} ${liste_unites[j][0]}$ d'arête.`;
-          texte_corr = `$\\mathcal{V}= c^3 =c \\times c \\times c = ${c}${
+          texte = `Un cube de $${tex_nombre(c)} ${liste_unites[j][0]}$ d'arête.`;
+          texte_corr = `$\\mathcal{V}= c^3 =c \\times c \\times c = ${tex_nombre(c)}${
             liste_unites[j][0]
-          }\\times${c}${liste_unites[j][0]}\\times${c}${
+          }\\times${tex_nombre(c)}${liste_unites[j][0]}\\times${tex_nombre(c)}${
             liste_unites[j][0]
           }=${tex_nombrec(c * c * c)}${liste_unites[j][1]}$`;
           break;
@@ -11007,33 +11066,33 @@ function Calcul_de_volumes() {
           if (this.sup == 1) {
             //sans conversion
             j = randint(0, 3); // pour le choix de l'unité
-            l = randint(2, 5);
-            h = randint(3, 6);
-            L = randint(6, 10);
-            texte = `Un pavé droit de $${l}${liste_unites[j][0]}$ de largeur, de $${L}${liste_unites[j][0]}$ de longueur et de $${h}${liste_unites[j][0]}$ de hauteur.`;
-            texte_corr = `$\\mathcal{V}= l \\times L \\times h = ${l}${
+            l = calcul(randint(2, 5)+partieDecimale1);
+            h = calcul(randint(3, 6)+partieDecimale2);
+            L = calcul(randint(6, 10)+partieDecimale3);
+            texte = `Un pavé droit de $${tex_nombre(l)}${liste_unites[j][0]}$ de largeur, de $${tex_nombre(L)}${liste_unites[j][0]}$ de longueur et de $${tex_nombre(h)}${liste_unites[j][0]}$ de hauteur.`;
+            texte_corr = `$\\mathcal{V}= l \\times L \\times h = ${tex_nombre(l)}${
               liste_unites[j][0]
-            }\\times${L}${liste_unites[j][0]}\\times${h}${
+            }\\times${tex_nombre(L)}${liste_unites[j][0]}\\times${tex_nombre(h)}${
               liste_unites[j][0]
             }=${tex_nombrec(l * L * h)}${liste_unites[j][1]}$`;
           } else {
             // avec conversion
-            j = randint(1, 2); // pour le choix de l'unité	centrale
-            l = randint(2, 5);
-            h = randint(3, 6) * 10;
+            j = randint(1, 2); // pour le choix de l'unité  centrale
+            l = calcul(randint(2, 5)+partieDecimale1);
+            h = calcul(randint(3, 6)*10+partieDecimale2);
             L = arrondi(randint(6, 10) / 10, 1);
-            texte = `Un pavé droit de $${l}${
+            texte = `Un pavé droit de $${tex_nombre(l)}${
               liste_unites[j][0]
             }$ de largeur, de $${tex_nombre(L)}${
               liste_unites[j - 1][0]
-            }$ de longueur et de $${h}${liste_unites[j + 1][0]}$ de hauteur.`;
-            texte_corr = `$\\mathcal{V}= l \\times L \\times h = ${l}${
+            }$ de longueur et de $${tex_nombre(h)}${liste_unites[j + 1][0]}$ de hauteur.`;
+            texte_corr = `$\\mathcal{V}= l \\times L \\times h = ${tex_nombre(l)}${
               liste_unites[j][0]
-            }\\times${tex_nombre(L)}${liste_unites[j - 1][0]}\\times${h}${
+            }\\times${tex_nombre(L)}${liste_unites[j - 1][0]}\\times${tex_nombre(h)}${
               liste_unites[j + 1][0]
-            }=${l}${liste_unites[j][0]}\\times${L * 10}${
+            }=${l}${liste_unites[j][0]}\\times${tex_nombrec(L * 10)}${
               liste_unites[j][0]
-            }\\times${h / 10}${liste_unites[j][0]}=${tex_nombrec(
+            }\\times${tex_nombrec(h / 10)}${liste_unites[j][0]}=${tex_nombrec(
               arrondi(l * L * h)
             )}${liste_unites[j][1]}$`;
           }
@@ -11082,25 +11141,25 @@ function Calcul_de_volumes() {
           if (this.sup == 1) {
             //sans conversion
             j = randint(0, 3); // pour le choix de l'unité
-            c = randint(2, 10);
+            c = calcul(randint(2, 10)+partieDecimale3);
             h = randint(2, 5);
             l = randint(6, 10);
-            texte = `Un prisme droit de hauteur $${l}${liste_unites[j][0]}$ et dont les bases sont des triangles de base $${c}${liste_unites[j][0]}$ et de hauteur correspondante $${h}${liste_unites[j][0]}$.`;
-            texte_corr = `$\\mathcal{V}=\\mathcal{B} \\times h=\\dfrac{${c}${
+            texte = `Un prisme droit de hauteur $${l}${liste_unites[j][0]}$ et dont les bases sont des triangles de base $${tex_nombre(c)}${liste_unites[j][0]}$ et de hauteur correspondante $${h}${liste_unites[j][0]}$.`;
+            texte_corr = `$\\mathcal{V}=\\mathcal{B} \\times h=\\dfrac{${tex_nombre(c)}${
               liste_unites[j][0]
-            }\\times${h}${liste_unites[j][0]}}{2}\\times${l}${
+            }\\times${tex_nombre(h)}${liste_unites[j][0]}}{2}\\times${tex_nombre(l)}${
               liste_unites[j][0]
             }=${tex_nombrec(arrondi(calcul((c * h * l) / 2), 1))}${
               liste_unites[j][1]
             }$`;
           } else {
             j = randint(1, 2); // pour le choix de l'unité
-            c = randint(2, 10);
+            c = calcul(randint(2, 10)+partieDecimale3);
             h = randint(30, 50);
             l = arrondi(randint(5, 15) / 10, 1);
             texte = `Un prisme droit de hauteur $${l}${
               liste_unites[j - 1][0]
-            }$ et dont les bases sont des triangles de base $${c}${
+            }$ et dont les bases sont des triangles de base $${tex_nombre(c)}${
               liste_unites[j][0]
             }$ et de hauteur correspondante $${h}${liste_unites[j + 1][0]}$.`;
             texte_corr = `$\\mathcal{V}=\\mathcal{B} \\times h=\\dfrac{${c}${
@@ -11159,11 +11218,11 @@ function Calcul_de_volumes() {
           if (this.sup == 1) {
             //sans conversion
             j = randint(0, 3); // pour le choix de l'unité
-            c = randint(2, 10);
+            c = calcul(randint(2, 10)+partieDecimale2);
             h = randint(2, 5);
             l = randint(6, 10);
-            texte = `Une pyramide de hauteur $${h}${liste_unites[j][0]}$ et dont la base  est un carré de $${c}${liste_unites[j][0]}$ de côté.`;
-            texte_corr = `$\\mathcal{V}=\\dfrac{1}{3} \\times \\mathcal{B} \\times h=\\dfrac{1}{3}\\times\\left(${c}${liste_unites[j][0]}\\right)^2\\times${h}${liste_unites[j][0]}`;
+            texte = `Une pyramide de hauteur $${h}${liste_unites[j][0]}$ et dont la base  est un carré de $${tex_nombre(c)}${liste_unites[j][0]}$ de côté.`;
+            texte_corr = `$\\mathcal{V}=\\dfrac{1}{3} \\times \\mathcal{B} \\times h=\\dfrac{1}{3}\\times\\left(${tex_nombre(c)}${liste_unites[j][0]}\\right)^2\\times${h}${liste_unites[j][0]}`;
             if (calcul((c * c * h) / 3, false) == arrondi((c * c * h) / 3, 1))
               texte_corr += `=${tex_nombrec(
                 arrondi(calcul((c * c * h) / 3), 1)
@@ -11174,15 +11233,15 @@ function Calcul_de_volumes() {
               )}${liste_unites[j][1]}$`;
           } else {
             j = randint(1, 2); // pour le choix de l'unité
-            c = randint(2, 10);
+            c = calcul(randint(2, 10)+partieDecimale2);
             h = randint(30, 50);
             l = arrondi(randint(5, 15) / 10, 1);
             texte = `Une pyramide de hauteur $${tex_nombrec(h / 10)}${
               liste_unites[j - 1][0]
-            }$ et dont la base  est un carré de $${c}${
+            }$ et dont la base  est un carré de $${tex_nombre(c)}${
               liste_unites[j][0]
             }$ et de hauteur correspondante $${h}${liste_unites[j + 1][0]}$.`;
-            texte_corr = `$\\mathcal{V}=\\dfrac{1}{3} \\times \\mathcal{B} \\times h=\\dfrac{1}{3}\\times\\left(${c}${
+            texte_corr = `$\\mathcal{V}=\\dfrac{1}{3} \\times \\mathcal{B} \\times h=\\dfrac{1}{3}\\times\\left(${tex_nombre(c)}${
               liste_unites[j][0]
             }\\right)^2\\times${tex_nombrec(h / 10)}${
               liste_unites[j - 1][0]
@@ -11213,7 +11272,7 @@ function Calcul_de_volumes() {
           break;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -11225,9 +11284,11 @@ function Calcul_de_volumes() {
   this.besoin_formulaire_numerique = [
     "Niveau de difficulté",
     2,
-    "1 : pas de conversion\n2 : avec conversion",
+    "1 : Sans conversions\n2 : Avec des conversions",
   ];
+  this.besoin_formulaire2_case_a_cocher = ["Avec des décimaux",false];
 }
+
 
 /**
  * Transformations : trouvers un point numéroté par une des transformations du plan. Fonction générale utilisée sur tous les niveaux
@@ -11612,6 +11673,185 @@ function Transformations() {
     }
   };
   // this.besoin_formulaire_numerique = ['Transformations',5, '1 : Symétries axiales\n 2 : Symétries centrales\n 3 : Rotations\n 4 : Translations\n 5 : Homothéties\n'];
+}
+function Symetrie_axiale_conservation1() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Propriétés de conservation de la symétrie axiale";
+  this.consigne = "";
+  this.nb_questions = 4;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1;
+
+ 
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let type_de_questions_disponibles=["Segment","Droite","1/2droite","Triangle","Angle"];
+    let points=[],traces=[],nom=[],alternance
+    for (let i=0;i<25;i++) nom.push(lettre_depuis_chiffre(i+1))
+    let noms=shuffle(nom)
+
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions);
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    this.liste_questions.push(`${texte_gras('Dans la symétrie d\'axe (d)...')}`);
+    this.liste_corrections.push(`${texte_gras('Dans la symétrie d\'axe (d)...')}`);
+    // On prépare la figure...
+    let axe=parseInt(this.sup)
+    let d,nonchoisi,coords=[],x,y,objets_enonce=[],objets_correction=[],nomd,label_pos
+    if (axe==5) axe=randint(1,4) //choix de l'axe et des coordonnées
+    switch (axe) {
+      case 1 : d=droite(1,0,0,'(d)');
+        nomd=texteParPosition('(d)',0.3,5.6)
+        label_pos='above left'
+        for (let i=0;i<12;i++){
+          nonchoisi=false
+          while (!nonchoisi){ // Le nouveau point est-il déjà dans la liste ?
+            [x,y]=[randint(-5,0),randint(-5,5)]
+            nonchoisi=true
+            for (let j=0;j<i;j++)
+              if (coords[j][0]==x&&coords[j][1]==y) nonchoisi=false
+          }
+          coords.push([x,y]) //on stocke les 12 points
+        }
+        for (let j=0;j<12;j++) coords.push([-coords[j][0],coords[j][1]]) // on stocke les 12 images
+      break;
+      case 2: d=droite(0,1,0,'(d)');
+      label_pos='above'
+      nomd=texteParPosition('(d)',5.6,0.3)
+      for (let i=0;i<12;i++){
+          nonchoisi=false
+          while (!nonchoisi){ // Le nouveau point est-il déjà dans la liste ?
+            [x,y]=[randint(-5,5),randint(-5,0)]
+            nonchoisi=true
+            for (let j=0;j<i;j++)
+              if (coords[j][0]==x&&coords[j][1]==y) nonchoisi=false
+          }
+          coords.push([x,y]) //on stocke les 12 points
+        }
+        for (let j=0;j<12;j++) coords.push([coords[j][0],-coords[j][1]]) // on stocke les 12 images
+      break;
+      case 3: d=droite(1,-1,0,'(d)');
+      label_pos='above'
+      nomd=texteParPosition('(d)',-5.8,-5.4)
+      for (let i=0;i<12;i++){
+          nonchoisi=false
+          while (!nonchoisi){ // Le nouveau point est-il déjà dans la liste ?
+            x=randint(-5,5)
+            y=randint(x,5)
+            nonchoisi=true
+            for (let j=0;j<i;j++)
+              if (coords[j][0]==x&&coords[j][1]==y) nonchoisi=false
+          }
+          coords.push([x,y]) //on stocke les 12 points
+        }
+        for (let j=0;j<12;j++) coords.push([coords[j][1],coords[j][0]]) // on stocke les 12 images
+      break;
+      case 4: d=droite(1,1,0,'(d)');
+      label_pos='above'
+      nomd=texteParPosition('(d)',-5.8,5.4)
+      for (let i=0;i<12;i++){
+          nonchoisi=false
+          while (!nonchoisi){ // Le nouveau point est-il déjà dans la liste ? Si oui, on recommence.
+            x=randint(-5,5)
+            y=randint(-5,-x)
+            nonchoisi=true
+            for (let j=0;j<i;j++)
+              if (coords[j][0]==x&&coords[j][1]==y)
+                 nonchoisi=false;
+          }
+          coords.push([x,y]) //on stocke les 12 points
+        }
+        for (let j=0;j<12;j++) 
+          coords.push([-coords[j][1],-coords[j][0]]); // on stocke les 12 images
+      break;
+    }
+    for (let i=0;i<24;i++) {
+      if (i<12) points.push(point(coords[i][0],coords[i][1],noms[i],label_pos))
+      else if (coords[i][0]==coords[i-12][0]&&coords[i][1]==coords[i-12][1]) {
+        points.push(point(coords[i][0],coords[i][1],noms[i-12],label_pos))
+        noms[i]=noms[i-12]
+      }
+      else points.push(point(coords[i][0],coords[i][1],noms[i],label_pos))
+      traces.push(tracePoint(points[i]));
+    }
+    // On rédige les questions et les réponses
+    if (this.sup2==true) alternance=2
+    else alternance=1
+    function index(i) {
+      return (i+12*(i%alternance))%24
+    }
+    objets_enonce.length=0
+    objets_correction.lenght=0
+    for (let i = 0, texte, texte_corr, choix, cpt = 0;i < this.nb_questions && cpt < 50;) {
+
+      switch (liste_type_de_questions[i]) {
+        case "Segment" :
+          choix=randint(0,10)+randint(0,1)*12
+          texte=`Quel est le symétrique du segment $[${noms[index(choix)]}${noms[index(choix+1)]}]$ ?`
+          texte_corr=`Le symétrique du segment $[${noms[index(choix)]}${noms[index(choix+1)]}]$ est le segment $[${noms[index(choix+12)]}${noms[index(choix+13)]}]$.`
+          s1=segment(points[index(choix)],points[index(choix+1)],texcolors(i*3+2))
+          s2=segment(points[index(choix+12)],points[index(choix+13)],texcolors(i*3+2))
+          s1.epaisseur=2
+          s2.epaisseur=2
+          objets_correction.push(s1,s2)
+          break;
+        case "Droite" :
+          choix=randint(0,10)+randint(0,1)*12
+          texte=`Quel est la symétrique de la droite $(${noms[index(choix)]}${noms[index(choix+1)]})$ ?`
+          texte_corr=`La symétrique de la droite $(${noms[index(choix)]}${noms[index(choix+1)]})$ est la droite $(${noms[index(choix+12)]}${noms[index(choix+13)]})$.`
+          objets_correction.push(droite(points[index(choix)],points[index(choix+1)],"",texcolors(i*3+2)))
+          objets_correction.push(droite(points[index(choix+12)],points[index(choix+13)],"",texcolors(i*3+2)))
+         break;
+        case "1/2droite" :
+          choix=randint(0,10)+randint(0,1)*12
+          texte=`Quel est la symétrique de la demi-droite $[${noms[index(choix)]}${noms[index(choix+1)]})$ ?`
+          texte_corr=`La symétrique de la demi-droite $[${noms[index(choix)]}${noms[index(choix+1)]})$ est la demi-droite $[${noms[index(choix+12)]}${noms[index(choix+13)]})$`
+          objets_correction.push(demiDroite(points[index(choix)],points[index(choix+1)],texcolors(i*3+2)))
+          objets_correction.push(demiDroite(points[index(choix+12)],points[index(choix+13)],texcolors(i*3+2)))
+         break;
+        case "Triangle" :
+          choix=randint(0,9)+randint(0,1)*12
+          texte=`Quel est le symétrique du triangle $${noms[index(choix)]}${noms[index(choix+1)]}${noms[index(choix+2)]}$ ?`
+          texte_corr=`Le symétrique du triangle $${noms[index(choix)]}${noms[index(choix+1)]}${noms[index(choix+2)]}$ est le triangle $${noms[index(choix+12)]}${noms[index(choix+13)]}${noms[index(choix+14)]}$.`
+          objets_correction.push(polygone([points[index(choix)],points[index(choix+1)],points[index(choix+2)]],texcolors(i*3+2)))
+          objets_correction.push(polygone([points[index(choix+12)],points[index(choix+13)],points[index(choix+14)]],texcolors(i*3+2)))
+          break;
+        case "Angle" :
+          choix=randint(0,9)+randint(0,1)*12
+          texte=`Quel est le symétrique de l'angle $\\widehat{${noms[index(choix)]}${noms[index(choix+1)]}${noms[index(choix+2)]}}$ ?`
+          texte_corr=`Le symétrique de l'angle $\\widehat{${noms[index(choix)]}${noms[index(choix+1)]}${noms[index(choix+2)]}}$ est l'angle $\\widehat{${noms[index(choix+12)]}${noms[index(choix+13)]}${noms[index(choix+14)]}}$.`
+          objets_correction.push(codeAngle(points[index(choix)],points[index(choix+1)],points[index(choix+2)],2,'',texcolors(i*3+2),2,0.5,texcolors(i*3+2),0.2))
+          objets_correction.push(codeAngle(points[index(choix+12)],points[index(choix+13)],points[index(choix+14)],2,'',texcolors(i*3+2),2,0.5,texcolors(i*3+2),0.2))
+          objets_correction.push(segment(points[index(choix)],points[index(choix+1)],texcolors(i*3+2)))
+          objets_correction.push(segment(points[index(choix+1)],points[index(choix+2)],texcolors(i*3+2)))
+          objets_correction.push(segment(points[index(choix+12)],points[index(choix+13)],texcolors(i*3+2)))
+          objets_correction.push(segment(points[index(choix+13)],points[index(choix+14)],texcolors(i*3+2)))
+
+          break;
+      }
+      
+      if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    d.isVisible=true;
+    objets_enonce.push(nomd,d);
+    objets_correction.push(nomd,d);
+    for(let i=0;i<24;i++) {
+      objets_enonce.push(labelPoint(points[i]),tracePoint(points[i],'blue'))
+      objets_correction.push(labelPoint(points[i]),tracePoint(points[i],'blue'))
+
+    }
+    this.liste_questions.push(mathalea2d({xmin:-6,ymin:-6,xmax:6,ymax:6,pixelsParCm:40,scale:1},objets_enonce))
+    this.liste_corrections.push(mathalea2d({xmin:-6,ymin:-6,xmax:6,ymax:6,pixelsParCm:40,scale:1},objets_correction))
+    liste_de_question_to_contenu_sans_numero(this);
+
+  }
+  this.besoin_formulaire_numerique = ['Type d\'axe',5,"1 : Axe vertical\n2 : Axe horizontal\n3 : Axe oblique 1\n4 : Axe oblique 2\n5 : Axe aléatoire"];
+  this.besoin_formulaire2_case_a_cocher = ["Avec des points de part et d'autre"];	
 }
 
 // Exercices paramétrés pour correspondre au référentiel
@@ -13651,6 +13891,133 @@ function Proportionnalite_par_linearite_bis(){
 		}
 		liste_de_question_to_contenu(this);
 	}
+}
+
+
+/**
+ * Lire un diagramme en barre
+ * @Auteur Erwan Duplessy
+ * Référence 6S10
+ */
+
+function Lecture_diagramme_barre() {
+
+  Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Lire un diagramme en barre";
+	this.consigne = "Répondre aux questions à l'aide du graphique.";
+  this.nb_questions = 3;
+  this.nb_questions_modifiable = false;
+	this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1;
+  this.sup2 = 1;
+  
+  this.nouvelle_version = function(){
+		this.liste_questions = []; // vide la liste de questions
+    this.liste_corrections = []; // vide la liste de questions corrigées   
+
+    let lstAnimaux = ['girafes', 'zèbres', 'gnous', 'buffles', 'gazelles', 'crocodiles', 'rhinocéros', 'léopards', 'guépards', 'hyènes'];
+    let nbAnimaux = 4; // nombre d'animaux différents dans l'énoncé
+    switch (parseInt(this.sup)) {
+      case 1:nbAnimaux = 4;break;
+      case 2:nbAnimaux = 5;break;
+      case 3:nbAnimaux = 6;break;
+      default:nbAnimaux = 4;
+    }
+    let lstAnimauxExo = []; //liste des animaux uniquement cités dans l'exercice
+    let lstNombresAnimaux = []; // liste des effectifs de chaque animal
+    let lstVal = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]; // liste des valeurs à éviter pour les effectifs
+    let N = 0;
+
+    switch (parseInt(this.sup2)) {
+      case 1:
+        for (let i = 0; i < nbAnimaux; i++) {
+          N = randint(2, 100, lstVal); // choisit un nombre entre 2 et 100 sauf dans les valeurs à éviter
+          lstNombresAnimaux.push(N);
+          lstVal = lstVal.concat([N-1, N, N+1]); // valeurs à supprimer pour éviter des valeurs proches
+        }
+        break;
+      case 2:
+        for (let i = 0; i < nbAnimaux; i++) {
+          N = randint(2, 100, lstVal); // choisit un nombre entre 2 et 100 sauf dans les valeurs à éviter
+          lstNombresAnimaux.push(10*N);
+          lstVal = lstVal.concat([N-1, N, N+1]); // valeurs à supprimer pour éviter des valeurs proches
+        }
+        break;
+    }
+
+    for (let i = 0; i < nbAnimaux; i++) {
+      nom = choice(lstAnimaux, lstAnimauxExo); // choisit un animal au hasard sauf parmi ceux déjà utilisés
+      lstAnimauxExo.push(nom);
+    }
+
+    let nMin = Math.min(...lstNombresAnimaux);
+    let nMax = Math.max(...lstNombresAnimaux);
+
+    let lstNomParc = ['Dramve', 'Fatenmin', 'Batderfa', 'Vihi', 'Genser', 'Barbetdou', 'Dramrendu', 'Secai', 'Cipeudram', 'Cigel', 'Lisino', 'Fohenlan', 
+    'Farnfoss', 'Kinecardine', 'Zeffari', 'Kincardine', 'Barmwich', 'Swadlincote', 'Swordbreak'];
+
+    texte = 'Dans le parc naturel de ' + choice(lstNomParc)  + ', il y a beaucoup d’animaux. Voici un diagramme en bâtons qui donne le nombre d’individus pour chaque espèce.<br>';
+    texte += num_alpha(0) + ` Quels sont les animaux les plus nombreux ?<br>`;
+    texte += num_alpha(1) + ` Quels sont les animaux les moins nombreux ?<br>`;
+    
+    let numAnimal = randint(0,nbAnimaux-1);
+    switch (parseInt(this.sup2)) {
+      case 1:texte += num_alpha(2) + ` Donner un encadrement à la dizaine du nombre de ` + lstAnimauxExo[numAnimal] + ' ?<br>';
+        break;
+      case 2:texte += num_alpha(2) + ` Donner un encadrement à la centaine du nombre de ` + lstAnimauxExo[numAnimal] + ' ?<br>';
+        break;
+    }
+
+    // coefficient pour gérer les deux types d'exercices (entre 1 et 100) ou (entre 10 et 1000)
+    let coef = 1;
+    switch (parseInt(this.sup2)) {
+      case 1:
+        coef = 1;
+        break;
+      case 2:
+        coef = 10;
+        break;
+    }
+
+    let r = repere2({
+      grilleY : 'pointilles',
+      xThickListe : [],
+      xLabelListe : [],
+      yUnite : .1/coef,
+      yThickDistance : 10*coef,
+      yMax : 110*coef,
+      xMin : 0,
+      xMax : 10,
+      yMin : 0,
+      axeXStyle : '',
+      yLegende : "Nombre d'individus"
+     });
+
+     
+    let lstElementGraph = []
+    for (let i = 0; i < nbAnimaux; i++) {
+      lstElementGraph.push(traceBarre((((r.xMax-r.xMin)/(nbAnimaux+1))*(i+1)),lstNombresAnimaux[i],lstAnimauxExo[i],{unite:.1/coef}))
+    }
+
+    texte += mathalea2d({xmin : -5, xmax : 11, ymin : -3, ymax : 11, pixelsParCm : 30, scale : .5}, r, lstElementGraph)
+    // debut de la correction
+    // question 1
+    texte_corr = num_alpha(0) + ` Les animaux les plus nombreux sont les ` + lstAnimauxExo[lstNombresAnimaux.indexOf(nMax)] +'.<br>';
+    // question 2
+    texte_corr += num_alpha(1) + ` Les animaux les moins nombreux sont les ` + lstAnimauxExo[lstNombresAnimaux.indexOf(nMin)] +'.<br>';
+    // question 3
+    let reponse = lstNombresAnimaux[lstAnimauxExo.indexOf(lstAnimauxExo[numAnimal])];
+    reponseinf = 10*coef*Math.floor(reponse/(10*coef))
+    reponsesup = reponseinf + 10*coef
+    texte_corr += num_alpha(2) + ' Il y a entre ' + reponseinf + ' et ' + reponsesup + ' ' + lstAnimauxExo[numAnimal] + '.<br>';
+
+    this.liste_questions.push(texte);
+    this.liste_corrections.push(texte_corr);
+    liste_de_question_to_contenu(this);
+  }
+  this.besoin_formulaire_numerique = [`Nombre d'espèces différentes`, 3, ` choix 1 : 4 espèces\n choix 2 : 5 espèces\n choix 3 : 6 espèces`];
+  this.besoin_formulaire2_numerique = [`Valeurs numériques`, 2, ` choix 1 : entre 1 et 100\n choix 2 : entre 100 et 1 000`];
 }
 
 /**
@@ -15697,10 +16064,12 @@ jQuery(document).ready(function () {
   
   liste_html_des_exercices_6 = liste_html_des_exercices_d_un_niveau([
     ['6C1','6C1 - Calculs niveau 1'],['6C2','6C2 - Calculs niveau 2'],['6C3','6C3 - Calculs niveau 3'],
-    ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],['6M3', '6M3 - Volumes'],['6P1','6P1 - Proportionnalité'],
-    ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
     ['6D1','6D1 - Les durées'],
-    ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3'],['6N4','6N4 - Numération et fractions niveau 4']])
+    ['6G1','6G1 - Géométrie niveau 1'],['6G2','6G2 - Géométrie niveau 2'],['6G3','6G3 - Géométrie niveau 3'],['6G4','6G4 - Géométrie niveau 4'],
+    ['6M1','6M1 - Grandeurs et mesures niveau 1'],['6M2','6M2 - Grandeurs et mesures niveau 2'],['6M3', '6M3 - Volumes'],
+    ['6N1','6N1 - Numération et fractions niveau 1'],['6N2','6N2 - Numération et fractions niveau 2'],['6N3','6N3 - Numération et fractions niveau 3'],['6N4','6N4 - Numération et fractions niveau 4'],
+    ['6P1','6P1 - Proportionnalité'],['6S1','6S1 - Statistiques']
+  ])
     liste_html_des_exercices_5 = liste_html_des_exercices_d_un_niveau([
       ['5A1','5A1 - Arithmetique'],['5C1','5C1 - Calculs'],
       ['5G1','5G1 - Symétries'],['5G2','5G2 - Triangles'],['5G3','5G3 - Angles'],['5G4','5G4 - Parallélogrammes'],['5G5','5G5 - Espace'],
@@ -20313,33 +20682,33 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 			souscas=randint(0,3)
 			switch (souscas) {
 				case 0 : //somme de deux nombres
-					expf=`La somme de ${nombre_avec_espace(a)} et ${l1}`
+					expf=`La somme de ${nombre_avec_espace(a)} et $${l1}$`
 					expl=`$${tex_nombre(a)}+${l1}$`
 					expc=`$${tex_nombre(a)}+${l1}=${tex_nombre(a)}+${tex_nombre(val1)}=${tex_nombre(a+val1)}$`
 					last_op = 'addition';
 					break
 				case 1 : // différence de deux nombres
 					if (val1>b) {
-					expf=`La différence de ${l1} et ${nombre_avec_espace(b)}`
+					expf=`La différence de $${l1}$ et ${nombre_avec_espace(b)}`
 					expl=`$${l1}-${tex_nombre(b)}$`
 					expc=`$${l1}-${tex_nombre(b)}=${tex_nombre(val1)}-${tex_nombre(b)}=${tex_nombre(val1-b)}$`
 					}
 					else {
-					expf=`La différence de ${nombre_avec_espace(b)} et ${l1}`
+					expf=`La différence de ${nombre_avec_espace(b)} et $${l1}$`
 					expl=`$${tex_nombre(b)}-${l1}$`
 					expc=`$${tex_nombre(b)}-${l1}=${tex_nombre(b)}-${tex_nombre(val1)}=${tex_nombre(b-val1)}$`
 					}
 					last_op = 'soustraction';
 					break
 				case 2 : // produit de deux nombres
-					expf=`Le produit de ${l1} par ${nombre_avec_espace(b)}`
+					expf=`Le produit de $${l1}$ par ${nombre_avec_espace(b)}`
 					expl=`$${l1}\\times ${tex_nombre(b)} = ${tex_nombrec(b)}${l1}$`
 					expc=`$${tex_nombrec(b)}${l1} = ${tex_nombrec(b)}\\times ${val1}=${tex_nombre(b*val1)}$`
 					last_op = 'multiplication';
 					break
 				case 3 : // quotient de deux nombres
 
-					expf=`Le quotient de ${l1} par ${nombre_avec_espace(b)}`
+					expf=`Le quotient de $${l1}$ par ${nombre_avec_espace(b)}`
 					expl=`$${l1}\\div ${tex_nombre(b)}$`
 					if (estentier(val1/b*1000))	expc=`$${l1}\\div ${tex_nombre(b)} = ${val1}\\div ${tex_nombre(b)} = ${tex_nombrec(val1/b)}$`
 					else expc=`$${l1}\\div ${tex_nombre(b)} = ${val1}\\div ${tex_nombre(b)}=${tex_fraction(val1,tex_nombre(b))}${simplification_de_fraction_avec_etapes(val1,tex_nombre(b))}$`
@@ -20352,21 +20721,21 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 			nbval=1
 			switch (souscas) {
 				case 0 : //a(b+c)
-					expf=`Le produit de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et ${l1}`
+					expf=`Le produit de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et $${l1}$`
 					expl=`$${tex_nombre(a)}(${tex_nombre(b)}+${l1})$`
 					expc=`$${tex_nombre(a)}(${tex_nombre(b)}+${l1})=${tex_nombre(a)}(${tex_nombre(b)}+${val1})=${tex_nombre(a)}\\times ${tex_nombre(b+val1)} = ${tex_nombre(a*(b+val1))}$`
 					last_op = 'multiplication';
 					break
 				case 1 : // a(b-c)
 					if (b<=c) b=calcul(b+c) // b-c positif
-					expf=`Le produit de ${l1} par la différence de ${b} et ${nombre_avec_espace(c)}`
+					expf=`Le produit de $${l1}$ par la différence de ${b} et ${nombre_avec_espace(c)}`
 					expl=`$${l1}(${tex_nombre(b)}-${tex_nombre(c)})=${l1}\\times ${tex_nombrec(b-c)}=${tex_nombrec(b-c)}${l1}$`
 					expc=`$${l1}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(val1)}(${tex_nombre(b)}-${tex_nombre(c)})=${tex_nombre(val1)}\\times ${tex_nombrec(b-c)}=${tex_nombrec(val1*(b-c))}$`
 					last_op = 'multiplication';
 					break
 				case 2 : // a/(b+c)
 					a=calcul(a*(val1+c)) // on s'assure que le quotient tombe juste...
-					expf=`Le quotient de ${nombre_avec_espace(a)} par la somme de ${l1} et ${nombre_avec_espace(c)}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par la somme de $${l1}$ et ${nombre_avec_espace(c)}`
 					expl=`$${tex_nombre(a)}\\div (${l1}+${tex_nombre(c)})$ ou $\\dfrac{${tex_nombre(a)}}{${l1}+${tex_nombre(c)}}$`
 					expc=`$${tex_nombre(a)}\\div (${l1}+${tex_nombre(c)})=${tex_nombre(a)}\\div (${tex_nombre(val1)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\div ${tex_nombrec(val1+c)}=${tex_nombrec(a/(val1+c))}$`
 					last_op = 'division';
@@ -20374,7 +20743,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				case 3 : // a/(b-c)
 					if (b<=val1) b=calcul(b+val1) // b-c positif
  					a=calcul(a*(b-val1)) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et ${l1}`
+					expf=`Le quotient de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et $${l1}$`
 					expl=`$${tex_nombre(a)}\\div (${b}-${l1})$ ou $\\dfrac{${tex_nombre(a)}}{${tex_nombre(b)}-${l1}}$`
 					expc=`$${tex_nombre(a)}\\div (${b}-${l1})=${tex_nombre(a)}\\div (${b}-${val1})=${tex_nombre(a)}\\div ${tex_nombrec(b-val1)}=${tex_nombrec(a/(b-val1))}$`
 					last_op = 'division';
@@ -20382,14 +20751,14 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				case 4 : // (a+b)/c
 					a=calcul(a*val1)
 					b=calcul(b*val1) // on s'assure que le quotient tombe juste
-					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${l1}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par $${l1}$`
 					expl=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div  ${l1}$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${l1}}$`
 					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div  ${l1}=(${tex_nombre(a)}+${tex_nombre(b)})\\div ${val1}= ${tex_nombrec(a+b)}\\div ${val1}=${tex_nombrec((a+b)/val1)}$`
 					last_op = 'division';
 					break
 				case 5 : // (a-b)/c
 					a=calcul(a*c)+val1 // on s'assure que le quotient tombe juste et que a-b>0
-					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${l1} par ${nombre_avec_espace(c)}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et $${l1}$ par ${nombre_avec_espace(c)}`
 					expl=`$(${tex_nombre(a)}-${l1})\\div ${tex_nombre(c)}$ ou $\\dfrac{${tex_nombre(a)}-${l1}}{${tex_nombre(c)}}$`
 					expc=`$(${tex_nombre(a)}-${l1})\\div ${tex_nombre(c)}=(${tex_nombre(a)}-${val1})\\div ${tex_nombre(c)}= ${tex_nombrec(a-val1)}\\div ${tex_nombre(c)}=${tex_nombrec((a-val1)/c)}$`
 					last_op = 'division';
@@ -20404,7 +20773,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				case 0 : // (a+b)(c+d)
 					a=val1
 					d=val2
-					expf=`Le produit de la somme de ${l1} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${l2}`
+					expf=`Le produit de la somme de $${l1}$ et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et $${l2}$`
 					expl=`$(${l1}+${tex_nombre(b)})(${tex_nombre(c)}+${l2})$`
 					expc=`$(${l1}+${tex_nombre(b)})(${tex_nombre(c)}+${l2})=(${a}+${tex_nombre(b)})(${tex_nombre(c)}+${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
 					last_op = 'multiplication';
@@ -20413,7 +20782,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					d=val2
 					b=val1
 					if (c<=d) c=calcul(c+d)
-					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
+					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et $${l1}$ par la différence de ${nombre_avec_espace(c)} et $${l2}$`
 					expl=`$(${tex_nombre(a)}+${l1})(${tex_nombre(c)}-${l2})$`
 					expc=`$(${tex_nombre(a)}+${l1})(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}+${b})(${tex_nombre(c)}-${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
 					last_op = 'multiplication';
@@ -20422,7 +20791,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				b=val2
 				c=val1
 					if (a<=b) a=calcul(a+b)
-					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${l2} par la somme de ${l1} et ${nombre_avec_espace(d)}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et $${l2}$ par la somme de $${l1}$ et ${nombre_avec_espace(d)}`
 					expl=`$(${tex_nombre(a)}-${l2})(${l1}+${tex_nombre(d)})$`
 					expc=`$(${tex_nombre(a)}-${l2})(${l1}+${tex_nombre(d)})=(${tex_nombre(a)}-${b})(${c}+${tex_nombre(d)})=${tex_nombrec(a-b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
 					last_op = 'multiplication';
@@ -20432,7 +20801,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					d=val2
 					if (a<=b) a=calcul(a+b)
 					if (c<=d) c=calcul(c+d)
-					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et $${l1}$ par la différence de ${nombre_avec_espace(c)} et $${l2}$`
 					expl=`$(${tex_nombre(a)}-${l1})(${tex_nombre(c)}-${l2})$`
 					expc=`$(${tex_nombre(a)}-${l1})(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}-${b})(${tex_nombre(c)}-${d})= ${tex_nombrec(a-b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
 					last_op = 'multiplication';
@@ -20441,7 +20810,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					d=val2
 					b=val1
 					if (!estentier((a+b)/(c+d))) a=calcul(a*(c+d)-b)
-					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par la somme de ${nombre_avec_espace(c)} et ${l2}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et $${l1}$ par la somme de ${nombre_avec_espace(c)} et $${l2}$`
 					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}+${l2})$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}+${l2}}$`
 					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}+${l2})=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)/(c+d))}$`
 					last_op = 'division';
@@ -20450,7 +20819,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					d=val1
 					b=val2
 					if (a-b<=0||!estentier((a-b)/(c+d))) a=calcul(a*(c+d)+b)
-					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${l2} par la somme de ${nombre_avec_espace(c)} et ${l1}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et $${l2}$ par la somme de ${nombre_avec_espace(c)} et $${l1}$`
 					expl=`$(${tex_nombre(a)}-${l2})\\div (${tex_nombre(c)}+${l1})$ ou $\\dfrac{${tex_nombre(a)}-${l2}}{${tex_nombre(c)}+${l1}}$`
 					expc=`$(${tex_nombre(a)}-${l2})\\div (${tex_nombre(c)}+${l1})=(${tex_nombre(a)}-${tex_nombre(b)})\\div (${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/(c+d))}$`
 					last_op = 'division';
@@ -20462,7 +20831,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					if (!estentier((a+b)/(c-d))) 
 						if (a*(c-d)>b ) a=calcul(a*(c-d)-b)
 						else a=calcul((a+b)*(c-d)-b)
-					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et $${l1}$ par la différence de ${nombre_avec_espace(c)} et $${l2}$`
 					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}-${l2})$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}-${l2}}$`
 					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}-${l2})=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\div ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)/(c-d))}$`
 					last_op = 'division';
@@ -20473,7 +20842,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					if (c<=d) c=calcul(c+d)
 					if (a<=b) a=calcul(a+b)
 					if (!estentier((a-b)/(c-d))) a=calcul(a*(c-d)+b)
-					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et ${l1} par la différence de ${nombre_avec_espace(c)} et ${l2}`
+					expf=`Le quotient de la différence de ${nombre_avec_espace(a)} et $${l1}$ par la différence de ${nombre_avec_espace(c)} et $${l2}$`
 					expl=`$(${tex_nombre(a)}-${l1})\\div (${tex_nombre(c)}-${l2})$ ou $\\dfrac{${tex_nombre(a)}-${l1}}{${tex_nombre(c)}-${l2}}$`
 					expc=`$(${tex_nombre(a)}-${l1})\\div (${tex_nombre(c)}-${l2})=(${tex_nombre(a)}-${tex_nombre(b)})\\div (${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)/(c-d))}$`
 					last_op = 'division';
@@ -20481,7 +20850,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				case 8 : // ab+cd
 					b=val1;
 					d=val2;
-					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${l1} et du produit de ${nombre_avec_espace(c)} par ${l2}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par $${l1}$ et du produit de ${nombre_avec_espace(c)} par $${l2}$`
 					expl=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}$`
 					expc=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}=${tex_nombre(a)}\\times ${tex_nombre(b)}+${tex_nombre(c)}\\times ${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c*d)} = ${tex_nombrec(a*b+c*d)}$`
 					last_op = 'addition';
@@ -20491,7 +20860,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				b=val1
 					if (a*b<d*c) a=calcul(a+c)
 					while (a*b<d*c) a=calcul(a+c)
-					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${l1} et du produit de ${nombre_avec_espace(c)} par ${l2}`
+					expf=`La différence du produit de ${nombre_avec_espace(a)} par $${l1}$ et du produit de ${nombre_avec_espace(c)} par $${l2}$`
 					expl=`$${tex_nombre(a)}${l1}-${tex_nombre(c)}${l2}$`
 					expc=`$${tex_nombre(a)}${l1}-${tex_nombre(c)}${l2}=${tex_nombre(a)}\\times ${tex_nombre(b)}-${tex_nombre(c)}\\times ${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c*d)} = ${tex_nombrec(a*b-c*d)}$`
 					last_op = 'soustraction';
@@ -20500,7 +20869,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					d=val1
 					b=val2
 					if (!estentier(c/d)) c=calcul(c*d)
-					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${l2} et du quotient de ${nombre_avec_espace(c)} par ${l1}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par $${l2}$ et du quotient de ${nombre_avec_espace(c)} par $${l1}$`
 					expl=`$${tex_nombre(a)}${l2}+${tex_nombre(c)}\\div ${l1}$ ou $${tex_nombre(a)}${l2}+\\dfrac{${tex_nombre(c)}}{${l1}}$`
 					expc=`$${tex_nombre(a)}${l2}+${tex_nombre(c)}\\div ${l1}=${tex_nombre(a)}\\times ${tex_nombre(b)}+${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a*b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a*b+c/d)}$`
 					last_op = 'addition';
@@ -20510,7 +20879,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val1
 					if (!estentier(c/d)) c=calcul(c*d)
 					while (a*b<c/d) a=calcul(a*c)
-					expf=`La différence du produit de ${nombre_avec_espace(a)} par ${l1} et du quotient de ${nombre_avec_espace(c)} par ${l2}`
+					expf=`La différence du produit de ${nombre_avec_espace(a)} par $${l1}$ et du quotient de ${nombre_avec_espace(c)} par $${l2}$`
 					expl=`$${tex_nombre(a)}${l1}-${tex_nombre(c)}\\div ${l2}$ ou $${tex_nombre(a)}\\times ${l1}-\\dfrac{${tex_nombre(c)}}{${l2}}$`
 					expc=`${tex_nombre(a)}${l1}-${tex_nombre(c)}\\div ${l2}=${tex_nombre(a)}\\times ${tex_nombre(b)}-${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a*b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a*b-c/d)}$`
 					last_op = 'soustraction';
@@ -20520,7 +20889,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val2
 					if(!estentier(a/b)) a=calcul(a*b)
 					if (!estentier(c/d)) c=calcul(c*d)
-					expf=`La somme du quotient de ${nombre_avec_espace(a)} par ${l2} et du quotient de ${nombre_avec_espace(c)} par ${l1}`
+					expf=`La somme du quotient de ${nombre_avec_espace(a)} par $${l2}$ et du quotient de ${nombre_avec_espace(c)} par $${l1}$`
 					expl=`$${tex_nombre(a)}\\div ${l2}+${tex_nombre(c)}\\div ${l1}$ ou $\\dfrac{${tex_nombre(a)}}{${l2}}+\\dfrac{${tex_nombre(c)}}{${l1}}$`
 					expc=`$${tex_nombre(a)}\\div ${l2}+${tex_nombre(c)}\\div ${l1}=${tex_nombre(a)}\\div ${tex_nombre(b)}+${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a/b)}+${tex_nombrec(c/d)} = ${tex_nombrec(a/b+c/d)}$`
 					break	
@@ -20530,7 +20899,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					if(!estentier(a/b)) a=calcul(a*b)
 					if (!estentier(c/d)) c=calcul(c*d)
 					while (a/b<c/d) a=calcul(a*c)
-					expf=`La différence du quotient de ${nombre_avec_espace(a)} par ${l1} et du quotient de ${nombre_avec_espace(c)} par ${l2}`
+					expf=`La différence du quotient de ${nombre_avec_espace(a)} par $${l1}$ et du quotient de ${nombre_avec_espace(c)} par $${l2}$`
 					expl=`$${tex_nombre(a)}\\div ${l1}-${tex_nombre(c)}\\div ${l2}$ ou $\\dfrac{${tex_nombre(a)}}{${l1}}-\\dfrac{${tex_nombre(c)}}{${l2}}$`
 					expc=`$${tex_nombre(a)}\\div ${l1}-${tex_nombre(c)}\\div ${l2}=${tex_nombre(a)}\\div ${tex_nombre(b)}-${tex_nombre(c)}\\div ${tex_nombre(d)} = ${tex_nombrec(a/b)}-${tex_nombrec(c/d)} = ${tex_nombrec(a/b-c/d)}$`
 					last_op = 'soustraction';
@@ -20544,7 +20913,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				case 0 : // 2(a+bc)
 					a=val1
 					c=val2
-					expf=`Le double de la somme de ${l1} et du produit de ${nombre_avec_espace(b)} par ${l2}`
+					expf=`Le double de la somme de $${l1}$ et du produit de ${nombre_avec_espace(b)} par $${l2}$`
 					expl=`$2(${l1}+${tex_nombre(b)}${l2})$`
 					expc=`$2(${l1}+${tex_nombre(b)}${l2})=2(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)}) = 2(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times ${tex_nombrec(a+b*c)}=${tex_nombrec(2*(a+b*c))}$`
 					last_op = 'multiplication';
@@ -20554,7 +20923,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					c=val2
 					if (!estentier(3*(a+b)/c)) a=calcul(a*c-b)
 					while (a<b) a=calcul(a*c-b)
-					expf=`Le triple du quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par ${l2}`
+					expf=`Le triple du quotient de la somme de ${nombre_avec_espace(a)} et $${l1}$ par $${l2}$`
 					expl=`$3(${tex_nombre(a)}+${l1})\\div ${l2}$ ou $3\\times \\dfrac{${tex_nombre(a)}+${l1}}{${l2}}$`
 					expc=`$3(${tex_nombre(a)}+${l1})\\div ${l2}=3(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)} = 3\\times  ${tex_nombre(a+b)}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
 					last_op = 'division';
@@ -20563,7 +20932,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					nbval=1
 					b=val1
 					if (!estentier((a-b)/3)) a=calcul(3*a+b)
-					expf=`Le tiers de la différence de ${nombre_avec_espace(a)} et ${l1}`
+					expf=`Le tiers de la différence de ${nombre_avec_espace(a)} et $${l1}$`
 					expl=`$(${tex_nombre(a)}-${l1})\\div  3$ ou $\\dfrac{${tex_nombre(a)}-${l1}}{3}$`
 					expc=`$(${tex_nombre(a)}-${l1})\\div  3=(${tex_nombre(a)}-${tex_nombre(b)})\\div  3 = ${tex_nombrec(a-b)}\\div  3 = ${tex_nombrec((a-b)/3)}$`
 					last_op = 'division';
@@ -20573,7 +20942,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val2
 					if (a<=b) a=calcul(a+b)
 					if (!estentier((a-b)/3)) a=calcul(3*a+b)
-					expf=`Le produit du tiers de la différence de ${nombre_avec_espace(a)} et ${l2} par le double de la somme de ${l1} et ${nombre_avec_espace(d)}`
+					expf=`Le produit du tiers de la différence de ${nombre_avec_espace(a)} et $${l2}$ par le double de la somme de $${l1}$ et ${nombre_avec_espace(d)}`
 					expl=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2(${l1}+${tex_nombre(d)})$`
 					expc=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2(${l1}+${tex_nombre(d)})=\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div  3 \\times  2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times  2 \\times  ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
 					last_op = 'multiplication';
@@ -20582,7 +20951,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val1
 					c=val2
 					if (3*(a+b)<2*(c+d)) a=calcul(a+c+d)
-					expf=`La différence du triple de la somme de ${nombre_avec_espace(a)} et ${l1} et du double de la somme de ${l2} et ${nombre_avec_espace(d)}`
+					expf=`La différence du triple de la somme de ${nombre_avec_espace(a)} et $${l1}$ et du double de la somme de $${l2}$ et ${nombre_avec_espace(d)}`
 					expl=`$3(${tex_nombre(a)}+${l1})-2(${l2}+${tex_nombre(d)})$`
 					expc=`$3(${tex_nombre(a)}+${l1})-2(${l2}+${tex_nombre(d)})=3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times  ${tex_nombrec(a+b)} - 2 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
 					last_op = 'soustraction';
@@ -20591,7 +20960,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					d=val2
 					b=val1
 					if (a<=b) a=calcul(a+b)
-					expf=`La somme du double de la différence de ${nombre_avec_espace(a)} et ${l1} et du triple de la somme de ${nombre_avec_espace(c)} et ${l2}`
+					expf=`La somme du double de la différence de ${nombre_avec_espace(a)} et $${l1}$ et du triple de la somme de ${nombre_avec_espace(c)} et $${l2}$`
 					expl=`$2(${tex_nombre(a)}-${l1})+3(${tex_nombre(c)}+${l2})$`
 					expc=`$2(${tex_nombre(a)}-${l1})+3(${tex_nombre(c)}+${l2})=2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times  ${tex_nombrec(a-b)} + 3 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
 					last_op = 'addition';
@@ -20606,7 +20975,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val1
 					e=val2
 					if (!estentier((a+b)/(c*(d+e)))) a=calcul(a*c*(d+e)-b)
-					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${l1} par le produit de ${nombre_avec_espace(c)} par la somme de ${nombre_avec_espace(d)} et ${l2}`
+					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et $${l1}$ par le produit de ${nombre_avec_espace(c)} par la somme de ${nombre_avec_espace(d)} et $${l2}$`
 					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${l2}))$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}(${tex_nombre(d)}+${l2})}$`
 					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${l2}))=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div  (${tex_nombre(c)} \\times  ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div  ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
 					last_op = 'division';
@@ -20615,7 +20984,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					e=val1
 					b=val2
 					if (a<=b) a=calcul(a+b)
-					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${l2} par la somme de ${nombre_avec_espace(c)} et du produit de ${nombre_avec_espace(d)} par ${l1}`
+					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et $${l2}$ par la somme de ${nombre_avec_espace(c)} et du produit de ${nombre_avec_espace(d)} par $${l1}$`
 					expl=`$(${tex_nombre(a)}-${l2})(${tex_nombre(c)}+${tex_nombre(d)}${l1})$`
 					expc=`$(${tex_nombre(a)}-${l2})(${tex_nombre(c)}+${tex_nombre(d)}${l1})=(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)}) = ${tex_nombrec(a-b)}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times  ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
 					last_op = 'multiplication';
@@ -20624,7 +20993,7 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					d=val2
 					b=val1
 					if (!estentier(c*d/e)) c=calcul(c*e)
-					expf=`La somme du produit de ${nombre_avec_espace(a)} par ${l1} et du quotient du produit de ${nombre_avec_espace(c)} et ${l2} par ${nombre_avec_espace(e)}`
+					expf=`La somme du produit de ${nombre_avec_espace(a)} par $${l1}$ et du quotient du produit de ${nombre_avec_espace(c)} et $${l2}$ par ${nombre_avec_espace(e)}`
 					expl=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}\\div ${tex_nombre(e)}$ ou $${tex_nombre(a)}${l1}+\\dfrac{${tex_nombre(c)}${l2}}{${tex_nombre(e)}}$`
 					expc=`$${tex_nombre(a)}${l1}+${tex_nombre(c)}${l2}\\div ${tex_nombre(e)}=${tex_nombre(a)}\\times ${tex_nombre(b)}+${tex_nombre(c)}\\times ${tex_nombre(d)}\\div ${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d)} \\div  ${tex_nombre(e)} = ${tex_nombrec(a*b)} + ${tex_nombrec(c*d/e)} = ${tex_nombrec(a*b+c*d/e)}$`
 					last_op = 'addition';
@@ -26452,7 +26821,7 @@ function Exercice_Pythagore() {
         // Calcul d'un côté de l'angle droit
         texte = `Dans la figure ci-dessous, le triangle $${nom_du_triangle}$ est rectangle en $${s0}$, $${
           s0 + s1
-        }=${s01}$ cm, $${s1 + s2}=${s12}$ cm.`;
+        }=${s01}$ cm, $${s1 + s2}=${s12}$ cm.<br>`;
         texte += `Calculer $${s0 + s2}$.`;
         texte_corr = `Dans le triangle $${nom_du_triangle}$ rectangle en $${s0}$, d&rsquo;après le théorème de Pythagore, on a : $${
           s1 + s2
@@ -26654,7 +27023,9 @@ function Exercice_Pythagore() {
           `$${s0 + s2}~=~\\sqrt{${arrondi_virgule(
             carre12 - carre01,
             2
-          )}}~\\approx${s02}~\\text{cm}.$`;
+          )}}~`;
+          if (s02==calcul(Math.sqrt(s12**2-s01**2))) texte_corr+=`=${s02}~\\text{cm}.$`
+          else texte+=`\\approx${s02}~\\text{cm}.$`;
       } else {
         texte_corr =
           "Le triangle " +
@@ -26676,7 +27047,9 @@ function Exercice_Pythagore() {
           `$${s1 + s2}~=~\\sqrt{${arrondi_virgule(
             carre02 + carre01,
             2
-          )}}~\\approx${s12}~\\text{cm}.$`;
+          )}}~`;
+          if (s12==calcul(Math.sqrt(s01**2+s02**2))) texte_corr+=`=${s12}~\\text{cm}.$`
+          else texte+=`\\approx${s12}~\\text{cm}.$`;
       }
 
       this.liste_corrections.push(texte_corr);
@@ -36762,20 +37135,20 @@ function fonction_notion_vocabulaire() {
 					// sous question e/
 					txt_info =  `Voici le diagramme d'une machine qui triple `;
 					if (sortie_html) {
-						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme.<br>`;
+						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme, comme dans l’exemple ci-dessous.<br>`;
 						//texte += `Voici le diagramme d'une machine qui triple `;
 						//texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
-						SVG_machine_diag_3F1_act_mono(id_du_div_diag, 800, 100, 'f', 'x', [['3', '3x']]);
+						SVG_machine_diag_3F1_act_mono(id_du_div_diag, 800, 100, 't', 'x', [['3', '3x']]);
 						texte_corr += num_alpha(j) + ` C'est une machine qui quadruple, donc sous forme de diagramme.<br>`;
 						texte_corr += `<div id="${id_du_div_corr}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						SVG_machine_diag_3F1_act_mono(id_du_div_corr, 800, 100, 'f', 'x', [['4', '4x']]);
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
-						texte += `\\item   \\'{E}crire la réponse à la question d/ sous forme de diagramme.<br>`;
+						texte += `\\item   \\'{E}crire la réponse à la question d/ sous forme de diagramme, comme dans l’exemple ci-dessous.<br>`;
 						//texte += `Voici le diagramme d'une machine qui triple <br> `;
 						//texte += tikz_machine_diag(`f`, `x`, [[`\\times 3`, `3x`]]);
-						txt_info += '<br>'+tikz_machine_diag(`f`, `x`, [[`\\times 3`, `3x`]]);
+						txt_info += '<br>'+tikz_machine_diag(`t`, `x`, [[`\\times 3`, `3x`]]);
 						texte_corr += `\\item  C'est une machine qui quadruple, donc sous forme de diagramme.<br>`;
 						texte_corr += tikz_machine_diag(`f`, `x`, [[`\\times 4`, `4x`]]);
 					};
@@ -40044,6 +40417,7 @@ function Transformations_du_plan_et_coordonnees() {
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.titre = "Trouver les coordonnées de l'image d'un point par une transformation du plan";
 	this.consigne = "";
+	this.pas_de_version_LaTeX = true;
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false;
 	this.nb_cols = 1;
@@ -40520,7 +40894,7 @@ function Transformations_du_plan_et_coordonnees() {
 		}
 		else {
 			texte = ``
-			texte_cor=``
+			texte_corr=``
 			this.liste_questions.push(texte) // on envoie la question
 			this.liste_corrections.push(texte_corr)
 			liste_de_question_to_contenu_sans_numero(this);
@@ -41721,7 +42095,7 @@ function Image_antecedent_depuis_tableau_ou_fleche() {
 function Eq_resolvantes_Thales(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.debug = true;	
+	this.debug = false;	
 	this.sup=1;
 	if (this.debug) {
 		this.nb_questions = 4;
@@ -41743,7 +42117,7 @@ function Eq_resolvantes_Thales(){
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		if (this.debug) {
-			type_de_questions_disponibles = [0,1,2,3,4];			
+			type_de_questions_disponibles = [0,1,2,3];			
 		} else {
      		 type_de_questions_disponibles = shuffle([choice([0,1]),choice([2,3])]);      			
 		};
@@ -41759,54 +42133,61 @@ function Eq_resolvantes_Thales(){
 			// on a besoin d'un coeff pour le type de nombres
 			let coeff;
 			let nb_alea;
+			let c_temp_case_3;
+			while (c_temp_case_3%2 != 0 || c_temp_case_3%5 != 0) {
+				c_temp_case_3 = randint(11,99)
+			};
 			this.sup = Number(this.sup); // attention le formulaire renvoie un string, on a besoin d'un number pour le switch !
 			switch (this.sup) {
-			case 1://entiers          
-				coeff=[1,1,1];
-				nb_alea=[randint(1,9),randint(1,9),randint(1,9)];
-				break;
-			case 2://relatifs            
-				coeff=[choice([1,-1]),choice([1,-1]),choice([1,-1])];
-				nb_alea=[randint(1,9),randint(1,9),randint(1,9)];
-				break;
-			case 3://décimaux            
-				coeff=[0.1,0.1,0.1];
-				nb_alea=[randint(11,99),randint(11,99),randint(11,99)];
-				break;
+				case 1://entiers          
+					coeff=[1,1,1];
+					nb_alea=[randint(2,9),randint(2,9),randint(2,9,[3,6,7,9])];
+					break;
+				case 2://relatifs            
+					coeff=[choice([1,-1]),choice([1,-1]),choice([1,-1])];
+					nb_alea=[randint(2,9),randint(2,9),randint(1,9,[3,6,7,9])];
+					break;
+				case 3://décimaux            
+					coeff=[0.1,0.1,0.1];
+					nb_alea=[randint(11,99),randint(11,99),c_temp_case_3];
+					break;
 			};
 
 			let params = {
-				a:tex_nombre(calcul(nb_alea[0]*coeff[0])),
-				b:tex_nombre(calcul(nb_alea[1]*coeff[1])),
-				c:tex_nombre(calcul(nb_alea[2]*coeff[2])),
-				inc:'x'
+				// a:tex_nombre(calcul(nb_alea[0]*coeff[0])),
+				// b:tex_nombre(calcul(nb_alea[1]*coeff[1])),
+				// c:tex_nombre(calcul(nb_alea[2]*coeff[2])),
+				a:calcul(nb_alea[0]*coeff[0]),
+				b:calcul(nb_alea[1]*coeff[1]),
+				c:calcul(nb_alea[2]*coeff[2]),
+				inc:choice(['x','y','GO','AB','z','GA','BU','ZO','ME'])
 			}
 
 			// pour les situations, autant de situations que de cas dans le switch !
 			let situations = [
 				{//case 0 --> x/b=a/c --> cx= ab
-					eq:`\\dfrac{${params.inc}}{${params.b}}=\\dfrac{${params.a}}{${params.c}}`,
+					eq:`\\dfrac{${params.inc}}{${tex_nombre(params.b)}}=\\dfrac{${tex_nombre(params.a)}}{${tex_nombre(params.c)}}`,
 					a:params.a,
 					b:params.b,
 					c:params.c,
 					inc:params.inc 
 				},
 				{//case 1 --> a/c=x/b --> cx=ab
-					eq:`\\dfrac{${params.a}}{${params.c}}=\\dfrac{${params.inc}}{${params.c}}`,
+					eq:`\\dfrac{${tex_nombre(params.a)}}{${tex_nombre(params.c)}}=\\dfrac{${params.inc}}{${tex_nombre(params.c)}}`,
 					a:params.a,
 					b:params.b,
 					c:params.c,
 					inc:params.inc 
 				},
 				{//case 2 -->b/x=c/a --> cx = ab
-					eq:`\\dfrac{${params.b}}{${params.inc}}=\\dfrac{${params.c}}{${params.a}}`,
+					eq:`\\dfrac{${tex_nombre(params.b)}}{${params.inc}}=\\dfrac{${tex_nombre(params.c)}}{${tex_nombre(params.a)}}`,
 					a:params.a,
 					b:params.b,
 					c:params.c,
 					inc:params.inc 
 				},
 				{//case 3 -->c/a=b/x --> cx = ab 
-					eq:`\\dfrac{${params.c}}{${params.a}}=\\dfrac{${params.b}}{${params.inc}}`,
+					eq:`\\dfrac{${tex_nombre(params.c)}}{${tex_nombre(params.a)}}=\\dfrac{${tex_nombre(params.b)}}{${params.inc}}`,
 					a:params.a,
 					b:params.b,
 					c:params.c,
@@ -41823,13 +42204,13 @@ function Eq_resolvantes_Thales(){
 					question:``,
 					correction:`
 						$${situations[k].eq}$<br>
-						${texte_en_couleur_et_gras(`les produits en croix sont égaux`)}<br>
-						$${situations[k].c}\\times ${situations[k].inc}= ${situations[k].a}\\times ${situations[k].b}$<br>
-						${texte_en_couleur_et_gras(`on divise les deux membres par ${situations[k].c}`)}<br>
-						$\\dfrac{${situations[k].c}\\times ${situations[k].inc}}{${situations[k].c}}= \\dfrac{${situations[k].a}\\times ${situations[k].b}}{${situations[k].c}}$<br>
-						${texte_en_couleur_et_gras(`on simplifie et on calcule`)}<br>
-						${typeof situations[k].a}<br>
-						$${situations[k].inc}=${Number(situations[k].b)*Number(situations[k].a)/Number(situations[k].c)}$
+						${texte_en_couleur_et_gras(`Les produits en croix sont égaux.`)}<br>
+						$${tex_nombre(situations[k].c)}\\times ${situations[k].inc} = ${tex_nombre(situations[k].a)}\\times ${tex_nombre(situations[k].b)}$<br>
+						${texte_en_couleur_et_gras(`On divise les deux membres par ${tex_nombre(situations[k].c)}`)}.<br>
+						$\\dfrac{${tex_nombre(situations[k].c)}\\times ${situations[k].inc}}{${tex_nombre(situations[k].c)}}= \\dfrac{${tex_nombre(situations[k].a)}\\times ${tex_nombre(situations[k].b)}}{${tex_nombre(situations[k].c)}}$<br>
+						${texte_en_couleur_et_gras(`On simplifie et on calcule.`)}<br>
+
+						$${situations[k].inc}=${tex_nombre(calcul(Number(situations[k].b)*Number(situations[k].a)/Number(situations[k].c)))}$
 
 					`
 				});
@@ -41878,16 +42259,7 @@ function Eq_resolvantes_Thales(){
 						texte_corr = `${enonces[3].correction}`;
 					};
 					break;				
-         		case 4 : 
-					texte = `${enonces[4].enonce}`;
-					if (this.debug) {
-						texte += `<br>`;
-						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
-						texte_corr = ``;	
-					} else {
-						texte_corr = `${enonces[4].correction}`;
-					};
-					break;				
+ 			
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -45639,100 +46011,158 @@ function Resoudre_equation_degre_2() {
   };
   this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Solutions entières\n2 : Solutions réelles et calcul du discriminant non obligatoire"];
 }
+/**
+ * @Auteur Jean-Claude Lhote
+ * Trois type de questions proposées :
+ * 1) passant par trois dont deux d'abscisses opposées et le troisième d'abscisse 0 (pour simplifier la résolution du système)
+ * 2) Passant par un point et dont on connait le sommet
+ * 3) connaissant les deux racines et un autre point de passage à coordonnées entières
+ * référence 1E12
+ */
 function Trouver_equation_parabole() {
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Trouver l'équation d'une parabole";
   this.consigne = "Trouver l'expression de la fonction f.";
-  this.nb_questions = 4;
+  this.nb_questions = 5;
   this.nb_cols = 2;
   this.nb_cols_corr = 2;
   this.spacing_corr = 3;
-  this.sup = 1;
+  this.sup = 4;
+  this.correction_detaillee_disponible=true
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let liste_type_de_questions,type_de_questions_disponibles;
-    if (this.sup==1) type_de_questions_disponibles=[2,3]
-    else if (this.sup==2) type_de_questions_disponibles=[1,2]
-    else if (this.sup==3) type_de_questions_disponibles=[1,2,3]
+    if (this.sup<4) type_de_questions_disponibles=[parseInt(this.sup)]
+    else type_de_questions_disponibles=[1,2,2,3,3]
+    let f_name=[]
     liste_type_de_questions=combinaison_listes(type_de_questions_disponibles,this.nb_questions)
     for (let i = 0, texte, texte_corr, a, b, c, x1, x2,x3,f,r, cpt = 0;i < this.nb_questions && cpt < 50;) {
-
-      if (liste_type_de_questions[i]<3) {
-        a=choice([-1,1])
-        b=randint(-3,3)*2
-        c=randint(-10,10)
-        x1=randint(-10,10)
-        x2=randint(-10,10,x1)
-        x3=randint(-10,10,[x1,x2])
-      }
-      else {
-        x1=randint(-4,-1)
-        x2=randint(1,4)
-        x3=randint(-5,5,[x1,x2])
-        a=randint(-2,2,0)
-        b=calcul(-a*(x1+x2))
-        c=a*x1*x2
-      }
-      FdeX = function(x) {
-        return calcul(a*x**2+b*x+c)
-      }
-      texte = `Quelle est l'équation de la fonction f du second degré telle que :<br>`
+      f_name.push(lettre_minuscule_depuis_chiffre(i+6))
+      texte = `Quelle est l'expression de la fonction polynomiale $\\mathscr{${f_name[i]}}$ du second degré `
+      texte_corr=``
       switch (liste_type_de_questions[i]) {
-        case 1 : // passe par 3 points à coordonnées entières dont -x1, 0 et x1.
-          if (x1<0) x1=-x1
-          texte+=`$f(${x1})=${FdeX(x1)}$ ; $f(0)=${FdeX(0)}$ et $f(${-x1})=${FdeX(-x1)}$ <br>`
-          texte_corr=`Soit $f(x)=ax^2+bx+c$ , l'expression de la fonction cherchée, nous avons immédiatement :<br>`
-          texte_corr+=`$f(0)=c=${FdeX(0)}$ donc $f(x)=ax^2+bx${ecriture_algebrique(FdeX(0))}$.<br>`
+          case 1 : // passe par 3 points à coordonnées entières dont -x1, 0 et x1.
+          a=randint(-4,4,0)
+          b=randint(-6,6,0)
+          c=randint(-10,10,0)
+          x1=randint(1,5)
+          x2=randint(-5,5,x1)
+          x3=randint(-5,5,[x1,x2])
+           f = function(x) {
+            return calcul(a*x**2+b*x+c)
+          }
+          texte+=`qui passe par les points de coordonnées $(${-x1};${f(-x1)})$, $(0;${f(0)})$ et $(${x1};${f(x1)})$ ?<br>`
+          texte_corr=`Soit $\\mathscr{${f_name[i]}}(x)=ax^2+bx+c$ , l'expression de la fonction cherchée, comme $\\mathscr{${f_name[i]}}(0)=${f(0)}$ nous en déduisons que $c=${mise_en_evidence(f(0),'red')}$.<br>`
+          texte_corr+=`Donc $\\mathscr{${f_name[i]}}(x)=ax^2+bx${mise_en_evidence(ecriture_algebrique(f(0)),'red')}$.<br>`
           texte_corr+=`En substituant dans cette expression les valeurs de l'énoncé, nous obtenons :<br>`
           texte_corr+=`$\\begin{cases}
-          ${FdeX(x1)}=a\\times${x1}^2+b\\times${x1}${ecriture_algebrique(FdeX(0))}=${x1**2}a+${x1}b${ecriture_algebrique(FdeX(0))} \\\\
-          ${FdeX(-x1)}=a\\times(${-x1})^2+b\\times(${-x1})${ecriture_algebrique(FdeX(0))}=${x1**2}a-${x1}b${ecriture_algebrique(FdeX(0))}
+          ${f(x1)}=a\\times${x1}^2+b\\times${x1}${ecriture_algebrique(f(0))}=${Algebrite.eval(ecriture_algebrique_sauf1(x1**2)+'a'+ecriture_algebrique_sauf1(x1)+'b'+ecriture_algebrique(f(0)))} \\\\
+          ${f(-x1)}=a\\times(${-x1})^2+b\\times(${-x1})${ecriture_algebrique(f(0))}=${Algebrite.eval(ecriture_algebrique_sauf1(x1**2)+'a'+ecriture_algebrique_sauf1(-x1)+'b'+ecriture_algebrique(f(0)))}
        \\end{cases}$<br>`
-       texte_corr+=`La résolution de ce système donne $a=${a}$ et $b=${b}$.<br>`
-       texte_corr+=`D'où $f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$<br>`
+          if (this.correction_detaillee) {
+            texte_corr+=`Ce qui équivaut à <br>$\\begin{cases}
+               ${f(x1)}${ecriture_algebrique(-f(0))}=${f(x1)-f(0)}=${Algebrite.eval(ecriture_algebrique_sauf1(x1**2)+'a' + ecriture_algebrique_sauf1(x1)+'b')} \\\\
+               ${f(-x1)}${ecriture_algebrique(-f(0))}=${f(-x1)-f(0)}=${Algebrite.eval(ecriture_algebrique_sauf1(x1**2)+'a'+ecriture_algebrique_sauf1(-x1)+'b')}
+             \\end{cases}$<br>`
+             texte_corr+=`En ajoutant et en soustrayant les équations membre à membre, on obtient :<br>
+              $\\begin{cases}
+              ${f(x1)+f(-x1)-2*f(0)}=${2*x1**2}a \\\\
+              ${f(x1)-f(-x1)}=${2*x1}b
+           \\end{cases}$<br>`
+          }
+       texte_corr+=`La résolution de ce système donne $a=${mise_en_evidence(tex_nombre(a),'blue')}$ et $b=${mise_en_evidence(tex_nombre(b),'green')}$.<br>`
+       texte_corr+=`D'où $\\mathscr{${f_name[i]}}(x)=${mise_en_evidence(ecriture_algebrique_sauf1(a),'blue')}x^2 ${mise_en_evidence(ecriture_algebrique_sauf1(b),'green')}x  ${mise_en_evidence(ecriture_algebrique(c),'red')}$<br>`
  
           break;
         case 2 : // Passant par le sommet (x1,y1) et par le point (x2,y2)
-          x1=calcul(-b/(2*a))
-          texte+=`sa courbe atteint son `;
-          if (a>0) texte+=`minimum `;
-          else texte+=`maximum `;
-          texte +=`en (${x1};${FdeX(x1)}) et passe par le point de coordonnées (${x2};${FdeX(x2)})<br>`
-          texte_corr=`$f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$`
+        a=randint(-3,3,0)
+        b=randint(-3,3,0)*2*a
+        c=randint(-10,10)
+        x1=calcul(-b/(2*a))
+        x2=randint(-5,5,x1)
+        x3=randint(-5,5,[x1,x2])
+
+       f = function(x) {
+        return calcul(a*x**2+b*x+c)
+      }
+          texte+=`dont la parabole a pour sommet le point de coordonnées $(${x1};${f(x1)})$ et passe par le point de coordonnées $(${x2};${f(x2)})$ ?<br>`;
+          texte_corr=`D'après les coordonnées $(${x1};${f(x1)})$ du sommet, $\\mathscr{${f_name[i]}}$ a pour forme canonique : $\\mathscr{${f_name[i]}}(x)=a(x${ecriture_algebrique(-x1)})^2${ecriture_algebrique(f(x1))}$.<br>`
+  //       texte_corr+=`$=${Algebrite.eval('ax^2'+ecriture_algebrique(-2*x1)+'ax'+ecriture_algebrique(x1**2)+'a'+ecriture_algebrique(f(x1)))}$<br>`
+          texte_corr+=`De plus $\\mathscr{${f_name[i]}}(${x2})=${f(x2)}$`
+          if (this.correction_detaillee) {
+            texte_corr+=` donc $a(${x2}${ecriture_algebrique(-x1)})^2${ecriture_algebrique(f(x1))}=${f(x2)}$ `
+            texte_corr+=`soit $${Algebrite.eval(x2**2+'a'+ecriture_algebrique(-2*x1*x2)+'a'+ecriture_algebrique(x1**2)+'a'+ecriture_algebrique(f(x1)))}=${f(x2)}$.<br>`
+          if (x2**2-2*x1*x2+x1**2!=1)
+            texte_corr+=`On en déduit que $a=\\dfrac{${f(x2)}${ecriture_algebrique(-f(x1))}}{${(x2**2-2*x1*x2+x1**2)}}=${a}$.<br>`
+          else
+            texte_corr+=`On en déduit que $a=${f(x2)}${ecriture_algebrique(-f(x1))}=${a}$.<br>`
+          }
+          else texte_corr+=` donc $a=${a}$.<br>`
+          if (this.correction_detaillee) {
+            texte_corr+=`Développons la forme canonique : $\\mathscr{${f_name[i]}}(x)=
+            a(x${ecriture_algebrique(-x1)})^2${ecriture_algebrique(f(x1))}=
+            a(x^2${mise_en_evidence(ecriture_algebrique(-2*x1),'green')}x+${mise_en_evidence(tex_nombrec(x1**2),'red')})${mise_en_evidence(ecriture_algebrique(f(x1)),'red')}
+            =${mise_en_evidence('a','blue')}x^2${mise_en_evidence(ecriture_algebrique(-2*x1)+'a','green')}x${mise_en_evidence(ecriture_algebrique_sauf1(x1**2)+'a'+ecriture_algebrique(f(x1)),'red')}$.<br>`
+          }
+          texte_corr+=`En remplaçant $a$ par sa valeur $${a}$ dans l'expression canonique développée $${mise_en_evidence('a','blue')}x^2${mise_en_evidence(ecriture_algebrique(-2*x1)+'a','green')}x${mise_en_evidence(ecriture_algebrique_sauf1(x1**2)+'a'+ecriture_algebrique(f(x1)),'red')}$ on obtient :<br>`
+          texte_corr+=`$\\mathscr{${f_name[i]}}(x)=${mise_en_evidence(rien_si_1(a),'blue')}x^2${mise_en_evidence(ecriture_algebrique_sauf1(b),'green')}x${mise_en_evidence(ecriture_algebrique(c),'red')}$`
            break;
-        case 3:
-          texte+=`$f(${x1})=${FdeX(x1)}$ ; $f(${x2})=${FdeX(x2)}$ et $f(${x3})=${FdeX(x3)}$ <br>`
-          texte_corr=`$f(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique_sauf1(c)}`)}$`
+        case 3: // on a deux racines x1 et x2 et un troisième point (x3;f(x3))
+        x1=randint(-6,-1)
+        x2=randint(1,6,-x1)
+        x3=randint(-5,5,[x1,x2])
+        a=randint(-4,4,0)
+        b=calcul(-a*(x1+x2))
+        c=a*x1*x2
+        f = function(x) {
+          return calcul(a*x**2+b*x+c)
+        }
+             texte+=`qui s'annule en $x=${x1}$ et en $x=${x2}$ et dont la parabole passe par le point de coordonnées $(${x3};${f(x3)})$ ?<br>`
+          texte_corr+=`Comme $${x1}$ et $${x2}$ sont les deux solutions de l'équation $\\mathscr{${f_name[i]}}(x)=0$, on peut factoriser $\\mathscr{${f_name[i]}}(x)$ :<br>`
+          texte_corr+=`$\\mathscr{${f_name[i]}}(x)=a(x${ecriture_algebrique(-x1)})(x${ecriture_algebrique(-x2)})$.<br>`
+          texte_corr+=`Comme $\\mathscr{${f_name[i]}}(${x3})=${f(x3)}$, on en déduit que `
+          if (this.correction_detaillee) {
+            texte_corr+=`$${f(x3)}=a(${x3}${ecriture_algebrique(-x1)})(${x3}${ecriture_algebrique(-x2)})$ `
+            texte_corr+=`d'où $a=${f(x3)}\\div ${ecriture_parenthese_si_negatif((x3-x1)*(x3-x2))}=${a}$.<br>`
+          }
+          else texte_corr+=`$a=${a}$.<br>`
+          texte_corr+=`On obtient ainsi $\\mathscr{${f_name[i]}}(x)=${rien_si_1(a)}(x${ecriture_algebrique(-x1)})(x${ecriture_algebrique(-x2)})$ ou en développant $\\mathscr{${f_name[i]}}(x)=${Algebrite.eval(`${ecriture_algebrique_sauf1(a)}x^2 ${ecriture_algebrique_sauf1(b)}x  ${ecriture_algebrique(c)}`)}$`
           break;
 
       }
       if (a<0) {
-        Ymax=Math.ceil(FdeX(-b/(2*a))+2)
-        Ymin=Math.min(FdeX(x1),FdeX(x2),FdeX(x3))
+        Ymax=Math.ceil(f(-b/(2*a))+2)
+        Ymin=Math.min(f(x1),f(x2),f(x3),f(-x1),f(0),f(-6),f(6))
       }
       else {
-        Ymin=Math.floor(FdeX(-b/(2*a))-2)
-        Ymax=Math.max(FdeX(x1),FdeX(x2),FdeX(x3))
+        Ymin=Math.floor(f(-b/(2*a))-2)
+        Ymax=Math.max(f(x1),f(x2),f(x3),f(-x1),f(0),f(-6),f(6))
       }
-      if (Ymin>0) Ymin=0
-      if (Ymax<0) Ymax=0
-      if (Ymax-Ymin<10) Yscale=1
-      else Yscale =Math.ceil((Ymax-Ymin)/10)
-      console.log(i,Ymin,Ymax,Yscale) // Pour deboguer le décalage des graduations en Y
+
+      if (Ymax-Ymin<10) Yscale=2
+      else Yscale =Math.max(1,calcul(Math.round(Math.ceil((Ymax-Ymin)/10)/5)*5))*2
+/*      if (Ymin>=0) Ymin=-Yscale
+        else Ymin=-premierMultipleSuperieur(Yscale,-Ymin)
+      if (Ymax<=0) Ymax=Yscale
+         else Ymax=premierMultipleSuperieur(Yscale,Ymax)
+*/    
+
       r = repere({
         xmin: -10,
-        ymin: (Ymin-2)-(Ymin-2)%Yscale,
-        ymax: Ymax+2+(Ymax+2)%Yscale,
+        ymin: Ymin-Yscale,
+        ymax: Ymax+Yscale,
         xmax: 10,
         xscale: 1,
         yscale:Yscale,
+        positionLabelY:-0.8
       })
-      svgYmin=Math.round(((Ymin-2)-(Ymin-2)%Yscale)/Yscale-0.5)
-      svgYmax=Math.round((Ymax+2+(Ymax+2)%Yscale)/Yscale+0.5)
-      f = x => a*x**2+b*x+c;
-      texte+=mathalea2d({xmin:-10, xmax:10,ymin:svgYmin,ymax:svgYmax,scale:.6},courbe(f,-10,10,'black',1.5,r),r)
+
+      svgYmin=Math.min(calcul(Ymin/Yscale),-1)
+      svgYmax=Math.max(calcul(Ymax/Yscale),1)
+      F = x => a*x**2+b*x+c;
+      texte+=mathalea2d({xmin:-10, xmax:11,ymin:svgYmin,ymax:svgYmax+2,scale:.6},courbe(F,-10,10,'blue',1.5,r),r)
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(texte);
@@ -45743,5 +46173,5 @@ function Trouver_equation_parabole() {
     }
     liste_de_question_to_contenu(this);
   };
-  this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Solutions entières\n2 : Solutions réelles et calcul du discriminant non obligatoire"];
+  this.besoin_formulaire_numerique = ['Type de questions ',4,"1 : Passant par trois points à coordonnées entières 1\n2 : Connaissant le sommet et un point de passage\n3 : Connaissant les deux racines et un point de passage\n4 : Mélange des trois type de questions"];
 }
