@@ -62,7 +62,9 @@ var liste_des_exercices_disponibles = {
   "6G24-2" : Symetrie_axiale_figure_6e,
   "6G25-1": Pavages_et_reflexion,
   "6G25-2": Pavages_et_symetries,
-  "beta6G33" : Symetrie_axiale_conservation1,
+  "6G33" : Symetrie_axiale_conservation1,
+  "6G41" : Representer_un_solide_6e,
+  "6G33" : Symetrie_axiale_conservation1,
   "6G42" : Solide_6e,
   "6G43" : Utiliser_vocabulaire_pave,
   "6M11-1": Perimetre_ou_aire_de_carres_rectangles_triangles,
@@ -82,7 +84,7 @@ var liste_des_exercices_disponibles = {
   "6N10-1": Exercice_numeration_entier,
   "6N10-2": Decomposition_nombre_decimal,
   "6N10-3": chiffre_nombre_de,
-  "beta6N10-4" : Ecrire_nombres_entiers_formates,
+  "6N10-4" : Ecrire_nombres_entiers_formates,
   "6N11": Lire_abscisse_entiere,
   "6N11-2": Placer_un_point_abscisse_entiere,
   "6N11-3": Encadrer_un_entier_par_deux_entiers_consecutifs,
@@ -97,9 +99,9 @@ var liste_des_exercices_disponibles = {
   "6N22-1" : Rapports_sur_un_segment,
   "6N22-2" : Ajouter_des_fractions_d_unite,
   "6N23": Exercice_ecriture_decimale_a_partir_de_fraction_decimale,
-  "beta6N23-0" : Ecrire_nombres_decimal,
+  "6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
-  "beta6N23-2" : Lire_abscisse_decimale_trois_formes,
+  "6N23-2" : Lire_abscisse_decimale_trois_formes,
   "6N24": Exercice_6N24,
   "6N24-1": Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
   "6N30": Lire_abscisse_decimale,
@@ -122,6 +124,7 @@ var liste_des_exercices_disponibles = {
   "6P11": Proportionnalite_par_linearite,
   "6P11-1": Proportionnalite_par_linearite_bis,
   "6S10":Lecture_diagramme_barre,
+  "6S11":Organiser_donnees_depuis_texte,
   "5A10": Liste_des_diviseurs_5e,
   "5A11": Tableau_criteres_de_divisibilite,
   "5A12-1": Premier_ou_pas_5e,
@@ -144,6 +147,7 @@ var liste_des_exercices_disponibles = {
   "5G30" : Utiliser_le_codage_pour_decrire_5e,
   "5G31": Exercice_angles_triangles,
   "5G31-1": Constructibilite_des_triangles_angles,
+  "5G51" : Representer_un_solide_5e,
   "5N11-1": Tableaux_et_pourcentages,
   "5N13": Exercice_fractions_simplifier,
   "5N13-2": Egalites_entre_fractions,
@@ -186,6 +190,7 @@ var liste_des_exercices_disponibles = {
   "5R22-2": Exercice_simplification_somme_algebrique,
   "5S13": Calculer_des_frequences,
   "5S14": Calculer_des_moyennes,
+  "beta5S20":Placer_probabilites,
   "5S21": fonctions_probabilite1,
   "4Algo1-0": Tracer_avec_scratch,
   "4C10-0": Signe_produit_quotient_relatifs,
@@ -202,8 +207,8 @@ var liste_des_exercices_disponibles = {
   "4C32-1" : Calculs_avec_puissances_de_dix,
   "4C33-1": Puissances_d_un_relatif_1,
   "4C33-3": Puissances_d_un_relatif_2,
-  "4G40": Transformations_4e,
   "4L10": Exercice_developper,
+  "4L10-1": Reductions_pieges_classiques,
   "4L13-0": Mettre_en_equation_sans_resoudre,
   "4L13-1": Forme_litterale_introduire_une_lettre,
   "4L14-0": Tester_si_un_nombre_est_solution_d_une_equation,
@@ -211,7 +216,6 @@ var liste_des_exercices_disponibles = {
   "4L14-2": Tester_si_un_nombre_est_solution_d_une_equation_deg2,
   "4L15-0": Trouver_erreur_resol_eq_deg1,
   "4L20": Exercice_equation1,
-  "4G53": Calcul_de_volumes_4e,
   "4C21-1": Exercice_additionner_des_fractions,
   "4C21": Exercice_additionner_ou_soustraire_des_fractions,
   "4C22-1": Exercice_trouver_l_inverse,
@@ -228,11 +232,14 @@ var liste_des_exercices_disponibles = {
   "4G20MG32": Exercice_Pythagore,
   "4G21": Reciproque_Pythagore,
   "4G22": Problemes_Pythagore,
-  "4G30-1": Thales2D,
-  "4G30" : Thales_4eme,
+  "4G30": Thales2D_4e,
+  "4G30-1" : Thales_4eme,
   "4G31": Reciproque_Thales_4eme,
+  "4G40": Transformations_4e,
   "4G40": Exercice_Trigo_longueurs_4e,
   "4G41": Exercice_Trigo_angles_4e,
+  "4G51" : Representer_un_solide_4e,
+  "4G53": Calcul_de_volumes_4e,
   "3A10": DivisionEuclidienne_multiplesDiviseurs_Criteres,
   "3A11": Premier_ou_pas,
   "3A11-1": Premier_ou_pas_critere_par7_par11,
@@ -261,7 +268,8 @@ var liste_des_exercices_disponibles = {
   "3G10-1": Transformations_du_plan_et_coordonnees,
   "3G10-2": Transformations_3e,
   "3G12": Pavages_et_rotation,
-  "3G20": Exercice_Thales,
+  "3G20": Thales2D_3e,
+  "3G20-2": Exercice_Thales,
   "3G20-1": Problemes_Thales,
   "3G21": Reciproque_Thales,
   "3G22": Agrandissement_reduction,
@@ -374,6 +382,7 @@ function Exercice() {
   // this.bouton_aide = modal_texte_long(numero_de_l_exercice,titre,texte,label_bouton="Aide",icone="info circle")
   // this.bouton_aide = modal_youtube(numero_de_l_exercice,id_youtube,texte,label_bouton="Aide - Vidéo",icone="youtube")
   // this.bouton_aide = modal_pdf(numero_de_l_exercice,url_pdf,texte="Aide",label_bouton="Aide - PDF",icone="file pdf")
+  // this.vspace = -1 //Ajoute un \vspace{-1cm} avant l'énoncé ce qui peut être pratique pour des exercices avec des figures.
   this.pas_de_version_LaTeX = false;
   this.MG32editable = false; //pas d'interface par défaut pour les figures MG32
   this.nouvelle_version = function (numero_de_l_exercice) {};
@@ -898,7 +907,7 @@ function Questions_de_cours() {
 
     if (!window.divExist) {
       window.divExist = [];
-    } // Si divExist n'existe pas on le créé
+    } // Si divExist n'existe pas on le crée
     // divExist est un tableau dans lequel on stocke les listenner sur la création des div
     window.divExist[id_unique] = setInterval(function () {
       if ($(`#div_exo${id_unique}`).length && dictionnaire_de_questions_pret) {
@@ -1787,7 +1796,7 @@ function Conversions_de_durees() {
         }
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -1847,7 +1856,7 @@ function Heures_decimales() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         if (est_diaporama) {
           texte = texte.replace("=\\dotfill", "");
         }
@@ -1970,7 +1979,7 @@ function Somme_de_durees() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         if (est_diaporama) {
           texte = texte.replace("=\\dotfill", "");
         }
@@ -2219,7 +2228,7 @@ function Calculs_de_durees_ou_d_horaires() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -2370,7 +2379,7 @@ function Tables_de_multiplications(tables_par_defaut = "2-3-4-5-6-7-8-9") {
       // Si c'est un nombre c'est qu'il y a qu'une seule table
       tables[0] = this.sup;
     } else {
-      tables = this.sup.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des -
+      tables = this.sup.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des -
     }
     let couples = creer_couples(
       tables,
@@ -2463,7 +2472,7 @@ function Tables_de_divisions(tables_par_defaut = "2-3-4-5-6-7-8-9") {
       // Si c'est un nombre c'est qu'il y a qu'une seule table
       tables[0] = this.sup;
     } else {
-      tables = this.sup.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des -
+      tables = this.sup.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des -
     }
     let couples = creer_couples(
       tables,
@@ -2546,7 +2555,7 @@ function Tables_de_multiplications_et_divisions(
       // Si c'est un nombre c'est qu'il y a qu'une seule table
       tables[0] = this.sup;
     } else {
-      tables = this.sup.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des ;
+      tables = this.sup.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des ;
     }
     let couples = creer_couples(
       tables,
@@ -2724,7 +2733,7 @@ function Quatre_operations() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -2767,7 +2776,7 @@ function Ajouter9() {
       texte_corr = `$${a}+9=${a + 9}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -2855,7 +2864,7 @@ function Multiplier_entier_par_10_100_1000() {
         texte_corr = `$${tex_nombre(b)}\\times${tex_nombre(a)}=${tex_nombre(a*b)}$`
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -2894,7 +2903,7 @@ function Soustraire9() {
       texte_corr = `$${a}-9=${a - 9}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -2933,7 +2942,7 @@ function Ajouter11() {
       texte_corr = `$${a}+11=${a + 11}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -2982,7 +2991,7 @@ function Soustraire11() {
       texte_corr = `$${a}-11=${a - 11}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3025,7 +3034,7 @@ function Somme_de_deux_nombres_maries() {
       texte_corr = `$${a}+${b}=${a + b}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3082,7 +3091,7 @@ function Somme_de_deux_nombres_maries_et_un_entier() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3167,7 +3176,7 @@ function Vocabulaire_et_operations() {
           break;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3214,7 +3223,7 @@ function Compte_Est_Bon() {
           this.nb_questions
         );
       } else {
-        type_de_questions = this.sup.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des -
+        type_de_questions = this.sup.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des -
         for (let i = 0; i < type_de_questions.length; i++)
           type_de_questions[i] = parseInt(type_de_questions[i]);
         this.nb_questions = type_de_questions.length;
@@ -3332,7 +3341,7 @@ function Compte_Est_Bon() {
       texte += `Et le nombre à trouver est : ${cible}.`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3396,7 +3405,7 @@ function Le_compte_est_bonV3() {
         texte_corr += `$${solution_mathador[2][i]}$<br>`;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3441,7 +3450,7 @@ function Le_compte_est_bonV4() {
         min = 0;
         max = this.sup2;
       } else {
-        minmax = this.sup2.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des -
+        minmax = this.sup2.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des -
         min = minmax[0];
         max = minmax[1];
       }
@@ -3454,7 +3463,7 @@ function Le_compte_est_bonV4() {
         // Si c'est un nombre c'est qu'il y a qu'une seule grandeur
         solution_mathador = Trouver_solution_mathador(min, max, this.sup);
       } else {
-        tirage = this.sup.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des -
+        tirage = this.sup.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des -
         for (let i = 0; i < tirage.length; i++) tirage[i] = parseInt(tirage[i]);
         solution_mathador = Trouver_solution_mathador(min, max, ...tirage);
       }
@@ -3767,7 +3776,7 @@ function Ecrire_nombres_entiers() {
         else texte_corr = `$${tex_nombre(nombre)}$.`
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3830,7 +3839,7 @@ function Ecrire_nombres_entiers_formates() {
        if (!est_diaporama) texte_corr = `$${nombrestring}=${tex_nombre(nombre)}$.`
        else texte_corr = `${tex_nombre(nombre)}.`
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3916,7 +3925,7 @@ function Ecrire_nombres_decimal() {
       texte=texte.replace('et-un unités','et-une unités')
       texte_corr=texte_corr.replace('et-un unités','et-une unités')
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -3985,7 +3994,7 @@ function Exercice_numeration_entier() {
       )}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4112,7 +4121,7 @@ function Decomposition_nombre_decimal() {
       texte_corr += ".";
       texte += "\\ldots";
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4151,7 +4160,7 @@ function Complement_a_100() {
       texte_corr = `$100-${a}=${100 - a}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4191,7 +4200,7 @@ function Complement_a_une_dizaine() {
       texte_corr = `$${a}-${b}=${a - b}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4233,7 +4242,7 @@ function Diviser_par_10_100_1000() {
       )}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4280,7 +4289,7 @@ function Diviser_decimal_par_10_100_1000() {
       )}$`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4368,7 +4377,7 @@ function Moitie() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4439,7 +4448,7 @@ function Tiers() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4518,7 +4527,7 @@ function Quart() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4582,7 +4591,7 @@ function Double_moitie_tiers_triple() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -4621,7 +4630,7 @@ function Exercice_tables_de_multiplications_et_multiples_de_10(
       // Si c'est un nombre c'est qu'il y a qu'une seule table
       tables[0] = this.sup;
     } else {
-      tables = this.sup.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des ;
+      tables = this.sup.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des ;
     }
     let couples = creer_couples(
       tables,
@@ -4699,7 +4708,7 @@ function Exercice_tables_de_multiplications_et_decimaux(
       // Si c'est un nombre c'est qu'il y a qu'une seule table
       tables[0] = this.sup;
     } else {
-      tables = this.sup.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des ;
+      tables = this.sup.split("-"); // Sinon on crée un tableau à partir des valeurs séparées par des ;
     }
     let couples = creer_couples(
       tables,
@@ -4785,7 +4794,7 @@ function Exercice_tables_d_additions(max = 20) {
         tex_nombre(a + b) +
         " $";
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -5167,7 +5176,7 @@ function Criteres_de_divisibilite() {
           break;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -5703,7 +5712,7 @@ function Proportionnalite_pas_proportionnalite() {
           break;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -5884,7 +5893,7 @@ function Proportionnalite_par_linearite() {
         tex_nombrec(z / x)
       )} $\\times$ ${texte_en_couleur(n, "blue")} = ${p} ${objet}.<br>`;
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -5986,7 +5995,7 @@ function Exercice_fractions_differentes_ecritures() {
         " $";
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -6121,7 +6130,7 @@ function Encadrer_fraction_entre_2_entiers() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -6181,7 +6190,7 @@ function Representer_une_fraction() {
         texte_corr =`Voici sur ces dessins, colorié en bleu, la part correspondante à la fraction $${f.texFraction()}$ :<br>`
         texte_corr += mathalea2d(params,f.representation(0,0,2,randint(0,den-1),'gateau','blue'))
         if (this.liste_questions.indexOf(texte) == -1) {
-          // Si la question n'a jamais été posée, on en créé une autre
+          // Si la question n'a jamais été posée, on en crée une autre
           this.liste_questions.push(texte);
           this.liste_corrections.push(texte_corr);
           i++;
@@ -6388,7 +6397,7 @@ function Exercice_conversions_de_longueurs(niveau = 1) {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         if (est_diaporama) {
           texte = texte.replace("= \\dotfill", "\\text{ en }");
         }
@@ -6641,7 +6650,7 @@ function Exercice_conversions(niveau = 1) {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         if (est_diaporama) {
           texte = texte.replace("= \\dotfill", "\\text{ en }");
         }
@@ -6922,7 +6931,7 @@ function Exercice_conversions_aires(niveau = 1) {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         if (est_diaporama) {
           texte = texte.replace("= \\dotfill", "\\text{ en }");
         }
@@ -7192,7 +7201,7 @@ function Exercice_conversions_volumes(niveau = 1) {
       // }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         if (est_diaporama) {
           texte = texte.replace("= \\dotfill", "\\text{ en }");
         }
@@ -7384,7 +7393,7 @@ function Unites_de_volumes_et_de_capacite(niveau = 1) {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -7407,7 +7416,7 @@ function Unites_de_volumes_et_de_capacite(niveau = 1) {
  * * 1 : Carré, rectangle et triangle rectangle
  * * 2: Uniquement des cercles
  * * 3 : Les 4 sont demandés
- * @Auteur Rémi Angot
+ * @Auteur Rémi Angot// modifié par Mireille Gain pour le support des décimaux
  */
 function Exercice_perimetres_et_aires(difficulte = 1) {
   //Calculer le périmètre et l'aire de figures
@@ -7439,6 +7448,18 @@ function Exercice_perimetres_et_aires(difficulte = 1) {
       "triangle_rectangle",
       "cercle",
     ];
+    let partieDecimale1,partieDecimale2,partieDecimale3;
+    if (this.sup2) {
+      partieDecimale1=calcul(randint(1,9)/10);
+      partieDecimale2=calcul(randint(1,9)/10);
+      partieDecimale3=calcul(randint(1,9)/10*randint(0,1));
+    }
+    else {
+      partieDecimale1=0;
+      partieDecimale2=0;
+      partieDecimale3=0;
+    }
+
     if (this.sup == 1) {
       enleve_element(type_de_questions_disponibles, "cercle");
       this.nb_cols = 1;
@@ -7457,68 +7478,66 @@ function Exercice_perimetres_et_aires(difficulte = 1) {
       type_de_questions = liste_type_de_questions[i];
       switch (type_de_questions) {
         case "carre":
-          let cote = randint(2, 11);
+          let cote = calcul(randint(2, 11)+partieDecimale1);
           let nom_carre = creerNomDePolygone(4);
           if (choice([true, false])) {
             // 2 énoncés possibles équiprobables
-            texte = `Un carré $${nom_carre}$ de $${cote}$ cm de côté .`;
+            texte = `Un carré $${nom_carre}$ de $${tex_nombre(cote)}$ cm de côté .`;
           } else {
             texte = `Un carré $${nom_carre}$ tel que $${
               nom_carre[0] + nom_carre[1]
-            } = ${cote}$ cm.`;
+            } = ${tex_nombre(cote)}$ cm.`;
           }
 
-          texte_corr = `$\\mathcal{P}_{${nom_carre}}=4\\times${cote}~\\text{cm}=${
-            4 * cote
+          texte_corr = `$\\mathcal{P}_{${nom_carre}}=4\\times${tex_nombre(cote)}~\\text{cm}=${
+            tex_nombrec(4 * cote)
           }~\\text{cm}$<br>`;
-          texte_corr += `$\\mathcal{A}_{${nom_carre}}=${cote}~\\text{cm}\\times${cote}~\\text{cm}=${
-            cote * cote
+          texte_corr += `$\\mathcal{A}_{${nom_carre}}=${tex_nombre(cote)}~\\text{cm}\\times${tex_nombre(cote)}~\\text{cm}=${
+          tex_nombrec(  cote * cote)
           }~\\text{cm}^2$`;
           break;
         case "rectangle":
-          let L = randint(3, 11);
+          let L = calcul(randint(3, 11)+partieDecimale2);
           let l = randint(2, L - 1);
           let nom_rectangle = creerNomDePolygone(4);
           if (choice([true, false])) {
             // 2 énoncés possibles équiprobables
-            texte = `Un rectangle $${nom_rectangle}$ de $${L}$ cm de longueur et de $${l}$ cm de largeur.`;
+            texte = `Un rectangle $${nom_rectangle}$ de $${tex_nombre(L)}$ cm de longueur et de $${l}$ cm de largeur.`;
           } else {
             texte = `Un rectangle $${nom_rectangle}$ tel que $${
-              nom_rectangle[0] + nom_rectangle[1] + " = " + L
+              nom_rectangle[0] + nom_rectangle[1] + " = " + tex_nombre(L)
             }$ cm et $${nom_rectangle[1] + nom_rectangle[2] + " = " + l}$ cm.`;
           }
-
-          texte_corr = `$\\mathcal{P}_{${nom_rectangle}}=(${L}~\\text{cm}+${l}~\\text{cm})\\times2=${
-            (L + l) * 2
+          
+          texte_corr = `$\\mathcal{P}_{${nom_rectangle}}=(${tex_nombre(L)}~\\text{cm}+${l}~\\text{cm})\\times2=${
+            tex_nombrec((L + l) * 2)
           }~\\text{cm}$<br>`;
-          texte_corr += `$\\mathcal{A}_{${nom_rectangle}}=${L}~\\text{cm}\\times${l}~\\text{cm}=${
-            L * l
+          texte_corr += `$\\mathcal{A}_{${nom_rectangle}}=${tex_nombre(L)}~\\text{cm}\\times${l}~\\text{cm}=${
+            tex_nombrec(L * l)
           }~\\text{cm}^2$`;
           break;
         case "triangle_rectangle":
           let triplet = choice(triplets_pythagoriciens);
           enleve_element(triplets_pythagoriciens, triplet);
-          let a = triplet[0];
-          let b = triplet[1];
-          let c = triplet[2];
+          let a = calcul(triplet[0]*(1+partieDecimale1));
+          let b = calcul(triplet[1]*(1+partieDecimale1));
+          let c = calcul(triplet[2]*(1+partieDecimale1));
           let nom_triangle = creerNomDePolygone(3);
           if (choice([true, false])) {
             texte = `Un triangle $${nom_triangle}$ rectangle en $${
               nom_triangle[1]
             }$ tel que $${
-              nom_triangle[0] + nom_triangle[1] + " = " + a
-            }$ cm, $${nom_triangle[1] + nom_triangle[2] + " = " + b}$ cm\
- et $${nom_triangle[0] + nom_triangle[2] + " = " + c}$ cm.`;
+              nom_triangle[0] + nom_triangle[1] + " = " + tex_nombre(a)
+            }$ cm, $${nom_triangle[1] + nom_triangle[2] + " = " + tex_nombre(b)}$ cm\
+ et $${nom_triangle[0] + nom_triangle[2] + " = " + tex_nombre(c)}$ cm.`;
           } else {
-            texte = `Un triangle rectangle $${nom_triangle}$ a pour côtés : $${a}$ cm, $${c}$ cm et $${b}$ cm.`;
+            texte = `Un triangle rectangle $${nom_triangle}$ a pour côtés : $${tex_nombre(a)}$ cm, $${tex_nombre(c)}$ cm et $${tex_nombre(b)}$ cm.`;
           }
 
-          texte_corr = `$\\mathcal{P}_{${nom_triangle}}=${a}~\\text{cm}+${b}~\\text{cm}+${c}~\\text{cm}=${
-            a + b + c
-          }~\\text{cm}$<br>`;
-          texte_corr += `$\\mathcal{A}_{${nom_triangle}}=${a}~\\text{cm}\\times${b}~\\text{cm}\\div2=${Algebrite.eval(
-            (a * b) / 2
-          )}~\\text{cm}^2$`;
+          texte_corr = `$\\mathcal{P}_{${nom_triangle}}=${tex_nombre(a)}~\\text{cm}+${tex_nombre(b)}
+          ~\\text{cm}+${tex_nombre(c)}~\\text{cm}=${tex_nombre(a+b+c)}~\\text{cm}$<br>`;
+          texte_corr += `$\\mathcal{A}_{${nom_triangle}}=${tex_nombre(a)}~\\text{cm}\\times${tex_nombre(b)}~\\text{cm}\\div2=${
+            tex_nombrec(a * b / 2)}~\\text{cm}^2$`;
           break;
         case "cercle":
           let R = randint(3, 11);
@@ -7527,7 +7546,7 @@ function Exercice_perimetres_et_aires(difficulte = 1) {
             texte = `Un cercle de $${2 * R}$ cm de diamètre.`;
             texte_corr = `Le diamètre est de $${
               2 * R
-            }$ cm donc le rayon est de $${R}$~cm.<br>`;
+            }$ cm donc le rayon est de $${R}$ cm.<br>`;
           } else {
             texte = `Un cercle de $${R}$ cm de rayon.`;
             texte_corr = "";
@@ -7549,7 +7568,7 @@ function Exercice_perimetres_et_aires(difficulte = 1) {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -7563,8 +7582,8 @@ function Exercice_perimetres_et_aires(difficulte = 1) {
     3,
     "1 : Carré, rectangle et triangle rectangle\n2: Cercles\n3: Mélangé",
   ];
+  this.besoin_formulaire2_case_a_cocher = ["Avec des décimaux", false];
 }
-
 /**
  * On donne une fraction qui a pour dénominateur 10, 100 ou 1 000, il faut donner l'écriture décimale.
  *
@@ -7608,7 +7627,7 @@ function Exercice_ecriture_decimale_a_partir_de_fraction_decimale() {
         tex_nombre(Algebrite.eval(a / b)) +
         " $";
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         if (est_diaporama) {
           texte = texte.replace("=\\dotfill", "");
         }
@@ -7678,7 +7697,7 @@ function Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -7851,7 +7870,7 @@ function Comparer_decimaux() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -7929,7 +7948,7 @@ function Calculer_un_pourcentage() {
       texte_corr+=mathalea2d({xmin : 0,ymin : 0,xmax : 10, ymax : 10,pixelsParCm : 20,scale : 0.5,mainlevee:false,amplitude:1}, ...objets)
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -7991,7 +8010,7 @@ function Appliquer_un_pourcentage() {
       break;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -8063,7 +8082,7 @@ function Pourcentage_d_un_nombre() {
           )}$`;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -8152,7 +8171,7 @@ function Fractions_d_unite() {
 
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -8289,7 +8308,7 @@ function Fraction_d_une_quantite() {
 
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -8460,7 +8479,7 @@ function Fraction_d_un_nombre(max = 11) {
           )}\\times${n}=${tex_nombrec(Algebrite.eval((n / b) * a))}$`;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -9309,7 +9328,7 @@ function Connaitre_formules_de_perimetre_et_aires() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -9417,7 +9436,7 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -9428,41 +9447,123 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
   };
 }
 
-
+/**
+ * Lire des nombres déciamux sur une portion de droite graduée
+ * Une question demande la forme décimale, une autre, la partie entière plus la fraction décimale, et une troisième demande une seule fraction décimale.
+ * ref 6N23-2
+ * 
+ * @Auteur Jean-Claude Lhote
+ */
 function Lire_abscisse_decimale_trois_formes() {
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Différentes écritures des nombres décimaux";
-  this.consigne = "Compléter l'égalité puis donner l'écriture décimale.";
-  this.spacing = 2;
-  this.spacing_corr = 2;
+  this.titre = "Lire une abscisse décimale sous trois formes";
+  this.consigne = "";
+  if (sortie_html) {
+    this.spacing = 2;
+    this.spacing_corr = 3;
+  }
+  else {
+    this.spacing = 1;
+    this.spacing_corr = 1;
+  }
+  this.vspace=-1;
+  this.nb_cols=1;
+  this.nb_cols_corr=1;
+  this.sup=1
+  this.nb_questions=1;
+  this.nb_questions_modifiable=false
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let type_de_questions_disponibles = [1, 2, 3, 4, 5, 6];
-    let liste_type_de_questions = combinaison_listes(
-      type_de_questions_disponibles,
-      this.nb_questions
-    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
 
-    for (
-      let i = 0, texte, texte_corr, cpt = 0;
-      i < this.nb_questions && cpt < 50;
-
-    ) {
-
-
-      
-      if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
-        this.liste_questions.push(texte);
-        this.liste_corrections.push(texte_corr);
-        i++;
-      }
-      cpt++;
+    let d1,texte="",texte_corr="",extremite,noms=choisit_lettres_differentes(3,'Q')
+    let x1=0,x2=0,x3=0
+    if (this.sup==1){
+    xmin=randint(0,15)
+    if (xmin==0) extremite=`|->`
+    else extremite=`->`
+    xmax=xmin+9
+    while (estentier(x1)||estentier(x2)||estentier(x3)){
+    x1=randint(xmin*10,xmin*10+29)
+    x2=randint(xmin*10+31,xmin*10+59,x1)
+    x3=randint(xmin*10+61,xmax*10-1,[x1,x2])
+    x1=calcul(x1/10)
+    x2=calcul(x2/10)
+    x3=calcul(x3/10)
     }
-    liste_de_question_to_contenu(this);
+    [x1,x2,x3]=shuffle([x1,x2,x3])
+    d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:false,Unite:3,
+                      thickCouleur:'black',axeCouleur:'black',axeHauteur:6,
+                      pointListe:[[x1,`${noms[0]}`],[x2,`${noms[1]}`],[x3,`${noms[2]}`]],
+                      pointTaille:2,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'o',axeStyle:extremite})
+    texte=`${num_alpha(0)} Donner l'abscisse de ${noms[0]} en écriture décimale.<br>`
+    texte+=`${num_alpha(1)} Donner l'abscisse de ${noms[1]} comme la somme d'un nombre entier et d'une fraction décimale.<br>`
+    texte+=`${num_alpha(2)} Donner l'abscisse de ${noms[2]} sous la forme d'une fraction décimale.<br>`
+    texte_corr=`${num_alpha(0)} L'abscisse de ${noms[0]} est : $${tex_nombre(x1)}$.<br>`
+    texte_corr+=`${num_alpha(1)} L'abscisse de ${noms[1]} est : $${tex_nombre(Math.floor(x2))} + ${tex_fraction(calcul(10*(x2-Math.floor(x2))),10)}$.<br>`
+    texte_corr+=`${num_alpha(2)} L'abscisse de ${noms[2]} est : $${tex_fraction(calcul(x3*10),10)}$.`
+    }
+    else if (this.sup==2){
+      xmin=randint(0,15)
+      if (xmin==0) extremite=`|->`
+      else extremite=`->`
+      xmax=calcul(xmin+1.5)
+      while (estentier(x1)||estentier(x2)||estentier(x3)){
+      x1=randint(xmin*100,xmin*100+45)
+      x2=randint(xmin*100+55,xmin*100+95,x1)
+      x3=randint(xmin*100+105,xmax*100-5,[x1,x2])
+      x1=calcul(x1/100)
+      x2=calcul(x2/100)
+      x3=calcul(x3/100)
+      }
+      [x1,x2,x3]=shuffle([x1,x2,x3])
+      d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:true,Unite:20,
+                        thickCouleur:'black',axeCouleur:'black',axeHauteur:6,
+                        pointListe:[[x1,`${noms[0]}`],[x2,`${noms[1]}`],[x3,`${noms[2]}`]],
+                        pointTaille:2,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'o',axeStyle:extremite})
+      texte=`${num_alpha(0)} Donner l'abscisse de ${noms[0]} en écriture décimale.<br>`
+      texte+=`${num_alpha(1)} Donner l'abscisse de ${noms[1]} comme la somme d'un entier et d'une fraction décimale.<br>`
+      texte+=`${num_alpha(2)} Donner l'abscisse de ${noms[2]} sous la forme d'une fraction décimale.<br>`
+      texte_corr=`${num_alpha(0)} L'abscisse de ${noms[0]} est : $${tex_nombre(x1)}$.<br>`
+      texte_corr+=`${num_alpha(1)} L'abscisse de ${noms[1]} est : $${tex_nombre(Math.floor(x2))} + ${tex_fraction(calcul(100*(x2-Math.floor(x2))),100)}$.<br>`
+      texte_corr+=`${num_alpha(2)} L'abscisse de ${noms[2]} est : $${tex_fraction(calcul(x3*100),100)}$.`
+  
+    }
+    else if (this.sup==3) {
+      xmin=calcul(randint(0,15)+randint(0,9)*0.1)
+      if (xmin==0) extremite=`|->`
+      else extremite=`->`
+      xmax=calcul(xmin+0.15)
+      while (estentier(x1)||estentier(x2)||estentier(x3)){
+      x1=randint(xmin*1000+5,xmin*1000+45)
+      x2=randint(xmin*1000+55,xmin*1000+95,x1)
+      x3=randint(xmin*1000+105,xmax*1000-5,[x1,x2])
+      x1=calcul(x1/1000)
+      x2=calcul(x2/1000)
+      x3=calcul(x3/1000)
+      }
+      [x1,x2,x3]=shuffle([x1,x2,x3])
+      d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:true,Unite:200,
+                        thickDistance:0.1,thickSecDist:0.01,thickTerDist:0.001,
+                        thickCouleur:'black',axeCouleur:'black',axeHauteur:6,
+                        pointListe:[[x1,`${noms[0]}`],[x2,`${noms[1]}`],[x3,`${noms[2]}`]],
+                        labelListe:[[xmin+0.1,tex_nombrec(xmin+0.1)],[xmin+0.2,tex_nombrec(xmin+0.2)]],
+                        pointTaille:2,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'o',axeStyle:extremite})
+      texte=`${num_alpha(0)} Donner l'abscisse de ${noms[0]} en écriture décimale.<br>`
+      texte+=`${num_alpha(1)} Donner l'abscisse de ${noms[1]} comme la somme d'un entier et d'une fraction décimale.<br>`
+      texte+=`${num_alpha(2)} Donner l'abscisse de ${noms[2]} sous la forme d'une fraction décimale.<br>`
+      texte_corr=`${num_alpha(0)} L'abscisse de ${noms[0]} est : $${tex_nombre(x1)}$.<br>`
+      texte_corr+=`${num_alpha(1)} L'abscisse de ${noms[1]} est : $${tex_nombre(Math.floor(x2))} + ${tex_fraction(calcul(1000*(x2-Math.floor(x2))),1000)}$.<br>`
+      texte_corr+=`${num_alpha(2)} L'abscisse de ${noms[2]} est : $${tex_fraction(calcul(x3*1000),1000)}$.`
+  
+    }
+    texte+= mathalea2d({xmin:-1.5,xmax:35,ymin:-1,ymax:1.5,pixelsParcCm:20,scale:0.5},d1)
+    this.liste_questions.push(texte);
+    this.liste_corrections.push(texte_corr);
+    liste_de_question_to_contenu_sans_numero(this);
   };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Au dixième\n2 : Au centième\n3 : Au millième'];
 }
 
 
@@ -9585,7 +9686,7 @@ function Additions_soustractions_multiplications_posees() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         if (!sortie_html && i == 0) {
           texte_corr = `\\setlength\\itemsep{2em}` + texte_corr;
@@ -9763,7 +9864,7 @@ function Additionner_soustraires_decimaux() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -9866,7 +9967,7 @@ function Divisions_euclidiennes() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -10014,7 +10115,7 @@ function Division_decimale() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -10092,7 +10193,7 @@ function Multiplier_decimaux() {
         : (texte_corr = `$\\opmul[decimalsepsymbol={,}]{${a}}{${b}}$`);
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -10270,7 +10371,7 @@ function Multiplier_decimaux_par_10_100_1000() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -10594,7 +10695,7 @@ function Priorites() {
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -11015,7 +11116,7 @@ function Calcul_de_volumes() {
   let type_de_questions_disponibles;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
-    if (this.classe == 6) type_de_questions_disponibles = [1, 2];
+  if (this.classe == 6) type_de_questions_disponibles = [1, 2];
     // sixième : cube et pavé droit
     else if (this.classe == 5) type_de_questions_disponibles = [1, 2, 3, 4];
     // cinquième : on ajoute les prismes et le cylindre
@@ -11830,7 +11931,7 @@ function Symetrie_axiale_conservation1() {
           break;
       }
       
-      if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
+      if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -12115,6 +12216,20 @@ function Thales_4eme() {
 function Reciproque_Thales_4eme() {
   Reciproque_Thales.call(this);
   this.quatrieme = true;
+}
+
+// 4G30
+function Thales2D_4e (params) {
+  Thales2D.call(this);
+  this.besoin_formulaire_numerique = false
+  this.titre = "Calculer des longueurs avec la propriété de Thalès";
+
+}
+
+// 3G20
+function Thales2D_3e (params) {
+  Thales2D.call(this);
+  this.sup = 2;
 }
 
 /**
@@ -12596,7 +12711,7 @@ function Vocabulaire_des_triangles() {
           break;
       }
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -12807,7 +12922,7 @@ function Nommer_et_coder_des_polygones() {
       texte += `<br>` + mathalea2d(params, pol, polnom,g,carreaux)
       texte_corr = mathalea2d(params, pol, polnom, polcode, polsom,g,carreaux)
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -12892,7 +13007,7 @@ function Ajouter_des_fractions_d_unite() {
       texte_corr+=mathalea2d(params,fraction(num[0]+num[1]+num[2]+num[3],den).representation(0,0,5,0,'segment','red',0,1,0.6))
       texte_corr+=`<br>La longueur du segment ainsi obtenu est : $${fraction(num[0]+num[1]+num[2]+num[3],den).texFraction()}$`
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -12975,7 +13090,7 @@ function Notation_segment_droite_demi_droite() {
       texte_corr = `...tracer ${dABCorr}, ${dBCCorr}, ${dACCorr}.`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -13056,7 +13171,7 @@ function Description_segment_droite_demi_droite() {
       texte_corr = dABCorr;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -13162,7 +13277,7 @@ function Construire_un_triangle() {
       texte+=mathalea2d(params_enonce,objets_enonce)
       texte_corr+=mathalea2d(params_correction,objets_correction)
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -13360,7 +13475,7 @@ function Utiliser_le_codage_pour_decrire(){
           s5=segment(A,F)
           s1=segment(B,D)
           s2=segment(A,C)
-          params_enonce={xmin:Math.min(A.x-1,B.x-1,C.x-1,D.x-1,E.x-1,F.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1,D.y-1,E.y-1,F.y-1),xmax:Math.max(A.x+1,B.x+1,C.x+1,D.x+1,E.x+1,F.x+1),ymax:Math.max(A.y+1,B.y+1,C.y+1,D.y+1,E.y+1,F.y+1),pixelsParCm:20,scale:1,mainlevee:true,amplitude:1}
+          params_enonce={xmin:Math.min(A.x-1,B.x-1,C.x-1,D.x-1,E.x-1,F.x-1),ymin : Math.min(A.y-1,B.y-1,C.y-1,D.y-1,E.y-1,F.y-1),xmax:Math.max(A.x+1,B.x+1,C.x+1,D.x+1,E.x+1,F.x+1),ymax:Math.max(A.y+1,B.y+1,C.y+1,D.y+1,E.y+1,F.y+1),pixelsParCm:20,scale:1,mainlevee:false,amplitude:1}
           objets_enonce.push(labelPoint(A,B,C,D,E,F),s1,s2,s3,s4,s5)
           objets_enonce.push(codeAngle(D,A,B,2,'|','red',2),codeAngle(B,C,D,2,'|','red',2),codeAngle(A,B,F,2,'|','red',2))
           objets_enonce.push(codeAngle(A,B,C,2,'||','blue',2),codeAngle(A,D,C,2,'||','blue',2))
@@ -13384,7 +13499,7 @@ function Utiliser_le_codage_pour_decrire(){
         if (objets_enonce.length>0) texte+=mathalea2d(params_enonce,objets_enonce)
         if (objets_correction.length>0) texte_corr+=mathalea2d(params_correction,objets_correction)
         if (this.liste_questions.indexOf(texte) == -1) {
-          // Si la question n'a jamais été posée, on en créé une autre
+          // Si la question n'a jamais été posée, on en crée une autre
           this.liste_questions.push(texte);
           this.liste_corrections.push(texte_corr);
           i++;
@@ -13584,9 +13699,9 @@ function Parallele_et_Perpendiculaires() {
         
           if (sortie_html) enonce = num_alpha(0) + ` Reproduire la figure ci-dessous.<br>`;
           else enonce = num_alpha(0) + ` Utiliser un crayon à papier afin de pouvoir gommer si besoin.<br>`;
-          enonce +=num_alpha(1)+` Tracer la droite parallèle à $(AB)$ passant par $C$ et nomme $M$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
-          enonce +=num_alpha(2)+` Tracer la droite parallèle à $(AB)$ passant par $D$ et nomme $N$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
-          enonce +=num_alpha(3)+` Tracer la droite parallèle à $(AB)$ passant par $E$ et nomme $O$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
+          enonce +=num_alpha(1)+` Tracer la droite parallèle à $(AB)$ passant par $C$ et nommer $M$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
+          enonce +=num_alpha(2)+` Tracer la droite parallèle à $(AB)$ passant par $D$ et nommer $N$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
+          enonce +=num_alpha(3)+` Tracer la droite parallèle à $(AB)$ passant par $E$ et nommer $O$, le point d'intersection de cette droite avec la droite $(AF)$.<br>`;
           enonce += num_alpha(4)+` Mesurer les distances $AM$, $AN$ et $AO$. Pour l'auto-correction, comparer ces mesures avec celles données par  l'ordinateur dans la correction.<br>`;
          
           correction = `<br>$AM \\approx ${tex_nombre(
@@ -13722,7 +13837,7 @@ function Parallele_et_Perpendiculaires() {
         objets_correction
       );
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(enonce + "<br>");
         this.liste_corrections.push(correction + "<br>");
         i++;
@@ -13882,7 +13997,7 @@ function Proportionnalite_par_linearite_bis(){
 					break;				
 			}
 			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -13916,7 +14031,7 @@ function Lecture_diagramme_barre() {
 		this.liste_questions = []; // vide la liste de questions
     this.liste_corrections = []; // vide la liste de questions corrigées   
 
-    let lstAnimaux = ['girafes', 'zèbres', 'gnous', 'buffles', 'gazelles', 'crocodiles', 'rhinocéros', 'léopards', 'guépards', 'hyènes'];
+    let lstAnimaux = ['girafes', 'zèbres', 'gnous', 'buffles', 'gazelles', 'crocodiles', 'rhinocéros', 'léopards', 'guépards', 'hyènes', 'lycaons', 'servals', 'phacochères'];
     let nbAnimaux = 4; // nombre d'animaux différents dans l'énoncé
     switch (parseInt(this.sup)) {
       case 1:nbAnimaux = 4;break;
@@ -13955,7 +14070,7 @@ function Lecture_diagramme_barre() {
     let nMax = Math.max(...lstNombresAnimaux);
 
     let lstNomParc = ['Dramve', 'Fatenmin', 'Batderfa', 'Vihi', 'Genser', 'Barbetdou', 'Dramrendu', 'Secai', 'Cipeudram', 'Cigel', 'Lisino', 'Fohenlan', 
-    'Farnfoss', 'Kinecardine', 'Zeffari', 'Kincardine', 'Barmwich', 'Swadlincote', 'Swordbreak'];
+    'Farnfoss', 'Kinecardine', 'Zeffari', 'Barmwich', 'Swadlincote', 'Swordbreak', 'Loshull', 'Ruyron', 'Fluasall', 'Blueross', 'Vlane'];
 
     texte = 'Dans le parc naturel de ' + choice(lstNomParc)  + ', il y a beaucoup d’animaux. Voici un diagramme en bâtons qui donne le nombre d’individus pour chaque espèce.<br>';
     texte += num_alpha(0) + ` Quels sont les animaux les plus nombreux ?<br>`;
@@ -13968,6 +14083,7 @@ function Lecture_diagramme_barre() {
       case 2:texte += num_alpha(2) + ` Donner un encadrement à la centaine du nombre de ` + lstAnimauxExo[numAnimal] + ' ?<br>';
         break;
     }
+    texte += '<br>'   
 
     // coefficient pour gérer les deux types d'exercices (entre 1 et 100) ou (entre 10 et 1000)
     let coef = 1;
@@ -13981,6 +14097,7 @@ function Lecture_diagramme_barre() {
     }
 
     let r = repere2({
+      grilleX : false,
       grilleY : 'pointilles',
       xThickListe : [],
       xLabelListe : [],
@@ -13993,11 +14110,10 @@ function Lecture_diagramme_barre() {
       axeXStyle : '',
       yLegende : "Nombre d'individus"
      });
-
-     
+    
     let lstElementGraph = []
     for (let i = 0; i < nbAnimaux; i++) {
-      lstElementGraph.push(traceBarre((((r.xMax-r.xMin)/(nbAnimaux+1))*(i+1)),lstNombresAnimaux[i],lstAnimauxExo[i],{unite:.1/coef}))
+      lstElementGraph.push(traceBarre((((r.xMax-r.xMin)/(nbAnimaux+1))*(i+1)),lstNombresAnimaux[i],premiere_lettre_en_majuscule(lstAnimauxExo[i]),{unite:.1/coef}))
     }
 
     texte += mathalea2d({xmin : -5, xmax : 11, ymin : -3, ymax : 11, pixelsParCm : 30, scale : .5}, r, lstElementGraph)
@@ -14018,6 +14134,255 @@ function Lecture_diagramme_barre() {
   }
   this.besoin_formulaire_numerique = [`Nombre d'espèces différentes`, 3, ` choix 1 : 4 espèces\n choix 2 : 5 espèces\n choix 3 : 6 espèces`];
   this.besoin_formulaire2_numerique = [`Valeurs numériques`, 2, ` choix 1 : entre 1 et 100\n choix 2 : entre 100 et 1 000`];
+}
+
+
+/**
+ * Organiser donnees depuis texte
+ * @Auteur Erwan Duplessy
+ * Référence 6S11
+ */
+
+// source : http://www.ac-grenoble.fr/savoie/pedagogie/docs_pedas/ogd_c2_c3/ogd_c2_c3.pdf
+
+function Organiser_donnees_depuis_texte() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Organiser des données dans un tableau";
+	this.consigne = "Répondre aux questions à l'aide du texte.";
+  this.nb_questions = 4;
+  this.nb_questions_modifiable = false;
+	this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = false; // false -> effectif ; true -> masse
+  this.sup2 = 4; // paramètre nombre de fruit
+  sortie_html? this.spacing = 2 : this.spacing = 1; 
+	sortie_html? this.spacing_corr = 2 : this.spacing_corr = 1;
+  
+  this.nouvelle_version = function(){
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    let nbAmis = 4; // min = 2
+    let nbFruits = parseInt(this.sup2); // min = 2
+    let lstPrenomExo = []
+    let k = 0;
+    while (lstPrenomExo.length<nbAmis){
+      let p = prenom();
+      if (!lstPrenomExo.includes(p)) {
+        lstPrenomExo.push(p);
+      }
+    }
+
+    let lstFruit = ['pomme', 'poire', 'kiwi', 'pêche', 'coing', 'melon', 'citron', 'banane', 'mangue'];
+    let lstFruitExo = [];
+    // Choisir les fruits : 
+    for (let i = 0; i < nbFruits; i++) {
+      lstFruitExo.push(choice(lstFruit, lstFruitExo));
+    }
+    // Choisir les quantités de fruits pour chaque prénoms : 
+    let lstTabVal = []; // tableau i : amis et j : fruits
+    let L=[]; // tab temporaire
+    for (let i = 0; i < nbAmis; i++) {
+      for (let j = 0; j < nbFruits; j++) {
+        if (this.sup){
+          if (randint(0,8)>0) {
+            L.push(randint(0, 100)/10);
+          }else{
+            L.push(0);
+          }
+          
+        } else {
+          L.push(randint(0, 10));
+        }        
+      }
+      lstTabVal.push(L);
+      L= [];
+    }
+    // Affiche l'énoncé :
+    texte = `Plusieurs amis reviennent du marché. Il s'agit de `;
+    for (let i = 0; i < nbAmis-2; i++) {
+      texte+= lstPrenomExo[i] + ', '
+    }
+    texte += lstPrenomExo[nbAmis-2] + ' et ' + lstPrenomExo[nbAmis-1] + '.<br>';
+    let N;
+    //boucle sur les phrases. 1 phrase par personne.
+    for (let i = 0; i < nbAmis; i++) {
+      texte += lstPrenomExo[i] + ' rapporte ';
+      L=[]; // ne contient que les fruits d'effectifs strictement positifs
+      for (let j = 0; j < nbFruits; j++) {
+        N = lstTabVal[i][j];
+        if (N>0){
+          L.push([N, lstFruitExo[j]])
+        }
+      }
+      m = L.length
+      L = shuffle(L); // mélange l'ordre des fruits
+      for (let k = 0; k < m; k++) {
+        if (this.sup) {
+          texte += tex_nombre(L[k][0])+ ' kg de ' + L[k][1] + 's';
+        } else {
+          texte += tex_nombre(L[k][0])+ ' ' + L[k][1];
+          if (L[k][0]>1){texte += 's'}
+        }        
+        if (k < m-2){texte += ', '}
+        if (k == m-2){texte += ' et '}            
+      }
+      texte += '. <br>'    
+    }
+    texte += '<br>'  
+    texte += num_alpha(0) + ` Remplir le tableau suivant. <br>`;
+
+  if (this.sup){
+    texte += num_alpha(1) + ` Quel est la masse totale de fruits acheté par les amis ? <br>`;
+  }else{
+    texte += num_alpha(1) + ` Quel est le nombre total de fruits achetés par les amis ? <br>`;
+  }    
+    texte += num_alpha(2) + ` Qui a rapporté le plus de fruits ? <br>`;
+    texte += num_alpha(3) + ` Quel fruit a été apporté en la plus grosse quantité ? <br><br>`;
+
+    texte += `$\\begin{array}{|l|` +  `c|`.repeat(nbFruits+1) + `}\n`;
+    texte += `\\hline\n`;
+    texte += ` `;
+    for (let j = 0; j < nbFruits; j++) {
+      texte += ` & \\textbf{\\text{` + premiere_lettre_en_majuscule(lstFruitExo[j]) + `}}`;
+    }
+    texte += '& \\textbf{TOTAL}';
+    texte += `\\\\\\hline\n`;
+    for (let i = 0; i < nbAmis; i++) {
+      texte += `\\textbf{\\text{${lstPrenomExo[i]}}}` + `& `.repeat(nbFruits) + ` & `;
+      texte += `\\\\\\hline\n`;
+    }
+    texte += '\\textbf{TOTAL}' + '& '.repeat(nbFruits) + ` & `;
+    texte += `\\\\\\hline\n`;
+    texte += `\\end{array}\n$`;
+
+    //CORRECTION
+    // Question 1 :
+    texte_corr = num_alpha(0) + ` Voici le tableau complet. <br>`;
+    texte_corr += `$\\begin{array}{|l|` +  `c|`.repeat(nbFruits+1) + `}\n`;
+    texte_corr += `\\hline\n`;
+    texte_corr += ` `;
+    for (let j = 0; j < nbFruits; j++) {
+      texte_corr +=  ` & \\text{${lstFruitExo[j]}}`;
+    }
+    texte_corr += '& TOTAL';
+    texte_corr += `\\\\\\hline\n`;
+    for (let i = 0; i < nbAmis; i++) {
+      texte_corr += `\\text{${lstPrenomExo[i]}}`;
+      let S =0; // pour calculer les sommes
+      for (let j =0; j < nbFruits; j++){
+        texte_corr += '& ' + tex_nombre(lstTabVal[i][j]); //valeur dans le tableau
+        S += lstTabVal[i][j]; // somme d'une ligne
+      }
+      texte_corr += '& ' + arrondi_virgule(S);
+      texte_corr += `\\\\\\hline\n`;
+    }
+    texte_corr += 'TOTAL';
+    let S_total=0; // somme totale de tous les fruits
+    for (let j =0; j < nbFruits; j++){
+      S = 0;
+      for (let i =0; i < nbAmis; i++){
+        S += lstTabVal[i][j]; // somme d'une colonne
+      }
+      //texte_corr += '& ' + Math.round(S*10)/10;
+      texte_corr += '& ' + arrondi_virgule(S,1);
+      //texte_corr += '& ' + tex_nombre(S,1);
+      S_total +=S;
+    }
+    texte_corr += '& ' + arrondi_virgule(S_total);
+    texte_corr += `\\\\\\hline\n`;
+    texte_corr += `\\end{array}\n$`;
+    texte_corr += `<br>`
+
+    // Question 2 :
+    S_total = arrondi_virgule(S_total);
+    if (this.sup) {
+      texte_corr += num_alpha(1) + ` La masse totale de fruits est : ${S_total} kg. <br>`;
+    } else {
+      texte_corr += num_alpha(1) + ` Le nombre total de fruits est : ${S_total}. <br>`;
+    }
+
+    // Question 3 :
+    texte_corr += num_alpha(2) + ` On regarde la dernière colonne du tableau. `;
+    let lstmax = []; //liste des prénoms solutions
+    let nmax = 0; // nombre max de fruit pour une personne
+    for (let i=0; i < nbAmis; i++){
+      S = 0;      
+      for (let j=0; j < nbFruits; j++){
+        S += lstTabVal[i][j]; // somme d'une ligne
+      }      
+      if (S==nmax){
+        lstmax.push(lstPrenomExo[i]);
+      }
+      if (S>nmax){
+        nmax = S;
+        lstmax = [lstPrenomExo[i]];
+      }
+    }
+    nmax = arrondi_virgule(nmax,1);
+    if (lstmax.length>1){
+      texte_corr += `Les personnes qui ont ramené le plus de fruits sont : `;
+      texte_corr += lstmax[0];
+      for (let k=1; k<lstmax.length; k++){
+        texte_corr += ` et ${lstmax[k]}`;
+      }
+      if (this.sup) {
+        texte_corr +=`. La masse maximale rapportée est de ${nmax} kg.<br>`;
+      } else {
+        texte_corr +=`. Le nombre maximal de fruits rapporté par une personne est de ${nmax}.<br>`;
+      }      
+    } else {
+      if (this.sup) {
+        texte_corr += `La personne qui a ramené le plus de fruits est ${lstmax}. Cette masse maximale est de ${nmax} kg.<br>`;
+      } else {
+        texte_corr += `La personne qui a ramené le plus de fruits est ${lstmax}. Ce nombre maximal de fruits est de ${nmax}.<br>`;
+      }      
+    }    
+
+    // Question 4 :
+    texte_corr += num_alpha(3) + ` On regarde la dernière ligne du tableau. `;
+    let fmax = []; //liste des fruits apporté en quantité max
+    nmax = 0; // nombre max par type de fruit 
+    for (let j=0; j < nbFruits; j++){
+      S = 0;
+      for (let i=0; i < nbAmis; i++){
+        S += lstTabVal[i][j]; // somme d'une colonne
+      }
+      if (S==nmax){
+        fmax.push(lstFruitExo[j])
+      }
+      if (S>nmax){
+        nmax = S;
+        fmax = [lstFruitExo[j]];
+      }
+    }
+    nmax = arrondi_virgule(nmax,1);
+    if (fmax.length>1){
+      if (this.sup) {        
+        texte_corr += `Les fruits présents en la plus grosse quantité sont : `;
+      } else {
+        texte_corr += `Les fruits les plus nombreux sont : `;
+      } 
+      texte_corr += `Les fruits les plus nombreux sont : `;
+      texte_corr += `les ${fmax[0]}s`;
+      for (let k=1; k<fmax.length; k++){
+        texte_corr += ` et les ${fmax[k]}s`;
+      }
+      texte_corr +=`. Il y en a ${nmax} de chaque sorte.<br>`;
+    } else {
+      if (this.sup) {        
+        texte_corr += `Il y a plus de ${fmax}s que d'autres fruits. Il y en a ${nmax} kg.`;
+      } else {
+        texte_corr += `Il y a plus de ${fmax}s que d'autres fruits. Il y en a ${nmax}.`;
+      }      
+    }   
+
+    this.liste_questions.push(texte);
+    this.liste_corrections.push(texte_corr);
+    liste_de_question_to_contenu(this);
+  }
+  this.besoin_formulaire2_numerique = ['Nombre de fruits différents', 8];
+  this.besoin_formulaire_case_a_cocher = ['Pour utiliser des nombres décimaux et des masses', false];
 }
 
 /**
@@ -14108,7 +14473,7 @@ function Tracer_triangle_2_angles() {
       )}$ cm et $${p[1] + p[2]}\\approx${tex_nombre(longueur(B2, C, 1))}$ cm.`;
 
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
         i++;
@@ -14118,6 +14483,396 @@ function Tracer_triangle_2_angles() {
     liste_de_question_to_contenu(this);
   };
   //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+}
+
+/**
+ * fonction servant à compléter des solides, inspirée des fonctions de 6G42 et 6G43
+ * référence : 6G41
+ * @Auteur Mireille Gain, s'inspirant fortement de Jean-Claude Lhote
+ */
+function Representer_un_solide() {
+  "use strict";
+  Exercice.call(this);// Héritage de la classe Exercice ()
+  this.titre = "Compléter le schéma d'un schéma";
+  this.nb_questions = 1;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1;
+  this.sup2 = 1;
+  this.nouvelle_version = function (numero_de_l_exercice) {
+  let type_de_questions_disponibles;
+
+  if (this.sup==3) type_de_questions_disponibles=[1,2]
+   else if (this.sup==5) type_de_questions_disponibles=[1,2,4]
+   else if (this.sup==7) type_de_questions_disponibles=[1,2,4,6]
+   else type_de_questions_disponibles = [parseInt(this.sup)]; 
+
+let liste_type_de_questions = combinaison_listes(
+    type_de_questions_disponibles,
+    this.nb_questions
+  );// Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+
+  this.liste_questions = []; // Liste de questions
+  this.liste_corrections = []; // Liste de questions corrigées
+  let Xmin, Xmax, Ymin, Ymax, ppc, sc;
+
+  if (this.classe == 6) type_de_questions_disponibles = [1, 2];
+    // sixième : cube et pavé droit
+    else if (this.classe == 5) type_de_questions_disponibles = [1, 2, 4];
+    // cinquième : on ajoute le prisme
+    else if (this.classe == 4) type_de_questions_disponibles = [1, 2, 4, 6]
+    // Quatrième : on ajoute la pyramide
+    
+
+  if (this.sup2 == 1) sc = 0.5;
+    else sc = 0.8;
+
+  let A,B,C,D,E,F,G,H,I,
+      AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,IA,IB,IE,IF,BD,FH,
+      coeffpersp,
+      enonce,
+      correction,
+      carreaux,g,
+      objets_enonce = [],
+      objets_correction = [],p,
+      matrace=tracePoint(I)
+      ;
+  
+  for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;) 
+      
+    {
+     let nom = creerNomDePolygone(8, "PQ"),
+     anglepersp=choice([30,45,-30,-45,150,135,-150,-135])
+      if (anglepersp%10==0) coeffpersp=0.6
+      else coeffpersp=0.4
+      objets_correction=[]
+      objets_enonce=[]
+    
+      switch (liste_type_de_questions[i]) {
+        case 1: //cube
+          enonce=`$${nom}$ est un cube.<br>`
+          if (sortie_html) enonce +=`Reproduire et compléter la figure ci-dessous, en repassant de la même couleur les segments parallèles et de même longueur.<br>`;
+          correction=`Figure complétée :<br>`
+          break;
+
+        case 2: //pavé droit
+        enonce=`$${nom}$ est un pavé droit.<br>`
+        if (sortie_html) enonce +=`Reproduire et compléter la figure ci-dessous, en repassant de la même couleur les segments parallèles et de même longueur.<br>`;
+          correction=`Figure complétée :<br>`
+          break;
+
+        case 4: //prisme
+          enonce=`On considère un prisme à base triangulaire.<br>Reproduire et compléter la figure ci-dessous, en repassant de la même couleur les segments parallèles et de même longueur.<br>`;
+          correction=`Figure complétée :<br>`
+          break;
+
+        case 6: //pyramide
+          enonce=`On considère une pyramide à base rectangulaire.<br>Reproduire et compléter la figure ci-dessous, en repassant de la même couleur les segments parallèles et de même longueur.<br>`;
+          correction=`Figure complétée :<br>`
+          break;
+      }
+     
+      switch (liste_type_de_questions[i]%2) {
+      case 1 :
+        A = point(6, 0, nom[0], "left");
+        B = point(11, 0, nom[1], "right");
+        C = point(11, 5, nom[2], "right");
+        D = point(6, 5, nom[3],"left");
+        E = similitude(B,A,anglepersp,coeffpersp,nom[4],'left')
+        E.x=Math.round(E.x)
+        E.y=Math.round(E.y)
+      break;
+
+      case 0:
+        A = point(5, 0, nom[0], "left");
+        B = point(9+randint(1,3), 0, nom[1], "right");
+        C = point(B.x,randint(3,7), nom[2], "right");
+        D = point(A.x,C.y, nom[3],"left");
+        E = similitude(B,A,anglepersp,coeffpersp*randint(5,12)/10,nom[4],'left')
+        E.x=Math.round(E.x)
+        E.y=Math.round(E.y)
+      break ;
+      }  
+      
+      F = translation2Points(E,A,B,nom[5],'right')
+      G = translation2Points(F,B,C,nom[6],'right')
+      H = translation2Points(G,C,D,nom[7],'left')
+      I = milieu (D,G)
+      matrace.taille=4
+      matrace.opacite=0.9
+      matrace.epaisseur=5
+      matrace.style='x'
+      AB=segment(A,B)
+      BC=segment(B,C)
+      CD=segment(C,D)
+      DA=segment(D,A)
+      EF=segment(E,F)
+      FG=segment(F,G)
+      GH=segment(G,H)
+      HE=segment(H,E)
+      AE=segment(A,E)
+      BF=segment(B,F)
+      CG=segment(C,G)
+      DH=segment(D,H)
+      IA=segment(A,I)
+      IB=segment(B,I)
+      IE=segment(E,I)
+      IF=segment(F,I)
+      BD=segment(B,D)
+      FH=segment(F,H)
+      AB.epaisseur=2
+      BC.epaisseur=2
+      CD.epaisseur=2
+      DA.epaisseur=2
+      EF.epaisseur=2
+      FG.epaisseur=2
+      GH.epaisseur=2
+      HE.epaisseur=2
+      AE.epaisseur=2
+      BF.epaisseur=2
+      CG.epaisseur=2
+      DH.epaisseur=2
+      IA.epaisseur=1
+      IB.epaisseur=1
+      IE.epaisseur=1
+      IF.epaisseur=1
+      BD.epaisseur=2
+      FH.epaisseur=2
+      AB.color='black'
+      BC.color='black'
+      CD.color='black'
+      DA.color='black'
+      EF.color='black'
+      FG.color='black'
+      GH.color='black'
+      HE.color='black'
+      AE.color='black'
+      BF.color='black'
+      CG.color='black'
+      IA.color='black'
+
+      if (G.y<C.y&&G.x<C.x) {
+        CG.pointilles=true
+        GH.pointilles=true
+        FG.pointilles=true
+        IF.pointilles=true
+        FH.pointilles=true
+        CG.color='gray'
+        GH.color='gray'
+        FG.color='gray'
+        CG.opacite=0.7
+        GH.opacite=0.7
+        FG.opacite=0.7
+      }
+      else if (E.y>A.y&&E.x>A.x) {
+        AE.pointilles=true
+        EF.pointilles=true
+        HE.pointilles=true
+        IE.pointilles=true
+        FH.pointilles=true
+        AE.color='gray'
+        EF.color='gray'
+        HE.color='gray'
+        AE.opacite=0.7
+        EF.opacite=0.7
+        HE.opacite=0.7
+      }
+      else if (F.x<B.x&&F.y>B.y) {
+        BF.pointilles=true
+        FG.pointilles=true
+        EF.pointilles=true
+        IF.pointilles=true
+        FH.pointilles=true
+        BF.color='gray'
+        FG.color='gray'
+        EF.color='gray'
+        BF.opacite=0.7
+        FG.opacite=0.7
+        EF.opacite=0.7
+      }
+      else if (H.x>D.x&&H.y<D.y) {
+        DH.pointilles=true
+        GH.pointilles=true
+        HE.pointilles=true
+        IE.pointilles=true
+        FH.pointilles=true
+        DH.color='gray'
+        GH.color='gray'
+        HE.color='gray'
+        DH.opacite=0.7
+        GH.opacite=0.7
+        HE.opacite=0.7
+      }
+      Xmin = Math.min(A.x,E.x)-1;
+      Ymin = Math.min(A.y,E.y)-1;
+      Xmax = Math.max(B.x,F.x)+2;
+      Ymax = Math.max(D.y,H.y)+1;
+      ppc = 20;
+
+      if (this.sup2 < 3) {g = grille(Xmin, Ymin, Xmax, Ymax, "gray", 0.7);}
+      else g = "";
+      if (this.sup2 == 2) {carreaux = seyes(Xmin, Ymin, Xmax, Ymax);sc=0.8}
+      else {carreaux = "";sc=0.5}
+     
+    let  params = {
+      xmin: Xmin,
+      ymin: Ymin,
+      xmax: Xmax,
+      ymax: Ymax,
+      pixelsParCm: ppc,
+      scale: sc,
+    }
+    
+    if (liste_type_de_questions[i]==1){ 
+      objets_enonce.push(AB,BC,CD,DA,AE,labelPoint(A,B,C,D,E),
+      g,
+      carreaux
+      );
+      }
+
+    if (liste_type_de_questions[i]==2){ 
+      objets_enonce.push(AB,BC,CD,DA,AE,labelPoint(A,B,C,D,E),
+      g,
+      carreaux
+      );
+      }
+
+    if (liste_type_de_questions[i]==4){ 
+      objets_enonce.push(AB,DA,BD,AE,
+      g,
+      carreaux
+      );
+      }
+
+    if (liste_type_de_questions[i]==6){ 
+      objets_enonce.push(AB,BF,tracePoint(I,.5,'red'),labelPoint(I),
+      g,
+      carreaux
+      );
+      }
+
+    enonce += mathalea2d(params, objets_enonce);
+    if (liste_type_de_questions[i]==1){
+        AB.color='green'
+        BC.color='red'
+        CD.color='green'
+        DA.color='red'
+        EF.color='green'
+        FG.color='red'
+        GH.color='green'
+        HE.color='red'
+        AE.color='blue'
+        BF.color='blue'
+        CG.color='blue'
+        DH.color='blue'    
+        objets_correction.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,labelPoint(A,B,C,D,E,F,G,H),
+        g,
+        carreaux
+      ); 
+    }
+  
+    if (liste_type_de_questions[i]==2){
+      AB.color='green'
+      BC.color='red'
+      CD.color='green'
+      DA.color='red'
+      EF.color='green'
+      FG.color='red'
+      GH.color='green'
+      HE.color='red'
+      AE.color='blue'
+      BF.color='blue'
+      CG.color='blue'
+      DH.color='blue'    
+      objets_correction.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,labelPoint(A,B,C,D,E,F,G,H),
+      g,
+      carreaux
+    ); 
+  }    
+
+  if (liste_type_de_questions[i]==4){
+    AB.color='green'
+    BC.color='red'
+    CD.color='green'
+    DA.color='red'
+    EF.color='green'
+    FG.color='red'
+    GH.color='green'
+    HE.color='red'
+    AE.color='blue'
+    BF.color='blue'
+    CG.color='blue'
+    DH.color='blue'    
+    objets_correction.push(AB,DA,BD,EF,HE,AE,BF,DH,FH,
+    g,
+    carreaux
+  ); 
+}
+
+if (liste_type_de_questions[i]==6){
+  AB.color='green'
+  BC.color='red'
+  CD.color='green'
+  DA.color='red'
+  EF.color='green'
+  FG.color='red'
+  GH.color='green'
+  HE.color='red'
+  AE.color='blue'
+  BF.color='blue'
+  CG.color='blue'
+  DH.color='blue'    
+  objets_correction.push(AB,EF,AE,BF,IA,IB,IE,IF,tracePoint(I),
+  g,
+  carreaux
+); 
+}
+
+  correction += mathalea2d(params, objets_correction);
+    if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en crée une autre
+        this.liste_questions.push(enonce + "<br>");
+        this.liste_corrections.push(correction + "<br>");
+        i++;
+      }
+      cpt++;
+    }
+
+  liste_de_question_to_contenu(this);
+  };
+  if (this.classe == 6)  this.besoin_formulaire_numerique = ['Type de solides', 3, `1 : Cubes\n 2 : Pavés droits\n 3 : Mélange cubes et pavés`]
+  if (this.classe == 5)  this.besoin_formulaire_numerique = ['Type de solides', 5, `1 : Cubes\n 2 : Pavés droits\n 3 : Mélange cubes et pavés\n 4 : Prismes\n 5 : Mélange cubes, pavés, prismes`]
+  if (this.classe == 4)  this.besoin_formulaire_numerique = ['Type de solides', 7, `1 : Cubes\n 2 : Pavés droits\n 3 : Mélange cubes et pavés\n 4 : Prismes\n 5 : Mélange cubes, pavés, prismes\n 6 : Pyramides\n 7 : Mélange cubes, pavés, prismes, pyramides`]
+
+ this.besoin_formulaire2_numerique = [
+    "Type de cahier",
+    3,
+    `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
+  ];
+}
+
+
+// Référence 6G41
+function Representer_un_solide_6e() {
+  this.sup = 1;
+  this.classe = 6; 
+  Representer_un_solide.call(this);
+}
+
+// 5G51
+function Representer_un_solide_5e() {
+  this.sup = 4;
+  this.classe = 5;
+  Representer_un_solide.call(this);
+}
+
+// 4G51
+function Representer_un_solide_4e() {
+  this.sup = 6;
+  this.classe = 4;
+  Representer_un_solide.call(this);
 }
 
 /**
@@ -14138,6 +14893,7 @@ function Solide_6e() {
   let type_de_questions_disponibles;
   if (this.sup==3) type_de_questions_disponibles=[1,2]
  else type_de_questions_disponibles = [parseInt(this.sup)]; 
+ 
  if (this.titre=="Utiliser le vocabulaire associé au pavé droit") 
     for (let n=0;n<type_de_questions_disponibles.length;n++)
       type_de_questions_disponibles[n]+=2
@@ -14180,16 +14936,15 @@ function Solide_6e() {
           if (sortie_html) enonce +=` Reproduire la figure ci-dessous sur le cahier.<br>`;
           enonce += ` Repasse tous les segments de même longueur dans une même couleur.<br>`;
           correction=`Le cube ${nom}.<br>`
-
           break;
-        case 2:
 
+        case 2:
           enonce=`${nom} est un pavé droit.<br>`
           if (sortie_html) enonce += ` Reproduire la figure ci-dessous sur le cahier.<br>`;
           enonce += ` Repasse tous les segments de même longueur dans une même couleur.<br>`;
           correction=`Le pavé droit ${nom}.<br>`
-
            break;
+
         case 3 :
           enonce=`${nom} est un cube.<br>`
           break;
@@ -14206,22 +14961,27 @@ function Solide_6e() {
       let faces_perp=[[[0,1,2,3],[1,5,6,2],[2,6,7,3],[3,7,4,0],[0,1,5,4]],[[1,5,6,2],[0,1,2,3],[2,6,7,3],[5,6,7,4],[1,5,4,0]],[[0,1,5,4],[1,5,6,2],[4,5,6,7],[0,4,7,3],[0,1,2,3]],
       [[4,5,6,7],[0,1,5,4],[1,5,6,2],[2,6,7,3],[0,4,7,3]],[[0,4,7,3],[0,1,2,3],[0,1,5,4],[4,5,6,7],[3,2,6,7]],[[3,2,6,7],[0,1,2,3],[1,5,6,2],[4,5,6,7],[0,4,7,3]]]
       let k,l,s
+     
       switch (randint(1,4)) {
-        case 1 : // citer les arêtes parallèles à une arrête donnée
+     
+      case 1 : // citer les arêtes parallèles à une arrête donnée
         [k,l,s]=[randint(0,2),randint(0,3),randint(0,1)]
           enonce+=`Citer toutes les arêtes parallèles à [$${nom[aretes_paralleles[k][l][s]]+nom[aretes_paralleles[k][l][(s+1)%2]]}$].<br>`
         correction = `Les arêtes parallèles à [$${nom[aretes_paralleles[k][l][s]]+nom[aretes_paralleles[k][l][(s+1)%2]]}$] sont [$${nom[aretes_paralleles[k][(l+1)%4][s]]+nom[aretes_paralleles[k][(l+1)%4][(s+1)%2]]}$], [$${nom[aretes_paralleles[k][(l+2)%4][s]]+nom[aretes_paralleles[k][(l+2)%4][(s+1)%2]]}$] et [$${nom[aretes_paralleles[k][(l+3)%4][s]]+nom[aretes_paralleles[k][(l+3)%4][(s+1)%2]]}$].<br>`
       break;
-      case 2: // coter la face parallèle à une face donnée
+
+      case 2: // citer la face parallèle à une face donnée
        [k,l,s]=[randint(0,2),randint(0,1),randint(0,3)]
        enonce+=`Quelle est la face parallèle à $${nom[faces_paralleles[k][l][s]]+nom[faces_paralleles[k][l][(s+1)%4]]+nom[faces_paralleles[k][l][(s+2)%4]]+nom[faces_paralleles[k][l][(s+3)%4]]}$ ?<br>`
        correction = `La face parallèle à $${nom[faces_paralleles[k][l][s]]+nom[faces_paralleles[k][l][(s+1)%4]]+nom[faces_paralleles[k][l][(s+2)%4]]+nom[faces_paralleles[k][l][(s+3)%4]]}$ est la face $${nom[faces_paralleles[k][(l+1)%2][s]]+nom[faces_paralleles[k][(l+1)%2][(s+1)%4]]+nom[faces_paralleles[k][(l+1)%2][(s+2)%4]]+nom[faces_paralleles[k][(l+1)%2][(s+3)%4]]}$.<br>`
       break;
+
       case 3: // citer les arêtes perpendiculaires à une arête donnée
         [k,l,s]=[randint(0,11),0,randint(0,1)]
         enonce+=`Quelles sont les arêtes peprendiculaires à l'arête [$${nom[aretes_perp[k][l][s]]+nom[aretes_perp[k][l][(s+1)%2]]}$] ?<br>`
         correction = `Les arêtes perpendiculaires à l'arête [$${nom[aretes_perp[k][l][s]]+nom[aretes_perp[k][l][(s+1)%2]]}$] sont [$${nom[aretes_perp[k][1][s]]+nom[aretes_perp[k][1][(s+1)%2]]}$], [$${nom[aretes_perp[k][2][s]]+nom[aretes_perp[k][2][(s+1)%2]]}$], [$${nom[aretes_perp[k][3][s]]+nom[aretes_perp[k][3][(s+1)%2]]}$] et [$${nom[aretes_perp[k][4][s]]+nom[aretes_perp[k][4][(s+1)%2]]}$].`
       break;
+
       case 4 : // citer les faces perpendiculaires à une face donnée
         [k,l,s]=[randint(0,5),0,randint(0,3)]
         enonce+=`Quelles sont les faces perpendiculaires à la face $${nom[faces_perp[k][l][s]]+nom[faces_perp[k][l][(s+1)%4]]+nom[faces_perp[k][l][(s+2)%4]]+nom[faces_perp[k][l][(s+3)%4]]}$ ?<br>` 
@@ -14230,32 +14990,33 @@ function Solide_6e() {
         correction+=`$${nom[faces_perp[k][l+2][s]]+nom[faces_perp[k][l+2][(s+1)%4]]+nom[faces_perp[k][l+2][(s+2)%4]]+nom[faces_perp[k][l+2][(s+3)%4]]}$, `
         correction+=`$${nom[faces_perp[k][l+3][s]]+nom[faces_perp[k][l+3][(s+1)%4]]+nom[faces_perp[k][l+3][(s+2)%4]]+nom[faces_perp[k][l+3][(s+3)%4]]}$ et `
         correction+=`$${nom[faces_perp[k][l+4][s]]+nom[faces_perp[k][l+4][(s+1)%4]]+nom[faces_perp[k][l+4][(s+2)%4]]+nom[faces_perp[k][l+4][(s+3)%4]]}$.`
-    
-        break;
+      break;
       }
 
-        switch (liste_type_de_questions[i]%2) {
-          case 1 :
-      A = point(6, 0, nom[0], "left");
-      B = point(11, 0, nom[1], "right");
-      C = point(11,5, nom[2], "right");
-      D = point(6,5, nom[3],"left");
-      p=polygone(A,B,C,D)
-      E = similitude(B,A,anglepersp,coeffpersp,nom[4],'left')
-      E.x=Math.round(E.x)
-      E.y=Math.round(E.y)
-          break;
-          case 0:
-            A = point(5, 0, nom[0], "left");
-            B = point(9+randint(1,3), 0, nom[1], "right");
-            C = point(B.x,randint(3,7), nom[2], "right");
-            D = point(A.x,C.y, nom[3],"left");
-            p=polygone(A,B,C,D)
-            E = similitude(B,A,anglepersp,coeffpersp*randint(5,12)/10,nom[4],'left')
-            E.x=Math.round(E.x)
-            E.y=Math.round(E.y)
-            break ;
-        }  
+      switch (liste_type_de_questions[i]%2) {
+      case 1 :
+        A = point(6, 0, nom[0], "left");
+        B = point(11, 0, nom[1], "right");
+        C = point(11, 5, nom[2], "right");
+        D = point(6, 5, nom[3],"left");
+        p=polygone(A,B,C,D)
+        E = similitude(B,A,anglepersp,coeffpersp,nom[4],'left')
+        E.x=Math.round(E.x)
+        E.y=Math.round(E.y)
+      break;
+
+      case 0:
+        A = point(5, 0, nom[0], "left");
+        B = point(9+randint(1,3), 0, nom[1], "right");
+        C = point(B.x,randint(3,7), nom[2], "right");
+        D = point(A.x,C.y, nom[3],"left");
+        p=polygone(A,B,C,D)
+        E = similitude(B,A,anglepersp,coeffpersp*randint(5,12)/10,nom[4],'left')
+        E.x=Math.round(E.x)
+        E.y=Math.round(E.y)
+      break ;
+      }  
+
       p=polygone(A,B,C,D)
       F = translation2Points(E,A,B,nom[5],'right')
       G = translation2Points(F,B,C,nom[6],'right')
@@ -14295,7 +15056,6 @@ function Solide_6e() {
       AE.color='black'
       BF.color='black'
       CG.color='black'
-      DH.color='black'
       if (G.y<C.y&&G.x<C.x) {
         CG.pointilles=true
         CG.color='gray'
@@ -14369,9 +15129,8 @@ function Solide_6e() {
       pixelsParCm: ppc,
       scale: sc,
     }
-  
-   
-        enonce += mathalea2d(params, objets_enonce);
+    
+    enonce += mathalea2d(params, objets_enonce);
       if (liste_type_de_questions[i]==1) {
         codesseg=[codeSegments('||','green',[A,B,C,D,A,E,F,G,H,E]),codeSegments('||','green',B,F,C,G,D,H)]
         AB.color='green'
@@ -14402,14 +15161,16 @@ function Solide_6e() {
         CG.color='red'
         DH.color='red'
       }
+    
     objets_correction.push(AB,BC,CD,DA,EF,FG,GH,HE,AE,BF,CG,DH,labelPoint(A,B,C,D,E,F,G,H),
         g,
         carreaux
       );
+    
       if (liste_type_de_questions[i]<3) correction += mathalea2d(params, objets_correction,codesseg);
     
       if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on en créé une autre
+        // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(enonce + "<br>");
         this.liste_corrections.push(correction + "<br>");
         i++;
@@ -14552,7 +15313,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
           };
           break;							
 			};						
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -14685,7 +15446,7 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 					};
         	break;				
 			};						
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -14922,7 +15683,7 @@ function Ordre_de_grandeur_operations_decimaux(){
           			break;	
 			};			
 			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -15184,7 +15945,7 @@ function chiffre_nombre_de(){
 					break;			
 			};			
 			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -15419,7 +16180,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 					};
         	break;			
 			};						
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -15564,7 +16325,7 @@ function Ranger_ordre_croissant_decroissant(){
         break;			
      };			
      
-     if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+     if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
        this.liste_questions.push(texte);
        this.liste_corrections.push(texte_corr);
        i++;
@@ -15674,7 +16435,7 @@ function Tests_du_Seb(){
 			
 			};			
 			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -15900,7 +16661,7 @@ function Rapports_sur_un_segment(){
 					break;				
 			};			
 			
-			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en crée une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
 				i++;
@@ -17555,6 +18316,23 @@ function Exercice_substituer(difficulte=1){
 }
 
 /**
+ * Déterminer des angles en utilisant les cas d'égalités : opposés par le sommet, alternes-internes, correspondants...
+ * ref 
+ * @Auteur Jean-Claude Lhote
+ */
+function Egalite_d_angles() {
+	"use strict"
+	Exercice.call(this);
+	this.sup=1;
+	this.nb_questions=1;
+	this.titre="Déterminer des angles en utilisant les cas d'égalité";
+	this.nouvelle_version = function(numero_de_l_exercice){
+	
+	
+	}
+}
+
+/**
 * Déterminer la valeur d'un angle dans un triangle.
 *
 * Correction avec détails ou pas. 9 cas différents
@@ -19129,6 +19907,162 @@ function Reperage_point_du_plan(){
 	this.besoin_formulaire_numerique = ['Niveau de difficulté',3,"1 : Coordonnées entières\n2 : Coordonnées 'en demis'\n3 : Coordonnées 'en quarts'"];
 	this.besoin_formulaire2_case_a_cocher = ['Grille de lecture'];
 }
+
+/**
+ * Placer un événement sur une échelle de probabilités.
+ * @Auteur Erwan Duplessy
+ * Référence 5S20
+ */
+
+ // Source : https://pedagogie.ac-guadeloupe.fr/sites/default/files/File/flouvet/ra16_c4_math_probabilite_flash_pdf_69131.pdf
+
+function Placer_probabilites(){
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Placer un événement sur une échelle de probabilités";
+	this.consigne = "";
+	this.nb_questions = 1;
+	this.nb_questions_modifiable = false;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	sortie_html? this.spacing = 2 : this.spacing = 1; 
+	sortie_html? this.spacing_corr = 2 : this.spacing_corr = 1;
+	this.sup=true;
+	this.nouvelle_version = function(numero_de_l_exercice){
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées		
+		let lstEvenenementA = []; // liste des évènements disponibles : p == 0 ou p == 1
+		let lstEvenenementB= []; // liste des évènements disponibles : p < 0.5
+		let lstEvenenementC= []; // liste des évènements disponibles : p = 0.5
+		let lstEvenenementD= []; // liste des évènements disponibles : p > 0.5
+		nbEvenement = 4; // nombre d'évènements dans l'énoncé
+		texte = "";
+		// liste de vocabulaire. Le nombre donne la position sur l'axe.
+		lstEchelle = [['Impossible',0],
+					 ['Improbable', calcul(1/6)],
+					 ['Peu probable',calcul(2/6)],
+					 ['Une chance sur deux',calcul(3/6)],
+					 ['Probable',calcul(4/6)],
+					 ['Très probable',calcul(5/6)],
+					 ['Certain',1]];		
+		
+		// Evenements impossibles :
+		lstEvenenementA.push([`L’équipe de France de rugby va remporter le prochain match international de football`,0]);
+		animal = choice(["un dragon", "l'abominable homme des neiges", "un chat-garou", "un dahu", "un hippocampéléphantocamélos", "une licorne", "le Minotaure"]);
+		lstEvenenementA.push([`Rencontrer ${animal} en sortant du collège`, 0]);
+		lstEvenenementA.push([`On place un point M à 4 cm du point A. On considère l'évènement "le point M est sur le cercle de centre A et de rayon 7 cm"`, 0]);
+		lstEvenenementA.push([`En France, on peut trouver des vaches espagnoles qui parlent anglais`, 0]);
+		lstEvenenementA.push([`Aux USA, on peut trouver des pierres qui roulent et qui amassent de la mousse`, 0]);
+		// Evenements improbables :
+		lstEvenenementB.push([`Gagner le gros lot au loto`,0.05]);
+		lstEvenenementB.push([`Avoir de la neige à Nice en juillet`, 0.05]);
+		carte = choice(["un As", "un Roi", "une Dame", "un Valet", "un 10", "un 9", "un 8", "un 7", "un 6", "un 5", "un 4", "un 3", "un 2"]);
+		lstEvenenementB.push([`Obtenir ${carte} en prenant une carte au hasard dans un jeu de 52 cartes`, 0.08]);
+		// Evenements peu probables :
+		lstEvenenementB.push([`Choisir une balle rouge dans un sac contenant une balle rouge et trois balles vertes`, 0.25]);
+		// Evenements Une chance sur deux :
+		lstEvenenementC.push([`Obtenir ` + choice([`pile`, `face`])+ ` quand on lance une pièce d’un euro`, 0.5]);
+		lstEvenenementC.push([`Obtenir une carte ` + choice([`rouge`, `noire`])+ ` dans un jeu de 52 cartes`, 0.5]);
+		// Evenements probables :
+		lstEvenenementD.push([`La première voiture que je verrai en sortant du collège sera de marque française`, 0.6]);
+		// Evenements très probables :
+		lstEvenenementD.push([`Le prochain président de la République Française aura plus de 40 ans`, 0.9]);
+		// Evenements certains :
+		lstEvenenementA.push([`Le prochain oiseau que je verrai aura des ailes`, 1]);
+		lstEvenenementA.push([`On place un point M à 4 cm du point A. On considère l'évènement "le point M est sur le cercle de centre A et de rayon 4 cm"`, 1]);
+		lstEvenenementA.push([`On place un point M à 4 cm du point A. On considère l'évènement "le point M est dans le disque de centre A et de rayon 5 cm"`, 1]);
+		// Evenement divers : 
+		let m = choice([4, 6, 8, 10, 12, 20, 24, 30, 48, 60, 100]); //nombre de faces du dé
+		let n = randint(1,m); //nombre à obtenir
+		lstEvenenementB.push([`Obtenir ${n} avec un dé à ${m} faces`, 1/m]);
+		if ((m-n+1)/m<0.5){
+			lstEvenenementB.push([`Obtenir un nombre supérieur ou égal à ${n} avec un dé à ${m} faces`, (m-n+1)/m]);
+		} else {
+			lstEvenenementD.push([`Obtenir un nombre supérieur ou égal à ${n} avec un dé à ${m} faces`, (m-n+1)/m]);
+		}
+		if (n/m<0.5) {
+			lstEvenenementB.push([`Obtenir un nombre inférieur ou égal à ${n} avec un dé à ${m} faces`, n/m]);
+		} else {
+			lstEvenenementD.push([`Obtenir un nombre inférieur ou égal à ${n} avec un dé à ${m} faces`, n/m]);
+		}
+
+		// choix des évènements :
+		let lstEvenenementExo = [];
+		lstEvenenementExo.push(choice(lstEvenenementA, lstEvenenementExo)); // p == 0 ou p == 1
+		lstEvenenementExo.push(choice(lstEvenenementB, lstEvenenementExo)); // p < 0.5
+		lstEvenenementExo.push(choice(lstEvenenementC, lstEvenenementExo)); // p = 0.5 
+		lstEvenenementExo.push(choice(lstEvenenementD, lstEvenenementExo));	// p > 0.5
+		lstEvenenementExo = shuffle(lstEvenenementExo);
+		
+		// Texte de l'énoncé :
+		texte +=`Placer la lettre correspondant à chaque évènement sur l'axe des probabilités ci-dessous.<br>`
+		for (let i = 0; i<nbEvenement; i++){
+			texte += num_alpha(i) + ` ` + lstEvenenementExo[i][0] + `.<br>`;
+		}
+
+		// Création des objets pour dessiner :
+		let L = 10 // longueur du segment
+		let lstObjet = []; // tous les objets qui seront dessinés
+		let h = 0.25; // hauteur trait
+		lstObjet.push(segment(0,0,L,0)); // axe
+		lstObjet.push(segment(0,-h,0,h)); // trait gauche
+		lstObjet.push(segment(L,-h,L,h)); // trait central
+		lstObjet.push(segment(L/2,-h,L/2,h)); // trait droit
+		let angle = 60; //inclinaison du texte légende
+		let y = -0.5;
+		let txt = "";		
+		if (this.sup) {
+			for (let j = 0; j<lstEchelle.length; j++){
+				lstObjet.push(texteParPosition(lstEchelle[j][0],L*lstEchelle[j][1],y,angle,'black',1,'droite'));
+			}		
+		} 
+		else {
+			// Méthode très très moche !!!
+			// objectif écrire la fraction 1/2 au milieu du segment.............
+			angle = 0;
+			lstObjet.push(texteParPosition("0",0,y-0.25,angle,'black',1,'droite'));
+			lstObjet.push(texteParPosition("1",L,y-0.25,angle,'black',1,'droite'));
+			lstObjet.push(texteParPosition("1",L/2,y,angle,'black',1,'droite'));
+			lstObjet.push(texteParPosition("2",L/2,y-0.5,angle,'black',1,'droite'));
+			lstObjet.push(segment(L/2-0.1,-0.8,L/2+0.4,-0.8)); // trait de fraction		
+		}
+
+		texte += mathalea2d({xmin : -1, xmax : 12, ymin : -5, ymax : 1, pixelsParCm : 30, scale : 1}, lstObjet);
+
+		// CORRECTION :
+		texte_corr = ` `;
+		ylst = [0,0,0,0,0,0,0]; //ordonnées des textes réponses
+		angle = 0; // inclinaison du texte réponse
+		let p = 0; // probabilité de l'événement
+		let parrondi = 0; // arrondi de la proba au sixième près
+		for (let i = 0; i<nbEvenement; i++){ 
+			p = lstEvenenementExo[i][1];
+			parrondi = Math.round(calcul(6*p)); // échelle arrondie entre 0 et 7 pour éviter la superposition des textes réponses
+			ylst[parrondi] += 0.5; // on augmente l'ordonnée si elle est déjà utilisée
+			let txtSolution = String.fromCharCode(97+i); //code 97 correspond à 'a'
+			lstObjet.push(texteParPosition(txtSolution,calcul(L*p),ylst[parrondi],angle,'black',1,'milieu'))
+			lstObjet.push(tracePoint(point(calcul(L*p), 0), 'blue'))
+		}
+
+		for (let i = 0; i<nbEvenement; i++){ 
+			p = lstEvenenementExo[i][1];
+			if (p==0) { parrondi = 0 } 
+			else if (p<0.25) { parrondi = 1 }
+			else if (p<0.5) { parrondi = 2 }
+			else if (p==0.5) { parrondi = 3 }
+			else if (p<0.75) { parrondi = 4 }
+			else if (p<1) { parrondi = 5 }
+			else if (p==1) { parrondi = 6 };			
+			texte_corr += num_alpha(i) + ` ` + lstEvenenementExo[i][0] + ` : ` + lstEchelle[parrondi][0].toLowerCase() + `<br>`;
+		}
+		texte_corr += mathalea2d({xmin : -1, xmax : 12, ymin : -5, ymax : 2, pixelsParCm : 30, scale : 1}, lstObjet);
+
+		this.liste_questions.push(texte);
+		this.liste_corrections.push(texte_corr);
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque question.
+	}
+	this.besoin_formulaire_case_a_cocher = [`Changer le type d'axe`];
+};
+
 /**
  * Calculs de probabilités sur une expérience aléatoire à une épreuve.
  * @Auteur Jean-Claude Lhote
@@ -21394,22 +22328,16 @@ function Constructibilite_des_triangles(){
 	this.sup=1;
 	if (this.exo == this.beta+'5G21-1') { // via longueurs
 		this.titre = `Constructibilité des triangles via les longueurs`;
-		//this.consigne = `Justifier si les longueurs données permettent de construire le triangle. <br> Dire chaque fois le nombre de triangles constructibles, ça peut être 0 !`;
 		this.consigne = `Justifier si les longueurs données permettent de construire le triangle.`;
-		//this.consigne += `<br>Dire chaque fois s'il existe plusieurs triangles constructibles ou s'il n'en existe pas.`;
 		this.consigne += `<br>Dire si tous les élèves qui doivent construire ce triangle auront la même figure.`
 		
 	} else if (this.exo == this.beta+'5G31-1') {//via angles
 		this.titre = `Constructibilité des triangles via les angles`;
-		//this.consigne = `Justifier si les angles donnés permettent de construire le triangle. <br> Dire chaque fois le nombre de triangles constructibles, ça peut être 0 !`;
 		this.consigne = `Justifier si les angles donnés permettent de construire le triangle.`;
-		//this.consigne += `<br>Dire chaque fois s'il existe plusieurs triangles constructibles ou s'il n'en existe pas.`;
 		this.consigne += `<br>Dire si tous les élèves qui doivent construire ce triangle auront la même figure.`
 	} else {			
 		this.titre = "Constructibilité des triangles";	
-		//this.consigne = `Justifier si les longueurs ou les angles donnés permettent de construire le triangle. <br> Dire chaque fois le nombre de triangles constructibles, ça peut être 0 !`;
 		this.consigne = `Justifier si les longueurs ou les angles donnés permettent de construire le triangle.`;
-		//this.consigne += `<br>Dire chaque fois s'il existe plusieurs triangles constructibles ou s'il n'en existe pas.`;
 		this.consigne += `<br>Dire si tous les élèves qui doivent construire ce triangle auront la même figure.`
 
 	};
@@ -21423,11 +22351,6 @@ function Constructibilite_des_triangles(){
 	let type_de_questions_disponibles;
 	
 	this.nouvelle_version = function(numero_de_l_exercice){
-		// this.introduction=info_message({
-		// 	titre : "Exercice BETA",
-		// 	texte: "En cours de réalisation <br>Est-il préférable de mettre du conditionnel dans les corrections?"
-
-		// });
 
 		if (this.exo == this.beta+'5G21-1') { // via longueurs
 			if (this.sup ==1) {
@@ -21521,7 +22444,14 @@ function Constructibilite_des_triangles(){
 					texte_corr += `<br>Dans le triangle ${triangle.getNom()}, ${current_triangle[2].cote} qui mesure $${current_triangle[2].valeur}$ cm est le plus grand côté.`;
 					texte_corr += `<br> De plus ${current_triangle[0].longueur} + ${current_triangle[1].longueur} = $${current_triangle[0].valeur}$ cm + $${current_triangle[1].valeur}$ cm = $${current_triangle[2].valeur}$ cm aussi.`;
 					texte_corr += `<br> ${texte_en_couleur('On peut donc construire le triangle '+triangle.getNom()+' c\'est un triangle plat')}.`;
-					texte_corr += `<br><br>${texte_en_couleur('Un seul triangle de ce type existe')}, il s'agit du segment ${current_triangle[2].cote} sur lequel on place le point ${current_triangle[0].longueur.split('')[2]}.`;				
+					texte_corr += `<br><br>${texte_en_couleur('Un seul triangle de ce type existe')}, il s'agit du segment ${current_triangle[2].cote} sur lequel on place le point `;
+					if ((current_triangle[0].longueur.split('')[2]==current_triangle[2].cote.split('')[1]) || (current_triangle[0].longueur.split('')[2]==current_triangle[2].cote.split('')[2])) {
+					 	texte_corr += `${current_triangle[0].longueur.split('')[1]}`;
+					} else {
+					 	texte_corr += `${current_triangle[0].longueur.split('')[2]}`;
+					};
+					texte_corr += `.`;
+					//`${current_triangle[0].longueur.split('')[2]}.`;				
 					break;
 				case 3 : // 3 longueurs non constructible
 				  	// on initialise les longueurs sinon la méthode isTrueTriangleLongueurs() renvoie false!
@@ -25453,6 +26383,136 @@ function Exercice_developper(difficulte = 1) {
   ];
 }
 
+
+
+/**
+ * Réduire, si possible, une expression littérale simple
+ * 
+ * * ax+b
+ * * a+bx
+ * * ax-a
+ * * ax+bx
+ * * ax+x
+ * * ax×b
+ * * a×bx
+ * * ax×bx
+ * * ax+0
+ * * ax×0
+ * * ax^2×x
+ * * ax^2-a
+ * * ax^2-ax
+ * 
+ * 
+ * @Auteur Rémi Angot
+ * 4L10-1
+ */
+function Reductions_pieges_classiques() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Réduire, si possible, une expression littérale simple";
+  this.consigne = "Réduire, si possible, les expressions suivantes";
+  this.spacing = 1;
+  this.nb_questions = 10;
+  this.sup = true;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    let type_de_questions_disponibles = [
+      'ax+b',
+      'a+bx',
+      'ax-a',
+      'ax+bx',
+      'ax+x',
+      'ax×b',
+      'a×bx',
+      'ax×bx',
+      'ax+0',
+      'ax×0',
+      'ax^2×x',
+      'ax^2-a',
+      'ax^2-ax^2'
+    ];
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+    for (let i = 0, texte, texte_corr, a, b, cpt = 0;i < this.nb_questions && cpt < 50;)
+     {
+      type_de_questions = liste_type_de_questions[i];
+      a = randint(2, 11)
+      b = randint(2, 11)
+      if (this.sup){
+        a *= choice([-1,1])
+        b *= choice([-1,1])
+      }
+      switch (type_de_questions) {
+        case "ax+b":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${a}x${ecriture_algebrique(b)}$`
+          texte_corr = texte
+          break;
+        case "a+bx":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${a}${ecriture_algebrique(b)}x$`
+          texte_corr = texte
+          break;
+        case "ax-a":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${Math.abs(a)}x-${Math.abs(a)}$`
+          texte_corr = texte
+          break;
+        case "ax+bx":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${a}x${ecriture_algebrique(b)}x$`
+          texte_corr = `$${lettre_depuis_chiffre(i+1)}=${a}x${ecriture_algebrique(b)}x=${a+b}x$`
+          break;
+        case "ax+x":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${a}x+x$`
+          texte_corr = `$${lettre_depuis_chiffre(i+1)}=${a}x+x=${a+1}x$`
+          break;
+        case "ax×b":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${a}x\\times${ecriture_parenthese_si_negatif(b)}$`
+          texte_corr = `$${lettre_depuis_chiffre(i+1)}=${a}x\\times${ecriture_parenthese_si_negatif(b)}=${a*b}x$`
+          break;
+        case "a×bx":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${a}\\times${ecriture_parenthese_si_moins(b+'x')}$`
+          texte_corr = `$${lettre_depuis_chiffre(i+1)}=${a}\\times${ecriture_parenthese_si_moins(b+'x')}=${a*b}x$`
+          break;
+        case "ax×bx":
+          texte = `$${lettre_depuis_chiffre(i+1)}=${ecriture_parenthese_si_moins(a+'x')}\\times${ecriture_parenthese_si_moins(b+'x')}$`
+          texte_corr = `$${lettre_depuis_chiffre(i+1)}=${ecriture_parenthese_si_moins(a+'x')}\\times${ecriture_parenthese_si_moins(b+'x')}=${a*b}x^2$`
+          break;
+        case "ax+0":
+            texte = `$${lettre_depuis_chiffre(i+1)}=${a}x+0$`
+            texte_corr = `$${lettre_depuis_chiffre(i+1)}=${a}x+0=${a}x$`
+            break;
+        case "ax×0":
+            texte = `$${lettre_depuis_chiffre(i+1)}=${a}x\\times 0$`
+            texte_corr = `$${lettre_depuis_chiffre(i+1)}=${a}x\\times 0=0$`
+            break;
+        case "ax^2×x":
+              texte = `$${lettre_depuis_chiffre(i+1)}=${ecriture_parenthese_si_moins(a+'x^2')}\\times x$`
+              texte_corr = `$${lettre_depuis_chiffre(i+1)}=${ecriture_parenthese_si_moins(a+'x^2')}\\times x=${ecriture_parenthese_si_moins(a+'x^3')}$`
+              break;
+        case "ax^2-a":
+              a = Math.abs(a) 
+              texte = `$${lettre_depuis_chiffre(i+1)}=${ecriture_parenthese_si_moins(a+'x^2')}-${a}$`
+              texte_corr = `$${lettre_depuis_chiffre(i+1)}=${ecriture_parenthese_si_moins(a+'x^2')}-${a}$`
+              break;
+        case "ax^2-ax^2":
+              a = Math.abs(a) 
+              texte = `$${lettre_depuis_chiffre(i+1)}=${a}x^2-${a}x^2$`
+              texte_corr = `$${lettre_depuis_chiffre(i+1)}=${a}x^2-${a}x^2=0$`
+              break;
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_case_a_cocher = ['Avec des nombres relatifs'] 
+}
+
 /**
  * Équation du premier degré
  * * Type 1 : x+a=b ou ax=b
@@ -25693,7 +26753,7 @@ function Exercice_equation1() {
 function Exercice_Thales() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Déterminer une longueur avec la propriété de Thales";
+  this.titre = "Déterminer une longueur avec la propriété de Thales (MG32)";
   this.consigne = "";
   this.nb_questions = 1;
   this.nb_questions_modifiable = false;
@@ -26215,19 +27275,27 @@ function Exercice_Thales() {
 */
 function Thales2D() {
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Calculer des longueurs avec la propriété de Thalès";
+  this.titre = "Calculer des longueurs avec le théorème de Thalès";
   this.consigne = "";
   this.nb_questions = 1;
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
+  this.sup = 1; // Triangles imbriqués / configuration papillon / les 2
+  this.vspace = -0.5; // Monter un peu l'énoncé pour gagner de la place dans la sortie PDF
+
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let liste_de_noms_de_polygones = []
+    let premiereQuestionPapillon = randint(0,1) // Pour alterner les configurations et savoir par laquelle on commence
 
-    for (let i = 0, texte, texte_corr, cpt = 0;i < this.nb_questions && cpt < 50;)
+
+    for (let i = 0, texte = '', texte_corr = '', cpt = 0;i < this.nb_questions && cpt < 50;)
      {
+      if ((i+1)%3==0){ // Toutes les 3 questions, on repart à zéro sur les noms des polygones
+        liste_de_noms_de_polygones = []
+      }
       let nomDesPoints = creerNomDePolygone(5,liste_de_noms_de_polygones);
       liste_de_noms_de_polygones.push(nomDesPoints);
       let nomA = nomDesPoints[0];
@@ -26237,45 +27305,84 @@ function Thales2D() {
       let nomN = nomDesPoints[4];
       let ab = randint(5, 10);
       let ac = randint(5, 10,ab);
-      if(!sortie_html){
-        ab = randint(3, 7);
-        ac = randint(3, 7,ab);
-      }
       let bc = randint(Math.max(ab - ac, ac - ab) + 1, ab + ac - 1,[ab,ac]); // Pas de triangle isocèle ou équilatéral
       let A = point(0, 0, nomA);
       let B = pointAdistance(A, ab, nomB);
       let ABC = triangle2points2longueurs(A, B, ac, bc);
       let C = ABC.listePoints[2];
       C.nom = nomC;
-      let k = calcul(randint(2, 8,5) / 10);
+      let k = calcul(randint(3, 8, 5) / 10);
+      if (this.sup == 2) {
+        k *= -1
+        this.vspace = -.5; // Monter un peu l'énoncé pour gagner de la place dans la sortie PDF
+      }
+      if (this.sup == 3 && ((i + premiereQuestionPapillon) % 2 == 0)) {
+        k *= -1
+        this.vspace = -.5; // Monter un peu l'énoncé pour gagner de la place dans la sortie PDF
+      }
       let M = homothetie(A, C, k);
       let N = homothetie(B, C, k);
-      let s = segment(M, N);
-      let marqueNomABC = nommePolygone(ABC, nomA+nomB+nomC);
-      let m = pointSurSegment(M, N, -1);
-      let n = pointSurSegment(N, M, -1);
+      let MNC = polygone(M, N, C);
+      let m = pointSurSegment(M, N, -.5);
+      let n = pointSurSegment(N, M, -.5);
       let marqueNomM = texteParPoint(nomM, m);
       let marqueNomN = texteParPoint(nomN, n);
+      let a = pointSurSegment(A, B, -.5);
+      let b = pointSurSegment(B, A, -.5);
+      let marqueNomA = texteParPoint(nomA, a);
+      let marqueNomB = texteParPoint(nomB, b);
+      let c;
+      if (k<0) {
+        if (angle(A,C,N)<angle(N,C,A)){
+          c = similitude(A,C,-angleOriente(A,C,N)/2,1/longueur(A,C))
+        } else {
+          c = similitude(A,C,-angleOriente(N,C,A)/2,1/longueur(A,C)*0.5)
+        }
+      } else {
+        c = similitude(A,C,-180+angleOriente(A,C,B)/2,1/longueur(A,C)*.5)
+      }
+      let marqueNomC = texteParPoint(nomC,c)
 
 
-      texte = `Sur la figure suivante, $${nomA+nomC}=${ac}~\\text{cm}$, $${nomA+nomB}=${ab}~\\text{cm}$, $${nomC+nomM}=${tex_nombrec(k*ac)}~\\text{cm}$, $${nomC+nomN}=${tex_nombrec(k*bc)}~\\text{cm}$ et $(${nomA+nomB})//(${nomM+nomN})$.<br>`
+    
+
+      if (!sortie_html){
+        texte = '\\begin{minipage}{.5\\linewidth}\n'
+      } else {
+        texte = ''
+      }
+      texte += `Sur la figure suivante, $${nomA+nomC}=${ac}~\\text{cm}$, $${nomA+nomB}=${ab}~\\text{cm}$, $${nomC+nomM}=${tex_nombrec(Math.abs(k)*ac)}~\\text{cm}$, $${nomC+nomN}=${tex_nombrec(Math.abs(k)*bc)}~\\text{cm}$ et $(${nomA+nomB})//(${nomM+nomN})$.<br>`
       texte+= `Calculer $${nomM+nomN}$ et $${nomC+nomB}$.<br><br>`
-      texte += mathalea2d({xmin : Math.min(A.x, B.x, C.x) - 1.5,
-        ymin : Math.min(A.y, B.y, C.y) - 1.5,
-        xmax : Math.max(A.x, B.x, C.x) + 1.5,
-        ymax : Math.max(A.y, B.y, C.y) + 1.5},
+      if (!sortie_html){
+        texte += '\\end{minipage}\n'
+        texte += '\\begin{minipage}{.5\\linewidth}\n'
+        texte += '\\centering'
+      }
+      texte += mathalea2d({xmin : Math.min(A.x, B.x, C.x, M.x, N.x) - 1.5,
+        ymin : Math.min(A.y, B.y, C.y, M.y, N.y) - .8,
+        xmax : Math.max(A.x, B.x, C.x, M.x, N.x) + 1.5,
+        ymax : Math.max(A.y, B.y, C.y, M.y, N.y) + .8,
+        scale : .5},
 
-        ABC, s, marqueNomABC, marqueNomM, marqueNomN
+        ABC, MNC, marqueNomA, marqueNomB, marqueNomC, marqueNomM, marqueNomN
       );
-      texte_corr = `Dans le triangle $${nomA+nomB+nomC}$, $${nomM}\\in${"["+nomC+nomA+"]"}$, $${nomN}\\in${"["+nomC+nomB+"]"}$ et $(${nomA+nomB})//(${nomM+nomN})$ donc d'après le théorème de Thalès les triangles $${nomA+nomB+nomC}$ et $${nomM+nomN+nomC}$ ont des longueurs proportionnelles.`;
+      if (!sortie_html){
+        texte += '\\end{minipage}\n'
+      }
+      if (k>0){
+        texte_corr = `Dans le triangle $${nomA+nomB+nomC}$, $${nomM}\\in${"["+nomC+nomA+"]"}$, $${nomN}\\in${"["+nomC+nomB+"]"}$ et $(${nomA+nomB})//(${nomM+nomN})$ donc d'après le théorème de Thalès, les triangles $${nomA+nomB+nomC}$ et $${nomM+nomN+nomC}$ ont des longueurs proportionnelles.`;
+      } else {
+          texte_corr = `Les droites $(${nomA+nomM})$ et $(${nomB+nomN})$ sont sécantes en $${nomC}$ et $(${nomA+nomB})//(${nomM+nomN})$  donc d'après le théorème de Thalès, les triangles $${nomA+nomB+nomC}$ et $${nomM+nomN+nomC}$ ont des longueurs proportionnelles.`;
+      }
+      //texte_corr = `$(${nomA+nomB})//(${nomM+nomN})$, les points $${nomC}$, $${nomM}$, $${nomA}$ et $${nomC}$, $${nomN}$, $${nomB}$ sont alignés dans le même ordre  donc d'après le théorème de Thalès, les triangles $${nomA+nomB+nomC}$ et $${nomM+nomN+nomC}$ ont des longueurs proportionnelles.`;
       texte_corr += `<br><br>`
       texte_corr += `$\\dfrac{${nomC+nomM}}{${nomC+nomA}}=\\dfrac{${nomC+nomN}}{${nomC+nomB}}=\\dfrac{${nomM+nomN}}{${nomA+nomB}}$`  
       texte_corr += `<br><br>`
-      texte_corr += `$\\dfrac{${tex_nombrec(k*ac)}}{${tex_nombre(ac)}}=\\dfrac{${tex_nombrec(k*bc)}}{${nomC+nomB}}=\\dfrac{${nomM+nomN}}{${tex_nombre(ab)}}$`  
+      texte_corr += `$\\dfrac{${tex_nombrec(Math.abs(k)*ac)}}{${tex_nombre(ac)}}=\\dfrac{${tex_nombrec(Math.abs(k)*bc)}}{${nomC+nomB}}=\\dfrac{${nomM+nomN}}{${tex_nombre(ab)}}$`  
       texte_corr += `<br><br>`
-      texte_corr += `$${nomM+nomN}=\\dfrac{${tex_nombrec(k*ac)}\\times${tex_nombre(ab)}}{${tex_nombre(ac)}}=${tex_nombrec(k*ab)}$ cm`
+      texte_corr += `$${nomM+nomN}=\\dfrac{${tex_nombrec(Math.abs(k)*ac)}\\times${tex_nombre(ab)}}{${tex_nombre(ac)}}=${tex_nombrec(Math.abs(k)*ab)}$ cm`
       texte_corr += `<br><br>`
-      texte_corr += `$${nomC+nomB}=\\dfrac{${tex_nombrec(k*bc)}\\times${tex_nombre(ac)}}{${tex_nombrec(k*ac)}}=${tex_nombrec(bc)}$ cm`
+      texte_corr += `$${nomC+nomB}=\\dfrac{${tex_nombrec(Math.abs(k)*bc)}\\times${tex_nombre(ac)}}{${tex_nombrec(Math.abs(k)*ac)}}=${tex_nombrec(bc)}$ cm`
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(texte);
@@ -26286,7 +27393,7 @@ function Thales2D() {
     }
     liste_de_question_to_contenu(this);
   };
-  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+  this.besoin_formulaire_numerique = ['Configuration',3,'1 : Triangles imbriqués\n2 : Papillon\n3 : Les deux'];
 }
 
 
@@ -37112,7 +38219,7 @@ function fonction_notion_vocabulaire() {
 					if (sortie_html) {
 						texte += num_alpha(j) + ` Quelle est l'image de ${z} par la `;
 						texte += katex_Popup('fonction', 'Vocabulaire', '<b>fonction</b> est le nom que l\'on donne à ces machines mathématiques');
-						texte += ` $f$ ? &Eacute;crire la réponse sous la forme `;
+						texte += ` $\\mathbf{f}$ ? &Eacute;crire la réponse sous la forme `;
 						texte += katex_Popup('$\\mathbf{f(' + z + ')=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire <b>f(4)=16</b>') + `<br>`;
 						texte_corr += num_alpha(j) + ` L'image de ${z} par la fonction f vaut $f(${z})=4\\times ${z}=${4 * z}$.<br>`;
 						j++;//incrémente la sous question	
@@ -37124,18 +38231,23 @@ function fonction_notion_vocabulaire() {
 
 					// sous question d/
 					if (sortie_html) {
-						texte += num_alpha(j) + ` Que renvoie la machine si le côté vaut $x$ cm ?<br>`;
-						texte_corr += num_alpha(j) + ` Si le côté vaut $x$ la machine renvoie $x+x+x+x$ ce qui est équivalent à $4\\times x$ .<br>`;
+						texte += num_alpha(j) + ` Que renvoie la machine si le côté vaut $x$ cm ?`;
+						texte += ` &Eacute;crire la réponse sous la forme `;
+						texte += katex_Popup('$\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire <b>f(4)=16</b>') + `<br>`;
+						texte_corr += num_alpha(j) + ` Si le côté vaut $x$ la machine renvoie $x+x+x+x$ ce qui est équivalent à $4\\times x$ .<br>`;						
+						texte_corr += ` L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.<br>`;
 						j++;//incrémente la sous question	
 					} else { // sortie LaTeX
 						texte += `\\item   Que renvoie la machine si le côté vaut $x$ cm ?`;
 						texte_corr += `\\item  Si le côté vaut $x$ la machine renvoie $x+x+x+x$ ce qui est équivalent à $4\\times x$ .`;
+						texte += ` \\'{E}crire la réponse sous la forme $\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f(4)=16}$}`;
+					 	texte_corr += ` L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.`;
 					};
 
 					// sous question e/
 					txt_info =  `Voici le diagramme d'une machine qui triple `;
 					if (sortie_html) {
-						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme, comme dans l’exemple ci-dessous.<br>`;
+						texte += num_alpha(j) + ` Comme dans l’exemple ci-dessous, écrire le diagramme de la fonction $\\mathbf{f}$.<br>`;
 						//texte += `Voici le diagramme d'une machine qui triple `;
 						//texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
@@ -37158,27 +38270,27 @@ function fonction_notion_vocabulaire() {
 						couleur:'nombres'
 					});
 
-					// sous question f/
-					if (sortie_html) {
-						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 2) + ` sous la forme `;
-						texte += katex_Popup('$\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire <b>f(4)=16</b>') + `<br>`;
-						texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.<br>`;
-						j++;//incrémente la sous question
-					} else { // sortie LaTeX
-						texte += `\\item   \\'{E}crire la réponse à la question d/ sous la forme $\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f(4)=16}$}`;
-						texte_corr += `\\item  L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.`;
-					};
+					// // sous question f/
+					// if (sortie_html) {
+					// 	texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 2) + ` sous la forme `;
+					// 	texte += katex_Popup('$\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire <b>f(4)=16</b>') + `<br>`;
+					// 	texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.<br>`;
+					// 	j++;//incrémente la sous question
+					// } else { // sortie LaTeX
+					// 	texte += `\\item   \\'{E}crire la réponse à la question d/ sous la forme $\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f(4)=16}$}`;
+					// 	texte_corr += `\\item  L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.`;
+					// };
 
 					// sous question g/
 					if (sortie_html) {
-						texte += num_alpha(j) + ` En utilisant la forme `;
+						texte += num_alpha(j) + ` Ecrire maintenant la fonction f en utilisant la forme  `;
 						texte += katex_Popup('$\\mathbf{f:\\textbf{\\textit{x}}\\longmapsto \\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f:4\\longmapsto 16}$');
-						texte += `écrire la réponse à la question ` + num_alpha(j - 3) + `<br>`;
+						//texte += `écrire la réponse à la question ` + num_alpha(j - 3) + `<br>`;
 						texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction f vaut $4\\times x$ donc $f:x\\longmapsto 4\\times x$.<br>`;
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
-						texte += `\\item   En utilisant la forme $\\mathbf{f:\\textbf{\\textit{x}}\\longmapsto \\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f:4\\longmapsto 16}$},`;
-						texte += ` écrire la réponse à la question d/`;
+						texte += `\\item   Ecrire maintenant la fonction f en utilisant la forme $\\mathbf{f:\\textbf{\\textit{x}}\\longmapsto \\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f:4\\longmapsto 16}$},`;
+						//texte += ` écrire la réponse à la question d/`;
 						texte_corr += `\\item  L'image de $x$ par la fonction f vaut $4\\times x$ donc $f:x\\longmapsto 4\\times x$.`;
 						texte += `\\end{enumerate}`;
 						texte_corr += `\\end{enumerate}`;
@@ -39684,14 +40796,14 @@ function Antecedent_graphique() {
 		}
 
 		if (this.sup == 2) {
-			if (randint(1, 4) < 4) { // une fois sur 4 il n'y a qu'un seul antécédent
+			if (randint(1, 4) < 2) { // une fois sur 4 il n'y a qu'un seul antécédent
 				let x0 = randint(-2, 2)
 				let fx0 = randint(-4, 4)
 				if (!sortie_html) {
 					fx0 = randint(-2, 2)
 				}
 				a = randint(-3, 3, 0);
-				texte += `Déterminer par lecture graphique les antécédents de $${fx0}$ par cette fonction $f$.<br><br>`
+				texte += `Déterminer par lecture graphique le (ou les) antécédent(s) de $${fx0}$ par cette fonction $f$.<br><br>`
 				texte_corr = `$${fx0}$ a un unique antécédent $${x0}$, on note $f(${x0})=${fx0}$.<br>`
 				expression_f = `${a}*(x-(${x0}))^2+(${fx0})`;
 			} else {
@@ -39711,7 +40823,7 @@ function Antecedent_graphique() {
 				x2 = 0;
 				fx2 = c;
 				expression_f = `${a}*x^2+(${b})*x+(${c})`;
-				texte += `Déterminer par lecture graphique les antécédents de $${fx1}$ par cette fonction $f$.<br><br>`
+				texte += `Déterminer par lecture graphique le (ou les) antécédent(s) de $${fx1}$ par cette fonction $f$.<br><br>`
 				texte_corr = `$${fx1}$ a deux antécédents $${x1}$ et $${x3}$, on note $f(${x1})=f(${x3})=${fx1}$.<br>`
 			}
 		}
@@ -41465,13 +42577,13 @@ function Coefficient_evolution() {
 	this.nouvelle_version = function (numero_de_l_exercice) {
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		let texte_aide = '- Augmenter un nombre de $t$ % revient à le multiplier par $1+\\dfrac{t}{100}$.';
+		let texte_aide = '- Augmenter un nombre de $t~\\%$ revient à le multiplier par $1+\\dfrac{t}{100}$.';
 		texte_aide += '<br>'
-		texte_aide += '<br>- Diminuer un nombre de $t$ % revient à le multiplier par $1-\\dfrac{t}{100}$.'
+		texte_aide += '<br>- Diminuer un nombre de $t~\\%$ revient à le multiplier par $1-\\dfrac{t}{100}$.'
 		texte_aide += '<br>'
 		texte_aide += '<br><b>Exemples</b> :'
-		texte_aide += '<br>- Diminuer un nombre de 20 % revient à le multiplier par $1-\\dfrac{20}{100}=1-0,20=0,8$.'
-		texte_aide += '<br><br>- Augmenter un nombre de 5 % revient à le multiplier par $1+\\dfrac{5}{100}=1+0,05=1,05$.'
+		texte_aide += '<br>- Diminuer un nombre de $20~\\%$ revient à le multiplier par $1-\\dfrac{20}{100}=1-0,20=0,8$.'
+		texte_aide += '<br><br>- Augmenter un nombre de $5~\\%$ revient à le multiplier par $1+\\dfrac{5}{100}=1+0,05=1,05$.'
 
 		this.bouton_aide = modal_url(numero_de_l_exercice,'/aide/3P10');
 
@@ -41490,24 +42602,24 @@ function Coefficient_evolution() {
 			taux = choice([randint(1,9)*10,randint(1,9)]);
 			switch (liste_type_de_questions[i]){
 				case 'coef+' :
-				texte = `Augmenter de ${taux} % revient à multiplier par...`;
+				texte = `Augmenter de $${taux}~\\%$ revient à multiplier par...`;
 				coeff = tex_prix(calcul(1+taux/100));
-				texte_corr = `Augmenter de ${taux} % revient à multiplier par ${coeff} car $100~\\% + ${taux}~\\% = ${100+taux}~\\%$.`;
+				texte_corr = `Augmenter de $${taux}~\\%$ revient à multiplier par ${coeff} car $100~\\% + ${taux}~\\% = ${100+taux}~\\%$.`;
 				break;
 				case 'coef-' :
-				texte = `Diminuer de ${taux} % revient à multiplier par...`;
+				texte = `Diminuer de $${taux}~\\%$ revient à multiplier par...`;
 				coeff = tex_prix(calcul(1-taux/100));
-				texte_corr = `Diminuer de ${taux} % revient à multiplier par ${coeff} car $100~\\% - ${taux}~\\% = ${100-taux}~\\%$.`;
+				texte_corr = `Diminuer de $${taux}~\\%$ revient à multiplier par ${coeff} car $100~\\% - ${taux}~\\% = ${100-taux}~\\%$.`;
 				break;
 				case 'taux+' :
 				coeff = tex_nombrec(1+taux/100);
 				texte = `Multiplier par ${coeff} revient à...`;
-				texte_corr = `Multiplier par ${coeff} revient à augmenter de ${taux} % car $${coeff} = ${100+taux}~\\% = 100~\\% + ${taux}~\\%$.`;
+				texte_corr = `Multiplier par ${coeff} revient à augmenter de $${taux}~\\%$ car $${coeff} = ${100+taux}~\\% = 100~\\% + ${taux}~\\%$.`;
 				break;
 				case 'taux-' :
 				coeff = tex_nombrec(1-taux/100);
 				texte = `Multiplier par ${coeff} revient à...`;
-				texte_corr = `Multiplier par ${coeff} revient à diminuer de ${taux} % car $${coeff} = ${100-taux}~\\% = 100~\\% - ${taux}~\\%$.`;
+				texte_corr = `Multiplier par ${coeff} revient à diminuer de $${taux}~\\%$ car $${coeff} = ${100-taux}~\\% = 100~\\% - ${taux}~\\%$.`;
 				break;
 			}
 			if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
@@ -45751,16 +46863,18 @@ function Calcul_discriminant() {
   if (sortie_html) {
     this.spacing_corr = 2
   }
-  this.correction_detaillee_disponible = true;
-  sortie_html ? correction_detaillee = true : correction_detaillee = false ;
+  //this.correction_detaillee_disponible = true;
+  //sortie_html ? correction_detaillee = true : correction_detaillee = false ;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let liste_types_equations = combinaison_listes(["0solution","1solution","2solutions"],this.nb_questions)
     for (let i = 0, texte, texte_corr, a, b, c, delta, x1, x2, y1, y2, cpt = 0;i < this.nb_questions && cpt < 50;) {
+      let a_nb_points_intersection
       switch (liste_types_equations[i]) {
         case "0solution": 
+          a_nb_points_intersection = "n'a aucun point d'intersection"
           k = randint(1,5);
           x1 = randint(-3,3,[0]);
           y1 = randint(1,5);
@@ -45782,6 +46896,7 @@ function Calcul_discriminant() {
           texte_corr += `<br>$\\mathcal{S}=\\emptyset$`
           break;
         case "1solution": // k(x-x1)^2
+          a_nb_points_intersection = "n'a qu'un seul point d'intersection"
           k = randint(-5,5,[0]);
           x1 = randint(-5,5,[0]);
           a = k;
@@ -45799,6 +46914,7 @@ function Calcul_discriminant() {
           //texte_corr += `<br>$\\mathcal{S}={${x1}}$`
           break;
           case "2solutions": // k(x-x1)^2
+          a_nb_points_intersection = "a deux points d'intersection"
           k = randint(1,5);
           x1 = randint(-3,3);
           y1 = randint(1,5);
@@ -45826,19 +46942,21 @@ function Calcul_discriminant() {
         default:
           break;
       }
-      if (this.correction_detaillee){
+      if (sortie_html){
         let f = x => a * x**2 + b * x + c
         let graphique = courbe(f)
         graphique.color = 'blue';
         let s = segment(point(-10,0),point(10,0));
         s.epaisseur = 3;
         s.color = 'red';
-        let r = repere({afficheNumeros:false,legendeX : '', legendeY : ''})
-        texte_corr += '<br><br>'
-        texte_corr += `Représentation graphique de $f : x \\mapsto ${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique_sauf1(c)}$ : `
-        texte_corr +='<br><br>'
-        texte_corr += mathalea2d({xmin : -10, ymin : -10, xmax : 10, ymax : 10 , pixelsParCm : 15},
+        let r = repere2({afficheLabels:false,xLabelListe:[],yLabelListe:[]})
+        let correction_complementaire = `Notons $f : x \\mapsto ${rien_si_1(a)}x^2${ecriture_algebrique_sauf1(b)}x${ecriture_algebrique_sauf1(c)}$.`
+        correction_complementaire+= `<br>On observe que la courbe représentative de $f$ ${a_nb_points_intersection} avec l'axe des abscisses.`
+        correction_complementaire+='<br>'
+        correction_complementaire+= mathalea2d({xmin : -10.1, ymin : -10.1, xmax : 10.1, ymax : 10.1 , pixelsParCm : 15},
           graphique,r,s) 
+        
+        texte_corr += modal_texte_long(numero_de_l_exercice,'Complément graphique',correction_complementaire,label_bouton="Complément graphique",icone="info circle")
       }
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
