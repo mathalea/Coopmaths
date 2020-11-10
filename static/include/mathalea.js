@@ -16811,10 +16811,10 @@ function Colorier_Deplacement(){
 	this.titre = "Programmer des déplacements";
   this.consigne = "Dans le quadrillage, effectuer le programme.";
 	this.nb_cols = 1;
-	this.nb_cols_corr = 1;
-	this.nb_questions_modifiable = false;
-	sortie_html? this.spacing = 2 : this.spacing = 2; 
-  sortie_html? this.spacing_corr = 2 : this.spacing_corr = 2;
+  this.nb_cols_corr = 1;
+  this.nb_questions_modifiable = false;
+	sortie_html ? this.spacing = 2 : this.spacing = 1; 
+  sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
   this.liste_packages = "scratch3"; // pour dessiner les blocs en LaTeX/Tikz
 
   this.nouvelle_version = function(){
@@ -16833,7 +16833,7 @@ function Colorier_Deplacement(){
     let code_tikz = ``; // code pour dessiner les blocs en tikz
     let code_svg = ``; // code pour dessiner les blocs en svg
     let nbCommandes = Number(this.sup) + 2; // nombre de commandes de déplacement dans un script
-    let nbRepetition = 1;
+    let nbRepetition = 1; // Nombre de fois où la boucle est répétée. 
     if (this.sup2) {
       nbRepetition = 3;
     }
@@ -16841,22 +16841,22 @@ function Colorier_Deplacement(){
     let lstCommandesTikz = [`\\blockmove{Aller à gauche}`, `\\blockmove{Aller à droite}`, `\\blockmove{Aller en haut}`, `\\blockmove{Aller en bas}`, `\\blockmove{Colorier la case}`];
     let lstCommandesSVG = [`Aller à gauche`, `Aller à droite`, `Aller en haut`, `Aller en bas`, `Colorier`];
     let lstAjoutXY = [[-1,0],[1,0],[0,1],[0,-1],[0,0]];
-    let nb = lstCommandesTikz.length; // nombre de commandes disponibles
-    code_tikz += `\\begin{scratch} <br>`;
+    code_tikz += `\\medskip \\\\ \\begin{scratch} <br>`;
     code_svg += `<pre class='blocks'>`;
-    let n = 0;
+    let n = 0; // variable temporaire pour stocker le numéro de la commande
     let lstNumCommande = []; // liste des commandes successives
     let lstX = [0]; // liste des abscisses successives
     let lstY = [0]; // liste des ordonnées successives
     if (this.sup2) {
       code_svg += `répéter (${nbRepetition}) fois <br>`;
+      code_tikz += `\\blockrepeat{répéter \\ovalnum{${nbRepetition}} fois} {` 
     }
 
     for (i = 0; i<nbCommandes; i++) {
       n = choice([0,1,2,3]); // choix d'un déplacement
-      code_tikz += lstCommandesTikz[n]+`<br>`; // ajout d'un déplacement 
+      code_tikz += lstCommandesTikz[n]; // ajout d'un déplacement 
       code_svg += lstCommandesSVG[n]+`<br>`; // ajout d'un déplacement 
-      code_tikz += lstCommandesTikz[4]+`<br>`; // ajout de l'instruction "Colorier"
+      code_tikz += lstCommandesTikz[4]; // ajout de l'instruction "Colorier"
       code_svg += lstCommandesSVG[4]+`<br>`; // ajout de l'instruction "Colorier"
       lstNumCommande.push(n); // ajout d'un déplacement 
       lstNumCommande.push(4); // ajout de l'instruction "Colorier"
@@ -16869,100 +16869,84 @@ function Colorier_Deplacement(){
         lstY.push(lstY[lstY.length-1]+lstAjoutXY[lstNumCommande[i]][1]);
         }      
     }
-    code_tikz += `\\end{scratch}`;
     if (this.sup2) {
       code_svg += `fin <br>`;
+      code_tikz += `}` 
     }
     code_svg += `</pre>`;
+    code_tikz += `\\end{scratch}`;
 
     let xLutinMin = Math.min(...lstX);
     let xLutinMax = Math.max(...lstX);
     let yLutinMin = Math.min(...lstY);
     let yLutinMax = Math.max(...lstY);
 
-    texte += `Au départ, le lutin est situé dans la case grisée. Chaque déplacement se fait dans une case adjacente. <br>`;
     if (sortie_html) {
-      texte += `<table valign="top"><tr><td>` ;
-    }     
+      texte += `<table style="width: 100%"><tr><td>` ;
+    }  else {
+      texte += `\\begin{minipage}[t]{.25\\textwidth}`;
+    }   
 
     texte += scratchblocks_Tikz(code_svg,code_tikz);
     
     if (sortie_html) {
       texte += `</td><td>`;
       texte += `             `;
-      texte += `</td><td>`;
+      texte += `</td><td style="vertical-align: top; text-align: center">`;
     } else
     {
-      texte += `\\hfill `
+      texte += `\\end{minipage} `
+      texte += `\\hfill \\begin{minipage}[t]{.74\\textwidth}`
     }    
 
-    let r = repere2({
-      grille : true,
-      axesEpaisseur : 1,
-      axesCouleur : 'gray',
-      xThickListe : [],
-      yThickListe : [],
-      xLabelListe : [],
-      yLabelListe : [],
-      xUnite : 1,
-      yUnite : 1,
-      yThickDistance : 1,
-      xThickDistance : 1,
-      xMin : xLutinMin - 1, // la grille entoure le dessin final
-      xMax : xLutinMax + 2,
-      yMin : yLutinMin - 2,
-      yMax : yLutinMax + 1,
-      axeXStyle : '',
-      axeYStyle : '',
-      grilleCouleur : "black",
-      grilleOpacite : 1,
-      grilleEpaisseur : 1,
-    });
+    let xGrilleMin = xLutinMin - 1;
+    let xGrilleMax = xLutinMax + 2;
+    let yGrilleMin = yLutinMin - 2;
+    let yGrilleMax = yLutinMax + 1;
 
-    lstObjet = []; // liste de tous les objets Mathalea2d
+    let r2 = grille(xGrilleMin, yGrilleMin, xGrilleMax, yGrilleMax, 'black', .8, 1);
+    let lstObjet = [r2]; // liste de tous les objets Mathalea2d
 
-    lstObjet.push(segment(r.xMax,r.yMax,r.xMax,r.yMin)); // bord droit du quadrillage
-    lstObjet.push(segment(r.xMin,r.yMax,r.xMax,r.yMax)); // bord haut du quadrillage
-    lstObjet.push(segment(r.xMin,r.yMin,r.xMin,r.yMax)); // bord gauche du quadrillage
-    lstObjet.push(segment(r.xMin,r.yMin,r.xMax,r.yMin)); // bord bas du quadrillage
-    lstObjet[0].epaisseur = 2 ; // épaisseur du bord
-    lstObjet[1].epaisseur = 2 ; // épaisseur du bord
-    lstObjet[2].epaisseur = 2 ; // épaisseur du bord
-    lstObjet[3].epaisseur = 2 ; // épaisseur du bord
     let p; // carré gris représentant le lutin en position de départ
     p = polygone(point(lstX[0],lstY[0]), point(lstX[0]+1,lstY[0]), point(lstX[0]+1,lstY[0]-1), point(lstX[0], lstY[0]-1));
     p.opacite = 0.5;
     p.couleurDeRemplissage = 'black';
     p.opaciteDeRemplissage = 0.5;
+    p.epaisseur = 0;
     lstObjet.push(p);
     let txt = ``; // variable temporaire
-    for (let j = 0; j < (r.xMax-r.xMin); j++) {
+    for (let j = 0; j < (xGrilleMax-xGrilleMin); j++) {
       txt = String.fromCharCode(65+j); // ascii 65 = A
-      lstObjet.push(texteParPosition(txt, r.xMin+j+0.25, r.yMax+0.5, 0, 'black', 1, 'milieu')); // affiche de A à J... en haut de la grille
-    }   
-    
-    for (let i = 0; i < (r.yMax-r.yMin); i++) {
-      lstObjet.push(texteParPosition(String(i), r.xMin-1, r.yMax-i-0.5, 0, 'black', 1, 'milieu')); // affiche de 0 à 9... à gauche de la grille
+      lstObjet.push(texteParPosition(txt, xGrilleMin+j+0.5, yGrilleMax+0.5, 'milieu', 'black', 1)); // affiche de A à J... en haut de la grille
+    }    
+    for (let i = 0; i < (yGrilleMax-yGrilleMin); i++) {
+      lstObjet.push(texteParPosition(String(i), xGrilleMin-0.25, yGrilleMax-i-0.5, 'gauche', 'black', 1)); // affiche de 0 à 9... à gauche de la grille
     }   
 
-    texte+= mathalea2d({xmin:r.xMin-2,xmax:r.xMax+1,ymin:r.yMin-1,ymax:r.yMax+1,pixelsParcCm:20,scale:1},r, lstObjet);    
-    
+    texte += `Au départ, le lutin est situé dans la case grisée. Chaque déplacement se fait dans une case adjacente. <br><br>`;
+    if (!sortie_html) {texte += `\\begin{center}`}
+    texte+= mathalea2d({xmin:xGrilleMin-3,xmax:xGrilleMax+1,ymin:yGrilleMin-1,ymax:yGrilleMax+1,pixelsParcCm:20,scale:.5}, lstObjet);    
     if (sortie_html) {
       texte += `</td></tr></table>`;
-    }    
+    } else {
+      texte += `\\end{center}\\end{minipage} `
+      texte += `\\hfill \\null`;
+    }
 
     // CORRECTION
     // 0 : gauche, 1 : droite, 2 : haut, 3 : bas, 4 : colorier.
     let xLutin = 0; // position initiale du carré
     let yLutin = 0; // position initiale du carré
-    let lstCouleurs = ['green',  'blue', 'red', 'purple', 'pink', 'brown', 'cyan',  'lime', 'magenta', 'olive', 'orange',  'teal', 'violet', 'yellow']
     couleur = `red`;
 
     // on fait un dessin par passage dans la boucle
+    if (sortie_html) {
+      texte_corr += `<table style="width:100%"><tr><td style="text-align:center">` ;
+    } else {
+      texte_corr += `\\begin{minipage}{.49\\textwidth}`;
+    }
     for (let k = 0; k<nbRepetition; k++){
       for (i = k*lstNumCommande.length; i<(k+1)*lstNumCommande.length; i++) {
-        //couleur différente à chaque boucle
-        //if (i%lstNumCommande.length == 0) {couleur = lstCouleurs[Math.trunc(i/nbRepetition)] }
         switch (lstNumCommande[i%lstNumCommande.length]) {
           case 0:
             xLutin += -1;break;
@@ -16976,17 +16960,27 @@ function Colorier_Deplacement(){
             p = polygone(point(xLutin,yLutin), point(xLutin+1,yLutin), point(xLutin+1,yLutin-1), point(xLutin, yLutin-1));
             p.couleurDeRemplissage = couleur;
             p.opaciteDeRemplissage = 0.25;
+            p.epaisseur = 0;
             lstObjet.push(p);          
         }      
       }
       if (this.sup2){
-        texte_corr += `Passage n° ${k+1} dans la boucle. <br>`
+        texte_corr += `Passage n° ${k+1} dans la boucle : <br>`
       }    
-      texte_corr += mathalea2d({xmin:r.xMin-1,xmax:r.xMax+1,ymin:r.yMin-1,ymax:r.yMax+1,pixelsParcCm:20,scale:0.75},r, lstObjet);  
-      texte_corr += `<br>` ;
+      texte_corr += mathalea2d({xmin:xGrilleMin-3,xmax:xGrilleMax+1,ymin:yGrilleMin-1,ymax:yGrilleMax+1,pixelsParcCm:20,scale:0.4}, lstObjet);  
+      if (sortie_html) {
+        if (k%3==2) {
+          texte_corr += `</td></tr><tr><td style="text-align:center">`; // retour à la ligne après 3 grilles dessinées en HTML
+        } else {
+          texte_corr += `</td><td></td><td style="text-align:center">`;
+        }        
+      } else {
+        texte_corr += `\\end{minipage}`;
+        if (k%2==1) {texte_corr += `\\\\ `;} // retour à la ligne après 2 grilles dessinées en LaTeX
+        texte_corr += `\\begin{minipage}{.49\\textwidth}`;
+      }
     }
-
-    
+    sortie_html ? texte_corr += `</td></tr></table>` : texte_corr += `\\end{minipage}`;
 
     this.liste_questions.push(texte);
     this.liste_corrections.push(texte_corr);
@@ -27413,10 +27407,9 @@ function Placer_probabilites(){
 		for (let i = 0; i<nbEvenement; i++){
 			texte += num_alpha(i) + ` ` + lstEvenenementExo[i][0] + `.<br>`;
 		}
-		texte += `<br>`;
-
 		// Création des objets pour dessiner :
-		let L = 20; // longueur du segment
+		let L = 10; // longueur du segment
+
 		let lstObjet = []; // tous les objets qui seront dessinés
 		let h = 0.25; // hauteur trait
 		lstObjet.push(segment(0,0,L,0)); // axe
@@ -27427,16 +27420,26 @@ function Placer_probabilites(){
 		let y = -0.5;
 		if (this.sup) {
 			for (let j = 0; j<lstEchelle.length; j++){
-				lstObjet.push(texteParPosition(lstEchelle[j][0],L*lstEchelle[j][1],y,angle,'black',1,'droite'));
+				lstObjet.push(texteParPosition(lstEchelle[j][0], L*lstEchelle[j][1], y, angle, 'black', 1, 'gauche'));
 			}		
 		} 
 		else {
 			lstObjet.push(fractionParPosition({x:L/2,y:-1,num:1,den:2,couleur:'black'})); // fraction 1/2 
-			lstObjet.push(texteParPosition("0",0,y-0.25,angle,'black',1,'milieu')); // abscisse 0
-			lstObjet.push(texteParPosition("1",L,y-0.25,angle,'black',1,'milieu')); // abscisse 1
+			lstObjet.push(texteParPosition("0", 0, y-0.25, 'black',1)); // abscisse 0
+			lstObjet.push(texteParPosition("1", L, y-0.25, 0, 'black', 1, 'milieu')); // abscisse 1
 		}
 
-		texte += mathalea2d({xmin : -1, xmax : 24, ymin : -8, ymax : 1, pixelsParCm : 20, scale : 1}, lstObjet);
+		if (sortie_html) {
+			texte += `<p style="display:block">`;
+		} else {
+			texte += `\\begin{center}`;
+		} 
+		texte += mathalea2d({xmin : -1, xmax : L+3, ymin : -4, ymax : 1, pixelsParCm : 40, scale : 1}, lstObjet);
+		if (sortie_html) {
+			texte += `</p>`;
+		} else {
+			texte += `\\end{center}`;
+		}
 
 		// CORRECTION :
 		texte_corr = ` `;
@@ -27447,12 +27450,11 @@ function Placer_probabilites(){
 		for (let i = 0; i<nbEvenement; i++){ 
 			p = lstEvenenementExo[i][1];
 			parrondi = Math.round(calcul(6*p)); // échelle arrondie entre 0 et 7 pour éviter la superposition des textes réponses
-			ylst[parrondi] += 1; // on augmente l'ordonnée si elle est déjà utilisée
+			ylst[parrondi] += 0.5; // on augmente l'ordonnée si elle est déjà utilisée
 			let txtSolution = String.fromCharCode(97+i); //code 97 correspond à 'a'
-			lstObjet.push(texteParPosition(txtSolution,calcul(L*p),ylst[parrondi],angle,'black',1,'milieu'))
+			lstObjet.push(texteParPosition(txtSolution,calcul(L*p),ylst[parrondi],angle,'gauche', 'black', 1))
 			lstObjet.push(tracePoint(point(calcul(L*p), 0), 'blue'))
 		}
-
 		for (let i = 0; i<nbEvenement; i++){ 
 			p = lstEvenenementExo[i][1];
 			if (p==0) { parrondi = 0 } 
@@ -27464,8 +27466,17 @@ function Placer_probabilites(){
 			else if (p==1) { parrondi = 6 };			
 			texte_corr += num_alpha(i) + ` ` + lstEvenenementExo[i][0] + ` : ` + lstEchelle[parrondi][0].toLowerCase() + `.<br>`;
 		}
-		texte_corr += mathalea2d({xmin : -1, xmax : 24, ymin : -8, ymax : 2, pixelsParCm : 20, scale : 1}, lstObjet);
-
+		if (sortie_html) {
+			texte_corr += `<p style="display:block">`;
+		} else {
+			texte_corr += `\\begin{center}`;
+		} 
+		texte_corr += mathalea2d({xmin : -1, xmax : L+3, ymin : -4, ymax : 2, pixelsParCm : 40, scale : 1}, lstObjet);
+		if (sortie_html) {
+			texte_corr += `</p>`;
+		} else {
+			texte_corr += `\\end{center}`;
+		}		
 		this.liste_questions.push(texte);
 		this.liste_corrections.push(texte_corr);
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque question.
@@ -31617,9 +31628,9 @@ function Tableaux_et_proportionnalite(){
 function Tableaux_et_pourcentages(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
 		this.nb_questions = 1;
@@ -31637,7 +31648,7 @@ function Tableaux_et_pourcentages(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0];			
 		} else {
 			  //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
@@ -31659,8 +31670,8 @@ function Tableaux_et_pourcentages(){
 			if (this.sup == 1) {//coeff entier
 				remises = choice([
 					[{str:'10\\%',nb:10},{str:'20\\%',nb:20},{str:'30\\%',nb:30}],
-					[{str:'5\\%',nb:5},{str:'15\\%',nb:10},{str:'35\\%',nb:35}],
-					[{str:'10\\%',nb:20},{str:'40\\%',nb:40},{str:'80\\%',nb:80}],
+					[{str:'5\\%',nb:5},{str:'15\\%',nb:15},{str:'35\\%',nb:35}],
+					[{str:'10\\%',nb:10},{str:'40\\%',nb:40},{str:'80\\%',nb:80}],
 					[{str:'5\\%',nb:5},{str:'25\\%',nb:25},{str:'55\\%',nb:55}],
 					//[{str:'10\\%',nb:10},{str:'5\\%',nb:5},{str:'15\\%',nb:15}],
 					//[{str:'50\\%',nb:50},{str:'30\\%',nb:30},{str:'10\\%',nb:10}],
@@ -31717,7 +31728,7 @@ function Tableaux_et_pourcentages(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
