@@ -659,6 +659,9 @@ function Droite(arg1, arg2, arg3, arg4, color) {
     point(this.directeur.x, this.directeur.y)
   );
   this.svg = function (coeff) {
+    if (this.id){
+      this.style += ` id = "${this.id}"`
+    }
     if (this.epaisseur != 1) {
       this.style += ` stroke-width="${this.epaisseur}" `;
     }
@@ -1253,6 +1256,9 @@ function Segment(arg1, arg2, arg3, arg4, color) {
     if (this.opacite != 1) {
       this.style += ` stroke-opacity="${this.opacite}" `;
     }
+    if (this.id) {
+      this.style += ` id = "${this.id}"`
+    }
     let code = "";
     let A = point(this.x1, this.y1);
     let B = point(this.x2, this.y2);
@@ -1373,6 +1379,7 @@ function Segment(arg1, arg2, arg3, arg4, color) {
     return `\\draw${optionsDraw} (${this.x1},${this.y1})--(${this.x2},${this.y2});`;
   };
   this.svgml = function(coeff,amp){
+    this.style=`fill="none"`;
     if (this.epaisseur != 1) {
       this.style += ` stroke-width="${this.epaisseur}" `;
     }
@@ -1383,12 +1390,12 @@ function Segment(arg1, arg2, arg3, arg4, color) {
     let A = point(this.x1, this.y1);
     let B = point(this.x2, this.y2);
     let l=longueur(A,B)
-    let dx=(B.xSVG(coeff)-A.xSVG(coeff))/(10),dy=(B.ySVG(coeff)-A.ySVG(coeff))/(10)
-    let code =`<path d="M ${arrondi(A.xSVG(coeff),0)},${arrondi(A.ySVG(coeff),0)} C `
-    for (let k=0;k<=10;k++) {
-      code +=`${arrondi(A.xSVG(coeff)+k*dx+randint(-1,1)*amp,0)},${arrondi(A.ySVG(coeff)+k*dy+randint(-1,1)*amp,0)} `
+    let dx=(B.xSVG(coeff)-A.xSVG(coeff))/l/2,dy=(B.ySVG(coeff)-A.ySVG(coeff))/l/2
+    let code =`<path d="M ${A.xSVG(coeff)},${A.ySVG(coeff)} C ${Math.round(A.xSVG(coeff),0)},${arrondi(A.ySVG(coeff))} `
+    for (let k=0;k<2*l+0.25;k+=0.25) {
+      code +=`${Math.round(A.xSVG(coeff)+k*dx+randint(-1,1)*amp)},${Math.round(A.ySVG(coeff)+k*dy+randint(-1,1)*amp)} `
     }
-    code +=` ${arrondi(B.xSVG(coeff),0)},${arrondi(B.ySVG(coeff),0)} " stroke="${this.color}" ${this.style}"/>`
+    code +=` ${Math.round(B.xSVG(coeff),0)},${arrondi(B.ySVG(coeff))} ${B.xSVG(coeff)},${B.ySVG(coeff)} " stroke="${this.color}" ${this.style}/>`
     return code;
  }
   this.tikzml = function(amp){
@@ -1507,6 +1514,9 @@ function Polygone(...points) {
     return liste;
   };
   this.svg = function (coeff) {
+    if (this.id){
+      this.style += ` id = "${this.id}"`
+    }
     if (this.epaisseur != 1) {
       this.style += ` stroke-width="${this.epaisseur}" `;
     }
@@ -1570,7 +1580,7 @@ function Polygone(...points) {
       B=this.listePoints[k%this.listePoints.length]
       A=this.listePoints[k-1]
       segment_courant=segment(A,B)
-      segment_courant.isVisible=false
+      segment_courant.isVisible=true
       segment_courant.epaisseur=this.epaisseur
       segment_courant.color=this.color
       segment_courant.opacite=this.opacite
@@ -2199,6 +2209,7 @@ function Arc(M, Omega, angle, rayon = false, fill = 'none', color = 'black', fil
   }
   let N = rotation(M, Omega, angle)
   if (rayon) this.svg = function (coeff) {
+    this.style=``
     if (this.epaisseur != 1) {
       this.style += ` stroke-width="${this.epaisseur}" `
     }
@@ -2214,6 +2225,7 @@ function Arc(M, Omega, angle, rayon = false, fill = 'none', color = 'black', fil
     return `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} A ${l * coeff} ${l * coeff} 0 ${large} ${sweep} ${N.xSVG(coeff)} ${N.ySVG(coeff)} L ${Omega.xSVG(coeff)} ${Omega.ySVG(coeff)} Z" stroke="${this.color}" fill="${this.couleurDeRemplissage}" ${this.style}/>`
   }
   else this.svg = function (coeff) {
+    this.style=``
     if (this.epaisseur != 1) {
       this.style += ` stroke-width="${this.epaisseur}" `
     }
@@ -2253,7 +2265,10 @@ function Arc(M, Omega, angle, rayon = false, fill = 'none', color = 'black', fil
     else return `\\draw${optionsDraw} (${M.x},${M.y}) arc (${azimut}:${anglefin}:${longueur(Omega, M)}) ;`
   }
   let la,da,code,P,dMx,dMy,dPx,dPy
-  if (!rayon)  this.svgml = function (coeff, amp) {
+
+  this.svgml = function (coeff, amp) {
+    this.style=``
+    if(!rayon){
     if (this.epaisseur != 1) {
       this.style += ` stroke-width="${this.epaisseur}" `;
     }
@@ -2261,19 +2276,20 @@ function Arc(M, Omega, angle, rayon = false, fill = 'none', color = 'black', fil
       this.style += ` stroke-opacity="${this.opacite}" `;
     }
     this.style += ` fill="none" `;
-    la = Math.abs(Math.round(longueur(M, Omega) * 2 * Math.PI * angle / 360)) //longueur de l'arc pour obtenir le nombre de points intermédiaires proportionnel au rayon
-    da = angle / la
+    la = longueur(M, Omega) // pour obtenir le nombre de points intermédiaires proportionnel au rayon
+
+    da = angle/la/10
     code = `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} C `
-    for (let k = 0; k <= la; k++) {
-      P = rotation(M, Omega, k * da)
-      code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 2)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 2)}, `
+    for (let k = 0; Math.abs(k) <= Math.abs(angle); k+=da) {
+      P = rotation(M, Omega, k)
+      code += `${Math.round(P.xSVG(coeff) + randint(-1, 1) * amp)} ${Math.round(P.ySVG(coeff) + randint(-1, 1) * amp)}, `
     }
-    code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 2)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 2)} `
-    code += `" stroke="${color}" ${this.style}"/>`
+    P = rotation(M, Omega, angle)
+    code += `${Math.round(P.xSVG(coeff) + randint(-1, 1) * amp)} ${Math.round(P.ySVG(coeff) + randint(-1, 1) * amp)} `
+    code += `" stroke="${color}" ${this.style}/>`
     return code
   }
-  else 
-    this.svgml=function (coeff,amp) {
+  else {
       if (this.epaisseur != 1) {
         this.style += ` stroke-width="${this.epaisseur}" `;
       }
@@ -2286,32 +2302,33 @@ function Arc(M, Omega, angle, rayon = false, fill = 'none', color = 'black', fil
         this.style += ` fill="${this.couleurDeRemplissage}" `;
         this.style += ` fill-opacity="${this.opaciteDeRemplissage}" `;
       }
-      la = Math.abs(longueur(M, Omega) * 2 * Math.PI * angle / 360) //longueur de l'arc pour obtenir le nombre de points intermédiaires proportionnel au rayon
-      da = angle / la
+      la = longueur(M, Omega) // pour obtenir le nombre de points intermédiaires proportionnel au rayon
+      da = angle/la/10
       code = `<path d="M${M.xSVG(coeff)} ${M.ySVG(coeff)} C `
-      for (let k = 0; k <= la; k++) {
-        P = rotation(M, Omega, k * da)
-        code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)}, `
+      for (let k = 0; k <= angle; k+=da) {
+        P = rotation(M, Omega, k)
+        code += `${Math.round(P.xSVG(coeff) + randint(-1, 1) * amp)} ${Math.round(P.ySVG(coeff) + randint(-1, 1) * amp)}, `
       }
-      code += `${arrondi(P.xSVG(coeff) + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + randint(-1, 1) * amp, 0)} `
+      P = rotation(M, Omega, la * da)
+      code += `${Math.round(P.xSVG(coeff) + randint(-1, 1) * amp)} ${Math.round(P.ySVG(coeff) + randint(-1, 1) * amp)} `
     
     l = longueur(Omega, M)
     dMx = (M.xSVG(coeff) - Omega.xSVG(coeff)) / (4 * l)
     dMy = (M.ySVG(coeff) - Omega.ySVG(coeff)) / (4 * l)
     dPx = (Omega.xSVG(coeff) - P.xSVG(coeff)) / (4 * l)
     dPy = (Omega.ySVG(coeff) - P.ySVG(coeff)) / (4 * l)
-    if (rayon) {
       for (let k = 0; k <= 4 * l; k++) {
-        code += `${arrondi(P.xSVG(coeff) + k * dPx + randint(-1, 1) * amp, 0)} ${arrondi(P.ySVG(coeff) + k * dPy + randint(-1, 1) * amp, 0)}, `
+        code += `${Math.round(P.xSVG(coeff) + k * dPx + randint(-1, 1) * amp)} ${Math.round(P.ySVG(coeff) + k * dPy + randint(-1, 1) * amp)}, `
       }
       for (let j = 0; j <= 4 * l; j++) {
-        code += `${arrondi(Omega.xSVG(coeff) + j * dMx + randint(-1, 1) * amp, 0)} ${arrondi(Omega.ySVG(coeff) + j * dMy + randint(-1, 1) * amp, 0)}, `
+        code += `${Math.round(Omega.xSVG(coeff) + j * dMx + randint(-1, 1) * amp)} ${Math.round(Omega.ySVG(coeff) + j * dMy + randint(-1, 1) * amp)}, `
       }
-      code += `${arrondi(Omega.xSVG(coeff) + 4 * l * dMx + randint(-1, 1) * amp, 0)} ${arrondi(Omega.ySVG(coeff) + 4 * l * dMy + randint(-1, 1) * amp, 0)} Z `
-    }
-    code += `" stroke="${color}" ${this.style}"/>`
+      code += `${Math.round(Omega.xSVG(coeff) + 4 * l * dMx + randint(-1, 1) * amp)} ${Math.round(Omega.ySVG(coeff) + 4 * l * dMy + randint(-1, 1) * amp)} Z `
+    code += `" stroke="${color}" ${this.style} />`
     return code
+    }
   }
+
   this.tikzml = function (amp) {
     let optionsDraw = []
     let tableauOptions = [];
@@ -3271,6 +3288,29 @@ function AffiniteOrthoAnimee(
 function affiniteOrthoAnimee(...args) {
   return new AffiniteOrthoAnimee(...args);
 }
+
+
+function afficherTempo(id,t0,t){
+  let checkExist = setInterval(function() {
+    if ($(`#${id}`).length) {
+      document.getElementById(id).animate([
+        // keyframes
+        { opacity: 0 }, 
+        { opacity: 0, offset:t0/t }, 
+        { opacity: 1, offset:t0/t+.1 }, 
+        { opacity: 1 }
+      ], { 
+        // timing options
+        duration: t*1000,
+        iterations: Infinity
+      });
+       clearInterval(checkExist);
+    }
+ }, 100); // check every 100ms
+  
+  
+}
+
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%% LE TRIANGLE %%%%%%%%%%%%%%
@@ -3465,7 +3505,28 @@ function CodageAngleDroit(A, O, B, color = "black", d = 0.4) {
   }
   return polyline([a, o, b], color).tikz();
 }
-
+this.svgml=function(coeff,amp){
+  let a=pointSurSegment(this.sommet,this.depart, this.taille*20/coeff);
+  let b=pointSurSegment(this.sommet,this.arrivee, this.taille*20/coeff);
+  let o = {};
+  if (angleOriente(A, this.sommet, B) > 0) {
+    o = rotation(this.sommet, a, -90);
+  } else {
+    o = rotation(this.sommet, a, 90);
+  }
+  return polyline([a, o, b], color).svgml(coeff,amp);
+}
+this.tikzml=function(amp){
+let a=pointSurSegment(this.sommet,this.depart, this.taille/scale);
+let b=pointSurSegment(this.sommet,this.arrivee, this.taille/scale);
+let o = {};
+if (angleOriente(A, this.sommet, B) > 0) {
+  o = rotation(this.sommet, a, -90);
+} else {
+  o = rotation(this.sommet, a, 90);
+}
+return polyline([a, o, b], color).tikzml(amp);
+}
 
 
 }
@@ -3810,7 +3871,7 @@ function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur
   this.epaisseur=epaisseur
   this.opacite=opacite
 
-  if (this.fill!='none') {
+  if (fill!='none') {
     this.couleurDeRemplissage=fill
     this.opaciteDeRemplissage=fillOpacite
   }
@@ -3821,19 +3882,15 @@ function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur
     remplir = false
   else 
     remplir = true
-  this.plein=remplir
-  if (typeof(angle)!='number'){
-    angle=angleOriente(debut,centre,angle)
-  }
   this.angle=angle
-
+  
   this.svg=function(coeff){
     let P,depart,d,arcangle,codage
     depart=pointSurSegment(this.centre,this.debut,this.taille*20/pixelsParCm)
     P=rotation(depart,this.centre,this.angle/2)
     d=droite(this.centre,P)
     d.isVisible=false
-    arcangle=arc(depart,this.centre,this.angle,this.plein,this.couleurDeRemplissage,this.color)
+    arcangle=arc(depart,this.centre,this.angle,remplir,this.couleurDeRemplissage,this.color)
     arcangle.opacite=this.opacite
     arcangle.epaisseur=this.epaisseur
     arcangle.couleurDeRemplissage=this.couleurDeRemplissage
@@ -3850,7 +3907,7 @@ function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur
     P=rotation(depart,this.centre,this.angle/2)
     d=droite(this.centre,P)
     d.isVisible=false
-    arcangle=arc(depart,this.centre,this.angle,this.plein,this.couleurDeRemplissage,this.color)
+    arcangle=arc(depart,this.centre,this.angle,remplir,this.couleurDeRemplissage,this.color)
     arcangle.opacite=this.opacite
     arcangle.epaisseur=this.epaisseur
     arcangle.couleurDeRemplissage=this.couleurDeRemplissage
@@ -3864,10 +3921,10 @@ function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur
   this.svgml = function(coeff,amp){
     let P,depart,d,arcangle,codage
     depart=pointSurSegment(this.centre,this.debut,this.taille*20/pixelsParCm)
-    P=rotation(this.depart,this.centre,this.angle/2)
+    P=rotation(depart,this.centre,this.angle/2)
     d=droite(this.centre,P)
     d.isVisible=false
-    arcangle=arc(this.depart,this.centre,this.angle,this.plein,this.couleurDeRemplissage,this.color)
+    arcangle=arc(depart,this.centre,this.angle,false,this.couleurDeRemplissage,this.color)
     arcangle.opacite=this.opacite
     arcangle.epaisseur=this.epaisseur
     arcangle.couleurDeRemplissage=this.couleurDeRemplissage
@@ -3875,15 +3932,15 @@ function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur
     if (this.mark!='')  codage=texteParPoint(mark,P,90-d.angleAvecHorizontale,color)
     else codage=''
     if (codage!='') return codage.svg(coeff)+'\n'+arcangle.svgml(coeff,amp);
-    else return arcangle.svg(coeff);
+    else return arcangle.svgml(coeff,amp);
   }
   this.tikzml=function(amp){
     let P,depart,d,arcangle,codage
     depart=pointSurSegment(this.centre,this.debut,this.taille/scale)
-    P=rotation(this.depart,this.centre,this.angle/2)
+    P=rotation(depart,this.centre,this.angle/2)
     d=droite(this.centre,P)
     d.isVisible=false
-    arcangle=arc(this.depart,this.centre,this.angle,this.plein,this.couleurDeRemplissage,this.color)
+    arcangle=arc(depart,this.centre,this.angle,remplir,this.couleurDeRemplissage,this.color)
     arcangle.opacite=this.opacite
     arcangle.epaisseur=this.epaisseur
     arcangle.couleurDeRemplissage=this.couleurDeRemplissage
@@ -3896,7 +3953,13 @@ function CodeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur
 }
 
 function codeAngle(debut,centre,angle,taille=0.8,mark='',color='black',epaisseur=1,opacite=1,fill='none',fillOpacite=0.2){
-  return new CodeAngle(debut,centre,angle,taille,mark,color,epaisseur,opacite,fill,fillOpacite)
+  if (typeof(angle)!='number'){
+    angle=angleOriente(debut,centre,angle)
+  }
+  if (angle==90||angle==-90) {
+    return new CodageAngleDroit(debut,centre,rotation(debut,centre,angle),color,taille)
+  }
+  else  return new CodeAngle(debut,centre,angle,taille,mark,color,epaisseur,opacite,fill,fillOpacite)
 }
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4172,7 +4235,7 @@ function DroiteGraduee2({
    this.svgml = function (coeff,amp) {
      let code = "";
       for (objet of objets) {
-       if (!mainlevee||typeof(objet.svgml)=='undefined') code += "\t" + objet.svg(coeff) + "\n";
+       if (typeof(objet.svgml)=='undefined') code += "\t" + objet.svg(coeff) + "\n";
        else code += "\t" + objet.svgml(coeff,amp) + "\n";
       }
       return code;
@@ -4180,7 +4243,7 @@ function DroiteGraduee2({
     this.tikzml = function (amp) {
       let code = "";
       for (objet of objets) {
-       if (!mainlevee||typeof(objet.tikzml)=='undefined') code += "\t" + objet.tikz() + "\n";
+       if (typeof(objet.tikzml)=='undefined') code += "\t" + objet.tikz() + "\n";
        else code += "\t" + objet.tikzml(amp) + "\n";
       }
       return code;
@@ -5703,6 +5766,7 @@ function GraphiqueInterpole(
   tableau,{color = "black",
     epaisseur = 1,
     repere = {},
+    step = 0.2,
     }={}
   
 ) {
@@ -5717,7 +5781,7 @@ function GraphiqueInterpole(
     let depart, fin;
     repere.xMin > x0 ? (depart = repere.xMin) : (depart = x0);
     repere.xMax < x1 ? (fin = repere.xMax) : (fin = x1);
-    let c = courbe2(f,{step:0.4,xMin : depart, xMax : fin, color : color, epaisseur : epaisseur, xUnite : repere.xUnite, yUnite : repere.yUnite, yMin : repere.yMin, yMax : repere.yMax})
+    let c = courbe2(f,{step:step,xMin : depart, xMax : fin, color : color, epaisseur : epaisseur, xUnite : repere.xUnite, yUnite : repere.yUnite, yMin : repere.yMin, yMax : repere.yMax})
     mesCourbes.push(c);
     this.svg = function (coeff) {
       code = "";
@@ -6022,29 +6086,28 @@ function latexParCoordonnees(texte, x, y) {
  * @Auteur Jean-Claude Lhote
  */
 
-function fractionParPosition({x=0,y=0,num=1,den=2,couleur='black'}){
+function FractionParPosition({x=0,y=0,num=1,den=2,couleur='black'}){
   ObjetMathalea2D.call(this);
-  let objects=[]
-  let longueur=Math.max(Math.ceil(Math.log10(num)),Math.ceil(Math.log10(den)))*0.5
-  objects.push(segment(point(x,y),point(x+longueur,y),couleur))
-  objects.push(texteParPosition(nombre_avec_espace(num),x+longueur/2,y+0.5,"milieu",couleur))
-  objects.push(texteParPosition(nombre_avec_espace(den),x+longueur/2,y-0.5,"milieu",couleur))
+  let longueur=Math.max(Math.ceil(Math.log10(num)),Math.ceil(Math.log10(den)))*10
+  let offset=10
 
   this.svg=function(coeff){
-    let code=""
-    for (object of objects) {
-      code+=object.svg(coeff)
-    }
+    let code=segment(x,y,x+longueur/coeff,y,couleur).svg(coeff)
+    code+=texteParPosition(nombre_avec_espace(num),x+longueur/2/coeff,y+offset/coeff,"milieu",couleur).svg(coeff)
+    code+=texteParPosition(nombre_avec_espace(den),x+longueur/2/coeff,y-offset/coeff,"milieu",couleur).svg(coeff)
     return code
   }
 
   this.tikz = function(){
-    let code=""
-    for (object of objects) {
-      code+=object.tikz()
-    }
-    return code
+    let code=segment(x,y,x+longueur/scale,y,couleur).tikz()
+    code+=texteParPosition(nombre_avec_espace(num),x+longueur/2/scale,y+offset/scale,"milieu",couleur).tikz()
+    code+=texteParPosition(nombre_avec_espace(den),x+longueur/2/scale,y-offset/scale,"milieu",couleur).tikz()
+     return code
   }
+}
+
+function fractionParPosition(arg) {
+  return new FractionParPosition(arg)
 }
 
 function Print2d(helloworld){
