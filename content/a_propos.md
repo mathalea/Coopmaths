@@ -34,7 +34,9 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - COGEZ Sébastien
 - DESRUELLE Sophie
 - DUVOID Aude
+- DUPLESSY Erwan
 - FOURNIER Carine
+- GAIN Mireille
 - GUYON Sthéphane
 - LACROIX Olivier
 - LEFORT Julie

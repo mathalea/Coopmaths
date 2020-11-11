@@ -35,7 +35,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 ### Crédits
 
 - Moteur développé par Rémi Angot sous licence **CC-By-SA**.
-- Exercices écrits par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano et Stéphane Guyon puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
+- Exercices écrits par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain et Erwan Duplessy puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Biton - Licence GNU AGPLv3 (pour les constructions géométriques).
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
@@ -69,6 +69,16 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 
 ### Changelog
+
+#### 10/20
+
+- Arrivée de Erwan Duplessy et Mireille Gain pour la programmation d'exercices.
+- Représentation de données avec MathALEA2D (histogramme, graphique cartésien).
+- Équation d'une parabole.
+
+#### 09/20
+
+- Test de positionnement en cycle 4.
 
 
 #### 08/20

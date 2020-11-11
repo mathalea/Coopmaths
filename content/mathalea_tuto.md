@@ -11,6 +11,7 @@ description: "Générateur d'exercices de mathématiques à données aléatoires
 	{{% item "Je veux créer un fichier d'exercices PDF" "#pdf" %}}
 	{{% item "Je veux vidéoprojeter des questions flash" "#flash" %}}
 	{{% item "Je veux créer une évaluation différente par élève" "#alacarte" %}}
+	{{% item "Je veux intégrer un exercice dans un site ou un genial.ly" "#iframe" %}}
   {{% item "Je veux voir un diaporama qui résume l'usage par les élèves" "#eleves" %}}
 {{< /liste >}}
 
@@ -72,6 +73,7 @@ On peut donner un lien vers ce diaporama aux élèves en recopiant l'adresse int
 
 <h3 class="ui horizontal divider header" id="alacarte">Créer une évaluation différente pour chaque élève</h3>
 
+
 Pour pouvoir mettre en place la boucle évaluative, il peut être utile de préparer une évaluation individualisée avec les besoins de chaque élève.
 
 - Se rendre sur MathALEA > Évaluation à la carte.
@@ -82,6 +84,23 @@ Pour pouvoir mettre en place la boucle évaluative, il peut être utile de prép
 Il est possible de paramétrer un exercice en choisissant le niveau de difficulté et le nombre de questions en écrivant : « Nom ; Prénom ; 6C11,sup=2,nb_questions=3 ; 6C12 ; 6C30 » (l'exercice 6C11 sera de niveau 2 avec 3 questions).
 
 {{% video "/video/alacarte.mp4"  %}}
+
+
+<h3 class="ui horizontal divider header" id="iframe">Intégrer un exercice dans un site ou un genial.ly</h3>
+
+Sur tous les sites internet qui vous autorisent à écrire du code HTML, il est possible d'y insérer un exercice de MathALEA épuré comme le fait Stéphane Guyon sur <a href="https://mathsguyon.fr/test/index.php?l=fr&n=4e&c=1.%20Relatifs" target="_blank">ses pages de cours.</a>.
+
+Par exemple, sur Genial.ly, on utilise le bouton « Intégrer » pour placer la ressource directement sur la diapo. On peut aussi l'intégrer dans un objet en accédant au code html grâce au bouton `<>`.
+
+Pour cela, il vous faut saisir le code suivant avec `width` pour la largeur en pixels et `height` pour la hauteur. Pour l'URL, il suffit de remplacer exercice.html par exo.html pour avoir la version épurée de l'exercice.
+
+````
+<iframe width="660"
+        height="315" 
+        src="https://coopmaths.fr/exo.html?ex=5C11-1,nb_questions=4"
+        frameborder="0" >
+</iframe>
+````
 
 <h3 class="ui horizontal divider header" id="eleves">Utilisation pour l'élève - Présentation interactive</h3>
 

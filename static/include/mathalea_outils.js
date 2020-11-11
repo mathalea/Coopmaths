@@ -14,7 +14,11 @@ function liste_de_question_to_contenu(argument) {
 		argument.contenu = html_consigne(argument.consigne) + html_paragraphe(argument.introduction) + html_enumerate(argument.liste_questions,argument.spacing)
 		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_enumerate(argument.liste_corrections,argument.spacing_corr)	
 	} else {
-		argument.contenu = tex_consigne(argument.consigne) + tex_introduction(argument.introduction) + tex_multicols(tex_enumerate(argument.liste_questions,argument.spacing),argument.nb_cols)
+		let vspace = '';
+		if (argument.vspace) {
+			vspace = `\\vspace{${argument.vspace} cm}\n`
+		}
+		argument.contenu = tex_consigne(argument.consigne) + vspace + tex_introduction(argument.introduction) + tex_multicols(tex_enumerate(argument.liste_questions,argument.spacing),argument.nb_cols)
 		argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
 	}
 	
@@ -131,38 +135,38 @@ function ecrireAdditionPosee(x,y,...args){
 */
 class NombreDecimal {
 	constructor(nombre){
-		this.partieEntiere=[]
-		this.partieDecimale=[]
 		if (nombre<0) {
 			this.signe=`-`
 			nombre=calcul(-nombre)
 		}
 		else this.signe=`+`
-		let ent=Math.floor(nombre)
-		let partiedecimale=calcul(nombre-ent)
-		let nbcPE=Math.ceil(Math.log10(ent))
-		for (let i=0;i<nbcPE;i++){
-			this.partieEntiere.push(ent%10)
-			ent=(ent-(ent%10))/10
+		console.log(nombre)
+		this.exposant=Math.floor(Math.log10(nombre))
+		nombre=nombre/10**this.exposant
+		console.log(nombre)
+		this.mantisse=[]
+		for (let k=0;k<16;k++) {
+			if (egal(Math.ceil(nombre)-nombre,0,0.00001)) {
+				this.mantisse.push(Math.ceil(nombre))
+				nombre=(this.mantisse[k]-nombre)*10
+			}
+			else {
+				this.mantisse.push(Math.floor(nombre))
+				nombre=(nombre-this.mantisse[k])*10
+			}
+			console.log(nombre)
+			if (egal(nombre,0,0.001)) break
 		}
-
-		let k=0
-		while (!egal(partiedecimale,0)){
-			partiedecimale=arrondi(partiedecimale*10,10)
-			this.partieDecimale.push(Math.floor(partiedecimale))
-			partiedecimale=(partiedecimale-Math.floor(partiedecimale))
-			k++
-		}
+		
 	}
 	get valeur() {
 		return this.recompose()
 	}
 	recompose() {
 		let val=0
-		for (let i=0;i<this.partieEntiere.length;i++)
-			val+=this.partieEntiere[i]*10**i
-		for (let j=0;j<this.partieDecimale.length;j++) 
-			val+=this.partieDecimale[j]*10**(-1-j)
+		for (let i=0;i<10;i++)
+			val+=this.mantisse[i]*10**(-i)
+		val=val*10**this.exposant
 		if (this.signe==`+`) return val
 		else return calcul(-val)
 	}
@@ -210,7 +214,7 @@ function creer_couples(E1, E2, nombre_de_couples_min = 10){
 *
 * @example
 * // Renvoit 1, 2 ou 3
-* randint(1,3)
+* randint (1,3)
 * @example
 * // Renvoit -1 ou 1
 * randint(-1,1,[0])
@@ -336,7 +340,7 @@ function enleve_element_No_bis(array,index){
 *
 * @example
 * // Renvoit 1, 2 ou 3
-* choice[(1,2,3)]
+* choice([1,2,3])
 * @example
 * // Renvoit Rémi ou Léa
 * choice(['Rémi','Léa'])
@@ -354,6 +358,17 @@ function choice(liste,liste_a_eviter=[]) {
 	return listebis[index];
 }
 
+/**
+* Retourne une liste des entiers de 0 à max sans appartenir à une liste donnée
+* @param {max} 
+* @param {liste_a_eviter}
+*
+* @example
+* // Renvoit [1,4,5,6,7,8,9,10]
+* range(10,[2,3])
+*
+* @author Rémi Angot
+*/
 function range(max,liste_a_eviter=[]){
 	// Créer un tableau avec toutes les valeurs de 0 à max sauf celle de la liste à éviter
 	let nb_max = parseInt(max,10);
@@ -364,6 +379,29 @@ function range(max,liste_a_eviter=[]){
 	return liste
 }
 
+/**
+* Retourne une liste entre 2 bornes sans appartenir à une liste donnée (par défaut des entiers mais on peut changer le pas)
+* @param {min} 
+* @param {max} 
+* @param {liste_a_eviter}
+*
+* @example
+* // Renvoit [6,7,10]
+* range(6,10,[8,9])
+*
+* @author Rémi Angot
+*/
+function rangeMinMax(min,max,liste_a_eviter=[],step=1){
+	// Créer un tableau avec toutes les valeurs de 0 à max sauf celle de la liste à éviter
+	let liste = [];
+	for (let i = min; i <= max; i = calcul(i+step)) {
+		liste.push(i);
+	}
+	for (let i=0;i<liste_a_eviter.length;i++){
+		enleve_element(liste,liste_a_eviter[i])
+	}
+	return liste
+}
 
 /**
 * Créé un tableau avec toutes les valeurs de 1 à max sauf celle de la liste à éviter
@@ -1236,12 +1274,18 @@ function creerNomDePolygone(nbsommets,liste_a_eviter=[]){
 		polygone += String.fromCharCode(premiersommet+i)
 	}
 
-	while(possedeUnCaractereInterdit(polygone,liste_a_eviter)){
-		polygone="";
-		premiersommet = randint(65,90-nbsommets);
-		for (let i=0;i<nbsommets;i++){
-			polygone += String.fromCharCode(premiersommet+i)
+	if (liste_a_eviter.length < 26-nbsommets-1){ // On évite la liste à éviter si elle n'est pas trop grosse sinon on n'en tient pas compte
+		let cpt = 0;
+		while(possedeUnCaractereInterdit(polygone,liste_a_eviter) && cpt <20){
+			polygone="";
+			premiersommet = randint(65,90-nbsommets);
+			for (let i=0;i<nbsommets;i++){
+				polygone += String.fromCharCode(premiersommet+i)
+			}
+			cpt ++; // Au bout de 20 essais on laisse tomber la liste à éviter
 		}
+	} else {
+		console.log("Trop de questions donc plusieurs polygones peuvent avoir le même nom")
 	}
 	return polygone
 }
@@ -1260,6 +1304,46 @@ function possedeUnCaractereInterdit(texte,liste_a_eviter) {
 		}
 	}
 	return result;
+}
+/**
+ * retourne une liste de combien de nombres compris entre m et n (inclus) en évitant les valeurs de liste_a_eviter
+ * toutes la liste des nombres est retournée si combien est supérieur à l'effectif disponible
+ * les valeurs sont dans un ordre aléatoire.
+ * @Auteur Jean-Claude Lhote
+ * 
+ */
+function choisit_nombres_entre_m_et_n(m,n,combien,liste_a_eviter=[]){
+	let t
+	if (m>n) {
+		t=m;
+		m=n;
+		n=t;
+	}
+	else if (m==n)
+		return [n];
+	if (combien>n-m) combien=n-m;
+	let index=rangeMinMax(m,n,liste_a_eviter)
+	index=shuffle(index);
+	index=index.slice(0,combien)
+	return index;
+}
+/**
+ * retourne une liste de lettres majuscules (ou minuscule si majuscule=false)
+ * il y aura nombre lettres dans un ordre aléatoire
+ * les lettres à éviter sont données dans une chaine par exemple : 'QXY'
+ * @Auteur Jean-Claude Lhote
+ */
+function choisit_lettres_differentes(nombre,lettres_a_eviter,majuscule=true){
+	let liste_a_eviter=[],lettres=[]
+	for (l of lettres_a_eviter) {
+		liste_a_eviter.push(l.charCodeAt(0)-64)
+	}
+	let index=choisit_nombres_entre_m_et_n(1,26,nombre,liste_a_eviter)
+	for (n of index) {
+		if (majuscule) lettres.push(lettre_depuis_chiffre(n))
+		else lettres.push(lettre_minuscule_depuis_chiffre(n))
+	}
+	return lettres
 }
 
 /**
@@ -1287,7 +1371,7 @@ function lettre_depuis_chiffre(i){
 }
 
 /**
-* Renvoit une lettre majuscule depuis un nombre compris entre 1 et 702
+* Renvoit une lettre minuscule depuis un nombre compris entre 1 et 702
 * @Auteur Rémi Angot
 *@Example
 * // 0 -> @ 1->a ; 2->b...
@@ -3997,10 +4081,24 @@ function detect_safari_chrome_browser(){
 */
 function premierMultipleSuperieur(k,n){
 	let result = n
-	while (result%k!=0){
-		result+=1
+	if (Number.isInteger(k)&&Number.isInteger(n)) {
+		while (result%k!=0){
+			result+=1
+		}
+		return result
 	}
-	return result
+	else {
+		if (egal(Math.floor((n/k),n/k))) return n
+		else {
+			reste=n/k-Math.floor(n/k)
+			return n-reste*k+k
+		}
+	}
+}
+function premierMultipleInferieur(k,n){
+	let result=premierMultipleSuperieur(k,n)
+	if (result!=n) return result-k
+	else return n
 }
 
 /**
@@ -5069,7 +5167,7 @@ function Fraction(num,den) {
 	this.fractionEgale = function(k){
 		return fraction(calcul(this.numIrred*k),calcul(this.denIrred*k))
 	}   
-	this.simplifie=function() {
+	this.simpsimplifie=function() {
 		return fraction(this.numIrred,this.denIrred)
 	}
 	/**
@@ -5093,7 +5191,7 @@ function Fraction(num,den) {
 	/**
 	 * @return {object} L'inverse de la fraction simplifiée
 	 */
-    this.inverseIrred = function(){
+    this.inverseIrrred = function(){
         return fraction(this.denIrred,this.numIrred)
 	}
 	/**
@@ -5119,8 +5217,13 @@ function Fraction(num,den) {
 	 * @param {object} f2  LA fraction par laquelle est multipliée la fraction
 	 */
     this.produitFraction = function(f2) {
+
         return fraction(this.num*f2.num,this.den*f2.den)
 	}
+	this.texProduitFraction = function(f2) {
+			return `${tex_fraction(this.num,this.den)}\\times ${tex_fraction(f2.num,f2.den)}=${tex_fraction(this.num+`\\times`+f2.num,this.den+`\\times`+f2.den)}=${tex_fraction(this.num*f2.num,this.den*f2.den)}`
+	} 
+
 	/**
 	 * @return {object} La puissance n de la fraction
 	 * @param {integer} n l'exposant de la fraction 
@@ -7117,7 +7220,7 @@ function preambule_personnalise(){
 			result += '\\usepackage[tikz]{bclogo}'
 		break
 		case 'tkz-euclide' :
-			result += '\\usepackage{tkz-euclide}\n\\usetkzobj{all}'
+			result += '\\usepackage{tkz-euclide}'
 		break
 		default:
 		    result += `\\usepackage{${packages}}\n`
