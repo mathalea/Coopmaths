@@ -25,6 +25,8 @@ var liste_des_exercices_disponibles = {
   "c3C10-4" : Exercice_tables_d_additions_cycle3,
   "c3C11" : Division_cycle3,
   "c3N10" : Ecrire_entiers_cycle3,
+  "c3N22" : Lire_abscisse_decimale_trois_formesCM,
+  "c3N23" : lireUneAbscisseAvecZoomCM,
   "6Algo10": Colorier_Deplacement,
   "6C10": Additions_soustractions_multiplications_posees,
   "6C11": Divisions_euclidiennes,
@@ -42,7 +44,6 @@ var liste_des_exercices_disponibles = {
   "6C31": Division_decimale,
   "6C32": Probleme_course,
   "6C33": Priorites,
-  //"6C99" : separation6C,
   "6D10": Conversions_de_durees,
   "6D101": Heures_decimales,
   "6D11": Somme_de_durees,
@@ -53,7 +54,8 @@ var liste_des_exercices_disponibles = {
   "6G11": Tracer_des_perpendiculaires,
   "6G12": Tracer_des_paralleles,
   "6G12-1": Tracer_des_perpendiculaires_et_des_paralleles,
-  "beta6G14" : Test_main_levee,
+  "6G14" : Proprietes_paralleles_perpendiculaires,
+  "beta6G24" : Test_main_levee,
   "6G20" : Nommer_et_coder_des_polygones,
   "6G20-2": Vocabulaire_des_triangles_6e,
   "6G21" : Construire_un_triangle_6e,
@@ -65,7 +67,6 @@ var liste_des_exercices_disponibles = {
   "6G25-2": Pavages_et_symetries,
   "6G33" : Symetrie_axiale_conservation1,
   "6G41" : Representer_un_solide_6e,
-  "6G33" : Symetrie_axiale_conservation1,
   "6G42" : Solide_6e,
   "6G43" : Utiliser_vocabulaire_pave,
   "6M11-1": Perimetre_ou_aire_de_carres_rectangles_triangles,
@@ -103,6 +104,8 @@ var liste_des_exercices_disponibles = {
   "6N23-0" : Ecrire_nombres_decimal,
   "6N23-1": Exercice_differentes_ecritures_nombres_decimaux,
   "6N23-2" : Lire_abscisse_decimale_trois_formes,
+  "6N23-3" : LireUneAbscisseAvecZoom,
+  "6N23-4" : Nombre_decimal_oralise_de_differentes_manieres,
   "6N24": Exercice_6N24,
   "6N24-1": Exercice_multiplier_ou_diviser_un_nombre_entier_par_10_100_1000,
   "6N30": Lire_abscisse_decimale,
@@ -111,6 +114,7 @@ var liste_des_exercices_disponibles = {
   "6N31": Comparer_decimaux,
   "6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
   "6N31-2":Ordre_de_grandeur_operations_decimaux,
+  "6N31-3": Arrondir_une_valeur_6e,
   "6N32" :Fractions_d_unite,
   "6N33": Fraction_d_un_nombre,
   "6N33-0" : Fraction_d_une_quantite,
@@ -146,33 +150,35 @@ var liste_des_exercices_disponibles = {
   "5G20-1": Vocabulaire_des_triangles_5e,
   "5G22": DroiteRemarquableDuTriangle,
   "5G30" : Utiliser_le_codage_pour_decrire_5e,
+  "5G30-1" : Egalite_d_angles,
   "5G31": Exercice_angles_triangles,
   "5G31-1": Constructibilite_des_triangles_angles,
   "5G51" : Representer_un_solide_5e,
+  "5N10": Arrondir_une_valeur_5e,
   "5N11-1": Tableaux_et_pourcentages,
   "5N13": Exercice_fractions_simplifier,
   "5N13-2": Egalites_entre_fractions,
   "5N110": Variation_en_pourcentages,
   "5N14": Exercice_comparer_deux_fractions,
   "5N14-2": Exercice_comparer_quatre_fractions,
-  "5N20": Exercice_additionner_des_fractions_5e,
-  "5N20-2": Exercice_additionner_ou_soustraire_des_fractions_5e,
+  "5N20": Exercice_additionner_ou_soustraire_des_fractions_5e,
+  "5N20-0": Problemes_additifs_fractions_5e,
   "5L10": Ecrire_une_expression_litterale,
   "5L10-1": Traduire_une_phrase_par_une_expression_litterale,
   "5L10-2": Traduire_un_programme_de_calcul,
   "5L10-3": Traduire_une_expression_litterale_par_une_phrase,
   "5L10-4": Tableaux_et_fonction,
-  "5N20-0": Problemes_additifs_fractions_5e,
   "5L12": Reduire_une_expression_litterale,
   "5L12-1": Reduire_dinstinction_somme_produit,
-  "5L13": Calculer_la_valeur_d_une_expression_litterale,
-  "5L13-1": Calculer_une_expression_litterale,
-  "5L13-2": Exercice_substituer,
-  "5L13-3": Traduire_une_phrase_par_une_expression_litterale_et_calculer,
-  "5L13-4": Calculer_une_expression_litteraleBis,
-  "5L13-5":Calculer_la_valeur_d_une_expression_litterale_deg1_inc1,
-  "5L13-6":Determiner_derniere_operation_exp_num,
-  "5L14": Tester_une_egalite,
+  "5L13": Reduction_ax_bx,
+  "5L14": Calculer_la_valeur_d_une_expression_litterale,
+  "5L14-1": Calculer_une_expression_litterale,
+  "5L14-2": Exercice_substituer,
+  "5L14-3": Traduire_une_phrase_par_une_expression_litterale_et_calculer,
+  "5L14-4": Calculer_une_expression_litteraleBis,
+  "5L14-5":Calculer_la_valeur_d_une_expression_litterale_deg1_inc1,
+  "5L14-6":Determiner_derniere_operation_exp_num,
+  "5L15": Tester_une_egalite,
   "5M10": Aire_du_parallelogramme,
   "5M20": Calcul_de_volumes_5e,
   "5P10": Tableaux_et_proportionnalite,
@@ -191,7 +197,7 @@ var liste_des_exercices_disponibles = {
   "5R22-2": Exercice_simplification_somme_algebrique,
   "5S13": Calculer_des_frequences,
   "5S14": Calculer_des_moyennes,
-  "beta5S20":Placer_probabilites,
+  "5S20":Placer_probabilites,
   "5S21": fonctions_probabilite1,
   "4Algo1-0": Tracer_avec_scratch,
   "4C10-0": Signe_produit_quotient_relatifs,
@@ -201,9 +207,18 @@ var liste_des_exercices_disponibles = {
   "4C10-4": Exercice_quotients_relatifs,
   "4C10-5": Exercice_tableau_multiplications_relatifs,
   "4C11": Priorites_et_relatifs,
+  "4C21-1": Exercice_additionner_des_fractions,
+  "4C21": Exercice_additionner_ou_soustraire_des_fractions,
+  "4C22":Exercice_multiplier_fractions,
+  "4C22-1": Exercice_trouver_l_inverse,
+  "4C22-2": Exercice_diviser_fractions,
+  "4C23": Exercice_additionner_fraction_produit,
   "4C25-0": Problemes_additifs_fractions,
+  "4C30": Comparer_puissance10,
   "4C30": Puissances_de_dix,
   "4C30-1": Puissances_encadrement,
+  "4C30-2": EcritureDecimalePuissanceDe10,
+  "4C30-3": EcritureDecimalePuissance,
   "4C32" : Notation_scientifique,
   "4C32-1" : Calculs_avec_puissances_de_dix,
   "4C33-1": Puissances_d_un_relatif_1,
@@ -216,18 +231,14 @@ var liste_des_exercices_disponibles = {
   "4L14-1": Tester_si_un_nombre_est_solution_d_une_equation_deg1,
   "4L14-2": Tester_si_un_nombre_est_solution_d_une_equation_deg2,
   "4L15-0": Trouver_erreur_resol_eq_deg1,
+  "4L15-1": Equations_fractions,
   "4L20": Exercice_equation1,
-  "4C21-1": Exercice_additionner_des_fractions,
-  "4C21": Exercice_additionner_ou_soustraire_des_fractions,
-  "4C22-1": Exercice_trouver_l_inverse,
-  "4C22": Exercice_multiplier_fractions,
-  "4C22-2": Exercice_diviser_fractions,
-  "4C23": Exercice_additionner_fraction_produit,
   "4F12": Exploiter_representation_graphique,
   "4P10": Problemes_grandeurs_composees,
   "4P10-1" : Graphiques_et_proportionnalite,  
   "4G11": Pavages_et_translation,
   "4G20" : Pythagore2D,
+  "4G20-0": Arrondir_une_valeur_4e,
   "4G20-1": Egalite_Pythagore2D, // Anciennement Egalite_Pythagore,
   "4G20-2": Racine_caree_de_carres_parfaits,
   "4G20MG32": Exercice_Pythagore,
@@ -248,7 +259,6 @@ var liste_des_exercices_disponibles = {
   "3A11-3": Lister_Diviseurs_Par_Decomposition_facteurs_premiers,
   "3A12": Fractions_irreductibles,
   "3A13": PPCM_Engrenages,
-  "3G43": Calcul_de_volumes_3e,
   "3L10": Oppose_expression,
   "3L10-1": Parentheses_precedes_de_moins_ou_plus,
   "3L11": Exercice_developper,
@@ -256,6 +266,7 @@ var liste_des_exercices_disponibles = {
   "3L11-2": Reduction_si_possible,
   "3L11-3": Distributivite_simple_double_reduction,
   "3L11-4": Factoriser_par_nombre_ou_x,
+  "3L11-5": identites_calculs,
   "3L12-1": Developper_Identites_remarquables3,
   "3L12": Factoriser_Identites_remarquables3,
   "3L13": Exercice_equation1, //identique à 4L20
@@ -277,6 +288,7 @@ var liste_des_exercices_disponibles = {
   "3G23": TrianglesSemblables,
   "3G30": Exercice_Trigo_longueurs,
   "3G31": Exercice_Trigo_angles,
+  "3G43": Calcul_de_volumes_3e,
   "3F1-act": fonction_notion_vocabulaire,
   "3F10" : Image_antecedent_depuis_tableau_ou_fleche,
   "3F12": fonctions_calculs_d_images,
@@ -284,10 +296,12 @@ var liste_des_exercices_disponibles = {
   "3F12-3": Tableau_de_valeurs,
   "3F12-4": Image_graphique,
   "3F13": Antecedent_graphique,
+  "3F13-1": Antecedent_et_image_graphique,
+  "3F13-2" : Premier_escape_game_mathalea,
   "3F21": Lecture_expression_fonctions_lineaires,
   "3F21-1": Lecture_expression_fonctions_affines,
   "3S15": Calculer_des_etendues,
-  "3S20": fonctions_probabilite2,
+  "3S20": fonctions_probabilite2,  
   "2N10": Existence_d_une_racine_carree,
   "2N10-1": proprietes_racine_carree,
   "2N11": Extraire_un_carre_parfait_d_une_racine_carree,
@@ -313,11 +327,14 @@ var liste_des_exercices_disponibles = {
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   "betaTESTseb": Tests_du_Seb,
-  P001: Code_LaTeX_personnalise,
+  "betaSVG": AfficherSVG,
+  "P001": Code_LaTeX_personnalise,
   // 'P002': LaTeX_static,
-  P003: feuille_d_axes_gradues,
-  cours: Questions_de_cours,
-  LaTeX: Code_LaTeX_personnalise,
+  "P003" : feuille_d_axes_gradues,
+  "P004" :Feuille_de_zooms,
+  "P005" : Feuille_de_grilles,
+  "cours" : Questions_de_cours,
+  "LaTeX" : Code_LaTeX_personnalise,
   // 'Perso' : HTML_personnalise,
   // 'TsvgjsKatex' : tests_SVGJS_KATEX,  
 };
@@ -362,7 +379,7 @@ function Exercice() {
   this.nb_questions = 10;
   this.nb_cols = 2;
   this.nb_cols_corr = 2;
-  this.spacing = 1.5;
+  this.spacing = 1;
   this.spacing_corr = 1;
   this.beamer = false;
 
@@ -389,6 +406,7 @@ function Exercice() {
   this.nouvelle_version = function (numero_de_l_exercice) {};
   this.liste_packages = []; // string ou liste de string avec le nom des packages spécifiques à ajouter dans le préambule
 }
+
 /**
  * Pour imprimer des repères vierges pour les élèves.
  * @Auteur Jean-Claude Lhote
@@ -6123,7 +6141,7 @@ function Encadrer_fraction_entre_2_entiers() {
       a = randint(0, 9) * 10 + randint(1, 9);
       texte = `$\\ldots < \\dfrac{${n}}{${d}} < \\ldots$`;
       texte_corr = `$${k} < \\dfrac{${n}}{${d}} < ${k+1}$`;
-      if (correction_detaillee){
+      if (this.correction_detaillee){
         texte_corr += ` $\\qquad$ car $\\quad ${k}=\\dfrac{${k*d}}{${d}}\\quad$ et $\\quad${k+1}=\\dfrac{${(k+1)*d}}{${d}}$ `;
         texte_corr += `<br><br>`
         texte_corr += mathalea2d({xmin:-.5, xmax:24,ymax:1.5,scale:.6},fraction(n,d).representation(0,0,3,0,'barre','blue')
@@ -7919,8 +7937,8 @@ function Calculer_un_pourcentage() {
       switch(liste_choix[i]) {
         case 1: // Les moyens de déplacement maison collège
           [moy1,moy2,moy3]=combinaison_listes(liste_moyens,3)
-          texte = `Dans un collège, $${p1}\\%$ des élèves ${moy1}, $${p2}\\%$ ${moy2} et les autres ${moy3}.<br>`
-          texte += `Quel est le pourcentage des élèves qui ${moy3} ?` 
+          texte = `Dans un collège, $${p1}\\%$ des élèves se déplacent ${moy1}, $${p2}\\%$ ${moy2} et les autres ${moy3}.<br>`
+          texte += `Quel est le pourcentage des élèves qui se déplacent ${moy3} ?` 
           texte_corr=`Les élèves qui ${moy1} ou qui ${moy2} représentent $${p1}\\%$ + $${p2}\\% = ${p1+p2}\\%$.<br>`
           texte_corr+=`Donc on calcule : $100 - ${p1+p2}\\% = ${p3}\\%$<br>`
           texte_corr+=`$${p3}\\%$ des élèves ${moy3}.<br>`
@@ -9364,11 +9382,8 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
     this.liste_corrections = []; // Liste de questions corrigées
 
     let type_de_questions_disponibles = [1, 2, 3, 4, 5, 6];
-    let liste_type_de_questions = combinaison_listes(
-      type_de_questions_disponibles,
-      this.nb_questions
-    ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-
+    let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles,this.nb_questions);
+    if (this.nb_questions == 3) liste_type_de_questions = combinaison_listes([choice([1,2,6]),3,choice([4,5])],this.nb_questions);
     for (
       let i = 0, texte, texte_corr, cpt = 0;
       i < this.nb_questions && cpt < 50;
@@ -9421,7 +9436,7 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
           break;
         case 5: // u = .../100
           texte = `$${u}=${tex_fraction("", "100")}$`;
-          texte_corr = `$${u}=${tex_fraction(100 * u, "10")}$`;
+          texte_corr = `$${u}=${tex_fraction(100 * u, "100")}$`;
           break;
         case 6: // n/10 = ... + .../10 + .../100
           ecriture_decimale = tex_nombre(calcul(n / 10));
@@ -9455,9 +9470,16 @@ function Exercice_differentes_ecritures_nombres_decimaux() {
  * 
  * @Auteur Jean-Claude Lhote
  */
+function Lire_abscisse_decimale_trois_formesCM(){
+  Lire_abscisse_decimale_trois_formes.call(this)
+  this.niveau='CM'
+  this.sup=1
+}
+
 function Lire_abscisse_decimale_trois_formes() {
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.titre = "Lire une abscisse décimale sous trois formes";
+  this.niveau='sixième'
+  this.titre = "Lire des abscisses décimales sous trois formes";
   this.consigne = "";
   if (sortie_html) {
     this.spacing = 2;
@@ -9479,25 +9501,35 @@ function Lire_abscisse_decimale_trois_formes() {
     this.liste_corrections = []; // Liste de questions corrigées
 
     let d1,texte="",texte_corr="",extremite,noms=choisit_lettres_differentes(3,'Q')
-    let x1=0,x2=0,x3=0
+    let x1=0,x2=0,x3=0,thickOff,tableau=[]
     if (this.sup==1){
-    xmin=randint(0,15)
+      if (this.niveau=='CM') { 
+        xmin=0
+        thickOff=0
+      }
+      else {
+        xmin=randint(1,15)
+        thickOff=calcul(2/(10**(parseInt(this.sup))))
+      }
     if (xmin==0) extremite=`|->`
     else extremite=`->`
     xmax=xmin+9
-    while (estentier(x1)||estentier(x2)||estentier(x3)){
-    x1=randint(xmin*10,xmin*10+29)
-    x2=randint(xmin*10+31,xmin*10+59,x1)
-    x3=randint(xmin*10+61,xmax*10-1,[x1,x2])
+    x1=xmin*10+randint(0,2)*10+randint(2,8)
+    x2=xmin*10+randint(3,5)*10+randint(2,8)
+    x3=xmin*10+randint(6,8)*10+randint(2,8)
     x1=calcul(x1/10)
     x2=calcul(x2/10)
     x3=calcul(x3/10)
-    }
-    [x1,x2,x3]=shuffle([x1,x2,x3])
-    d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:false,Unite:3,
-                      thickCouleur:'black',axeCouleur:'black',axeHauteur:6,
+
+    tableau=shuffle([x1,x2,x3])
+    x1=tableau[0]
+    x2=tableau[1]
+    x3=tableau[2]
+
+    d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:false,Unite:3,thickOffset:thickOff,
+                      thickCouleur:'black',axeCouleur:'black',axeHauteur:4,
                       pointListe:[[x1,`${noms[0]}`],[x2,`${noms[1]}`],[x3,`${noms[2]}`]],
-                      pointTaille:2,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'o',axeStyle:extremite})
+                      pointTaille:6,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'|',pointEpaisseur:2,axeStyle:extremite})
     texte=`${num_alpha(0)} Donner l'abscisse de ${noms[0]} en écriture décimale.<br>`
     texte+=`${num_alpha(1)} Donner l'abscisse de ${noms[1]} comme la somme d'un nombre entier et d'une fraction décimale.<br>`
     texte+=`${num_alpha(2)} Donner l'abscisse de ${noms[2]} sous la forme d'une fraction décimale.<br>`
@@ -9506,23 +9538,33 @@ function Lire_abscisse_decimale_trois_formes() {
     texte_corr+=`${num_alpha(2)} L'abscisse de ${noms[2]} est : $${tex_fraction(calcul(x3*10),10)}$.`
     }
     else if (this.sup==2){
-      xmin=randint(0,15)
+      if (this.niveau=='CM') { 
+        xmin=0
+        thickOff=0
+      }
+      else {
+        xmin=randint(1,15)-0.1
+        thickOff=calcul(2/(10**(parseInt(this.sup))))
+      }
       if (xmin==0) extremite=`|->`
       else extremite=`->`
-      xmax=calcul(xmin+1.5)
-      while (estentier(x1)||estentier(x2)||estentier(x3)){
-      x1=randint(xmin*100,xmin*100+45)
-      x2=randint(xmin*100+55,xmin*100+95,x1)
-      x3=randint(xmin*100+105,xmax*100-5,[x1,x2])
-      x1=calcul(x1/100)
-      x2=calcul(x2/100)
-      x3=calcul(x3/100)
-      }
-      [x1,x2,x3]=shuffle([x1,x2,x3])
-      d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:true,Unite:20,
-                        thickCouleur:'black',axeCouleur:'black',axeHauteur:6,
+      xmax=calcul(xmin+1.5);
+      x1=10+xmin*100+randint(1,3)*10+randint(2,8);
+      x2=10+xmin*100+randint(4,6)*10+randint(2,8);
+      x3=10+xmin*100+randint(7,9)*10+randint(2,8);
+
+      x1=calcul(x1/100);
+      x2=calcul(x2/100);
+      x3=calcul(x3/100);
+      tableau=shuffle([x1,x2,x3])
+      x1=tableau[0]
+      x2=tableau[1]
+      x3=tableau[2];
+
+      d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:true,Unite:20,thickOffset:thickOff,
+                        thickCouleur:'black',axeCouleur:'black',axeHauteur:4,
                         pointListe:[[x1,`${noms[0]}`],[x2,`${noms[1]}`],[x3,`${noms[2]}`]],
-                        pointTaille:2,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'o',axeStyle:extremite})
+                        pointTaille:6,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'|',pointEpaisseur:2,axeStyle:extremite})
       texte=`${num_alpha(0)} Donner l'abscisse de ${noms[0]} en écriture décimale.<br>`
       texte+=`${num_alpha(1)} Donner l'abscisse de ${noms[1]} comme la somme d'un entier et d'une fraction décimale.<br>`
       texte+=`${num_alpha(2)} Donner l'abscisse de ${noms[2]} sous la forme d'une fraction décimale.<br>`
@@ -9532,25 +9574,36 @@ function Lire_abscisse_decimale_trois_formes() {
   
     }
     else if (this.sup==3) {
-      xmin=calcul(randint(0,15)+randint(0,9)*0.1)
+      if (this.niveau=='CM') { 
+        xmin=0
+        thickOff=0
+      }
+      else {
+        xmin=calcul(randint(0,15)+randint(0,9)*0.1)
+        thickOff=calcul(2/(10**(parseInt(this.sup))))
+      }
       if (xmin==0) extremite=`|->`
       else extremite=`->`
       xmax=calcul(xmin+0.15)
-      while (estentier(x1)||estentier(x2)||estentier(x3)){
-      x1=randint(xmin*1000+5,xmin*1000+45)
-      x2=randint(xmin*1000+55,xmin*1000+95,x1)
-      x3=randint(xmin*1000+105,xmax*1000-5,[x1,x2])
+
+      x1=xmin*1000+randint(1,5)*10+randint(2,8)
+      x2=xmin*1000+randint(6,9)*10+randint(2,8)
+      x3=xmin*1000+randint(11,14)*10+randint(2,8)
       x1=calcul(x1/1000)
       x2=calcul(x2/1000)
       x3=calcul(x3/1000)
-      }
-      [x1,x2,x3]=shuffle([x1,x2,x3])
-      d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:true,Unite:200,
+
+      tableau=shuffle([x1,x2,x3])
+      x1=tableau[0]
+      x2=tableau[1]
+      x3=tableau[2]
+      d1=droiteGraduee2({x:0,y:0,Min:xmin,axePosition:'H',Max:xmax,thickSec:true,thickTer:true,Unite:200,thickOffset:thickOff,
                         thickDistance:0.1,thickSecDist:0.01,thickTerDist:0.001,
-                        thickCouleur:'black',axeCouleur:'black',axeHauteur:6,
+                        thickCouleur:'black',axeCouleur:'black',axeHauteur:4,
                         pointListe:[[x1,`${noms[0]}`],[x2,`${noms[1]}`],[x3,`${noms[2]}`]],
-                        labelListe:[[xmin+0.1,tex_nombrec(xmin+0.1)],[xmin+0.2,tex_nombrec(xmin+0.2)]],
-                        pointTaille:2,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'o',axeStyle:extremite})
+                        labelListe:[[xmin+0.09,tex_nombre(calcul(xmin+0.09))],[xmin+0.1,tex_nombre(calcul(xmin+0.1))]],
+                        pointTaille:6,pointOpacite:0.8,pointCouleur:'blue',pointStyle:'|',pointEpaisseur:2,axeStyle:extremite})
+
       texte=`${num_alpha(0)} Donner l'abscisse de ${noms[0]} en écriture décimale.<br>`
       texte+=`${num_alpha(1)} Donner l'abscisse de ${noms[1]} comme la somme d'un entier et d'une fraction décimale.<br>`
       texte+=`${num_alpha(2)} Donner l'abscisse de ${noms[2]} sous la forme d'une fraction décimale.<br>`
@@ -9559,12 +9612,564 @@ function Lire_abscisse_decimale_trois_formes() {
       texte_corr+=`${num_alpha(2)} L'abscisse de ${noms[2]} est : $${tex_fraction(calcul(x3*1000),1000)}$.`
   
     }
-    texte+= mathalea2d({xmin:-1.5,xmax:35,ymin:-1,ymax:1.5,pixelsParcCm:20,scale:0.5},d1)
+    texte+= mathalea2d({xmin:-1.5,xmax:35,ymin:-1.5,ymax:1.5,pixelsParCm:25,scale:0.5},d1)
     this.liste_questions.push(texte);
     this.liste_corrections.push(texte_corr);
     liste_de_question_to_contenu_sans_numero(this);
   };
   this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Au dixième\n2 : Au centième\n3 : Au millième'];
+}
+
+
+function lireUneAbscisseAvecZoomCM() {
+  LireUneAbscisseAvecZoom.call(this);
+  this.niveau='CM';
+  this.sup=1;
+  this.nb_cols_corr=1
+}
+/**
+ * Fonction permettant aux enseignants de proposer des grilles décimale à colorier
+ * ref P005
+ * @Auteur Jean-Claude Lhote
+ */
+function Feuille_de_grilles() {
+  Exercice.call(this)
+  this.nb_cols=1
+  this.sup=1
+  this.titre = "Grilles décimales"
+
+  this.nouvelle_version=function() {
+  this.liste_questions=[]
+  let objets=[]
+  if (this.sup==1) {// On travaille au dixième
+    for (let i=0;i<4;i++) {
+      objets.length=0
+      //pixelsParCm=50
+      objets.push(grille(6,0,11,0.5,'black',1,0.5))
+      for (let j=0;j<5;j++) {
+        A=point(0,j*0.8)
+        B=point(5,j*0.8)
+        C=point(5,j*0.8+0.5)
+        D=point(0,j*0.8+0.5)
+        objets.push(polygone(A,B,C,D))
+      }
+     // g2=grilleHorizontale(3,0,13,10,'gray',0.5,0.1)
+      // objets.push(texteParPosition("------",0,0.1))
+      // objets.push(texteParPosition("+",2,0.5))
+      texte=mathalea2d({xmin:0,ymin:0,xmax:15,ymax:6,pixelsParCm:20,scale:0.5},objets)
+      this.liste_questions.push(texte);
+    }
+  }
+  else if (this.sup==2) {
+    for (let i=0;i<4;i++) {
+      objets.length=0
+      //pixelsParCm=50
+      objets.push(grille(20,0,24,4,'black',1,0.4))
+      for (let j=0;j<5;j++) {
+        A=point(0+j*5,0)
+        B=point(4+j*5,0)
+        C=point(4+j*5,4)
+        D=point(0+j*5,4)
+        objets.push(polygone(A,B,C,D))
+      }
+     // g2=grilleHorizontale(3,0,13,10,'gray',0.5,0.1)
+      // objets.push(texteParPosition("------",0,0.1))
+      // objets.push(texteParPosition("+",2,0.5))
+      texte=mathalea2d({xmin:-0.5,ymin:-1,xmax:26,ymax:4,pixelsParCm:20,scale:0.5},objets)
+      this.liste_questions.push(texte);
+    }
+  }
+  else {
+    for (let i=0;i<2;i++) {
+      objets.length=0
+      //pixelsParCm=50
+      objets.push(grille(11,0,21,10,'black',1,1))
+        A=point(0,0)
+        B=point(10,0)
+        C=point(10,10)
+        D=point(0,10)
+        objets.push(polygone(A,B,C,D))
+        objets.push(grilleHorizontale(11,0,21,10,'gray',0.8,0.1))
+      // objets.push(texteParPosition("------",0,0.1))
+      // objets.push(texteParPosition("+",2,0.5))
+      texte=mathalea2d({xmin:0,ymin:-1,xmax:26,ymax:11,pixelsParCm:30,scale:0.8},objets)
+      this.liste_questions.push(texte);
+    }
+  }
+  liste_de_question_to_contenu_sans_numero(this);
+};
+this.besoin_formulaire_numerique = ['nombre de cases', 3, '1 : 10\n2 : 100\n3 : 1000'];
+
+}
+/**
+ * Fonction permettant aux enseignants de proposer des feuilles à compléter pour la lecture d'abscisse décimale avec zoom
+ * L'enseignant peut ajouter "à la main" les données qu'il souhaite
+ * ref P004
+ * @Auteur Jean-Claude Lhote
+ */
+function Feuille_de_zooms() {
+  Exercice.call(this)
+  this.nb_cols=1
+  this.sup=1
+  this.titre = "Droites graduées avec zoom"
+
+  this.nouvelle_version=function() {
+  this.liste_questions=[]
+  let d1, d2,d3, texte = "", extremite,extreme, noms =[]
+  let x1 = 0, x2 = 0, x3 = 0, objets = [], fenetre, thickOff = 0
+  for (let n=0;n<8/parseInt(this.sup);n++) {
+    noms= choisit_lettres_differentes(5, 'QFN')
+  objets.length=0
+  if (this.sup == 1) {
+        xmin = randint(5, 10) - 0.2
+      origine=Math.round(xmin+0.2)
+      extreme=calcul(origine+9)
+      thickOff = 0.1
+      xmax=origine+9.2
+ 
+    x1 = calcul(xmin + 0.2 + randint(1, 5) + randint(2, 8) / 10)
+    extremite = `->`
+
+    d1 = droiteGraduee2({
+      x: 0, y: 3, Min: xmin, axePosition: 'H', Max: xmax + 0.2, thickSec: true, thickTer: false, Unite: 3, thickOffset: thickOff,
+      thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 4, labelsPrincipaux: false, 
+      //labelListe: [[origine, `${tex_nombre(origine)}`], [extreme, `${tex_nombre(extreme)}`]],
+      pointListe: [[x1, `${noms[1]}`], [Math.floor(x1), `${noms[0]}`], [Math.floor(x1 + 1), `${noms[2]}`]],
+      pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+    })
+    d2 = droiteGraduee2({
+      x: Math.floor(x1) - xmin + 1.5, y: 0, Min: Math.floor(x1), axePosition: 'H', Max: Math.floor(x1 + 1), thickSec: true, thickTer: false, Unite: 20, thickOffset: thickOff,
+      thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 4, labelsPrincipaux: false,
+      pointListe: [[x1, `${noms[1]}`], [Math.floor(x1), `${noms[0]}`], [Math.floor(x1 + 1), `${noms[2]}`]],
+      pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+    })
+
+    pA1 = point((Math.floor(x1) - xmin) * 3, 3)
+    pA2 = point(Math.floor(x1) - xmin + 1.5, 0)
+    pB1 = point((Math.floor(x1) + 1 - xmin) * 3, 3)
+    pB2 = point(Math.floor(x1) - xmin + 21.5, 0)
+    sA = segment(pA1, pA2)
+    sB = segment(pB1, pB2)
+    sA.pointilles = true
+    sB.pointilles = true
+    objets.push(d1, d2, sA, sB)
+    fenetre = { xmin: -1.5, xmax: 35, ymin: -1, ymax: 4.5, pixelsParCm: 25, scale: 0.5 }
+  }
+  else  {
+      xmin = randint(1, 15)
+      xmax = xmin + 1
+      x1 = calcul(xmin + randint(2, 8) / 10 + randint(2, 8) / 100 + randint(2, 8) * 0.001)
+      x2 = troncature(x1, 1)
+      x21 = troncature(x1, 2)
+      x3 = calcul(x2 + 0.1)
+      x31 = calcul(x21 + 0.01)
+      xmin = Math.floor(x2)
+      xmax = xmin+1
+      thickOff = 0.001
+
+   extremite = `->`
+    d1 = droiteGraduee2({
+      x: 0, y: 6, Min: xmin, axePosition: 'H', Max: xmax, thickSec: true, thickTer: true, Unite: 30, thickDistance: 1, thickSecDist: 0.1, thickTerDist: 0.01, thickOffset: thickOff,
+      thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: false,
+      pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`]],
+      pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 3, axeStyle: extremite
+    })
+    d2 = droiteGraduee2({
+      x: 6.5, y: 3, Min: x2, axePosition: 'H', Max: x3, thickSec: true, thickTer: true, Unite: 200, thickSecDist: 0.01, thickTerDist: 0.001, thickDistance: 0.1, thickOffset: thickOff,
+      thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: false,
+      pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`], [x21, `${noms[3]}`], [x31, `${noms[4]}`]],
+      pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+    })
+    d3 = droiteGraduee2({
+      x: 6.5, y: 0, Min: x21, axePosition: 'H', Max: x31, thickSec: true, thickTer: false, Unite: 2000, thickSecDist: 0.001, thickOffset: thickOff,
+      thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: false,
+      pointListe: [[x1, `${noms[1]}`], [x21, `${noms[3]}`], [x31, `${noms[4]}`]],
+      pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+    })
+
+    pA1 = point((x2-xmin)*30, 6)
+    pA2 = point(6.5, 3)
+    pB1 = point((x3-xmin)*30, 6)
+    pB2 = point(26.5, 3)
+    sA = segment(pA1, pA2)
+    sB = segment(pB1, pB2)
+    sA.pointilles = true
+    sB.pointilles = true
+    pC1 = point(6.5 + (x21 - x2) * 200, 3)
+    pC2 = point(6.5, 0)
+    pD1 = point(6.5 + (x31 - x2) * 200, 3)
+    pD2 = point(26.5, 0)
+    sC = segment(pC1, pC2)
+    sD = segment(pD1, pD2)
+    sC.pointilles = true
+    sD.pointilles = true
+    fenetre = { xmin: -1.5, xmax: 35, ymin: -1.5, ymax: 7.5, pixelsParCm:25, scale: 0.5 }
+    objets.push(d1, d2, d3, sA, sB, sC, sD)
+
+    let partent = Math.floor(x1), pardec = calcul(x1 - partent)
+
+  }
+  texte = mathalea2d(fenetre, objets)
+
+  this.liste_questions.push(texte);
+  }
+  liste_de_question_to_contenu_sans_numero(this);
+};
+this.besoin_formulaire_numerique = ['Nombre de zoom', 2, '1 : Un seul zoom\n2 : Deux niveaux de zoom'];
+
+}
+/**
+ * Lire un nombre décimal jusqu'au millième graĉe à un système de zoom successifs
+ * L'abscisse est à donner sous trois formes.
+ * ref 6N23-3
+ * Publié le 13/11/2020
+ * @Auteur Jean-Claude Lhote
+ */
+function LireUneAbscisseAvecZoom() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.niveau = 'sixième'
+  this.sup=3;
+  this.titre = "Lire une abscisse décimale grâce à des zooms successifs";
+  this.consigne = "";
+  if (sortie_html) {
+    this.spacing = 2;
+    this.spacing_corr = 3;
+  }
+  else {
+    this.spacing = 1;
+    this.spacing_corr = 1;
+  }
+  this.vspace = -1;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1
+  this.nb_questions = 1;
+  this.nb_questions_modifiable = false
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    let d1, d2,d3,d3Corr, d1Corr, d2Corr, texte = "", texte_corr = "", extremite,extreme, noms = choisit_lettres_differentes(5, 'QFN')
+    let x1 = 0, x2 = 0, x3 = 0, objets = [], fenetre, thickOff = 0, objetsCorr = []
+    if (this.sup == 1) {
+      if (this.niveau == 'CM') {
+        xmin = 0
+        thickOff = 0
+        origine=0
+        extreme=9
+        xmax=9
+      }
+      else {
+        xmin = randint(5, 10) - 0.2
+        origine=Math.round(xmin+0.2)
+        extreme=calcul(origine+9)
+        thickOff = 0.1
+        xmax=origine+9.2
+      }
+      x1 = calcul(xmin + 0.2 + randint(1, 5) + randint(2, 8) / 10)
+      //   xmin=calcul(Math.floor(x1)-5)
+      //    xmax=calcul(Math.floor(x1)+6)
+      if (xmin == 0) extremite = `|->`
+      else extremite = `->`
+
+      d1 = droiteGraduee2({
+        x: 0, y: 3, Min: xmin, axePosition: 'H', Max: xmax + 0.2, thickSec: true, thickTer: false, Unite: 3, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 4, labelsPrincipaux: false, 
+        labelListe: [[origine, `${tex_nombre(origine)}`], [extreme, `${tex_nombre(extreme)}`]],
+        pointListe: [[x1, `${noms[1]}`], [Math.floor(x1), `${noms[0]}`], [Math.floor(x1 + 1), `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d2 = droiteGraduee2({
+        x: Math.floor(x1) - xmin + 1.5, y: 0, Min: Math.floor(x1), axePosition: 'H', Max: Math.floor(x1 + 1), thickSec: true, thickTer: false, Unite: 20, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 4, labelsPrincipaux: false,
+        pointListe: [[x1, `${noms[1]}`], [Math.floor(x1), `${noms[0]}`], [Math.floor(x1 + 1), `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d1Corr = droiteGraduee2({
+        x: 0, y: 3, Min: xmin, axePosition: 'H', Max: xmax + 0.2, thickSec: true, thickTer: false, Unite: 3, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 4, labelsPrincipaux: true,
+        labelListe: [[origine , `${tex_nombre(origine )}`], [extreme, `${tex_nombre(extreme)}`]],
+        pointListe: [[x1, `${noms[1]}`], [Math.floor(x1), `${noms[0]}`], [Math.floor(x1 + 1), `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d2Corr = droiteGraduee2({
+        x: Math.floor(x1) - xmin + 1.5, y: 0, Min: Math.floor(x1), axePosition: 'H', Max: Math.floor(x1 + 1), thickSec: true, thickTer: false, Unite: 20, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 4, labelsPrincipaux: false,labelsSecondaires:true,
+        labelListe: [[Math.floor(x1),`${tex_nombre(Math.floor(x1))}`],[x1,`${tex_nombre(x1)}`],[Math.ceil(x1),`${tex_nombre(Math.ceil(x1))}`]],
+        pointListe: [[x1, `${noms[1]}`], [Math.floor(x1), `${noms[0]}`], [Math.floor(x1 + 1), `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      
+      pA1 = point((Math.floor(x1) - xmin) * 3, 3)
+      pA2 = point(Math.floor(x1) - xmin + 1.5, 0)
+      pB1 = point((Math.floor(x1) + 1 - xmin) * 3, 3)
+      pB2 = point(Math.floor(x1) - xmin + 21.5, 0)
+      sA = segment(pA1, pA2)
+      sB = segment(pB1, pB2)
+      sA.pointilles = true
+      sB.pointilles = true
+      objets.push(d1, d2, sA, sB)
+      objetsCorr.push(d1Corr, d2Corr, sA, sB)
+      fenetre = { xmin: -1.5, xmax: 35, ymin: -1, ymax: 4.5, pixelsParCm: 25, scale: 0.5 }
+      texte_corr = `L'abscisse de ${noms[1]} est : $${tex_nombre(x1)}=${tex_nombre(Math.floor(x1))} + ${tex_fraction(calcul(10 * (x1 - Math.floor(x1))), 10)}=${tex_fraction(calcul(x1 * 10), 10)}$.<br>`
+    }
+    else if (this.sup == 2) {
+      if (this.niveau == 'CM') {
+        xmin = 0
+        thickOff = 0
+      }
+      else {
+        xmin = randint(1, 15) - 0.02
+        thickOff = 0.01
+      }
+
+      xmax = xmin + 1.05
+      x1 = calcul(xmin + 0.02 + randint(2, 8) / 10 + randint(2, 8) / 100)
+      x2 = calcul(Math.floor(x1 * 10) / 10)
+      x3 = calcul(x2 + 0.1)
+      //      xmin=calcul(x2-0.8)
+      //      xmax=calcul(xmin+1.7)
+      if (xmin == 0) extremite = `|->`
+      else extremite = `->`
+      d1 = droiteGraduee2({
+        x: 0, y: 3, Min: xmin, axePosition: 'H', Max: xmax, thickSec: true, thickTer: true, Unite: 30, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 8, thickDistance: 1, thickSecDist: 0.1, thickTerDist: 0.01, labelsPrincipaux: false,
+        labelListe: [[Math.floor(x1), `${Math.floor(x1)}`], [Math.ceil(x1), `${Math.ceil(x1)}`]],
+        pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d2 = droiteGraduee2({
+        x: (x2 - xmin) + 6, y: 0, Min: x2, axePosition: 'H', Max: x2 + .1, thickSec: true, thickTer: false, Unite: 200, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, thickDistance: 0.1, thickSecDist: 0.01, thickTerDist: 0.001, labelsPrincipaux: false,
+        pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x2 + 0.1, `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d1Corr = droiteGraduee2({
+        x: 0, y: 3, Min: xmin, axePosition: 'H', Max: xmax, thickSec: true, thickTer: true, Unite: 30, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 8, thickDistance: 1, thickSecDist: 0.1, thickTerDist: 0.01, labelsSecondaires:true,
+        labelListe: [[Math.floor(x1), `${Math.floor(x1)}`], [Math.ceil(x1), `${Math.ceil(x1)}`]],
+        pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d2Corr = droiteGraduee2({
+        x: (x2 - xmin) + 6, y: 0, Min: x2, axePosition: 'H', Max: x2 + .1, thickSec: true, thickTer: false, Unite: 200, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, thickDistance: 0.1, thickSecDist: 0.01, thickTerDist: 0.001, labelsPrincipaux: false,labelsSecondaires:true,
+        labelListe: [[x2,`${tex_nombre(x2)+'0'}`],[x1,`${tex_nombre(x1)}`],[x3,`${tex_nombre(x3)+'0'}`]], 
+        pointListe: [[x1,`${noms[1]}`], [x2, `${noms[0]}`], [x2 + 0.1, `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+
+      pA1 = point((Math.floor(x1 * 10) / 10 - xmin) * 30, 3)
+      pA2 = point(x2 - xmin + 6, 0)
+      pB1 = point((Math.floor(x1 * 10) / 10 + 0.1 - xmin) * 30, 3)
+      pB2 = point(x3 - xmin + 26, 0)
+      sA = segment(pA1, pA2)
+      sB = segment(pB1, pB2)
+      sA.pointilles = true
+      sB.pointilles = true
+      fenetre = { xmin: -1.5, xmax: 35, ymin: -1.5, ymax: 4.5, pixelsParCm:25, scale: 0.5 }
+      objets.push(d1, d2, sA, sB)
+      objetsCorr.push(d1Corr,d2Corr,sA,sB)
+      let partent = Math.floor(x1), pardec = calcul(x1 - partent)
+      texte_corr = `L'abscisse de ${noms[1]} est : $${tex_nombre(x1)}=${tex_nombre(partent)} + ${tex_fraction(calcul(pardec * 100), 100)}=${tex_fraction(calcul(x1 * 100), 100)}$.<br>`
+
+    }
+    else if (this.sup == 3) {
+      if (this.niveau == 'CM') {
+        xmin = 0
+        xmax =1
+        thickOff = 0
+        x1 = calcul(xmin + randint(2, 8) / 10 + randint(2, 8) / 100 + randint(2, 8) * 0.001)
+        x2 = troncature(x1, 1)
+        x21 = troncature(x1, 2)
+        x3 = calcul(x2 + 0.1)
+        x31 = calcul(x21 + 0.01)
+      }
+      else {
+        xmin = randint(1, 15)
+        xmax = xmin + 1
+        x1 = calcul(xmin + randint(2, 8) / 10 + randint(2, 8) / 100 + randint(2, 8) * 0.001)
+        x2 = troncature(x1, 1)
+        x21 = troncature(x1, 2)
+        x3 = calcul(x2 + 0.1)
+        x31 = calcul(x21 + 0.01)
+        xmin = Math.floor(x2)
+        xmax = xmin+1
+        thickOff = 0.001
+      }
+      if (xmin == 0) extremite = `|->`
+      else extremite = `->`
+      d1 = droiteGraduee2({
+        x: 0, y: 6, Min: xmin, axePosition: 'H', Max: xmax, thickSec: true, thickTer: true, Unite: 30, thickDistance: 1, thickSecDist: 0.1, thickTerDist: 0.01, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: true,
+        labelListe: [[xmin, `${tex_nombre(xmin)}`], [xmax, `${tex_nombre(xmax)}`]],
+        pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 3, axeStyle: extremite
+      })
+      d2 = droiteGraduee2({
+        x: 6.5, y: 3, Min: x2, axePosition: 'H', Max: x3, thickSec: true, thickTer: true, Unite: 200, thickSecDist: 0.01, thickTerDist: 0.001, thickDistance: 0.1, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: false,
+        pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`], [x21, `${noms[3]}`], [x31, `${noms[4]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d3 = droiteGraduee2({
+        x: 6.5, y: 0, Min: x21, axePosition: 'H', Max: x31, thickSec: true, thickTer: false, Unite: 2000, thickSecDist: 0.001, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: false,
+        pointListe: [[x1, `${noms[1]}`], [x21, `${noms[3]}`], [x31, `${noms[4]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d1Corr = droiteGraduee2({
+        x: 0, y: 6, Min: xmin, axePosition: 'H', Max: xmax, thickSec: true, thickTer: true, Unite: 30, thickDistance: 1, thickSecDist: 0.1, thickTerDist: 0.01, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: true,labelsSecondaires:true,
+        labelListe: [[xmin, `${tex_nombre(xmin)}`], [xmax, `${tex_nombre(xmax)}`]],
+        pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 3, axeStyle: extremite
+      })
+      d2Corr = droiteGraduee2({
+        x: 6.5, y: 3, Min: x2, axePosition: 'H', Max: x3, thickSec: true, thickTer: true, Unite: 200, thickSecDist: 0.01, thickTerDist: 0.001, thickDistance: 0.1, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: false,labelsSecondaires:true,
+        pointListe: [[x1, `${noms[1]}`], [x2, `${noms[0]}`], [x3, `${noms[2]}`], [x21, `${noms[3]}`], [x31, `${noms[4]}`]],
+        labelListe: [[x2, `${tex_nombre(x2)+'0'}`], [x3, `${tex_nombre(x3)+'0'}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+      d3Corr = droiteGraduee2({
+        x: 6.5, y: 0, Min: x21, axePosition: 'H', Max: x31, thickSec: true, thickTer: false, Unite: 2000, thickSecDist: 0.001, thickOffset: thickOff,
+        thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: false,labelsSecondaires:true,
+        pointListe: [[x1, `${noms[1]}`], [x21, `${noms[3]}`], [x31, `${noms[4]}`]],
+        labelListe: [[x21, `${tex_nombre(x21)+'0'}`], [x31 ,`${tex_nombre(x31)+'0'}`]],
+        pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
+      })
+
+      pA1 = point((x2-xmin)*30, 6)
+      pA2 = point(6.5, 3)
+      pB1 = point((x3-xmin)*30, 6)
+      pB2 = point(26.5, 3)
+      sA = segment(pA1, pA2)
+      sB = segment(pB1, pB2)
+      sA.pointilles = true
+      sB.pointilles = true
+      pC1 = point(6.5 + (x21 - x2) * 200, 3)
+      pC2 = point(6.5, 0)
+      pD1 = point(6.5 + (x31 - x2) * 200, 3)
+      pD2 = point(26.5, 0)
+      sC = segment(pC1, pC2)
+      sD = segment(pD1, pD2)
+      sC.pointilles = true
+      sD.pointilles = true
+      fenetre = { xmin: -1.5, xmax: 35, ymin: -1.5, ymax: 7.5, pixelsParCm:25, scale: 0.5 }
+      objets.push(d1, d2, d3, sA, sB, sC, sD)
+      objetsCorr.push(d1Corr,d2Corr,d3Corr,sA, sB, sC, sD)
+      let partent = Math.floor(x1), pardec = calcul(x1 - partent)
+      texte_corr = `L'abscisse de ${noms[1]} est : $${tex_nombre(x1)}=${tex_nombre(partent)} + ${tex_fraction(calcul(pardec * 1000), 1000)}=${tex_fraction(calcul(x1 * 1000), 1000)}$.<br>`
+
+    }
+    texte = `Donner l'abscisse de ${noms[1]} sous trois formes : en écriture décimale, comme somme d’un nombre entier et d’une fraction décimale et avec une fraction décimale.<br>`
+    texte += mathalea2d(fenetre, objets)
+    texte_corr+=mathalea2d(fenetre, objetsCorr)
+    this.liste_questions.push(texte);
+    this.liste_corrections.push(texte_corr);
+    liste_de_question_to_contenu_sans_numero(this);
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté', 3, '1 : Au dixième\n2 : Au centième\n3 : Au millième'];
+}
+
+
+/**
+ * Écriture décimale à partir de différentes manière de l'énoncer
+ *
+ * * 3 unités, 5 dixièmes et 8 centièmes
+ * * 3 unités et 5 centièmes
+ * * 5 dixièmes
+ * * 128/10
+ * * 8+5/100+7/100
+ * @Auteur Rémi Angot
+ * Référence 6N23-4
+ */
+function Nombre_decimal_oralise_de_differentes_manieres() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Donner l'écriture décimale d'un nombre à partir de différents textes";
+  this.consigne = "Donner l'écriture décimale de chaque nombre.";
+  this.nb_questions = 5;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    let type_de_questions_disponibles = range1(5);
+    let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions); 
+    for (
+      let i = 0, texte, texte_corr, cpt = 0, a, b, c, choix ;i < this.nb_questions && cpt < 50;) {
+      a = randint(2,9);
+      b = randint(2,9,a)
+      c = randint(2,9,[a,b])
+      switch (liste_type_de_questions[i]) {
+        case 1: //3 unités, 5 dixièmes et 8 centièmes   
+          texte = `${a} unités, ${b} dixièmes et ${c} centièmes`;
+          texte_corr = `$${a}+${tex_fraction(b,10)}+${tex_fraction(c,100)}=${tex_nombrec(a+b/10+c/100)}$`
+          break;
+        case 2: //3 unités et 5 centièmes   
+          texte = `${a} unités et ${c} centièmes`;
+          texte_corr = `$${a}+${tex_fraction(c,100)}=${tex_nombrec(a+c/100)}$`
+          break;
+        case 3: //5 dixièmes / centièmes ou millièmes
+          choix = randint(1,3)
+          if (choix==1){
+            texte = `${a} dixièmes`;
+            texte_corr = `$${tex_fraction(a,10)}=${tex_nombrec(a/10)}$`
+          }   
+          if (choix==2){
+            texte = `${a} centièmes`;
+            texte_corr = `$${tex_fraction(a,100)}=${tex_nombrec(a/100)}$`
+          }   
+          if (choix==3){
+            texte = `${a} millièmes`;
+            texte_corr = `$${tex_fraction(a,1000)}=${tex_nombrec(a/1000)}$`
+          }   
+          break;
+        case 4: //128/10
+          let n = a*100+b*10+c   
+          choix = randint(1,3)
+          if (choix==1){
+            texte = `$${tex_fraction(n,10)}$`;
+            texte_corr = `$${tex_fraction(n,10)}=${tex_nombrec(n/10)}$`
+          }
+          if (choix==2){
+            texte = `$${tex_fraction(n,100)}$`;
+            texte_corr = `$${tex_fraction(n,100)}=${tex_nombrec(n/100)}$`
+          }
+          if (choix==1){
+            texte = `$${tex_fraction(n,1000)}$`;
+            texte_corr = `$${tex_fraction(n,1000)}=${tex_nombrec(n/1000)}$`
+          }
+          break;
+        case 5: //8+5/100+7/100  
+          choix = randint(1,2)
+          if (choix==1){
+            texte = `$${a}+${tex_fraction(b,100)}+${tex_fraction(c,100)}$`;
+            texte_corr = `$${a}+${tex_fraction(b,100)}+${tex_fraction(c,100)}=${a}+${tex_fraction(b+c,100)}=${tex_nombrec(a+(b+c)/100)}$`
+          }
+          if (choix==2){
+            texte = `$${a}+${tex_fraction(b,10)}+${tex_fraction(c,10)}$`;
+            texte_corr = `$${a}+${tex_fraction(b,10)}+${tex_fraction(c,10)}=${a}+${tex_fraction(b+c,10)}=${a}+${tex_nombrec((b+c)/10)}=${tex_nombrec(a+(b+c)/10)}$`
+          }
+          break;
+        
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en crée une autre
+        this.liste_questions.push(texte);
+        if (!sortie_html && i == 0) {
+          texte_corr = `\\setlength\\itemsep{2em}` + texte_corr;
+        } // espacement entre les questions
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
 }
 
 /** 
@@ -9695,7 +10300,7 @@ function Colorier_Deplacement(){
 
     texte += `Au départ, le lutin est situé dans la case grisée. Chaque déplacement se fait dans une case adjacente. <br><br>`;
     if (!sortie_html) {texte += `\\begin{center}`}
-    texte+= mathalea2d({xmin:xGrilleMin-3,xmax:xGrilleMax+1,ymin:yGrilleMin-1,ymax:yGrilleMax+1,pixelsParcCm:20,scale:.5}, lstObjet);    
+    texte+= mathalea2d({xmin:xGrilleMin-3,xmax:xGrilleMax+1,ymin:yGrilleMin-1,ymax:yGrilleMax+1,pixelsParCm:20,scale:.5}, lstObjet);    
     if (sortie_html) {
       texte += `</td></tr></table>`;
     } else {
@@ -9737,7 +10342,7 @@ function Colorier_Deplacement(){
       if (this.sup2){
         texte_corr += `Passage n° ${k+1} dans la boucle : <br>`
       }    
-      texte_corr += mathalea2d({xmin:xGrilleMin-3,xmax:xGrilleMax+1,ymin:yGrilleMin-1,ymax:yGrilleMax+1,pixelsParcCm:20,scale:0.4}, lstObjet);  
+      texte_corr += mathalea2d({xmin:xGrilleMin-3,xmax:xGrilleMax+1,ymin:yGrilleMin-1,ymax:yGrilleMax+1,pixelsParCm:20,scale:0.4}, lstObjet);  
       if (sortie_html) {
         if (k%3==2) {
           texte_corr += `</td></tr><tr><td style="text-align:center">`; // retour à la ligne après 3 grilles dessinées en HTML
@@ -11992,9 +12597,10 @@ function Symetrie_axiale_conservation1() {
     // On prépare la figure...
     let axe=parseInt(this.sup)
     let d,nonchoisi,coords=[],x,y,objets_enonce=[],objets_correction=[],nomd,label_pos
+
     if (axe==5) axe=randint(1,4) //choix de l'axe et des coordonnées
     switch (axe) {
-      case 1 : d=droite(1,0,0,'(d)');
+      case 1 : d=droite(1,0,0);
         nomd=texteParPosition('(d)',0.3,5.6)
         label_pos='above left'
         for (let i=0;i<12;i++){
@@ -12009,7 +12615,7 @@ function Symetrie_axiale_conservation1() {
         }
         for (let j=0;j<12;j++) coords.push([-coords[j][0],coords[j][1]]) // on stocke les 12 images
       break;
-      case 2: d=droite(0,1,0,'(d)');
+      case 2: d=droite(0,1,0);
       label_pos='above'
       nomd=texteParPosition('(d)',5.6,0.3)
       for (let i=0;i<12;i++){
@@ -12024,7 +12630,7 @@ function Symetrie_axiale_conservation1() {
         }
         for (let j=0;j<12;j++) coords.push([coords[j][0],-coords[j][1]]) // on stocke les 12 images
       break;
-      case 3: d=droite(1,-1,0,'(d)');
+      case 3: d=droite(1,-1,0);
       label_pos='above'
       nomd=texteParPosition('(d)',-5.8,-5.4)
       for (let i=0;i<12;i++){
@@ -12040,7 +12646,7 @@ function Symetrie_axiale_conservation1() {
         }
         for (let j=0;j<12;j++) coords.push([coords[j][1],coords[j][0]]) // on stocke les 12 images
       break;
-      case 4: d=droite(1,1,0,'(d)');
+      case 4: d=droite(1,1,0);
       label_pos='above'
       nomd=texteParPosition('(d)',-5.8,5.4)
       for (let i=0;i<12;i++){
@@ -12157,9 +12763,11 @@ function Symetrie_axiale_conservation1() {
 
 // Référence 6C23
 function Exercice_additionner_des_fractions_6e() {
-  Exercice_additionner_des_fractions_5e.call(this);
-  this.level=6
-  this.titre= "Additionner des fractions de même dénominateur"
+  Exercice_additionner_ou_soustraire_des_fractions_5e.call(this);
+  this.sup2 = 1;
+  this.level = 6;
+  this.titre= "Additionner des fractions de même dénominateur";
+  this.besoin_formulaire_numerique2 = false;
 }
 /**
  * @Auteur Jean-Claude Lhote
@@ -13258,7 +13866,7 @@ function Notation_segment_droite_demi_droite() {
             break;
           case 3:
             trait = demiDroite(B, A);
-            notation = `$[${A.nom}${B.nom})$`;
+            notation = `$[${B.nom}${A.nom})$`;
             break;
           case 4:
             trait = segment(A, B);
@@ -13343,7 +13951,7 @@ function Description_segment_droite_demi_droite() {
             break;
           case 3:
             trait = demiDroite(B, A);
-            correction = `La demi-droite d'origine $${B.nom}$ passant par $${A.nom}$ notée $[${A.nom}${B.nom})$.`;
+            correction = `La demi-droite d'origine $${B.nom}$ passant par $${A.nom}$ notée $[${B.nom}${A.nom})$.`;
             break;
           case 4:
             trait = segment(A, B);
@@ -13688,6 +14296,268 @@ function Utiliser_le_codage_pour_decrire(){
    };
 }
 
+/**
+ * Ref beta6G14
+ */
+function Proprietes_paralleles_perpendiculaires() {
+  "use strict";
+  Exercice.call(this);
+  this.titre = "Utiliser les propriétés des droites perpendiculaires";
+  this.nb_questions = 3;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 4;
+  this.sup2 = 1;
+  this.correction_detaillee_disponible = true;
+  this.correction_detaillee=false;
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let type_de_questions_disponibles,questions_par_niveau=[];
+    questions_par_niveau.push(range(3))
+    questions_par_niveau.push(rangeMinMax(9,15))
+    questions_par_niveau.push(rangeMinMax(19,31,20))
+
+    if (this.sup<4) type_de_questions_disponibles = questions_par_niveau[parseInt(this.sup)-1]
+    else  type_de_questions_disponibles=questions_par_niveau[0].concat(questions_par_niveau[1].concat(questions_par_niveau[2]))
+
+    let liste_type_de_questions = combinaison_listes(
+      type_de_questions_disponibles,
+      this.nb_questions
+    );
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    let droites=[],code,raisonnement,numDroites=[],phrases=[],textetemp
+    let d=[],P=[],objets=[],num1,num2,couleurd=[],droiteP,PP,Inter
+    let droitecolor=function(num) {
+      let couleurs
+      sortie_html ? couleurs=['red','blue','green','black','magenta','orange'] : couleurs=['black','black','black','black','black','black'];
+      return couleurs[num]
+    }
+    if (sortie_html) {
+      num1=`<tspan dy="5" style="font-size:70%">`
+      num2=`</tspan><tspan dy="-5">)</tspan>`
+     }
+     else {
+       num1=`_`
+       num2=`)`
+     }
+    for (
+      let i = 0, texte, texte_corr, cpt = 0;
+      i < this.nb_questions && cpt < 50;
+
+    ) { 
+      texte=""
+      texte_corr=""
+      phrases.length=0;
+      droites.length=0;
+      objets.length=0;
+      d.length=0;
+      P.length=0;
+      couleurd.length=0
+      numDroites=shuffle([1,2,3,4,5]);
+      raisonnement=liste_type_de_questions[i]
+
+    switch (raisonnement) {
+      case 0: // si 1//2 et 2//3 alors 1//3
+        code = [[1, 2, 1], [2, 3, 1]];
+        break;
+      case 1: // si 1//2 et 2T3 alors 1T3
+        code = [[1, 2, 1], [2, 3, -1]]
+        break;
+      case 2: // si 1T2 et 2T3 alors 1//3
+        code = [[1, 2, -1], [2, 3, -1]]
+        break;
+      case 3: // si 1T2 et 2//3 alors 1T3
+        code = [[1, 2, -1], [2, 3, 1]]
+        break;
+      case 8: // Si 1//2 et 2//3 et 3//4 alors 1//4
+        code = [[1, 2, 1], [2, 3, 1], [3, 4, 1]];
+        break;
+      case 9: // Si 1//2 et 2//3 et 3T4 alors 1T4
+        code = [[1, 2, 1], [2, 3, 1], [3, 4, -1]];
+        break;
+      case 10: // Si 1//2 et 2T3 et 3//4 alors 1T4
+        code = [[1, 2, 1], [2, 3, 1], [3, 4, 1]];
+        break;
+      case 11: // Si 1//2 et 2T3 et 3T4 alors 1//4
+        code = [[1, 2, 1], [2, 3, -1], [3, 4, -1]];
+        break;
+      case 12: // Si 1T2 et 2//3 et 3//4 alors 1T4
+        code = [[1, 2, -1], [2, 3, 1], [3, 4, 1]];
+        break;
+      case 13: // Si 1T2 et 2//3 et 3T4 alors 1//4
+        code = [[1, 2, -1], [2, 3, 1], [3, 4, -1]];
+        break;
+      case 14: // Si 1T2 et 2T3 et 3//4 alors 1//4
+        code = [[1, 2, -1], [2, 3, -1], [3, 4, 1]];
+        break;
+      case 15: // Si 1T2 et 2T3 et 3T4 alors 1T4
+        code = [[1, 2, -1], [2, 3, -1], [3, 4, -1]];
+        break;
+      case 16: // Si 1//2 et 2//3 et 3//4 et 4//5 alors 1//5
+        code = [[1, 2, 1], [2, 3, 1], [3, 4, 1], [4, 5, 1]];
+        break;
+      case 17: // Si 1//2 et 2//3 et 3T4 et 4//5 alors 1T5
+        code = [[1, 2, 1], [2, 3, 1], [3, 4, -1], [4, 5, 1]];
+        break;
+      case 18: // Si 1//2 et 2T3 et 3//4 et 4//5 alors 1T5
+        code = [[1, 2, 1], [2, 3, -1], [3, 4, 1], [4, 5, 1]];
+        break;
+      case 19: // Si 1//2 et 2T3 et 3T4 et 4//5 alors 1//5
+        code = [[1, 2, 1], [2, 3, -1], [3, 4, -1], [4, 5, 1]];
+        break;
+      case 20: // Si 1T2 et 2//3 et 3//4 et 4//5 alors 1T5
+        code = [[1, 2, -1], [2, 3, 1], [3, 4, 1], [4, 5, 1]];
+        break;
+      case 21: // Si 1T2 et 2//3 et 3T4 et 4//5 alors 1//5
+        code = [[1, 2, -1], [2, 3, 1], [3, 4, -1], [4, 5, 1]];
+        break;
+      case 22: // Si 1T2 et 2T3 et 3//4 et 4//5 alors 1//5
+        code = [[1, 2, -1], [2, 3, -1], [3, 4, 1], [4, 5, 1]];
+        break;
+      case 23: // Si 1T2 et 2T3 et 3T4 et 4//5 alors 1T5
+        code = [[1, 2, -1], [2, 3, -1], [3, 4, -1], [4, 5, 1]];
+        break;
+      case 24: // Si 1//2 et 2//3 et 3//4 et 4T5 alors 1T5
+        code = [[1, 2, 1], [2, 3, 1], [3, 4, 1], [4, 5, -1]];
+        break;
+      case 25: // Si 1//2 et 2//3 et 3T4 et 4T5 alors 1//5
+        code = [[1, 2, 1], [2, 3, 1], [3, 4, -1], [4, 5, -1]];
+        break;
+      case 26: // Si 1//2 et 2T3 et 3//4 et 4T5 alors 1//5
+        code = [[1, 2, 1], [2, 3, -1], [3, 4, 1], [4, 5, -1]];
+        break;
+      case 27: // Si 1//2 et 2T3 et 3T4 et 4T5 alors 1T5
+        code = [[1, 2, 1], [2, 3, -1], [3, 4, -1], [4, 5, -1]];
+        break;
+      case 28: // Si 1T2 et 2//3 et 3//4 et 4T5 alors 1//5
+        code = [[1, 2, -1], [2, 3, 1], [3, 4, 1], [4, 5, -1]];
+        break;
+      case 29: // Si 1T2 et 2//3 et 3T4 et 4T5 alors 1T5
+        code = [[1, 2, -1], [2, 3, 1], [3, 4, -1], [4, 5, -1]];
+        break;
+      case 30: // Si 1T2 et 2T3 et 3//4 et 4T5 alors 1T5
+        code = [[1, 2, -1], [2, 3, -1], [3, 4, 1], [4, 5, -1]];
+        break;
+      case 31: // Si 1T2 et 2T3 et 3T4 et 4T5 alors 1//5
+        code = [[1, 2, -1], [2, 3, -1], [3, 4, -1], [4, 5, -1]];
+        break;
+
+    }
+
+    // enoncé mélangé
+    texte +=`On sait que `
+    couleurd.push(randint(0,5))
+    for (let j=0;j<code.length;j++) {
+      textetemp =`$(d_${numDroites[code[j][0]-1]})`;
+      if (code[j][2]==1) {
+        textetemp+= `//`
+        couleurd.push(couleurd[j])
+      }
+      else {
+        textetemp+=`\\perp`
+        couleurd.push((couleurd[j]+1)%6)
+      }
+      textetemp +=`(d_${numDroites[code[j][1]-1]})$`
+      phrases.push(textetemp)
+    }
+    //phrases=shuffle(phrases)
+    for (let j=0;j<code.length-1;j++) {
+      texte+=phrases[j]
+      if (j!=code.length-2) texte+=`, `
+      else texte +=` et `
+    }
+    texte+=phrases[code.length-1]
+    texte +=`.<br>Que peut-on dire de $(d_${numDroites[code[0][0]-1]})$ et $(d_${numDroites[code[code.length-1][1]-1]})$ ?`
+
+    //construction de la figure
+    
+    P.push(point(0,0))
+    droiteP=droiteParPointEtPente(P[0],randint(-1,1,0)/10,`(d${num1}${numDroites[code[0][0]-1]}${num2}`,droitecolor(couleurd[0]))
+    droiteP.epaisseur=2
+    droite.pointilles=false
+    d.push(droiteP)
+    objets.push(d[0])
+    for (let x=0;x<code.length;x++) {
+      if (code[x][2]==1) {
+        P.push(point((x+1)*2,(x+1)*2))
+        droiteP=droiteParPointEtParallele(P[x+1],d[x],`(d${num1}${numDroites[code[x][1]-1]}${num2}`,droitecolor(couleurd[x+1]))
+        droiteP.epaisseur=2
+        droiteP.pointilles=d[x].pointilles
+        d.push(droiteP)
+      }
+      else {
+        P.push(point((x+1)*2,(x+1)*2))
+        droiteP=droiteParPointEtPerpendiculaire(P[x+1],d[x],`(d${num1}${numDroites[code[x][1]-1]}${num2}`,droitecolor(couleurd[x+1]))
+        droiteP.epaisseur=2
+        droiteP.pointilles=x%3+1
+        Inter=pointIntersectionDD(d[x],droiteP)
+        PP=rotation(P[x+1],Inter,90)
+        d.push(droiteP)
+        objets.push(codageAngleDroit(PP,Inter,P[x+1],'black',0.6))
+      }
+      objets.push(d[x+1])
+    }
+    for (let i=0;i<code.length;i++){ // on ajoute les angles droits
+
+    }
+    // correction raisonnement ordonné
+    fenetreMathalea2d=[-2,-2,15,10]
+    texte_corr=`À partir de l\'énoncé, on peut réaliser le shémas suivant (il en existe une infinité)<br> Les droites données parallèles dans l'énoncé sont de même couleur/style.<br>`
+    texte_corr+=mathalea2d({xmin:-2,xmax:15,ymin:-2,ymax:10,pixelsParCm:20,scale:0.3,mainlevee:false,amplitude:0.3},objets)+`<br>`
+    for (let j=0;j<code.length-1;j++) {
+      if (this.correction_detaillee) texte_corr+=`On sait que : `
+      else texte_corr+=`Comme `
+      texte_corr+=`$(d_${numDroites[code[j][0]-1]})`;
+      if (code[j][2]==1) texte_corr+= `//`
+      else texte_corr+=`\\perp`
+      texte_corr +=`(d_${numDroites[code[j][1]-1]})$ et `
+      texte_corr+=`$(d_${numDroites[code[j+1][0]-1]})`;
+      if (code[j+1][2]==1) texte_corr+= `//`
+      else texte_corr+=`\\perp`
+      texte_corr +=`(d_${numDroites[code[j+1][1]-1]})$`
+      // quelle propriété ?
+      if (code[j][2]*code[j+1][2]==-1) { // Une parallèle et une perpendiculaire
+        if (this.correction_detaillee) texte_corr+=`.<br> Or «Si deux droites sont parallèles alors toute droite perpendiculaire à l'une est aussi perpendiculaire à l'autre».<br>Donc`
+        else texte_corr+=`, on en déduit que `
+        texte_corr+=` $(d_${numDroites[code[0][0]-1]})\\perp(d_${numDroites[code[j+1][1]-1]})$.<br>`
+        code[j+1][0]=code[j][0]
+        code[j+1][2]=-1
+      }
+      else if (code[j][2]>0) { // deux parallèles
+        if (this.correction_detaillee) texte_corr+=`.<br> Or «Si deux droites sont parallèles à une même droite alors elles sont parallèles entre elles».<br>Donc`
+        else texte_corr+=`, on en déduit que `
+        texte_corr+=` $(d_${numDroites[code[0][0]-1]})//(d_${numDroites[code[j+1][1]-1]})$.<br>`
+        code[j+1][0]=code[j][0]
+        code[j+1][2]=1
+
+      }
+      else { //deux perpendiculaires
+        if (this.correction_detaillee) texte_corr+=`.<br> Or «Si deux droites sont perpendiculaires à une même droite alors elles sont parallèles entre elles».<br>Donc`
+        else texte_corr+=`, on en déduit que `
+        texte_corr+=` $(d_${numDroites[code[0][0]-1]})//(d_${numDroites[code[j+1][1]-1]})$.<br>`
+        code[j+1][0]=code[j][0]
+        code[j+1][2]=1
+
+      }
+      
+
+    }
+
+    if (this.liste_questions.indexOf(texte) == -1) {
+      // Si la question n'a jamais été posée, on en crée une autre
+      this.liste_questions.push(texte + "<br>");
+      this.liste_corrections.push(texte_corr + "<br>");
+      i++;
+    }
+      cpt++;
+    }
+
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Nombre d\'étapes de raisonnement :', 4, `1 : 1 étape\n 2 : 2 étapes\n 3 : 3 étapes\n4 : Mélange aléatoire`]
+  // this.besoin_formulaire2_case_a_cocher = [
+  //  "Avec figure ? ",false];
+}
 
 /**
  * Fonction générale pour exercices de constructions de parallèles et perpendiculaires
@@ -14042,9 +14912,9 @@ function Parallele_et_Perpendiculaires() {
 function Proportionnalite_par_linearite_bis(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 3;
 	} else {
 		this.nb_questions = 1;
@@ -14063,7 +14933,7 @@ function Proportionnalite_par_linearite_bis(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [1];			
 		} else {
 			type_de_questions_disponibles = [1];			
@@ -14165,7 +15035,7 @@ function Proportionnalite_par_linearite_bis(){
 			switch (liste_type_de_questions[i]){
 				case 1 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte_corr = ``;	
@@ -14294,7 +15164,7 @@ function Lecture_diagramme_barre() {
       lstElementGraph.push(traceBarre((((r.xMax-r.xMin)/(nbAnimaux+1))*(i+1)),lstNombresAnimaux[i],premiere_lettre_en_majuscule(lstAnimauxExo[i]),{unite:.1/coef}))
     }
 
-    texte += mathalea2d({xmin : -5, xmax : 11, ymin : -3, ymax : 11, pixelsParCm : 30, scale : .5}, r, lstElementGraph)
+    texte += mathalea2d({xmin : -5, xmax : 11, ymin : -4, ymax : 11, pixelsParCm : 30, scale : .5}, r, lstElementGraph)
     // debut de la correction
     // question 1
     texte_corr = num_alpha(0) + ` Les animaux les plus nombreux sont les ` + lstAnimauxExo[lstNombresAnimaux.indexOf(nMax)] +'.<br>';
@@ -15375,9 +16245,9 @@ function Solide_6e() {
 function Produit_de_decimaux_a_partir_d_un_produit_connu(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 3;
 	} else {
 		this.nb_questions = 3;
@@ -15395,7 +16265,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1,2];			
 		} else {
       //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
@@ -15427,7 +16297,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
 				enonces.push({
           enonce:`
             Sachant que $${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}$,
-            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${calcul(situations[0].d2*10+situations[0].u2)}$
+            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${calcul(situations[0].d2*10+situations[0].u2)}$.
 					`,
 					question:``,
 					correction:`
@@ -15437,7 +16307,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
         enonces.push({
           enonce:`
             Sachant que $${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}$,
-            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))}$
+            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))}$.
 					`,
 					question:``,
 					correction:`
@@ -15447,7 +16317,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
 				enonces.push({
           enonce:`
             Sachant que $${calcul(situations[0].d1*10+situations[0].u1)}\\times ${calcul(situations[0].d2*10+situations[0].u2)} = ${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(situations[0].d2*10+situations[0].u2)))}$,
-            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))}$
+            calculer $${tex_nombre(calcul((situations[0].d1*10+situations[0].u1)*(10**situations[0].p1)))}\\times ${tex_nombre(calcul((situations[0].d2*10+situations[0].u2)*(10**situations[0].p2)))}$.
 					`,
 					question:``,
 					correction:`
@@ -15461,7 +16331,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -15472,7 +16342,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
      			break;	
      		case 1 : 
           texte = `${enonces[1].enonce}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
             texte_corr = ``;	
@@ -15482,7 +16352,7 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
           break;
      		case 2 : 
           texte = `${enonces[2].enonce}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
             texte_corr = ``;	
@@ -15512,9 +16382,9 @@ function Produit_de_decimaux_a_partir_d_un_produit_connu(){
 function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 3;
 	} else {
 		this.nb_questions = 3;
@@ -15532,7 +16402,7 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1,2];			
 		} else {
       //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
@@ -15594,7 +16464,7 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -15605,7 +16475,7 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
           break;	
         case 1 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -15615,7 +16485,7 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
           break;
         case 2 : 
 					texte = `${enonces[2].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
 						texte_corr = ``;	
@@ -15644,9 +16514,9 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs(){
 function Ordre_de_grandeur_operations_decimaux(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
 		this.nb_questions = 1;
@@ -15664,7 +16534,7 @@ function Ordre_de_grandeur_operations_decimaux(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0];			
 		} else {
       //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
@@ -15850,7 +16720,7 @@ function Ordre_de_grandeur_operations_decimaux(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -15874,6 +16744,118 @@ function Ordre_de_grandeur_operations_decimaux(){
 };
 
 /** 
+ * * Encadrer_puis_arrondir_une_valeur
+ * * 6N31-3
+ * @author Mireille Gain, s'inspirant de 6N31-1 de Sébastien Lozano
+ */
+
+function Arrondir_une_valeur() {
+    "use strict";
+    Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Arrondir une valeur";
+    this.consigne = "Encadrer chaque nombre à l'unité, puis au dixième, puis au centième.<br>Dans chaque cas, mettre ensuite en évidence son arrondi.";
+    this.nb_questions = 3;
+    this.nb_cols = 3;
+    this.nb_cols_corr = 1;
+    this.sup = 1;
+    this.sup2 = false;
+
+    sortie_html ? (this.spacing_corr = 2.5) : (this.spacing_corr = 3.5);
+
+    this.nouvelle_version = function () {
+        this.liste_questions = [];
+        this.liste_corrections = [];
+        let m, c, d, u, di, ci, mi, me, ce, de, n, den, num, nb, rac;
+
+        for (let i = 0, texte = "", texte_corr = "", cpt = 0; i < this.nb_questions && cpt < 50; ) {
+            if (this.sup == 1) {
+                m = randint(0, 9);
+                c = randint(0, 9);
+                d = randint(0, 9);
+                u = randint(0, 9);
+                di = randint(1, 9);
+                ci = randint(1, 9);
+                mi = randint(1, 9, 5);
+                me = randint(0, 1);
+                ce = randint(0, 1);
+                de = randint(0, 1);
+                n = me * m * 1000 + ce * c * 100 + de * d * 10 + u * 1 + calcul(di * 0.1 + ci * 0.01 + mi * 0.001);
+                nb = tex_nombre(n);
+            } else if (this.sup == 2) {
+                den = choice([7, 9, 11, 13]);
+                num = randint(1, 50, [7, 9, 11, 13, 14, 18, 21, 22, 26, 27, 28, 33, 35, 36, 39, 42, 44, 45, 49]);
+                n = num / den;
+                nb = tex_fraction(num, den);
+                di = troncature(n - troncature(n, 0), 1);
+                ci = troncature(n - troncature(n, 1), 2);
+                mi = troncature(n - troncature(n, 2), 3);
+            } else if (this.sup == 3) {
+                rac = randint(3, 99, [4, 9, 16, 25, 36, 49, 64, 81]);
+                n = Math.sqrt(rac);
+                nb = `\\sqrt{${rac}}`;
+                di = troncature(n - troncature(n, 0), 1);
+                ci = troncature(n - troncature(n, 1), 2);
+                mi = troncature(n - troncature(n, 2), 3);
+            }
+
+            texte = `$${nb}$`;
+            if (this.sup2) {
+                if (this.sup == 1) texte += ``;
+                else if (this.sup == 2) texte += `$\\phantom{1234567}$[Quand on écrit sur la calculatrice $${num}\\div ${den}$, elle affiche : $${tex_nombre(n)}$.]`;
+                else if (this.sup == 3) texte += `$\\phantom{1234567}$[Quand on écrit sur la calculatrice $${nb}$, elle affiche : $${tex_nombre(n)}$.]`;
+            }
+            texte_corr = "Encadrement et arrondi à l'unité : ";
+            if (di < 5) {
+                texte_corr += `$\\phantom{1234567}${mise_en_evidence(tex_nombre(troncature(n, 0)))} < ${nb} < ${tex_nombre(troncature(n + 1, 0))}$`;
+            } else {
+                texte_corr += `$\\phantom{1234567}${tex_nombre(troncature(n, 0))} < ${nb} < ${mise_en_evidence(tex_nombre(troncature(n + 1, 0)))}$`;
+            }
+
+            texte_corr += "<br>Encadrement et arrondi au dixième : ";
+            if (ci < 5) {
+                texte_corr += `$\\phantom{123}${mise_en_evidence(tex_nombre(troncature(n, 1)))} < ${nb} < ${tex_nombre(troncature(n + 0.1, 1))}$`;
+            } else {
+                texte_corr += `$\\phantom{123}${tex_nombre(troncature(n, 1))} < ${nb} < ${mise_en_evidence(tex_nombre(troncature(n + 0.1, 1)))}$`;
+            }
+
+            texte_corr += "<br>Encadrement et arrondi au centième : $~$";
+            if (mi < 5) {
+                texte_corr += `$${mise_en_evidence(tex_nombre(troncature(n, 2)))} < ${nb} < ${tex_nombre(troncature(n + 0.01, 2))}$`;
+            } else {
+                texte_corr += `$${tex_nombre(troncature(n, 2))} < ${nb} < ${mise_en_evidence(tex_nombre(troncature(n + 0.01, 2)))}$`;
+            }
+
+            if (this.liste_questions.indexOf(texte) == -1) {
+                // Si la question n'a jamais été posée, on en créé une autre
+                this.liste_questions.push(texte); // Sinon on enregistre la question dans liste_questions
+                this.liste_corrections.push(texte_corr); // On fait pareil pour la correction
+                i++; // On passe à la question suivante
+            }
+            cpt++;
+        }
+        liste_de_question_to_contenu(this);
+    };
+    this.besoin_formulaire_numerique = ['Type de nombre', 2, `1 : Nombre décimal\n 2 : Fraction`];
+    this.besoin_formulaire2_case_a_cocher = ["Affichage de la valeur donnée à la calculatrice", false];
+}
+
+function Arrondir_une_valeur_6e() {
+  Arrondir_une_valeur.call(this);
+  this.sup = 1;
+}
+
+function Arrondir_une_valeur_5e() {
+  Arrondir_une_valeur.call(this);
+  this.sup = 2;
+  this.besoin_formulaire_numerique = ['Type de nombre', 2, `1 : Nombre décimal\n 2 : Fraction`];
+}
+
+function Arrondir_une_valeur_4e() {
+  this.sup = 3;
+  Arrondir_une_valeur.call(this);
+  this.besoin_formulaire_numerique = ['Type de nombre', 3, `1 : Nombre décimal\n 2 : Fraction\n 3 : Racine carrée`];
+}
+/** 
  * * Donner le chiffre des ... le nombre de ...
  * * 6N10-3
  * @author Sébastien Lozano
@@ -15882,9 +16864,9 @@ function Ordre_de_grandeur_operations_decimaux(){
 function chiffre_nombre_de(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 6;
 	} else {
 		this.nb_questions = 6;
@@ -15902,7 +16884,7 @@ function chiffre_nombre_de(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1,2,3,4,5];			
 		} else {
           //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
@@ -16062,7 +17044,7 @@ function chiffre_nombre_de(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -16073,7 +17055,7 @@ function chiffre_nombre_de(){
           			break;	
      		case 1 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -16083,7 +17065,7 @@ function chiffre_nombre_de(){
           			break;
      		case 2 : 
 					texte = `${enonces[2].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
 						texte_corr = ``;	
@@ -16093,7 +17075,7 @@ function chiffre_nombre_de(){
           			break;				
      		case 3 : 
 					texte = `${enonces[3].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
 						texte_corr = ``;	
@@ -16103,7 +17085,7 @@ function chiffre_nombre_de(){
 					break;				
      		case 4 : 
 					texte = `${enonces[4].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
 						texte_corr = ``;	
@@ -16113,7 +17095,7 @@ function chiffre_nombre_de(){
           break;	
         case 5 : 
 					texte = `${enonces[5].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[5].correction}`;
 						texte_corr = ``;	
@@ -16138,7 +17120,7 @@ function chiffre_nombre_de(){
 };
 
 /** 
-* * Encadrer un nombre entier par deux entier consécutifs
+* * Encadrer un nombre entier par deux entiers consécutifs
 * * 6N11-3
 * @author Sébastien Lozano
 */
@@ -16146,9 +17128,9 @@ function chiffre_nombre_de(){
 function Encadrer_un_entier_par_deux_entiers_consecutifs(){
   'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 6;
 	} else {
 		this.nb_questions = 3;
@@ -16166,7 +17148,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1,2,3,4,5];			
 		} else {
       type_de_questions_disponibles = shuffle([choice([0,1]),choice([2,3]),choice([4,5])]);      			
@@ -16297,7 +17279,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -16308,7 +17290,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
           break;	
         case 1 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -16318,7 +17300,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
           break;
         case 2 : 
 					texte = `${enonces[2].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
 						texte_corr = ``;	
@@ -16328,7 +17310,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
           break;	
         case 3 : 
 					texte = `${enonces[3].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
 						texte += `             `
@@ -16339,7 +17321,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
           break;	
         case 4 : 
 					texte = `${enonces[4].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
 						texte_corr = ``;	
@@ -16349,7 +17331,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
           break;
         case 5 : 
 					texte = `${enonces[5].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[5].correction}`;
 						texte_corr = ``;	
@@ -16373,7 +17355,7 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 };
 
 /** 
-* * Ranger une liste de nombres dans l'odre croissant ou décroissant
+* * Ranger une liste de nombres dans l'ordre croissant ou décroissant
 * * 6N11-4
 * @author Sébastien Lozano
 */
@@ -16381,9 +17363,9 @@ function Encadrer_un_entier_par_deux_entiers_consecutifs(){
 function Ranger_ordre_croissant_decroissant(){
  'use strict';
  Exercice.call(this); // Héritage de la classe Exercice()
- this.beta = false;	
+ this.debug = false;	
  this.sup=1;
- if (this.beta) {
+ if (this.debug) {
    this.nb_questions = 2;
  } else {
    this.nb_questions = 2;
@@ -16401,7 +17383,7 @@ function Ranger_ordre_croissant_decroissant(){
  let type_de_questions_disponibles;	
 
  this.nouvelle_version = function(numero_de_l_exercice){
-   if (this.beta) {
+   if (this.debug) {
      type_de_questions_disponibles = [0,1];			
    } else {
          //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
@@ -16482,7 +17464,7 @@ function Ranger_ordre_croissant_decroissant(){
      switch (liste_type_de_questions[i]){
       case 0 : 
         texte = `${enonces[0].enonce}`;
-        if (this.beta) {
+        if (this.debug) {
           texte += `<br>`;
           texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
           texte += `             `
@@ -16493,7 +17475,7 @@ function Ranger_ordre_croissant_decroissant(){
         break;	
       case 1 : 
         texte = `${enonces[1].enonce}`;
-        if (this.beta) {
+        if (this.debug) {
           texte += `<br>`;
           texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
           texte_corr = ``;	
@@ -16527,9 +17509,9 @@ function Ranger_ordre_croissant_decroissant(){
 function Tests_du_Seb(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = true;	
+	this.debug = true;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 2;
 	} else {
 		this.nb_questions = 2;
@@ -16547,7 +17529,7 @@ function Tests_du_Seb(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1];			
 		} else {
           //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
@@ -16591,7 +17573,7 @@ function Tests_du_Seb(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -16602,7 +17584,7 @@ function Tests_du_Seb(){
           break;	
         case 1 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -16636,9 +17618,9 @@ function Tests_du_Seb(){
 function Rapports_sur_un_segment(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-  this.beta = false;	
+  this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 2;
 	} else {
 		this.nb_questions = 2;
@@ -16656,7 +17638,7 @@ function Rapports_sur_un_segment(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1];			
 		} else {
        //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
@@ -16788,7 +17770,7 @@ function Rapports_sur_un_segment(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -16799,7 +17781,7 @@ function Rapports_sur_un_segment(){
           			break;	
         		case 1 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -16809,7 +17791,7 @@ function Rapports_sur_un_segment(){
           			break;
         		case 2 : 
 					texte = `${enonces[2].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
 						texte_corr = ``;	
@@ -16819,7 +17801,7 @@ function Rapports_sur_un_segment(){
           			break;				
         		case 3 : 
 					texte = `${enonces[3].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
 						texte_corr = ``;	
@@ -16829,7 +17811,7 @@ function Rapports_sur_un_segment(){
 					break;				
          		case 4 : 
 					texte = `${enonces[4].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
 						texte_corr = ``;	
@@ -16999,7 +17981,7 @@ jQuery(document).ready(function () {
   }
 
   liste_html_des_exercices_c3 = liste_html_des_exercices_d_un_niveau([
-    ['c3C1','c3C1 - Calculs niveau 1'],['c3N1','c3N1 - Numération Niveau 1']])
+    ['c3C1','c3C1 - Calculs niveau 1'],['c3N1','c3N1 - Numération Niveau 1'],['c3N2','c3N2 - Numération Niveau 2']])
   
   liste_html_des_exercices_6 = liste_html_des_exercices_d_un_niveau([
     ['6C1','6C1 - Calculs niveau 1'],['6C2','6C2 - Calculs niveau 2'],['6C3','6C3 - Calculs niveau 3'],
@@ -17114,6 +18096,11 @@ jQuery(document).ready(function () {
     liste_html_des_exercices += liste_html_des_exercices_beta;
     liste_html_des_exercices += `</div>`;
     liste_html_des_exercices += `</div>`;
+  } else if (window.location.href.indexOf("outils") > 0) {
+    liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Outils pour le professeur (${nombre_d_exercices_disponibles_prof})</div><div class="active content">`;
+    liste_html_des_exercices += liste_html_des_exercices_prof;
+    liste_html_des_exercices += `</div>`;
+    liste_html_des_exercices += `</div>`;
   } else if (window.location.href.indexOf("cm.html") > 0) {
     liste_html_des_exercices += `<div class="ui accordion"><div class="active title"><i class="dropdown icon"></i>Calcul mental (${nombre_d_exercices_disponibles_CM})</div><div class="active content">`;
     liste_html_des_exercices += liste_html_des_exercices_CM;
@@ -17187,6 +18174,16 @@ jQuery(document).ready(function () {
   }
 
   $("#liste_des_exercices").html(liste_html_des_exercices);
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+    ],
+    throwOnError: true,
+    errorColor: "#CC0000",
+    strict: "warn",
+    trust: false,
+    });
 
   // Gère le clic sur un exercice de la liste
   $(".lien_id_exercice").click(function () {
@@ -17219,6 +18216,120 @@ jQuery(document).ready(function () {
   });
 });
 
+/** 
+ * * Exo test pour quand j'en ai besoin
+ * * pas de numéro
+ * * Tests
+ * @author Erwan DUPLESSY
+ */
+
+function AfficherSVG(){
+	//'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+
+	this.titre = "Test d'affichage d'icone SVG";	
+  this.consigne = `On utilise awesomefont. `;	
+  this.nb_questions = 1;
+	this.nb_questions_modifiable = false;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	sortie_html? this.spacing = 1 : this.spacing = 1; 
+	sortie_html? this.spacing_corr = 2 : this.spacing_corr = 1;
+
+  this.nouvelle_version = function(){
+		this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées    
+
+    texte = `Directement dans le html avec la font : `; 
+    texte += `
+        <i class="orange users icon"></i>
+        <i class="yellow users icon"></i>
+        <i class="olive users icon"></i>
+        <i class="green users icon"></i>
+        <i class="teal users icon"></i>
+        <i class="blue users icon"></i>
+        <i class="violet users icon"></i>
+        <i class="purple users icon"></i>
+        <i class="pink users icon"></i>
+        <i class="brown users icon"></i><br>
+        <i class="grey users icon"></i>
+        <i class="black users icon"></i>
+        <i class="horizontally flipped cloud icon"></i>
+        <i class="vertically flipped cloud icon"></i>
+        <i class="clockwise rotated cloud icon"></i>
+        <i class="counterclockwise rotated cloud icon"></i>
+        <i class="chess icon"></i>
+        <i class="orange chess bishop icon"></i>
+        <i class="chess board icon"></i>
+        <i class="chess king icon"></i>
+        <i class="chess knight icon"></i>
+        <i class="chess pawn icon"></i>
+        <i class="chess queen icon"></i>
+        <i class="chess rook icon"></i>
+        <i class="square full icon"></i>`;
+
+    texte += `<br> Ou bien en SVG. Attention à l'utilisation des repères de coordonnées !<br>`;
+    texte += `<svg xmlns="http://www.w3.org/2000/svg">
+      <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+      <defs>
+        <symbol id="plane" viewBox="0 0 576 512">
+         <path d="M480 192H365.71L260.61 8.06A16.014 16.014 0 0 0 246.71 0h-65.5c-10.63 0-18.3 10.17-15.38 20.39L214.86 192H112l-43.2-57.6c-3.02-4.03-7.77-6.4-12.8-6.4H16.01C5.6 128-2.04 137.78.49 147.88L32 256 .49 364.12C-2.04 374.22 5.6 384 16.01 384H56c5.04 0 9.78-2.37 12.8-6.4L112 320h102.86l-49.03 171.6c-2.92 10.22 4.75 20.4 15.38 20.4h65.5c5.74 0 11.04-3.08 13.89-8.06L365.71 320H480c35.35 0 96-28.65 96-64s-60.65-64-96-64z"/>
+        </symbol>
+      </defs>
+      <defs>
+        <g id="Port">
+          <circle style="fill: inherit;"/>
+        </g>
+      </defs>
+      </svg>`;
+
+    texte += `
+    <svg width="300" height="300" viewBox="0 0 300 300" style="border: 1px solid #333333;">
+      <use width="35" x="70" y="0" transform="rotate(-15, 70, 70)" xlink:href="#plane"/>
+      <use width="35" x="70" y="0" transform="rotate(15, 70, 70)" xlink:href="#plane"/>
+      <use xlink:href="#plane" transform="rotate(-30, 70, 70)" width="35" x="70" y="0" />
+      <use xlink:href="#plane" width="25" x="60" y="50" fill="red" />
+      <use width="38" x="92" y="80" xlink:href="#plane"/>
+      <use width="23" x="50" y="30" xlink:href="#plane"/ fill-opacity="0%" stroke="green" stroke-width="8">   
+      <use width="50" x="0" y="0" fill="blue" xlink:href="#plane"/>
+      <use width="50" x="0" y="0" fill="blue" xlink:href="#Port"/>
+    </svg>`;
+
+    texte_corr = ``;
+    let txt_commande = "ADAAGAAAGAA";
+    let posx = 10;
+    let posy = 10;
+    let angle = 90;
+    texte_corr += `<svg width="300" height="300" viewBox="0 0 300 300" style="border: 1px solid #333333;">`
+    for (let c of txt_commande) {
+      switch (c) {
+        case "A":
+          texte_corr += `<use width="38" x="${10*i}" y="80" xlink:href="#plane"/>`
+          break;
+        case "G":
+          texte_corr += `<use width="38" x="${10*i}" y="80" xlink:href="#plane"/>`
+          break;
+        case "D":
+          texte_corr += `<use width="38" x="${10*i}" y="80" xlink:href="#plane"/>`
+          break;
+        default:
+          texte_corr += ``;
+      }
+      
+      texte_corr += `<use width="38" x="${10*i}" y="80" xlink:href="#plane"/>`
+    }
+    texte_corr += `</svg>`
+
+
+
+
+    
+    this.liste_questions.push(texte);
+		this.liste_corrections.push(texte_corr);
+		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque question.
+
+  }
+}
 // Exercices de 6ème déclinés en cycle3
 function Ecrire_entiers_cycle3(){
     Ecrire_nombres_entiers.call(this)
@@ -17633,69 +18744,6 @@ function Exercice_comparer_quatre_fractions (){
 	}
 }
 
-/**
-* Effectuer l'addition de deux fractions dont un dénominateur est un multiple de l'autre.
-*
-* Le coefficient est paramétrable, par défaut il est inférieur à 11.
-* @Auteur Rémi Angot
-* 5N20
-*/
-function Exercice_additionner_des_fractions_5e(max=11){
-	Exercice.call(this); // Héritage de la classe Exercice()
-	this.sup = max ; // Correspond au facteur commun
-	this.titre = "Additionner deux fractions (dénominateurs multiples)"
-	this.consigne = "Calculer et donner le résultat sous la forme d'une fraction simplifiée"
-	this.spacing = 2;
-	this.spacing_corr = 2;
-	this.nb_questions = 5;
-	this.nb_cols_corr = 1;
-
-	this.nouvelle_version = function(numero_de_l_exercice){
-		this.liste_questions = []; // Liste de questions
-		this.liste_corrections = []; // Liste de questions corrigées
-		for (let i = 0, a, b, c, d,texte, texte_corr, cpt=0; i < this.nb_questions;i++) {
-			// les numérateurs
-			a = randint (1,9);
-			c = randint (1,9);
-			// les dénominateurs
-			if (this.level!=6) b = randint(2,9);
-			else b = randint(2,5)
-			while (b==a){
-				if (this.level!=6) b = randint(2,9); // pas de fraction avec numérateur et dénominateur égaux
-				else b = randint(2,5)
-			}
-			if (this.level!=6) k = randint(2,this.sup);
-			else k=1
-			d = b*k
-			ordre_des_fractions = randint(1,2)
-			if (ordre_des_fractions==1) {
-				texte = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=$`;
-			} else {
-				texte = texte = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=$`;
-			}
-			if (ordre_des_fractions==1) {
-				if (this.level!=6) texte_corr = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}+${tex_fraction(c,d)}`
-				else texte_corr =`$`
-				texte_corr += `=${tex_fraction(a*k,b*k)}+${tex_fraction(c,d)}=${tex_fraction(a*k+`+`+c,d)}=${tex_fraction(a*k+c,d)}$`;
-			} else {
-				if (this.level!=6) texte_corr = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=${tex_fraction(c,d)}+${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}`
-				else texte_corr =`$`
-				texte_corr += `=${tex_fraction(c,d)}+${tex_fraction(a*k,b*k)}=${tex_fraction(c+'+'+a*k,d)}=${tex_fraction(a*k+c,d)}$`;
-			}
-			// Est-ce que le résultat est simplifiable ?
-			let s = pgcd(a*k+c,d);
-			if ((a*k+c)%d==0) { // si le résultat est un entier
-				texte_corr +=`$=${Algebrite.eval((a*k+c)/d)}$`
-			} else if (s!=1) {
-				texte_corr +=`$=${tex_fraction(Algebrite.eval((a*k+c)/s)+mise_en_evidence('\\times '+s),Algebrite.eval(d/s)+mise_en_evidence('\\times '+s))}=${tex_fraction(Algebrite.eval((a*k+c)/s),Algebrite.eval(d/s))}$`
-			}
-			this.liste_questions.push(texte);
-			this.liste_corrections.push(texte_corr);
-			}
-		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
-	}
-	this.besoin_formulaire_numerique = ['Valeur maximale du coefficient multiplicateur',99999];		
-}
 
 /**
 * Effectuer l'addition ou la soustraction de deux fractions dont un dénominateur est un multiple de l'autre.
@@ -17706,7 +18754,7 @@ function Exercice_additionner_des_fractions_5e(max=11){
 *
 * On peut paramétrer de n'avoir que des soustractions.
 * @Auteur Rémi Angot
-* 5N20-2
+* 5N20
 */
 function Exercice_additionner_ou_soustraire_des_fractions_5e(max=11){
 	Exercice.call(this); // Héritage de la classe Exercice()
@@ -17718,27 +18766,42 @@ function Exercice_additionner_ou_soustraire_des_fractions_5e(max=11){
 	this.spacing_corr = 2;
 	this.nb_questions = 5;
 	this.nb_cols_corr = 1;
+	this.sup2=3;
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
+		let liste_type_de_questions;
+		if (this.sup2==1){
+			liste_type_de_questions = combinaison_listes(['+'],this.nb_questions);
+		}
+		if (this.sup2==2){
+			liste_type_de_questions = combinaison_listes(['-'],this.nb_questions);
+		}
+		if (this.sup2==3){
+			liste_type_de_questions = combinaison_listes(['+','-'],this.nb_questions);
+		}
 		for (let i = 0, a, b, c, d,texte, texte_corr, cpt=0; i < this.nb_questions;i++) {
 			// les numérateurs
 			a = randint (1,9);
-			c = randint (1,9);
 			// les dénominateurs
-			b = randint(2,9);
+			b = randint(2,9,a);
 			while (b==a){
 				b = randint(2,9); // pas de fraction avec numérateur et dénominateur égaux
 			}
 			k = randint(2,this.sup);
 			d = b*k
-			if (randint(1,2)==1 && !this.sup2) { //une addition
-				ordre_des_fractions = randint(1,2)
+			if (liste_type_de_questions[i]=='-'){
+				c = choice([randint(1,b*k),randint(b*k,9*k)])
+			} else {
+				c = randint(1,19,d)
+			}
+			if (liste_type_de_questions[i]=='+') { //une addition
+				let ordre_des_fractions = randint(1,2)
 				if (ordre_des_fractions==1) {
 					texte = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=$`;
 				} else {
-					texte = texte = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=$`;
+					texte = `$${tex_fraction(c,d)}+${tex_fraction(a,b)}=$`;
 				}
 				if (ordre_des_fractions==1) {
 					texte_corr = `$${tex_fraction(a,b)}+${tex_fraction(c,d)}=${tex_fraction(a+mise_en_evidence('\\times '+k),b+mise_en_evidence('\\times '+k))}+${tex_fraction(c,d)}`
@@ -17780,7 +18843,7 @@ function Exercice_additionner_ou_soustraire_des_fractions_5e(max=11){
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
 	}
 	this.besoin_formulaire_numerique = ['Valeur maximale du coefficient multiplicateur',99999];	
-	this.besoin_formulaire2_case_a_cocher = ['Uniquement des soustractions'];	
+	this.besoin_formulaire2_numerique = ['Types de calculs ', 3, '1 : Additions\n2 : Soustractions\n3 : Additions et soustractions'];	
 }
 
 
@@ -18496,19 +19559,141 @@ function Exercice_substituer(difficulte=1){
 
 /**
  * Déterminer des angles en utilisant les cas d'égalités : opposés par le sommet, alternes-internes, correspondants...
- * ref 
- * @Auteur Jean-Claude Lhote
+ * ref 5G30-1 
+ * publié le 14/11/2020
+ * @Auteur Jean-Claude Lhote Inspiré d'exercices du manuel sésamath.
  */
 function Egalite_d_angles() {
 	"use strict"
 	Exercice.call(this);
 	this.sup=1;
 	this.nb_questions=1;
+	if (sortie_html) {
+		this.spacing=2;
+		this.spacing_corr=3;
+	}
+	else {
+		this.spacing=2;
+		this.spacing_corr=2;
+	}
+	this.nb_cols=1;
+	this.nb_cols_corr=1;
 	this.titre="Déterminer des angles en utilisant les cas d'égalité";
 	this.nouvelle_version = function(numero_de_l_exercice){
-	
-	
+		this.liste_questions=[]
+		this.liste_corrections=[]
+		let figure=[],choix;
+		let fig1=function(){ //retourne le tableau d'objets, la série de questions et la série de réponses 
+			let A, B, C, D, E, a, ac, ce, c, AE, BD, CA, CE, c1, c2, c3, c4, c5, m1, m2, l1, objets = [], enonce, correction, params;
+			let noms = choisit_lettres_differentes(5, 'Q', true),gras;
+			sortie_html ? gras="#f15929" : gras=`black`;
+			A = point(0, 0, noms[0], 'above left');
+			a = randint(45, 85);
+			ac = randint(8, 10)
+			ce = randint(7, 10, ac)
+			C = similitude(rotation(point(1,0),A,randint(-45,45)), A, a, ac, noms[2], 'left')
+			c = randint(45, 70)
+			E = similitude(A, C, c, ce / ac, noms[4], 'above right');
+			CA = droite(C, A)
+			CE = droite(C, E)
+			AE = droite(A, E, '', 'grey')
+			AE.epaisseur = 2
+			B = pointSurSegment(A, C, randint(3, ac - 4), noms[1], 'above left')
+			BD = droiteParPointEtParallele(B, AE, '', 'grey')
+			BD.epaisseur = 2
+			D = pointIntersectionDD(BD, CE, noms[3], 'above right')
+			m1 = codeAngle(E, A, C,1,'','black',2,1,'black',0.1,true)
+			m2 = codeAngle(A, C, E,1,'','black',2,1,'black',0.1,true)
+			l1 = labelPoint(A, B, C, D, E)
+			c1 = codeAngle(D, B, A,1,'','blue',2,1,'blue')
+			c2 = codeAngle(B, D, E,1,'','orange',2,1,'orange')
+			c3 = codeAngle(D, E, A,1,'','green',2,1,'green')
+			c4 = codeAngle(D, B, C,1,'','pink',2,1,'pink')
+			c5 = codeAngle(C, D, B,1,'','red',2,1,'red')
+			objets.push( CA, CE, AE, BD, m1, m2, c1, c2, c3, c4, c5, l1)
+			a = Math.round(angle(E, A, C))
+			enonce = `Dans la figure ci-dessous,  les droites $(${noms[0]}${noms[4]})$ et $(${noms[1]}${noms[3]})$ sont parallèles.<br>`
+			enonce += `On veut déterminer la mesure des angles du quadrilatère $${noms[0]}${noms[1]}${noms[3]}${noms[4]}$ (toutes les réponses doivent être justifiées).<br>`
+			enonce += `${num_alpha(0)} Déterminer la mesure de l'angle $\\widehat{${noms[3]}${noms[1]}${noms[2]}}$.<br>`
+			enonce += `${num_alpha(1)} En déduire la mesure de l'angle $\\widehat{${noms[0]}${noms[1]}${noms[3]}}$.<br>`
+			enonce += `${num_alpha(2)} En utilisant la question ${num_alpha(0)}, déterminer la mesure de l'angle $\\widehat{${noms[1]}${noms[3]}${noms[2]}}$.<br>`
+			enonce += `${num_alpha(3)} En déduire la mesure de l'angle $\\widehat{${noms[1]}${noms[3]}${noms[4]}}$.<br>`
+			enonce += `${num_alpha(4)} En utilisant la question ${num_alpha(2)} déterminer la mesure de l'angle $\\widehat{${noms[3]}${noms[4]}${noms[0]}}$.<br>`
+			enonce += `${num_alpha(5)} Vérifier la conjecture suivante : « La somme des angles d'un quadrilatère vaut 360°.»<br>`
+			correction = `${num_alpha(0)} Comme les droites $(${noms[0]}${noms[4]})$ et $(${noms[1]}${noms[3]})$ sont parallèles, les angles correspondants $\\widehat{${noms[4]}${noms[0]}${noms[1]}}$ et $\\widehat{${noms[3]}${noms[1]}${noms[2]}}$ sont égaux, donc $\\widehat{${noms[3]}${noms[1]}${noms[2]}}$ mesure $${a}\\degree$.<br>`
+			correction += `${num_alpha(1)} Les angles $\\widehat{${noms[0]}${noms[1]}${noms[3]}}$ et $\\widehat{${noms[3]}${noms[1]}${noms[2]}}$ sont adjacents supplémentaires, donc $\\widehat{${noms[0]}${noms[1]}${noms[3]}}$ mesure $180\\degree-${a}\\degree=${mise_en_evidence(180 - a,gras)}\\degree$.<br>`
+			correction += `${num_alpha(2)} Dans un triangle, la somme des angles vaut $180\\degree$ donc $\\widehat{${noms[1]}${noms[3]}${noms[2]}}=180\\degree-\\widehat{${noms[3]}${noms[1]}${noms[2]}}-\\widehat{${noms[1]}${noms[2]}${noms[3]}}=180\\degree-${a}\\degree-${c}\\degree=${180 - a - c}\\degree$.<br>`
+			correction += `${num_alpha(3)} Les angles $\\widehat{${noms[1]}${noms[3]}${noms[2]}}$ et $\\widehat{${noms[1]}${noms[3]}${noms[4]}}$ sont adjacents supplémentaires, donc $\\widehat{${noms[1]}${noms[3]}${noms[4]}}$ mesure $180\\degree-${180 - a - c}\\degree=${mise_en_evidence(a + c,gras)}\\degree$.<br>`
+			correction += `${num_alpha(4)} Comme les droites $(${noms[0]}${noms[4]})$ et $(${noms[1]}${noms[3]})$ sont parallèles, les angles correspondants $\\widehat{${noms[1]}${noms[3]}${noms[2]}}$ et $\\widehat{${noms[3]}${noms[4]}${noms[0]}}$ sont égaux, donc $\\widehat{${noms[3]}${noms[4]}${noms[0]}}$ mesure $${mise_en_evidence(180 - a - c,gras)}\\degree$.<br>`
+			correction += `${num_alpha(5)} La somme des angles du quadrilatère vaut donc : $${a}\\degree+${mise_en_evidence(180 - a,gras)}\\degree+${mise_en_evidence(a + c,gras)}\\degree+${mise_en_evidence(180 - a - c,gras)}\\degree=180\\degree+180\\degree=360\\degree$.<br>`
+			correction += `$\\phantom{f}$ La conjecture est finalement vraie.`
+			params = { xmin: Math.min(A.x-8,C.x-8,E.x-8), ymin: Math.min(A.y - 1, E.y - 1,C.y-1), xmax: Math.max(E.x + 2,A.x+2,C.x+2), ymax: Math.max(C.y + 2,A.y+2,E.y+2),scale:0.7}
+
+			return [objets, params, enonce, correction]
+		}
+		let fig2=function(){ //retourne le tableau d'objets, la série de questions et la série de réponses 
+		let A, B, C, D, E, a, ac,ab,cd,ad, c,d,AB,BE, CA, CE, cA, cD, cE,c3, c4, c5,c6, l1, objets = [], enonce, correction, params;
+		let noms=choisit_lettres_differentes(5,'Q',true);
+		A=point(0,0,noms[0],'above left');
+		B=rotation(point(randint(8,10),randint(1,3)),A,randint(-40,40),noms[1],'right')
+		ab=longueur(A,B)
+		ac=randint(6,8)
+		a=randint(40,60);
+		C=similitude(B,A,a,ac/ab,noms[2],'above left')
+		CA=droite(C,A)
+		AB=droite(A,B)
+		D=pointSurSegment(A,B,ab/2+randint(-1,1,0)/10,noms[3],'below')
+		CE=droite(C,D)
+		cd=longueur(C,D)
+		ad=longueur(A,D)
+		E=pointSurSegment(C,D,cd*ab/ad,noms[4],'below right')
+		BE=droite(B,E)
+		c=arrondi(angle(A,C,D),0)
+		d=arrondi(angle(C,D,B),0)
+		cA=codeAngle(D,A,C,1,'','black',2,1,'black',0.2,true)
+		cD=codeAngle(C,D,B,1,'','red',2,1,'red',0.2,true)
+		cE=codeAngle(D,E,B,1,'','blue',2,1,'blue',0.2,true)
+		c4=codeAngle(A,C,D,1,'','green',2,1,'green',0.2)
+		c5=codeAngle(B,D,E,1,'','orange',2,1,'orange',0.2)
+		c6=codeAngle(E,B,D,1,'','pink',2,1,'pink',0.2)
+		c3=codeAngle(A,D,C,1,'','grey',2,1,'grey',0.2)
+		l1=labelPoint(A,B,C,D,E)
+		objets.push(CA,AB, CE, BE,cA, cD, cE,c3, c4, c5, c6,l1)
+		enonce=`La figure n'est pas en vraie grandeur. Toutes les réponses devront être justifiées.<br>`
+		enonce += `${num_alpha(0)} Déterminer la mesure de l'angle $\\widehat{${noms[0]}${noms[3]}${noms[2]}}$.<br>`
+		enonce += `${num_alpha(1)} En déduire la mesure de l'angle $\\widehat{${noms[3]}${noms[2]}${noms[0]}}$.<br>`
+		enonce += `${num_alpha(2)} Déterminer si les droites $(${noms[0]}${noms[2]})$ et $(${noms[4]}${noms[1]})$ sont parallèles.<br>`
+		enonce += `${num_alpha(3)} Si on considère que les segments $[${noms[0]}${noms[2]}]$ et $[${noms[4]}${noms[1]}]$ sont de même longueur, Déterminer la nature du quadrilatère $${noms[0]}${noms[2]}${noms[1]}${noms[4]}$.<br>`
+		correction = `${num_alpha(0)} Les angles $\\widehat{${noms[0]}${noms[3]}${noms[2]}}$ et $\\widehat{${noms[2]}${noms[3]}${noms[1]}}$ sont adjacents supplémentaires, donc $\\widehat{${noms[0]}${noms[3]}${noms[2]}}$ mesure $180\\degree-${d}\\degree=${180 - d}\\degree$.<br>`
+		correction += `${num_alpha(1)} Dans un triangle, la somme des angles vaut $180\\degree$ donc $\\widehat{${noms[0]}${noms[2]}${noms[3]}}=180-\\widehat{${noms[3]}${noms[0]}${noms[2]}}-\\widehat{${noms[0]}${noms[3]}${noms[2]}}=180\\degree-${a}\\degree-${180-d}\\degree=${- a + d}\\degree$.<br>`
+		correction += `${num_alpha(2)} Pour les droites $(${noms[0]}${noms[2]})$ et $(${noms[4]}${noms[1]})$ coupées par la sécante $(${noms[2]}${noms[4]})$ les angles $\\widehat{${noms[0]}${noms[2]}${noms[3]}}$ et $\\widehat{${noms[1]}${noms[4]}${noms[3]}}$ sont des angles alternes-internes.<br>`
+		correction +=`$\\phantom{c/}$ Or si des angles alternes-internes sont égaux, cela signifie que les droites coupées par la sécante sont parallèles.<br>`
+		correction+=`$\\phantom{c/}$ Les droites $(${noms[0]}${noms[2]})$ et $(${noms[4]}${noms[1]})$ sont donc parallèles.<br>`
+		correction += `${num_alpha(3)} Les droites $(${noms[0]}${noms[2]})$ et $(${noms[4]}${noms[1]})$ sont parallèles et les segments $[${noms[0]}${noms[2]}]$ et $[${noms[4]}${noms[1]}]$ sont de même longueur.<br>`
+		correction +=`$\\phantom{c/}$ Or, un quadrilatère qui possède des côtés opposés parallèles et de même longueur est un parallèlogramme.<br>`
+		correction +=`$\\phantom{c/}$ Donc $${noms[0]}${noms[2]}${noms[1]}${noms[4]}$ est un parallèlogramme et $${noms[3]}$ est son centre.`
+		params = { xmin: Math.min(A.x,B.x,C.x,D.x,E.x)-1, ymin: Math.min(A.y,B.y,C.y,D.y,E.y)-1, xmax: Math.max(A.x,B.x,C.x,D.x,E.x)+2, ymax: Math.max(A.y,B.y,C.y,D.y,E.y)+2}
+
+		return [objets, params, enonce, correction]
+	}	
+	if (this.sup==3) choix=randint(1,2)
+	else choix=parseInt(this.sup)
+	switch (choix) {
+		case 1:
+			figure=fig1()
+			figure[2]+=mathalea2d(figure[1],figure[0])
+			break;
+		case 2:
+			figure=fig2()
+			console.log(figure[0])
+			figure[2]+=mathalea2d(figure[1],figure[0])
+			break;
 	}
+	this.liste_questions.push(figure[2]);
+	this.liste_corrections.push(figure[3]);
+	liste_de_question_to_contenu(this);
+	}
+	this.besoin_formulaire_numerique = ['Numéro de figure',3,'1 : Le trapèze\n2: Le papillon\n3: Au hasard'] 
 }
 
 /**
@@ -19071,7 +20256,7 @@ function Variation_en_pourcentages(){
 	this.consigne = "Calculer le nouveau prix";
 	this.nb_questions = 5;
 	this.spacing = 1;
-	this.spacing_corr = 1.5;
+	this.spacing_corr = 2;
 	this.nb_cols_corr = 1;
 	this.nb_cols = 1;
 
@@ -19329,6 +20514,52 @@ function Traduire_un_programme_de_calcul(){
 	}
 	//this.besoin_formulaire_case_a_cocher = true;
 }
+
+
+/**
+* Réduire des expressions de la forme ax+bx
+*
+* @Auteur Rémi Angot
+* 5L13
+*/
+function Reduction_ax_bx() {
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Réduire une expression de la forme $ax+bx$";
+	this.consigne = "Réduire les expressions suivantes, si cela est possible.";
+	this.nb_questions = 5;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+
+	this.nouvelle_version = function (numero_de_l_exercice) {
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+
+		let type_de_questions_disponibles = ['ax+bx'];
+		let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		for (let i = 0, texte, texte_corr, a, b, c, d, cpt = 0; i < this.nb_questions && cpt < 50;) {
+			a = randint(-11,11,0);
+			b = randint(-11,11,[0,a]);
+			c = randint(-11,11,[0]);
+			d = randint(-11,11,0)
+			switch (liste_type_de_questions[i]) {
+				case 'ax+bx':
+					texte = `$${lettre_depuis_chiffre(i+1)}=${printlatex(`${a}*x+(${b}*x)`)}$`;
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${printlatex(`${a}*x+(${b}*x)`)}=(${a}${ecriture_algebrique(b)})\\times x=${printlatex(`${a+b}x`)}$`;
+					break;
+			}
+
+			if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;
+		}
+		liste_de_question_to_contenu(this);
+	}
+}
+
 
 
 /**
@@ -20128,7 +21359,8 @@ function Placer_probabilites(){
 		lstEvenenementA.push([`L’équipe de France de rugby va remporter le prochain match international de football`,0]);
 		animal = choice(["un dragon", "l'abominable homme des neiges", "un chat-garou", "un dahu", "un hippocampéléphantocamélos", "une licorne", "le Minotaure"]);
 		lstEvenenementA.push([`Rencontrer ${animal} en sortant du collège`, 0]);
-		lstEvenenementA.push([`On place un point M à 4 cm du point A. On considère l'évènement "le point M est sur le cercle de centre A et de rayon 7 cm"`, 0]);
+		lstEvenenementA.push([`Le point M, placé à 4 cm de A, est sur le cercle de centre A et de rayon 7 cm`, 0]);
+		lstEvenenementA.push([`Le point M, placé à 4 cm de A, est dans le disque de centre A et de rayon 3 cm`, 0]);
 		lstEvenenementA.push([`En France, on peut trouver des vaches espagnoles qui parlent anglais`, 0]);
 		lstEvenenementA.push([`Aux USA, on peut trouver des pierres qui roulent et qui amassent de la mousse`, 0]);
 		// Evenements improbables :
@@ -20147,8 +21379,8 @@ function Placer_probabilites(){
 		lstEvenenementD.push([`Le prochain président de la République Française aura plus de 40 ans`, 0.9]);
 		// Evenements certains :
 		lstEvenenementA.push([`Le prochain oiseau que je verrai aura des ailes`, 1]);
-		lstEvenenementA.push([`On place un point M à 4 cm du point A. On considère l'évènement "le point M est sur le cercle de centre A et de rayon 4 cm"`, 1]);
-		lstEvenenementA.push([`On place un point M à 4 cm du point A. On considère l'évènement "le point M est dans le disque de centre A et de rayon 5 cm"`, 1]);
+		lstEvenenementA.push([`Le point M, placé à 4 cm de A, est sur le cercle de centre A et de rayon 4 cm`, 1]);
+		lstEvenenementA.push([`Le point M, placé à 4 cm de A, est dans le disque de centre A et de rayon 5 cm`, 1]);
 		// Evenement divers : 
 		let m = choice([4, 6, 8, 10, 12, 20, 24, 30, 48, 60, 100]); //nombre de faces du dé
 		let n = randint(1,m); //nombre à obtenir
@@ -20175,7 +21407,7 @@ function Placer_probabilites(){
 		// Texte de l'énoncé :
 		texte +=`Placer la lettre correspondant à chaque évènement sur l'axe des probabilités ci-dessous.<br>`
 		for (let i = 0; i<nbEvenement; i++){
-			texte += num_alpha(i) + ` ` + lstEvenenementExo[i][0] + `.<br>`;
+			texte += String.fromCharCode(65+i) + ` : ` + lstEvenenementExo[i][0] + `.<br>`;
 		}
 		// Création des objets pour dessiner :
 		let L = 10; // longueur du segment
@@ -20194,9 +21426,9 @@ function Placer_probabilites(){
 			}		
 		} 
 		else {
-			lstObjet.push(fractionParPosition({x:L/2,y:-1,num:1,den:2,couleur:'black'})); // fraction 1/2 
-			lstObjet.push(texteParPosition("0", 0, y-0.25, 'black',1)); // abscisse 0
-			lstObjet.push(texteParPosition("1", L, y-0.25, 0, 'black', 1, 'milieu')); // abscisse 1
+			lstObjet.push(fractionParPosition({x:L/2,y:-1,fraction:fraction(1,2),couleur:'black'})); // fraction 1/2 
+			lstObjet.push(texteParPosition("0", 0, y-0.25, 0, 'black', 1, 'middle')); // abscisse 0
+			lstObjet.push(texteParPosition("1", L, y-0.25, 0, 'black', 1, 'middle')); // abscisse 1
 		}
 
 		if (sortie_html) {
@@ -20204,7 +21436,12 @@ function Placer_probabilites(){
 		} else {
 			texte += `\\begin{center}`;
 		} 
-		texte += mathalea2d({xmin : -1, xmax : L+3, ymin : -4, ymax : 1, pixelsParCm : 40, scale : 1}, lstObjet);
+		let miny = -2;
+		if (this.sup) {
+			miny = -4;
+		}
+
+		texte += mathalea2d({xmin : -1, xmax : L+3, ymin : miny, ymax : 1, pixelsParCm : 40, scale : 1}, lstObjet);
 		if (sortie_html) {
 			texte += `</p>`;
 		} else {
@@ -20221,8 +21458,8 @@ function Placer_probabilites(){
 			p = lstEvenenementExo[i][1];
 			parrondi = Math.round(calcul(6*p)); // échelle arrondie entre 0 et 7 pour éviter la superposition des textes réponses
 			ylst[parrondi] += 0.5; // on augmente l'ordonnée si elle est déjà utilisée
-			let txtSolution = String.fromCharCode(97+i); //code 97 correspond à 'a'
-			lstObjet.push(texteParPosition(txtSolution,calcul(L*p),ylst[parrondi],angle,'gauche', 'black', 1))
+			let txtSolution = String.fromCharCode(65+i); //code 65 correspond à 'A'
+			lstObjet.push(texteParPosition(txtSolution,calcul(L*p),ylst[parrondi], 0, 'black', 1, 'middle'))
 			lstObjet.push(tracePoint(point(calcul(L*p), 0), 'blue'))
 		}
 		for (let i = 0; i<nbEvenement; i++){ 
@@ -20234,14 +21471,14 @@ function Placer_probabilites(){
 			else if (p<0.75) { parrondi = 4 }
 			else if (p<1) { parrondi = 5 }
 			else if (p==1) { parrondi = 6 };			
-			texte_corr += num_alpha(i) + ` ` + lstEvenenementExo[i][0] + ` : ` + lstEchelle[parrondi][0].toLowerCase() + `.<br>`;
+			texte_corr += String.fromCharCode(65+i) + ` : ` + lstEvenenementExo[i][0] + `. ` + texte_en_couleur_et_gras(lstEchelle[parrondi][0]) + `.<br>`;
 		}
 		if (sortie_html) {
 			texte_corr += `<p style="display:block">`;
 		} else {
 			texte_corr += `\\begin{center}`;
 		} 
-		texte_corr += mathalea2d({xmin : -1, xmax : L+3, ymin : -4, ymax : 2, pixelsParCm : 40, scale : 1}, lstObjet);
+		texte_corr += mathalea2d({xmin : -1, xmax : L+3, ymin : miny, ymax : 2, pixelsParCm : 40, scale : 1}, lstObjet);
 		if (sortie_html) {
 			texte_corr += `</p>`;
 		} else {
@@ -21290,7 +22527,7 @@ function Pavages_et_transformations() {
 
 
 	}
-	this.besoin_formulaire_numerique = ['Transformations',4, '1 : Symétries axiales\n 2 : Symétries centrales\n 3 : Translations\n 4 : Translations\n 5 : Homothéties\n'];
+	this.besoin_formulaire_numerique = ['Transformations',4, '1 : Symétries axiales\n 2 : Symétries centrales\n 3 : Translations\n 4 : Rotations\n 5 : Homothéties\n'];
 }
 /**
  * Transformer un programme de calcul avec les 4 opérations dans un ordre aléatoire en un seul calcul.
@@ -21427,8 +22664,8 @@ function Calculer_une_expression_litterale() {
 function Reduire_dinstinction_somme_produit() {
 	'use strict'
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;
-	if (this.beta) {
+	this.debug = false;
+	if (this.debug) {
 		this.nb_questions = 4;
 	} else {
 		this.nb_questions = 2;
@@ -21444,7 +22681,7 @@ function Reduire_dinstinction_somme_produit() {
 		//let type_de_questions_disponibles
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1,2,3]; 
 		} else {
 			type_de_questions_disponibles = [choice([0,2]),choice([1,3])];
@@ -21560,7 +22797,7 @@ function Reduire_dinstinction_somme_produit() {
 			switch (liste_type_de_questions[i]) {
 				case 0:	// produit puis somme 				
 					texte =`${enonces[0].enonce}.`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br><br>=====CORRECTION======<br>`;
 						texte += enonces[0].correction_produit;
 						texte += `<br>`;
@@ -21574,7 +22811,7 @@ function Reduire_dinstinction_somme_produit() {
 					break;
 				case 1:	// x puis +				
 					texte =`${enonces[1].enonce}.`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br><br>=====CORRECTION======<br>`;
 						texte += enonces[1].correction_produit;
 						texte += `<br>`;
@@ -21588,7 +22825,7 @@ function Reduire_dinstinction_somme_produit() {
 					break;
 				case 2:	// somme puis produit				
 					texte =`${enonces[2].enonce}.`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br><br>=====CORRECTION======<br>`;
 						texte += enonces[2].correction_somme;
 						texte += `<br>`;
@@ -21602,7 +22839,7 @@ function Reduire_dinstinction_somme_produit() {
 					break;
 				case 3:	// + puis x				
 					texte =`${enonces[3].enonce}.`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br><br>=====CORRECTION======<br>`;
 						texte += enonces[3].correction_somme;
 						texte += `<br>`;
@@ -21632,14 +22869,14 @@ function Reduire_dinstinction_somme_produit() {
 
 
 /**
- * Référence 5L13-4
+ * Référence 5L14-4
  * Déterminer la dernière opération à effectuer dans une expression littérale
  * @author Sébastien Lozano fork Jean-Claude Lhote
  */
 function Calculer_une_expression_litteraleBis() {
 	'use strict'
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.consigne = "";
 	this.nb_questions = 4;
 	this.nb_cols = 1;
@@ -21660,7 +22897,7 @@ function Calculer_une_expression_litteraleBis() {
 			val1=randint(2,5)
 			val2=randint(6,9)
 			//resultats=Choisir_expression_litteraleBis(nb_operations,decimal,val1,val2)
-			resultats=Choisir_expression_litterale(nb_operations,decimal,val1,val2)
+			resultats=Choisir_expression_litterale(nb_operations,decimal,val1,val2,this.sup)
 			expf=resultats[0]
 			expn=resultats[1]
 			expc=resultats[2]
@@ -21672,7 +22909,7 @@ function Calculer_une_expression_litteraleBis() {
 					if (expn.indexOf('ou')>0) expn=expn.substring(0,expn.indexOf('ou')) // on supprime la deuxième expression fractionnaire
 					this.consigne=`Déterminer la dernière opération à effectuer s'il fallait faire le calcul pour des valeurs données de $x$ et de $y$.`
 					texte =`${expn}.`
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br><br>=====CORRECTION======<br>`;
 						texte += `Pour fixer les idées, choissions des valeurs pour $x$ et $y$, par exemple $x=${val1}$ et $y=${val2}$.`
 						texte += `<br>Le calcul serait le suivant :<br> ${expc}.`;
@@ -21698,6 +22935,7 @@ function Calculer_une_expression_litteraleBis() {
 		}
 		liste_de_question_to_contenu(this);
 	}	
+	this.besoin_formulaire_case_a_cocher =["Avec signes × devant les parenthèses",true]
 	this.besoin_formulaire2_case_a_cocher = ["Avec décimaux.",false]
 
 }
@@ -21710,11 +22948,12 @@ function Calculer_une_expression_litteraleBis() {
 function Determiner_derniere_operation_exp_num() {
 	'use strict'
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.consigne = "";
 	this.nb_questions = 4;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
+	this.sup=true;
 	this.sup2=false; // si false alors utilisation de nombres entiers, si true alors utilisation de nombres à un chiffre après la virgule.
 	this.titre = `Déterminer la dernière opération à effectuer dans une expression numérique`;
 
@@ -21731,7 +22970,7 @@ function Determiner_derniere_operation_exp_num() {
 			val1=randint(2,5)
 			val2=randint(6,9)
 			//resultats=Choisir_expression_litteraleBis(nb_operations,decimal,val1,val2)
-			resultats=Choisir_expression_litterale(nb_operations,decimal,val1,val2)
+			resultats=Choisir_expression_litterale(nb_operations,decimal,val1,val2,this.sup)
 			expf=resultats[0]
 			expn=resultats[1]
 			expc=resultats[2]
@@ -21745,7 +22984,7 @@ function Determiner_derniere_operation_exp_num() {
 					this.consigne=`Déterminer la dernière opération à effectuer .`
 					texte =`$${str[1]}$`
 					//texte=`${expn}`
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br><br>=====CORRECTION======<br>`;
 						texte+=`$`
 						for (l=1;l<str.length-1;l++) {
@@ -21776,6 +23015,7 @@ function Determiner_derniere_operation_exp_num() {
 		liste_de_question_to_contenu(this);
 	}	
 	this.besoin_formulaire2_case_a_cocher = ["Avec décimaux.",false]
+	this.besoin_formulaire_case_a_cocher=["Avec le signe × devant les parenthèses",true]
 
 }
 
@@ -21790,7 +23030,7 @@ function Determiner_derniere_operation_exp_num() {
  * Référence 5C11,5C11-1, 5C11-2, 5L13, 5L13-1, 5L13-2, 5L13-3
  */
 //function Choisir_expression_litteraleBis(nb_operations,decimal,val1=1,val2=2) {
-function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
+function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2,times_on=true) {
 	let expf,expl,expc,arrondir=Math.log10(decimal)
 	let a=arrondi(randint(2*decimal,10*decimal)/decimal,arrondir)
 	let b=arrondi(randint(2*decimal,10*decimal,[a*decimal])/decimal,arrondir)
@@ -21802,6 +23042,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
     let l1 = 'x'
 	let l2 = 'y'
 	let nbval
+	let signex=``
+	if (times_on) signex=`\\times`
 	switch (nb_operations){
 		case 1 : // expressions de base (1 opération)
 			nbval=1
@@ -21848,15 +23090,15 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 			switch (souscas) {
 				case 0 : //a(b+c)
 					expf=`Le produit de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et $${l1}$`
-					expl=`$${tex_nombre(a)}(${tex_nombre(b)}+${l1})$`
-					expc=`$${tex_nombre(a)}(${tex_nombre(b)}+${l1})=${tex_nombre(a)}(${tex_nombre(b)}+${val1})=${tex_nombre(a)}\\times ${tex_nombre(b+val1)} = ${tex_nombre(a*(b+val1))}$`
+					expl=`$${tex_nombre(a)}${signex}(${tex_nombre(b)}+${l1})$`
+					expc=`$${tex_nombre(a)}${signex}(${tex_nombre(b)}+${l1})=${tex_nombre(a)}${signex}(${tex_nombre(b)}+${val1})=${tex_nombre(a)}\\times ${tex_nombre(b+val1)} = ${tex_nombre(a*(b+val1))}$`
 					last_op = 'multiplication';
 					break
 				case 1 : // a(b-c)
 					if (b<=c) b=calcul(b+c) // b-c positif
 					expf=`Le produit de $${l1}$ par la différence de ${b} et ${nombre_avec_espace(c)}`
-					expl=`$${l1}(${tex_nombre(b)}-${tex_nombre(c)})=${l1}\\times ${tex_nombrec(b-c)}=${tex_nombrec(b-c)}${l1}$`
-					expc=`$${l1}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(val1)}(${tex_nombre(b)}-${tex_nombre(c)})=${tex_nombre(val1)}\\times ${tex_nombrec(b-c)}=${tex_nombrec(val1*(b-c))}$`
+					expl=`$${l1}${signex}(${tex_nombre(b)}-${tex_nombre(c)})=${l1}\\times ${tex_nombrec(b-c)}=${tex_nombrec(b-c)}${l1}$`
+					expc=`$${l1}${signex}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(val1)}${signex}(${tex_nombre(b)}-${tex_nombre(c)})=${tex_nombre(val1)}\\times ${tex_nombrec(b-c)}=${tex_nombrec(val1*(b-c))}$`
 					last_op = 'multiplication';
 					break
 				case 2 : // a/(b+c)
@@ -21900,8 +23142,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					a=val1
 					d=val2
 					expf=`Le produit de la somme de $${l1}$ et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et $${l2}$`
-					expl=`$(${l1}+${tex_nombre(b)})(${tex_nombre(c)}+${l2})$`
-					expc=`$(${l1}+${tex_nombre(b)})(${tex_nombre(c)}+${l2})=(${a}+${tex_nombre(b)})(${tex_nombre(c)}+${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
+					expl=`$(${l1}+${tex_nombre(b)})${signex}(${tex_nombre(c)}+${l2})$`
+					expc=`$(${l1}+${tex_nombre(b)})${signex}(${tex_nombre(c)}+${l2})=(${a}+${tex_nombre(b)})${signex}(${tex_nombre(c)}+${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
 					last_op = 'multiplication';
 					break
 				case 1 : // (a+b)(c-d)
@@ -21909,8 +23151,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val1
 					if (c<=d) c=calcul(c+d)
 					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et $${l1}$ par la différence de ${nombre_avec_espace(c)} et $${l2}$`
-					expl=`$(${tex_nombre(a)}+${l1})(${tex_nombre(c)}-${l2})$`
-					expc=`$(${tex_nombre(a)}+${l1})(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}+${b})(${tex_nombre(c)}-${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
+					expl=`$(${tex_nombre(a)}+${l1})${signex}(${tex_nombre(c)}-${l2})$`
+					expc=`$(${tex_nombre(a)}+${l1})${signex}(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}+${b})${signex}(${tex_nombre(c)}-${d})= ${tex_nombrec(a+b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
 					last_op = 'multiplication';
 					break
 				case 2 : // (a-b)(c+d)
@@ -21918,8 +23160,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 				c=val1
 					if (a<=b) a=calcul(a+b)
 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et $${l2}$ par la somme de $${l1}$ et ${nombre_avec_espace(d)}`
-					expl=`$(${tex_nombre(a)}-${l2})(${l1}+${tex_nombre(d)})$`
-					expc=`$(${tex_nombre(a)}-${l2})(${l1}+${tex_nombre(d)})=(${tex_nombre(a)}-${b})(${c}+${tex_nombre(d)})=${tex_nombrec(a-b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
+					expl=`$(${tex_nombre(a)}-${l2})${signex}(${l1}+${tex_nombre(d)})$`
+					expc=`$(${tex_nombre(a)}-${l2})${signex}(${l1}+${tex_nombre(d)})=(${tex_nombre(a)}-${b})${signex}(${c}+${tex_nombre(d)})=${tex_nombrec(a-b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
 					last_op = 'multiplication';
 					break
 				case 3 : // (a-b)(c-d)
@@ -21928,8 +23170,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					if (a<=b) a=calcul(a+b)
 					if (c<=d) c=calcul(c+d)
 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et $${l1}$ par la différence de ${nombre_avec_espace(c)} et $${l2}$`
-					expl=`$(${tex_nombre(a)}-${l1})(${tex_nombre(c)}-${l2})$`
-					expc=`$(${tex_nombre(a)}-${l1})(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}-${b})(${tex_nombre(c)}-${d})= ${tex_nombrec(a-b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
+					expl=`$(${tex_nombre(a)}-${l1})${signex}(${tex_nombre(c)}-${l2})$`
+					expc=`$(${tex_nombre(a)}-${l1})${signex}(${tex_nombre(c)}-${l2})=(${tex_nombre(a)}-${b})${signex}(${tex_nombre(c)}-${d})= ${tex_nombrec(a-b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
 					last_op = 'multiplication';
 					break			
 				case 4 : // (a+b)/(c+d)
@@ -22040,8 +23282,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					a=val1
 					c=val2
 					expf=`Le double de la somme de $${l1}$ et du produit de ${nombre_avec_espace(b)} par $${l2}$`
-					expl=`$2(${l1}+${tex_nombre(b)}${l2})$`
-					expc=`$2(${l1}+${tex_nombre(b)}${l2})=2(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)}) = 2(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times ${tex_nombrec(a+b*c)}=${tex_nombrec(2*(a+b*c))}$`
+					expl=`$2${signex}(${l1}+${tex_nombre(b)}${l2})$`
+					expc=`$2${signex}(${l1}+${tex_nombre(b)}${l2})=2${signex}(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)}) = 2${signex}(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times ${tex_nombrec(a+b*c)}=${tex_nombrec(2*(a+b*c))}$`
 					last_op = 'multiplication';
 					break
 				case 1 : // 3(a+b)/c
@@ -22050,8 +23292,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					if (!estentier(3*(a+b)/c)) a=calcul(a*c-b)
 					while (a<b) a=calcul(a*c-b)
 					expf=`Le triple du quotient de la somme de ${nombre_avec_espace(a)} et $${l1}$ par $${l2}$`
-					expl=`$3(${tex_nombre(a)}+${l1})\\div ${l2}$ ou $3\\times \\dfrac{${tex_nombre(a)}+${l1}}{${l2}}$`
-					expc=`$3(${tex_nombre(a)}+${l1})\\div ${l2}=3(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)} = 3\\times  ${tex_nombre(a+b)}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
+					expl=`$3${signex}(${tex_nombre(a)}+${l1})\\div ${l2}$ ou $3\\times \\dfrac{${tex_nombre(a)}+${l1}}{${l2}}$`
+					expc=`$3${signex}(${tex_nombre(a)}+${l1})\\div ${l2}=3${signex}(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)} = 3\\times  ${tex_nombre(a+b)}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
 					last_op = 'division';
 					break
 				case 2 : // (a-b)/3
@@ -22069,8 +23311,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					if (a<=b) a=calcul(a+b)
 					if (!estentier((a-b)/3)) a=calcul(3*a+b)
 					expf=`Le produit du tiers de la différence de ${nombre_avec_espace(a)} et $${l2}$ par le double de la somme de $${l1}$ et ${nombre_avec_espace(d)}`
-					expl=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2(${l1}+${tex_nombre(d)})$`
-					expc=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2(${l1}+${tex_nombre(d)})=\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div  3 \\times  2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times  2 \\times  ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
+					expl=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2${signex}(${l1}+${tex_nombre(d)})$`
+					expc=`$\\left((${tex_nombre(a)}-${l2})\\div  3\\right)\\times  2${signex}(${l1}+${tex_nombre(d)})=\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div  3 \\times  2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times  2 \\times  ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
 					last_op = 'multiplication';
 					break			
 				case 4 : // 3(a+b)-2(c+d)
@@ -22078,8 +23320,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					c=val2
 					if (3*(a+b)<2*(c+d)) a=calcul(a+c+d)
 					expf=`La différence du triple de la somme de ${nombre_avec_espace(a)} et $${l1}$ et du double de la somme de $${l2}$ et ${nombre_avec_espace(d)}`
-					expl=`$3(${tex_nombre(a)}+${l1})-2(${l2}+${tex_nombre(d)})$`
-					expc=`$3(${tex_nombre(a)}+${l1})-2(${l2}+${tex_nombre(d)})=3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times  ${tex_nombrec(a+b)} - 2 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
+					expl=`$3${signex}(${tex_nombre(a)}+${l1})-2${signex}(${l2}+${tex_nombre(d)})$`
+					expc=`$3${signex}(${tex_nombre(a)}+${l1})-2${signex}(${l2}+${tex_nombre(d)})=3${signex}(${tex_nombre(a)}+${tex_nombre(b)})-2${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times  ${tex_nombrec(a+b)} - 2 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
 					last_op = 'soustraction';
 					break
 				case 5 : // 2(a-b)+3(c+d)
@@ -22087,8 +23329,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val1
 					if (a<=b) a=calcul(a+b)
 					expf=`La somme du double de la différence de ${nombre_avec_espace(a)} et $${l1}$ et du triple de la somme de ${nombre_avec_espace(c)} et $${l2}$`
-					expl=`$2(${tex_nombre(a)}-${l1})+3(${tex_nombre(c)}+${l2})$`
-					expc=`$2(${tex_nombre(a)}-${l1})+3(${tex_nombre(c)}+${l2})=2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times  ${tex_nombrec(a-b)} + 3 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
+					expl=`$2${signex}(${tex_nombre(a)}-${l1})+3${signex}(${tex_nombre(c)}+${l2})$`
+					expc=`$2${signex}(${tex_nombre(a)}-${l1})+3${signex}(${tex_nombre(c)}+${l2})=2${signex}(${tex_nombre(a)}-${tex_nombre(b)})+3${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times  ${tex_nombrec(a-b)} + 3 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
 					last_op = 'addition';
 					break	
 			}		
@@ -22102,8 +23344,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					e=val2
 					if (!estentier((a+b)/(c*(d+e)))) a=calcul(a*c*(d+e)-b)
 					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et $${l1}$ par le produit de ${nombre_avec_espace(c)} par la somme de ${nombre_avec_espace(d)} et $${l2}$`
-					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${l2}))$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}(${tex_nombre(d)}+${l2})}$`
-					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${l2}))=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div  (${tex_nombre(c)} \\times  ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div  ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
+					expl=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}${signex}(${tex_nombre(d)}+${l2}))$ ou $\\dfrac{${tex_nombre(a)}+${l1}}{${tex_nombre(c)}${signex}(${tex_nombre(d)}+${l2})}$`
+					expc=`$(${tex_nombre(a)}+${l1})\\div (${tex_nombre(c)}${signex}(${tex_nombre(d)}+${l2}))=(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}${signex}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div  (${tex_nombre(c)} \\times  ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div  ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
 					last_op = 'division';
 					break
 				case 2 : //(a-b)*(c+de)
@@ -22111,8 +23353,8 @@ function Choisir_expression_litterale(nb_operations,decimal,val1=1,val2=2) {
 					b=val2
 					if (a<=b) a=calcul(a+b)
 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et $${l2}$ par la somme de ${nombre_avec_espace(c)} et du produit de ${nombre_avec_espace(d)} par $${l1}$`
-					expl=`$(${tex_nombre(a)}-${l2})(${tex_nombre(c)}+${tex_nombre(d)}${l1})$`
-					expc=`$(${tex_nombre(a)}-${l2})(${tex_nombre(c)}+${tex_nombre(d)}${l1})=(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)}) = ${tex_nombrec(a-b)}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times  ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
+					expl=`$(${tex_nombre(a)}-${l2})${signex}(${tex_nombre(c)}+${tex_nombre(d)}${l1})$`
+					expc=`$(${tex_nombre(a)}-${l2})${signex}(${tex_nombre(c)}+${tex_nombre(d)}${l1})=(${tex_nombre(a)}-${tex_nombre(b)})${signex}(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)}) = ${tex_nombrec(a-b)}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times  ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
 					last_op = 'multiplication';
 					break
 				case 3 : // ab+cd/e
@@ -22151,8 +23393,9 @@ function Ecrire_une_expression_numerique(){
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
 	this.sup2=false; // si false alors utilisation de nombres entiers, si true alors utilisation de nombres à un chiffre après la virgule.
-	this.sup=false
-	this.version=1 // 1 pour ecrire une expression, 2 pour écrire la phrase, 3 pour écrire l'expression et la calculer, 4 pour calculer une expression numérique
+	this.sup=false;
+	this.sup3=true;
+	this.version=1; // 1 pour ecrire une expression, 2 pour écrire la phrase, 3 pour écrire l'expression et la calculer, 4 pour calculer une expression numérique
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		let type_de_questions_disponibles
@@ -22179,9 +23422,9 @@ function Ecrire_une_expression_numerique(){
 			val2=randint(6,9)
 			if (this.version>2&&nb_operations==1&&!this.litteral) nb_operations++
 			if (!this.litteral)
-				resultats=Choisir_expression_numerique(nb_operations,decimal)
+				resultats=Choisir_expression_numerique(nb_operations,decimal,this.sup3)
 			else 
-				resultats=Choisir_expression_litterale(nb_operations,decimal,val1,val2)
+				resultats=Choisir_expression_litterale(nb_operations,decimal,val1,val2,this.sup3)
 			expf=resultats[0]
 			expn=resultats[1]
 			expc=resultats[2]
@@ -22232,6 +23475,7 @@ function Ecrire_une_expression_numerique(){
 	}
 	this.besoin_formulaire_texte = ['Choix des expressions','Nombres séparés par des tirets\n 1 : Expressions de base à une opération\n2 : Expressions à deux opérations\n3 : Expressions à 3 opérations\n4 : Expressions à 4 opérations\n5 : Expressions complexes'] // Texte, tooltip
 	this.besoin_formulaire2_case_a_cocher = ["Avec décimaux.",false]
+	this.besoin_formulaire3_case_a_cocher = ["Avec le signe × devant les parenthèses",true]
 
 }
 
@@ -22246,7 +23490,7 @@ function Ecrire_une_expression_numerique(){
  * @Auteur Jean-Claude Lhote
  * Fonction utilisée dans plusieurs exercices.
  */
-function Choisir_expression_numerique(nb_operations,decimal) {
+function Choisir_expression_numerique(nb_operations,decimal,times_on=true) {
 	let expf,expn,expc,arrondir=Math.log10(decimal)
 	let a=arrondi(randint(2*decimal,10*decimal)/decimal,arrondir)
 	let b=arrondi(randint(2*decimal,10*decimal,[a*decimal])/decimal,arrondir)
@@ -22255,6 +23499,8 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 	let e=arrondi(randint(2*decimal,10*decimal)/decimal,arrondir)  
 	let f=arrondi(randint(2*decimal,10*decimal,[e*decimal])/decimal,arrondir)
 	let souscas
+	let signex=``
+	if (times_on) signex=`\\times`
 	switch (nb_operations){
 		case 1 : // expressions de base (1 opération)
 			souscas=randint(0,3)
@@ -22288,14 +23534,14 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			switch (souscas) {
 				case 0 : //a(b+c)
 					expf=`Le produit de ${nombre_avec_espace(a)} par la somme de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
-					expn=`$${tex_nombre(a)}(${tex_nombre(b)}+${tex_nombre(c)})$`
-					expc=`$${tex_nombre(a)}(${tex_nombre(b)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\times ${tex_nombrec(b+c)}=${tex_nombrec(a*(b+c))}$`
+					expn=`$${tex_nombre(a)}${signex}(${tex_nombre(b)}+${tex_nombre(c)})$`
+					expc=`$${tex_nombre(a)}${signex}(${tex_nombre(b)}+${tex_nombre(c)}) = ${tex_nombre(a)}\\times ${tex_nombrec(b+c)}=${tex_nombrec(a*(b+c))}$`
 					break
 				case 1 : // a(b-c)
 					if (b<=c) b=calcul(b+c) // b-c positif
 					expf=`Le produit de ${nombre_avec_espace(a)} par la différence de ${nombre_avec_espace(b)} et ${nombre_avec_espace(c)}`
-					expn=`$${tex_nombre(a)}(${tex_nombre(b)}-${tex_nombre(c)})$`
-					expc=`$${tex_nombre(a)}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(a)}\\times ${tex_nombrec(b-c)}=${tex_nombrec(a*(b-c))}$`
+					expn=`$${tex_nombre(a)}${signex}(${tex_nombre(b)}-${tex_nombre(c)})$`
+					expc=`$${tex_nombre(a)}${signex}(${tex_nombre(b)}-${tex_nombre(c)}) = ${tex_nombre(a)}\\times ${tex_nombrec(b-c)}=${tex_nombrec(a*(b-c))}$`
 					break
 				case 2 : // a/(b+c)
 					a=calcul(a*(b+c)) // on s'assure que le quotient tombe juste...
@@ -22333,27 +23579,27 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			switch (souscas) {
 				case 0 : // (a+b)(c+d)
 					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
-					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)})$`
-					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
+					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})${signex}(${tex_nombre(c)}+${tex_nombre(d)})$`
+					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a+b)*(c+d))}$`
 					break
 				case 1 : // (a+b)(c-d)
 					if (c<=d) c=calcul(c+d)
 					expf=`Le produit de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
-					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)})$`
-					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
+					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})${signex}(${tex_nombre(c)}-${tex_nombre(d)})$`
+					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})${signex}(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a+b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a+b)*(c-d))}$`
 					break
 				case 2 : // (a-b)(c+d)
 					if (a<=b) a=calcul(a+b)
 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
-					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)})$`
-					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
+					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})${signex}(${tex_nombre(c)}+${tex_nombre(d)})$`
+					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)*(c+d))}$`
 					break
 				case 3 : // (a-b)(c-d)
 					if (a<=b) a=calcul(a+b)
 					if (c<=d) c=calcul(c+d)
 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la différence de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
-					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)})$`
-					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
+					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})${signex}(${tex_nombre(c)}-${tex_nombre(d)})$`
+					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})${signex}(${tex_nombre(c)}-${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\times ${tex_nombrec(c-d)} = ${tex_nombrec((a-b)*(c-d))}$`
 					break			
 				case 4 : // (a+b)/(c+d)
 					a=calcul(a*(c+d))
@@ -22436,15 +23682,15 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 			switch (souscas) {
 				case 0 : // 2(a+bc)
 					expf=`Le double de la somme de ${nombre_avec_espace(a)} et du produit de ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
-					expn=`$2(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)})$`
-					expc=`$2(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)}) = 2(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times  ${tex_nombrec(a+b*c)}$`
+					expn=`$2${signex}(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)})$`
+					expc=`$2${signex}(${tex_nombre(a)}+${tex_nombre(b)}\\times ${tex_nombre(c)}) = 2${signex}(${tex_nombre(a)}+${tex_nombrec(b*c)}) = 2\\times  ${tex_nombrec(a+b*c)}$`
 					break
 				case 1 : // 3(a+b)/c
 					a=calcul(a*c)
 					b=calcul(b*c)
 					expf=`Le triple du quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par ${nombre_avec_espace(c)}`
-					expn=`$3(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)}$ ou $3\\times \\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}}$`
-					expc=`$3(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)} = 3\\times  ${tex_nombre(a+b)}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
+					expn=`$3${signex}(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)}$ ou $3\\times \\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}}$`
+					expc=`$3${signex}(${tex_nombre(a)}+${tex_nombre(b)})\\div ${tex_nombre(c)} = 3\\times  ${tex_nombre(a+b)}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b))}\\div ${tex_nombre(c)} = ${tex_nombrec(3*(a+b)/c)}$`
 					break
 				case 2 : // (a-b)/3
 					if (a<=b) a=calcul(a+b)
@@ -22459,20 +23705,20 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					a=calcul(3*a)
 					b=calcul(3*b)
 					expf=`Le produit du tiers de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par le double de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
-					expn=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2(${tex_nombre(c)}+${tex_nombre(d)})$`
-					expc=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div  3 \\times  2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times  2 \\times  ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
+					expn=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2${signex}(${tex_nombre(c)}+${tex_nombre(d)})$`
+					expc=`$\\left((${tex_nombre(a)}-${tex_nombre(b)})\\div  3\\right)\\times  2${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = ${tex_nombrec(a-b)}\\div  3 \\times  2 \\times ${tex_nombrec(c+d)} = ${tex_nombrec((a-b)/3)} \\times  2 \\times  ${tex_nombrec(c+d)} =  ${tex_nombrec(2*(a-b)/3)} \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(c+d)*(a-b)/3)}$`
 					break			
 				case 4 : // 3(a+b)-2(c+d)
 					if (3*(a+b)<2*(c+d)) a=calcul(a+c+d)
 					expf=`La différence du triple de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} et du double de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
-					expn=`$3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)})$`
-					expc=`$3(${tex_nombre(a)}+${tex_nombre(b)})-2(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times  ${tex_nombrec(a+b)} - 2 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
+					expn=`$3${signex}(${tex_nombre(a)}+${tex_nombre(b)})-2${signex}(${tex_nombre(c)}+${tex_nombre(d)})$`
+					expc=`$3${signex}(${tex_nombre(a)}+${tex_nombre(b)})-2${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = 3 \\times  ${tex_nombrec(a+b)} - 2 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(3*(a+b))} - ${tex_nombrec(2*(c+d))} = ${tex_nombrec(3*(a+b)-2*(c+d))}$`
 					break
 				case 5 : // 2(a-b)+3(c+d)
 					if (a<=b) a=calcul(a+b)
 					expf=`La somme du double de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} et du triple de la somme de ${nombre_avec_espace(c)} et ${nombre_avec_espace(d)}`
-					expn=`$2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)})$`
-					expc=`$2(${tex_nombre(a)}-${tex_nombre(b)})+3(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times  ${tex_nombrec(a-b)} + 3 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
+					expn=`$2${signex}(${tex_nombre(a)}-${tex_nombre(b)})+3${signex}(${tex_nombre(c)}+${tex_nombre(d)})$`
+					expc=`$2${signex}(${tex_nombre(a)}-${tex_nombre(b)})+3${signex}(${tex_nombre(c)}+${tex_nombre(d)}) = 2 \\times  ${tex_nombrec(a-b)} + 3 \\times  ${tex_nombrec(c+d)} = ${tex_nombrec(2*(a-b))} + ${tex_nombrec(3*(c+d))} = ${tex_nombrec(2*(a-b)+3*(c+d))}$`
 					break	
 			}		
 			break ;
@@ -22483,14 +23729,14 @@ function Choisir_expression_numerique(nb_operations,decimal) {
 					a=calcul(a*c*(d+e))
 					b=calcul(b*c*(d+e))
 					expf=`Le quotient de la somme de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par le produit de ${nombre_avec_espace(c)} par la somme de ${nombre_avec_espace(d)} et ${nombre_avec_espace(e)}`
-					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)}))$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})}$`
-					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div  (${tex_nombre(c)} \\times  ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div  ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
+					expn=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}${signex}(${tex_nombre(d)}+${tex_nombre(e)}))$ ou $\\dfrac{${tex_nombre(a)}+${tex_nombre(b)}}{${tex_nombre(c)}${signex}(${tex_nombre(d)}+${tex_nombre(e)})}$`
+					expc=`$(${tex_nombre(a)}+${tex_nombre(b)})\\div (${tex_nombre(c)}${signex}(${tex_nombre(d)}+${tex_nombre(e)})) = ${tex_nombrec(a+b)} \\div  (${tex_nombre(c)} \\times  ${tex_nombrec(d+e)}) = ${tex_nombrec(a+b)} \\div  ${tex_nombre(c*(d+e))} = ${tex_nombrec((a+b)/(c*(d+e)))}$`
 					break
 				case 2 : //(a-b)*(c+de)
 					if (a<=b) a=calcul(a+b)
 					expf=`Le produit de la différence de ${nombre_avec_espace(a)} et ${nombre_avec_espace(b)} par la somme de ${nombre_avec_espace(c)} et du produit de ${nombre_avec_espace(d)} par ${nombre_avec_espace(e)}`
-					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)})$`
-					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)}) = ${tex_nombrec(a-b)}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times  ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
+					expn=`$(${tex_nombre(a)}-${tex_nombre(b)})${signex}(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)})$`
+					expc=`$(${tex_nombre(a)}-${tex_nombre(b)})${signex}(${tex_nombre(c)}+${tex_nombre(d)}\\times ${tex_nombre(e)}) = ${tex_nombrec(a-b)}${signex}(${tex_nombre(c)}+${tex_nombrec(d*e)}) = ${tex_nombrec(a-b)} \\times  ${tex_nombre(c+d*e)} = ${tex_nombrec((a-b)*(c+d*e))}$`
 					break
 				case 3 : // ab+cd/e
 					c=calcul(c*e)
@@ -22509,8 +23755,9 @@ function Choisir_expression_numerique(nb_operations,decimal) {
  * Préciser ici les numéros des exos 
  * 5G2 exercice parent il faudra supprimmer la version beta5G2 de la liste des choix du fichier mathalea_exercices.js
  * 5G21-1
- * 5G31-1
- * beta5G2,beta5G21-1,beta5G31-1
+ * 5G31-1 
+ * Dans ces exercices je me servais de this.beta pour faire passer l'exo de beta.html à mathalea.html
+ * this.beta pouvait prendre la valeur 'beta' ou '', tous les autres this.beta sont devenus des this.debug
  * @author Sébastien Lozano
  */
 
@@ -22894,11 +24141,11 @@ function Constructibilite_des_triangles(){
 
 /**
  * Vocabulaire des triangles 
- * beta5G21-1
+ * G21-1
  * @author Sébastien Lozano
  */
 function Constructibilite_des_triangles_longueurs(){
-	this.beta = ``;
+	this.beta = ``;// ici this.beta peut prendre la valeur 'beta' ou '', tous les autres this.beta sont devenus des this.debug
 	this.exo = this.beta+`5G21-1`;
 	//this.titre = `Constructibilité des triangles via les longueurs`;
 	Constructibilite_des_triangles.call(this);
@@ -22906,11 +24153,11 @@ function Constructibilite_des_triangles_longueurs(){
 
 /**
  * Vocabulaire des triangles 
- * beta5G31-1
+ * 5G31-1
  * @author Sébastien Lozano
  */
 function Constructibilite_des_triangles_angles(){
-	this.beta = ``;
+	this.beta = ``;// ici this.beta peut prendre la valeur 'beta' ou '', tous les autres this.beta sont devenus des this.debug
 	this.exo = this.beta+`5G31-1`;
 	//this.titre = `Constructibilité des triangles via les angles`;
 	Constructibilite_des_triangles.call(this);
@@ -23439,9 +24686,9 @@ function Construire_par_Symetrie() {
 function Trouver_oppose(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
 		this.nb_questions = 1;
@@ -23459,7 +24706,7 @@ function Trouver_oppose(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [1];			
 		} else {
 			type_de_questions_disponibles = [1];			
@@ -23522,7 +24769,7 @@ function Trouver_oppose(){
 			switch (liste_type_de_questions[i]){
 				case 1 : 
           texte = `${enonces[0].enonce}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
             texte_corr = ``;	
@@ -23532,7 +24779,7 @@ function Trouver_oppose(){
           break;	
         case 2 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -23565,9 +24812,9 @@ function Trouver_oppose(){
 function Problemes_additifs_fractions_5e(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
 		this.nb_questions = 1;
@@ -23585,7 +24832,7 @@ function Problemes_additifs_fractions_5e(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0];			
 		} else {
 			  // type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
@@ -23859,7 +25106,7 @@ function Problemes_additifs_fractions_5e(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -23895,9 +25142,9 @@ function Problemes_additifs_fractions_5e(){
 function Problemes_additifs_relatifs_5e(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
 		this.nb_questions = 1;
@@ -23915,7 +25162,7 @@ function Problemes_additifs_relatifs_5e(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0];			
 		} else {
 			//   type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
@@ -24066,7 +25313,7 @@ function Problemes_additifs_relatifs_5e(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -24115,9 +25362,9 @@ function Calculer_la_valeur_d_une_expression_litterale_deg1_inc1() {
 function Tableaux_et_proportionnalite(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 6;
 	} else {
 		this.nb_questions = 4;
@@ -24135,7 +25382,7 @@ function Tableaux_et_proportionnalite(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0,1,2,3,4,5];			
 		} else {
 			  //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);
@@ -24314,7 +25561,7 @@ function Tableaux_et_proportionnalite(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -24325,7 +25572,7 @@ function Tableaux_et_proportionnalite(){
           			break;	
         		case 1 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -24335,7 +25582,7 @@ function Tableaux_et_proportionnalite(){
           			break;
         		case 2 : 
 					texte = `${enonces[2].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
 						texte_corr = ``;	
@@ -24345,7 +25592,7 @@ function Tableaux_et_proportionnalite(){
           			break;				
         		case 3 : 
 					texte = `${enonces[3].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
 						texte_corr = ``;	
@@ -24355,7 +25602,7 @@ function Tableaux_et_proportionnalite(){
 					break;	
 				case 4 : 
 					texte = `${enonces[4].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
 						texte_corr = ``;	
@@ -24365,7 +25612,7 @@ function Tableaux_et_proportionnalite(){
 					break;
 				case 5 : 
 					texte = `${enonces[5].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[5].correction}`;
 						texte_corr = ``;	
@@ -24399,7 +25646,8 @@ function Tableaux_et_pourcentages(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.debug = false;	
-	this.sup=1;
+	this.sup=1; // nature du coefficient entre les pourcentages, entier/decimal
+	this.sup2=1; //nombre de colonnes
 	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
@@ -24411,7 +25659,7 @@ function Tableaux_et_pourcentages(){
 	
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
-	//this.nb_questions_modifiable = false;
+	this.nb_questions_modifiable = false;
 	// sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
 	// sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
 
@@ -24419,10 +25667,35 @@ function Tableaux_et_pourcentages(){
 
 	this.nouvelle_version = function(numero_de_l_exercice){
 		if (this.debug) {
-			type_de_questions_disponibles = [0];			
+			//if (this.sup==1) {
+				if (this.sup2==1) {
+					type_de_questions_disponibles = [0];			
+				};
+				if (this.sup2==2) {
+					type_de_questions_disponibles = [1];			
+				};
+				if (this.sup2==3) {
+					type_de_questions_disponibles = [2];			
+				};
+				if (this.sup2==4) {
+					type_de_questions_disponibles = [3];			
+				};
+			//};			
 		} else {
 			  //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
-			  type_de_questions_disponibles = [0];			
+			if (this.sup2==1) {
+				type_de_questions_disponibles = [0];			
+			};
+			if (this.sup2==2) {
+				type_de_questions_disponibles = [1];			
+			};
+			if (this.sup2==3) {
+				type_de_questions_disponibles = [2];			
+			};
+			if (this.sup2==4) {
+				type_de_questions_disponibles = [3];			
+			};
+
 		};
 
 		this.liste_questions = []; // Liste de questions
@@ -24432,47 +25705,134 @@ function Tableaux_et_pourcentages(){
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
 		
 		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			// une fonction pour le texte de correction
+			/**
+			 * 
+			 * @param {object} remise_init //remise initiale deux propriétés nb sous forme numerique et str sous forme de chaine
+			 * @param {object} remise //remise effective deux propriétés nb sous forme numerique et str sous forme de codageHauteurTriangle
+			 * @param {number} prix
+			 */
+			function justifCorr(remise_init,remise,prix) {
+				return `L'énoncé indique le montant pour une remise de $${remise_init.str}$ or $${tex_nombre(remise.nb/remise_init.nb)} \\times ${remise_init.str} = ${remise.str}$.<br>
+					Donc pour $${remise.str}$ le montant de la remise sera $${tex_nombre(remise.nb/remise_init.nb)}$ fois celui de la remise de $${remise_init.str}$,<br>
+					d'où le calul pour le montant de la remise : $${mise_en_evidence(`${tex_prix(prix*remise_init.nb/100)} \\times ${tex_nombre(remise.nb/remise_init.nb)} = ${tex_prix(prix*remise.nb/100)}`)}$.<br>
+					Et celui pour le nouveu prix : $${mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remise.nb/100)} = ${tex_prix(prix-prix*remise.nb/100)}`)}$.										
+				`;
+			}
+
 			let prix,remises;
 			do {
 				prix = randint(150,300);
 			} while (prix%5 != 0)
 			
-			if (this.sup == 1) {//coeff entier
+			if (this.sup == 1) {//coeff entier				
 				remises = choice([
-					[{str:'10\\%',nb:10},{str:'20\\%',nb:20},{str:'30\\%',nb:30}],
-					[{str:'5\\%',nb:5},{str:'15\\%',nb:15},{str:'35\\%',nb:35}],
-					[{str:'10\\%',nb:10},{str:'40\\%',nb:40},{str:'80\\%',nb:80}],
-					[{str:'5\\%',nb:5},{str:'25\\%',nb:25},{str:'55\\%',nb:55}],
-					//[{str:'10\\%',nb:10},{str:'5\\%',nb:5},{str:'15\\%',nb:15}],
-					//[{str:'50\\%',nb:50},{str:'30\\%',nb:30},{str:'10\\%',nb:10}],
+					[{str:'5\\%',nb:5},{str:'10\\%',nb:10},{str:'15\\%',nb:15},{str:'20\\%',nb:20},{str:'25\\%',nb:25},{str:'30\\%',nb:30}],
+					[{str:'5\\%',nb:5},{str:'35\\%',nb:35},{str:'45\\%',nb:45},{str:'55\\%',nb:55},{str:'65\\%',nb:65},{str:'75\\%',nb:75}],
+					[{str:'5\\%',nb:5},{str:'15\\%',nb:15},{str:'25\\%',nb:25},{str:'35\\%',nb:35},{str:'45\\%',nb:45},{str:'55\\%',nb:55}],					
+					[{str:'5\\%',nb:5},{str:'30\\%',nb:30},{str:'40\\%',nb:40},{str:'50\\%',nb:50},{str:'60\\%',nb:60},{str:'70\\%',nb:70}],
+					[{str:'5\\%',nb:5},{str:'25\\%',nb:25},{str:'40\\%',nb:40},{str:'45\\%',nb:45},{str:'50\\%',nb:50},{str:'55\\%',nb:55}],
+					[{str:'5\\%',nb:5},{str:'45\\%',nb:45},{str:'50\\%',nb:50},{str:'55\\%',nb:55},{str:'60\\%',nb:60},{str:'65\\%',nb:65}],
+					[{str:'5\\%',nb:5},{str:'50\\%',nb:50},{str:'55\\%',nb:55},{str:'60\\%',nb:60},{str:'65\\%',nb:65},{str:'70\\%',nb:70}],					
+					[{str:'10\\%',nb:10},{str:'20\\%',nb:20},{str:'30\\%',nb:30},{str:'40\\%',nb:40},{str:'50\\%',nb:50},{str:'60\\%',nb:60}],
+					[{str:'10\\%',nb:10},{str:'30\\%',nb:30},{str:'40\\%',nb:40},{str:'50\\%',nb:50},{str:'60\\%',nb:60},{str:'70\\%',nb:70}],
+					[{str:'10\\%',nb:10},{str:'40\\%',nb:40},{str:'50\\%',nb:50},{str:'60\\%',nb:60},{str:'70\\%',nb:70},{str:'80\\%',nb:80}]
 				]);	
 			};
 			if (this.sup == 2) {//coeff décimal
 				remises = choice([
-					//[{str:'10\\%',nb:10},{str:'20\\%',nb:20},{str:'30\\%',nb:30}],					
-					//[{str:'5\\%',nb:5},{str:'10\\%',nb:10},{str:'35\\%',nb:35}],
-					[{str:'10\\%',nb:10},{str:'5\\%',nb:5},{str:'15\\%',nb:15}],
-					[{str:'50\\%',nb:50},{str:'30\\%',nb:30},{str:'10\\%',nb:10}],
-					[{str:'20\\%',nb:20},{str:'10\\%',nb:10},{str:'50\\%',nb:50}],
-					[{str:'40\\%',nb:40},{str:'10\\%',nb:10},{str:'5\\%',nb:5}],
+					[{str:'10\\%',nb:10},{str:'5\\%',nb:5},{str:'15\\%',nb:15},{str:'25\\%',nb:25},{str:'35\\%',nb:35},{str:'45\\%',nb:45}],
+					[{str:'50\\%',nb:50},{str:'30\\%',nb:30},{str:'10\\%',nb:10},{str:'20\\%',nb:20},{str:'40\\%',nb:40},{str:'60\\%',nb:60}],
+					[{str:'20\\%',nb:20},{str:'10\\%',nb:10},{str:'50\\%',nb:50},{str:'30\\%',nb:30},{str:'40\\%',nb:40},{str:'60\\%',nb:60}],
+					[{str:'40\\%',nb:40},{str:'10\\%',nb:10},{str:'5\\%',nb:5},{str:'20\\%',nb:20},{str:'50\\%',nb:50},{str:'30\\%',nb:30}],
+					[{str:'80\\%',nb:80},{str:'10\\%',nb:10},{str:'50\\%',nb:50},{str:'30\\%',nb:30},{str:'40\\%',nb:40},{str:'20\\%',nb:20}],
+					[{str:'10\\%',nb:10},{str:'15\\%',nb:15},{str:'25\\%',nb:25},{str:'35\\%',nb:35},{str:'45\\%',nb:45},{str:'55\\%',nb:55}],
+					[{str:'50\\%',nb:50},{str:'35\\%',nb:35},{str:'10\\%',nb:10},{str:'25\\%',nb:25},{str:'40\\%',nb:40},{str:'65\\%',nb:65}],
+					[{str:'20\\%',nb:20},{str:'5\\%',nb:5},{str:'50\\%',nb:50},{str:'35\\%',nb:35},{str:'40\\%',nb:40},{str:'55\\%',nb:55}],
+					[{str:'40\\%',nb:40},{str:'15\\%',nb:15},{str:'5\\%',nb:5},{str:'20\\%',nb:20},{str:'30\\%',nb:30},{str:'25\\%',nb:25}],
+					[{str:'80\\%',nb:80},{str:'20\\%',nb:20},{str:'55\\%',nb:55},{str:'30\\%',nb:30},{str:'40\\%',nb:40},{str:'20\\%',nb:20}],		
 				]);	
-			}
+			};
 
 			// pour les situations, autant de situations que de cas dans le switch !
 			let situations = [
-				{//case 0 -->
-					tableau:tab_C_L([`\\text{Prix en euro}`,tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en euro}`,`\\text{Nouveau prix}`],[
+				{//case 0 --> 1 colonne à remplir
+					tableau:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
+						remises[0].str,remises[1].str,
+						tex_prix(prix*remises[0].nb/100),'',
+						tex_prix(prix-prix*remises[0].nb/100),'',
+					]),
+					tableau_corr:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
+						remises[0].str,remises[1].str,
+						tex_prix(prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix*remises[1].nb/100)}`),
+						tex_prix(prix-prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix-prix*remises[1].nb/100)}`),
+					]),
+				},				
+				{//case 1 --> 2 colonnes à remplir
+					tableau:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
 						remises[0].str,remises[1].str,remises[2].str,
 						tex_prix(prix*remises[0].nb/100),'','',
 						tex_prix(prix-prix*remises[0].nb/100),'','',
 					]),
-					tableau_corr:tab_C_L([`\\text{Prix en euro}`,tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en euro}`,`\\text{Nouveau prix}`],[
+					tableau_corr:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
 						remises[0].str,remises[1].str,remises[2].str,
-						tex_prix(prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${tex_nombre(remises[1].nb/remises[0].nb)} = ${tex_prix(prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${tex_nombre(remises[2].nb/remises[0].nb)} = ${tex_prix(prix*remises[2].nb/100)}`),
-						tex_prix(prix-prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[1].nb/100)} = ${tex_prix(prix-prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[2].nb/100)} = ${tex_prix(prix-prix*remises[2].nb/100)}`),
+						tex_prix(prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[2].nb/100)}`),
+						tex_prix(prix-prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix-prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix-prix*remises[2].nb/100)}`),
+					]),
+				},
+				{//case 2 --> 3 colonnes à remplir
+					tableau:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
+						remises[0].str,remises[1].str,remises[2].str,remises[3].str,
+						tex_prix(prix*remises[0].nb/100),'','','',
+						tex_prix(prix-prix*remises[0].nb/100),'','','',
+					]),
+					tableau_corr:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
+						remises[0].str,remises[1].str,remises[2].str,remises[3].str,
+						tex_prix(prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[2].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[3].nb/100)}`),
+						tex_prix(prix-prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix-prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix-prix*remises[2].nb/100)}`),mise_en_evidence(`${tex_prix(prix-prix*remises[3].nb/100)}`),
 					]),
 				},	
+				{//case 3 --> 4 colonnes à remplir
+					tableau:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
+						remises[0].str,remises[1].str,remises[2].str,remises[3].str,remises[4].str,
+						tex_prix(prix*remises[0].nb/100),'','','','',
+						tex_prix(prix-prix*remises[0].nb/100),'','','','',
+					]),
+					tableau_corr:tab_C_L([`\\text{Prix en €}`,tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en €}`,`\\text{Nouveau prix en €}`],[
+						remises[0].str,remises[1].str,remises[2].str,remises[3].str,remises[4].str,
+						tex_prix(prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[2].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[3].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[4].nb/100)}`),
+						tex_prix(prix-prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix-prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix-prix*remises[2].nb/100)}`),mise_en_evidence(`${tex_prix(prix-prix*remises[3].nb/100)}`),mise_en_evidence(`${tex_prix(prix-prix*remises[4].nb/100)}`),
+					]),
+				},	
+				// {//case 4 --> 5 colonnes à remplir
+				// 	tableau:tab_C_L([`\\text{Prix en euro}`,tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en euro}`,`\\text{Nouveau prix}`],[
+				// 		remises[0].str,remises[1].str,remises[2].str,remises[3].str,remises[4].str,remises[5].str,
+				// 		tex_prix(prix*remises[0].nb/100),'','','','','',
+				// 		tex_prix(prix-prix*remises[0].nb/100),'','','','','',
+				// 	]),
+				// 	tableau_corr:tab_C_L([`\\text{Prix en euro}`,tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix),tex_prix(prix)],[`\\text{Remise en pourcentage}`,`\\text{Montant de la remise en euro}`,`\\text{Nouveau prix}`],[
+				// 		remises[0].str,remises[1].str,remises[2].str,remises[3].str,remises[4].str,remises[5].str,
+				// 		tex_prix(prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${tex_nombre(remises[1].nb/remises[0].nb)} = ${tex_prix(prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${tex_nombre(remises[2].nb/remises[0].nb)} = ${tex_prix(prix*remises[2].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${tex_nombre(remises[3].nb/remises[0].nb)} = ${tex_prix(prix*remises[3].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${tex_nombre(remises[4].nb/remises[0].nb)} = ${tex_prix(prix*remises[4].nb/100)}`),mise_en_evidence(`${tex_prix(prix*remises[0].nb/100)} \\times ${tex_nombre(remises[5].nb/remises[0].nb)} = ${tex_prix(prix*remises[5].nb/100)}`),
+				// 		tex_prix(prix-prix*remises[0].nb/100),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[1].nb/100)} = ${tex_prix(prix-prix*remises[1].nb/100)}`),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[2].nb/100)} = ${tex_prix(prix-prix*remises[2].nb/100)}`),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[3].nb/100)} = ${tex_prix(prix-prix*remises[3].nb/100)}`),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[4].nb/100)} = ${tex_prix(prix-prix*remises[4].nb/100)}`),mise_en_evidence(`${tex_prix(prix)}-${tex_prix(prix*remises[5].nb/100)} = ${tex_prix(prix-prix*remises[5].nb/100)}`),
+				// 	]),
+				// },	
+				
 			];
+
+			let corrections;
+			if (this.sup2==1) {
+				corrections = `${justifCorr(remises[0],remises[1],prix)}`
+			}
+			if (this.sup2==2) {
+				corrections = `${justifCorr(remises[0],remises[1],prix)}<br><br>${justifCorr(remises[0],remises[2],prix)}`
+			}
+			if (this.sup2==3) {
+				corrections = `${justifCorr(remises[0],remises[1],prix)}<br><br>${justifCorr(remises[0],remises[2],prix)}<br><br>${justifCorr(remises[0],remises[3],prix)}`
+			}
+			if (this.sup2==4) {
+				corrections = `${justifCorr(remises[0],remises[1],prix)}<br><br>${justifCorr(remises[0],remises[2],prix)}<br><br>${justifCorr(remises[0],remises[3],prix)}<br><br>${justifCorr(remises[0],remises[4],prix)}`
+			}
+
 
 			let enonces = [];
 			for (let k=0;k<situations.length;k++) {
@@ -24482,14 +25842,9 @@ function Tableaux_et_pourcentages(){
 					`,
 					question:``,
 					correction:`
-					L'énoncé indique le montant pour une remise de $${remises[0].str}$.
-					<br>Or $${tex_nombre(remises[1].nb/remises[0].nb)} \\times ${remises[0].str} = ${remises[1].str}$.
-					<br>Donc pour $${remises[1].str}$ le montant de la remise sera $${tex_nombre(remises[1].nb/remises[0].nb)}$ fois celui de la remise de $${remises[0].str}$, d'où le calul indiqué dans le tableau.
-					<br><br>
-					L'énoncé indique le montant pour une remise de $${remises[0].str}$.
-					<br>Or $${tex_nombre(remises[2].nb/remises[0].nb)} \\times ${remises[0].str} = ${remises[2].str}$.
-					<br>Donc pour $${remises[2].str}$ le montant de la remise sera $${tex_nombre(remises[2].nb/remises[0].nb)}$ fois celui de la remise de $${remises[0].str}$, d'où le calul indiqué dans le tableau.
-					<br><br>${situations[k].tableau_corr}
+					${corrections}<br><br>
+					D'où le tableau complété : <br><br>
+					${situations[k].tableau_corr}
 					`
 				});
 			};
@@ -24507,7 +25862,40 @@ function Tableaux_et_pourcentages(){
 						texte_corr = `${enonces[0].correction}`;
 					};
           			break;	
-			
+				case 1 : 
+					texte = `${enonces[1].enonce}`;
+					if (this.debug) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[1].correction}`;
+					};
+					break;			
+				case 2 : 
+					texte = `${enonces[2].enonce}`;
+					if (this.debug) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[2].correction}`;
+					};
+					break;
+				case 3 : 
+					texte = `${enonces[3].enonce}`;
+					if (this.debug) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
+						texte += `             `
+						texte_corr = ``;	
+					} else {
+						texte_corr = `${enonces[3].correction}`;
+					};
+					break;			
+
 			};			
 			
 			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
@@ -24520,8 +25908,9 @@ function Tableaux_et_pourcentages(){
 		liste_de_question_to_contenu(this);
 
 	}
-	this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : coefficient enttier\n2 : coefficient décimal"];
-	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
+	this.besoin_formulaire_numerique = ['Le coefficient entre les pourcentages',2,"1 : est entier\n2 : est décimal"];
+	this.besoin_formulaire2_numerique = ['Nombre de colonnes à remplir',4,"1 : une colonne\n2 : deux colonnes\n3 : trois colonnes\n4 : quatre colonnes"];
+	//this.besoin_formulaire3_case_a_cocher = ["Modulation de ce qui est demandé"];
 };
 
 
@@ -24534,9 +25923,9 @@ function Tableaux_et_pourcentages(){
 function Tableaux_et_fonction(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
 		this.nb_questions = 1;
@@ -24554,7 +25943,7 @@ function Tableaux_et_fonction(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [0];			
 		} else {
 			  //type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),0]);      			
@@ -24737,7 +26126,7 @@ function Tableaux_et_fonction(){
 			switch (liste_type_de_questions[i]){
 				case 0 : 					
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte += `             `
@@ -24832,6 +26221,103 @@ function Exercice_tableau_additions_relatifs (){
 	liste_de_question_to_contenu(this);
 	}
 }
+
+/**
+ * * Comparer des puissances de 10.
+ *
+ * Paramétrages possibles :
+ * * 1 : inverse d'un nombre entier
+ * * 2 : inverse d'une fraction
+ * * 3 : inverse d'un nombre décimal
+ * @auteur Erwan Duplessy
+ * date : 15/11/2020
+ * 4C30
+ */
+
+function Comparer_puissance10() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.sup = 1; // Avec ou sans relatifs
+  this.titre = "Puissances de 10";
+  this.consigne = "Dans chaque cas, comparer les deux nombres.";
+  this.spacing = 2;
+  this.spacing_corr = 2;
+  this.nb_questions = 5;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.sup = 1;
+
+  this.nouvelle_version = function (numero_de_l_exercice) { 
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+    texte = ` `; // texte énoncé
+    texte_corr = ` `; // texte correction
+    let a1 = 0; // mantisse 1
+    let a2 = 0; // mantisse 2
+    let n1 = 0; // puissance 1
+    let n2 = 0; // puissance 2
+    let nbA1 = 0;
+    let nbA2 = 0;
+    let c = parseInt(this.sup);
+    for (let i=0; i<this.nb_questions; i++) {
+      if (this.sup == 6) {
+        c = randint(1,5);
+      }
+      switch (c) {
+        case 1:
+          a1 = 1;
+          n1 = randint(-9,9);
+          a2 = 1;
+          n2 = choice(rangeMinMax(-9, 9), [n1]);
+          break;
+        case 2:
+          a1 = randint(1,9)+0.1*randint(1,9)*randint(0,1);
+          n1 = randint(-9,9);
+          a2 = choice([0, 1, 2, 3, 4, 5 ,6 ,7, 8, 9], [a1])+0.1*randint(1,9)*randint(0,1);
+          n2 = n1;
+          break;
+        case 3:
+          a1 = randint(1,9)+0.1*randint(0,9)+0.01*randint(0,9);
+          n1 = randint(-9,9);
+          a2 = a1;
+          n2 = randint(-9,9);          
+          break;
+        case 4:
+          a1 = randint(1,9)+0.1*randint(0,9);
+          n1 = randint(-9,9);
+          a2 = choice(rangeMinMax(1, 99))/10;
+          n2 = randint(-9,9);
+          break;
+        case 5:
+          a1 = choice(rangeMinMax(-99, 99, [0]))/10;
+          n1 = randint(-9,9);
+          a2 = choice(rangeMinMax(-99, 99, [0]))/10;
+          n2 = randint(-9,9);
+          break;
+        default:
+          break;
+      }
+      nbA1 = a1*10**n1;
+      nbA2 = a2*10**n2;
+      
+      texte += num_alpha(i) + "  " + ecriturePuissance(a1, 10, n1) + " et " + ecriturePuissance(a2, 10, n2) + "<br>";
+      if (nbA1 > nbA2) {
+        texte_corr += num_alpha(i) + ` ${ecriturePuissance(a1, 10, n1)} $>$ ${ecriturePuissance(a2, 10, n2)} <br>`;
+      } else {
+        if (nbA1 == nbA2) {
+          texte_corr += num_alpha(i) + ` ${ecriturePuissance(a1, 10, n1)} $=$ ${ecriturePuissance(a2, 10, n2)} <br>`;
+        } else {
+          texte_corr += num_alpha(i) + ` ${ecriturePuissance(a1, 10, n1)} $<$ ${ecriturePuissance(a2, 10, n2)} <br>`;
+        }        
+      }
+    }
+      this.liste_questions.push(texte);
+      this.liste_corrections.push(texte_corr);
+      liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
+    };
+    this.besoin_formulaire_numerique = ["Niveau de difficulté", 6,
+          "1 : Puissances de 10 seules\n 2 : Mantisses différentes et même exposant\n 3 : Mêmes mantisses et exposants différents\n 4 : Mantisses et exposants différents\n 5 : Mantisses (négatives) et exposants différents\n 6 : Tous types"];
+}
+
 
 /**
  * * Calcul de l'inverse d'un nombre.
@@ -30621,6 +32107,134 @@ function Puissances_de_dix() {
   ];
 }
 
+
+/**
+ * Donner l'écriture décimale d'une puissance de 10
+ * @Auteur Rémi Angot
+* Référence 4C30-2
+ */
+function EcritureDecimalePuissanceDe10() {
+  Exercice.call(this); 
+  this.titre = "Écriture décimale d'une puissance de 10";
+  this.consigne = "Donner l'écriture décimale";
+  this.nb_questions = 8;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.sup = 3; // exposants positifs et négatifs par défaut
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    let liste_type_de_questions 
+    if (this.sup==1) {
+      liste_type_de_questions = combinaison_listes(['+'],this.nb_questions); 
+    }
+    if (this.sup==2) {
+      liste_type_de_questions = combinaison_listes(['-'],this.nb_questions); 
+    }
+    if (this.sup==3) {
+      liste_type_de_questions = combinaison_listes(['+','-'],this.nb_questions); 
+    }
+    for (let i = 0, texte, texte_corr, n, cpt = 0;i < this.nb_questions && cpt < 50;) {
+      switch (liste_type_de_questions[i]) {
+        case '+': 
+          n = randint(0,10)
+          texte = `$10^{${n}}$`;
+          if (n<2) {
+            texte_corr = `$10^${n}=${10**n}$`
+          } else {
+            texte_corr = `$10^{${n}}=${puissanceEnProduit(10,n)}=${tex_nombre(10**n)}$`;
+          }
+          break;
+        case '-': 
+          n = randint(1,10)
+          texte = `$10^{${-n}}$`;
+          texte_corr = `$10^{${-n}}=\\dfrac{1}{10^{${n}}}=\\dfrac{1}{${puissanceEnProduit(10,n)}}=\\dfrac{1}{${tex_nombre(10**n)}}=${tex_nombre2(1/10**n)}$`;
+          break;
+        
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en crée une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Exposants positifs\n2 : Exposants négatifs\n3 : Exposants relatifs'];
+}
+
+
+/**
+ * Donner l'écriture décimale d'une puissance de 10
+ * @Auteur Rémi Angot
+* Référence 4C30-3
+ */
+function EcritureDecimalePuissance() {
+  Exercice.call(this); 
+  this.titre = "Écriture décimale d'une puissance";
+  this.consigne = "Donner l'écriture sous la forme d'un nombre entier ou d'une fraction.";
+  this.nb_questions = 8;
+  this.nb_cols = 2;
+  this.nb_cols_corr = 2;
+  this.sup = 3; // exposants positifs et négatifs par défaut
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    let liste_de_calculs = combinaison_listes([[2,2],[2,3],[2,4],[2,5],[2,6],[3,2],[3,3],[3,4],[4,2],[4,3],[5,2],[5,3],[6,2],[6,3],[7,2],[7,3],[8,2],[8,3],[9,2],[9,3]],this.nb_questions);
+
+    let liste_type_de_questions 
+    if (this.sup==1) {
+      liste_type_de_questions = combinaison_listes(['+'],this.nb_questions); 
+      this.consigne = "Donner l'écriture sous la forme d'un nombre entier.";
+    }
+    if (this.sup==2) {
+      liste_type_de_questions = combinaison_listes(['-'],this.nb_questions); 
+    }
+    if (this.sup==3) {
+      liste_type_de_questions = combinaison_listes(['+','-'],this.nb_questions); 
+    }
+    for (let i = 0, texte, texte_corr, a, n, cpt = 0;i < this.nb_questions && cpt < 50;) {
+      switch (liste_type_de_questions[i]) {
+        case '+': 
+          a = liste_de_calculs[i][0];
+          n = liste_de_calculs[i][1];
+          texte = `$${a}^{${n}}$`;
+          if (n<2) {
+            texte_corr = `${a}^${n}=$${a}**n}$`
+          } else {
+            texte_corr = `$${a}^{${n}}=${puissanceEnProduit(a,n)}=${tex_nombre(a**n)}$`;
+          }
+          break;
+        case '-': 
+          a = liste_de_calculs[i][0];
+          n = liste_de_calculs[i][1];
+          texte = `$${a}^{${-n}}$`;
+          texte_corr = `$${a}^{${-n}}=\\dfrac{1}{${a}^{${n}}}=\\dfrac{1}{${puissanceEnProduit(a,n)}}=\\dfrac{1}{${tex_nombre(a**n)}}$`;
+          break;
+        
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en crée une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : Exposants positifs\n2 : Exposants négatifs\n3 : Exposants relatifs'];
+}
+
+
 /**
  * problèmes de grandeurs composées
  * @Auteur Jean-Claude Lhote
@@ -32278,7 +33892,11 @@ function Notation_scientifique() {
 /**
  * Signe d'un produit ou d'on quotient de relatifs
  * Plusieurs niveaux 2, 3 ou 4 factieurs, un quotient de 2 nombres, 1  nombre sur un produit de deux nombres, un prooduit de 2 nombres sur un nombre, un quotient de produit de 2 nombres
- * 4C10-0 exercice parent  ?
+ * 4C10-0 exercice parent de 4C10-1 et 4C10-2
+ * 4C10-0 contient tous les cas
+ * Dans ces exercices je me servais de this.beta pour faire passer l'exo de beta.html à mathalea.html
+ * this.beta pouvait prendre la valeur 'beta' ou '', tous les autres this.beta sont devenus des this.debug
+
  * @author Sébastien Lozano
  */
 
@@ -32639,22 +34257,22 @@ function Signe_produit_quotient_relatifs() {
 
 /**
  * Signe du produit de relatifs
- * 4C10-1
+ * 4C10-1 fils de 4C10-0
  * @author Sébastien Lozano
  */
 function Signe_produit_relatifs() {
-  this.beta = ``;
+  this.beta = ``;// ici this.beta peut prendre la valeur 'beta' ou '', tous les autres this.beta sont devenus des this.debug
   this.exo = this.beta + `4C10-1`;
   Signe_produit_quotient_relatifs.call(this);
 }
 
 /**
  * Signe du produit de relatifs
- * 4C10-2
+ * 4C10-2 fils de 4C10-0
  * @author Sébastien Lozano
  */
 function Signe_quotient_relatifs() {
-  this.beta = ``;
+  this.beta = ``;// ici this.beta peut prendre la valeur 'beta' ou '', tous les autres this.beta sont devenus des this.debug
   this.exo = this.beta + `4C10-2`;
   Signe_produit_quotient_relatifs.call(this);
 }
@@ -32857,9 +34475,9 @@ function Puissances_encadrement() {
 function Problemes_additifs_fractions() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
-  this.beta = false;
+  this.debug = false;
   this.sup = 1;
-  if (this.beta) {
+  if (this.debug) {
     this.nb_questions = 5;
   } else {
     this.nb_questions = 2;
@@ -32876,7 +34494,7 @@ function Problemes_additifs_fractions() {
   let type_de_questions_disponibles;
 
   this.nouvelle_version = function (numero_de_l_exercice) {
-    if (this.beta) {
+    if (this.debug) {
       type_de_questions_disponibles = [1, 2, 3, 4, 5];
     } else {
       type_de_questions_disponibles = [choice([1, 2]), choice([3, 4, 5])];
@@ -33675,7 +35293,7 @@ function Problemes_additifs_fractions() {
       switch (liste_type_de_questions[i]) {
         case 1: // Triathlon des neiges --> VTT, ski de fond, course
           texte = `${pb_3_f[0].enonce} <br> ${pb_3_f[0].question}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> ${pb_3_f[0].correction}`;
             texte_corr = ``;
@@ -33685,7 +35303,7 @@ function Problemes_additifs_fractions() {
           break;
         case 2: //Miss Math --> Noémie, Samia, Alexia
           texte = `${pb_3_f[1].enonce} <br> ${pb_3_f[1].question}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> ${pb_3_f[1].correction}`;
             texte_corr = ``;
@@ -33695,7 +35313,7 @@ function Problemes_additifs_fractions() {
           break;
         case 3: // Mandala --> carmin, ocre jaune, turquoise, pourpre
           texte = `${pb_4_f[0].enonce} <br> ${pb_4_f[0].question}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> ${pb_4_f[0].correction}`;
             texte_corr = ``;
@@ -33705,7 +35323,7 @@ function Problemes_additifs_fractions() {
           break;
         case 4: // Jardin --> légumes, plantes aromatiques, semis, fraisiers
           texte = `${pb_4_f[1].enonce} <br> ${pb_4_f[1].question}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> ${pb_4_f[1].correction}`;
             texte_corr = ``;
@@ -33715,7 +35333,7 @@ function Problemes_additifs_fractions() {
           break;
         case 5: // Stade --> pays organisatuers, supporters, sponsors, vente libre
           texte = `${pb_4_f[2].enonce} <br> ${pb_4_f[2].question}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> ${pb_4_f[2].correction}`;
             texte_corr = ``;
@@ -34581,7 +36199,7 @@ function Tester_si_un_nombre_est_solution_d_une_equation() {
           }
           texte = `$x^2-${ecriture_parenthese_si_negatif(
             b + a
-          )}x-${ecriture_parenthese_si_negatif(
+          )}x+${ecriture_parenthese_si_negatif(
             a * b
           )}=0~$ pour $~x=${x1}~$ , pour $~x=${x2}~$ puis pour $~x=${x3}$`;
           texte_corr = `Pour $x=${x1}$ : <br>`;
@@ -34712,9 +36330,9 @@ function Tester_si_un_nombre_est_solution_d_une_equation_deg2() {
 function Forme_litterale_introduire_une_lettre(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 3;
 	} else {
 		this.nb_questions = 2;
@@ -34732,7 +36350,7 @@ function Forme_litterale_introduire_une_lettre(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [1];			
 		} else {
 			type_de_questions_disponibles = [1];			
@@ -34789,7 +36407,7 @@ function Forme_litterale_introduire_une_lettre(){
 			switch (liste_type_de_questions[i]){
 				case 1 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte_corr = ``;	
@@ -34822,9 +36440,9 @@ function Forme_litterale_introduire_une_lettre(){
 function Mettre_en_equation_sans_resoudre(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 9;
 	} else {
 		this.nb_questions = 2;
@@ -34842,7 +36460,7 @@ function Mettre_en_equation_sans_resoudre(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [1];			
 		} else {
 			type_de_questions_disponibles = [1,2];			
@@ -34976,7 +36594,7 @@ function Mettre_en_equation_sans_resoudre(){
 			switch (liste_type_de_questions[i]){
 				case 1 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte_corr = ``;	
@@ -34986,7 +36604,7 @@ function Mettre_en_equation_sans_resoudre(){
           break;	
         case 2 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -35019,9 +36637,9 @@ function Mettre_en_equation_sans_resoudre(){
 function Graphiques_et_proportionnalite() {
   'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 2;
 	} else {
 		this.nb_questions = 1;
@@ -35039,7 +36657,7 @@ function Graphiques_et_proportionnalite() {
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [1];			
 		} else {
 			type_de_questions_disponibles = [1];			
@@ -35180,7 +36798,7 @@ function Graphiques_et_proportionnalite() {
 				case 1 : 
           texte = `${enonces[0].enonce}`;
           //texte = `${fig}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
 						texte_corr = ``;	
@@ -35213,9 +36831,9 @@ function Graphiques_et_proportionnalite() {
 function Trouver_erreur_resol_eq_deg1(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 5;
 	} else {
 		this.nb_questions = 3;
@@ -35233,7 +36851,7 @@ function Trouver_erreur_resol_eq_deg1(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [1,2,3,4,5];			
 		} else {
       type_de_questions_disponibles = shuffle([choice([1,3]),choice([2,4]),5]);
@@ -35542,7 +37160,7 @@ function Trouver_erreur_resol_eq_deg1(){
 			switch (liste_type_de_questions[i]){
 				case 1 : 
 					texte = `${enonces[0].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
             texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
             texte += `
@@ -35554,7 +37172,7 @@ function Trouver_erreur_resol_eq_deg1(){
           break;	
         case 2 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -35564,7 +37182,7 @@ function Trouver_erreur_resol_eq_deg1(){
           break;
         case 3 : 
 					texte = `${enonces[2].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[2].correction}`;
 						texte_corr = ``;	
@@ -35574,7 +37192,7 @@ function Trouver_erreur_resol_eq_deg1(){
           break;				
         case 4 : 
 					texte = `${enonces[3].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[3].correction}`;
 						texte_corr = ``;	
@@ -35584,7 +37202,7 @@ function Trouver_erreur_resol_eq_deg1(){
 					break;				
          case 5 : 
 					texte = `${enonces[4].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[4].correction}`;
 						texte_corr = ``;	
@@ -35618,9 +37236,9 @@ function Trouver_erreur_resol_eq_deg1(){
 function Tracer_avec_scratch(){
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
-	this.beta = false;	
+	this.debug = false;	
 	this.sup=1;
-	if (this.beta) {
+	if (this.debug) {
 		this.nb_questions = 1;
 	} else {
 		this.nb_questions = 1;
@@ -35641,7 +37259,7 @@ function Tracer_avec_scratch(){
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
-		if (this.beta) {
+		if (this.debug) {
 			type_de_questions_disponibles = [1];			
 		} else {
 			type_de_questions_disponibles = [1];			
@@ -35913,7 +37531,7 @@ function Tracer_avec_scratch(){
 			switch (liste_type_de_questions[i]){
 				case 1 : 
           texte = `${enonces[0].enonce}`;
-          if (this.beta) {
+          if (this.debug) {
             texte += `<br>`;
             texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
             texte_corr = ``;	
@@ -35923,7 +37541,7 @@ function Tracer_avec_scratch(){
           break;	
         case 2 : 
 					texte = `${enonces[1].enonce}`;
-					if (this.beta) {
+					if (this.debug) {
 						texte += `<br>`;
 						texte += `<br> =====CORRECTION======<br>${enonces[1].correction}`;
 						texte_corr = ``;	
@@ -36478,7 +38096,7 @@ function Pythagore2D() {
   this.nb_questions = 3;
   this.nb_cols = 3;
   this.nb_cols_corr = 1;
-  type_exercice = 'Calculer'
+  this.type_exercice = 'Calculer'
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
@@ -36492,7 +38110,7 @@ function Pythagore2D() {
     } else {
          this.consigne = "Dans chaque cas, calculer la longueur manquante."
     }
-    if (this.sup == 2 || type_exercice == 'Calculer' ){
+    if (this.sup == 2 || this.type_exercice == 'Calculer' ){
       liste_type_de_questions = combinaison_listes(['AB','BC','AC'],this.nb_questions) 
     }
     for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;)
@@ -36524,13 +38142,13 @@ function Pythagore2D() {
       let longueurBC = longueur(B,C,1)
       let mesObjetsATracer = [codage,p2,nomme]
 
-      if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='AB'){
+      if (this.type_exercice == 'Calculer' && liste_type_de_questions[i]=='AB'){
         mesObjetsATracer.push(affAC,affBC)
       }
-      if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='BC'){
+      if (this.type_exercice == 'Calculer' && liste_type_de_questions[i]=='BC'){
         mesObjetsATracer.push(affAC,affAB)
       }
-      if (type_exercice == 'Calculer' && liste_type_de_questions[i]=='AC'){
+      if (this.type_exercice == 'Calculer' && liste_type_de_questions[i]=='AC'){
         mesObjetsATracer.push(affAB,affBC)
       }
 
@@ -36562,11 +38180,12 @@ function Pythagore2D() {
           texte_corr += ` d'où $${A.nom+C.nom}^2=${B.nom+C.nom}^2-${A.nom+B.nom}^2$.`
         }
       }
-      if (type_exercice == "Calculer"){
+      if (this.type_exercice == "Calculer"){
         if (liste_type_de_questions[i]=='AB'){
           texte_corr += ` donc $${A.nom+B.nom}^2=${B.nom+C.nom}^2-${A.nom+C.nom}^2$`
           texte_corr += `<br> $${A.nom+B.nom}^2=${tex_nombre(longueurBC)}^2-${tex_nombre(longueurAC)}^2=${tex_nombrec(longueurBC**2-longueurAC**2)}$`
-          if (calcul(Math.sqrt(longueurBC**2-longueurAC**2),1)==calcul(Math.sqrt(longueurBC**2-longueurAC**2),2)){
+          texte_corr += `<br> $${A.nom+B.nom}=\\sqrt{${tex_nombrec(longueurBC**2-longueurAC**2)}}$`
+          if (calcul(Math.sqrt(longueurBC**2-longueurAC**2),1)==calcul(Math.sqrt(longueurBC**2-longueurAC**2),5)){
             texte_corr += `<br> $${A.nom+B.nom}=${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAC**2),1))}$ cm.`
           } else {
             texte_corr += `<br> $${A.nom+B.nom}\\approx${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAC**2),1))}$ cm.`
@@ -36574,7 +38193,8 @@ function Pythagore2D() {
         }
         if (liste_type_de_questions[i]=='BC'){
           texte_corr += `<br> $${B.nom+C.nom}^2=${tex_nombre(longueurAB)}^2+${tex_nombre(longueurAC)}^2=${tex_nombrec(longueurAB**2+longueurAC**2)}$`
-          if (calcul(Math.sqrt(longueurAB**2+longueurAC**2),1)==calcul(Math.sqrt(longueurAB**2+longueurAC**2),2)){
+          texte_corr += `<br> $${B.nom+C.nom}=\\sqrt{${tex_nombrec(longueurAB**2+longueurAC**2)}}$`
+          if (calcul(Math.sqrt(longueurAB**2+longueurAC**2),1)==calcul(Math.sqrt(longueurAB**2+longueurAC**2),5)){
             texte_corr += `<br> $${B.nom+C.nom}=${tex_nombre(calcul(Math.sqrt(longueurAB**2+longueurAC**2),1))}$ cm.`
           } else {
             texte_corr += `<br> $${B.nom+C.nom}\\approx${tex_nombre(calcul(Math.sqrt(longueurAB**2+longueurAC**2),1))}$ cm.`
@@ -36583,7 +38203,8 @@ function Pythagore2D() {
         if (liste_type_de_questions[i]=='AC'){
           texte_corr += ` donc $${A.nom+C.nom}^2=${B.nom+C.nom}^2-${A.nom+B.nom}^2$`
           texte_corr += `<br> $${A.nom+C.nom}^2=${tex_nombre(longueurBC)}^2-${tex_nombre(longueurAB)}^2=${tex_nombrec(longueurBC**2-longueurAB**2)}$`
-          if (calcul(Math.sqrt(longueurBC**2-longueurAB**2),1)==calcul(Math.sqrt(longueurBC**2-longueurAB**2),2)){
+          texte_corr += `<br> $${A.nom+C.nom}=\\sqrt{${tex_nombrec(longueurBC**2-longueurAB**2)}}$`
+          if (calcul(Math.sqrt(longueurBC**2-longueurAB**2),1)==calcul(Math.sqrt(longueurBC**2-longueurAB**2),5)){
             texte_corr += `<br> $${A.nom+C.nom}=${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAB**2),1))}$ cm.`
           } else {
             texte_corr += `<br> $${A.nom+C.nom}\\approx${tex_nombre(calcul(Math.sqrt(longueurBC**2-longueurAB**2),1))}$ cm.`
@@ -36608,10 +38229,24 @@ function Egalite_Pythagore2D(){
   Pythagore2D.call(this);
   this.titre = "Donner ou compléter une égalité de Pythagore"
   this.sup = 1;
-  type_exercice = ''
+  this.type_exercice = ''
   this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Donner l'égalité de Pythagore\n2 : Compléter l'égalité de Pythagore"];
 
 }
+
+/** 
+ * * Equation type x/a=b/c
+ * * numéro de l'exo ex : 4L15-1 fils de 3L13-2
+ * * publication initiale le 22/11/2020
+ * * modification le jj/mm/aaaa pour ....
+ * @author Sébastien Lozano
+ */
+
+function Equations_fractions(){    
+  this.debug=true;
+  this.exo = `4L15-1`;
+  Eq_resolvantes_Thales.call(this);
+};
 
 /**
  * Calculs de probabilités sur une expérience aléatoire à deux épreuves
@@ -37258,13 +38893,13 @@ function Reduction_si_possible() {
 					texte_corr = texte
 					break;
 				case 'ax*b':
-					texte = `$${lettre_depuis_chiffre(i+1)}=${printlatex(`${a}*x`)}\\times${ecriture_parenthese_si_negatif(b)}$`;
-					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${printlatex(`${a}*x`)}\\times${ecriture_parenthese_si_negatif(b)}=${printlatex(`${a*b}*x`)}$`;
+					texte = `$${lettre_depuis_chiffre(i+1)}=${printlatex(`${a}*x`)}\\times ${ecriture_parenthese_si_negatif(b)}$`;
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${printlatex(`${a}*x`)}\\times ${ecriture_parenthese_si_negatif(b)}=${printlatex(`${a*b}*x`)}$`;
 					break;
 				case 'b*ax':
 					a = randint(1,11);
-					texte = `$${lettre_depuis_chiffre(i+1)}=${b}\\times${printlatex(`${a}*x`)}$`;
-					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${b}\\times${printlatex(`${a}*x`)}=${printlatex(`${b*a}*x`)}$`;
+					texte = `$${lettre_depuis_chiffre(i+1)}=${b}\\times ${printlatex(`${a}*x`)}$`;
+					texte_corr = `$${lettre_depuis_chiffre(i+1)}=${b}\\times ${printlatex(`${a}*x`)}=${printlatex(`${b*a}*x`)}$`;
 					break;
 				case 'ax+b+cx+d':
 					texte = `$${lettre_depuis_chiffre(i+1)}=${printlatex(`${a}*x+(${b})+(${c})*x+(${d})`)}$`;
@@ -37307,6 +38942,7 @@ function Reduction_si_possible() {
 					break;
 				
 			}
+
 			if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
 				this.liste_questions.push(texte);
 				this.liste_corrections.push(texte_corr);
@@ -41075,6 +42711,235 @@ function Antecedent_graphique() {
 	this.besoin_formulaire_numerique = ['Type de fonctions', 2, "1 : Affine\n2 : Polynome du 2nd degré"];
 
 }
+
+
+/**
+ * Lecture d'images et antécédents sur un graphe sinusoidale
+ * @Auteur Rémi Angot
+ * Référence 3F13-1
+*/
+function Antecedent_et_image_graphique() {
+	Exercice.call(this); 
+	this.titre = "Lecture graphique d'images et d'antécédents.";
+	this.nb_questions = 1;
+	this.nb_questions_modifiable = false;
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	if (sortie_html) this.spacing_corr = 2;
+  
+	this.nouvelle_version = function (numero_de_l_exercice) {
+		let r = repere2({
+			xMin : -5, 
+			xMax : 5,
+			yMin : -4,
+			yMax : 4
+		  })
+		let a = randint(1,3)
+		let b = a-4
+		let c = a-2
+		let x0 = randint(-4,-2)
+		let gr = graphiqueInterpole([[randint(-8,-5),a-1],[x0,a],[x0+4,b],[x0+6,c], [randint(6,10),c-1]] // Coordonnées des "sommets"
+							 ,{repere:r, color : 'blue', step:.15, epaisseur:2})
+		
+		if (randint(1,2)==1){
+			a*=-1;
+			b*=-1;
+			c*=-1;
+			gr = graphiqueInterpole([[randint(-8,-5),a+1],[x0,a],[x0+4,b],[x0+6,c], [randint(6,10),c+1]] // Coordonnées des "sommets"
+							 ,{repere:r, color : 'blue', step:.15, epaisseur:2})
+		}
+		this.contenu = `Ci-dessous, on a tracé la courbe représentative de la fonction $f$.`
+		this.contenu += `<br><br>`
+		let cont1 = `${num_alpha(0)} Quelle est l'image de $${x0}$ ?`
+		cont1 += `<br>${num_alpha(1)} Quelle est l'image de $${x0+5}$ ?`
+		let ordre = randint(1,2);
+		let cont2;
+		if (ordre == 1){
+			cont2 = `${num_alpha(2)} Déterminer le (ou les) antécédent(s) de $${b}$.`
+			cont2 += `<br>${num_alpha(3)} Déterminer le (ou les) antécédent(s) de $${c}$.`
+		} else {
+			cont2 = `${num_alpha(2)} Déterminer le (ou les) antécédent(s) de $${c}$.`
+			cont2 += `<br>${num_alpha(3)} Déterminer le (ou les) antécédent(s) de $${b}$.`
+		}
+		this.contenu += deuxColonnes(cont1,cont2)
+		this.contenu += mathalea2d({xmin:-7,ymin:-4.5,xmax:7,ymax:4.5,pixelsParCm:30},r,gr) 
+		this.contenu_correction = `${num_alpha(0)} L'image de $${x0}$ est $${a}$, on note $f(${x0})=${a}$.`
+		this.contenu_correction += `<br>${num_alpha(1)} L'image de $${x0+5}$ est $${(b+c)/2}$, on note $f(${x0+5})=${(b+c)/2}$.`
+		if (ordre == 1){
+			this.contenu_correction += `<br>${num_alpha(2)} $${b}$ a pour unique antécédent $${x0+4}$, on note $f(${x0+4})=${b}$.`
+			this.contenu_correction += `<br>${num_alpha(3)} $${c}$ a deux antécédents $${x0+2}$ et $${x0+6}$, on note $f(${x0+2})=f(${x0+6})=${c}$.`
+		} else {
+			this.contenu_correction += `<br>${num_alpha(2)} $${c}$ a deux antécédents $${x0+2}$ et $${x0+6}$, on note $f(${x0+2})=f(${x0+6})=${c}$.`
+			this.contenu_correction += `<br>${num_alpha(3)} $${b}$ a pour unique antécédent $${x0+4}$, on note $f(${x0+4})=${b}$.`
+		}
+		if (!sortie_html){
+			this.contenu = this.contenu.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
+			this.contenu_correction = this.contenu_correction.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
+		} else {
+			this.contenu_correction = `<div style="line-height: ${this.spacing_corr};">\n${this.contenu_correction}\n</div>`
+		}
+		
+	};
+	//this.besoin_formulaire_numerique = ['Niveau de difficulté',3];
+  }
+/**
+ * ref beta3F13-2
+ */
+function Premier_escape_game_mathalea() {
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre = "Spécial escape game";
+	this.consigne = "Trouver le mot de passe.";
+	this.nb_questions = 1;
+	sortie_html ? this.spacing_corr = 1 : this.spacing_corr = 1.5
+	sortie_html ? this.spacing = 1 : this.spacing = 1.5
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1;  
+	this.sup2="";
+	this.pas_de_version_LaTeX = false;
+	this.nouvelle_version = function () {
+		let lettres=[],mots=["BMDF","OGNQ","BUQP","BAUP","BXGE","BDUJ","MZSXQE","BDUEYQ","BMDFUQ","HMXQGD","OAGBXQ","PDAUFQ","DQXMFUAZ","BMDMNAXQ","MPPUFUAZ","QJBAEMZF","RAZOFUAZ","OAYBXQJQ"]
+		let alphabet=[];
+//		let coords=[]
+		this.liste_questions = [];
+		this.liste_corrections = [];
+		let texte='', texte_corr='', f1,f2,f3,f4,p,r
+		// Initialisation des tableaux
+		for (let i=0;i<26;i++) {
+			alphabet.push(String.fromCharCode(65+i))
+		}
+		for (let y=0;y<5;y++) {
+				lettres.push(['*','*','*','*','*','*'])
+		}
+//		for (let y=0;y<5;y++) {
+//			for (let x=0;x<6;x++) {
+//				coords.push([0,0])
+//			}
+//		}
+		// Le moment du choix
+		let type=parseInt(this.sup)
+		let mdp=cesar(mots[randint(0,5)+(type-1)*6],14)
+		let absc=[],ord=[],car
+		if (this.sup2==mdp) texte+=`${texte_en_couleur_et_gras(`Bravo ! le mot de passe était bien le mot ${mdp}`,'blue')}<br>`
+		else texte+=`Min et Max sont dans un bateau.<br>La tempête fait rage.<br>Ils en voient de toutes les couleurs.<br>Les vagues et les creux sont immenses.<br>Soudain, Min et Max tombent à l'eau... à moins que ce ne soit le contraire ?<br>`
+		texte+="Taper le mot de passe dans la boite de dialogue correspondante des paramètres de l'exercice.<br>"
+		texte_corr+=`Le mot de passe comporte ${2+2*type} lettres.`
+		if (this.sup2==mdp) texte_corr+=`${texte_en_couleur_et_gras(`<br>Bravo ! le mot de passe était bien le mot ${mdp}`,'blue')}<br>`
+
+		for(let x=0;x<type*2+2;x++){
+			car=mdp[x]
+			alphabet=alphabet.filter(item => item !== car)
+			if (x%2==0) absc.push(randint(0,2))
+			else absc.push(randint(3,5))
+			// Pour l'abscisse, pas de problème de doublons
+			if (x%2==0) ord.push(randint(0,4)) // premier point, l'ordonnée n'est pas contrainte.
+			else ord.push(randint(0,4,ord[x-1])) // pour le deuxième, on évite l'ordonnée précédente
+			console.log(x,absc[x],ord[x])
+			if (lettres[ord[x]][absc[x]]=='*') lettres[ord[x]][absc[x]]=car
+			else if (lettres[absc[x]][ord[x]]!=car) {
+					for (let i=0;i<x;i++) {
+						if (absc[i]==absc[x]&&ord[i]==ord[x]) {
+							ord[x]=(ord[x]+1)%5
+							i=0
+						}
+					}
+					lettres[ord[x]][absc[x]]=car
+			}	
+		}
+		for (let i=0;i<type*2+2;i++) {
+			absc[i]++ // On corrige les coordonnées des points
+			ord[i]++
+		}
+		// On complète la grille de lettres
+		alphabet=shuffle(alphabet)
+		for (let x=0;x<6;x++) {
+			for (let y=0;y<5;y++) {
+				if (lettres[y][x]=='*'&&alphabet.length>0) {
+					lettres[y][x]=alphabet.pop()	
+				}
+			}
+		}
+		// On calcule les ordonnées de début et de fin de chaque courbe
+		let ord0=[0,0,0,0],ord6=[0,0,0,0]
+
+		for (let i=0;i<type*2+2;i+=2) {
+			if (ord[i]>ord[i+1]) {
+				ord0[i/2]=-2.34+randint(0,2)
+				ord6[i/2]=8.17-randint(0,2)
+			}
+			else {
+				ord6[i/2]=-2.34+randint(0,2)
+				ord0[i/2]=8.17-randint(0,2)	
+			}
+		}
+		r=repere2({xMin:-1,yMin:-1,xMax:7,yMax:6,xUnite:2})
+console.log([0,ord0[0]],[absc[0],ord[0]],[absc[1],ord[1]],[7,ord6[0]])
+		switch (type) {
+			case 1 : //N&B
+				p=polygoneRegulierIndirect(point(-1,-2),point(15,-2),4)
+				p.couleurDeRemplissage='grey'
+				p.opacite=0.2
+				f1=graphiqueInterpole([[0,ord0[0]],[absc[0],ord[0]],[absc[1],ord[1]],[7,ord6[0]]],{repere:r,color:'black',step:0.1})
+				f2=graphiqueInterpole([[0,ord0[1]],[absc[2],ord[2]],[absc[3],ord[3]],[7,ord6[1]]],{repere:r,color:'white',step:0.1})		
+				f1.epaisseur=2
+				f2.epaisseur=2
+				texte +=mathalea2d({xmin:-1,ymin:-1,xmax:15,ymax:7,pixelsParCm:30},p,r,f1,f2)+`<br>`
+				break;
+			case 2: //RGB
+				p=polygoneRegulierIndirect(point(-1,-2),point(15,-2),4)
+				p.opacite=0.2
+				p.couleurDeRemplissage='grey'
+				f1=graphiqueInterpole([[0,ord0[0]],[absc[0],ord[0]],[absc[1],ord[1]],[7,ord6[0]]],{repere:r,color:'red',step:0.1})
+				f2=graphiqueInterpole([[0,ord0[1]],[absc[2],ord[2]],[absc[3],ord[3]],[7,ord6[1]]],{repere:r,color:'green',step:0.1})			
+				f3=graphiqueInterpole([[0,ord0[2]],[absc[4],ord[4]],[absc[5],ord[5]],[7,ord6[2]]],{repere:r,color:'blue',step:0.1})	
+				f1.epaisseur=2
+				f2.epaisseur=2
+				f3.pepaisseur=2		
+				texte +=mathalea2d({xmin:-1,ymin:-1,xmax:15,ymax:7,pixelsParCm:30},p,r,f1,f2,f3)+`<br>`	
+				break;
+			case 3: //CJMN
+				p=polygoneRegulierIndirect(point(-1,-2),point(15,-2),4)
+				p.opacite=0.2
+				p.couleurDeRemplissage='grey'
+				f1=graphiqueInterpole([[0,ord0[0]],[absc[0],ord[0]],[absc[1],ord[1]],[7,ord6[0]]],{repere:r,color:'cyan',step:0.1})
+				f2=graphiqueInterpole([[0,ord0[1]],[absc[2],ord[2]],[absc[3],ord[3]],[7,ord6[1]]],{repere:r,color:'yellow',step:0.1})			
+				f3=graphiqueInterpole([[0,ord0[2]],[absc[4],ord[4]],[absc[5],ord[5]],[7,ord6[2]]],{repere:r,color:'magenta',step:0.1})	
+				f4=graphiqueInterpole([[0,ord0[3]],[absc[6],ord[6]],[absc[7],ord[7]],[7,ord6[3]]],{repere:r,color:'black',step:0.1})	
+				f1.epaisseur=2
+				f2.epaisseur=2
+				f3.pepaisseur=2	
+				f4.epaisseur=2	
+				texte +=mathalea2d({xmin:-1,ymin:-1,xmax:15,ymax:7,pixelsParCm:30},p,r,f1,f2,f3,f4)+`<br>`
+				break;
+		}
+		texte += `$\\begin{array}{|l|` +  `c|`.repeat(6) + `}\n`;
+		texte += `\\hline\n`;
+		texte+= ` `;
+		for (let j = 0; j < 6; j++) {
+		  texte+=  ` & \\text{${j+1}}`;
+		}
+		texte += `\\\\\\hline\n`;
+		for (let i = 0; i < 5; i++) {
+		  texte += `\\text{${i+1}}`;
+		  for (let j =0; j < 6; j++){
+			texte += '& ' + lettres[i][j]; //valeur dans le tableau
+		  }
+		  texte += `\\\\\\hline\n`;
+		}
+		texte+= `\\end{array}\n$`;
+		texte += `<br>`
+
+		this.liste_questions.push(texte);
+			this.liste_corrections.push(texte_corr);
+			liste_de_question_to_contenu(this);
+
+//	this.besoin_formulaire2_numerique = ['Coefficient de réduction(problèmes de type1)', 3, '1 : Décimal\n 2 : Non décimal\n 3 : Décimal ou non'];
+	}
+	this.besoin_formulaire_numerique = ['Catégorie', 3, '1 : Noir & Blanc\n 2 : RGB\n 3 : CJMN'];
+	this.besoin_formulaire2_texte= ['Quel est ton mot de passe ?',1,'Mot de passe (en majuscule):']
+
+}
+
 /**
 * Problèmes calculs d'aire et de volumes utilisant l'effet d'une réduction sur les aires et les volumes 
 * @auteur Jean-Claude Lhote
@@ -43017,7 +44882,7 @@ function Problemes_Thales(){
 function TrianglesSemblables() {
 	'use strict'
 	Exercice.call(this)
-	this.beta = false;
+	this.debug = false;
 	this.titre = "Reconnaître des triangles semblables dans différentes configurations";
 	this.nb_questions = 1;
 	this.nb_questions_modifiable = false;
@@ -43326,7 +45191,7 @@ function TrianglesSemblables() {
 				}
 				//texte=mathalea2d({xmin:-3,ymin:-3,xmax:27,ymax:18,pixelsParCm:20,scale:0.5},p,nom1,grid,r,s)
 				texte = `${figures.enonce}`;
-				if (this.beta) {
+				if (this.debug) {
 					texte += `<br>${texte_gras(`===== Première solution ======`)}<br>${figures.corr_animmee_sol1}`;
 					texte += `<br><br>${texte_gras(`===== Seconde solution ======`)}<br>${figures.corr_animmee_sol2}`;
 				} else {
@@ -43440,9 +45305,13 @@ function Eq_resolvantes_Thales(){
 	} else {
 		this.nb_questions = 2;
 	};
-	this.sup2=false;	
-
-	this.titre = "Equations résolvantes pour le théorème de Thalès";	
+	this.sup2=false;
+	//this.exo = '';	
+	if (this.exo=='4L15-1') {
+		this.titre = "Equations du type $\\dfrac{x}{a}=\\dfrac{b}{c}$";	
+	} else {
+		this.titre = "Equations résolvantes pour le théorème de Thalès";	
+	}	
 	this.consigne = `Résoudre les équations suivantes.`;	
 	
 	this.nb_cols = 1;
@@ -43451,9 +45320,24 @@ function Eq_resolvantes_Thales(){
 	sortie_html? this.spacing = 2.5 : this.spacing = 1.5; 
 	sortie_html? this.spacing_corr = 2.5 : this.spacing_corr = 1.5;
 
+	this.liste_packages = `bclogo`;
+
 	let type_de_questions_disponibles;	
 
 	this.nouvelle_version = function(numero_de_l_exercice){
+		// une fonction pour dire que c'est trivial dans ce cas
+		function trivial(bool,a,b,c,inc) {
+			let sortie;
+			let texte=``;
+			if (bool) {				
+				texte=`Dans ce cas le recours au produit en croix est superflu.<br> Par identification, on a directement $${inc}=${a}$ !`;
+				sortie=warn_message(texte,`nombres`,`Keep Cool Guy !`);
+			} else {
+				sortie=``
+			};
+			return sortie;
+		};
+
 		if (this.debug) {
 			type_de_questions_disponibles = [0,1,2,3];			
 		} else {
@@ -43475,6 +45359,7 @@ function Eq_resolvantes_Thales(){
 			while (c_temp_case_3%2 != 0 || c_temp_case_3%5 != 0) {
 				c_temp_case_3 = randint(11,99)
 			};
+			
 			this.sup = Number(this.sup); // attention le formulaire renvoie un string, on a besoin d'un number pour le switch !
 			switch (this.sup) {
 				case 1://entiers          
@@ -43491,6 +45376,14 @@ function Eq_resolvantes_Thales(){
 					break;
 			};
 
+			let inc;
+			if (this.exo=='4L15-1') {
+				inc = choice(['r','s','t','u','v','w','x','y','z']);
+
+			} else {
+				inc=choice(['x','y','GO','AB','z','GA','BU','ZO','ME']);
+			};
+
 			let params = {
 				// a:tex_nombre(calcul(nb_alea[0]*coeff[0])),
 				// b:tex_nombre(calcul(nb_alea[1]*coeff[1])),
@@ -43498,7 +45391,8 @@ function Eq_resolvantes_Thales(){
 				a:calcul(nb_alea[0]*coeff[0]),
 				b:calcul(nb_alea[1]*coeff[1]),
 				c:calcul(nb_alea[2]*coeff[2]),
-				inc:choice(['x','y','GO','AB','z','GA','BU','ZO','ME'])
+				//inc:choice(['x','y','GO','AB','z','GA','BU','ZO','ME'])
+				inc:inc
 			}
 
 			// pour les situations, autant de situations que de cas dans le switch !
@@ -43508,28 +45402,33 @@ function Eq_resolvantes_Thales(){
 					a:params.a,
 					b:params.b,
 					c:params.c,
-					inc:params.inc 
+					inc:params.inc,
+					trivial:(params.b==params.c)
 				},
 				{//case 1 --> a/c=x/b --> cx=ab
-					eq:`\\dfrac{${tex_nombre(params.a)}}{${tex_nombre(params.c)}}=\\dfrac{${params.inc}}{${tex_nombre(params.c)}}`,
+					eq:`\\dfrac{${tex_nombre(params.a)}}{${tex_nombre(params.c)}}=\\dfrac{${params.inc}}{${tex_nombre(params.b)}}`,
 					a:params.a,
 					b:params.b,
 					c:params.c,
-					inc:params.inc 
+					inc:params.inc ,
+					trivial:(params.b==params.c)
+
 				},
 				{//case 2 -->b/x=c/a --> cx = ab
 					eq:`\\dfrac{${tex_nombre(params.b)}}{${params.inc}}=\\dfrac{${tex_nombre(params.c)}}{${tex_nombre(params.a)}}`,
 					a:params.a,
 					b:params.b,
 					c:params.c,
-					inc:params.inc 
+					inc:params.inc,
+					trivial:(params.b==params.c)
 				},
 				{//case 3 -->c/a=b/x --> cx = ab 
 					eq:`\\dfrac{${tex_nombre(params.c)}}{${tex_nombre(params.a)}}=\\dfrac{${tex_nombre(params.b)}}{${params.inc}}`,
 					a:params.a,
 					b:params.b,
 					c:params.c,
-					inc:params.inc  
+					inc:params.inc,
+					trivial:(params.b==params.c)  
 				},
 			];
 
@@ -43547,9 +45446,8 @@ function Eq_resolvantes_Thales(){
 						${texte_en_couleur_et_gras(`On divise les deux membres par ${tex_nombre(situations[k].c)}`)}.<br>
 						$\\dfrac{${tex_nombre(situations[k].c)}\\times ${situations[k].inc}}{${tex_nombre(situations[k].c)}}= \\dfrac{${tex_nombre(situations[k].a)}\\times ${tex_nombre(situations[k].b)}}{${tex_nombre(situations[k].c)}}$<br>
 						${texte_en_couleur_et_gras(`On simplifie et on calcule.`)}<br>
-
 						$${situations[k].inc}=${tex_nombre(calcul(Number(situations[k].b)*Number(situations[k].a)/Number(situations[k].c)))}$
-
+						${trivial(situations[k].trivial,tex_nombre(situations[k].a),tex_nombre(situations[k].b),tex_nombre(situations[k].c),situations[k].inc)}
 					`
 				});
 			};
@@ -43613,6 +45511,269 @@ function Eq_resolvantes_Thales(){
 	this.besoin_formulaire_numerique = ['Type de nombres',3,"1 : Entiers naturels\n2 : Entiers relatifs\n3 : Décimaux"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec décimaux.",false]	
+};
+
+/** 
+ * * Calcul mental autour des identités remarquables
+ * * numéro de l'exo ex : 3L11-5
+ * * publié le  14/11/2020
+ * @author Sébastien Lozano
+ */
+
+function identites_calculs(){
+	'use strict';
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.debug = false;	
+	this.sup=1;
+	if (this.debug) {
+		this.nb_questions = 3;	
+	} else {
+		this.nb_questions = 3;
+	};	
+
+	this.titre = "Calcul mental et calcul littéral";	
+	this.consigne = `Faire les calculs suivants sans calculatrice. Utiliser la double distributivité ou les identités remarquables.`;	
+	
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	//this.nb_questions_modifiable = false;	
+	sortie_html? this.spacing = 1 : this.spacing = 1; 
+	sortie_html? this.spacing_corr = 1 : this.spacing_corr = 1;
+
+	this.liste_packages = `bclogo`;
+
+	let type_de_questions_disponibles;	
+
+	this.nouvelle_version = function(numero_de_l_exercice){
+		//une fonction pour gérer un \hfill dans la sortie LaTeX
+		function myhfill() {
+			if (sortie_html) {
+				return `<br><br>`;
+			} else {
+				return `\\hfill`;
+			}
+		};
+				switch (Number(this.sup)) {
+					case 1 :
+						type_de_questions_disponibles = [0,0,0];//shuffle([choice([1,3]),choice([2,3]),0]);
+						this.introduction = warn_message(`$(a+b)^2=a^2+2ab+b^2$`, `nombres`, `Coup de pouce`);      			
+						break;
+					case 2 :
+						type_de_questions_disponibles = [1,1,1];//shuffle([choice([1,3]),choice([2,3]),0]); 
+						this.introduction = warn_message(`$(a-b)^2 = a^2-2ab+b^2$`, `nombres`, `Coup de pouce`); 		
+						break;
+					case 3 : 
+						type_de_questions_disponibles = [2,2,2];//shuffle([choice([1,3]),choice([2,3]),0]);      			
+						this.introduction = warn_message(`$(a+b)(a-b)=a^2-b^2$`, `nombres`, `Coup de pouce`); 
+						break;
+					case 4 :
+						type_de_questions_disponibles = shuffle([0,1,2]);//shuffle([choice([1,3]),choice([2,3]),0]);      			
+						this.introduction = warn_message(`$(a+b)^2 = a^2 +2ab + b^2$ ${myhfill()} $(a-b)^2 = a^2-2ab+b^2$ ${myhfill()} $(a+b)(a-b)=a^2-b^2$`, `nombres`, `Coup de pouce`); 
+						break;
+				};
+
+		this.liste_questions = []; // Liste de questions
+		this.liste_corrections = []; // Liste de questions corrigées
+		
+		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+		
+		
+		for (let i = 0, texte, texte_corr, cpt=0; i < this.nb_questions && cpt<50; ) {
+			// une fonction pour gérer l'affichage sous forme de carré
+			// a et b  sont les facteurs du produit, s'ils sont égaux on affiche sous forme de carré
+			function ifIsCarreAfficheCarre(a,b) {
+				if (a==b) {
+					return `${a}^2`
+				} else {
+					return `${a}\\times ${b}`
+				}
+			}
+
+			// une fonction pour afficher le double terme rectangle ou pas
+			function ifIsCarreAfficheDblProd(bool,dblTermeRect) {
+				if (bool) {
+					return dblTermeRect;
+				} else {
+					return ``;
+				}
+			};
+
+			let a = randint(2,9);
+			let b_somme = randint(1,4);
+			let b_difference = randint(1,4);
+			let b_som_dif = randint(1,9);
+			let coeff = choice([10,100]);
+			let coeff_som_dif = 100;
+			let signes_som_dif = choice([[{str:'-',nb:-1},{str:'+',nb:1}],[{str:'+',nb:1},{str:'-',nb:-1}]]);
+			let lettres = choice(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z'])
+
+			// pour les situations, autant de situations que de cas dans le switch !
+			let situations = [
+				{//case 0 --> carré d'une somme
+					lettre:lettres,
+					a:a,
+					b:b_somme,
+					coeff:coeff,
+					a_coeff:a*coeff,
+					operations:[{str:'+',nb:1},{str:'+',nb:1}],
+					facteurs:[{str:`${tex_nombre(a*coeff)}+${b_somme}`,nb:tex_nombre(a*coeff+b_somme)},{str:`${tex_nombre(a*coeff)}+${b_somme}`,nb:tex_nombre(a*coeff+b_somme)}],					
+					carre_de_a_coeff:tex_nombre(coeff*coeff*a*a),				
+					//carre_de_coeff:coeff*coeff,	
+					carre_de_b:tex_nombre(b_somme*b_somme),
+					termes_rectangles:[tex_nombre(coeff*a*b_somme),tex_nombre(coeff*a*b_somme)],
+					somme_terme_rect:tex_nombre(2*coeff*a*b_somme),
+					signes_dbl_dist:['+','+','+'],
+					carre:true,
+					resultat:tex_nombre(a*a*coeff*coeff + b_somme*b_somme + 2*a*coeff*b_somme)
+				},
+				{//case 1 --> carré d'une différence
+					lettre:lettres,
+					a:a,
+					b:b_difference,
+					coeff:coeff,
+					a_coeff:a*coeff,					
+					operations:[{str:'-',nb:-1},{str:'-',nb:-1}],					
+					facteurs:[{str:`${tex_nombre(a*coeff)}-${b_difference}`,nb:tex_nombre(a*coeff-b_difference)},{str:`${tex_nombre(a*coeff)}-${b_difference}`,nb:tex_nombre(a*coeff-b_difference)}],					
+					carre_de_a_coeff:tex_nombre(coeff*coeff*a*a),
+					//carre_de_coeff:coeff*coeff,					
+					carre_de_b:tex_nombre(b_difference*b_difference),
+					termes_rectangles:[tex_nombre(coeff*a*b_difference),tex_nombre(coeff*a*b_difference)],
+					somme_terme_rect:tex_nombre(2*coeff*a*b_difference),
+					signes_dbl_dist:['+','-','-'],
+					carre:true,
+					resultat:tex_nombre(a*a*coeff*coeff + b_difference*b_difference - 2*a*coeff*b_difference)
+
+				},										
+				{//case 2 --> produit somme différence
+					lettre:lettres,
+					a:a,
+					b:b_som_dif,
+					coeff:coeff_som_dif,
+					a_coeff:a*coeff_som_dif,
+					operations:signes_som_dif,					
+					facteurs:[{str:`${tex_nombre(a*coeff_som_dif)} ${signes_som_dif[0].str} ${b_som_dif}`,nb:tex_nombre(a*coeff_som_dif+signes_som_dif[0].nb*b_som_dif)},{str:`${tex_nombre(a*coeff_som_dif)} ${signes_som_dif[1].str} ${b_som_dif}`,nb:tex_nombre(a*coeff_som_dif+signes_som_dif[1].nb*b_som_dif)}],										
+					carre_de_a_coeff:tex_nombre(coeff_som_dif*coeff_som_dif*a*a),				
+					//carre_de_coeff:coeff*coeff,	
+					carre_de_b:tex_nombre(b_som_dif*b_som_dif),
+					termes_rectangles:[tex_nombre(coeff_som_dif*a*b_som_dif),tex_nombre(coeff_som_dif*a*b_som_dif)],
+					somme_terme_rect:0,
+					signes_dbl_dist:['-','+','-'],
+					carre:false,
+					resultat:tex_nombre(a*a*coeff_som_dif*coeff_som_dif - b_som_dif*b_som_dif)					
+				},
+			];
+
+			let enonces = [];
+			for (let k=0;k<situations.length;k++) {
+				enonces.push({
+					enonce:`					
+					 $${situations[k].lettre}=${ifIsCarreAfficheCarre(situations[k].facteurs[0].nb,situations[k].facteurs[1].nb)}$
+					`,
+					question:``,
+					correction1:`
+						${texte_gras(`Avec la double distributivité`)}<br>
+						$${situations[k].lettre} = ${ifIsCarreAfficheCarre(situations[k].facteurs[0].nb,situations[k].facteurs[1].nb)}$<br>
+						$${situations[k].lettre} = (${situations[k].facteurs[0].str})\\times (${situations[k].facteurs[1].str})$<br>
+						$${situations[k].lettre} = ${situations[k].a_coeff}^2 ${situations[k].signes_dbl_dist[1]} ${situations[k].a_coeff}\\times ${situations[k].b} ${situations[k].signes_dbl_dist[2]} ${situations[k].b}\\times ${situations[k].a_coeff} ${situations[k].signes_dbl_dist[0]} ${situations[k].b}^2$<br>
+						$${situations[k].lettre} = ${situations[k].carre_de_a_coeff} ${situations[k].signes_dbl_dist[1]} ${situations[k].termes_rectangles[0]} ${situations[k].signes_dbl_dist[2]} ${situations[k].termes_rectangles[1]}	${situations[k].signes_dbl_dist[0]} ${situations[k].carre_de_b}$<br>
+						$${situations[k].lettre} = ${situations[k].carre_de_a_coeff} ${ifIsCarreAfficheDblProd(situations[k].carre,`${situations[k].signes_dbl_dist[1]} ${situations[k].somme_terme_rect}`)} ${situations[k].signes_dbl_dist[0]} ${situations[k].carre_de_b}$<br>
+						$${situations[k].lettre} = ${situations[k].resultat}$
+					`,
+					correction2:`
+					${texte_gras(`Avec une identité`)}<br>
+					$${situations[k].lettre} = ${ifIsCarreAfficheCarre(situations[k].facteurs[0].nb,situations[k].facteurs[1].nb)}$<br>
+					$${situations[k].lettre} = ${ifIsCarreAfficheCarre(`(${situations[k].facteurs[0].str})`,`(${situations[k].facteurs[1].str})`)} $<br>
+					$${situations[k].lettre} = ${situations[k].a_coeff}^2 ${ifIsCarreAfficheDblProd(situations[k].carre,`${situations[k].signes_dbl_dist[1]} 2\\times ${situations[k].a_coeff} \\times ${situations[k].b}`)} ${situations[k].signes_dbl_dist[0]}  ${situations[k].b}^2$<br>
+					$${situations[k].lettre} = ${situations[k].carre_de_a_coeff} ${ifIsCarreAfficheDblProd(situations[k].carre,`${situations[k].signes_dbl_dist[1]} 2\\times ${situations[k].termes_rectangles[0]}`)} ${situations[k].signes_dbl_dist[0]}  ${situations[k].carre_de_b}$<br>
+					$${situations[k].lettre} = ${situations[k].carre_de_a_coeff} ${ifIsCarreAfficheDblProd(situations[k].carre,`${situations[k].signes_dbl_dist[1]} ${situations[k].somme_terme_rect}`)} ${situations[k].signes_dbl_dist[0]} ${situations[k].carre_de_b}$<br>
+					$${situations[k].lettre} = ${situations[k].resultat}$				
+				`
+				});
+			};
+            
+            // autant de case que d'elements dans le tableau des situations
+			switch (liste_type_de_questions[i]){
+				case 0 : // carré d'une somme 
+					texte = `${enonces[0].enonce}`;
+					if (this.debug) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[0].correction1}<br>${enonces[0].correction2}`;			
+						texte_corr = ``;	
+					} else {
+						if (sortie_html) {
+							texte_corr = `${enonces[0].correction1}<br><br>${enonces[0].correction2}`;
+						} else {
+							texte_corr = `Détaillons deux méthodes : <br><br>`
+							texte_corr += `\\begin{minipage}{8cm}`;
+							texte_corr += enonces[0].correction1;
+							texte_corr += `\\end{minipage}`;
+							texte_corr += `\\hfill \\vrule \\hfill`;							
+							texte_corr += `\\begin{minipage}{8cm}`;
+							texte_corr += enonces[0].correction2;
+							texte_corr += `\\end{minipage}`;
+							texte_corr += `<br>`;
+						};						
+					};
+          			break;	
+        		case 1 : // carré d'une différence
+					texte = `${enonces[1].enonce}`;
+					if (this.debug) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[1].correction1}<br>${enonces[1].correction2}`;
+						texte_corr = ``;	
+					} else {
+						if (sortie_html) {
+							texte_corr = `${enonces[1].correction1}<br><br>${enonces[1].correction2}`;
+						} else {
+							texte_corr = `Détaillons deux méthodes : <br><br>`
+							texte_corr += `\\begin{minipage}{8cm}`;
+							texte_corr += enonces[1].correction1;
+							texte_corr += `\\end{minipage}`;
+							texte_corr += `\\hfill \\vrule \\hfill`;							
+							texte_corr += `\\begin{minipage}{8cm}`;
+							texte_corr += enonces[1].correction2;
+							texte_corr += `\\end{minipage}`;
+							texte_corr += `<br>`;
+						};						
+					};
+          			break;
+        		case 2 : // Produit somme différence
+					texte = `${enonces[2].enonce}`;
+					if (this.debug) {
+						texte += `<br>`;
+						texte += `<br> =====CORRECTION======<br>${enonces[2].correction1}<br>${enonces[2].correction2}`;
+						texte_corr = ``;	
+					} else {
+						if (sortie_html) {
+							texte_corr = `${enonces[2].correction1}<br><br>${enonces[2].correction2}`;
+						} else {
+							texte_corr = `Détaillons deux méthodes : <br><br>`
+							texte_corr += `\\begin{minipage}{8cm}`;
+							texte_corr += enonces[2].correction1;
+							texte_corr += `\\end{minipage}`;
+							texte_corr += `\\hfill \\vrule \\hfill`;							
+							texte_corr += `\\begin{minipage}{8cm}`;
+							texte_corr += enonces[2].correction2;
+							texte_corr += `\\end{minipage}`;
+							texte_corr += `<br>`;
+						};						
+					};
+          			break;								
+			};			
+			
+			if (this.liste_questions.indexOf(texte)==-1){ // Si la question n'a jamais été posée, on en créé une autre
+				this.liste_questions.push(texte);
+				this.liste_corrections.push(texte_corr);
+				i++;
+			}
+			cpt++;	
+		}
+		liste_de_question_to_contenu(this);
+
+	}
+	this.besoin_formulaire_numerique = ['Niveau de difficulté',4,"1 : Carré d'une somme\n2 : Carré d'une différence\n3 : Produit de la somme et de la différence\n4 : Mélange"];
+	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	
 };
 /**
  * @Auteur Stéphane Guyon

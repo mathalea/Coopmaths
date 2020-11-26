@@ -27,6 +27,7 @@ Cet outil servira principalement à la création d'exercices pour MathALEA mais 
 {{% item "Les droites remarquables" "/docMathalea2d/remarquables" %}}
 {{% item "Quadrillages, repères et graphiques" "/docMathalea2d/repere" %}}
 {{% item "Les codages" "/docMathalea2d/codages" %}}
+{{% item "Les animations" "/docMathalea2d/animations" %}}
 {{% item "La programmation" "/docMathalea2d/programmation" %}}
 {{% item "La programmation Logo - GéoTortue - Crayon de Scratch" "/docMathalea2d/lutin" %}}
 
