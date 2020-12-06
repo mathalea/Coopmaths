@@ -98,3 +98,35 @@ gradue : true // true=compléter les graduations principales à partir de la 3è
 ...args : vide // liste de points à placer au format ['Nom',abscisse]
 ````
 {{% alea2d "droitegraduee"  %}}
+
+<div class="ui hidden divider"></div>
+
+`droiteGraduee2()` est une fonction plus puissante que droiteGraduee() qui permet d'avoir trois niveaux de graduations.
+
+
+
+Vous pouvez placer des points sur cette droite.
+Exemple : droiteGraduee2({x:0,y:4,Min:0,Max:2.7,thickEpaisseur:1,thickSec:true,thickTer:true,axeStyle:'|->',pointListe:[[1.73,'B'],[1.7,'A'],[1.8,'C']],labelListe:[[1.7,'x'],[1.8,'y']]})
+Voici tous les paramètres par défaut que vous pouvez modifier ou pas (entre parenthèses la valeur par défaut) : 
+````
+Paramètres :
+ * Unite (10) : Nombre de cm par Unité
+ * Min(0),Max(2) : Valeur minimum et maximum labelisées sur l'axe (les graduations commencent un peu avant et finissent un peu après)
+ * x (0),y (0) : coordonnées du point de départ du tracé
+ * axeEpaisseur (2),axeCouleur ('black'), axeStyle ('->') : épaisseur, couleur et syle de l'axe (valeurs possibles '->' ou '|->')
+ * axeHauteur (4): définit la "largeur" de l'axe, celle des graduations et de la flèche
+ * axePosition ('H'): 'H' pour horizontal, 'V' pour vertical
+ * thickEpaisseur (2),thickCouleur (axeCouleur): grosseur et couleur des graduations
+ * thickDistance (1): distance entre deux graduations principales
+ * thickSecDist (0.1): distance entre deux graduations secondaires
+ * thickTerDist (0.01): distance entre deux graduations tertiaires
+ * thickSec (false): true si besoin de graduations secondaires, false sinon
+ * thickTer (false): true si besoin de graduations tertiaires, false sinon
+ * pointListe (false): Liste de points à mettre sur l'axe. Exemple [[3.4,'A'],[3.8,'B],....]. Les noms se placent au dessus de l'axe.
+ * pointTaille (4), pointOpacite (0.8), pointCouleur ('blue'), pointStyle ('+'): taille en pixels, opacité, couleur et style des points de la pointListe
+ * labelListe (false): pour ajouter des labels. Exemple [[2.8,'x'],[3.1,'y']] les labels se placent sous l'axe. 
+ * LabelDistance (2*axeHauteur) : Distance entre les labels faculatatifs et l'axe
+ * Legende (""): texte à écrire en bout de droite graduée
+ * LegendePosition (1,5cm après Max): position de la légende
+ */
+{{% alea2d "droitegraduee2"  %}}
