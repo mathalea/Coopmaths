@@ -23,17 +23,19 @@ var liste_des_exercices_disponibles = {
   "CM021": Compte_Est_Bon,
   "c3C10-1": Tables_de_multiplications,
   "c3C10-4": Exercice_tables_d_additions_cycle3,
+  "c3C10-2" : Exercice_labyrinthe_multiplesCM,
   "c3C11": Division_cycle3,
   "c3N10": Ecrire_entiers_cycle3,
   "c3N22": Lire_abscisse_decimale_trois_formesCM,
   "c3N23": lireUneAbscisseAvecZoomCM,
   "6Algo10": Colorier_Deplacement,
   "6C10": Additions_soustractions_multiplications_posees,
-  "6C11": Divisions_euclidiennes,
   "6C10-1": Tables_de_multiplications,
   "6C10-2": Exercice_tables_de_multiplications_et_multiples_de_10,
   "6C10-3": Exercice_tables_de_multiplications_et_decimaux,
   "6C10-4": Exercice_tables_d_additions,
+  "6C10-5" : Exercice_labyrinthe_multiples,
+  "6C11": Divisions_euclidiennes,
   "6C13": Vocabulaire_et_operations,
   "6C20": Additionner_soustraires_decimaux,
   "6C21": Divisions_euclidiennes_niv2,
@@ -346,6 +348,7 @@ var liste_des_exercices_disponibles = {
   "betaTESTseb": Tests_du_Seb,
   "betaSVG": AfficherSVG,
   "betaExoZero" : Exercice_zero_mathalea2d,
+  "betaExoConstruction" : Exercice_constructions_basiques,
   P001: Code_LaTeX_personnalise,
   // 'P002': LaTeX_static,
   "P003": feuille_d_axes_gradues,
@@ -14494,7 +14497,7 @@ function Exercice_zero_mathalea2d() {
 
   this.liste_questions = [] // tableau contenant la liste des questions 
   this.liste_corrections = []
-  let type_de_questions_disponibles=[] // tableau à compléter par valeurs possibles des types de questions
+  let type_de_questions_disponibles=[1] // tableau à compléter par valeurs possibles des types de questions
   let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
 // Ci-dessus On crée une liste aléatoire comprenant nb_questions parmi les types disponibles.
 /* Un exemple ci-dessous : si la classe est 6, alors les types dispo sont 1 et 2 sinon , 1,2,3 et 4.
@@ -14518,6 +14521,7 @@ liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this
 // fonction permettant de choisir un nom de polygone, soit ici 3 lettres qui se suivent à l'exclusion de la séquence PQ
       switch (liste_type_de_questions[i]) { // Chaque question peut être d'un type différent, ici 4 cas sont prévus...
         case 1:
+             
           //ici sont créés les texte, tex_corr, objets mathalea2d divers entrant dans le contenu de l'exercice
         break;
 
@@ -14534,18 +14538,18 @@ liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this
         break  
           
       }
-//  objets.enonce.push () // On rempli les tableaux d'objets Mathalea2d
+//  objets_enonce.push () // On rempli les tableaux d'objets Mathalea2d
 //  objets_enonceml.push()
 //  objets_correction.push()
 
 //paramètres de la fenêtre Mathalea2d pour l'énoncé main levée
-      params_enonceml = { xmin: Math.min(objets_enonceml.x), ymin: Math.min(objets_enonceml.y), xmax: Math.max(objets_enonceml.x), ymax: Math.max(objets_enonceml.y), pixelsParCm: 20, scale: 1, mainlevee: true, amplitude: 1 }
+  //    params_enonceml = { xmin: Math.min(objets_enonceml.x), ymin: Math.min(objets_enonceml.y), xmax: Math.max(objets_enonceml.x), ymax: Math.max(objets_enonceml.y), pixelsParCm: 20, scale: 1, mainlevee: true, amplitude: 1 }
 //paramètres de la fenêtre Mathalea2d pour l'énoncé normal
-      params_enonce = { xmin: Math.min(objets_enonce.x), ymin: Math.min(objets_enonce.y), xmax: Math.max(objets_enonce.x), ymax: Math.max(objets_enonce.y), pixelsParCm: 20, scale: 1, mainlevee: false}
+      params_enonce = { xmin:-10, ymin: -10, xmax: 10, ymax: 10, pixelsParCm: 20, scale: 1, mainlevee: false}
 //paramètres de la fenêtre Mathalea2d pour la correction
-      params_correction = { xmin: Math.min(objets_correction.x), ymin: Math.min(objets_correction.y), xmax: Math.max(objets_correction.x), ymax: Math.max(objets_correction.y), pixelsParCm: 20, scale: 1 }
+      params_correction = { xmin: -10, ymin: -10, xmax: 10, ymax: 10, pixelsParCm: 20, scale: 1 }
 // On ajoute au texte de l'énoncé, la figure à main levée et la figure de l'enoncé.
-      texte += mathalea2d(params_enonceml, objets_enonceml) + mathalea2d(params_enonce, objets_enonce)
+      texte += mathalea2d(params_enonce, objets_enonce)
 // On ajoute au texte de la correction, la figure de la correction
       texte_corr += mathalea2d(params_correction, objets_correction)
       if (this.liste_questions.indexOf(texte) == -1) {
@@ -14568,6 +14572,366 @@ liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this
 
 } // Fin de l'exercice.
 
+function Exercice_constructions_basiques() {
+  "use strict"
+  Exercice.call(this)
+  this.titre = "Programmes de constructions (en chantier)";
+  this.nb_questions = 1; // Ici le nombre de questions
+  this.nb_questions_modifiable=false // Active le formulaire nombre de questions
+  this.nb_cols = 1; // Le nombre de colonnes dans l'énoncé LaTeX
+  this.nb_cols_corr = 1;// Le nombre de colonne pour la correction LaTeX
+  this.pas_de_version_LaTeX=false // mettre à true si on ne veut pas de l'exercice dans le générateur LaTeX
+  this.pas_de_version_HMTL=false // mettre à true si on ne veut pas de l'exercice en ligne
+// Voir la Classe Exercice pour une liste exhaustive des propriétés disponibles.
+
+//  this.sup = false; // A décommenter : valeur par défaut d'un premier paramètre
+//  this.sup2 = false; // A décommenter : valeur par défaut d'un deuxième paramètre
+//  this.sup3 = false; // A décommenter : valeur par défaut d'un troisième paramètre
+
+// c'est ici que commence le code de l'exercice cette fonction crée une copie de l'exercice
+  this.nouvelle_version = function (numero_de_l_exercice) {
+  // la variable numero_de_l_exercice peut être récupérée pour permettre de différentier deux copies d'un même exo
+  // Par exemple, pour être certain de ne pas avoir les mêmes noms de points en appelant 2 fois cet exo dans la même page
+
+  this.liste_questions = [] // tableau contenant la liste des questions 
+  this.liste_corrections = []
+  let type_de_questions_disponibles=[1] // tableau à compléter par valeurs possibles des types de questions
+  let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
+// Ci-dessus On crée une liste aléatoire comprenant nb_questions parmi les types disponibles.
+/* Un exemple ci-dessous : si la classe est 6, alors les types dispo sont 1 et 2 sinon , 1,2,3 et 4.
+if (this.classe == 6) type_de_questions_disponibles = [1, 2]
+    else type_de_questions_disponibles = [1, 2, 3,4]
+liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
+*/
+// boucle pour fabriquer les nb_questions questions en s'assurant que si il n'y a pas nb_questions différentes
+// La boucle s'arrête après 50 tentatives.
+    let A,B,C,D,traces1,traces2,labels1,labels2,kare,aA,aB,aC,aD
+    let objets_enonce,objets_enonceml,objets_correction,params_enonce,params_enonceml,params_correction
+    for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
+      objets_enonce = [] // on initialise le tableau des objets Mathalea2d de l'enoncé
+      objets_enonceml = [] // Idem pour l'enoncé à main levée si besoin
+      objets_correction = [] // Idem pour la correction
+
+      texte = `Construire le carré $ABCD$.<br>` // Nous utilisons souvent cette variable pour construire le texte de la question.
+      texte_corr = `Pour cette construction on peut utiliser la règle et l'équerre.<br>` // Idem pour le texte de la correction.
+//      nom = creerNomDePolygone(3, "PQ")
+// fonction permettant de choisir un nom de polygone, soit ici 3 lettres qui se suivent à l'exclusion de la séquence PQ
+      switch (liste_type_de_questions[i]) { // Chaque question peut être d'un type différent, ici 4 cas sont prévus...
+        case 1:
+          A=point(0,0,'A','below')
+          B=point(5,randint(-30,30)/10,'B','below')
+          C=rotation(A,B,-90,'C','above')
+          D=rotation(B,A,90,'D','above')
+          traces1=tracePoint(A,B)
+          labels1=labelPoint(A,B)
+          traces2=tracePoint(A,B,C,D)
+          labels2=labelPoint(A,B,C,D)
+          kare=carre(A,B)
+          kare.epaisseur=2
+          aA=codageAngleDroit(B,A,D)
+          aB=codageAngleDroit(A,B,C)
+          aC=codageAngleDroit(B,C,D)
+          aD=codageAngleDroit(C,D,A)
+
+          objets_enonce.push (traces1,labels1) 
+          objets_enonceml.push(traces2,labels2,kare,aA,aB,aC,aD)
+          objets_correction.push(traces2,labels2,kare,aA,aB,aC,aD)
+          //ici sont créés les texte, tex_corr, objets mathalea2d divers entrant dans le contenu de l'exercice
+        break;
+
+        case 2:
+
+          // Idem Cas1 mais avec d'autres texte, texte_corr...
+        break
+
+        case 3:
+          
+        break
+          
+        case 4:
+        
+        break  
+          
+      }
+//  objets_enonce.push () // On rempli les tableaux d'objets Mathalea2d
+//  objets_enonceml.push()
+//  objets_correction.push()
+
+//paramètres de la fenêtre Mathalea2d pour l'énoncé main levée
+     params_enonceml = { xmin: -5, ymin: -5, xmax: 9, ymax: 9, pixelsParCm: 20, scale: 1, mainlevee: true, amplitude: 1 }
+//paramètres de la fenêtre Mathalea2d pour l'énoncé normal
+      params_enonce = { xmin:-5, ymin: -5, xmax: 9, ymax: 9, pixelsParCm: 20, scale: 1, mainlevee: false}
+//paramètres de la fenêtre Mathalea2d pour la correction
+      params_correction = { xmin: -5, ymin: -5, xmax: 9, ymax: 9, pixelsParCm: 20, scale: 1 }
+// On ajoute au texte de l'énoncé, la figure à main levée et la figure de l'enoncé.
+      texte += mathalea2d(params_enonceml, objets_enonceml)+ mathalea2d(params_enonce, objets_enonce)
+// On ajoute au texte de la correction, la figure de la correction
+      texte_corr += mathalea2d(params_correction, objets_correction)
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on la stocke dans la liste des questions
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this); // On envoie l'exercice à la fonction de mise en page
+  };
+// Si les variables suivantes sont définies, elles provoquent l'affichage des formulaires des paramètres correspondants
+// Il peuvent être de 3 types : _numerique, _case_a_cocher ou _texte.
+// Il sont associés respectivement aux paramètres sup, sup2 et sup3.
+
+//	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Perpendiculaires\n 2 : Parallèles\n 3 : Mélange`]
+//  this.besoin_formulaire2_numerique = ["Type de cahier",3,`1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`];
+// this.besoin_formulaire3_case_a_cocher =['figure à main levée',true]
+
+} // Fin de l'exercice.
+
+
+/**
+ * @Auteur Jean-Claude Lhote
+ * Publié le 6/12/2020
+ * Ref : c3C10-2 et 6C10-5
+ * Parcourir un labyrinthe de nombres en passant par les multiples du nombre choisi.
+ */
+function Exercice_labyrinthe_multiplesCM() {
+  Exercice_labyrinthe_multiples.call(this)
+  this.niveau='CM'
+}
+function Exercice_labyrinthe_multiples() {
+  "use strict"
+  Exercice.call(this)
+  this.titre = "Labyrinthe de multiples de 9 (bugué)";
+  this.niveau='6e'
+  this.nb_questions = 1; 
+  this.nb_questions_modifiable=false
+  this.nb_cols = 1; 
+  this.nb_cols_corr = 1;
+  this.pas_de_version_LaTeX=false
+  this.pas_de_version_HMTL=false 
+  this.sup3 =1
+ this.sup = 9; 
+ if (this.niveau='CM')
+  this.sup2 = 10; 
+  else
+  this.sup2 = 13;
+//  this.sup3 = false; // A décommenter : valeur par défaut d'un troisième paramètre
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let chemins =[[[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+    [[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[6,1]],
+    [[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]],
+    [[1,0],[2,0],[3,0],[4,0],[4,1],[5,1],[6,1]],
+    [[1,0],[2,0],[3,0],[4,0],[4,1],[5,1],[5,2],[6,2]],
+    [[1,0],[2,0],[3,0],[4,0],[4,1],[4,2],[5,2],[6,2]],
+    [[1,0],[2,0],[3,0],[3,1],[4,1],[5,1],[5,2],[6,2]],
+    [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[6,2]],
+    [[1,0],[2,0],[2,1],[3,1],[4,1],[5,1],[6,1]],
+    [[1,0],[2,0],[2,1],[3,1],[4,1],[4,2],[5,2],[6,2]],
+    [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[5,1],[6,1]],
+    [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[5,1],[5,0],[6,0]],
+    [[1,0],[1,1],[2,1],[3,1],[4,1],[4,0],[5,0],[6,0]],
+    [[1,0],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1]],
+    [[1,0],[1,1],[2,1],[3,1],[4,1],[5,1],[5,2],[6,2]],
+    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[4,1],[4,0],[5,0],[6,0]],
+    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[5,1],[5,0],[6,0]],
+    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[5,1],[6,1]],
+    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[6,2]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[4,1],[5,1],[6,1]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[4,1],[5,1],[6,1]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[4,1],[4,0],[5,0],[6,0]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]]]
+    let cheminsB=[],elementchemin
+    let choix = choice(['A', 'B'])
+    for (let i=0;i<25;i++) {
+      elementchemin=[]
+      for (let j=0;j<chemins[i].length;j++){
+        elementchemin.push([chemins[i][j][0],2-chemins[i][j][1]])
+      }
+      cheminsB.push(elementchemin)
+    }
+    
+    let objets=[],s1,s2,s3,s4,s5,couleur='blue',i,x=0,y=0,nombres,chemin2d=[],cheminB2d=[],params,texte,texte_corr
+    let objetsB=[]
+
+    nombres=[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]] // On initialise le tableau
+    this.liste_corrections=[]
+    this.liste_questions=[]
+    texte = `` 
+    texte_corr = `` 
+    let choixchemin =randint(0,24) // on choisit le chemin
+
+    let monchemin,trouve
+    if (choix=='A') 
+      monchemin=chemins[choixchemin]
+    else
+      monchemin=cheminsB[choixchemin]
+
+    // On crée le chemin de correction
+    if (choix=='B') {
+      y=2
+    }
+    for (let j=0;j<monchemin.length;j++) {
+      chemin2d.push(segment(point(x*3-1.5,y*3+2.5),point(monchemin[j][0]*3-1.5,monchemin[j][1]*3+2.5),couleur))
+      x=monchemin[j][0]
+      y=monchemin[j][1]
+    }
+
+
+    chemin2d.push(segment(point(x*3-1.5,y*3+2.5),point(x*3+1.5,y*3+2.5),couleur))
+    // On place les nombres corrects le long du chemin et d'autres nombres en dehors.
+    let type_de_questions_disponibles,liste_type_de_questions
+    if(this.sup3==1) type_de_questions_disponibles = [1]
+    else type_de_questions_disponibles = [1, 2, 3,4]
+    liste_type_de_questions =  combinaison_listes(type_de_questions_disponibles, this.nb_questions)
+
+    // Construction du labyrinthe
+
+    for (let i = 0; i < 6; i++) {
+      // éléments symétriques pour A et B
+      if (choix == 'A') {
+        // T inférieurs
+        s1 = segment(point(i * 3, 1), point(i * 3, 2))
+        s1.styleExtremites = '-|'
+        objets.push(s1)
+
+        // T supérieurs
+        if (i > 0) {
+          s2 = segment(point(i * 3, 10), point(i * 3, 9))
+          s2.styleExtremites = '-|'
+          objets.push(s2)
+        }
+      }
+      else {
+        // T supérieurs
+        s1 = segment(point(i * 3, 10), point(i * 3, 9))
+        s1.styleExtremites = '-|'
+        objets.push(s1)
+
+        // T inférieurs
+        if (i > 0) {
+          s2 = segment(point(i * 3, 1), point(i * 3, 2))
+          s2.styleExtremites = '-|'
+          objets.push(s2)
+        }
+      }
+    }
+    if (choix=='A') // éléments uniques symétriques
+    {
+            //bord gauche
+            s1 = segment(point(0, 10), point(0, 3))
+            s1.styleExtremites = '-|'
+            objets.push(s1)
+            // case départ
+            objets.push(segment(point(-3, 1), point(0, 1)))
+            objets.push(segment(point(-3, 1), point(-3, 4)))
+            objets.push(segment(point(-3, 4), point(0, 4)))
+            objets.push(texteParPoint(`Départ`,point(-1.5,2.5)))
+    }
+    else {
+              // bord gauche
+              s1 = segment(point(0, 1), point(0, 8))
+              s1.styleExtremites = '-|'
+              objets.push(s1)
+              // case départ
+              objets.push(segment(point(-3, 10), point(0, 10)))
+              objets.push(segment(point(-3, 10), point(-3, 7)))
+              objets.push(segment(point(-3, 7), point(0, 7)))
+              objets.push(texteParPoint(`Départ`,point(-1.5,8.5)))
+    }
+
+    // les croix centrales communes à A et B
+    for (let i = 1; i < 6; i++) {
+      s1 = segment(point(i * 3, 8), point(i * 3, 6))
+      s1.styleExtremites = '|-|'
+      s2 = segment(point(i * 3 - 0.5, 7), point(i * 3 + 0.5, 7))
+      s2.styleExtremites = '|-|'
+      s3 = segment(point(i * 3, 5), point(i * 3, 3))
+      s3.styleExtremites = '|-|'
+      s4 = segment(point(i * 3 - 0.5, 4), point(i * 3 + 0.5, 4))
+      s4.styleExtremites = '|-|'
+      objets.push(s2, s3, s4, s1)
+    }
+    // le pourtour commun à A et B
+    objets.push(segment(point(18, 9), point(18, 10)))
+    objets.push(segment(point(0, 10), point(18, 10)))
+    objets.push(segment(point(18, 9), point(18, 10)))
+    objets.push(segment(point(18, 1), point(18, 2)))
+    objets.push(segment(point(0, 1), point(18, 1)))
+    // les sorties communes à A et B
+    for (let i = 0; i < 2; i++) {
+      s1 = segment(point(18, 6 - i * 3), point(20, 6 - i * 3))
+      s1.styleExtremites = '-|'
+      s2 = segment(point(18, 7 - i * 3), point(17, 7 - i * 3))
+      s2.styleExtremites = '-|'
+      s3 = segment(point(18, 8 - i * 3), point(20, 8 - i * 3))
+      s3.styleExtremites = '-|'
+      s4 = segment(point(18, 8 - i * 3), point(18, 6 - i * 3))
+      s5 = segment(point(0, 7 - i * 3), point(1, 7 - i * 3))
+      s5.styleExtremites = '-|'
+      objets.push(s1, s2, s3, s4, s5)
+    }
+    for (let i=1;i<=3;i++) {
+      objets.push(texteParPoint(`Sortie ${i}`,point(19,11.5-3*i)))
+    }
+    s1 = segment(point(18, 9), point(20, 9))
+    s1.styleExtremites = '-|'
+    s2 = segment(point(18, 2), point(20, 2))
+    s2.styleExtremites = '-|'
+    objets.push(s1, s2)
+      
+      switch (liste_type_de_questions[0]) { // Chaque question peut être d'un type différent, ici 4 cas sont prévus...
+          case 1 : // Multiple de this.sup
+            let table=parseInt(this.sup)
+            this.consigne=`Trouve la sortie en ne passant que par les cases contenant un multiple de $${table}$.`
+            let maximum=parseInt(this.sup2)
+            for (let a=1;a<7;a++){
+            for (let b=0;b<3;b++){
+              trouve=false
+              for (let k=0;k<monchemin.length;k++)
+                if (monchemin[k][0]==a&&monchemin[k][1]==b) trouve=true
+              if (!trouve) nombres[a-1][b]=randint(2,maximum)*table+randint(1,table-1)
+              else nombres[a-1][b]=randint(2,maximum)*table
+              objets.push(texteParPoint(nombre_avec_espace(nombres[a-1][b]),point(-1.5+a*3,2.5+b*3)))
+            }
+          }
+          texte_corr+=`${texte_en_couleur_et_gras(`Voici le chemin en bleu et la sortie était la numéro $${2-monchemin[monchemin.length-1][1]+1}$.`,'black')}<br>`
+        break;
+
+        case 2:
+          // Idem Cas1 mais avec d'autres texte, texte_corr...
+        break
+
+        case 3:
+          
+        break
+          
+        case 4:
+        
+        break  
+        }   
+
+      params = { xmin:-4, ymin: 0, xmax: 22, ymax: 11, pixelsParCm: 20, scale: 1}
+      texte += mathalea2d(params, objets)
+// On ajoute au texte de la correction, la figure de la correction
+      texte_corr += mathalea2d(params, objets,chemin2d)
+
+      this.liste_questions.push(texte);
+      this.liste_corrections.push(texte_corr);
+     
+    liste_de_question_to_contenu(this); // On envoie l'exercice à la fonction de mise en page
+  }  
+// Si les variables suivantes sont définies, elles provoquent l'affichage des formulaires des paramètres correspondants
+// Il peuvent être de 3 types : _numerique, _case_a_cocher ou _texte.
+// Il sont associés respectivement aux paramètres sup, sup2 et sup3.
+
+  this.besoin_formulaire_numerique = ["Table "]
+  this.besoin_formulaire2_numerique = ["Multiple maximum "];
+// this.besoin_formulaire3_case_a_cocher =['figure à main levée',true]
+
+} // Fin de l'exercice.
 
 function Test_main_levee() {
   "use strict";
@@ -37228,6 +37592,8 @@ function Graphiques_et_proportionnalite() {
       let r;
       let xscale = 1;
       let yscale = 2;
+      // pour aléatoiriser un peu le pas sur l'axe des prix
+      let stepAxeSecondaire = choice([0.1,0.2]);
       // on finit les appels
       let mesAppels = [
         r = repere({
@@ -37240,7 +37606,7 @@ function Graphiques_et_proportionnalite() {
           legendeX: situation.legendeX,
           legendeY: situation.legendeY,
           grilleSecondaireVisible: true,
-          grilleSecondaireDistance: 0.2,
+          grilleSecondaireDistance: stepAxeSecondaire,//0.2,
           positionLegendeY: [0.3, situation.qte_max * situation.prix_unitaire + 4 + 0.4]
         }),
       ];
@@ -37330,7 +37696,7 @@ function Graphiques_et_proportionnalite() {
         <br> ${situation.fig_corr}
         <br> ${num_alpha(k_corr++)} Pour $${situation.qte2}$ ${situation.unite}  ${situation.articles}, la lecture graphique est moins facile, nous allons détailler deux méthodes.
         <br><br> ${texte_gras(`Première méthode par lecture graphique :`)} 
-        <br> Il faut prendre en compte que chaque petit carreau représente $${tex_prix(0.4)}$ € et utiliser les pointillés bleus.
+        <br> Il faut prendre en compte que chaque petit carreau représente $${tex_prix(stepAxeSecondaire*yscale)}$ € et utiliser les pointillés bleus.
         <br><br> ${texte_gras(`Seconde méthode en calculant une quatrième proportionnelle :`)}
         <br> $${situation.qte_max}$ ${situation.unite}  ${situation.articles} coûtent $${tex_prix(calcul(situation.qte_max * situation.prix_unitaire))}$ €
         donc $${situation.qte2}$ ${situation.unite}  ${situation.articles} coûtent : <br> $(${tex_prix(calcul(situation.qte_max * situation.prix_unitaire))}$ € $\\div ${situation.qte_max}$ ${situation.articles} $)\\times (${situation.qte2}$ ${situation.articles})  $= ${tex_prix(calcul(situation.qte2 * situation.prix_unitaire))}$ €
