@@ -37,7 +37,7 @@ description : "Sixième  : calcul mental"
 <h3>Ceinture verte</h3>
 {{< liste >}}
  <a class="item" target="_blank"  href="http://mathsmentales.net/index.html#sixMariages2?n=5&e=1&t=15&xc=1&a=1&tts=0&d=1&o=&f=false&cd=sixMariages2">  <div class="header content"> <img class="ui avatar image" src="/images/dice.png"> Trouver une somme de 3 nombres astucieusement (deux se marient bien) </div> </a>
-<a class="item" target="_blank"  href="http://mathsmentales.net/index.html#tables?n=5&e=1&t=9&xc=1&a=1&tts=0&d=1&o=7&f=false&cd=tables">  <div class="header content"> <img class="ui avatar image" src="/images/dice.png"> La table de 8 </div> </a>
+<a class="item" target="_blank"  href="http://mathsmentales.net/index.html#tables?n=5&e=1&t=9&xc=1&a=1&tts=0&d=1&o=8&f=false&cd=tables">  <div class="header content"> <img class="ui avatar image" src="/images/dice.png"> La table de 8 </div> </a>
 <a class="item" target="_blank"  href="http://mathsmentales.net/index.html#sixMultpar?n=5&e=1&t=15&xc=1&a=1&tts=0&d=1&o=20&f=false&cd=sixMultpar">  <div class="header content"> <img class="ui avatar image" src="/images/dice.png"> Multiplier par 20 </div> </a>
 <a class="item" target="_blank"  href="http://mathsmentales.net/index.html#sixEcrDec2?n=5&e=1&t=15&xc=1&a=1&tts=0&d=1&o=Petits%20d%C3%A9cimaux&f=false&cd=sixEcrDec2">  <div class="header content"> <img class="ui avatar image" src="/images/dice.png"> Diviser un décimal par 10, 100, 1000 </div> </a>
 {{< /liste >}}
