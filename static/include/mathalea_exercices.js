@@ -14601,7 +14601,7 @@ function Exercice_constructions_basiques() {
 /* Un exemple ci-dessous : si la classe est 6, alors les types dispo sont 1 et 2 sinon , 1,2,3 et 4.
 if (this.classe == 6) type_de_questions_disponibles = [1, 2]
     else type_de_questions_disponibles = [1, 2, 3,4]
-liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
+liste_type_de_questions = combin,aison_listes(type_de_questions_disponibles, this.nb_questions)
 */
 // boucle pour fabriquer les nb_questions questions en s'assurant que si il n'y a pas nb_questions différentes
 // La boucle s'arrête après 50 tentatives.
@@ -14635,7 +14635,7 @@ liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this
 
           objets_enonce.push (traces1,labels1) 
           objets_enonceml.push(traces2,labels2,kare,aA,aB,aC,aD)
-          objets_correction.push(traces2,labels2,kare,aA,aB,aC,aD)
+          objets_correction.p,ush(traces2,labels2,kare,aA,aB,aC,aD)
           //ici sont créés les texte, tex_corr, objets mathalea2d divers entrant dans le contenu de l'exercice
         break;
 
@@ -14701,7 +14701,7 @@ function Exercice_labyrinthe_multiplesCM() {
 function Exercice_labyrinthe_multiples() {
   "use strict"
   Exercice.call(this)
-  this.titre = "Labyrinthe de multiples de 9 (bugué)";
+  this.titre = "Labyrinthe de multiples";
   this.niveau='6e'
   this.nb_questions = 1; 
   this.nb_questions_modifiable=false
@@ -14709,43 +14709,47 @@ function Exercice_labyrinthe_multiples() {
   this.nb_cols_corr = 1;
   this.pas_de_version_LaTeX=false
   this.pas_de_version_HMTL=false 
-  this.sup3 =1
+  this.sup3 =3
  this.sup = 9; 
- if (this.niveau='CM')
+ if (this.niveau='CM') {
   this.sup2 = 10; 
-  else
+  this.sup3 = 3;
+ }
+
+  else {
   this.sup2 = 13;
-//  this.sup3 = false; // A décommenter : valeur par défaut d'un troisième paramètre
+  this.sup3 = 4;
+  }
 
   this.nouvelle_version = function (numero_de_l_exercice) {
-    let chemins =[[[1,0],[2,0],[3,0],[4,0],[5,0],[6,0]],
+    let chemins =[
     [[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[6,1]],
-    [[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]],
     [[1,0],[2,0],[3,0],[4,0],[4,1],[5,1],[6,1]],
+    [[1,0],[2,0],[2,1],[3,1],[4,1],[5,1],[6,1]],
+    [[1,0],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1]],
+    [[1,0],[2,0],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]],
     [[1,0],[2,0],[3,0],[4,0],[4,1],[5,1],[5,2],[6,2]],
     [[1,0],[2,0],[3,0],[4,0],[4,1],[4,2],[5,2],[6,2]],
     [[1,0],[2,0],[3,0],[3,1],[4,1],[5,1],[5,2],[6,2]],
     [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[6,2]],
-    [[1,0],[2,0],[2,1],[3,1],[4,1],[5,1],[6,1]],
     [[1,0],[2,0],[2,1],[3,1],[4,1],[4,2],[5,2],[6,2]],
-    [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[5,1],[6,1]],
-    [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[5,1],[5,0],[6,0]],
+    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[6,2]],
     [[1,0],[1,1],[2,1],[3,1],[4,1],[4,0],[5,0],[6,0]],
-    [[1,0],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1]],
     [[1,0],[1,1],[2,1],[3,1],[4,1],[5,1],[5,2],[6,2]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]],
+    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[5,1],[6,1]],
+    [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[5,1],[6,1]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[4,1],[5,1],[6,1]],
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[4,1],[5,1],[6,1]],
+    [[1,0],[2,0],[3,0],[3,1],[3,2],[4,2],[5,2],[5,1],[5,0],[6,0]],
     [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[4,1],[4,0],[5,0],[6,0]],
     [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[5,1],[5,0],[6,0]],
-    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[5,1],[6,1]],
-    [[1,0],[1,1],[2,1],[2,2],[3,2],[4,2],[5,2],[6,2]],
-    [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[4,1],[5,1],[6,1]],
-    [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]],
-    [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[4,1],[5,1],[6,1]],
     [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[4,1],[4,0],[5,0],[6,0]],
     [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]],
-    [[1,0],[1,1],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2]]]
+    [[1,0],[1,1],[1,2],[2,2],[3,2],[3,1],[3,0],[4,0],[5,0],[5,1],[5,2],[6,2]]]
     let cheminsB=[],elementchemin
     let choix = choice(['A', 'B'])
-    for (let i=0;i<25;i++) {
+    for (let i=0;i<24;i++) {
       elementchemin=[]
       for (let j=0;j<chemins[i].length;j++){
         elementchemin.push([chemins[i][j][0],2-chemins[i][j][1]])
@@ -14753,15 +14757,29 @@ function Exercice_labyrinthe_multiples() {
       cheminsB.push(elementchemin)
     }
     
-    let objets=[],s1,s2,s3,s4,s5,couleur='blue',i,x=0,y=0,nombres,chemin2d=[],cheminB2d=[],params,texte,texte_corr
-    let objetsB=[]
+    let objets=[],s1,s2,s3,s4,s5,couleur='brown',i,x=0,y=0,nombres,chemin2d=[],cheminB2d=[],params,texte,texte_corr
 
     nombres=[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]] // On initialise le tableau
     this.liste_corrections=[]
     this.liste_questions=[]
     texte = `` 
     texte_corr = `` 
-    let choixchemin =randint(0,24) // on choisit le chemin
+    let choixchemin
+    switch (parseInt(this.sup3)) {
+      case 1 : choixchemin=randint(0,3)
+      break
+      case 2 : choixchemin=randint(4,13)
+      break
+      case 3 : choixchemin=randint(14,17)
+      break
+      case 4 : choixchemin=randint(18,21)
+      break
+      case 5 : choixchemin=randint(22,23)
+      break
+      case 6 : choixchemin=randint(0,23)
+      break
+ 
+    }  // on choisit le chemin
 
     let monchemin,trouve
     if (choix=='A') 
@@ -14774,18 +14792,24 @@ function Exercice_labyrinthe_multiples() {
       y=2
     }
     for (let j=0;j<monchemin.length;j++) {
-      chemin2d.push(segment(point(x*3-1.5,y*3+2.5),point(monchemin[j][0]*3-1.5,monchemin[j][1]*3+2.5),couleur))
+      s1=segment(point(x*3-1.5,y*3+2.5),point(monchemin[j][0]*3-1.5,monchemin[j][1]*3+2.5),couleur)
+      s1.pointilles=true
+      s1.stylePointilles=2
+      s1.epaisseur=5
+      s1.opacite=0.3
+      chemin2d.push(s1)
       x=monchemin[j][0]
       y=monchemin[j][1]
     }
 
-
-    chemin2d.push(segment(point(x*3-1.5,y*3+2.5),point(x*3+1.5,y*3+2.5),couleur))
+    s1=segment(point(x*3-1.5,y*3+2.5),point(x*3+1.5,y*3+2.5),couleur)
+    s1.pointilles=true
+    s1.stylePointilles=2
+    s1.epaisseur=5
+    s1.opacite=0.3
+    chemin2d.push(s1)
     // On place les nombres corrects le long du chemin et d'autres nombres en dehors.
     let type_de_questions_disponibles,liste_type_de_questions
-    if(this.sup3==1) type_de_questions_disponibles = [1]
-    else type_de_questions_disponibles = [1, 2, 3,4]
-    liste_type_de_questions =  combinaison_listes(type_de_questions_disponibles, this.nb_questions)
 
     // Construction du labyrinthe
 
@@ -14794,26 +14818,30 @@ function Exercice_labyrinthe_multiples() {
       if (choix == 'A') {
         // T inférieurs
         s1 = segment(point(i * 3, 1), point(i * 3, 2))
-        s1.styleExtremites = '-|'
+        s1.epaisseur=2
+        //s1.styleExtremites = '-'
         objets.push(s1)
 
         // T supérieurs
         if (i > 0) {
           s2 = segment(point(i * 3, 10), point(i * 3, 9))
-          s2.styleExtremites = '-|'
+          s2.epaisseur=2
+          //s2.styleExtremites = '-|'
           objets.push(s2)
         }
       }
       else {
         // T supérieurs
         s1 = segment(point(i * 3, 10), point(i * 3, 9))
-        s1.styleExtremites = '-|'
+        s1.epaisseur=2
+        // s1.styleExtremites = '-|'
         objets.push(s1)
 
         // T inférieurs
         if (i > 0) {
           s2 = segment(point(i * 3, 1), point(i * 3, 2))
-          s2.styleExtremites = '-|'
+          s2.epaisseur=2
+          // s2.styleExtremites = '-|'
           objets.push(s2)
         }
       }
@@ -14822,98 +14850,125 @@ function Exercice_labyrinthe_multiples() {
     {
             //bord gauche
             s1 = segment(point(0, 10), point(0, 3))
-            s1.styleExtremites = '-|'
+            s1.epaisseur=3
+            //s1.styleExtremites = '-|'
             objets.push(s1)
             // case départ
-            objets.push(segment(point(-3, 1), point(0, 1)))
-            objets.push(segment(point(-3, 1), point(-3, 4)))
-            objets.push(segment(point(-3, 4), point(0, 4)))
-            objets.push(texteParPoint(`Départ`,point(-1.5,2.5)))
+            s1=segment(point(-3, 1), point(0, 1),'green')
+            s1.epaisseur=3
+            objets.push(s1)
+            s1=segment(point(-3, 1), point(-3, 4),'green')
+            s1.epaisseur=3
+            objets.push(s1)
+            s1=segment(point(-3, 4), point(0, 4),'green')
+            s1.epaisseur=3
+            objets.push(s1)
+            objets.push(texteParPoint(`Départ`,point(-1.5,2.5),'milieu','blue',1.5,0,false))
     }
     else {
               // bord gauche
               s1 = segment(point(0, 1), point(0, 8))
-              s1.styleExtremites = '-|'
+              s1.epaisseur=3
+              //s1.styleExtremites = '-|'
               objets.push(s1)
               // case départ
-              objets.push(segment(point(-3, 10), point(0, 10)))
-              objets.push(segment(point(-3, 10), point(-3, 7)))
-              objets.push(segment(point(-3, 7), point(0, 7)))
-              objets.push(texteParPoint(`Départ`,point(-1.5,8.5)))
+              s1=segment(point(-3, 10), point(0, 10),'green')
+              s1.epaisseur=3
+              objets.push(s1)
+              s1=segment(point(-3, 7), point(-3, 10),'green')
+              s1.epaisseur=3
+              objets.push(s1)
+              s1=segment(point(-3, 7), point(0, 7),'green')
+              s1.epaisseur=3
+              objets.push(s1)
+              objets.push(texteParPoint(`Départ`,point(-1.5,8.5),'milieu','blue',1.5,0,false))
     }
 
     // les croix centrales communes à A et B
     for (let i = 1; i < 6; i++) {
-      s1 = segment(point(i * 3, 8), point(i * 3, 6))
-      s1.styleExtremites = '|-|'
-      s2 = segment(point(i * 3 - 0.5, 7), point(i * 3 + 0.5, 7))
-      s2.styleExtremites = '|-|'
-      s3 = segment(point(i * 3, 5), point(i * 3, 3))
-      s3.styleExtremites = '|-|'
-      s4 = segment(point(i * 3 - 0.5, 4), point(i * 3 + 0.5, 4))
-      s4.styleExtremites = '|-|'
+      s1 = segment(point(i * 3, 8), point(i * 3, 6),'black')
+      s1.epaisseur=2
+      // s1.styleExtremites = '|-|'
+      s2 = segment(point(i * 3 - 0.5, 7), point(i * 3 + 0.5, 7),'black')
+      s2.epaisseur=2
+      // s2.styleExtremites = '|-|'
+      s3 = segment(point(i * 3, 5), point(i * 3, 3),'black')
+      s3.epaisseur=2
+      // s3.styleExtremites = '|-|'
+      s4 = segment(point(i * 3 - 0.5, 4), point(i * 3 + 0.5, 4),'black')
+      s4.epaisseur=2
+      // s4.styleExtremites = '|-|'
       objets.push(s2, s3, s4, s1)
     }
     // le pourtour commun à A et B
-    objets.push(segment(point(18, 9), point(18, 10)))
-    objets.push(segment(point(0, 10), point(18, 10)))
-    objets.push(segment(point(18, 9), point(18, 10)))
-    objets.push(segment(point(18, 1), point(18, 2)))
-    objets.push(segment(point(0, 1), point(18, 1)))
+    s1=segment(point(18, 9), point(18, 10))
+    s1.epaisseur=3
+    objets.push(s1)
+    s1=segment(point(0, 10), point(18, 10))
+    s1.epaisseur=3
+    objets.push(s1)
+    s1=segment(point(18, 9), point(18, 10))
+    s1.epaisseur=3
+    objets.push(s1)
+    s1=segment(point(18, 1), point(18, 2))
+    s1.epaisseur=3
+    objets.push(s1)
+    s1=segment(point(0, 1), point(18, 1))
+    s1.epaisseur=3
+    objets.push(s1)
     // les sorties communes à A et B
     for (let i = 0; i < 2; i++) {
       s1 = segment(point(18, 6 - i * 3), point(20, 6 - i * 3))
-      s1.styleExtremites = '-|'
+      s1.epaisseur=3
+      // s1.styleExtremites = '-|'
       s2 = segment(point(18, 7 - i * 3), point(17, 7 - i * 3))
-      s2.styleExtremites = '-|'
+      s2.epaisseur=3
+      // s2.styleExtremites = '-|'
       s3 = segment(point(18, 8 - i * 3), point(20, 8 - i * 3))
-      s3.styleExtremites = '-|'
+      s3.epaisseur=3
+      // s3.styleExtremites = '-|'
       s4 = segment(point(18, 8 - i * 3), point(18, 6 - i * 3))
+      s4.epaisseur=3
       s5 = segment(point(0, 7 - i * 3), point(1, 7 - i * 3))
-      s5.styleExtremites = '-|'
+      s5.epaisseur=3
+      //s5.styleExtremites = '-|'
       objets.push(s1, s2, s3, s4, s5)
     }
     for (let i=1;i<=3;i++) {
-      objets.push(texteParPoint(`Sortie ${i}`,point(19,11.5-3*i)))
+      objets.push(texteParPoint(`Sortie ${i}`,point(19.5,11.5-3*i),'milieu','blue',1.5,0,false))
     }
     s1 = segment(point(18, 9), point(20, 9))
-    s1.styleExtremites = '-|'
+    s1.epaisseur=3
+    //s1.styleExtremites = '-|'
     s2 = segment(point(18, 2), point(20, 2))
-    s2.styleExtremites = '-|'
+    s2.epaisseur=3
+    //s2.styleExtremites = '-|'
     objets.push(s1, s2)
       
-      switch (liste_type_de_questions[0]) { // Chaque question peut être d'un type différent, ici 4 cas sont prévus...
-          case 1 : // Multiple de this.sup
             let table=parseInt(this.sup)
-            this.consigne=`Trouve la sortie en ne passant que par les cases contenant un multiple de $${table}$.`
             let maximum=parseInt(this.sup2)
+            let listeMultiples=[]
+            for (let i=2;i<=maximum;i++)
+                listeMultiples.push(table*i)
+            listeMultiples=combinaison_listes(listeMultiples,12)
+            this.consigne=`Trouve la sortie en ne passant que par les cases contenant un multiple de $${table}$.`
+            let index=0
             for (let a=1;a<7;a++){
             for (let b=0;b<3;b++){
               trouve=false
               for (let k=0;k<monchemin.length;k++)
                 if (monchemin[k][0]==a&&monchemin[k][1]==b) trouve=true
               if (!trouve) nombres[a-1][b]=randint(2,maximum)*table+randint(1,table-1)
-              else nombres[a-1][b]=randint(2,maximum)*table
-              objets.push(texteParPoint(nombre_avec_espace(nombres[a-1][b]),point(-1.5+a*3,2.5+b*3)))
+              else {
+                nombres[a-1][b]=listeMultiples[index]
+                index++
+              }
+              objets.push(texteParPoint(nombre_avec_espace(nombres[a-1][b]),point(-1.5+a*3,2.5+b*3),'milieu','black',1.5,0,true))
             }
           }
-          texte_corr+=`${texte_en_couleur_et_gras(`Voici le chemin en bleu et la sortie était la numéro $${2-monchemin[monchemin.length-1][1]+1}$.`,'black')}<br>`
-        break;
+          texte_corr+=`${texte_en_couleur_et_gras(`Voici le chemin en marron et la sortie était la numéro $${2-monchemin[monchemin.length-1][1]+1}$.`,'black')}<br>`
 
-        case 2:
-          // Idem Cas1 mais avec d'autres texte, texte_corr...
-        break
-
-        case 3:
-          
-        break
-          
-        case 4:
-        
-        break  
-        }   
-
-      params = { xmin:-4, ymin: 0, xmax: 22, ymax: 11, pixelsParCm: 20, scale: 1}
+      params = { xmin:-4, ymin: 0, xmax: 22, ymax: 11, pixelsParCm: 20, scale: 0.7}
       texte += mathalea2d(params, objets)
 // On ajoute au texte de la correction, la figure de la correction
       texte_corr += mathalea2d(params, objets,chemin2d)
@@ -14928,8 +14983,8 @@ function Exercice_labyrinthe_multiples() {
 // Il sont associés respectivement aux paramètres sup, sup2 et sup3.
 
   this.besoin_formulaire_numerique = ["Table "]
-  this.besoin_formulaire2_numerique = ["Multiple maximum "];
-// this.besoin_formulaire3_case_a_cocher =['figure à main levée',true]
+  this.besoin_formulaire2_numerique = ["Facteur maximum "];
+   this.besoin_formulaire3_numerique =['Niveau de rapidité',6,'1 : Guépard\n 2 : Antilope\n 3 : Lièvre\n 4 : Tortue\n 5 : Escargot\n 6 : Au hasard']
 
 } // Fin de l'exercice.
 
@@ -37594,6 +37649,201 @@ function Graphiques_et_proportionnalite() {
       let yscale = 2;
       // pour aléatoiriser un peu le pas sur l'axe des prix
       let stepAxeSecondaire = choice([0.1,0.2]);
+      // on finit les appels
+      let mesAppels = [
+        r = repere({
+          xmin: 0,
+          ymin: 0,
+          ymax: situation.qte_max * situation.prix_unitaire + 4,
+          xmax: situation.qte_max,
+          xscale: xscale,
+          yscale: yscale,
+          legendeX: situation.legendeX,
+          legendeY: situation.legendeY,
+          grilleSecondaireVisible: true,
+          grilleSecondaireDistance: stepAxeSecondaire,//0.2,
+          positionLegendeY: [0.3, situation.qte_max * situation.prix_unitaire + 4 + 0.4]
+        }),
+      ];
+      let f = x => calcul(situation.prix_unitaire * x);
+      mesAppels.push(f, courbe(f, 0, situation.qte_max, 'black', 1.5, r));
+      // on prépare l'objet figure
+      let fig = mathalea2d(
+        {
+          xmin: -xscale,
+          ymin: -yscale,
+          xmax: situation.qte_max / xscale + 3,
+          ymax: (situation.qte_max * situation.prix_unitaire + 4) / 2 + 1,
+          pixelsParCm: 40
+        },
+        mesAppels
+      );
+      situation.fig = fig;
+
+      // on prépare les appels supplémentaires pour la correction
+      let mesAppels_corr = mesAppels;
+      let A = point(situation.qte_max, 0);
+      let B = point(situation.qte_max, calcul(situation.qte_max * situation.prix_unitaire / yscale));
+      let s1 = segment(A, B, "red");
+      s1.epaisseur = 2;
+      s1.pointilles = true;
+      s1.styleExtremites = `->`;
+      let C = point(0, calcul(situation.qte_max * situation.prix_unitaire / yscale));
+      let s2 = segment(B, C, "red");
+      s2.epaisseur = 2;
+      s2.pointilles = true;
+      s2.styleExtremites = `->`;
+
+      let D = point(situation.qte2, 0);
+      let E = point(situation.qte2, calcul(situation.qte2 * situation.prix_unitaire / yscale));
+      let s3 = segment(D, E, "blue");
+      s3.epaisseur = 2;
+      s3.pointilles = true;
+      s3.styleExtremites = `->`;
+      let F = point(0, calcul(situation.qte2 * situation.prix_unitaire / yscale));
+      let s4 = segment(E, F, "blue");
+      s4.epaisseur = 2;
+      s4.pointilles = true;
+      s4.styleExtremites = `->`;
+
+      // on ajoute les appels pour la correction
+      mesAppels_corr.push(
+        s1,
+        s2,
+        s3,
+        s4
+      )
+
+      // on prépare l'objet figure correction
+      let fig_corr = mathalea2d(
+        {
+          xmin: -xscale,
+          ymin: -yscale,
+          xmax: situation.qte_max / xscale + 3,
+          ymax: (situation.qte_max * situation.prix_unitaire + 4) / 2 + 1,
+          pixelsParCm: 40
+        },
+        mesAppels_corr
+      );
+      situation.fig_corr = fig_corr;
+
+
+
+      // un compteur pour les sous-questions
+      let k = 0;
+      let k_corr = 0;
+
+      let enonces = [];
+      enonces.push({
+        enonce: `
+          À ${situation.lieu}, ${situation.prenom} utilise le graphique ci-dessous pour indiquer le prix de ses ${situation.articles} en fonction du ${situation.qte} ${situation.art_articles}.
+          <br>${situation.fig}
+          <br> ${num_alpha(k++)} Justifier que c'est une situation de proportionnalité à l'aide du graphique.
+          <br> ${num_alpha(k++)} Quel est le prix de $${situation.qte_max}$ ${situation.unite}  ${situation.articles}?
+          <br> ${num_alpha(k++)} Quel est le prix de $${situation.qte2}$ ${situation.unite}  ${situation.articles}?
+          `,
+        //question:``,
+        correction: `
+        <br> ${num_alpha(k_corr++)} Ce graphique est une droite qui passe par l'origine.
+        <br> ${texte_en_couleur(`C'est donc bien le graphique d'une situation de proportionnalité.`)}
+
+        <br> ${num_alpha(k_corr++)} Par lecture graphique, en utilisant les pointillés rouges du graphe ci-dessous, ${texte_en_couleur(`$${situation.qte_max}$ ${situation.unite}  ${situation.articles} coûtent $${tex_prix(calcul(situation.qte_max * situation.prix_unitaire))}$ €.`)}
+        <br> ${situation.fig_corr}
+        <br> ${num_alpha(k_corr++)} Pour $${situation.qte2}$ ${situation.unite}  ${situation.articles}, la lecture graphique est moins facile, nous allons détailler deux méthodes.
+        <br><br> ${texte_gras(`Première méthode par lecture graphique :`)} 
+        <br> Il faut prendre en compte que chaque petit carreau représente $${tex_prix(stepAxeSecondaire*yscale)}$ € et utiliser les pointillés bleus.
+        <br><br> ${texte_gras(`Seconde méthode en calculant une quatrième proportionnelle :`)}
+        <br> $${situation.qte_max}$ ${situation.unite}  ${situation.articles} coûtent $${tex_prix(calcul(situation.qte_max * situation.prix_unitaire))}$ €
+        donc $${situation.qte2}$ ${situation.unite}  ${situation.articles} coûtent : <br> $(${tex_prix(calcul(situation.qte_max * situation.prix_unitaire))}$ € $\\div ${situation.qte_max}$ ${situation.articles} $)\\times (${situation.qte2}$ ${situation.articles})  $= ${tex_prix(calcul(situation.qte2 * situation.prix_unitaire))}$ €
+        <br><br>${texte_en_couleur(`Quelle que soit la méthode utilisée, ${situation.qte2} ${situation.unite}  ${situation.articles} coûtent $${tex_prix(calcul(situation.qte2 * situation.prix_unitaire))}$ €.`)}
+        `
+      })
+      switch (liste_type_de_questions[i]) {
+        case 1:
+          texte = `${enonces[0].enonce}`;
+          //texte = `${fig}`;
+          if (this.debug) {
+            texte += `<br>`;
+            texte += `<br> =====CORRECTION======<br>${enonces[0].correction}`;
+            texte_corr = ``;
+          } else {
+            texte_corr = `${enonces[0].correction}`;
+          };
+          break;
+      }
+
+
+      if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+
+  }
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',2,"1 : Entiers naturels\n2 : Entiers relatifs"];
+  //this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];	  
+}
+/**
+ * fork de 4P10-1 par Jean-Claude Lhote
+ */
+
+function Graphiques_et_proportionnalite2() {
+  'use strict';
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.debug = false;
+  this.sup = 1;
+  if (this.debug) {
+    this.nb_questions = 2;
+  } else {
+    this.nb_questions = 1;
+  };
+
+  this.titre = "Résoudre un problème de proportionnalité à l'aide d'un graphique";
+  this.consigne = "";
+
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  //this.nb_questions_modifiable = false;
+  sortie_html ? this.spacing = 1.5 : this.spacing = 1;
+  //sortie_html? this.spacing_corr = 3 : this.spacing_corr = 2;
+
+  let type_de_questions_disponibles;
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    if (this.debug) {
+      type_de_questions_disponibles = [1];
+    } else {
+      type_de_questions_disponibles = [1];
+    };
+
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    //type_de_questions_disponibles=[1];			
+
+    //let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
+    let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles, this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
+
+    for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
+      // on prévoit un peu d'aléatoire pour les prix unitaires
+      let pu_oranges = choice([1.2, 1.4, 1.6, 1.8]);
+      let pu_baguettes = choice([0.6, 0.8, 1.2]);
+      // on prévoit un tableau avec des situations
+      let situations = [
+        { lieu: `l'épicerie`, prenom: prenom(), articles: `oranges`, art_articles: `d'oranges`, prix_unitaire: pu_oranges, qte: `poids`, qte_max: 10, qte2: 3, unite: `kg d'`, legendeX: `poids en kg`, legendeY: `prix en €`, fig: {}, fig_corr: {} },
+        { lieu: `la boulangerie`, prenom: prenom(), articles: `baguettes`, art_articles: `de baguettes`, prix_unitaire: pu_baguettes, qte: `nombre`, qte_max: 10, qte2: 3, unite: ``, legendeX: `quantité`, legendeY: `prix en €`, fig: {}, fig_corr: {} }
+      ]
+      // on en choisit une
+      let situation = situations[randint(0, situations.length - 1)];
+      let r;
+      let xscale = 1;
+      let yscale = choice([1,2,5]);
+      // pour aléatoiriser un peu le pas sur l'axe des prix
+      let stepAxeSecondaire 
+      if (yscale==1) stepAxeSecondaire = choice([0.5,0.2,0.25]);
       // on finit les appels
       let mesAppels = [
         r = repere({
