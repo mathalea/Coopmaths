@@ -133,7 +133,7 @@ function TracePoint(...points) {
         else if (this.style=='#'){
           p1=point(A.x-this.taille/coeff,A.y-this.taille/coeff)
           p2=point(A.x+this.taille/coeff,A.y-this.taille/coeff)
-          c=carreIndirect(p1,p2,this.color)
+          c=carre(p1,p2,this.color)
           c.epaisseur=this.epaisseur
           c.opacite=this.opacite
           c.couleurDeRemplissage=this.color
@@ -195,7 +195,7 @@ function TracePoint(...points) {
         else if (this.style=='#'){
           p1=point(A.x-tailletikz,A.y-tailletikz)
           p2=point(A.x+tailletikz,A.y-tailletikz)
-          c=carreIndirect(p1,p2,this.color)
+          c=carre(p1,p2,this.color)
           c.epaisseur=this.epaisseur
           c.opacite=this.opacite
           c.couleurDeRemplissage=this.color
@@ -693,39 +693,52 @@ function Droite(arg1, arg2, arg3, arg4, color) {
     point(this.directeur.x, this.directeur.y)
   );
   let absNom,ordNom,leNom
-  let pointXmin=pointSurDroite(this,fenetreMathalea2d[0])
+ // let pointXmin=pointSurDroite(this,fenetreMathalea2d[0])
   if (this.nom!='') {
-    pointXmin=pointSurDroite(this,fenetreMathalea2d[0])
-    if (pointXmin.y>fenetreMathalea2d[1]&&pointXmin.y<fenetreMathalea2d[3]) {
+    if (egal(this.b,0,0.1)) { // ax+c=0 x=-c/a est l'équation de la droite
+      absNom=-this.c/this.a+0.8 // l'abscisse du label est décalé de 0.8
+      ordNom=fenetreMathalea2d[1]+1 // l'ordonnée du label est ymin +1
+    }
+    else if (egal(this.a,0,0.1)){ //by+c=0 y=-c/b est l'équation de la droite
+      absNom=fenetreMathalea2d[0]+0.8 // l'abscisse du label est xmin +1
+      ordNom=-this.c/this.b+0.8 // l'ordonnée du label est décalée de 0.8 
+    }
+    else { // a et b sont différents de 0 ax+by+c=0 est l'équation
+    // y=(-a.x-c)/b est l'aquation cartésienne et x=(-by-c)/a
+    let y0=(-this.a*(fenetreMathalea2d[0]+1)-this.c)/this.b
+    let y1=(-this.a*(fenetreMathalea2d[2]-1)-this.c)/this.b
+    let x0=(-this.b*(fenetreMathalea2d[1]+1)-this.c)/this.a
+    let x1=(-this.b*(fenetreMathalea2d[3]-1)-this.c)/this.a
+    if (y0>fenetreMathalea2d[1]&&y0<fenetreMathalea2d[3]) {
       absNom=fenetreMathalea2d[0]+1
-      ordNom=pointXmin.y+0.8
+      ordNom=y0+this.pente
     }
     else {
-      pointXmin=pointSurDroite(this,fenetreMathalea2d[2])
-      if (pointXmin.y>fenetreMathalea2d[1]&&pointXmin.y<fenetreMathalea2d[3]) {
+      if (y1>fenetreMathalea2d[1]&&y1<fenetreMathalea2d[3]) {
         absNom=fenetreMathalea2d[2]-1
-        ordNom=pointXmin.y+0.8
+        ordNom=y1-this.pente
       }
       else {
-        pointXmin=pointIntersectionDD(this,droiteHorizontaleParPoint(point(0,fenetreMathalea2d[1])))
-        if (pointXmin.x>fenetreMathalea2d[0]&&pointXmin.x<fenetreMathalea2d[2]) {
-          absNom=pointXmin.x+0.7
-          ordNom=fenetreMathalea2d[1]+1
+        if (x0>fenetreMathalea2d[0]&&x0<fenetreMathalea2d[2]) {
+          absNom=x0
+          ordNom=fenetreMathalea2d[1]+math.abs(this.pente)
         }
         else {
-          pointXmin=pointIntersectionDD(this,droiteHorizontaleParPoint(point(0,fenetreMathalea2d[3])))
-          if (pointXmin.x>fenetreMathalea2d[0]&&pointXmin.x<fenetreMathalea2d[2]) {
-            absNom=pointXmin.x+0.7
-            ordNom=fenetreMathalea2d[3]-1
+          if (x1>fenetreMathalea2d[0]&&x1<fenetreMathalea2d[2]) {
+            absNom=x1
+            ordNom=fenetreMathalea2d[3]+this.pente
           }
           else {
-            absNom=(fenetreMathalea2d[0]+fenetreMathalea2d[2]/2)
-            ordNom=pointSurDroite(this,absNom).y+0.8
+            absNom=(fenetreMathalea2d[0]+fenetreMathalea2d[2])/2
+            ordNom=pointSurDroite(this,absNom).y
           }
         }
       }
     }
-    leNom=texteParPosition(this.nom,absNom,ordNom,"milieu",this.color,0.7,"milieu",true)
+  }
+  absNom=arrondi(absNom,2)
+  ordNom=arrondi(ordNom,2)
+    leNom=texteParPosition(this.nom,absNom,ordNom,"milieu",this.color,1.2,"milieu",true)
 
   }
   this.svg = function (coeff) {
@@ -801,8 +814,8 @@ function Droite(arg1, arg2, arg3, arg4, color) {
     }
     let A = point(this.x1, this.y1);
     let B = point(this.x2, this.y2);
-    let A1 = pointSurSegment(A, B, -10);
-    let B1 = pointSurSegment(B, A, -10);
+    let A1 = pointSurSegment(A, B, -50);
+    let B1 = pointSurSegment(B, A, -50);
 
     if (this.nom!="")
         return `\\draw${optionsDraw} (${A1.x},${A1.y})--(${B1.x},${B1.y});`+leNom.tikz();
@@ -813,8 +826,8 @@ function Droite(arg1, arg2, arg3, arg4, color) {
   this.svgml = function(coeff,amp){
     let A = point(this.x1, this.y1);
     let B = point(this.x2, this.y2);
-    let A1 = pointSurSegment(A, B, -10);
-    let B1 = pointSurSegment(B, A, -10);
+    let A1 = pointSurSegment(A, B, -50);
+    let B1 = pointSurSegment(B, A, -50);
     let s=segment(A1,B1,this.color)
     s.isVisible=false
   return s.svgml(coeff,amp)+leNom.svg(coeff)
@@ -822,8 +835,8 @@ function Droite(arg1, arg2, arg3, arg4, color) {
   this.tikzml = function(amp){
     let A = point(this.x1, this.y1);
     let B = point(this.x2, this.y2);
-    let A1 = pointSurSegment(A, B, -10);
-    let B1 = pointSurSegment(B, A, -10);
+    let A1 = pointSurSegment(A, B, -50);
+    let B1 = pointSurSegment(B, A, -50);
     let s=segment(A1,B1,this.color)
     s.isVisible=false
   return s.tikzml(amp)+leNom.tikz()
@@ -1828,7 +1841,7 @@ function polygoneRegulier(A, B, n, color = "black") {
     listePoints[i + 1] = rotation(
       listePoints[i - 1],
       listePoints[i],
-      calcul(180 - 360 / n)
+      calcul(-180 + 360 / n)
     );
   }
   return polygone(listePoints, color);
@@ -1845,7 +1858,7 @@ function polygoneRegulierIndirect(A, B, n, color = "black") {
     listePoints[i + 1] = rotation(
       listePoints[i - 1],
       listePoints[i],
-      calcul(-180 + 360 / n)
+      calcul(180 - 360 / n)
     );
   }
   return polygone(listePoints, color);
@@ -1857,7 +1870,7 @@ function polygoneRegulierIndirect(A, B, n, color = "black") {
  * @Auteur Rémi Angot
  */
 function carre(A, B, color) {
-  return polygoneRegulier(B, A, 4, color);
+  return polygoneRegulier(A, B, 4, color);
 }
 
 /**
@@ -3664,7 +3677,7 @@ function HomothetieAnimee(
     p2.isVisible = false;
     let binomesXY2 = p2.binomesXY(coeff);
     code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="none" >
-		<animate attributeName="points" dur="2s" repeatCount="indefinite"
+		<animate attributeName="points" ${animation}
 		from="${binomesXY1}"
 		to="${binomesXY2}"
 		/>
@@ -3694,7 +3707,7 @@ function SymetrieAnimee(
     p2.isVisible = false;
     let binomesXY2 = p2.binomesXY(coeff);
     code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="none" >
-		<animate attributeName="points" dur="2s" repeatCount="indefinite"
+		<animate attributeName="points" ${animation}
 		from="${binomesXY1}"
 		to="${binomesXY2}"
 		/>
@@ -3719,7 +3732,7 @@ function AffiniteOrthoAnimee(
     p2.isVisible = false;
     let binomesXY2 = p2.binomesXY(coeff);
     code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="none" >
-		<animate attributeName="points" dur="2s" repeatCount="indefinite"
+		<animate attributeName="points" ${animation}
 		from="${binomesXY1}"
 		to="${binomesXY2}"
 		/>
@@ -3762,6 +3775,8 @@ function montrerParDiv(id) {
   document.getElementById(id).style.visibility = "visible";
 }
 
+
+
 /**
  * Rend invisible un element d'après son id
  * 
@@ -3799,6 +3814,48 @@ function afficherTempo(objet, t0 = 1, t = 5, r = 'Infinity') {
           montrerParDiv(objet.id) // On attend t0 pour montrer
           let montreRepete = setInterval(function(){
             montrerParDiv(objet.id)
+            compteur++
+            if (typeof r === 'number'){
+              if (compteur >=r){
+                clearInterval(cacheRepete)
+                clearInterval(montreRepete)
+              }
+            }
+            },t*1000) // On montre tous les t s (vu qu'on a décalé de t0)
+          
+        },t0*1000) // Fin de l'animation en boucle
+      }
+    }
+  }, 100); // vérifie toutes les  100ms que le div existe
+}
+
+
+/**
+ * Masque un objet puis l'affiche au bout de t0 s avant de recommencer r fois toutes les t secondes
+ * 
+ * 
+ * @param {any} objet dont l'identifiant est accessible par objet.id
+ * @param {number} [t0=1] temps en secondes avant l'apparition
+ * @param {number} [t=5] temps à partir duquel l'animation recommence
+ * @param {string} [r='Infinity'] nombre de répétition (infini si ce n'est pas un nombre)
+
+ * 
+ * 
+ */
+function afficherTempoId(id, t0 = 1, t = 5, r = 'Infinity') {
+  let compteur = 1 // Nombre d'animations
+  let checkExist = setInterval(function () {
+    if (document.getElementById(id)) {
+      clearInterval(checkExist);
+      cacherParDiv(id)
+      if (r==1){ // On le montre au bout de t0 et on ne le cache plus
+        setTimeout(function(){montrerParDiv(id)},t0*1000) 
+      } else {
+        let cacheRepete = setInterval(function(){cacherParDiv(id)},t*1000) // On cache tous les t s
+        setTimeout(function(){
+          montrerParDiv(id) // On attend t0 pour montrer
+          let montreRepete = setInterval(function(){
+            montrerParDiv(id)
             compteur++
             if (typeof r === 'number'){
               if (compteur >=r){

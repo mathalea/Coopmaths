@@ -1,5 +1,17 @@
 .katex { font-size: 1em !important; } 
 
+/* Timer pour le calcul chronométré*/
+
+#timer, #numero_question {
+  float: right;
+  font-size: xx-large;
+  color: #f15929;
+}
+
+#numero_question {
+  margin-right: 10px;
+}
+
 @media print {
   body * {
     visibility: hidden;

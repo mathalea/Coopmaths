@@ -1104,7 +1104,34 @@ function tex_fraction_reduite(n,d){
 		return tex_fraction_signe(fraction_simplifiee(n,d)[0],fraction_simplifiee(n,d)[1]);
 	}
 }
-
+/**
+ * produit_de_deux_fractions(num1,den1,num2,den2) retourne deux chaines :
+ * la première est la fraction résultat, la deuxième est le calcul mis en forme Latex avec simplification éventuelle
+ * Applique une simplification si le numérateur de l'une est égal au dénominateur de l'autre.
+ */
+function produit_de_deux_fractions(num1,den1,num2,den2) {
+	let num,den,tex_produit
+	if (num1==den2) {
+		tex_produit=`\\dfrac{\\cancel{${num1}}\\times ${num2}}{${den1}\\times\\cancel{${den2}}}`
+		num=num2
+		num1=1
+		den2=1
+		den=den1
+	}
+	else if (num2==den1) {
+		tex_produit=`\\dfrac{${num1}\\times \\cancel{${num2}}}{\\cancel{${den1}}\\times${den2}}`
+		num=num1
+		num2=1
+		den1=1
+		den=den2
+	}
+	else {
+		num=num1*num2
+		den=den1*den2
+		tex_produit=`\\dfrac{${num1}\\times ${num2}}{${den1}\\times${den2}}`
+	}
+	return [tex_fraction(num,den),tex_produit,[num1,den1,num2,den2]]
+}
 /**
 *
 * Simplifie une fraction en montrant les étapes
@@ -1975,7 +2002,7 @@ function couleurAleatoire() {
 
   function arcenciel(i,fondblanc=true) {
 	  let couleurs
-	  if (fondblanc) couleurs=['violet','indigo',  'blue', 'green', 'lime', 'orange', 'red']
+	  if (fondblanc) couleurs=['violet','purple',  'blue', 'green', 'lime', 'orange', 'red']
 	  else couleurs=['violet','indigo',  'blue', 'green', 'yellow', 'orange', 'red']
 	  return couleurs[i%7]
   }
@@ -2088,6 +2115,15 @@ function obtenir_liste_fractions_irreductibles() {
 	return  [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
 	[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
 	[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+}
+
+/**
+* Retourne une liste de fractions irréductibles de dénominateur égal à 2 3 5 7
+* @Auteur Mireille Gain
+*/
+function obtenir_liste_fractions_irreductibles_faciles() {
+	return  [[1,2],[1,3],[2,3],[1,5],[2,5],[3,5],[4,5],
+	[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]]
 }
 
 /**
@@ -3327,6 +3363,18 @@ function creer_modal(numero_de_l_exercice,contenu,label_bouton,icone) {
 		</div>`
 	return HTML;
 }
+/**
+* Fonction créant le bouton d'aide utilisée par les différentes fonctions modal_ type de contenu
+* @param numero_de_l_exercice
+* @param contenu code HTML 
+* @param icone 
+* @Auteur Rémi Angot
+*/	
+function creerBoutonMathalea2d(numero_de_l_exercice,fonction,label_bouton="Aide",icone="info circle") {
+	let HTML = `<button class="ui toggle left floated mini compact button" id = "btnMathALEA2d_${numero_de_l_exercice}" onclick="${fonction}"><i class="large ${icone} icon"></i>${label_bouton}</button>`
+
+	return HTML;
+}
 
 /**
 * Créé un bouton pour une aide modale avec un texte court
@@ -4372,10 +4420,19 @@ function texte_ou_pas(texte) {
 /**
  * Crée un tableau avec un nombre de lignes et de colonnes déterminées par la longueur des tableaux des entetes passés en paramètre
  * Les contenus sont en mode maths par défaut, il faut donc penser à remplir les tableaux en utilisant éventuellement la commande \\text{}
- * @param {array} tab_entetes_colonnes contient les entetes des colonnes
+ * tab_C_L(['coin','A','B'],['1','2'],['A1','B1','A2','B2']) affiche le tablleau ci-dessous
+ * ------------------
+ * | coin | A  | B  |
+ * ------------------
+ * |  1   | A1 | B1 |
+ * ------------------
+ * |  2   | A2 | B2 |
+ * ------------------
+* @param {array} tab_entetes_colonnes contient les entetes des colonnes
  * @param {array} tab_entetes_lignes contient les entetes des lignes
  * @param {array} tab_lignes contient les elements de chaque ligne
  * @author Sébastien Lozano
+ * 
  */
 function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 	'use strict';
@@ -4397,17 +4454,38 @@ function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 	tableau_C_L +=`}\n`;
 					
 	tableau_C_L += `\\hline\n`
-	tableau_C_L += tab_entetes_colonnes[0];
+	if (typeof tab_entetes_colonnes[0]=='number') {
+		tableau_C_L += tex_nombre(tab_entetes_colonnes[0]);
+	}
+	else
+	{
+		tableau_C_L += tab_entetes_colonnes[0];		
+	}
 	for (let k=1;k<C;k++) {
-		tableau_C_L += ` & `+tab_entetes_colonnes[k]+``;
+		if (typeof tab_entetes_colonnes[k]=='number') {
+				tableau_C_L += ` & `+tex_nombre(tab_entetes_colonnes[k])+``;
+		}
+		else {
+			tableau_C_L += ` & `+tab_entetes_colonnes[k]+``;		
+		}
 	};
 	tableau_C_L += `\\\\\n`;
 	tableau_C_L += `\\hline\n`;
 	// on construit toutes les lignes
 	for (let k=0;k<L;k++) {
-		tableau_C_L += ``+tab_entetes_lignes[k]+``;
+		if (typeof tab_entetes_lignes[k]=='number'){
+			tableau_C_L += ``+tex_nombre(tab_entetes_lignes[k])+``;
+		}
+		else {
+			tableau_C_L += ``+tab_entetes_lignes[k]+``;
+		}
 		for (let m=1;m<C;m++) {
-			tableau_C_L += ` & `+tab_lignes[(C-1)*k+m-1];
+			if (typeof tab_lignes[(C-1)*k+m-1]== 'number') {
+				tableau_C_L += ` & `+tex_nombre(tab_lignes[(C-1)*k+m-1]);
+			}
+			else {
+				tableau_C_L += ` & `+tab_lignes[(C-1)*k+m-1];
+			}
 		};
 		tableau_C_L += `\\\\\n`;
 		tableau_C_L += `\\hline\n`;	
@@ -6896,6 +6974,519 @@ function partieEntiereEnLettres(nb) {
 	}
 	return result
 }
+
+
+function Pavage() {
+	this.type = 1
+	this.polygones = []
+	this.barycentres = []
+	this.tracesCentres = []
+	this.numeros = []
+	this.coordonnees = []
+	this.Nx = 1
+	this.Ny = 1
+	this.echelle=20
+	this.fenetre={}
+	this.nb_polygones
+
+	this.construit = function (type = 1, Nx = 1, Ny = 1, taille = 3) {
+		let nettoie_objets = function (objets) {
+			let barywhite, baryblack // c'est drôle non ?
+			for (let i = 0; i < objets.length; i++) {
+			  barywhite = barycentre(objets[i])
+			  for (let j = i + 1; j < objets.length;) {
+				baryblack = barycentre(objets[j])
+				if (egal(barywhite.x, baryblack.x, 0.1) && egal(barywhite.y, baryblack.y, 0.1)) {
+				  objets.splice(j, 1)
+				}
+				else j++
+			  }
+			}
+		  }
+		let A, B, v, w, C, D, P, XMIN = 0, YMIN = 0, XMAX = 0, YMAX = 0, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, fenetre, echelle, nombre_de_polygones
+		A = point(0, 0)
+		B = point(taille, 0)
+		switch (type) {
+			case 1: // triangles équilatéraux
+				v = vecteur(A, B)
+				w = rotation(v, A, -90)
+				w = homothetie(w, A, 1.73205)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						P1 = polygoneRegulier(A, B, 3)
+						P2 = rotation(P1, A, 60)
+						P3 = rotation(P1, A, -60)
+						P4 = rotation(P1, A, -120)
+						this.polygones.push(P1, P2, P3, P4)
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, v)
+						B = translation(B, v)
+					}
+					A = translation(A, vecteur(-Nx * v.x, -2 * v.y))
+					B = translation(B, vecteur(-Nx * v.x, -2 * v.y))
+					A = translation(A, w)
+					B = translation(B, w)
+				}
+				break
+
+			case 2: //carrés
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2)
+				w = rotation(v, A, -90)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						P1 = polygoneRegulier(A, B, 4)
+						P2 = rotation(P1, A, 90)
+						P3 = rotation(P1, A, -90)
+						P4 = rotation(P1, A, -180)
+						this.polygones.push(P1, P2, P3, P4)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, v)
+						B = translation(B, v)
+					}
+					A = translation(A, vecteur(-Nx * v.x, -2 * v.y))
+					B = translation(B, vecteur(-Nx * v.x, -2 * v.y))
+					A = translation(A, w)
+					B = translation(B, w)
+				}
+				break
+
+			case 3: //hexagones
+				B=homothetie(B,A,0.8)
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2)
+				w = rotation(v, A, -90)
+				w = homothetie(w, A, 1.73205)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = similitude(B, A, 30, 1.1547)
+						P1 = polygoneRegulier(A, C, 6)
+						P2 = rotation(P1, A, -120)
+						P3 = translation(P1, v)
+						P4 = translation(P2, v)
+						this.polygones.push(P1, P2, P3, P4)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, vecteur(2 * v.x, 0))
+						B = translation(B, vecteur(2 * v.x, 0))
+					}
+					A = translation(A, vecteur(-Nx * 2 * v.x, w.y))
+					B = translation(B, vecteur(-Nx * 2 * v.x, w.y))
+				}
+				break
+
+			case 4: // Pavage 3².4.3.4
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2.73205)
+				w = rotation(v, A, -90)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+
+						C = rotation(B, A, 60)
+						P1 = polygoneRegulier(A, B, 3)
+						P2 = rotation(P1, A, 150)
+						P6 = rotation(P1, B, -150)
+						P7 = rotation(P1, B, 60)
+						P9 = rotation(P2, C, 150)
+						P10 = rotation(P9, A, -60)
+						P11 = rotation(P2, B, 60)
+						P12 = rotation(P6, A, -60)
+						P3 = polygoneRegulier(A, C, 4)
+						P4 = polygoneRegulierIndirect(B, C, 4)
+						P5 = rotation(P4, B, -150)
+						P8 = rotation(P3, A, 150)
+
+						this.polygones.push(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P11.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+
+						for (let p of P12.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P7.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P8.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P9.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P10.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, vecteur(v.x, 0))
+						B = translation(B, vecteur(v.x, 0))
+					}
+					A = translation(A, vecteur(-Nx * v.x, w.y))
+					B = translation(B, vecteur(-Nx * v.x, w.y))
+				}
+				break
+			case 5: // 4.8²
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2.4142)
+				w = rotation(v, A, -90)
+
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = rotation(A, B, -135)
+						P1 = polygoneRegulier(A, B, 8)
+						P2 = polygoneRegulierIndirect(A, B, 8)
+						P3 = translation(P1, v)
+						P4 = translation(P2, v)
+						P5 = polygoneRegulierIndirect(B, C, 4)
+						P6 = translation(P5, v)
+						P7 = translation(P5, w)
+						P8 = translation(P6, w)
+						this.polygones.push(P1, P2, P3, P4, P5, P6, P7, P8)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P7.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P8.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+
+						A = translation(A, vecteur(2 * v.x, 0))
+						B = translation(B, vecteur(2 * v.x, 0))
+					}
+					A = translation(A, vecteur(-Nx * 2 * v.x, 2 * w.y))
+					B = translation(B, vecteur(-Nx * 2 * v.x, 2 * w.y))
+				}
+				break
+
+			case 6: // Pavage hexagonal d'écolier
+				v = vecteur(A, B)
+				w = rotation(v, A, 60)
+				v = vecteur(v.x + w.x, v.y + w.y) // v=AB+CB
+				w = rotation(v, A, -60)
+
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = rotation(A, B, 120)
+						D = rotation(B, C, 60)
+						P1 = polygone(A, B, C, D)
+						P2 = rotation(P1, C, -60)
+						P3 = rotation(P1, A, 60)
+						P4 = translation(P2, v)
+						P5 = translation(P1, v)
+						P6 = translation(P3, v)
+						P7 = translation(P1, w)
+						P8 = translation(P2, w)
+						P9 = translation(P3, w)
+						this.polygones.push(P1, P2, P3, P4, P5, P6, P7, P8, P9)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P7.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P8.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P9.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, vecteur(w.x + v.x, w.y + v.y))
+						B = translation(B, vecteur(w.x + v.x, w.y + v.y))
+					}
+					A = translation(A, vecteur(-Nx * (w.x + v.x) + 2 * w.x - v.x, 2 * w.y - v.y))
+					B = translation(B, vecteur(-Nx * (w.x + v.x) + 2 * w.x - v.x, 2 * w.y - v.y))
+				}
+				break
+			case 7 :
+				v = vecteur(A, B)
+				v=homothetie(v,A,2)
+				w = rotation(v, A, -60)
+
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = rotation(A, B,-120)
+						D = rotation(B, C, -120)
+						P1 = polygoneRegulier(A, B,6)
+						P2 = polygoneRegulier(C,B,3)
+						P3 = rotation(P2, C, 180)
+						P4 = translation(P3,w)
+						P5 = translation(P2, w)
+						P6 = rotation(P1,B,180)
+						this.polygones.push(P1, P2, P3, P6, P5,P4)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, v)
+						B = translation(B, v)
+					}
+					A = translation(A, vecteur(-Nx * v.x+2*w.x - v.x,2*w.y - v.y))
+					B = translation(B, vecteur(-Nx * v.x+2*w.x - v.x,2*w.y - v.y))
+				}
+			break
+		}
+		this.echelle = arrondi(80 / Math.sqrt( XMAX - XMIN),0)
+		this.fenetre = { xmin: XMIN-0.5, ymin: YMIN-0.5, xmax: XMAX+0.5, ymax: YMAX+0.5, pixelsParCm: this.echelle, scale: arrondi(this.echelle / 30,2) }
+		nettoie_objets(this.polygones) // On supprime les doublons éventuels (grâce à leur barycentre)
+		// On ajoute les N°
+		this.nb_polygones = this.polygones.length // Le nombre de polygones du pavage qui sert dans les boucles
+
+		for (let i = 0; i < this.nb_polygones; i++) {
+			this.barycentres.push(barycentre(this.polygones[i]))
+			this.tracesCentres.push(tracePoint(this.barycentres[i]))
+			this.tracesCentres[i].opacite = 0.5
+			this.tracesCentres[i].color = 'blue'
+			this.tracesCentres[i].taille = 2
+			this.coordonnees.push([arrondi(this.barycentres[i].x, 2), arrondi(this.barycentres[i].y, 2)])
+			this.numeros.push(texteParPosition(nombre_avec_espace(i + 1), this.barycentres[i].x + 0.5, this.barycentres[i].y, 'milieu', 'black', 50/this.echelle, 0, true))
+		}
+	}
+}
+function pavage() {
+	return new Pavage()
+}
 /**
  * Fonction créant un labyrinthe de nombres
  * Le tableau de nombres doit être de format [6][3]
@@ -6909,7 +7500,7 @@ function Labyrinthe() {
 	this.nombres2d = []
 	this.chemin = []
 	this.niveau = 3
-	this.nombres = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
+	this.nombres = [[]]
 	let  s1, s2, s3, s4, s5, couleur = 'brown', x = 0, y = 0, chemin2d = []
 	let chemins = [
 		[[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [5, 1], [6, 1]],
@@ -7129,8 +7720,17 @@ function Labyrinthe() {
 		let objets=[]
 		for (let a = 1; a < 7; a++) {
 			for (let b = 0; b < 3; b++) {
+				if (typeof(nombres[a-1][b])=='number') {
 				objets.push(texteParPoint(nombre_avec_espace(nombres[a - 1][b]), point(-1.5 + a * 3, 2.5 + b * 3), 'milieu', 'black', taille, 0, true))
+				}
+				else if (typeof(nombres[a-1][b])=='string') { // écriture mode Maths
+					objets.push(texteParPosition(nombres[a - 1][b],-1.5 + a * 3,2.5 + b * 3,'milieu','black',taille,0,true))
+				}
+				else {
+					objets.push(fractionParPosition({x:-1.5 + a * 3,y: 2.5 + b * 3,fraction:nombres[a - 1][b]}))
+				}
 			}
+
 		}
 		return objets
 	}

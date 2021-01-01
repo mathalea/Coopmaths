@@ -73,7 +73,9 @@ var liste_des_exercices_disponibles = {
   "6G25": Construire_mediatrices_6e,
   "6G25-1": Pavages_et_reflexion,
   "6G25-2": Pavages_et_symetries,
-  "6G33": Symetrie_axiale_conservation1,
+  "6G25-3" : Pavage_et_reflexion2d,
+  "6G32-1": Symetrie_axiale_conservation1,
+  "6G33": Reconnaitre_quadrilatere_particulier,
   "6G41": Representer_un_solide_6e,
   "6G42": Solide_6e,
   "6G43": Utiliser_vocabulaire_pave,
@@ -124,6 +126,7 @@ var liste_des_exercices_disponibles = {
   "6N31-1": Encadrer_un_decimal_par_deux_entiers_consecutifs,
   "6N31-2": Ordre_de_grandeur_operations_decimaux,
   "6N31-3": Arrondir_une_valeur_6e,
+  "6N31-4": Intercaler_decimal_entre_2_decimaux,
   "6N32": Fractions_d_unite,
   "6N33": Fraction_d_un_nombre,
   "6N33-0": Fraction_d_une_quantite,
@@ -132,6 +135,7 @@ var liste_des_exercices_disponibles = {
   "6N33-3": Appliquer_un_pourcentage,
   "6N34": Reglages_6N34,
   "6N41": Egalites_entre_fractions,
+  "6N41-1" :Exercice_labyrinthe_fractions_egales,
   "6N43": Criteres_de_divisibilite,
   "6N43-2": Tableau_criteres_de_divisibilite,
   "6P10": Proportionnalite_pas_proportionnalite,
@@ -150,7 +154,8 @@ var liste_des_exercices_disponibles = {
   "5C12": Calculer_une_expression_numerique,
   "5C12-1": Traduire_une_phrase_par_une_expression_et_calculer,
   "5G10": Symetrie_axiale_5e,
-  "5G12": Pavages_et_demi_tour,
+  "5G12" : Pavage_et_demi_tour2d,
+  "5G12-1": Pavages_et_demi_tour,
   "5G11": Transformations_5e,
   "5G10-1": Symetrie_axiale_point_5e,
   "5G10-2": Symetrie_axiale_figure_5e,
@@ -254,8 +259,10 @@ var liste_des_exercices_disponibles = {
   "4F12": Exploiter_representation_graphique,
   "4P10": Problemes_grandeurs_composees,
   "4P10-1": Graphiques_et_proportionnalite,
+  "4P10-2": Tableaux_et_quatrieme_proportionnelle,
   "4G10": Construire_translate_point_4e,
-  "4G11": Pavages_et_translation,
+  "4G11" :Pavage_et_translation2d,
+  "4G11-1": Pavages_et_translation,
   "4G20": Pythagore2D,
   "4G20-1": Egalite_Pythagore2D, // Anciennement Egalite_Pythagore,
   "4G20-2": Racine_caree_de_carres_parfaits,
@@ -300,7 +307,8 @@ var liste_des_exercices_disponibles = {
   "3G10-2": Transformations_3e,
   "3G10-3": Construire_rotation_point_3e,
   "3G11": Construire_homothetie_point_3e,
-  "3G12": Pavages_et_rotation,
+  "3G12" : Pavage_et_rotation2d,
+  "3G12-1": Pavages_et_rotation,
   "3G20": Thales2D_3e,
   "3G20-2": Exercice_Thales,
   "3G20-1": Problemes_Thales,
@@ -346,11 +354,12 @@ var liste_des_exercices_disponibles = {
   "1E10": Calcul_discriminant,
   "1E11": Resoudre_equation_degre_2,
   "1E12": Trouver_equation_parabole,
+  "1F10": CalculsDeDerives,
   "PEA11": Passer_d_une_base_a_l_autre,
   "PEA11-1": Passer_de_la_base_12_ou_16_a_la_10,
   "betaTESTseb": Tests_du_Seb,
   "betaSVG": AfficherSVG,
-  "betaExoZero" : Exercice_zero_mathalea2d,
+  //"betaExoZero" : Exercice_zero_mathalea2d,
   "betaExoConstruction" : Exercice_constructions_basiques,
   P001: Code_LaTeX_personnalise,
   // 'P002': LaTeX_static,
@@ -358,6 +367,7 @@ var liste_des_exercices_disponibles = {
   "P004": Feuille_de_zooms,
   "P005": Feuille_de_grilles,
   "P006" : Nombre_a_placer,
+  "P007" : Pavages_mathalea2d,
   "cours": Questions_de_cours,
   "LaTeX": Code_LaTeX_personnalise,
   // 'Perso' : HTML_personnalise,
@@ -5687,7 +5697,7 @@ function Proportionnalite_pas_proportionnalite() {
           for (let j = 0; j < tirages.length; j++)
             texte += `&${tex_prix(arrondi(tirages[j][1], 2))}`;
           texte += `\\\\\\hline\\end{array}$<br> <br>`;
-          texte += `Le prix des ${objet} est-il proportionnel à la quatité achetée ?<br>`;
+          texte += `Le prix des ${objet} est-il proportionnel à la quantité achetée ?<br>`;
           texte_corr = `Il faut calculer le prix unitaire des ${objet} dans chaque cas de figure :<br><br>`;
           if (met) index3 = range(3);
           else index3 = range(3, [p]);
@@ -6119,7 +6129,7 @@ function Encadrer_fraction_entre_2_entiers() {
       a = randint(0, 9) * 10 + randint(1, 9);
       texte = `$\\ldots < \\dfrac{${n}}{${d}} < \\ldots$`;
       texte_corr = `$${k} < \\dfrac{${n}}{${d}} < ${k + 1}$`;
-      if (correction_detaillee) {
+      if (this.correction_detaillee) {{}
         texte_corr += ` $\\qquad$ car $\\quad ${k}=\\dfrac{${k * d}}{${d}}\\quad$ et $\\quad${k + 1}=\\dfrac{${(k + 1) * d}}{${d}}$ `;
         texte_corr += `<br><br>`
         texte_corr += mathalea2d({ xmin: -.5, xmax: 24, ymax: 1.5, scale: .6 }, fraction(n, d).representation(0, 0, 3, 0, 'barre', 'blue')
@@ -9574,7 +9584,7 @@ function Feuille_de_grilles() {
       for (let i = 0; i < 5; i++) {
         objets.length = 0
         //pixelsParCm=50
-        objets.push(carre(point(1, 1), point(2, 1)))
+        objets.push(carreIndirect(point(1, 1), point(2, 1)))
         objets.push(texteParPosition("= 1 unité", 3.5, 1.5))
         objets.push(grille(15, -2, 19, 2, 'black', 1, 4))
         for (let j = 0; j < 11; j++) {
@@ -9605,7 +9615,7 @@ function Feuille_de_grilles() {
       for (let i = 0; i < 4; i++) {
         objets.length = 0
         //pixelsParCm=50
-        objets.push(carre(point(1, 1.5), point(2, 1.5)))
+        objets.push(carreIndirect(point(1, 1.5), point(2, 1.5)))
         objets.push(texteParPosition("= 1 unité", 3.5, 2))
         objets.push(grille(15, -2.5, 20, 2.5, 'black', 1, 0.5))
         objets.push(grille(11, -0.5, 12, 0.5, 'black', 0.3, 0.1))
@@ -9640,7 +9650,7 @@ function Feuille_de_grilles() {
           D = point(0 + j * 1.1, 0.5)
           objets.push(polygone(A, B, C, D))
         }
-        objets.push(carre(point(1, 1.5), point(2, 1.5)))
+        objets.push(carreIndirect(point(1, 1.5), point(2, 1.5)))
         objets.push(texteParPosition("= 1 unité", 3.5, 2))
         objets.push(segment(point(11.5, 0.5), point(15, 5)))
         objets.push(segment(point(11.5, -0.5), point(15, -5)))
@@ -9682,7 +9692,7 @@ function Feuille_de_grilles() {
       for (let i = 0; i < 5; i++) {
         objets.length = 0
         //pixelsParCm=50
-        objets.push(carre(point(1, 1), point(2, 1)))
+        objets.push(carreIndirect(point(1, 1), point(2, 1)))
         objets.push(texteParPosition("= 1 unité", 3.5, 1.5))
         objets.push(grille(15, -2, 19, 2, 'black', 1, 4))
         for (let j = 0; j < 11; j++) {
@@ -9713,7 +9723,7 @@ function Feuille_de_grilles() {
       for (let i = 0; i < 4; i++) {
         objets.length = 0
         //pixelsParCm=50
-        objets.push(carre(point(1, 1.5), point(2, 1.5)))
+        objets.push(carreIndirect(point(1, 1.5), point(2, 1.5)))
         objets.push(texteParPosition("= 1 unité", 3.5, 2))
         objets.push(grille(15, -2.5, 20, 2.5, 'black', 1, 0.5))
         objets.push(grille(11, -0.5, 12, 0.5, 'black', 0.3, 0.1))
@@ -9748,7 +9758,7 @@ function Feuille_de_grilles() {
           D = point(0 + j * 1.1, 0.5)
           objets.push(polygone(A, B, C, D))
         }
-        objets.push(carre(point(1, 1.5), point(2, 1.5)))
+        objets.push(carreIndirect(point(1, 1.5), point(2, 1.5)))
         objets.push(texteParPosition("= 1 unité", 3.5, 2))
         objets.push(segment(point(11.5, 0.5), point(15, 5)))
         objets.push(segment(point(11.5, -0.5), point(15, -5)))
@@ -9793,14 +9803,14 @@ function Nombre_a_placer() {
       noms = choisit_lettres_differentes(5, 'QFN')
       objets.length = 0
           x1 = parseFloat(this.sup2)
-          x1=arrondi(x1,3)
+          x1=arrondi(x1,4)
         x2 = troncature(x1, 1)
         x21 = troncature(x1, 2)
         x3 = calcul(x2 + 0.1)
         x31 = calcul(x21 + 0.01)
         xmin = Math.floor(x2)
         xmax = xmin + 1
-        thickOff = 0.001
+        thickOff = 0.0001
 
         extremite = `->`
         d1 = droiteGraduee2({
@@ -9816,7 +9826,7 @@ function Nombre_a_placer() {
           pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
         })
         d3 = droiteGraduee2({
-          x: 6.5, y: 0, Min: x21, axePosition: 'H', Max: x31, thickSec: true, thickTer: false, Unite: 2000, thickSecDist: 0.001, thickOffset: thickOff,
+          x: 6.5, y: 0, Min: x21, axePosition: 'H', Max: x31, thickSec: true, thickTer: true, Unite: 2000, thickSecDist: 0.001,thickTerDist: 0.0001, thickOffset: thickOff,
           thickCouleur: 'black', axeCouleur: 'black', axeHauteur: 6, labelsPrincipaux: this.sup3,
           pointListe: [[x1, `${noms[1]}`], [x21, `${noms[3]}`], [x31, `${noms[4]}`]],
           pointTaille: 6, pointOpacite: 0.8, pointCouleur: 'blue', pointStyle: '|', pointEpaisseur: 2, axeStyle: extremite
@@ -9848,7 +9858,7 @@ function Nombre_a_placer() {
         let partent = Math.floor(x1), pardec = calcul(x1 - partent)
 
       texte = mathalea2d(fenetre, objets)
-
+console.log(objets)
       this.contenu += texte;
       this.contenu += '<br>'
     
@@ -11113,18 +11123,20 @@ function Valeur_approchee_division_decimale() {
      {
       // Une fraction irréductible avec un dénominateur qui comporte un facteur différent de 2 ou de 5
       // aura une écriture décimale périodique infinie
-      let k1 = choice([3,5,7,11,13]);
-      let k2 = choice([3,5,7,11,13],k1);
+      let k1 = choice([3,7,11,13]);
+      let k2 = choice([3,7,11,13],k1);
       let a = choice([3,5,7,11,13],[k1,k2])*choice([3,5,7,11,13],[k1,k2])
       let b = k1*k2
       let q = math.round(a/b,6)
       texte = `On sait que $${a}\\div${b}\\approx${tex_nombre(q)}$.`;
       let liste_de_questions1 = [
-        [`La valeur approchée par défaut de $${a}\\div${b}$ au dixième près est : `, math.floor(a/b,1)],
-        [`La valeur approchée par excès de $${a}\\div${b}$ au dixième près est : `, math.ceil(a/b,1)],
+        [`La valeur approchée par défaut de $${a}\\div${b}$ au dixième près est : `, math.floor(a/b,1)], 
+        [`La valeur approchée par excès de $${a}\\div${b}$ au dixième près est : `, math.ceil(a/b,1)], 
         [`La valeur approchée par défaut de $${a}\\div${b}$ au centième près est : `, math.floor(a/b,2)],
+        [`La troncature de $${a}\\div${b}$ au centième près est : `, math.floor(a/b,2)],
         [`La valeur approchée par excès de $${a}\\div${b}$ au centième près est : `, math.ceil(a/b,2)],
         [`La valeur approchée par défaut de $${a}\\div${b}$ au millième près est : `, math.floor(a/b,3)],
+        [`La troncature de $${a}\\div${b}$ au millième près est : `, math.floor(a/b,3)],
         [`La valeur approchée par excès de $${a}\\div${b}$ au millième près est : `, math.ceil(a/b,3)],
       ]
       let liste_de_questions2 = [
@@ -11133,16 +11145,41 @@ function Valeur_approchee_division_decimale() {
         [`La valeur approchée de $${a}\\div${b}$ au millième près est : `, math.round(a/b,3)],
       ]
 
-      shuffle(liste_de_questions1)
+      texte_corr = `On sait que $${a}\\div${b}\\approx${tex_nombre(q)}$.`;
+      // Questions peuvent être défaut, excès ou excès, défaut ou troncature, excès ou excès, troncature
+      let choix = randint(1,4);
+      switch (choix) {
+        case 1:
+          texte+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[0][0]}\\ldots`
+          texte+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[4][0]}\\ldots`
+          texte_corr+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[0][0]} $ ${tex_nombre(liste_de_questions1[0][1])}$`
+          texte_corr+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[4][0]} $ ${tex_nombre(liste_de_questions1[4][1])}$`
+          break;
+        case 2:
+          texte+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[1][0]}\\ldots`
+          texte+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[5][0]}\\ldots`
+          texte_corr+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[1][0]} $ ${tex_nombre(liste_de_questions1[1][1])}$`
+          texte_corr+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[5][0]} $ ${tex_nombre(liste_de_questions1[5][1])}$`
+          break;
+        case 3:
+          texte+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[3][0]}\\ldots`
+          texte+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[7][0]}\\ldots`
+          texte_corr+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[3][0]} $ ${tex_nombre(liste_de_questions1[3][1])}$`
+          texte_corr+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[7][0]} $ ${tex_nombre(liste_de_questions1[7][1])}$`
+          break;
+        case 4:
+          texte+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[4][0]}\\ldots`
+          texte+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[7][0]}\\ldots`
+          texte_corr+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[4][0]} $ ${tex_nombre(liste_de_questions1[4][1])}$`
+          texte_corr+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[7][0]} $ ${tex_nombre(liste_de_questions1[7][1])}$`
+          break;
+      }
       shuffle(liste_de_questions2)
-      texte+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[0][0]}\\ldots`
-      texte+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[1][0]}\\ldots`
+      
       texte+= `<br><br> ${num_alpha(2)} ${liste_de_questions2[0][0]}\\ldots`
       texte+= `<br><br> ${num_alpha(3)} ${liste_de_questions2[1][0]}\\ldots`
       
-      texte_corr = `On sait que $${a}\\div${b}\\approx${tex_nombre(q)}$.`;
-      texte_corr+= `<br><br> ${num_alpha(0)} ${liste_de_questions1[0][0]} $ ${tex_nombre(liste_de_questions1[0][1])}$`
-      texte_corr+= `<br><br> ${num_alpha(1)} ${liste_de_questions1[1][0]} $ ${tex_nombre(liste_de_questions1[1][1])}$`
+      
       texte_corr+= `<br><br> ${num_alpha(2)} ${liste_de_questions2[0][0]} $ ${tex_nombre(liste_de_questions2[0][1])}$`
       texte_corr+= `<br><br> ${num_alpha(3)} ${liste_de_questions2[1][0]} $ ${tex_nombre(liste_de_questions2[1][1])}$`
 
@@ -11807,17 +11844,312 @@ function HTML_personnalise() {
     this.contenu_correction = this.sup2;
   };
 }
+/**
+ * Outil de création de pavages pour le prof
+ * @Auteur Jean-Claude Lhote
+ * Publié le 12/12/2020
+ * Ref : P007
+ */
+function Pavages_mathalea2d() {
+  "use strict";
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Fabriquer des pavages pour travailler les transformations";
+  this.consigne = "";
+  this.nb_questions = 1;
+  this.nb_questions_modifiable = false;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 4
+  this.sup2 = "1-1"
+  this.sup3 = true
+  this.correction_detaillee = false
+  this.correction_detaillee_disponible = true
+  sortie_html ? (this.spacing_corr = 2.5) : (this.spacing_corr = 1.5);
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let objets=[]
+    let Nx, Ny // nombres de dalles en x et en y
+    if (!this.sup2) { // On fixe le nombre de dalles en x et en y
+      // Si aucune grandeur n'est saisie
+      [Nx, Ny] = [1, 1]
+    } else {
+      if (typeof this.sup2 === "number") { // Si on ne met qu'un nombre alors on prend Nx=Ny
+        [Nx, Ny] = [this.sup2, this.sup2];
+        this.nb_questions = 1;
+      } else { // On fixe Nx et Ny avec les valeurs saisies.
+        [Nx, Ny] = this.sup2.split("-"); // Sinon on créé un tableau à partir des valeurs séparées par des -
+      }
+    }
+    this.liste_corrections = []
+    this.liste_questions = []
+    let texte = "", texte_corr = ""
+    let type_de_pavage
 
+    let monpavage=pavage() // On crée l'objet Pavage qui va s'appeler monpavage
+    type_de_pavage = parseInt(this.sup)
+    monpavage.construit(type_de_pavage,Nx,Ny,3) // On initialise toutes les propriétés de l'objet.
+    if (this.sup3){ // Doit-on afficher les Numéros ?
+        for (let i=0;i<monpavage.nb_polygones;i++){
+    objets.push(texteParPosition(nombre_avec_espace(i + 1), monpavage.barycentres[i].x + 0.5,monpavage.barycentres[i].y, 'milieu', 'black', 0.04 * monpavage.echelle, 0, true))
+        }
+      }
+        if (this.correction_detaillee) { // Doit-on montrer les centres des figures ?
+      for (let i = 0; i < monpavage.nb_polygones; i++) {
+        objets.push(monpavage.tracesCentres[i])
+      }
+    }
+    for (let i = 0; i < monpavage.nb_polygones; i++) { // il faut afficher tous les polygones du pavage
+      objets.push(monpavage.polygones[i])
+    }
+    texte = mathalea2d(monpavage.fenetre, objets) // monpavage.fenetre est calibrée pour faire entrer le pavage dans une feuille A4
+ 
+    texte_corr = "Le premier paramètre permet de choisir le pavage.<br>"
+    texte_corr += "Le deuxième permet de choisir le nombre de répétitions en x et y. Exemple : 3-2<br>"
+    texte_corr += "Le troisième permet d'afficher un Numéro distinct sur chaque figure.<br>"
+    texte_corr += "En activant la correction détaillée, on affiche les barycentres de celles-ci."
+ 
+    this.liste_questions.push(texte);
+    this.liste_corrections.push(texte_corr);
+    liste_de_question_to_contenu(this)
+  }
+  this.besoin_formulaire_numerique = ["Type de pavage", 7, '1 : Triangles équilatéraux\n2 : Carrés\n3 : Hexagones\n4 : Pavage 3².4.3.4\n5 : Pavage 8².4\n6 : Pavage hexagonal d\'écolier\n7 : Pavage 6.3.6.3']
+  this.besoin_formulaire2_texte = ["Nombre de répétitions du motif (2 entiers séparés par un tiret)"];
+  this.besoin_formulaire3_case_a_cocher = ["Présence de numéros"]
+} // Fin de l'exercice.
+
+/**
+ * @Auteur Jean-Claude Lhote
+ * publié le 14/12/2020
+ * Réf : 6G25-3
+ * Trouver une figure symétrique dans un pavage. Symétrie axiale. 6 pavages différents.
+ */
+function Pavage_et_reflexion2d() {
+  "use strict";
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre =
+    "Trouver l\'image d'une figure par une symétrie axiale dans un pavage";
+  this.consigne = "";
+  this.nb_questions = 3;
+  this.nb_questions_modifiable = true;
+  this.correction_detaillee=true;
+  this.correction_detaillee_disponible=true;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1; // 1 pour des pavages modestes, 2 pour des plus grand.
+  this.sup2=false // On cache les centres par défaut.
+  this.sup3=7;
+  sortie_html ? (this.spacing_corr = 2.5) : (this.spacing_corr = 1.5);
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let videcouples=function(tableau){
+      for (let k=0;k<tableau.length;k++){
+        for (let j=k+1;j<tableau.length;j++){
+          if (tableau[k][1]==tableau[j][0]) {
+            tableau.splice(j,1)
+          }
+        }
+      }
+      return tableau
+    }
+    let compare2polys=function(poly1,poly2){
+      if (comparenbsommets(poly1,poly2)) {
+        if (comparesommets(poly1,poly2)) 
+          return true
+        else
+          return false
+      }
+      else 
+        return false 
+      }
+      let comparenbsommets = function(poly1,poly2){
+        if (poly1.listePoints.length==poly2.listePoints.length){
+          return true
+        }
+        else return false
+      }
+      
+      let compare2sommets=function(sommet1,sommet2){
+        if (egal(sommet1.x,sommet2.x,0.1)&&egal(sommet1.y,sommet2.y,0.1)) {
+          return true
+        }
+        else return false
+      }
+      let comparesommets = function(poly1,poly2){
+        let trouve=false,trouves=0
+        if (comparenbsommets(poly1,poly2))
+        for (let P of poly1.listePoints) {
+          for (let M of poly2.listePoints) {
+            if (compare2sommets(M,P)) {
+              trouve=true
+            }
+            if (trouve) break
+          }
+          if (trouve) {
+            trouves++
+            trouve=false
+          }
+          else {
+            trouves-=100
+          }
+          if (trouves<0)
+          break
+        }
+        if (trouves==poly1.listePoints.length)
+          return true
+        else return false
+      }
+ /*     let associesommets=function(poly1,poly2,d){ //Pour chercher les indices des symétriques dans leur polygone respectif
+        let binomes=[],P,M   
+        for (let k=0;k<poly1.listePoints.length;k++) { // afin éventuellement de faire clignoter ces paires de points lors de la correction
+          P=symetrieAxiale(poly1.listePoints[k],d)
+          for (let l=0;l<poly2.listePoints.length;l++) {
+            M=poly2.listePoints[l]
+            if (compare2sommets(M,P)) {
+              binomes.push([k,l])
+              break
+            }
+          }
+        }
+        return binomes
+      }
+  */  
+    let refleccion = function (pavage, d, numero) { // retourne le numero du polygone symétrique ou -1 si il n'existe pas
+      let poly=pavage.polygones[numero-1],pol
+      let result=-1
+      let sympoly=symetrieAxiale(poly,d)
+      for (let k= 0;k<pavage.polygones.length;k++) {
+        pol=pavage.polygones[k]
+        if (compare2polys(sympoly,pol)) {
+          return k+1
+        }
+      }
+      return result
+    } 
+
+    let objets=[],objets_correction=[],symetriques=[],P1,P2,P3,t
+    let codes=['/','//','///','o','w','X','U','*']
+    let taillePavage=parseInt(this.sup)
+    if (taillePavage<1||taillePavage>2) {
+      taillePavage=1
+    }
+    if (this.nb_questions>5) {
+      taillePavage=2
+    }
+    this.liste_corrections = []
+    this.liste_questions = []
+    let Nx,Ny,index1,index2,A,B,d,image,couples=[],tailles=[],monpavage,fenetre
+    let texte = "", texte_corr = "", type_de_pavage = parseInt(this.sup)
+    let nombreTentatives,nombrePavageTestes=1
+    if (this.sup3==8) {
+      type_de_pavage =  randint(1,7)
+    }
+    else {
+      type_de_pavage=parseInt(this.sup3)
+    }
+    while (couples.length<this.nb_questions&&nombrePavageTestes<7){
+      nombreTentatives=0
+    monpavage = pavage() // On crée l'objet Pavage qui va s'appeler monpavage
+    tailles = [[[3, 2], [3, 2], [2, 2], [2, 2], [2, 2], [2, 2],[3,2]], [[4, 3], [4, 3], [3, 3], [3, 3], [3, 3], [3, 2],[5,3]]]
+    Nx = tailles[taillePavage-1][type_de_pavage-1][0]
+    Ny = tailles[taillePavage-1][type_de_pavage-1][1]
+    monpavage.construit(type_de_pavage, Nx, Ny, 3) // On initialise toutes les propriétés de l'objet.
+    fenetre=monpavage.fenetre
+    fenetreMathalea2d=[fenetre.xmin,fenetre.ymin,fenetre.xmax,fenetre.ymax]
+    while (couples.length<this.nb_questions+2&&nombreTentatives<3) { // On cherche d pour avoir suffisamment de couples
+    couples=[] // On vide la liste des couples pour une nouvelle recherche
+    index1=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3)) // On choisit 2 points dans 2 polygones distincts.
+    index2=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3),index1) 
+    A=monpavage.polygones[index1].listePoints[randint(0,2)] // On les choisit dans les trois premiers
+    B=monpavage.polygones[index2].listePoints[randint(0,2)] // points pour éviter un point qui n'éxiste pas
+    while (compare2sommets(A,B)){ // On vérifie qu'ils sont bien distincts sinon, on change.
+      index1=randint(0,monpavage.nb_polygones-1) 
+      index2=randint(0,monpavage.nb_polygones-1,index1)
+      A=monpavage.polygones[index1].listePoints[randint(0,2)] // idem ci-dessus
+      B=monpavage.polygones[index2].listePoints[randint(0,2)] // mais à la sortie du While A!=B
+    }
+    d=mediatrice(A,B,'(d)','red') // l'axe sera la droite passant par ces deux points si ça fonctionne
+    d.epaisseur=3
+    for (let i=1;i<= monpavage.nb_polygones; i++){ //on crée une liste des couples (antécédents, images)
+      image=refleccion(monpavage,d,i)
+      if (image!=-1){ // si l'image du polygone i existe, on ajoute le couple à la liste
+        couples.push([i,image])
+      }
+    }
+    couples=videcouples(couples) //supprime tous les couples en double (x,y)=(y,x)
+    nombreTentatives++ 
+    }
+    if (couples.length<this.nb_questions){
+    if (this.sup3==7) {
+      type_de_pavage=(type_de_pavage+1)%5+1
+    }
+    nombrePavageTestes++
+    }
+  }
+  if (couples.length<this.nb_questions){
+    console.log('trop de questions, augmentez la taille du pavage')
+    return
+  }
+
+    objets.push(d) // la droite d est trouvée
+    couples=shuffle(couples) // on mélange les couples
+    for (let i = 0; i < monpavage.nb_polygones; i++) {
+      objets.push(texteParPosition(nombre_avec_espace(i + 1), monpavage.barycentres[i].x + 0.5, monpavage.barycentres[i].y, 'milieu', 'gray', 1, 0, true))
+    }
+    if (this.sup2) { // Doit-on montrer les centres des figures ?
+      for (let i = 0; i < monpavage.nb_polygones; i++) {
+        objets.push(monpavage.tracesCentres[i])
+      }
+    }
+    for (let i = 0; i < monpavage.nb_polygones; i++) { // il faut afficher tous les polygones du pavage
+      objets.push(monpavage.polygones[i])
+    }
+    texte = mathalea2d(fenetre, objets) // monpavage.fenetre est calibrée pour faire entrer le pavage dans une feuille A4
+    texte+=`<br>`
+    for (let i=0;i<this.nb_questions;i++){  
+      texte+=`Quel est l'image de la figure $${couples[i][0]}$ dans la symétrie d'axe $(d)$ ?<br>`
+      texte_corr+=`L'image de la figure $${couples[i][0]}$ dans la symétrie d'axe $(d)$ est la figure ${couples[i][1]}<br>`
+//      symetriques=associesommets(monpavage.polygones[couples[i][0]-1],monpavage.polygones[couples[i][1]-1],d)
+      if (this.correction_detaillee){
+        t=this.nb_questions*3;
+        A=monpavage.barycentres[couples[i][0]-1]
+        B=monpavage.barycentres[couples[i][1]-1]
+        P1=monpavage.polygones[couples[i][0]-1]
+        P1.color=texcolors(i)
+        P1.couleurDeRemplissage=texcolors(i)
+        P1.opaciteDeRemplissage=0.5
+        P1.epaisseur=2
+        P2=monpavage.polygones[couples[i][1]-1]
+        P2.color=texcolors(i)
+        P2.couleurDeRemplissage=texcolors(i)
+        P2.opaciteDeRemplissage=0.5
+        P2.epaisseur=2
+        P3=symetrieAnimee(P1,d,`begin="${i*3}s;${i*3+t}s;${i*3+t*2}s" end="${i*3+2}s;${i*3+t+2}s;${i*3+t*2+2}s" dur="2s" repeatCount="indefinite" repeatDur="${9*this.nb_questions}s" id="poly-${i}-anim"`)
+        P3.color=texcolors(i)
+        P3.epaisseur=2
+        objets_correction.push(tracePoint(A,B),segment(A,B,texcolors(i)),codageMediatrice(A,B,texcolors(i),codes[i]),P1,P2,P3)
+      }
+    }
+    if (this.correction_detaillee){
+      texte_corr+=mathalea2d(fenetre, objets,objets_correction)
+    }
+    this.liste_questions.push(texte);
+    this.liste_corrections.push(texte_corr);
+    liste_de_question_to_contenu(this)
+  }
+	this.besoin_formulaire_numerique = ['Taille du pavage (la grande est automatique au-delà de 5 questions)', 2, '1 : Taille modeste\n 2 : Grande taille'];
+  this.besoin_formulaire2_case_a_cocher=["Montrer les centres"]
+  this.besoin_formulaire3_numerique=['Choix du pavage',8,'1 : Pavage de triangles équilatéraux\n2 : Pavage de carrés\n3 : Pavage d\'hexagones réguliers\n4 : Pavage 3².4.3.4\n5 : Pavage 8².4\n 6 : Pavage de losanges (hexagonal d\'écolier)\n7 : Pavage 6.3.6.3\n8 : Un des sept pavages au hasard']
+}
 /**
  * Pavages et symétrie axiale.
  * Pas de version LaTeX
+ * @Auteur Jean-Claude Lhote
+ * Publié en 02/2020
  * référence 6G25-1
  */
 function Pavages_et_reflexion() {
   "use strict";
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre =
-    "Trouver l'image d'une figure par une symétrie axiale dans un pavage triangulaire";
+    "Trouver l'image d'une figure par une symétrie axiale dans un pavage triangulaire (sortie Latex Impossible)";
   this.pas_de_version_LaTeX = true;
   this.consigne = "";
   this.nb_questions = 1;
@@ -12939,7 +13271,7 @@ function Construire_mediatrices_6e() {
 }
 
 /**
- * Ref 6G33
+ * Ref 6G32-1
  * Publié le 26/10/2020
  * @Auteur Jean-Claude Lhote
  */
@@ -13122,6 +13454,218 @@ function Symetrie_axiale_conservation1() {
   this.besoin_formulaire2_case_a_cocher = ["Avec des points de part et d'autre"];
 }
 
+
+/**
+ * Reconnaitre un quadrilatère particulier à partir de ses propriétés
+ * @Auteur Rémi Angot
+ * Référence 6G33
+*/
+function Reconnaitre_quadrilatere_particulier() {
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = "Reconnaitre un quadrilatère particulier à partir de ses propriétés";
+  this.consigne = "";
+  this.nb_questions = 3;
+  this.nb_questions_modifiable = false;
+  this.nb_cols = 2; // Nombre de colonnes pour la sortie LaTeX
+  this.nb_cols_corr = 2; // Nombre de colonnes dans la correction pour la sortie LaTeX
+  this.correction_detaillee_disponible = true;
+  sortie_html ? this.correction_detaillee = true : this.correction_detaillee = false
+
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    this.liste_questions = []; // Liste de questions
+    this.liste_corrections = []; // Liste de questions corrigées
+
+    let liste_de_questions = shuffle([choice(['losange1','losange2']),choice(['rectangle1','rectangle2']),choice(['carre1','carre2','carre3'])])
+    for (let i = 0, texte, texte_corr,cpt = 0; i < this.nb_questions && cpt < 50;)
+     {
+      texte = '';
+      texte_corr = '';
+      let A,B,C,D,O,ABCD,codage,codage1,codage2,codage3,codage4,sAC,sBD,sOA,sOB,sOC,sOD,marquesDemiDiagonales,marquesDemiDiagonales1,marquesDemiDiagonales2;
+      switch (liste_de_questions[i]) {
+          case 'losange1':
+              texte = "Quelle est la nature d'un quadrilatère ayant 4 côtés de même longueur ?";
+              A = point(0, 0);
+              B = point(2, 3);
+              C = point(0, 6);
+              D = point(-2, 3);
+              O = point(0, 3);
+              ABCD = polygone(A, B, C, D);
+              //codage = codageAngleDroit(C, O, B);
+              marquesCotes = codeSegments("||", "blue", A, B, B, C, C, D, D, A);
+              // sAC = segment(A, C);
+              // sBD = segment(B, D);
+              // sOA = segment(O, A);
+              // sOB = segment(O, B);
+              // sOC = segment(O, C);
+              // sOD = segment(O, D);
+              // sAC.pointilles = true;
+              // sBD.pointilles = true;
+              // marquesDemiDiagonales = codeSegments("|", "blue", O, A, O, B, O, C, O, D);
+              if (this.correction_detaillee) {texte_corr = mathalea2d({xmin:-3,xmax:3,ymin:-1,ymax:7},ABCD,marquesCotes)+"<br>"}
+              texte_corr += "C'est un losange."
+              break;
+          case 'losange2':
+              texte = "Quelle est la nature d'un quadrilatère ayant ses diagonales perpendiculaires et sécantes en leur milieu ?";
+              A = point(0, 0);
+              B = point(2, 3);
+              C = point(0, 6);
+              D = point(-2, 3);
+              O = point(0, 3);
+              ABCD = polygone(A, B, C, D);
+              codage = codageAngleDroit(C, O, B);
+              //marquesCotes = codeSegments("||", "blue", A, B, B, C, C, D, D, A);
+              sAC = segment(A, C);
+              sBD = segment(B, D);
+              sOA = segment(O, A);
+              sOB = segment(O, B);
+              sOC = segment(O, C);
+              sOD = segment(O, D);
+              sAC.pointilles = true;
+              sBD.pointilles = true;
+              marquesDemiDiagonales1 = codeSegments("|", "blue", O, A, O, C);
+              marquesDemiDiagonales2 = codeSegments("|||", "blue", O, B, O, D);
+              if (this.correction_detaillee) {texte_corr = mathalea2d({xmin:-3,xmax:3,ymin:-1,ymax:7},ABCD,codage,sAC,sBD,marquesDemiDiagonales1,marquesDemiDiagonales2)+"<br>"}
+              texte_corr += "C'est un losange."
+              break;
+          case 'rectangle1':
+              texte = "Quelle est la nature d'un quadrilatère ayant 3 angles droits ?";
+              A = point(0, 0);
+              B = point(5, 0);
+              C = point(5, 3);
+              D = point(0, 3);
+              O = point(2.5, 1.5);
+              ABCD = polygone(A, B, C, D);
+              codage1 = codageAngleDroit(A,B,C);
+              codage2 = codageAngleDroit(B,C,D);
+              codage3 = codageAngleDroit(C,D,A);
+              //marquesCotes = codeSegments("||", "blue", A, B, B, C, C, D, D, A);
+              // sAC = segment(A, C);
+              // sBD = segment(B, D);
+              // sOA = segment(O, A);
+              // sOB = segment(O, B);
+              // sOC = segment(O, C);
+              // sOD = segment(O, D);
+              // sAC.pointilles = true;
+              // sBD.pointilles = true;
+              // marquesDemiDiagonales = codeSegments("||", "blue", O, A, O, B, O, C, O, D);
+              if (this.correction_detaillee) {texte_corr = mathalea2d({xmin:-1,xmax:6,ymin:-1,ymax:4},ABCD,codage1,codage2,codage3)+"<br>"}
+              texte_corr += "C'est un rectangle."
+              break;
+          case 'rectangle2':
+              texte = "Quelle est la nature d'un quadrilatère ayant ses diagonales de même longueur et sécantes en leur milieu ?";
+              A = point(0, 0);
+              B = point(5, 0);
+              C = point(5, 3);
+              D = point(0, 3);
+              O = point(2.5, 1.5);
+              ABCD = polygone(A, B, C, D);
+              // codage1 = codageAngleDroit(A,B,C);
+              // codage2 = codageAngleDroit(B,C,D);
+              // codage3 = codageAngleDroit(C,D,A);
+              //marquesCotes = codeSegments("||", "blue", A, B, B, C, C, D, D, A);
+              sAC = segment(A, C);
+              sBD = segment(B, D);
+              // sOA = segment(O, A);
+              // sOB = segment(O, B);
+              // sOC = segment(O, C);
+              // sOD = segment(O, D);
+              // sAC.pointilles = true;
+              // sBD.pointilles = true;
+              marquesDemiDiagonales = codeSegments("||", "blue", O, A, O, B, O, C, O, D);
+              if (this.correction_detaillee) {texte_corr = mathalea2d({xmin:-1,xmax:6,ymin:-1,ymax:4},ABCD,marquesDemiDiagonales,sAC,sBD)+"<br>"}
+              texte_corr += "C'est un rectangle."
+              break;
+          case 'carre1':
+              texte = "Quelle est la nature d'un quadrilatère ayant ses 4 côtés de même longueur et 4 angles droits ?";
+              A = point(0, 0);
+              B = point(3, 0);
+              C = point(3, 3);
+              D = point(0, 3);
+              O = point(1.5, 1.5);
+              ABCD = polygone(A, B, C, D);
+              codage1 = codageAngleDroit(A,B,C);
+              codage2 = codageAngleDroit(B,C,D);
+              codage3 = codageAngleDroit(C,D,A);
+              codage4 = codageAngleDroit(D,A,B);
+              marquesCotes = codeSegments("||", "blue", A, B, B, C, C, D, D, A);
+              // sAC = segment(A, C);
+              // sBD = segment(B, D);
+              // sOA = segment(O, A);
+              // sOB = segment(O, B);
+              // sOC = segment(O, C);
+              // sOD = segment(O, D);
+              // sAC.pointilles = true;
+              // sBD.pointilles = true;
+              // marquesDemiDiagonales = codeSegments("||", "blue", O, A, O, B, O, C, O, D);
+              if (this.correction_detaillee) {texte_corr = mathalea2d({xmin:-1,xmax:4,ymin:-1,ymax:4},ABCD,codage1,codage2,codage3,marquesCotes)+"<br>"}
+              texte_corr += "C'est un carré."
+              break;
+          case 'carre2':
+              texte = "Quelle est la nature d'un quadrilatère ayant ses ses diagonales perpendiculaires, de même longueur et sécantes en leur milieu ?";
+              A = point(0, 0);
+              B = point(3, 0);
+              C = point(3, 3);
+              D = point(0, 3);
+              O = point(1.5, 1.5);
+              ABCD = polygone(A, B, C, D);
+              codage = codageAngleDroit(C,O,D);
+              // codage2 = codageAngleDroit(B,C,D);
+              // codage3 = codageAngleDroit(C,D,A);
+              // codage4 = codageAngleDroit(D,A,B);
+              // marquesCotes = codeSegments("||", "blue", A, B, B, C, C, D, D, A);
+              sAC = segment(A, C);
+              sBD = segment(B, D);
+              sOA = segment(O, A);
+              sOB = segment(O, B);
+              sOC = segment(O, C);
+              sOD = segment(O, D);
+              sAC.pointilles = true;
+              sBD.pointilles = true;
+              marquesDemiDiagonales = codeSegments("||", "blue", O, A, O, B, O, C, O, D);
+              if (this.correction_detaillee) {texte_corr = mathalea2d({xmin:-1,xmax:4,ymin:-1,ymax:4},ABCD,codage,marquesDemiDiagonales,sAC,sBD)+"<br>"}
+              texte_corr += "C'est un carré."
+              break;
+          case 'carre3':
+              texte = "Quelle est la nature d'un quadrilatère ayant ses 4 côtés de même longueur et un angle droit ?";
+              A = point(0, 0);
+              B = point(3, 0);
+              C = point(3, 3);
+              D = point(0, 3);
+              O = point(1.5, 1.5);
+              ABCD = polygone(A, B, C, D);
+              codage = codageAngleDroit(A,B,C);
+              // codage2 = codageAngleDroit(B,C,D);
+              // codage3 = codageAngleDroit(C,D,A);
+              // codage4 = codageAngleDroit(D,A,B);
+              marquesCotes = codeSegments("||", "blue", A, B, B, C, C, D, D, A);
+              // sAC = segment(A, C);
+              // sBD = segment(B, D);
+              // sOA = segment(O, A);
+              // sOB = segment(O, B);
+              // sOC = segment(O, C);
+              // sOD = segment(O, D);
+              // sAC.pointilles = true;
+              // sBD.pointilles = true;
+              // marquesDemiDiagonales = codeSegments("||", "blue", O, A, O, B, O, C, O, D);
+              if (this.correction_detaillee) {texte_corr = mathalea2d({xmin:-1,xmax:4,ymin:-1,ymax:4},ABCD,codage,marquesCotes)+"<br>"}
+              texte_corr += "C'est un carré."
+              break;
+      }
+
+      if (this.liste_questions.indexOf(texte) == -1) {
+        // Si la question n'a jamais été posée, on en crée une autre
+        this.liste_questions.push(texte);
+        this.liste_corrections.push(texte_corr);
+        i++;
+      }
+      cpt++;
+    }
+    liste_de_question_to_contenu(this);
+  };
+  //this.besoin_formulaire_numerique = ['Niveau de difficulté',3,'1 : ....\n2 : .....,\n3 : .....];
+}
+
+
 // Exercices paramétrés pour correspondre au référentiel
 // Référence 5P10
 //function Proportionnalite_pas_proportionnalite_5e(){
@@ -13184,7 +13728,7 @@ function Tracer_des_perpendiculaires_et_des_paralleles() {
 function Pavages_et_demi_tour() {
   Pavages_et_transformations.call(this);
   this.titre =
-    "Trouver l'image d'une figure par une symétrie centrale dans un pavage";
+    "Trouver l'image d'une figure par une symétrie centrale dans un pavage (sortie Latex Impossible)";
   this.sup = 2;
 }
 /**
@@ -13195,29 +13739,29 @@ function Pavages_et_demi_tour() {
 function Pavages_et_symetries() {
   Pavages_et_transformations.call(this);
   this.titre =
-    "Trouver l'image d'une figure par une symétrie axiale dans un pavage carré";
+    "Trouver l'image d'une figure par une symétrie axiale dans un pavage carré (sortie Latex Impossible)";
   this.sup = 1;
 }
 /**
  * Exercice en html seulement. Translations dans un pavage.
  * @Auteur Jean-Claude Lhote
- * référence 4G11
+ * référence 4G11-1
  */
 function Pavages_et_translation() {
   Pavages_et_transformations.call(this);
   this.titre =
-    "Trouver l'image d'une figure par une translation dans un pavage";
+    "Trouver l'image d'une figure par une translation dans un pavage (sortie Latex Impossible)";
   this.sup = 3;
 }
 /**
  * Exercice en html seulement. Rotationss dans un pavage.
  * @Auteur Jean-Claude Lhote
- * référence 3G12
+ * référence 3G12-1
  */
 function Pavages_et_rotation() {
   Pavages_et_transformations.call(this);
   this.titre =
-    "Trouver l'image d'une figure par une rotation de 90 degrés dans un pavage";
+    "Trouver l'image d'une figure par une rotation de 90 degrés dans un pavage (sortie Latex Impossible)";
   this.sup = 4;
 }
 
@@ -14544,105 +15088,12 @@ function Construire_un_triangle_avec_cible() {
     `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
   ];
 }
-
-function Exercice_zero_mathalea2d() {
-  "use strict"
-  Exercice.call(this)
-  this.titre = "Mettre ici le titre écrit dans le menu Mathalea";
-  this.nb_questions = 4; // Ici le nombre de questions
-  this.nb_questions_modifiable=true // Active le formulaire nombre de questions
-  this.nb_cols = 1; // Le nombre de colonnes dans l'énoncé LaTeX
-  this.nb_cols_corr = 1;// Le nombre de colonne pour la correction LaTeX
-  this.pas_de_version_LaTeX=false // mettre à true si on ne veut pas de l'exercice dans le générateur LaTeX
-  this.pas_de_version_HMTL=false // mettre à true si on ne veut pas de l'exercice en ligne
-// Voir la Classe Exercice pour une liste exhaustive des propriétés disponibles.
-
-//  this.sup = false; // A décommenter : valeur par défaut d'un premier paramètre
-//  this.sup2 = false; // A décommenter : valeur par défaut d'un deuxième paramètre
-//  this.sup3 = false; // A décommenter : valeur par défaut d'un troisième paramètre
-
-// c'est ici que commence le code de l'exercice cette fonction crée une copie de l'exercice
-  this.nouvelle_version = function (numero_de_l_exercice) {
-  // la variable numero_de_l_exercice peut être récupérée pour permettre de différentier deux copies d'un même exo
-  // Par exemple, pour être certain de ne pas avoir les mêmes noms de points en appelant 2 fois cet exo dans la même page
-
-  this.liste_questions = [] // tableau contenant la liste des questions 
-  this.liste_corrections = []
-  let type_de_questions_disponibles=[1] // tableau à compléter par valeurs possibles des types de questions
-  let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
-// Ci-dessus On crée une liste aléatoire comprenant nb_questions parmi les types disponibles.
-/* Un exemple ci-dessous : si la classe est 6, alors les types dispo sont 1 et 2 sinon , 1,2,3 et 4.
-if (this.classe == 6) type_de_questions_disponibles = [1, 2]
-    else type_de_questions_disponibles = [1, 2, 3,4]
-liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
-*/
-// boucle pour fabriquer les nb_questions questions en s'assurant que si il n'y a pas nb_questions différentes
-// La boucle s'arrête après 50 tentatives.
-
-    let objets_enonce,objets_enonceml,objets_correction,params_enonce,params_enonceml,params_correction
-
-    for (let i = 0, texte, texte_corr, cpt = 0; i < this.nb_questions && cpt < 50;) {
-      objets_enonce = [] // on initialise le tableau des objets Mathalea2d de l'enoncé
-      objets_enonceml = [] // Idem pour l'enoncé à main levée si besoin
-      objets_correction = [] // Idem pour la correction
-
-      texte = `` // Nous utilisons souvent cette variable pour construire le texte de la question.
-      texte_corr = `` // Idem pour le texte de la correction.
-//      nom = creerNomDePolygone(3, "PQ")
-// fonction permettant de choisir un nom de polygone, soit ici 3 lettres qui se suivent à l'exclusion de la séquence PQ
-      switch (liste_type_de_questions[i]) { // Chaque question peut être d'un type différent, ici 4 cas sont prévus...
-        case 1:
-             
-          //ici sont créés les texte, tex_corr, objets mathalea2d divers entrant dans le contenu de l'exercice
-        break;
-
-        case 2:
-          // Idem Cas1 mais avec d'autres texte, texte_corr...
-        break
-
-        case 3:
-          
-        break
-          
-        case 4:
-        
-        break  
-          
-      }
-//  objets_enonce.push () // On rempli les tableaux d'objets Mathalea2d
-//  objets_enonceml.push()
-//  objets_correction.push()
-
-//paramètres de la fenêtre Mathalea2d pour l'énoncé main levée
-  //    params_enonceml = { xmin: Math.min(objets_enonceml.x), ymin: Math.min(objets_enonceml.y), xmax: Math.max(objets_enonceml.x), ymax: Math.max(objets_enonceml.y), pixelsParCm: 20, scale: 1, mainlevee: true, amplitude: 1 }
-//paramètres de la fenêtre Mathalea2d pour l'énoncé normal
-      params_enonce = { xmin:-10, ymin: -10, xmax: 10, ymax: 10, pixelsParCm: 20, scale: 1, mainlevee: false}
-//paramètres de la fenêtre Mathalea2d pour la correction
-      params_correction = { xmin: -10, ymin: -10, xmax: 10, ymax: 10, pixelsParCm: 20, scale: 1 }
-// On ajoute au texte de l'énoncé, la figure à main levée et la figure de l'enoncé.
-      texte += mathalea2d(params_enonce, objets_enonce)
-// On ajoute au texte de la correction, la figure de la correction
-      texte_corr += mathalea2d(params_correction, objets_correction)
-      if (this.liste_questions.indexOf(texte) == -1) {
-        // Si la question n'a jamais été posée, on la stocke dans la liste des questions
-        this.liste_questions.push(texte);
-        this.liste_corrections.push(texte_corr);
-        i++;
-      }
-      cpt++;
-    }
-    liste_de_question_to_contenu(this); // On envoie l'exercice à la fonction de mise en page
-  };
-// Si les variables suivantes sont définies, elles provoquent l'affichage des formulaires des paramètres correspondants
-// Il peuvent être de 3 types : _numerique, _case_a_cocher ou _texte.
-// Il sont associés respectivement aux paramètres sup, sup2 et sup3.
-
-//	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Perpendiculaires\n 2 : Parallèles\n 3 : Mélange`]
-//  this.besoin_formulaire2_numerique = ["Type de cahier",3,`1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`];
-// this.besoin_formulaire3_case_a_cocher =['figure à main levée',true]
-
-} // Fin de l'exercice.
-
+/**
+ * Non Publié : base servant à faire des tutoriels vidéos
+ * @Auteur Jean-Claude Lhote
+ * Réf : betaExoConstruction
+ * publié le 1/12/2020
+ */
 function Exercice_constructions_basiques() {
   "use strict"
   Exercice.call(this)
@@ -14706,7 +15157,7 @@ liste_type_de_questions = combin,aison_listes(type_de_questions_disponibles, thi
 
           objets_enonce.push (traces1,labels1) 
           objets_enonceml.push(traces2,labels2,kare,aA,aB,aC,aD)
-          objets_correction.p,ush(traces2,labels2,kare,aA,aB,aC,aD)
+          objets_correction.push(traces2,labels2,kare,aA,aB,aC,aD)
           //ici sont créés les texte, tex_corr, objets mathalea2d divers entrant dans le contenu de l'exercice
         break;
 
@@ -14765,10 +15216,7 @@ liste_type_de_questions = combin,aison_listes(type_de_questions_disponibles, thi
  * Ref : c3C10-2 et 6C10-5
  * Parcourir un labyrinthe de nombres en passant par les multiples du nombre choisi.
  */
-function Exercice_labyrinthe_multiplesCM() {
-  Exercice_labyrinthe_multiples.call(this)
-  this.niveau='CM'
-}
+
 function Exercice_labyrinthe_multiples() {
   "use strict"
   Exercice.call(this)
@@ -14812,6 +15260,9 @@ function Exercice_labyrinthe_multiples() {
       listeMultiples.push(table * i)
     }
     listeMultiples = combinaison_listes(listeMultiples, 12)
+    for (let a=1;a<7;a++) {
+      laby.nombres.push([0,0,0])
+    }
     for (let a = 1; a < 7; a++) {
       for (let b = 0; b < 3; b++) {
         trouve = false
@@ -14842,14 +15293,14 @@ function Exercice_labyrinthe_multiples() {
 
 /**
  * @Auteur Jean-Claude Lhote
- * Publié le 7/12/2020
- * Ref 5A11-1
- * Sortir du labyrinthe en utilisant les critères de divisibilité.
+ * Publié le 11/12/2020
+ * Ref : 6N41-1
+ * Parcourir un labyrinthe de fractions en passant par des fractions égales.
  */
-function Exercice_labyrinthe_divisibilite() {
+function Exercice_labyrinthe_fractions_egales() {
   "use strict"
   Exercice.call(this)
-  this.titre = "Labyrinthe de multiples basé sur les critères de divisibilité";
+  this.titre = "Labyrinthe de fractions égales";
   this.consigne=""
   this.niveau = '6e'
   this.nb_questions = 1;
@@ -14858,88 +15309,76 @@ function Exercice_labyrinthe_divisibilite() {
   this.nb_cols_corr = 1;
   this.pas_de_version_LaTeX = false
   this.pas_de_version_HMTL = false
-  this.sup3 = 3
-  this.sup = 9;
+  this.sup2 = 3
+  this.sup = 10
   if (this.niveau = 'CM') {
-    this.sup2 = 1;
-    this.sup3 = 3;
+    this.sup = 10;
+    this.sup2 = 3;
   }
   else {
-    this.sup2 = 2;
-    this.sup3 = 4;
+    this.sup = 13;
+    this.sup2 = 4;
   }
-  //this.consigne=`Trouve la sortie en ne passant que par les cases contenant un nombre divisible par $${parseInt(this.sup)}$.`
-
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_corrections=[]
     this.liste_questions=[]
+    let mesfractions=[]
     let params, texte, texte_corr, trouve
     let laby = labyrinthe()
-    laby.niveau = parseInt(this.sup3) // Le niveau (de 1 à 6=mélange) définit le nombre d'étapes
+    laby.niveau = parseInt(this.sup2) // Le niveau (de 1 à 6=mélange) définit le nombre d'étapes
     laby.chemin = laby.choisitChemin(laby.niveau) // On choisi un chemin
     laby.murs2d = laby.construitMurs(laby.chemin) // On construit le labyrinthe
     laby.chemin2d = laby.traceChemin(laby.chemin) // On trace le chemin solution
     let monchemin = laby.chemin
-    let table = parseInt(this.sup)
-    if (this.sup2==2) {
-      if (table%2!=0) {
-      table=table*2
-      }
+    let table = randint(1,7)+1
+    let num=randint(1,2*table-1)
+    while (pgcd(num,table)!=1) {
+      num=randint(2,2*table-1)
     }
-    else if (this.sup2==3) {
-      if (table%3!=0) {
-        table=table*3
-      }
-    }
-    else if (this.sup2==4) {
-      if (table%4!=0) {
-        if (table%2!=0){
-        table=table*4
-        }
-        else {
-          table=table*2
-        }
-    }
-  }
-    else if (this.sup2==5){
-      if (table%5!=0){
-        table=table*5
-      }
-    }
-    else if (this.sup2==6){
-      if (table%9!=0){
-        if (table%3!=0){
-          table=table*9
-        }
-      }
-      else {
-        table=table*3
-      }
-    }
-    texte = `${texte_en_couleur_et_gras(`Trouve la sortie en ne passant que par les cases contenant un nombre divisible par `,'black')}$${table}$.<br>`
+    let maximum = parseInt(this.sup)
+ //   this.consigne=`Trouve la sortie en ne passant que par les cases contenant un multiple de $${table}$.`
+    texte = `${texte_en_couleur_et_gras(`Trouve la sortie en ne passant que par les cases contenant des fractions égales à `,'black')}$${tex_fraction_reduite(num,table)}$.<br>`
     texte_corr = `${texte_en_couleur_et_gras(`Voici le chemin en marron et la sortie était la numéro $${2 - monchemin[monchemin.length - 1][1] + 1}$.`, 'black')}<br>`
     // Zone de construction du tableau de nombres : Si ils sont sur monchemin et seulement si, ils doivent vérifier la consigne
     let listeMultiples = [], index = 0
-    for (let i = 200; i <= 12000; i+=randint(1,100)) {
+ 
+    for (let i = 2; i <= maximum; i++){
       listeMultiples.push(table * i)
     }
     listeMultiples = combinaison_listes(listeMultiples, 12)
+    for (let i=0;i<12;i++){
+      mesfractions.push(fraction(calcul(num*listeMultiples[i]/table),listeMultiples[i]))
+    }
+    for (let i=0;i<12;i++) {
+      switch (randint(1,3)){
+        case  1:  mesfractions.push(fraction(listeMultiples[i],num*listeMultiples[i]/table))
+        break
+        case 2:   mesfractions.push(fraction(calcul(num*listeMultiples[i]/table),listeMultiples[i]-table))
+        break
+        case 3:   mesfractions.push(fraction(calcul(num*listeMultiples[i]/table),listeMultiples[i]-table))
+        break
+      }
+    }
+    for (let a=1;a<7;a++) {
+      laby.nombres.push([fraction(1,1),fraction(1,1),fraction(1,1)])
+    }
+ 
     for (let a = 1; a < 7; a++) {
       for (let b = 0; b < 3; b++) {
         trouve = false
-        for (let k = 0; k < monchemin.length; k++){
+        for (let k = 0; k < monchemin.length; k++) {
           if (monchemin[k][0] == a && monchemin[k][1] == b) trouve = true
         }
         if (!trouve) {
-          laby.nombres[a - 1][b] = randint(200,5000) * table + randint(1, table - 1)
+          laby.nombres[a - 1][b] = mesfractions[index+12]
         }
         else {
-          laby.nombres[a - 1][b] = listeMultiples[index]
+          laby.nombres[a - 1][b] = mesfractions[index]
           index++
         }
       }
     } // Le tableau de nombre étant fait, on place les objets nombres.
-    laby.nombres2d = laby.placeNombres(laby.nombres,1)
+    laby.nombres2d = laby.placeNombres(laby.nombres,1.5)
     params = { xmin: -4, ymin: 0, xmax: 22, ymax: 11, pixelsParCm: 20, scale: 0.7 }
     texte += mathalea2d(params, laby.murs2d, laby.nombres2d)
     texte_corr += mathalea2d(params, laby.murs2d, laby.nombres2d, laby.chemin2d)
@@ -14947,10 +15386,18 @@ function Exercice_labyrinthe_divisibilite() {
     this.liste_corrections.push(texte_corr);
     liste_de_question_to_contenu(this)
   }
-  this.besoin_formulaire_numerique = ["Critère de divisibilité ",5,'1 : Par 2\n2 : Par 3\n3 : Par 4\n4 : Par 5\n5 : Par 9']
-  this.besoin_formulaire2_numerique = ["Critère de divisibilité supplémentaire ",6,'1 : Aucun\n2 : Par 2\n3 : Par 3\n4 : Par 4\n5 : Par 5\n6 : Par 9'];
-  this.besoin_formulaire3_numerique = ['Niveau de rapidité', 6, '1 : Escargot\n 2 : Tortue\n 3 : Lièvre\n 4 : Antilope\n 5 : Guépard\n 6 : Au hasard']
+ // this.besoin_formulaire_numerique = ["Table "]
+  this.besoin_formulaire_numerique = ["Facteur maximum "];
+  this.besoin_formulaire2_numerique = ['Niveau de rapidité', 6, '1 : Guépard\n 2 : Antilope\n 3 : Lièvre\n 4 : Tortue\n 5 : Escargot\n 6 : Au hasard']
 } // Fin de l'exercice.
+
+
+/**
+ * @Auteur Jean-Claude Lhote
+ * Publié le 9/12/2020
+ * Ref 6N10-5
+ * Sortir du labyrinthe en utilisant la numération décimale.
+ */
 function Exercice_labyrinthe_numeration() {
   "use strict"
   Exercice.call(this)
@@ -14963,8 +15410,7 @@ function Exercice_labyrinthe_numeration() {
   this.nb_cols_corr = 1;
   this.pas_de_version_LaTeX = false
   this.pas_de_version_HMTL = false
-  this.sup = false;
-  this.sup3=3
+  this.sup = 3;
 
   //this.consigne=`Trouve la sortie en ne passant que par les cases contenant un nombre divisible par $${parseInt(this.sup)}$.`
 
@@ -14974,7 +15420,7 @@ function Exercice_labyrinthe_numeration() {
 
     let params, texte, texte_corr, trouve
     let laby = labyrinthe()
-    laby.niveau = parseInt(this.sup3) // Le niveau (de 1 à 6=mélange) définit le nombre d'étapes
+    laby.niveau = parseInt(this.sup) // Le niveau (de 1 à 6=mélange) définit le nombre d'étapes
     laby.chemin = laby.choisitChemin(laby.niveau) // On choisi un chemin
     laby.murs2d = laby.construitMurs(laby.chemin) // On construit le labyrinthe
     laby.chemin2d = laby.traceChemin(laby.chemin) // On trace le chemin solution
@@ -15135,6 +15581,9 @@ function Exercice_labyrinthe_numeration() {
       nombretemp=tex_nombrec2(`${Dm}*10000+${Um}*1000+${C}*100+${D}*10+${U}+${d}*0.1+${c}*0.01+${m}*0.001+${dm}*0.0001`,8)
       listeNombresOK.push(nombretemp)
     }
+    for (let a=1;a<7;a++) {
+      laby.nombres.push([0,0,0])
+    }
     for (let a = 1; a < 7; a++) {
       for (let b = 0; b < 3; b++) {
         trouve = false
@@ -15160,7 +15609,7 @@ function Exercice_labyrinthe_numeration() {
   }
 //this.besoin_formulaire_case_a_cocher = ["Avec des dizaines de mille et des dix-millièmes"]
 //  this.besoin_formulaire2_numerique = ["Critère de divisibilité supplémentaire ",6,'1 : Aucun\n2 : Par 2\n3 : Par 3\n4 : Par 4\n5 : Par 5\n6 : Par 9'];
- this.besoin_formulaire3_numerique = ['Niveau de rapidité', 6, '1 : Escargot\n 2 : Tortue\n 3 : Lièvre\n 4 : Antilope\n 5 : Guépard\n 6 : Au hasard']
+ this.besoin_formulaire_numerique = ['Niveau de rapidité', 6, '1 : Escargot\n 2 : Tortue\n 3 : Lièvre\n 4 : Antilope\n 5 : Guépard\n 6 : Au hasard']
 } // Fin de l'exercice.
 
 function Test_main_levee() {
@@ -15295,7 +15744,7 @@ function Utiliser_le_codage_pour_decrire() {
           objets_correction.push(codeSegments('||', 'black', D, E, C, E), codeSegments('O', 'black', A, B, B, C, C, D, D, A), codeSegments('|||', 'black', F, C, B, F))
           texte = `$${sommets[0] + sommets[1] + sommets[2] + sommets[3]}$ est un carré et $${sommets[3] + sommets[2] + sommets[4]}$ est un triangle équilatéral ($${sommets[4]}$ est à l'intérieur du carré $${sommets[0] + sommets[1] + sommets[2] + sommets[3]}$).<br>`
           texte += ` $${sommets[1] + sommets[2] + sommets[5]}$ est un triangle isocèle en $${sommets[5]}$ ($${sommets[5]}$ est à l'extérieur du carré $${sommets[0] + sommets[1] + sommets[2] + sommets[3]}$).<br>`
-          texte += `Représenter cette configuration par un schéma à main levée et ajouter les codages nécéssaires.`
+          texte += `Représenter cette configuration par un schéma à main levée et ajouter les codages nécessaires.`
           texte_corr = `Voilà ci-dessous un schéma qui pourrait convenir à la situation.<br>`
           break
         case 3:
@@ -15315,7 +15764,7 @@ function Utiliser_le_codage_pour_decrire() {
           objets_correction.push(codeSegments('||', 'black', D, E, E, B, A, E, E, C, F, C, B, F), codeSegments('O', 'black', A, B, D, C), codeSegments('/', 'black', A, D, B, C))
           texte = `$${sommets[0] + sommets[1] + sommets[2] + sommets[3]}$ est un rectangle. Ses diagonales se coupent en $${sommets[4]}$.<br>`
           texte += `$${sommets[4] + sommets[1] + sommets[5] + sommets[2]}$ est un losange.<br>`
-          texte += `Représenter cette configuration par un schéma à main levée et ajouter les codages nécéssaires.`
+          texte += `Représenter cette configuration par un schéma à main levée et ajouter les codages nécssaires.`
           texte_corr = `Voilà ci-dessous un schéma qui pourrait convenir à la situation.<br>`
           break
         case 4:
@@ -17571,6 +18020,123 @@ function Encadrer_un_decimal_par_deux_entiers_consecutifs() {
   }
 };
 
+/**
+ * Intercaler un nombre décimal entre deux décimaux
+ * @Auteur Rémi Angot
+ * Référence 6N31-4
+*/
+function Intercaler_decimal_entre_2_decimaux() {
+    Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Intercaler un nombre décimal entre deux nombres décimaux";
+    this.consigne = "Compléter avec un nombre décimal";
+    this.nb_questions = 6;
+    this.nb_cols = 2; // Nombre de colonnes pour la sortie LaTeX
+    this.nb_cols_corr = 2; // Nombre de colonnes dans la correction pour la sortie LaTeX
+  
+    this.nouvelle_version = function (numero_de_l_exercice) {
+      this.liste_questions = []; // Liste de questions
+      this.liste_corrections = []; // Liste de questions corrigées
+
+      let liste_type_de_questions_disponibles = ["a,b1", "a,b2", "a,9", "a,bc", "a,b9", "a,99", "a,b0c", "a,1", "a,01", "a"];
+      let liste_type_de_questions = combinaison_listes(liste_type_de_questions_disponibles, this.nb_questions);
+      for (let i = 0, texte, texte_corr, a, b, r, u, u1, u2, d1, d2, c1, c2, cpt = 0; i < this.nb_questions && cpt < 50; ) {
+          switch (liste_type_de_questions[i]) {
+              case "a,b1":
+                  d1 = randint(1, 6);
+                  u = randint(1, 39);
+                  a = calcul(u + d1 / 10);
+                  b = calcul(u + randint(d1 + 2, 9) / 10);
+                  r = calcul(a + 1 / 10);
+                  break;
+              case "a,b2":
+                  d1 = randint(1, 8);
+                  u = randint(1, 39);
+                  a = calcul(u + d1 / 10);
+                  b = calcul(u + (d1 + 1) / 10);
+                  r = calcul(a + 5 / 100);
+                  break;
+              case "a,9":
+                  a = calcul(randint(1, 39) + 9 / 10);
+                  b = calcul(a + 1 / 10);
+                  r = calcul(a + 5 / 100);
+                  break;
+              case "a,bc":
+                  u = randint(1, 39);
+                  d1 = randint(1, 9);
+                  c1 = randint(1, 8);
+                  c2 = c1 + 1;
+                  a = calcul(u + d1 / 10 + c1 / 100);
+                  b = calcul(u + d1 / 10 + c2 / 100);
+                  r = calcul(a + 5 / 1000);
+                  break;
+              case "a,b9":
+                  u = randint(1, 39);
+                  d1 = randint(1, 9);
+                  c1 = 9;
+                  a = calcul(u + d1 / 10 + c1 / 100);
+                  b = calcul(u + (d1 + 1) / 10);
+                  r = calcul(a + 5 / 1000);
+                  break;
+              case "a,99":
+                  u = randint(1, 39);
+                  a = calcul(u + 99 / 100);
+                  b = u + 1;
+                  r = calcul(a + 5 / 1000);
+                  break;
+              case "a,b0c":
+                  u = randint(1, 39);
+                  d1 = randint(1, 6);
+                  c1 = randint(1, 8);
+                  c2 = c1 + 1;
+                  a = calcul(u + d1 / 10 + c1 / 1000);
+                  b = calcul(u + randint(d1+1,9)/ 10);
+                  if (calcul(b-a)>.1){
+                    r = calcul(u + (d1+1)/10);
+                  }else {
+                    r = calcul(u + (d1)/10+1/100);
+                  }
+                  break;
+              case "a,1":
+                  u = randint(1, 39);
+                  d1 = 1;
+                  a = calcul(u);
+                  b = calcul(u + d1 / 10);
+                  r = calcul(u + 5 / 100);
+                  break;
+
+              case "a,01":
+                  u = randint(1, 39);
+                  c1 = 1;
+                  a = calcul(u);
+                  b = calcul(u + c1 / 100);
+                  r = calcul(u + 5 / 1000);
+                  break;
+
+              case "a":
+                  a = randint(1, 39);
+                  b = a + 1;
+                  r = calcul(a + 1 / 10);
+                  break;
+          }
+          texte = `$${tex_nombre(a)}<\\ldots\\ldots<${tex_nombre(b)}$`;
+          texte_corr = `$${tex_nombre(a)}<${tex_nombre(r)}<${tex_nombre(b)}$`;
+
+          if (this.liste_questions.indexOf(texte) == -1) {
+              // Si la question n'a jamais été posée, on en crée une autre
+              this.liste_questions.push(texte);
+              this.liste_corrections.push(texte_corr);
+              i++;
+          }
+          cpt++;
+      }
+      liste_de_question_to_contenu(this);
+      if (sortie_html){
+        this.contenu_correction = info_message({ titre: "Remarque", texte: "Il y a une infinité de solutions. La correction ne montre qu'une possibilité.", couleur: "black" }) + this.contenu_correction;
+      }
+    };
+  }
+
+
 /** 
  * * Ordre de grandeur d'une opération entre décimaux
  * * 6N31-2
@@ -19381,7 +19947,10 @@ function Division_cycle3(){
 function Exercice_tables_d_additions_cycle3() {
     Exercice_tables_d_additions.call(this,10)
 }
-/**
+function Exercice_labyrinthe_multiplesCM() {
+    Exercice_labyrinthe_multiples.call(this)
+    this.niveau='CM'
+  }/**
 * Décomposer en produit de facteurs premiers un nombre (la décomposition aura 3, 4 ou 5 facteurs premiers)
 * @Auteur Rémi Angot
 5A13
@@ -20594,7 +21163,122 @@ function Exercice_substituer(difficulte = 1) {
 	}
 	this.besoin_formulaire_numerique = ['Niveau de difficulté', 2, '1 : Multiplication par un facteur positif\n2: Multiplication par un facteur relatif']
 }
+/**
+ * @Auteur Jean-Claude Lhote
+ * Publié le 7/12/2020
+ * Ref 5A11-1
+ * Sortir du labyrinthe en utilisant les critères de divisibilité.
+ */
 
+function Exercice_labyrinthe_divisibilite() {
+	"use strict"
+	Exercice.call(this)
+	this.titre = "Labyrinthe de multiples basé sur les critères de divisibilité";
+	this.consigne=""
+	this.niveau = '6e'
+	this.nb_questions = 1;
+	this.nb_questions_modifiable = false
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.pas_de_version_LaTeX = false
+	this.pas_de_version_HMTL = false
+	this.sup3 = 3
+	this.sup = 9;
+	if (this.niveau = 'CM') {
+	  this.sup2 = 1;
+	  this.sup3 = 3;
+	}
+	else {
+	  this.sup2 = 2;
+	  this.sup3 = 4;
+	}
+	//this.consigne=`Trouve la sortie en ne passant que par les cases contenant un nombre divisible par $${parseInt(this.sup)}$.`
+  
+	this.nouvelle_version = function (numero_de_l_exercice) {
+	  this.liste_corrections=[]
+	  this.liste_questions=[]
+	  let params, texte, texte_corr, trouve
+	  let laby = labyrinthe()
+	  laby.niveau = parseInt(this.sup3) // Le niveau (de 1 à 6=mélange) définit le nombre d'étapes
+	  laby.chemin = laby.choisitChemin(laby.niveau) // On choisi un chemin
+	  laby.murs2d = laby.construitMurs(laby.chemin) // On construit le labyrinthe
+	  laby.chemin2d = laby.traceChemin(laby.chemin) // On trace le chemin solution
+	  let monchemin = laby.chemin
+	  let table = parseInt(this.sup)
+	  if (this.sup2==2) {
+		if (table%2!=0) {
+		table=table*2
+		}
+	  }
+	  else if (this.sup2==3) {
+		if (table%3!=0) {
+		  table=table*3
+		}
+	  }
+	  else if (this.sup2==4) {
+		if (table%4!=0) {
+		  if (table%2!=0){
+		  table=table*4
+		  }
+		  else {
+			table=table*2
+		  }
+	  }
+	}
+	  else if (this.sup2==5){
+		if (table%5!=0){
+		  table=table*5
+		}
+	  }
+	  else if (this.sup2==6){
+		if (table%9!=0){
+		  if (table%3!=0){
+			table=table*9
+		  }
+		}
+		else {
+		  table=table*3
+		}
+	  }
+	  texte = `${texte_en_couleur_et_gras(`Trouve la sortie en ne passant que par les cases contenant un nombre divisible par `,'black')}$${table}$.<br>`
+	  texte_corr = `${texte_en_couleur_et_gras(`Voici le chemin en marron et la sortie était la numéro $${2 - monchemin[monchemin.length - 1][1] + 1}$.`, 'black')}<br>`
+	  // Zone de construction du tableau de nombres : Si ils sont sur monchemin et seulement si, ils doivent vérifier la consigne
+	  let listeMultiples = [], index = 0
+	  for (let i = 200; i <= 12000; i+=randint(1,100)) {
+		listeMultiples.push(table * i)
+	  }
+	  listeMultiples = combinaison_listes(listeMultiples, 12)
+	  for (let a=1;a<7;a++) {
+		laby.nombres.push([0,0,0])
+	  } 
+	  for (let a = 1; a < 7; a++) {
+		for (let b = 0; b < 3; b++) {
+		  trouve = false
+		  for (let k = 0; k < monchemin.length; k++){
+			if (monchemin[k][0] == a && monchemin[k][1] == b) trouve = true
+		  }
+		  if (!trouve) {
+			laby.nombres[a - 1][b] = randint(200,5000) * table + randint(1, table - 1)
+		  }
+		  else {
+			laby.nombres[a - 1][b] = listeMultiples[index]
+			index++
+		  }
+		}
+	  } // Le tableau de nombre étant fait, on place les objets nombres.
+	  laby.nombres2d = laby.placeNombres(laby.nombres,1)
+	  params = { xmin: -4, ymin: 0, xmax: 22, ymax: 11, pixelsParCm: 20, scale: 0.7 }
+	  texte += mathalea2d(params, laby.murs2d, laby.nombres2d)
+	  texte_corr += mathalea2d(params, laby.murs2d, laby.nombres2d, laby.chemin2d)
+	  this.liste_questions.push(texte);
+	  this.liste_corrections.push(texte_corr);
+	  liste_de_question_to_contenu(this)
+	}
+	this.besoin_formulaire_numerique = ["Critère de divisibilité ",5,'1 : Par 2\n2 : Par 3\n3 : Par 4\n4 : Par 5\n5 : Par 9']
+	this.besoin_formulaire2_numerique = ["Critère de divisibilité supplémentaire ",6,'1 : Aucun\n2 : Par 2\n3 : Par 3\n4 : Par 4\n5 : Par 5\n6 : Par 9'];
+	this.besoin_formulaire3_numerique = ['Niveau de rapidité', 6, '1 : Escargot\n 2 : Tortue\n 3 : Lièvre\n 4 : Antilope\n 5 : Guépard\n 6 : Au hasard']
+  } // Fin de l'exercice.
+  
 /**
  * Déterminer des angles en utilisant les cas d'égalités : opposés par le sommet, alternes-internes, correspondants...
  * ref 5G30-1 
@@ -23005,7 +23689,8 @@ function Premier_ou_pas_5e() {
  * Trouver l'image d'une figure par une symétrie centrale dans un pavage (7 motifs différents)
  * @Auteur Jean-Claude Lhote
  * fonction servant à tous les niveaux
- * Références 5G12, 6G25-2, 4G11, 3G12
+ * Pas de version Latex !
+ * Références 5G12-1, 6G25-2, 4G11, 3G12
  */
 function Pavages_et_transformations() {
 	'use strict';
@@ -25391,6 +26076,229 @@ function DroiteRemarquableDuTriangle() {
 	}
 	this.besoin_formulaire_numerique = ['Type de droites', 3, "1 : Hauteurs et Médiatrices\n2 : Médianes et Bissectrices\n3 : Toutes les droites"]
 }
+/**
+ * Publié le 14/12/2020
+ * Trouver l'image par symétrie centrale d'une figure dans un pavage
+ * Version Latex & Html grâce à Mathalea2d
+ * @Auteur Jean-Claude Lhote
+ * Ref 5G12
+ */
+function Pavage_et_demi_tour2d() {
+	"use strict";
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre =
+	  "Trouver l\'image d'une figure par une symétrie centrale dans un pavage";
+	this.consigne = "";
+	this.nb_questions = 3;
+	this.nb_questions_modifiable = true;
+	this.correction_detaillee_disponible=true
+	this.correction_detaillee=true
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1; // 1 pour des pavages modestes, 2 pour des plus grand.
+	this.sup2=false // On cache les barycentres par défaut.
+	this.sup3=7;
+	sortie_html ? (this.spacing_corr = 2.5) : (this.spacing_corr = 1.5);
+	this.nouvelle_version = function (numero_de_l_exercice) {
+	  let videcouples=function(tableau){
+		for (let k=0;k<tableau.length;k++){
+		  for (let j=k+1;j<tableau.length;j++){
+			if (tableau[k][1]==tableau[j][0]) {
+			  tableau.splice(j,1)
+			}
+		  }
+		}
+		return tableau
+	  }
+	  let compare2polys=function(poly1,poly2){
+		if (comparenbsommets(poly1,poly2)) {
+		  if (comparesommets(poly1,poly2)) 
+			return true
+		  else
+			return false
+		}
+		else 
+		  return false 
+		}
+		let comparenbsommets = function(poly1,poly2){
+		  if (poly1.listePoints.length==poly2.listePoints.length){
+			return true
+		  }
+		  else return false
+		}
+		
+		let compare2sommets=function(sommet1,sommet2){
+		  if (egal(sommet1.x,sommet2.x,0.1)&&egal(sommet1.y,sommet2.y,0.1)) {
+			return true
+		  }
+		  else return false
+		}
+		let comparesommets = function(poly1,poly2){
+		  let trouve=false,trouves=0
+		  if (comparenbsommets(poly1,poly2))
+		  for (let P of poly1.listePoints) {
+			for (let M of poly2.listePoints) {
+			  if (compare2sommets(M,P)) {
+				trouve=true
+			  }
+			  if (trouve) break
+			}
+			if (trouve) {
+			  trouves++
+			  trouve=false
+			}
+			else {
+			  trouves-=100
+			}
+			if (trouves<0)
+			break
+		  }
+		  if (trouves==poly1.listePoints.length)
+			return true
+		  else return false
+		}
+	  
+	  let demitour = function (pavage, A, numero) { // retourne le numero du polygone symétrique ou -1 si il n'existe pas
+		let poly=pavage.polygones[numero-1]
+		let pol
+		let result=-1
+		let sympoly=rotation(poly,A,180)
+		for (let k= 0;k<pavage.polygones.length;k++) {
+		  pol=pavage.polygones[k]
+		  if (compare2polys(sympoly,pol)) {
+			return k+1
+		  }
+		}
+		return result
+	  } 
+  
+	  let objets=[],objets_correction=[],P1,P2,P3,G1,G2,t
+	  let codes=['/','//','///','o','w','X','U','*']
+	  let taillePavage=parseInt(this.sup)
+	  if (taillePavage<1||taillePavage>2) {
+		taillePavage=1
+	  }
+	  if (this.nb_questions>5) {
+		taillePavage=2
+	  }
+	  this.liste_corrections = []
+	  this.liste_questions = []
+	  let Nx,Ny,index1,index2,A,B,d,image,couples=[],tailles=[],monpavage,fenetre
+	  let texte = "", texte_corr = "", type_de_pavage = parseInt(this.sup)
+	  let nombreTentatives,nombrePavageTestes=1
+	  if (this.sup3==8) {
+		type_de_pavage =  randint(1,7)
+	  }
+	  else {
+		type_de_pavage=parseInt(this.sup3)
+	  }
+	  while (couples.length<this.nb_questions&&nombrePavageTestes<6){
+		nombreTentatives=0
+	  monpavage = pavage() // On crée l'objet Pavage qui va s'appeler monpavage
+	  tailles = [[[3, 2], [3, 2], [2, 2], [2, 2], [2, 2], [2, 2],[3,2]], [[4, 3], [4, 3], [3, 3], [3, 3], [3, 3], [3, 2],[5,3]]]
+	  Nx = tailles[taillePavage-1][type_de_pavage-1][0]
+	  Ny = tailles[taillePavage-1][type_de_pavage-1][1]
+	  monpavage.construit(type_de_pavage, Nx, Ny, 3) // On initialise toutes les propriétés de l'objet.
+	  fenetre=monpavage.fenetre
+	  fenetreMathalea2d=[fenetre.xmin,fenetre.ymin,fenetre.xmax,fenetre.ymax]
+	  while (couples.length<this.nb_questions+2&&nombreTentatives<3) { // On cherche d pour avoir suffisamment de couples
+	  couples=[] // On vide la liste des couples pour une nouvelle recherche
+	  
+	  index1=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3)) // On choisit 1 point dans un des polygones
+	  if (choice([true,false])) { 
+		  A=monpavage.polygones[index1].listePoints[randint(0,monpavage.polygones[index1].listePoints.length-1)] // On choisit un sommet
+	  }
+	  else {
+		A=monpavage.barycentres[index1] // Ou on choisit un barycentre
+	  }
+	  while (A.x-5<fenetre.xmin||A.x+5>fenetre.xmax||A.y-5<fenetre.ymin||A.y+5>fenetre.ymax){
+		index1=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3)) // On choisit 1 point dans un des polygones
+		if (choice([true,false])) { 
+			A=monpavage.polygones[index1].listePoints[randint(0,monpavage.polygones[index1].listePoints.length-1)] // On choisit un sommet
+		}
+		else {
+		  A=monpavage.barycentres[index1] // Ou on choisit un barycentre
+		}
+	  }
+			  A.nom='A'
+			  A.positionLabel='above left'
+		  d=tracePoint(A) // la trace du centre de symétrie sera rouge et grosse
+		  B=labelPoint(A)
+	  d.epaisseur=3
+	  d.taille=4
+	  d.color='red'
+	  for (let i=1;i<= monpavage.nb_polygones; i++){ //on crée une liste des couples (antécédents, images)
+		image=demitour(monpavage,A,i)
+		if (image!=-1){ // si l'image du polygone i existe, on ajoute le couple à la liste
+		  couples.push([i,image])
+		}
+	  }
+	  couples=videcouples(couples) //supprime tous les couples en double (x,y)=(y,x)
+	  nombreTentatives++ 
+	  }
+	  if (couples.length<this.nb_questions){
+		if (this.sup3==7) {
+			type_de_pavage=(type_de_pavage+1)%5+1
+		  }
+	  nombrePavageTestes++
+	  }
+	}
+	if (couples.length<this.nb_questions){
+	  console.log('trop de questions, augmentez la taille du pavage')
+	  return
+	}
+  
+	  objets.push(d) // le centre est OK on pousse sa trace
+	  objets.push(B) // et son label
+	  couples=shuffle(couples) // on mélange les couples
+	  for (let i = 0; i < monpavage.nb_polygones; i++) {
+		objets.push(texteParPosition(nombre_avec_espace(i + 1), monpavage.barycentres[i].x + 0.5, monpavage.barycentres[i].y, 'milieu', 'gray', 1, 0, true))
+	  }
+	  if (this.sup2) { // Doit-on montrer les centres des figures ?
+		for (let i = 0; i < monpavage.nb_polygones; i++) {
+		  objets.push(monpavage.tracesCentres[i])
+		}
+	  }
+	  for (let i = 0; i < monpavage.nb_polygones; i++) { // il faut afficher tous les polygones du pavage
+		objets.push(monpavage.polygones[i])
+	  }
+	  texte = mathalea2d(fenetre, objets) // monpavage.fenetre est calibrée pour faire entrer le pavage dans une feuille A4
+	  texte+=`<br>`
+	  for (let i=0;i<this.nb_questions;i++){
+		texte+=`Quel est l'image de la figure $${couples[i][0]}$ dans la symétrie de centre $A$ ?<br>`
+		texte_corr+=`L'image de la figure $${couples[i][0]}$ dans la symétrie de centre $A$ est la figure ${couples[i][1]}<br>`
+		if (this.correction_detaillee){
+			t=this.nb_questions*3;
+			G1=monpavage.barycentres[couples[i][0]-1]
+			G2=monpavage.barycentres[couples[i][1]-1]
+			P1=monpavage.polygones[couples[i][0]-1]
+			P1.color=texcolors(i)
+			P1.couleurDeRemplissage=texcolors(i)
+			P1.opaciteDeRemplissage=0.5
+			P1.epaisseur=2
+			P2=monpavage.polygones[couples[i][1]-1]
+			P2.color=texcolors(i)
+			P2.couleurDeRemplissage=texcolors(i)
+			P2.opaciteDeRemplissage=0.5
+			P2.epaisseur=2
+			P3=rotationAnimee(P1,A,180,`begin="${i*3}s;${i*3+t}s;${i*3+t*2}s" end="${i*3+2}s;${i*3+t+2}s;${i*3+t*2+2}s" dur="2s" repeatCount="indefinite" repeatDur="${9*this.nb_questions}s" id="poly-${i}-anim"`)
+			P3.color=texcolors(i)
+			P3.epaisseur=2
+			objets_correction.push(tracePoint(G1,G2),segment(G1,G2,texcolors(i)),codageMilieu(G1,G2,texcolors(i),codes[i],false),P1,P2,P3)
+		  }
+	}
+    if (this.correction_detaillee){
+      texte_corr+=mathalea2d(fenetre, objets,objets_correction)
+    }
+	  this.liste_questions.push(texte);
+	  this.liste_corrections.push(texte_corr);
+	  liste_de_question_to_contenu(this)
+	}
+	this.besoin_formulaire_numerique = ['Taille du pavage (la grande est automatique au-delà de 5 questions)', 2, '1 : Taille modeste\n 2 : Grande taille'];
+	this.besoin_formulaire2_case_a_cocher=["Montrer les centres"]
+	this.besoin_formulaire3_numerique=['Choix du pavage',8,'1 : Pavage de triangles équilatéraux\n2 : Pavage de carrés\n3 : Pavage d\'hexagones réguliers\n4 : Pavage 3².4.3.4\n5 : Pavage 8².4\n 6 : Pavage de losanges (hexagonal d\'écolier)\n7 : Pavage 6.3.6.3\n8 : Un des sept pavages au hasard']
+}
+
 /**
  * Référence 6G24-1
  * @Auteur Jean-Claude Lhote
@@ -28633,21 +29541,27 @@ function Exercice_additionner_fraction_produit() {
   this.spacing_corr = 2;
   this.nb_questions = 5;
   this.nb_cols_corr = 1;
+  this.correction_detaillee_disponible=true
+  this.correction_detaillee=true
 
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let type_de_questions_disponibles;
     liste_fractions = obtenir_liste_fractions_irreductibles();
+    liste_fractions_faciles = obtenir_liste_fractions_irreductibles_faciles();
     let nombre_de_signe_moins;
-    if (this.sup == 1) {
-      type_de_questions_disponibles = [1, 1, 2, 2];
+    if (this.sup == 1)  {
+      type_de_questions_disponibles = [1, 2, 3, 4];
+    } // fractions faciles, relatifs
+    else if (this.sup == 2)  {
+      type_de_questions_disponibles = [1, 2, 3, 2];
     } // 1*nombre entier,3*fraction (pas de négatifs)
-    else if (this.sup == 2) {
-      type_de_questions_disponibles = [2, 2, 3, 3];
+    else if (this.sup == 3) {
+      type_de_questions_disponibles = [3, 3, 4, 4];
     } // fractions, 2*positifs, 2*relatifs
     else {
-      type_de_questions_disponibles = [3];
+      type_de_questions_disponibles = [4];
     }
 
     let liste_type_de_questions = combinaison_listes(
@@ -28672,47 +29586,44 @@ function Exercice_additionner_fraction_produit() {
       signe2,
       texte,
       texte_corr,
+      produit=[],
       type_de_questions,
       cpt = 0;
       i < this.nb_questions && cpt < 50;
 
     ) {
       type_de_questions = liste_type_de_questions[i];
-      ab = choice(liste_fractions);
-      cd = choice(liste_fractions);
-      ef = choice(liste_fractions);
+      if (this.sup==1) {ab = choice(liste_fractions_faciles);cd = choice(liste_fractions_faciles);ef = choice(liste_fractions_faciles);}
+      else {ab = choice(liste_fractions);cd = choice(liste_fractions);ef = choice(liste_fractions);}
+
       a = ab[0];
       b = ab[1];
       c = cd[0];
       d = cd[1];
       e = ef[0];
       f = ef[1];
-
+      console.log(i,type_de_questions)
       switch (type_de_questions) {
         case 1: // sans piège fraction1 + fraction2 x fraction3 (tout positif)
-          texte = `$${tex_fraction(a, b)}+${tex_fraction(
-            c,
-            d
-          )}\\times${tex_fraction(e, f)}$`;
+          texte = `$${tex_fraction(a, b)}+${tex_fraction(c,d)}\\times${tex_fraction(e, f)}$`;
 
-          p = pgcd(c * e, d * f);
-          texte_corr = `$${tex_fraction(a, b)}+${tex_fraction(
-            c,
-            d
-          )}\\times${tex_fraction(e, f)}$`;
-          texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(
-            c + "\\times" + e,
-            d + "\\times" + f
-          )}$`;
-          texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(
-            c * e,
-            d * f
-          )}$`;
+          texte_corr = `$${tex_fraction(a, b)}+${tex_fraction(c,d)}\\times${tex_fraction(e, f)}$`;
+          produit=produit_de_deux_fractions(c,d,e,f)
+          if (this.correction_detaillee) {
+          texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(c + "\\times" + e,d + "\\times" + f)}$`;
+          texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(c * e,d * f)}$`;
+      }
+      else {
+        texte_corr += `$=${tex_fraction(a, b)}+${produit[1]}$`;
+        texte_corr += `$=${tex_fraction(a, b)}+${produit[0]}$`;
+      }
           // faut-il simplifier c*e/d*f
+          if (!this.correction_detaillee) {
+            [c,d,e,f]=produit[2]
+          }
+          p = pgcd(c * e, d * f);
           if (p != 1 && ppcm(b, d * f) > ppcm(b, (d * f) / p)) {
-            texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(
-              (e * c) / p + "\\times\\cancel{" + p + "}",
-              (f * d) / p + "\\times\\cancel{" + p + "}"
+            texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction((e * c) / p + "\\times\\cancel{" + p + "}",(f * d) / p + "\\times\\cancel{" + p + "}"
             )}$`;
             c = (e * c) / p;
             d = (f * d) / p;
@@ -28728,25 +29639,24 @@ function Exercice_additionner_fraction_produit() {
               a + mise_en_evidence("\\times" + k1),
               b + mise_en_evidence("\\times" + k1)
             )}$`;
-          } else {
+          } else { if (k2!=1){
             texte_corr += `$=${tex_fraction(a, b)}$`;
-          }
+          }}
           if (k2 != 1) {
             texte_corr += `$+${tex_fraction(
               c + mise_en_evidence("\\times" + k2),
               d + mise_en_evidence("\\times" + k2)
             )}$`;
-          } else {
+          } else { if (k1!=1) {
             texte_corr += `$+${tex_fraction(c, d)}$`;
-          }
+          }}
 
-          texte_corr += `$=${tex_fraction(a * k1, p)}+${tex_fraction(
-            c * k2,
-            p
-          )}$`;
+          texte_corr += `$=${tex_fraction(a * k1, p)}+${tex_fraction(c * k2,p)}$`;
           e = a * k1 + c * k2;
           f = p;
-          texte_corr += `$=${tex_fraction(e, f)}$`;
+
+          texte_corr += `$=${tex_fraction(e, f)}${simplification_de_fraction_avec_etapes(e, f)}$`;
+  /*
           p = pgcd(e, f);
           // faut-il simplifier e/f
           if (p != 1) {
@@ -28756,37 +29666,101 @@ function Exercice_additionner_fraction_produit() {
             )}$`;
             texte_corr += `$=${tex_fraction_reduite(e / p, f / p)}$`;
           }
-
+*/
           break;
 
-        case 2: // avec piege addition non prioritaire fraction1 + fraction2 * fraction3 tout positif
+
+        case 2: // sans piège fraction2 x fraction3 + fraction1  (tout positif)
+        texte = `$${tex_fraction(c,d)}\\times${tex_fraction(e, f)}+${tex_fraction(a, b)}$`;
+        produit=produit_de_deux_fractions(c,d,e,f)
+        texte_corr = `$${tex_fraction(c,d)}\\times${tex_fraction(e, f)}+${tex_fraction(a, b)}$`;
+        if (this.correction_detaillee) {
+        texte_corr += `$=${tex_fraction(c + "\\times" + e,d + "\\times" + f)}+${tex_fraction(a, b)}$`;
+        texte_corr += `$=${tex_fraction(c * e,d * f)}+${tex_fraction(a, b)}$`;
+        }
+        else {
+          texte_corr += `$=${produit[1]}+${tex_fraction(a, b)}$`;
+          texte_corr += `$=${produit[0]}+${tex_fraction(a, b)}$`;
+        }
+        // faut-il simplifier c*e/d*f
+        if (!this.correction_detaillee) {
+          [c,d,e,f]=produit[2]
+        }
+        p = pgcd(c * e, d * f);
+        if (p != 1 && ppcm(b, d * f) > ppcm(b, (d * f) / p)) {
+          texte_corr += `$=${tex_fraction((e * c) / p + "\\times\\cancel{" + p + "}",(f * d) / p + "\\times\\cancel{" + p + "}")}+${tex_fraction(a, b)}$`;
+          c = (e * c) / p;
+          d = (f * d) / p;
+        } else {
+          c = e * c;
+          d = f * d;
+        }
+        p = ppcm(b, d); // p = dénominateur commun
+        k1 = p / b;
+        k2 = p / d;
+        if (k2 != 1) {
+          texte_corr += `$=${tex_fraction(
+            c + mise_en_evidence("\\times" + k2),
+            d + mise_en_evidence("\\times" + k2)
+          )}$`;
+        } else { if (k1!=1) {
+          texte_corr += `$=${tex_fraction(c, d)}$`;
+        }
+      }
+
+        if (k1 != 1) {
+          texte_corr += `$+${tex_fraction(
+            a + mise_en_evidence("\\times" + k1),
+            b + mise_en_evidence("\\times" + k1)
+          )}$`;
+        } else {
+          if (k2!=1) {
+          texte_corr += `$+${tex_fraction(a, b)}$`;
+          }
+        }
+
+        if (this.correction_detaillee) {
+          texte_corr += `$=${tex_fraction(c * k2,p)}+${tex_fraction(a * k1, p)}$`;
+        }
+        e = a * k1 + c * k2;
+        f = p;
+
+        texte_corr += `$=${tex_fraction(e, f)}${simplification_de_fraction_avec_etapes(e, f)}$`;
+   /*     p = pgcd(e, f);
+        // faut-il simplifier e/f
+        if (p != 1) {
+          texte_corr += `$=${tex_fraction(
+            e / p + "\\times\\cancel{" + p + "}",
+            f / p + "\\times\\cancel{" + p + "}"
+          )}$`;
+          texte_corr += `$=${tex_fraction_reduite(e, f)}$`;
+        }*/
+        break;
+
+       
+        case 3: // avec piege addition non prioritaire fraction2 * fraction3 + fraction1  tout positif
           d = b;
-
-          texte = `$${tex_fraction(a, b)}+${tex_fraction(
-            c,
-            d
-          )}\\times${tex_fraction(e, f)}$`;
-
-          p = pgcd(c * e, d * f);
-          texte_corr = `$${tex_fraction(a, b)}+${tex_fraction(
-            c,
-            d
-          )}\\times${tex_fraction(e, f)}$`;
-          texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(
-            c + "\\times" + e,
-            d + "\\times" + f
-          )}$`;
-          texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(
-            c * e,
-            d * f
-          )}$`;
-
+          produit=produit_de_deux_fractions(c,d,e,f)
+          texte = `$${tex_fraction(c,d)}\\times${tex_fraction(e, f)}+${tex_fraction(a, b)}$`;
+          texte_corr = `$${tex_fraction(c,d)}\\times${tex_fraction(e, f)}+${tex_fraction(a, b)}$`;
+          if (this.correction_detaillee){
+          texte_corr += `$=${tex_fraction(c + "\\times" + e,d + "\\times" + f)}+${tex_fraction(a, b)}$`;
+          texte_corr += `$=${tex_fraction(c * e,d * f)}+${tex_fraction(a, b)}$`;
+          }
+          else {
+            texte_corr += `$=${produit[1]}+${tex_fraction(a, b)}$`;
+            texte_corr += `$=${produit[0]}+${tex_fraction(a, b)}$`;
+          }
           // faut-il simplifier c*e/d*f
+          if (!this.correction_detaillee) {
+            [c,d,e,f]=produit[2]
+          }
+          p = pgcd(c * e, d * f);
           if (p != 1 && ppcm(b, d * f) > ppcm(b, (d * f) / p)) {
-            texte_corr += `$=${tex_fraction(a, b)}+${tex_fraction(
+            texte_corr += `$=${tex_fraction(
               (e * c) / p + "\\times\\cancel{" + p + "}",
               (f * d) / p + "\\times\\cancel{" + p + "}"
-            )}$`;
+            )}+${tex_fraction(a, b)}$`;
             c = (e * c) / p;
             d = (f * d) / p;
           } else {
@@ -28796,42 +29770,43 @@ function Exercice_additionner_fraction_produit() {
           p = ppcm(b, d); //denominateur commun = p
           k1 = p / b;
           k2 = p / d;
-          if (k1 != 1) {
-            texte_corr += `$=${tex_fraction(
-              a + mise_en_evidence("\\times" + k1),
-              b + mise_en_evidence("\\times" + k1)
-            )}$`;
-          } else {
-            texte_corr += `$=${tex_fraction(a, b)}$`;
-          }
+
           if (k2 != 1) {
-            texte_corr += `$+${tex_fraction(
+            texte_corr += `$=${tex_fraction(
               c + "\\times" + k2,
               d + "\\times" + k2
             )}$`;
-          } else {
-            texte_corr += `$+${tex_fraction(c, d)}$`;
+          } else { if (k1!=1) {
+            texte_corr += `$=${tex_fraction(c, d)}$`;
+          }}
+
+          if (k1 != 1) {
+            texte_corr += `$+${tex_fraction(
+              a + mise_en_evidence("\\times" + k1),
+              b + mise_en_evidence("\\times" + k1)
+            )}$`;
+          } else { if (k2!=1) {
+            texte_corr += `$+${tex_fraction(a, b)}$`;
+          }}
+          if(this.correction_detaillee){
+          texte_corr += `$=${tex_fraction(c * k2,d * k2)}+${tex_fraction(a * k1, b * k1)}$`;
           }
-          texte_corr += `$=${tex_fraction(a * k1, b * k1)}+${tex_fraction(
-            c * k2,
-            d * k2
-          )}=${tex_fraction(a * k1 + c * k2, p)}$`;
           e = a * k1 + c * k2;
           f = p;
-          texte_corr += `$=${tex_fraction(e, f)}$`;
-          p = pgcd(e, f);
+            texte_corr += `$=${tex_fraction(e, f)}${simplification_de_fraction_avec_etapes(e, f)}$`;
+   /*      p = pgcd(e, f);
           // faut-il simplifier e/f
           if (p != 1) {
             texte_corr += `$=${tex_fraction(
               e / p + "\\times\\cancel{" + p + "}",
               f / p + "\\times\\cancel{" + p + "}"
             )}$`;
-            texte_corr += `$=${tex_fraction_reduite(e / p, f / p)}$`;
-          }
-
+            texte_corr += `$=${tex_fraction_reduite(e, f)}$`;
+            
+          }*/
           break;
 
-        case 3:
+        case 4:
           a = a * randint(-1, 1, [0]);
           b = b * randint(-1, 1, [0]);
           c = c * randint(-1, 1, [0]);
@@ -28845,14 +29820,8 @@ function Exercice_additionner_fraction_produit() {
           } else {
             signe2 = "-";
           }
-          texte = `$${tex_fraction(a, b)}+${tex_fraction(
-            c,
-            d
-          )}\\times${tex_fraction(e, f)}=$`;
-          texte_corr = `$${tex_fraction(a, b)}+${tex_fraction(
-            c,
-            d
-          )}\\times${tex_fraction(e, f)}$`;
+          texte = `$${tex_fraction(a, b)}+${tex_fraction(c,d)}\\times${tex_fraction(e, f)}=$`;
+          texte_corr = `$${tex_fraction(a, b)}+${tex_fraction(c,d)}\\times${tex_fraction(e, f)}$`;
 
           c = abs(c); // gestion du signe du produit avec {signe}
           d = abs(d);
@@ -28861,7 +29830,6 @@ function Exercice_additionner_fraction_produit() {
 
           if (a * b > 0) {
             //suppression des signes - superflus de la première fraction
-
             signe1 = "";
           } else {
             signe1 = "-";
@@ -28869,7 +29837,8 @@ function Exercice_additionner_fraction_produit() {
 
           a = abs(a);
           b = abs(b);
-
+          produit=produit_de_deux_fractions(c,d,e,f)
+          if (this.correction_detaillee) {
           texte_corr += `$=${signe1}${tex_fraction(
             a,
             b
@@ -28878,9 +29847,22 @@ function Exercice_additionner_fraction_produit() {
             a,
             b
           )}${signe2}${tex_fraction(c * e, d * f)}$`;
-
-          p = pgcd(c * e, d * f);
+          }
+          else {
+            texte_corr += `$=${signe1}${tex_fraction(
+              a,
+              b
+            )}${signe2}${produit[1]}$`;
+            texte_corr += `$=${signe1}${tex_fraction(
+              a,
+              b
+            )}${signe2}${produit[0]}$`;
+            }
           // faut-il simplifier c*e/d*f
+          if (!this.correction_detaillee) {
+            [c,d,e,f]=produit[2]
+          }
+          p = pgcd(c * e, d * f);
           if (p != 1 && ppcm(b, d * f) > ppcm(b, (d * f) / p)) {
             texte_corr += `$=${signe1}${tex_fraction(
               a,
@@ -28985,8 +29967,8 @@ function Exercice_additionner_fraction_produit() {
             }
           }
 
-          texte_corr += `$=${tex_fraction_signe(e, d)}$`;
-          p = pgcd(abs(e), d);
+          texte_corr += `$=${tex_fraction_signe(e, d)}${simplification_de_fraction_avec_etapes(e, d)}$`;
+/*          p = pgcd(abs(e), d);
           if (p != 1) {
             f = d / p;
             e = e / p;
@@ -28996,17 +29978,17 @@ function Exercice_additionner_fraction_produit() {
                 e + "\\times\\cancel{" + p + "}",
                 f + "\\times\\cancel{" + p + "}"
               )}$`;
-              texte_corr += `$=${tex_fraction(e, f)}$`;
+              texte_corr += `$=${simplification_de_fraction_avec_etapes(e, f)}$`;
             } else {
               // numérateur négatif => signe - devant les fractions suivantes.
               texte_corr += `$=-${tex_fraction(
                 -e + "\\times\\cancel{" + p + "}",
                 f + "\\times\\cancel{" + p + "}"
               )}$`;
-              texte_corr += `$=-${tex_fraction(-e, f)}$`;
+              texte_corr += `$=${simplification_de_fraction_avec_etapes(e, f)}$`;
             }
           }
-
+*/
           break;
       }
 
@@ -29021,9 +30003,8 @@ function Exercice_additionner_fraction_produit() {
     liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
   };
   this.besoin_formulaire_numerique = [
-    "Niveau de difficulté",
-    3,
-    "1 : nombres positifs sans piège de priorité\n 2 : 2 calculs avec positifs et piège de priorité et 2 calculs avec relatifs\n 3 : calculs avec relatifs",
+    "Niveau de difficulté ",4,
+    "1 : Fractions faciles, positives ou non\n2 : Nombres positifs sans piège de priorité\n3 : Deux calculs avec positifs et piège de priorité et deux calculs avec relatifs\n4 : Calculs avec relatifs",
   ];
 }
 
@@ -29756,7 +30737,7 @@ function Exercice_equation1() {
 
 /**
  * @auteur Jean-Claude Lhote
- * 3G20
+ * 3G20MG32
  */
 function Exercice_Thales() {
   "use strict";
@@ -30268,8 +31249,7 @@ function Thales2D() {
   this.nb_cols_corr = 1;
   this.sup = 1; // Triangles imbriqués / configuration papillon / les 2
   this.vspace = -0.5; // Monter un peu l'énoncé pour gagner de la place dans la sortie PDF
-
-
+  
   this.nouvelle_version = function (numero_de_l_exercice) {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
@@ -30294,6 +31274,7 @@ function Thales2D() {
       let A = point(0, 0, nomA);
       let B = pointAdistance(A, ab, nomB);
       let ABC = triangle2points2longueurs(A, B, ac, bc);
+      ABC.id = `M2D_${numero_de_l_exercice}_${i}_1`;
       let C = ABC.listePoints[2];
       C.nom = nomC;
       let k = calcul(randint(3, 8, 5) / 10);
@@ -30308,6 +31289,7 @@ function Thales2D() {
       let M = homothetie(A, C, k);
       let N = homothetie(B, C, k);
       let MNC = polygone(M, N, C);
+      MNC.id = `M2D_${numero_de_l_exercice}_${i}_2`;
       let m = pointSurSegment(M, N, -.5);
       let n = pointSurSegment(N, M, -.5);
       let marqueNomM = texteParPoint(nomM, m);
@@ -30356,20 +31338,60 @@ function Thales2D() {
       if (!sortie_html) {
         texte += '\\end{minipage}\n'
       }
+
+      let epaisseurTriangle = (k < 0) ? 2 : 6; // En cas de configuration papillon il est inutile de changer l'épaisseur
+      let bouton_aide_mathalea2d = creerBoutonMathalea2d(numero_de_l_exercice+'_'+i,
+        `if (!document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').dataset.colorie == true || (document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').dataset.colorie == 'false')){
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').style.stroke = 'blue';
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_2').style.stroke = 'red';
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').style.opacity = .5;
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').style.strokeWidth = ${epaisseurTriangle};
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_2').style.opacity = 1;
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_2').style.strokeWidth = 2;
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').dataset.colorie = true;
+          document.getElementById('btnMathALEA2d_${numero_de_l_exercice}_${i}').classList.add('active');
+        } else {
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').style.stroke = 'black';
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_2').style.stroke = 'black';
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').style.opacity = 1;
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').style.strokeWidth = 1;
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_2').style.opacity = 1;
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_2').style.strokeWidth = 1;
+          document.getElementById('M2D_${numero_de_l_exercice}_${i}_1').dataset.colorie = false;
+          document.getElementById('btnMathALEA2d_${numero_de_l_exercice}_${i}').classList.remove('active');
+  
+        }
+        `,
+        'Mettre en couleur les 2 triangles');
+
       if (k > 0) {
-        texte_corr = `Dans le triangle $${nomA + nomB + nomC}$, $${nomM}\\in${"[" + nomC + nomA + "]"}$, $${nomN}\\in${"[" + nomC + nomB + "]"}$ et $(${nomA + nomB})//(${nomM + nomN})$ donc d'après le théorème de Thalès, les triangles $${nomA + nomB + nomC}$ et $${nomM + nomN + nomC}$ ont des longueurs proportionnelles.`;
+        texte_corr = `Dans le triangle $${nomA + nomB + nomC}$ :
+       <br> - $${nomM}\\in${"[" + nomC + nomA + "]"}$,
+       <br> - $${nomN}\\in${"[" + nomC + nomB + "]"}$,
+       <br> -  $(${nomA + nomB})//(${nomM + nomN})$,
+       <br> donc d'après le théorème de Thalès, les triangles $${nomA + nomB + nomC}$ et $${nomM + nomN + nomC}$ ont des longueurs proportionnelles.`;
       } else {
-        texte_corr = `Les droites $(${nomA + nomM})$ et $(${nomB + nomN})$ sont sécantes en $${nomC}$ et $(${nomA + nomB})//(${nomM + nomN})$  donc d'après le théorème de Thalès, les triangles $${nomA + nomB + nomC}$ et $${nomM + nomN + nomC}$ ont des longueurs proportionnelles.`;
+        texte_corr = `Les droites $(${nomA + nomM})$ et $(${nomB + nomN})$ sont sécantes en $${nomC}$ et $(${nomA + nomB})//(${nomM + nomN})$ <br> donc d'après le théorème de Thalès, les triangles $${nomA + nomB + nomC}$ et $${nomM + nomN + nomC}$ ont des longueurs proportionnelles.`;
       }
       //texte_corr = `$(${nomA+nomB})//(${nomM+nomN})$, les points $${nomC}$, $${nomM}$, $${nomA}$ et $${nomC}$, $${nomN}$, $${nomB}$ sont alignés dans le même ordre  donc d'après le théorème de Thalès, les triangles $${nomA+nomB+nomC}$ et $${nomM+nomN+nomC}$ ont des longueurs proportionnelles.`;
       texte_corr += `<br><br>`
-      texte_corr += `$\\dfrac{${nomC + nomM}}{${nomC + nomA}}=\\dfrac{${nomC + nomN}}{${nomC + nomB}}=\\dfrac{${nomM + nomN}}{${nomA + nomB}}$`
+      if (sortie_html){
+        texte_corr += `$\\dfrac{\\color{red}${nomC + nomM}}{\\color{blue}${nomC + nomA}}=\\dfrac{\\color{red}${nomC + nomN}}{\\color{blue}${nomC + nomB}}=\\dfrac{\\color{red}${nomM + nomN}}{\\color{blue}${nomA + nomB}}$`
+      } else {
+        texte_corr += `$\\dfrac{${nomC + nomM}}{${nomC + nomA}}=\\dfrac{${nomC + nomN}}{${nomC + nomB}}=\\dfrac{${nomM + nomN}}{${nomA + nomB}}$`
+      }
       texte_corr += `<br><br>`
       texte_corr += `$\\dfrac{${tex_nombrec(Math.abs(k) * ac)}}{${tex_nombre(ac)}}=\\dfrac{${tex_nombrec(Math.abs(k) * bc)}}{${nomC + nomB}}=\\dfrac{${nomM + nomN}}{${tex_nombre(ab)}}$`
       texte_corr += `<br><br>`
       texte_corr += `$${nomM + nomN}=\\dfrac{${tex_nombrec(Math.abs(k) * ac)}\\times${tex_nombre(ab)}}{${tex_nombre(ac)}}=${tex_nombrec(Math.abs(k) * ab)}$ cm`
       texte_corr += `<br><br>`
       texte_corr += `$${nomC + nomB}=\\dfrac{${tex_nombrec(Math.abs(k) * bc)}\\times${tex_nombre(ac)}}{${tex_nombrec(Math.abs(k) * ac)}}=${tex_nombrec(bc)}$ cm`
+      
+      if (sortie_html){
+        texte += `<br><div style="display: inline-block;margin-top:20px;">${bouton_aide_mathalea2d}</div>`;
+      }
+      
+      
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(texte);
@@ -30379,7 +31401,7 @@ function Thales2D() {
       cpt++;
     }
     liste_de_question_to_contenu(this);
-  };
+    }
   this.besoin_formulaire_numerique = ['Configuration', 3, '1 : Triangles imbriqués\n2 : Papillon\n3 : Les deux'];
 }
 
@@ -30776,6 +31798,228 @@ function Reciproque_Thales() {
     "1 : Réciproque \n 2 : Contraposée \n 3 : Aléatoire",
   ];
 }
+
+
+/**
+ * @Auteur Jean-Claude Lhote
+ * publié le 16/12/2020
+ * Réf : 4G11
+ * Trouver une figure image dans un pavage par une translation. 6 pavages différents.
+ */
+function Pavage_et_translation2d() {
+  "use strict";
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre =
+    "Trouver l\'image d'une figure par une translation dans un pavage";
+  this.consigne = "";
+  this.nb_questions = 3;
+  this.nb_questions_modifiable = true;
+  this.correction_detaillee=true;
+  this.correction_detaillee_disponible=true;
+  this.nb_cols = 1;
+  this.nb_cols_corr = 1;
+  this.sup = 1; // 1 pour des pavages modestes, 2 pour des plus grand.
+  this.sup2=false // On cache les centres par défaut.
+  this.sup3=7;
+  sortie_html ? (this.spacing_corr = 2.5) : (this.spacing_corr = 1.5);
+  this.nouvelle_version = function (numero_de_l_exercice) {
+    let videcouples=function(tableau){
+      for (let k=0;k<tableau.length;k++){
+        for (let j=k+1;j<tableau.length;j++){
+          if (tableau[k][1]==tableau[j][0]) {
+            tableau.splice(j,1)
+          }
+        }
+      }
+      return tableau
+    }
+    let compare2polys=function(poly1,poly2){
+      if (comparenbsommets(poly1,poly2)) {
+        if (comparesommets(poly1,poly2)) 
+          return true
+        else
+          return false
+      }
+      else 
+        return false 
+      }
+      let comparenbsommets = function(poly1,poly2){
+        if (poly1.listePoints.length==poly2.listePoints.length){
+          return true
+        }
+        else return false
+      }
+      
+      let compare2sommets=function(sommet1,sommet2){
+        if (egal(sommet1.x,sommet2.x,0.1)&&egal(sommet1.y,sommet2.y,0.1)) {
+          return true
+        }
+        else return false
+      }
+      let comparesommets = function(poly1,poly2){
+        let trouve=false,trouves=0
+        if (comparenbsommets(poly1,poly2))
+        for (let P of poly1.listePoints) {
+          for (let M of poly2.listePoints) {
+            if (compare2sommets(M,P)) {
+              trouve=true
+            }
+            if (trouve) break
+          }
+          if (trouve) {
+            trouves++
+            trouve=false
+          }
+          else {
+            trouves-=100
+          }
+          if (trouves<0)
+          break
+        }
+        if (trouves==poly1.listePoints.length)
+          return true
+        else return false
+      }
+
+    let translacion = function (pavage, v, numero) { // retourne le numero du polygone image ou -1 si il n'existe pas
+      let poly=pavage.polygones[numero-1],pol
+      let result=-1
+      let sympoly=translation(poly,v)
+      for (let k= 0;k<pavage.polygones.length;k++) {
+        pol=pavage.polygones[k]
+        if (compare2polys(sympoly,pol)) {
+          return k+1
+        }
+      }
+      return result
+    } 
+
+    let objets=[],objets_correction=[],symetriques=[],P1,P2,P3,t
+    let codes=['/','//','///','o','w','X','U','*']
+    let taillePavage=parseInt(this.sup)
+    if (taillePavage<1||taillePavage>2) {
+      taillePavage=1
+    }
+    if (this.nb_questions>5) {
+      taillePavage=2
+    }
+    this.liste_corrections = []
+    this.liste_questions = []
+    let Nx,Ny,index1,index2,A,B,d,image,couples=[],tailles=[],monpavage,fenetre
+    let texte = "", texte_corr = "", type_de_pavage = parseInt(this.sup)
+    let nombreTentatives,nombrePavageTestes=1,v
+    if (this.sup3==8) {
+      type_de_pavage =  randint(1,7)
+    }
+    else {
+      type_de_pavage=parseInt(this.sup3)
+    }
+    while (couples.length<this.nb_questions&&nombrePavageTestes<6){
+      nombreTentatives=0
+    monpavage = pavage() // On crée l'objet Pavage qui va s'appeler monpavage
+    tailles = [[[3, 2], [3, 2], [2, 2], [2, 2], [2, 2], [2, 2],[3,2]], [[4, 3], [4, 3], [3, 3], [3, 3], [3, 3], [3, 2],[5,3]]]
+    Nx = tailles[taillePavage-1][type_de_pavage-1][0]
+    Ny = tailles[taillePavage-1][type_de_pavage-1][1]
+    monpavage.construit(type_de_pavage, Nx, Ny, 3) // On initialise toutes les propriétés de l'objet.
+    fenetre=monpavage.fenetre
+    fenetreMathalea2d=[fenetre.xmin,fenetre.ymin,fenetre.xmax,fenetre.ymax]
+    while (couples.length<this.nb_questions+2&&nombreTentatives<3) { // On cherche d pour avoir suffisamment de couples
+    couples=[] // On vide la liste des couples pour une nouvelle recherche
+    index1=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3)) // On choisit 2 points dans 2 polygones distincts.
+    index2=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3),index1) 
+    while (!comparenbsommets(monpavage.polygones[index1],monpavage.polygones[index2])) { // On vérifie que les deux polygones sont compatibles
+      index2=(index2+1)%(monpavage.polygones.length-1)
+    }
+    A=monpavage.barycentres[index1] // On prends  les barycentres
+    B=monpavage.barycentres[index2] 
+    v=vecteur(A,B)
+    while (compare2sommets(A,B)){ // On vérifie qu'ils sont bien distincts sinon, on change.
+    index2=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3),index1) 
+    while (!comparenbsommets(monpavage.polygones[index1],monpavage.polygones[index2])) { // On vérifie que les deux polygones sont compatibles
+      index2=(index2+1)%(monpavage.polygones.length-1)
+    }
+    A=monpavage.barycentres[index1] // On prends  les barycentres
+    B=monpavage.barycentres[index2] 
+    v=vecteur(A,B)
+  }
+    d=segment(A,B)
+    d.styleExtremites='->'
+    d.color='red'
+    d.epaisseur=3
+    for (let i=1;i<= monpavage.nb_polygones; i++){ //on crée une liste des couples (antécédents, images)
+      image=translacion(monpavage,v,i)
+      if (image!=-1){ // si l'image du polygone i existe, on ajoute le couple à la liste
+        couples.push([i,image])
+      }
+    }
+    couples=videcouples(couples) //supprime tous les couples en double (x,y)=(y,x)
+    nombreTentatives++ 
+    }
+    if (couples.length<this.nb_questions){
+    if (this.sup3==7) {
+      type_de_pavage=(type_de_pavage+1)%5+1
+    }
+    nombrePavageTestes++
+    }
+  }
+  if (couples.length<this.nb_questions){
+    console.log('trop de questions, augmentez la taille du pavage')
+    return
+  }
+
+    objets.push(d) // la droite d est trouvée
+    couples=shuffle(couples) // on mélange les couples
+    for (let i = 0; i < monpavage.nb_polygones; i++) {
+      objets.push(texteParPosition(nombre_avec_espace(i + 1), monpavage.barycentres[i].x + 0.5, monpavage.barycentres[i].y, 'milieu', 'gray', 1, 0, true))
+    }
+    if (this.sup2) { // Doit-on montrer les centres des figures ?
+      for (let i = 0; i < monpavage.nb_polygones; i++) {
+        objets.push(monpavage.tracesCentres[i])
+      }
+    }
+    for (let i = 0; i < monpavage.nb_polygones; i++) { // il faut afficher tous les polygones du pavage
+      objets.push(monpavage.polygones[i])
+    }
+    texte = mathalea2d(fenetre, objets) // monpavage.fenetre est calibrée pour faire entrer le pavage dans une feuille A4
+    texte+=`<br>`
+    for (let i=0;i<this.nb_questions;i++){  
+      texte+=`Quel est l'image de la figure $${couples[i][0]}$ dans la translation transformant la figure $${index1+1}$ en la figure $${index2+1}$ ?<br>`
+      texte_corr+=`L'image de la figure $${couples[i][0]}$ dans la translation transformant la figure $${index1+1}$ en la figure $${index2+1}$ est la figure ${couples[i][1]}<br>`
+//      symetriques=associesommets(monpavage.polygones[couples[i][0]-1],monpavage.polygones[couples[i][1]-1],d)
+      if (this.correction_detaillee){
+        A=monpavage.barycentres[couples[i][0]-1]
+        B=monpavage.barycentres[couples[i][1]-1]
+        d=v.representant(A,B)
+        d.color=texcolors(i)
+        t=this.nb_questions*3;
+        P1=monpavage.polygones[couples[i][0]-1]
+        P1.color=texcolors(i)
+        P1.couleurDeRemplissage=texcolors(i)
+        P1.opaciteDeRemplissage=0.5
+        P1.epaisseur=2
+        P2=monpavage.polygones[couples[i][1]-1]
+        P2.color=texcolors(i)
+        P2.couleurDeRemplissage=texcolors(i)
+        P2.opaciteDeRemplissage=0.5
+        P2.epaisseur=2
+        P3=translationAnimee(P1,v,`begin="${i*3}s;${i*3+t}s;${i*3+t*2}s" end="${i*3+2}s;${i*3+t+2}s;${i*3+t*2+2}s" dur="2s" repeatCount="indefinite" repeatDur="${9*this.nb_questions}s" id="poly-${i}-anim"`)
+        P3.color=texcolors(i)
+        P3.epaisseur=2
+        objets_correction.push(tracePoint(A,B),d,codeSegment(A,B,'//',texcolors(i)),P1,P2,P3)
+      }
+    }
+    if (this.correction_detaillee){
+      texte_corr+=mathalea2d(fenetre, objets,objets_correction)
+    }
+    this.liste_questions.push(texte);
+    this.liste_corrections.push(texte_corr);
+    liste_de_question_to_contenu(this)
+  }
+	this.besoin_formulaire_numerique = ['Taille du pavage (la grande est automatique au-delà de 5 questions)', 2, '1 : Taille modeste\n 2 : Grande taille'];
+  this.besoin_formulaire2_case_a_cocher=["Montrer les centres"]
+	this.besoin_formulaire3_numerique=['Choix du pavage',8,'1 : Pavage de triangles équilatéraux\n2 : Pavage de carrés\n3 : Pavage d\'hexagones réguliers\n4 : Pavage 3².4.3.4\n5 : Pavage 8².4\n 6 : Pavage de losanges (hexagonal d\'écolier)\n7 : Pavage 6.3.6.3\n8 : Un des sept pavages au hasard']
+}
+
 /**
  * Construction de translaté avec dispositif d'auto-correction aléatoire
  * Ref 4G10 
@@ -39576,6 +40820,27 @@ function Equations_fractions() {
   Eq_resolvantes_Thales.call(this);
 };
 
+/** 
+ * * Quatrieme proportionnelle dans un tableau du type 
+ * ---------
+ * | x | b |
+ * ---------
+ * | a | c |
+ * --------- 
+ * * numéro de l'exo ex : 4P10-2 fils de 3L13-2
+ * * publication initiale le 15/12/2020
+ * * modification le jj/mm/aaaa pour ....
+ * @author Sébastien Lozano
+ */
+
+function Tableaux_et_quatrieme_proportionnelle() {
+  this.exo = `4P10-2`;
+  Eq_resolvantes_Thales.call(this);
+};
+
+
+
+
 /**
  * Calculs de probabilités sur une expérience aléatoire à deux épreuves
  * @Auteur Jean-Claude Lhote
@@ -41146,7 +42411,7 @@ function Resoudre_une_equation_produit_nul() {
 					b = randint(1, 20, [a]);
 					c = randint(2, 9, [a]);
 					d = randint(1, 20, [b, c]);
-					texte = `$(${a}x+${b})(${c}x+${d})=0$`
+					texte = `$(${a}x+${b})(${c}x-${d})=0$`
 					texte_corr = 'Un produit est nul si l\'un au moins de ses facteurs est nul.'
 					texte_corr += '<br>' + `$(${a}x+${b})(${c}x-${d})=0$`
 					texte_corr += '<br> Soit ' + `$${a}x+${b}=0$` + ' ou ' + `$${c}x-${d}=0$`
@@ -41263,17 +42528,14 @@ function fonction_notion_vocabulaire() {
 	this.titre = "Fonctions : Notion et vocabulaire";
 	// pas de différence entre la version html et la version latex pour la consigne
 	this.consigne = `Étudier différents procédés de calcul.`;
-	// this.consigne += "Lorsqu'un nombre $\\textit{x}$ entre dans une machine mathématique , celle-ci renvoie à la sortie un nombre appelé $\\textit{image de x}$.<br>";
-	// this.consigne += "On dit que le nombre de départ est un $\\textit{antécédent}$ du nombre qu'on trouve à la sortie.<br>";
-	// this.consigne += "Ces machines sont appelées $\\textit{fonctions}$, on a l'habitude de leur donner des noms $\\textit{f}$ ou $\\textit{g}$ ou $\\textit{h} \\ldots$";
-	// this.consigne += `<br>`;
 	sortie_html ? this.spacing = 3 : this.spacing = 1;
 	sortie_html ? this.spacing_corr = 2 : this.spacing_corr = 1;
-	this.nb_questions = 4;
+	//this.nb_questions;// = 4;
+	this.nb_questions_modifiable = false;
 	//this.correction_detaillee_disponible = true;
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
-	this.sup = 1;
+	this.sup = 5;
 	this.liste_packages = `bclogo`;
 
 	var num_ex = '3F1-act'; // pour rendre unique les id des SVG, en cas d'utilisation dans plusieurs exercices y faisant appel
@@ -41291,8 +42553,32 @@ function fonction_notion_vocabulaire() {
 		this.liste_corrections = []; // Liste de questions corrigées
 		this.contenu = ''; // Liste de questions
 		this.contenu_correction = ''; // Liste de questions corrigées
+		let type_de_questions_disponibles;
+		this.sup = Number(this.sup); // attention le formulaire renvoie un string, on a besoin d'un number pour le switch !
+			switch (this.sup) {
+				case 1 :
+					type_de_questions_disponibles = [1];
+					this.nb_questions = 1;
+					break;
+				case 2 :
+					type_de_questions_disponibles = [2];
+					this.nb_questions = 1;
+					break;
+				case 3 :
+					type_de_questions_disponibles = [3];
+					this.nb_questions = 1;
+					break;
+				case 4 :
+					type_de_questions_disponibles = [4];
+					this.nb_questions = 1;
+					break;
+				case 5 :
+					type_de_questions_disponibles = [1,2,3,4];
+					this.nb_questions = 4;
+					break;										
+			}
 
-		let type_de_questions_disponibles = [1, 2, 3, 4];
+		
 		//let type_de_questions_disponibles = [1];
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles, this.nb_questions);
 
@@ -41330,7 +42616,7 @@ function fonction_notion_vocabulaire() {
 					if (sortie_html) {
 						texte = `La $\\mathbf{machine\\,f}$ renvoie le ` + katex_Popup(`périmètre`, `Rappel`, `Le périmètre d'un polygone est égal à la somme des longueurs de ses côtés`) + ` d'un carré de côté $x$`;
 					} else {
-						texte = `La $\\mathbf{machine\\,f}$ renvoie le \\textbf{périmètre} \\footnote{\\textbf{Rappel :} Le périmètre d'un polygone est égal à la somme des longueurs de ses côtés} d'un carré de côté $x$`;
+						texte = `<br>La $\\mathbf{machine\\,f}$ renvoie le \\textbf{périmètre} \\footnote{\\textbf{Rappel :} Le périmètre d'un polygone est égal à la somme des longueurs de ses côtés} d'un carré de côté $x$`;
 					}
 					texte += `<br>`;
 					// machine						
@@ -41364,7 +42650,7 @@ function fonction_notion_vocabulaire() {
 						texte_corr += `On dit que ${y} est <b>un</b> antécédent de ${4 * y} par la fonction f.<br>`;
 						j++;//incrémente la sous question
 					} else { //sortie LaTeX
-						texte += `\\item Combien vaut la longueur du côté si la machine renvoie  ${4 * y} cm ? Formuler la réponse avec le mot \\textbf{antécédent} \\footnote{\\textbf{Antécédent :} Un antécédent de la valeur d\'un périmètre est une valeur du côté qui a pour image ce périmètre}`;
+						texte += `\\item Combien vaut le côté si la machine renvoie  ${4 * y} cm ? Formuler la réponse avec le mot \\textbf{antécédent} \\footnote{\\textbf{Antécédent :} Un antécédent de la valeur d\'un périmètre est une valeur du côté qui a pour image ce périmètre}`;
 						texte_corr += `\\item Si la machine renvoie un périmètre de ${4 * y} cm alors le côté du carré vaut $${4 * y}\\div 4 = ${y}$ cm.<br>`;
 						texte_corr += `On dit que ${y} est \\textbf{un} antécédent de ${4 * y} par la fonction f.`;
 					};
@@ -41381,7 +42667,7 @@ function fonction_notion_vocabulaire() {
 					} else { // sortie LaTeX
 						texte += `\\item Quelle est l'image de ${z} par la \\textbf{fonction f} \\footnote{\\textbf{Vocabulaire :} \\textit{fonction} est le nom que l\'on donne à ces machines mathématiques}`;
 						texte += ` ? \\'{E}crire la réponse sous la forme $\\mathbf{f(${z})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f(4)=16}$}`;
-						texte_corr += `\\ item L'image de ${z} par la fonction f vaut $f(${z})=4\\times ${z}=${4 * z}$.`;
+						texte_corr += `\\item L'image de ${z} par la fonction f vaut $f(${z})=4\\times ${z}=${4 * z}$.`;
 					};
 
 					// sous question d/
@@ -41403,8 +42689,6 @@ function fonction_notion_vocabulaire() {
 					txt_info = `Voici le diagramme d'une machine qui triple `;
 					if (sortie_html) {
 						texte += num_alpha(j) + ` Comme dans l’exemple ci-dessous, écrire le diagramme de la fonction $\\mathbf{f}$.<br>`;
-						//texte += `Voici le diagramme d'une machine qui triple `;
-						//texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						SVG_machine_diag_3F1_act_mono(id_du_div_diag, 800, 100, 't', 'x', [['3', '3x']]);
 						texte_corr += num_alpha(j) + ` C'est une machine qui quadruple, donc sous forme de diagramme.<br>`;
@@ -41412,9 +42696,7 @@ function fonction_notion_vocabulaire() {
 						SVG_machine_diag_3F1_act_mono(id_du_div_corr, 800, 100, 'f', 'x', [['4', '4x']]);
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
-						texte += `\\item   \\'{E}crire la réponse à la question d/ sous forme de diagramme, comme dans l’exemple ci-dessous.<br>`;
-						//texte += `Voici le diagramme d'une machine qui triple <br> `;
-						//texte += tikz_machine_diag(`f`, `x`, [[`\\times 3`, `3x`]]);
+						texte += `\\item   Comme dans l’exemple ci-dessous, écrire le diagramme de la fonction $\\mathbf{f}$.<br>`;
 						txt_info += '<br>' + tikz_machine_diag(`t`, `x`, [[`\\times 3`, `3x`]]);
 						texte_corr += `\\item  C'est une machine qui quadruple, donc sous forme de diagramme.<br>`;
 						texte_corr += tikz_machine_diag(`f`, `x`, [[`\\times 4`, `4x`]]);
@@ -41425,22 +42707,10 @@ function fonction_notion_vocabulaire() {
 						couleur: 'nombres'
 					});
 
-					// // sous question f/
-					// if (sortie_html) {
-					// 	texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 2) + ` sous la forme `;
-					// 	texte += katex_Popup('$\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire <b>f(4)=16</b>') + `<br>`;
-					// 	texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.<br>`;
-					// 	j++;//incrémente la sous question
-					// } else { // sortie LaTeX
-					// 	texte += `\\item   \\'{E}crire la réponse à la question d/ sous la forme $\\mathbf{f(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f(4)=16}$}`;
-					// 	texte_corr += `\\item  L'image de $x$ par la fonction f vaut $4\\times x$ donc $f(x)=4\\times x$.`;
-					// };
-
-					// sous question g/
+					// sous question f/
 					if (sortie_html) {
 						texte += num_alpha(j) + ` Ecrire maintenant la fonction f en utilisant la forme  `;
-						texte += katex_Popup('$\\mathbf{f:\\textbf{\\textit{x}}\\longmapsto \\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f:4\\longmapsto 16}$');
-						//texte += `écrire la réponse à la question ` + num_alpha(j - 3) + `<br>`;
+						texte += katex_Popup('$\\mathbf{f:\\textbf{\\textit{x}}\\longmapsto \\ldots}$', 'Notation', '4 a pour image 16 par la fonction f peut s\'écrire $\\mathbf{f:4\\longmapsto 16}$');						
 						texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction f vaut $4\\times x$ donc $f:x\\longmapsto 4\\times x$.<br>`;
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
@@ -41456,7 +42726,7 @@ function fonction_notion_vocabulaire() {
 					if (sortie_html) {
 						texte = `La $\\textbf{machine\\,g}$ renvoie ` + katex_Popup('l\'aire', 'Rappel', 'L\'aire d\'un carré est égale au produit de la longueur de son côté par lui-même.') + ` d'un carré de côté $x$`;
 					} else {
-						texte = `La $\\textbf{machine\\,g}$ renvoie \\textbf{l\'aire} \\footnote{\\textbf{Rappel :} L\'aire d\'un carré est égale au produit de la longueur de son côté par lui-même.} d'un carré de côté $x$`;
+						texte = `<br>La $\\textbf{machine\\,g}$ renvoie \\textbf{l\'aire} \\footnote{\\textbf{Rappel :} L\'aire d\'un carré est égale au produit de la longueur de son côté par lui-même.} d'un carré de côté $x$`;
 					}
 					texte += `<br>`;
 					// machine
@@ -41516,20 +42786,24 @@ function fonction_notion_vocabulaire() {
 
 					// sous question d/
 					if (sortie_html) {
-						texte += num_alpha(j) + ` Que renvoie la machine si le côté vaut $x$ cm ?<br>`;
+						texte += num_alpha(j) + ` Que renvoie la machine si le côté vaut $x$ cm ?`;
+						texte += ` &Eacute;crire la réponse sous la forme `;
+						texte += katex_Popup('$\\mathbf{g(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction g peut s\'écrire <b>g(4)=16</b>') + `<br>`;
 						texte_corr += num_alpha(j) + ` Si le côté vaut $x$ la machine renvoie $x\\times x$ ce qui est équivalent à $x^2$ .<br>`;
+						texte_corr += ` L'image de $x$ par la fonction g vaut $x^2$ donc $g(x)=x^2$.<br>`;
 						j++;//incrémente la sous question	
 					} else {
 						texte += `\\item  Que renvoie la machine si le côté vaut $x$ cm ?`;
 						texte_corr += `\\item Si le côté vaut $x$ la machine renvoie $x\\times x$ ce qui est équivalent à $x^2$ .`;
+						texte += ` \\'{E}crire la réponse sous la forme $\\mathbf{g(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction g peut s\'écrire $\\mathbf{g(4)=16}$}`;
+						texte_corr += ` L'image de $x$ par la fonction g vaut $x^2$ donc $g(x)=x^2$.`;
+
 					};
 
 					// sous question e/
 					txt_info = `Voici le diagramme d'une machine qui double `;
 					if (sortie_html) {
-						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme.<br>`;
-						// texte += `Voici le diagramme d'une machine qui double `;
-						// texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						texte += num_alpha(j) + ` Comme dans l’exemple ci-dessous, écrire le diagramme de la fonction $\\mathbf{g}$.<br>`;
 						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						SVG_machine_diag_3F1_act_mono(id_du_div_diag, 800, 100, 'g', 'x', [['2', '2x']]);
 						texte_corr += num_alpha(j) + ` C'est une machine qui multiplie un nombre par lui-même, donc sous forme de diagramme.<br>`;
@@ -41537,9 +42811,7 @@ function fonction_notion_vocabulaire() {
 						SVG_machine_diag_3F1_act_mono(id_du_div_corr, 800, 100, 'g', 'x', [['x', 'x²']]);
 						j++;//incrémente la sous question
 					} else {
-						texte += `\\item  \\'{E}crire la réponse à la question d/ sous forme de diagramme.<br>`;
-						// texte += `Voici le diagramme d'une machine qui double <br>`;
-						// texte += tikz_machine_diag(`g`, `x`, [[`\\times 2`, `2x`]]);
+						texte += `\\item  Comme dans l’exemple ci-dessous, écrire le diagramme de la fonction $\\mathbf{g}$.<br>`;
 						txt_info += '<br>' + tikz_machine_diag(`g`, `x`, [[`\\times 2`, `2x`]]);
 						texte_corr += `\\item C'est une machine qui multiplie un nombre par lui-même, donc sous forme de diagramme.<br>`;
 						texte_corr += tikz_machine_diag(`g`, `x`, [[`\\times x`, `x^2`]]);
@@ -41552,27 +42824,13 @@ function fonction_notion_vocabulaire() {
 
 					// sous question f/
 					if (sortie_html) {
-						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 2) + ` sous la forme `;
-						texte += katex_Popup('$\\mathbf{g(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction g peut s\'écrire <b>g(4)=16</b>') + `<br>`;
-						texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction g vaut $x\\times x = x^2$ donc $g(x)=x\\times x=x^2$.<br>`;
-						j++;//incrémente la sous question
-					} else { // sortie LaTeX
-						texte += `\\item  \\'{E}crire la réponse à la question d/ sous la forme `;
-						texte += `$\\mathbf{g(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction g peut s\'écrire \\textbf{g(4)=16}}`;
-						texte_corr += `\\item L'image de $x$ par la fonction g vaut $x\\times x = x^2$ donc $g(x)=x\\times x=x^2$.`;
-					};
-
-					// sous question g/
-					if (sortie_html) {
-						texte += num_alpha(j) + ` En utilisant la forme `;
-						texte += katex_Popup('$\\mathbf{g:\\textbf{\\textit{x}} \\longmapsto \\ldots}$', 'Notation', '4 a pour image 16 par la fonction g peut s\'écrire $\\mathbf{g:4\\longmapsto 16}$');
-						texte += ` écrire la réponse à la question ` + num_alpha(j - 3) + `<br>`;
+						texte += num_alpha(j) + ` Ecrire maintenant la fonction g en utilisant la forme `;
+						texte += katex_Popup('$\\mathbf{g:\\textbf{\\textit{x}} \\longmapsto \\ldots}$', 'Notation', '4 a pour image 16 par la fonction g peut s\'écrire $\\mathbf{g:4\\longmapsto 16}$');						
 						texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction g vaut $x\\times x=x^2$ donc $g:x\\longmapsto x\\times x=x^2$.<br>`;
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
-						texte += `\\item  En utilisant la forme `;
+						texte += `\\item  Ecrire maintenant la fonction g en utilisant la forme `;
 						texte += `$\\mathbf{g:\\textbf{\\textit{x}} \\longmapsto \\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction g peut s\'écrire $\\mathbf{g:4\\longmapsto 16}$'}`;
-						texte += ` écrire la réponse à la question d/ `;
 						texte_corr += `\\item L'image de $x$ par la fonction g vaut $x\\times x=x^2$ donc $g:x\\longmapsto x\\times x=x^2$.`;
 						texte += `\\end{enumerate}`;
 						texte_corr += `\\end{enumerate}`;
@@ -41581,7 +42839,13 @@ function fonction_notion_vocabulaire() {
 				case 3: // somme de 1 et du triple de x
 					var j = 0; // pour la sous-numérotation
 					// consigne
-					texte = `La $\\mathbf{machine\\,h}$ renvoie la somme du triple du nombre de départ et de 1.`;
+					if (!sortie_html) {
+						texte=`<br>`;
+					} else {
+						texte=``;
+					};
+
+					texte += `La $\\mathbf{machine\\,h}$ renvoie la somme du triple du nombre de départ et de 1.`;
 					texte += `<br>`;
 					// machine
 					x = randint(2, 99);//augmenter les possibles pour éviter les questions déjà posées?	
@@ -41640,21 +42904,25 @@ function fonction_notion_vocabulaire() {
 
 					// sous question d/
 					if (sortie_html) {
-						texte += num_alpha(j) + ` Que renvoie la machine si le côté vaut $x$ ?<br>`;
+						texte += num_alpha(j) + ` Que renvoie la machine si le côté vaut $x$ ?`;
+						texte += ` &Eacute;crire la réponse sous la forme `;
+						texte += katex_Popup('$\\mathbf{h(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction h peut s\'écrire <b>h(4)=16</b>') + `<br>`;
 						texte_corr += num_alpha(j) + ` Si le côté vaut $x$ la machine renvoie $3\\times x + 1$ ce qui est équivalent à $3x + 1$ .<br>`;
+						texte_corr += ` L'image de $x$ par la fonction h vaut $3\\times x + 1$ donc $f(x)=3\\times x + 1$.<br>`;
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
 						texte += `\\item  Que renvoie la machine si le côté vaut $x$ ?`;
 						texte_corr += `\\item Si le côté vaut $x$ la machine renvoie $3\\times x + 1$ ce qui est équivalent à $3x + 1$ .`;
+						texte += ` \\'{E}crire la réponse sous la forme $\\mathbf{h(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction h peut s\'écrire $\\mathbf{h(4)=16}$}`;
+						texte_corr += ` L'image de $x$ par la fonction h vaut $3x + 1$ donc $h(x)=3x+1$.`;
+
 						j++;//incrémente la sous question
 					};
 
 					// sous question e/
 					txt_info = `Voici le diagramme d'une machine qui double puis qui ajoute 5 `;
 					if (sortie_html) {
-						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 1) + ` sous forme de diagramme.<br>`;
-						// texte += `Voici le diagramme d'une machine qui double puis qui ajoute 5 `;
-						// texte += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
+						texte += num_alpha(j) + ` Comme dans l’exemple ci-dessous, écrire le diagramme de la fonction $\\mathbf{h}$.<br>`;
 						txt_info += `<div id="${id_du_div_diag}" style="width: ${pourcentage}"; height: 50px; display : table "></div>`;
 						SVG_machine_diag_3F12(id_du_div_diag, 800, 100, 'h', 'x', [['2', '2x'], ['5', '2x+5']]);
 						texte_corr += num_alpha(j) + ` C'est une machine qui triple un nombre et ajoute 1, donc sous forme de diagramme.<br>`;
@@ -41662,9 +42930,7 @@ function fonction_notion_vocabulaire() {
 						SVG_machine_diag_3F12(id_du_div_corr, 800, 100, 'h', 'x', [['3', '3x'], ['1', '3x+1']]);
 						j++;//incrémente la sous question
 					} else {
-						texte += `\\item  \\'{E}crire la réponse à la question d/ sous forme de diagramme.<br>`;
-						// texte += `Voici le diagramme d'une machine qui double puis qui ajoute 5 <br>`;
-						// texte += tikz_machine_diag(`h`, `x`, [[`\\times 2`, `2x`], [`+5`, `2x+5`]]);
+						texte += `\\item  Comme dans l’exemple ci-dessous, écrire le diagramme de la fonction $\\mathbf{h}$.<br>`;
 						txt_info += '<br>' + tikz_machine_diag(`h`, `x`, [[`\\times 2`, `2x`], [`+5`, `2x+5`]]);
 						texte_corr += `\\item C'est une machine qui triple un nombre et ajoute 1, donc sous forme de diagramme.<br>`;
 						texte_corr += tikz_machine_diag(`h`, `x`, [[`\\times 3`, `3x`], [`+1`, `3x+1`]]);
@@ -41677,27 +42943,13 @@ function fonction_notion_vocabulaire() {
 
 					// sous question f/
 					if (sortie_html) {
-						texte += num_alpha(j) + ` &Eacute;crire la réponse à la question ` + num_alpha(j - 2) + ` sous la forme `;
-						texte += katex_Popup('$\\mathbf{h(\\textbf{\\textit{x}})=\\ldots}$', 'Notation', '4 a pour image 16 par la fonction h peut s\'écrire <b>h(4)=16</b>') + `<br>`;
-						texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction h vaut $3\\times x + 1 = 3x + 1$ donc $h(x)=3\\times x + 1$ soit $h(x) = 3x + 1$.<br>`;
-						j++;//incrémente la sous question
-					} else { // sortie LaTeX
-						texte += `\\item  \\'{E}crire la réponse à la question d/ sous la forme `;
-						texte += `$\\mathbf{h(\\textbf{\\textit{x}})=\\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction h peut s\'écrire \\textbf{h(4)=16}}`;
-						texte_corr += `\\item L'image de $x$ par la fonction h vaut $3\\times x + 1 = 3x + 1$ donc $h(x)=3\\times x + 1$ soit $h(x) = 3x + 1$.`;
-					};
-
-					// sous question g/
-					if (sortie_html) {
-						texte += num_alpha(j) + ` En utilisant la forme `;
-						texte += katex_Popup('$\\mathbf{h:\\textbf{\\textit{x}} \\longmapsto \\ldots}$', 'Notation', '4 a pour image 16 par la fonction h peut s\'écrire $\\mathbf{h:4\\longmapsto16}$');
-						texte += ` écrire la réponse à la question ` + num_alpha(j - 3) + `<br>`;
+						texte += num_alpha(j) + ` Ecrire maintenant la fonction h en utilisant la forme `;
+						texte += katex_Popup('$\\mathbf{h:\\textbf{\\textit{x}} \\longmapsto \\ldots}$', 'Notation', '4 a pour image 16 par la fonction h peut s\'écrire $\\mathbf{h:4\\longmapsto16}$');						
 						texte_corr += num_alpha(j) + ` L'image de $x$ par la fonction h vaut $3\\times x +1= 3x + 1$ donc $h : x \\longmapsto 3\\times x + 1$ soit $h : x \\longmapsto 3x + 1$.<br>`;
 						j++;//incrémente la sous question
 					} else { // sortie LaTeX
-						texte += `\\item  En utilisant la forme `;
-						texte += `$\\mathbf{h:\\textbf{\\textit{x}} \\longmapsto \\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction h peut s\'écrire $\\mathbf{h:4\\longmapsto16}$}`;
-						texte += ` écrire la réponse à la question d/`;
+						texte += `\\item  Ecrire maintenant la fonction h en utilisant la forme `;
+						texte += `$\\mathbf{h:\\textbf{\\textit{x}} \\longmapsto \\ldots}$ \\footnote{\\textbf{Notation :} 4 a pour image 16 par la fonction h peut s\'écrire $\\mathbf{h:4\\longmapsto16}$}`;						
 						texte_corr += `\\item L'image de $x$ par la fonction h vaut $3\\times x +1= 3x + 1$ donc $h : x \\longmapsto 3\\times x + 1$ soit $h : x \\longmapsto 3x + 1$.`;
 						texte += `\\end{enumerate}`;
 						texte_corr += `\\end{enumerate}`;
@@ -41706,7 +42958,12 @@ function fonction_notion_vocabulaire() {
 				case 4: // nombre de diviseurs de x entier
 					var j = 0; // pour la sous-numérotation
 					// consigne
-					texte = `La $\\mathbf{machine\\,d}$, qui n'accepte que des nombres entiers positifs, renvoie le nombre de diviseurs du nombre de départ.`;
+					if (!sortie_html) {
+						texte = `<br>`;
+					} else {
+						texte=``;
+					};
+					texte += `La $\\mathbf{machine\\,d}$, qui n'accepte que des nombres entiers positifs, renvoie le nombre de diviseurs du nombre de départ.`;
 					texte += `<br>`;
 					// machine
 					x = randint(2, 51);//augmenter les possibles pour éviter les questions déjà posées?						
@@ -41846,7 +43103,7 @@ function fonction_notion_vocabulaire() {
 
 		liste_de_question_to_contenu(this);
 	}
-	//this.besoin_formulaire_numerique = ['Règle à travailler',5,"1 : Produit de deux puissances de même base\n2 : Quotient de deux puissances de même base\n3 : Puissance de puissance\n4 : Produit de puissances de même exposant\n5 : Mélange"]; 
+	this.besoin_formulaire_numerique = ['Type de fonction',5,"1 : Périmètre d'un carré\n2 : Aire d'un carré\n3 : Somme de 1 et du triple du nombre de départ\n4 : Nombre de diviseurs d'un entier positif\n5 : Les quatre"]; 
 };
 
 /**
@@ -44101,7 +45358,7 @@ function Antecedent_et_image_graphique() {
 			this.contenu_correction += `<br>${num_alpha(3)} $${b}$ a pour unique antécédent $${x0 + 4}$, on note $f(${x0 + 4})=${b}$.`
 		}
 		if (!sortie_html) {
-			this.contenu = this.contenu.replace(/<br><br>/g, '\n\n\\medskip\n').replace(/<br>/g, '\\\\\n')
+			this.contenu = tex_consigne('') + this.contenu.replace(/<br><br>/g, '\n\n\\medskip\n').replace(/<br>/g, '\\\\\n')
 			this.contenu_correction = this.contenu_correction.replace(/<br><br>/g, '\n\n\\medskip\n').replace(/<br>/g, '\\\\\n')
 		} else {
 			this.contenu_correction = `<div style="line-height: ${this.spacing_corr};">\n${this.contenu_correction}\n</div>`
@@ -44165,7 +45422,7 @@ function Premier_escape_game_mathalea() {
 			else ord.push(randint(0, 4, ord[x - 1])) // pour le deuxième, on évite l'ordonnée précédente
 			console.log(x, absc[x], ord[x])
 			if (lettres[ord[x]][absc[x]] == '*') lettres[ord[x]][absc[x]] = car
-			else if (lettres[absc[x]][ord[x]] != car) {
+			else if (lettres[ord[x]][absc[x]] != car) {
 				for (let i = 0; i < x; i++) {
 					if (absc[i] == absc[x] && ord[i] == ord[x]) {
 						ord[x] = (ord[x] + 1) % 5
@@ -44205,7 +45462,7 @@ function Premier_escape_game_mathalea() {
 		console.log([0, ord0[0]], [absc[0], ord[0]], [absc[1], ord[1]], [7, ord6[0]])
 		switch (type) {
 			case 1: //N&B
-				p = polygoneRegulierIndirect(point(-1, -2), point(15, -2), 4)
+				p = polygoneRegulier(point(-1, -2), point(15, -2), 4)
 				p.couleurDeRemplissage = 'grey'
 				p.opacite = 0.2
 				f1 = graphiqueInterpole([[0, ord0[0]], [absc[0], ord[0]], [absc[1], ord[1]], [7, ord6[0]]], { repere: r, color: 'black', step: 0.1 })
@@ -44215,7 +45472,7 @@ function Premier_escape_game_mathalea() {
 				texte += mathalea2d({ xmin: -1, ymin: -1, xmax: 15, ymax: 7, pixelsParCm: 30 }, p, r, f1, f2) + `<br>`
 				break;
 			case 2: //RGB
-				p = polygoneRegulierIndirect(point(-1, -2), point(15, -2), 4)
+				p = polygoneRegulier(point(-1, -2), point(15, -2), 4)
 				p.opacite = 0.2
 				p.couleurDeRemplissage = 'grey'
 				f1 = graphiqueInterpole([[0, ord0[0]], [absc[0], ord[0]], [absc[1], ord[1]], [7, ord6[0]]], { repere: r, color: 'red', step: 0.1 })
@@ -44227,7 +45484,7 @@ function Premier_escape_game_mathalea() {
 				texte += mathalea2d({ xmin: -1, ymin: -1, xmax: 15, ymax: 7, pixelsParCm: 30 }, p, r, f1, f2, f3) + `<br>`
 				break;
 			case 3: //CJMN
-				p = polygoneRegulierIndirect(point(-1, -2), point(15, -2), 4)
+				p = polygoneRegulier(point(-1, -2), point(15, -2), 4)
 				p.opacite = 0.2
 				p.couleurDeRemplissage = 'grey'
 				f1 = graphiqueInterpole([[0, ord0[0]], [absc[0], ord[0]], [absc[1], ord[1]], [7, ord6[0]]], { repere: r, color: 'cyan', step: 0.1 })
@@ -45438,6 +46695,250 @@ function Transformations_du_plan_et_coordonnees() {
 	this.besoin_formulaire_numerique = ['Transformations', 5, '1 : Symétries axiales (6ème)\n 2 : Symétries axiales et centrales (5ème)\n 3 : Symétries et translations (4ème)\n 4 : Symétries, translations, rotations et homothéties\n 5 : Les mêmes plus des rotations compliquées\n'];
 
 }
+/**
+ * Publié le 16/12/2020
+ * @Auteur Jean-Claude Lhote
+ * Trouver l'image par symétrie centrale d'une figure dans un pavage
+ * Ref 3G12
+ */
+function Pavage_et_rotation2d() {
+	"use strict";
+	Exercice.call(this); // Héritage de la classe Exercice()
+	this.titre =
+	  "Trouver l\'image d'une figure par une rotation dans un pavage";
+	this.consigne = "";
+	this.nb_questions = 3;
+	this.nb_questions_modifiable = true;
+	this.correction_detaillee_disponible=true
+	this.correction_detaillee=true
+	this.nb_cols = 1;
+	this.nb_cols_corr = 1;
+	this.sup = 1; // 1 pour des pavages modestes, 2 pour des plus grand.
+	this.sup2=false // On cache les barycentres par défaut.
+	this.sup3=7;
+	sortie_html ? (this.spacing_corr = 2.5) : (this.spacing_corr = 1.5);
+	this.nouvelle_version = function (numero_de_l_exercice) {
+	  let videcouples=function(tableau){
+		for (let k=0;k<tableau.length;k++){
+			if (tableau[k][0]==tableau[k][1]) {
+				tableau.splice(k,1)
+			}
+		  for (let j=k+1;j<tableau.length;j++){
+			if (tableau[k][1]==tableau[j][0]) {
+
+			}
+		  }
+		}
+		return tableau
+	  }
+	  let compare2polys=function(poly1,poly2){
+		if (comparenbsommets(poly1,poly2)) {
+		  if (comparesommets(poly1,poly2)) 
+			return true
+		  else
+			return false
+		}
+		else 
+		  return false 
+		}
+		let comparenbsommets = function(poly1,poly2){
+		  if (poly1.listePoints.length==poly2.listePoints.length){
+			return true
+		  }
+		  else return false
+		}
+		
+		let compare2sommets=function(sommet1,sommet2){
+		  if (egal(sommet1.x,sommet2.x,0.1)&&egal(sommet1.y,sommet2.y,0.1)) {
+			return true
+		  }
+		  else return false
+		}
+		let comparesommets = function(poly1,poly2){
+		  let trouve=false,trouves=0
+		  if (comparenbsommets(poly1,poly2))
+		  for (let P of poly1.listePoints) {
+			for (let M of poly2.listePoints) {
+			  if (compare2sommets(M,P)) {
+				trouve=true
+			  }
+			  if (trouve) break
+			}
+			if (trouve) {
+			  trouves++
+			  trouve=false
+			}
+			else {
+			  trouves-=100
+			}
+			if (trouves<0)
+			break
+		  }
+		  if (trouves==poly1.listePoints.length)
+			return true
+		  else return false
+		}
+	  
+	  let rotaccion = function (pavage, A,angle, numero) { // retourne le numero du polygone image ou -1 si il n'existe pas
+		let poly=pavage.polygones[numero-1]
+		let pol
+		let result=-1
+		let sympoly=rotation(poly,A,angle)
+		for (let k= 0;k<pavage.polygones.length;k++) {
+		  pol=pavage.polygones[k]
+		  if (compare2polys(sympoly,pol)) {
+			return k+1
+		  }
+		}
+		return result
+	  } 
+  
+	  let objets=[],objets_correction=[]
+	  let codes=['/','//','///','o','w','X','U','*']
+	  let taillePavage=parseInt(this.sup)
+	  if (taillePavage<1||taillePavage>2) {
+		taillePavage=1
+	  }
+	  if (this.nb_questions>5) {
+		taillePavage=2
+	  }
+	  this.liste_corrections = []
+	  this.liste_questions = []
+	  let Nx,Ny,index1,index2,A,B,d,image,couples=[],tailles=[],monpavage,fenetre
+	  let texte = "", texte_corr = "", type_de_pavage = parseInt(this.sup)
+	  let nombreTentatives,nombrePavageTestes=1
+	  let sensdirect,M,N,trace,label,P1,P2,P3,t
+	  let alphas=[[60,120,180],[90,180],[60,120,180],[60,120,180,90],[45,90,135,180],[60,120,180],[60,120,180]],alpha
+	  if (this.sup3==8) {
+		type_de_pavage =  randint(1,7)
+	  }
+	  else {
+		type_de_pavage=parseInt(this.sup3)
+	  }
+	  while (couples.length<this.nb_questions&&nombrePavageTestes<6){
+		nombreTentatives=0
+	  monpavage = pavage() // On crée l'objet Pavage qui va s'appeler monpavage
+	  tailles = [[[3, 2], [3, 2], [2, 2], [2, 2], [2, 2], [2, 2],[3,2]], [[4, 3], [4, 3], [3, 3], [3, 3], [3, 3], [3, 2],[5,3]]]
+ 	
+	  Nx = tailles[taillePavage-1][type_de_pavage-1][0]
+	  Ny = tailles[taillePavage-1][type_de_pavage-1][1]
+	  monpavage.construit(type_de_pavage, Nx, Ny, 3) // On initialise toutes les propriétés de l'objet.
+	  fenetre=monpavage.fenetre
+	  fenetreMathalea2d=[fenetre.xmin,fenetre.ymin,fenetre.xmax,fenetre.ymax]
+	  while (couples.length<this.nb_questions+2&&nombreTentatives<3) { // On cherche d pour avoir suffisamment de couples
+	  couples=[] // On vide la liste des couples pour une nouvelle recherche
+	  
+	  index1=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3)) // On choisit 1 point dans un des polygones
+	  if (choice([true,false])) { 
+		  A=monpavage.polygones[index1].listePoints[randint(0,monpavage.polygones[index1].listePoints.length-1)] // On choisit un sommet
+	  }
+	  else {
+		A=monpavage.barycentres[index1] // Ou on choisit un barycentre
+	  }
+	  while (A.x-5<fenetre.xmin||A.x+5>fenetre.xmax||A.y-5<fenetre.ymin||A.y+5>fenetre.ymax){
+		index1=randint(Math.floor(monpavage.nb_polygones/3),Math.ceil(monpavage.nb_polygones*2/3)) // On choisit 1 point dans un des polygones
+		if (choice([true,false])) { 
+			A=monpavage.polygones[index1].listePoints[randint(0,monpavage.polygones[index1].listePoints.length-1)] // On choisit un sommet
+		}
+		else {
+		  A=monpavage.barycentres[index1] // Ou on choisit un barycentre
+		}
+	  }
+			  A.nom='A'
+			  A.positionLabel='above left'
+		  trace=tracePoint(A) // la trace du centre de symétrie sera rouge et grosse
+		  label=labelPoint(A)
+	  trace.epaisseur=3
+	  trace.taille=4
+	  trace.color='red'
+	  alpha=alphas[type_de_pavage-1][randint(0,alphas[type_de_pavage-1].length-1)]
+	  sensdirect=choice([1,-1])
+	  for (let i=1;i<= monpavage.nb_polygones; i++){ //on crée une liste des couples (antécédents, images)
+		image=rotaccion(monpavage,A,alpha*sensdirect,i)
+		if (image!=-1){ // si l'image du polygone i existe, on ajoute le couple à la liste
+		  couples.push([i,image])
+		}
+	  }
+	  couples=videcouples(couples) //supprime tous les couples en double (x,y)=(y,x)
+	  nombreTentatives++ 
+	  }
+	  if (couples.length<this.nb_questions){
+		if (this.sup3==7) {
+			type_de_pavage=(type_de_pavage+1)%5+1
+		  }
+	  nombrePavageTestes++
+	  }
+	}
+	if (couples.length<this.nb_questions){
+	  console.log('trop de questions, augmentez la taille du pavage')
+	  return
+	}
+  
+	  objets.push(trace) // le centre est OK on pousse sa trace
+	  objets.push(label) // et son label
+	  couples=shuffle(couples) // on mélange les couples
+	  for (let i = 0; i < monpavage.nb_polygones; i++) {
+		objets.push(texteParPosition(nombre_avec_espace(i + 1), monpavage.barycentres[i].x + 0.5, monpavage.barycentres[i].y, 'milieu', 'gray', 1, 0, true))
+	  }
+	  if (this.sup2) { // Doit-on montrer les centres des figures ?
+		for (let i = 0; i < monpavage.nb_polygones; i++) {
+		  objets.push(monpavage.tracesCentres[i])
+		}
+	  }
+	  for (let i = 0; i < monpavage.nb_polygones; i++) { // il faut afficher tous les polygones du pavage
+		objets.push(monpavage.polygones[i])
+	  }
+	  texte = mathalea2d(fenetre, objets) // monpavage.fenetre est calibrée pour faire entrer le pavage dans une feuille A4
+	  texte+=`<br>Dans la rotation de centre $A$ et d\'angle ${alpha}° dans le sens `
+	  if (sensdirect==1) {
+		texte+=`inverse des aiguilles d'une montre.<br>`
+	}
+	else {
+		texte+=`des aiguilles d'une montre.<br>`
+	}
+	texte_corr+=`Dans la rotation de centre $A$ et d\'angle ${alpha}° dans le sens `
+	if (sensdirect==1) {
+		texte_corr+=`inverse des aiguilles d'une montre, <br>`
+	}		
+	else {
+		texte_corr+=`des aiguilles d'une montre, <br>`
+	}
+	  for (let i=0;i<this.nb_questions;i++){
+		texte+=`Quel est l'image de la figure $${couples[i][0]}$ ?<br>`
+		texte_corr+=`- l'image de la figure $${couples[i][0]}$ est la figure ${couples[i][1]}.<br>`
+	
+		if (this.correction_detaillee){
+			t=this.nb_questions*3;
+			M=monpavage.barycentres[couples[i][0]-1]
+			N=monpavage.barycentres[couples[i][1]-1]
+			P1=monpavage.polygones[couples[i][0]-1]
+			P1.color=texcolors(i)
+			P1.couleurDeRemplissage=texcolors(i)
+			P1.opaciteDeRemplissage=0.5
+			P1.epaisseur=2
+			P2=monpavage.polygones[couples[i][1]-1]
+			P2.color=texcolors(i)
+			P2.couleurDeRemplissage=texcolors(i)
+			P2.opaciteDeRemplissage=0.5
+			P2.epaisseur=2
+			P3=rotationAnimee(P1,A,alpha*sensdirect,`begin="${i*3}s;${i*3+t}s;${i*3+t*2}s" end="${i*3+2}s;${i*3+t+2}s;${i*3+t*2+2}s" dur="2s" repeatCount="indefinite" repeatDur="${9*this.nb_questions}s" id="poly-${i}-anim"`)
+			P3.color=texcolors(i)
+			P3.epaisseur=2
+			objets_correction.push(tracePoint(M,N),segment(A,M,texcolors(i)),segment(A,N,arcenciel(i)),codeAngle(M,A,N,0.8,'',arcenciel(i),1,1,'blue',0.2,true),P1,P2,P3)
+
+		  }
+	}
+    if (this.correction_detaillee){
+      texte_corr+=mathalea2d(fenetre, objets,objets_correction)
+    }
+	  this.liste_questions.push(texte);
+	  this.liste_corrections.push(texte_corr);
+	  liste_de_question_to_contenu(this)
+	}
+	this.besoin_formulaire_numerique = ['Taille du pavage (la grande est automatique au-delà de 5 questions)', 2, '1 : Taille modeste\n 2 : Grande taille'];
+	this.besoin_formulaire2_case_a_cocher=["Montrer les centres"]
+	this.besoin_formulaire3_numerique=['Choix du pavage',8,'1 : Pavage de triangles équilatéraux\n2 : Pavage de carrés\n3 : Pavage d\'hexagones réguliers\n4 : Pavage 3².4.3.4\n5 : Pavage 8².4\n 6 : Pavage de losanges (hexagonal d\'écolier)\n7 : Pavage 6.3.6.3\n8 : Un des sept pavages au hasard']
+}
 
 /**
 * Passer d'une écriture en base 10 à l'écriture dans une autre base ou inversement
@@ -46628,20 +48129,26 @@ function Eq_resolvantes_Thales() {
 	'use strict';
 	Exercice.call(this); // Héritage de la classe Exercice()
 	this.debug = false;
-	this.sup = 1;
 	if (this.debug) {
 		this.nb_questions = 4;
 	} else {
-		this.nb_questions = 2;
-	};
+		this.nb_questions = 2;				
+	};	
+	this.sup = 1;
 	this.sup2 = false;
 	//this.exo = '';	
 	if (this.exo == '4L15-1') {
 		this.titre = "Equations du type $\\dfrac{x}{a}=\\dfrac{b}{c}$";
-	} else {
+	} else if (this.exo == '4P10-2') {
+		this.titre = "Déterminer une quatrième proportionnelle dans un tableau";
+	}else {
 		this.titre = "Equations résolvantes pour le théorème de Thalès";
 	}
-	this.consigne = `Résoudre les équations suivantes.`;
+	if (this.exo == '4P10-2') {
+		this.consigne = `Déterminer la quatrième proportionnelle dans les tableaux suivants.`;
+	} else {
+		this.consigne = `Résoudre les équations suivantes.`;
+	};
 
 	this.nb_cols = 1;
 	this.nb_cols_corr = 1;
@@ -46659,8 +48166,14 @@ function Eq_resolvantes_Thales() {
 			let sortie;
 			let texte = ``;
 			if (bool) {
-				texte = `Dans ce cas le recours au produit en croix est superflu.<br> Par identification, on a directement $${inc}=${a}$ !`;
-				sortie = warn_message(texte, `nombres`, `Keep Cool Guy !`);
+				if (b==c) {
+					texte = `Dans ce cas le recours au produit en croix est superflu.<br> Par identification, on a directement $${inc}=${a}$ !`;
+					sortie = warn_message(texte, `nombres`, `Keep Cool Guy !`);
+				};
+				if (c==a) {
+					texte = `Dans ce cas le recours au produit en croix est superflu.<br> Par identification, on a directement $${inc}=${b}$ !`;
+					sortie = warn_message(texte, `nombres`, `Keep Cool Guy !`);
+				}
 			} else {
 				sortie = ``
 			};
@@ -46672,9 +48185,16 @@ function Eq_resolvantes_Thales() {
 		} else {
 			type_de_questions_disponibles = shuffle([choice([0, 1]), choice([2, 3])]);
 		};
+		
+		if (this.sup == 4) {
+			this.nb_questions = 5;
+		} else if (!this.debug) {
+			this.nb_questions = 2;
+		};
 
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
+		let type_de_nombres_sup_egal_4 = []; // liste des situations coeff on veut chaque fois [1,1,1] et [-1,1,1] ou autre  et [0.1,0.1,0.1]
 
 		//let liste_type_de_questions  = combinaison_listes(type_de_questions_disponibles,this.nb_questions) // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
 		let liste_type_de_questions = combinaison_listes_sans_changer_ordre(type_de_questions_disponibles, this.nb_questions) // Tous les types de questions sont posées --> à remettre comme ci dessus		
@@ -46683,7 +48203,7 @@ function Eq_resolvantes_Thales() {
 
 			// on a besoin d'un coeff pour le type de nombres
 			let coeff;
-			let nb_alea;
+			let nb_alea=[1,1,1];
 			let c_temp_case_3;
 			while (c_temp_case_3 % 2 != 0 || c_temp_case_3 % 5 != 0) {
 				c_temp_case_3 = randint(11, 99)
@@ -46693,34 +48213,49 @@ function Eq_resolvantes_Thales() {
 			switch (this.sup) {
 				case 1://entiers          
 					coeff = [1, 1, 1];
-					nb_alea = [randint(2, 9), randint(2, 9), randint(2, 9, [3, 6, 7, 9])];
+					nb_alea[0] = randint(2, 9)
+					nb_alea[1] =randint(2, 9,nb_alea[0])
+					nb_alea[2] =choice([2,4,5,8],[nb_alea[0],nb_alea[1]]);
 					break;
 				case 2://relatifs            
 					coeff = [choice([1, -1]), choice([1, -1]), choice([1, -1])];
-					nb_alea = [randint(2, 9), randint(2, 9), randint(1, 9, [3, 6, 7, 9])];
+					nb_alea[0] = randint(2, 9)
+					nb_alea[1] =randint(2, 9,nb_alea[0])
+					nb_alea[2] =choice([2,4,5,8],[nb_alea[0],nb_alea[1]]);
 					break;
 				case 3://décimaux            
 					coeff = [0.1, 0.1, 0.1];
-					nb_alea = [randint(11, 99), randint(11, 99), c_temp_case_3];
+					nb_alea[0] = randint(2, 9)
+					nb_alea[1] =randint(2, 9,nb_alea[0])
+					nb_alea[2] =c_temp_case_3;
 					break;
+				case 4://mélange
+					nb_alea[0] = randint(2, 9)
+					nb_alea[1] =randint(2, 9,nb_alea[0])
+					nb_alea[2] =choice([2,4,5,8],[nb_alea[0],nb_alea[1]]);
+					let masterChoix = choice([
+						{c:[1, 1, 1],na:[nb_alea[0],nb_alea[1],nb_alea[2]]},
+						{c:[choice([1, -1]), choice([1, -1]), choice([1, -1])],na:[nb_alea[0],nb_alea[1],nb_alea[2]]},
+						{c:[0.1, 0.1, 0.1],na:[randint(11, 99), randint(11, 99), c_temp_case_3]}
+					]);
+					coeff = masterChoix.c;					
+					nb_alea = masterChoix.na;					
 			};
 
 			let inc;
 			if (this.exo == '4L15-1') {
 				inc = choice(['r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']);
 
+			} else if (this.exo == '4P10-2') {
+				inc = ['?'];
 			} else {
 				inc = choice(['x', 'y', 'GO', 'AB', 'z', 'GA', 'BU', 'ZO', 'ME']);
 			};
 
 			let params = {
-				// a:tex_nombre(calcul(nb_alea[0]*coeff[0])),
-				// b:tex_nombre(calcul(nb_alea[1]*coeff[1])),
-				// c:tex_nombre(calcul(nb_alea[2]*coeff[2])),
 				a: calcul(nb_alea[0] * coeff[0]),
 				b: calcul(nb_alea[1] * coeff[1]),
 				c: calcul(nb_alea[2] * coeff[2]),
-				//inc:choice(['x','y','GO','AB','z','GA','BU','ZO','ME'])
 				inc: inc
 			}
 
@@ -46728,47 +48263,59 @@ function Eq_resolvantes_Thales() {
 			let situations = [
 				{//case 0 --> x/b=a/c --> cx= ab
 					eq: `\\dfrac{${params.inc}}{${tex_nombre(params.b)}}=\\dfrac{${tex_nombre(params.a)}}{${tex_nombre(params.c)}}`,
+					tab:tab_C_L([params.inc,params.a],[params.b],[params.c]),
 					a: params.a,
 					b: params.b,
 					c: params.c,
 					inc: params.inc,
-					trivial: (params.b == params.c)
+					trivial: (params.b == params.c) || (params.c == params.a)
 				},
 				{//case 1 --> a/c=x/b --> cx=ab
 					eq: `\\dfrac{${tex_nombre(params.a)}}{${tex_nombre(params.c)}}=\\dfrac{${params.inc}}{${tex_nombre(params.b)}}`,
+					tab:tab_C_L([params.a,params.inc],[params.c],[params.b]),
 					a: params.a,
 					b: params.b,
 					c: params.c,
 					inc: params.inc,
-					trivial: (params.b == params.c)
+					trivial: (params.b == params.c) || (params.c == params.a)
 
 				},
 				{//case 2 -->b/x=c/a --> cx = ab
 					eq: `\\dfrac{${tex_nombre(params.b)}}{${params.inc}}=\\dfrac{${tex_nombre(params.c)}}{${tex_nombre(params.a)}}`,
+					tab:tab_C_L([params.b,params.c],[params.inc],[params.a]),
 					a: params.a,
 					b: params.b,
 					c: params.c,
 					inc: params.inc,
-					trivial: (params.b == params.c)
+					trivial: (params.b == params.c) || (params.c == params.a)
 				},
 				{//case 3 -->c/a=b/x --> cx = ab 
 					eq: `\\dfrac{${tex_nombre(params.c)}}{${tex_nombre(params.a)}}=\\dfrac{${tex_nombre(params.b)}}{${params.inc}}`,
+					tab:tab_C_L([params.c,params.b],[params.a],[params.inc]),
 					a: params.a,
 					b: params.b,
 					c: params.c,
 					inc: params.inc,
-					trivial: (params.b == params.c)
+					trivial: (params.b == params.c) || (params.c == params.a)
 				},
 			];
 
+			let enoncePlus;
+			let corrPlusPremiereLigne;
+			
 			let enonces = [];
 			for (let k = 0; k < situations.length; k++) {
+				if (this.exo == '4P10-2') {
+					enoncePlus = `${situations[k].tab}`;
+					corrPlusPremiereLigne = `${situations[k].tab} <br> Le tableau ci-dessus est un tableau de proportionnalité, pour déterminer la quatrième proportionnelle il suffit par exemple de résoudre l'équation suivante : <br>`;
+				} else {
+					enoncePlus = `$${situations[k].eq}$`;
+					corrPlusPremiereLigne = ``;
+				};
 				enonces.push({
-					enonce: `
-						$${situations[k].eq}$
-					`,
+					enonce: enoncePlus,
 					question: ``,
-					correction: `
+					correction: `${corrPlusPremiereLigne}
 						$${situations[k].eq}$<br>
 						${texte_en_couleur_et_gras(`Les produits en croix sont égaux.`)}<br>
 						$${tex_nombre(situations[k].c)}\\times ${situations[k].inc} = ${tex_nombre(situations[k].a)}\\times ${tex_nombre(situations[k].b)}$<br>
@@ -46824,7 +48371,6 @@ function Eq_resolvantes_Thales() {
 						texte_corr = `${enonces[3].correction}`;
 					};
 					break;
-
 			};
 
 			if (this.liste_questions.indexOf(texte) == -1) { // Si la question n'a jamais été posée, on en créé une autre
@@ -46837,7 +48383,7 @@ function Eq_resolvantes_Thales() {
 		liste_de_question_to_contenu(this);
 
 	}
-	this.besoin_formulaire_numerique = ['Type de nombres', 3, "1 : Entiers naturels\n2 : Entiers relatifs\n3 : Décimaux"];
+	this.besoin_formulaire_numerique = ['Type de nombres', 4, "1 : Entiers naturels\n2 : Entiers relatifs\n3 : Décimaux\n4 : Mélange"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec des équations du second degré"];
 	//this.besoin_formulaire2_case_a_cocher = ["Avec décimaux.",false]	
 };
@@ -51334,3 +52880,146 @@ function Trouver_equation_parabole() {
   };
   this.besoin_formulaire_numerique = ['Type de questions ',4,"1 : Passant par trois points à coordonnées entières 1\n2 : Connaissant le sommet et un point de passage\n3 : Connaissant les deux racines et un point de passage\n4 : Mélange des trois type de questions"];
 }
+
+
+/**
+ * Calculs de dérivés
+ * @Auteur Rémi Angot
+ * Référence 1F10
+*/
+function CalculsDeDerives() {
+    Exercice.call(this); // Héritage de la classe Exercice()
+    this.titre = "Calculs de dérivés";
+    this.consigne = "Pour chacune des fonctions suivantes, dire sur quel ensemble elle est dérivable, puis déterminer l'expression de sa fonction dérivée.";
+    this.nb_questions = 6;
+    this.nb_cols = 2; // Nombre de colonnes pour la sortie LaTeX
+    this.nb_cols_corr = 2; // Nombre de colonnes dans la correction pour la sortie LaTeX
+    this.sup = 1;
+    // On modifie les règles de simplifications par défaut de math.js pour éviter 10x+10 = 10(x+1) et -4x=(-4x)
+    let reglesDeSimplifications = math.simplify.rules.slice();
+    reglesDeSimplifications.splice(reglesDeSimplifications.findIndex(rule => rule.l == "n1*n2 + n2"), 1)
+    reglesDeSimplifications.splice(reglesDeSimplifications.findIndex(rule => rule.l == "n1*n3 + n2*n3"), 1)
+//    reglesDeSimplifications.push({l:"-(n1*v^2)",r:"-n1*v^2"})     
+  
+  
+  
+    this.nouvelle_version = function (numero_de_l_exercice) {
+      this.liste_questions = []; // Liste de questions
+      this.liste_corrections = []; // Liste de questions corrigées
+      this.liste_valeurs = []; // Les questions sont différentes du fait du nom de la fonction, donc on stocke les valeurs
+
+      let liste_type_de_questions_disponibles
+      if (this.sup == 1) {
+        liste_type_de_questions_disponibles = ['ax+b','a','ax2+bx+c','xn','xn+xm','1/x','xn+1/x','1/xn','xn+1/xm','racine(x)']
+      } 
+      if (this.sup == 2) {
+        liste_type_de_questions_disponibles = ['ax+b','axn','a/x','a/xn','racine(ax)']
+      }
+      if (this.sup == 3){
+        liste_type_de_questions_disponibles = ['ax+b','axn','a/x','a/xn','racine(ax)']
+      } 
+      let liste_type_de_questions = combinaison_listes(liste_type_de_questions_disponibles, this.nb_questions)
+
+      
+      for (let i = 0, texte, texte_corr, a, b, c, d, n, m, expression, ensembleDerivation, cpt = 0; i < this.nb_questions && cpt < 50;)
+       {
+        switch (liste_type_de_questions[i]) {
+            case 'a':
+                a = randint(-10,10,0)
+                expression = `${a}`;
+                ensembleDerivation = `\\mathbb{R}`
+                break;
+            case 'ax+b':
+                a = randint(-10,10,0)
+                b = randint(-10,10,0)
+                expression = `${a}x  ${ecriture_algebrique(b)}`;
+                ensembleDerivation = `\\mathbb{R}`
+                break;
+            case 'ax2+bx+c':
+                a = randint(-10,10,0)
+                b = randint(-10,10,0)
+                c = randint(-10,10,0)
+                expression = `${a} x^2  ${ecriture_algebrique_sauf1(b)} x  ${ecriture_algebrique(c)}`;
+                console.log(expression)
+                ensembleDerivation = `\\mathbb{R}`
+                break;
+            case 'xn':
+                n = randint(2,10)
+                expression = `x^${n}`;
+                ensembleDerivation = `\\mathbb{R}`
+                break;
+            case 'xn+1/x':
+                n = randint(2,10)
+                expression = `x^${n}+1/x`;
+                ensembleDerivation = `\\mathbb{R}^{\\text{*}}`
+                break;
+            case 'xn+1/xm':
+                n = randint(2,10)
+                m = randint(2,10,m)
+                expression = `x^${n}+1/x^${m}`;
+                ensembleDerivation = `\\mathbb{R}^{\\text{*}}`
+                break;
+            case 'xn+xm':
+                n = randint(2,10)
+                m = randint(2,10,m)
+                expression = `x^${n}+x^${m}`;
+                ensembleDerivation = `\\mathbb{R}`
+                break;
+            case 'axn':
+                a = randint(-10,10,[0,1,-1])
+                n = randint(2,10)
+                expression = `${a}x^${n}`;
+                ensembleDerivation = `\\mathbb{R}`
+                break;
+            case '1/x':
+                expression = `1/x`;
+                ensembleDerivation = `\\mathbb{R}^{\\text{*}}`
+                break;
+            case 'a/x':
+                a = randint(-10,10,[0,1])
+                expression = `${a}/x`;
+                ensembleDerivation = `\\mathbb{R}^{\\text{*}}`
+                break;
+            case '1/xn':
+                n = randint(2,10)
+                expression = `${1}/x^${n}`;
+                ensembleDerivation = `\\mathbb{R}^{\\text{*}}`
+                break;
+            case 'a/xn':
+                a = randint(-10,10,[1,0])
+                n = randint(2,10)
+                expression = `${a}/x^${n}`;
+                ensembleDerivation = `\\mathbb{R}^{\\text{*}}`
+                break;
+            case 'racine(x)':
+                expression = `sqrt(x)`;
+                ensembleDerivation = `[0,+\\infin[`
+                break;
+            case 'racine(ax)':
+                a = randint(2,10,[4,9])
+                expression = `sqrt(${a}x)`;
+                ensembleDerivation = `[0,+\\infin[`
+                break;
+            
+        }
+
+        texte = `$${lettre_minuscule_depuis_chiffre(i+6)}:x\\longmapsto ${math.parse(expression).toTex({'implicit':'hide'}).replaceAll('\\cdot','')}$`
+        texte_corr = `$${lettre_minuscule_depuis_chiffre(i+6)}$ est dérivable sur $${ensembleDerivation}$ et $ ${lettre_minuscule_depuis_chiffre(i+6)}':x\\longmapsto ${math.simplify(math.derivative(expression,'x'),reglesDeSimplifications).toTex({'implicit':'hide'}).replaceAll('\\cdot','')}$`
+  
+        texte = texte.replaceAll('frac','dfrac')
+        texte_corr = texte_corr.replaceAll('frac','dfrac')
+
+
+        if (this.liste_valeurs.indexOf(expression) == -1) {
+          // Si la question n'a jamais été posée, on en crée une autre
+          this.liste_valeurs.push(expression);
+          this.liste_questions.push(texte);
+          this.liste_corrections.push(texte_corr);
+          i++;
+        }
+        cpt++;
+      }
+      liste_de_question_to_contenu(this);
+    };
+    this.besoin_formulaire_numerique = ['Niveau de difficulté',2,'1 : Fonctions de base \n2 : ku']; //\n3 : u/v, uv'];
+  }

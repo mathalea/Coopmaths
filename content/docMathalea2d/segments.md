@@ -18,37 +18,37 @@ description: "MathALEA 2D - Les segments, droites et demi-droites"
 Il y a plusieurs manières de créer une droite : à l'aide de 2 points, à l'aide des coefficients de l'équation de la droite, à l'un d'un point et d'un coefficient directeur...
 
 
-* `d = droite(A,B)` // La droite passant par A et B
-* `d = droite(A,B,'(d)')` // La droite passant par A et B se nommant (d)
-* `d = droite(a,b,c,'(d)')` // La droite définie par les coefficients de ax +by + c=0 (équation de la droite avec a et b non nuls)
-* `d = droite(A,B,'(d)','blue')` //La droite passant par A et B se nommant (d) et de couleur bleue
-* `d = droiteParPointEtVecteur(A,v,'red')` //Droite passant par A, de vecteur directeur v et de couleur rouge
-* `d = droiteParPointEtParallele(A,d)` // Droite parallèle à (d) passant par A
-* `d = droiteParPointEtPerpendiculaire(A,d)` //Droite perpendiculaire à (d) passant par A
-* `d = droiteHorizontaleParPoint(A)` // Droite horizontale passant par A
-* `d = droiteVerticaleParPoint(A)` // Droite verticale passant par A
-* `d = droiteParPointEtPente(A,2)` // Droite passant par A de coefficient directeur 2
-* `d = demiDroite(A,B)` //Demi-droite d'origine A passant par B
-* `d = demiDroite(A,B,'blue')` //Demi-droite d'origine A passant par B et de couleur bleue
-* `d = demiDroiteAvecExtremite(A,B)` //Demi-droite d'origine A passant par B avec l'extrémité en A dessinée
+* `let d = droite(A,B)` // La droite passant par A et B
+* `let d = droite(A,B,'(d)')` // La droite passant par A et B se nommant (d)
+* `let d = droite(a,b,c,'(d)')` // La droite définie par les coefficients de ax +by + c=0 (équation de la droite avec a et b non nuls)
+* `let d = droite(A,B,'(d)','blue')` //La droite passant par A et B se nommant (d) et de couleur bleue
+* `let d = droiteParPointEtVecteur(A,v,'red')` //Droite passant par A, de vecteur directeur v et de couleur rouge
+* `let d = droiteParPointEtParallele(A,d)` // Droite parallèle à (d) passant par A
+* `let d = droiteParPointEtPerpendiculaire(A,d)` //Droite perpendiculaire à (d) passant par A
+* `let d = droiteHorizontaleParPoint(A)` // Droite horizontale passant par A
+* `let d = droiteVerticaleParPoint(A)` // Droite verticale passant par A
+* `let d = droiteParPointEtPente(A,2)` // Droite passant par A de coefficient directeur 2
+* `let d = demiDroite(A,B)` //Demi-droite d'origine A passant par B
+* `let d = demiDroite(A,B,'blue')` //Demi-droite d'origine A passant par B et de couleur bleue
+* `let d = demiDroiteAvecExtremite(A,B)` //Demi-droite d'origine A passant par B avec l'extrémité en A dessinée
 
 
 
 Une fois la droite créée, on peut créer un vecteur directeur ou normal à cette droite.
 
-* `v = d.normal()` // Pour obtenir un vecteur normal à la droite (d)
-* `v = d.directeur()` // Pour obtenir un  vecteur directeur de la droite (d)
+* `let v = d.normal()` // Pour obtenir un vecteur normal à la droite (d)
+* `let v = d.directeur()` // Pour obtenir un  vecteur directeur de la droite (d)
 
 <h3 class="ui horizontal divider header">Les segments</h3>
 
 
 Pour créer un segment, on peut utiliser des points déjà créés ou les coordonnées des deux extrémités.
 
-* `s = segment(A,B)` // Segment d'extrémités A et B
-* `s = segment(A,B,'blue')` // Segment d'extrémités A et B et de couleur bleue
-* `s = segment(x1,y1,x2,y2)` // Segment défini par les coordonnées des deux extrémités
-* `s = segment(x1,y1,x2,y2,'blue')` // Segment défini par les coordonnées des deux extrémités et de couleur bleue
-* `s = segmentAvecExtremites(A,B)` // Trace les 2 extrémités du segment en plus du segment
+* `let s = segment(A,B)` // Segment d'extrémités A et B
+* `let s = segment(A,B,'blue')` // Segment d'extrémités A et B et de couleur bleue
+* `let s = segment(x1,y1,x2,y2)` // Segment défini par les coordonnées des deux extrémités
+* `let s = segment(x1,y1,x2,y2,'blue')` // Segment défini par les coordonnées des deux extrémités et de couleur bleue
+* `let s = segmentAvecExtremites(A,B)` // Trace les 2 extrémités du segment en plus du segment
 
 
 On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou `'<->'` ou `'-|'` ou `'|-'` ou `'->'` ou `'<-'`.
@@ -82,12 +82,12 @@ Par ailleurs, il est possible de coder un segment.
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>
 
-* `M = pointSurSegment(A,B,l)` // M est le point de [AB] à l cm de A
-* `M = pointSurSegment(A,B,l,'M')` // M est le point de [AB] à l cm de A et se nomme M
-* `M = pointSurSegment(A,B,l,'M','below')` // M est le point de [AB] à l cm de A, se nomme M et le nom est en dessous du point
-* `M = pointSurSegment(A,B,'h','M')` // M est un point au hasard sur [AB] \(on peut écrire n'importe quel texte à la place de 'h')
-* `M = pointSurSegment(A,B)` // M est un point au hasard sur [AB] 
-* `M = milieu(A,B)` // M est le milieu de [AB]
-* `M = milieu(A,B,'M')` // M est le milieu de [AB] et se nomme M
-* `M = milieu(A,B,'M','below')` // M est le milieu de [AB], se nomme M et le nom est en dessous du point
-* `M = pointIntersectionDD(d1,d2,'M','below')` // M est le point d'intersection des droites (d1) et (d2)
+* `let M = pointSurSegment(A,B,l)` // M est le point de [AB] à l cm de A
+* `let M = pointSurSegment(A,B,l,'M')` // M est le point de [AB] à l cm de A et se nomme M
+* `let M = pointSurSegment(A,B,l,'M','below')` // M est le point de [AB] à l cm de A, se nomme M et le nom est en dessous du point
+* `let M = pointSurSegment(A,B,'h','M')` // M est un point au hasard sur [AB] \(on peut écrire n'importe quel texte à la place de 'h')
+* `let M = pointSurSegment(A,B)` // M est un point au hasard sur [AB] 
+* `let M = milieu(A,B)` // M est le milieu de [AB]
+* `let M = milieu(A,B,'M')` // M est le milieu de [AB] et se nomme M
+* `let M = milieu(A,B,'M','below')` // M est le milieu de [AB], se nomme M et le nom est en dessous du point
+* `let M = pointIntersectionDD(d1,d2,'M','below')` // M est le point d'intersection des droites (d1) et (d2)
