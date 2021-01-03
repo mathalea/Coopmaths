@@ -15,8 +15,7 @@ import {egal,randint,choice,rangeMinMax,unSiPositifMoinsUnSinon,arrondi,arrondi_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
 
-// let mesObjets = []; // Liste de tous les objets construits
-//Liste utilisée quand il n'y a qu'une seule construction sur la page web
+
 
 let numId = 0 // Créer un identifiant numérique unique par objet SVG
 
@@ -969,12 +968,10 @@ export function constructionMediatrice(...args) {
  * @Auteur Rémi Angot
  */
 export function bissectrice(A, O, B, color = "black") {
-  ObjetMathalea2D.call(this);
-  this.color = color;
   let demiangle = calcul(angleOriente(A, O, B) / 2);
   let m = pointSurSegment(O, A, 3);
   let M = rotation(m, O, demiangle);
-  return demiDroite(O, M, this.color);
+  return demiDroite(O, M, color);
 }
 /**
  * m = codagebissectrice(A,O,B) ajoute des arcs marqués de part et d'autres de la bissectrice mais ne trace pas celle-ci.
@@ -1027,7 +1024,6 @@ function ConstructionBissectrice(
   couleurBissectrice = "red",
   epaiseurBissectrice = 2
 ) {
-  ObjetMathalea2D.call(this);
   let M = pointSurSegment(O, A, tailleLosange);
   let N = pointSurSegment(O, B, tailleLosange);
   let sOM = segment(O, M);
@@ -3037,6 +3033,69 @@ function CibleRonde({x=0,y=0,rang=3,num,taille=0.3}) {
 export function cibleRonde({x=0,y=0,rang=3,num=1,taille=0.3}) {
   return new CibleRonde({x:x,y:y,rang:rang,num:num,taille:taille})
 }
+/**
+ * création d'une cible ronde pour l'auto-correction
+ * @Auteur Jean-Claude Lhote
+ * (x,y) sont les coordonnées du centre de la cible 
+ * Les secteurs de la cible fot 45°. Ils sont au nombre de rang*8
+ * Repérage de A1 à Hn où n est le rang.
+ */
+function CibleCouronne({x=0,y=0,taille=5}) {
+  ObjetMathalea2D.call(this);
+  this.x=x;
+  this.y=y;
+  this.taille=taille;
+  this.opacite=0.5
+  this.color='gray'
+  let objets=[],numero,centre,azimut,rayon,rayon1,rayon2,arc1,arc2
+
+  centre =point(this.x,this.y,this.y)
+  azimut=point(this.x+this.taille,this.y)
+  let azimut2=pointSurSegment(centre,azimut,longueur(centre,azimut)+1)
+  for (let i=0;i<18;i++) {
+    rayon=segment(azimut,azimut2)
+    rayon1=rotation(rayon,centre,20/3)
+    rayon2=rotation(rayon,centre,40/3)
+    rayon2.pointilles=1
+    rayon1.pointilles=1
+    rayon1.color=this.color
+    rayon2.color=this.color
+    rayon1.opacite=this.opacite
+    rayon2.opacite=this.opacite
+    arc1=arc(azimut,centre,20)
+    arc2=arc(azimut2,centre,20)
+    numero=texteParPoint(lettre_depuis_chiffre(1+i),rotation(milieu(azimut,azimut2),centre,10),'milieu','gray')
+    numero.contour=true
+    rayon.color=this.color
+    rayon.opacite=this.opacite
+    arc1.color=this.color
+    arc2.color=this.color
+    arc1.opacite=this.opacite
+    arc2.opacite=this.opacite
+
+    objets.push(rayon,rayon1,rayon2,arc1,arc2,numero)
+    azimut=rotation(azimut,centre,20)
+    azimut2=rotation(azimut2,centre,20)
+  }
+  this.svg = function (coeff) {
+    let code = "";
+    for (let objet of objets) {
+      code += "\n\t" + objet.svg(coeff);
+    }
+    return code;
+  };
+  this.tikz = function () {
+    let code = "";
+    for (let objet of objets) {
+      code += "\n\t" + objet.tikz();
+    }
+    return code;
+  };
+}
+
+export function cibleCouronne({x=0,y=0,taille=5}) {
+  return new CibleCouronne({x:x,y:y,taille:taille})
+}
 
 /**
  * M = tion(O,v) //M est l'image de O dans la translation de vecteur v
@@ -3194,6 +3253,41 @@ export function rotation(A, O, angle, nom, positionLabel) {
   }
 }
 
+/**
+ * @Auteur Jean-Claude Lhote
+ * A1 Le point de départ de la flèche 
+ * centre Le centre de la rotation
+ * sens Le sens (+1 ou -1) de la rotation. +1=sens trigo
+ */
+function Sens_de_rotation(A1,centre,sens) {
+  ObjetMathalea2D.call(this);
+  let arc1,s1,s2,A2,F1,F2,objets=[]
+  arc1=arc(A1,centre,20*sens)
+  A2=rotation(A1,centre,20*sens)
+  F1=similitude(A2,centre,-5*sens,0.95)
+  F2=similitude(A2,centre,-5*sens,1.05)
+  s1=segment(A2,F1)
+  s2=segment(A2,F2)
+  objets.push(arc1,s1,s2)
+
+  this.svg = function (coeff) {
+    let code = "";
+    for (let objet of objets) {
+      code += "\n\t" + objet.svg(coeff);
+    }
+    return code;
+  };
+  this.tikz = function () {
+    let code = "";
+    for (let objet of objets) {
+      code += "\n\t" + objet.tikz();
+    }
+    return code;
+  };
+}
+export function sens_de_rotation(A,O,sens) {
+  return new Sens_de_rotation(A,O,sens)
+}
 /**
  * M = homothetie(A,O,k) //M est l'image de A dans l'homothétie de centre O et de rapport k
  * M = homothetie(A,O,k,'M') //M est l'image de A dans l'homothétie de centre O et de rapport k et se nomme M
@@ -4120,12 +4214,12 @@ export function AfficheMesureAngle(A, B, C, color = "black", distance = 1.5) {
   this.tikz=function(){
    // let d = bissectrice(A, B, C);
     // d.isVisible = false;
-    let M = pointSurSegment(d.extremite1, d.extremite2, this.distance/mathalea.scale);
+    let M = pointSurSegment(this.sommet, this.depart, this.distance);
+    let N = rotation(pointSurSegment(this.sommet,M , this.distance+0.5),this.sommet,angleOriente(this.depart,this.sommet,this.arrivee)/2);
     let mesureAngle = arrondi_virgule(angle(this.depart,this.sommet,this.arrivee), 0) + "°";
-    return "\n"+texteParPoint(mesureAngle, M, "milieu", color).tikz()+"\n"+arc(pointSurSegment(this.sommet, this.depart, this.distance-0.7/mathalea.scale), B, angleOriente(this.depart,this.sommet,this.arrivee)).tikz();
+    return "\n"+texteParPoint(mesureAngle, N, "milieu", color).tikz()+"\n"+arc(M, B, angleOriente(this.depart,this.sommet,this.arrivee)).tikz();
   }
 }
-
 export function afficheMesureAngle(...args){
   return new AfficheMesureAngle(...args)
 }
@@ -6779,6 +6873,7 @@ export function angleradian(A, O, B) {
 function ObjetLutin() {
   //let mesObjets
   //mesObjets.push(this);
+  ObjetMathalea2D.call(this);
   this.x = 0;
   this.y = 0;
   this.xSVG = function (coeff) {
@@ -6859,7 +6954,7 @@ export function creerLutin(...args) {
   return new ObjetLutin(...args);
 }
 
-export function avance(d, lutin=monLutin) { // A faire avec pointSurCercle pour tenir compte de l'orientation
+export function avance(d, lutin = mathalea.lutin) { // A faire avec pointSurCercle pour tenir compte de l'orientation
   let xdepart = lutin.x;
   let ydepart = lutin.y;
   lutin.x = calcul(lutin.x + d/mathalea.unitesLutinParCm * Math.cos(Math.radians(lutin.orientation)));
@@ -6870,27 +6965,27 @@ export function avance(d, lutin=monLutin) { // A faire avec pointSurCercle pour 
   }
 }
 
-export function baisseCrayon(lutin=monLutin) {
+export function baisseCrayon(lutin = mathalea.lutin) {
   lutin.crayonBaisse = true;
 }
 
-export function leveCrayon(lutin=monLutin) {
+export function leveCrayon(lutin = mathalea.lutin) {
   lutin.crayonBaisse = false;
 }
 
-export function orienter(a,lutin=monLutin){
+export function orienter(a,lutin = mathalea.lutin){
   lutin.orientation = a
 }
 
-export function tournerG(a,lutin=monLutin){
+export function tournerG(a,lutin = mathalea.lutin){
   lutin.orientation +=a
 }
 
-export function tournerD(a,lutin=monLutin){
+export function tournerD(a,lutin = mathalea.lutin){
   lutin.orientation -=a
 }
 
-export function allerA(x,y,lutin=monLutin){
+export function allerA(x,y,lutin = mathalea.lutin){
   let xdepart = lutin.x;
   let ydepart = lutin.y;
   lutin.x = calcul(x/mathalea.unitesLutinParCm);
@@ -6901,7 +6996,7 @@ export function allerA(x,y,lutin=monLutin){
   } 
 }
 
-export function mettrexA(x,lutin=monLutin){
+export function mettrexA(x,lutin = mathalea.lutin){
   let xdepart = lutin.x;
   lutin.x = calcul(x/mathalea.unitesLutinParCm);
   lutin.historiquePositions.push([lutin.x, lutin.y]);
@@ -6910,7 +7005,7 @@ export function mettrexA(x,lutin=monLutin){
   } 
 }
 
-export function mettreyA(y,lutin=monLutin){
+export function mettreyA(y,lutin = mathalea.lutin){
   let ydepart = lutin.y;
   lutin.y = calcul(y/mathalea.unitesLutinParCm);
   lutin.historiquePositions.push([lutin.x, lutin.y]);
@@ -6919,7 +7014,7 @@ export function mettreyA(y,lutin=monLutin){
   } 
 }
 
-export function ajouterAx(x,lutin=monLutin){
+export function ajouterAx(x,lutin = mathalea.lutin){
   let xdepart = lutin.x;
   lutin.x += calcul(x/mathalea.unitesLutinParCm);
   lutin.historiquePositions.push([lutin.x, lutin.y]);
@@ -6928,7 +7023,7 @@ export function ajouterAx(x,lutin=monLutin){
   } 
 }
 
-export function ajouterAy(y,lutin=monLutin){
+export function ajouterAy(y,lutin = mathalea.lutin){
   let ydepart = lutin.y;
   lutin.y += calcul(y/mathalea.unitesLutinParCm);
   lutin.historiquePositions.push([lutin.x, lutin.y]);

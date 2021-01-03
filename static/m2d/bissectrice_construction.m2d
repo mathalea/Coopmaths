@@ -12,7 +12,7 @@ demiDroite(D,C)
 demiDroite(D,E)
 constructionBissectrice(C,D,E,false)
 
-let sOA = segment(O,A) ; sOB = segment(O,B) ; sDC = segment(D,C) ; sDE = segment(D,E)
+let sOA = segment(O,A) , sOB = segment(O,B) , sDC = segment(D,C) , sDE = segment(D,E)
 sOA.styleExtremites = '-|'
 sOB.styleExtremites = '-|'
 sDC.styleExtremites = '-|'
