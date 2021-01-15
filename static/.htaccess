@@ -13,6 +13,9 @@
 # Erreur 404
 ErrorDocument 404 /404.html
 
+# UTF8
+AddDefaultCharset utf-8
+
 
 # http -> https
 RewriteEngine On

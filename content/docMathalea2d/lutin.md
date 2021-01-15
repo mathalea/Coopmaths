@@ -29,7 +29,7 @@ description: "MathALEA 2D - Programmer comme en Logo "
 
 Il est possible de créer d'autres lutins. Pour donner des ordres à un lutin, il faut ajouter un dernier paramètre aux différentes fonctions qui est le nom de la variable de ce nouveau lutin.
 
-* `lutin2 = creerLutin()`
+* `let lutin2 = creerLutin()`
 * `baisserCrayon(lutin2)`
 * `avance(100,lutin2)` 
 

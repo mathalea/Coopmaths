@@ -18,8 +18,30 @@ function liste_de_question_to_contenu(argument) {
 		if (argument.vspace) {
 			vspace = `\\vspace{${argument.vspace} cm}\n`
 		}
-		argument.contenu = tex_consigne(argument.consigne) + vspace + tex_introduction(argument.introduction) + tex_multicols(tex_enumerate(argument.liste_questions,argument.spacing),argument.nb_cols)
+		if (document.getElementById('supprimer_reference').checked == true) {
+			argument.contenu = tex_consigne(argument.consigne) + vspace + tex_introduction(argument.introduction) + tex_multicols(tex_enumerate(argument.liste_questions,argument.spacing),argument.nb_cols)
+		} else {
+			argument.contenu = tex_consigne(argument.consigne) + `\n\\marginpar{\\footnotesize ${argument.id}}` +  vspace + tex_introduction(argument.introduction) + tex_multicols(tex_enumerate(argument.liste_questions,argument.spacing),argument.nb_cols)
+		}
 		argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
+	}
+	
+}
+function liste_de_choses_a_imprimer(argument) {
+	if (sortie_html) {
+		argument.contenu =  html_ligne(argument.liste_questions,argument.spacing)
+		argument.contenu_correction = ""	
+	} else {
+		let vspace = '';
+		if (argument.vspace) {
+			vspace = `\\vspace{${argument.vspace} cm}\n`
+		}
+		if (document.getElementById('supprimer_reference').checked == true) {
+			argument.contenu = tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+		} else {
+			argument.contenu = `\n\\marginpar{\\footnotesize ${argument.id}}` + tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+		}
+		argument.contenu_correction = ""
 	}
 	
 }
@@ -36,7 +58,11 @@ function liste_de_question_to_contenu_sans_numero(argument) {
 		argument.contenu = html_consigne(argument.consigne) + html_paragraphe(argument.introduction) + html_ligne(argument.liste_questions,argument.spacing)
 		argument.contenu_correction = html_consigne(argument.consigne_correction) + html_ligne(argument.liste_corrections,argument.spacing_corr)	
 	} else {
-		argument.contenu = tex_consigne(argument.consigne) + tex_introduction(argument.introduction) + tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+		if (document.getElementById('supprimer_reference').checked == true) {
+			argument.contenu = tex_consigne(argument.consigne) + tex_introduction(argument.introduction) + tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+		} else {
+			argument.contenu = tex_consigne(argument.consigne) + `\n\\marginpar{\\footnotesize ${argument.id}}` + tex_introduction(argument.introduction) + tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+		}
 		// argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate_sans_numero(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
 		argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_paragraphe(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
 	}
@@ -52,12 +78,46 @@ function liste_de_question_to_contenu_sans_numero(argument) {
 * @author Rémi Angot
 */
 function liste_de_question_to_contenu_sans_numero_et_sans_consigne(argument) {
-	argument.contenu = tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
-	// argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate_sans_numero(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
+	if (document.getElementById('supprimer_reference').checked == true) {
+		argument.contenu = tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+	} else {
+		argument.contenu = `\n\\marginpar{\\footnotesize ${argument.id}` + tex_multicols(tex_paragraphe(argument.liste_questions,argument.spacing),argument.nb_cols)
+	}
+		// argument.contenu_correction = tex_consigne(argument.consigne_correction) + tex_multicols(tex_enumerate_sans_numero(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
 	argument.contenu_correction =  tex_multicols(tex_paragraphe(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
 
 	
 }
+
+
+
+/**
+* Renvoie 2 chaines de caractères sur 2 colonnes différentes
+* 
+* @author Rémi Angot
+*/
+function deuxColonnes(cont1,cont2){
+	if (sortie_html){
+		return `
+		<div style="float:left;min-width: fit-content;max-width : 35%;margin-right: 30px">
+		${cont1}
+	 </div>
+	 <div style="float:left;min-width: fit-content; max-width : 45%">
+		${cont2}
+	 </div>
+	 <div style="clear:both"></div>`
+	} else {
+		return `\\begin{minipage}{.5\\linewidth}
+		${cont1}
+		\\end{minipage}
+		\\begin{minipage}{.5\\linewidth}
+		${cont2}
+		\\end{minipage}
+		`
+	}
+}
+
+
 /**
  * fonctions de comparaison pour les nombres en virgule flottante afin d'éviter les effets de la conversion en virgule flottante.
  * @param {number} a premier nombre 
@@ -140,10 +200,8 @@ class NombreDecimal {
 			nombre=calcul(-nombre)
 		}
 		else this.signe=`+`
-		console.log(nombre)
 		this.exposant=Math.floor(Math.log10(nombre))
 		nombre=nombre/10**this.exposant
-		console.log(nombre)
 		this.mantisse=[]
 		for (let k=0;k<16;k++) {
 			if (egal(Math.ceil(nombre)-nombre,0,0.00001)) {
@@ -154,7 +212,6 @@ class NombreDecimal {
 				this.mantisse.push(Math.floor(nombre))
 				nombre=(nombre-this.mantisse[k])*10
 			}
-			console.log(nombre)
 			if (egal(nombre,0,0.001)) break
 		}
 		
@@ -213,10 +270,10 @@ function creer_couples(E1, E2, nombre_de_couples_min = 10){
 * @param {liste} liste - Tous les éléments que l'on souhaite supprimer 
 *
 * @example
-* // Renvoit 1, 2 ou 3
+* // Renvoie 1, 2 ou 3
 * randint (1,3)
 * @example
-* // Renvoit -1 ou 1
+* // Renvoie -1 ou 1
 * randint(-1,1,[0])
 *
 * @author Rémi Angot
@@ -339,10 +396,10 @@ function enleve_element_No_bis(array,index){
 * @param {liste_a_eviter}
 *
 * @example
-* // Renvoit 1, 2 ou 3
+* // Renvoie 1, 2 ou 3
 * choice([1,2,3])
 * @example
-* // Renvoit Rémi ou Léa
+* // Renvoie Rémi ou Léa
 * choice(['Rémi','Léa'])
 *
 * @author Rémi Angot
@@ -364,7 +421,7 @@ function choice(liste,liste_a_eviter=[]) {
 * @param {liste_a_eviter}
 *
 * @example
-* // Renvoit [1,4,5,6,7,8,9,10]
+* // Renvoie [1,4,5,6,7,8,9,10]
 * range(10,[2,3])
 *
 * @author Rémi Angot
@@ -386,7 +443,7 @@ function range(max,liste_a_eviter=[]){
 * @param {liste_a_eviter}
 *
 * @example
-* // Renvoit [6,7,10]
+* // Renvoie [6,7,10]
 * range(6,10,[8,9])
 *
 * @author Rémi Angot
@@ -538,7 +595,7 @@ function tridictionnaire(dict) {
 * Filtre un dictionnaire suivant les premiers caractères de ses clés
 *
 * @Example
-* filtreDictionnaire(dict,'6N') renvoit un dictionnaire où toutes les clés commencent par 6N
+* filtreDictionnaire(dict,'6N') renvoie un dictionnaire où toutes les clés commencent par 6N
 * @Auteur Rémi Angot
 */
 function filtreDictionnaire(dict,sub) {
@@ -560,6 +617,7 @@ function filtreDictionnaire(dict,sub) {
 * @Auteur Rémi Angot
 */
 function combinaison_listes(liste,taille_minimale){
+	if (liste.length==0) return []
 	l = shuffle(liste);
 	while (l.length<taille_minimale){
 		l = l.concat(shuffle(liste))
@@ -972,9 +1030,21 @@ function arrondi(nombre, precision=2){
 	let tmp = Math.pow(10, precision);
 	return Math.round( nombre*tmp )/tmp;
 }
-
 /**
-* Renvoit la valeur absolue
+ * Retourne la troncature signée de nombre.
+ * @Auteur Jean-Claude Lhote
+ */
+function troncature(nombre,precision){
+	let signe,absolu,tronc
+	let tmp=Math.pow(10, precision)
+	if (nombre<0) signe=-1
+	else signe=1
+	absolu=Math.abs(nombre)
+	tronc=calcul(Math.floor(absolu*tmp)/tmp);
+	return signe*tronc;
+}
+/**
+* Renvoie la valeur absolue
 * @Auteur Rémi Angot
 */
 function abs(a){
@@ -991,7 +1061,7 @@ function arrondi_virgule(nombre, precision=2){ //
 }
 
 /**
-* Renvoit le PGCD de deux nombres
+* Renvoie le PGCD de deux nombres
 * @Auteur Rémi Angot
 */
 function pgcd(a,b){
@@ -999,7 +1069,7 @@ function pgcd(a,b){
 }
 
 /**
-* Renvoit le PPCM de deux nombres
+* Renvoie le PPCM de deux nombres
 * @Auteur Rémi Angot
 */
 const ppcm = (a,b) => { return parseInt(Algebrite.run(`lcm(${a},${b})`))}
@@ -1034,7 +1104,34 @@ function tex_fraction_reduite(n,d){
 		return tex_fraction_signe(fraction_simplifiee(n,d)[0],fraction_simplifiee(n,d)[1]);
 	}
 }
-
+/**
+ * produit_de_deux_fractions(num1,den1,num2,den2) retourne deux chaines :
+ * la première est la fraction résultat, la deuxième est le calcul mis en forme Latex avec simplification éventuelle
+ * Applique une simplification si le numérateur de l'une est égal au dénominateur de l'autre.
+ */
+function produit_de_deux_fractions(num1,den1,num2,den2) {
+	let num,den,tex_produit
+	if (num1==den2) {
+		tex_produit=`\\dfrac{\\cancel{${num1}}\\times ${num2}}{${den1}\\times\\cancel{${den2}}}`
+		num=num2
+		num1=1
+		den2=1
+		den=den1
+	}
+	else if (num2==den1) {
+		tex_produit=`\\dfrac{${num1}\\times \\cancel{${num2}}}{\\cancel{${den1}}\\times${den2}}`
+		num=num1
+		num2=1
+		den1=1
+		den=den2
+	}
+	else {
+		num=num1*num2
+		den=den1*den2
+		tex_produit=`\\dfrac{${num1}\\times ${num2}}{${den1}\\times${den2}}`
+	}
+	return [tex_fraction(num,den),tex_produit,[num1,den1,num2,den2]]
+}
 /**
 *
 * Simplifie une fraction en montrant les étapes
@@ -1236,7 +1333,7 @@ function tex_nombrecoul(nombre){
 
 
 /**
-* Renvoit un tableau (somme des termes positifs, somme des termes négatifs)
+* Renvoie un tableau (somme des termes positifs, somme des termes négatifs)
 * @Auteur Rémi Angot
 */function somme_des_termes_par_signe(liste){
 	let somme_des_positifs = 0, somme_des_negatifs = 0;
@@ -1345,9 +1442,26 @@ function choisit_lettres_differentes(nombre,lettres_a_eviter,majuscule=true){
 	}
 	return lettres
 }
+cesar=function (word,decal){
+	let mot='',code=65;
+	for (let x=0;x<word.length;x++) {
+		code=word.charCodeAt(x)%65
+		code=(code+decal)%26+65
+		mot+=String.fromCharCode(code)
+	}
+	return mot
+}
+
+codeCesar=function(mots,decal){
+	let motsCodes=[]
+	for (let x=0;x<mots.length;x++) {
+		motsCodes.push(cesar(mots[x],decal))
+	}
+	return motsCodes
+}
 
 /**
-* Renvoit une lettre majuscule depuis un nombre compris entre 1 et 702
+* Renvoie une lettre majuscule depuis un nombre compris entre 1 et 702
 * @Auteur Rémi Angot
 *@Example
 * // 0 -> @ 1->A ; 2->B...
@@ -1371,7 +1485,7 @@ function lettre_depuis_chiffre(i){
 }
 
 /**
-* Renvoit une lettre minuscule depuis un nombre compris entre 1 et 702
+* Renvoie une lettre minuscule depuis un nombre compris entre 1 et 702
 * @Auteur Rémi Angot
 *@Example
 * // 0 -> @ 1->a ; 2->b...
@@ -1422,7 +1536,7 @@ function minToHour(minutes){
 }
 
 /**
-* Renvoit un prénom féminin au hasard 
+* Renvoie un prénom féminin au hasard 
 * @Auteur Rémi Angot
 */
 function prenomF(){
@@ -1430,7 +1544,7 @@ function prenomF(){
 }
 
 /**
-* Renvoit un prénom masculin au hasard
+* Renvoie un prénom masculin au hasard
 * @Auteur Rémi Angot
 */
 function prenomM(){
@@ -1438,7 +1552,7 @@ function prenomM(){
 }
 
 /**
-* Renvoit un prénom au hasard
+* Renvoie un prénom au hasard
 * @Auteur Rémi Angot
 */
 function prenom(){
@@ -1446,7 +1560,7 @@ function prenom(){
 }
 
  /**
-* Renvoit un tableau avec les résultats des tirages successifs
+* Renvoie un tableau avec les résultats des tirages successifs
 * @param nombre_tirages Combien de tirages ?
 * @param nombre_faces Pour spécifier le type de dés
 * @param nombre_des Combien de dés à chaque tirage ?
@@ -1463,7 +1577,7 @@ function tirer_les_des(nombre_tirages,nombre_faces,nombre_des) {
 		return tirages
 	}
  /**
-* Renvoit un tableau de nombres
+* Renvoie un tableau de nombres
 * @param nombre_notes
 * @param note_min
 * @param note_max
@@ -1476,7 +1590,7 @@ function liste_de_notes(nombre_notes,note_min,note_max) {
 }
 
  /**
-* Renvoit le nombre de jour d'un mois donné
+* Renvoie le nombre de jour d'un mois donné
 * @param n quantième du mois (janvier=1...)
 * @auteur Jean-Claude Lhote
 */
@@ -1485,7 +1599,7 @@ function jours_par_mois(n){
 	return jours_mois[n-1]
 }
  /**
-* Renvoit un tableau de températures
+* Renvoie un tableau de températures
 * @param base température médiane
 * @mois quantième du mois (janvier=1...)
 * @annee pour déterminer si elle est bissextile ou non 
@@ -1504,7 +1618,7 @@ function un_mois_de_temperature(base,mois,annee) {
 }
 
  /**
-* Renvoit le nom du mois
+* Renvoie le nom du mois
 * @param n quantième du mois
 * @auteur Jean-Claude Lhote
 */
@@ -1594,7 +1708,7 @@ function tex_introduction(texte){
 
 
 /**
-*  Renvoit une liste HTML à partir d'une liste
+*  Renvoie une liste HTML à partir d'une liste
 * 
 * @param liste une liste de questions
 * @param spacing interligne (line-height en css)
@@ -1620,7 +1734,7 @@ function html_enumerate(liste,spacing){
 
 
 /**
-* Renvoit une liste HTML ou LaTeX suivant le contexte
+* Renvoie une liste HTML ou LaTeX suivant le contexte
 * 
 * @param liste une liste de questions
 * @param spacing interligne (line-height en css)
@@ -1636,7 +1750,7 @@ function enumerate(liste,spacing){
 
 
 /**
-*  Renvoit un paragraphe HTML à partir d'un string
+*  Renvoie un paragraphe HTML à partir d'un string
 * 
 * @param string
 * @Auteur Rémi Angot
@@ -1650,7 +1764,7 @@ function html_paragraphe(texte){
 }
 
 /**
-*  Renvoit un div HTML à partir d'une liste découpée par des sauts de ligne
+*  Renvoie un div HTML à partir d'une liste découpée par des sauts de ligne
 * 
 * @param liste une liste de questions
 * @param spacing interligne (line-height en css)
@@ -1676,7 +1790,7 @@ function html_ligne(liste,spacing){
 
 
 /**
-* Renvoit un environnent LaTeX multicolonnes
+* Renvoie un environnent LaTeX multicolonnes
 * @Auteur Rémi Angot
 */
 function tex_multicols(texte,nb_cols=2){
@@ -1691,7 +1805,7 @@ function tex_multicols(texte,nb_cols=2){
 }
 
 /**
-* Renvoit la consigne en titre 4
+* Renvoie la consigne en titre 4
 * @Auteur Rémi Angot
 */
 function html_consigne(consigne){
@@ -1699,7 +1813,7 @@ function html_consigne(consigne){
 }
 
 /**
-* Renvoit \exo{consigne}
+* Renvoie \exo{consigne}
 * @Auteur Rémi Angot
 */
 function tex_consigne(consigne){
@@ -1707,7 +1821,7 @@ function tex_consigne(consigne){
 }
 
 /**
-* Renvoit un nombre dans le format français (séparateur de classes)
+* Renvoie un nombre dans le format français (séparateur de classes)
 * @Auteur Rémi Angot
 */
 function tex_nombre(nb){
@@ -1727,6 +1841,27 @@ function tex_nombre(nb){
 }
 
 /**
+* Renvoie un nombre dans le format français (séparateur de classes) pour la partie entière comme pour la partie décimale
+* @Auteur Rémi Angot
+*/
+function tex_nombre2(nb){
+	let nombre = tex_nombre(math.format(nb,{notation:'auto',lowerExp:-12,upperExp:12,precision:12}))
+	let rang_virgule = nombre.indexOf(',')
+	for (let i=rang_virgule+4; i<nombre.length; i+=3){
+		nombre = nombre.substring(0,i)+'\\thickspace '+nombre.substring(i)
+		i+=13 // comme on a ajouté un espace, il faut décaler l'indice de 1
+	}
+	if (sortie_html){
+		return nombre
+	} else {
+		return tex_nombre(math.format(nb,{notation:'auto',lowerExp:-12,upperExp:12,precision:12}))
+	}
+}
+function tex_nombrec2(expr,precision=8){
+	return math.format(math.evaluate(expr),{notation:'auto',lowerExp:-12,upperExp:12,precision:precision})
+}
+
+/**
  * Renvoie un espace insécable pour le mode texte suivant la sorite html ou Latex.
  * @Auteur Jean-Claude Lhote
  */
@@ -1736,7 +1871,7 @@ function sp() {
 }
 
 /**
-* Renvoit un nombre dans le format français (séparateur de classes)
+* Renvoie un nombre dans le format français (séparateur de classes)
 * Fonctionne sans le mode maths contrairement à tex_nombre()
 * @Auteur Rémi Angot
 */
@@ -1757,7 +1892,7 @@ function nombre_avec_espace(nb){
 
 
 /**
-* Renvoit un nombre dans le format français (séparateur de classes) version sans Katex (pour les SVG)
+* Renvoie un nombre dans le format français (séparateur de classes) version sans Katex (pour les SVG)
 * @Auteur Jean-Claude Lhote
 */
 function string_nombre(nb){
@@ -1867,7 +2002,7 @@ function couleurAleatoire() {
 
   function arcenciel(i,fondblanc=true) {
 	  let couleurs
-	  if (fondblanc) couleurs=['violet','indigo',  'blue', 'green', 'lime', 'orange', 'red']
+	  if (fondblanc) couleurs=['violet','purple',  'blue', 'green', 'lime', 'orange', 'red']
 	  else couleurs=['violet','indigo',  'blue', 'green', 'yellow', 'orange', 'red']
 	  return couleurs[i%7]
   }
@@ -1932,7 +2067,7 @@ function premiere_lettre_en_majuscule(text){return (text+'').charAt(0).toUpperCa
 
 
 /**
-* Renvoit le nombre de chiffres de la partie décimale 
+* Renvoie le nombre de chiffres de la partie décimale 
 * @Auteur Rémi Angot
 */
 function nombre_de_chiffres_dans_la_partie_decimale(nb){
@@ -1980,6 +2115,15 @@ function obtenir_liste_fractions_irreductibles() {
 	return  [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
 	[1,6],[5,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[1,8],[3,8],[5,8],[7,8],
 	[1,9],[2,9],[4,9],[5,9],[7,9],[8,9],[1,10],[3,10],[7,10],[9,10]]
+}
+
+/**
+* Retourne une liste de fractions irréductibles de dénominateur égal à 2 3 5 7
+* @Auteur Mireille Gain
+*/
+function obtenir_liste_fractions_irreductibles_faciles() {
+	return  [[1,2],[1,3],[2,3],[1,5],[2,5],[3,5],[4,5],
+	[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]]
 }
 
 /**
@@ -2392,13 +2536,10 @@ function SVG_tracer_point(mon_svg,x,y,nom,couleur,shiftxnom,shiftynom,montrer_co
 function SVG_tracer_flecheH(mon_svg,x,y) {
 	//creer un groupe pour la fleche
 	let fleche = mon_svg.group()
-	let c1 = fleche.line(-5,5,0,0)
+	let c1 = fleche.line(x-5,y-5,x,y)
 	c1.stroke({ color: 'black', width: 3, linecap: 'round' })
-	let c2 = fleche.line(-5,-5,0,0)
+	let c2 = fleche.line(x-5,y+5,x,y)
 	c2.stroke({ color: 'black', width: 3, linecap: 'round' })
-	//déplace la croix
-	fleche.move(x,y)
-	fleche.dmove(-5,-5)
 }
 /**
  * 
@@ -3041,6 +3182,52 @@ function simpExp(b,e) {
 };
 
 /**
+ * Fonction pour écrire des notations scientifique de la forme a * b ^ n
+ * @param a {number} mantisse
+ * @param b {number} base
+ * @param n {number} exposant 
+ * @author Erwan Duplessy
+ */	
+function puissance(b,n) {
+	switch (b) {
+		case 0:
+			return `0`;
+			break;
+		case 1:
+			return `1`;
+			break;
+		case -1:
+			if (b%2==0) {
+				return `1`;
+				break;
+			} else {
+				return `-1`;
+				break;
+			};
+		default:
+			if (b<0) {
+				return `(${b})^{${n}}`;
+			} else {
+				return `${b}^{${n}}`;				
+			}
+			break;
+	}
+}
+
+function ecriturePuissance(a, b, n) {
+	switch (a) {
+		case 0:
+			return `$0$`;
+			break;
+		case 1:
+			return `$${puissance(b,n)}$`;
+			break;
+		default:
+			return `$${String(Math.round(a*1000)/1000).replace('.','{,}')} \\times ${puissance(b,n)}$`.replace('.','{,}');
+	}
+}
+
+/**
  * Fonction pour simplifier les notations puissance dans certains cas
  * si la base vaut 1 ou -1 quelque soit l'exposant, retourne 1 ou -1,
  * si la base est négative on teste la parité de l'exposant pour alléger la notation sans le signe
@@ -3050,35 +3237,38 @@ function simpExp(b,e) {
  * @author Sébastien Lozano
  */	
 function simpNotPuissance(b,e) {
+	// on switch sur la base
 	switch (b) {
-		case -1 : 
+		case -1 : // si la base vaut -1 on teste la parité de l'exposant
 			if (e%2==0) {
 				return ` 1`;
-				break;
+				//break;
 			} else {
 				return ` -1`;
-				break;
+				//break;
 			};
-		case 1 : 
+			break;
+		case 1 : // si la base vaut 1 on renvoit toujours 1
 			return ` 1`;
 			break;
-		default : 
+		default : // sinon on switch sur l'exposant
 			switch (e) {
-				case 0 :
+				case 0 : // si l'exposant vaut 0 on ranvoit toujours 1
 					return `1`;
 					break;
-				case 1 :
+				case 1 : // si l'exposant vaut 1 on renvoit toujours la base 
 					return ` ${b}`;
 					break;
-				default :
-					if (b<0 && e%2==0) {
+				default : // sinon on teste le signe de la base et la parité de l'exposant
+					if (b<0 && e%2==0) { // si la base est négative et que l'exposant est pair, le signe est inutile
 						return ` ${b*-1}^{${e}}`;
-						break;
+						//break;
 					} else {
-						//return ` ${b}^{${e}}`;
-						return ` `;
-						break;
+						return ` ${b}^{${e}}`;
+						//return ` `;
+						//break;
 					};
+					break;
 			};
 	};
 };
@@ -3103,6 +3293,30 @@ function eclatePuissance(b,e,couleur) {
 			let str = `\\mathbf{\\color{${couleur}}{${b}}} `;
 			for (let i=1; i<e;i++) {
 				str = str + `\\times \\mathbf{\\color{${couleur}}{${b}}}`;
+			 }
+			return str;
+	}
+};
+
+
+/**
+ * Fonction pour écrire la forme éclatée d'une puissance
+ * @param b base
+ * @param e exposant 
+ * @author Rémi Angot
+ */		
+function puissanceEnProduit(b,e) {
+	switch (e) {
+		case 0 :
+			return `1`;
+			break;
+		case 1 : 
+			return `${b}`;
+			break;
+		default :
+			let str = `${b}`;
+			for (let i=1; i<e;i++) {
+				str = str + `\\times ${b}`;
 			 }
 			return str;
 	}
@@ -3147,6 +3361,18 @@ function creer_modal(numero_de_l_exercice,contenu,label_bouton,icone) {
 		<div class="ui modal" id="modal${numero_de_l_exercice}">
 		${contenu}
 		</div>`
+	return HTML;
+}
+/**
+* Fonction créant le bouton d'aide utilisée par les différentes fonctions modal_ type de contenu
+* @param numero_de_l_exercice
+* @param contenu code HTML 
+* @param icone 
+* @Auteur Rémi Angot
+*/	
+function creerBoutonMathalea2d(numero_de_l_exercice,fonction,label_bouton="Aide",icone="info circle") {
+	let HTML = `<button class="ui toggle left floated mini compact button" id = "btnMathALEA2d_${numero_de_l_exercice}" onclick="${fonction}"><i class="large ${icone} icon"></i>${label_bouton}</button>`
+
 	return HTML;
 }
 
@@ -4171,7 +4397,7 @@ function crible_eratosthene_n(n) {
 	let premiers_jusque_max = crible_eratosthene_n(max);
 	// on supprime le début de la liste jusque min
 	premiers_jusque_max.splice(0,premiers_a_suppr.length);
-	// on renvoit le tableau restant
+	// on renvoie le tableau restant
 	return premiers_jusque_max;
  };
 
@@ -4194,10 +4420,19 @@ function texte_ou_pas(texte) {
 /**
  * Crée un tableau avec un nombre de lignes et de colonnes déterminées par la longueur des tableaux des entetes passés en paramètre
  * Les contenus sont en mode maths par défaut, il faut donc penser à remplir les tableaux en utilisant éventuellement la commande \\text{}
- * @param {array} tab_entetes_colonnes contient les entetes des colonnes
+ * tab_C_L(['coin','A','B'],['1','2'],['A1','B1','A2','B2']) affiche le tablleau ci-dessous
+ * ------------------
+ * | coin | A  | B  |
+ * ------------------
+ * |  1   | A1 | B1 |
+ * ------------------
+ * |  2   | A2 | B2 |
+ * ------------------
+* @param {array} tab_entetes_colonnes contient les entetes des colonnes
  * @param {array} tab_entetes_lignes contient les entetes des lignes
  * @param {array} tab_lignes contient les elements de chaque ligne
  * @author Sébastien Lozano
+ * 
  */
 function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 	'use strict';
@@ -4219,17 +4454,38 @@ function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 	tableau_C_L +=`}\n`;
 					
 	tableau_C_L += `\\hline\n`
-	tableau_C_L += tab_entetes_colonnes[0];
+	if (typeof tab_entetes_colonnes[0]=='number') {
+		tableau_C_L += tex_nombre(tab_entetes_colonnes[0]);
+	}
+	else
+	{
+		tableau_C_L += tab_entetes_colonnes[0];		
+	}
 	for (let k=1;k<C;k++) {
-		tableau_C_L += ` & `+tab_entetes_colonnes[k]+``;
+		if (typeof tab_entetes_colonnes[k]=='number') {
+				tableau_C_L += ` & `+tex_nombre(tab_entetes_colonnes[k])+``;
+		}
+		else {
+			tableau_C_L += ` & `+tab_entetes_colonnes[k]+``;		
+		}
 	};
 	tableau_C_L += `\\\\\n`;
 	tableau_C_L += `\\hline\n`;
 	// on construit toutes les lignes
 	for (let k=0;k<L;k++) {
-		tableau_C_L += ``+tab_entetes_lignes[k]+``;
+		if (typeof tab_entetes_lignes[k]=='number'){
+			tableau_C_L += ``+tex_nombre(tab_entetes_lignes[k])+``;
+		}
+		else {
+			tableau_C_L += ``+tab_entetes_lignes[k]+``;
+		}
 		for (let m=1;m<C;m++) {
-			tableau_C_L += ` & `+tab_lignes[(C-1)*k+m-1];
+			if (typeof tab_lignes[(C-1)*k+m-1]== 'number') {
+				tableau_C_L += ` & `+tex_nombre(tab_lignes[(C-1)*k+m-1]);
+			}
+			else {
+				tableau_C_L += ` & `+tab_lignes[(C-1)*k+m-1];
+			}
 		};
 		tableau_C_L += `\\\\\n`;
 		tableau_C_L += `\\hline\n`;	
@@ -4254,7 +4510,8 @@ function warn_message(texte,couleur,titre) {
 	if (sortie_html) {
 		return `
 		<br>
-		<div class="ui compact warning message">		
+		<div class="ui compact warning message">
+		<h4><i class="lightbulb outline icon"></i>${titre}</h4>		
 		<p>`+texte+`
 		</p>
 		</div>
@@ -5128,7 +5385,7 @@ function Relatif(...relatifs) {
   */
  function fraction (a,b) {
     return new Fraction(a,b)
-}
+ }
 
 /**
  * @constant {object} Frac objet générique pour accéder à tout moment aux méthodes et proprétés de la classe Fraction()
@@ -5167,7 +5424,7 @@ function Fraction(num,den) {
 	this.fractionEgale = function(k){
 		return fraction(calcul(this.numIrred*k),calcul(this.denIrred*k))
 	}   
-	this.simpsimplifie=function() {
+	this.simplifie=function() {
 		return fraction(this.numIrred,this.denIrred)
 	}
 	/**
@@ -6717,6 +6974,784 @@ function partieEntiereEnLettres(nb) {
 	}
 	return result
 }
+
+
+function Pavage() {
+	this.type = 1
+	this.polygones = []
+	this.barycentres = []
+	this.tracesCentres = []
+	this.numeros = []
+	this.coordonnees = []
+	this.Nx = 1
+	this.Ny = 1
+	this.echelle=20
+	this.fenetre={}
+	this.nb_polygones
+
+	this.construit = function (type = 1, Nx = 1, Ny = 1, taille = 3) {
+		let nettoie_objets = function (objets) {
+			let barywhite, baryblack // c'est drôle non ?
+			for (let i = 0; i < objets.length; i++) {
+			  barywhite = barycentre(objets[i])
+			  for (let j = i + 1; j < objets.length;) {
+				baryblack = barycentre(objets[j])
+				if (egal(barywhite.x, baryblack.x, 0.1) && egal(barywhite.y, baryblack.y, 0.1)) {
+				  objets.splice(j, 1)
+				}
+				else j++
+			  }
+			}
+		  }
+		let A, B, v, w, C, D, P, XMIN = 0, YMIN = 0, XMAX = 0, YMAX = 0, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, fenetre, echelle, nombre_de_polygones
+		A = point(0, 0)
+		B = point(taille, 0)
+		switch (type) {
+			case 1: // triangles équilatéraux
+				v = vecteur(A, B)
+				w = rotation(v, A, -90)
+				w = homothetie(w, A, 1.73205)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						P1 = polygoneRegulier(A, B, 3)
+						P2 = rotation(P1, A, 60)
+						P3 = rotation(P1, A, -60)
+						P4 = rotation(P1, A, -120)
+						this.polygones.push(P1, P2, P3, P4)
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, v)
+						B = translation(B, v)
+					}
+					A = translation(A, vecteur(-Nx * v.x, -2 * v.y))
+					B = translation(B, vecteur(-Nx * v.x, -2 * v.y))
+					A = translation(A, w)
+					B = translation(B, w)
+				}
+				break
+
+			case 2: //carrés
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2)
+				w = rotation(v, A, -90)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						P1 = polygoneRegulier(A, B, 4)
+						P2 = rotation(P1, A, 90)
+						P3 = rotation(P1, A, -90)
+						P4 = rotation(P1, A, -180)
+						this.polygones.push(P1, P2, P3, P4)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, v)
+						B = translation(B, v)
+					}
+					A = translation(A, vecteur(-Nx * v.x, -2 * v.y))
+					B = translation(B, vecteur(-Nx * v.x, -2 * v.y))
+					A = translation(A, w)
+					B = translation(B, w)
+				}
+				break
+
+			case 3: //hexagones
+				B=homothetie(B,A,0.8)
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2)
+				w = rotation(v, A, -90)
+				w = homothetie(w, A, 1.73205)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = similitude(B, A, 30, 1.1547)
+						P1 = polygoneRegulier(A, C, 6)
+						P2 = rotation(P1, A, -120)
+						P3 = translation(P1, v)
+						P4 = translation(P2, v)
+						this.polygones.push(P1, P2, P3, P4)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, vecteur(2 * v.x, 0))
+						B = translation(B, vecteur(2 * v.x, 0))
+					}
+					A = translation(A, vecteur(-Nx * 2 * v.x, w.y))
+					B = translation(B, vecteur(-Nx * 2 * v.x, w.y))
+				}
+				break
+
+			case 4: // Pavage 3².4.3.4
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2.73205)
+				w = rotation(v, A, -90)
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+
+						C = rotation(B, A, 60)
+						P1 = polygoneRegulier(A, B, 3)
+						P2 = rotation(P1, A, 150)
+						P6 = rotation(P1, B, -150)
+						P7 = rotation(P1, B, 60)
+						P9 = rotation(P2, C, 150)
+						P10 = rotation(P9, A, -60)
+						P11 = rotation(P2, B, 60)
+						P12 = rotation(P6, A, -60)
+						P3 = polygoneRegulier(A, C, 4)
+						P4 = polygoneRegulierIndirect(B, C, 4)
+						P5 = rotation(P4, B, -150)
+						P8 = rotation(P3, A, 150)
+
+						this.polygones.push(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P11.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+
+						for (let p of P12.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P7.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P8.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P9.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P10.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, vecteur(v.x, 0))
+						B = translation(B, vecteur(v.x, 0))
+					}
+					A = translation(A, vecteur(-Nx * v.x, w.y))
+					B = translation(B, vecteur(-Nx * v.x, w.y))
+				}
+				break
+			case 5: // 4.8²
+				v = vecteur(A, B)
+				v = homothetie(v, A, 2.4142)
+				w = rotation(v, A, -90)
+
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = rotation(A, B, -135)
+						P1 = polygoneRegulier(A, B, 8)
+						P2 = polygoneRegulierIndirect(A, B, 8)
+						P3 = translation(P1, v)
+						P4 = translation(P2, v)
+						P5 = polygoneRegulierIndirect(B, C, 4)
+						P6 = translation(P5, v)
+						P7 = translation(P5, w)
+						P8 = translation(P6, w)
+						this.polygones.push(P1, P2, P3, P4, P5, P6, P7, P8)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P7.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P8.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+
+						A = translation(A, vecteur(2 * v.x, 0))
+						B = translation(B, vecteur(2 * v.x, 0))
+					}
+					A = translation(A, vecteur(-Nx * 2 * v.x, 2 * w.y))
+					B = translation(B, vecteur(-Nx * 2 * v.x, 2 * w.y))
+				}
+				break
+
+			case 6: // Pavage hexagonal d'écolier
+				v = vecteur(A, B)
+				w = rotation(v, A, 60)
+				v = vecteur(v.x + w.x, v.y + w.y) // v=AB+CB
+				w = rotation(v, A, -60)
+
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = rotation(A, B, 120)
+						D = rotation(B, C, 60)
+						P1 = polygone(A, B, C, D)
+						P2 = rotation(P1, C, -60)
+						P3 = rotation(P1, A, 60)
+						P4 = translation(P2, v)
+						P5 = translation(P1, v)
+						P6 = translation(P3, v)
+						P7 = translation(P1, w)
+						P8 = translation(P2, w)
+						P9 = translation(P3, w)
+						this.polygones.push(P1, P2, P3, P4, P5, P6, P7, P8, P9)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P7.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P8.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P9.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, vecteur(w.x + v.x, w.y + v.y))
+						B = translation(B, vecteur(w.x + v.x, w.y + v.y))
+					}
+					A = translation(A, vecteur(-Nx * (w.x + v.x) + 2 * w.x - v.x, 2 * w.y - v.y))
+					B = translation(B, vecteur(-Nx * (w.x + v.x) + 2 * w.x - v.x, 2 * w.y - v.y))
+				}
+				break
+			case 7 :
+				v = vecteur(A, B)
+				v=homothetie(v,A,2)
+				w = rotation(v, A, -60)
+
+				for (let k = 0; k < Ny; k++) {
+					for (let j = 0; j < Nx; j++) {
+						C = rotation(A, B,-120)
+						D = rotation(B, C, -120)
+						P1 = polygoneRegulier(A, B,6)
+						P2 = polygoneRegulier(C,B,3)
+						P3 = rotation(P2, C, 180)
+						P4 = translation(P3,w)
+						P5 = translation(P2, w)
+						P6 = rotation(P1,B,180)
+						this.polygones.push(P1, P2, P3, P6, P5,P4)
+
+						for (let p of P1.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P2.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P3.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P4.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P5.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						for (let p of P6.listePoints) {
+							XMIN = Math.min(XMIN, p.x)
+							XMAX = Math.max(XMAX, p.x)
+							YMIN = Math.min(YMIN, p.y)
+							YMAX = Math.max(YMAX, p.y)
+						}
+						A = translation(A, v)
+						B = translation(B, v)
+					}
+					A = translation(A, vecteur(-Nx * v.x+2*w.x - v.x,2*w.y - v.y))
+					B = translation(B, vecteur(-Nx * v.x+2*w.x - v.x,2*w.y - v.y))
+				}
+			break
+		}
+		this.echelle = arrondi(80 / Math.sqrt( XMAX - XMIN),0)
+		this.fenetre = { xmin: XMIN-0.5, ymin: YMIN-0.5, xmax: XMAX+0.5, ymax: YMAX+0.5, pixelsParCm: this.echelle, scale: arrondi(this.echelle / 30,2) }
+		nettoie_objets(this.polygones) // On supprime les doublons éventuels (grâce à leur barycentre)
+		// On ajoute les N°
+		this.nb_polygones = this.polygones.length // Le nombre de polygones du pavage qui sert dans les boucles
+
+		for (let i = 0; i < this.nb_polygones; i++) {
+			this.barycentres.push(barycentre(this.polygones[i]))
+			this.tracesCentres.push(tracePoint(this.barycentres[i]))
+			this.tracesCentres[i].opacite = 0.5
+			this.tracesCentres[i].color = 'blue'
+			this.tracesCentres[i].taille = 2
+			this.coordonnees.push([arrondi(this.barycentres[i].x, 2), arrondi(this.barycentres[i].y, 2)])
+			this.numeros.push(texteParPosition(nombre_avec_espace(i + 1), this.barycentres[i].x + 0.5, this.barycentres[i].y, 'milieu', 'black', 50/this.echelle, 0, true))
+		}
+	}
+}
+function pavage() {
+	return new Pavage()
+}
+/**
+ * Fonction créant un labyrinthe de nombres
+ * Le tableau de nombres doit être de format [6][3]
+ * Le niveau doit être un entier entre 1 et 6 inclus
+ * @Auteur Jean-Claude
+ * Publié le 6/12/2020
+ */
+function Labyrinthe() {
+	this.murs2d = []
+	this.chemin2d = []
+	this.nombres2d = []
+	this.chemin = []
+	this.niveau = 3
+	this.nombres = [[]]
+	let  s1, s2, s3, s4, s5, couleur = 'brown', x = 0, y = 0, chemin2d = []
+	let chemins = [
+		[[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [5, 1], [6, 1]],
+		[[1, 0], [2, 0], [3, 0], [4, 0], [4, 1], [5, 1], [6, 1]],
+		[[1, 0], [2, 0], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]],
+		[[1, 0], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]],
+		[[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [5, 1], [5, 2], [6, 2]],
+		[[1, 0], [2, 0], [3, 0], [4, 0], [4, 1], [5, 1], [5, 2], [6, 2]],
+		[[1, 0], [2, 0], [3, 0], [4, 0], [4, 1], [4, 2], [5, 2], [6, 2]],
+		[[1, 0], [2, 0], [3, 0], [3, 1], [4, 1], [5, 1], [5, 2], [6, 2]],
+		[[1, 0], [2, 0], [3, 0], [3, 1], [3, 2], [4, 2], [5, 2], [6, 2]],
+		[[1, 0], [2, 0], [2, 1], [3, 1], [4, 1], [4, 2], [5, 2], [6, 2]],
+		[[1, 0], [1, 1], [2, 1], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]],
+		[[1, 0], [1, 1], [2, 1], [3, 1], [4, 1], [4, 0], [5, 0], [6, 0]],
+		[[1, 0], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [5, 2], [6, 2]],
+		[[1, 0], [1, 1], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]],
+		[[1, 0], [1, 1], [2, 1], [2, 2], [3, 2], [4, 2], [5, 2], [5, 1], [6, 1]],
+		[[1, 0], [2, 0], [3, 0], [3, 1], [3, 2], [4, 2], [5, 2], [5, 1], [6, 1]],
+		[[1, 0], [1, 1], [1, 2], [2, 2], [3, 2], [3, 1], [4, 1], [5, 1], [6, 1]],
+		[[1, 0], [1, 1], [1, 2], [2, 2], [3, 2], [4, 2], [4, 1], [5, 1], [6, 1]],
+		[[1, 0], [2, 0], [3, 0], [3, 1], [3, 2], [4, 2], [5, 2], [5, 1], [5, 0], [6, 0]],
+		[[1, 0], [1, 1], [2, 1], [2, 2], [3, 2], [4, 2], [4, 1], [4, 0], [5, 0], [6, 0]],
+		[[1, 0], [1, 1], [2, 1], [2, 2], [3, 2], [4, 2], [5, 2], [5, 1], [5, 0], [6, 0]],
+		[[1, 0], [1, 1], [1, 2], [2, 2], [3, 2], [4, 2], [4, 1], [4, 0], [5, 0], [6, 0]],
+		[[1, 0], [1, 1], [1, 2], [2, 2], [3, 2], [3, 1], [3, 0], [4, 0], [5, 0], [5, 1], [5, 2], [6, 2]],
+		[[1, 0], [1, 1], [1, 2], [2, 2], [3, 2], [3, 1], [3, 0], [4, 0], [5, 0], [5, 1], [5, 2], [6, 2]]]
+	let elementchemin
+	for (let i = 0; i < 24; i++) { // on double le nombre de chemins par Symétrie.
+		elementchemin = []
+		for (let j = 0; j < chemins[i].length; j++) {
+			elementchemin.push([chemins[i][j][0], 2 - chemins[i][j][1]])
+		}
+		chemins.push(elementchemin)
+	}
+	this.choisitChemin = function (niveau) { // retourne un chemin en fonction du niveau
+		let choix = choice([0, 24]), choixchemin
+		switch (niveau) {  // on choisit le chemin parmi les 23*2
+			case 1: choixchemin = randint(0, 3) + choix
+				break
+			case 2: choixchemin = randint(4, 13) + choix
+				break
+			case 3: choixchemin = randint(14, 17) + choix
+				break
+			case 4: choixchemin = randint(18, 21) + choix
+				break
+			case 5: choixchemin = randint(22, 23) + choix
+				break
+			case 6: choixchemin = randint(0, 23) + choix
+				break
+		}
+		return chemins[choixchemin]
+	}
+
+	// Retourne le tableau d'objets des murs en fonction du point d'entrée de chemin
+	this.construitMurs = function (chemin) {
+		let choix, objets = []
+		if (chemin[0][1] == 0) choix = 0
+		else choix = 2
+		for (let i = 0; i < 6; i++) {
+			// éléments symétriques pour A et B
+			if (choix == 0) {
+				// T inférieurs
+				s1 = segment(point(i * 3, 1), point(i * 3, 2))
+				s1.epaisseur = 2
+				//s1.styleExtremites = '-'
+				objets.push(s1)
+
+				// T supérieurs
+				if (i > 0) {
+					s2 = segment(point(i * 3, 10), point(i * 3, 9))
+					s2.epaisseur = 2
+					//s2.styleExtremites = '-|'
+					objets.push(s2)
+				}
+			}
+			else {
+				// T supérieurs
+				s1 = segment(point(i * 3, 10), point(i * 3, 9))
+				s1.epaisseur = 2
+				// s1.styleExtremites = '-|'
+				objets.push(s1)
+
+				// T inférieurs
+				if (i > 0) {
+					s2 = segment(point(i * 3, 1), point(i * 3, 2))
+					s2.epaisseur = 2
+					// s2.styleExtremites = '-|'
+					objets.push(s2)
+				}
+			}
+		}
+		if (choix == 0) // éléments uniques symétriques
+		{
+			//bord gauche
+			s1 = segment(point(0, 10), point(0, 3))
+			s1.epaisseur = 3
+			//s1.styleExtremites = '-|'
+			objets.push(s1)
+			// case départ
+			s1 = segment(point(-3, 1), point(0, 1), 'green')
+			s1.epaisseur = 3
+			objets.push(s1)
+			s1 = segment(point(-3, 1), point(-3, 4), 'green')
+			s1.epaisseur = 3
+			objets.push(s1)
+			s1 = segment(point(-3, 4), point(0, 4), 'green')
+			s1.epaisseur = 3
+			objets.push(s1)
+			objets.push(texteParPoint(`Départ`, point(-1.5, 2.5), 'milieu', 'blue', 1.5, 0, false))
+		}
+		else {
+			// bord gauche
+			s1 = segment(point(0, 1), point(0, 8))
+			s1.epaisseur = 3
+			//s1.styleExtremites = '-|'
+			objets.push(s1)
+			// case départ
+			s1 = segment(point(-3, 10), point(0, 10), 'green')
+			s1.epaisseur = 3
+			objets.push(s1)
+			s1 = segment(point(-3, 7), point(-3, 10), 'green')
+			s1.epaisseur = 3
+			objets.push(s1)
+			s1 = segment(point(-3, 7), point(0, 7), 'green')
+			s1.epaisseur = 3
+			objets.push(s1)
+			objets.push(texteParPoint(`Départ`, point(-1.5, 8.5), 'milieu', 'blue', 1.5, 0, false))
+		}
+
+		// les croix centrales communes à A et B
+		for (let i = 1; i < 6; i++) {
+			s1 = segment(point(i * 3, 8), point(i * 3, 6), 'black')
+			s1.epaisseur = 2
+			// s1.styleExtremites = '|-|'
+			s2 = segment(point(i * 3 - 0.5, 7), point(i * 3 + 0.5, 7), 'black')
+			s2.epaisseur = 2
+			// s2.styleExtremites = '|-|'
+			s3 = segment(point(i * 3, 5), point(i * 3, 3), 'black')
+			s3.epaisseur = 2
+			// s3.styleExtremites = '|-|'
+			s4 = segment(point(i * 3 - 0.5, 4), point(i * 3 + 0.5, 4), 'black')
+			s4.epaisseur = 2
+			// s4.styleExtremites = '|-|'
+			objets.push(s2, s3, s4, s1)
+		}
+		// le pourtour commun à A et B
+		s1 = segment(point(18, 9), point(18, 10))
+		s1.epaisseur = 3
+		objets.push(s1)
+		s1 = segment(point(0, 10), point(18, 10))
+		s1.epaisseur = 3
+		objets.push(s1)
+		s1 = segment(point(18, 9), point(18, 10))
+		s1.epaisseur = 3
+		objets.push(s1)
+		s1 = segment(point(18, 1), point(18, 2))
+		s1.epaisseur = 3
+		objets.push(s1)
+		s1 = segment(point(0, 1), point(18, 1))
+		s1.epaisseur = 3
+		objets.push(s1)
+		// les sorties communes à A et B
+		for (let i = 0; i < 2; i++) {
+			s1 = segment(point(18, 6 - i * 3), point(20, 6 - i * 3))
+			s1.epaisseur = 3
+			// s1.styleExtremites = '-|'
+			s2 = segment(point(18, 7 - i * 3), point(17, 7 - i * 3))
+			s2.epaisseur = 3
+			// s2.styleExtremites = '-|'
+			s3 = segment(point(18, 8 - i * 3), point(20, 8 - i * 3))
+			s3.epaisseur = 3
+			// s3.styleExtremites = '-|'
+			s4 = segment(point(18, 8 - i * 3), point(18, 6 - i * 3))
+			s4.epaisseur = 3
+			s5 = segment(point(0, 7 - i * 3), point(1, 7 - i * 3))
+			s5.epaisseur = 3
+			//s5.styleExtremites = '-|'
+			objets.push(s1, s2, s3, s4, s5)
+		}
+		for (let i = 1; i <= 3; i++) {
+			objets.push(texteParPoint(`Sortie ${i}`, point(19.5, 11.5 - 3 * i), 'milieu', 'blue', 1.5, 0, false))
+		}
+		s1 = segment(point(18, 9), point(20, 9))
+		s1.epaisseur = 3
+		//s1.styleExtremites = '-|'
+		s2 = segment(point(18, 2), point(20, 2))
+		s2.epaisseur = 3
+		//s2.styleExtremites = '-|'
+		objets.push(s1, s2)
+		return objets
+	}
+
+	// Retourne le tableau d'objets du chemin
+	this.traceChemin = function (monchemin) {
+		let y = monchemin[0][1]
+		let x = 0, chemin2d = []
+		for (let j = 0; j < monchemin.length; j++) {
+			s1 = segment(point(x * 3 - 1.5, y * 3 + 2.5), point(monchemin[j][0] * 3 - 1.5, monchemin[j][1] * 3 + 2.5), couleur)
+			s1.pointilles = true
+			s1.stylePointilles = 2
+			s1.epaisseur = 5
+			s1.opacite = 0.3
+			chemin2d.push(s1)
+			x = monchemin[j][0]
+			y = monchemin[j][1]
+		}
+		s1 = segment(point(x * 3 - 1.5, y * 3 + 2.5), point(x * 3 + 1.5, y * 3 + 2.5), couleur)
+		s1.pointilles = true
+		s1.stylePointilles = 2
+		s1.epaisseur = 5
+		s1.opacite = 0.3
+		chemin2d.push(s1)
+		return chemin2d
+	}
+	// Retourne le tableau d'objets des nombres 
+	this.placeNombres = function (nombres,taille) {
+		let objets=[]
+		for (let a = 1; a < 7; a++) {
+			for (let b = 0; b < 3; b++) {
+				if (typeof(nombres[a-1][b])=='number') {
+				objets.push(texteParPoint(nombre_avec_espace(nombres[a - 1][b]), point(-1.5 + a * 3, 2.5 + b * 3), 'milieu', 'black', taille, 0, true))
+				}
+				else if (typeof(nombres[a-1][b])=='string') { // écriture mode Maths
+					objets.push(texteParPosition(nombres[a - 1][b],-1.5 + a * 3,2.5 + b * 3,'milieu','black',taille,0,true))
+				}
+				else {
+					objets.push(fractionParPosition({x:-1.5 + a * 3,y: 2.5 + b * 3,fraction:nombres[a - 1][b]}))
+				}
+			}
+
+		}
+		return objets
+	}
+}  // fin de la classe labyrinthe
+function labyrinthe() {
+	return new Labyrinthe()
+}
+
+// Gestion du fichier à télécharger
+function telechargeFichier(text,filename) {
+	var element = document.createElement('a');
+	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	element.setAttribute('download', filename);
+  
+	element.style.display = 'none';
+	document.body.appendChild(element);
+  
+	element.click();
+  
+	document.body.removeChild(element);
+  }
 
 // Gestion des styles LaTeX
 
