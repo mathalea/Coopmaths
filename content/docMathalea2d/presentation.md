@@ -30,6 +30,7 @@ Cet outil servira principalement à la création d'exercices pour MathALEA mais 
 {{% item "Les animations" "/docMathalea2d/animations" %}}
 {{% item "La programmation" "/docMathalea2d/programmation" %}}
 {{% item "La programmation Logo - GéoTortue - Crayon de Scratch" "/docMathalea2d/lutin" %}}
+{{% item "La 3d" "/docMathalea2d/3d" %}}
 
 {{< /liste >}}
 
