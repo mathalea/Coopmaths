@@ -1,4 +1,4 @@
-import { strRandom, telechargeFichier, intro_LaTeX, intro_LaTeX_coop, scratchTraductionFr } from "./modules/outils.js";
+import { strRandom, telechargeFichier, intro_LaTeX, intro_LaTeX_coop, scratchTraductionFr, modal_youtube } from "./modules/outils.js";
 import { getUrlVars } from "./modules/getUrlVars.js";
 import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules/menuDesExercicesDisponibles.js";
 
@@ -67,6 +67,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 if (listeObjetsExercice[0].nb_questions_modifiable) {
                     fin_de_l_URL += `,nb_questions=${listeObjetsExercice[0].nb_questions}`;
                 }
+                if (listeObjetsExercice[0].video.length>1) {
+                    fin_de_l_URL += `,video=${listeObjetsExercice[0].video}`;
+                }
                 
                 for (let i = 1; i < liste_des_exercices.length; i++) {
                     fin_de_l_URL += `&ex=${liste_des_exercices[i]}`
@@ -82,6 +85,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     if (listeObjetsExercice[i].nb_questions_modifiable) {
                         fin_de_l_URL += `,nb_questions=${listeObjetsExercice[i].nb_questions}`;
                     }
+                    if (listeObjetsExercice[i].video.length>1) {
+                        fin_de_l_URL += `,video=${listeObjetsExercice[i].video}`;
+                     }
                 }
                 if (typeof mathalea.duree !== 'undefined'){
                     fin_de_l_URL +=`&duree=${mathalea.duree}`
@@ -211,6 +217,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                         console.log(error);
                     }
                     contenuDesExercices += `<h3 class="ui dividing header">Exercice ${i + 1} − ${listeObjetsExercice[i].id}</h3>`;
+                    if (listeObjetsExercice[i].video.length>3) {
+                        contenuDesExercices += `<div id=video${i}>` +modal_youtube(i,listeObjetsExercice[i].video,'',"Aide - Vidéo","youtube") + `</div>`;
+                    }
                     if (listeObjetsExercice[i].bouton_aide) {
                         contenuDesExercices += `<div id=aide${i}> ${listeObjetsExercice[i].bouton_aide}</div>`;
                     }
@@ -507,6 +516,10 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                         listeObjetsExercice[i].nb_questions = urlVars[i]["nb_questions"];
                         form_nb_questions[i].value = listeObjetsExercice[i].nb_questions;
                     }
+                    if (urlVars[i]["video"] && sortie_html && !est_diaporama) {
+                        listeObjetsExercice[i].video = urlVars[i]["video"];
+                        form_video[i].value = listeObjetsExercice[i].video;
+                    }
                     if (typeof urlVars[i]["sup"] !== 'undefined') {
                         listeObjetsExercice[i].sup = urlVars[i]["sup"];
                         // Un exercice avec un this.sup mais pas de formulaire pouvait poser problème
@@ -665,6 +678,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
     let div_parametres_generaux = document.getElementById("parametres_generaux"); // Récupère le div dans lequel seront inscrit les paramètres
     let form_consigne = [],
         form_nb_questions = [],
+        form_video = [],
         form_correction_detaillee = [],
         form_nb_cols = [],
         form_nb_cols_corr = [],
@@ -697,6 +711,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 if (exercice[i].nb_questions_modifiable) {
                     div_parametres_generaux.innerHTML +=
                         '<div><label for="form_nb_questions' + i + '">Nombre de questions : </label> <input id="form_nb_questions' + i + '" type="number"  min="1" max="99"></div>';
+                }
+                if (!est_diaporama){
+                    div_parametres_generaux.innerHTML += '<div><label for="form_video' + i + '" data-tooltip="Identifiant YouTube" data-inverted="" >Vidéo : <input id="form_video' + i + '" type="texte" size="20"  ></label></div>';
                 }
                 if (exercice[i].correction_detaillee_disponible) {
                     div_parametres_generaux.innerHTML +=
@@ -1043,6 +1060,17 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     mise_a_jour_du_code();
                 });
             }
+            
+            // Gestion de la vidéo
+            if (sortie_html && !est_diaporama) {
+                form_video[i] = document.getElementById("form_video" + i);
+                form_video[i].value = exercice[i].video; // Rempli le formulaire
+                form_video[i].addEventListener("change", function (e) {
+                    // Dès que ça change, on met à jour
+                    exercice[i].video = e.target.value;
+                    mise_a_jour_du_code();
+                });
+            }
 
             // Gestion de la correction détaillée
             if (exercice[i].correction_detaillee_disponible) {
@@ -1223,21 +1251,39 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
         }
 
         // Gestion du bouton de zoom
-        let taille = parseInt($("#affichage_exercices").css("font-size"));
-        $("#btn_zoom_plus").click(function () {
-            taille *= 1.2;
-            $("#affichage_exercices").css("font-size", `${taille}px`);
-            $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
-            $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
-        });
-        $("#btn_zoom_moins").click(function () {
-            if (parseInt(taille) > 14) {
-                taille *= 0.8;
-            }
-            $("#affichage_exercices").css("font-size", `${taille}px`);
-            $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
-            $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
-        });
+        // let taille = parseInt($("#affichage_exercices").css("font-size"));
+        // $("#btn_zoom_plus").click(function () {
+        //     taille *= 1.2;
+        //     $("#affichage_exercices").css("font-size", `${taille}px`);
+        //     $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
+        //     $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
+        // });
+        // $("#btn_zoom_moins").click(function () {
+        //     if (parseInt(taille) > 14) {
+        //         taille *= 0.8;
+        //     }
+        //     $("#affichage_exercices").css("font-size", `${taille}px`);
+        //     $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
+        //     $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
+        // });
+
+        if (sortie_html && !est_diaporama) {
+            // Gestion du bouton de zoom
+                let zoom = 1;
+                $( "#btn_zoom_plus").click(function() {
+                    zoom+=.5;
+                    $("#affichage_exercices").css("transform", `scale(${zoom})`);
+                    $("#affichage_exercices").css("transform-origin", "0 0px");
+                      //window.location.hash = 'section';
+                  });
+                $( "#btn_zoom_moins").click(function() {
+                    if (zoom>1) {
+                        zoom-=.5;
+                    }
+                    $("#affichage_exercices").css("transform", `scale(${zoom})`);
+                    $("#affichage_exercices").css("transform-origin", "0 0px");
+                });
+        }
 
         // Gestion de la redirection vers MathaleaLaTeX
         $( "#btnLaTeX").click(function() {

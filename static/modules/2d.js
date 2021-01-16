@@ -54,10 +54,11 @@ function ObjetMathalea2D() {
  * @Auteur Rémi Angot
  */
 function Point(arg1, arg2, arg3, positionLabel = "above") {
-  ObjetMathalea2D.call(this);
+ // ObjetMathalea2D.call(this);
   if (arguments.length == 1) {
     this.nom = arg1;
   } else if (arguments.length == 2) {
+
     this.x = arg1;
     this.y = arg2;
   } else {
@@ -126,7 +127,16 @@ function TracePoint(...points) {
           c.opaciteDeRemplissage=this.opacite/2
           objetssvg.push(c)
         }
-        else if (this.style=='#'){
+  /*      else if (this.style=='.'){
+          p1=point(A.x,A.y)
+          c=cercle(p1,0.05,this.color)
+          c.epaisseur=this.epaisseur
+          c.opacite=this.opacite
+          c.couleurDeRemplissage=this.color
+          c.opaciteDeRemplissage=this.opacite/2
+          objetssvg.push(c)
+        }
+    */    else if (this.style=='#'){
           p1=point(A.x-this.taille/coeff,A.y-this.taille/coeff)
           p2=point(A.x+this.taille/coeff,A.y-this.taille/coeff)
           c=carreIndirect(p1,p2,this.color)
@@ -188,7 +198,16 @@ function TracePoint(...points) {
           c.opaciteDeRemplissage=this.opacite/2
           objetstikz.push(c)
         }
-        else if (this.style=='#'){
+ /*       else if (this.style=='.'){
+          p1=point(A.x,A.y)
+          c=cercle(p1,0.05,this.color)
+          c.epaisseur=this.epaisseur
+          c.opacite=this.opacite
+          c.couleurDeRemplissage=this.color
+          c.opaciteDeRemplissage=this.opacite/2
+          objetstikz.push(c)
+        }
+   */     else if (this.style=='#'){
           p1=point(A.x-tailletikz,A.y-tailletikz)
           p2=point(A.x+tailletikz,A.y-tailletikz)
           c=carreIndirect(p1,p2,this.color)
@@ -1207,6 +1226,66 @@ export function polyline(...args) {
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% 3D EN PERSPECTIVE CAVALIERES %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/**
+ * 
+ * @param {int} Longueur 
+ * @param {int} largeur 
+ * @param {int} profondeur
+ *  
+ */
+function Pave(L=10, l=5, h=5, origine=point(0,0), cote=true, angleDeFuite=30, coefficientDeFuite=.5){
+  let objets = [];
+  let A = origine, B = point(A.x+L,A.y), C = point(B.x,B.y+l) , D = point(A.x,A.y+l);
+  let p = polygone(A,B,C,D);
+  let E = pointAdistance(A,calcul(h*coefficientDeFuite),angleDeFuite);
+  let F = translation(B,vecteur(A,E));
+  let G = translation(C,vecteur(A,E));
+  let H = translation(D,vecteur(A,E));
+  let sAE = segment(A,E);
+  let sBF = segment(B,F);
+  let sCG = segment(C,G);
+  let sDH = segment(D,H);
+  let sEF = segment(E,F);
+  let sFG = segment(F,G);
+  let sGH = segment(G,H);
+  let sHE = segment(H,E);
+  sAE.pointilles = true;
+  sEF.pointilles = true;
+  sHE.pointilles = true;
+
+  objets.push(p, sAE, sBF, sCG, sDH, sEF, sFG, sGH, sHE);
+  if (cote) {
+    objets.push(afficheCoteSegment(segment(B,A),'',1));
+    objets.push(afficheCoteSegment(segment(A,D),'',1));
+    objets.push(afficheCoteSegment(segment(F,B),h+' cm',1));
+  }
+  this.svg = function (coeff) {
+    let code = "";
+    for (let objet of objets) {
+      code += "\n\t" + objet.svg(coeff);
+    }
+    return code;
+  };
+  this.tikz = function () {
+    let code = "";
+    for (let objet of objets) {
+      code += "\n\t" + objet.tikz();
+    }
+    return code;
+  };
+}
+
+export function pave(...args){
+  return new Pave(...args)
+}
+
+
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% LES VECTEURS %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
@@ -2142,6 +2221,132 @@ function Cercle(O, r, color) {
 }
 export function cercle(...args) {
   return new Cercle(...args);
+}
+
+
+/**
+ * c = ellipse(O,rx,ry) //Ellipse de centre O et de rayon rx et ry
+ * @Auteur Rémi Angot
+ */
+function Ellipse(O, rx, ry, color) {
+  ObjetMathalea2D.call(this);
+  if (color) {
+    this.color = color;
+    this.styleTikz = `[${color}]`;
+  }
+  this.centre = O;
+  this.rx = rx;
+  this.ry = ry;
+  this.couleurDeRemplissage = "";
+  this.opaciteDeRemplissage = 0.7;
+  this.svg = function (coeff) {
+    if (this.epaisseur != 1) {
+      this.style += ` stroke-width="${this.epaisseur}" `;
+    }
+    if (Boolean(this.pointilles)) {
+      switch (this.pointilles) {
+        case 1 :
+          this.style += ` stroke-dasharray="6 10" `;
+          break;
+        case 2 : 
+        this.style += ` stroke-dasharray="6 3" `;
+        break;       
+        case 3 :
+          this.style += ` stroke-dasharray="3 2 6 2 " `;
+          break;      
+        default : 
+        this.style += ` stroke-dasharray="5 5" `;
+        break; 
+      }
+
+    }
+    if (this.opacite != 1) {
+      this.style += ` stroke-opacity="${this.opacite}" `;
+    }
+    if (this.couleurDeRemplissage == "") {
+      this.style += ` fill="none" `;
+    } else {
+      this.style += ` fill="${this.couleurDeRemplissage}" `;
+      this.style += ` fill-opacity="${this.opaciteDeRemplissage}" `;
+    }
+
+    return `<ellipse cx="${O.xSVG(coeff)}" cy="${O.ySVG(coeff)}" rx="${calcul(rx*coeff)}" ry="${calcul(ry*coeff)}" stroke="${this.color}" ${this.style} id="${this.id}" />`
+  };
+  this.tikz = function () {
+    let optionsDraw = [];
+    let tableauOptions = [];
+    if (this.color.length > 1 && this.color !== "black") {
+      tableauOptions.push(this.color);
+    }
+    if (this.epaisseur != 1) {
+      tableauOptions.push(`line width = ${this.epaisseur}`);
+    }
+    if (Boolean(this.pointilles)) {
+      switch (this.pointilles) {
+         case 1 :
+           tableauOptions.push(` dash dot `);
+           break;
+         case 2 : 
+         tableauOptions.push(` dash dash dot `);
+         break;       
+         case 3 :
+           tableauOptions.push(` dash dot dot `);
+           break;      
+         default : 
+           tableauOptions.push(` dashed `);
+         break; 
+       }
+     }
+     if (this.opacite != 1) {
+      tableauOptions.push(`opacity = ${this.opacite}`);
+    }
+    if (tableauOptions.length > 0) {
+      optionsDraw = "[" + tableauOptions.join(",") + "]";
+    }
+    return `\\draw${optionsDraw} (${O.x},${O.y}) ellipse (${rx}cm and ${ry}cm);;`;
+  };
+  // this.svgml = function (coeff,amp) {
+  //   if (this.epaisseur != 1) {
+  //     this.style += ` stroke-width="${this.epaisseur}" `;
+  //   }
+
+  //   if (this.opacite != 1) {
+  //     this.style += ` stroke-opacity="${this.opacite}" `;
+  //   }
+  //   if (this.couleurDeRemplissage == "") {
+  //     this.style += ` fill="none" `;
+  //   } else {
+  //     this.style += ` fill="${this.couleurDeRemplissage}" `;
+  //     this.style += ` fill-opacity="${this.opaciteDeRemplissage}" `;
+  //   }
+
+  //   let code =`<ellipse cx="${O.xSVG(coeff)}" cy="${O.ySVG(coeff)}" rx="${calcul(rx*coeff)}" ry="${calcul(ry*coeff)}" />`
+  //   return code;
+  // }
+  this.tikzml = function(amp) {
+    let optionsDraw = [];
+    let tableauOptions = [];
+    if (this.color.length > 1 && this.color !== "black") {
+      tableauOptions.push(this.color);
+    }
+    if (this.epaisseur != 1) {
+      tableauOptions.push(`line width = ${this.epaisseur}`);
+    }
+
+    if (this.opacite != 1) {
+      tableauOptions.push(`opacity = ${this.opacite}`);
+    }
+    tableauOptions.push(`decorate,decoration={random steps , amplitude = ${amp}pt}`);
+    optionsDraw = "[" + tableauOptions.join(",") + "]";
+
+
+    let code=`\\draw${optionsDraw} (${O.x},${O.y}) circle (${r});`
+    return code
+  
+  }
+}
+export function ellipse(...args) {
+  return new Ellipse(...args);
 }
 
 /**
@@ -4535,6 +4740,38 @@ export function codeAngle(debut,centre,angle,taille=0.8,mark='',color='black',ep
   }
   else  return new CodeAngle(debut,centre,angle,taille,mark,color,epaisseur,opacite,fill,fillOpacite,mesure_on)
 }
+
+function NomAngleParPosition(nom,x,y,color,s){
+  ObjetMathalea2D.call(this)
+  let objets=[],s1,s2
+  objets.push(texteParPosition(nom,x,y,'milieu',color,1,'middle',true))
+    s1=segment(x-0.6,y+0.4-s/10,x+0.1,y+0.4+s/10)
+    s2=segment(x+0.1,y+0.4+s/10,x+0.8,y+0.4-s/10)
+  s1.color=color
+  s2.color=color
+  objets.push(s1,s2)
+  this.svg = function (coeff) {
+    let code = "";
+     for (let objet of objets) {
+       code += "\n\t" + objet.svg(coeff);
+     }
+     return code;
+   };
+   this.tikz = function () {
+     let code = "";
+     for (let objet of objets) {
+       code += "\n\t" + objet.tikz();
+     }
+     return code;
+   };
+}
+export function nomAngleSaillantParPosition(nom,x,y,color) {
+  return new NomAngleParPosition(nom,x,y,color,1)
+}
+export function nomAngleRentrantParPosition(nom,x,y,color) {
+  return new NomAngleParPosition(nom,x,y,color,-1)
+}
+
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% LES REPERES ET GRILLE %%%%%%%%%%
@@ -7238,7 +7475,7 @@ export function mathalea2d(
              else
                   code += "\t" + objet[i].svgml(pixelsParCm,amplitude) + "\n";
             }
-          } catch (error) {console.log('premiere boucle',error.message,objet[i])}
+          } catch (error) {console.log('premiere boucle',error.message,objet[i],i)}
 
         }
       }
