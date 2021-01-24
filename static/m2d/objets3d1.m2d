@@ -17,10 +17,11 @@ let Pav=pave3d(A,B,D,C)
 let v=vecteur3d(0,0,1) // v sera le vecteur normal au plan de base du cône et
 // au plan de l'équateur pour la sphère
 let centreS=point3d(7,4,7) // le centre de la sphère
-let rayon=vecteur3d(2,0,0) // un vecteur pour définir le rayon de la sphère et de la base du cône
-// la sphère avec 5 parallèles et 3(×2) méridiens
-let S=sphere3d(centreS,v,rayon,5,3) 
+
+// la sphère de rayon 7 avec 5 parallèles et 3(×2) méridiens
+let S=sphere3d(centreS,7,5,3) 
 
 let centreC=point3d(7,4,0) // le centre de la base du cône
 let sommet=point3d(7,4,5) // le sommet du cône
+let rayon=vecteur3d(2,0,0) // un vecteur pour définir le rayon de la base du cône
 let cone=cone3d(centreC,sommet,v,rayon)
