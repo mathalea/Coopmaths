@@ -1863,6 +1863,9 @@ export function tex_nombre2(nb){
 export function tex_nombrec2(expr,precision=8){
 	return math.format(math.evaluate(expr),{notation:'auto',lowerExp:-12,upperExp:12,precision:precision})
 }
+export function nombrec2(nb){
+	return math.evaluate(nb)
+}
 
 /**
  * Renvoie un espace insécable pour le mode texte suivant la sorite html ou Latex.
@@ -3354,6 +3357,23 @@ export function reorganiseProduitPuissance(b1,b2,e,couleur1,couleur2) {
 }
 
 /**
+ * 
+ * x le nombre dont on cherche l'ordre de grandeur 
+ * type = 0 pour la puissance de 10 inférieure, 1 pour la puissance de 10 supérieur et 2 pour la plus proche
+ */
+export function ordreDeGrandeur(x,type){
+	let signe,P
+	if (x<0) signe=-1
+	else signe=1
+	x=Math.abs(x)
+	P=10**Math.floor(Math.log10(x))
+	if (type==0) return P*signe
+	else if (type==1) return P*10*signe
+	else if (x-P<10*P-x) return P*signe
+	else return P*10*signe
+}
+
+/**
 * Fonction créant le bouton d'aide utilisée par les différentes fonctions modal_ type de contenu
 * @param numero_de_l_exercice
 * @param contenu code HTML 
@@ -3405,7 +3425,13 @@ export function modal_texte_court(numero_de_l_exercice,texte,label_bouton="Aide"
 * @Auteur Rémi Angot
 */	
 export function modal_youtube(numero_de_l_exercice,id_youtube,texte,label_bouton="Aide - Vidéo",icone="youtube"){
-	let contenu = `<div class="header">${texte}</div><div class="content"><p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${id_youtube}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p></div>`
+	let contenu
+	if (id_youtube.substr(0,4)=='http'){
+		contenu = `<iframe width="560" height="315" sandbox="allow-same-origin allow-scripts allow-popups" src="${id_youtube}" frameborder="0" allowfullscreen></iframe>`
+		contenu = contenu.replace('watch','embed')
+	} else {
+		contenu = `<div class="header">${texte}</div><div class="content"><p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${id_youtube}?rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p></div>`
+	}
 	return creer_modal(numero_de_l_exercice,contenu,label_bouton,icone)
 }
 
@@ -4552,30 +4578,30 @@ export function info_message({titre,texte,couleur}) {
 
 export function lampe_message({titre,texte,couleur}) {
 	//'use strict';
-	// if (sortie_html) {
-	// 	return `
-	// 	<div class="ui compact icon message">
-	// 		<i class="lightbulb outline icon"></i>
-	// 		<div class="content">
-	// 	  		<div class="header">
-	// 				`+titre+`
-	// 	  		</div>
-	// 	  		<p>`+texte+`</p>
-	// 		</div>
-	//   	</div>
-	// 	`;
-	// } else {
-	// 	return `
-	// 	\\begin{bclogo}[couleurBarre=`+couleur+`,couleurBord=`+couleur+`,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
-	// 		`+texte+`
-	// 	\\end{bclogo}
-	// 	`;
-	// };
-	return info_message({
-		titre:titre,
-		texte:texte,
-		couleur:couleur
-	})
+	if (sortie_html) {
+		return `
+		<div class="ui compact icon message">
+			<i class="lightbulb outline icon"></i>
+			<div class="content">
+		  		<div class="header">
+					`+titre+`
+		  		</div>
+		  		<p>`+texte+`</p>
+			</div>
+	  	</div>
+		`;
+	} else {
+		return `
+		\\begin{bclogo}[couleurBarre=`+couleur+`,couleurBord=`+couleur+`,epBord=2,couleur=gray!10,logo=\\bclampe,arrondi=0.1]{\\bf `+titre+`}
+			`+texte+`
+		\\end{bclogo}
+		`;
+	};
+	// return info_message({
+	// 	titre:titre,
+	// 	texte:texte,
+	// 	couleur:couleur
+	// })
 };
 
 
