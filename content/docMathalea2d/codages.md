@@ -21,6 +21,7 @@ description: "MathALEA 2D - Les codages"
 * `let monCodage = codageAngleDroit(A,O,B)` //Fait un codage d'angle droit de 3 mm pour l'angle direct AOB
 * `let monCodage = codageAngleDroit(A,O,B,.5)` //Fait un codage d'angle droit de 5 mm pour l'angle direct AOB
 * `let monCodage = afficheMesureAngle(A,B,C)` // Affiche la mesure de l'angle ABC arrondie au degré près
+* `let monCodage = afficheMesureAngle(A,B,C,'red',1.5,'⍺')` // Affiche la marque de l'angle en rouge avec un rayon de 1,5 et remplace la mesure de l'angle par un texte (ici ⍺)
 * `let monCodage = codageCarre(c,color = 'black',mark='X')` // Code les longueurs égales et les angles droits du carré c
 * `let m = codageMediatrice(A,B,'blue')` // Ajoute le codage du milieu et de l'angle droit pour la médiatrice de [AB] en bleu
 * `let m = codageHauteurTriangle(A,B,C,'blue')` // Code en bleu la hauteur issue de B dans le triangle ABC et trace en pointillés (AC) si le pied de la hauteur est à l'extérieur du triangle
