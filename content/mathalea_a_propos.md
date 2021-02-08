@@ -70,6 +70,17 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 ### Changelog
 
+
+#### 01/21
+
+- Développement d'un module pour la représentation en perspective cavalière d'objets définis avec des coordonnées en 3d.
+- Nouveaux exercices de trigonométrie et de géométrie dans l'espace.
+- Nouveaux exercices sur les fonctions en seconde.
+
+#### 12/20
+
+- Refonte complète du moteur de MathALEA avec l'import dynamique des bibliothèques et le découpage pour avoir un exercice par fichier.
+
 #### 10/20
 
 - Arrivée de Erwan Duplessy et Mireille Gain pour la programmation d'exercices.
