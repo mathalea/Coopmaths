@@ -37,6 +37,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - Moteur développé par Rémi Angot sous licence **CC-By-SA**.
 - Exercices écrits par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain et Erwan Duplessy puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
+- [maths.js](https://mathsjs.org) Apache license 2.0 (pour le calcul formel et les matrices)
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Biton - Licence GNU AGPLv3 (pour les constructions géométriques).
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
 - [KaTeX](https://khan.github.io/KaTeX/) LPPL (pour le rendu LaTeX des exercices en ligne).
@@ -80,6 +81,8 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 #### 12/20
 
 - Refonte complète du moteur de MathALEA avec l'import dynamique des bibliothèques et le découpage pour avoir un exercice par fichier.
+- Générateur de calcul posé (4 opérations).
+- Constructions géométriques avec cible pour l'auto-correction.
 
 #### 10/20
 
