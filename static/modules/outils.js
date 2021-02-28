@@ -776,6 +776,22 @@ export function ecriture_parenthese_si_moins(expr) {
 };
 
 /**
+ * 
+ * @Auteur Jean-claude Lhote
+ * @param {numero} 1=A, 2=B ..
+ * @param {etapes} tableau de chaines comportant les expressions à afficher dans le membre de droite.
+ */
+
+export function calcul_aligne(numero,etapes){
+	let script=`$\\begin{aligned}${mise_en_evidence(lettre_depuis_chiffre(numero))}&=${etapes[0]}`
+	for (let i=1;i<etapes.length-1;i++){
+		script+=`\\\\&=${etapes[i]}`
+	}
+	script+=`\\\\${mise_en_evidence(lettre_depuis_chiffre(numero)+'&='+etapes[etapes.length-1])}$`
+	return script
+}
+
+/**
 * Renvoie la valeur du chiffre (8->8, A->10, B->11...)
 * 
 * @Auteur Rémi Angot
@@ -1091,7 +1107,7 @@ export function fraction_simplifiee(n,d){
 * @Auteur Rémi Angot
 */
 export function tex_fraction_reduite(n,d){
-	if (n%d==0) {
+	if (Math.abs(n)%Math.abs(d)==0) {
 		return n/d
 	} else {
 		return tex_fraction_signe(fraction_simplifiee(n,d)[0],fraction_simplifiee(n,d)[1]);
@@ -1185,6 +1201,7 @@ else {
 
 /**
  * renvoie une chaine correspondant à l'écriture réduite de ax+b selon les valeurs de a et b
+ * @Auteur Jean-Claude Lhote
  * @param {number} a 
  * @param {number} b 
  */
@@ -1198,6 +1215,110 @@ export function reduire_ax_plus_b(a,b) {
 	else if (a==0) result='0'
 	return result
 }
+/**
+ * renvoie une chaine correspondant à l'écriture réduite de ax^3+bx^2+cx+d selon les valeurs de a,b,c et d
+ * @Auteur Jean-Claude Lhote
+ */
+export function reduire_polynome_degre3(a, b, c, d) {
+	let result = ""
+	if (a != 0) {
+		switch (a) {
+			case 1:
+				result += 'x^3'
+				break
+			case -1:
+				result += '-x^3'
+				break
+			default:
+				result += `${a}x^3`
+				break
+		}
+		if (b != 0) {
+			switch (b) {
+				case 1:
+					result += '+x^2'
+					break
+				case -1:
+					result += '-x^2'
+					break
+				default:
+					result += `${ecriture_algebrique(b)}x^2`
+					break
+			}
+		}
+		if (c != 0) {
+			switch (c) {
+				case 1:
+					result += '+x'
+					break;
+				case -1:
+					result += '-x'
+					break
+				default:
+					result += `${ecriture_algebrique(c)}x`
+					break
+			}
+		}
+		if (d != 0) {
+			result += `${ecriture_algebrique(d)}`
+		}
+	}
+	else { // degré 2 pas de degré 3
+		if (b != 0) {
+			switch (b) {
+				case 1:
+					result += 'x^2'
+					break
+				case -1:
+					result += '-x^2'
+					break
+				default:
+					result += `${b}x^2`
+					break
+			}
+			if (c != 0) {
+				switch (c) {
+					case 1:
+						result += '+x'
+						break;
+					case -1:
+						result += '-x'
+						break
+					default:
+						result += `${ecriture_algebrique(c)}x`
+						break
+				}
+			}
+			if (d != 0) {
+				result += `${ecriture_algebrique(d)}`
+			}
+		}
+		else  // degré 1 pas de degré 2 ni de degré 3
+			if (c != 0) {
+				switch (c) {
+					case 1:
+						result += 'x'
+						break;
+					case -1:
+						result += '-x'
+						break
+					default:
+						result += `${c}x`
+						break
+				}
+				if (d != 0) {
+					result += `${ecriture_algebrique(d)}`
+				}
+			}
+			else { // degré 0 a=0, b=0 et c=0
+				result += `${d}`
+			}
+
+	}
+	return result
+}
+
+
 /**
 *
 * Donne la liste des facteurs premiers d'un nombre
@@ -1278,6 +1399,16 @@ export function tex_racine_carree(n) {
 	if (result[1]==1) return `${result[0]}`
 	else if (result[0]==1) return `\\sqrt{${result[1]}}`
 	else return `${result[0]}\\sqrt{${result[1]}}`
+}
+
+/**
+* Utilise giac/xcas 
+* 
+* @Auteur Rémi Angot
+*/
+export function xcas(expression){
+	return UI.eval(`latex(${expression})`).replaceAll('\\cdot ','~').replaceAll("\\frac","\\dfrac").replaceAll('\"','');
+	
 }
 
 /**
@@ -1744,6 +1875,25 @@ export function enumerate(liste,spacing){
 	}
 }
 
+/**
+* Renvoie une liste sans puce ni numéro HTML ou LaTeX suivant le contexte
+* 
+* @param liste une liste de questions
+* @param spacing interligne (line-height en css)
+* @Auteur Sébastien Lozano
+*/
+export function enumerate_sans_puce_sans_numero(liste,spacing){
+	if (sortie_html) {
+		//return html_enumerate(liste,spacing)
+		// for (let i=0; i<liste.length;i++) {
+		// 	liste[i]='> '+liste[i];
+		// }		
+		return html_ligne(liste,spacing)
+	} else {
+		//return tex_enumerate(liste,spacing)
+		return tex_enumerate(liste,spacing).replace('\\begin{enumerate}','\\begin{enumerate}[label={}]')
+	}
+}
 
 /**
 *  Renvoie un paragraphe HTML à partir d'un string
@@ -1841,20 +1991,37 @@ export function tex_nombre(nb){
 * @Auteur Rémi Angot
 */
 export function tex_nombre2(nb){
-	let nombre = tex_nombre(math.format(nb,{notation:'auto',lowerExp:-12,upperExp:12,precision:12}))
+	let nombre = math.format(nb,{notation:'auto',lowerExp:-12,upperExp:12,precision:12}).replace('.',',')
 	let rang_virgule = nombre.indexOf(',')
-	for (let i=rang_virgule+4; i<nombre.length; i+=3){
-		nombre = nombre.substring(0,i)+'\\thickspace '+nombre.substring(i)
-		i+=13 // comme on a ajouté un espace, il faut décaler l'indice de 1
+	let partie_entiere = ''
+	if (rang_virgule!=-1) {
+		partie_entiere=nombre.substring(0,rang_virgule)
 	}
-	if (sortie_html){
-		return nombre
-	} else {
-		return tex_nombre(math.format(nb,{notation:'auto',lowerExp:-12,upperExp:12,precision:12}))
+	else {
+		partie_entiere=nombre
 	}
+	let partie_decimale = ''
+	if (rang_virgule!=-1){
+		partie_decimale=nombre.substring(rang_virgule+1)
+	}
+
+	for (let i=partie_entiere.length-3;i>0;i-=3){
+			partie_entiere=partie_entiere.substring(0,i)+'\\thickspace '+partie_entiere.substring(i)
+	}
+	for (let i=3;i<=partie_decimale.length;i+=3){
+		partie_decimale=partie_decimale.substring(0,i)+'\\thickspace '+partie_decimale.substring(i)
+			i+=12
+	}
+	if (partie_decimale==''){
+		nombre=partie_entiere
+	}
+	else {
+		nombre=partie_entiere+','+partie_decimale
+	}
+	return nombre
 }
 export function tex_nombrec2(expr,precision=8){
-	return math.format(math.evaluate(expr),{notation:'auto',lowerExp:-12,upperExp:12,precision:precision})
+	return math.format(math.evaluate(expr),{notation:'auto',lowerExp:-12,upperExp:12,precision:precision}).replace('.',',')
 }
 export function nombrec2(nb){
 	return math.evaluate(nb)
@@ -1864,9 +2031,13 @@ export function nombrec2(nb){
  * Renvoie un espace insécable pour le mode texte suivant la sorite html ou Latex.
  * @Auteur Jean-Claude Lhote
  */
-export function sp() {
-	if (sortie_html) return `&nbsp`
-	else return `~`
+export function sp(nb=1) {
+	let s=``
+	for (let i=0;i<nb;i++){
+	if (sortie_html) s+=`&nbsp`
+	else s+=`~`
+	}
+	return s
 }
 
 /**
@@ -2009,6 +2180,20 @@ export function couleurAleatoire() {
 	  let couleurs=['black', 'blue', 'brown', 'cyan', 'darkgray', 'gray', 'green', 'lightgray', 'lime', 'magenta', 'olive', 'orange', 'pink', 'purple', 'red', 'teal', 'violet', 'white', 'yellow']
 	  if (fondblanc&&i%19>=17) i+=2
 	  return couleurs[i%19]
+  }
+  export function couleur_en_gris(color){
+	let gris  
+	switch (color){
+		case 'black' :
+			return color
+		case 'white' :
+			return color
+		case 'gray' :
+			return color
+		case 'blue' :
+			
+		
+	} 
   }
 
 /**
@@ -4452,8 +4637,15 @@ export function texte_ou_pas(texte) {
  * @author Sébastien Lozano
  * 
  */
-export function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
+export function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes,arraystretch) {
 	'use strict';
+	let myLatexArraystretch;	
+	if (typeof arraystretch === 'undefined') {
+		myLatexArraystretch = 1
+	} else {
+		myLatexArraystretch = arraystretch
+	};
+
 	// on définit le nombre de colonnes
 	let C = tab_entetes_colonnes.length;
 	// on définit le nombre de lignes
@@ -4463,7 +4655,8 @@ export function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 	if (sortie_html) {
 		tableau_C_L += `$\\def\\arraystretch{2.5}\\begin{array}{|`;
 	} else {
-		tableau_C_L += `$\\begin{array}{|`;
+		tableau_C_L += `$\\renewcommand{\\arraystretch}{${myLatexArraystretch}}\n`; 
+		tableau_C_L += `\\begin{array}{|`;
 	};
 	// on construit la 1ere ligne avec toutes les colonnes
 	for (let k=0;k<C;k++) {
@@ -4507,8 +4700,13 @@ export function tab_C_L(tab_entetes_colonnes,tab_entetes_lignes,tab_lignes) {
 		};
 		tableau_C_L += `\\\\\n`;
 		tableau_C_L += `\\hline\n`;	
-	};	
-	tableau_C_L += `\\end{array}\n$`
+	};		
+	tableau_C_L += `\\end{array}\n`
+	if (sortie_html) {
+		tableau_C_L += `$`;
+	} else {
+		tableau_C_L += `\\renewcommand{\\arraystretch}{1}$\n`;
+	};
 
 	return tableau_C_L;
 };
@@ -7265,4 +7463,53 @@ export function scratchTraductionFr() {
 			"name": "Français",
 			"percentTranslated": 100
 		}})
+}
+export function export_QCM_AMC(tabQCMs) {
+	let tex_QR = ``, type = '', tabQCM
+	let nbBonnes
+	for (let j = 0; j < tabQCMs[1].length; j++) {
+		tabQCM = tabQCMs[1][j].slice(0)
+		nbBonnes=0
+		for (let b of tabQCM[2]) {
+			if (b == 1) nbBonnes++
+		}
+		if (nbBonnes == 1) {
+			type = 'question'
+		}
+		else if (nbBonnes > 1) {
+			type = 'questionmult'
+		}
+		else {
+			console.log('Il faut au moins une bonne réponse dans un QCM !')
+			return false
+		}
+		tex_QR += `\\element{${tabQCMs[0]}}{\\n `
+		tex_QR +=`\\begin{${type}} \\n `
+		tex_QR += `${tabQCM[0]} \\n `
+		tex_QR += `\\begin{reponses} \\n `
+		for (let i = 0; i < tabQCM[1].length; i++) {
+			switch (tabQCM[2][i]) {
+				case 1:
+					if (typeof (tabQCM[1][i]) == 'number') {
+						tex_QR += `\\bonne{\\numprint{${tabQCM[1][i].toString().replace('.', ',')}}}\\n `
+					}
+					else {
+						tex_QR += `\\bonne{${tabQCM[1][i]}}\\n `
+					}
+					break
+				case 0:
+					if (typeof (tabQCM[1][i]) == 'number') {
+						tex_QR += `\\mauvaise{\\numprint{${tabQCM[1][i].toString().replace('.', ',')}}}\\n `
+					}
+					else {
+						tex_QR += `\\mauvaise{${tabQCM[1][i]}}\\n `
+					}
+					break
+			}
+		}
+		tex_QR += `\\end{reponses}\\n `
+		tex_QR += `\\end{${type}}\\n }\\n `
+	}
+	console.log(tex_QR)
+	return tex_QR
 }

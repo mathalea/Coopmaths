@@ -49,7 +49,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
         (function gestionURL() {
             if (liste_des_exercices.length > 0) {
                 let fin_de_l_URL = "";
-                if (sortie_html && !est_diaporama && window.location.pathname.indexOf('exo.html')<0) {
+                if (sortie_html && !est_diaporama && window.location.pathname.indexOf('exo.html')<0 && window.location.pathname.indexOf('beta.html')<0) {
                     fin_de_l_URL += "exercice.html";
                 }
                 fin_de_l_URL += `?ex=${liste_des_exercices[0]}`
@@ -158,7 +158,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 trust: false,
             });
             let besoinMG32 = false;
-              let besoinScratch = false;
+            let besoinScratch = false;
               for (let i = 0; i < liste_des_exercices.length; i++) {
                 if (listeObjetsExercice[i].type_exercice == "MG32") {
                  besoinMG32 = true
@@ -179,7 +179,6 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                       MG32_tracer_toutes_les_figures();
                 })
               }
-
               if (besoinScratch){
                   loadScript("include/scratchblocks-v3.5-min.js")
                   .then(()=>{
@@ -269,7 +268,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 if (listeObjetsExercice[i].type_exercice == "Scratch") {
                  besoinScratch = true
                 }
+               
               }
+              
               if (besoinMG32){
                 loadScript("https://www.mathgraph32.org/js/mtgLoad/mtgLoad.min.js")
                 .then(()=>{
@@ -282,7 +283,6 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                       MG32_tracer_toutes_les_figures();
                 })
               }
-
               if (besoinScratch){
                   loadScript("include/scratchblocks-v3.5-min.js")
                   .then(()=>{
@@ -325,7 +325,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                         listeObjetsExercice[i].liste_packages.forEach(liste_packages.add, liste_packages);
                     }
                 }
-
+ 
                 if ($("#supprimer_correction:checked").val()) {
                     code_LaTeX = codeEnonces;
                 } else {
@@ -334,6 +334,8 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 }
                 $("#message_liste_exercice_vide").hide();
                 $("#cache").show();
+         
+
 
                 // Gestion du nombre de versions
                 if ($("#nombre_de_versions").val() > 1) {
@@ -477,6 +479,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
      *
      */
     function mise_a_jour_de_la_liste_des_exercices() {
+        let besoinXCas = false
         mathalea.listeDesScriptsCharges = [];
         let promises = [];
         for (let i = 0, id; i < liste_des_exercices.length; i++) {
@@ -497,6 +500,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     .then((module) => {
                         if (module) {
                             listeObjetsExercice[i] = new module.default(); // Ajoute l'objet dans la liste des
+                            if (listeObjetsExercice[i].type_exercice == 'XCas') {
+                                besoinXCas = true;
+                            }
                         }
                     })
             );
@@ -547,6 +553,26 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 }
             })
             .then(() => {
+                if (besoinXCas){
+                    // On charge le javascript de XCas
+                    document.getElementById("exercices").innerHTML = `<div class="profile-main-loader">
+                    <div class="loader">
+                      <svg class="circular-loader"viewBox="25 25 50 50" >
+                        <circle class="loader-path" cx="50" cy="50" r="20" fill="none" stroke="#70c542" stroke-width="2" />
+                      </svg>
+                    </div>
+                  </div>`
+                    return loadScript("modules/giacsimple.js")
+
+                }
+            })
+            .then((resolve,reject) => {
+                if (besoinXCas) {
+                    // On vérifie que le code WebAssembly est bien chargé en mémoire et disponible
+                    return checkXCas();
+                    }
+            })
+            .then(() => {
                 mise_a_jour_du_code();
             });
     }
@@ -566,6 +592,18 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
               }
           })
           
+    }
+    const checkXCas = () => {
+        return new Promise((resolve, reject) => {
+                const monInterval = setInterval(() => {
+                    if (typeof(Module)!= 'undefined'){
+                            if (Module.ready == true){
+                                resolve();
+                                clearInterval(monInterval);
+                            }
+                        }
+                }, 500);
+          })
     }
 
     // GESTION DE MG32
@@ -685,7 +723,8 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
         form_spacing_corr = [],
         form_sup = [],
         form_sup2 = [],
-        form_sup3 = []; // Création de tableaux qui recevront les éléments HTML de chaque formulaires
+        form_sup3 = [],
+        form_ModeQCM= []; // Création de tableaux qui recevront les éléments HTML de chaque formulaires
 
     function parametres_exercice(exercice) {
         /* Pour l'exercice i, on rajoute un formulaire avec 5 inputs : 
@@ -718,7 +757,12 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     div_parametres_generaux.innerHTML +=
                         '<div><label for="form_correction_detaillee' + i + '">Correction détaillée : </label> <input id="form_correction_detaillee' + i + '" type="checkbox" ></div>';
                 }
-                if (!exercice[i].nb_questions_modifiable && !exercice[i].correction_detaillee_disponible && !exercice[i].besoin_formulaire_numerique && !exercice[i].besoin_formulaire_texte) {
+                if (exercice[i].QCM_disponible) {
+                    div_parametres_generaux.innerHTML +=
+                        '<div><label for="form_ModeQCM' + i + '">Mode QCM : </label> <input id="form_ModeQCM' + i + '" type="checkbox" ></div>';
+                }
+                
+                if (!exercice[i].nb_questions_modifiable && !exercice[i].correction_detaillee_disponible && !exercice[i].besoin_formulaire_numerique && !exercice[i].besoin_formulaire_texte && !exercice[i].QCM_disponible) {
                     div_parametres_generaux.innerHTML += "<p><em>Cet exercice ne peut pas être paramétré.</em></p>";
                 }
             } else {
@@ -734,6 +778,10 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 if (exercice[i].correction_detaillee_disponible) {
                     div_parametres_generaux.innerHTML +=
                         '<div><label for="form_correction_detaillee' + i + '">Correction détaillée : </label> <input id="form_correction_detaillee' + i + '" type="checkbox" ></div>';
+                }
+                if (exercice[i].QCM_disponible) {
+                    div_parametres_generaux.innerHTML +=
+                        '<div><label for="form_ModeQCM' + i + '">Mode QCM : </label> <input id="form_ModeQCM' + i + '" type="checkbox" ></div>';
                 }
                 if (exercice[i].nb_cols_modifiable) {
                     div_parametres_generaux.innerHTML += '<div><label for="form_nb_cols' + i + '">Nombre de colonnes : </label><input id="form_nb_cols' + i + '" type="number" min="1" max="99"></div>';
@@ -983,6 +1031,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     });
                 }
 
+       
                 // Gestion du nombre de colones
                 if (exercice[i].nb_cols_modifiable) {
                     form_nb_cols[i] = document.getElementById("form_nb_cols" + i);
@@ -1031,6 +1080,19 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 let form_correction_affichee = document.getElementById("supprimer_correction");
                 form_correction_affichee.addEventListener("change", function (e) {
                     // Dès que le statut change, on met à jour
+                    mise_a_jour_du_code();
+                });
+                
+                // Gestion du mode N&B pour les remplissages
+                let form_ModeNB = document.getElementById("ModeNB");
+                form_ModeNB.addEventListener("change", function (e) {
+                    // Dès que le statut change, on met à jour
+                    if ($("#ModeNB:checked").val()) {
+                        mathalea.sortieNB=true;
+                    }
+                    else {
+                        mathalea.sortieNB=false;
+                    }
                     mise_a_jour_du_code();
                 });
 
@@ -1082,6 +1144,16 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 });
             }
 
+         // Gestion du mode QCM
+         if (exercice[i].QCM_disponible) {
+            form_ModeQCM[i] = document.getElementById("form_ModeQCM" + i);
+            form_ModeQCM[i].checked = exercice[i].ModeQCM; // Rempli le formulaire avec la valeur par défaut
+            form_ModeQCM[i].addEventListener("change", function (e) {
+                // Dès que le statut change, on met à jour
+                exercice[i].ModeQCM = e.target.checked;
+                mise_a_jour_du_code();
+            });
+        }
             // Gestion de l'identifiant de la série
             if (exercice.length > 0) {
                 let form_serie = document.getElementById("form_serie");
