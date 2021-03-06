@@ -18,7 +18,6 @@ export default function Multiplier_par_001() {
     this.pas_de_version_HMTL=false // mettre à true si on ne veut pas de l'exercice en ligne
     this.consigne=`Compléter les pointillés.`
   // Voir la Classe Exercice pour une liste exhaustive des propriétés disponibles.
-  this.QCM=['6C30-5',[],this.titre]
   this.QCM_disponible=true
   this.ModeQCM=false;
   this.sup = false; 
@@ -30,7 +29,9 @@ export default function Multiplier_par_001() {
     this.nouvelle_version = function () {
     // la variable numero_de_l_exercice peut être récupérée pour permettre de différentier deux copies d'un même exo
     // Par exemple, pour être certain de ne pas avoir les mêmes noms de points en appelant 2 fois cet exo dans la même page
-  
+ 
+    this.QCM=['6C30-5',[],"Multiplication par 0,1 ; 0,01 ; 0,001 (compléter avec le nombre qui convient)"]
+
     this.liste_questions = [] // tableau contenant la liste des questions 
     this.liste_corrections = []
     let type_de_questions_disponibles
@@ -66,7 +67,7 @@ export default function Multiplier_par_001() {
         resultat=calcul(nombre*10**coef)
         switch (liste_type_de_questions[i]) { // Chaque question peut être d'un type différent, ici 4 cas sont prévus...
           case 1:
-            tabrep=[resultat,calcul(nombre*10**(-coef)),calcul(nombre*10**(coef-1)),calcul(nombre*10**(-coef+1))]
+            tabrep=[`$${tex_nombre2(resultat)}$`,`$${tex_nombre2(calcul(nombre*10**(-coef)))}$`,`$${tex_nombre2(calcul(nombre*10**(coef-1)))}$`,`$${tex_nombre2(calcul(nombre*10**(-coef+1)))}$`]
             tabicone=[1,0,0,0]
             this.QCM[1].push([`Que doit-on écrire à la place des pointillés ? $${tex_nombre2(nombre)} \\times ${tex_nombre2(calcul(10**coef))}~~ = ~~\\ldots\\ldots\\ldots\\ldots$.\\\\ \n Réponses possibles`,
             tabrep,
@@ -75,12 +76,12 @@ export default function Multiplier_par_001() {
             if (this.ModeQCM) {
               texte+=`<br>   Réponses possibles : ${espace}  `
               shuffle2tableaux(tabrep, tabicone);
-              for (let i=0; i<4; i++) {
-                texte += `$\\square\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+              for (let i=0; i<tabrep.length; i++) {
+                texte += `$\\square\\;$ ${tabrep[i]}` + espace ;
                if (tabicone[i]==1) {
-                 texte_corr += `$\\blacksquare\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+                 texte_corr += `$\\blacksquare\\;$ ${tabrep[i]}` + espace ;
                } else {
-                 texte_corr += `$\\square\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+                 texte_corr += `$\\square\\;$ ${tabrep[i]}` + espace ;
                }
              }
              break
@@ -92,7 +93,7 @@ export default function Multiplier_par_001() {
             break;
   
           case 2:
-            tabrep=[calcul(10**coef),calcul(10**(coef-1)),calcul(10**(coef+1)),calcul(10**(-coef))]
+            tabrep=[`$${tex_nombre2(calcul(10**coef))}$`,`$${tex_nombre2(calcul(10**(coef-1)))}$`,`$${tex_nombre2(calcul(10**(coef+1)))}$`,`$${tex_nombre2(calcul(10**(-coef)))}$`]
             tabicone=[1,0,0,0]
             this.QCM[1].push([`Que doit-on écrire à la place des pointillés ? $${tex_nombre2(nombre)} \\times \\ldots\\ldots\\ldots~~ = ~~${tex_nombre2(resultat)}$.\\\\ \n Réponses possibles`,
             tabrep,
@@ -101,12 +102,12 @@ export default function Multiplier_par_001() {
             if (this.ModeQCM) {
               texte+=`<br>    Réponses possibles : ${espace}  `
               shuffle2tableaux(tabrep, tabicone);
-              for (let i=0; i<4; i++) {
-                texte += `$\\square\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+              for (let i=0; i<tabrep.length; i++) {
+                texte += `$\\square\\;$ ${tabrep[i]}` + espace ;
                if (tabicone[i]==1) {
-                 texte_corr += `$\\blacksquare\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+                 texte_corr += `$\\blacksquare\\;$ ${tabrep[i]}` + espace ;
                } else {
-                 texte_corr += `$\\square\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+                 texte_corr += `$\\square\\;$ ${tabrep[i]}` + espace ;
                }
              }
              break
@@ -118,7 +119,7 @@ export default function Multiplier_par_001() {
           break
   
           case 3:
-            tabrep=[nombre,calcul(nombre/10),calcul(nombre*10),calcul(nombre*10**(-coef+1))]
+            tabrep=[`$${tex_nombre2(nombre)}$`,`$${tex_nombre2(calcul(nombre/10))}$`,`$${tex_nombre2(calcul(nombre*10))}$`,`$${tex_nombre2(calcul(nombre*10**(-coef+1)))}$`]
             tabicone=[1,0,0,0]
             this.QCM[1].push([`Que doit-on écrire à la place des pointillés ? $\\ldots\\ldots\\ldots\\ldots \\times ${tex_nombre2(10**coef)}~~ = ~~${tex_nombre2(resultat)}$.\\\\ \n Réponses possibles`,
             tabrep,
@@ -128,12 +129,12 @@ export default function Multiplier_par_001() {
             if (this.ModeQCM) {
               texte+=`<br>    Réponses possibles : ${espace}  `
               shuffle2tableaux(tabrep, tabicone);
-              for (let i=0; i<4; i++) {
-                texte += `$\\square\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+              for (let i=0; i<tabrep.length; i++) {
+                texte += `$\\square\\;$ ${tabrep[i]}` + espace ;
                if (tabicone[i]==1) {
-                 texte_corr += `$\\blacksquare\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+                 texte_corr += `$\\blacksquare\\;$ ${tabrep[i]}` + espace ;
                } else {
-                 texte_corr += `$\\square\\; ${tex_nombre2(tabrep[i])}$` + espace ;
+                 texte_corr += `$\\square\\;$ ${tabrep[i]}` + espace ;
                }
              }
              break
@@ -155,7 +156,6 @@ export default function Multiplier_par_001() {
         cpt++;
       }
       liste_de_question_to_contenu(this); // On envoie l'exercice à la fonction de mise en page
-      this.codeAMC=export_QCM_AMC(this.QCM)
     };
   // Si les variables suivantes sont définies, elles provoquent l'affichage des formulaires des paramètres correspondants
   // Il peuvent être de 3 types : _numerique, _case_a_cocher ou _texte.

@@ -19,7 +19,7 @@ export function liste_de_question_to_contenu(argument) {
 			argument.contenu = tex_consigne(argument.consigne) + `\n\\marginpar{\\footnotesize ${argument.id}}` +  vspace + tex_introduction(argument.introduction) + tex_multicols(tex_enumerate(argument.liste_questions,argument.spacing),argument.nb_cols)
 		}
 	}
-		argument.contenu_correction = tex_introduction(argument.consigne_correction) + tex_multicols(tex_enumerate(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
+		argument.contenu_correction = tex_consigne('') + tex_introduction(argument.consigne_correction) + tex_multicols(tex_enumerate(argument.liste_corrections,argument.spacing_corr),argument.nb_cols_corr)	
 	}
 	
 }
@@ -1788,7 +1788,7 @@ export function tex_enumerate(liste,spacing){
 			result += '\\end{spacing}\n'
 		} 
 	}	
-	return result.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
+	return result.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n').replace(/€/g,'\\euro{}')
 	
 }
 
@@ -1822,7 +1822,7 @@ export function tex_paragraphe(liste,spacing=false){
 	if (spacing>1){
 		result += '\\end{spacing}'
 	} 
-	return result.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
+	return result.replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n').replace(/€/g,'\\euro{}')
 }
 
 /**
@@ -6774,11 +6774,12 @@ export function intro_LaTeX(entete = "Exercices",liste_packages) {
 \\usepackage{textcomp}
 \\usepackage{gensymb}
 \\usepackage{eurosym}
-\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+%\\DeclareUnicodeCharacter{20AC}{\\euro{}} %Incompatible avec XeLaTeX
 \\usepackage{fancyhdr,lastpage}          	
 \\pagestyle{fancy}                      	
 \\usepackage{fancybox}					
 \\usepackage{setspace}	
+\\usepackage{colortbl}
 \\usepackage{xcolor}
 	\\definecolor{nombres}{cmyk}{0,.8,.95,0}
 	\\definecolor{gestion}{cmyk}{.75,1,.11,.12}
@@ -6842,7 +6843,7 @@ ${preambule_personnalise(liste_packages)}
 \\usepackage{textcomp}
 \\usepackage{gensymb}
 \\usepackage{eurosym}
-\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+%\\DeclareUnicodeCharacter{20AC}{\\euro{}} %Incompatible avec XeLaTeX
 \\usepackage{fancyhdr,lastpage}          	
 \\pagestyle{fancy}                      	
 \\usepackage{fancybox}					
@@ -7251,6 +7252,31 @@ export function preambule_personnalise(liste_packages){
 		case 'tkz-euclide' :
 			result += '\\usepackage{tkz-euclide}'
 		break
+		case 'dnb' :
+			result +=`
+			\\usepackage{fourier}
+			\\usepackage[scaled=0.875]{helvet}
+			\\renewcommand{\\ttdefault}{lmtt}
+			\\usepackage[normalem]{ulem}
+			\\usepackage{diagbox}
+			\\usepackage{fancybox}
+			\\usepackage{booktabs}
+			\\usepackage{pifont}
+			\\usepackage{multirow}
+			\\usepackage{dcolumn}
+			\\usepackage{lscape}
+			\\usepackage{graphics,graphicx}
+			\\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+			\\usepackage{scratch}
+			\\renewcommand{\\theenumi}{\\textbf{\\arabic{enumi}}}
+			\\renewcommand{\\labelenumi}{\\textbf{\\theenumi.}}
+			\\renewcommand{\\theenumii}{\\textbf{\\alph{enumii}}}
+			\\renewcommand{\\labelenumii}{\\textbf{\\theenumii.}}
+			\\newcommand{\\vect}[1]{\\overrightarrow{\\,\\mathstrut#1\\,}}
+			\\def\\Oij{$\\left(\\text{O}~;~\\vect{\\imath},~\\vect{\\jmath}\\right)$}
+			\\def\\Oijk{$\\left(\\text{O}~;~\\vect{\\imath},~\\vect{\\jmath},~\\vect{k}\\right)$}
+			\\def\\Ouv{$\\left(\\text{O}~;~\\vect{u},~\\vect{v}\\right)$}`
+		break
 		default:
 		    result += `\\usepackage{${packages}}\n`
 		} 
@@ -7466,12 +7492,30 @@ export function scratchTraductionFr() {
 			"percentTranslated": 100
 		}})
 }
-export function export_QCM_AMC(tabQCMs) {
+
+/**
+ * 
+ * @param {*} tabQCMs tableau de la forme [ref du groupe,tabQCMs,titre du groupe]
+ * chaque tableau de tabQCMs est constitué par 3 éléments :
+ * la question énoncée, le tableau des réponses, le tableau des booléens bon=1 mauvaise=0
+ * Si le troisième tableau ne comporte que des 0, il s'agit d'une question ouverte.
+ * c'est la longueur du tableau des réponses qui définit le nombre de réponses et donc le nombre de booléens nécessaires
+ * Si c'est pour une question ouverte, il n'y aura qu'une réponse et une seule valeur dans le tableau des booléens qui déterminera le nombre de ligne à réserver pour la réponse
+ * exemple : Pour l'exo 3G30 : tabQCMs=['3G30',[texte,[texte_corr],[4]],'Calculer des longueurs avec la trigonométrie']
+ * exemple de type QCM : ​["6C30-3",[["Calcul : $62+23$.\\\\ \n Réponses possibles",[85,1426,8.5,850,86],[1,0,0,0,0]],
+ * 			["Calcul : $80,88+50,34$.\\\\ \n Réponses possibles",[131.22,407150,13.122,1312.2,131.23],[1,0,0,0,0]]],'Opérations avec les nombres décimaux']
+ * c'est la partie centrale qui contient autant de tableaux de QCM [question,tableau des réponses,tableaux des booléens] que de questions dans l'exercice.
+ * chaque tableau est élaboré dans le corps de l'exercice 
+ * La fonction crée la partie préparation des groupes de questions du document AMC.
+ */
+
+ export function export_QCM_AMC(tabQCMs,idExo) {
 	let tex_QR = ``, type = '', tabQCM
 	let nbBonnes,id=0
 	for (let j = 0; j < tabQCMs[1].length; j++) {
 		tabQCM = tabQCMs[1][j].slice(0)
 		nbBonnes=0
+		if (tabQCM[2][0]<2) {
 		for (let b of tabQCM[2]) {
 			if (b == 1) nbBonnes++
 		}
@@ -7481,31 +7525,17 @@ export function export_QCM_AMC(tabQCMs) {
 		else if (nbBonnes > 1) {
 			type = 'questionmult'
 		}
-		else {
-			console.log('Il faut au moins une bonne réponse dans un QCM !')
-			return false
-		}
 		tex_QR += `\\element{${tabQCMs[0]}}{\n `
-		tex_QR +=`	\\begin{${type}}{ques${tabQCMs[0]}-${id}} \n `
+		tex_QR +=`	\\begin{${type}}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo+1)}-${id}} \n `
 		tex_QR += `		${tabQCM[0]} \n `
 		tex_QR += `		\\begin{reponseshoriz} \n `
 		for (let i = 0; i < tabQCM[1].length; i++) {
 			switch (tabQCM[2][i]) {
 				case 1:
-					if (typeof (tabQCM[1][i]) == 'number') {
-						tex_QR += `			\\bonne{$\\numprint{${tabQCM[1][i].toString().replace('.', ',')}}$}\n `
-					}
-					else {
 						tex_QR += `			\\bonne{${tabQCM[1][i]}}\n `
-					}
 					break
 				case 0:
-					if (typeof (tabQCM[1][i]) == 'number') {
-						tex_QR += `			\\mauvaise{$\\numprint{${tabQCM[1][i].toString().replace('.', ',')}}$}\n `
-					}
-					else {
 						tex_QR += `			\\mauvaise{${tabQCM[1][i]}}\n `
-					}
 					break
 			}
 		}
@@ -7513,10 +7543,55 @@ export function export_QCM_AMC(tabQCMs) {
 		tex_QR += `	\\end{${type}}\n }\n `
 		id++
 	}
+	else { // question ouverte
+		tex_QR += `\\element{${tabQCMs[0]}}{\n `
+		tex_QR +=`	\\begin{question}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo+1)}-${id}} \n `
+		tex_QR += `		${tabQCM[0]} \n `
+		tex_QR += `\\explain{${tabQCM[1][0]}}\n`
+		tex_QR +=`\\AMCOpen{lines=${tabQCM[2][0]}}{\\wrongchoice[F]{f}\\scoring{0}\\wrongchoice[P]{p}\\scoring{1}\\correctchoice[J]{j}\\scoring{2}}\n`
+		tex_QR +=`\\end{question}\n }\n`
+		id++
+	}
+}
 	return [tex_QR,tabQCMs[0],tabQCMs[1].length,tabQCMs[2]]
 }
 
-export function Creer_document_AMC(questions,nb_questions=[],{nb_exemplaires=10,matiere='Mathématiques',titre='Evaluation'}) {
+/**
+ * @Auteur Jean-Claude Lhote
+ * Fonction qui crée un document pour AMC (pour le compiler, le package automultiplechoice.sty doit être présent)
+ * 
+ *  questions est un tableau d'éléments de type codeAMC
+ * codeAMC est un tableau comme celui retourné par la fonction export_QCM_AMC ci-dessus
+ * codeAMC[0] est le code Latex des \element{} du groupe de questions
+ * codeAMC[1] est le nom du groupe
+ * codeAMC[2] est le nombre d'éléments du groupe
+ * codeAMC[3] est le titre affiché en commun pour toutes les questions du groupe. 
+ * 
+ * nb_questions est un tableau pour préciser le nombre de questions à prendre dans chaque groupe pour constituer une copie
+ * si il est indéfini, toutes les questions du groupe seront posées.
+ * nb_exemplaire est le nombre de copie à générer
+ */
+export function Creer_document_AMC(questions,nb_questions=[],{nb_exemplaires=1,matiere='Mathématiques',titre='Evaluation'}) {
+	// Attention questions est maintenant un tableau de tous les this.QCM des exos
+	let idExo=0,code
+	let groupeDeQuestion=[],tex_questions=[[]],titre_question=[]
+	for (let qcm of questions){
+		code=export_QCM_AMC(qcm,idExo)
+		idExo++
+		console.log('exercice ',idExo,'this.QCM = ',qcm)
+		if (groupeDeQuestion.indexOf(code[1])==-1){ //si le groupe n'existe pas
+			groupeDeQuestion.push(code[1])
+			tex_questions[groupeDeQuestion.indexOf(code[1])]=code[0]
+			nb_questions[groupeDeQuestion.indexOf(code[1])]=code[2]
+			titre_question[groupeDeQuestion.indexOf(code[1])]=code[3]
+		}
+		else {
+			tex_questions[groupeDeQuestion.indexOf(code[1])]+=code[0]
+			nb_questions[groupeDeQuestion.indexOf(code[1])]+=code[2]
+		}
+		
+	}
+	console.log(groupeDeQuestion,tex_questions,nb_questions)
 	let entete_copie =
 	`%%% fabrication des copies 
 	\\exemplaire{${nb_exemplaires}}{ %%% debut de l’en-tête des copies : 
@@ -7548,7 +7623,7 @@ export function Creer_document_AMC(questions,nb_questions=[],{nb_exemplaires=10,
 \\usepackage{textcomp}
 \\usepackage{gensymb}
 \\usepackage{eurosym}
-\\DeclareUnicodeCharacter{20AC}{\\euro{}}
+%\\DeclareUnicodeCharacter{20AC}{\\euro{}} %Incompatible avec XeLaTeX
 \\usepackage{fancyhdr,lastpage}          	
 \\pagestyle{fancy}                      	
 \\usepackage{fancybox}					
@@ -7570,24 +7645,26 @@ shapes.callouts, shapes.multipart, shapes.gates.logic.US,shapes.gates.logic.IEC,
 	%%% préparation des groupes 
 	\\setdefaultgroupmode{withoutreplacement}\n`;
 	
-	for (let i=0;i<questions.length;i++){
-		code_latex+=questions[i][0]
+	for (let g of groupeDeQuestion){
+		let i=groupeDeQuestion.indexOf(g)
+		code_latex+=tex_questions[i]
 	}
 	code_latex+='\n'+entete_copie
-	for (let i=0;i<questions.length;i++){
+	for (let g of groupeDeQuestion){
+		let i=groupeDeQuestion.indexOf(g)
 		code_latex+=`
 	\\begin{center}
 		\\hrule
 		\\vspace{2mm}
-		\\bf\\Large ${questions[i][3]}
+		\\bf\\Large ${titre_question[i]}
 		\\vspace{1mm}
 		\\hrule
 	\\end{center}\n`
 		if (nb_questions[i]>0){
-			code_latex+=`\\restituegroupe[${nb_questions[i]}]{${questions[i][1]}}\n\n`
+			code_latex+=`\\restituegroupe[${nb_questions[i]}]{${g}}\n\n`
 		}
 		else {
-			code_latex+=`\\restituegroupe{${questions[i][1]}}\n\n`
+			code_latex+=`\\restituegroupe{${g}}\n\n`
 		}
 	}
 	code_latex+=`}\n \\end{document}\n`

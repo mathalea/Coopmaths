@@ -24,10 +24,10 @@ export default function Exercice_additionner_ou_soustraire_des_fractions_5e(max 
 	this.nb_questions = 5;
 	this.nb_cols_corr = 1;
 	this.sup2 = 3;
-	this.QCM=['5N20',[],this.titre]
 	this.QCM_disponible=true
 	this.ModeQCM=false;
 	this.nouvelle_version = function () {
+		this.QCM=['5N20',[],"Additionner ou soustraire deux fractions (dénominateurs multiples)"]
 		if (this.level==6) this.QCM[0]='6C23'
 		this.liste_questions = []; // Liste de questions
 		this.liste_corrections = []; // Liste de questions corrigées
@@ -91,11 +91,11 @@ export default function Exercice_additionner_ou_soustraire_des_fractions_5e(max 
 					texte+=`<br><br>Réponses possibles : ${espace}  `
 					shuffle2tableaux(tabrep, tabicone);
 					for (let i=0; i<4; i++) {
-					  texte += `$\\square\\; ${tabrep[i]}$` + espace ;
+					  texte += `$\\square\\;$ ${tabrep[i]}` + espace ;
 					 if (tabicone[i]==1) {
-					   texte_corr += `$\\blacksquare\\; ${tabrep[i]}$` + espace ;
+					   texte_corr += `$\\blacksquare\\;$ ${tabrep[i]}` + espace ;
 					 } else {
-					   texte_corr += `$\\square\\; ${tabrep[i]}$` + espace ;
+					   texte_corr += `$\\square\\;$ ${tabrep[i]}` + espace ;
 					 }
 				   }
 				}else {
@@ -140,11 +140,11 @@ export default function Exercice_additionner_ou_soustraire_des_fractions_5e(max 
 						texte+=`<br><br>Réponses possibles : ${espace}  `
 						shuffle2tableaux(tabrep, tabicone);
 						for (let i=0; i<4; i++) {
-						  texte += `$\\square\\; ${tabrep[i]}$` + espace ;
+						  texte += `$\\square\\;$ ${tabrep[i]}` + espace ;
 						 if (tabicone[i]==1) {
-						   texte_corr += `$\\blacksquare\\; ${tabrep[i]}$` + espace ;
+						   texte_corr += `$\\blacksquare\\;$ ${tabrep[i]}` + espace ;
 						 } else {
-						   texte_corr += `$\\square\\; ${tabrep[i]}$` + espace ;
+						   texte_corr += `$\\square\\;$ ${tabrep[i]}` + espace ;
 						 }
 					   }
 					}
@@ -160,11 +160,11 @@ export default function Exercice_additionner_ou_soustraire_des_fractions_5e(max 
 						texte+=`<br>	Réponses possibles : ${espace}  `
 						shuffle2tableaux(tabrep, tabicone);
 						for (let i=0; i<4; i++) {
-						  texte += `$\\square\\; ${tabrep[i]}$` + espace ;
+						  texte += `$\\square\\;$ ${tabrep[i]}` + espace ;
 						 if (tabicone[i]==1) {
-						   texte_corr += `$\\blacksquare\\; ${tabrep[i]}$` + espace ;
+						   texte_corr += `$\\blacksquare\\;$ ${tabrep[i]}` + espace ;
 						 } else {
-						   texte_corr += `$\\square\\; ${tabrep[i]}$` + espace ;
+						   texte_corr += `$\\square\\;$ ${tabrep[i]}` + espace ;
 						 }
 					   }
 					}
@@ -191,7 +191,6 @@ export default function Exercice_additionner_ou_soustraire_des_fractions_5e(max 
 			this.liste_corrections.push(texte_corr);
 		}
 		liste_de_question_to_contenu(this); //Espacement de 2 em entre chaque questions.
-		this.codeAMC=export_QCM_AMC(this.QCM)
 	};
 	this.besoin_formulaire_numerique = ['Valeur maximale du coefficient multiplicateur', 99999];
 	this.besoin_formulaire2_numerique = ['Types de calculs ', 3, '1 : Additions\n2 : Soustractions\n3 : Additions et soustractions'];
