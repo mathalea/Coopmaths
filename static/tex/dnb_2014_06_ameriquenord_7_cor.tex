@@ -1,0 +1,78 @@
+\textbf{\textsc{Exercice 7} \hfill 5 points}
+
+\medskip
+
+On étudie plus précisément le remplissage d'une écluse pour faire passer une péniche de l'amont vers l'aval. 
+
+\textbf{Principe :} Il s'agit de faire monter le niveau de l'eau dans l'écluse jusqu'au niveau du canal en amont afin que l'on puisse ensuite faire passer la péniche dans l'écluse. 
+
+Ensuite, l'écluse se vide et le niveau descend à celui du canal en aval. La péniche peut sortir de l'écluse et poursuivre dans le canal en aval. 
+
+\begin{center}
+\psset{unit=0.75cm}
+\begin{pspicture}(15,9)
+%\psgrid
+\def\vague{\pscurve(0,0.2)(0.25,0.25)(0.5,0)(0.75,-0.05)(1,-0.2)}
+\psframe*(0.5,3.7)(5.5,3.8)
+\psframe[fillstyle=solid,fillcolor=lightgray](5.5,1.2)(6,6)
+\psframe[fillstyle=solid,fillcolor=lightgray](10.6,1.2)(11.1,6)
+\psframe*(5.5,1.1)(15,1.2)
+\psline[linewidth=1.25pt]{<->}(2.7,1.2)(2.7,5.4)
+\psline[linewidth=1.25pt]{<->}(4.9,1.2)(4.9,2.3)\uput[l](4.9,1.7){$x$}
+\psline(0.9,5.45)(0.5,6.1)(5.1,6.1)(4.7,5.4)%bateau
+\psline(0.8,6.1)(0.8,6.5)(2.45,6.5)(2.6,6.1)%haut du bateau
+\pscurve(0,5.4)(2,5.5)(4,5.4)(5.6,5.5)%ligne sous bateau
+\pscurve(6,2.3)(8,2.2)(10,2.3)(12,2.2)(14,2.35)(15,2.3)% mer sous vantelles
+\psframe[fillstyle=solid,fillcolor=lightgray](10.6,1.2)(11.1,6)
+\psframe[fillstyle=solid,fillcolor=gray](5.3,4)(6.2,4.5)
+\psframe[fillstyle=solid,fillcolor=gray](10.5,1.6)(11.3,2)
+\psline(5.6,7.2)(5.6,8)
+\psline(11.1,7.2)(11.1,8)
+\psline{<->}(5.6,7.7)(11.1,7.7)
+\psline{->}(2.7,1.2)(2.7,5.4)\uput[r](2.7,3.3){$h$}
+\rput{30}(1.3,4.5){\vague}\rput{30}(3.3,4.5){\vague}\rput{30}(1.3,4){\vague}
+\rput{30}(4.3,4){\vague}
+\rput(2.6,8.5){Amont} 
+\rput(8.2,8){Écluse} 
+\rput(13.2,8){Aval} 
+\rput(14.3,6.8){Portes}\psline{->}(14.3,6.6)(5.8,5.3)\psline{->}(14.3,6.6)(10.8,5.3) 
+\rput(9.6,0.1){radier}\psline{->}(9,0.3)(8,1.1)  
+\rput(13.8,3.5){vantelles}\psline{->}(12.9,3.3)(5.8,4.3)\psline{->}(12.9,3.3)(11,1.8)
+\multido{\r=1.0+0.6}{6}{\rput(\r,5.8){\pscircle(0,0){3pt}}}
+\rput{30}(6.3,1.8){\vague} \rput{30}(9,1.8){\vague}\rput{30}(13,1.8){\vague}
+\rput{30}(8,1.2){\vague}\rput{30}(12.3,1.2){\vague}
+\psline[linestyle=dotted](2,1.2)(5.6,1.2)
+\psline[linestyle=dotted](4.7,2.3)(5.5,2.3)
+\end{pspicture}
+\end{center}
+
+Toutes les mesures de longueur sont exprimées en mètres. 
+
+On notera $h$ la hauteur du niveau de l'eau en amont et $x$ la hauteur du niveau de l'eau dans l'écluse. 
+
+Ces hauteurs sont mesurées à partir du radier (fond) de l'écluse. (voir schéma ci-dessus). Lorsque la péniche se présente à l'écluse, on a : $h = 4,3$~m et $x = 1,8$~m.
+ 
+La vitesse de l'eau s'écoulant par la vantelle (vanne) est donnée par la formule suivante : 
+
+\[v = \sqrt{2g(h - x)}\]
+ 
+où $g = 9,81$ (accélération en mètre par seconde au carré noté m.s$^{-2}$) et $v$ est la vitesse (en mètre par seconde noté m.s$^{-1}$) 
+
+\medskip
+ 
+\begin{enumerate}
+\item \textit{Calculons l'arrondi à l'unité de la vitesse de l'eau s'écoulant par la vantelle à l'instant de son ouverture :}
+
+ $v = \sqrt{2\times 9,81~\text{m.s}^{-2}\times(4,3~\text{m} - 1,8~\text{m})}=\sqrt{49,05~\text{m}^ 2~\text{s}^{-2}}$\fbox{$\approx 7~\text{m.s}^{-1}$} arrondi à l'unité
+
+%(On considère l'ouverture comme étant instantanée). 
+\item \textit{La vitesse d'écoulement de l'eau sera nulle lorsque $x=h$.} 
+
+\textit{Dans ce cas, le niveau de l'eau dans l'écluse est le m\^eme qu'en amont.}
+\item Le graphique donné en annexe 2 représente la vitesse d'écoulement de l'eau par la vantelle en fonction du niveau $x$ de l'eau dans l'écluse. 
+
+\textit{Par lecture graphique, la vitesse d'écoulement est de \fbox{$4$ m/s} lorsque la hauteur de l'eau dans l'écluse est de $3,4$~m} (voir les pointillés*)\flushright{\scriptsize *d'où la celèbre maxime : <<Point de pointillés, point de point y est !>>[NDLR]}
+\end{enumerate}
+ 
+\vspace{0,5cm}
+

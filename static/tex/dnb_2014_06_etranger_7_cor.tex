@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 7} \hfill 7 points}
+
+\medskip
+ 
+Il existe différentes unités de mesure de la température : en France on utilise le degré Celsius (\degres C), aux États-Unis on utilise le degré Fahrenheit (\degres~F).
+
+\medskip
+ 
+Pour passer des degrés Celsius aux degrés Fahrenheit, on multiplie le nombre de départ par $1,8$ et on ajoute 32 au résultat.
+
+\medskip
+ 
+\begin{enumerate}
+\item Qu'indiquerait un thermomètre en degrés Fahrenheit si on le plongeait dans une casserole d'eau qui gèle ? On rappelle que l'eau gèle à 0~\degres C. 
+
+\textit{Il indiquerait} $1,8\times 0+32=32$ \degres~F
+\item Qu'indiquerait un thermomètre en degrés Celsius si on le plongeait dans une 
+casserole d'eau portée à $212$~\degres F ? Que se passe t-il ?
+
+\textit{Il indiquerait} $\dfrac{212-32}{1,8}=100$\degres~C. L'eau bout.
+\item 
+	\begin{enumerate}
+		\item \textit{Si l'on note $x$ la température en degré Celsius et $f(x)$ la température en degré Fahrenheit, alors} \fbox{$f(x)=1,8x+32$}
+		\item \textit{C'est une fonction \fbox{affine}}
+		\item \textit{L'image de $5$ par la fonction $f$ est} $f(5)=1,8\times 5+32=$\fbox{$41$} 
+		\item \textit{L'antécédent $x$ de $5$ par la fonction $f$ est la solution de l'équation $18x+32=5$ soit} $x=\dfrac{5-32}{1,8}=$\fbox{$-15$}
+		\item \textit{En terme de conversion de température la relation $f(10) =$\fbox{$ 50$} signifie que $10$\degres~C correspondent à $50$\degres~F.}
+	\end{enumerate} 
+\end{enumerate} 
+\end{document}\end{document}

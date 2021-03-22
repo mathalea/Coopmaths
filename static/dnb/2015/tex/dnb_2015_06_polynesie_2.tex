@@ -1,0 +1,55 @@
+
+\medskip
+
+\begin{enumerate}
+\item Le graphique ci-dessous donne le niveau de bruit (en décibels) d'une tondeuse à gazon en marche, en fonction de la distance (en mètres) entre la tondeuse et l'endroit où s'effectue la mesure.
+\begin{center}
+\psset{unit=0.07cm}
+\begin{pspicture}(-8,-5)(150,95)
+\multido{\n=0+10}{16}{\psline[linestyle=dotted,linewidth=0.2pt](\n,0)(\n,95)}
+\multido{\n=0+10}{10}{\psline[linestyle=dotted,linewidth=0.2pt](0,\n)(150,\n)}
+\psaxes[linewidth=1.25pt,Dx=10,Dy=10]{->}(0,0)(0,0)(150,95)
+\uput[r](0,92){\scriptsize Niveau de bruit (en décibels)}
+\uput[u](135,0){\scriptsize  Distance (en mètres)}
+\psplot[plotpoints=3000,linewidth=1.25pt,linecolor=blue]{1}{150}{2.71828 x 0.035 mul neg exp 50 mul 45 add}
+\end{pspicture}
+\end{center}
+
+En utilisant ce graphique, répondre aux deux questions suivantes. \emph{Aucune justification n'est attendue.}
+
+	\begin{enumerate}
+		\item Quel est le niveau de bruit à une distance de $100$ mètres de la tondeuse?
+		\item À quelle distance de la tondeuse se trouve-t-on quand le niveau de bruit est égal à $60$~décibels ?
+	\end{enumerate}
+\item  Voici les graphiques obtenus pour deux machines très bruyantes d'une usine .
+
+\begin{center}
+\begin{tabularx}{\linewidth}{X X}
+\psset{xunit=0.14cm,yunit=0.07cm}
+\begin{pspicture}(-5,-5)(35,105)
+\uput[r](0,102){\scriptsize Niveau de bruit (en décibels)}
+\uput[u](25,0){\scriptsize  Distance (en mètres)}
+\rput(17.5,35){Machine A}
+\psaxes[linewidth=1.25pt,Dx=5,Dy=10,labelFontSize=\scriptstyle]{->}(0,0)(0,0)(35,105)
+\multido{\n=0+5}{8}{\psline[linestyle=dotted,linewidth=0.2pt](\n,0)(\n,100)}
+\multido{\n=0+10}{11}{\psline[linestyle=dotted,linewidth=0.2pt](0,\n)(35,\n)}
+\psplot[plotpoints=3000,linewidth=1.25pt]{1}{35}{2.71828 x 0.11 mul neg exp 40 mul 65 add}
+	\end{pspicture}&\psset{xunit=0.14cm,yunit=0.07cm}
+\begin{pspicture}(-5,-5)(35,105)
+\uput[r](0,102){\scriptsize Niveau de bruit (en décibels)}
+\uput[u](25,0){\scriptsize  Distance (en mètres)}
+\rput(17.5,35){Machine B}
+\multido{\n=0+5}{8}{\psline[linestyle=dotted,linewidth=0.2pt](\n,0)(\n,100)}
+\multido{\n=0+10}{11}{\psline[linestyle=dotted,linewidth=0.2pt](0,\n)(35,\n)}
+\psaxes[linewidth=1.25pt,Dx=5,Dy=10,labelFontSize=\scriptstyle]{->}(0,0)(0,0)(35,105)
+\psplot[plotpoints=3000,linewidth=1.25pt]{1}{35}{2.71828 x 0.1 mul neg exp 28 mul 77 add}	
+\end{pspicture}
+\end{tabularx}
+\end{center}
+Dans l'usine, le port d'un casque antibruit est obligatoire à partir d'un \textbf{même niveau de bruit}.
+
+Pour la machine A, il est obligatoire quand on se trouve à moins de $5$~mètres de la machine. En utilisant ces graphiques, déterminer cette distance pour la machine B.
+ \end{enumerate}
+
+\vspace{0,5cm}
+

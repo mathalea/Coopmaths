@@ -1,0 +1,54 @@
+
+\medskip
+
+Avec un logiciel de géométrie, on exécute le programme ci-dessous.
+
+\medskip
+
+\parbox{0.45\linewidth}{Programme de construction :}\hfill\parbox{0.53\linewidth}{\qquad \qquad Figure obtenue:}
+
+\parbox{0.45\linewidth}{$\bullet~~$ Construire un carré ABCD ;
+
+$\bullet~~$ Tracer le cercle de centre A et de rayon [AC] ;
+
+$\bullet~~$Placer le point E à l'intersection du cercle et
+de la demi-droite [AB) ;
+
+$\bullet~~$Construire un carré DEFG.}\hfill
+\parbox{0.53\linewidth}{ 
+\psset{unit=1cm}
+\begin{pspicture}(-2.2,-2)(4.2,4.2)
+%\psgrid
+\psframe[fillstyle=solid,fillcolor=lightgray](1.414,1.414)
+\rput{55.5}(2,0){\psframe[fillstyle=solid,fillcolor=lightgray](0,0)(2.4495,2.4495)}
+\psframe[fillstyle=solid,fillcolor=lightgray](1.414,1.414)
+\pscircle(0,0){2}
+\pspolygon[fillstyle=solid,fillcolor=gray](0,1.414)(1.414,0.414)(1.414,1.414)
+\psline(4.2,0)
+
+\uput[dl](0,0){A} \uput[d](1.414,0){B} \uput[ur](1.414,1.414){C} 
+\uput[ul](0,1.414){D} \uput[dr](2,0){E} \uput[r](3.4,2){F} 
+\uput[u](1.414,3.4){G}
+\rput(1.1,4){} 
+\end{pspicture}
+}
+
+\begin{enumerate}
+\item Sur la copie, réaliser la construction avec AB $=3$~cm.
+\item Dans cette question, AB $= 10~$cm.
+	\begin{enumerate}
+		\item Montrer que AC $= \sqrt{200}$~cm.
+		\item Expliquer pourquoi AE $= \sqrt{200}$~cm.
+		\item Montrer que l'aire du carré DEFG est le triple de l'aire du carré ABCD.
+	\end{enumerate}
+\item On admet pour cette question que pour n'importe quelle longueur du côté [AB],
+l'aire du carré DEFG est toujours le triple de l'aire du carré ABCD.
+	
+En exécutant ce programme de construction, on souhaite obtenir un carré DEFG ayant
+une aire de 48 cm$^2$.
+	
+Quelle longueur AB faut-il choisir au départ ?
+\end{enumerate}
+
+\vspace{0,5cm}
+

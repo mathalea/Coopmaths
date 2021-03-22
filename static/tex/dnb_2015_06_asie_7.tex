@@ -1,0 +1,105 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 7 \hfill 5 points}
+
+\medskip
+
+\parbox{0.5\linewidth}{Un aquarium a la forme d'une sphère de 10~cm de
+rayon, coupée en sa partie haute: c'est une \og calotte
+sphérique \fg.
+
+La hauteur totale de l'aquarium est 18 cm.}\hfill
+\parbox{0.47\linewidth}{\psset{unit=0.9cm}
+\begin{pspicture*}(0,-0.1)(5.6,4.1)
+%\psgrid
+\psarc(2.5,2.5){2.5}{144}{36}
+\psline(0.45,4)(4.55,4)
+\psline{<->}(2.5,2.5)(5,2.5)\uput[u](3.75,2.5){$r$}
+\psline{<->}(5.3,0)(5.3,4)\rput{90}(5.45,2){$h$}
+\end{pspicture*}}
+
+\medskip
+
+\begin{enumerate}
+\item Le volume d'une calotte sphérique est donné par la formule :
+
+\[V \dfrac{\pi}{3} \times h^2 \times (3r - h)\]
+
+où $r$ est le rayon de la sphère et $h$ est la hauteur de la calotte sphérique.
+	\begin{enumerate}
+		\item Prouver que la valeur exacte du volume en cm$^3$ de l'aquarium est $\np{1296}\pi$.
+		\item Donner la valeur approchée du volume de l'aquarium au litre près.
+	\end{enumerate}
+\item On remplit cet aquarium à ras bord, puis on verse la totalité de son contenu dans
+un autre aquarium parallélépipédique. La base du nouvel aquarium est un rectangle
+de $15$~cm par $20$~cm.
+
+Déterminer la hauteur atteinte par l'eau (on arrondira au cm).
+
+* Rappel: 1 $\ell$ = 1 dm$^3 = \np{1000}$ cm$^3$
+\end{enumerate}
+\end{document}\end{document}

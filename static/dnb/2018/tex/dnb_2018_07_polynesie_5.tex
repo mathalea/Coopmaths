@@ -1,0 +1,153 @@
+
+\medskip
+
+\textbf{Les deux parties de cet exercice sont indépendantes.}
+
+\medskip
+
+Mario, qui dirige un centre de plongée sous-marine en pleine expansion, décide de
+construire un bâtiment pour accueillir ses clients lors de la pause déjeuner. Celui-ci sera
+constitué d'un rez-de-chaussée climatisé servant de réfectoire et d'un étage non climatisé
+qui pourra être utilisé pour le stockage du matériel de plongée.
+
+Pour finir d'établir son budget, il ne lui reste plus qu'à choisir un modèle de climatisation adapté et à calculer la quantité nécessaire de tuiles pour couvrir le toit de sa construction qu'il a schématisé ci-dessous.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Document 1 :} Croquis réalisé par Mario.\\
+
+\begin{center}
+\psset{unit=0.9cm}
+\begin{pspicture}(16,10)
+%\psgrid
+\psframe[linewidth=1.25pt](4.5,1)(9.5,4)%IKDF
+\psframe(4.5,1)(4.7,1.2)\psframe(9.5,1)(9.3,1.2)
+\psframe(4.5,4)(4.7,3.8)\psframe(9.5,4)(9.3,3.8)
+\psline[linewidth=1.25pt](9.5,1)(15.5,3.1)(15.5,6.1)(9.5,4)%KLCD
+%\psline[linewidth=1.25pt](15.5,6.1)
+\psline[linewidth=1.25pt](7,4)(7,7.9)(13,10)(15.5,6.1)%EABC
+\psline[linewidth=1.25pt](4.5,4)(7,7.9)(9.5,4)%FAD
+\psframe(6,1)(8,2.8) \psline(7,1)(7,2.8)
+\psline(12.5,2.05)(12.5,3.85)
+\psarc(7,7.9){0.5}{-90}{-60}\rput(7.3,7){38\degres}
+\psarc(7,7.9){0.5}{-120}{-90}\rput(6.7,7){38\degres}
+\rput(2,2.4){FI = DK = CL = 2,70~m}
+\rput(7,0.3){IK = FD = 5,06~m}
+\psline{<->}(4.5,0.8)(9.5,0.8)
+\psline{<->}(4.2,1)(4.2,4)
+\psline{<->}(9.7,0.8)(15.6,2.9)
+\psline(11.8,1.8)(11.8,3.6)(13.2,4.1)(13.2,2.3)
+\rput{19}(12.5,1.5){KL = DC = AB = 13~m}
+\uput[u](7,7.9){A} \uput[u](13,10){B} \uput[ur](15.5,6.1){C} \uput[dr](9.5,4){D} 
+\uput[ul](4.5,4){F} \uput[dl](4.5,1){I} \uput[dr](9.45,1){K} \uput[r](15.5,3.1){L}
+\uput[d](7,4){E}\psframe(7,4)(7.2,4.2)
+\psline(5.7,3.9)(5.8,4.1)\psline(5.8,3.9)(5.9,4.1)
+\psline(8.2,3.9)(8.3,4.1)\psline(8.3,3.9)(8.4,4.1)
+\psline(7.15,7.7)(7.35,7.8)(7.25,8)
+\end{pspicture}
+\end{center}
+\smallskip
+
+Le croquis n'est pas réalisé à l'échelle.
+
+Les deux pentes (ou versants) de la toiture forment un angle $\widehat{\text{FAD}}$ de mesure $76$\degres{}  qui est partagé en deux parties égales de $38$\degres.\\ \hline
+\end{tabularx}
+\end{center}
+\smallskip
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Document 2 :} Tuiles plates choisies par Mario pour recouvrir son toit.\\
+
+\parbox{0.5\linewidth}{\psset{unit=1cm}
+\begin{center}\begin{pspicture}(4,3.9)
+\pspolygon[fillstyle=solid,fillcolor=lightgray](0,0)(0,3.8)(2.8,3.9)(3.7,2.2)(3.15,2.18)(3.5,1.4)(3.05,1.35)(3.4,0.5)(0.4,0)
+\psline[linewidth=1.25pt](2,3.9)(2.8,2.1)
+\psline[linewidth=1.25pt](1,3.85)(1.8,2.)
+\psline[linewidth=1.25pt](0,3.4)(0.65,1.9)
+\psline[linewidth=1.25pt](0,1.9)(3.7,2.2)
+\psline[linewidth=1.25pt](2.3,2.1)(2.6,1.3)
+\psline[linewidth=1.25pt](1.15,1.95)(1.5,1.1)
+\psline[linewidth=1.25pt](0,1.65)(0.3,0.9)
+\psline[linewidth=1.25pt](2,1.2)(2.35,0.4)
+\psline[linewidth=1.25pt](0.9,1)(1.2,0.2)
+\psline[linewidth=1.25pt](3.5,1.4)(0,0.9)
+\psline[linewidth=1.25pt](3.4,0.5)(0.35,0)
+%\psgrid
+\end{pspicture}
+\end{center}}\hfill
+\parbox{0.45\linewidth}{
+Prévoir $26$ tuiles par m$^2$
+
+\medskip
+
+Prix : $0,65$ euro l'unité.}\\ \hline
+\end{tabularx}
+\end{center}
+
+
+\begin{enumerate}
+\item \textbf{PARTIE 1 :} Calcul du budget correspondant aux tuiles.
+\smallskip
+
+	\begin{enumerate}
+		\item Calculer AD. \emph{Vous donnerez le résultat arrondi au centimètre près}.
+		\item Calculer AE. \emph{Vous donnerez le résultat arrondi au centimètre près}.
+		\item En déduire le prix des tuiles nécessaires à la couverture des deux pentes du toit.
+ 	\end{enumerate}
+\item  \textbf{PARTIE 2 :} Choix d'un climatiseur adapté.
+\smallskip
+
+À l'aide des documents, faire un choix de climatiseur raisonné, adapté et le moins cher
+possible pour climatiser le rez-de-chaussée du bâtiment, c'est dire à dire le réfectoire.
+	
+\begin{center}
+\begin{tabularx}{\linewidth}{|X|}\hline	
+\textbf{Document 3 :} Comment choisir un climatiseur ?\\[4pt]
+Étape 1 : Connaître la puissance frigorifique nécessaire.\\[4pt]
+
+Celle-ci dépend du volume des pièces à refroidir.
+
+La puissance de froid s'exprime en BTU qui est une unité de mesure frigorifique.
+
+Le tableau ci-dessous fait la correspondance entre le volume du bâtiment à refroidir et la
+puissance en BTU nécessaire.
+
+\begin{center}
+\begin{tabular}{|m{2cm}|c|}\hline
+Volume 		&Puissance frigorifique\\ \hline
+100 m$^3$ 	&\np{12000} BTU\\ \hline
+150 m$^3$ 	&\np{18000} BTU\\ \hline
+250 m$^3$ 	&\np{25000} BTU\\ \hline
+300 m$^3$ 	&\np{33000} BTU\\ \hline
+350 m$^3$ 	&\np{41000} BTU\\ \hline
+400 m$^3$ 	&\np{49000} BTU\\ \hline
+450 m$^3$ 	&\np{56000} BTU\\ \hline
+500 m$^3$ 	&\np{62000} BTU\\ \hline
+\multicolumn{2}{r}{\hfill \footnotesize \emph{BTU : British Thermal Unit}}
+\end{tabular}
+\end{center}
+
+\medskip
+
+Étape 2 : Choisir le climatiseur le plus adapté.\\[4pt]
+
+\begin{center}
+\begin{tabular}{|m{3cm}|*{3}{>{\centering \arraybackslash}c|}}\hline
+Modèle de différentes 
+marques				&Type			& Puissance frigorifique&Prix T.T.C. en Euros\\ \hline
+Freez 4000 			&monobloc 		&\np{15000} BTU &880\\ \hline
+Freez 8000 			&monobloc 		&\np{22000} BTU &\np{1050}\\ \hline
+Air 10 pingouin 	&Bi-split 		&\np{27000} BTU &990\\ \hline
+Air 100 phoque 		&Bi-split 		&\np{39000} BTU &\np{1390}\\ \hline
+Pôle Nord 500 		&Quadri-split	&\np{48000} BTU &\np{1180}\\ \hline
+Laponglace			&Quadri-split 	&\np{50000} BTU &\np{2300}\\ \hline
+Maxi Everest $+$	&Quadri-split 	&\np{53000} BTU &\np{1990}\\ \hline
+Froid Extrême 2000	&Inverter 		&\np{55000} BTU &\np{2650}\\ \hline
+\end{tabular}
+\end{center}\\ \hline
+\end{tabularx}
+\end{center}
+\end{enumerate}
+
+

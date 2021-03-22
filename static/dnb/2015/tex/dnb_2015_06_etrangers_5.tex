@@ -1,0 +1,63 @@
+
+\medskip
+
+Il existe différentes unités de mesure de la température. En France, on utilise le degré
+Celsius (\degres C), aux États-Unis on utilise le degré Fahrenheit (\degres F). Voici deux représentations de cette correspondance :
+
+\medskip
+
+\parbox{0.3\linewidth}{\psset{unit=0.9cm}
+\begin{pspicture}(3,9.5)
+%\psgrid
+\psframe[framearc=0.3](0.6,0.5)(2.6,9)
+\multido{\n=1.3000+0.0823}{86}{\psline(1.3,\n)(1.5,\n)}
+\multido{\n=1.3823+0.4118}{18}{\psline(1.2,\n)(1.5,\n)}
+\multido{\n=1.3630+0.0908}{77}{\psline[linecolor=red](1.7,\n)(1.9,\n)}
+\multido{\n=1.454+0.454}{16}{\psline[linecolor=red](1.7,\n)(2,\n)}
+\multido{\n=1.3823+0.4118,\na=-35+5}{18}{\rput(0.8,\n){\footnotesize \np{\na}}}
+\multido{\nb=1.491+0.454,\nc=-30+10}{16}{\rput(2.25,\nb){\footnotesize \np{\nc}}}
+\pscircle*(1.6,0.9){3.5mm}
+\psline(1.5,1.3)(1.5,8.5)(1.7,8.5)(1.7,1.3)
+\rput(1,8.7){\degres C}\rput(2,8.7){\red \degres F}
+\rput(1.6,0.2){Représentation 1}
+\end{pspicture}} \hfill
+\parbox{0.67\linewidth}{
+\psset{unit=0.09cm}
+\begin{pspicture}(-35,-45)(52.5,55)
+\multido{\n=-35.0+2.5}{36}{\psline[linewidth=0.2pt](\n,-35)(\n,55)}
+\multido{\n=-35.0+2.5}{37}{\psline[linewidth=0.2pt](-35,\n)(55,\n)}
+\psaxes[linewidth=1.25pt,Dx=10,Dy=10,labelFontSize=\scriptstyle]{->}(0,0)(-35,-35)(52.5,52.5)
+\psaxes[linewidth=1.25pt,Dx=10,Dy=10,labelFontSize=\scriptstyle](0,0)(-35,-35)(52.5,52.5)
+\psplot[plotpoints=2000,linewidth=1.25pt,linecolor=blue]{-35}{11.5}{1.8 x mul 32 add}
+\uput[u](40,0){\footnotesize Température en \degres C}
+\uput[r](0,53){\footnotesize  Température en \degres F}
+\rput(8.5,-42){Représentation 2}
+\end{pspicture}}
+
+\medskip
+
+\begin{enumerate}
+\item En vous appuyant sur les représentations précédentes, déterminer s'il y a
+proportionnalité entre la température en degré Celsius et la température en degré
+Fahrenheit. Justifier votre réponse.
+\item  Soit $f$ la fonction qui à une température $x$ en degré Celsius associe la température
+$f(x)$ en degré Fahrenheit correspondante. On propose trois expressions de $f(x)$ :
+
+\begin{center}
+\begin{tabularx}{0.8\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+Proposition 1 &Proposition 2& Proposition 3\\ \hline
+$f(x) = x+32$& $f(x) = 1,8x + 32$& $f(x) = 2x + 30$\\ \hline
+\end{tabularx}
+\end{center}
+
+\og Les propositions 1 et 3 ne peuvent pas être correctes. C'est donc la proposition 2 qui
+convient. \fg. Justifier cette affirmation.
+\item  On considère la fonction $f$ définie par $f(x) = 1,8x + 32$.
+
+Calculer $f(10)$ et $f(-40)$.
+\item  Existe-t-il une valeur pour laquelle la température exprimée en degré Celsius est égale
+à la température exprimée en degré Fahrenheit ? Justifier votre réponse.
+\end{enumerate}
+
+\vspace{0,5cm}
+

@@ -1,0 +1,89 @@
+
+\medskip
+
+%\parbox{5cm}{On a programmé un jeu.
+%Le but du jeu est de sortir du
+%labyrinthe.
+%Au début du jeu, le lutin se
+%place au point de départ.
+%Lorsque le lutin touche un mur,
+%représenté par un trait noir
+%épais, il revient au point de
+%départ.}
+%\hfill
+%\begin{tikzpicture}[x=5.5mm,y=5.5mm,>=stealth,baseline={(0,0)}]
+%		\foreach \x in {-7,...,7}{
+%			\foreach \y in {-5,...,5}{
+%				\draw[gray,fill=gray] (\x,\y) circle (0.5mm);
+%			}}
+%		\draw[line width=.25mm,gray] (-7.5,0)--(7.5,0) (0,-5.5)--(0,5.5) (0,0) node [above left]{{\Large O}};
+%		\node at(-4,1){\includegraphics[height=0.7cm]{chat}};
+%		\draw[line width = 1mm, line cap = round, line join = round] 
+%		(-7,-5)--(-7,5)--(7,5)--(7,-3) 
+%		(-5,-2)--(-5,-5)--(7,-5) (1,-5)--(1,-3) (3,-5)--(3,-3)
+%		(-7,0)--(-5,0)--(-5,3) (-3,-3)--(-3,5) 
+%		(-1,-5)--(-1,-1)--(5,-1)--(5,-3)
+%		(-1,5)--(-1,1)--(5,1)--(5,3)--(1,3);
+%		\draw [<-,line width=.8pt] (-5.9,-4.1)--(-5.3,-5.5) node[below]{point de départ};
+%		\draw [<-,line width=.8pt] (6.9,-4.1)--(5,-5.5) node[below ]{point de sortie};
+%	\end{tikzpicture}
+%
+%L'arrière-plan est constitué d'un repère d'origine O avec des points espacés de 30 unités verticalement et horizontalement.
+%
+%Dans cet exercice, on considèrera que seuls les murs du labyrinthe sont noirs.
+%
+%Voici le programme :
+%
+%\begin{tabular}{p{9cm}}
+%\begin{tikzpicture}[>=stealth]
+%\node at (0,0)[below right] {\begin{scratch}[scale=0.8]
+%	\blockinit{quand \greenflag est cliqué}
+%	\blockmove{aller à x: \ovalnum{-180} y: \ovalnum{-120}}
+%	\blockinfloop{répéter indéfiniment}{
+%		\blockifelse{si ~\boolsensing{couleur ~\pencolor{black}~ touchée ?}~ alors}{\blocklook{dire ~\ovalnum{perdu}~ pendant ~ \ovalnum{2} ~ secondes}
+%			\blockmove{aller à x: \ovalnum{~~} ~~y: \ovalnum{~~}}
+%		}{\blockmoreblocks{Réussite}}}
+%	\end{scratch}
+%};
+%\draw [<-] (2.4,-2.8) -- (3.2,-2) node[right]{Couleur : noir};
+%\end{tikzpicture}\\
+%Le bloc \begin{scratch}[scale=0.7]
+%	\blockmoreblocks{Réussite} \end{scratch} correspond à un sous-programme qui fait dire \og Gagné !\fg{} au lutin lorsqu'il est situé au point de sortie; le jeu s'arrête alors.
+%\end{tabular}
+%\hfill
+%\begin{tabular}{l}
+%	\begin{scratch}[scale=0.75]
+%			\blockinitclone{quand \selectmenu{flèche haut} est pressé }
+%			\blockmove{ajouter ~\ovalnum{30}~ à y}
+%			\blockcontrol{attendre ~\ovalnum{0.1}~ secondes}
+%	\end{scratch}\\
+%	\begin{scratch}[scale=0.75]
+%			\blockinitclone{quand \selectmenu{flèche bas} est pressé }
+%			\blockmove{ajouter ~\ovalnum{-30}~ à y}
+%			\blockcontrol{attendre ~\ovalnum{0.1}~ secondes}
+%	\end{scratch}\\
+%	\begin{scratch}[scale=0.75]
+%			\blockinitclone{quand \selectmenu{flèche droite} est pressé }
+%			\blockmove{ajouter ~\ovalnum{30}~ à y}
+%			\blockcontrol{attendre ~\ovalnum{0.1}~ secondes}
+%	\end{scratch}\\
+%	\begin{scratch}[scale=0.75]
+%			\blockinitclone{quand \selectmenu{flèche gauche} est pressé }
+%			\blockmove{ajouter ~\ovalnum{-30}~ à x}
+%			\blockcontrol{attendre ~\ovalnum{0.1}~ secondes}
+%		\end{scratch}\\	
+%\end{tabular}
+
+\begin{enumerate}
+	\item  %Recopier et compléter l'instruction 
+	\begin{scratch}[scale=0.8] \blockmove{aller à x: \ovalnum{- 180} ~~y: \ovalnum{- 120}} \end{scratch} 
+	
+%du programme pour ramener le lutin au point de départ si la couleur noire est touchée.	
+	\item %Quelle est la distance minimale parcourue par le lutin entre le point de départ et le point de sortie ?
+Le chemin le plus court : monter de 3, aller à droite de 2, descendre de 3, aller à droite de 2, monter de 4, aller à droite de 8, descendre de 4, aller à droite de 1, donc en tout 27 pas de 30 unités soit 810~unités	
+	\item %On lance le programme en cliquant sur le drapeau. Le lutin est au point de départ. On appuie brièvement sur la touche $\uparrow$ (\og flèche haut\fg{}) puis sur la touche $\rightarrow$ (\og flèche droite\fg{}). Quelles sont toutes les actions effectuées par le lutin ?
+Le lutin monte de 30 unités puis se déplace vers la droite de 30 unités. Il percute le mur. le jeu annonce \og Perdu \fg{} et replace le lutin au point de départ.
+\end{enumerate}
+
+\vspace{0,5cm}
+

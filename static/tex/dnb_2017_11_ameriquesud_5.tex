@@ -1,0 +1,77 @@
+
+Cet exercice porte sur la consommation d'énergie en France. 
+
+Le tableau ci-dessous donne la répartition (exprimée en pourcentages) de la consommation des différents types d'énergie entre 1973 et 2014. 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|l|*{5}{>{\centering \arraybackslash}X|}}\hline
+								&1973   &1980   &1990   &2002 &2014 \\ \hline   
+Électricité   					&4,3   	&11,7   &36,4   &41,7 &45,4 \\ \hline     
+Pétrole   						&67,6  	&56,4   &38,7   &34,6 &30,2 \\ \hline     
+Gaz  							&7,4   	&11,1  	&11,5   &14,7 &14,0 \\ \hline     
+Énergies renouvelables 			&5,2   	&4,4   	&5,0   	&4,3  &7,0 \\ \hline     
+Charbon   						&15,5  	&16,4   &8,4   	&4,7  &3,4 \\ \hline
+\multicolumn{6}{r}{\emph{Sources : INSEE}}\\
+\end{tabularx}
+\end{center} 
+
+\begin{enumerate}
+\item Quel pourcentage de la consommation d'énergie le pétrole représentait-il en 1980 ? 
+\item À partir du tableau précédent, on a créé, pour une des années, un diagramme représentant la répartition des différents types d'énergie. 
+
+Déterminer de quelle année il s'agit. 
+
+\begin{center}
+\psset{unit=0.9cm}
+\begin{pspicture}(-3.5,-3.5)(3.5,3.5)
+\pscircle(0,0){3}
+\newgray{gris5}{0.55}\pswedge[fillstyle=solid,fillcolor=gris5](0,0){3}{-41}{90}
+\pstextpath[c](0,0.5){\psarcn(0,0){3}{90}{-41}}{Électricité}
+\newgray{gris6}{0.65}\pswedge[fillstyle=solid,fillcolor=gris6](0,0){3}{90}{120.24}
+\pstextpath[c](0,0.5){\psarcn(0,0){3}{120.24}{90}}{Charbon}
+\newgray{gris7}{0.75}\pswedge[fillstyle=solid,fillcolor=gris7](0,0){3}{120.24}{138.24}
+\pstextpath[c](0,1){\psarcn(0,0){3}{138.24}{120.24}}{\small renouve-}
+\pstextpath[c](0,0.5){\psarcn(0,0){3}{138.24}{120.24}}{\small lables}
+\newgray{gris8}{0.85}\pswedge[fillstyle=solid,fillcolor=gris8](0,0){3}{138.24}{179.64}
+\pstextpath[c](0,0.5){\psarcn(0,0){3}{179.64}{138.24}}{Gaz}
+\newgray{gris9}{0.95}\pswedge[fillstyle=solid,fillcolor=gris9](0,0){3}{179.64}{-41}
+\pstextpath[c](0,-0.5){\pswedge[fillstyle=solid,fillcolor=gris9](0,0){3}{179.64}{-41}}{Pétrole}
+\end{pspicture}
+\end{center}
+\item On peut observer l'évolution de la part du pétrole au fil des années à partir d'une représentation graphique comme celle proposée ci-dessous. 
+
+\begin{center}
+\psset{xunit=1cm,yunit=0.75cm}
+\begin{pspicture}(-1,-1)(6.5,10)
+%\psgrid
+\psgrid[gridlabels=0pt,subgriddiv=1,gridwidth=0.2pt](0,0)(6,8)
+\psaxes[linewidth=1.25pt,Dx=10,Dy=10]{->}(0,0)(0,0)(6.5,8.25)
+\uput[d](0,0){1973} \uput[d](1,0){1980} \uput[d](2,0){1990} 
+\uput[d](3,0){2002} \uput[d](4,0){2014} \uput[d](5,0){2026} 
+\uput[d](6,0){2038} 
+\uput[l](0,8.4){Pourcentage}
+\uput[l](0,0){0\,\%} \uput[l](0,1){10\,\%}\uput[l](0,2){20\,\%}
+\uput[l](0,3){30\,\%}\uput[l](0,4){40\,\%}\uput[l](0,5){50\,\%}
+\uput[l](0,6){60\,\%}\uput[l](0,7){70\,\%}\uput[l](0,8){80\,\%}
+\uput[u](6.5,0){Année} 
+\rput(3.5,9){Part du pétrole}
+\rput(3.5,8.5){(en pourcentage des énergies consommées)}
+\psline(0,6.8)(1,5.6)(2,3.95)(3,3.5)(4,3)
+\psline[linestyle=dashed](4,3)(6,2.1) 
+\psframe(0.2,8.2)(6.8,9.3)
+\end{pspicture}  
+\end{center}          
+  
+Les pointillés indiquent que l'on suppose que la baisse de la part du pétrole va se poursuivre sur le rythme observé depuis 2002. 
+
+En suivant cette supposition, on peut modéliser la part du pétrole (exprimée en pourcentage) en fonction de l'année $a$ par la fonction $P$, définie ainsi: 
+
+\[P(a) = \dfrac{- 17}{48}a + 743,5.\] 
+
+	\begin{enumerate}
+		\item Écrire le calcul permettant de vérifier que $P(1990) \approx 38,7$. 
+		\item D'après ce modèle, à partir de quelle année la part du pétrole sera-t-elle nulle ? 
+	\end{enumerate}
+\end{enumerate}
+
+

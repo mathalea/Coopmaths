@@ -1,0 +1,39 @@
+
+Pauline réalise le schéma ci-dessous (qui n'est pas à l'échelle) et relève les mesures suivantes:
+\[
+PA=0,65\text{m},\ AC=QP=5\text{m}\ \text{et}\ CK=0,58\text{m}
+\]
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoints{0/0/A,5/0/C,4/0/B,0/.75/P,5/.75/Q,5/1.2/Q',5/.4/K}
+\tkzInterLL(P,K)(A,C) \tkzGetPoint{S}
+\tkzDrawSegments(A,S Q,P P,A P,B P,S)\tkzDrawSegments[very thick](C,Q')
+\tkzLabelPoint[below](A){$A$} \tkzLabelPoint[below](B){$B$}
+\tkzLabelPoint[below](C){$C$} \tkzLabelPoint[below](S){$S$}
+\tkzLabelPoint[above](P){$P$} \tkzLabelPoint[right](Q){$Q$} 
+\tkzLabelPoint[below right](K){{\scriptsize $K$}} 
+\tkzMarkRightAngle(Q',Q,P) \tkzMarkRightAngle(K,C,A)\tkzMarkRightAngle(B,A,P)
+\end{tikzpicture}
+\end{center}
+Pour que l'éclairage d'une voiture soit conforme, les constructeurs déterminent l'inclinaison du faisceau. Cette inclinaison correspond au rapport $\dfrac{QK}{QP}$. Elle est correcte si ce rapport est compris entre 0,01 et 0,015.
+\begin{enumerate}
+\item Les feux de croisement de Pauline sont réglés avec une inclinaison de 0,014:
+\[
+\frac{QK}{QP}=\frac{QC-KC}{QP}=\frac{PA-CK}{QP}=\frac{0,65-0,58}{5}=0,014
+\]
+\item On peut utiliser la trigonométrie dans le triangle rectangle $QPK$ en $Q$:
+\[
+\tan(\widehat{QPK})=\frac{QK}{QP}=0,014\Longrightarrow \text{mes}(\widehat{QPK})\simeq 0,8^{\circ}\ \text{au dixième de degré près}
+\]
+\item Distance $AS$ d'éclairage de ses feux:
+
+\begin{itemize}
+\item Les droites $(PS)$ et $(CQ)$ sont sécantes en $K$:
+\item les droites $(CS)$ et $(PQ)$ étant perpendiculaires à $(QC)$, elles sont parallèles.
+\end{itemize}
+On peut donc utiliser le théorème de \textsc{Thalès}:
+\[
+\frac{PQ}{CS}=\frac{QK}{CK}\Longleftrightarrow \frac{5}{CS}=\frac{0,65-0,58}{0,58}=\frac{0,07}{0,58}\Longleftrightarrow CS=\frac{0,58\times 5}{0,07}\simeq 41\ \text{au mètre près}
+\]
+Ainsi, $AS=AC+CS=5+41=46$~m.
+\end{enumerate}

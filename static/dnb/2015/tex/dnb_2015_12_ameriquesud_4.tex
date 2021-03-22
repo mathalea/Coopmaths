@@ -1,0 +1,58 @@
+
+\medskip
+
+Un charpentier doit réaliser pour un de ses clients la charpente dont il a fait un
+schéma ci-dessous:
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(12,5)
+%\psgrid
+\pspolygon(0.3,1)(11.7,1)(6,4.7)
+\pspolygon(2.2,1)(9.8,1)(6,3.3)
+\psline(6,1)(6,4.7)
+\psline(6,1)(5,2.7)
+\psline(6,1)(7,2.7)
+\psframe(6,1)(6.2,1.2)
+\rput{210}(5,2.7){\psframe(0,0)(0.2,0.2)}
+\rput{-120}(7,2.7){\psframe(0,0)(0.2,0.2)}
+\uput[d](0.3,1){A} \uput[d](11.7,1){B} \uput[u](6,4.7){C} 
+\uput[d](6,1){D} \uput[d](4.1,1){E} \uput[d](7.9,1){F} 
+\uput[d](9.8,1){G} \uput[d](2.2,1){H} \uput[ur](6,3.3){I} 
+\uput[ul](5,2.7){J} \uput[ur](7,2.7){K}
+\psarc(0.3,1){6mm}{0}{32}\rput(1.2,1.25){25\degres} 
+\psdots[dotstyle=+,dotangle=45](1.25,1)(3.15,1)(5.05,1)(6.95,1)(8.85,1)(10.75,1)
+\psline{<->}(0.3,0.5)(11.7,0.5)
+\uput[d](6,0.6){9~m}%
+\psdots[dotstyle=+](4.1,1)(7.9,1)
+\end{pspicture}
+\end{center}
+
+Il ne possède pas pour le moment toutes les dimensions nécessaires pour la réaliser mais il sait que :
+
+\setlength\parindent{8mm}
+\begin{itemize}
+\item  la charpente est symétrique par rapport à la poutre [CD],
+\item  les poutres [AC] et [HI] sont parallèles.
+\end{itemize}
+\setlength\parindent{0mm}
+
+Vérifier les dimensions suivantes, calculées par le charpentier au centimètre près.
+
+Toutes les réponses doivent être justifiées.
+
+\medskip
+
+\begin{enumerate}
+\item Démontrer que hauteur CD de la charpente est égale à 2,10~m.
+\item Démontrer, en utilisant la propriété de Pythagore, que la longueur AC est
+égale à 4,97~m.
+\item Démontrer, en utilisant la propriété de Thalès, que la longueur DI est égale à
+1,40~m.
+\item Proposer deux méthodes différentes pour montrer que la longueur JD est
+égale à 1,27~m. On ne demande pas de les rédiger mais d'expliquer la
+démarche.
+\end{enumerate}
+%%%%%%%%%%%%%
+\vspace{0.25cm}
+

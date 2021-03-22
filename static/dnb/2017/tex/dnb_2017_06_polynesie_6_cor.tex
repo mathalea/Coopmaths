@@ -1,0 +1,54 @@
+
+\medskip
+
+%Voici le plan de deux lignes de bus:
+%
+%\begin{center}
+%\psset{unit=1cm}
+%\begin{pspicture}(11.5,7.5)
+%\cnode*(0.5,5.2){4pt}{S}\uput[l](0.5,5.2){\small Stade}
+%\cnode*(2.3,6.3){4pt}{C}\uput[u](2.3,6.3){\small Conservatoire}
+%\cnode*(4.4,5.7){4pt}{H}\uput[u](4.4,5.9){\small Cathédrale}
+%\cnode*(6.2,6.8){4pt}{B}\uput[u](6.2,6.8){\small Bibliothèque}
+%\cnode*(8.5,6.5){4pt}{P}\uput[u](8.5,6.5){\small Piscine}
+%\cnode*(10.7,5.9){4pt}{L}\uput[dr](10.7,5.9){\small Lycée}
+%\cnode*(8.7,4.2){4pt}{Po}\uput[dr](8.7,4.2){\small Pompier}
+%\cnode*(7,3.2){4pt}{E}\uput[d](7,3.2){\small École}
+%\cnode*(4.3,3.9){4pt}{M}\uput[dr](4.1,3.7){\small Mairie}
+%\cnode*(2.1,5.1){4pt}{Pl}\uput[u](2.1,5.1){\small Place}
+%\cnode*(3.7,2){4pt}{G}\uput[dr](3.7,2){\small Gendarmerie}
+%\cnode*(2.7,0.5){4pt}{C}\uput[d](2.7,0.5){\small Collège}
+%\cnode*(1.8,1.9){4pt}{Ma}\uput[l](1.8,1.9){\small Marché}
+%\cnode*(2.1,3.6){4pt}{Ho}\uput[l](2.1,3.6){\small Horloge}
+%\pspolygon(0.5,5.2)(2.3,6.3)(4.4,5.7)(4.3,3.9)(3.7,2)(2.7,0.5)(1.8,1.9)(2.1,3.6)(0.5,5.2)
+%\pspolygon[linestyle=dotted,linewidth=2.5pt](2.1,5.1)(4.4,5.7)(6.2,6.8)(8.5,6.5)(10.7,5.9)(8.7,4.2)(7,3.2)(4.3,3.9)
+%\rput(7,5.5){\large LIGNE 1}
+%\rput(3,3){\large LIGNE 2}
+%\end{pspicture}
+%\end{center}
+%
+%C'est à 6~h~30 que les deux bus des lignes 1 et 2 partent de l'arrêt \og Mairie \fg{} dans le
+%sens des aiguilles d'une montre. Le bus de la ligne 1 met 3 minutes entre chaque arrêt
+%(temps de stationnement compris), tandis que le bus de la ligne 2 met 4 minutes. Tous
+%les deux vont effectuer le circuit complet un grand nombre de fois. Ils s'arrêteront juste
+%après 20~h.
+%
+%Est-ce que les deux bus vont se retrouver à un moment de la journée à l'arrêt
+%\og Mairie \fg{} en même temps ? Si oui, donner tous les horaires précis de ces rencontres.
+Le bus de la ligne 1 met $8 \times 3 = 24$~minutes pour repasser à l'arrêt \og Mairie \fg.
+
+Le bus de la ligne 2 met $8 \times 4 = 32$~minutes pour repasser à l'arrêt \og Mairie \fg.
+
+De 6~h 30 à 20~h s'écoulent 13~h 30, soit 810 minutes.
+
+Les deux bus vont se retrouver à un moment de la journée à l'arrêt
+\og Mairie \fg{} en même temps s'il existe un multiple commun à 24 et 32 inférieur ou égal à 810.
+
+Or $ 8 \times 3 \times 4 = 8 \times 4 \times 3 = 96$ est le plus multiple commun à 24 et 32.
+
+Or 96~min = 1~h 36~min.
+
+Les deux bus vont donc se retrouver toutes les 1~h 36~min à l'arrêt
+\og Mairie \fg{} en même temps soit à :
+
+6~h 30 ~;~8~h 06~;~9~h 42~;~11~h 18~;~12~h 54~;~14~h 30~;~16~h 06~;~17~h 42~;~19~h 18.

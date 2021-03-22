@@ -1,0 +1,95 @@
+
+\begin{enumerate}
+\item Je joue une partie face à  un adversaire qui joue au hasard et je choisis de jouer \og \textbf{pierre} \fg{}. 
+	\begin{enumerate}
+		\item Je perds la partie si mon adversaire choisit \og \textbf{feuille} \fg{} parmi les trois \linebreak possibilités \og \textbf{pierre} \fg{}, \og \textbf{ciseaux} \fg{} et \og \textbf{feuille} \fg{}, donc la probabilité que je perde la partie est égale à $\dfrac13$.
+		\item La probabilité que je ne perde pas la partie est égale à $\dfrac23$. \quad Car $\left( 1-\dfrac13=\dfrac23\right)$
+	\end{enumerate}
+\item  Arbre des possibles de l'adversaire pour les deux parties. 
+
+\makeatletter
+ 
+\begin{forest}
+	% Paramètres généraux de l'arbre :
+	% - s sep :  distance verticale entre les nœuds.
+	% - l :      distance horizontale entre les nœuds.
+	% - grow ' : orientation de l'arbre (ici, vers la droite).
+	for tree={s sep=.5cm, l=2.5cm, grow=0, grow'=east, align=left},
+	before typesetting nodes={for tree={content=#1}},
+	decision edge label/.style n args=3{
+		% On met la probabilité de l'événement au milieu de la branche. S'il n'y en a pas, on ne met pas de fond.
+		edge label/.expanded={node[midway, fill={\if#3\@empty none\else white\fi}]{#3}}
+		% Autre possibilité : probabilité au-dessus de la branche.
+		%edge label/.expanded={node[midway, above]{#3}}
+	},
+	decision/.style={if n=1
+		{decision edge label={below}{north}{#1}}
+		{decision edge label={left}{east}{#1}}
+	},
+	delay={for descendants={
+		% Gestion de l'événement.
+		decision/.expanded/.wrap pgfmath arg={\getProba#1\endget}{content},
+		% Gestion de la probabilité.
+		content/.expanded/.wrap pgfmath arg={\getEvene#1\endget}{content}
+	}},
+	% On créé le nœud principale (l'univers oméga).
+%	[$\Omega$
+	[$$
+		[\text{P}/\frac13, name=premierLance % On créé un sous-nœud que l'on nomme `premierLance`.
+			[\text{P}/\frac13, name=secondLance % Un sous-sous-nœud. On marque `événement/probabilité` (voir structure plus haut).
+				% La probabilité en fin de branche. On la nomme `proba`. On enlève la branche avec `no edge`. 
+				% Pensez à entourer la probabilité de trois { et } si vous obtenez une erreur.
+				[{{{P(\text{P}, \text{P}) = \frac13 \times \frac13 = \frac19}}}/, no edge, name=proba]
+			]
+			[\text{F}/\frac13
+				[{{{P(\text{P}, \text{F}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+			[\text{C}/\frac13
+				[{{{P(\text{P}, \text{C}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+		]
+		[\text{F}/\frac13 % Second sous-nœud.
+			[\text{P}/\frac13
+				[{{{P(\text{F}, \text{P}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+			[\text{F}/\frac13
+				[{{{P(\text{F}, \text{F}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+			[\text{C}/\frac13
+				[{{{P(\text{F}, \text{C}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+		]
+		[\text{C}/\frac13 % Troisième sous-nœud.
+			[\text{P}/\frac13
+				[{{{P(\text{C}, \text{P}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+			[\text{F}/\frac13
+				[{{{P(\text{C}, \text{F}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+			[C/\frac13
+				[{{{P(\text{C}, \text{C}) = \frac13 \times \frac13 = \frac19}}}/, no edge]
+			]
+		]
+	]
+	% Noms des colonnes
+	% ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+	% "Probabilités" au-dessus de `proba`. On nomme ce texte `nomProba`.
+	\node [above=5pt of proba, name=nomProba] {Probabilités};
+	% "2de lancé" à l'intersection de droite verticale passant par `nomProba` et de la droite horizontale passant par `secondLance`.
+	\node [name=nomSecondLance] at (secondLance |- nomProba) {2\up{de} partie}; 
+	% Idem mais pour `premierLance` et `nomSecondLance`.
+	\node at (premierLance |- nomSecondLance) {1\up{re} partie};
+\end{forest}
+ 
+\makeatother
+
+\item  	\begin{enumerate}
+		\item Je gagne les deux parties si mon adversaire choisit \og \textbf{ciseaux} \fg{} aux deux \linebreak parties, donc la probabilité que je gagne les deux parties est égale à \linebreak $P$(C, C), soit $\dfrac19$. 
+		\item Je ne perds aucune des deux parties si mon adversaire choisit \og \textbf{ciseaux} \fg{} ou \og \textbf{pierre} \fg{} dans les parties donc la probabilité que je ne perde aucune des deux parties est égale à $P(\text{P}, \text{P})+P(\text{P}, \text{C})+P(\text{C}, \text{P}) + P(\text{C}, \text{C})=4\times \dfrac13=\dfrac49$. 
+	\end{enumerate}
+\end{enumerate}
+
+\vspace{0,5cm}
+
+
+

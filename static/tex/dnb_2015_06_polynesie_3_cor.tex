@@ -1,0 +1,97 @@
+\textbf{Exercice 3 \hfill 8 points}
+
+\medskip
+
+%\parbox{0.35\linewidth}{On considère la figure ci-contre dessinée à main levée.
+%
+%L'unité utilisée est le centimètre.
+%
+%Les points I, H et K sont alignés.}\hfill
+%\parbox{0.62\linewidth}{\psset{unit=1cm,varsteptol=0.2,VarStepEpsilon=10}
+%%\psgrid
+%\begin{pspicture}(8,4)
+%\pslineByHand(4.5,3)(0.5,0.5)(7.5,1)(4.5,3)(4.7,0.3)%IKJI
+%\rput(2.7,2.2){6,8}\rput(6,2.2){4}\rput(4.3,1.6){3,2}\rput(6,0.6){2,4}
+%\uput[ul](4.5,3){J}\uput[l](0.5,0.5){I}\uput[dl](4.6,0.8){H}\uput[d](7.5,1){K}
+%\end{pspicture}}
+%
+%\medskip
+
+\begin{enumerate}
+\item ~%Construire la figure ci-dessus en vraie grandeur.
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(0,-1.5)(11,4)
+%\psgrid
+\pspolygon(10,0.5)(7.6,3.7)(7.6,0.5)%KJH
+\psarc(7.6,3.7){6.8}{205}{215}
+\psline(0,0.5)(7.6,0.5)
+\psline(1.6,0.5)(7.6,3.7)%IJ
+\uput[dl](7.6,-0.78){L}
+\psline(10,0.5)(7.6,-0.78)(7.6,0.5)
+\uput[dl](1.6,0.5){I} \uput[u](7.6,3.7){J} \uput[r](10,0.5){K} \uput[dl](7.6,0.5){H} 
+\end{pspicture}
+\end{center}
+
+On trace le triangle KJH connaissant les longueurs de ses trois côtés  ; le cercle de centre J de rayon 6,8 coupe la droite (HK) en I.
+\item %Démontrer que les droites (IK) et (JH) sont perpendiculaires.
+Pour démontrer que les droites (IK) et (JH) sont perpendiculaires, les points I, H et K
+étant alignés, il suffit de montrer que le triangle JHK est un triangle rectangle en H.
+
+Dans le triangle JHK, [JK] est le plus grand côté.
+
+Je calcule séparément :
+
+D’une part : $\text{JK}^2 = 4^2 = 16$.
+
+D’autre part : $\text{JH}^2 + \text{HK}^2  = 3,2^2 + 2,4^2 = 10,24 + 5,76 = 16$
+
+Je constate que : $\text{JK}^2 = \text{JH}^2 + \text{HK}^2$.
+
+D’après la réciproque du théorème de Pythagore, le triangle JHK est rectangle en H.
+
+Les droites (IK) et (JH) sont donc perpendiculaires.
+\item %Démontrer que IH = 6 cm.
+Les droites (IK) et (JH) étant perpendiculaires, IHJ est un triangle rectangle en H,
+donc d’après le théorème de Pythagore, on a :
+
+$\text{IJ}^2 = \text{IH}^2 + \text{HJ}^2$
+
+$6,82 = \text{IH}^2 + 3,22$
+
+$46,24 = \text{IH}^2 + 10,24$
+
+$\text{IH}^2 = 46,24 - 10,24$
+
+$\text{IH}^2 = 36$.
+
+IH est un nombre positif, donc IH $= \sqrt{36}$~cm
+
+IH = $6$~cm
+\item %Calculer la mesure de l'angle $\widehat{\text{HJK}}$, arrondie au degré.
+HJK est un triangle rectangle en H, on a donc : $\cos \widehat{\text{HJK}} = \dfrac{\text{HJ}}{\text{JK}} = \dfrac{3,2}{4} = 0,8$.
+
+D'où $\widehat{\text{HJK}} \approx  37$~\degres
+\item %La parallèle à (IJ) passant par K coupe (JH) en L. Compléter la figure.
+Voir plus haut
+\item %Expliquer pourquoi LK = $0,4 \times$ IJ.
+Les triangles HIJ et HKL sont tels que :
+
+- (JL) et (IK) sont sécantes en H ;
+
+- (IJ) est parallèle à (KL).
+
+D’après le théorème de Thalès, on a :
+
+$\dfrac{\text{HL}}{\text{HJ}} = \dfrac{\text{HK}}{\text{HI}}= \dfrac{
+\text{KL}}{\text{IJ}}$.
+
+Or $\dfrac{\text{HK}}{\text{HI}}= \dfrac{2,4}{6} = 0,4$, donc 
+
+$\dfrac{\text{KL}}{\text{IJ}} = 0,4$ ou encore
+
+KL $= 0,4 \times$ IJ.
+\end{enumerate}
+
+\vspace{0,5cm}
+

@@ -1,0 +1,97 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 4} \hfill 5 points}
+
+\medskip 
+
+Lors des soldes, un commerçant décide d'appliquer une réduction de 30\,\% sur l'ensemble des articles de son magasin. 
+
+\medskip
+
+\begin{enumerate}
+\item L'un des articles coûte 54~\euro{} avant la réduction. Calculer son prix après la réduction. 
+\item Le commerçant utilise la feuille de calcul ci-dessous pour calculer les prix des articles soldés . 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|l|*{5}{>{\centering \arraybackslash}X|}}\hline
+&A  &   B   &C  &D&   E&   F\\ \hline     
+1  &prix avant réduction&   12,00~\euro{}   &14,80~\euro{}   &33,00~\euro{}   &44,20~\euro{}&   85,50~\euro{}\\ \hline  
+2 &  réduction de 30\,\%&   3,60~\euro{} &  4,44~\euro{}&   9,90~\euro{} & 13,26~\euro{} &  25,65~\euro{}\\ \hline   
+3&   prix soldé &&&&&\\ \hline
+\end{tabularx}
+\end{center}
+
+	\begin{enumerate}
+		\item Pour calculer la réduction, quelle formule a-t-il pu saisir dans la cellule B2 avant de l'étirer sur la ligne 2 ? 
+		\item Pour obtenir le prix soldé, quelle formule peut-il saisir dans la cellule B3 avant de l'étirer sur la ligne 3 ? 
+	\end{enumerate}
+\item Le prix soldé d'un article est 42,00~\euro. Quel était son prix initial ? 
+\end{enumerate}
+
+\bigskip
+
+\end{document}

@@ -1,0 +1,59 @@
+
+\medskip
+ 
+À Pise vers 1200 après J. C. (problème attribué à Léonard de Pise, dit Fibonacci, 
+mathématicien italien du moyen âge).
+
+%\medskip
+
+\parbox{0.6\linewidth}{Une lance, longue de 20 pieds, est posée verticalement 
+le long d'une tour considérée comme perpendiculaire au sol. Si on éloigne l'extrémité de la lance qui repose sur le sol de 12 pieds de la tour, de combien descend l'autre 
+extrémité de la lance le long du mur ? 
+
+* Un pied est une unité de mesure anglo-saxonne valant environ 30 cm.} \hfill
+\parbox{0.36\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(4,5)
+\psframe(4,0.3)
+\psframe(0.5,0.3)(2.5,3.8)
+\psframe*(2.52,0.3)(2.62,3)
+\pspolygon*(3.8,0.3)(3.9,0.35)(2.7,2.55)(2.6,2.5)
+\psarc{->}(2.65,2.525){1.5cm}{-90}{-62}
+\psline(2.52,2.56)(3,2.56)
+\psline(2.52,3)(3,3)
+\psline{<->}(3,2.56)(3,3)\uput[r](3,2.78){$h$}
+\rput(1.5,3){Tour}
+\psline{<->}(2.62,0.15)(3.9,0.15)
+\rput(3.2,0.4){12 pieds}
+\rput{-90}(2.2,1.65){lance}
+\end{pspicture}}
+
+\textit{Il est utile de tracer un schéma simplifié du problème. }
+
+\parbox{0.3\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(2,0)(4,3.4)
+%\psgrid
+\psline(2.7,0.3)(2.7,3)
+\pspolygon(3.8,0.3)(2.7,2.55)(2.7,0.3)
+\psline(2.52,2.56)(3,2.56)
+\psline(2.52,3)(3,3)
+\psline{<->}(3,2.56)(3,3)\uput[r](3,2.78){$h$}
+\rput(3.2,-0.2){12}
+\rput(3.8,1.5){20}
+\uput[-135](2.7,0.2){$A$}
+\uput[-45](3.8,0.3){$B$}
+\uput[180](2.7,2.55){$C$}
+\uput[90](2.7,3){$D$}
+\end{pspicture}}
+\hfill
+\parbox{0.65\linewidth}{\psset{unit=.8cm}
+\textit{Dans le schéma, $AD=CB=20$ pieds.}
+
+\textit{Le triangle, $ABC$ étant rectangle en $A$, d'après le théorème de Pythagore, on a :}
+
+$AC^2=CB^2-AB^2=20^2-12^2=400-144=256$. D'où \fbox{$AC=16$ pieds.}
+
+La lance descend de $h=20 -16 =4$ pieds.
+}
+
+\vspace{0,5cm}
+

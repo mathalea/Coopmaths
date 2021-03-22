@@ -1,0 +1,79 @@
+
+\medskip
+ 
+Voici les copies d'écran d'un programme qui permet d'obtenir une frise.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{2}{>{\centering \arraybackslash}X|}m{4cm}|}\hline
+\textbf{Script de la frise}&\textbf{Bloc motif}&\textbf{Pour information}\\
+\small{\begin{scratch}
+\blockinit{Quand \greenflag est cliqu\'e}
+\blockmove{s'orienter à \ovalnum{90} }
+\blockmove{aller à x: \ovalnum {- 150} y: \ovalnum 0}
+\blockpen{effacer tout}
+\blockrepeat{répéter \ovalnum{4} fois}
+{\blockevent{Motif}
+\blockmove{avancer de \ovalnum{30}}}
+\end{scratch}}&
+\small{\begin{scratch}
+\initmoreblocks{définir \namemoreblocks{Motif}}
+\blockpen{stylo en position d'écriture}
+\blockmove{avancer de \ovalnum{20}}
+\blockmove{tourner \turnright{} de \ovalnum{60} degrés}
+\blockmove{avancer de \ovalnum{40}}
+\blockmove{tourner \turnleft{} de \ovalnum{120} degrés}
+\blockmove{avancer de \ovalnum{40}}
+\blockmove{s'orienter \`a \ovalnum{90}}
+\blockpen{relever le stylo}
+\end{scratch}}&L'instruction 
+
+\small{\begin{scratch}\blockmove{s'orienter à \ovalnum{90}}\end{scratch}}
+
+signifie qu'on s'oriente en vue
+
+ de se diriger vers la droite.\\ \hline
+\multicolumn{3}{|c|}{\textbf{Frise obtenue avec le script}}\\
+\multicolumn{3}{|c|}{\psset{unit=0.5cm}\def\zig{\psline(0,0)(0.4,0)(0.8,-0.7)(1.2,0)} 
+\begin{pspicture}(-5,-1)(8,0.5)
+\rput(-2.5,-0.5){Point de départ}
+\rput(1,0){\zig}\rput(3,0){\zig}\rput(5,0){\zig}\rput(7,0){\zig}\psline{->}(0,-0.5)(1,0)\end{pspicture}}\\ \hline
+\end{tabularx}
+\end{center}
+\medskip
+
+\begin{enumerate}
+\item Quelle distance le lutin a-t-il parcourue pour tracer \textbf{un seul motif} de la frise?
+\item On modifie le programme, dans cette question seulement :
+
+\setlength\parindent{6mm}
+\begin{itemize}[label=$\bullet~~$]
+\item on ne modifie pas le script de la frise.
+\item dans le bloc motif, il enlève l'instruction : \small{\begin{scratch} \blockpen{relever le stylo} \end{scratch}}
+\end{itemize}
+\setlength\parindent{0mm}
+
+Dessiner à main levée la frise obtenue avec ce nouveau programme.
+\item On utilise maintenant le bloc motif ci-dessous. Laquelle des deux frises obtient-il ? Expliquer pourquoi.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+\textbf{Bloc motif modifié}&\textbf{Frise \no 1}&\textbf{Frise \no 2}\\
+\psset{unit=1cm}
+\begin{pspicture}(4,6.5)
+\rput(2,3.1){
+\small{\begin{scratch}
+\initmoreblocks{définir \namemoreblocks{Motif}}
+\blockpen{stylo en position d'écriture}
+\blockmove{avancer de \ovalnum{20}}
+\blockmove{tourner \turnright{} de \ovalnum{60} degrés}
+\blockmove{avancer de \ovalnum{40}}
+\blockmove{tourner \turnleft{} de \ovalnum{120} degrés}
+\blockmove{avancer de \ovalnum{40}}
+\blockpen{relever le stylo}
+\end{scratch}}}\end{pspicture}&\psset{unit=0.58cm}\def\zig{\psline(0,0)(0.4,0)(0.8,-0.6928)(1.2,0)}
+\begin{pspicture}(1.3,-4)(5.5,3.4)\rput(1.5,0.5){\zig}\rput(3,1){\zig}\rput(4.5,1.5){\zig}\rput(6,2){\zig}\rput(1.5,2){Point de départ}\psline{->}(1.5,1.8)(1.5,0.45)\end{pspicture}&\psset{unit=0.6cm}\def\zig{\psline(0,0)(0.4,0)(0.8,-0.6928)(1.2,0)}
+\psset{unit=0.58cm}\begin{pspicture}(-2,-3)(4,5.2)
+\rput(0,0){\zig}\rput{60}(1.5,0.52){\zig} \rput{120}(1.8,2.1){\zig}\rput{180}(0.6,3.15){\zig} \rput(0,-1.5){Point de départ}\psline{->}(0,-1.2)(0,0)\end{pspicture}\\ \hline
+\end{tabularx}
+\end{center}
+\end{enumerate}

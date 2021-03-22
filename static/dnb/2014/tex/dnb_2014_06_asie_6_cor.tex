@@ -1,0 +1,69 @@
+
+\medskip
+
+%Une association décide d'organiser une tombola pour financer entièrement une sortie pour ses adhérents d'un montant de \np{2660}~\euro.
+% 
+%Le 1\up{er} ticket tiré au sort fera remporter le gros lot d'une valeur de 300~\euro, 
+%
+%Les 10 tickets suivants tirés au sort feront remporter un lot d'une valeur de 25~\euro chacun. 
+%
+%Les 20 tickets suivants tirés au sort feront remporter un lot d'une valeur de 5~\euro{} chacun.
+% 
+%\textbf{L'association finance entièrement les lots.}
+%
+%\smallskip
+% 
+%Chaque ticket de tombola est vendu 2~\euro et les tickets sont vendus durant 6 jours.
+% 
+%On a représenté ci-dessous le diagramme des ventes des tickets durant ces 6 jours. 
+%
+%
+%\begin{center}
+%\psset{xunit=1.3cm,yunit=0.012cm}
+%\begin{pspicture}(-1,-50)(6,500)
+%\multido{\n=0+25}{21}{\psline(0,\n)(6,\n)}
+%\psframe[fillstyle=solid,fillcolor=lightgray](0.333,0)(0.666,350)
+%\psframe[fillstyle=solid,fillcolor=lightgray](1.333,0)(1.666,225)
+%\psframe[fillstyle=solid,fillcolor=lightgray](2.333,0)(2.666,400)
+%\psframe[fillstyle=solid,fillcolor=lightgray](3.333,0)(3.666,125)
+%\psframe[fillstyle=solid,fillcolor=lightgray](4.333,0)(4.666,325)
+%\psframe[fillstyle=solid,fillcolor=lightgray](5.333,0)(5.666,475)
+%\uput[d](0.5,0){Lundi} \uput[d](1.5,0){Mardi} \uput[d](2.5,0){Mercredi} 
+%\uput[d](3.5,0){Jeudi} \uput[d](4.5,0){Vendredi} \uput[d](5.5,0){Samedi}
+%\psaxes[linewidth=1.25pt,Dx=10,Dy=25](0,0)(6,500)
+%\rput{90}(-1.,250){Nombre de tickets vendus}
+%\end{pspicture}
+%\end{center}
+
+\begin{enumerate}
+\item  %L’association pourra-t-elle financer entièrement cette sortie ? 
+L’association récupère :
+
+$2 \times (350 + 225 + 400 + 125 + 325 + 475) = 2 \times \np{1900} = \np{3800}$~(\euro).
+
+Mais elle doit donner en prix :
+
+$300 + 10 \times 25 + 20 \times 5 = 300 + 250 + 100 = 650$~\euro.
+
+Il lui restera donc : $\np{3800} - 650 = \np{3150}$~\euro{} soit assez pour financer la sortie.
+\item  %Pour le même nombre de tickets vendus, proposer un prix de ticket de tombola permettant de financer un voyage d'une valeur de \np{10000}~\euro{} ? 
+Il faut, si le prix du billet est $x$~\euro{} que :
+
+$x \times \np{1900} - 650 \geqslant \np{10000}$ ou 
+
+$\np{1900}x \geqslant \np{10650}$ et enfin 
+
+$x \geqslant \dfrac{\np{10650}}{\np{1900}} \approx 5,61$.
+
+À l’euro près il faut donc un prix du billet à 6~\euro.
+
+%Quel serait le prix minimal ? 
+Le prix minimal (irréaliste) est égal à 5,61~\euro.
+\item  %Le gros lot a été déjà tiré. Quelle est la probabilité de tirer un autre ticket gagnant ? (donner le résultat sous la forme fractionnaire) 
+Il reste 30 tickets gagnants sur \np{1899}  : la probabilité de gagner est donc égale à :
+
+$\dfrac{30}{\np{1899}} = \dfrac{10}{633} \approx 0,016$ soit environ 1,6\,\%. 
+\end{enumerate}  
+
+\bigskip
+

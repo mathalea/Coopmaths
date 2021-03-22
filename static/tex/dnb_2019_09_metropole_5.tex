@@ -1,0 +1,57 @@
+
+\medskip
+
+On donne le programme de calcul suivant :
+
+\begin{center}
+\begin{tabularx}{0.6\linewidth}{|l|X|}\hline
+Étape 1 :& Choisir un nombre de départ\\
+Étape 2 :& Ajouter 6 au nombre de départ\\
+Étape 3 :& Retrancher 5 au nombre de départ\\
+Étape 4 :& Multiplier les résultats des étapes 2 et 3\\
+Étape 5 :& Ajouter 30 à ce produit\\
+Étape 6 :& Donner le résultat\\ \hline
+\end{tabularx}
+\end{center}
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Montrer que si le nombre choisi est $4$, le résultat est $20$.
+		
+		\item Quel est le résultat quand on applique ce programme de calcul au nombre $-3$ ?
+
+	\end{enumerate}
+\item Zoé pense qu'un nombre de départ étant choisi, le résultat est égal à la somme de ce nombre et de
+son carré.
+	\begin{enumerate}
+		\item Vérifier qu'elle a raison quand le nombre choisi au départ vaut $4$, et aussi quand on choisit $- 3$.
+		\item  Ismaël décide d'utiliser un tableur pour vérifier l'affirmation de Zoé sur quelques exemples.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|m{3cm}|*{5}{>{\centering \arraybackslash}X|}}\hline
+\multicolumn{2}{|l}{B6}&& \multicolumn{4}{|l|}{$=\text{B}1+\text{B}1\text{\verb+^+}2$}\\\hline
+&A& B&C&D&E&F\\ \hline
+1& Étape 1			& 2 	&5 	&7 	&10 	&20\\ \hline
+2& Étape 2			& 8 	&11 &13 &16 	&26\\ \hline
+3& Étape 3			& $-3$	& 0 &2 	&5 		&15\\ \hline
+4& Étape 4			& $-24$	& 0 &26 &80 	&390\\ \hline
+5& Étape 5 (résultat)&  6 	&30 &56 &110 	&420\\ \hline
+6&Somme du nombre et de son carré &6&30 &56 	&110 &420\\ \hline
+\end{tabularx}
+\end{center}
+
+Il a écrit des formules en B2 et B3 pour exécuter automatiquement les étapes 2 et 3 du
+programme de calcul.
+
+Quelle formule à recopier vers la droite a-t-il écrite dans la cellule B4 pour exécuter l'étape 4 ?
+		\item  Zoé observe les résultats, puis confirme que pour tout nombre $x$ choisi, le résultat du
+programme de calcul est bien $x^2 + x$. Démontrer sa réponse.
+
+		\item  Déterminer tous les nombres pour lesquels le résultat du programme est $0$.
+
+	\end{enumerate}
+\end{enumerate}
+
+\bigskip
+

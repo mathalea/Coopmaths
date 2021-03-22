@@ -1,0 +1,119 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 7} \hfill 5 points}
+
+\medskip 
+
+%Antoine crée des objets de décoration avec des vases, des billes et de l'eau colorée. 
+%
+%Pour sa nouvelle création, il décide d'utiliser le vase et les billes ayant les caractéristiques suivantes : 
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|m{7cm}|X|}\hline
+%\textbf{Caractéristiques du vase}&\textbf{Caractéristiques des billes}\\  
+%\psset{unit=0.7cm}
+%\begin{pspicture}(9.5,8.5)
+%%\psgrid
+%\psline(0.25,1.6)(1.85,0.25)(4.4,0.9)(4.4,6.8)(1.85,6.15)(0.25,7.5)(2.8,8.15)(4.4,6.8)
+%\psline(1.85,0.25)(1.85,6.15)\psline(0.25,1.6)(0.25,7.5)
+%\pspolygon[fillstyle=vlines](6.1,0.5)(9.1,0.5)(9.1,6.6)(9,6.6)(9,1.3)(6.2,1.3)(6.2,6.6)(6.1,6.6)
+%\psline{<->}(5.9,0.5)(5.9,6.6)\psline{>-<}(6.2,6.8)(6.1,6.8)\psline{>-<}(9.1,6.8)(9,6.8)
+%\psline{<->}(9.2,0.5)(9.2,1.3)\rput{90}(9.5,0.9){1,7 cm}
+%\psline{<->}(6.1,0.3)(9.1,0.3)\uput[d](7.6,0.3){9 cm}
+%\uput[u](9.05,6.8){0,2 cm} 
+%\uput[u](6.15,6.8){0,2 cm} 
+%\rput{90}(5.5,3.9){21,7 cm} 
+%\end{pspicture}	&\psset{unit=1cm}
+%\begin{pspicture}(5,3)
+%%\psgrid
+%\pscircle[gradangle=90,gradbegin = gray,gradmidpoint = 0.5,gradend = white,fillstyle=gradient](2,1){0.5}
+%\psline{<->}(2.6,0.5)(2.6,1.5)\uput[r](2.6,1){1,8 cm}
+%\end{pspicture}\\
+%Matière: verre &Matière: verre \\
+%Forme: pavé droit&Forme: boule \\ 
+%Dimensions extérieures : 9 cm $\times$ 9 cm $\times$ 21,7 cm&Dimension : 1,8 cm de diamètre\\
+%Épaisseur des bords : 0,2 cm &\\
+%Épaisseur du fond : 1,7 cm&\\ \hline 
+%\end{tabularx}
+%\end{center}
+%
+%Il  met 150 billes dans le vase. Peut-il ajouter un litre d'eau colorée sans risquer le débordement ? 
+
+\smallskip
+
+\emph{On rappelle que le volume de la boule est donné par la formule : $\dfrac{4}{3}\times \pi \times \text{rayon}^3$.} 
+
+Le pavé a pour base un carré de côtés $9 - 2\times 0,2 = 8,6$~cm et de hauteur $21,7 - 1,7 = 20$~cm.
+
+Le volume du vase est donc égal à :
+
+$8,6 \times 8,6 \times 20 = \np{1479,2}$~(cm$^3)$.
+
+Une bille a un volume de : $\dfrac{4}{3}\times \pi \times 0,9^3 = 0,972\pi$, donc 150 billes occuperont un volume de $145,8\pi$.
+
+Il restera  $\np{1479,2} - 145,8\pi \approx \np{1021,16}$~(cm$^3)$ soit plus de 1 dm$^3$ : Antoine pourra ajouter un litre d'eau colorée.
+\end{document}\end{document}

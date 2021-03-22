@@ -1,0 +1,162 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 6 \hfill 20 points}
+
+\medskip
+
+Pour servir ses jus de fruits, un restaurateur a le choix entre deux types de verres : un verre cylindrique A de hauteur $10$~cm et de rayon $3$~cm et un verre conique B de hauteur $10$~cm et de rayon $5,2$~cm.
+
+\medskip
+
+\parbox{0.42\linewidth}{\psset{unit=0.9cm}
+\begin{pspicture}(8,6)
+%\psgrid
+\psellipse(1.5,5)(1.1,0.2)\psline{<->}(1.5,5)(2.6,5)\uput[u](2.05,5){\small 3~cm}
+\psellipse(1.5,1)(1.1,0.2)
+\psline(0.4,1)(0.4,5)\psline(2.6,1)(2.6,5)
+\psellipse(5,5)(1.7,0.4)
+\psellipse(5,1)(1.1,0.2)
+\rput(1.5,0){Verre A}\rput(5,0){Verre B}
+\psline{<->}(3,1)(3,5)\uput[r](3,3){\small 10~cm}
+\psline{<->}(5,5)(6.7,5)\uput[u](5.85,4.85){\small 5,2~cm}
+\psline(3.3,4.95)(5,1)(6.7,4.95)
+\end{pspicture}}\hfill 
+\parbox{0.56\linewidth}{\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Rappels :}\\
+$\bullet~~$ Volume d'un cylindre de rayon $r$ et de hauteur $h$ :
+
+\[\pi \times  r^2 \times h\]\\
+$\bullet~~$ Volume d'un cône de rayon $r$ et de hauteur $h$ :
+
+\[\dfrac{1}{3} \times  \pi \times r^2 \times h\]\\
+$\bullet~~$ 1 L = 1 dm$^3$\\ \hline
+\end{tabularx}}
+
+Le graphique situé en \textbf{ANNEXE 1.2} représente le volume de jus de fruits dans chacun des verres en fonction de la hauteur de jus de fruits qu'ils contiennent.
+
+\medskip
+
+\begin{enumerate}
+\item Répondre aux questions suivantes à l'aide du graphique en \textbf{ANNEXE 1.2} :
+	\begin{enumerate}
+		\item Pour quel verre le volume et la hauteur de jus de fruits sont-ils proportionnels ? Justifier.
+		\item Pour le verre A, quel est le volume de jus de fruits si la hauteur est de $5$~cm ?
+		\item Quelle est la hauteur de jus de fruits si on en verse $50$~cm$^3$ dans le verre B ?
+ 	\end{enumerate}
+\item  Montrer, par le calcul, que les deux verres ont le même volume total à $1$ cm$^3$ près.
+\item  Calculer la hauteur du jus de fruits servi dans le verre A pour que le volume de jus soit égal à $200$~cm$^3$. Donner une valeur approchée au centimètre près.
+\item  Un restaurateur sert ses verres de telle sorte que la hauteur du jus de fruits dans le verre soit égale à $8$~cm.
+	\begin{enumerate}
+		\item Par lecture graphique, déterminer quel type de verre le restaurateur doit choisir pour servir le plus grand nombre possible de verres avec 1 L de jus de fruits.
+		\item Par le calcul, déterminer le nombre maximum de verres A qu'il pourra servir avec 1 L de jus de fruits.
+	\end{enumerate}
+\end{enumerate}
+
+\newpage
+\begin{center}
+\textbf{\large ANNEXE 1 - A rendre avec la copie}
+
+\vspace{2cm}
+
+
+\textbf{ANNEXE 1.1}
+
+\bigskip
+
+\psset{unit=0.5cm}
+\begin{pspicture}(16,10)
+\multido{\n=0+1}{17}{\psline[linewidth=0.3pt,linecolor=blue](\n,0)(\n,10)}
+\multido{\n=0+1}{11}{\psline[linewidth=0.3pt,linecolor=blue](0,\n)(16,\n)}
+\def\Te{\pspolygon[linewidth=1.6pt](0,0)(3,0)(3,1)(2,1)(2,2)(1,2)(1,1)(0,1)}
+\rput(4,3){\Te}\rput{90}(5,4){\Te}\rput{-90}(3,4){\Te}\rput{-180}(4,5){\Te}
+\rput(12,5){\Te}\rput{90}(13,6){\Te}\rput{-90}(11,6){\Te}\rput{-180}(12,7){\Te}
+\rput(3.5,0.5){Figure A}
+\rput(11.5,2.5){Figure B}
+\end{pspicture}
+
+\vspace{1.5cm}
+
+\textbf{ANNEXE 1.2}
+
+\bigskip
+
+\psset{xunit=1cm,yunit=0.025cm}
+\begin{pspicture}(-0.5,-25)(10.5,325)
+\multido{\n=0.0+0.2}{53}{\psline[linewidth=0.2pt,linecolor=orange](\n,0)(\n,325)}
+\multido{\n=0+1}{11}{\psline[linewidth=0.6pt,linecolor=orange](\n,0)(\n,325)}
+\multido{\n=0+10}{33}{\psline[linewidth=0.2pt,linecolor=orange](0,\n)(10.5,\n)}
+\multido{\n=0+10}{7}{\psline[linewidth=0.6pt,linecolor=orange](0,\n)(10.5,\n)}
+\psaxes[linewidth=1.25pt,Dy=50]{->}(0,0)(0,0)(10.5,325)
+\uput[r](0,310){\footnotesize Volume de jus de fruits (en cm$^3$)}
+\uput[d](8.6,-18){\footnotesize hauteur de jus de fruits (en cm)}
+\psplot[plotpoints=2000,linewidth=1.25pt,linecolor=blue]{0}{10}{ x 3 exp 5.2 mul 5.2 mul 3.14159 mul 300 div}
+\psline[linestyle=dashed](0,0)(10,283.162)
+\uput[dr](7.8,140){\blue Verre B}
+\uput[ul](6,170){Verre A}
+\end{pspicture}
+\end{center}
+\end{document}\end{document}

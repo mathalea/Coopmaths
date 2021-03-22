@@ -1,0 +1,105 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 1} \hfill 5,5 points}
+
+\medskip
+
+%\parbox{0.75\linewidth}{\emph{Pour cet exercice, aucune justification n'est attendue.}
+%
+%
+%En appuyant sur un bouton, on allume une des cases de la grille ci-contre 
+%au hasard.}\hfill 
+%\parbox{0.22\linewidth}{\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+%1 &2& 3\\ \hline
+%4 &5& 6\\ \hline 
+%7 &8 &9\\ \hline
+%\end{tabularx}}
+%
+%\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item %Quelle est la probabilité que la case 1 s'allume?
+La probabilité est égale à $\dfrac{1}{9}$.
+		\item %Quelle est la probabilité qu'une case marquée d'un chiffre impair s'allume ?
+		Il y a sur les 9 nombres, 5 qui sont impairs ; la probabilité est donc égale à $\dfrac{5}{9}$.		
+		\item %Pour cette expérience aléatoire, définir un évènement qui aurait pour probabilité $\dfrac{1}{3}$.
+Évènements de probabilité  $\dfrac{1}{3}$ : 
+
+\og la case d'un multiple de 3 s'allume \fg ;
+
+\og la case d'un nombre plus petit que 4 s'allume \fg.
+	\end{enumerate}
+\item %Les cases 1 et 7 sont restées allumées. En appuyant sur un autre bouton, quelle est la
+%probabilité que les trois cases allumées soient alignées ?
+En supposant que les seules les cases éteintes puissent s'allumer la seule possibilité d'avoir trois cases allumées et alignées est que la case 4 s'allume soit une chance sur 7 cases éteintes : probabilité égale à $\dfrac{1}{7}$.
+\end{enumerate}
+
+\vspace{0,5cm}
+
+\end{document}

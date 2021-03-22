@@ -1,0 +1,68 @@
+
+\medskip
+
+François aide son papa à reconstruire le faré du jardin.
+
+Le toit a la forme d'une pyramide à base carrée représentée ci-dessous.
+
+François doit acheter du bois de charpente pour refaire les traverses de ce toit à quatre pans.
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(10,7)
+%\psgrid
+\pspolygon(0.5,0.5)(7,0.5)(9.7,2.2)(5.1,6.6)(7,0.5)%AB?CBA
+\psline(0.5,0.5)(5.1,6.6)%AC
+\psline[linestyle=dashed](0.5,0.5)(9.7,2.2)
+\psline[linestyle=dashed](3.2,2.2)(7,0.5)
+\psline[linestyle=dashed](0.5,0.5)(3.2,2.2)(9.7,2.2)
+\psline[linestyle=dashed](3.2,2.2)(5.1,6.6)(5.1,1.35)
+\psline(2.1,2.65)(6.37,2.65)(8.12,3.7)%GF--
+\psline[linestyle=dashed](2.1,2.65)(3.85,3.7)(8.12,3.7)%G--
+\psline(3.5,4.5)(5.8,4.5)(6.7,5.1)%DE--
+\psline[linestyle=dashed](3.5,4.5)(4.4,5.1)(6.7,5.1)%D--
+\uput[dl](0.5,0.5){A} \uput[dr](7,0.5){B} \uput[u](5.1,6.6){C} \uput[ul](3.5,4.5){D} 
+\uput[ur](5.7,4.55){E} \uput[ur](6.27,2.65){F} \uput[ul](2.1,2.65){G} \uput[d](5.1,1.38){H}
+\rput(8.4,4.8){traverses}
+\psline{->}(8.4,4.6)(6.2,4.8)
+\psline{->}(8.4,4.6)(7.3,3.2)
+\psline{->}(8.4,4.6)(8.6,1.52) 
+\end{pspicture}
+
+AC = 3,60 m, \quad AH = 2,88 m,\quad CH = 2,16 m
+\end{center}
+
+\begin{enumerate}
+\item Montrer que le triangle ACH est rectangle en H.
+\item On a représenté ci-dessous le pan ABC.
+
+\parbox{0.5\linewidth}{\psset{unit=0.9cm}
+\begin{pspicture}(6.3,5)
+%\psgrid
+\def\barbar{\psline(-0.15,0.15)(0.15,-0.15)\psline(-0.08,0.15)(0.22,-0.15)}
+\def\barbard{\psline(0.15,0.15)(-0.15,-0.15)\psline(0.08,0.15)(-0.23,-0.15)}
+\pspolygon(0.5,0.5)(5.8,0.5)(3.15,4.5)%ABC
+\psline(1.38,1.8)(4.92,1.8)%GF
+\psline(2.2,3.1)(4.1,3.1)%DE
+\uput[dl](0.5,0.5){A} \uput[dr](5.8,0.5){B} \uput[u](3.15,4.5){C} 
+\uput[ul](2.2,3.1){D} \uput[ur](4.1,3.1){E} \uput[ur](4.92,1.8){F} 
+\uput[ul](1.38,1.8){G}
+\rput(1,1.3){\barbar}\rput(1.8,2.5){\barbar}\rput(2.7,3.8){\barbar}
+\rput(5.3,1.23){\barbard}\rput(4.5,2.5){\barbard}\rput(3.6,3.8){\barbard}
+\end{pspicture}
+}\hfill\parbox{0.48\linewidth}{ABC est un triangle isocèle en C.
+
+AC = 3,60 m
+
+Les distances AG, GD, DC, CE, EF et FB sont
+égales.
+
+Les droites (DE), (GF) et (AB) sont parallèles.}
+
+	\begin{enumerate}
+		\item Le pan ABC comprend trois traverses [DE], [GF] et [AB].
+François a coupé une traverse [AB] de 4,08 m.
+Calculer DE.
+		\item On donne de plus GF = 2,72 m. Les quatre pans de la toiture sont identiques.
+Calculer la longueur totale des traverses nécessaires pour refaire la toiture.
+	\end{enumerate} 
+\end{enumerate}

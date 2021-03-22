@@ -1,0 +1,115 @@
+
+\medskip
+
+%\parbox{0.6\linewidth}{Dans tout l'exercice l'unité de longueur est le mm.
+%
+%\smallskip
+%
+%On lance une fléchette sur une plaque carrée sur laquelle figure
+%une cible circulaire (en gris sur la figure), Si la pointe de la
+%fléchette est sur le bord de la cible, on considère que la cible
+%n'est pas atteinte.
+%
+%On considère que cette expérience est aléatoire et l'on
+%s'intéresse à la probabilité que la fléchette atteigne la cible.
+%
+%\setlength\parindent{3mm}
+%\begin{itemize}
+%\item La longueur du côté de la plaque carrée est 200.
+%\item Le rayon de la cible est 100.
+%\item La fléchette est représentée par le point F de coordonnées
+%$(x~;~y)$ où $x$ et $y$ sont des nombres aléatoires compris entre $-100$ et $100$.
+%\end{itemize}
+%\setlength\parindent{0mm}}\hfill
+%\parbox{0.38\linewidth}{
+%\psset{unit=0.027cm}
+%\begin{pspicture}(-100,-100)(106,106)
+%\pscircle[fillstyle=solid,fillcolor=lightgray](0,0){100}
+%\uput[u](105,0){$x$}\uput[r](0,105){$y$}
+%\multido{\n=-100+50}{5}{\psline[linewidth=0.2pt,linestyle=dashed](\n,-100)(\n,100)}
+%\multido{\n=-100+50}{5}{\psline[linewidth=0.2pt,linestyle=dashed](-100,\n)(100,\n)}
+%\psaxes[linewidth=1.25pt,Dx=50,Dy=50]{->}(0,0)(-100,-100)(106,106)
+%\psaxes[linewidth=1.25pt,Dx=50,Dy=50](0,0)(-100,-100)(106,106)
+%\rput(-65,45){Cible}
+%\psdots[dotstyle=+,dotangle=45](0,0)(72,0)(72,54)%OHF
+%\uput[dl](0,0){O}\uput[dr](72,0){H}\uput[ul](72,54){F}
+%\pspolygon(0,0)(72,0)(72,54)\psframe(72,0)(66,6)
+%\end{pspicture}}
+%
+%\medskip
+
+\begin{enumerate}
+\item %Dans l'exemple ci-dessus, la fléchette F est située au point de coordonnées (72~;~54).
+Le triangle OFH est rectangle en H ; le théorème dePythagore appliqué ce triangle s'écrit :
+
+$\text{OF}^2 = \text{OH}^2 + \text{HF}^2$, soit $\text{OF}^2 =  72^2 + 54^2 = \np{5184} + \np{2916} = \np{8100}$, donc OF $= \sqrt{\np{8100}} = 90$.
+
+%Montrer que la distance OF, entre la fléchette et l'origine du repère est $90$.
+\item %D'une façon générale, quel nombre ne doit pas dépasser la distance OF pour que la fléchette atteigne la cible ?
+La fléchette doit être à l'intérieur du cercle, donc on doit avoir $\text{OF}^2 = x^2 + y^2 < 100^2$ ou encore $x^2 + y^2 < \np{10000}$, $x$ et $y$ étant les coordonnées du point F.
+\item %On réalise un programme qui simule plusieurs fois le lancer de cette fléchette sur la plaque carrée et qui compte le nombre de lancers atteignant la cible. Le programmeur a créé trois variables nommées :
+
+%\textbf{carré de OF, distance et score}.
+
+%\medskip
+
+%\begin{scratch}
+%\blockinit{Quand \greenflag est cliqué}
+%\blockvariable{mettre \selectmenu{\textbf{score}}à \ovalnum{0}}
+%\blockrepeat{répéter \ovalnum{$120$} fois}
+%{
+%\blockmove{aller à x :{nombre aléatoire entre \ovalnum{-100} et \ovalnum{100}} y : {nombre aléatoire entre \ovalnum{-100} et \ovalnum{100}}}
+%\blockvariable{mettre \selectmenu{carré de OF} à \ovaloperator{\ovaloperator{\ovalvariable{abscisse x} * \ovalvariable{abscissex}} + \ovalnum{\quad\quad\quad\quad\quad\quad\quad\quad}}}}
+%\blockvariable{mettre \selectmenu{distance} à {\selectmenu{racine} de \ovalnum{~~~~~~~~~~~~~}}}
+%%\blockif{si \selectmenu{distance} < \ovalnum{...} alors}
+%%{ajouter à \txtbox{score}\ovalnum{1}
+%}
+%\end{scratch}
+
+
+%\begin{scratch}
+%\blockinit{Quand \greenflag est cliqué}
+%\blockvariable{mettre \selectmenu{score} à \ovalnum{0}}
+%\blockrepeat{répéter \ovalnum{120} fois}
+%	{
+%	\blockmove{aller à x: \ovaloperator{nombre aléatoire entre \ovalnum{-100} et \ovalnum{100}} y: \ovaloperator{nombre aléatoire entre \ovalnum{-100} et \ovalnum{100}}}
+%	\blockvariable{mettre \selectmenu{\textbf{Carré de OF}} à 
+%		\ovaloperator{\ovaloperator{\ovalmove{abscisse x} * \ovalmove{abscisse x}} + \ovaloperator{\txtbox{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}}}
+%	\blockvariable{mettre \selectmenu{distance} à \ovaloperator{\selectmenu{racine} de \ovalvariable{\txtbox{~~~~~~~~~~~~~~~~~~~~~~~~~~}}}}
+%	\blockif{si \booloperator{\ovalvariable{distance} < \ovalnum{...}} alors}
+%		{
+%		\blockvariable{ajouter à \selectmenu{score} \ovalnum{1}}
+%		}
+%	}
+%\end{scratch}
+
+	\begin{enumerate}
+		\item %Lorsqu'on exécute ce programme, combien de lancers sont simulés ?
+On simule 120 lancers.
+		\item %Quel est le rôle de la variable \textbf{score} ?
+		\textbf{score} comptabilise le nombre de lancers ayant atteint la cible.
+		\item %Compléter et recopier sur la copie uniquement les lignes 5, 6 et 7 du programme afin qu'il fonctionne correctement.
+Dans la ligne mettre Carré de OF il faut compléter par « ordonnée $y *$ ordonnée $y$ » ;
+
+Dans la ligne mettre distance il faut écrire « racine de Carré de OF\fg{} ;
+
+Dans la ligne si distance il faut compléter avec le nombre 100.
+		\item %Après une exécution du programme, la variable \textbf{score} est égale à $102$. 
+		
+%À quelle fréquence la cible a-t-elle été atteinte dans cette simulation  ?
+		
+%Exprimer le résultat sous la forme d'une fraction irréductible.
+Le nombre de réussites étant égal à 102 sur 120 lancers, la fréquence de réussite est égale à $\dfrac{102}{120} = \dfrac{51}{60} = \dfrac{3 \times 17}{3 \times 20} = \dfrac{17}{20}$.
+	\end{enumerate}
+\item  %On admet que la probabilité d'atteindre la cible est égale au quotient : aire de la cible divisée par aire de la plaque carrée.
+	
+%Donner une valeur approchée de cette probabilité au centième près.
+L'aire du carré est égale à $200^2 = \np{40000}$ ; l'aire de la cible est égale à $\pi \times 100^2 = \np{10000}\pi$.
+
+La probabilité est donc égale à $\dfrac{\np{10000}\pi}{\np{40000}} = \dfrac{\pi}{4} \approx 0,785$, soit 0,79 au centième près.
+
+
+\end{enumerate}
+ 
+\vspace{0,5cm}
+

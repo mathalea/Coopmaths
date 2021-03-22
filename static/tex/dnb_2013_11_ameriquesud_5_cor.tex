@@ -1,0 +1,94 @@
+\textbf{Exercice 5 \hfill 8 points}
+
+\medskip  
+
+%Un éleveur a acheté $40$ m de grillage; il veut adosser un enclos rectangulaire à sa grange, contre un mur de $28$~m de long. 
+% 
+%\begin{center}
+%\psset{unit=1cm}
+%\begin{pspicture}(8,5.5)
+%\psframe[fillstyle=vlines](0,4.5)(8,5) \uput[u](4,5){mur}
+%\psline(0.5,4.5)(0.5,0.5)(7.5,0.5)(7.5,4.5)
+%\rput{90}(0.1,2.5){grillage}\rput{90}(7.6,2.5){grillage}
+%\rput(4,0.3){grillage}
+%\uput[d](4,0.1){$x$}\uput[r](7.7,2.5){$y$}
+%\psline{<->}(0.5,0.1)(7.5,0.1)
+%\psline{<->}(7.75,0.5)(7.75,4.5)
+%\end{pspicture}
+%\end{center}
+%
+%Il souhaite offrir ainsi le maximum de place à ses brebis en utilisant le grillage. 
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item %Pour $x = 4$~m , calculer la longueur $y$, puis l'aire $A$ de l'enclos en m$^2$.
+On a $4 + 2y = 48$ soit $2y = 44$ et donc $y = 22$. D'où $A = xy = 4 \times 22 = 88$. 
+		\item %Recopier et compléter le tableau ci-dessous : 
+~
+\begin{center}
+\begin{tabularx}{0.6\linewidth}{|c|*{4}{>{\centering \arraybackslash}X|}}\hline
+$x$ (en m)						&4	&10		&20		&28\\ \hline   
+$y$ (en m)						&18	&15		&10		&6\\ \hline             
+$A \left(\text{en m}^2\right)$	&72	&150	&200	&168\rule[-2mm]{0mm}{7mm}\\ \hline
+\end{tabularx}
+\end{center}
+
+	\end{enumerate}   
+\item %Déterminer $y$ en fonction de $x$.
+On a $x + 2y = 40$ soit $2y = 40 - x$ et enfin $y = - \dfrac{1}{2}x + 20$. (fonction affine)
+
+%En déduire que $A = 20x - 0,5x^2$.
+$A = xy = x\left(- \dfrac{1}{2}x + 20 \right) = - \dfrac{1}{2}x^2 + 20x$. 
+\item %Voici la plage de cellules réalisées dans un tableur-grapheur qui permettra de calculer la valeur de $A$. 
+
+%\begin{center}    
+%\begin{tabularx}{0.4\linewidth}{|c|*{2}{>{\centering \arraybackslash}X|}}\hline    
+%				&Valeur de $x$	&   Valeur de $A$\\ \hline     
+%2				&4				&\\ \hline
+%3				&6				&\\ \hline
+%4				&8				&\\ \hline
+%5				&10				&\\ \hline
+%6				&12				&\\ \hline
+%7				&14				&\\ \hline
+%8				&16				&\\ \hline
+%9				&18				&\\ \hline            
+%11				&22				&\\ \hline         
+%12				&24				&\\ \hline         
+%13				&26				&\\ \hline      
+%14				&28				&\\ \hline       
+%\end{tabularx}
+%\end{center}
+
+%Quelle formule doit-il saisir dans la cellule B2 et qui pourra être étendue sur toute la colonne B ? 
+=20*A2$-$0,5*A2*A2 ou =20*A2$-$A$2^2$.
+\item %Le graphique ci-dessous représente l'aire $A$ en fonction de la longueur $x$ compris entre 4~m et 28m. 
+
+%\begin{center}
+%\psset{xunit=0.25cm,yunit=0.025cm}
+%\begin{pspicture}(-2,-15)(30,250)
+%\multido{\n=0+5}{7}{\psline[linewidth=0.5pt](\n,0)(\n,250)}
+%\multido{\n=0+10}{26}{\psline[linewidth=0.5pt](0,\n)(30,\n)}
+%\multido{\n=0+50}{6}{\psline[linewidth=1.25pt](0,\n)(30,\n)}
+%\psaxes[linewidth=1.5pt,Dx=5,Dy=50](0,0)(30,250)
+%\psplot[plotpoints=5000,linewidth=1.25pt,linecolor=blue]{4}{28}{24 x mul x dup mul 0.5 mul sub}
+%\end{pspicture}
+%\end{center}
+%
+%À l'aide de ce graphique répondre aux questions suivantes en donnant des valeurs approchées : 
+
+	\begin{enumerate}
+		\item %Quelle est l'aire de cet enclos pour $x = 14$~m ?
+La verticale passant par le point de coordonnées (14~;~0) coupe la courbe en un point dont l'ordonnée est à peu près égale à 180. 
+		\item %Pour quelle(s) valeur(s) de $x$ l'aire de l'enclos est égale à $192$~m$^2$ ? 
+L'horizontale contenant le point de coordonnées (0,192) coupe la courbe en deux points dont les abscisses sont environ 16 et 24.
+		\item %Pour quelle(s) valeur(s) de $x$ l'aire de l'enclos est maximale ? 
+Il semble que le maximum de l'aire 200 est atteint pour $x = 20$.
+%En déduire les dimensions de l'enclos pour que les brebis aient le maximum de place.
+
+On a déjà vu qu'alors $y = 10$ et donc $A = xy = 20 \times 10 = 200$.
+	\end{enumerate} 
+\end{enumerate}
+
+\bigskip
+

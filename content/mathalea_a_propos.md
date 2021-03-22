@@ -9,11 +9,21 @@ description: "Générateur d'exercices de mathématiques à données aléatoires
 Ce générateur d'exercices à données aléatoires est présenté dans cet <a href="http://revue.sesamath.net/spip.php?article1352" target="_blank">article de MathémaTICE</a> (écrit en juin 2020).
 
 
-### Soutien
+### Soutiens
 
 Depuis l'été 2020, MathALEA est un projet soutenu par l'association <a href="https://www.sesamath.net" target="_blank">Sésamath</a>.
 
-<a href="https://www.sesamath.net" target="_blank"><img src="/images/sesamath_logo.png"></a>
+<a href="https://www.sesamath.net" target="_blank"><img class="ui centered image" src="/images/sesamath_logo.png"></a>
+
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+
+L'intégration des annales du brevet des collèges a été réalisée grâce au travail précieux de l'APMEP et à Denis Vergès qui a retranscrit en LaTeX et coordonné la rubrique des annales de concours du site de l'APMEP : [https://www.apmep.fr/-Annales-Bac-Brevet-BTS-](https://www.apmep.fr/-Annales-Bac-Brevet-BTS-).
+
+<a  href="https://www.apmep.fr" target="_blank"><img class="ui centered image" src="/images/logoapmep.png"></a>
+
+Au printemps 2020, Sébastien Lozano a réalisé un [programme](https://github.com/slozano54/projetDNB) (bash et Python) qui analyse les fichiers mis à disposition par l'APMEP pour les découper exercice par exercice et générer une image pour chaque exercice et chaque correction.
 
 
 ### Objectifs
@@ -28,17 +38,23 @@ Depuis l'été 2020, MathALEA est un projet soutenu par l'association <a href="h
 
 ### Pour participer
 
-Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/remiangot/Coopmaths) et lire la documentation sur le [wiki](https://github.com/remiangot/Coopmaths/wiki). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tout ceux qui souhaiteraient participer.
+Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/remiangot/MathALEA) et lire la documentation sur le [wiki](https://github.com/remiangot/MathALEA/wiki). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tout ceux qui souhaiteraient participer.
 
 
 
 ### Crédits
 
 - Moteur développé par Rémi Angot sous licence **CC-By-SA**.
-- Exercices écrits par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain et Erwan Duplessy puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
+- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **CC-By-SA**.
+
+### Ressources libres utilisées
+
+
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
 - [maths.js](https://mathsjs.org) Apache license 2.0 (pour le calcul formel et les matrices)
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Biton - Licence GNU AGPLv3 (pour les constructions géométriques).
+- [Giac/XCas](https://www-fourier.ujf-grenoble.fr/~parisse/giac_fr.html) développé par Bernard Parisse et Renée De Graeve (pour le calcul formel dans les exercices de lycée)
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
 - [KaTeX](https://khan.github.io/KaTeX/) LPPL (pour le rendu LaTeX des exercices en ligne).
 - [Dowload.js](http://danml.com/download.html) CCBY2 (pour le téléchargement du fichier LaTeX généré).
@@ -60,8 +76,9 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 ### ToDo
 
 - Nouveaux exercices (notamment en cycle 4 et lycée).
-- Meilleur rangement des exercices (moteur de recherche, mots-clés...)
-- Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome).
+- Meilleur rangement des exercices (moteur de recherche, mots-clés...).
+- Intégrer des exercices écrits en MarkDown ou dans un langager très simple.
+- ~~Possibilité d'ajouter et d'éditer des exercices statiques de CoopMaths (à l'image de l'excellent travail de Thomas Castanet sur Chingatome)~~.
 - ~~Faire le lien avec les demandes de re-évaluation dans SACoche (voir [article](http://revue.sesamath.net/spip.php?article535) sur MathémaTICE).~~
 - ~~Améliorer l'export sur overleaf.com avec support du thème CoopMaths.~~
 - ~~Proposer des versions diaporamas.~~
@@ -71,6 +88,13 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 ### Changelog
 
+#### 03/21
+
+
+- Intégration des annales de brevet en partenariat avec l'APMEP.
+- Export au format AMC.
+- Exercices sur les ratios.
+- Arrivée de Cédric Grolleau pour la programmation d'exercices.
 
 #### 01/21
 

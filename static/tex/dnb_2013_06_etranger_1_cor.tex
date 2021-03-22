@@ -1,0 +1,122 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 1} \hfill 6 points}
+
+\medskip
+
+%\emph{Cet exercice est un questionnaire à choix multiple (QCM). Pour chaque ligne du tableau, trois réponses sont proposées, mais une seule est exacte. Toute réponse exacte vaut $1$ point. Toute réponse inexacte ou toute absence de réponse n'enlève pas de point. Pour chacune des questions, on indiquera sur sa feuille le numéro de la question et la réponse choisie.}
+%
+%\medskip
+%
+%\begin{tabularx}{\linewidth}{|c|m{3cm}|*{3}{>{\centering \arraybackslash}X|}}\hline 
+%& & réponse A &réponse B &réponse C\\ \hline 
+%1& Les solutions de l'équation $(x+7)(2x - 7)= 0$ sont& 
+%$-7$ et $3,5$& 7 et $- 3,5$& $- 7$ et $5$\\ \hline 
+%2&La (ou les) solution(s) de l'inéquation $-2(x + 7) \leqslant  - 16$ est (sont)&tous les nombres inférieurs ou égaux à 1&tous les nombres supérieurs ou égaux à 1&1\\ \hline 
+%3&La forme développée de $(7x - 5)^2$ est&$49x^2 - 25$&$49x^2 - 70x + 25$& $49x^2 - 70x - 25$\\ \hline
+%4&La forme factorisée de $9 - 64x^2$ est& $- 55 x^2$&$(3 - 8x)^2$&$(3 - 8x)(3 + 8x)$\\ \hline
+%5&\psset{unit=0.8cm}\begin{pspicture}(-1,0)(1,5)
+%%\psgrid
+%\psellipse[fillstyle=solid,fillcolor=lightgray](0,0.2)(0.4,0.2)
+%\pspolygon[fillstyle=solid,fillcolor=lightgray](-0.3,3.1)(0.3,3.1)(0,1.8)
+%\psline[linewidth=1.4pt](0,0.2)(0,1.8)
+%\psellipse(0,4.3)(0.6,0.3)
+%\psline[linewidth=1.4pt](-0.6,4.3)(0,1.8)(0.6,4.3)
+%\psellipse[fillstyle=solid,fillcolor=lightgray](0,3.1)(0.3,0.15)
+%\psline{<->}(0.8,1.8)(0.8,4.3) \uput[r](0.8,3.1){$h$}
+%\psline{<->}(-0.8,1.8)(-0.8,3.1) \uput[r](-0.8,2.45){$\frac{h}{2}$}
+%\end{pspicture}
+%
+%Le liquide remplit-il à moitié le verre ?&oui&non, c'est moins de la moitié&non, c'est plus de la moitié\\ \hline
+%6&La section KMEH du cube ABCDEFGH par un plan parallèle à une de ses arêtes est \ldots
+%
+%\psset{unit=0.6cm}\begin{pspicture}(-0.2,-0.2)(4.6,4.8)
+%\pspolygon[fillstyle=solid,fillcolor=lightgray](1.1,1.1)(1.1,4.2)(2.2,3.1)(2.2,0)
+%\psframe(3.1,3.1)%ABCD
+%\psline(3.1,0)(4.2,1.1)(4.2,4.2)(3.1,3.1)%DFGC
+%\psline(4.2,4.2)(1.1,4.2)(0,3.1)%GHD
+%\psline[linestyle=dashed](0,0)(1.1,1.1)(4.2,1.1)%AEF
+%\uput[l](0.15,0.15){\footnotesize A} \uput[r](3.1,0){\footnotesize B} \uput[r](3.1,3.1){\footnotesize C} 
+%\uput[ul](0,3.1){\footnotesize D} \uput[l](1.1,1.1){\footnotesize E} \uput[ur](4.2,1.1){\footnotesize F} 
+%\uput[ur](4.2,4.2){\footnotesize G} \uput[ul](1.1,4.2){\footnotesize H} \uput[ur](2.2,3.1){\footnotesize K} 
+%\uput[ur](2.2,0){\footnotesize M}
+% 
+%\end{pspicture}
+%&un parallélogramme non rectangle&un carré &un rectangle\\ \hline
+%\end{tabularx} 
+\begin{enumerate}
+\item On a $x+7 = 0$ ou $2x-7=0$ soit $x = - 7$ ou $x = \dfrac{7}{2}$. Réponse A.
+\item $- 2(x+7) \leqslant - 16$ soit $- 2x - 14 \leqslant - 16$ ou $2 \leqslant 2x$ et enfin $1 \leqslant x$. Réponse B.
+\item $(7x - 5)^2 = 49x^2 + 25 - 70x$. Réponse B.
+\item $9 - 64x^2 = (3 + 8x)(3 - 8x)$. Réponse C.
+\item Si la hauteur est divisée par 2, le rayon de la base du cône aussi ; réponse B.
+\item On a EM $>$ AE ; on a donc un rectangle. Réponse C.
+\end{enumerate}
+
+\bigskip
+
+\end{document}

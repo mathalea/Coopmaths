@@ -1,0 +1,97 @@
+\textbf{Exercice 2 \hfill 6,5 points}
+
+\medskip
+
+%Depuis 1981, le service de la pêche maintient un parc permanent de Dispositifs de
+%Concentration de Poisson (DCP) ancrés afin de soutenir l'activité de pêche de la flottille
+%côtière. Selon les années, entre 25\,\% à 40\,\% de la production de la flotte professionnelle est capturée autour des DCP. La totalité de DCP ancrés entre les années 2006 et 2011 est de 107.
+%
+%Voici l'historique des ancrages de DCP de 2006 à 2011, créé à l'aide d'un tableur :
+
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|*{7}{>{\centering \arraybackslash}X|}}\hline
+%	&A &B 	&C 	&D 	&E 	&F 	&G\\ \hline
+%1& Année& Australes &\footnotesize Îles du Vent (IDV)&\footnotesize Îles sous le Vent (ISLV)& \small Marquises& Tuamotu &Total\\ \hline 
+%2& 2006&0	&5	&2	&0	&5 	&12\\ \hline
+%3& 2007&0 	&18 &0 	&0 	&0 	&18\\ \hline
+%4& 2008&1 	&18 &1 	&0 	&1 	&21\\ \hline
+%5& 2009&0 	&6 	&6 	&0 	&0 	&12\\ \hline
+%6& 2010&0 	&6 	&9 	&0 	&2 	&17\\ \hline
+%7& 2011&4 	&1 	&2 	&8 	&12 &27\\ \hline
+%8& TOTAL& 5 &\ldots&20 &8 &20 &107\\ \hline
+%\end{tabularx}
+%\end{center}
+
+\begin{enumerate}
+\item %Combien de DCP a-t-on ancrés aux Îles du Vent en 2008 ?
+On lit  : 18
+
+\item %Combien de DCP a-t-on ancrés au total en 2010 ?
+Il suffit de lire : 17.
+\item %En quelle année a-t-on le plus ancré de DCP ?
+C'est en 2011 qu'il y a eu le plus de DCP ancrés.
+\item ~%Les diagrammes ci-dessous représentent la répartition des ancrages de DCP à différentes années.
+
+%Déterminer celui qui représente la répartition des ancrages de DCP en 2010, en cochant
+%la case correspondante.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{*{3}{>{\centering \arraybackslash}X}}
+\psset{unit=0.5cm}\begin{pspicture}(0,-2)(5,6)
+\psaxes[linewidth=1.25pt,Dx=10](0,0)(5,6)
+\psframe[fillstyle=solid,fillcolor=lightgray](1,0)(2,5)
+\psframe[fillstyle=solid,fillcolor=lightgray](2,0)(3,2)
+\psframe[fillstyle=solid,fillcolor=lightgray](4,0)(5,5)
+\rput(-0.5,-0.8){\rotatebox{45}{\footnotesize Australes}}
+\rput(0.5,-0.8){\rotatebox{45}{\footnotesize IDV}}
+\rput(1.5,-0.8){\rotatebox{45}{\footnotesize ISLV}}
+\rput(2.5,-0.8){\rotatebox{45}{\footnotesize  Marquises}}
+\rput(3.5,-0.8){\rotatebox{45}{\footnotesize Tuamotu}}
+\end{pspicture}&\psset{xunit=0.5cm,yunit=0.333cm}
+\begin{pspicture}(0,-3)(5,10)
+\psaxes[linewidth=1.25pt,Dx=10](0,0)(5,10)
+\psframe[fillstyle=solid,fillcolor=lightgray](1,0)(2,6)
+\psframe[fillstyle=solid,fillcolor=lightgray](2,0)(3,9)
+\psframe[fillstyle=solid,fillcolor=lightgray](4,0)(5,2)
+\uput[d](-0.5,0){\rotatebox{45}{\footnotesize Australes}}
+\uput[d](0.7,0){\rotatebox{45}{\footnotesize IDV}}
+\uput[d](1.7,0){\rotatebox{45}{\footnotesize ISLV}}
+\uput[d](2.7,0){\rotatebox{45}{\footnotesize  Marquises}}
+\uput[d](3.7,0){\rotatebox{45}{\footnotesize Tuamotu}}
+\end{pspicture}&\psset{xunit=0.5cm,yunit=0.4cm}
+\begin{pspicture}(0,-3)(5,8)
+\psaxes[linewidth=1.25pt,Dx=10](0,0)(5,8)
+\psframe[fillstyle=solid,fillcolor=lightgray](2,0)(3,6)
+\psframe[fillstyle=solid,fillcolor=lightgray](3,0)(4,6)
+\uput[d](-0.5,0){\rotatebox{45}{\footnotesize Australes}}
+\uput[d](0.7,0){\rotatebox{45}{\footnotesize IDV}}
+\uput[d](1.7,0){\rotatebox{45}{\footnotesize ISLV}}
+\uput[d](2.7,0){\rotatebox{45}{\footnotesize  Marquises}}
+\uput[d](3.7,0){\rotatebox{45}{\footnotesize Tuamotu}}
+\end{pspicture}\\
+$\Box$&$\boxtimes$&$\Box$\\
+\end{tabularx}
+\end{center}
+\item 
+	\begin{enumerate}
+		\item %Compléter dans le tableau précédent, la cellule C8.
+Il y a eu  en 2008  : $107 - (5 + 20  + 8 + 20) = 107 - 53 = 54$ DCP ancrés aux Îles du Vent.
+
+On pouvait aussi calculer $ 5 + 18 + 18 + 6 + 6 +1 = 54$.
+		\item %Parmi les formules ci-dessous, laquelle peut-on utiliser pour obtenir la valeur en C8 ?
+		
+%Entourer la bonne réponse.
+
+\begin{center}
+\renewcommand\arraystretch{1.8}
+\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline		
+5+18+18+18+6+6+1 &\fbox{= Somme(C2~:~C7)} &\footnotesize = D2+D3+D4+D5+D6+D7\\ \hline
+\end{tabularx}
+\renewcommand\arraystretch{1}
+\end{center}
+ 
+	\end{enumerate}
+\end{enumerate}
+
+\bigskip
+

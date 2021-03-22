@@ -1,0 +1,42 @@
+
+\medskip
+
+Lors d'une étape cycliste, les distances parcourues par un cycliste ont été relevées
+chaque heure après le départ.
+
+Ces données sont précisées dans le graphique ci-dessous :
+
+\begin{center}
+\psset{xunit=2.1cm,yunit=0.0325cm}
+\begin{pspicture}(-0.5,-10)(6,220)
+\multido{\n=0.0+0.5}{13}{\psline[linestyle=dotted,linecolor=cyan](\n,0)(\n,220)}
+\multido{\n=0+10}{23}{\psline[linestyle=dotted,linecolor=cyan](0,\n)(6,\n)}
+\psaxes[linewidth=1.25pt,Dy=20]{->}(0,0)(0,0)(6,220)
+\psline[linewidth=1.25pt](0,0)(1,40)(2,70)(3,130)(4,170)(4.5,190)
+\uput[u](4.75,0){Durée de parcours (en heure)}
+\uput[r](0,215){Distance parcourue (en kilomètre)}
+\psdots[dotstyle=+,dotangle=45,dotscale=1.4](1,40)(2,70)(3,130)(4,170)(4.5,190)
+\end{pspicture}
+\end{center}
+
+Par lecture graphique, répondre aux questions suivantes.
+
+\emph{Aucune justification n'est demandée.}
+
+\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Quelle est la distance totale de cette étape ?
+		\item En combien de temps le cycliste a-t-il parcouru les cent premiers kilomètres ?
+		\item Quelle est la distance parcourue lors de la dernière demi-heure de course ?
+	\end{enumerate}
+\item  Y-a-t-il proportionnalité entre la distance parcourue et la durée de parcours de cette
+étape ?
+	
+Justifier votre réponse et proposer une explication.
+\end{enumerate}
+
+\vspace{0,5cm}
+

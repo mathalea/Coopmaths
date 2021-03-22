@@ -1,0 +1,115 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 7 \hfill 7 points}
+
+\medskip
+ 
+\textbf{Dans cet exercice, toute trace de recherche même non aboutie sera prise en compte dans l'évaluation.}
+
+\medskip
+ 
+Les gérants d'un centre commercial ont construit un parking 
+souterrain et souhaitent installer un trottoir roulant pour accéder 
+de ce parking au centre commercial.
+ 
+Les personnes empruntant ce trottoir roulant ne doivent 
+pas mettre plus de 1 minute pour accéder au centre commercial.
+ 
+La situation est présentée par le schéma ci-dessous.
+
+\begin{center}
+\psset{unit=0.5cm}
+\begin{pspicture}(22,5.5)
+\psline(0,0.5)(22,0.5)
+\psline[linewidth=1.5pt](3.5,0.5)(16.3,2)(22,2)
+\psline(16.3,0.5)(16.3,2)
+\psframe(16.3,0.5)(16,0.8) 
+\rput(11.5,5){\scriptsize Trottoir roulant}
+\psline{->}(11.5,4.3)(11.5,1.5) 
+\uput[ul](16.3,2){C} \uput[u](19,2){\scriptsize Sol du centre commercial} 
+\uput[r](16.3,1){4 m} 
+\uput[d](1.75,0.5){\scriptsize Sol du parking} 
+\uput[d](3.5,0.5){P} 
+\uput[d](10.3,0.5){25 m} 
+\uput[dr](16.3,0.5){H}
+\end{pspicture}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|X|m{0.5cm}|X|}\hline 
+\textbf{Caractéristiques du trottoir roulant} : &~&\textbf{Caractéristiques du trottoir roulant} :\\
+Modèle 1 &&Modèle 2 \\
+$\bullet~~$ Angle d'inclinaison maximum avec l'horizontale : 12~\degres&& 
+$\bullet~~$ Angle d'inclinaison maximum avec l'horizontale : 6~\degres.\\ 
+$\bullet~~$  Vitesse : 0,5 m/s&& $\bullet~~$  Vitesse : 0,75 m/s.\\ \hline
+\end{tabularx}
+\end{center}
+ 
+Est-ce que l'un de ces deux modèles peut convenir pour équiper ce centre commercial ? 
+
+Justifier. 
+\end{document}\end{document}

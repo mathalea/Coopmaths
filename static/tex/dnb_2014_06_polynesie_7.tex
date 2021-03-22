@@ -1,0 +1,109 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 7 \hfill 6 points}
+
+\medskip
+
+Dans tout cet exercice, on travaille avec des triangles ABC isocèles en A tels que : BC = 5 cm. La mesure de l'angle $\widehat{\text{ABC}}$ peut varier. 
+
+\smallskip
+
+On va alors s'intéresser aux angles extérieurs de ces triangles, c'est-à-dire, comme l'indique la figure ci-après, aux angles qui sont supplémentaires et adjacents avec les angles de ce triangle.
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(12,7.5)
+%\psgrid 
+\pspolygon(4,2)(6.3,2.8)(4,5.7)
+\uput[l](4,2){C} \uput[dr](6.3,2.8){B} \uput[ur](4,5.7){A}
+\rput(2.6,6.9){$x$}
+\rput(9.,3.6){$y$}
+\rput(3.85,0.2){$z$}
+\psline(3.9,3.7)(4.1,3.5)\psline(3.9,3.6)(4.1,3.4)
+\psline(4.9,4.4)(5.1,4.6)\psline(4.9,4.3)(5.1,4.5)
+\psline(6.3,2.8)(8.6,3.6)
+\psline(4,5.7)(2.85,7.15)
+\psline(4,2)(4,0.1)
+\psarc(4,2){5mm}{-90}{26}
+\psarc(6.3,2.8){5mm}{26}{122}
+\psarc(4,5.7){5mm}{125}{270}
+\rput(1.6,6){Angle extérieur}\psline{->}(5,1)(4.5,1.6) 
+\rput(7,4.8){Angle extérieur}\psline{->}(6.8,4.6)(6.4,3.4) 
+\rput(6.2,1){Angle extérieur}\psline{->}(2.7,5.8)(3.4,5.5)
+\end{pspicture}
+\end{center}
+
+\begin{enumerate}
+\item Dans cette question uniquement, on suppose que $\widehat{\text{ABC}} = 40\degres$. 
+	\begin{enumerate}
+		\item Construire le triangle ABC en vraie grandeur. Aucune justification n'est attendue pour cette construction. 
+		\item Calculer la mesure de chacun de ses 3 angles extérieurs. 
+		\item Vérifier que la somme des mesures de ces 3 angles extérieurs est égale à 360\degres.
+	\end{enumerate} 
+\item Est-il possible de construire un triangle ABC isocèle en A tel que la somme des mesures de ses trois angles extérieurs soit différente de $360$\degres ? 
+\end{enumerate}
+\end{document}\end{document}

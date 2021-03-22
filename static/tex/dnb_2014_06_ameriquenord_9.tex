@@ -1,0 +1,75 @@
+\textbf{\textsc{Exercice 9} \hfill 5 points}
+
+\medskip
+
+Certaines écluses ont des portes dites \og busquées \fg{} qui forment un angle pointé vers l'amont de manière à résister à la pression de l'eau, 
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(10.8,9.6)
+%\psgrid 
+\psframe[fillstyle=solid,fillcolor=lightgray](0,0.5)(1.2,9.6)
+\psframe[fillstyle=solid,fillcolor=lightgray](6.6,0.5)(7.8,9.6)
+\psline(1.2,4.7)(6.6,4.7)
+\psline[linewidth=3pt](1.2,4.7)(4,6)(6.6,4.7)
+\psline[linewidth=3pt]{->}(3.7,9)(3.7,6.7)
+\psline(3.9,6)(3.9,4.3)
+\psframe(3.9,5)(3.6,4.7)
+\rput(3.7,9.5){Amont} 
+\rput(5,9){Sens du courant} 
+\rput(9.4,7.1){Portes}
+\rput(9.4,6.7){\og busquées\fg}
+\rput(9.4,6.3){de même}
+\rput(9.4,5.9){longueur}
+\rput(1,4.7){A}\rput(6.8,4.7){B}
+\rput(4,6.3){P} 
+\psline{<->}(1.2,4.3)(6.6,4.3)
+\uput[d](3.9,4.3){5,8 m} 
+\rput(3.6,0.2){Aval}
+\pscurve(2.2,9.3)(2.4,8.3)(2,7.3)(2.15,6) 
+\pscurve(4.5,9.3)(4.7,8.3)(4.3,7.3)(4.45,6) 
+\pscurve(2.2,3.7)(2.4,2.7)(2,1.7)(2.15,0.7) 
+\pscurve(4.5,3.7)(4.7,2.7)(4.3,1.7)(4.45,0.7) 
+\psline{->}(8.5,6.7)(3.35,5.6) 
+\psline{->}(8.5,6.7)(5.6,5.3)
+\psarc(1.2,4.7){1cm}{25}{90}\rput(1.8,5.8){55~\degres}
+\end{pspicture}
+\end{center}
+ 
+En vous appuyant sur le schéma ci-dessus, déterminer la longueur des portes au cm près.
+ 
+\textbf{Si le travail n'est pas terminé, laisser tout de même une trace de la recherche. Elle sera prise en compte dans la notation.} 
+
+\newpage
+\begin{center}
+\textbf{Annexe 1}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|*{13}{>{\scriptsize\centering \arraybackslash}X|}}\hline
+&A &B &C &D &E &F &G &H &I &J &K &L &M\\ \hline 
+1 &Écluse &de Renneville &d'Encas\-san &d'Embor\-rel &de l'Océan&de la Méditerranée&du Roc &de Laurens &de la Domergue&de la Planque&de Saint-Roch &de Gay &\\ \hline
+2&&&&&&&&&&&&&\\ \hline
+3& hauteur (m)& 2,44 &4,85 &3,08 &2,62 &$-2,58$ &$-5,58$ &$- 6,78$ &$- 2,24$ &$- 2,63$ &$- 9,42$ &$- 5,23$ &\\ \hline
+4&&&&&&&&&&&&&\\ \hline
+5&&&&&&&&&&&&&\\ \hline
+\end{tabularx}
+
+\vspace{1cm}
+
+\textbf{Annexe 2}
+
+\bigskip
+
+\psset{unit=1cm}
+\begin{pspicture}(-2,-1)(6,9)
+\psgrid[gridlabels=0,subgriddiv=5,gridcolor=orange,subgridcolor=orange](6,9)
+\psaxes[linewidth=1pt](0,0)(0,0)(6,9)
+\psaxes[linewidth=1.5pt]{->}(0,0)(1,1)
+\uput[u](5.3,0){hauteur (m)}
+\uput[l](0,8.8){vitesse m/s}
+\uput[r](0,8.8){$v$}
+\psplot[plotpoints=5000,linewidth=1.25pt,linecolor=blue]{1.8}{4.3}{4.3 x sub 18.62 mul 0.5 exp}
+\uput[dl](0,0){0}
+\end{pspicture}
+\end{center}

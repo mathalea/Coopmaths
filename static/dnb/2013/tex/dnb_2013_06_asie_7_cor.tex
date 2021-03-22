@@ -1,0 +1,65 @@
+
+\medskip
+
+%\textbf{Dans cet exercice, si le travail n'est pas terminé, laisser tout de même une trace de la recherche. Elle sera prise en compte dans l'évaluation. }
+%
+%\bigskip
+%
+%\parbox{0.6\linewidth}{Un moule à muffins(2) est constitué de 9 cavités.
+%
+%Toutes les cavités sont identiques.
+%  
+%Chaque cavité a la forme d'un tronc de cône (cône 
+%coupé par un plan parallèle à sa base) représenté ci-contre. 
+%
+%Les dimensions sont indiquées sur la figure.
+%
+%(2) un muffin est une pâtisserie}\hfill
+%\parbox{0.38\linewidth}{\psset{unit=0.8cm}
+%\begin{pspicture}(6,7)
+%\psline(0,4.6)(0.5,3)\psline(2.8,4.6)(2.3,3)
+%\psellipse(1.4,4.6)(1.4,0.375)
+%\psline[linestyle=dashed](0.5,3)(1.4,0)(2.3,3.1)
+%\psline[linestyle=dashed](2.8,4.6)(4.3,4.6)
+%\psline[linestyle=dashed](2.3,3.1)(3.6,3.1)
+%\psline[linestyle=dashed](1.4,0)(4.3,0)
+%\psline[linestyle=dashed](2.8,4.6)(2.8,5.4)
+%\psline[linestyle=dashed](0,4.6)(0,5.4)
+%\psline[linewidth=0.5pt,arrowsize=2pt 3]{<->}(0,5.4)(2.8,5.4)
+%\psline[linewidth=0.5pt,arrowsize=2pt 3]{<->}(3,3.1)(3,4.6)
+%\psline[linewidth=0.5pt,arrowsize=2pt 3]{<->}(4.1,0)(4.1,4.6)
+%\uput[u](1.4,5.4){7,5 cm}\uput[r](3,3.85){4 cm}\uput[r](4.1,2.3){12 cm}
+%\psdots[dotstyle=+,dotangle=45,dotsize=0.2](1.4,4.6)(1.4,3.1)
+%\psline[linestyle=dashed](1.4,4.6)(1.4,3.1)
+%\scalebox{.99}[0.3]{\psarc(1.4,10.4){0.92}{180}{0}}%
+%\scalebox{.99}[0.3]{\psarc[linestyle=dashed](1.4,10.4){0.92}{0}{180}}%
+%\end{pspicture}}
+
+%\medskip
+% 
+%\begin{tabularx}{\linewidth}{|l X|}\hline
+%Rappels :& Volume d'un cône de rayon de base $r$ et de hauteur $h$ : $\dfrac{1}{3}\pi r^2 h$\\ 
+%&1 L = 1 dm$^3$\\ \hline
+%\end{tabularx} 
+%
+%\bigskip
+ 
+\begin{enumerate}
+\item %Montrer que le volume d'une cavité est d'environ 125~cm$^3$.
+Le volume d'une cavité est égal à la différence entre les volumes de deux cône : le grand de hauteur 12 cm et de diamètre et l'autre de hauteur $12 - 4 = 8$~cm et de diamètre $d$ tel que d'après le théorème de Chasles :
+
+$\dfrac{d}{7,5} = \dfrac{8}{12} = \dfrac{2}{3}$, d'où $d = \dfrac{15}{3} = 5$~cm.
+
+D'où le volume d'une cavité : 
+
+$\dfrac{1}{3}\pi\times 3,75^2 \times 12 - \dfrac{1}{3}\times \pi\times 2,5^2 \times 8 = \dfrac{1}{3}\times \pi(168,75 - 50) = \dfrac{118,75\pi}{3} \approx 124,355$. (donc à peu près 125 cm$^3$). 
+\item %Léa a préparé 1 litre de pâte. Elle veut remplir chaque cavité du moule au $\dfrac{3}{4}$ de son volume.
+ 
+%A-t-elle suffisamment de pâte pour les 9 cavités du moule ? Justifier la réponse.
+Chaque cavité devrait contenir $\dfrac{3}{4} \times 125$ et pour remplir le moule à 9 cavités il faut :
+
+$\dfrac{3}{4} \times 125 \times 9 = \dfrac{\np{3375}}{4} = 843,75$ cm$^3$ donc moins de 1 L = 1 dm$^3$ = \np{1000} cm$^3$. Elle a donc préparé assez de pâte.
+\end{enumerate}
+ 
+\bigskip
+

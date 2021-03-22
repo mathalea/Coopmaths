@@ -1,0 +1,95 @@
+
+\medskip
+
+Une association propose diverses activités pour occuper les enfants pendant les vacances scolaires.
+
+\smallskip
+
+Plusieurs tarifs sont proposés:
+
+\begin{itemize}
+\item Tarif A : 8 \euro{} par demi-journée ;
+\item Tarif B : une adhésion de 30 \euro{} donnant droit à un tarif préférentiel de 5~\euro{} par demi-journée
+\end{itemize}
+
+\medskip
+
+Un fichier sur tableur a été préparé pour calculer le coût à payer en fonction du nombre de demi-journées d'activités pour chacun des tarifs proposés :
+
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|c|*{5}{>{\centering \arraybackslash}X|}}\hline
+	&A						&B	&C	&D	&E	&F\\ \hline
+1	&Nombre de demi-journées&1	&2	&3	&4	&5\\ \hline
+2	& Tarif A				&8 	&16	&	&	&\\ \hline
+3	& Tarif B				&35	&40	&	&	&\\ \hline
+\end{tabularx}
+\end{center}
+
+Les questions 1, 2, 4 et 5 ne nécessitent pas de justification. 
+
+\medskip
+
+\begin{enumerate}
+\item Compléter ce tableau sur l'annexe 1.
+\item Retrouver parmi les réponses suivantes la formule qui a été saisie dans la cellule B3 avant de l'étirer vers la droite :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{5}{>{\centering \arraybackslash}X|}}\hline
+Réponse A 	&Réponse B 			&Réponse C 					&Réponse D 			&Réponse E\\ \hline
+$=8*$B1		& $=30*\text{B}1+5$	& $=5*\text{B}1+30*\text{B}1$& $=30+5*\text{B}1$& $=35$\\ \hline
+\end{tabularx}
+\end{center}
+
+\item On considère les fonctions $f$ et $g$ qui donnent les tarifs à payer en fonction du nombre $x$ de demi-journées d'activités :
+
+\begin{itemize}
+\item Tarif A :\quad  $f(x) = 8x$
+\item Tarif B :\quad $g(x) =30 + 5x$
+\end{itemize}
+
+Parmi ces fonctions, quelle est celle qui traduit une situation de proportionnalité ?
+\item Sur le graphique de l'annexe 2, on a représenté la fonction $g$. Représenter sur ce même graphique la fonction $f$.
+\item Déterminer le nombre de demi-journées d'activités pour lequel le tarif A est égal au tarif B.
+\item Avec un budget de 100~\euro, déterminer le nombre maximal de demi-journées auxquelles on peut participer.
+
+Décrire la méthode choisie.
+\end{enumerate}
+\begin{center}
+
+	\textbf{\large ANNEXES à rendre avec votre copie}
+	
+	\bigskip
+	
+	\textbf{Annexe 1 - Question 1}
+	
+	\medskip
+	
+	\begin{tabularx}{\linewidth}{|c|c|*{5}{>{\centering \arraybackslash}X|}}\hline
+		&A						&B	&C	&D	&E	&F\\ \hline
+	1	&Nombre de demi-journées&1	&2	&3	&4	&5\\ \hline
+	2	& Tarif A				&8 	&16	&	&	&\\ \hline
+	3	& Tarif B				&35	&40	&	&	&\\ \hline
+	\end{tabularx}
+	
+	\vspace{2cm}
+	
+	\bigskip
+	
+	\textbf{Annexe 2 - Question 4}
+	
+	\bigskip
+	
+	\psset{xunit=0.8cm,yunit=0.08cm}
+	\begin{pspicture}(-1,-10)(15,120)
+	\multido{\n=0+1}{16}{\psline[linecolor=orange,linewidth=0.15pt](\n,0)(\n,120)}
+	\multido{\n=0+10}{13}{\psline[linecolor=orange,linewidth=0.15pt](0,\n)(15,\n)}
+	\psaxes[linewidth=1.25pt,Dy=20]{->}(0,0)(0,0)(15,120)
+	\psplot[plotpoints=2000,linewidth=1.25pt,linecolor=blue]{0}{15}{5 x mul 30 add}
+	\uput[dr](14,100){\blue $\mathcal{C}_g$}
+	\uput[r](0,118){Tarif en \euro}
+	\uput[u](13,0){Nombre de demi-journées}
+	\end{pspicture}
+	\end{center}
+\bigskip
+

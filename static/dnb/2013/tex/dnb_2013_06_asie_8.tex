@@ -1,0 +1,48 @@
+
+\medskip
+
+\textbf{Dans cet exercice, si le travail n'est pas terminé, laisser tout de même une trace de la recherche. Elle sera prise en compte dans l'évaluation.}
+
+\medskip
+ 
+La ville BONVIVRE possède une plaine de jeux bordée d'une piste cyclable. La piste cyclable a la forme d'un rectangle ABCD dont on a \og enlevé trois des coins \fg.
+ 
+Le chemin de G à H est un arc de cercle ; les chemins de E à F et de I à J sont des segments.
+ 
+Les droites (EF) et (AC) sont parallèles. 
+
+\begin{center}
+\psset{unit=0.65cm}
+\begin{pspicture}(16.5,8)
+\psline[linewidth=1.8pt](16,3.6)(16,6)(13.4,7)(1.3,7)(1.3,4.6)(2.8,1)(13.4,1)%GFEAJIH
+\uput[ul](1.3,7){A} \uput[ur](16,7){B} \uput[dr](16,1){C} \uput[dl](1.3,1){D} 
+\uput[ul](13.4,7){E} \uput[ur](16,6){F} \uput[dr](16,3.6){G} \uput[d](13.4,1){H} 
+\uput[dr](2.8,1){I} \uput[ul](1.3,4.6){J} 
+\psarc[linewidth=1.8pt](13.4,3.6){2.6}{-90}{0}
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(1.3,7)(16,1)
+\rput(6,5.5){Rugby}\psframe(3.3,4.3)(8.4,6.6)%rugby\rput(6,5.5){Rugby}
+\rput(6,2.5){Rugby}\psframe(3.3,1.6)(8.4,3.9)%rugby
+\rput(11.8,4.3){Foot}\psframe(10.7,1.6)(13,6.6)%foot
+\psframe[linestyle=dashed](1.3,1)(16,7)
+\rput{-23}(9.5,4){312 m}
+\psline[linestyle=dashed](13.4,1)(13.4,3.6)(16,3.6)
+\psframe(13.4,3.4)(13.6,3.6)
+\psframe(1.3,1)(1.5,1.2)
+\psframe(16,1)(15.8,1.2)
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(13.4,7.2)(16,7.2)\uput[u](14.7,7.2){48 m}
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(1.3,7.8)(16,7.8)\uput[u](8.65,7.8){288 m}
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(16.4,6)(16.4,3.6)\uput[r](16.4,4.1){52 m}
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(1.3,0.7)(3,0.7)\uput[d](2.15,0.7){29 m}
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(1.1,1)(1.1,4.6)\uput[l](1.1,2.8){72 m}
+\psframe(16,7)(15.8,6.8)
+\psline(14.6,6.8)(14.7,7.2)\psline(14.7,6.8)(14.8,7.2)
+\psline(14.6,3.4)(14.7,3.8)\psline(14.7,3.4)(14.8,3.8)
+\rput{90}(13.4,1.8){\psline(-0.1,-0.2)(-0,0.2)}
+\rput{90}(13.4,1.8){\psline(-0.2,-0.2)(-0.1,0.2)}
+\psline(1.1,5.8)(1.5,5.7)
+\psline(1.1,5.7)(1.5,5.6)
+\psframe(1.3,7)(1.5,6.8)
+\end{pspicture}
+\end{center}
+
+Quelle est la longueur de la piste cyclable ? Justifier la réponse.

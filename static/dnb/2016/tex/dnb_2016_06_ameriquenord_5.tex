@@ -1,0 +1,50 @@
+
+\medskip
+		
+		Une station de ski propose deux tarifs de forfaits :
+		\begin{itemize}
+			\item[\textbullet] Tarif 1 : le forfait \og journée \fg{} à 40,50~\euro.
+			\item[\textbullet] Tarif 2 : Achat d'une carte club SKI sur Internet pour 31~\euro{} et donnant droit au forfait \og journée \fg{} à 32~\euro.
+		\end{itemize}
+		
+		\begin{enumerate}
+			\item Déterminer par le calcul :
+			\begin{enumerate}
+				\item Le tarif le plus intéressant pour Elliot qui compte skier deux journées.
+				
+				\item Le nombre de journées de ski à partir duquel le tarif 2 est plus intéressant.
+			\end{enumerate}
+			
+			\item  Utiliser le graphique ci-dessous qui donne les prix en euros des forfaits en fonction du nombre de jours skiés pour les deux tarifs.
+			
+		\begin{center}
+				\begin{tikzpicture}[framed,line cap=round,line join=round,x=0.8cm,y=0.023 cm] %sur le sujet original x = 1.25cm
+				\draw [color=gray, xstep=1.0,ystep=25.0] (0,0) grid (8,350);
+				\draw[-,color=black] (0,0) -- (8,0);
+				\draw (4,-8mm)node {Nombre de jours de ski};
+				\foreach \x in {0,1,2,3,4,5,6,7,8}
+				\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\small $\x$};
+				\draw[-,color=black] (0.,0) -- (0.,350);
+				\draw (-10mm,175)node [rotate = 90] {Prix en euros};
+				\foreach \y in {0,25,50,75,100,125,150,175,200,225,250,275,300,325,350}
+				\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\small $\y$};
+				\draw [line width = 2pt, color = black] (0.,0.)-- (8.,324.);
+				\draw [line width = 2pt, color = gray](0.,31.)-- (8.,287.);
+				\draw [line width = 2pt, color = black] (8.2,324.) -- (8.5,324) node [right] {TARIF 1};
+				\draw [line width = 2pt, color = gray](8.2,287.) -- (8.5, 287) node [right] {TARIF 2};
+				\end{tikzpicture}
+		\end{center}
+
+		Déterminer par lecture graphique :
+		\begin{enumerate}
+			\item Le tarif pour lequel le prix payé est proportionnel au nombre de jours skiés. On justifiera la réponse.
+			
+			\item Une estimation de la différence de prix entre les deux tarifs pour 6 jours de ski.
+			
+			\item Le nombre maximum de jours de ski que peut faire Elliot avec un budget de 275~\euro.
+		\end{enumerate}
+
+		\end{enumerate}
+
+\vspace{0,5cm}
+

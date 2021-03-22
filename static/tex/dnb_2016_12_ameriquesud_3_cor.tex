@@ -1,0 +1,53 @@
+\textbf{\textsc{Exercice 3} \hfill 6 points}
+
+\medskip
+
+Voici une représentation  de la surface à paver  :
+
+\begin{center}
+\psset{unit=0.03cm,arrowsize=2pt 3}
+\begin{pspicture}(-5,-5)(225,108)
+\psframe(0,0)(225,108)
+\psline{<->}(0,-6)(225,-6)
+\psline{<->}(-6,0)(-6,108)
+\uput[d](112.5,-10){225~cm}
+\rput{90}(-13,54){108~cm}
+\end{pspicture}
+\end{center}
+
+\begin{enumerate}
+\item Il faut que la longueur et la largeur du rectangle soient multiples de 3 ce qui est le cas car :
+
+$108 = 3 \times 36$ et $225 = 3 \times 75$.
+
+36 carreaux en largeur et 75 en longueur : Carole pourra paver la surface avec $36 \times 75 = \np{2700}$ carreaux.
+
+Il est facile de calculer l'aire de la surface totale que devra paver Carole. Il ne s'agit rien d'autre que de l'aire du rectangle.
+
+$A_R =  225 \times 108 = \np{24300}~\left(\text{cm}^2\right)$.
+
+%Si elle utilise des carreaux de 3~cm de côté, cela signifie que la surface de chaque carreau, soit l'aire d'un carreau, est égale à : $3 \times 3 = 9~\left(\text{cm}^2\right)$.
+%En divisant l'aire du rectangle par l'aire d'un carreau, on obtiendra le nombre de carreaux nécessaires pour paver la totalité de la mosaïque. Si ce nombre est un entier, alors Carole pourra utiliser des carreaux de 3~cm de côté. Or
+%
+%$\dfrac{\np{24300}}{9} = \np{2700}$
+%
+%Avec des carreaux de 3 cm de côté, Carole aura donc besoin de \np{2700} carreaux pour paver sa surface.
+
+On ne peut pas utiliser des carreaux de 6~cm de côté. En effet en longueur il faudrait que 6 divise 225, ce qui est faux.
+\item Pour déterminer la dimension maximale des carreaux qu'elle peut utiliser, il faut commencer par chercher le plus grand diviseur commun de 225 et de 108. 
+En effet, étant donné que les carreaux sont des carrés, ils doivent avoir la même longueur et la même largeur.
+
+Les diviseurs de 225 sont: 1-3-5-9-15-25-45-75-225.
+
+Les diviseurs de 108 sont: 1-2-3-4-6-9-12-18-27-36-54-108.
+
+On remarque que 9 est le plus grand diviseur commun des deux nombres. Il faut donc que Carole utilise des carreaux de 9 cm de côté, cette dimension étant la plus grande qu'elle puisse utiliser.
+
+Etant donné que la surface à paver est de \np{24300}~cm$^2$, et que chaque carré a une aire de 
+
+$9 \times 9 = 81~\left(\text{cm}^2\right)$,
+il faudra utiliser au total : $\dfrac{\np{24300}}{81} = 300$~carreaux de 9~cm de côté.
+\end{enumerate}
+
+\vspace{0,25cm}
+

@@ -1,0 +1,77 @@
+
+Dans les marais salants, le sel récolté est stocké sur une surface plane. On admet qu'un tas de sel a toujours la forme d'un cône de révolution. 
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Pascal souhaite déterminer la hauteur d'un cône de sel de diamètre 5 mètres. Il possède un bâton de longueur $1$~mètre. Il effectue des mesures et réalise les deux schémas ci-dessous :
+		
+%\begin{center}
+%\begin{tikzpicture}[scale=.9]
+%    \draw (-1,0) arc (180:360:2cm and 0.5cm) -- (1,3.2) -- cycle;
+%    \draw[dashed] (-1,0) arc (180:0:2cm and 0.5cm);
+%   \shade[left color=blue!5!white,right color=blue!40!white,opacity=0.3] (-1,0) arc (180:360:2cm and 0.5cm) -- (1,3.2) -- cycle;
+%   \tkzDefPoints{1/0/O,1/3.2/A,-6.2/0/D,-2.92/0/B,-2.92/3/B'}
+%   \tkzDrawSegments[dashed](O,A O,D D,A)
+%   \tkzInterLL(A,D)(B,B') \tkzGetPoint{C}
+%   \tkzDrawSegment(B,C)
+%   \tkzLabelSegment[right](B,C){{\scriptsize Bâton}}\tkzLabelSegment(A,O){{\scriptsize Cône de sel}}
+%\end{tikzpicture}
+%
+%\begin{tikzpicture}[scale=.9]
+%\tkzDefPoints{1/0/O,1/3.2/S,-1/0/E,3/0/L,-2.92/0/B,-6.2/0/A,-2.92/3/B'}
+%\tkzInterLL(A,S)(B,B') \tkzGetPoint{C}
+%\tkzDrawSegments(E,S S,L L,E B,C)
+%\tkzDrawSegments[dashed](A,E A,S S,O)
+%\tkzLabelPoints[below](A,B,E,L) \tkzLabelPoints[above](C,S)
+%\tkzLabelPoint[above left](O){$O$}
+%\tkzMarkRightAngle(L,O,S) \tkzMarkRightAngle(L,B,C)
+%\tkzLabelSegment[below](A,B){3,20~m}
+%\tkzLabelSegment[below](B,E){2,30~m}
+%\tkzLabelSegment[below](E,L){5~m}
+%\tkzLabelSegment[sloped](B,C){1~m}
+%\end{tikzpicture}
+%\end{center}
+\begin{center}
+\psset{unit=0.7cm} 
+\begin{pspicture}(0,-0.3)(15,12)
+\rput(11.5,9.5){Cône de sel} 
+\pspolygon[linestyle=dashed](11.5,8)(0.3,8)(11.5,11.7)
+\psline[linewidth=1.8pt](4.5,8)(4.5,9.4)
+\uput[r](4.5,8.7){Bâton}
+\scalebox{.99}[0.3]{\psarc(11.5,26.8){2.5}{180}{0}}%
+\scalebox{.99}[0.3]{\psarc[linestyle=dashed](11.5,26.8){2.5}{0}{180}}%
+\psline(8.9,8)(11.5,11.7)(13.9,8)
+\pspolygon[linestyle=dashed](11.5,0.5)(0.3,0.5)(11.5,4.2)
+\pspolygon(8.9,0.5)(11.5,4.2)(13.9,0.5)
+\psline[linewidth=1.8pt](4.5,0.5)(4.5,1.9)
+\psframe(11.5,0.5)(11.8,0.8)
+\psframe(4.5,0.5)(4.2,0.8)
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(0.2,0.2)(4.5,0.2)
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(4.5,0.2)(8.9,0.2)
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(8.9,0.2)(13.9,0.2)
+\uput[d](2.35,0.2){3,20 m} \uput[d](6.7,0.2){2,30 m} \uput[d](11.4,0.2){5 m}
+\uput[r](4.5,1.2){1 m}\uput[ul](0.2,0.5){A}\uput[u](4.5,1.9){C}
+\uput[u](11.5,4.2){S}\uput[ul](11.5,0.5){O}
+\uput[ul](8.9,0.5){E}\uput[ur](13.9,0.5){L} \uput[ur](4.5,0.5){B}
+\end{pspicture}
+\end{center}
+
+La hauteur de ce cône de sel est $h=2,50$~mètres. On utilise le théorème de Thalès:
+\[
+\frac{AB}{BC}=\frac{AO}{OS}\Longleftrightarrow \frac{3,2}{1}=\frac{3,2+2,3+2,5}{h}\Longleftrightarrow h=\frac{8}{3,2}=2,5
+\]
+ 
+\item Volume du cône $V$:
+\[
+V=\frac{\pi\times 2,5^2\times 2,5}{3}\simeq 16,3541666667\simeq 16~\text{m}^3
+\]
+\end{enumerate} 
+\item Le sel est ensuite stocké dans un entrepôt sous la forme de cônes de volume \np{1000}~m$^3 $. Par mesure de sécurité, la hauteur d'un tel cône de sel ne doit pas dépasser $6$~mètres. 
+
+\[
+h = 6 \Longrightarrow 1000 = \frac{6\pi R^2}{3}=2\pi R^2\Longrightarrow \frac{500}{\pi}= R^2 \Longrightarrow R =  \sqrt{\frac{500}{\pi}} \approx 12,61 (R\ \text{est positif})
+\]
+Ainsi au dixième près $R = 12,7$~m.
+\end{enumerate}
+ 

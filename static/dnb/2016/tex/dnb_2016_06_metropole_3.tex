@@ -1,0 +1,47 @@
+
+\medskip
+
+Trois figures codées sont données ci-dessous. Elles ne sont pas dessinées en vraie grandeur. 
+
+Pour chacune d'elles, déterminer la longueur AB au millimètre près. 
+
+\textbf{Dans cet exercice, on n'attend pas de démonstration rédigée. Il suffit d'expliquer brièvement le raisonnement suivi et de présenter clairement les calculs.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{2}{>{\centering \arraybackslash}X|}}\hline 
+\textbf{Figure 1} &\textbf{Figure 2}\\
+\psset{unit=1cm}
+\begin{pspicture}(5.75,3.)
+%\psgrid
+\pspolygon(0.5,0.5)(4,0.75)(1.6,2.3)%CAB
+\uput[l](0.5,0.5){C} \uput[r](4,0.75){A} \uput[u](1.6,2.3){B} \uput[d](2.25,0.625){J}
+\rput{-120}(1.6,2.3){\psframe(.3,.3)}
+%\pscircle(2.25,0.625){1.78}
+\psdots(2.25,0.625)
+\psdots[dotstyle=+,dotangle=45](1.05,1.4)(1.375,0.575)(3.125,0.675) 
+\rput(4.75,2.5){BC = 6~cm}
+\end{pspicture}& \psset{unit=1cm}
+\begin{pspicture}(5.75,3.)
+\pspolygon(0.5,0.5)(4,0.5)(0.5,3)%ABC
+\uput[ul](0.5,3){C} \uput[l](0.5,0.5){A} \uput[dr](4,0.5){B}
+\uput[ur](2.25,1.75){36~cm}
+\psarc(0.5,3){4mm}{-90}{-40}
+\psframe(0.5,0.5)(0.8,0.8)
+\rput(0.8,2.3){53\degres}
+\end{pspicture}\\ \hline
+\multicolumn{1}{|c}{\textbf{Figure 3}}&\multicolumn{1}{c|}{~}\\
+\multicolumn{2}{|c|}{\psset{unit=1cm}\begin{pspicture}(-3,-1.5)(8,1.5)
+%\psgrid
+\pscircle(0,0){1.5}\psline(1.5;40)(1.5;220)
+\uput[l](1.5;220){A} \uput[ur](1.5;40){B}
+\uput[ul](0,0){O}
+\psdots[dotstyle=+,dotangle=45](0.75;220)(0.75;40)
+\psdots(0,0)
+\uput[r](2.,0.5){[AB] est un diamètre du cercle de centre O.}
+\uput[r](2.,-0.5){ La longueur du cercle est 154 cm.}
+\end{pspicture}}\\ \hline
+\end{tabularx}
+\end{center}
+
+\bigskip
+

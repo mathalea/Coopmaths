@@ -1,0 +1,68 @@
+
+\medskip
+
+%Voici deux programmes de calcul:
+%
+%\medskip
+%
+%\parbox{0.48\linewidth}{\begin{center}\textbf{PROGRAMME A}
+%
+%\psset{unit=1cm}
+%\begin{pspicture}(0,0.5)(6,6)
+%%\psgrid
+%\rput(3,5){Choisir un nombre}\psframe(1.4,4.7)(4.6,5.2)\psline{->}(2.5,4.7)(2,3.3)
+%\rput(2,3){Multiplier par 4}\psframe(0.8,2.8)(3.3,3.3)\psline{->}(3,4.7)(4.,4.3)
+%\rput(4,4){Soustraire 2}\psframe(3,3.8)(5,4.3)\psline{->}(2,2.8)(2.5,1.2)
+%\rput(4,2){Élever au carré}\psframe(2.8,1.7)(5.2,2.2)\psline{->}(4,3.8)(4,2.2)
+%\rput(3,1){ Ajouter les deux nombres}\psframe(1,0.7)(5,1.2)\psline{->}(4,1.7)(3.5,1.2)
+%\end{pspicture}
+%\end{center}}\hfill
+%\parbox{0.48\linewidth}{\begin{center}\textbf{PROGRAMME B}
+%\vspace{1.5cm}
+%\psset{unit=1cm}
+%\begin{pspicture}(6,4)
+%%\psgrid
+%\uput[r](1,3.5){$\bullet~~$Choisir un nombre}
+%\uput[r](1,2.5){$\bullet~~$Calculer son carré}
+%\uput[r](1,1.5){$\bullet~~$Ajouter 6 au résultat.}
+%\psframe(1,3.8)(4.6,1.2)
+%\end{pspicture}
+%\end{center}}
+%
+%\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item %Montrer que, si l'on choisit le nombre $5$, le résultat du programme A est $29$.
+		En partant de 5, on obtient à gauche $5 \times 4 = 20$ et à droite $5 - 2 = 3$, puis $3^2 = 9$ et finalement la somme $20 + 9 = 29$.
+		\item %Quel est le résultat du programme B si on choisit le nombre 5 ?
+		On obtient $5 \to 5^2 = 25 \to 25 + 6 = 31$.
+	\end{enumerate}
+\item %Si on nomme $x$ le nombre choisi, expliquer pourquoi le résultat du programme A peut s'écrire $x^2 + 4$.
+À partir de $x$ le programme A donne  :
+
+$x \to 4x$ à gauche $x - 2)$ puis $(x - 2)^2$ et en faisant la somme :
+
+$4x + (x - 2)^2 = 4x + x^2 + 4 - 4x = x^2 + 4$.
+\item %Quel est le résultat du programme B si l'on nomme $x$ le nombre choisi ?
+Le programme B donne à partir de $x$ :
+
+$x \to x^2 \to x^2 + 6$. 
+\item %Les affirmations suivantes sont-elles vraies ou fausses? Justifier les réponses et écrire les étapes des éventuels calculs :
+	\begin{enumerate}
+		\item %\og Si l'on choisit le nombre $\dfrac{2}{3}$, le résultat du programme B est $\dfrac{58}{9}$. \fg
+$\dfrac{2}{3} \to \left(\dfrac{2}{3}\right)^2 + 6 = \dfrac{4}{9} + 6 = \dfrac{4}{9} + \dfrac{54}{9} = \dfrac{58}{9}$ : l'affirmation est vraie.		
+		\item %\og Si l'on choisit un nombre entier, le résultat du programme B est un nombre entier impair. \fg
+		Si $x$ est pair, alors $x^2$ est pair et $x^2 + 6$ est pair : l'affirmation est fausse.
+		\item %\og Le résultat du programme B est toujours un nombre positif. \fg
+	Quel que soit le nombre $x$, \: $x^2 + 6 \geqslant 6 > 0$ : l'affirmation est vraie
+		\item %\og Pour un même nombre entier choisi, les résultats des programmes A et B sont ou bien tous les deux des entiers pairs, ou bien tous les deux des entiers impairs. \fg
+$\bullet~~$si $x$ est pair, alors $x^2$ et $x^2 + 4$ sont pairs et $x^2 + 6$ est pair ;
+
+$\bullet~~$si $x$ est impair, alors $x^2$ est impair et $x^2 + 4$ est impair et $x^2 + 6$ est impair : l'affirmation est vraie.  
+	\end{enumerate}
+\end{enumerate}
+
+\bigskip
+

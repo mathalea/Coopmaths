@@ -1,0 +1,71 @@
+\textbf{Exercice 6 \hfill 6 points}
+
+\medskip
+
+%Germaine souhaite réaliser un escalier pour monter à l'étage de son
+%appartement.
+%
+%Elle a besoin pour cela de connaître les dimensions du limon (planche
+%dans laquelle viendront se fixer les marches de cet escalier).
+%
+%Elle réalise le croquis ci-dessous.
+%
+%\begin{center}
+%\psset{unit=0.6cm,arrowsize=3pt 5}
+%\begin{pspicture}(0,-1)(18.2,7)
+%%\psgrid
+%\psline(0,0.5)(18.2,0.5)
+%\pspolygon[linewidth=2pt,fillstyle=solid,fillcolor=lightgray](1.3,0.5)(2.6,0.5)(10.1,5.2)(10.1,6.1)
+%\psline(16.8,5.2)(10.1,5.2)(10.1,6.1)(16.8,6.1)
+%\psline[linestyle=dotted](10.1,5.2)(10.1,0.5)
+%\psline[linewidth=0.2pt]{<->}(11.5,6.1)(11.5,5.2)
+%\psline[linewidth=0.2pt]{<->}(11.5,0.5)(11.5,5.2)
+%\psline[linewidth=0.2pt]{<->}(1.3,-0.5)(10.1,-0.5)
+%\uput[u](5.7,-0.5){360 cm}
+%\rput(15.6,5.7){Épaisseur de la dalle : 20 cm}
+%\rput(15.6,2.8){Hauteur sous plafond : 250 cm}
+%\psframe(10.1,0.5)(10.4,0.8)
+%\uput[d](2.6,0.5){A} \uput[d](10.1,0.5){B} \uput[dr](10.1,5.2){C} 
+%\uput[u](10.1,6.1){D} \uput[d](1.3,0.5){E} 
+%\end{pspicture}
+%\end{center}
+%
+%Sur ce croquis :
+%
+%\setlength\parindent{6mm}
+%\begin{itemize}
+%\item le limon est représenté par le quadrilatère ACDE.
+%\item les droites (AC) et (ED) sont parallèles.
+%\item les points E, A et B sont alignés.
+%\item les points B, C et D sont alignés.
+%\end{itemize}
+%\setlength\parindent{0mm}
+%
+%\medskip
+\begin{enumerate}
+\item %Prouver que ED = 450 cm.
+BD = BC + CD = 250 + 20 = 270~(cm).
+
+Dans le triangle BDE rectangle en B, le théorème de Pythagore s’écrit :
+
+$\text{ED}^2 = \text{EB}^2 + \text{BD}^2  = \np{202500}$.
+
+Donc ED $ = \sqrt{\np{202500}} = 450$~(cm).
+\item %Calculer les deux dimensions AC et AE de cette planche. Arrondir les résultats au centimètre.
+E, A, C sont alignés dans cet ordre ainsi que D, C, B et les droites (CA) et (ED) sont parallèles ; on peut donc appliquer le théorème de Thalès :
+
+$\dfrac{\text{BC}}{\text{BD}} = \dfrac{\text{AC}}{\text{ED}}$ soit $\dfrac {250}{270} = \dfrac{\text{AC}}{450}$ qui donne :
+
+$270 \text{AC} = 250 \times 450$ ou  $\text{AC} = \dfrac{250 \times 9 \times 50}{9 \times 30} = \dfrac{\np{1250}}{3} \approx 416,67$ soit 417~(cm) au centimètre près.
+
+Toujours d’après le théorème de Thalès :
+
+$\dfrac{\text{BA}}{\text{BE}} = \dfrac{\text{BC}}{\text{BD}}$ soit $\dfrac{\text{BA}}{\text{360}} = \dfrac{250}{270}$ ; donc 
+
+$270\text{BA} = 360 \times 250$ et $\text{BA} = \dfrac{360 \times 250}{270} = \dfrac{9 \times 4 \times 10 \times 250}{9 \times 10 \times 3} = \dfrac{\np{1000}}{3} \approx 333,33$.
+
+Donc AE $= 360 - \dfrac{\np{1000}}{3} = \dfrac{\np{1080} - \np{1000}}{3} = \dfrac{80}{3} \approx 26,67$ soit 27~cm au centimètre près.
+\end{enumerate}
+
+\vspace{0,5cm}
+

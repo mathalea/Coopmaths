@@ -1,0 +1,59 @@
+
+\medskip
+
+\emph{Dans cet exercice, on donnera, si nécessaire, une valeur approchée des résultats au centième près}.
+
+\smallskip
+
+Pour construire le décor d'une pièce de théâtre (\emph{Figure 1}), Joanna dispose d'une plaque rectangulaire ABCD de 4~m sur 2~m dans laquelle elle doit découper les trois triangles du décor avant de les superposer. Elle propose un découpage de la plaque (\emph{Figure 2}).
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(10,4)
+%\psgrid
+\pspolygon[fillstyle=solid,fillcolor=lightgray](0,0.6)(1.8,0.6)(0,3.9)
+\pspolygon[fillstyle=solid,fillcolor=gray](0,0.6)(1.2,0.6)(0,2.8)
+\pspolygon[fillstyle=solid,fillcolor=darkgray](0,0.6)(0.8,0.6)(0,2.1)
+\pspolygon[fillstyle=solid,fillcolor=lightgray](5.3,2.6)(5.3,0.6)(8.9,2.6)%ADM
+\pspolygon[fillstyle=solid,fillcolor=gray](5.3,0.6)(8.05,2.15)(8.9,0.6)%DPN
+\pspolygon[fillstyle=solid,fillcolor=darkgray](8.05,2.15)(8.9,2.6)(8.9,0.6)%PMN
+\psline(5.3,0.6)(8.9,2.6)%DM
+\psline(8.05,2.15)(8.9,0.6)%NP
+\psdots(5.3,0.6)(9.6,0.6)(9.6,2.6)(5.3,2.6)(8.9,0.6)(8.9,2.6)(8.05,2.15)%DCBANMP
+\uput[dl](5.3,0.6){D} \uput[dr](9.6,0.6){C} \uput[ur](9.6,2.6){B} 
+\uput[ul](5.3,2.6){A} \uput[d](8.9,0.6){N} \uput[u](8.9,2.6){M}
+\uput[ul](8.05,2.15){P}
+\psframe(5.3,0.6)(8.9,2.6) 
+\psframe[fillstyle=crosshatch](8.9,0.6)(9.6,2.6)
+\rput(0.9,0.2){\emph{Figure $1$}}\rput(7.4,0.2){\emph{Figure $2$}}
+\psarc(5.3,0.6){0.4}{30}{90}
+\rput{-150}(8.05,2.15){\psframe(0,0)(0.2,0.2)}
+\psframe(8.9,2.6)(8.7,2.4)
+\end{pspicture}
+\end{center}
+
+\medskip
+
+Le triangle ADM respecte les conditions suivantes :
+
+%\setlength{\parindent}{20mm}
+\begin{itemize}[leftmargin=20mm]
+\item[$\bullet~~$]le triangle ADM est rectangle en A
+\item[$\bullet~~$]AD = 2~m
+\item[$\bullet~~$]$\widehat{\text{ADM}} = 60$\degres
+\end{itemize}
+%\setlength\parindent{0cm}
+
+\medskip
+
+\begin{enumerate}
+\item Montrer que [AM] mesure environ $3,46$~m.
+\item La partie de la plaque non utilisée est représentée en quadrillé sur la figure 2.
+
+Calculer une valeur approchée au centième de la proportion de la plaque qui n'est pas utilisée.
+\item  Pour que la superposition des triangles soit harmonieuse, Joanna veut que les trois triangles AMD, PNM et PDN soient semblables. Démontrer que c'est bien le cas.
+\item Joanna aimerait que le coefficient d'agrandissement pour passer du triangle PDN au triangle AMD soit plus petit que $1,5$. Est-ce le cas ? Justifier.
+\end{enumerate}
+
+\bigskip
+

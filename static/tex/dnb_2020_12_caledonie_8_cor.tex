@@ -1,0 +1,102 @@
+\textbf{EXERCICE 8 : Scratch \hfill 11 points}
+
+\medskip
+
+
+Le script suivant permet de tracer le carré de côté $50$ unités .
+
+\begin{center}
+\begin{scratch}
+\blockinit{quand \greenflag est cliqué}
+\blockmove{s’orienter à \ovaloperator{\selectmenu{90}}}
+\blockpen{stylo en position d’écriture}
+\blockinfloop{répéter \ovalnum{4} fois}
+{
+\blockmove{avancer de \ovalnum{50}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+}
+\end{scratch}
+\end{center}
+
+\medskip
+
+\begin{enumerate}
+\item %Sur l'annexe page \pageref{annexe2}, compléter le script pour obtenir un triangle équilatéral de coté $80$ unités.
+
+\medskip
+
+On a lancé le script suivant :
+
+\begin{center}
+\begin{scratch}
+\blockinit{quand \greenflag est cliqué}
+\blockmove{s’orienter à \ovaloperator{\selectmenu{90}}}
+\blockmove{mettre \selectmenu{longueur} à \ovalnum{40}}
+\blockpen{stylo en position d’écriture}
+\blockinfloop{répéter \ovalnum{12} fois}
+{
+\blockmove{avancer de \selectmenu{longueur}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{ajouter  à \selectmenu{longueur}\ovalnum{10}}
+}
+\end{scratch}
+\end{center}
+\item %Entourer sur l'annexe page \pageref{annexe2}, la figure obtenue avec ce script.
+Il suffit de compter le nombre de segments tracés : 12. Seule la figure 2 convient.
+\end{enumerate}
+
+
+
+\begin{center}
+\label{annexe2}
+\textbf{\Large ANNEXE 2}
+
+\vspace{2cm}
+
+\textbf{question 1}
+
+\bigskip
+
+\textbf{Script à compléter}
+
+\bigskip
+
+\begin{scratch}
+\blockinit{quand \greenflag est cliqué}
+\blockmove{s’orienter à \ovalnum{\selectmenu{90}}}
+\blockpen{stylo en position d’écriture}
+\blockinfloop{répéter \ovalnum{3} fois}
+{
+\blockmove{avancer de \ovalnum{80}}
+\blockmove{tourner \turnleft{} de \ovalnum{120} degrés}
+}
+\end{scratch}
+
+
+\vspace{1.5cm}
+
+\textbf{question 2}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{*{3}{>{\centering \arraybackslash}X}}
+Figure 1&Figure 2& Figure 3\\
+\psset{unit=1mm,linecolor=red}
+\begin{pspicture}(33,33)
+%\psgrid
+\psline(0,0)(0,34)(32,34)(32,4)(4,4)(4,30)(28,30)(28,8)(8,8)(8,26)(24,26)
+(24,12)(12,12)(12,22)(20,22)(20,16)(16,16)
+\end{pspicture}&
+\psset{unit=1mm,linecolor=red}
+\begin{pspicture}(34,34)
+%\psgrid
+\psline(0,0)(0,34)(32,34)(32,4)(4,4)(4,30)(28,30)(28,8)(8,8)(8,26)(24,26)
+(24,12)(12,12)
+\end{pspicture}&
+\psset{unit=1mm,linecolor=red}
+\begin{pspicture}(-20,-12)(20,20)
+%\psgrid
+\psline(20;210)(18;90)(16.2;-30)(14.58;210)(13.122;90)(11.8098;-30)(10.629;210)(9.56;90)(8.61;-30)(7.75;210)(6.974;90)(6.276;-30)(5.649;210)
+\end{pspicture}
+\end{tabularx}
+\end{center}

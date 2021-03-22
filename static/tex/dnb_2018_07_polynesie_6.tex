@@ -1,0 +1,50 @@
+
+\medskip
+
+Voici un script saisi par Alice dans un logiciel d'algorithmique.
+
+\medskip
+
+\begin{center}
+\begin{tabularx}{0.8\linewidth}{X}
+\begin{scratch}
+\blockinit{quand \greenflag est cliqué}
+\blocksensing{demander \txtbox{Choisissez un nombre ?} et attendre}
+\blockevent{envoyer à tous \ovalvariable{le nombre a été saisi}}
+\blockvariable{mettre \ovalvariable{Nombre} à \ovaloperator{\ovalvariable{réponse} }}
+\blockvariable{mettre \ovalvariable{Résultat 1} à \ovaloperator{2*\ovalvariable{Nombre} +3}}
+\blockvariable{mettre \ovalvariable{Résultat 1} à \ovaloperator{Résultat 1}*\ovaloperator{Résultat 1}}
+\blocklook{dire \txtbox{regroupe} \ovalvariable{le résultat 1 est \ovaloperator{Résultat 1}}pendant \ovalnum{2} secondes}
+\end{scratch}\\[5pt]
+\begin{scratch}
+\blockinit{quand je reçois \txtbox{le nombre a été saisi}}
+\blockvariable{mettre \ovalvariable{Résultat 2} à \ovaloperator{Nombre}*\ovaloperator{Nombre}}
+\blockvariable{mettre \ovalvariable{Résultat 2} à \ovaloperator{Résultat 2}*\ovaloperator{4}}
+\blockvariable{mettre \ovalvariable{Résultat 2} à \ovaloperator{Résultat 2}+\ovaloperator{12}*\ovaloperator{Nombre}}
+\blockvariable{mettre \ovalvariable{Résultat 2} à \ovaloperator{Résultat 2}+\ovaloperator{9}}
+\blockcontrol{attendre \ovalnum{3} seconde}
+\blocklook{dire \txtbox{regroupe} \ovalvariable{le résultat 2 est \ovaloperator{Résultat 2}}}
+\end{scratch}\\
+\end{tabularx}
+\end{center}
+
+\begin{enumerate}
+\item Alice a choisi 3 comme nombre, calculer les valeurs de Résultat 1 et de Résultat 2.
+
+\emph{Justifier en faisant apparaître les calculs réalisés}.
+\item Généralisation
+	\begin{enumerate}
+		\item En appelant $x$ le nombre choisi dans l'algorithme, donner une expression littérale
+traduisant la première partie de l'algorithme correspondant à Résultat 1.
+		\item  En appelant $x$ le nombre choisi dans l'algorithme, donner une expression littérale
+traduisant la deuxième partie de l'algorithme correspondant à Résultat 2.
+\item  Trouver le ou les nombres choisis par Alice qui correspondent au résultat affiché ci-dessous.
+
+\begin{center}
+\ovallook{Résultat 2 \ovalnum{9}}
+\end{center}
+ 	\end{enumerate}
+\end{enumerate}
+
+
+

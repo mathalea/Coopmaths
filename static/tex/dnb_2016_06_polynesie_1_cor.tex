@@ -1,0 +1,63 @@
+\textbf{Exercice 1 \hfill 6 points}
+
+\medskip
+
+%\parbox{0.5\linewidth}{Le Solitaire est un jeu de hasard de la Française des Jeux.
+%
+%Le joueur achète un ticket au prix de 2~\euro, gratte la case
+%argentée et découvre le \og montant du gain \fg.
+%
+%Un ticket est gagnant si le \og montant du gain\fg{} est
+%supérieur ou égal à  2~\euro.
+%
+%Les tickets de Solitaire sont fabriqués par lots de \np{750000}
+%tickets.
+%
+%Le tableau ci-contre donne la composition d'un lot.}\hfill
+%\parbox{0.48\linewidth}{\begin{tabularx}{\linewidth}{c|*{2}{>{\centering \arraybackslash}X|}c|}\cline{2-3}
+%		&\scriptsize Nombre de tickets	&\scriptsize \og Montant du gain \fg{} par ticket	&\multicolumn{1}{|c}{}\\ \cline{2-3}
+%		&\np{532173} 		&0~\euro						&\multicolumn{1}{|c}{}\\\cline{2-4}
+%		&\np{100000} 		&2~\euro						&\multirow{8}{0.25cm}{}\\\cline{2-3}
+%		&\np{83000} 		&4~\euro						&\\ \cline{2-3}
+%		&\np{20860} 		&6~\euro						&\\\cline{2-3}
+%		&\np{5400} 			&12~\euro						&\\\cline{2-3}
+%		&\np{8150} 			&20~\euro						&\\\cline{2-3}
+%		&400 				&150~\euro 						&\\\cline{2-3}
+%		&15 				&\np{1000}~\euro				&\\\cline{2-3}
+%		&2 					&\np{15000}~\euro				&\\\hline
+%\multicolumn{1}{|c|}{Total}	& \np{750000}		&\multicolumn{1}{c}{}			&\multicolumn{1}{c}{}\\\cline{1-2}
+%\end{tabularx}}
+%\rput{-90}(-0.4,-0.35){Tickets gagnants}
+%\medskip
+
+\begin{enumerate}
+\item Si on prélève un ticket au hasard dans un lot,
+	\begin{enumerate}
+		\item %quelle est la probabilité d'obtenir un ticket gagnant dont le \og montant du gain\fg{} est 4~\euro ?
+\np{83000} tickets sur \np{750000} permettent de gagner 4~\euro. La probabilité de ce gain est donc égale à $\dfrac{\np{83000}}{\np{750000}} = \dfrac{83}{750} \approx 0,1106 \approx 0,111$ au millième.
+		\item %quelle est la probabilité d'obtenir un ticket gagnant ?
+Il y a \np{532173} tickets non gagnants, donc $\np{750000} - \np{532173} = \np{217827}$ gagnants.
+
+La probabilité d'obtenir un ticket gagnant est donc égale à $\dfrac{\np{217827}}{\np{750000}} \approx  \np{0,2904}$ soit 0,290 au millième.
+
+		\item %expliquer pourquoi on a moins de 2\,\% de chance d'obtenir un ticket dont le \og montant du gain \fg{} est supérieur ou égal à  10~\euro.
+Il y a $\np{5400} + \np{8150} + 400 + 15 + 2 = \np{13967}$ tickets dont le \og montant du gain \fg{} est supérieur ou égal à  10~\euro.
+
+La probabilité de tirer l'un de ces tickets est égale à $\dfrac{\np{13967}}{\np{750000}} \approx \np{0,0186} < 0,02$ soit moins de $0,02 = \dfrac{2}{100} = 2\,\%$.
+	\end{enumerate}
+\item %Tom dit : \og Si j'avais assez d'argent, je pourrais acheter un lot complet de tickets Solitaire. Je deviendrais encore plus riche. \fg
+	
+%Expliquer si Tom a raison.
+Si Tom achetait tous les tickets il débourserait : $\np{750000} \times 2 = \np{1500000}$~\euro.
+
+Il gagnerait alors :
+
+$\np{100000} \times 2 + \np{83000} \times 4 + \np{20860} \times 6 + \np{5400} \times 12 + \np{8150} \times 20 + 400 \times 150 + 15 \times \np{1000} + 2 \times \np{15000} = \np{989960}$~\euro.
+
+Il aura alors perdu : $\np{1500000} - \np{989960} = \np{660040}$~\euro.
+
+Tom a donc tort.
+\end{enumerate}
+
+\bigskip
+

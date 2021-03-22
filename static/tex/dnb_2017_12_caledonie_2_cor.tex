@@ -1,0 +1,59 @@
+
+\medskip
+
+%\parbox{0.3\linewidth}{Voici un programme de calcul :}\hfill
+%\parbox{0.68\linewidth}{
+%\begin{tabular}{|l|}\hline
+%$\bullet~~$Choisir un nombre\\
+%$\bullet~~$Ajouter 1 à ce nombre\\
+%$\bullet~~$Calculer le carré du résultat\\
+%$\bullet~~$Soustraire le carré du nombre de départ au résultat précédent.\\
+%$\bullet~~$Écrire le résultat.\\ \hline
+%\end{tabular}
+%}
+
+\medskip
+
+\begin{enumerate}
+\item %On choisit 4 comme nombre de départ. Prouver par le calcul que le résultat obtenu avec le programme est 9.
+On obtient successivement : $4 \to 4 + 1 = 5 \to 5^2 = 25 \to 25 - 4^2 = 25 - 16 = 9$.
+\item On note $x$ le nombre choisi.
+	\begin{enumerate}
+		\item %Exprimer le résultat du programme en fonction de $x$.
+On obtient successivement : $x \to x + 1 \to (x + 1)^2 \to (x + 1)^2 - x^2$.
+		\item %Prouver que ce résultat est égal à $2x + 1$.
+$(x + 1)^2 - x^2 = x^2 + 2x + 1 - x^2 = 2x + 1$.
+	\end{enumerate}
+\item Soit $f$ la fonction définie par $f(x) = 2x + 1$.
+	\begin{enumerate}
+		\item %Calculer l'image de 0 par $f$.
+L'image de 0 par $f$ est $f(0) = 2\times 0 + 1 = 1$.
+		\item %Déterminer par le calcul l'antécédent de $5$ par $f$.
+On a $f(x) = 2x + 1 = 5$ ou $2x = 4$ ou $x = 2$. L'antécédent de $5$ par $f$ est $2$.
+		\item %En annexe 1, tracer la droite représentative de la fonction $f$.
+Voir à la fin.
+		\item %Par lecture graphique, déterminer le résultat obtenu en choisissant $- 3$ comme nombre de départ dans le programme de calcul. Sur l'annexe, laisser les traits de construction apparents.
+La verticale passant par le point d'abscisse $- 3$ coupe la droite en un point d'ordonnée $- 5$. 
+	\end{enumerate}	
+\end{enumerate}
+\begin{center}
+\textbf{\large À RENDRE AVEC LA COPIE}
+
+\bigskip
+
+\textbf{\large ANNEXE 1}
+
+\medskip
+
+\psset{unit=0.5cm,arrowsize=2pt 4}
+\begin{pspicture}(-10,-9)(10,9)
+\psgrid[gridlabels=0pt,subgriddiv=1,griddots=10]
+\psaxes[linewidth=1.25pt,Dx=2,Dy=2]{->}(0,0)(-10,-9)(10,9)
+\psplot[plotpoints=3000,linewidth=1.25pt,linecolor=blue]{-5}{4}{x 2 mul 1 add}
+\psline[linestyle=dashed,ArrowInside=->,linewidth=1.5pt](-3,0)(-3,-5)(0,-5)
+\uput[u](9.5,0){$x$}\uput[r](0,9.5){$y$}
+\end{pspicture}
+
+\end{center}
+\vspace{0,5cm}
+

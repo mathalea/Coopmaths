@@ -1,0 +1,26 @@
+
+\medskip
+
+%Tom lance cinquante fois deux dés à six faces parfaitement équilibrés. Il note dans une feuille de calcul les sommes obtenues à chaque lancer. Il obtient le tableau suivant : 
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|l|c|*{10}{>{\centering \arraybackslash}X|}c|X|}\hline
+%\multicolumn{2}{|c|}{B3}&\multicolumn{13}{l|}{=B2/M2}\\ \hline
+%&A&B&C&D&E&F&G&H&I&J&K&L&M&N\\ \hline
+%1 &somme obtenue 			&2 		&3 	&4 	&5 	&6 	&7 	&8 	&9 	&10 &11 &12 &total	&\\ \hline 
+%2 &nombre d'apparitions 	&3 		&1 	&4 	&6 	&9 	&9 	&7 	&3 	&5 	&3 	&0 	&50		&\\ \hline 
+%3 &fréquence d'apparition	&0,06	&	&	&	&	&	&	&	&	&	&	&		&\\ \hline 
+%\end{tabularx}
+%\end{center}
+
+\begin{enumerate}
+\item %Quelle formule a-t-il saisie dans la cellule M2 pour vérifier qu'il a bien relevé 50 résultats ? 
+=SOMME(B2:L2)
+\item %Tom a saisi dans la cellule B3 la formule $\fbox{=B2/M2}$. Il obtient un message d'erreur quand il la tire dans la cellule C3. Pourquoi ? 
+Il devrait avoir dans C3 : B3/M3 ; or il y a 0 dans M3 et la division par 0 n'existe pas.
+\item %Tom déduit de la lecture de ce tableau que s'il lance ces deux dés, il n'a aucune chance d'obtenir la somme 12. A-t-il tort ou raison ?
+Il a tort car la sortie d'un double 6 est tout à fait possible. Il se trouve que sur les 50 lancers il n'y a pas eu ce tirage.
+\end{enumerate}
+ 
+\bigskip  
+

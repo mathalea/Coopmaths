@@ -1,0 +1,99 @@
+
+\bigskip
+ 
+%Dans un jeu vidéo on a le choix entre trois personnages : un guerrier, un mage et un chasseur. 
+%
+%La force d'un personnage se mesure en points.
+% 
+%Tous les personnages commencent au niveau $0$ et le jeu s'arrête au niveau $25$. 
+%
+%Cependant ils n'évoluent pas de la même façon :
+%
+%\setlength\parindent{8mm} 
+%\begin{itemize}
+%\item[\decoone~~] Le guerrier commence avec 50 points et ne gagne pas d'autre point au cours du jeu. 
+%\item[\decoone~~] Le mage n'a aucun point au début mais gagne 3 points par niveau. 
+%\item[\decoone~~] Le chasseur commence à 40 points et gagne 1 point par niveau. 
+%\end{itemize}
+%\setlength\parindent{0mm}
+%
+%\medskip
+
+\begin{enumerate}
+\item %Au début du jeu, quel est le personnage le plus fort ? Et quel est le moins fort ? 
+Le plus fort est le guerrier, le moins fort le mage.
+\item %Compléter le tableau de l'annexe 2. 
+\item %À quel niveau le chasseur aura-t-il autant de points que le guerrier ?
+Il faut résoudre l'équation :
+
+$50 = 40 + x$  soit $x = 10$.
+\item %Dans cette question, x désigne le niveau de jeu d'un personnage. 
+
+%Associer chacune des expressions suivantes à l'un des trois personnages: chasseur, mage ou guerrier :
+% 
+%\setlength\parindent{8mm} 
+%\begin{itemize}
+%\item[$\bullet~~$] $f(x) = 3x$ ; 
+%\item[$\bullet~~$] $g(x) = 50$ ; 
+%\item[$\bullet~~$] $h(x) = x + 40$.
+%\end{itemize}
+%\setlength\parindent{0mm}
+ 
+\item %Dans le repère de l'annexe 2, la fonction $g$ est représentée. 
+$f(x)$ désigne le nombre de points du mage ;
+
+$g(x)$ désigne le nombre de points du guerrier ;
+
+$h(x)$ désigne le nombre de points du chasseur.
+
+%Tracer les deux droites représentant les fonctions $f$ et $h$.
+Voir le dessin à la fin. 
+\item %Déterminer à l'aide du graphique, le niveau à partir duquel le mage devient le plus fort.
+Le mage devient le plus fort à partir du niveau 21. 
+\end{enumerate} 
+
+
+\begin{center}
+{\large \textbf{ANNEXE 1 - Exercice 7}}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|m{2cm}|*{6}{>{\centering \arraybackslash}X|}}\hline
+&A&B&C&D&E&F&G\\ \hline
+1&Catégorie&\multicolumn{2}{|c|}{Junior}&\multicolumn{2}{|c|}{Intermédiaire}&\multicolumn{2}{|c|}{Sénior}\\ \hline 
+2&Effectif par catégorie&\multicolumn{1}{>{\columncolor{lightgray}}c|}{\quad}&\np{1958}&\multicolumn{1}{>{\columncolor{lightgray}}c|}{\quad}&876&\multicolumn{1}{>{\columncolor{lightgray}}c|}{\quad}&308\\ \hline 
+3&Niveau&5\up{e}&4\up{e}&3\up{e}&2\up{nde}&1\up{re}&Term\\ \hline 
+4&Effectif par niveau& 989&969& 638&238& 172&136\\ \hline 
+5&\multicolumn{6}{|c|}{Effectif total}&\np{3142}  \\ \hline
+\end{tabularx}
+
+\vspace{1cm}
+
+{\large \textbf{ANNEXE 2 - Exercice 8}}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|m{1.75cm}|*{6}{>{\centering \arraybackslash}X|}}\hline
+Niveau						&0	&1	&5	&10	&15	&25\\ \hline
+\small Points du guerrier	&50	&50	&50	&50	&50	&50\\ \hline
+\small Points du mage		&0	&3	&6	&9	&12	&15\\ \hline
+\small Points du chasseur	&40	&41	&42	&43	&44	&45\\ \hline
+\end{tabularx}
+
+\vspace{1cm}
+
+\psset{xunit=0.4cm,yunit=0.08cm}
+\begin{pspicture}(-1,-5)(27,75)
+\multido{\n=0+1}{28}{\psline[linestyle=dashed,linewidth=0.3pt](\n,0)(\n,75)}
+\multido{\n=0+5}{15}{\psline[linestyle=dashed,linewidth=0.3pt](0,\n)(27,\n)}
+\psline[linewidth=1.5pt](0,50)(27,50)
+\psaxes[linewidth=1.5pt,Dy=5]{->}(0,0)(-0.9,-4)(27,75)
+\uput[u](25.5,0){Niveau}
+\uput[r](0,72.5){Points}
+\uput[dl](0,0){O}
+\psline(24,72)
+\psline(0,40)(27,67)
+\rput{30}(2,7){mage}\uput[u](2,50){guerrier} \rput{12}(2,40){chasseur}
+\psline[ArrowInside=->,linecolor=blue](0,60)(20,60)(20,0)
+\end{pspicture}
+\end{center}

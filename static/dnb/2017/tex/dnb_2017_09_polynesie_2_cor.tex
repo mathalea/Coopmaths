@@ -1,0 +1,82 @@
+
+\medskip
+
+
+%Le 17 juillet 2016, une spectatrice regarde l'étape \og Bourg-en-Bresse
+%/ Culoz \fg{} du Tour de France.
+%
+%Elle note, toutes les demi-heures, la distance parcourue par le
+%cycliste français Thomas Vœckler qui a mis 4~h 30~min pour
+%parcourir cette étape de 160~km ; elle oublie seulement de noter la
+%distance parcourue par celui-ci au bout de 1~h de course.
+%
+%Elle obtient le tableau suivant : 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|*{10}{>{\centering \arraybackslash}X|}}\hline
+Temps en heure &0 &0,5&1 		&1,5 	&2 	&2,5 	&3 	&3,5 &4 	&4,5\\ \hline
+Distance en km &0 &15 &\ldots 	&55 	&70 &80 	&100&110 &135 	&160\\ \hline
+\end{tabularx}
+\end{center}
+
+\medskip
+
+\begin{enumerate}
+\item %Quelle distance a-t-il parcourue au bout de 2~h 30~min de course?
+2~h 30~min ou 2,5~h : la distance parcourue est égale à 80 km.
+\item %Montrer qu'il a parcouru 30 km lors de la troisième heure de course.
+De la 2\up{e} à la 3\up{e} heure il a parcouru $100 - 70 = 30$~km.
+\item %A-t-il été plus rapide lors de la troisième ou bien lors de la quatrième heure de
+%course ?
+De la 3\up{e} à la 4\up{e} heure il a parcouru $135 - 100 = 35$~km, soit plus que pendant la 3\up{e} heure.
+\item %Répondre aux questions qui suivent sur la feuille ANNEXE , qui est à rendre avec la copie.
+	\begin{enumerate}
+		\item Placer les 9 points du tableau dans le repère. On ne peut pas placer le
+point d'abscisse 1 puisque l'on ne connaît pas son ordonnée.
+		\item En utilisant votre règle, relier les points consécutifs entre eux.
+ 	\end{enumerate}
+\item %En considérant que la vitesse du cycliste est constante entre deux relevés,
+%déterminer, par lecture graphique, le temps qu'il a mis pour parcourir 75~km.
+On lit environ 2,25~h soit 2~h 15~min.
+\item %On considère que la vitesse du cycliste est constante entre le premier relevé
+%effectué au bout de 0,5~h de course et le relevé effectué au bout de 1,5~h de
+%course ; déterminer par lecture graphique la distance parcourue au bout de 1~h
+%de course.
+Si la vitesse est constante pendant cette heure, la représentation sur cet intervalle est affine ; on trace donc la verticale ($x = 1$) qui coupe la représentation en un point dont l'ordonnée est environ 35~(km).
+\item %Soit $f$ la fonction, qui au temps de parcours du cycliste Thomas Vœckler,
+%associe la distance parcourue. La fonction $f$ est-elle linéaire ?
+La fonction n'est pas linéaire puisque les points ne sont pas alignés.
+
+Plus mathématique on a vu qu'il faisait 30 km en une heure et plus tard 35~km en une heure. La fonction n'est pas linéaire.
+\end{enumerate}
+
+\begin{center}
+
+\textbf{\large ANNEXE}
+
+\medskip
+
+\textbf{À détacher du sujet et à joindre avec la copie}
+
+\begin{flushleft}
+\textbf{question 4}
+\end{flushleft}
+\bigskip
+
+\psset{xunit=1.7cm,yunit=0.09cm,arrowsize=2pt 5}
+\begin{pspicture}(-0.5,-10)(5.5,200)
+\uput[u](5,0){Temps en $h$}
+\uput[r](0,192.5){Distance en km}
+\multido{\n=0.0+0.5}{12}{\psline[linewidth=0.2pt](\n,0)(\n,190)}
+\multido{\n=0+5}{39}{\psline[linewidth=0.2pt](0,\n)(5.5,\n)}
+\psaxes[linewidth=1.25pt,Dy=20]{->}(0,0)(0,0)(5.5,190)
+\psaxes[linewidth=1.25pt,Dy=20](0,0)(0,0)(5.5,190)
+\psdots(0,0)(0.5,15)(1.5,55)(2,70)(2.5,80)(3,100)(3.5,110)(4,135)(4.5,160)
+\psline[linewidth=1pt](0,0)(0.5,15)(1.5,55)(2,70)(2.5,80)(3,100)(3.5,110)(4,135)(4.5,160)
+\psline[linewidth=1pt,linecolor=blue,ArrowInside=->](0,75)(2.25,75)(2.25,0)
+\psline[linewidth=1pt,linecolor=red,ArrowInside=->](1,0)(1,35)(0,35)
+\end{pspicture}
+\end{center}
+
+\vspace{0,5cm}
+

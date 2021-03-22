@@ -1,0 +1,68 @@
+
+\medskip
+
+%Une assistante maternelle gardait plusieurs enfants dont Farida qui est entrée à l'école en
+%septembre 2017. Ses parents ont alors rompu leur contrat avec cette assistante maternelle. La
+%loi les oblige à verser une \og indemnité de rupture \fg.
+%
+%Le montant de cette indemnité est égal au 1/120\up{e} du total des salaires nets perçus par
+%l'assistante maternelle pendant toute la durée du contrat.
+%
+%Ils ont reporté le montant des salaires nets versés, de mars 2015 à août 2017, dans un tableur
+%comme ci-dessous :
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|*{12}{>{\centering \arraybackslash \footnotesize}X|}c|}\hline
+%	&A 		&B &C& D & E &F &G &H &I &J &K &L &M\\ \hline
+%2	&		&	&&&&&&&&&&&\\ \hline
+%3 	&\multicolumn{7}{|l|}{Salaires nets versés en 2015 (en \euro)}&&&&&&\\ \hline
+%2	&Janvier&Février&Mars&Avril&Mai&Juin&Juillet&Août&Sept.&Octob.&Novemb.&Décemb.&Total\\ \hline
+%4 	&		&	&77,81 &187,11&197,21&197,11&187,11&170,63&186,28 &191,37 &191,37 &197,04 &\np{1783,04}\\ \hline
+%5	&		&	&	&	&&&&&&&&&\\ \hline
+%6 	&\multicolumn{7}{|l|}{Salaires nets versés en 2016 (en \euro)}&&&&&&\\ \hline
+%7	&		&	&	&	&&&&&&&&&\\ \hline
+%8 	&Janvier &Février&Mars&Avril&Mai&Juin&Juillet&Août&Sept.&Octob.&Novemb.&Décemb. &Total \\ \hline
+%9 	&191,37 &191,37&191,37&197,04&194,21&191,37&211,21&216,89&212,63& 212,63 &218,3&218,3&\np{2446,69}\\ \hline
+%10	&		&	&&&&&&&&&&&\\ \hline
+%11 	&\multicolumn{7}{|l|}{Salaires nets versés en 2017 (en \euro)}&&&&&&\\ \hline
+%12	&		&	&&&&&&&&&&&\\ \hline
+%13 	&Janvier &Février&Mars&Avril&Mai&Juin &Juillet&Août&Sept.&Octob.&Novemb.&Décemb.& Total\\ \hline
+%14 	&223,97	&261,64&270,15&261,64&261,64&267,3&261,64&261,64&&&&&\np{2069,62}\\ \hline
+%15	&		&	&	&&&&&&&&&&\\ \hline
+%16 	&\multicolumn{7}{|l|}{Montant total des salaires versés (en \euro)}&&&&&&\\ \hline
+%17	&		&	&&&&&&&&&&&\\ \hline
+%18 	&\multicolumn{8}{|l|}{Montant de l'indemnité de rupture de contrat (en \euro)}&&&&&\\ \hline
+%\end{tabularx}
+%\end{center}
+%
+%\smallskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item %Que représente la valeur \np{1783,04} dans la cellule M4 ?
+\np{1783,04}~\euro (?) représente la somme des salaires versés à l'assistante maternelle de mars à décembre 2015.
+		\item %Quelle formule a-t-on écrit dans la cellule M4 pour obtenir cette valeur ?
+=SOMME(C4:\;L4)
+		\item %Dans quelle cellule doit-on écrire la formule $= \text{M}4 + \text{M}9 + \text{M}14$ ?
+Dans la cellule M16.
+	\end{enumerate}
+\item %Déterminer le montant de \og l'indemnité de rupture \fg. Arrondir au centime d'euro près.
+La somme des salaires versés en trois ans est égale à :
+
+$\np{1783,04} + \np{2446,69} + \np{2069,62} = \np{6299,35}$.
+
+L'indemnité de rupture est donc égale à $\dfrac{\np{6299,35}}{120} \approx 52,49$.
+\item %Déterminer le salaire moyen net mensuel versé à cette assistante maternelle sur toute
+%la durée du contrat de la famille de Farida. Arrondir au centime d'euro près.
+Le salaire total,  \np{6299,35}~\euro{} a été versé sur 30 mois, soit un salaire moyen de $\dfrac{\np{6299,35}}{30} \approx 209,98$.
+\item %Calculer l'étendue des salaires versés.
+Salaire le plus bas : 77,81 ;
+
+Salaire le plus haut : 270,15 ;
+
+Étendue des salaires : $270,15 - 77,81 = 192,34$.
+\end{enumerate}
+
+\bigskip
+

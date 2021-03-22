@@ -1,0 +1,83 @@
+
+\medskip 
+
+%Le diagramme en bâtons ci-dessous nous renseigne sur le nombre de buts marqués lors de la seconde édition de la coupe de l'Outre-Mer de football en 2010. 
+%Nombre de buts marqués par ligue 
+%
+%\begin{center} 
+%\psset{xunit=1cm,yunit=0.4cm}
+%\begin{pspicture}(-2,-6)(9,19)
+%\multido{\n=0+2}{9}{\psline[linewidth=0.2pt](0,\n)(9,\n)}
+%\psaxes[Dx=20,Dy=2](0,0)(9,16)
+%\psline(0,0)(0,16)
+%\psframe*(0.75,0)(1.25,8)
+%\psframe*(1.75,0)(2.25,9)
+%\psframe*(2.75,0)(3.25,8)
+%\psframe*(3.75,0)(4.25,13)
+%\psframe*(4.75,0)(5.25,2)
+%\psframe*(5.75,0)(6.25,14)
+%\psframe*(7.75,0)(8.25,3)
+%\rput{45}(0.4,-2){\footnotesize Guadeloupe}
+%\rput{45}(1.4,-2){\footnotesize Guyane}
+%\rput{45}(2.4,-2){\footnotesize Martinique}
+%\rput{45}(3.4,-2){\footnotesize Mayotte}
+%\rput{45}(4.3,-2.2){\footnotesize Nouvelle-Cal\'edonie}
+%\rput{45}(5.4,-2){\footnotesize R\'eunion}
+%\rput{45}(6.3,-2.2){\footnotesize St-Pierre et Miquelon}
+%\rput{45}(7.4,-2){\footnotesize Tahiti}
+%\rput(4,18){\large Nombre de buts marqu\'es par ligue}
+%\rput{90}(-1,9){Nombre de buts marqu\'es}
+%\rput(4,-5){Ligues de l'Outre-Mer}
+%\end{pspicture}
+%\end{center}
+ 
+\begin{enumerate}
+\item %Combien de buts a marqué l'équipe de Mayotte ?
+Mayotte a marqué 13 buts. 
+\item %Quelle est l'équipe qui a marqué le plus de buts ? 
+C'est l'équipe de La Réunion avec 14 buts.
+\item %Quelle(s) équipe(s) ont marqué strictement moins de 8 buts ? 
+La Nouvelle Calédonie St-Pierre et Miquelon et Tahiti ont marqué moins de 8 buts.
+\item %Quelle(s) équipe(s) ont marqué au moins 10 buts ?
+Mayotte et La Réunion ont marqué 10 buts et plus. 
+\item %Quel est le nombre total de buts marqués lors de cette coupe de l'Outre-Mer 2010 ?
+Total : $8 + 9 + 8 + 13 + 2 + 14 + 3 = 57$ buts. 
+\item %Calculer la moyenne de buts marqués lors de cette coupe de l'Outre-Mer 2010.
+Si l'on suppose que chaque ligue a rencontré toutes les autres il y a eu $\dfrac{8 \times 7}{2} = 28$ matchs.
+
+La moyenne de buts par match est donc $\dfrac{57}{28} \approx 2$ buts.
+
+Si on ca	lcule la moyenne par ligue on obtient $\dfrac{57}{8} \approx 6$. 
+\item %Compléter les cellules B2 à B10 dans le tableau ci-dessous. 
+
+\begin{center}
+\begin{tabularx}{0.9\linewidth}{|c|*{2}{>{\centering \arraybackslash}X|}}\hline
+&A & B \\ \hline
+1&Ligues de l'Outre~Mer 	&Nombre de buts marqués\\ \hline 
+2&Guadeloupe				&8 \\ \hline
+3&Guyane					&9 \\ \hline
+4&Martinique				&8 \\ \hline
+5&Mayotte					&13 \\ \hline
+6&Nouvelle-Calédonie		&2 \\ \hline
+7&Réunion					&14 \\ \hline
+8&Saint Pierre et Miquelon	&0 \\ \hline
+9&Tahiti					&2 \\ \hline
+10&TOTAL					&57 \\ \hline
+11& Moyenne					&$\approx 2$ \\ \hline
+\end{tabularx}
+\end{center}
+
+\item %Parmi les propositions suivantes, \textbf{entourer} la formule que l'on doit écrire dans la cellule B10 du tableau pour retrouver le résultat du nombre total de buts marqués. 
+
+%\begin{center}
+%\begin{tabularx}{0.9\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+%8+9+8+13+2+14+0+3& = TOTAL(B2:B9)& =SOMME(B2:B9) \\ \hline
+%\end{tabularx}
+%\end{center}
+=SOMME(B2:B9)
+\item %Écrire dans la cellule B11 du tableau précédent une formule donnant la moyenne des buts marqués.
+=B10/28 (moyenne par match) ou =B10/8 (moyenne par ligue).
+\end{enumerate}
+ 
+\bigskip
+

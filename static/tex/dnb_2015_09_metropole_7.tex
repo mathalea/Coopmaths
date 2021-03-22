@@ -1,0 +1,112 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 7 \hfill 4 points}
+
+\medskip 
+
+Une boulangerie veut installer une rampe d'accès pour des personnes à mobilité réduite. 
+
+Le seuil de la porte est situé à 6 cm du sol. 
+
+\medskip
+
+\textbf{Document 1 : Schéma représentant la rampe d'accès}
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(12,6)
+%\psgrid
+\psframe(12,6)
+\pspolygon(1.5,2)(8,2)(8,3.5)
+\psline(1.5,2)(0.5,2.4)(7,3.9)(8,3.5)
+\psarc(1.5,2){0.6cm}{0}{14}
+\rput{14}(4.4,2.9){DT = 50,2 cm}
+\rput(3.5,1.2){$\widehat{\text{TDS}}$ : angle formé par la} 
+\rput(3.5,0.8){rampe avec l'horizontale }
+\uput[d](4.75,2){DS : longueur de l'horizontale }
+\rput(9,2.75){TS = 6 cm}
+\psline{->}(2.2,1.4)(2.2,2.1)
+\uput[ur](8,3.5){T} \uput[dl](1.5,2){D} \uput[dr](8,2){S} 
+\psframe(8,2)(7.8,2.2)
+\end{pspicture}
+\end{center}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Document 2 : Extrait de la norme relative aux rampes d'accès pour des personnes à mobilité réduite}\\ \hline
+La norme impose que la rampe d'accès forme un angle inférieur à 3\degres{} avec l'horizontale sauf dans certains cas. \\
+
+Cas particuliers :\\ 
+L'angle formé par la rampe avec l'horizontale peut aller :\\ 
+\hspace{1cm} -- jusqu'à 5\degres{} si la longueur de l'horizontale est inférieure à 2 m. \\
+\hspace{1cm} -- jusqu'à 7\degres{} si la longueur de l'horizontale est inférieure à 0,5 m. \\ \hline
+\end{tabularx}
+
+\medskip
+
+Cette rampe est-elle conforme à la norme ?
+
+\end{document}\end{document}

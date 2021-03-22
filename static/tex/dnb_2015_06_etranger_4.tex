@@ -1,0 +1,123 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 4} \hfill 6 points}
+
+\medskip
+
+Mathilde et Paul saisissent sur leur calculatrice un même nombre. Voici leurs programmes
+de calcul :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|X|m{1.cm}|X|}
+\multicolumn{1}{l}{Programme de calcul de Mathilde}&\multicolumn{1}{l}{~}&\multicolumn{1}{l}{Programme de calcul de Paul}\\\cline{1-1}\cline{3-3}
+$\bullet~~$Saisir un nombre&&$\bullet~~$Saisir un nombre\\
+$\bullet~~$Multiplier ce nombre par 9&&$\bullet~~$Multiplier ce nombre par $- 3$\\
+$\bullet~~$Soustraire 8 au résultat obtenu&&$\bullet~~$Ajouter 31 au résultat obtenu\\\cline{1-1}\cline{3-3}
+\end{tabularx}
+\end{center}
+
+\medskip
+
+\begin{enumerate}
+\item On considère la feuille de calcul suivante :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|l|*{11}{>{\centering \arraybackslash}X|}}\hline
+	&\multicolumn{1}{|c|}{A}&B	&C	&D	&E	&F	&G	&H	&I	&J	&K	&L\\ \hline
+1	&Nombre de départ		&0	&1	&2	&3	&4	&5	&6	&7	&8	&9	&10\\ \hline
+2	&Mathilde				&	&	&	&	&	&	&	&	&	&	&\\ \hline
+3	&Paul					&	&	&	&	&	&	&	&	&	&	&\\ \hline
+\end{tabularx}
+\end{center}
+
+	\begin{enumerate}
+		\item Quelle formule doit-on saisir dans la cellule B2 puis étirer jusqu'à la cellule L2 pour obtenir les résultats obtenus par Mathilde ?
+		\item Quelle formule doit-on saisir dans la cellule B3 puis étirer jusqu'à la cellule L3 pour obtenir les résultats obtenus par Paul ?
+	\end{enumerate}
+\item Voici ce que la feuille de calcul fait apparaître après avoir correctement programmé les
+cellules B2 et B3.
+	
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|l|*{11}{>{\centering \arraybackslash}X|}}\hline
+	&\multicolumn{1}{|c|}{A}&B	&C	&D	&E	&F	&G	&H	&I	&J	&K	&L\\ \hline
+1	&Nombre de départ	&0		&1	&2	&3	&4	&5	&6	&7	&8	&9	&10\\ \hline
+2	&Mathilde			&$- 8$	&1	&10 &19 &28 &37 &46 &55 &64 &73 &82\\ \hline
+3	&Paul 				&31 	&28 &25 &22 &19 &16 &13 &10 &7 	&4	&1\\ \hline
+\end{tabularx}
+\end{center}	
+
+Mathilde et Paul cherchent à obtenir le même résultat.
+	
+Au vu du tableau, quelle conjecture pourrait-on faire sur l'encadrement à l'unité du
+nombre à saisir dans les programmes pour obtenir le même résultat ?
+\item Déterminer par le calcul le nombre de départ à saisir par Mathilde et Paul pour obtenir
+le même résultat et vérifier la conjecture sur l'encadrement.
+\end{enumerate}
+
+\vspace{0,5cm}
+
+\end{document}

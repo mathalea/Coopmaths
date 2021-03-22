@@ -1,0 +1,114 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 4} \hfill 5 points}
+
+\medskip
+
+Pour répondre à la question posée, il faut calculer SO.
+
+Je commence par déterminer AO :
+
+ABC est un triangle rectangle en B. D'après le théorème de Pythagore, on a :
+
+$\text{AC}^2 = \text{AB}^2 + \text{BC}^2$
+
+$\text{AC}^2 = 30^2 + 30^2$
+
+$\text{AC}^2 = 900 + 900$
+
+$\text{AC}^2 = \np{1800}$
+
+$\text{AC} > 0$, donc $\text{AC} = \sqrt{1800} = \sqrt{900 \times 2} = 30\sqrt{2}$~(cm).
+
+ABCD est un carré, donc ses diagonales se coupent en leur milieu et
+$\text{AO} = \dfrac{30\sqrt{2}}{2} = 15\sqrt{2}$ cm.
+
+Je calcule SO :
+
+ASO est un triangle rectangle en O. D'après le théorème de Pythagore, on a :
+
+$\text{AS}^2 = \text{AO}^2 + \text{SO}^2$
+
+$552 = \left(15\sqrt{2}\right)^2 + \text{SO}^2$
+
+$\np{3025} = 225 \times 2 + \text{SO}^2$
+
+$3 025 = 450 + \text{SO}^2$
+
+$\text{SO}^2 = \np{3025} - 450$
+
+$\text{SO}^2 = \np{2575}$
+
+$\text{SO} > 0$, donc $\text{SO} = \sqrt{\np{2575}}$.
+
+$\text{SO} \approx  50,7> 50  $ (cm).
+
+Le présentoir ne peut pas être placé dans la vitrine de hauteur 50~cm.
+
+\vspace{0,5cm}
+
+\end{document}

@@ -1,0 +1,83 @@
+\textbf{Exercice 4 \hfill 5 points}
+
+\medskip
+
+Adèle et Mathéo souhaitent participer au marathon de Paris. Après s'être entraînés
+pendant des mois, ils souhaitent évaluer leur état de forme avant de s'engager. Pour
+cela, ils ont réalisé un test dit \og de Cooper\fg{} : l'objectif est de courir, sur une piste
+d'athlétisme, la plus grande distance possible en 12 minutes. La distance parcourue
+détermine la forme physique de la personne.
+
+\medskip
+
+\textbf{Document 1 : Indice de forme selon le test de Cooper}
+
+\medskip
+
+L'indice de forme d'un sportif dépend du sexe, de l'âge et de la distance parcourue
+pendant les 12~min.
+
+\begin{center}
+Pour les hommes
+
+\smallskip
+
+\begin{tabularx}{\linewidth}{|*{5}{>{\footnotesize\centering \arraybackslash}X|}}\hline
+Indice de Forme &Moins de 30 ans& De 30 à 39 ans& De 40 à 49 ans &Plus de 50 ans\\ \hline
+Très faible& moins de \np{1600} m& moins de \np{1500} m& moins de \np{1350} m &moins de \np{1250} m\\ \hline
+Faible& \np{1601} à \np{2000} m& \np{1501} à \np{1850} m& \np{1351} à \np{1700} m& \np{1251} à \np{1600} m\\ \hline
+Moyen& \np{2001} à \np{2400} m& \np{1851} à \np{2250} m& \np{1701} à \np{2100} m& \np{1601} à \np{2000} m\\ \hline
+Bon& \np{2401} à \np{2800} m& \np{2251} à \np{2650} m &\np{2101} à \np{2500} m &\np{2001} à \np{2400} m\\ \hline
+Très bon& plus de \np{2800} m &plus de \np{2650} m &plus de \np{2500} m &plus de \np{2400} m\\ \hline
+\end{tabularx}
+\end{center}
+\begin{center}
+Pour les femmes
+
+\smallskip
+\begin{tabularx}{\linewidth}{|*{5}{>{\footnotesize\centering \arraybackslash}X|}}\hline
+Indice de Forme &Moins de 30 ans &De 30 à 39 ans &De 40 à 49 ans &Plus de 50 ans\\ \hline
+Très faible &moins de \np{1500} m &moins de \np{1350} m &moins de \np{1200} m &moins de \np{1100} m\\ \hline
+Faible &\np{1501} à \np{1850} m &\np{1351} à \np{1700} m &\np{1201} à \np{1500} m &\np{1101} à \np{1350} m\\ \hline
+Moyen &\np{1851} à \np{2150} m &\np{1701} à \np{2000} m &\np{1501} à \np{1850} m &\np{1351} à \np{1700} m\\ \hline
+Bon &\np{2151} à \np{2650} m &\np{2001} à \np{2500} m &\np{1851} à \np{2350} m &\np{1701} à \np{2200} m\\ \hline
+Très bon &plus de \np{2650} m &plus de \np{2500} m &plus de \np{2350} m &plus de \np{2200} m\\ \hline
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabularx}{\linewidth}{|m{7cm}|X|}\hline
+Document 2 : Plan de la piste&Document 3 : Données du test\\
+\psset{unit=0.8cm}
+\begin{pspicture}(8,4)
+\psline(1.5,0.5)(6.5,0.5)
+\psline(1.5,3.5)(6.5,3.5)
+\psline[linestyle=dashed](1.5,0.5)(1.5,3.5)
+\psarc(6.5,2){1.5}{-90}{90}
+\psarc(1.5,2){1.5}{90}{270}
+\rput{90}(1.7,2){58 m}\uput[d](4,0.5){109 m}
+\psdots[dotstyle=+,dotangle=45,dotscale=1.5](4,0.5)(4,3.5)
+\end{pspicture}
+Cette piste est composée de deux parties rectilignes et
+de deux demi-cercles.&$\bullet~~$Adèle a 31 ans.
+
+$\bullet~~$Mathéo a 27 ans.
+
+$\bullet~~$Adèle a réalisé 6 tours de piste et 150 mètres.
+
+$\bullet~~$Mathéo a réalisé le test avec une vitesse moyenne de
+13,5 km/h.\\ \hline
+\end{tabularx}
+\end{center}
+
+\smallskip
+
+\begin{enumerate}
+\item Vérifier que la longueur de la piste est d'environ $400$ mètres.
+\item Adèle et Mathéo ont décidé de participer au marathon uniquement si leur
+indice de forme est au moins au niveau \og moyen\fg.
+
+Déterminer si Adèle et Mathéo participeront à la course.
+\end{enumerate}
+
+\bigskip
+

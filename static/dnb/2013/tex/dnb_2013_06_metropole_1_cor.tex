@@ -1,0 +1,77 @@
+
+\parbox{0.5\linewidth}{Avec un logiciel :
+ 
+\begin{itemize}
+\item on a construit un carré $ABCD$, de côté 4 cm.
+\item on a placé un point $M$ mobile sur $[AB]$ et construit le carré $MNPQ$ comme visualisé sur la copie d'écran ci-contre. 
+\item on a représenté l'aire du carré $MNPQ$ en 
+fonction de la longueur $AM$.
+\end{itemize}}\hfill  \parbox{0.5\linewidth}{\begin{center}
+\psset{unit=0.8cm}
+\begin{pspicture}(6.5,6.5)
+\psframe(0.5,0.5)(5.7,5.7)
+\pspolygon(4.2,0.5)(5.7,4.2)(2,5.7)(0.5,2)
+\uput[ul](0.5,5.7){A} \uput[ur](5.7,5.7){B} \uput[dr](5.7,0.5){C} \uput[dl](0.5,0.5){D} 
+\uput[u](2,5.7){M} \uput[r](5.7,4.2){N} \uput[d](4.2,0.5){P} \uput[l](0.5,2){Q}
+\uput[u](2,5.7){M} \uput[r](5.7,4.2){N} \uput[d](4.2,0.5){P} \uput[l](0.5,2){Q}
+\psline(1.25,5.6)(1.25,5.8)\psline(1.35,5.6)(1.35,5.8)
+\psline(4.90,0.4)(4.90,0.6)\psline(5.00,0.4)(5.00,0.6)
+\psline(0.4,1.2)(0.6,1.2)\psline(0.4,1.3)(0.6,1.3)
+\psline(5.6,4.9)(5.8,4.9)\psline(5.6,5)(5.8,5)
+\end{pspicture}
+%\begin{tikzpicture}[scale=.8]
+%\tkzDefPoints{0/0/D,4/0/C,4/4/B,0/4/A,2/0/P,4/2/N,2/4/M,0/2/Q}
+%\tkzDrawSegments(D,C C,B B,A A,D)
+%\tkzDrawSegments[color=green](Q,P P,N N,M M,Q)
+%\tkzLabelPoint[below left](D){$D$} \tkzLabelPoint[below right](C){$C$} 
+%\tkzLabelPoint[above left](A){$A$} \tkzLabelPoint[above right](B){$B$} 
+%\tkzLabelPoint[below](P){$P$} \tkzLabelPoint[right](N){$N$} 
+%\tkzLabelPoint[above](M){$M$} \tkzLabelPoint[left](Q){$Q$}
+%\tkzText(2,2){\textcolor{green}{Aire $MNPQ=8$}}
+%\tkzLabelSegments[sloped,color=green](A,M M,B B,N N,C P,D C,P D,Q Q,A){2}
+%\end{tikzpicture}
+\end{center}}
+
+
+\begin{minipage}{0.58\linewidth}
+On a obtenu le graphique ci-dessous.
+
+\begin{center}
+\psset{xunit=1.2cm,yunit=0.4cm}
+\begin{pspicture}(-1,-0.5)(6,18)
+\psgrid[gridlabels=0pt,subgriddiv=1,gridwidth=1pt,griddots=10,gridcolor=orange](0,0)(6,18)
+\psaxes[linewidth=1pt](0,0)(0,0)(6,18)
+\psaxes[linewidth=1.5pt]{->}(0,0)(1,1)
+\psplot[plotpoints=5000,linewidth=1.25pt,linecolor=blue]{0}{4}{x dup mul 2 mul 8 x mul sub 16 add}
+\uput[r](0,17.5){Aire de MNPQ $\left(\text{en cm}^2\right)$}
+\uput[u](5,0){Longueur AM (en cm)}\uput[dl](0,0){O}
+\end{pspicture} 
+\end{center}
+%\begin{center}
+%\begin{tikzpicture}[yscale=.5,scale=.85]
+%\tkzInit[xmin=0,ymin=0,xmax=5,ymax=17]%,xunit=1cm,yunit=.5cm]
+%\tkzGrid[sub,subxstep=.5,subystep=1]
+%\tkzAxeY[above,label={{\scriptsize Aire de MNPQ $\left(\text{en cm}^2\right)$}}]
+%\tkzAxeX[right,label={{\scriptsize Longueur AM (en cm)}}]
+%\tkzFct[domain=0:4,line width=1.25pt]{2*\x*\x-8*\x+16}
+%\tkzDrawTangentLine[color=green,line width=1.3pt](2)
+%\tkzHLine[dashed,color=red,line width=1.3pt]{10}
+%\tkzDefPoints{1/0/A1,1/10/A2,3/0/B1,3/10/B2,.5/12.5/C2,.5/0/C1,0/12.5/C3,2/0/D1,2/8/D2}
+%\tkzDrawSegments[dashed,color=red,line width=1.3pt,->,>=latex](A2,A1 B2,B1) 
+%\tkzDrawSegments[dashed,color=blue,line width=1.3pt,->,>=latex](C1,C2 C2,C3)
+%\tkzDrawSegments[dashed,color=green,line width=1.3pt,->,>=latex](D2,D1)
+%\tkzLabelPoint[left,color=blue](C3){{\scriptsize $12,5$}} \tkzLabelPoint[below,color=blue](C1){{\scriptsize $0,5$}}
+%\end{tikzpicture}
+%\end{center}
+\end{minipage}\hfill  \begin{minipage}{0.4\linewidth}
+En utilisant ce graphique répondre aux questions suivantes. \textbf{Aucune justification n'est attendue.}
+\begin{enumerate}
+\item Lorsque \textcolor{red}{$AM=1$} ou \textcolor{red}{$AM=3$}, l'aire de $MNPQ$ est égale à $10$~cm$^2$.
+\item Lorsque \textcolor{blue}{$AM=0,5$}, l'aire de $MNPQ$ est égale à \textcolor{blue}{12,5}.
+\item L'aire de $MNPQ$ est minimale, lorsque \textcolor{green}{$AM=2$}.
+
+Cette aire a alors pour valeur \textcolor{green}{$8$}.
+
+$MNPQ$ est alors un carré.
+\end{enumerate}
+\end{minipage}

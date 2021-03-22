@@ -1,0 +1,61 @@
+
+\medskip
+%\begin{minipage}[t]{0.5\linewidth}
+%	La figure ci-contre n'est pas en vraie grandeur.
+%	On donne les informations suivantes :
+%	\begin{itemize}
+%		\item Le triangle ADE a pour dimensions :
+%		
+%			AD = 7 cm, AE = 4,2 cm et DE = 5,6 cm.
+%		
+%		\item F est le point de [AD] tel que AF = 2,5 cm.
+%		\item B est le point de [AD) et C est le point de [AE) tels que : AB = AC = 9 cm.
+%		\item La droite (FG) est parallèle à la droite (DE).
+%	\end{itemize}
+%
+%\smallskip
+%
+%	\begin{enumerate}
+%		\item Réaliser une figure en vraie grandeur.
+%		\item Prouver que ADE est un triangle rectangle en E.
+%		\item Calculer la longueur FG.
+%	\end{enumerate}
+%\end{minipage}
+\parbox{0.55\linewidth}{
+\begin{enumerate}
+\item Voir ci-contre
+\item On calcule :
+
+$\text{AD}^2 = 7^2 = 49$, \: $\text{AE}^2 = 4,2^2 = 17,64$ et 
+
+$\text{DE}^2 = 5,6^2 = 31,36$.
+
+Or $17,64 + 31,36 = 49$ ou encore $\text{AE}^2 + \text{DE}^2 = \text{AD}^2$, ce qui montre d'après la réciproque de Pythagore que le triangle ADE est rectangle en E car d'hypoténuse [AD].
+\item Dans le triangle ADE on a (FG) parallèle à (DE) ; on a donc une configuration de Thalès et par conséquent l'égalité de quotients :
+
+$\dfrac{\text{FG}}{\text{DE}} = \dfrac{\text{AF}}{\text{AD}}$, soit $\dfrac{\text{FG}}{5,6} = \dfrac{2,5}{7}$.
+
+On a donc FG $ = \dfrac{2,5}{7} \times 5,6 = \dfrac{14}{7} = 2$~cm.
+\end{enumerate}}\hfill
+\parbox{0.45\linewidth}{\psset{unit=0.75cm}
+\begin{pspicture}(-4,-4)(5,5.6)
+%\psgrid
+\pscircle(0,0){2.8}
+\psline(2.8;30)(2.8;210)
+\psarc(-2.4,-1.4){7}{40}{80}
+\psarc(2.8;30){4.2}{100}{130}
+\psline(-2.4,-1.4)(0.34,5.03)(2.4,1.4)
+\psarc(0.34,5.03){4.2}{240}{260}
+\psline(-1.3,1.18)(3.5,3.58)
+\uput[l](2.8;210){D} \uput[r](2.8;30){E} \uput[u](0.34,5.03){A} 
+\uput[ul](-1.3,1.18){F} \uput[u](1.66,2.64){G} 
+\uput[dl](-3.22,-3.22){B} \uput[dr](4.8,-2.8){C} 
+\psline(2.8;30)(-1.3,1.18)
+\psarc(0.34,5.03){9}{240}{300}
+\psline(2.8;210)(-3.22,-3.22)
+\psline(2.8;30)(4.8,-2.8)
+\end{pspicture}
+}
+
+\vspace{0,5cm}
+

@@ -1,6 +1,7 @@
-import { Creer_document_AMC, strRandom } from "./modules/outils.js";
+import { creer_document_AMC, strRandom } from "./modules/outils.js";
 import { getUrlVars } from "./modules/getUrlVars.js";
-import {menuDesExercicesQCMDisponibles,dictionnaireDesExercicesQCM} from '/modules/menuDesExercicesQCMDisponibles.js'
+import {menuDesExercicesQCMDisponibles} from '/modules/menuDesExercicesQCMDisponibles.js'
+import {dictionnaireDesExercicesQCM} from "./modules/dictionnaireDesExercicesAMC.js"
 
 (function () {
  // IIFE principal
@@ -9,6 +10,10 @@ import {menuDesExercicesQCMDisponibles,dictionnaireDesExercicesQCM} from '/modul
  let liste_des_exercices = []; // Liste des identifiants des exercices
  let code_LaTeX = "";
  let liste_packages = new Set();
+ let nb_exemplaires=1
+ let nb_questions=[]
+ let nom_fichier=''
+ let type_entete=''
 
  menuDesExercicesQCMDisponibles();
 
@@ -86,10 +91,10 @@ import {menuDesExercicesQCMDisponibles,dictionnaireDesExercicesQCM} from '/modul
             }
         })();
 
-        if (!sortie_html) {
-            // Sortie LaTeX
+            // Sortie LaTeX quoi qu'il advienne !
             // code pour la sortie LaTeX
             let questions=[];
+
             code_LaTeX = "";
             liste_packages = new Set();
             if (liste_des_exercices.length > 0) {
@@ -105,8 +110,7 @@ import {menuDesExercicesQCMDisponibles,dictionnaireDesExercicesQCM} from '/modul
                         listeObjetsExercice[i].liste_packages.forEach(liste_packages.add, liste_packages);
                     }
                 }
-console.log(questions)
-                    code_LaTeX = Creer_document_AMC(questions,[],{}).replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
+                    code_LaTeX = creer_document_AMC({questions:questions,nb_questions:nb_questions,nb_exemplaires:nb_exemplaires,type_entete:type_entete}).replace(/<br><br>/g,'\n\n\\medskip\n').replace(/<br>/g,'\\\\\n')
 
                 $("#message_liste_exercice_vide").hide();
                 $("#cache").show();
@@ -120,11 +124,10 @@ console.log(questions)
                 $("#cache").hide(); // Cache au dessus du code LaTeX
                 div.innerHTML = "";
             }
-        }
 
             // Gestion du téléchargement
 
-            $("#btn_telechargement").click(function () {
+            $("#btn_telechargement").off("click").on("click",function () {
                 // Gestion du style pour l'entête du fichier
 
                 let contenu_fichier = `
@@ -158,8 +161,12 @@ console.log(questions)
 
     contenu_fichier+=code_LaTeX
     let monzip= new JSZip()
-    console.log('export fichier',code_LaTeX)
-    monzip.file("mathalea.tex",code_LaTeX)
+    if ($("#nom_du_fichier").val()!="") {
+        nom_fichier=$("#nom_du_fichier").val() + ".tex"                               ;
+    } else {
+        nom_fichier= "mathalea.tex";
+    }
+    monzip.file(`${nom_fichier}`,code_LaTeX)
     monzip.file("automultiplechoice.sty",load("/fichiers/automultiplechoice.sty"))
     monzip.generateAsync({type:"blob"})
 .then(function(content) {
@@ -206,6 +213,7 @@ console.log(questions)
                     .then((module) => {
                         if (module) {
                             listeObjetsExercice[i] = new module.default(); // Ajoute l'objet dans la liste des
+                            listeObjetsExercice[i].ModeQCM=true
                             if (listeObjetsExercice[i].type_exercice == 'XCas') {
                                 besoinXCas = true;
                             }
@@ -218,8 +226,15 @@ console.log(questions)
                 parametres_exercice(listeObjetsExercice);
             })
             .then(() => {
-                // Récupère les paramètres passés dans l'URL
-                let urlVars = getUrlVars();
+                                // Récupère les paramètres passés dans l'URL
+                                let urlVars = getUrlVars();
+                                //trier et mettre de côté les urlvars qui ne sont plus dans la liste des exercices
+                                //	=> évite les erreurs lors de la suppression de question dans la liste.
+                                for (var i = 0; i < urlVars.length; i++) {
+                                    if (urlVars[i].id != liste_des_exercices[i]) {
+                                        urlVars.splice(i,1);
+                                    }	
+                                }
                 for (var i = 0; i < urlVars.length; i++) {
                     // récupère les éventuels paramètres dans l'URL
                     // et les recopie dans les formulaires des paramètres
@@ -322,12 +337,6 @@ console.log(questions)
     modification(numero_figure);
     }
 
-
-
-
-
-
-
     // FIN DE GESTION DE MG32
 
     // Gestion des paramètres
@@ -353,31 +362,7 @@ console.log(questions)
         }
 
         for (let i = 0; i < exercice.length; i++) {
-            if (sortie_html) {
-                div_parametres_generaux.innerHTML += '<h4 class="ui dividing header">Exercice n°' + (i + 1) + " : " + exercice[i].titre + " − " + liste_des_exercices[i] + "</h4>";
-                if (exercice[i].pas_de_version_LaTeX) {
-                    div_parametres_generaux.innerHTML += "<p><em>Cet exercice n'a pas de version LaTeX et ne peut donc pas être exporté en PDF.</em></p>";
-                }
-                if (exercice[i].nb_questions_modifiable) {
-                    div_parametres_generaux.innerHTML +=
-                        '<div><label for="form_nb_questions' + i + '">Nombre de questions : </label> <input id="form_nb_questions' + i + '" type="number"  min="1" max="99"></div>';
-                }
-                if (!est_diaporama){
-                    div_parametres_generaux.innerHTML += '<div><label for="form_video' + i + '" data-tooltip="URL, code iframe, identifiant YouTube" data-inverted="" >Vidéo ou complément numérique : <input id="form_video' + i + '" type="texte" size="20"  ></label></div>';
-                }
-                if (exercice[i].correction_detaillee_disponible) {
-                    div_parametres_generaux.innerHTML +=
-                        '<div><label for="form_correction_detaillee' + i + '">Correction détaillée : </label> <input id="form_correction_detaillee' + i + '" type="checkbox" ></div>';
-                }
-                if (exercice[i].QCM_disponible) {
-                    div_parametres_generaux.innerHTML +=
-                        '<div><label for="form_ModeQCM' + i + '">Mode QCM : </label> <input id="form_ModeQCM' + i + '" type="checkbox" ></div>';
-                }
-                
-                if (!exercice[i].nb_questions_modifiable && !exercice[i].correction_detaillee_disponible && !exercice[i].besoin_formulaire_numerique && !exercice[i].besoin_formulaire_texte && !exercice[i].QCM_disponible) {
-                    div_parametres_generaux.innerHTML += "<p><em>Cet exercice ne peut pas être paramétré.</em></p>";
-                }
-            } else {
+            exercice[i].ModeQCM=true
                 div_parametres_generaux.innerHTML += '<h4 class="ui dividing header">Exercice n°' + (i + 1) + " : " + exercice[i].titre + "</h4>";
 
                 if (exercice[i].consigne_modifiable) {
@@ -408,7 +393,6 @@ console.log(questions)
                 if (exercice[i].spacing_corr_modifiable) {
                     div_parametres_generaux.innerHTML +=
                         '<div><label for="form_nb_cols_corr' + i + '">Espacement dans la correction : </label><input id="form_spacing_corr' + i + '" type="number" min="1" max="99"></div>';
-                }
 
                 // Si le nombre de versions changent
                 $("#nombre_de_versions").change(function () {
@@ -801,62 +785,29 @@ console.log(questions)
             form_serie.value = mathalea.graine; // mise à jour du formulaire
             mise_a_jour_du_code();
         }
-    
-        // Gestion du bouton de zoom
-        // let taille = parseInt($("#affichage_exercices").css("font-size"));
-        // $("#btn_zoom_plus").click(function () {
-        //     taille *= 1.2;
-        //     $("#affichage_exercices").css("font-size", `${taille}px`);
-        //     $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
-        //     $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
-        // });
-        // $("#btn_zoom_moins").click(function () {
-        //     if (parseInt(taille) > 14) {
-        //         taille *= 0.8;
-        //     }
-        //     $("#affichage_exercices").css("font-size", `${taille}px`);
-        //     $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
-        //     $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
-        // });
-
-        if (sortie_html && !est_diaporama) {
-            // Gestion du bouton de zoom
-                let zoom = 1;
-                $( "#btn_zoom_plus").click(function() {
-                    zoom+=.5;
-                    $("#affichage_exercices").css("transform", `scale(${zoom})`);
-                    $("#affichage_exercices").css("transform-origin", "0 0px");
-                      //window.location.hash = 'section';
-                  });
-                $( "#btn_zoom_moins").click(function() {
-                    if (zoom>1) {
-                        zoom-=.5;
-                    }
-                    $("#affichage_exercices").css("transform", `scale(${zoom})`);
-                    $("#affichage_exercices").css("transform-origin", "0 0px");
-                });
-        }
-
-        // Gestion de la redirection vers MathaleaLaTeX
-        $( "#btnLaTeX").click(function() {
-            window.location.href=window.location.href.replace('exercice.html','mathalealatex.html');
+                    // Gestion du nombre d'exemplaire
+      
+        let form_nb_exemplaires = document.getElementById("nombre_d_exemplaires");
+        form_nb_exemplaires.value = 1; // Rempli le formulaire avec le nombre de questions
+        form_nb_exemplaires.addEventListener("change", function (e) {
+            // Dès que le nombre change, on met à jour
+            nb_exemplaires = e.target.value;
+            mise_a_jour_du_code();
         });
+// Gestion des paramètres du fichier LaTeX
+        // gestion de l'entête
+        let form_entete=document.getElementById("options_type_entete");
         
-        if (document.getElementById('btnQRcode')){
-			document.getElementById('btnQRcode').addEventListener('click',function () {
-				$('#ModalQRcode').html('');
-				let qrcode = new QRCode(document.getElementById("ModalQRcode"), {
-					text: window.location.href,
-					width: Math.min(window.innerHeight,window.innerWidth)*.9,
-					height: Math.min(window.innerHeight,window.innerWidth)*.9,
-					colorDark : "#000000",
-					colorLight : "#ffffff",
-					correctLevel : QRCode.CorrectLevel.H
-				});
-				qrcode.makeCode(window.location.href)
-				$('#ModalQRcode').modal('show')
-			})
-		}
+        form_entete.addEventListener("change",function (e) {
+        type_entete=e.target.value;
+         });
+         //gestion du nombre de questions par groupe
+         let form_nb_questions=document.getElementById("nb_questions_par_groupe");
+        
+         form_nb_questions.addEventListener("change",function (e) {
+             let saisie=e.target.value;
+         nb_questions=saisie.split(',');
+          });         
 
         $("#btn_overleaf").click(function () {
             // Gestion du style pour l'entête du fichier
@@ -872,8 +823,7 @@ console.log(questions)
 
 
 `;
-console.log(code_LaTeX)
-                contenu_fichier +=  code_LaTeX ;
+            contenu_fichier +=  code_LaTeX ;
 
             // Gestion du LaTeX statique
 
@@ -889,9 +839,6 @@ console.log(code_LaTeX)
         let serie = params.get("serie");
         if (serie) {
             mathalea.graine = serie;
-        }
-        if (params.get("duree")) {
-            mathalea.duree = params.get("duree");
         }
         let urlVars = getUrlVars();
         if (urlVars.length > 0) {

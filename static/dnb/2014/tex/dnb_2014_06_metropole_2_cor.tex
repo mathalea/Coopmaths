@@ -1,0 +1,55 @@
+Léa a besoin de nouveaux cahiers. pour les acheter au meilleurs prix, elle étudie les offres promotionnelles de trois magasins. Dans ces trois magasins, le modèle de cahier dont elle a besoin a le même prix avant promotion.
+\begin{multicols}{3}
+\begin{bclogo}[couleur= gray!10,arrondi =0.1,cadreTitre=true]{Magasin A}
+\begin{center}
+Cahier à l'unité 
+ou 
+lot de 3 cahiers pour le prix de deux
+\end{center}
+\end{bclogo}
+
+\begin{bclogo}[couleur= gray!10,arrondi =0.1,cadreTitre=true]{Magasin B}
+\begin{center}
+Pour un cahier acheté, le deuxième à moitié prix.
+\end{center}
+\end{bclogo}
+
+\begin{bclogo}[couleur= gray!10,arrondi =0.1,cadreTitre=true]{Magasin C}
+\begin{center}
+30\%{} de réduction sur chaque cahier acheté.
+\end{center}
+\end{bclogo}
+\end{multicols}
+
+\begin{enumerate}
+\item Seul le magasin C est propose une réduction de 30\%{} sur chaque cahier acheté, donc sur le premier. Si on achète qu'un seul cahier, c'est le magasin C qui est le plus intéressant.
+\item Pour plusieurs cahiers de prix que nous nommerons $x,\ x > 0$:
+\begin{enumerate}
+\item deux cahiers: 
+\begin{description}
+\item[A] Prix de deux cahiers: $p_A(2)=2x$;
+\item[B] Prix de deux cahiers: $p_B(2)=x+\dfrac{1}{2}x=\dfrac{3}{2}x=1,5x$;
+\item[C] Prix de deux cahiers: $p_C(2)=2\times\left(1-\dfrac{30}{100}\right)x=2\times 0,7x=1,4x$.
+\end{description}
+On a: $p_A(2) > p_B(2) > p_C(2)$ ;
+
+Si on achète deux cahiers, c'est le magasin C qui est le plus intéressant.
+\item trois cahiers:
+\begin{description}
+\item[A] Prix de trois cahiers: $p_A(3)=2x$;
+\item[B] Prix de trois cahiers: $p_B(3)=x+\dfrac{1}{2}x+x==\dfrac{5}{2}x=2,5x$;
+\item[C] Prix de trois cahiers: $p_C(2)=3\times\left(1-\dfrac{30}{100}\right)x=3\times 0,7x=2,1x$.
+\end{description}
+On a: $p_B(3)>p_C(3)>p_A(3)$;
+
+Si on achète trois cahiers, c'est le magasin A qui est le plus intéressant.
+\end{enumerate}
+\item La carte de fidélité du magasin C permet d'obtenir 10\%{} de réduction sur le ticket de caisse, y compris sur les articles ayant déjà bénéficié d'une première réduction.
+\[
+p'_C(1)=\left(1-\dfrac{30}{100}\right)\times\left(1-\dfrac{10}{100}\right)x=0,7\times 0,9=0,61-0,37
+\]
+Elle obtient donc une réduction de 37\%.
+\end{enumerate}
+
+\vspace{0,5cm}
+

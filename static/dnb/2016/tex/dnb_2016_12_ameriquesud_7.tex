@@ -1,0 +1,75 @@
+
+\medskip
+
+Le mont du Pain de Sucre est un pic situé à Rio à flanc de mer. Il culmine à $396$~mètres
+d'altitude et est accessible par un téléphérique composé de deux tronçons.
+
+\begin{center}
+\psset{unit=0.8cm}
+\begin{pspicture}(15.3,4.5)
+%\psgrid
+\pspolygon[fillstyle=solid,fillcolor=lightgray](0,0.4)(1,1.1)(2,2.2)(2.4,1.8)(2.6,2.2)(3.5,2.1)(5,1.7)(5.8,1.5)(7,1.8)(7.5,1.9)(8,1.8)(8.4,2.3)(9.1,3.6)(9.3,3.4)(9.5,3.5)(11,2.5)(13,1.4)(13.5,1.5)(15.3,0.4)
+\psdots(2.6,2.2)(9.1,3.6)(9.1,2.2)
+\psline(2.6,2.2)(9.1,3.6)
+\psline[linestyle=dotted](2.6,2.2)(9.1,2.2)(9.1,3.6)
+\pscircle(7.05,3.2){0.05}
+\pscircle(6.95,3.18){0.05}
+\psline(7,3.19)(7,2.9)
+\psframe[fillstyle=solid,fillcolor=gray](6.83,2.8)(7.17,3)
+\psframe[fillstyle=solid,fillcolor=cyan](6.86,2.9)(6.95,2.96)
+\psframe[fillstyle=solid,fillcolor=cyan](6.97,2.9)(7.06,2.96)
+\psframe[fillstyle=solid,fillcolor=cyan](7.08,2.9)(7.17,2.96)
+\psline[linestyle=dotted]{->}(12,2.2)(9.2,2.2)\uput[r](12,2.2){altitude 220 m}
+\psline[linestyle=dotted]{->}(12,3.6)(9.2,3.6)\uput[r](12,3.6){altitude 396 m}
+\uput[u](2.6,2.2){U} \uput[u](9.1,3.6){S} \uput[dr](9.1,2.2){O} \uput[u](5.7,2.8){762 m}
+\rput(3.6,4.2){\small 2\up{e} tronçon du téléphérique du Pain de Sucre}
+\end{pspicture}
+
+\medskip
+
+Le dessin ci-dessus n'est pas à l'échelle.
+\end{center}
+
+On a représenté ci-dessus le deuxième tronçon du téléphérique qui mène du point U au
+sommet S du pic.
+
+\begin{tabularx}{\linewidth}{l*{2}{X}}
+On donne : 	&Altitude du point S : 396 m&US = 762 m\\
+			&Altitude du point U : 220 m&Le triangle UOS est rectangle en O.\\
+\end{tabularx}
+
+\medskip
+
+\begin{enumerate}
+\item Déterminer l'angle $\widehat{\text{OUS}}$ que forme le câble du téléphérique avec l'horizontale. On arrondira le résultat au degré.
+\item Sachant que le temps de trajet entre les stations U et S est de 6~min~30~s, calculer la
+vitesse moyenne du téléphérique entre ces deux stations en mètres par seconde.
+On arrondira le résultat au mètre par seconde.
+\item On a relevé la fréquentation du Pain de Sucre sur une journée et saisit ces informations
+dans une feuille de calcul d'un tableur.
+
+\begin{center}	
+\begin{tabularx}{\linewidth}{|>{\footnotesize}c|>{\footnotesize}c|*{7}{>{\centering \arraybackslash}X|}}\hline
+\multicolumn{9}{|l|}{H2\qquad  =SOMME(B2 : G2)}\\ \hline
+&A &B &C& D&E &F &G &H\\ \hline
+1&Horaires &\scriptsize 8 \negthickspace : 00- 10\negthickspace:00&\scriptsize 10\negthickspace:00 12\negthickspace:00&\scriptsize  12\negthickspace:00-14\negthickspace:00&\scriptsize  14\negthickspace:00-16\negthickspace:00&\scriptsize  16\negthickspace:00-18\negthickspace:00&\scriptsize  18\negthickspace:00-20\negthickspace:00&\\ \hline
+2&Nombre de visiteurs& 122 &140 &\psellipse*(0.,0.1)(0.3,0.2)&63 &75 &118 &615\\ \hline
+\end{tabularx}
+\end{center}
+
+On a saisi dans la cellule H2 la formule : =SOMME(B2\negthickspace:G2)
+	\begin{enumerate}
+		\item Interpréter le nombre calculé avec cette formule.
+		\item Quel est le nombre de visiteurs entre 12~h 00 et 14~h 00 ?
+	\end{enumerate}
+\item Une formule doit être saisie pour calculer le nombre moyen de visiteurs par heure sur
+cette journée. Parmi les propositions suivantes, recopier sans justification celle qui
+convient:
+
+\begin{center}	
+\begin{tabularx}{\linewidth}{*{2}{X}}	
+MOYENNE(B2\negthickspace:G2)&=MOYENNE(B2\negthickspace:G2)\\
+MOYENNE(B2\negthickspace:G2)/2&=MOYENNE(B2\negthickspace:G2)/2\\
+\end{tabularx}
+\end{center}
+\end{enumerate}

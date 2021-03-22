@@ -1,0 +1,101 @@
+\textbf{\textsc{Exercice 7} \hfill 5 points}
+
+\medskip
+
+Une pizzeria fabrique des pizzas rondes  de 34~cm  de diamètre et des pizzas carrées de 34~cm de côté.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{*{2}{\centering \arraybackslash}X}
+\psset{unit=1cm}
+\begin{pspicture}(-2.5,-2.5)(2.5,2.5)
+\pscircle(0,0){2.25}
+\multido{\n=0+45}{8}{\psline(2.25;\n)}
+\end{pspicture}&\psset{unit=1cm}
+\begin{pspicture}(-2.5,-2.5)(2.5,2.5)
+\psframe(-2.25,-2.25)(2.25,2.25)
+\multido{\n=-2.25+1.50}{3}{\psline(-2.25,\n)(2.25,\n)}
+\multido{\n=-2.25+1.50}{3}{\psline(\n,-2.25)(\n,2.25)}
+\end{pspicture}
+\end{tabularx}
+\end{center}
+
+Toutes les pizzas
+
+\begin{itemize}
+\item[$\bullet~~$]ont la même épaisseur ;
+\item[$\bullet~~$]sont livrées dans des boîtes identiques.
+\end{itemize}
+ 
+\medskip
+ 
+Les  pizzas carrées coûtent 1~\euro{} de plus que les pizzas rondes.
+ 
+ \medskip
+ 
+\begin{enumerate}
+\item Pierre achète deux pizzas : une ronde et une carrée. Il paye 14,20~\euro. Quel est le prix de chaque pizza ?
+\item Les pizzas rondes sont découpées en huit parts de même taille et les pizzas carrées en neuf parts de même taille.
+
+Dans quelle pizza trouve-t-on les parts les plus grandes ? 
+\end{enumerate}
+
+\newpage
+\begin{center}
+{\large \textbf{Annexe}}
+
+{\large \textbf{À rendre avec la copie à la fin de l'épreuve}}
+
+{\large \textbf{(À placer à l'intérieur de la copie)}}
+\end{center}
+
+\bigskip
+
+\textbf{Fiche technique trouvée sur le blog}
+
+\begin{center}
+\begin{tabular}{|m{8cm} m{3.2cm}|}\hline
+\multicolumn{2}{|c|}{\textbf{TRACER UNE ÉTOILE A CINQ BRANCHES}}\\
+\textbf{1.~~}Tracer un cercle de centre O, puis tracer deux diamètres
+perpendiculaires [AB] et [CD].
+
+\textbf{2.~~} Placer le milieu du segment [OC]. Le nommer J.
+
+\textbf{3.~~} Placer la pointe du compas sur J, placer le crayon sur C et tourner.
+
+\textbf{4.~~} Représenter la demi-droite [JA]. Elle coupe ce cercle en M.
+
+\textbf{5.~~} Placer la pointe du compas sur A, placer le crayon sur M et tourner.
+
+\textbf{6.~~} Le cercle obtenu coupe le cercle de centre O et de rayon [OC] en E et F{}.
+
+\textbf{7.~~} À partir du point F{}, reporter trois fois la longueur EF sur le cercle pour obtenir dans cet ordre les points G, H et I.
+
+\textbf{8.~~} Tracer les segments [EG], [GI], [IF], [FH] et [HE].&\psset{unit=0.5cm}
+\begin{pspicture}(-3,-3)(3,5)
+\pscircle(0,0){3}
+\pspolygon[fillstyle=solid,fillcolor=lightgray](3;45)(3;189)(3;333)(3;477)(3;621)
+\uput[ur](3;45){F} \uput[ul](3;189){I} \uput[dr](3;333){G} 
+\uput[ul](3;477){E} \uput[dl](3;621){H} 
+\end{pspicture}\\ \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Construction débutée par Archibald}
+
+\begin{center}
+\begin{pspicture}(-3,-3)(3,5)
+%\psgrid
+\pscircle(0,0){3}
+\psdots(0,0)(-3,0)(3,0)(0,-3)(0,3)(-1.5,0)(-0.8,1.36)(1.74,2.44)
+\pscircle[linestyle=dashed](-1.5,0){1.5}
+\psline(-3,0)(3,0)\psline(0,-3)(0,3)\uput[ul](0,3){A}
+\psline[linestyle=dashed](-1.5,0)(1,5)
+\pscircle[linestyle=dashed](0,3){1.82}
+\uput[l](-3,0){C}\uput[ur](0,0){O}
+%\pspolygon[fillstyle=solid,fillcolor=lightgray](3;45)(3;189)(3;333)(3;477)(3;621)
+\end{pspicture}\\ \hline
+\end{tabularx}
+\end{center}
+

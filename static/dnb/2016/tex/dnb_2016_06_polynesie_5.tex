@@ -1,0 +1,83 @@
+
+\medskip
+
+\parbox{0.4\linewidth}{On découpe la pyramide FIJK dans le cube ABCDEFGH
+comme le montre le dessin ci-contre.
+
+Le segment [AB] mesure 6 cm.
+
+Les points I, J, et K sont les milieux respectifs des arêtes
+[FE], [FB] et [FG].}\hfill
+\parbox{0.58\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(6.7,5.5)
+%\psgrid
+\psline(6.2,1)(2.8,0.6)(1.4,1.9)(1.4,4.8)(2.8,3.5)(2.8,0.6)%BADHEA
+\psline(2.8,3.5)(6.2,3.9)(4.8,5.2)(1.4,4.8)%EFGH
+\psline(6.2,3.9)(6.2,1)%FB
+\uput[d](2.8,0.6){A}\uput[dr](6.2,1){B}\uput[ur](4.8,2.3){C}\uput[l](1.4,1.9){D}
+\uput[l](2.8,3.5){E}\uput[r](6.2,3.9){F}\uput[ur](4.8,5.2){G}\uput[ul](1.4,4.8){H}
+\uput[u](4.1,3.65){I}\uput[u](5.5,4.55){K}\uput[r](6.2,2.45){J}
+\psline(6.2,2.45)(4.1,3.65)(5.5,4.55)%JIK
+\psline[linestyle=dashed](1.4,1.9)(4.8,2.3)(4.8,5.2)%DCG
+\psline[linestyle=dashed](4.8,2.3)(6.2,1)%CB
+\psline[linestyle=dashed](6.2,2.45)(5.5,4.55)%JK
+\pspolygon(2.8,3.5)(1.4,4.8)(1.4,1.9)(2.8,0.6)%EHDA
+\end{pspicture}
+}
+
+\medskip
+
+\begin{enumerate}
+\item Tracer le triangle IFK en vraie grandeur.
+
+\item Un des quatre schémas ci-dessous correspond au patron de la pyramide FIIK.
+
+Indiquer son numéro sur la copie. Aucune justification n'est attendue.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{2}{>{\centering \arraybackslash}X|}}\hline
+\psset{unit=0.9cm}
+\begin{pspicture}(-2,-2)(2,2)
+\pspolygon(-2,0)(0,-2)(2,0)(0,2)
+\psline(0,-2)(0,2)\psline(-2,0)(2,0)
+\psdots(1,1)(1,-1)(-1,1)(-1,-1)
+\psframe(0.3,0.3) \psframe(-0.3,-0.3)\psframe(0.3,-0.3)
+\end{pspicture}&\psset{unit=0.9cm}\begin{pspicture}(-2,-2)(2,4)
+\pspolygon(-2,0)(0,-2)(2,0)(0,2)(0,-2)
+\psline(-2,0)(2,0)
+\psdots(1,1)(1,-1)(1,3)(-1,-1)
+\psframe(0.3,0.3) \psframe(-0.3,-0.3)\psframe(0.3,-0.3)
+\psline(2,0)(2,4)(0,2)\rput{-45}(0,2){\psframe(0,0)(0.3,0.3)}
+\end{pspicture}\\ 
+Schéma 1 &Schéma 2\\ \hline
+\psset{unit=0.9cm}
+\begin{pspicture}(-2,-3)(3,2.25)
+%\psgrid
+\pspolygon(-2,0)(0,-2)(2,0)(0,2)(0,-2)
+\psline(-2,0)(2,0)
+\psdots(1,1)(1,-1)(-1,-1)(2.3,-1.3)(1.3,-2.3)
+\psframe(0.3,0.3) \psframe(-0.3,-0.3)\psframe(0.3,-0.3)
+%\psline(2,0)(2,4)(0,2)%\rput{-45}(0,2){\psframe(0,0)(0.3,0.3)}
+\psline(2,0)(2.6,-2.6)(0,-2)
+\end{pspicture}&\psset{unit=0.8cm}\begin{pspicture}(0,-1.5)(6.5,2.6)
+
+%\psgrid
+\psline(2.5,0)(5.1,0.1)(6.2,2.5)(3.7,2.4)(5.1,0.1)
+\psline(3.7,2.4)(2.5,0)
+\psline(3.7,2.4)(0.2,1.2)(2.5,0)(1.95,1.8)
+\psdots(1.3,0.6)(3.1,1.2)(3.8,0.05)(4.35,1.3)(5,2.42)(5.75,1.5)
+\psdots[dotstyle=+,dotangle=45](2.25,0.8)(2.7,2.08)\rput{-70}(1.95,1.8){\psframe(0.3,0.3)}
+\end{pspicture}\\ 
+Schéma 3 &Schéma 4\\ \hline
+\end{tabularx}
+\end{center}
+
+\item Calculer le volume de la pyramide FIJK.
+
+\emph{Rappel : Volume d'une pyramide} $= \dfrac{\text{\emph{Aire d'une base}} \times \text{\emph{hauteur}}}{3}$
+
+
+\end{enumerate}
+
+\bigskip
+

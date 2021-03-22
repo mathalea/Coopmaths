@@ -1,0 +1,15 @@
+<!-- {{/*
+Utilisation: {{% listeDesExercicesDNB "theme"  %}}
+*/}}-->
+
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+<div id="MenuDesExercicesDNB"></div>
+<script type="module">
+    import {menuThemeDNB} from "/modules/menuDesExercicesDisponibles.js";
+    document.getElementById('MenuDesExercicesDNB').innerHTML=menuThemeDNB({{ .Get 0}})
+</script>
+
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>

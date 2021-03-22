@@ -1,0 +1,117 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 1 \hfill 20 points}
+
+\medskip 
+
+%Pour chacune des affirmations suivantes, indiquer sur la copie, si elle est vraie ou fausse.
+%
+%On rappelle que chaque réponse doit être justifiée.
+
+\begin{itemize}[label=$\bullet~~$]
+\item \textbf{Affirmation \no 1} : fausse
+
+On a $94 - 18 = 76$.%\og Dans la série de valeurs ci-dessous, l'étendue est 25. 
+%
+%Série : 37~;~20~;~18~;~25~;~45~;~94~;~62 \fg.
+
+\item \textbf{Affirmation \no 2} : vraie
+
+%\og Les nombres 70 et 90 ont exactement deux diviseurs premiers en commun \fg.
+On a $70 = 7 \times 10 = 7 \times 2 \times 5 = 2 \times 5 \times 7$ ;
+
+$90 = 9 \times 10 = 2 \times 3^2 \times 5$.
+
+70 et 90 ont deux facteurs premiers en commun : 2 et 5.
+
+\item \textbf{Affirmation \no 3} : fausse
+
+%\parbox{0.55\linewidth}
+%{
+%\og À partir du quadrilatère BUTS, on a obtenu le quadrilatère VRAC par une translation \fg.
+%}
+%\hfill 
+%\parbox{0.43\linewidth}
+%{
+%\psset{unit=1cm}
+%\def\poly{\pspolygon[fillstyle=solid,fillcolor=lightgray](0,0)(1,0)(1,2)(0,1)}
+%\begin{pspicture}(5.5,3.8)
+%\rput(0.3,0.3){\poly}\rput{180}(4.6,3.3){\poly}
+%\uput[dl](0.3,0.3){C}\uput[dr](1.3,0.3){A} \uput[ur](1.3,2.3){R} \uput[ul](0.3,1.3){V} 
+%\uput[ur](4.6,3.3){U} \uput[ul](3.6,3.3){B} \uput[dl](3.6,1.3){S} \uput[dr](4.6,2.3){T} 
+%\end{pspicture}
+%}
+Les deux quadrilatères n'ont pas la même orientation.
+\item \textbf{Affirmation \no 4} : vraie
+
+%\og Quand on multiplie l'arête d'un cube par 3, son volume est multiplié par 27 \fg.
+Chaque dimension étant multipliée par 3, le volume est multiplié par $3 \times 3 \times 3 = 3^3 = 27$.
+\end{itemize}
+
+\vspace{0,5cm}
+
+\end{document}

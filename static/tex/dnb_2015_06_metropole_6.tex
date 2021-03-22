@@ -1,0 +1,50 @@
+\textbf{Exercice 6 \hfill 6 points}
+
+\medskip
+
+La distance parcourue par un véhicule entre le moment où 1e conducteur voit un obstacle et l'arrêt
+complet du véhicule est schématisée ci-dessous.
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(0,-3)(12,3)
+%\psgrid
+\rput(0.6,1.4){véhicule}\rput(4.4,1.4){véhicule}\rput(10,1.4){véhicule}
+\psframe(10.7,1)(12,1.5)
+\rput(11.4,1.25){obstacle} 
+\psline[linewidth=5pt]{->}(1.2,1)(5,1)
+\psset{arrowsize=1pt 1.5} 
+\psline[linewidth=3pt,doubleline=true]{->}(5,1)(10.7,1)
+\rput(2.5,0){Distance de réaction}
+\rput(8.5,0){Distance de freinage}
+\rput(2.5,-0.5){distance parcourue entre l'instant où}
+\rput(2.5,-1){le conducteur voit l'obstacle et celui}
+\rput(2.5,-1.5){où il commence à freiner}
+\rput(8.5,-0.5){distance parcourue depuis le début du}
+\rput(8.5,-1){freinage jusqu'à l'arrêt du véhicule}
+\psline[linewidth=2.5pt,linestyle=dashed,doubleline=true]{->}(1.2,-2)(10.7,-2)
+\rput(6,-2.6){Distance d'arrêt = distance de réaction + distance de freinage}
+\end{pspicture}
+\end{center}
+
+\medskip
+
+\begin{enumerate}
+\item Un scooter roulant à 45 km/h freine en urgence pour éviter un obstacle. À cette vitesse, la distance de réaction est égale à 12,5 m et la distance de freinage à 10 m. Quelle est la distance d'arrêt ?
+\item \textbf{Les deux graphiques, donnés en annexe} (dernière page du sujet) représentent, dans des conditions normales et sur route sèche, la distance de réaction et la distance de freinage en fonction de la vitesse du véhicule.
+
+En utilisant ces graphiques, répondre aux questions suivantes :
+	\begin{enumerate}
+		\item La distance de réaction est de 15~m. À quelle vitesse roule-t-on ? (\emph{Aucune justification n'est attendue}).
+		\item La distance de freinage du conducteur est-elle proportionnelle à la vitesse de son véhicule ?
+		\item Déterminer la distance d'arrêt pour une voiture roulant à 90~km/h.
+	\end{enumerate}
+\item La distance de freinage en mètres, d'un véhicule sur route mouillée, peut se calculer à l'aide de la formule sui vante, où $v$ est la. vitesse en km/h du véhicule :
+
+\[\text{distance de freinage sur route mouillée }\:= \dfrac{v^2}{152,4}\]
+
+Calculer au mètre près la distance de freinage sur route mouillée à 110~km/h.
+\end{enumerate}
+
+\clearpage
+

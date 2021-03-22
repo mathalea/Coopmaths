@@ -1,0 +1,41 @@
+\textbf{Exercice 4 \hfill 3 points}
+
+\medskip
+
+%À la fin d'une fête de village, tous les enfants présents se partagent équitablement les 397
+%ballons de baudruche qui ont servi à la décoration. Il reste alors 37 ballons. 
+%
+%\smallskip
+%
+%L'année suivante, les mêmes enfants se partagent les 598 ballons utilisés cette année-là.
+%Il en reste alors 13.
+%
+%\smallskip
+%
+%Combien d'enfants, au maximum, étaient présents ?
+
+%\emph{Toute trace de recherche, même incomplète, sera prise en compte dans le notation.}
+S’il reste 37 ballons la première année, les enfants se sont partagés équitablement 360
+ballons car $397 - 37 = 360$.
+
+S’il reste 13 ballons l'année suivante, les enfants se sont partagés équitablement 585
+ballons car $598 - 13 = 585$.
+
+Pour connaître le nombre maximum d’enfants présents à la fête, je recherche le PGCD,
+plus grand diviseur commun à $360$ et $585$. J’utilise l’algorithme d’Euclide.
+
+$585 = 360 \times 1 + 225$
+
+$360 = 225 \times 1 + 135$
+
+$225 =135 \times 1 + 90$
+
+$135 = 90 \times 1 + 45$
+
+$90 = 45 \times 2 + 0$
+
+Le dernier reste non nul est 45, donc PGCD$(585~;~360) = 45$.
+
+Le nombre maximum d’enfants présents était de $45$.
+\vspace{0,5cm}
+

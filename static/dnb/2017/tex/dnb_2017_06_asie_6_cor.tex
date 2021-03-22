@@ -1,0 +1,63 @@
+
+\medskip
+
+%Gaspard réalise des motifs avec des carreaux de mosaïque blancs et gris de la façon
+%suivante :
+%
+%\begin{center}
+%\parbox{0.70\linewidth}{
+%\psset{unit=0.6cm}
+%\begin{pspicture}(14,7)
+%\psframe[fillstyle=solid,fillcolor=lightgray](1,1)(2,2)
+%\psframe[fillstyle=solid,fillcolor=lightgray](5,1)(7,3)
+%\psframe[fillstyle=solid,fillcolor=lightgray](10,1)(13,4)
+%\multido{\n=0+1}{4}{\psline(\n,0)(\n,3)}
+%\multido{\n=0+1}{4}{\psline(0,\n)(3,\n)}
+%\multido{\n=4+1}{5}{\psline(\n,0)(\n,4)}
+%\multido{\n=0+1}{5}{\psline(4,\n)(8,\n)}
+%\multido{\n=9+1}{6}{\psline(\n,0)(\n,5)}
+%\multido{\n=0+1}{6}{\psline(9,\n)(14,\n)}
+%\rput(1.5,6){Motif 1} \rput(6.5,6){Motif 2}\rput(11.5,6){ Motif 3}
+%\end{pspicture}
+%}\hfill
+%\parbox{0.28\linewidth}{
+%
+%Gaspard forme un carré avec des carreaux gris puis le borde avec des carreaux blancs.
+%}
+%\end{center}
+%\medskip
+
+\begin{enumerate}
+\item %Combien de carreaux blancs Gaspard va-t-il utiliser pour border le carré gris du
+%motif 4 (un carré ayant 4 carreaux gris de côté) ?
+Le nombre de carrés blancs est successivement :
+
+$3^2 - 1^2 = 8~;~4^2 - 2^2 = 12~;~5^2 - 3^2 = 16$ et donc dans le motif 4 : $6^2 - 4^2 = 36 - 16 = 20$.
+\item  
+	\begin{enumerate}
+		\item %Justifier que Gaspard peut réaliser un motif de ce type en utilisant exactement $144$ carreaux gris.
+Le nombre de carrés gris est successivement :
+		
+$1^2 = 1~;~2^2 = 4~;~3^2 = 9~;~\ldots 11^2 = 121~;~12^2 = 144$.
+		\item Combien de carreaux blancs utilisera-t-il alors pour border le carré gris obtenu ?
+		Le nombre de carreaux blancs sera alors de : $14^2 - 12^2 = 196 - 144 = 52$.
+	\end{enumerate}
+\item  On appelle \og  motif $n$ \fg{} le motif pour lequel on borde un carré de $n$ carreaux gris de
+côté.
+	
+%Trois élèves ont proposé chacun une expression pour calculer le nombre de
+%carreaux blancs nécessaires pour réaliser le \og motif $n$ \fg{} :
+%\setlength\parindent{2cm}
+%\begin{itemize}
+%\item[$\bullet~~$] Expression \no 1 : $2 \times n + 2 \times (n + 2)$
+%\item[$\bullet~~$] Expression \no 2 : $4 \times (n + 2)$
+%\item[$\bullet~~$] Expression \no 3 : $4 \times (n + 2) - 4$
+%\end{itemize}
+%\setlength\parindent{0cm}
+%
+%Une seule de ces trois expressions ne convient pas. Laquelle ?
+C'est l'expression \no 2 : avec elle pour $n = 1$, le nombre de carreaux blancs serait $4\times (1 + 2) = 4 \times 3 = 12$ ; or on a vu que dans ce motif le carré gris est entouré de 8 carreaux blancs.
+\end{enumerate}
+
+\vspace{0,5cm}
+

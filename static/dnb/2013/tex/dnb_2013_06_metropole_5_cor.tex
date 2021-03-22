@@ -1,0 +1,73 @@
+
+\begin{minipage}{0.6\linewidth}
+Pour réaliser un abri de jardin en parpaing, un bricoleur a besoin de $300$~parpaings de dimensions 50~cm $\times$ 20~cm $\times$ 10~cm pesant chacun $10$~kg. 
+
+Il achète les parpaings dans un magasin situé à $10$~km de sa  maison. Pour les transporter, il loue au magasin un fourgon.
+\end{minipage} \hfill \begin{minipage}{0.35\linewidth}
+%\begin{tikzpicture}
+%\tkzDefPoints{0/0/A,4/-2/B,5/-1.5/C,5/.5/D,1/2.5/E,0/2/F,4/0/G}
+%\tkzDrawSegments(A,B B,C C,D D,E E,F F,G B,G G,D A,F)
+%\tkzLabelSegment[sloped](F,E){10~cm}
+%\tkzLabelSegment[sloped,below](A,B){50~cm}
+%\tkzLabelSegment[sloped](D,C){20~cm}
+%\end{tikzpicture}
+\psset{unit=1cm}
+\begin{pspicture}(0,-0.5)(5,5)
+\psline(0.1,2.2)(3.2,0.3)(4.1,0.6)(4.1,2.3)(3.2,2)(3.2,0.3)
+\psline(0.1,2.2)(0.1,3.9)(1,4.2)(4.1,2.3)
+\psline(0.1,3.9)(3.2,2)
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(0.1,1.9)(3.2,0)\rput(1.5,0.6){50 cm}
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(4.4,0.6)(4.4,2.3)
+\uput[r](4.4,1.2){20 cm}
+\psline[linewidth=0.6pt,arrowsize=3pt 3]{<->}(0.1,4.1)(1,4.4)\rput(0.4,4.6){10 cm}
+\end{pspicture}
+\end{minipage}
+
+\subsection*{Information 1: Caractéristiques du fourgon}
+ 
+\begin{itemize}
+\item 3 places assises. 
+\item \textcolor{blue}{Dimensions du volume transportable (L $\times   l \times h$)} : 
+2,60 m $\times$ 1,56 m $\times$ 1,84 m. 
+\item \textcolor{blue}{Charge pouvant être transportée : $1,7$ tonne}.
+\item Volume réservoir : $80$ litres. 
+\item \textcolor{orange}{Diesel (consommation : $8$ litres aux $100$ km)}. 
+\end{itemize}
+
+\subsection*{Information 2 : Tarifs de location du fourgon}
+
+\begin{tabularx}{\linewidth}{|*{5}{>{\centering \arraybackslash}X|}}\hline 
+1 jour& 1 jour &1 jour&1 jour& km\\
+30 km maximum &\textcolor{red}{50 km maximum} &100 km maximum &200 km maximum&supplémentaire\\ \hline 
+48~\eurologo &\textcolor{red}{55~\eurologo} &61~\eurologo &78~\eurologo &2~\eurologo\\ \hline
+\multicolumn{5}{l}{\emph{Ces prix comprennent le kilométrage indiqué hors carburant}}\\
+\end{tabularx} 
+
+\subsection*{Information 3 : Un litre de carburant coûte $1,50$~\eurologo.}
+ 
+\begin{enumerate}
+\item \textcolor{blue}{La charge pouvant être transportée est de $1,7$ tonne}. Il devra effectuer deux aller-retour pour transporter les $300$~parpaings jusqu'à sa maison, car le poids des $300$~parpaings est de $300\times 10=3000$~kg$=3$~tonnes.
+
+De plus, si l'on met
+\begin{itemize}
+\item 5 parpaings dans la \textcolor{blue}{longueur}, on obtient $5\times 50=250$~cm$<\textcolor{blue}{260}$~cm.
+\item 9 parpaings dans la \textcolor{blue}{hauteur}, on obtient $9\times 20=180$~cm$<\textcolor{blue}{184}$~cm
+\item 15 parpaings dans la \textcolor{blue}{largeur}, on obtient $15\times 10=150$~cm$<\textcolor{blue}{156}$~cm
+\end{itemize}
+On peut mettre $9\times 5\times 15=675$ parpaings en volume dans le fourgon. Donc on peut évidemment mettre 150 parpaings à chaque voyage.
+\item Coût total du transport:
+\begin{itemize}
+\item 2 aller-retour: $(2\times 10)\times 2=40$~km, donc \textcolor{red}{le tarif de la location sera de 55\eurologo}.
+\item carburant: le fourgon faisant du 8 litre aux 100~km, pour parcourir 40~km, il consommera $\dfrac{8\times 40}{100}=3,2$~litres.
+
+Le coût sera de: $3,2\times \textcolor{orange}{1,5}=4,80$~\eurologo.
+
+Le coût total sera donc de: $55+4,8=59,80$~\eurologo.
+\end{itemize}
+ 
+\item Les tarifs de location du fourgon ne sont pas proportionnels à la distance maximale autorisée par jour, car:
+\[
+\frac{30}{48}=0,625\not=\frac{50}{55}\simeq 0,909
+\]
+\end{enumerate}
+

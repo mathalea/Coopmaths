@@ -1,0 +1,55 @@
+
+\medskip
+
+%Le viaduc de Millau est un pont franchissant la vallée du Tarn, dans le département
+%de l'Aveyron, en France. Il est constitué de $7$ pylônes verticaux équipés chacun de 22
+%câbles appelés haubans.
+%
+%Le schéma ci-dessous, qui n'est pas à l'échelle, représente un pylône et deux de ses
+%haubans.
+%
+%\begin{center}
+%\psset{unit=0.6cm}
+%\begin{pspicture}(19,9)
+%\psline(0,0.5)(19,0.5)%AD
+%\psline(2.3,0.5)(2.3,8.2)%AB
+%\psline(13.1,0.5)(2.3,5.4)%FE
+%\psline(14.9,0.5)(2.3,6.3)%DC
+%\uput[d](2.3,0.5){A} \uput[l](2.3,8.2){B} \uput[l](2.3,6.3){C}
+%\uput[d](14.9,0.5){D} \uput[l](2.3,5.4){E} \uput[d](13.1,0.5){F}
+%\rput{90}(2,2.5){Pylône}\rput{-26}(7.5,4.4){Haubans}
+%\uput[u](16.5,0.5){Chaussée}
+%\end{pspicture}
+%\end{center}
+%
+%On dispose des informations suivantes :
+%
+%AB = 89 m ; AC = 76 m ; AD = 154 m ; FD = 12 m et EC = 5 m.
+%
+%\medskip
+
+\begin{enumerate}
+\item %Calculer la longueur du hauban [CD]. Arrondir au mètre près.
+Le pylône est supposé vertical donc perpendiculaire à la chaussée ; le triangle ACD est donc rectangle en A et le théorème de Pythagore s'écrit :
+
+$\text{CD}^2 = \text{CA}^2 + \text{AD}^2 = 76^2 + 154^2 = \np{5776} + \np{23716} = \np{29492}$.
+
+Donc $\text{CD} = \sqrt{\np{29492}} \approx 171,7 \approx 172$~(m) au mètre près.
+\item %Calculer la mesure de l'angle $\widehat{\text{CDA}}$ formé par le hauban [CD] et la chaussée.
+
+%Arrondir au degré près.
+On a $\tan \widehat{\text{CDA}} = \dfrac{\text{AC}}{\text{AD}} = \dfrac{76}{154} = \dfrac{38}{77} \approx \np{0,493506}$.
+
+La calculatrice donne $\widehat{\text{CDA}} \approx 26,2$ soit 26\,\degres{} au degré près.
+\item %Les haubans [CD] et [EF] sont-ils parallèles ?
+On a AE = $\text{AC} - \text{EC} = 76 - 5 = 71$~(m).
+
+AF $ = \text{AD} - \text{FD} = 154 - 12 = 142$~(m).
+
+Donc $\dfrac{\text{AE}}{\text{AC}} = \dfrac{71}{76}$ et $\dfrac{\text{AF}}{\text{AD}} = \dfrac{142}{154} = \dfrac{71}{77}$.
+
+Comme $\dfrac{71}{76} \ne \dfrac{71}{77}$, la réciproque de la propriété de Thalès n'est pas vraie donc les droites (ED) et (CD) ne sont pas parallèles.
+\end{enumerate}
+
+\bigskip
+

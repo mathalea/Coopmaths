@@ -1,0 +1,39 @@
+
+\medskip
+
+\parbox{9cm}{On considère la figure ci-contre, réalisée à main levée et qui n'est pas à l'échelle.
+	
+On donne les informations suivantes :
+\begin{itemize}
+	\item les droites (ER) et (FT) sont sécantes en A ;
+	
+	\item $\text{AE}=\np[cm]{8}$, $\text{AF}=\np[cm]{10}$, $\text{EF}=\np[cm]{6}$ ;
+	
+	\item $\text{AR}=\np[cm]{12}$, $\text{AT}=\np[cm]{14}$
+\end{itemize}
+}\hfill
+\begin{tikzpicture}[baseline = (current bounding box.center),line width=0.9pt, line cap=round, pencildraw/.style={black, decorate, decoration={random steps,segment length=1.5pt,amplitude=0.2pt},smooth},x=3mm,y=3mm]
+\draw[pencildraw] (-1.74,-0.94)-- (0.,0.) -- (4.5,1.6)-- (7.8,2.7) -- (8.8,3.26)
+(-1.6,0.3)-- (0.,0.) -- (6.2,-2) -- (10,-2.6) -- (12.8,-3.3)
+
+(11,-4.4)-- (10,-2.6)-- (7.8,2.7)-- (7.4,4) (4.,3.)-- (4.5,1.6) -- (6.2,-2) -- (7.9,-4.4);
+\newcommand{\croix}[3]{\draw [pencildraw,shift = {#1}] (-2pt,-2pt)--(2pt,2pt) (-3pt,3pt)--(0,0)--(3pt,-3pt) (0,0) node[#2] {#3}}
+
+\croix{(0,0)}{shift={(90:3mm)}}{A};
+\croix{(4.5,1.6)}{shift={(70:3mm)}}{E};
+\croix{(7.8,2.7)}{shift={(70:3mm)}}{R};
+\croix{(6.2,-2)}{shift={(-100:3mm)}}{F};
+\croix{(10,-2.6)}{shift={(-100:3mm)}}{T};
+
+\end{tikzpicture} \hfill{}
+
+\medskip
+
+\begin{enumerate}
+	\item Démontrer que le triangle AEF est rectangle en E.	
+	\item En déduire une mesure de l'angle $\widehat{\text{EAF}}$ au degré près.
+	\item Les droites (EF) et (RT) sont-elles parallèles ?
+\end{enumerate}
+
+\vspace{0,5cm}
+

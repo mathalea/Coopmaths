@@ -1,0 +1,131 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 8 \hfill 5 points}}
+
+\medskip
+
+\parbox{0.48\linewidth}{Afin de faciliter l'accès à sa piscine,
+Monsieur Joseph décide de construire un escalier constitué de deux prismes superposés dont les bases sont des triangles rectangles.}\hfill\parbox{0.48\linewidth}{
+\psset{unit=1cm}
+\begin{pspicture}(5.5,4.2)
+%\psgrid
+\psframe(0,0)(5.5,1)
+\psframe(1.75,2.2)(4,3.2)
+\pspolygon(1.75,3.2)(2.92,4)(4,3.2)
+\psline(0,1)(1.75,2.2)
+\psline(5.5,1)(4,2.2)
+\end{pspicture}}
+
+Voici ses plans :
+
+\begin{center}
+\psset{unit=1.5cm}
+\begin{pspicture}(5.5,4.2)
+%\psgrid
+\psframe(0,0)(5.5,1)
+\psframe(1.75,2.2)(4,3.2)
+\pspolygon(1.75,3.2)(2.92,4)(4,3.2)
+\psline(0,1)(1.75,2.2)
+\psline(5.5,1)(4,2.2)
+\psline[linestyle=dotted](2.92,4)(2.92,2)
+\psline[linestyle=dotted](1.75,2.2)(2.92,3)(5.5,1)
+\psline[linestyle=dotted](0,0)(2.92,2)(5.5,0)
+\rput{-38}(3.5,3.8){1,28 m}\rput{34}(2.4,3.8){1,36 m}
+\rput(1.35,2.7){0,20 m}
+\psline{<->}(0,0.2)(2.92,2.2)\rput{35}(1.46,1.4){3,40 m}
+\psline{<->}(5.5,0.2)(2.92,2.2)\rput{-35}(4.2,1.4){3,20 m}
+\psdots(1.75,2.7)(4,2.7)(0,0.5)(5.5,0.5)
+\psline(2.8,3.9)(2.92,3.8)(3.06,3.89)
+\psline[linestyle=dotted](2.8,2.9)(2.92,2.8)(3.06,2.89)
+\end{pspicture}
+\end{center}
+
+\textbf{Information 1 :} Volume du prisme = aire de la base $\times$ hauteur ;\quad  1~L = 1~dm$^3$
+
+\textbf{Information 2 :} Voici la reproduction d'une étiquette figurant au dos d'un sac de ciment
+de 35~kg.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|m{2cm}|*{4}{>{\centering \arraybackslash}X|}}\hline
+Dosage pour 1 sac de 35 kg	&Volume de béton obtenu	&Sable (seaux)	&Gravillons (seaux)	&Eau\\ \hline
+Mortier courant 			&105 L					&10				&					&16 L\\ \hline
+Ouvrages en béton courant	&100 L					&5				&8 					&17 L\\ \hline
+Montage de murs 			&120 L 					&12				&					&18~L\\ \hline
+\multicolumn{5}{m{11cm}}{\emph{Dosages donnés à titre indicatif et pouvant varier suivant les matériaux régionaux et le taux d'hygrométrie des granulats}} 
+\end{tabularx}
+\end{center}
+
+\medskip
+
+\begin{enumerate}
+\item Démontrer que le volume de l'escalier est égal à \np{1,26208} m$^3$.
+\item Sachant que l'escalier est un ouvrage en béton courant, déterminer le nombre de sacs
+de ciment de 35 kg nécessaires à la réalisation de l'escalier.
+\item Déterminer la quantité d'eau nécessaire à cet ouvrage.
+\end{enumerate}
+
+\end{document}\end{document}

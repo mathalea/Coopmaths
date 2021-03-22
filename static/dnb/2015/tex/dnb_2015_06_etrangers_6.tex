@@ -1,0 +1,89 @@
+
+\medskip
+
+La gélule est une forme médicamenteuse utilisée quand le médicament qu'elle contient 'a
+une odeur forte ou un goût désagréable que l'on souhaite cacher.
+
+On trouve des gélules de différents calibres. Ces calibres sont numérotés de \og 000 \fg{} à \og 5\fg{} comme le montre l'illustration ci-contre (\og 000 \fg{} désignant le plus grand calibre et \og 5\fg{} désignant le plus petit) :
+
+
+\begin{center}
+\psset{unit=1cm}
+\def\gelule{\psline(-0.6,0.55)(-0.6,1.2)\psline(0.6,0.55)(0.6,1.2)\psarc(0,0.55){0.55}{180}{0}
+\psline(-0.7,2.4)(-0.7,1.2)(0.7,1.2)(0.7,2.4)\psarc(0,2.4){0.65}{0}{180}}
+\begin{pspicture}(8.6,3.8)
+%\psgrid
+\psframe(8.65,3.8)
+\rput(0.8,0.1){\gelule}\rput(0.8,2.6){000}
+\rput(2.25,0.1){\psscalebox{0.94}{\gelule}}\rput(2.25,2.45){00}
+\rput(3.4,0.1){\psscalebox{0.81}{\gelule}}\rput(3.4,2.2){0}
+\rput(4.6,0.1){\psscalebox{0.74}{\gelule}}\rput(4.6,1.95){1}
+\rput(5.65,0.1){\psscalebox{0.67}{\gelule}}\rput(5.65,1.75){2}
+\rput(6.6,0.1){\psscalebox{0.63}{\gelule}}\rput(6.6,1.6){3}
+\rput(7.5,0.1){\psscalebox{0.55}{\gelule}}\rput(7.5,1.45){4}
+\rput(8.25,0.1){\psscalebox{0.44}{\gelule}}\rput(8.25,1.15){5}
+\end{pspicture}
+\end{center}
+
+Le tableau suivant donne la longueur de ces différents calibres de gélule :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|l|*{8}{>{\centering \arraybackslash}X|}}\hline
+Calibre de la gélule 				&000 &00 	&0 		&1 		&2 		&3 	&4 		&5\\ \hline
+Longueur $L$ de la gélule (en mm) 	&26,1&23,3 	&21,7 	&19,4 	&18,0 &15,9 &14,3 &11,1\\ \hline
+\multicolumn{9}{r}{\emph{\scriptsize Source: \og Technical Reference File 1st edition CAPSUGEL - Gélules Coni-Snap}}
+\end{tabularx}
+\end{center} 
+
+\medskip
+
+\parbox{0.5\linewidth}{On considère une gélule constituée de deux demi-sphères
+identiques de diamètre 9,5 mm et d'une partie cylindrique d'une
+hauteur de 16,6 mm comme l'indique le croquis ci-contre.}\hfill
+\parbox{0.48\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(-1.65,-0.6)(1.65,5.5)
+
+\rput{-25}(0,0){\scalebox{.99}[0.3]{\psarc[linewidth=1pt](0,3.3){1.15cm}{180}{0}}%
+\scalebox{.99}[0.3]{\psarc[linestyle=dashed](0,3.3){1.15cm}{0}{180}}%
+\scalebox{.99}[0.3]{ \psarc[linewidth=1pt](0,13.3){1.15cm}{180}{0}}%
+\scalebox{.99}[0.3]{\psarc[linestyle=dashed](0,13.3){1.15cm}{0}{180}}%
+\psarc(0,1){1.15cm}{-180}{0}
+\psarc(0,4){1.15cm}{0}{180}
+\psline(-1.15,1)(-1.15,4)\psline(1.15,1)(1.15,4)
+\psline{<->}(1.4,0)(1.4,4.8)
+\psline{<->}(-1.4,1)(-1.4,4)
+\psline{<->}(-1.15,5.3)(1.15,5.3)
+\uput[u](0,5.3){9,5 mm}
+\uput[r](1.4,2.4){$L$}\rput{90}(-1.55,2.45){16,6 mm}
+\psdots[dotstyle=+,dotangle=45](0,1)(0,4)}
+
+\end{pspicture}
+
+{\footnotesize Cette représentation n'est pas
+en vraie grandeur.}}
+
+\begin{enumerate}
+\item À quel calibre correspond cette gélule ?
+Justifier votre réponse.
+
+\item Calculer le volume arrondi au mm$^3$ de cette gélule.
+
+\emph{On rappelle les formules suivantes :}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash \scriptsize}X|}}\hline
+Volume d'un cylindre de rayon& Volume d'un cône de rayon de&  Volume d'une sphère\\
+$R$ et de hauteur $h$ & base $R$ et de hauteur $h$ & de rayon $R$ :\\
+\rule[-3mm]{0mm}{8mm}$V = \pi \times  R^2 \times h$& $ V = \dfrac{\pi \times  R^2 \times h}{3}$&$V = \dfrac{4}{3} \times \pi \times  R^3$\\ \hline
+\end{tabularx}
+\end{center}
+
+\item Robert tombe malade et son médecin lui prescrit comme traitement une boîte
+d'antibiotique conditionné en gélules correspondant au croquis ci-dessus.
+
+Chaque gélule de cet antibiotique a une masse volumique de $6,15 \times  10^{-4}$ g/mm$^3$.
+La boîte d'antibiotique contient 3 plaquettes de 6 gélules.
+
+Quelle masse d'antibiotique Robert a-t-il absorbée durant son traitement ? Donner le
+résultat en grammes arrondi à l'unité.
+\end{enumerate}
