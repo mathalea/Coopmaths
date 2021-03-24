@@ -13,7 +13,6 @@ export default function Construire_un_triangle() {
   this.nb_questions = 2;
   this.nb_cols = 1;
   this.nb_cols_corr = 1;
-  this.sup = false;
   this.classe=6
   this.nouvelle_version = function () {
     this.liste_questions = []
@@ -33,7 +32,7 @@ export default function Construire_un_triangle() {
       sommets = shuffle(sommets)
       A = point(0, 0, sommets[0],'left')
       switch (liste_type_de_questions[i]) {
-        case 1:
+        case 1: // triangle donné par trois longueurs
           lAC = randint(35, 45)
           lBC = calcul(randint(35, 45, lAC) / 10)
           lAB = calcul(randint(46, 60) / 10)
@@ -51,7 +50,7 @@ export default function Construire_un_triangle() {
           texte_corr += `Pour cette construction, nous avons utilisé le compas et la règle graduée.<br>`
           break;
 
-        case 2:
+        case 2: // triangle rectangle donné par longueur hypoténuse et un côté de l'angle droit.
           lAC = randint(70, 80) / 10
           lAB = calcul(randint(46, 60) / 10)
           B = pointAdistance(A, lAB, randint(-45, 45), sommets[1])
@@ -74,7 +73,7 @@ export default function Construire_un_triangle() {
       TT = polygoneAvecNom(A, B, CC)
       objets_enonce.push(TT[0], TT[1])
       objets_correction.push(T[0], T[1])
-      params_enonce = { xmin: Math.min(A.x - 1, B.x - 1, C.x - 1), ymin: Math.min(A.y - 1, B.y - 1, C.y - 1), xmax: Math.max(A.x + 1, B.x + 1, C.x + 1), ymax: Math.max(A.y + 1, B.y + 1, C.y + 1), pixelsParCm: 30, scale: 1, mainlevee: true, amplitude: 1 }
+      params_enonce = { xmin: Math.min(A.x - 1, B.x - 1, C.x - 1), ymin: Math.min(A.y - 1, B.y - 1, C.y - 1), xmax: Math.max(A.x + 1, B.x + 1, C.x + 1), ymax: Math.max(A.y + 1, B.y + 1, C.y + 1), pixelsParCm: 30, scale: 1, mainlevee: true, amplitude: 0.3 }
       params_correction = { xmin: Math.min(A.x - 1, B.x - 1, C.x - 2), ymin: Math.min(A.y - 1, B.y - 1, C.y - 2), xmax: Math.max(A.x + 1, B.x + 1, C.x + 2), ymax: Math.max(A.y + 1, B.y + 1, C.y + 2), pixelsParCm: 30, scale: 1 }
       texte += mathalea2d(params_enonce, objets_enonce)
       texte_corr += mathalea2d(params_correction, objets_correction)
@@ -88,10 +87,4 @@ export default function Construire_un_triangle() {
     }
     liste_de_question_to_contenu(this);
   };
-  //	this.besoin_formulaire_numerique = ['Type de questions', 3, `1 : Perpendiculaires\n 2 : Parallèles\n 3 : Mélange`]
-  this.besoin_formulaire2_numerique = [
-    "Type de cahier",
-    3,
-    `1 : Cahier à petits careaux\n 2 : Cahier à gros carreaux (Seyes)\n 3 : Feuille blanche`,
-  ];
 }

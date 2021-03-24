@@ -1,0 +1,108 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 6 \hfill 18 points}}
+
+\medskip
+
+\textbf{Partie A. Parcours du robot}
+
+\medskip
+
+On sait que (CE) et (BD) se coupent en F et que (BC) // (DE).
+
+D'après la propriété de Thalès, on a :
+
+$\dfrac{\text{FD}}{\text{FB}} = \dfrac{\text{DE}}{\text{BC}} = \dfrac{\text{FE}}{\text{FC}}$. Soit 
+
+$\dfrac{4}{5} = \dfrac{\text{DE}}{80} = \dfrac{\text{FE}}{\text{FC}}$.
+
+Donc DE $= \dfrac{80 \times 4}{5}= 64$~(m).
+
+\bigskip
+
+\textbf{Partie B. Programme de déplacement du robot}
+
+\medskip
+
+\begin{enumerate}
+\item ~
+\begin{center}
+\begin{scratch}
+\initmoreblocks{définir \namemoreblocks{Motif montant}}
+\blockmove{avancer de \ovalnum{80}}
+\blockmove{tourner \turnright{} de \ovalnum{90} degr\' es}
+\blockmove{avancer de \ovalnum{1}}
+\blockmove{tourner \turnright{} de \ovalnum{90} degr\' es}
+\end{scratch}
+\end{center}
+
+\item Il suffit de tourner dans l'autre sens aux lignes 3 et 5.
+\item $\dfrac{48}{2} = 24$ donc $x = 24$.
+
+$y = 64$ (dernière longueur).
+\end{enumerate}
+\end{document}\end{document}

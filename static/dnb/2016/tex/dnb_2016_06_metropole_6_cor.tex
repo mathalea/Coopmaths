@@ -1,0 +1,109 @@
+
+\medskip
+
+%Avec des ficelles de 20~cm, on construit des polygones comme ci-dessous :
+%\medskip
+%
+%\begin{center} 
+%
+%\textbf{Méthode de construction des polygones}
+%
+%\begin{tabularx}{\linewidth}{|l|m{6cm}|X|}\hline 
+%Étape 1&\psset{unit=1cm}\begin{pspicture}(6,1)%\psgrid
+%\psline(0,0.5)(6,0.5)\psline(1.5,0.8)(1.7,0.4)\rput{-65}(1.78,0.25){\psellipse(0,0)(0.16,0.1)}
+%\psline(1.8,0.8)(1.55,0.4)\rput{-125}(1.45,0.25){\psellipse(0,0)(0.16,0.1)} \end{pspicture}&On coupe la ficelle de 20~cm en deux   morceaux.\\ \hline   
+%Étape 2&\psset{unit=1cm}\begin{pspicture}(6,1.5)%\psgrid
+%\psline(0,0.5)(1.6,0.5)\psline(1.8,0.5)(6,0.5)  \rput(0.8,1){morceau \no 1}
+%   \rput(4,1){morceau \no 2}\end{pspicture}   &On sépare les deux morceaux.\\ \hline   
+%Étape 3&\psset{unit=0.65cm}\begin{pspicture}(6,4.5)%\psgrid
+%\psframe(0.5,1)(1.5,2) \pspolygon(4,0.5)(7,0.5)(5.5,3.398)
+%\end{pspicture}
+%&$\bullet~~$Avec le \og morceau \no 1 \fg,  on construit un carré.
+%   
+%$\bullet~~$Avec le \og morceau \no 2 \fg,  on construit un triangle équilatéral.\\ \hline   
+%\end{tabularx}
+%\end{center}
+%
+%\textbf{Partie 1 :}
+%
+%\smallskip 
+%
+%Dans cette partie, on découpe à l'étape 1 une ficelle pour que le \og morceau \no 1 \fg{} mesure 8~cm.
+%
+%\medskip 
+
+\begin{enumerate}
+\item %Dessiner en grandeur réelle les deux polygones obtenus.
+Avec le morceau \no 1, on construit un carré de côté $c$, donc $8 = 4c$ soit $c = 2$~(cm).
+
+Avec le morceau \no 2 de longueur $20 - 8 = 2$, on construit un triangle équilatéral de côté $d$ tel que $3d = 12$, soit $d = 4$~(cm). D'où la construction :
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(9,5)
+\psframe(1,1)(3,3) \pspolygon(4,0.5)(8,0.5)(6,3.9641)
+\end{pspicture}
+\end{center}
+
+\item %Calculer l'aire du carré obtenu.
+L'aire du carré est égale à $c^2 = 2^2 = 4$~cm$^2$. 
+\item %Estimer l'aire du triangle équilatéral obtenu en mesurant sur le dessin.
+Les hauteurs du triangle équilatéral mesurent environ 3,4~cm (au mm près).
+
+L'aire de ce triangle est donc à peu près $\dfrac{4 \times 3,4}{2} = 4 \times 1,7 = 6,8$~cm$^2$. 
+\end{enumerate}
+
+\medskip
+
+\textbf{Partie 2 :}
+
+\medskip 
+
+%Dans cette partie, on cherche maintenant à étudier l'aire des deux polygones obtenus à l'étape 3 en fonction de la longueur du \og morceau \no 1 \fg. 
+%
+%\medskip
+
+\begin{enumerate}
+\item %Proposer une formule qui permet de calculer l'aire du carré en fonction de la longueur du  \og morceau \no 1 \fg.
+Si $\ell$ est la longueur  \og morceau \no 1 \fg{}, le côté du carré a pour longueur $\dfrac{\ell}{4}$ et par conséquent l'aire du carré est $\mathcal{A}_{\text{carré}} = \left(\dfrac{\ell}{4} \right)^2 = \dfrac{\ell^2}{16}$. 
+\item %Sur le graphique ci-dessous: 
+
+%\setlength\parindent{8mm}
+%\begin{itemize}
+%\item[$\bullet~~$] la courbe A représente la fonction qui donne l'aire du carré en fonction de la longueur du \og morceau \no 1 \fg{} ; 
+%\item[$\bullet~~$]la courbe B représente la fonction qui donne l'aire du triangle équilatéral en fonction de la longueur du \og morceau \no 1 \fg. 
+%\end{itemize}
+%\setlength\parindent{0mm}
+%
+\textbf{Graphique représentant les aires des polygones en fonction de la longueur du \og morceau \no 1 \fg }
+
+\begin{center}
+\psset{unit=0.4cm}
+\begin{pspicture}(-1.5,-2)(21,26)
+\multido{\n=0+2}{11}{\psline[linewidth=0.3pt,linecolor=cyan](\n,0)(\n,26)}
+\multido{\n=0+2}{14}{\psline[linewidth=0.3pt,linecolor=cyan](0,\n)(21,\n)}
+\psaxes[linewidth=1.25pt,Dx=2,Dy=2](0,0)(0,0)(21,26)
+\uput[d](15.6,-1){Longueur du \og morceau \no 1 \fg{} (en cm)}
+\uput[r](0,25.5){Aire $\left(\text{en cm}^2\right)$}
+\psplot[plotpoints=4000,linewidth=1.25pt,linecolor=blue]{0}{20}{x 4 div dup mul}
+\psplot[plotpoints=4000,linewidth=1.25pt]{0}{20}{20 x sub 3 div dup mul 0.866025 mul 2 div}
+\rput(18.2,16.5){\blue Courbe A}
+\rput(3.7,16.5){Courbe B}
+\psset{arrowsize=3pt 4}
+\psline{->}(0,14)(2.95,14)
+\psline{->}(2.95,14)(2.95,0)
+\psline{->}(9.36,0)(9.36,5.65) 
+\end{pspicture}
+\end{center}
+% 
+%En utilisant ce graphique, répondre aux questions suivantes. Aucune justification n'est attendue. 
+	\begin{enumerate}
+		\item %Quelle est la longueur du \og morceau \no 1 \fg{} qui permet d'obtenir un triangle équilatéral d'aire 14~cm$^2$ ?
+		On trace l'horizontale partant du point de coordonnées (0~;~14) qui coupe la courbe B en un point dont l'abscisse est obtenue en projetant ce point sur l'axe des abscisses (voir la figure) ; on lit environ 2,95~cm. 
+		\item %Quelle est la longueur du \og morceau \no 1 \fg{} qui permet d'obtenir deux polygones d'aires égales ?
+Le point commun aux deux courbes a pour ordonnée l'aire commune aux deux polygones (environ 5,5) ; l'abscisse de ce point est environ 9,4~(cm). 
+	\end{enumerate}
+\end{enumerate}
+
+\bigskip
+

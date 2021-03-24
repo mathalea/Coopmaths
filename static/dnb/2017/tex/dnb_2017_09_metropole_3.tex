@@ -1,0 +1,90 @@
+
+\medskip
+
+Voici trois figures différentes, aucune n'est à l'échelle indiquée dans l'exercice :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{*{3}{>{\centering \arraybackslash}X}}
+\psset{unit=0.8cm}
+\begin{pspicture}(4.9,4.3)
+\psline[linecolor=blue,linewidth=1.5pt](0,0)(0,4.3)(3.8,4.3)(3.8,1)(1,1)(1,3.3)(2.7,3.3)(2.7,2.2)(2.2,2.2)
+\end{pspicture}&
+%\psset{unit=0.8cm}
+%\begin{pspicture}(4.9,4.3)
+%\psline[linecolor=blue](4.9,2.3)(3.6,0)(0.9,0)(0,2.2)(1,3.4)(2.4,3.4)(3,2.3)(2.7,1.7)(2,1.7)
+%\end{pspicture}
+\psset{unit=0.5cm}
+\begin{pspicture}(-4.2,-3.5)(4.7,2.7)
+\psStartPoint(0,0)
+\psVector[linecolor=blue,
+arrows=-,linewidth=1.5pt](1,0)(1;60)(2;120)(-3,0)(3;-120)(3;-60)(4,0)(4;60)
+\end{pspicture}
+&\psset{unit=0.9cm}
+\begin{pspicture}(4.9,4.3)
+\psline[linecolor=blue,linewidth=1.5pt ](0.5,0.5)(0.5,3.4)(3.4,3.4)(3.4,1.4)(1.2,1.4)(1.2,2.7)(2.7,2.7)(2.7,1.9)(1.9,1.9)
+\end{pspicture}\\
+figure 1 &figure 2 &figure 3\\
+\end{tabularx}
+\end{center}
+
+Le programme ci-dessous contient une variable nommée \og \textbf{longueur} \fg.
+
+\medskip
+
+\begin{minipage}{.4\linewidth}
+Script
+\begin{scratch}
+    \blockinit{Quand \greenflag est cliqué}
+    \blocklook{cacher}
+    \blockmove{aller à x: \ovalnum{0} y: \ovalnum{0}}
+    \blockmove{s’orienter à \ovalnum{90\selectarrownum} degrés}
+    \blockvariable{mettre \selectmenu{longueur} à   \ovalnum{30} }
+    \blockpen{effacer tout}
+    \blockpen{mettre la taille du stylo à \ovalnum{3}}
+    \blockpen{stylo en position d'écriture}        
+        \blockrepeat{répéter \ovalnum{2} fois}
+    {
+        \blockmoreblocks{un tour}
+        \blockvariable{ajouter  à \selectmenu{longueur}    \ovalnum{30} }
+    }
+\end{scratch}
+\end{minipage}
+\begin{minipage}{.2\linewidth}
+~
+\end{minipage}
+\begin{minipage}{.4\linewidth}
+{Le~bloc~:~\textbf{un~tour}}
+
+\begin{scratch}
+	\initmoreblocks{Définir \namemoreblocks{un tour}}
+		\blockrepeat{répéter \ovalnum{2} fois}
+		{\blockmove{avancer de \ovalvariable{longueur} }
+		\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+		}		
+	\blockvariable{ajouter à  \selectmenu{longueur}  \ovalnum{30} }
+		\blockrepeat{répéter \ovalnum{2} fois}
+		{
+		\blockmove{avancer de \ovalvariable{longueur} }
+		\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+		}
+\end{scratch}
+\end{minipage}
+
+\medskip
+
+On rappelle que l'instruction \raisebox{-2.3ex}{\begin{scratch} \blockmove{s’orienter à \ovalnum{90\selectarrownum} degrés}  \end{scratch}} signifie que l'on s'oriente vers la droite avec le stylo.
+
+\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Dessiner la figure obtenue avec le bloc \og un tour\fg{} donné dans le cadre de droite ci-dessus, pour une longueur de départ égale à 30, étant orienté vers la droite avec le stylo, en début de tracé. On prendra 1~cm pour 30~unités de longueur, c'est-à-dire 30 pixels.
+		\item Comment est-on orienté avec le stylo après ce tracé ? (aucune justification n'est demandée)
+	\end{enumerate}
+\item Laquelle des figures 1 ou 3 le programme ci-dessus permet-il d'obtenir ? Justifier votre réponse.
+\item Quelle modification faut-il apporter au bloc \og \textbf{un tour}\fg{} pour obtenir la figure 2 ci-dessus ?
+\end{enumerate}
+
+\vspace{0,5cm}
+

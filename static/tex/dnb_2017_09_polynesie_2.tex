@@ -1,0 +1,72 @@
+
+\medskip
+
+
+Le 17 juillet 2016, une spectatrice regarde l'étape \og Bourg-en-Bresse
+/ Culoz \fg{} du Tour de France.
+
+Elle note, toutes les demi-heures, la distance parcourue par le
+cycliste français Thomas Vœckler qui a mis 4~h 30~min pour
+parcourir cette étape de 160~km ; elle oublie seulement de noter la
+distance parcourue par celui-ci au bout de 1~h de course.
+
+Elle obtient le tableau suivant : 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|*{10}{>{\centering \arraybackslash}X|}}\hline
+Temps en heure &0 &0,5&1 		&1,5 	&2 	&2,5 	&3 	&3,5 &4 	&4,5\\ \hline
+Distance en km &0 &15 &\ldots 	&55 	&70 &80 	&100&110 &135 	&160\\ \hline
+\end{tabularx}
+\end{center}
+
+\medskip
+
+\begin{enumerate}
+\item Quelle distance a-t-il parcourue au bout de 2~h 30~min de course?
+\item Montrer qu'il a parcouru 30 km lors de la troisième heure de course.
+\item A-t-il été plus rapide lors de la troisième ou bien lors de la quatrième heure de
+course ?
+\item Répondre aux questions qui suivent sur la feuille ANNEXE , qui est
+à rendre avec la copie.
+	\begin{enumerate}
+		\item Placer les 9 points du tableau dans le repère. On ne peut pas placer le
+point d'abscisse 1 puisque l'on ne connaît pas son ordonnée.
+		\item En utilisant votre règle, relier les points consécutifs entre eux.
+ 	\end{enumerate}
+\item En considérant que la vitesse du cycliste est constante entre deux relevés,
+déterminer, par lecture graphique, le temps qu'il a mis pour parcourir 75~km.
+\item On considère que la vitesse du cycliste est constante entre le premier relevé
+effectué au bout de 0,5~h de course et le relevé effectué au bout de 1,5~h de
+course ; déterminer par lecture graphique la distance parcourue au bout de 1~h
+de course.
+\item Soit $f$ la fonction, qui au temps de parcours du cycliste Thomas Vœckler,
+associe la distance parcourue. La fonction $f$ est-elle linéaire ?
+\end{enumerate}
+
+\begin{center}
+
+\textbf{\large ANNEXE}
+
+\bigskip
+
+\textbf{À détacher du sujet et à joindre avec la copie}
+
+\begin{flushleft}
+\textbf{question 4}
+\end{flushleft}
+
+\medskip
+
+\psset{xunit=1.7cm,yunit=0.08cm}
+\begin{pspicture}(-0.5,-10)(5.5,200)
+\uput[u](5,0){Temps en $h$}
+\uput[r](0,192.50){Distance en km}
+\multido{\n=0.0+0.5}{12}{\psline[linewidth=0.2pt](\n,0)(\n,190)}
+\multido{\n=0+5}{39}{\psline[linewidth=0.2pt](0,\n)(5.5,\n)}
+\psaxes[linewidth=1.25pt,Dy=20]{->}(0,0)(0,0)(5.5,190)
+\psaxes[linewidth=1.25pt,Dy=20](0,0)(0,0)(5.5,190)
+\end{pspicture}
+\end{center}
+
+\vspace{0,5cm}
+

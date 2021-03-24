@@ -33,11 +33,13 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - CAUCAT Bernard
 - COGEZ Sébastien
 - DESRUELLE Sophie
+- DEVILLERS Matthieu
 - DUVOID Aude
 - DUPLESSY Erwan
 - FOURNIER Carine
 - GAIN Mireille
 - GUYON Sthéphane
+- GROLLEAU Cédric
 - LACROIX Olivier
 - LEFORT Julie
 - LHOTE Jean-Claude

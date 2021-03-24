@@ -1,0 +1,57 @@
+\textbf{\textsc{Exercice 4} \hfill 7 points}
+
+\medskip 
+ 
+Le nombre d'abonnés à une revue dépend du prix de la revue.
+ 
+Pour un prix $x$ compris entre 0 et 20~\euro, le nombre d'abonnés est donné par la fonction $A$ telle que : $A(x) = - 50 x + \np{1250}$.
+ 
+La recette, c'est-à-dire le montant perçu par l'éditeur de cette revue, est donnée par la fonction $R$ telle que : $R(x) = - 50 x^2 + \np{1250} x$. 
+
+
+\begin{center}\textbf{Représentation graphique de la fonction} \boldmath $A$ \unboldmath 
+
+\medskip
+
+\psset{xunit=0.4cm,yunit=0.004cm}
+\begin{pspicture}(-1,-100)(25,1400)
+\multido{\n=0+1}{25}{\psline[linestyle=dashed,linecolor=orange,linewidth=0.2pt](\n,0)(\n,1400)}
+\multido{\n=0+100}{15}{\psline[linestyle=dashed,linecolor=orange,linewidth=0.2pt](0,\n)(24,\n)}
+\psaxes[linewidth=1.5pt,Dx=2,Dy=200]{->}(0,0)(0,0)(24,1400)
+\psplot[plotpoints=100,linewidth=1.25pt]{0}{24}{1250 50 x mul sub}
+\uput[u](19,0){prix de la revue en euros}
+\uput[r](0,1350){nombre d'abonnés}
+\end{pspicture}
+
+\vspace{1cm}
+
+\textbf{Représentation graphique de la fonction } \boldmath $R$ \unboldmath
+
+\vspace{0,5cm}
+
+\psset{xunit=0.5cm,yunit=0.001cm}
+\begin{pspicture}(-1,-400)(20,8400)
+
+\multido{\n=0+1}{21}{\psline[linestyle=dashed,linecolor=orange,linewidth=0.2pt](\n,0)(\n,8400)}
+\multido{\n=0+400}{21}{\psline[linestyle=dashed,linecolor=orange,linewidth=0.2pt](0,\n)(20,\n)}
+\psaxes[linewidth=1.5pt,Dx=2,Dy=20000]{->}(0,0)(0,0)(20,8400)
+\multido{\n=0+2000}{5}{\uput[l](0,\n){\np{\n}}}
+\psplot[plotpoints=100,linewidth=1.25pt,linecolor=blue]{0}{20}{25  x  sub 50 mul x mul}
+\uput[u](16.5,0){prix de la revue en euros}
+\uput[r](0,8350){recette en euros}
+\end{pspicture} 
+\end{center}
+
+\medskip
+ 
+\begin{enumerate}
+\item Le nombre d'abonnés est-il proportionnel au prix de la revue ? Justifier. 
+\item Vérifier, par le calcul, que $A(10) = 750$ et interpréter concrètement ce résultat. 
+\item La fonction $R$ est-elle affine ? Justifier. 
+\item Déterminer graphiquement pour quel prix la recette de l'éditeur est maximale. 
+\item Déterminer graphiquement les antécédents de \np{6800} par $R$. 
+\item Lorsque la revue coûte $5$~euros, déterminer le nombre d'abonnés et la recette. 
+\end{enumerate}
+
+\bigskip
+

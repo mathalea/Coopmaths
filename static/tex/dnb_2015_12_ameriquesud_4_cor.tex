@@ -1,0 +1,85 @@
+\textbf{\textsc{Exercice 4} \hfill 6 points}
+
+\medskip
+
+%Un charpentier doit réaliser pour un de ses clients la charpente dont il a fait un
+%schéma ci-dessous :
+%
+%\begin{center}
+%\psset{unit=1cm}
+%\begin{pspicture}(12,5)
+%%\psgrid
+%\pspolygon(0.3,1)(11.7,1)(6,4.7)
+%\pspolygon(2.2,1)(9.8,1)(6,3.3)
+%\psline(6,1)(6,4.7)
+%\psline(6,1)(5,2.7)
+%\psline(6,1)(7,2.7)
+%\psframe(6,1)(6.2,1.2)
+%\rput{210}(5,2.7){\psframe(0,0)(0.2,0.2)}
+%\rput{-120}(7,2.7){\psframe(0,0)(0.2,0.2)}
+%\uput[d](0.3,1){A} \uput[d](11.7,1){B} \uput[u](6,4.7){C} 
+%\uput[d](6,1){D} \uput[d](4.1,1){E} \uput[d](7.9,1){F} 
+%\uput[d](9.8,1){G} \uput[d](2.2,1){H} \uput[ur](6,3.3){I} 
+%\uput[ul](5,2.7){J} \uput[ur](7,2.7){K}
+%\psarc(0.3,1){6mm}{0}{32}\rput(1.2,1.25){25\degres} 
+%\psdots[dotstyle=+,dotangle=45](1.25,1)(3.15,1)(5.05,1)(6.95,1)(8.85,1)(10.75,1)
+%\psline{<->}(0.3,0.5)(11.7,0.5)
+%\uput[d](6,0.6){9~m}%
+%\psdots[dotstyle=+](4.1,1)(7.9,1)
+%\end{pspicture}
+%\end{center}
+%
+%Il ne possède pas pour le moment toutes les dimensions nécessaires pour la réaliser mais il sait que :
+%
+%\setlength\parindent{8mm}
+%\begin{itemize}
+%\item  la charpente est symétrique par rapport à la poutre [CD],
+%\item  les poutres [AC] et [HI] sont parallèles.
+%\end{itemize}
+%\setlength\parindent{0mm}
+%
+%Vérifier les dimensions suivantes, calculées par le charpentier au centimètre près.
+%
+%Toutes les réponses doivent être justifiées.
+%
+%\medskip
+
+\begin{enumerate}
+\item %Démontrer que hauteur CD de la charpente est égale à 2,10~m.
+Puisque (CD) est axe de symétrie de la figure, elle est perpendiculaire au segment [AB] en son milieu D. Le triangle CAD est donc rectangle en D et AD = 4,5~m.
+
+On a dans ce triangle $\tan \widehat{\text{A}} = \dfrac{\text{CD}}{\text{AD}}$, donc
+
+$\text{CD} = \tan 25 \times 4,5 \approx 2,098$ soit 2,10~m au centimètre près.
+\item %Démontrer, en utilisant la propriété de Pythagore, que la longueur AC est égale à 4,97~m.
+Le théorème de Pythagore dans le triangle ACD s'écrit :
+
+AC$^2 = \text{AD}^2 + \text{DC}^2$, soit AC$^2 = 4,5^2 + 2,1^2 = 20,25 + 4,41 = 24,66$, donc
+
+AC $= \sqrt{24,66} \approx 4,965$ soit 4,97~m au centimètre près.
+\item %Démontrer, en utilisant la propriété de Thalès, que la longueur DI est égale à 1,40~m.
+
+On a d'après la figure DH $ = \dfrac{2}{3} \times \text{DH} = \dfrac{2}{3} \times 4,5 = 3$.
+
+Les droites (AC) et (HI) étant parallèles, les D, H, A d'une part, D, I, C d'autre part étant alignés dans cet ordre, le théorème de Thalès s'applique et s'écrit :
+
+$\dfrac{\text{DH}}{\text{DA}}  = \dfrac{\text{DI}}{\text{DC}} = \dfrac{\text{HI}}{\text{AC}}$.
+
+En particulier $\dfrac{\text{DH}}{\text{DA}}  = \dfrac{\text{DI}}{\text{DC}}$ soit $\dfrac{3}{4,5} = \dfrac{\text{DI}}{2,1}$ soit $\text{DI} = 2,1 \times \dfrac{2}{3} = 1,4$~(m).
+\item %Proposer deux méthodes différentes pour montrer que la longueur JD est
+%égale à 1,27~m. On ne demande pas de les rédiger mais d'expliquer la démarche.
+\emph{Méthode $1$} : dans le triangle HDJ rectangle en J, on a $\widehat{\text{JHD}} = 25\degres$ car les poutres [AC] et [HI] sont parallèles ; on a donc $\sin \widehat{\text{JHD}} = \dfrac{\text{DJ}}{\text{DH}}$ donc $\text{DJ} = \text{DH} \times \sin \widehat{\text{JHD}} = 3 \times \sin 25 \approx 1,267$, soit 1,27~m au centimètre près.
+
+\emph{Méthode $2$} : on calcule l'aire du triangle rectangle HDI :
+
+$\dfrac{1}{2} \times \text{HI} \times \text{DJ} = \dfrac{1}{2} \times \text{DH} \times \text{DI}$.
+
+Il reste à calculer IH grâce au théorème de Pythagore toujours dans ce triangle HDI.
+
+On a HI $= \sqrt{3^2 + 1,4^2} \approx 3,311$.
+
+On a ensuite  DJ $ = \dfrac{\text{DH} \times \text{DI}}{\text{HI}} \approx \dfrac{3 \times 1,4}{3,311} \approx 1,268$ : on retrouve 1,27~m au centimètre près.
+\end{enumerate}
+%%%%%%%%%%%%%
+\vspace{0.25cm}
+

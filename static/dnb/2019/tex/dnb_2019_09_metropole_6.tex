@@ -1,0 +1,111 @@
+
+\medskip
+
+Deux amis Armelle et Basile jouent aux dés en utilisant des dés bien équilibrés mais dont les faces ont
+été modifiées. Armelle joue avec le dé A et Basile joue avec le dé B.
+
+\medskip
+
+Lors d'une partie, chaque joueur lance son dé et celui qui obtient le plus grand numéro gagne un point.
+
+\medskip
+
+Voici les patrons des deux dés:
+
+\begin{center}
+\begin{tabularx}{\linewidth}{*{2}{>{\centering \arraybackslash}X}}
+Patron du dé A &Patron du dé B\\
+\psset{unit=1cm}
+\begin{pspicture}(4,3)
+\pspolygon(0,1)(0,2)(1,2)(1,3)(2,3)(2,2)(4,2)(4,1)(2,1)(2,0)(1,0)(1,1)
+\psline(1,1)(1,2)\psline(2,1)(2,2)\psline(3,1)(3,2)\psline(1,2)(2,2)\psline(1,1)(2,1)
+\psdots(0.2,1.2)(0.8,1.8)(1.2,1.2)(1.8,1.8)(2.2,1.2)(2.8,1.8)(3.2,1.2)(3.8,1.8)
+(1.2,2.25)(1.2,2.5)(1.2,2.75)(1.2,0.25)(1.2,0.5)(1.2,0.75)
+(1.8,2.25)(1.8,2.5)(1.8,2.75)(1.8,0.25)(1.8,0.5)(1.8,0.75)
+\end{pspicture}&
+\psset{unit=1cm}
+\begin{pspicture}(4,3)
+\pspolygon(0,1)(0,2)(1,2)(1,3)(2,3)(2,2)(4,2)(4,1)(2,1)(2,0)(1,0)(1,1)
+\psline(1,1)(1,2)\psline(2,1)(2,2)\psline(3,1)(3,2)\psline(1,2)(2,2)\psline(1,1)(2,1)
+\psdots(0.5,1.5)(2.5,1.5)(3.5,1.5)(1.5,1.5)(1.25,1.25)(1.75,1.25)(1.25,1.75)(1.75,1.75)
+(1.25,0.25)(1.75,0.25)(1.25,0.75)(1.75,0.75)(1.5,0.5)(1.25,2.25)(1.25,2.75)(1.5,2.5)(1.75,2.25)(1.75,2.75)
+\end{pspicture}\\
+\end{tabularx}
+\end{center}
+
+\smallskip
+
+\begin{enumerate}
+\item Une partie peut-elle aboutir à un match nul ?
+\item 
+	\begin{enumerate}
+		\item Si le résultat obtenu avec le dé A est 2, quelle est la probabilité que Basile gagne un point ?
+		\item Si le résultat obtenu avec le dé B est 1, quelle est la probabilité qu'Armelle gagne un point?
+ 	\end{enumerate}
+\end{enumerate}
+ 
+Les joueurs souhaitent comparer leur chance de gagner. Ils décident de simuler un match de
+soixante mille duels à l'aide d'un programme informatique.
+	
+Voici une partie du programme qu'ils ont réalisé.
+
+\begin{small}
+\begin{center}
+\begin{tabularx}{\linewidth}{l X}	
+Programme principal &Sous-programmes\\
+\begin{scratch}
+\blockinit{quand \greenflag est cliqué}
+\blockvariable{mettre \ovalvariable{Victoire de A\selectarrownum} \`a \ovalnum{0}}
+\blockvariable{mettre \ovalvariable{Victoire de B\selectarrownum} \`a \ovalnum{0}}
+\blockrepeat{répéter \ovalnum{60000} fois}
+{
+\blockmove{Lancer le dé A}
+\blockmove{Lancer le dé B}
+\blockifelse{si \booloperator{\ldots < \ldots} alors}
+{
+\blockvariable{ajouter \`a {Victoire de A~ \selectarrownum} \ovalnum{1}}
+}
+{\blockvariable{ajouter \`a {Victoire de B~ \selectarrownum} \ovalnum{1}}}
+}
+\end{scratch}&\begin{scratch}
+\initmoreblocks{définir \ovalmoreblocks{Lancer le dé A}}
+{\blockvariable{mettre \ovalvariable{tirage  de dé~ \selectarrownum} \`a \ovalvariable{nombre aléatoire entre \ovalnum{1} et \ovalnum{6}}}
+\blockifelse{si \booloperator{\ovalvariable{tirage de dé } < 5} alors}
+{
+\blockvariable{mettre  {\ovalvariable{FaceA~ \selectarrownum}} \`a \ovalnum{2}}
+}
+{\blockvariable{mettre  {\ovalvariable{FaceA~ \selectarrownum}} \`a \ovalnum{6}}}
+}
+\end{scratch}
+
+\begin{scratch}
+\initmoreblocks{définir \namemoreblocks{Lancer le dé B}}
+\end{scratch}\\ \end{tabularx}
+\end{center}
+\end{small}
+
+\medskip
+
+On précise que l'expression (\textbf{nombre aléatoire entre 1 et 6}) renvoie de manière équiprobable un
+nombre pouvant être 1 ; 2 ; 3 ; 4 ; 5 ou 6.
+	
+Les variables FaceA et FaceB enregistrent les résultats des dés A et B. Par exemple, la variable FaceA
+peut prendre soit la valeur 2 soit la valeur 6, puisque ce sont les seuls nombres présents sur le dé A.
+	
+Les variables Victoire de A et Victoire de B comptent les victoires des joueurs.
+
+\begin{enumerate}[resume]
+\item 
+	\begin{enumerate}
+		\item Lorsqu'on exécute le sous-programme \og Lancer le dé A \fg, quelle est la probabilité que la variable FaceA prenne la valeur 2 ?
+		\item Recopier la ligne 7 du programme principal en la complétant.
+		\item Rédiger un sous-programme \og Lancer le dé B \fg{} qui simule le lancer du dé B et enregistre le nombre obtenu dans la variable FaceB.
+	\end{enumerate}
+\item  Après exécution du programme principal, on obtient les résultats suivants:
+	
+\emph{Victoire de A}$ = \np{39901}$ \qquad  \emph{Victoire de A}$ = \np{20099}$
+	\begin{enumerate}
+		\item Calculer la fréquence de gain du joueur A, exprimée en pourcentage. On donnera une valeur approchée à 1\,\% près.
+		\item Conjecturer la probabilité que A gagne contre B.
+	\end{enumerate}
+\end{enumerate}

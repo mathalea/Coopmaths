@@ -1,0 +1,91 @@
+
+\medskip
+
+ Pour chacune des affirmations suivantes, dire si elle est vraie ou fausse. 
+
+ Chaque réponse doit être justifiée. 
+
+\medskip
+
+\parbox{0.55\linewidth}{\textbf{Affirmation 1 :} 
+
+Un menuisier prend les mesures suivantes dans le coin d'un mur à 1 mètre au-dessus du sol pour construire une étagère $ABC$ : 
+
+$AB = 65$ cm ; $AC = 72$ cm et $BC = 97$ cm 
+
+Il réfléchit quelques minutes et assure que l'étagère a un angle droit.}
+\hfill
+\parbox{0.45\linewidth}{\psset{unit=.9cm}
+\begin{pspicture}(-.5,-.5)(6.5,7)
+\pstGeonode[PointName=none,PointSymbol=none](0,0){b}
+\pstGeonode[PointName=none,PointSymbol=none](0,5){a}
+\pstGeonode[PointName=none,PointSymbol=none](3.7,1.5){c}
+\pstGeonode[PointName=none,PointSymbol=none](6.5,.5){d}
+\pstTranslation[PointName=none,PointSymbol=none]{b}{a}{c}[f]
+\pstTranslation[PointName=none,PointSymbol=none]{b}{a}{d}[e]
+\pstLineAB{b}{c}
+\pstLineAB{d}{c}
+\pstLineAB{b}{a}
+\pstLineAB{d}{e}
+\pstLineAB{a}{f}
+\pstLineAB{f}{c}
+\pstLineAB{f}{e}
+\pstHomO[dotscale=2,PointSymbol=x,HomCoef=.34,PosAngle=120]{c}{f}[A]
+\pstTranslation[PointName=none,PointSymbol=none]{f}{e}{A}[h]
+\pstHomO[dotscale=2,PointSymbol=x,HomCoef=.32,PosAngle=20]{A}{h}[C]
+\pstTranslation[PointName=none,PointSymbol=none]{f}{a}{A}[g]
+\pstHomO[dotscale=2,PointSymbol=x,HomCoef=.36,PosAngle=150]{A}{g}[B]
+\pstLineAB{A}{B}
+\pstLineAB{C}{B}\pstLineAB{A}{C}
+\end{pspicture} }
+
+\medskip
+
+ \textbf{Affirmation 2 :} 
+
+ Les normes de construction imposent que la pente d'un toit représentée ici par l'angle $\widehat{CAH}$ doit avoir une mesure comprise entre 30$^\circ$ et 35$^\circ$. \\
+
+\parbox{0.43\linewidth}{Une coupe du toit est représentée ci-contre : 
+
+$AC = 6$ m et $AH = 5$ m. 
+
+ 
+
+$H$ est le milieu de $[AB]$. 
+
+ }
+\hfill
+\parbox{0.52\linewidth}{\psset{unit=1.3cm}
+\begin{pspicture}(-3,-.5)(3,1.3)
+\pstGeonode[dotscale=2,PointSymbol=x,PosAngle=-90](0,0){H}
+\pstGeonode[dotscale=2,PointSymbol=x,PosAngle=170](-2.6,0){A}
+\pstGeonode[dotscale=2,PointSymbol=x,PosAngle=10](2.6,0){B}
+\pstGeonode[dotscale=2,PointSymbol=x,PosAngle=90](0,1.3){C}
+\pstGeonode[PointName=none,PointSymbol=none](-.6,0){d}
+\pstGeonode[PointName=none,PointSymbol=none](.6,0){e}
+\pstProjection[PointName=none,PointSymbol=none]{A}{C}{d}[g]
+\pstProjection[PointName=none,PointSymbol=none]{B}{C}{e}[f]
+\pstLineAB{A}{B}
+\pstLineAB{A}{C}
+\pstLineAB{C}{B}
+\pstLineAB[linestyle=dashed]{C}{H}
+\pstLineAB{C}{d}
+\pstLineAB{d}{g}
+\pstLineAB{C}{e}
+\pstLineAB{e}{f}
+\pstRightAngle[RightAngleSize=0.15]{B}{H}{C}
+\end{pspicture} }
+
+Le charpentier affirme que sa construction respecte la norme.\\
+
+
+\medskip
+
+\textbf{Affirmation 3 : }
+
+ Un peintre souhaite repeindre les volets d'une maison. Il constate qu'il utilise $\dfrac{1}{6}$ du pot pour mettre une couche de peinture sur l'intérieur et l'extérieur d'un volet. Il doit peindre ses 4 paires de volets et mettre sur chaque volet 3 couches de peinture. 
+
+ Il affirme qu'il lui faut 2 pots de peinture.
+
+\bigskip
+

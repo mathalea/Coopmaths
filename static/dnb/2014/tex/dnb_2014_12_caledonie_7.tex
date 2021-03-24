@@ -1,0 +1,45 @@
+
+\medskip 
+
+À l'aide d'un tableur, on a réalisé les tableaux de valeurs de deux fonctions dont les expressions sont :
+
+\[f(x) = 2x\quad  \text{et}\quad  g(x) = - 2x + 8\] 
+
+\begin{tabularx}{\linewidth}{|c|c|*{5}{>{\centering \arraybackslash}X|}}\hline         
+\multicolumn{4}{|c|}{B2}&\multicolumn{3}{l|}{=2*B1} \\ \hline      
+ &A				&B	&C	&D	&E	&F\\ \hline   
+1&Valeur de $x$	&0	&1	&2	&   3&4\\ \hline   
+2&Image de $x$	&0	&2	&4	&6	&8\\ \hline             
+3&\multicolumn{6}{c|}{}\\ \hline    
+4&Valeur de $x$	&0	&0,5&1	&2	&4\\ \hline 
+
+5& Image de $x$	&8 	&7 	&6 	&  4&0\\ \hline
+\end{tabularx}
+
+\medskip
+
+\begin{enumerate}
+\item Quelle est la fonction ($f$ ou $g$) qui correspond à la formule saisie dans la cellule B2 ? 
+\item Quelle formule a été saisie en cellule B5 ? 
+\item Laquelle des fonctions $f$ ou $g$ est représenté dans le repère de l'annexe 2 ? 
+\item Tracer la représentation graphique de la deuxième fonction dans le repère de l'annexe 2. 
+\item Donner, en justifiant, la solution de l'équation : $2x = - 2x + 8$. 
+\end{enumerate}
+
+\begin{center}
+
+	\textbf{ANNEXE 2 - Exercice 7}
+	
+	\vspace{3cm} 
+	
+	\psset{unit=0.9cm}
+	\begin{pspicture*}(-0.75,-0.75)(13,11.5)
+	\psgrid[gridlabels=0,subgriddiv=1,gridcolor=cyan](13,12)
+	\psaxes[linewidth=1pt](0,0)(-0.75,-0.75)(13,11.5)
+	\psaxes[linewidth=1.5pt]{->}(0,0)(1,1)
+	\psplot[plotpoints=3000,linewidth=1.25pt,linecolor=blue]{-1.5}{6}{2 x mul}
+	\uput[dl](0,0){O}
+	\end{pspicture*}
+	\end{center}
+\vspace{0,5cm}
+

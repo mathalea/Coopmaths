@@ -1,0 +1,123 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 4 \hfill 24 points}
+
+\medskip
+
+%Voici la série des temps exprimés en secondes, et réalisés par des nageuses lors de la finale du 100 mètres féminin nage libre lors des championnats d'Europe de natation de 2018 :
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|*{8}{>{\centering \arraybackslash}X|}}\hline
+%53,23&54,04&53,61&54,52&53,35&52,93&54,56&54,07\\ \hline
+%\end{tabularx}
+%\end{center}
+
+\begin{enumerate}
+\item %La nageuse française, Charlotte BONNET, est arrivée troisième à cette finale. Quel est le temps, exprimé en secondes, de cette nageuse ?
+Le troisième temps est 53,35~s.
+\item %Quelle est la vitesse moyenne, exprimée en m/s, de la nageuse ayant parcouru les $100$ mètres en $52,93$ secondes? Arrondir au dixième près.
+La vitesse moyenne est égale à $\dfrac{100}{52,93} \approx 1,89$ soit environ 1,9~m/s au dixième près.
+\item Comparer moyenne et médiane des temps de cette série.
+
+$\bullet~~$La moyenne est égale à $\dfrac{53,23 + 5,04 + \ldots + 54,07}{8}  \approx 53,8$ ;
+
+$\bullet~~$La médiane peut être prise entre 53,61 et 54,04. On peut prendre 53,8!
+
+\medskip
+
+%Sur une feuille de calcul, on a reporté le classement des dix premiers pays selon le nombre de médailles d'or lors de ces championnats d'Europe de natation, toutes disciplines confondues :
+
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|c|c|*{4}{>{\centering \arraybackslash}X|}}\hline
+%&A&B &C& D &E &F\\ \hline
+%1& Rang &Nation &Or 	&Argent &Bronze &Total\\ \hline
+%2&1		&Russie 		&23	&15 &9 	&47 \\ \hline
+%3&2		&Grande-Bretagne&13	&12 &9 	&34 \\ \hline
+%4&3		&Italie 		&8	&12 &19 &39\\ \hline
+%5&4		&Hongrie 		&6	&4	&2	&12\\ \hline
+%6&5		&Ukraine 		&5	&6 	&2 	&13\\ \hline
+%7&6		&Pays-Bas 		&5	&5 	&2 	&12\\ \hline
+%8&7		&France 		&4	&2 	&6 	&12\\ \hline
+%9&8		&Suède 			&4	&0 	&0 	&4\\ \hline
+%10&9	&Allemagne 		&3	&6 	&10 &19\\ \hline
+%11&10	&Suisse 		&1	&0 	&1 	&2\\ \hline
+%\end{tabularx}
+%\end{center}
+
+\item %Est-il vrai qu'à elles deux, la Grande-Bretagne et l'Italie ont obtenu autant de médailles d'or
+%que la Russie ?
+La Grande-Bretagne et l'Italie ont obtenu en tout $13 + 8 = 21$ soit moins que les 23 médailles de la Russie.
+\item %Est-il vrai que plus de 35\,\% des médailles remportées par la France sont des médailles d'or ?
+La France a remporté 4 médailles d'or 12 médailles en tout soit $\dfrac{4}{12} \times 100 = \dfrac{1}{3} \times 100 = \dfrac{100}{3} \approx 33,3\,\%$.
+\item %Quelle formule a-t-on pu saisir dans la cellule F2 de cette feuille de calcul, avant qu'elle soit étirée vers le bas jusqu'à la cellule F11 ?
+Formule: SOMME(C2:E2)
+
+\end{enumerate}
+
+\bigskip
+
+\end{document}

@@ -1,0 +1,48 @@
+
+\medskip
+
+%La figure ci-après est la copie d'écran d'un programme réalisé avec le logiciel
+%\og Scratch \fg.
+%
+%\medskip
+
+%\parbox{0.4\linewidth}{
+\begin{enumerate}
+\item %Montrer que si on choisit 2 comme nombre de départ, alors le programme renvoie $- 5$
+Avec $x = 2, \: y = x^2 - 9 = 4 - 9 = - 5$.
+\item %Que renvoie le programme si on choisit au départ :
+	\begin{enumerate}
+		\item %le nombre $5$ ?
+si $x =  5, \: y = 5^2 - 9 = 25 - 9 = 16$ ;
+		\item %le nombre $- 4$ ?
+si $x = - 4, \: y = (- 4)^2 - 9 = 16 - 9 = 7$.
+	\end{enumerate}
+\item  %Déterminer les nombres qu'il faut choisir au départ pour que le programme renvoie $0$.
+Il faut que $y = x^2 - 9 = 0$, soit $(x + 3)(x - 3) = 0$ ou $\left\{\begin{array}{l c l}
+x + 3	&=&0\\
+		&\text{ou}&\\
+x - 3	&=&0
+\end{array}\right.$ et finalement $\left\{\begin{array}{l c r}
+x	&=&- 3\\
+	&\text{ou}&\\
+x	&=&3
+\end{array}\right.$
+
+Pour obtenir 0 à la fin du programme on peut choisir au départ $- 3$ ou 3.
+\end{enumerate}
+%}\hfill
+%\parbox{0.54\linewidth}{\begin{\small}{\begin{scratch}
+%  \blockinit{quand \greenflag est cliqué}
+%  \blockvariable{cacher la variable \txtbox{\ovalvariable{x}\selectarrownum}}
+%  \blockvariable{cacher la variable \txtbox{\ovalvariable{y}\selectarrownum}}
+%  \blocksensing{demander \txtbox{Choisis un nombre} et attendre}
+%  \blockvariable{mettre \txtbox{\ovalvariable{x}\selectarrownum} à \ovalsensing{réponse}}
+%  \blockvariable{mettre \txtbox{\ovalvariable{y}\selectarrownum} à \ovaloperator{\ovalvariable{x} * \ovalvariable{x} - \ovalnum{9}}}
+%   \blocklook{dire \txtbox{En choississant} pendant \ovalnum{1} seconde} 
+%   \blocklook{dire \ovalsensing{réponse} pendant \ovalnum{1} seconde}
+%   \blocklook{dire \txtbox{On obtient} pendant \ovalnum{1} seconde}
+%   \blocklook{dire \ovalvariable{y}}                 
+%\end{scratch}\end{small}}
+%}	
+
+

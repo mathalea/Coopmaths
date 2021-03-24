@@ -1,0 +1,36 @@
+\textbf{\textsc{Exercice 4} \hfill 5 points}
+
+\medskip
+
+Flavien veut répartir la totalité de 760~dragées au chocolat et \np{1045}~dragées aux amandes dans des sachets dans des sachets ayant la même répartition de dragées au chocolat et aux amandes.
+
+\medskip
+ 
+\begin{enumerate}
+\item %Peut-il faire 76 sachets ? Justifier la réponse.
+On a $760 = 76 \times 10$ mais  $\np{1045}$ impair ne peut être multiple de 76 qui est pair. On ne peut donc répartir ces dragées dans 76 sachets.
+\item 
+	\begin{enumerate}
+		\item %Quel nombre maximal de sachets peut-il réaliser ?
+		On cherche avec l'algorithme d'Euclide le PGCD à 760 et \np{1045} :
+		
+$\np{1045} = 760 \times 1 + 285$ ;
+
+$760 = 285 \times 2 + 190$ ;
+
+$285 = 190 \times 1 + 95$ ;
+
+$190 = 95 \times 2 + 0$.
+
+On a donc PGCD(760~;~\np{1045}) = 95$.
+
+On peut faire au maximum 95 sachets. 
+		\item %Combien de dragées de chaque sorte y aura-t-il dans chaque sachet ?
+On  a $760 = 95 \times 8$ et $\np{1045} = 95 \times 11$.
+
+Il y a dans chacun des 95 sachets, 8 dragées au chocolat et 11 dragées aux amandes.
+	\end{enumerate}
+\end{enumerate}
+ 
+\vspace{0,5cm}
+

@@ -1,0 +1,38 @@
+
+\medskip
+
+La figure ci-après est la copie d'écran d'un programme réalisé avec le logiciel
+\og Scratch \fg.
+
+\medskip
+
+\parbox{0.48\linewidth}{\begin{enumerate}
+\item Montrer que si on choisit 2 comme
+nombre de départ, alors le programme renvoie $- 5$.
+\item Que renvoie le programme si on
+choisit au départ :
+	\begin{enumerate}
+		\item le nombre $5$ ?
+		\item le nombre $- 4$ ?
+	\end{enumerate}
+\item  Déterminer les nombres qu'il faut choisir au départ pour que le
+programme renvoie $0$.
+\end{enumerate}}\quad\hfill
+\parbox{0.48\linewidth}{\small{%
+\begin{scratch}
+\blockinit{quand \greenflag est cliqué}
+    \blockvariable{cacher la variable \selectmenu{x}}
+    \blockvariable{cacher la variable \selectmenu{y}}
+    \blocksensing{demander \txtbox{Choisis un nombre} et attendre}
+    \blockvariable{mettre \selectmenu{x} à \ovalsensing{réponse}}
+    \blockvariable{mettre \selectmenu{y} à \ovaloperator{\ovaloperator{\ovalvariable{x} * \ovalvariable{x}} - \ovalnum{9}}}
+    \blocklook{dire \txtbox{En choisissant} pendant \ovalnum{1} seconde}
+    \blocklook{dire \ovalsensing{réponse} pendant \ovalnum{1} seconde}
+    \blocklook{dire \txtbox{On obtient} pendant \ovalnum{1} seconde}
+    \blocklook{dire \ovalvariable{y}}
+\end{scratch}
+}
+}	
+
+
+

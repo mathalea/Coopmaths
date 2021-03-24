@@ -1,0 +1,100 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 2} \hfill 3 points}
+
+\medskip
+ 
+À Pise vers 1200 après J. C. (problème attribué à Léonard de Pise, dit Fibonacci, 
+mathématicien italien du moyen âge).
+
+\medskip
+
+\parbox{0.6\linewidth}{Une lance, longue de 20 pieds, est posée verticalement 
+le long d'une tour considérée comme perpendiculaire au sol. Si on éloigne l'extrémité de la lance qui repose sur le sol de 12 pieds de la tour, de combien descend l'autre 
+extrémité de la lance le long du mur ? 
+
+* Un pied est une unité de mesure anglo-saxonne valant environ 30 cm.} \hfill
+\parbox{0.36\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(4,5)
+%\psgrid
+\psframe(4,0.3)
+\psframe(0.5,0.3)(2.5,3.8)
+\psframe*(2.52,0.3)(2.62,3)
+\pspolygon*(3.8,0.3)(3.9,0.35)(2.7,2.55)(2.6,2.5)
+\psarc{->}(2.65,2.525){1.5cm}{-90}{-62}
+\psline(2.52,2.56)(3,2.56)
+\psline(2.52,3)(3,3)
+\psline{<->}(3,2.56)(3,3)\uput[r](3,2.78){$h$}
+\rput(1.5,3){Tour}
+\psline{<->}(2.62,0.15)(3.9,0.15)
+\rput(3.2,0.4){12 pieds}
+\rput{-90}(2.2,1.65){lance}
+\end{pspicture}}
+
+\newpage
+
+\end{document}

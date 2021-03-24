@@ -1,0 +1,64 @@
+
+\medskip
+
+%La figure ci-dessous représente le plan de coupe d'une tribune d'un gymnase. Pour
+%voir le déroulement du jeu, un spectateur du dernier rang assis en C doit regarder au-dessus
+%du spectateur placé devant lui et assis en D. Une partie du terrain devant la
+%tribune lui est alors masquée. On considèrera que la hauteur moyenne d'un spectateur
+%assis est de $80$~cm ($\text{CT} = \text{DS} = 80$~cm).
+%
+%\begin{center}
+%\psset{unit=0.9cm}
+%\begin{pspicture}(12,7)
+%%\psgrid
+%\pspolygon(3,0)(11.6,0)(11.6,4.5)
+%\psarc(3,0){8mm}{0}{30}\rput(4.2,0.2){30\degres}
+%\uput[u](7.3,0){11 m}
+%\psline[linestyle=dashed](11.6,4.5)(11.6,6.1)(0,0)(3,0)
+%\psline[linestyle=dashed](10.3,4.5)(10.3,5.4)
+%\psarc(0,0){8mm}{0}{30}
+%\psline(3,0)(3,0.7)(4.4,0.7)
+%\psline(7.5,2.4)(7.5,3.1)(8.9,3.1)
+%\psline(8.9,3.1)(8.9,3.8)(10.3,3.8)
+%\psline(10.3,3.8)(10.3,4.5)(11.6,4.5)
+%\uput[d](3,0){A} \uput[d](11.6,0){B}\uput[r](11.6,4.5){C}
+%\uput[d](10.3,3.8){D}\uput[d](0,0){R}\uput[r](11.6,6.1){T}
+%\uput[u](10.1,5.35){S}
+%\rput(11,4.7){80 cm}\uput[r](11.6,5.2){80 cm}
+%\psframe(11.6,0)(11.3,0.3)
+%\psline[linestyle=dotted](4.5,1.1)(6.8,2.3)
+%\end{pspicture}
+%\end{center}
+%
+%Sur ce plan de coupe de la tribune :
+%
+%\setlength\parindent{9mm}
+%\begin{itemize}
+%\item[$\bullet~~$] les points R, A et B sont alignés horizontalement et les points B, C et T sont alignés verticalement ;
+%\item[$\bullet~~$] les points R, S et T sont alignés parallèlement à l'inclinaison (AC) de la tribune ;
+%\item[$\bullet~~$] on considérera que la zone représentée par le segment [RA] n'est pas visible par le spectateur du dernier rang ;
+%\item[$\bullet~~$] la largeur au sol AB de la tribune est de 11~m et l'angle 
+%$\widehat{\text{BAC}}$ d'inclinaison de la
+%tribune mesure 30\degres.
+
+\medskip
+
+\begin{enumerate}
+\item %Montrer que la hauteur BC de la tribune mesure $6,35$~m, arrondie au centième de mètre près.
+Dans le triangle ABC rectangle en B on a :
+
+$\tan \widehat{\text{BAC}} = \dfrac{\text{BC}}{\text{AB}}$ soit BC $ = \text{AB} \times \tan \widehat{\text{BAC}} \approx 11 \times 0,577 \approx 6,350$ soit environ 6,35~m.
+\item  %Quelle est la mesure de l'angle $\widehat{\text{BRT}}$ ?
+Les droites (RT) et (AC) étant parallèles, les angles correspondants $\widehat{\text{BAC}}$ et $\widehat{\text{BRT}}$ ont la même mesure 30\degres.
+\item  %Calculer la longueur RA en centimètres. Arrondir le résultat au centimètre près.
+Dans le triangle BRT rectangle en B, on a : $\tan \widehat{\text{BRT}} = \dfrac{\text{BT}}{\text{BR}}$.
+
+Or BT $= \text{BC} + \text{CT} \approx  6,35 + 0,80 = 7,15$~(m).
+
+Donc $\text{BR} = \dfrac{\text{BT}}{\tan \widehat{\text{BRT}}} \approx \dfrac{7,15}{0,577} \approx 12,38$~(m).
+
+Finalement $\text{AR} = \text{BR} - \text{AB} \approx 12,38 - 11$ soit environ 1,38~(m). 
+\end{enumerate}
+
+\vspace{0,5cm}
+

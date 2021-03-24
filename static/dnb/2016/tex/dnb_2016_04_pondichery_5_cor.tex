@@ -1,0 +1,70 @@
+
+\medskip
+
+%Lors d'une course en moto-cross, après avoir franchi une rampe, Gaëtan a effectué un saut record en moto.
+%
+%\medskip
+%
+%\parbox{0.45\linewidth}{Le saut commence dès que Gaëtan quitte
+%la rampe. 
+%
+%On note $t$ la durée (en secondes) de ce saut.
+%
+%La hauteur (en mètres) est déterminée en fonction de la durée $t$ par la fonction $h$ suivante : 
+%
+%$h\: : t \longmapsto  (-5t - 1,35)(t - 3,7)$.}\hfill
+%\parbox{0.51\linewidth}{\psset{unit=1cm}
+%\begin{pspicture}(-0.5,-1.2)(4,4)
+%\psline(-0.5,0)(4,0)
+%\psplot[plotpoints=2000,linewidth=1.75pt,linecolor=blue]{0}{3}{x dup mul 0.125  mul}
+%\psplot[plotpoints=2000,linewidth=1.25pt]{3}{4}{x 1.2 mul 1.575  sub x dup mul 0.1 mul sub}
+%\rput(3,-1){distance horizontale $d$}
+%\rput(5,1){hauteur $h$}
+%\rput(4,3){durée $t = 0$ s}
+%\rput(1.8,1.2){\blue rampe}
+%\psset{arrowsize=3pt 2}
+%\psline{->}(3,3)(3,1.125)\psline[linestyle=dotted](3,1.12)(3,0)
+%\psline[linestyle=dotted](4,1.65)(4,0)
+%\psline{<->}(4.2,0)(4.2,1.65)\psline{<->}(3,-0.5)(4,-0.5)
+%\end{pspicture}}
+%
+%Voici la courbe représentative de cette fonction $h$.
+%
+%\begin{center}
+%\psset{xunit=2cm,yunit=0.3cm,comma=true}
+%\begin{pspicture}(-.5,-2)(4.5,22.5)
+%\multido{\n=0.0+0.5}{9}{\psline[linewidth=0.3pt](\n,0)(\n,22.5)}
+%\multido{\n=0+5}{5}{\psline[linewidth=0.3pt](0,\n)(4.5,\n)}
+%\psaxes[linewidth=1.5pt,Dx=0.5,Dy=5](0,0)(-.4,-2)(4.4,22.5)
+%\psplot[plotpoints=2000,linewidth=1.25pt,linecolor=blue]{0}{3.7}{x 3.7 sub 5 x mul 1.35 add mul neg}
+%\uput[dl](0,0){O}
+%\end{pspicture}
+%\end{center}
+%
+%Les affirmations suivantes sont-elles vraies ou fausses ? Justifier en utilisant soit le graphique soit des calculs.
+%
+%\medskip
+
+\begin{enumerate}
+\item %En développant et en réduisant l'expression de $h$ on obtient 
+$h(t) = - 5t^2 + 5 \times 3,7t - 1,35t + 1,35 \times 3,7 = - 5t^2 + 18,5t - 1,35t + 4,995$ ;
+
+$h(t) = - 5t^2 + 17,15t + 4,995$.
+
+L'affirmation est fausse.
+\item %Lorsqu'il quitte la rampe, Gaëtan est à 3,8~m de hauteur.
+Gaëtan quitte la rampe au temps $t = 0$ ; on obtient $h(0) = 4,995$. l'affirmation est fausse.
+\item %Le saut de Gaëtan dure moins de 4 secondes.
+Gaëtan retombe au bout de 3,7~s, donc le saut dure moins de 4 secondes.
+\item %Le nombre 3,5 est un antécédent du nombre 3,77 par la fonction $h$.
+On a $h(3,5) = (- 5 \times 3,5 - 1,35)(3,5 - 3,7)  = - 18,85 \times ( - 0,2) = 3,77$.
+
+L'affirmation est vraie.
+\item %Gaetan a obtenu la hauteur maximale avant 1,5 seconde.
+D'après le graphique la hauteur maximale est atteinte entre 1,5 et 2~secondes.
+
+L'affirmation est fausse.
+\end{enumerate}
+
+\vspace{0,5cm}
+

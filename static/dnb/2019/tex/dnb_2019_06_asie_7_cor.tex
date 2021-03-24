@@ -1,0 +1,52 @@
+
+\medskip
+
+%Les représentations graphiques $C_1$ et $C_2$ de deux fonctions sont données dans le repère
+%ci-dessous.
+%
+%Une de ces deux fonctions est la fonction $f$ définie par $f(x) = -2x + 8$.
+%
+%\medskip
+%
+%\parbox{0.48\linewidth}{\psset{unit=0.6cm}
+%\begin{pspicture*}(-2,-1.5)(8.5,12.5)
+%\psgrid[gridlabels=0,subgriddiv=1,gridwidth=0.2pt]
+%\psaxes[linewidth=1.25pt,labelFontSize=\scriptstyle]{->}(0,0)(-2,-1.5)(8.5,12.5)
+%\psplot[plotpoints=2000,linewidth=1.25pt]{-2}{4.5}{8 2 x mul sub}
+%\psplot[plotpoints=2000,linewidth=1.25pt,linecolor=blue]{-2}{6.5}{x 3 sub dup mul 1 sub}
+%\rput(-1.5,10){$C_2$}\rput(6.8,10){\blue $C_1$}
+%\end{pspicture*}}\hfill
+%\parbox{0.48\linewidth}{\textbf{1.} Laquelle de ces deux représentations est celle de la fonction $f$ ?
+%
+%\textbf{2.} Que vaut $f(3)$ ?
+%
+%\textbf{3.}  Calculer le nombre qui a pour image 6 par la fonction $f$.
+%
+%\textbf{4.}  La feuille de calcul ci -dessous permet de calculer des images par la fonction $f$.
+%}
+%
+%\medskip
+%
+%\begin{tabularx}{\linewidth}{|c|*{7}{>{\centering \arraybackslash}X|}}\hline
+%	&A		&B		&C		&D	&E	&F	&G\\ \hline
+%1	&$x$	&$- 2$	&$- 1$	&0	&1	&2	&3\\ \hline
+%2	&$f(x)$	&		&		&	&	&	&\\ \hline
+%\end{tabularx}
+%
+%\medskip
+%
+%Quelle formule peut-on saisir dans la cellule B2 avant de l'étirer vers la droite
+%jusqu'à la cellule G2 ?
+\begin{enumerate}
+\item $f$ est une fonction affine dont la représentation graphique est une droite qui est donc la droite C$_2$.
+\item $f(3) = - 2 \times 3 + 8 = - 6 + 8 = 2$ (lisible sur la représentation graphique.
+\item Il faut trouver $x$ tel que :
+$- 2x + 8 = 6$ soit en ajoutant à chaque membre $2x$ :
+
+$8 = 6 + 2x$, puis en ajoutant $- 6$ :
+
+$2 = 2x$ ou $2\times 1 = 2\times x$ et en simplifiant par 2 : 
+
+$1 = x$. $1$ a pour image $6$ par $f$ (lisible sur la représentation graphique).
+\item On peut écrire dans la cellule B2 : = 8-2*B1.
+\end{enumerate}

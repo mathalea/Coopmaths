@@ -1,0 +1,83 @@
+
+\medskip
+
+Un avion de ligne transportant des passagers atterrit à l'aéroport international Galeao à Rio de Janeiro.
+
+On étudie la distance de freinage de l'appareil en fonction de sa vitesse au moment de
+l'atterrissage.
+
+Le pilote peut décider d'un freinage \og rapide \fg{} s'il souhaite raccourcir la distance de freinage, ou d'un freinage \og confort\fg{} plus modéré et donc plus confortable pour les passagers.
+
+Les courbes suivantes donnent la distance de freinage d'un avion en fonction de sa vitesse au
+moment de l'atterrissage selon le mode freinage choisi (confort ou rapide).
+
+\begin{center}
+
+
+\psset{xunit=0.02cm,yunit=0.0023cm}
+\begin{pspicture}(-15,-120)(520,4400)
+\multido{\n=0+10}{53}{\psline[linestyle=dotted,linewidth=0.4pt](\n,0)(\n,4200)}
+\multido{\n=0+100}{43}{\psline[linestyle=dotted,linewidth=0.4pt](0,\n)(520,\n)}
+\psaxes[linewidth=1.25pt,Dx=20,Dy=500,labelFontSize=\scriptscriptstyle]{->}(0,0)(0,0)(520,4200)
+\psplot[plotpoints=3000,linewidth=1.25pt,linecolor=blue]{0}{400}{x dup mul 0.011719 mul}
+\psplot[plotpoints=3000,linewidth=1.25pt,linecolor=green]{0}{400}{x dup mul 0.023669 mul}
+\uput[u](380,0){Vitesse d'atterrissage $\left(\text{en km.h}^{-1}\right)$}
+\uput[r](0,4100){Distance de freinage en mètres}
+\uput[r](400,3700){freinage \og confort\fg}
+\uput[r](400,1900){freinage \og rapide\fg}
+\rput(260,4300){\textbf{Distance de freinage de l'avion en fonction de la vitesse d'atterrissage}}
+\end{pspicture}
+\end{center}
+
+
+\begin{enumerate}
+\item Donner par lecture graphique, sans justification:
+	\begin{enumerate}
+		\item Une valeur approchée de la distance de freinage \og confort\fg{} de l'appareil si l'avion arrive à une vitesse de 320 km.h$^{-1}$.
+		\item Une valeur approchée de la vitesse d'atterrissage d'un avion dont la distance de freinage \og rapide \fg{} est de \np{1500}~m.
+	\end{enumerate}
+\item Pour regagner la zone de débarquement des passagers, l'avion doit emprunter une des
+quatre sorties précisées dans les documents ci-dessous :
+
+\begin{center}
+Distances des sorties au point d'atterrissage
+\begin{tabularx}{0.9\linewidth}{|c|*{4}{>{\centering \arraybackslash}X|}}\hline
+Numéro de sortie& 1 &2 &3 &4\\ \hline
+Distance (en mètres)& 900 &\np{1450} &\np{2050} &\np{2950}\\ \hline
+\end{tabularx}
+
+\bigskip
+
+\psset{unit=0.55cm,arrowsize=2pt 4}
+\begin{pspicture}(20,10.5)
+%\psgrid
+\psframe(20,10.5)
+\psline(0.8,9.3)(17.3,0.)(17.9,1.2)
+\psline(1,9.6)(5.6,7)(7,7)\rput(6.3,7.3){Sortie 1}
+\psline(7,6.7)(6,6.7)(8.8,5.2)(10,5.2)\rput(9.4,5.6){Sortie 2}
+\psline(10.4,4.9)(9.3,4.9)(12.1,3.3)(13.3,3.3)\rput(12.6,3.8){Sortie 3}
+\psline(13.5,3)(12.4,3)(12.8,2.9)(17.1,0.4)(17.6,1.3)\rput(17.8,1.6){Sortie 4}
+\rput(2.6,10){Point d'atterrissage}
+\psline{->}(2.2,9.7)(1,9.4)
+\rput(15,9.5){Aéroport international Galeao}
+\rput(15,9){Rio de Janeiro}
+\psline[linestyle=dashed]{->}(1,9.4)(4,7.7)
+\psline{->}(4.4,7.4)(5.6,6.8)(6.4,6.9)
+\psline{->}(8,5.4)(8.8,5.05)(10.4,5.05)
+\psline{->}(11,3.7)(12,3.15)(13.2,3.15)
+\psline{->}(16,0.85)(17.2,0.2)(17.6,1)
+\end{pspicture}
+\end{center}
+
+
+	\begin{enumerate}
+		\item L'avion atterrit à 260 km.h$^{-1}$. Le pilote décide un freinage \og confort\fg. Avec la distance de freinage correspondante, quelle est ou quelles sont les sorties qu'il va dépasser ?
+		\item Seule la sortie 1 étant disponible, le pilote envisage un freinage \og rapide \fg.
+		
+Déterminer avec la précision du graphique, la vitesse maximale avec laquelle il peut
+atterrir pour pouvoir emprunter cette sortie.
+	\end{enumerate}
+\end{enumerate}
+
+\vspace{0,5cm}
+

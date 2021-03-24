@@ -16,6 +16,7 @@ export default function Tableau_criteres_de_divisibilite() {
   this.spacing_corr = 1;
   this.nb_questions = 5;
   this.nb_cols_corr = 1;
+  this.nb_cols = 1;
 
   this.nouvelle_version = function () {
     this.liste_questions = []; // Liste de questions
@@ -156,7 +157,7 @@ export default function Tableau_criteres_de_divisibilite() {
           tableau_de_nombres[i] = 90 * choice(liste_de_facteurs);
           tableau_de_nombres_avec_correction[i] = `${tex_nombre(
             tableau_de_nombres[i]
-          )} & \\color{blue} \\text{oui} & \\text{non} & \\text{non} & \\text{non} \\\\`;
+          )} & \\color{blue} \\text{oui} & \\text{oui} & \\text{oui} & \\text{oui} \\\\`;
           break;
         case "divrien":
           tableau_de_nombres[i] = choice(liste_de_facteurs);

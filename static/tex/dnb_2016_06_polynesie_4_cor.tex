@@ -1,0 +1,66 @@
+\textbf{Exercice 4 \hfill 7 points}
+
+\medskip
+
+%Une association cycliste organise une journée de randonnée à  vélo.
+%
+%Les participants ont le choix entre trois circuits de longueurs différentes: 42 km, 35 km et 27 km.
+%
+%à€ l'arrivée, les organisateurs relèvent les temps de parcours des participants et calculent leurs vitesses moyennes. Ils regroupent les informations dans un tableau dont voici un extrait:
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|l|*{5}{>{\centering \arraybackslash}X|}}\hline
+%Nom du sportif				& Alix 	&David 	&Gwenn 		&Yassin 	&Zoé\\ \hline
+%Distance parcourue (en km)	& 35 	&42 	&27 		&35 		&42\\ \hline
+%Durée de la randonnée 		&2 h 	&3 h 	&1 h 30 min &1 h 45 min &1 h 36 min\\ \hline
+%Vitesse moyenne (en km/h) 	&17,5	&		&			&			&\\ \hline
+%\end{tabularx}
+%\end{center}
+
+
+\begin{enumerate}
+\item %Quelle distance David a-t-il parcourue ?
+David a parcouru 42~km en 3~h.
+\item %Calculer les vitesses moyennes de David et de Gwenn.
+$v_{\text{Dadid}} = \dfrac{42}{3} = 14$~km/h.
+
+$v_{\text{Gwenn}} = \dfrac{27}{1,5} = \dfrac{54}{3} = 18$~km/h.
+\item %Afin d'automatiser les calculs, l'un des organisateurs décide d'utiliser la feuille de tableur ci-dessous :
+
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|l|*{5}{>{\centering \arraybackslash}X|}}\hline
+%&A &B &C &D& E &F\\ \hline
+%1 &Nom du sportif 				&Alix 	&David 	&\footnotesize Gwenn 	&Yassin &Zoé\\ \hline
+%2 &Distance parcourue (en km)	& 35	& 42	&27 	&35 	&42\\ \hline
+%3 &Durée de la randonnée (en h)& 2 	&3 		&1,5	&		&\\ \hline
+%4 &Vitesse moyenne (en km/h)	& 17,5	&		&		&		&\\ \hline
+%\end{tabularx}
+%\end{center}
+
+	\begin{enumerate}
+		\item %Quel nombre doit-il saisir dans la cellule E3 pour renseigner le temps de Yassin ?
+1~h 45~min $ = 1 + \dfrac{45}{60} = 1 + \dfrac{3}{4} = 1 +  0,75 = 1,75$.
+
+Il faut inscrire en E3 : 1,75.
+
+		\item %Expliquer pourquoi il doit saisir 1,6 dans la cellule F3 pour renseigner le temps de Zoé.
+1~h 36~min $ = 1 + \dfrac{36}{60} = 1 + \dfrac{6}{10} = \dfrac{16}{10} = 1,6$~(h).
+		\item %Quelle formule de tableur peut-il saisir dans la cellule B4 avant de l'étirer sur la ligne 4 ?
+		Il faut inscrire en B4 : =B2/B3.
+	\end{enumerate}
+\item %Les organisateurs ont oublié de noter la performance de Stefan.
+	
+%Sa montre GPS indique qu'il a fait le circuit de 35 km à  la vitesse moyenne de 25 km/h.
+	
+%Combien de temps a-t-il mis pour faire sa randonnée? On exprimera la durée de la randonnée en heures et minutes.
+Si $v$, $d$, $t$ désignent respectivement la vitesse, la distance parcourue et le temps de la randonnée, on sait que :
+
+$v = \dfrac{d}{t}$ ou encore $d = v\times t$ ou $t = \dfrac{d}{v}$.
+
+En utilisant la dernière relation on a pour Stefan :
+
+$t = \dfrac{35}{25} = \dfrac{7}{5} = \dfrac{7 \times 12}{5 \times 12} = \dfrac{84}{60} = \dfrac{60}{60} + \dfrac{24}{60} = 1$~h 24~min.
+\end{enumerate}
+
+\bigskip
+

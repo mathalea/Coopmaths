@@ -1,0 +1,50 @@
+
+\medskip
+
+%On a saisi dans un tableur les dépenses liées au transport des familles françaises pour les années 2013 et 2015. Ces dépenses sont exprimées en milliards d'euros.
+%
+%Pour l'année 2013, on a aussi saisi dans ce tableur les dépenses totales annuelles qui correspondent aux dépenses liées au logement, au transport, à la santé, à l'éducation, etc.
+%
+%Voici une copie de l'écran obtenu.
+%
+%Par exemple : en 2015, les dépenses annuelles des familles françaises, liées à l'achat de carburant, ont été de $34$ milliards d'euros.
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|m{5cm}|*{2}{>{\centering \arraybackslash}X|}}\hline
+%&\multicolumn{1}{|c|}{A}				&B &C\\ \hline
+%1&Dépenses annuelles liées au transport	&Année 2013	&Année 2015\\ \hline
+%2&Achat de véhicules particuliers 		&38			&39\\ \hline
+%3&Frais d'entretien des véhicules 		&45 		&51\\ \hline
+%4& Achat de carburant 					&39 		&34\\ \hline
+%5&Achat de services de transports 
+%(avion; train, etc.)					&26 		&28\\ \hline
+%6&Total pour le budget transport		&148		&152\\ \hline
+%7&										&			&\\ \hline
+%8&Dépenses totales annuelles			&\np{1498}	& \\ \hline
+%\multicolumn{4}{r}{\emph{D'après une source: INSEE}}
+%\end{tabularx}
+%\end{center}
+%
+%\smallskip
+
+\begin{enumerate}
+\item %Pour l'année 2015, quelle est la dépense des familles françaises liée aux frais d'entretien des véhicules?
+Les frais d'entretien des véhicules ont représenté en 2015 51 milliards d'euros.
+\item %Quelle formule peut-on saisir dans la cellule B6 avant de l'étirer dans la cellule C6 ?
+=SOMME(B2:B5).
+\item %À la lecture du tableau, les dépenses annuelles liées à l'achat de carburant ont-elles baissé de 5\,\% entre 2013 et 2015 ?
+La baisse des dépenses de carburant est égale à :
+
+$\dfrac{39 - 34}{39} \times 100 = \dfrac{5}{39}\times 100$, soit environ 12,8\,\%, donc beaucoup plus de 5\,\%.
+\item %En 2015, les dépenses des familles françaises liées aux transports correspondaient à environ 9,87\,\% des dépenses totales annuelles.
+
+%Quelles étaient alors les dépenses totales annuelles des familles françaises en 2015 ?
+Si $t$ est le montant des dépenses totales en 2015, on a :
+
+$\dfrac{9,87}{100} \times t = 152$ soit en multipliant chaque membre par $\dfrac{100}{9,87}$ :
+
+$t = 152 \times \dfrac{100}{9,87} = \dfrac{\np{15200}}{9,87}\approx \np{1540,0}$ milliards d'euros.
+\end{enumerate}
+
+\vspace{0,5cm}
+

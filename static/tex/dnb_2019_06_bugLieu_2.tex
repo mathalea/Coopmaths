@@ -1,0 +1,201 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 2 \hfill 18 points}
+
+\medskip
+
+\og S'orienter à 90 \fg{} signifie que l'on se tourne vers la droite.
+
+Mathieu, Pierre et Elise souhaitent tracer le motif ci-dessous à l'aide de leur ordinateur. Ils commencent tous par le \textbf{script commun} ci-dessous, mais écrivent un script \textbf{Motif} différent.
+\medskip
+
+\parbox{0.4\linewidth}{\textbf{Script commun} aux trois élèves
+
+{\small \begin{scratch}[num blocks]
+\blockinit{Quand  \greenflag est cliqué}
+\blockmove{aller à x: \ovalnum{-160} y: \ovalnum{-100}}
+\blockmove{s’orienter à \ovalnum{90\selectarrownum}}
+\blockpen{effacer tout}
+\blockpen{mettre la taille du stylo à \ovalnum{4}}
+\blockpen{stylo en position d’écriture}
+\blocklook{Motif}
+\end{scratch}}
+} \hfill
+\parbox{0.57\linewidth}{\hspace{3cm}\textbf{Motif}
+
+\psset{unit=0.5cm}
+\begin{pspicture}(10,9)
+\multido{\n=6+1}{5}{\psline[linecolor=blue](\n,3)(\n,8)}
+\multido{\n=3+1}{6}{\psline[linecolor=blue](6,\n)(10,\n)}
+\pspolygon[linewidth=2.3pt](7,5)(8,5)(8,4)(9,4)(9,7)(8,7)(8,6)(7,6)
+\rput(2,2){\footnotesize Point de départ}
+\rput(8,2.5){\footnotesize Le quadrillage a des}
+\rput(8,2){\footnotesize carreaux qui mesurent}
+\rput(8,1.5){\footnotesize 10 pixels de côté.}
+\psline{->}(3,2.2)(8,4)
+\end{pspicture}}
+ 
+\bigskip
+
+\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+\textbf{Motif de Mathieu}& \textbf{Motif de Pierre}& \textbf{Motif d'Élise}\\
+{\small \begin{scratch}
+\initmoreblocks{définir \namemoreblocks{Motif}}
+\blockmove{avancer de \ovalnum{10}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{30}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{20}}
+\blockrepeat{répéter \ovalnum{2} fois}
+{\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{10}}
+}
+\blockmove{tourner \turnright{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{20}}
+\end{scratch}}
+&
+{\small \begin{scratch}
+\initmoreblocks{définir \namemoreblocks{Motif}}
+\blockmove{avancer de \ovalnum{10}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{30}}
+\blockrepeat{répéter \ovalnum{2} fois}
+{\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{10}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{10}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{10}}
+}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\end{scratch}}&
+{\small \begin{scratch}
+\initmoreblocks{définir \namemoreblocks{Motif}}
+\blockmove{avancer de \ovalnum{10}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{30}}
+\blockrepeat{répéter \ovalnum{2} fois}
+{
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{10}}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{10}}
+\blockmove{tourner \turnright{} de \ovalnum{90} degrés}
+\blockmove{avancer de \ovalnum{10}}
+}
+\blockmove{tourner \turnleft{} de \ovalnum{90} degrés}
+\end{scratch}}\\ \hline
+\end{tabularx}
+
+\medskip
+
+\begin{enumerate}
+\item Tracer le motif de Mathieu en prenant comme échelle : 1 cm pour 10 pixels.
+\item Quel élève a un script permettant d'obtenir le motif souhaité ? On ne demande pas de justifier.
+\item~
+
+\hspace{0.5cm}\parbox{0.6\linewidth}{ 
+\textbf{a.~~} On utilise ce motif pour obtenir la figure ci-contre.
+
+Quelle transformation du plan permet de passer à la fois du
+motif 1 au motif 2, du motif 2 au motif 3 et du motif 3 au
+motif 4 ?
+
+\textbf{b.~~}  Modifier le \textbf{script commun} à partir de la ligne 7 incluse
+pour obtenir la figure voulue. On écrira sur la copie
+uniquement la partie modifiée. Vous pourrez utiliser
+certaines ou toutes les instructions suivantes :}\hfill 
+\parbox{0.31\linewidth}{\psset{unit=0.5cm}
+\begin{pspicture}(8,8)
+\psgrid[gridlabels=0pt,subgriddiv=1,gridcolor=blue]
+\def\Te{\pspolygon[linewidth=1.6pt](0,0)(3,0)(3,1)(2,1)(2,2)(1,2)(1,1)(0,1)}
+\rput(4,3){\Te}\rput{90}(5,4){\Te}\rput{-90}(3,4){\Te}\rput{-180}(4,5){\Te}
+\rput(2.5,4.5){2}
+\rput(4.5,5.5){1}
+\rput(3.5,2.5){3}
+\rput(5.5,3.5){4}
+\end{pspicture}}
+
+\medskip
+
+\begin{scratch}
+\blockrepeat{répéter \ovalnum{2} fois}
+{}
+\end{scratch} \begin{scratch}\initmoreblocks{\namemoreblocks{Motif}}\end{scratch}
+
+\begin{scratch}\blockmove{tourner \turnleft{} de \ovalnum{} degrés}\end{scratch}
+\begin{scratch}\blockmove{avancer de \ovalnum{}}\end{scratch}
+\begin{scratch}\blockmove{tourner \turnright{} de \ovalnum{} degrés}\end{scratch}
+
+\item  Un élève trace les deux figures A et B que vous trouverez en \textbf{ANNEXE 1.1}
+
+Placer sur cette annexe, \textbf{qui est à rendre avec la copie}, le centre O  de la symétrie centrale qui transforme la figure A en figure B.
+\end{enumerate}
+
+\newpage
+
+\end{document}

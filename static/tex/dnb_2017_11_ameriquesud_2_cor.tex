@@ -1,0 +1,65 @@
+
+\vspace{0.3cm}
+\begin{minipage}{7cm}
+Il faut chercher la longueur $KH$ pour connaître l'aire de la partie grise.
+
+Les triangles $BCK$ et $BJH$ ont deux angles de même mesure : l'angle droit et l'angle de 30\degre, ils sont donc semblables.
+
+Le triangle $BCK$ est un agrandissement du triangle $BJH$.
+
+Si $k$ est le coefficient d'agrandissement, alors on a :
+$2,90=k\times 1,80$ \hspace{1cm} et \hspace{1cm} $5=k\times HB$
+
+Avec la première égalité, on obtient $k = \dfrac{2,90}{1,80}$.
+
+Avec la seconde égalité, on obtient $k = \dfrac{5}{HB}$.
+
+D'où : \quad $\dfrac{2,90}{1,80} = \dfrac{5}{HB}$.
+\end{minipage} 
+\hspace{0.5cm}\begin{minipage}{6cm}
+\psset{unit=1cm,arrowsize=2pt 4}
+\begin{pspicture}(0,-0.5)(8,4.6)
+%\psgrid
+\newgray{mongris}{0.95}
+\pspolygon[fillstyle=solid,fillcolor=mongris](4,0.5)(6.5,2.5)(4.5,2.5)(1.8,0.5)
+\pspolygon(0.5,0.5)(5.3,0.5)(2.9,2.3)%ABC
+\psline(5.3,0.5)(7.8,2.5)(5.4,4.3)(2.9,2.3)%BxxC(pente droite)
+\psline(5.4,4.3)(2.8,2.5)(0.5,0.5)
+\psline{<->}(0.5,0)(2.9,0)\uput[d](1.7,0){5 m}
+\psline{<->}(2.9,0)(5.3,0)\uput[d](4.1,0){5 m}
+\psline{<->}(5.6,0.5)(8.1,2.5)\rput(7.25,1.5){\small 8~m}
+\uput[d](2.9,0.5){$K$}\psline(2.9,0.5)(2.9,2.3)
+\psline[linestyle=dashed](4,0.5)(4,1.45)
+\psline[linestyle=dashed](1.8,0.5)(1.8,1.45)
+\psline[linestyle=dashed](6.5,2.5)(6.5,3.5)
+\psline[linestyle=dashed](4.5,2.5)(4.5,3.5)
+\psline[linestyle=dashed](5.4,2.5)(5.4,4.3)
+\psline[linestyle=dashed](4.5,2.5)(2.8,2.5)
+\psline[linestyle=dashed](4.5,2.5)(7.8,2.5)
+\psframe(4,0.5)(4.2,0.7)\psframe(2.9,0.5)(3.1,0.7)\psframe(1.8,0.5)(2,0.7)
+\rput{90}(3.8,1){\small 1,80~m}\rput{90}(2.7,1.4){\small 2,90~m}
+\rput(4.7,0.7){\small 30\degres}
+\uput[dl](0.5,0.5){$A$}\uput[dr](5.3,0.5){$B$}\uput[ul](3.43,2.1){$C$}
+\uput[ur](4,1.35){$J$}\uput[d](4,0.5){$H$}
+\psarc(5.3,0.5){0.25}{150}{180}
+\end{pspicture}
+\end{minipage} 
+
+\vspace{0.2cm}
+On effectue le produit en croix : \quad $2,90 \times HB= 1,80\times 5$
+
+$2,90 \times HB= 9$ ou  $HB= 9\div2,90$ soit  $HB\approx3,10$~m
+
+$KH = KB - HB$ car $h \in [KB]$.
+ $KH\approx5-3,10$, soit $KH\approx1,90$~m.
+
+Calcul de l'aire de la partie grise : \quad $2\times 1,90 \times 8=30,4$. \quad L'aire de la partie grise est d'environ 30,4~m$^2$.
+
+Le prix maximum par m$^2$ de surface habitable est de 20~\euro{}.
+
+Pour environ 30,4~m$^2$ de surface habitable, le prix maximum sera d'environ $30,4\times 20$ soit 608~\euro{}.
+
+Madame Duchemin ne pourra pas louer son studio au prix de  700 \euro. 
+
+\vspace{0.5cm}
+

@@ -1,0 +1,51 @@
+
+\medskip
+
+Gaspard travaille avec un logiciel de géométrie dynamique pour construire une frise.
+
+Il a construit un triangle ABC isocèle en C (motif 1) puis il a obtenu le losange ACBD (motif 2).
+
+Voici les captures d'écran de son travail.
+
+\smallskip
+
+\begin{tabularx}{\linewidth}{|*{2}{>{\centering \arraybackslash} X|}} \hline
+	\textbf{Motif 1} & \textbf{Motif 2}\\ \hline
+	\begin{tikzpicture}
+		\draw (0,0) -- (2.5,.8) -- (2.5,-0.8) -- cycle;
+		\node at (0,0) [left = 1mm]{C};
+		\node at (2.5,0.8) [above = 1mm]{A};
+		\node at (2.5,-0.8) [below = 1mm]{B};
+	\end{tikzpicture}	
+	& 	\begin{tikzpicture}
+	\draw (0,0) -- (2.5,.8) -- (2.5,-0.8) -- cycle (2.5,0.8) --(5,0)--(2.5,-0.8);
+	\node at (0,0) [left = 1mm]{C};
+	\node at (2.5,0.8) [above = 1mm]{A};
+	\node at (2.5,-0.8) [below = 1mm]{B};
+	\node at (5,0) [right = 1mm]{D};
+	\end{tikzpicture}	 \\ \hline
+\end{tabularx}
+
+\begin{enumerate}
+	\item Préciser une transformation permettant de compléter le motif 1 pour obtenir le motif 2.
+	
+	\item Une fois le motif 2 construit, Gaspard a appliqué à plusieurs reprises une translation. 
+	
+	Il obtient ainsi la frise ci-dessous.
+	
+	Préciser de quelle translation il s'agit.
+	
+	\begin{center}
+			\begin{tikzpicture}
+		\foreach \r in {0,...,3}
+		{\draw[shift = {(2.5*\r,-0.8*\r)}] (0,0) -- (2.5,.8) -- (2.5,-0.8) -- cycle (2.5,0.8) --(5,0)--(2.5,-0.8);}
+		\node at (0,0) [left = 1mm]{C};
+		\node at (2.5,0.8) [above = 1mm]{A};
+		\node at (2.5,-0.8) [below = 1mm]{B};
+		\node at (5,0) [above right = 0.7mm]{D};
+		\end{tikzpicture}
+	\end{center}
+\end{enumerate}
+
+\vspace{5mm}
+

@@ -1,0 +1,40 @@
+\textbf{\textsc{Exercice 4} \hfill 6 points}
+
+\medskip 
+
+Le principe d'un vaccin est d'inoculer (introduire dans l'organisme) à une personne saine, en très faible quantité, une bactérie, ce qui permet à l'organisme de fabriquer des anticorps. Ces anticorps permettront de combattre la maladie par la suite si la personne souffre de cette maladie. 
+
+Lors de la visite médicale de Pablo le jeudi 16 octobre, le médecin s'aperçoit qu'il n'est pas à jour de ses vaccinations contre le tétanos. Il  réalise alors une première injection d'anatoxine tétanique et lui indique qu'un rappel sera nécessaire. 
+
+On réalise des prises de sang quotidiennes pour suivre la réaction de l'organisme aux injections. 
+
+\newpage
+\begin{center}
+Évolution du taux d'anticorps en fonction du temps lors de deux injections anatoxine tétanique* 
+
+\psset{xunit=0.25cm,yunit=0.01cm}
+\begin{pspicture}(-5,-100)(42,1000)
+\multido{\n=0+1}{43}{\psline[linewidth=0.3pt](\n,0)(\n,1000)}
+\multido{\n=0+50}{21}{\psline[linewidth=0.3pt](0,\n)(42,\n)}
+\psaxes[linewidth=1.25pt,Dx=5,Dy=100](0,0)(42,1000)
+\pscurve[linewidth=1.5pt,linecolor=blue](0,0)(1.5,0)(3,40)(4,70)(5,90)(6,70)(7,41)(10,9)(13,0)(24,0)(29,0)(30,6)(31,100)(32,300)(33,650)(33.7,800)(34.5,850)(35.5,810)(36,790)(37,770)(41,725)
+\uput[d](21,-50){temps (jours)}
+\rput{90}(-4,450){taux d'anticorps (unité arbitraire)}
+\end{pspicture}
+\end{center}  
+
+*anatoxine tétanique (AT) : substance inactivée provenant de la bactérie responsable du tétanos et servant à la fabrication du vaccin.
+
+\medskip 
+
+\begin{enumerate}
+\item Combien de jours faut-il attendre, après la première injection, pour constater une présence d'anticorps ? 
+\item Quelle est la valeur maximale du taux d'anticorps atteinte après la première injection ? 
+
+À quel jour de la semaine correspond cette valeur ? 
+\item Au bout de combien de jours approximativement, après la première injection, Pablo n'a t-il plus d'anticorps dans son organisme ? 
+\item Durant combien de jours environ le taux d'anticorps est supérieur à 800 ? 
+\end{enumerate}
+
+\vspace{0,5cm}
+

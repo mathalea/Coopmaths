@@ -1,0 +1,103 @@
+
+\medskip 
+
+%Léna et Youri travaillent sur un programme. Ils ont obtenu le dessin suivant :
+%
+%\begin{center}
+%\psset{unit=1cm}
+%\begin{pspicture}(8,1)
+%\multido{\n=0.0+1.6}{5}{\rput(\n,0){\psframe(1,1)}}
+%\end{pspicture}
+%\end{center}
+%
+%Ils ont ensuite effacé une donnée par erreur dans le script principal.
+%
+%Voici les copies d'écran de leur travail :
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash }X|}}\hline
+%\multicolumn{2}{|c|}{Programme}&Pour information\\ \hline
+%Script principal & Bloc du motif& \\ 
+%\begin{scratch}
+%\blockinit{quand \greenflag est cliqué}
+%\blockmove{s’orienter à \ovalnum{90\selectarrownum}}
+%\blockmove{aller à x: \ovalnum{-200} y: \ovalnum{0}}
+%\blockpen{effacer tout}
+%\blockrepeat{répéter \ovalnum{5} fois}
+%{
+%\blockmoreblocks{Motif}
+%\blockmove{avancer de \ovalnum{}}
+%}
+%\end{scratch}&\begin{scratch}
+%\initmoreblocks{définir \namemoreblocks{Motif}}
+%\blockpen{stylo en position d’écriture}
+%\blockrepeat{répéter \ovalnum{4} fois}
+%{
+%\blockmove{avancer de \ovalnum{40}}
+%\blockmove{tourner \turnright{} de \ovalnum{90} degrés}
+%}
+%\blockpen{relever le stylo}
+%\end{scratch}&L'instruction \begin{scratch}\blockmove{s’orienter à \ovalnum{90\selectarrownum}} \end{scratch}
+%
+%signifie qu'on se dirige vers
+%la droite.\\ \hline
+%\multicolumn{1}{r}{Valeur effacée}&\multicolumn{1}{r}{}&\multicolumn{1}{r}{}\\
+%\end{tabularx}
+%\psset{arrowsize=2pt 4}\psline{->}(-3.5,0.4)(-4,1.6)
+%
+%\end{center}
+%
+%\emph{Dans cet exercice, aucune justification n'est demandée.}
+
+\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item %La valeur effacée dans le script principal était-elle $40$ ou bien $60$ ?
+La valeur effacée est 60 sinon les carrés seraient jointifs.
+		\item ~%Dessiner sur la copie ce qu'on aurait obtenu avec l'autre valeur.
+		
+%On représentera l'instruction \og avancer de $20$ \fg par un segment de longueur $1$ cm.
+\begin{center}
+\psset{unit=2cm}
+\begin{pspicture}(5,1)
+\multido{\n=0+1}{4}{\rput(\n,0){\psframe(0,0)(1,1)}}
+\end{pspicture}
+\end{center}
+	\end{enumerate}
+\item %Léna et Youri souhaitent maintenant obtenir un triangle équilatéral comme motif.
+
+%\parbox{0.6\linewidth}{Afin d'obtenir un triangle équilatéral :
+%
+%\medskip
+%
+%$\bullet~~$ %par quelle valeur peut-on remplacer $a$ ? 
+%
+%
+%\medskip
+%
+%$\bullet~~$ par quelle valeur peut-on remplacer $b$ ?
+%
+%\medskip
+%
+%$\bullet~~$ %par quelle valeur peut-on remplacer $c$ ?}\hfill
+%\parbox{0.38\linewidth}{\begin{scratch}
+%\initmoreblocks{définir \namemoreblocks{Motif}}
+%\blockpen{stylo en position d’écriture}
+%\blockrepeat{répéter \ovalnum{$a$} fois}
+%{
+%\blockmove{avancer de \ovalnum{$b$}}
+%\blockmove{tourner \turnright{} de \ovalnum{$c$} degrés}
+%}
+%\blockpen{relever le stylo}
+%\end{scratch}}
+\end{enumerate}
+
+$a = 3$
+
+$b = 40$ par exemple
+
+$c = 120$.
+\medskip
+

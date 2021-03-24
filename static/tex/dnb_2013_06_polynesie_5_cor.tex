@@ -1,0 +1,63 @@
+\textbf{Exercice 5 \hfill 4 points}
+
+\medskip
+
+%Voici le profil schématisé d'une \og ferme simple \fg{} de
+%la maison de Moana.
+%
+%\og  L'entrait \fg{} et \og  le faux-entrait \fg{} sont
+%parallèles.
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(8,5)
+%\psgrid
+\pspolygon(0.5,0.5)(7.5,0.5)(4,4.5)%DEA
+\uput[dl](0.5,0.5){D} \uput[dr](7.5,0.5){E} \uput[u](4,4.5){A}
+\psline(2.2,2.4)(5.8,2.4)%BC
+\uput[l](2.2,2.4){B}\uput[r](5.8,2.4){C}
+\psline(4,4.5)(4,2.4)%AF
+\uput[d](4,2.4){F}
+\rput(5.8,3.6){poinçon}\psline{->}(5.1,3.6)(4,3.6)
+\rput(2,4){faux-entrait}\psline{->}(2.8,3.8)(3.2,2.4)
+\rput(4,0.1){entrait}\psline{->}(4,0.2)(4,0.5)
+\psframe(4,2.4)(4.3,2.7)
+\rput{48}(2.2,2.8){340}\uput[u](4,0.5){561}\uput[u](3.7,2.4){330}
+\end{pspicture} 
+\end{center}
+%Toutes les longueurs sont exprimées en
+%centimètres.
+%
+%Moana décide de calculer la longueur du segment [AB] :
+%
+%On donne AD = 340 ; DE = 561 et BC = 330.
+%
+%B est un point du segment [AD] et C est un point du
+%segment [AE]. Les droites (BC) et (DE) sont
+%parallèles.
+
+\medskip
+
+\begin{enumerate}
+\item %Sur le schéma ci-contre qui n'est pas à l'échelle,
+%reporter les valeurs des longueurs données.
+Voir au dessus.
+\item %Dans cet exercice, pour calculer AB, quelle propriété peut-on utiliser ?
+
+%Cocher ci-dessous la bonne propriété.
+\begin{itemize}
+%\item[$\bullet~~$] Le théorème de Pythagore.
+%\item[$\bullet~~$] Si un segment a pour extrémités les milieux de deux côtés d'un triangle, alors sa longueur est égale à la moitié de la longueur du troisième côté du triangle.
+\item[$\bullet~~$] Le théorème de Thalès.
+\end{itemize}
+\item %Calculer AB.
+D'après le théorème de Thalès les droites (BC) et (DE) étant parallèles :
+
+$\dfrac{\text{AB}}{\text{AD}} = \dfrac{\text{BC}}{\text{DE}}$, ou en remplaçant par les valeurs connues :
+
+$\dfrac{\text{AB}}{340} = \dfrac{330}{561}$, d'où $\text{AB} = \dfrac{340 \times 330}{561} = 200$.
+
+\end{enumerate}
+
+\bigskip
+

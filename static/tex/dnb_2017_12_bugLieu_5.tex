@@ -1,0 +1,117 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 5 :  \hfill 9 points}
+
+\medskip
+
+Pour des raisons de santé, il est conseillé de limiter ses efforts durant des activités sportives, afin de ne pas dépasser un certain rythme cardiaque.
+
+La fréquence cardiaque est donnée en pulsations/minute.
+
+L'âge est donné en année.
+
+\smallskip
+
+Autrefois, la relation entre l'âge $x$ d'une personne et $f(x)$ la fréquence cardiaque maximale recommandée était décrite par la formule suivante :
+
+\[f(x) = 220 - x.\]
+
+Des recherches récentes ont montré que cette formule devait être légèrement modifiée.
+
+La nouvelle formule est :
+\[g(x) = 208 - 0,7x.\]
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Avec la formule $f(x)$, quelle est la fréquence cardiaque maximale recommandée pour un enfant de $5$ ans ?
+		\item Avec la formule $g(x)$, quelle est la fréquence cardiaque maximale recommandée pour un enfant de $5$ ans ?
+	\end{enumerate}
+\item  
+	\begin{enumerate}
+		\item Sur l'annexe 2, compléter le tableau de valeurs.
+		\item Sur l'annexe 2, tracer la droite $d$ représentant la fonction $f$ dans le repère tracé.
+		\item Sur le même repère, tracer la droite $d'$ représentant la fonction $g$.
+	\end{enumerate}
+\item  Un journal commente : \og Une des conséquences de l'utilisation de la nouvelle formule au lieu de l'ancienne est que la fréquence cardiaque maximale recommandée diminue
+légèrement pour les jeunes et augmente légèrement pour les personnes âgées. \fg
+	
+Selon la nouvelle formule, à partir de quel âge la fréquence cardiaque maximale
+recommandée est-elle supérieure ou égale à celle calculée avec l'ancienne formule ?
+	
+Justifier.
+\item  Des recherches ont démontré que l'exercice physique est le plus efficace lorsque la
+fréquence cardiaque atteint 80\,\% de la fréquence cardiaque maximale recommandée
+donnée par la nouvelle formule.
+	
+Calculer pour une personne de $30$ ans la fréquence cardiaque, en pulsations/minute, pour
+que l'exercice physique soit le plus efficace.
+\end{enumerate}
+
+\vspace{0,5cm}
+
+\end{document}

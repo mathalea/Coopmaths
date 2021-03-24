@@ -1,0 +1,69 @@
+
+\bigskip
+ 
+Dans un jeu vidéo on a le choix entre trois personnages : un guerrier, un mage et un chasseur. 
+
+La force d'un personnage se mesure en points.
+ 
+Tous les personnages commencent au niveau $0$ et le jeu s'arrête au niveau $25$. 
+
+Cependant ils n'évoluent pas de la même façon :
+
+\setlength\parindent{8mm} 
+\begin{itemize}
+\item[\decoone~~] Le guerrier commence avec 50 points et ne gagne pas d'autre point au cours du jeu. 
+\item[\decoone~~] Le mage n'a aucun point au début mais gagne 3 points par niveau. 
+\item[\decoone~~] Le chasseur commence à 40 points et gagne 1 point par niveau. 
+\end{itemize}
+\setlength\parindent{0mm}
+
+\medskip
+
+\begin{enumerate}
+\item Au début du jeu, quel est le personnage le plus fort? Et quel est le moins fort ? 
+\item Compléter le tableau de l'annexe 2 en page 5. 
+\item À quel niveau le chasseur aura-t-il autant de points que le guerrier? 
+\item Dans cette question, x désigne le niveau de jeu d'un personnage. 
+
+Associer chacune des expressions suivantes à l'un des trois personnages: chasseur, mage ou guerrier :
+ 
+\setlength\parindent{8mm} 
+\begin{itemize}
+\item[$\bullet~~$] $f(x) = 3x$ ; 
+\item[$\bullet~~$] $g(x) = 50$ ; 
+\item[$\bullet~~$] $h(x) = x + 40$.
+\end{itemize}
+\setlength\parindent{0mm}
+ 
+\item Dans le repère de l'annexe 2, la fonction $g$ est représentée. 
+
+Tracer les deux droites représentant les fonctions $f$ et $h$. 
+\item Déterminer à l'aide du graphique, le niveau à partir duquel le mage devient le plus fort. 
+\end{enumerate} 
+\begin{center}
+
+{\large \textbf{ANNEXE 2}}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|*{7}{>{\centering \arraybackslash}X|}}\hline
+Niveau						&0	&1	&5	&10	&15	&25\\ \hline
+\small Points du Guerrier	&50	&50	&	&	&	&\\ \hline
+\small Points du Mage		&0	&3	&	&	&	&\\ \hline
+\small Points du Chasseur	&40	&41	&	&	&	&\\ \hline
+\end{tabularx}
+
+\vspace{1cm}
+
+\psset{xunit=0.5cm,yunit=0.09cm}
+\begin{pspicture}(-1,-5)(27,75)
+\multido{\n=0+1}{28}{\psline[linestyle=dashed,linewidth=0.3pt](\n,0)(\n,75)}
+\multido{\n=0+5}{16}{\psline[linestyle=dashed,linewidth=0.3pt](0,\n)(27,\n)}
+\psline[linewidth=1.5pt](0,50)(27,50)
+\psaxes[linewidth=1.25pt,Dy=5]{->}(0,0)(0,0)(27,75)
+\psaxes[linewidth=1.25pt,Dy=5](0,0)(0,0)(27,75)
+\uput[u](25.5,0){Niveau}
+\uput[r](0,72.5){Points}
+\uput[dl](0,0){O}
+\end{pspicture}
+\end{center}

@@ -1,0 +1,110 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 5 \hfill 18 points}}
+
+\medskip
+
+\begin{enumerate}
+\item Tarif A : $202,43 + \np{0,0609} \times \np{17500} = \np{1268,18}$ €. La famille est abonnée au tarif A.
+\item 
+	\begin{enumerate}
+		\item Nombre de kWh consommés en 2017 : $\np{17500} \times  \dfrac{80}{100} = \np{14000}$.
+		\item Montant à payer en 2017 : $202,43 + \np{0,0609} \times \np{14000} = \np{1055,03}$ (\euro).
+		
+Montant des économies réalisées par la famille de Romane entre 2016 et 2017 : 
+		
+		$\np{1268,18} - \np{1055,03} = 213,15$~(\euro).
+	\end{enumerate}
+\item  On souhaite déterminer la consommation maximale assurant que le tarif A est le plus avantageux.
+	
+Pour cela :
+
+\setlength\parindent{1cm}
+\begin{itemize}
+\item[$\bullet~~$] on note $x$ le nombre de kWh consommés sur l'année.
+\item[$\bullet~~$] on modélise les tarifs A et B respectivement par les fonctions $f$ et $g$ :
+
+\[f(x) = \np{0,0609}x + 202,43\quad  \text{et}\quad  g(x) = \np{0,0574}x + 258,39.\]
+
+\end{itemize}
+\setlength\parindent{0cm}
+	\begin{enumerate}
+		\item Ce sont des fonctions affines, leurs représentations graphiques sont des droites.
+		\item $\np{0,0609}x + 202,43 < \np{0,0574}x + 258,39$
+		
+$\np{0,0609}x - 0,0574x < 258,39 - 202,43$
+		
+$\np{0,0035}x < 55,96$
+
+$x < \dfrac{55,96}{\np{0,0035}}$. Or $\dfrac{55,96}{\np{0,0035}} \approx \np{15988,6}$.
+		\item Le tarif A est le plus avantageux jusqu'à une consommation maximale d'environ \np{15989}kWh.
+	\end{enumerate}
+\end{enumerate}
+
+\vspace{0,5cm}
+
+\end{document}

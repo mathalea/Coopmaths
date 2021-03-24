@@ -1,0 +1,58 @@
+
+\medskip
+ 
+Valentin souhaite acheter un écran de télévision ultra HD (haute définition).
+
+Pour un confort optimal, la taille de l'écran doit être adaptée aux dimensions de son salon.
+
+Voici les caractéristiques du téléviseur que Valentin pense acheter:
+
+\begin{center}
+\begin{tabularx}{0.4\linewidth}{|X m{1.5cm}|}\hline
+Hauteur de l'écran	&60 cm\\
+Format de l'écran	&16/9\\
+Ultra HD			&Oui\\ \hline
+\end{tabularx}
+\end{center}
+
+\textbf{Question :} Valentin a-t-il fait un choix adapté ?
+
+\medskip
+
+Utiliser les informations ci-dessous et les caractéristiques du téléviseur pour répondre.
+
+Toute trace de recherche, même incomplète, pourra être prise en compte dans la notation.
+
+\textbf{Information 1.} 
+
+Distance écran-téléspectateur du salon de Valentin : 3,20~m. 
+
+\medskip
+
+\textbf{Information 2.} Format 16/9
+
+Pour un écran au format 16/9, on a : Largeur $= \dfrac{16}{9} \times $ Hauteur
+
+\medskip
+
+\textbf{Information 3.} Graphique pour aider au choix de la taille de l'écran
+
+\begin{center}
+\psset{xunit=0.06cm,yunit=0.015cm,arrowsize=2pt 4}
+\begin{pspicture}(-10,-20)(200,550)
+\multido{\n=0+10}{16}{\psline[linewidth=0.2pt](\n,0)(\n,500)}
+\multido{\n=0+50}{4}{\psline[linewidth=1.2pt](\n,0)(\n,500)}
+\multido{\n=0+20}{26}{\psline[linewidth=0.2pt](0,\n)(150,\n)}
+\multido{\n=0+100}{6}{\psline[linewidth=1.2pt](0,\n)(150,\n)}
+\psaxes[linewidth=1.25pt,Dx=50,Dy=100]{->}(0,0)(0,0)(150,500)
+\psaxes[linewidth=1.25pt,Dx=50,Dy=100](0,0)(0,0)(150,500)
+\uput[r](0,520){\small Distance écran-téléspectateur (en cm)}
+\uput[r](150,460){\small  Distance maximale}\psline{->}(150,460)(132,460)
+\uput[r](150,230){\small Distance minimale}\psline{->}(150,230)(135,230)
+\uput[u](140,0){\small Longueur de la diagonale de l'écran (en cm)}
+\psline[linewidth=1.25pt](30,100)(140,485)
+\psline[linewidth=1.25pt](30,48)(140,240)
+\end{pspicture}
+\end{center}
+\medskip
+

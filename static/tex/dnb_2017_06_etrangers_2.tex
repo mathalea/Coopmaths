@@ -1,0 +1,88 @@
+
+\medskip
+
+ \textbf{Partie 1 }: 
+
+  Pour réaliser une étude sur différents isolants, une société réalise 3 maquettes de maison strictement identiques à l'exception près des isolants qui diffèrent dans chaque maquette. On place ensuite ces 3 maquettes dans une chambre froide réglée à 6 $^\circ$C. On réalise un relevé des températures ce qui permet de construire les 3 graphiques suivants: 
+
+\begin{center}
+\psset{xunit=.12,yunit=.3}
+\begin{pspicture}(-3,-.5)(100,24)
+\multido{\n=0+5}{21}{\psline[linewidth=0.2pt,linecolor=lightgray](\n,-0)(\n,22.5)}
+\multido{\n=0+2}{12}{\psline[linewidth=0.2pt,linecolor=lightgray](-.20,\n)(100,\n)}
+\psaxes[labelsep=.8mm,linewidth=.75pt,ticksize=-2pt 2pt,Dx=5,Dy=2]{->}(0,0)(0,0)(100,23)
+\rput(10,21.5){{\tiny Température en $^\circ$C}}
+\psline[linewidth=1.25pt](0,20)(15,20)
+\pscurve[linewidth=1.25pt](15,20)(20,19.6)(35,14)(50,7.85)(55,6.2)(60,6)
+\psline[linewidth=1.25pt](60,6)(100,6)
+\rput(60,19.2){MAQUETTE A}
+\rput(87,1.5){{\tiny Durée en heures}}
+\end{pspicture}
+\end{center}
+
+
+
+\begin{center}
+\psset{xunit=.12,yunit=.3}
+\begin{pspicture}(-3,-.5)(100,24)
+\multido{\n=0+5}{21}{\psline[linewidth=0.2pt,linecolor=lightgray](\n,-0)(\n,22.5)}
+\multido{\n=0+2}{12}{\psline[linewidth=0.2pt,linecolor=lightgray](-.20,\n)(100,\n)}
+\psaxes[labelsep=.8mm,linewidth=.75pt,ticksize=-2pt 2pt,Dx=5,Dy=2]{->}(0,0)(0,0)(100,23)
+\rput(10,21.5){{\tiny Température en $^\circ$C}}
+\psline[linewidth=1.25pt](0,20)(20,20)
+\pscurve[linewidth=1.25pt](20,20)(24,19.9)(66,6.1)(70,6)
+\psline[linewidth=1.25pt](70,6)(100,6)
+\rput(60,19.2){MAQUETTE B}
+\rput(87,1.5){{\tiny Durée en heures}}
+\end{pspicture}
+\end{center}
+
+\begin{center}
+\psset{xunit=.12,yunit=.3}
+\begin{pspicture}(-3,-.5)(100,24)
+\multido{\n=0+5}{21}{\psline[linewidth=0.2pt,linecolor=lightgray](\n,-0)(\n,22.5)}
+\multido{\n=0+2}{12}{\psline[linewidth=0.2pt,linecolor=lightgray](-.20,\n)(100,\n)}
+\psaxes[labelsep=.8mm,linewidth=.75pt,ticksize=-2pt 2pt,Dx=5,Dy=2]{->}(0,0)(0,0)(100,23)
+\rput(10,21.5){{\tiny Température en $^\circ$C}}
+\psline[linewidth=1.25pt](0,20)(10,20)
+\pscurve[linewidth=1.25pt](10,20)(14,19.9)(51,6.1)(55,6)
+\psline[linewidth=1.25pt](55,6)(100,6)
+\rput(60,19.2){MAQUETTE C}
+\rput(87,1.5){{\tiny Durée en heures}}
+\end{pspicture}
+\end{center}
+
+\medskip
+
+\begin{enumerate}
+\item  Quelle était la température des maquettes avant d'être mise dans la chambre froide? 
+
+\item Cette expérience a-t-elle duré plus de 2 jours? Justifier votre réponse. 
+
+
+\item Quelle est la maquette qui contient l'isolant le plus performant? Justifier votre réponse. 
+\end{enumerate}
+\medskip
+
+
+ \textbf{Partie 2 }: 
+
+ Pour respecter la norme RT2012 des maisons BBC (Bâtiments Basse Consommation), il faut que la résistance thermique des murs notée R soit supérieure ou égale à 4. Pour calculer cette résistance thermique, on utilise la relation: 
+
+$$R=\dfrac{e}{c}$$ 
+
+ où $e$ désigne l'épaisseur de l'isolant en mètre et $c$ désigne le coefficient de conductivité thermique de l'isolant. Ce coefficient permet de connaître la performance de l'isolant. 
+
+\begin{enumerate}
+\item  Noa a choisi comme isolant la laine de verre dont le coefficient de conductivité thermique est: $c = 0,035$. Il souhaite mettre 15 cm de laine de verre sur ses murs. 
+
+Sa maison respecte-t-elle la normé RT2012 des maisons BBC ? 
+
+\item  Camille souhaite obtenir une résistance thermique de 5 ($R = 5$). Elle a choisi comme isolant du liège dont le coefficient de conductivité thermique est: $c = 0,04$. 
+
+Quelle épaisseur d'isolant doit-elle mettre sur ses murs? 
+
+\end{enumerate}
+
+\vspace{0,5cm}
+

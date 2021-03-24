@@ -1,0 +1,73 @@
+
+\medskip 
+
+%L'oncle de Pauline participe régulièrement à une régate* organisée tous les ans sur le même plan d'eau. 
+%
+%* régate : course de voiliers
+%
+%\medskip 
+%
+%En 2012, il a réalisé le parcours constitué de deux boucles courtes et de trois boucles longues en 8 heures et 40~minutes. 
+%
+%Lors de sa participation en 2013, il lui a fallu 8 heures et 25~minutes pour achever le parcours constitué, cette année-là, de trois boucles courtes et de deux boucles longues. 
+%
+%Il se souvient qu'il n'a parcouru aucune boucle en moins de 75~minutes. Il sait aussi qu'il lui a fallu, pour parcourir la boucle longue, 15~minutes de plus que pour la boucle courte. 
+%
+%Cependant il souhaite connaître la durée nécessaire pour parcourir sur son voilier la boucle courte et la boucle longue.
+%
+%\medskip 
+
+\begin{enumerate}
+\item %Convertir en minutes les temps réalisés pour ces parcours de 2012 et 2013.
+En 2012 il a mis $480 + 40 = 520$~min.
+
+En 2013 il a mis $480 + 25 = 505$~min 
+\item %Pauline a décidé, en utilisant un tableur, d'aider son oncle à déterminer les durées pour la boucle courte ainsi que pour la boucle longue. 
+
+%Une copie de l'écran obtenu est donnée ci-dessous. 
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|*{7}{>{\centering \arraybackslash}X|}}\hline
+% &A 	&B	& C &D	&E	& F	& G\\ \hline 
+%1& $x$	&75	&80	&85	&90	&95	&100\\ \hline 
+%2&$f(x)$&	&	&	&	&	& \\ \hline
+%3&$f(x)$&	&	&	&	&	& \\ \hline
+%4&$f(x)$&	&	&	&	&	& \\ \hline
+%5&		&	&	&	&	&& \\ \hline
+%\end{tabularx}
+%\end{center}
+ 
+%Elle a noté $x$ la durée en minutes pour la boucle courte. 
+	\begin{enumerate}
+		\item %Quelle formule permettant d'obtenir la durée en minutes nécessaire au parcours de la boucle longue va-t-elle saisir dans la cellule B2 ? 
+		=B1+15
+		\item %Elle va saisir dans la cellule B3 la formule \og =2*B1+3*B2 \fg. 
+
+%Que permet de calculer cette formule ?
+Cette formule permet de calculer en fonction de $x$ le temps mis en 2012. 
+		\item %Quelle formule va-t-elle saisir dans la cellule B4 pour calculer le temps de parcours lors de sa participation en 2013 ? 
+=3*B1+2*B2
+%Elle a ensuite recopié vers la droite les formules saisies en B2,\: B3 et B4 et obtenu l'écran suivant : 
+	\end{enumerate}
+
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|*{7}{>{\centering \arraybackslash}X|}}\hline
+% &A 	&B		& C &D	&E	& F	& G\\ \hline 
+%1& $x$	&75		&80	&85	&90	&95	&100\\ \hline 
+%2&$f(x)$&90		&95	&100&105&110&115 \\ \hline
+%3&$f(x)$&420	&445&470&495&520&545 \\ \hline
+%4&$f(x)$&405	&430&455&480&505&530 \\ \hline
+%5&		&		&	&	&	&& \\ \hline
+%\end{tabularx}
+%\end{center}
+
+\item %Si elle saisit le nombre 105 dans la cellule H1, quelles valeurs obtiendra-t-elle dans les cellules H2, H3 et H4 ?
+Avec $x = 105$, on obtient dans H2 $x + 15 = 120$, dans H3 $2x + 3(x + 15) = 525 + 45 = 570$ et dans H4 $3x + 2(x + 15) = 525 + 30 = 555$. 
+\item %À l'aide de la copie de l'écran obtenu avec le tableur préciser les durées nécessaires à son oncle pour parcourir la boucle courte ainsi que pour parcourir la boucle longue.
+On constate que les valeurs 520 et 505 sont atteintes pour $x = 95$.
+
+Il faut donc 1~h 35~min pour effectuer la boule courte et 1~h 50~min pour effectuer la boucle longue. 
+\end{enumerate}
+ 
+\vspace{0,5cm}
+

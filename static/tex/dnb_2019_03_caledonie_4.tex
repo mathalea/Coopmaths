@@ -1,0 +1,46 @@
+
+\medskip
+
+Calédorail est un projet de bus qui relierait différents points stratégiques de la ville de Nouméa.
+
+\medskip
+
+\begin{enumerate}
+\item \textbf{Longueur de la ligne}
+
+\begin{center}
+\psset{unit=0.4cm,arrowsize=1.5pt 2}
+\begin{pspicture}(27.6,3.3)
+\psframe(0,1.5)(27.6,2.2)
+\psline[linewidth=2pt]{->}(0.4,1.9)(0.4,0.5)
+\psline[linewidth=2pt]{->}(9.4,1.9)(9.4,0.5)
+\psline[linewidth=2pt]{->}(18.4,1.9)(18.4,0.5)
+\psline[linewidth=2pt]{->}(27.4,1.9)(27.4,0.5)
+\pspolygon[fillstyle=solid,fillcolor=lightgray](20.5,1.9)(25.7,1.9)(25,3.1)(20.5,3.1)
+\multido{\n=20.7+0.7,\na=21.2+0.7}{6}{\psframe[fillstyle=solid,fillcolor=white](\n,2.5)(\na,3)}
+\pscircle[fillstyle=solid,fillcolor=black](21.7,2){0.35}
+\pscircle[fillstyle=solid,fillcolor=black](24.5,2){0.35}
+\pscircle[fillstyle=solid,fillcolor=white](21.7,2){0.15}
+\pscircle[fillstyle=solid,fillcolor=white](24.5,2){0.15}
+\rput(0.7,0){\textbf{Station 1}} \rput(9.4,0){\textbf{Station 2}} 
+\rput(18.4,0){\textbf{Station 3}} \rput(27.4,0){\textbf{Station 4}} 
+\end{pspicture}
+\end{center}
+\medskip
+
+La distance moyenne entre deux stations est d'environ 450 mètres. Estimer la distance entre la station
+1 et la station 4.
+\item \textbf{Vitesse moyenne}
+
+Le bus Calédorail mettrait 24 minutes pour effectuer un trajet de 9,9 km.
+
+Quelle serait sa vitesse moyenne en km/h ?
+\item \textbf{Tarif}
+
+Actuellement, un ticket de bus coûte 190~F. Le ticket de bus Calédorail coûterait 40\,\% plus cher.
+
+Quel serait le prix du ticket de bus Calédorail ?
+\end{enumerate}
+
+\vspace{0,5cm}
+

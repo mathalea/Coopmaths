@@ -1,0 +1,39 @@
+
+\medskip
+
+\parbox{0.38\linewidth}{Paul veut construire un garage dans le
+fond de son jardin.
+
+Sur le schéma ci-contre, la partie
+hachurée représente le garage positionné
+en limite de propriété.
+
+Les longueurs indiquées (1,6~m et 3~m) sont imposées; la longueur marquée par
+un point d'interrogation est variable.} \hfill
+\parbox{0.58\linewidth}{\psset{unit=0.7cm,arrowsize=2pt 4}
+\begin{pspicture}(10.5,9)
+%\psgrid
+\psline(2.4,0)(2.4,9)(10.4,4.3)
+\psline(2.4,2.3)(6.6,2.3)(6.6,6.5)
+\psline[linestyle=dashed](6.6,6.5)(2.4,6.5)
+\psframe(2.4,2.3)(2.7,2.6)
+\psframe(6.6,2.3)(6.3,2.6)
+\psframe(6.6,6.5)(6.3,6.2)
+\psframe(2.4,6.5)(2.7,6.2)
+\pspolygon[fillstyle=hlines](2.4,2.3)(6.6,2.3)(6.6,6.5)(2.4,9)
+\rput(8,2.5){Jardin}
+\rput{90}(2,5.2){Limite de propriété}
+\rput{-30}(6.6,6.9){Limite de propriété}
+\psline{<->}(1,2.4)(1,6.5)\uput[l](1,4.45){?}
+\psline{<->}(1,6.5)(1,9)\uput[l](1,7.75){1,6~m}
+\psline{<->}(2.4,1.6)(6.6,1.6)\uput[d](4.5,1.6){3~m}
+\end{pspicture}}
+
+\medskip
+
+\emph{Toute trace de recherche, même incomplète, pourra être prise en compte dans la notation.}
+
+Sachant que la surface du garage ne doit pas dépasser 20 m$^2$, quelle valeur maximale peut-il choisir pour cette longueur variable ?
+
+\bigskip
+

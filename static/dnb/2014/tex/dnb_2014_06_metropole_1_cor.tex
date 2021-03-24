@@ -1,0 +1,46 @@
+
+\begin{enumerate}
+\item Représentation d'un agrandissement de cet octogone en l'inscrivant dans un cercle de rayon 3~cm. 
+\begin{center}
+\begin{tikzpicture}
+\tkzDefPoints{0/0/O,3/0/J}
+\tkzDefPointBy[rotation=center O angle 22.5](J) \tkzGetPoint{H}
+\tkzDefPointBy[rotation=center O angle 45](H) \tkzGetPoint{A}
+\tkzDefPointBy[rotation=center O angle 45](A) \tkzGetPoint{B}
+\tkzDefPointBy[rotation=center O angle 45](B) \tkzGetPoint{C}
+\tkzDefPointBy[rotation=center O angle 45](C) \tkzGetPoint{D}
+\tkzDefPointBy[rotation=center O angle 45](D) \tkzGetPoint{E}
+\tkzDefPointBy[rotation=center O angle 45](E) \tkzGetPoint{F}
+\tkzDefPointBy[rotation=center O angle 45](F) \tkzGetPoint{G}
+\tkzDrawPolygon(A,B,C,D,E,F,G,H) \tkzDrawPoints(O,A,B,C,D,E,F,G,H)
+\tkzDrawSegments(O,A O,B)
+\tkzLabelPoint[below](O){$O$} 
+\tkzLabelPoint[above](A){$A$} \tkzLabelPoint[above left](B){$B$}
+\tkzLabelPoint[left](C){$C$} \tkzLabelPoint[left](D){$D$}
+\tkzLabelPoint[below](E){$E$} \tkzLabelPoint[below](F){$F$}
+\tkzLabelPoint[right](G){$G$} \tkzLabelPoint[right](H){$H$}
+\tkzCompass[color=blue,length=1.5](A,B)
+\tkzCompass[color=blue,length=1.5](B,C)
+\tkzCompass[color=blue,length=1.5](C,D)
+\tkzCompass[color=blue,length=1.5](D,E)
+\tkzCompass[color=blue,length=1.5](E,F)
+\tkzCompass[color=blue,length=1.5](F,G)
+\tkzCompass[color=blue,length=1.5](G,H)
+\tkzDrawCircle[color=red](O,A)
+%\tkzProtractor[scale=.55,rotate=67.5,with=half](O,A)
+\tkzMarkAngle[color=red](A,O,B)
+\tkzLabelAngle[pos=1.2](A,O,B){$45^{\circ}$}
+%\tkzCompass[color=blue,length=1.5](A,B)
+\end{tikzpicture}
+\end{center}
+On place le point $A$ sur le cercle de centre $O$ et de rayon 3~cm. On place le point $B$ sur le cercle tel que $\widehat{AOB}=\dfrac{360}{8}=45^{\circ}$. \`A l'aide d'un compas, on reporte,  avec un écartement de $AB$, on définit les autres points.
+\item Le triangle $DAH$ est rectangle.
+
+On a: $\text{mes}(\widehat{DOH})=4\times\text{mes}(\widehat{HOA})=4\times45^{\circ}=180^{\circ}$; les points $D$, $O$ et $H$ sont donc alignés et $D$ et $H$ sont ainsi diamétralement opposés. $[DH]$ est un diamètre du cercle, $A$ est sur le cercle.
+
+Ainsi, $DAH$ est rectangle.
+\item Dans un cercle, si un angle inscrit (ici \textcolor{blue}{$\widehat{BEH}$}) et un angle au centre (ici \textcolor{blue}{$\widehat{BOH}$}) interceptent le même arc, alors la mesure de l'angle au centre (ici \textcolor{blue}{$\text{mes}(\widehat{BOH})=2\times 45= 90^{\circ}$}) est le double de la mesure de l'angle inscrit (ici $\textcolor{red}{\text{mes}(\widehat{BEH})}=\dfrac{2\times 45}{2}\textcolor{red}{= 45^{\circ}}$).
+\end{enumerate}
+
+\vspace{0.5cm}
+

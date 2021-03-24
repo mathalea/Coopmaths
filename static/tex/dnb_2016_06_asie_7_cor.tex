@@ -1,0 +1,122 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 7 \hfill 6 points}
+
+\medskip
+
+%Romane souhaite préparer un cocktail pour son anniversaire.
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|*{2}{>{\centering \arraybackslash}X|}}\hline
+%Document 1 : Recette du cocktail
+%
+%Ingrédients pour 6 personnes :&Document 2 : Récipient de Romane\\ 
+%
+%\begin{pspicture}(5,4)
+%\uput[r](0,3.75){$\bullet~~$60 cl de jus de mangue}
+%\uput[r](0,3.25){$\bullet~~$30 cl de jus de poire}
+%\uput[r](0,2.75){$\bullet~~$12 cl de jus de citron vert}
+%\uput[r](0,2.25){$\bullet~~$12 cl de sirop de cassis}
+%\end{pspicture}&\psset{unit=1cm}
+%\begin{pspicture}(5,4)
+%\psellipse(2.5,3)(2,0.4)
+%\psarc(2.5,3){2cm}{-180}{0}
+%\end{pspicture}\\
+%Préparation : &\\
+%Verser les différents ingrédients dans un récipient et remuer.
+%
+%Garder au frais pendant au moins 4~h.&On considère qu'il a la forme d'une
+%demi-sphère de diamètre 26 cm.\\ \hline
+%\end{tabularx}
+%\end{center}
+%\emph{Rappels :}
+%
+%$\bullet~~$Volume d'une sphère : $V = \dfrac{4}{3}\pi r^3$
+%
+%$\bullet~~$1~L = 1~dm$^3$ = \np{1000}~cm$^3$
+%
+%\medskip
+%
+%Le récipient choisi par Romane est-il assez grand pour préparer le cocktail pour 20
+%personnes ?
+Pour un cocktail le volume des ingrédients est égal à :
+
+$\dfrac{60 + 30 + 12 + 12}{6} = \dfrac{114}{6} = 19$~cl.
+
+Donc pour 20 cocktails le volume est égal à :
+
+$20 \times 19 = \np{380}$~cl soit 3,8~l.
+
+Le volume du récipient de Romane est égal à :
+
+$\dfrac{1}{2} \times \dfrac{4}{3}\times \pi \times 13^3 \approx \np{4601}~$cm$^3$ soit environ 4,601~dm$^3$ ou 4,6~l : le récipient est assez grand pour préparer tous les cocktails.
+\medskip
+
+\textbf{Il est rappelé que, pour l'ensemble du sujet, les réponses doivent être justifiées.\\
+Il est rappelé que toute trace de recherche sera prise en compte dans la
+correction.}
+\end{document}\end{document}

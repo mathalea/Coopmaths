@@ -1,0 +1,370 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 5 : La pêche aux crabes \hfill 4 points}
+
+\medskip
+
+Martin va en vacances durant une semaine chez sa grand-mère
+au bord de la mer.
+
+Les crabes se mesurent dans leur plus grande largeur (sans les pinces).
+
+Voici les différentes tailles en centimètres des crabes qu'il a
+pêchés au cours de la semaine :
+
+\[23 - 9 - 10 - 10 - 23 - 22 - 18 - 16 - 13 - 8 - 8 - 16 - 18 - 10 - 12\]
+
+\begin{enumerate}
+\item% Quelle est la moyenne de cette série ?
+Martin a mesuré 15 crabes. La moyenne de cette série est:
+
+$\dfrac{23 + 9 + 10 + 10 + 23 + 22 + 18 + 16 + 13 + 8 + 8 + 16 + 18 + 10 + 12}{15} = \dfrac{216}{15}=14,4 $
+
+\item% Quelle est la médiane de cette série ?
+Pour déterminer la médiane, on écrit les tailles des crabes en ordre croissant:
+
+\[ 8 - 8 - 9 - 10 - 10 - 10 - 12 - \fbox{13} - 16 - 16 - 18 - 18 - 22 - 23 - 23\]
+
+La médiane de cette série est la valeur du nombre situé \og{} au milieu\fg{} de cette série, soit le $8\ieme$ nombre qui est 13.
+
+\item Les crabes de moins de 14~cm dans leur plus grande largeur sont interdits à la pêche. 
+
+%Quelle proportion de crabes a-t-il dû remettre en liberté pour protéger l'espèce ?
+
+Il y a 8 crabes ayant une largeur inférieure à 14~cm; il faut donc remettre en liberté une proportion de crabes égale à $\dfrac{8}{15}$.
+
+\end{enumerate}
+
+\vspace{0,5cm}
+
+\subsection*{Exercice 6 : La géode \hfill 6 points}
+
+\medskip
+
+La géode, située à la Cité des Sciences de la Villette à Paris, est une
+structure sphérique.
+
+\medskip
+
+\begin{enumerate}
+\item La salle de projection, située à l'intérieur de la géode, est une
+demi-sphère de diamètre 26~m.
+
+Une sphère de diamètre 26~m a pour rayon 13~m et donc pour volume
+$\dfrac{4}{3}\pi r^3 = \dfrac{4}{3}\pi\times 13^3$.
+
+Le volume de la géode est donc 
+$\dfrac{1}{2}\times \dfrac{4}{3}\pi \times 13^3 \approx \np{4601}$~m$^3$
+
+%Calculer le volume de cette salle. Donner la réponse en m$^3$ arrondie à l'unité.
+
+\item La surface extérieure est en partie recouverte de triangles équilatéraux de $120$~cm de côté.
+
+	\begin{enumerate}
+
+		\item% Montrer que la hauteur d'un de ces triangles est $104$~cm (arrondie à l'unité).
+
+\begin{multicols}{2}
+
+Soit ABC un triangle équilatéral de côté 120~cm. On appelle H le pied de la hauteur issue de C.
+
+Dans le triangle ACH rectangle en H:\\ $\sin \widehat{\text{CAH}} = \dfrac{\text{CH}}{\text{AC}}$ donc $\text{CH}= \sin \widehat{\text{CAH}}\times \text{AC}$.
+
+Le triangle ABC est équilatéral de côté 120 donc $\text{AC}=120$ et chaque angle de ce triangle vaut 60° donc $\widehat{\text{CAH}}=60\degres$.
+
+On a donc: 
+$\text{CH}= \sin 60\degres\times 120 \approx 104$
+
+La hauteur d'un de ces triangles est approximativement de 104~cm.
+
+\columnbreak
+
+\begin{center}
+\psset{unit=0.3cm}
+\def\xmin {-1}   \def\xmax {13}
+\def\ymin {-1}   \def\ymax {13}
+\begin{pspicture}(\xmin,\ymin)(\xmax,\ymax)
+%\psgrid[subgriddiv=10]
+\pspolygon(0,0)(12,0)(12;60)
+\psline(12;60)(6,0)
+\uput[-150](0,0){\small A} \uput[-30](12,0){\small B} 
+\uput[u](12;60){\small C} 
+\uput[d](6,0){\small H}
+\psarc(0,0){2}{0}{60} \uput[30](2;30){60°} 
+\psline(5,0)(5,1)(6,1)
+\end{pspicture}
+\end{center}
+
+\end{multicols}
+
+		\item% En déduire que l'aire d'un triangle est d'environ \np{6240}cm$^2$.
+L'aire d'un de ces triangles est égale à
+$\dfrac{\text{AB}\times \text{CH}}{2} \approx \dfrac{120\times 104}{2} \approx \np{6240}$~cm$^2$.
+
+
+
+ 	\end{enumerate}
+
+\item Il a fallu \np{6433} triangles pour recouvrir la partie extérieure de la Géode.
+	
+%Quelle est l'aire de la surface recouverte par ces triangles ? Donner la réponse en m$^2$ arrondie à l'unité.
+
+La surface recouverte par ces triangles est approximativement de
+$\np{6433}\times\np{6240} = \np{40141920}$~cm$^2$ soit \np{4014,1920}~m$^2$ ce qui donne en arrondissant au m$^2$: \np{4014}~m$^2$.  
+
+\end{enumerate}
+
+%\medskip
+%
+%\begin{tabularx}{\linewidth}{|l X|}\hline
+%Formulaire :& Volume d'une sphère : $S = \dfrac{4}{3} \times \pi \times r^3$ où $r$ est le rayon de la sphère.\\
+%&Aire d'un triangle :  $A = \dfrac{b \times h}{2}$ où $b$ est l'aire d'une base et $h$ sa hauteur associée.\\ \hline
+%\end{tabularx}
+
+\vspace{0,5cm}
+
+\subsection*{Exercice 7 : Le club de sport \hfill 3,5 points}
+
+\medskip
+
+Le club de sport \og Santé et Forme \fg{} propose à ses clients deux
+tarifs :
+
+Tarif A: forfait annuel à \np{90000}~F
+
+Tarif B: une adhésion à \np{5000}~F puis un abonnement mensuel à
+\np{7900}~F.
+%
+%
+%\parbox{0.58\linewidth}{Le club de sport \og Santé et Forme \fg{} propose à ses clients deux
+%tarifs :
+%
+%Tarif A: forfait annuel à \np{90000}~F
+%
+%Tarif B: une adhésion à \np{5000}~F puis un abonnement mensuel à
+%\np{7900}~F.
+%
+%\begin{enumerate}
+%\item Mathilde est intéressée mais elle ne sait pas quel tarif
+%choisir. Pour s'aider elle utilise un tableur (ci-contre).
+%
+%Mathilde a utilisé une formule pour le calcul du tarif B.
+%
+%Parmi les quatre propositions suivantes, recopie sur ta feuille
+%celle qui correspond à la cellule C4 :
+%
+%\fbox{20800 + 7900}
+%
+%\fbox{=5000+A4*7900}
+%
+%\fbox{=somme (C2:C3)}
+%
+%\fbox{(C2+C3)/2}
+%\end{enumerate}} \hfill
+%\parbox{0.4\linewidth}{\begin{tabularx}{\linewidth}{|c|*{3}{>{\centering \arraybackslash}X|}}\hline
+%&A&B&C\\ \hline
+%1&\footnotesize Nombre de mois&\footnotesize tarif A&\footnotesize tarif B\\ \hline
+%2	&1	&\np{90000}&\np{12900}\\ \hline
+%3	&2	&\np{90000}&\np{20800}\\ \hline 
+%4	&3	&\np{90000}&\np{28700}\\ \hline 
+%5	&4	&\np{90000}&\np{36600}\\ \hline 
+%6	&5	&\np{90000}&\np{44500}\\ \hline 
+%7	&6	&\np{90000}&\np{52400}\\ \hline 
+%8	&7	&\np{90000}&\np{60300}\\ \hline 
+%9	&8	&\np{90000}&\np{68200}\\ \hline 
+%10	&9	&\np{90000}&\np{76100}\\ \hline 
+%11	&10	&\np{90000}&\np{84000}\\ \hline 
+%12	&11	&\np{90000}&\np{91900}\\ \hline 
+%13	&12	&\np{90000}&\np{99800}\\ \hline  
+%\end{tabularx}}
+%
+%\parbox{0.4\linewidth}{
+%\begin{enumerate}
+%\item[\textbf{2.}] À partir de combien de mois d'abonnement le tarif A devient-il
+%plus intéressant que le tarif B ?
+%\item[\textbf{3.}] Mathilde construit aussi le graphique correspondant (ci-contre).
+%
+%Lequel des tarifs A ou B est représenté par la droite $g$ ?
+%\end{enumerate}}
+%\hfill
+%\parbox{0.6\linewidth}{\psset{xunit=0.45cm,yunit=0.000045cm}
+%\begin{pspicture}(-3,-10000)(13,120000)
+%\multido{\n=0+1}{14}{\psline[linestyle=dotted](\n,0)(\n,120000)}
+%\multido{\n=0+10000}{13}{\psline[linestyle=dotted](0,\n)(13,\n)}
+%\psaxes[linewidth=1.25pt,Dy=150000,labelFontSize=\scriptstyle]{->}(0,0)(13,120000)
+%\psline[linewidth=1.5pt](0,90000)(13,90000)
+%\psplot[plotpoints=3000,linewidth=1.5pt]{0}{13}{7900 x mul 5000 add}
+%\uput[u](4.8,90000){$h$}
+%\uput[u](4.8,44000){$g$}
+%\multido{\n=0+10000}{13}{\uput[l](0,\n){\scriptsize \np{\n}}}
+%\end{pspicture}
+%}
+
+\begin{enumerate}
+\item La formule qui doit être dans la cellule C4 est
+\fbox{= 5000 + A4*7900}
+
+\item D'après le tableur, le 11\ieme{} mois est la première fois que le tarif B (\np{91900}~F) est supérieur au tarif A (\np{90000}~F); c'est donc à partir du 11\ieme{} mois que le tarif A devient plus intéressant que le tarif B. 
+
+\item La droite $h$ correspond à une fonction constante, donc au prix constant correspondant au tarif A; c'est donc le tarif B qui est représenté par la droite $g$.
+
+\end{enumerate}
+
+
+\vspace{0,5cm}
+
+\subsection*{Exercice 8 : Le faré \hfill 5 points}
+
+\medskip
+
+François aide son papa à reconstruire le faré du jardin.
+
+Le toit a la forme d'une pyramide à base carrée représentée ci-dessous.
+
+François doit acheter du bois de charpente pour refaire les traverses de ce toit à quatre pans.
+%\begin{center}
+%\psset{unit=1cm}
+%\begin{pspicture}(10,7)
+%%\psgrid
+%\pspolygon(0.5,0.5)(7,0.5)(9.7,2.2)(5.1,6.6)(7,0.5)%AB?CBA
+%\psline(0.5,0.5)(5.1,6.6)%AC
+%\psline[linestyle=dashed](0.5,0.5)(9.7,2.2)
+%\psline[linestyle=dashed](3.2,2.2)(7,0.5)
+%\psline[linestyle=dashed](0.5,0.5)(3.2,2.2)(9.7,2.2)
+%\psline[linestyle=dashed](3.2,2.2)(5.1,6.6)(5.1,1.35)
+%\psline(2.1,2.65)(6.37,2.65)(8.12,3.7)%GF--
+%\psline[linestyle=dashed](2.1,2.65)(3.85,3.7)(8.12,3.7)%G--
+%\psline(3.5,4.5)(5.8,4.5)(6.7,5.1)%DE--
+%\psline[linestyle=dashed](3.5,4.5)(4.4,5.1)(6.7,5.1)%D--
+%\uput[dl](0.5,0.5){A} \uput[dr](7,0.5){B} \uput[u](5.1,6.6){C} \uput[ul](3.5,4.5){D} 
+%\uput[ur](5.7,4.55){E} \uput[ur](6.27,2.65){F} \uput[ul](2.1,2.65){G} \uput[d](5.1,1.38){H}
+%\rput(8.4,4.8){traverses}
+%\psline{->}(8.4,4.6)(6.2,4.8)
+%\psline{->}(8.4,4.6)(7.3,3.2)
+%\psline{->}(8.4,4.6)(8.6,1.52) 
+%\end{pspicture}
+%
+%AC = 3,60 m, \quad AH = 2,88 m,\quad CH = 2,16 m
+%\end{center}
+
+\begin{enumerate}
+\item% Montrer que le triangle ACH est rectangle en H.
+On sait que, en mètres, $\text{AC}= 3,6$, $\text{AH}=2,88$ et $\text{CH}= 2,16$.
+
+Donc $\text{AC}^2=12,96$, $\text{AH}^2=\np{8,2944}$ et $\text{CH}^2= \np{4,6656}$.
+
+On constate que $12,96 = \np{8,2944} + \np{4,6656}$ ce qui veut dire que $\text{AC}^2= \text{AH}^2+\text{CH}^2$.
+
+Donc, d'après la réciproque du théorème de Pythagore, le triangle ACH est rectangle en H.  
+  
+
+\item On a représenté ci-dessous le pan ABC.
+
+\parbox{0.5\linewidth}{\psset{unit=0.9cm}
+\begin{pspicture}(6.3,5)
+%\psgrid
+\def\barbar{\psline(-0.15,0.15)(0.15,-0.15)\psline(-0.08,0.15)(0.22,-0.15)}
+\def\barbard{\psline(0.15,0.15)(-0.15,-0.15)\psline(0.08,0.15)(-0.23,-0.15)}
+\pspolygon(0.5,0.5)(5.8,0.5)(3.15,4.5)%ABC
+\psline(1.38,1.8)(4.92,1.8)%GF
+\psline(2.2,3.1)(4.1,3.1)%DE
+\uput[dl](0.5,0.5){A} \uput[dr](5.8,0.5){B} \uput[u](3.15,4.5){C} 
+\uput[ul](2.2,3.1){D} \uput[ur](4.1,3.1){E} \uput[ur](4.92,1.8){F} 
+\uput[ul](1.38,1.8){G}
+\rput(1,1.3){\barbar}\rput(1.8,2.5){\barbar}\rput(2.7,3.8){\barbar}
+\rput(5.3,1.23){\barbard}\rput(4.5,2.5){\barbard}\rput(3.6,3.8){\barbard}
+\end{pspicture}
+}\hfill\parbox{0.48\linewidth}{ABC est un triangle isocèle en C.
+
+AC = 3,60 m
+
+Les distances AG, GD, DC, CE, EF et FB sont égales.
+
+Les droites (DE), (GF) et (AB) sont parallèles.}
+
+	\begin{enumerate}
+		\item Le pan ABC comprend trois traverses [DE], [GF] et [AB].
+François a coupé une traverse [AB] de 4,08 m.
+%Calculer DE.
+
+On sait que (DE) est parallèle à (AB); on applique le théorème de Thalès dans les triangles CDE et CAB:
+$\dfrac{\text{CD}}{\text{CA}} = \dfrac{\text{CE}}{\text{CB}} = \dfrac{\text{DE}}{\text{AB}}$ donc $\dfrac{\text{CD}}{\text{CA}} =\dfrac{\text{DE}}{\text{AB}}$;
+or $\text{CD}=\text{DG}=\text{GA}$ donc $\dfrac{\text{CD}\rule{0pt}{12pt}}{\text{CA}}=\dfrac{1}{3}$
+
+On en déduit que $\dfrac{\text{DE}\rule{0pt}{12pt}}{\text{AB}} = \dfrac{1}{3}$ donc que $\text{DE} = \dfrac{1}{3}\,\text{AB} = \dfrac{1}{3}\times 4,08 = 1,36$~m.
+
+		\item On donne de plus GF = 2,72 m. Les quatre pans de la toiture sont identiques.
+		
+%Calculer la longueur totale des traverses nécessaires pour refaire la toiture.
+
+Sur la face ABC, la longueur des traverses nécessaires est\\
+$\text{DE} + \text{GF} + \text{AB} = 1,36 + 2,72 + 4,08 = 8,16$~m.
+
+Comme il y a quatre pans identiques, la longueur totale des traverses nécessaires pour refaire la toiture est de $4\times 8,16 = 32,64$~m.
+	\end{enumerate} 
+\end{enumerate}
+\end{document}\end{document}

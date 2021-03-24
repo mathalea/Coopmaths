@@ -1,0 +1,40 @@
+
+\medskip
+ 
+Voici une feuille de calcul obtenue à l'aide d'un tableur.
+
+\medskip
+ 
+Dans cet exercice, on cherche à comprendre comment cette feuille a été remplie. 
+
+\begin{center}
+\begin{tabularx}{0.6\linewidth}{|*{4}{>{\centering \arraybackslash}X|}}\hline
+&A&B&C\\ \hline
+1&216	&126&90\\ \hline
+2&126	&90	&36\\ \hline
+3&90	&36	&54\\ \hline
+4&54	&36	&18\\ \hline
+5&36	&18	&18\\ \hline
+6&18	&18	&0\\ \hline
+\end{tabularx}
+\end{center}
+\medskip
+
+\begin{enumerate}
+\item \textit{En observant les valeurs du tableau, on remarque que les cellules de la colonne C semblent être obtenues par différence entre celle de la colonne A et celles de la colonne B, d'où la formule \fbox{=A1-B1}}
+
+\textit{On peut aussi entrer la formule \fbox{=\$A1-\$B1}}
+ 
+\item %\textbf{Dans cette question, on laissera sur la copie toutes les traces de recherche. Elles seront valorisées.}
+
+%\medskip
+ 
+Le tableur fournit deux fonctions MAX et MIN. À partir de deux nombres, MAX renvoie la valeur la plus grande et MIN la plus petite. (exemple MAX(23~;~12) = 23)
+
+\textit{La formule qui a été entrée dans la cellule A2, puis recopiée vers le bas est \fbox{=MAX(A1;B1)} }
+\item \textit{L'algorithme en \oe uvre dans cette feuille de calculs est celui des différences successives qui permet de trouver le PGCD de deux entiers. Donc le nombre figurant dans la cellule C5 représente le PGCD de 216 et de 126.} 
+\item \textit{D'après la question précédente, la fraction $\dfrac{216}{126}$ n'est pas irréductible car simplifiable par 18. D'où} $\dfrac{216}{126}=\dfrac{216:18}{126:18}$=\fbox{$\dfrac{12}{7}$} 
+\end{enumerate}
+ 
+\vspace{0,5cm}
+

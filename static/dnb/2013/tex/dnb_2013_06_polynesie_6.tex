@@ -1,0 +1,69 @@
+
+\medskip
+ 
+Sur un parking, une commune veut regrouper 6 conteneurs à déchets du même modèle A ou B. Les deux modèles sont fabriqués dans le même matériau qui a partout la même épaisseur.
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(10,5.5) 
+\rput(1.5,5){le conteneur A} 
+\rput(6.5,5){le conteneur B}
+\pspolygon(0.3,0.4)(2,0.3)(2.9,0.6)(2.8,4.3)(1.9,4)(0.2,4.1)%ABCGFEA
+\psline(2.8,4.3)(1.1,4.4)(0.2,4.1)%GHE
+\psline(2,0.3)(1.9,4)%BF
+\psline[linestyle=dashed](0.3,0.4)(1.2,0.7)(1.1,4.4)%ADH
+\psline[linestyle=dashed](1.2,0.7)(2.9,0.6)
+\psline(5.5,1.2)(5.5,3.4)
+\psline(7.7,1.2)(7.7,3.4)
+\psarc(6.6,1.2){1.1}{-180}{0}
+\psarc(6.6,3.4){1.1}{0}{-180}
+\scalebox{.99}[0.3]{\psarc[linewidth=2pt](6.65,3.2){1.075}{180}{0}}%
+\scalebox{.99}[0.3]{\psarc[linewidth=2pt,linestyle=dashed](6.65,3.2){1.075}{0}{180}}%
+\scalebox{.99}[0.3]{\psarc[linewidth=2pt](6.65,12.){1.075}{180}{0}}%
+\scalebox{.99}[0.3]{\psarc[linewidth=2pt,linestyle=dashed](6.65,12.){1.075}{0}{180}}%
+\end{pspicture} 
+\end{center}
+
+\setlength\parindent{6mm}
+\begin{itemize}
+\item le conteneur A est un pavé droit à base carrée de côté 1~m, et de hauteur 2~m 
+\item le conteneur B est constitué de deux demi-sphères de rayon $0,58$~m et d'un cylindre de même rayon et de hauteur $1,15$~m
+\end{itemize}
+\setlength\parindent{0mm}
+
+\bigskip
+ 
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Vérifie que les 2 conteneurs ont pratiquement le même volume. 
+		\item Quels peuvent être les avantages du conteneur A ?
+	\end{enumerate} 
+\item On souhaite savoir quel est le conteneur le plus économique à fabriquer. 
+	\begin{enumerate}
+		\item Calcule l'aire totale des 6 faces du conteneur A. 
+		\item Vérifie que, pour le conteneur B, l'aire totale, arrondie à 0,1~m$^2$ près, est 8,4 m$^2$. 
+		\item Quel est le conteneur le plus économique à fabriquer ? Justifie ta réponse.
+	\end{enumerate}
+\end{enumerate}
+
+\medskip
+ 
+\textbf{Formulaire :}
+
+$b$ = base  ; $c$ = côté ;  $L$ = longueur ;  $l$ = largeur  ; $h$ = hauteur  ; $r$ = rayon 
+
+\medskip
+\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+Aire d'un rectangle 	&Aire d'un carré 	&Aire d'un triangle\\ \hline 
+$L \times l$			&$c \times c$		&$\dfrac{b x h}{2}$\\ \hline 
+Aire d'un disque 		&Aire latérale d'un cylindre &Aire d'une sphère\\ \hline 
+$\pi r^2$				& $2\pi r h$		& $4\pi r^2$\\ \hline 
+Volume d'un pavé droit 	&Volume d'un cylindre &Volume d'une sphère\\ \hline
+$L \times l \times h$	&$\pi r^2 \times h$	&$\dfrac{4}{3}\pi r^3$\\ \hline
+\end{tabularx}
+
+\medskip
+
+\bigskip
+

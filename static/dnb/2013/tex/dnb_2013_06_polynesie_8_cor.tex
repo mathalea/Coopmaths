@@ -1,0 +1,106 @@
+
+\medskip
+
+%\parbox{0.55\linewidth}{Soit l'expérience aléatoire suivante :
+ 
+%- tirer au hasard une boule noire, noter son numéro ; 
+%
+%- tirer au hasard une boule blanche, noter son numéro;
+% 
+%- puis calculer la somme des 2 numéros tirés.} \hfill
+%\parbox{0.42\linewidth}{\psset{unit=0.8cm}
+%\begin{pspicture}(6,2)
+%\psline(0,1.5)(0,0)(2.5,0)(2.5,1.5)
+%\psline(3,1.5)(3,0)(5.5,0)(5.5,1.5)
+%\pscircle*(0.4,0.25){0.25} \rput(0.4,0.25){\white 1}
+%\pscircle*(0.9,0.25){0.25} \rput(0.9,0.25){\white 2}
+%\pscircle*(1.4,0.25){0.25} \rput(1.4,0.25){\white 3}
+%\pscircle*(1.9,0.25){0.25} \rput(1.9,0.25){\white 4}
+%
+%\pscircle(3.4,0.25){0.25} \rput(3.4,0.25){ 2}
+%\pscircle(4.15,0.25){0.25}\rput(4.15,0.25){ 3}
+%\pscircle(4.9,0.25){0.25} \rput(4.9,0.25){ 5}
+%\end{pspicture}
+%} 
+%
+%\bigskip
+ 
+%\begin{enumerate}
+%\item %On a simulé l'expérience avec un tableur, en utilisant la fonction ALEA() pour obtenir les numéros des boules tirées au hasard.
+ 
+%Voici les résultats des premières expériences : 
+
+%\medskip
+%
+%\parbox{0.52\linewidth}{\hspace{-0.5cm}\begin{tabularx}{1.1\linewidth}{|c|*{4}{>{\footnotesize \centering \arraybackslash}X|}}\hline 
+%&A &B& C&D\\ \hline 
+%1&Expé\-rience &Numéro de la boule noire &Numéro de la boule blanche& 
+%Somme\\ \hline 
+%2 &\no 1& 4 &2 &6\\ \hline 
+%3& \no 2& 1 &2 &3\\ \hline 
+%4&\no 3 &2& 3 &5\\ \hline 
+%5 &\no 4 &3&3&6\\ \hline 
+%6& \no 5& 3 &5& 8\\ \hline 
+%7& \no 6& 4 &3 &7\\ \hline
+%\end{tabularx}
+%}\hfill \parbox{0.46\linewidth}{\begin{enumerate}
+%\item Décris l'expérience \no 3. 
+%\item Parmi les 4 formules suivantes, recopie sur ta feuille celle qui est écrite dans la case D5 :
+% 
+%\fbox{$2\star\text{A}4$}\: \fbox{=\text{B}4+\text{C}4}\: \fbox{$=\text{B}5+\text{C}5$}\: \fbox{$=\text{SOMME}(\text{D}5)$} 
+%\item Peut-on obtenir la somme 2 ? Justifie. 
+%\item Quels sont les tirages possibles qui permettent d'obtenir la somme 4 ? 
+%Quelle est la plus grande somme possible ?
+% 
+%Justifie.
+%\end{enumerate}}
+
+%\medskip
+% 
+%\item Sur une seconde feuille de calcul, on a copié les résultats obtenus avec $50$~expériences, avec \np{1000}~expériences, avec \np{5000}~expériences et on a calculé les fréquences des différentes sommes.
+%
+%\medskip
+%\begin{tabularx}{\linewidth}{|c|c|*{7}{>{\centering \arraybackslash \footnotesize }X|}c|}\hline 
+%	& A 		& B & C & D & E & F& G& H & I\\ \hline 
+%1 	&Somme 		&3 	&4 	&5 	&6 	&7 &8 &9&\footnotesize effectif total\\ \hline
+%2 	&effectif 	&5 	&10 &9 &8 &8 &8 &2 &50\\ \hline 
+%3	&\footnotesize fréquence &0,1 &0,2 &0,18 &0,16 &0,16 &0,16&&\\ \hline 
+%4	&\multicolumn{9}{c}{~}\\ \hline
+%5 	&Somme 		&3 	&4 &5 &6 &7 &8 &9&\footnotesize effectif total\\ \hline 
+%6	&effectif 	&79 &161 &167 &261 &166&72 &94 &\np{1000}\\ \hline 
+%7	&\footnotesize fréquence &0,079 &0,161 &0,167 &0,261 &0,166 &0,072&0,094&\\ \hline 
+%8	&\multicolumn{9}{c}{~}\\  \hline
+%9 	&Somme 		&3 	&4 &5 &6 &7 &8 &9 &\footnotesize effectif total\\ \hline 
+%10	& effectif 	&405&844 &851 &\np{1221} &871 &410 &398 &\np{5000}\\ \hline 
+%11	&\footnotesize fréquence& 0,081 &0,1688 &0,1702 &0,2442 &0,1742 &0,082 &0,0796&\\ \hline 
+%\end{tabularx} 
+%\medskip
+%
+%	\begin{enumerate}
+%		\item Quelle est la fréquence de la somme $9$ au cours des $50$~premières expériences ? Justifie. 
+%		\item Quelle formule a-t-on écrite dans la case B7 pour obtenir la fréquence de la somme $3$ ? 
+%		\item Donne une estimation de la probabilité d'obtenir la somme $3$. 
+%	\end{enumerate}
+
+%\end{enumerate}
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+			\item On a tiré de l’urne 1, une boule noire de numéro 2 et de l’urne 2 une boule blanche numérotée 3 ; le total est donc 5.
+			\item =B5 + C5
+			\item On ne peut obtenir la somme 2 : la plus petite somme est : $1 + 2 = 3$.
+			\item 1 noir et 3 blanc et 2 noir et 2 blanc permettent d’obtenir un total de 4.
+			
+La plus grande somme possible est $4 + 5 = 9$.
+	\end{enumerate}
+\item 
+		\begin{enumerate}
+			\item La fréquence de la somme 9 est égale à :
+			
+$1 - (0,1 +0,2 + 0,18 + 0,16 + 0,16 + 0,16) = 1 - 0,96 = 0,04$.
+			\item =B6/\$I6
+			\item La probabilité d’obtenir comme somme 3 semble se rapprocher de $0,08$.
+			
+\emph{Remarque } : en fait il n’y a qu’un tirage sur les 12 possibles qui permet d’obtenir comme total 3 ; la probabilité est donc égale à $\dfrac{1}{12} \approx 0,083333$.
+		\end{enumerate}
+\end{enumerate}

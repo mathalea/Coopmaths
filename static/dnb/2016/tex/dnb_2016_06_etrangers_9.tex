@@ -1,0 +1,54 @@
+
+\medskip
+
+Pour son mariage, le samedi 20 août 2016, Norbert souhaite se faire livrer des macarons.
+
+L'entreprise lui demande de payer 402~\euro{} avec les frais de livraison compris.
+
+À l'aide des documents ci-dessous, déterminer dans quelle zone se trouve l'adresse de livraison.
+
+
+\begin{center}
+\parbox{0.31\linewidth}{\begin{tabularx}{\linewidth}{|X|}\hline
+\textbf{Document 1 : Bon de commande de Norbert}\\
+10 boîtes de 12 petits macarons chocolat\\
+10 boîtes de 12 petits macarons vanille\\
+5 boîtes de 12 petits macarons framboise\\
+2 boîtes de 12 petits macarons café\\
+1 boîte de 6 petits macarons caramel\\ \hline
+\end{tabularx}}\hfill \parbox{0.66\linewidth}{\begin{tabularx}{\linewidth}{|*{2}{>{\centering \arraybackslash}X|}m{1.9cm}|}\hline
+\multicolumn{3}{|c|}{\textbf{Document 2 : Tarifs de la boutique}}\\ \hline
+Parfum au choix& Jusqu'à 5 boites achetées&\multirow{5}{1.9cm}{\emph{À partir de la sixième boîte identique achetée, profitez de $20$\,\% de réduction sur toutes vos boîtes de ce parfum}}\\ \cline{1-2}
+Boîte de 6 petits macarons& 9~\euro{} la boîte&\\ \cline{1-2}
+Boîte de 12 petits macarons&16~\euro{} la boîte&\\ \cline{1-2}
+Boîte de 6 gros macarons &13,50~\euro{} la boîte&\\ \cline{1-2}
+Boîte de 12 gros macarons&25~\euro{} la boîte&\\ \hline
+\multicolumn{3}{|m{7cm}|}{Les frais de livraison, en supplément, sont détaillés
+ci-dessous en fonction de la zone de livraison.}\\ \hline
+\end{tabularx}}
+
+\bigskip
+
+\begin{tabularx}{0.5\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+\multicolumn{3}{|c|}{\textbf{Document 3 : Tarifs de livraison}}\\ \hline
+&En semaine&Samedi et dimanche\\ \hline
+Zone A &12,50~\euro &17,50~\euro\\ \hline
+Zone B &20~\euro &25~\euro\\ \hline
+Zone C &25~\euro &30~\euro\\ \hline
+\end{tabularx}
+
+\vspace{1cm}
+\psset{unit=0.6cm}
+\begin{pspicture}(11,7)
+%\psgrid
+
+\pscircle[fillstyle=solid,fillcolor=lightgray](3.5,3.5){1.75}
+\pscircle[fillstyle=solid,fillcolor=white](3.5,3.5){0.75}
+\pscircle[fillstyle=vlines](3.5,3.5){0.75}
+\pscircle(3.5,3.5){3.4}
+\rput(9.5,6){\textbf{Zones de livraison}}
+\rput(9.5,4.5){Zone A}\psline{->}(8.4,4.4)(3.5,3.5)
+\rput(9.5,3){Zone B}\psline{->}(8.4,3)(4.6,3)
+\rput(9.5,1.5){Zone C}\psline{->}(8.4,1.4)(5.8,2.2)
+\end{pspicture}
+\end{center}

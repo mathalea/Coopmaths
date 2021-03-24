@@ -1,0 +1,39 @@
+
+\medskip
+
+%Un chocolatier vient de fabriquer \np{2622}~oeufs de Pâques et \np{2530}~poissons en chocolat.
+%
+%Il souhaite vendre des assortiments d'oeufs et de poissons de façon que :
+%
+%\setlength\parindent{6mm}
+%\begin{itemize}
+%\item[$\bullet~~$] tous les paquets aient la même composition ;
+%\item[$\bullet~~$] après mise en paquet, il reste ni oeufs, ni poissons.
+%\end{itemize}
+%\setlength\parindent{0mm}
+%
+%\medskip
+
+\begin{enumerate}
+\item %Le chocolatier peut-il faire 19 paquets ? Justifier.
+On a $\dfrac{\np{2622}}{19} = 138$, mais $\dfrac{\np{2530}}{19} \approx  133,2$.
+
+Ce qui veut dire que l'on ne pas répartir les \np{2530} poissons dans 19 paquets (il en reste 3)
+\item %Quel est le plus grand nombre de paquets qu'il peut réaliser ? Dans ce cas, quelle sera la composition de chaque paquet ?
+Le plus grand nombre de paquets qu'il peut réaliser est un diviseur commun à \np{2622} et à \np{2530}. Puisque c'est le plus grand c'est donc leur PGCD que l'on calcule grâce à l'algorithme d'Euclide :
+
+$\np{2622}  \np{2530} \times 1 + 92$ ;
+
+$\np{2530} =  92 \times 27  + 46$ ;
+
+$92 = 46 \times 2 + 0$.
+
+Le PGCD est le dernier reste non nul, donc 46.
+
+Effectivement : $\dfrac{\np{2622}}{46} = 57$ et   $\dfrac{\np{2530}}{46} = 55$
+
+Dans chacun des 46 paquets il y aura 57 œufs et 55 poissons.
+\end{enumerate}
+
+\vspace{0.5cm}
+

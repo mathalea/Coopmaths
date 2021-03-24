@@ -1,0 +1,112 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 7 \hfill 5 points}}
+
+\medskip
+
+Un couple et leurs deux enfants Thomas et Anaïs préparent leur séjour au ski du 20 au 27 février.
+
+Il réservent un studio pour 4 personnes pour la semaine.
+
+Pendant 6 jours, Anaïs et ses parents font du ski et Thomas du snowboard. Ils doivent tous louer leur matériel.
+
+Ils prévoient \textbf{une dépense de 500 \euro} pour la nourriture et les sorties de la semaine.
+\begin{center}
+	
+\begin{tabularx}{\linewidth}{|>{\centering \arraybackslash }m{3cm} | *{4}{>{\centering \arraybackslash} X |}} \cline{2-5}
+	\multicolumn{1}{l |}{~}	& \textbf{06/02 - 13/02} & \textbf{13/02 - 20/02}  & \textbf{20/02 - 27/02} & \textbf{27/02 - 05/03}  \\  \hline
+	Studio 4 personnes \linebreak 29~m$^2$	&  $\np{870}~$\euro &  $\np{1020}~$\euro& $\np{1020}~$\euro & $\np{1020}~$\euro \\ \hline
+	T2 6  personnes \linebreak 36~m$^2$	&  $\np{1050}~$\euro &  $\np{1250}~$\euro& $\np{1250}~$\euro & $\np{1250}~$\euro \\ \hline
+	T3 8 personnes \linebreak 58~m$^2$	&  $\np{1300}~$\euro &  $\np{1550}~$\euro& $\np{1550}~$\euro & $\np{1550}~$\euro \\ \hline
+\end{tabularx} 
+
+\vspace{5mm}
+
+\begin{tabularx}{0.8\linewidth}{|X l|} \hline
+	\multicolumn{2}{| c |}{\textbf{Location de matériel de ski :}}  \\  
+	Adulte : skis, casque, chaussures : & 17~\euro~par jour \\
+	Enfant : skis, casque, chaussures : & 10~\euro~par jour \\
+	Enfant : snowboard, casque, chaussures : & 19~\euro~par jour \\ \hline
+\end{tabularx} 
+
+\vspace{5mm}
+
+\begin{tabularx}{\linewidth}{|c | p{2mm} |X r|} \cline{1-1} \cline{3-4}
+\textbf{Formule 1}					&&\multicolumn{2}{c|}{\textbf{Formule 2}} \\
+	 								&& Achat d'une Carte Famille & 120~\euro \\
+1 adulte 187,50~\euro{} pour 6 jours&& \multicolumn{2}{c |}{Puis :}\\
+1 enfant 162,50~\euro{} pour 6 jours&&1 forfait adulte 				& 25~\euro~par jour \\
+									&&1 forfait enfant 				& 20~\euro~par jour \\  \cline{1-1} \cline{3-4}
+\end{tabularx} 
+\end{center}
+
+\begin{enumerate}
+	\item Déterminer pour cette famille, la formule la plus intéressante pour l'achat des forfaits pour six jours.
+	
+	\item Déterminer alors le budget total à prévoir pour leur séjour au ski.
+\end{enumerate}
+\end{document}\end{document}

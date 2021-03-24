@@ -1,0 +1,72 @@
+
+\medskip
+
+Pour des raisons de santé, il est conseillé de limiter ses efforts durant des activités sportives, afin de ne pas dépasser un certain rythme cardiaque.
+
+La fréquence cardiaque est donnée en pulsations/minute.
+
+L'âge est donné en année.
+
+\smallskip
+
+Autrefois, la relation entre l'âge $x$ d'une personne et $f(x)$ la fréquence cardiaque maximale recommandée était décrite par la formule suivante :
+
+\[f(x) = 220 - x.\]
+
+Des recherches récentes ont montré que cette formule devait être légèrement modifiée.
+
+La nouvelle formule est :
+\[g(x) = 208 - 0,7x.\]
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Avec la formule $f(x)$, quelle est la fréquence cardiaque maximale recommandée pour un enfant de $5$ ans ?
+		\item Avec la formule $g(x)$, quelle est la fréquence cardiaque maximale recommandée pour un enfant de $5$ ans ?
+	\end{enumerate}
+\item  
+	\begin{enumerate}
+		\item Sur l'annexe 2, compléter le tableau de valeurs.
+		\item Sur l'annexe 2, tracer la droite $d$ représentant la fonction $f$ dans le repère tracé.
+		\item Sur le même repère, tracer la droite $d'$ représentant la fonction $g$.
+	\end{enumerate}
+\item  Un journal commente : \og Une des conséquences de l'utilisation de la nouvelle formule au lieu de l'ancienne est que la fréquence cardiaque maximale recommandée diminue
+légèrement pour les jeunes et augmente légèrement pour les personnes âgées. \fg
+	
+Selon la nouvelle formule, à partir de quel âge la fréquence cardiaque maximale
+recommandée est-elle supérieure ou égale à celle calculée avec l'ancienne formule ?
+	
+Justifier.
+\item  Des recherches ont démontré que l'exercice physique est le plus efficace lorsque la
+fréquence cardiaque atteint 80\,\% de la fréquence cardiaque maximale recommandée
+donnée par la nouvelle formule.
+	
+Calculer pour une personne de $30$ ans la fréquence cardiaque, en pulsations/minute, pour
+que l'exercice physique soit le plus efficace.
+\end{enumerate}
+
+\begin{center}
+{\Large \textbf{Annexe 2}}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|*{12}{>{\centering \arraybackslash}X|}}\hline
+$x$		&5	&10	&20	&30	&40	&50	&60	&70	&80	&90	&100\\ \hline
+$f(x)$	&	&	&	&	&	&	&	&	&	&	&\\ \hline
+$g(x)$	&	&	&	&	&	&	&	&	&	&	&\\ \hline
+\end{tabularx}
+
+\bigskip
+
+\psset{xunit =0.08cm,yunit=0.08cm}
+\begin{pspicture}(-5,-5)(100,220)
+\multido{\n=0+5}{21}{\psline[linecolor=cyan,linewidth=0.3pt](\n,0)(\n,220)}
+\multido{\n=0+5}{45}{\psline[linecolor=cyan,linewidth=0.3pt](0,\n)(100,\n)}
+\psaxes[linewidth=1.25pt,Dx=10,Dy=10,labelFontSize=\scriptstyle]{->}(0,0)(0,0)(100,220)
+\psaxes[linewidth=1.25pt,Dx=10,Dy=10,labelFontSize=\scriptstyle](0,0)(0,0)(100,220)
+\uput[r](0,217.5){fréquence cardiaque}
+\uput[u](97,0){$x$}
+\end{pspicture}
+\end{center}
+\vspace{0,5cm}
+

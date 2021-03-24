@@ -1,0 +1,49 @@
+
+\medskip
+
+%La figure ci-dessous donne un schéma d'un programme de calcul.
+%
+%\psset{xunit=1cm,yunit=0.85cm}
+%\begin{center}
+%\begin{pspicture}(13,12)
+%\psframe(13,12)
+%\rput(6.5,11.2){Choisir un nombre}
+%\psline{->}(6.5,11)(6.5,10.7)
+%\psframe(4.1,10.7)(8.9,9.7)
+%\psline{->}(6.5,9.7)(3.7,8.8)\psline{->}(6.5,9.7)(9.3,8.8)
+%\rput(2.5,8.5){Calculer son double}\psline{->}(2.5,8.4)(2.5,8.1)
+%\rput(10.3,8.5){Calculer son triple}\psline{->}(10.5,8.4)(10.5,8.1)
+%\psframe(0.5,8.1)(4.5,7.1)\psframe(8.5,8.1)(12.5,7.1)
+%\psline{->}(2.5,7)(2.5,6.7)  \psline{->}(10.5,7)(10.5,6.7)
+%\rput(2.5,6.5){Soustraire 5}\rput(10.5,6.5){Ajouter 2}
+%\psline{->}(2.5,6.3)(2.5,6)\psline{->}(10.5,6.3)(10.5,6)
+%\psframe(0.5,6)(4.5,5)\psframe(8.5,6)(12.5,5)
+%\psline{->}(2.5,5)(6.5,2.4)\psline{->}(10.5,5)(6.5,2.4)
+%\rput(6.5,3.7){Multiplier les deux}
+%\rput(6.5,3.4){nombres obtenus}
+%\psline{->}(6.5,2.4)(6.5,2.1)
+%\psframe(4.5,2.1)(8.5,1.1)
+%\end{pspicture}
+%\end{center}
+%
+%\medskip
+
+\begin{enumerate}
+\item ~%Si le nombre de départ est 1, montrer que le résultat obtenu est $-15$.
+On obtient à gauche : $1 \to 2 \to - 3$ et à droite : $1 \to 3  \to 5$, donc à la fin $- 3 \times 5 = - 15$.
+\item ~%Si on choisit un nombre quelconque $x$ comme nombre de départ, parmi les expressions suivantes, quelle est celle qui donne le résultat obtenu par le programme de calcul ? Justifier.
+On obtient à gauche : $x \to 2x \to 2x - 5$ et à droite : $x \to 3x  \to 3x + 2$, donc à la fin $(2x - 5)(3x + 2)$ : c'est $B$.
+%\medskip
+%\begin{tabularx}{\linewidth}{*{3}{X}}
+%$A = \left(x^2 - 5\right) \times  (3x + 2)$ &$B = (2x - 5) \times (3x + 2)$ &$C = 2x - 5 \times 3x + 2$
+%\end{tabularx}
+
+\item %Lily prétend que l'expression $D = (3x + 2)^2 - (x + 7)(3x + 2)$ donne les mêmes résultats que l'expression $B$ pour toutes les valeurs de $x$.
+
+%L'affirmation de Lily est-elle vraie ? Justifier.
+
+On a $D = (3x + 2)[(3x + 2) - (x + 7)] = (3x + 2)(3x + 2 - x - 7) = (3x + 2)(2x - 5) = 2x - 5)(3x + 2) = B$ : Lily a raison.
+\end{enumerate}
+
+\vspace{0,5cm}
+

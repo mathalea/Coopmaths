@@ -1,0 +1,168 @@
+\textbf{EXERCICE 7 : L'habitation \hfill 15 points}
+
+\medskip
+
+Nolan souhaite construire une habitation.
+
+Il hésite entre une \textbf{case} et une \textbf{maison} en forme de prisme droit.
+
+La case est représentée par un cylindre droit d'axe (OO$'$) surmontée d'un cône de révolution de sommet S.
+
+Les dimensions sont données sur les figures suivantes.
+
+$x$ \textbf{représente à la fois le diamètre de la case et la longueur AB du prisme droit.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{*{2}{>{\centering \arraybackslash}X}}
+\psset{unit=0.8cm,arrowsize=2pt 3}
+\definecolor{mongris}{gray}{0.6}
+\definecolor{grisleger}{gray}{0.8}
+\begin{pspicture}(-3,-0.5)(3,5)
+\pscustom[fillstyle=solid,fillcolor=grisleger]%haut
+{\psellipticarc(0,0)(3,0.45){180}{0}
+\psline(3,2.5)(0,3.75)(-3,2.5)
+}
+\pscustom[fillstyle=solid,fillcolor=mongris]
+{\psellipticarc[linestyle=dashed](0,2.5)(3,0.45){0}{180}
+\psellipticarc(0,2.5)(3,0.5){180}{360}
+}
+\pscustom[fillstyle=solid,fillcolor=grisleger]
+{\psellipticarc(0,2.5)(3,0.5){180}{360}
+\psline(3,2.5)(3,0)
+\psellipticarc[linestyle=dashed](0,0)(3,0.49){180}{0}
+\psline(-3,0)(-3,2.5)}
+\pscustom[fillstyle=solid,fillcolor=mongris]
+{\psellipticarc[linestyle=dashed](0,0)(3,0.45){0}{180}
+\psellipticarc(0,0)(3,0.5){180}{360}
+}
+\psdots(0,0)(0,2.5)(0,3.75)
+\uput[ur](0,0){O}\uput[ur](0,2.5){O$'$}\uput[r](0,3.75){S}
+\psline{<->}(-2.5,-0.272)(2.5,0.272)\uput[dr](0,0){$x$}
+\psline(0,0)(0,3.75)\rput{90}(-0.2,1.25){2 m}\rput{90}(-0.2,3.3){1 m}
+\end{pspicture}&
+\psset{unit=0.8cm}
+\begin{pspicture}(7.3,4.3)
+\psline(0.5,0.9)(3.5,0.5)(7,1)(7,2.5)(3.5,2)(3.5,0.5)
+\psline(7,2.5)(3.9,4.1)(0.5,3.6)(3.5,2)
+\psline(0.5,0.9)(0.5,3.6)
+\uput[d](3.5,0.5){A}\uput[d](7,1){B}\uput[d](5.25,0.75){$x$}
+\uput[d](2,0.6){5 m}\uput[l](0.3,1.8){2 m}\uput[l](0.3,3.125){1 m}
+\psline[linestyle=dotted,linewidth=1.25pt](3.5,2)(0.5,2.7)
+\psline[linestyle=dotted,linewidth=1.25pt](7,1)(4,1.4)(4,4.1)
+\psline[linestyle=dotted,linewidth=1.25pt](0.5,0.9)(4,1.4)
+\psline[linewidth=0.2pt]{<->}(0.3,0.9)(0.3,2.7)
+\psline[linewidth=0.2pt]{<->}(0.3,3.6)(0.3,2.7)
+\end{pspicture}
+\end{tabularx}
+\end{center}
+
+\textbf{Partie 1 :}
+
+\medskip
+
+Dans cette partie, on considère que $x = 6$ m.
+
+\medskip
+
+\begin{enumerate}
+\item Montrer que le volume exact de la partie cylindrique de la case est $18\pi$ m$^3$. 
+\item Calculer le volume de la partie conique. Arrondir à l'unité.
+\item En déduire que le volume total de la case est environ $66$~m$^3$.
+\end{enumerate}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c *{2}{>{\centering \arraybackslash}X}|}\hline
+\textbf{Rappels :}&
+Cylindre rayon de base $r$ et de hauteur $h$&Cône
+rayon de base $r$ et de hauteur $h$\\
+&\psset{unit=1cm}
+\begin{pspicture}(-1.25,-0.4)(1.25,2.3)
+\psellipticarc(0,0)(1.25,0.4){180}{360}
+\psellipse(0,1.8)(1.25,0.4)
+\pscustom[fillstyle=solid,fillcolor=lightgray]{
+\psellipticarc(0,1.8)(1.25,0.4){00}{180}
+\psline(-1.25,1.8)(-1.25,0)
+\psellipticarc(0,0)(1.25,0.4){180}{360}
+\psline(1.25,0)(1.25,1.8)
+}
+\uput[r](1.25,0.9){$h$}\uput[d](0.55,1.9){$r$}
+\psline(0,1.8)(1.15,1.9)
+\end{pspicture}&\psset{unit=1cm}
+\begin{pspicture}(1.5,-0.5)(1.5,3)
+\psellipticarc(0,0)(1.5,0.4){180}{360}
+\pscustom[fillstyle=solid,fillcolor=lightgray]
+{
+\psellipticarc(0,0)(1.5,0.4){180}{360}
+\psline(1.5,0)(0,2.8)(-1.5,0)
+}
+\psline[linestyle=dashed,linewidth=1.25pt](0,2.8)(0,0)(1.5,0)
+\uput[l](0,1.4){$h$}\uput[d](0.75,0){$r$}
+\psellipticarc[linestyle=dashed,linewidth=1.25pt](0,0)(1.5,0.4){0}{180}
+\end{pspicture}\\
+&$\text{Volume} =\pi \times r^2 \times h$&$\text{Volume} =\dfrac{1}{3} \times \pi \times r^2 \times h$\\ \hline
+\end{tabularx}
+\end{center}
+
+\textbf{Partie 2 :}
+
+\medskip
+
+\emph{Dans cette partie, le diamètre est exprimé en mètre, le volume en m$^3$.}
+
+\medskip
+
+Sur l'\textbf{annexe } page \pageref{annexe1}, on a représenté la fonction qui donne le volume total de la case en fonction de son diamètre $x$.
+
+\medskip
+
+\begin{enumerate}
+\item Par lecture graphique, donner une valeur approchée du volume d'une case de $7$ m de diamètre.
+
+Tracer des pointillés permettant la lecture.
+\end{enumerate}
+
+La fonction qui donne le volume de la maison en forme de prisme droit est définie par 
+
+\[V(x) = 12,5 x.\]
+
+\begin{enumerate}[resume]
+\item Calculer l'image de 8 par la fonction $V$.
+\item Quelle est la nature de la fonction $V$ ?
+\item Sur l'\textbf{annexe } page \pageref{annexe1}, tracer la représentation graphique de la fonction $V$.
+\end{enumerate}
+
+Pour des raisons pratiques, la valeur maximale de $x$ est de $6$ m. Nolan souhaite choisir la construction qui lui offre le plus grand volume.
+\begin{enumerate}[resume]
+\item Quelle construction devra-t-il choisir ? Justifier. 
+\end{enumerate}
+
+\begin{center}
+    \label{annexe1}
+    \textbf{\Large ANNEXE 1}
+    
+    \medskip
+    
+    \textbf{Partie 2 :} question 1 et 3
+    
+    \vspace{1cm}
+    
+    \textbf{Volume de la case en fonction de} \boldmath $x$ \unboldmath
+    
+    \bigskip
+    
+    \psset{xunit=1.2cm,yunit=0.06cm}
+    \begin{pspicture}(11.4,220)
+    \multido{\n=0+1}{11}{\psline[linewidth=0.2pt,linecolor=lightgray](\n,0)(\n,220)}
+    \multido{\n=0+20}{10}{\psline[linewidth=0.1pt,linecolor=lightgray](0,\n)(11,\n)}
+    \multido{\n=0+4}{56}{\psline[linewidth=0.4pt,linecolor=lightgray](0,\n)(11,\n)}
+    \psaxes[linewidth=1.25pt,Dy=20]{->}(0,0)(0,0)(11,220)
+    \psaxes[linewidth=1.25pt,Dy=20](0,0)(0,0)(11,220)
+    \psplot[plotpoints=2000,linewidth=1.25pt,linecolor=red]{0}{11}{x dup mul 3.141592 mul 7 mul 12 div}
+    \uput[u](10.9,0){$x$}
+    \uput[r](0,218){$V(x) ~\left(\text{m}^3\right)$}
+    \end{pspicture}
+    \end{center}
+
+\vspace{0,5cm}
+
+dnb_2017_05_pondichery_1_cor.texdnb_2017_05_pondichery_1.texdnb_2017_05_pondichery_2_cor.texdnb_2017_05_pondichery_2.texdnb_2017_05_pondichery_3_cor.texdnb_2017_05_pondichery_3.texdnb_2017_05_pondichery_4_cor.texdnb_2017_05_pondichery_4.texdnb_2017_05_pondichery_5_cor.texdnb_2017_05_pondichery_5.texdnb_2017_05_pondichery_6_cor.texdnb_2017_05_pondichery_6.texdnb_2017_05_pondichery_7_cor.texdnb_2017_05_pondichery_7.texdnb_2017_06_ameriquenord_1_cor.texdnb_2017_06_ameriquenord_1.texdnb_2017_06_ameriquenord_2_cor.texdnb_2017_06_ameriquenord_2.texdnb_2017_06_ameriquenord_3_cor.texdnb_2017_06_ameriquenord_3.texdnb_2017_06_ameriquenord_4_cor.texdnb_2017_06_ameriquenord_4.texdnb_2017_06_ameriquenord_5_cor.texdnb_2017_06_ameriquenord_5.texdnb_2017_06_ameriquenord_6_cor.texdnb_2017_06_ameriquenord_6.texdnb_2017_06_antillesguyanne_1_cor.texdnb_2017_06_antillesguyanne_2_cor.texdnb_2017_06_antillesguyanne_3_cor.texdnb_2017_06_antillesguyanne_4_cor.texdnb_2017_06_antillesguyanne_5_cor.texdnb_2017_06_antillesguyanne_6_cor.texdnb_2017_06_antillesguyanne_7_cor.texdnb_2017_06_asie_1_cor.texdnb_2017_06_asie_1.texdnb_2017_06_asie_2_cor.texdnb_2017_06_asie_2.texdnb_2017_06_asie_3_cor.texdnb_2017_06_asie_3.texdnb_2017_06_asie_4_cor.texdnb_2017_06_asie_4.texdnb_2017_06_asie_5_cor.texdnb_2017_06_asie_5.texdnb_2017_06_asie_6_cor.texdnb_2017_06_asie_6.texdnb_2017_06_asie_7_cor.texdnb_2017_06_asie_7.texdnb_2017_06_asie_8_cor.texdnb_2017_06_asie_8.texdnb_2017_06_etrangers_1_cor.texdnb_2017_06_etrangers_1.texdnb_2017_06_etrangers_2_cor.texdnb_2017_06_etrangers_2.texdnb_2017_06_etrangers_3_cor.texdnb_2017_06_etrangers_3.texdnb_2017_06_etrangers_4_cor.texdnb_2017_06_etrangers_4.texdnb_2017_06_etrangers_5_cor.texdnb_2017_06_etrangers_5.texdnb_2017_06_etrangers_6_cor.texdnb_2017_06_etrangers_6.texdnb_2017_06_etrangers_7_cor.texdnb_2017_06_etrangers_7.texdnb_2017_06_metropole_1.texdnb_2017_06_metropole_2.texdnb_2017_06_metropole_3.texdnb_2017_06_metropole_4.texdnb_2017_06_metropole_5.texdnb_2017_06_metropole_6.texdnb_2017_06_metropole_7.texdnb_2017_06_polynesie_1_cor.texdnb_2017_06_polynesie_1.texdnb_2017_06_polynesie_2_cor.texdnb_2017_06_polynesie_2.texdnb_2017_06_polynesie_3_cor.texdnb_2017_06_polynesie_3.texdnb_2017_06_polynesie_4_cor.texdnb_2017_06_polynesie_4.texdnb_2017_06_polynesie_5_cor.texdnb_2017_06_polynesie_5.texdnb_2017_06_polynesie_6_cor.texdnb_2017_06_polynesie_6.texdnb_2017_09_metropole_1_cor.texdnb_2017_09_metropole_1.texdnb_2017_09_metropole_2_cor.texdnb_2017_09_metropole_2.texdnb_2017_09_metropole_3_cor.texdnb_2017_09_metropole_3.texdnb_2017_09_metropole_4_cor.texdnb_2017_09_metropole_4.texdnb_2017_09_metropole_5_cor.texdnb_2017_09_metropole_5.texdnb_2017_09_metropole_6_cor.texdnb_2017_09_metropole_6.texdnb_2017_09_metropole_7_cor.texdnb_2017_09_metropole_7.texdnb_2017_09_polynesie_1_cor.texdnb_2017_09_polynesie_1.texdnb_2017_09_polynesie_2_cor.texdnb_2017_09_polynesie_2.texdnb_2017_09_polynesie_3_cor.texdnb_2017_09_polynesie_3.texdnb_2017_09_polynesie_4_cor.texdnb_2017_09_polynesie_4.texdnb_2017_09_polynesie_5_cor.texdnb_2017_09_polynesie_5.texdnb_2017_09_polynesie_6_cor.texdnb_2017_09_polynesie_6.texdnb_2017_11_ameriquesud_1_cor.texdnb_2017_11_ameriquesud_1.texdnb_2017_11_ameriquesud_2_cor.texdnb_2017_11_ameriquesud_2.texdnb_2017_11_ameriquesud_3_cor.texdnb_2017_11_ameriquesud_3.texdnb_2017_11_ameriquesud_4_cor.texdnb_2017_11_ameriquesud_4.texdnb_2017_11_ameriquesud_5_cor.texdnb_2017_11_ameriquesud_5.texdnb_2017_11_ameriquesud_6_cor.texdnb_2017_11_ameriquesud_6.texdnb_2017_11_ameriquesud_7_cor.texdnb_2017_11_ameriquesud_7.texdnb_2017_12_caledonie_1_cor.texdnb_2017_12_caledonie_1.texdnb_2017_12_caledonie_2_cor.texdnb_2017_12_caledonie_2.texdnb_2017_12_caledonie_3_cor.texdnb_2017_12_caledonie_3.texdnb_2017_12_caledonie_4_cor.texdnb_2017_12_caledonie_4.texdnb_2017_12_caledonie_5_cor.texdnb_2017_12_caledonie_5.texdnb_2017_12_caledonie_6_cor.texdnb_2017_12_caledonie_6.texdnb_2017_12_caledonie_7_cor.texdnb_2017_12_caledonie_7.texdnb_2017_12_caledonie_8_cor.texdnb_2017_12_caledonie_8.texdnb_2017_12_wallisfutuna_1_cor.texdnb_2017_12_wallisfutuna_1.texdnb_2017_12_wallisfutuna_2_cor.texdnb_2017_12_wallisfutuna_2.texdnb_2017_12_wallisfutuna_3_cor.texdnb_2017_12_wallisfutuna_3.texdnb_2017_12_wallisfutuna_4_cor.texdnb_2017_12_wallisfutuna_4.texdnb_2017_12_wallisfutuna_5_cor.texdnb_2017_12_wallisfutuna_5.texdnb_2017_12_wallisfutuna_6_cor.texdnb_2017_12_wallisfutuna_6.texdnb_2017_12_wallisfutuna_7_cor.texdnb_2017_12_wallisfutuna_7.tex

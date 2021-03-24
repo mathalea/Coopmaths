@@ -1,0 +1,56 @@
+
+\medskip
+
+%\parbox{0.5\linewidth}{À la kermesse du village, il y a un jeu de grande
+%roue. Le joueur lance la roue et gagne le lot indiqué.
+%
+%On suppose que la roue est bien équilibrée et que les
+%secteurs sont superposables.
+%
+%Les lots sont de deux sortes : les jouets (petite
+%voiture, poupée et ballon) et les sucreries (chocolat,
+%sucette et bonbons).
+%
+%\medskip
+%
+%\begin{enumerate}
+%\item Gilda lance la roue une fois. Quelle est la
+%probabilité qu'elle gagne un ballon ?
+%\item Marie lance la roue une fois. Quelle est la
+%probabilité qu'elle gagne une des sucreries ?
+%\item Roméo lance la roue deux fois. Quelle est la
+%probabilité qu'il gagne du chocolat puis une
+%petite voiture ?\end{enumerate}}\hfill
+%\parbox{0.48\linewidth}{\psset{unit=0.9cm}
+%\begin{pspicture}(-3,-3)(3,3.2)
+%\def\clou{\psline[linewidth=1.5pt](0,0)(0.75,0.2)\pscircle*(0.75,0.2){0.08}}
+%\multido{\n=0+60}{6}{\rput(3;\n){\clou}}
+%\psline(3;0)(3;180)\psline(3;60)(3;240)\psline(3;120)(3;300)
+%\pscircle(0,0){3}
+%\pstextpath[c](0,0){\psplot[linecolor=white]{-0.5}{0.5}{6.25 x dup mul sub sqrt}}{sucette}
+%\pstextpath[c](0,0){\psplot[linecolor=white]{-2.5}{-1}{6.25 x dup mul sub sqrt}}{petite voiture}
+%\pstextpath[c](0,0){\psplot[linecolor=white]{-2.5}{-1}{6.25 x dup mul sub sqrt neg}}{chocolat}
+%\pstextpath[c](0,0){\psplot[linecolor=white]{-0.6}{0.6}{6.25 x dup mul sub sqrt neg}}{poupée}
+%\pstextpath[c](0,0){\psplot[linecolor=white]{1}{2.5}{6.25 x dup mul sub sqrt neg}}{bonbons}
+%\pstextpath[c](0,0){\psplot[linecolor=white]{1}{2.5}{6.25 x dup mul sub sqrt}}{ballon}
+%\pspolygon*(-0.2,3.2)(0.2,3.2)(0,2.8)
+%\psarc{<-}(0,0){3.2}{120}{150}
+%\end{pspicture}
+%}
+%
+%\vspace{0,5cm}
+
+\begin{enumerate}
+\item Sur la roue, il y a 6 secteurs de mêmes surfaces donc il y a équiprobabilité; la probabilité de gagner un ballon est
+$\dfrac{1}{6}$.
+
+\item
+La roue contient 3 secteurs contenant des sucreries: la probabilité de gagner une sucrerie est donc $\dfrac{3}{6} = \dfrac{1}{2}$.
+
+\item
+Pour avoir la probabilité de gagner un chocolat puis une petite voiture, il faut multiplier les probabilités de chacun des événements:
+$\dfrac{1}{6}\times \dfrac{1}{6}=\dfrac{1}{36}$
+
+\end{enumerate}
+
+

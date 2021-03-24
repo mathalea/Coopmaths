@@ -1,0 +1,107 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 3 \hfill 17 points}
+
+\medskip
+
+Le premier juillet 2018, la vitesse maximale autorisée sur les routes à double sens de circulation, sans séparateur central, a été abaissée de $90$ km/h à $80$ km/h.
+
+En 2016, \np{1911} personnes ont été tuées sur les routes à double sens de circulation, sans séparateur central, ce qui représente environ 55\,\% des décès sur l'ensemble des routes en France.
+
+\emph{Source : www.securite-routiere.gouv.fr}
+
+\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Montrer qu'en 2016, il y a eu environ \np{3475} décès sur l'ensemble des routes en France.
+		\item Des experts ont estimé que la baisse de la vitesse à $80$ km/h aurait permis de sauver $400$ vies en 2016. 
+		
+De quel pourcentage le nombre de morts sur l'ensemble des routes de France
+aurait-il baissé ? Donner une valeur approchée à $0,1$\,\% près.
+	\end{enumerate}
+\item  En septembre 2018, des gendarmes ont effectué une série de contrôles sur une route dont la vitesse maximale autorisée est $80$ km/h. Les résultats ont été entrés dans un tableur dans l'ordre croissant des vitesses. Malheureusement, les données de la colonne B ont été effacées.
+	
+\begin{center}
+	\begin{tabularx}{\linewidth}{|c|l|*{9}{>{\centering \arraybackslash}X|}c|}\hline
+	&A 						&B 	&C 	&D 	&E 	&F 	&G 	&H 	&I 	&J &K\\ \hline
+1 	&vitesse relevée (km/h)	&	&72 &77 &79 &82 &86 &90 &91 &97& TOTAL\\ \hline
+2 	&nombre d'automobilistes&	& 2 &10 &6 	&1 	&7 	&4 	&3 	&6	&\\ \hline
+\end{tabularx}
+\end{center}
+
+	\begin{enumerate}
+		\item Calculer la moyenne des vitesses des automobilistes contrôlés qui ont dépassé la vitesse maximale autorisée. Donner une valeur approchée à $0,1$ km/h près.
+		\item Sachant que l'étendue des vitesses relevées est égale à $27$ km/h et que la médiane est égale à $82$ km/h, quelles sont les données manquantes dans la colonne B ?
+		\item Quelle formule doit-on saisir dans la cellule K2 pour obtenir le nombre total d'automobilistes contrôlés?
+	\end{enumerate}
+\end{enumerate}
+
+\bigskip
+
+\end{document}

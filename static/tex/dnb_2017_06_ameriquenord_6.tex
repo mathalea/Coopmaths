@@ -1,0 +1,59 @@
+
+\medskip
+
+\parbox{0.48\linewidth}{Le schéma ci-contre représente le jardin de
+Leïla. Il n'est pas à l'échelle.
+
+[OB] et [OF] sont des murs, OB = 6 m et OF = 4m.
+
+La ligne pointillée BCDEF représente le
+grillage que Leïla veut installer pour délimiter un \textbf{enclos rectangulaire OCDE}.
+
+Elle dispose d'un rouleau de 50 m de grillage qu'elle veut utiliser entièrement.}\hfill
+\parbox{0.48\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(-0.5,0)(6,4.7)
+\psline(0,2)(0,0)(6,0)(6,4.3)(3.9,4.3)
+\psframe[linestyle=dashed](0,2)(3.9,4.3)
+\psline[linewidth=1.25pt](0,3.4)(0,4.3)(1.4,4.3)
+\rput(2,3){ENCLOS}
+\uput[ul](0,4.3){O}\uput[u](1.4,4.3){B}\uput[u](3.9,4.3){C}\uput[l](0,3.4){F}\uput[l](0,2){E}\uput[dr](3.9,2){D}
+\end{pspicture}}
+\smallskip
+
+Leïla envisage plusieurs possibilités pour placer le point C.
+
+\medskip
+
+\begin{enumerate}
+\item En plaçant C pour que BC $= 5$~m, elle obtient que FE $= 15$~m.
+	\begin{enumerate}
+		\item Vérifier qu'elle utilise les $50$~m de grillage.
+		\item Justifier que l'aire A de l'enclos OCDE est $209$~m$^2$.
+	\end{enumerate}
+\item Pour avoir une aire maximale, Leïla fait appel à sa voisine professeure de
+mathématiques qui, un peu pressée, lui écrit sur un bout de papier:
+	
+\begin{center}\og En notant BC $= x$, on a A$(x) = - x^2 + 18x + 144$ \fg \end{center}
+	
+Vérifier que la formule de la voisine est bien cohérente avec le résultat de la
+question 1.
+\item \emph{Dans cette partie, les questions {\rm\textbf{a.}} et {\rm\textbf{b.}} ne nécessitent pas de justification.}
+	\begin{enumerate}
+		\item Leïla a saisi une formule en B2 puis l'a étirée jusqu'à la cellule I2.
+		
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|m{2.9cm}|*{9}{>{\centering \arraybackslash}X|}}\hline
+\multicolumn{3}{|c|}{B2}	&\multicolumn{8}{X|}{=$-$B1*B1+18*B1+144}\\\hline
+	&\multicolumn{1}{|c|}{A}	&B	&C	&D	&E	&F	&G	&H	&I	&J\\ \hline
+1	&\multicolumn{1}{|c|}{$x$}	&5	&6	&7	&8	&9	&10	&11	&12	&\\ \hline
+2	&\small $A(x) = - x^2 + 18x + 144$	&209&216&221&224&225&224&221&216&\\ \hline
+3	&											&	&	&	&	&	&	&	&	&\\ \hline
+\end{tabularx}
+\end{center}
+		
+Quelle formule est alors inscrite dans la cellule F2 ?
+		\item Parmi les valeurs figurant dans le tableau, quelle est celle que Leïla va choisir
+pour BC afin obtenir un enclos d'aire maximale ?
+		\item Donner les dimensions de l'enclos ainsi obtenu.
+	\end{enumerate} 
+\end{enumerate}		

@@ -1,0 +1,28 @@
+\textbf{\textsc{Exercice 2} \hfill 6 points}
+
+\medskip
+
+\begin{enumerate}
+\item Les coordonnées du point de départ du tracé sont $(-200~;~-100)$.
+\item Le script permet de dessiner 5 triangles.
+\item  
+	\begin{enumerate}
+		\item La longueur du côté du deuxième triangle tracé est de $80$ pixels.
+		\item La figure obtenue :
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(8,1.8)
+\def\tria{\pspolygon(0,0)(2,0)(1,1.732)}
+\def\trib{\pspolygon(0,0)(1.6,0)(0.8,1.386)}
+\def\tric{\pspolygon(0,0)(1.2,0)(0.6,1.039)}
+\def\trid{\pspolygon(0,0)(0.8,0)(0.4,0.693)}
+\def\trie{\pspolygon(0,0)(0.4,0)(0.2,0.346)}
+\rput(0,0){\tria}\rput(2,0){\trib}\rput(3.6,0){\tric}\rput(4.8,0){\trid}\rput(5.6,0){\trie}
+\end{pspicture}
+\end{center}
+ 	\end{enumerate}
+\item  Il faut placer le bloc \og tournez le bloc de 60\degres \fg{} après l'instruction \no 9 du script initial pour obtenir cette nouvelle figure. 
+\end{enumerate}
+
+\bigskip
+

@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 3} \hfill 6 points}
+
+\medskip
+
+\parbox{0.4\linewidth}{\psset{unit=0.75cm}
+\begin{pspicture}(-3.8,-4.5)(3.8,4.5)
+\pscircle(0,0){3.5}\psline[linestyle=dashed](0.8,3.4)(-0.8,-3.4)
+\pspolygon(1.8,-3)(-3.1,-1.6)(0.8,3.4)%CBA
+\uput[ur](0.8,3.4){A} \uput[dl](-3.1,-1.6){B} \uput[dr](1.8,-3){C} \uput[ur](0,0){O}\uput[d](-0.8,-3.4){M}
+\psdots(0,0)
+\rput(-1.6,1){5} 
+\end{pspicture}}\hfill
+\parbox{0.55\linewidth}{On considère un triangle ABC isocèle en A tel que l'angle $\widehat{\text{BAC}}$ mesure 50\degres{} et AB est égal à 5~cm.
+ 
+On note O le centre du cercle circonscrit au triangle ABC. La droite (OA) coupe ce cercle, noté ($C$), en un autre point M.
+
+\medskip
+
+\begin{enumerate}
+\item Quelle est la mesure de l'angle $\widehat{\text{BAM}}$ ? Aucune justification n'est demandée. 
+\item Quelle est la nature du triangle BAM ? Justifier. 
+\item Calculer la longueur AM et en donner un arrondi au dixième de centimètre près. 
+\item La droite (BO) coupe le cercle ($C$) en un autre point K. Quelle est la mesure de l'angle $\widehat{\text{BKC}}$ ?
+
+Justifier. 
+\end{enumerate}}
+
+\bigskip
+
+\end{document}

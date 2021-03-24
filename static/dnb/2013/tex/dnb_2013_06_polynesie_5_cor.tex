@@ -1,0 +1,37 @@
+
+\medskip
+
+%Pour cet exercice, on utilise uniquement la courbe donnée ci-dessous qui représente une fonction $f$.
+%
+%\medskip
+%
+%En laissant apparaître les tracés utiles sur le graphique ci-dessous :
+ 
+\begin{enumerate}
+\item %Donne une valeur approchée de $f(2)$.
+On lit $f(2) \approx 2,25$. 
+\item %Donne l'(ou les) antécédent(s) de $5$ par la fonction $f$.
+On lit que 5 et 7,5 ont pour image 5. 
+\item %Place, sur la courbe de la fonction $f$ un point S qui te semble avoir la plus petite ordonnée. 
+\item %Par lecture graphique, donne des valeurs approchées des coordonnées de ton point S. 
+On lit à peu près S(6,25~;~5).
+\end{enumerate}
+\begin{center}
+\psset{unit=0.75cm}
+\begin{pspicture}(10,10)
+\psgrid[gridlabels=0pt,subgriddiv=2,gridwidth=0.4pt,gridcolor=orange,subgridwidth=0.4pt,subgridcolor=orange]
+\psaxes[linewidth=1pt](0,0)(10,10)
+\psaxes[linewidth=1.5pt]{->}(0,0)(1,1)
+%\psplot[plotpoints=8000,linewidth=1.25pt,linecolor=blue]{0}{10}{x dup mul  0.05 mul 0.85 x mul  sub 8 add}
+\psplot[plotpoints=8000,linewidth=1.25pt,linecolor=blue]{0}{10}{x dup mul  0.08 mul  x   sub 8 add}
+\rput(5,-1){Cette feuille est à rendre avec votre copie}
+\uput[u](9.75,0){$x$}\uput[r](0,9.75){$y$}
+\psdots[dotstyle=+,dotangle=45,dotscale=1.7](6.25,4.85)
+\uput[d](6.25,4.85){S}
+\end{pspicture}
+\end{center}
+
+\vspace{0.5cm} 
+ 
+\bigskip
+

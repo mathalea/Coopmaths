@@ -1,0 +1,53 @@
+
+\medskip
+
+Une corde de guitare est soumise à une tension $T$, exprimée en Newton (N), 
+qui permet d'obtenir un son quand la corde est pincée.
+  
+Ce son plus ou moins aigu est caractérisé par une fréquence $f$exprimée en Hertz (Hz). 
+
+\medskip
+
+\parbox{0.34\linewidth}{La fonction qui à une tension $T$ associe 
+sa fréquence  est définie par la relation : 
+$f(T) = 20\sqrt{T}$.
+ 
+On donne ci-contre la représentation 
+graphique de cette fonction.}\hfill
+\parbox{0.65\linewidth}{
+\psset{unit=0.005cm}
+%\def\pshlabel#1{\tiny#1}
+%\def\psvlabel#1{\scriptsize#1}
+\begin{pspicture}(-150,-100)(1700,1300) 
+\uput[r](0,1250){\small Fréquence $f$ en Hz}
+\uput[u](1400,0){\small Tension $T$ en N } 
+\multido{\n=0+100}{18}{\psline[linewidth=0.3pt,linecolor=orange](\n,0)(\n,1300)}
+\multido{\n=0+100}{14}{\psline[linewidth=0.3pt,linecolor=orange](0,\n)(1700,\n)}
+\psaxes[linewidth=1.25pt,Dx=1700,Dy=1500]{->}(0,0)(0,0)(1700,1300)
+\multido{\n=0+100}{17}{\uput[d](\n,0){\scriptsize \np{\n}}}
+\multido{\n=0+100}{13}{\uput[l](0,\n){\scriptsize \np{\n}}}
+\psplot[plotpoints=4000,linewidth=1.25pt,linecolor=cyan]{0}{1700}{x sqrt 20 mul}
+\end{pspicture}}
+
+\medskip
+
+\textbf{Tableau des fréquences (en Hertz) de différentes notes de musique}
+
+\medskip
+\begin{tabularx}{\linewidth}{|m{1.7cm}|*{14}{>{\footnotesize \centering \arraybackslash}X|}}\hline
+ Notes& Do2& Ré2& Mi2& Fa2& Sol2 &La2& Si2& Do3& Ré3& Mi3& Fa3& Sol3& La3& Si3\\\hline 
+Fréquences (en Hz)&132& 148,5& 165& 176& 198& 220& 247,5& 264 &297 &330& 352& 396& 440& 495\\\hline
+\end{tabularx}
+\medskip
+ 
+Déterminer graphiquement une valeur approchée de la tension à appliquer sur la corde pour obtenir un \og La3 \fg. 
+
+Déterminer par le calcul la note obtenue si on pince la corde avec une tension de 220~N environ.
+ 
+La corde casse lorsque la tension est supérieure à 900~N.
+ 
+Quelle fréquence maximale peut-elle émettre avant de casser? 
+Page 2 sur 6 
+
+\bigskip
+

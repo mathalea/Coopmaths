@@ -1,0 +1,51 @@
+
+\medskip
+
+Louise a téléchargé une liste de lecture sur son lecteur MP4 : 
+
+\medskip
+\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline  
+\textbf{Titre de la chanson}&   \textbf{Nom de l'interprète}&\textbf{Durée de la chanson en secondes}\\ \hline   
+Mamatéou	&Timaté 	&  232 \\ \hline  
+La différence&Timaté	&  211 \\ \hline  
+Amazing		&Timaté	&  214 \\ \hline  
+Tes racines	&Timaté	&  175\\ \hline   
+YoungBov   &Hudad	&   336 \\ \hline  
+La ficelle  	&Maen		&   191\\ \hline   
+Fou fou fou	&Maen		&   184 \\ \hline  
+Nina   			&Maen		&   217 \\ \hline 
+\end{tabularx}
+\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Quelle est la durée totale de cette liste? Exprimer cette durée en minutes et secondes. 
+		\item Déterminer le pourcentage de chansons dont la durée est supérieure à 3 min 30 s. 
+	\end{enumerate}
+\item Louise décide d'utiliser la fonction \og aléatoire \fg{} de son MP4. Cette fonction choisit au hasard une chanson parmi celles qui sont présentes dans la liste de lecture. Chaque chanson a la même probabilité d'être écoutée. 
+
+Déterminer la probabilité que Louise écoute une chanson de Maen. 
+\item Elle répète 25 fois l'utilisation de la fonction \og aléatoire \fg{} de son MP4 et note à chaque fois le nom de l'interprète qu'elle a écouté. Les résultats qu'elle obtient sont notés dans le graphique ci-dessous.
+
+ Déterminer la fréquence d'écoute de Hudad. 
+
+\begin{center}
+\psset{xunit=1cm,yunit=0.4cm}
+\begin{pspicture}(-1,-4)(9,17)
+\psaxes[Dx=20,Dy=2](0,0)(9,17)
+\multido{\n=0+2}{9}{\psline(0,\n)(9,\n)}
+ \rput{90}(-1,13){Nombre  d'écoutes}  
+\uput[d](6.5,-1){Nom des interprètes }  
+\uput[d](2,0){Timaté} 
+\uput[d](4.5,0){Hudad} 
+\uput[d](7,0){Maen} 
+\psframe[fillstyle=solid,fillcolor=lightgray](1,0)(3,15)
+\psframe[fillstyle=solid,fillcolor=lightgray](3.5,0)(5.5,4)
+\psframe[fillstyle=solid,fillcolor=lightgray](6,0)(8,6)
+\end{pspicture}
+\end{center}
+\end{enumerate}
+
+\vspace{0.5cm}
+

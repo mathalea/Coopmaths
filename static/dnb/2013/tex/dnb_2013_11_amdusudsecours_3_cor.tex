@@ -1,0 +1,77 @@
+
+\medskip 
+
+%M. Cotharbet décide de monter au Pic Pointu en prenant le funiculaire\up{1}  entre la gare inférieure et la gare supérieure, la suite du trajet s'effectuant à pied. 
+%
+%{\footnotesize(1) Un funiculaire est une remontée mécanique équipée de véhicules circulant sur des rails en pente.}
+%
+%\begin{center} 
+%\psset{unit=0.9cm}
+%\begin{pspicture}(13.5,7.5)
+%\def\fenetre{\psframe(0.29,0.29)\psframe(0.31,0)(0.6,0.29)\psline(0,0)(0,0.31)(0.61,0.32)(0.61,0)}
+%\pspolygon[fillstyle=solid,fillcolor=lightgray](0.3,1.3)(9.8,1.3)(0.3,5.1)
+%\pspolygon[fillstyle=solid,fillcolor=white,linecolor=white](1.4,3.75)(1.4,1.3)(2.3,1.3)(2.3,3.75)
+%\pswedge[linecolor=white,fillstyle=solid,fillcolor=white](1.85,3.75){0.45}{0}{180}
+%\pspolygon[fillstyle=solid,fillcolor=white,linecolor=white](3.6,2.95)(3.6,1.3)(4.5,1.3)(4.5,2.95)
+%\pswedge[linecolor=white,fillstyle=solid,fillcolor=white](4.05,2.95){0.45}{0}{180}
+%\pspolygon[fillstyle=solid,fillcolor=white,linecolor=white](5.7,2.05)(5.7,1.3)(6.6,1.3)(6.6,2.05)
+%\pswedge[linecolor=white,fillstyle=solid,fillcolor=white](6.15,2.05){0.45}{0}{180}
+%\pswedge[linecolor=white,fillstyle=solid,fillcolor=white](8.35,1.3){0.45}{0}{180}
+%\pspolygon[fillstyle=solid,fillcolor=gray](0.3,1.3)(1.1,1.3)(1.1,4.8)(0.3,5.1)
+%\psline[linewidth=0.8pt](0.3,1.3)(9.8,1.3)
+%\rput(3.5,4.3){\fenetre}\psframe(3.5,4)(3.8,4.29)\psframe(3.8,4)(4.1,4.29)
+%\rput(4.11,3.99){\fenetre}\psframe(4.11,3.71)(4.41,4)\psframe(4.4,3.71)(4.7,4.)
+%\rput(4.72,3.68){\fenetre}\psframe(4.72,3.41)(5.02,3.7)\psframe(5.02,3.41)(5.32,3.7)
+%\rput(5.33,3.37){\fenetre}\psframe(5.33,3.11)(5.63,3.4)\psframe(5.63,3.11)(5.93,3.4)
+%\psframe(5.93,3.11)(6.23,3.4)\psframe(6.23,3.11)(6.53,3.4)
+%\psline(6.53,3.11)(6,2.9)(3.5,3.95)(3.5,4.95)(5.93,3.7)
+%\rput(2.2,6.8){Pic Pointu (altitude \np{1165} m)} 
+%\rput(4.3,5.8){Gare supérieure (altitude \np{1075} m)} 
+%\rput(7.5,4.5){Funiculaire} 
+%\rput(11,3){Gare inférieure (altitude 415 m)} 
+%\rput(10.5,6){Sur le dessin ci-contre, les points}   
+%\rput(9.5,5.6){I, L et K sont alignés,}
+%\rput(9.2,5.2){ainsi que I, S et J.} 
+%\uput[ul](0.3,5.1){J} \uput[u](1.1,4.82){S} \uput[r](9.8,1.3){I} 
+%\uput[d](1.1,1.3){L} \uput[d](0.3,1.3){K}
+%\psline{<->}(1.1,0.7)(9.8,0.7)
+%\uput[d](5.45,0.7){880 m}
+%\psline{->}(1.8,6.6)(0.3,5.1) 
+%\psline{->}(3.8,5.6)(1.1,4.8)
+%\psline{->}(7.4,4.3)(5.3,4)
+%\psline{->}(10.7,2.8)(9.8,1.3)
+%\end{pspicture} 
+%\end{center}
+ 
+\begin{enumerate}
+\item %À l'aide des altitudes fournies, déterminer les longueurs SL et JK.
+On a SL $ = \np{1075} - 415 = 660$~m.
+
+JK $ = \np{1165} - 415 = 750$~m. 
+\item  
+	\begin{enumerate}
+		\item %Montrer que la longueur du trajet SI entre les deux gares est \np{1100}~m.
+Dans le triangle SIL rectangle en L le théorème de Pythagore s'écrit :
+		
+$\text{SI}^2 = \text{SL}^2 + \text{LI}^2  = 660^2 + 880^2 = \np{1210000}$.
+
+Donc SI $ = \sqrt{\np{1210000}} = \np{1100}$~m.
+		\item %Calculer une valeur approchée de l'angle $\widehat{\text{SIL}}$. On arrondira à un degré près.
+Dans le triangle SIL rectangle en L, on a $\tan \widehat{\text{SIL}} = \dfrac{\text{SL}}{\text{LI}} = \dfrac{660}{880} = \dfrac{6}{8} = \dfrac{3}{4} = 0,75$.
+
+La calculatrice donne $\widehat{\text{SIL}} \approx 36,87$ soit 37\degres au degré près.
+ 	\end{enumerate} 
+\item %Le funiculaire se déplace à la vitesse moyenne constante de 10 km.h$^{-1}$, aussi bien à la montée qu'à la descente. 
+
+%Calculer la durée du trajet aller entre les deux gares. On donnera le résultat en min et s. 
+Pour parcourir \np{1100}~m à la vitesse de 10 km.h$^{-1}$, on met $t = \dfrac{\np{1,100}}{10} = 0,11$~h soit $60 \times 0,11 = 6,6$~min ou encore 6~min + 0,6~min = 6~min 36~s.
+\item %Entre la gare supérieure et le sommet, M. Cotharbet effectue le trajet en marchant. 
+
+%Quelle distance aura-t-il parcourue à pied ?
+Dans le triangle IKJ rectangle en K, on a $\sin \widehat{\text{SIL}} = \dfrac{\text{JK}}{\text{IJ}}$, donc IJ $ = \dfrac{\text{JK}}{\sin \widehat{\text{SIL}}} = \np{1250}$~m
+
+On a donc SJ $ = \text{IJ} - \text{IS} = \np{1250} - \np{1100} = 150$~m. 
+\end{enumerate}
+
+%\bigskip
+

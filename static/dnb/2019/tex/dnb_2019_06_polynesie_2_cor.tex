@@ -1,0 +1,77 @@
+
+\medskip
+
+\begin{enumerate}
+\item %On a utilisé une feuille de calcul pour obtenir les images de différentes valeurs de $x$ par une fonction affine $f$.
+
+%Voici une copie de l'écran obtenu :
+
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|c|*{8}{>{\centering \arraybackslash}X|}}\hline
+%\multicolumn{2}{|l|}{B2}&\multicolumn{7}{l|}{=3*B1$-4$}\\ \hline
+%	&A		&B		&C		&D		&E		&F	&G	&H\\ \hline
+%1	&$x$	&$-2$	&$-1$	&0		&1		&2	&3	&4\\ \hline
+%2	&$f(x)$	&\multicolumn{1}{>{\columncolor{lightgray}}c|}{$- 10$}	&$- 7$	&$- 4$	&$- 1$	&2	&5	&8\\ \hline
+%\end{tabularx}
+%\end{center}
+
+	\begin{enumerate}
+		\item Les antécédents sont dans la ligne 1, les images dans la ligne 2.
+		
+%Quelle est l'image de $- 1$ par la fonction $f$ ?
+L'image de $- 1$ par la fonction $f$ est $f(-1)  = - 7$.
+		\item %Quel est l'antécédent de $5$ par la fonction $f$?
+L'antécédent de $5$ par la fonction $f$ est $3$.
+		\item %Donner l'expression de $f(x)$.
+On a $f(x) = 3x - 4$.
+		\item %Calculer $f(10)$.
+Donc $f(10) = 3 \times 10 - 4 = 30 - 4 = 26$.
+ 	\end{enumerate}
+\item  %On donne le programme suivant qui traduit un programme de calcul.
+
+%\begin{center}
+%\begin{scratch}
+%\blockinit{Quand \greenflag est cliqué}
+%\blocksensing{demander \txtbox{Choisir un nombre} et attendre}
+%\blockmove{mettre \ovalnum{A \selectarrownum} à \ovalvariable{réponse}}
+%\blockmove{mettre \ovalnum{A\selectarrownum} à \ovalnum{\ovalnum{A} + \ovalnum{3}}}
+%\blockmove{mettre \ovalnum{A\selectarrownum} à \ovalnum{\ovalnum{A} * \ovalnum{2}}}
+%\blockmove{mettre \ovalnum{A\selectarrownum} à \ovalnum{\ovalnum{A} $- \ovalnum{3}$}}
+%\blockmove{dire\ovalnum{regroupe} {\txtbox{Le programme de calcul donne }}\ovalnum{A}}
+%\end{scratch}
+%\end{center}
+	\begin{enumerate}
+		\item Écrire sur votre copie les deux dernières étapes du programme de calcul:
+\begin{center}
+\begin{tabularx}{0.4\linewidth}{|X|}\hline
+$\bullet~~$ Choisir un nombre.\\
+$\bullet~~$ Ajouter 3 à ce nombre.\\
+$\bullet~~$ {\blue Multiplier ce nombre par 2}\\
+$\bullet~~$ {\blue Retrancher 5 de ce nombre}\\ \hline
+\end{tabularx}
+\end{center}
+		\item  %Si on choisit le nombre $8$ au départ, quel sera le résultat ?
+		8 donne successivement $8 \to 11 \to 22 \to 17$.
+		\item  %Si on choisit $x$ comme nombre de départ, montrer que le résultat obtenu avec ce programme de calcul sera $2x + 1$.
+$x$ donne successivement $x \to x + 3 \to 2(x + 3) \to 2(x + 3) - 5$.
+
+Or $2(x + 3) - 5 = 2x + 6 - 5 = 2x + 1$.
+		\item %Quel nombre doit-on choisir au départ pour obtenir 6 ?
+		
+$\bullet~~$Il faut trouver $x$ tel que $2(x + 3) - 5 = 2x + 6 - 5 = 2x + 1 = 6$ soit $2x = 5$ et enfin $x = 2,5$.
+
+$\bullet~~$On peut \og remonter \fg{} les opérations :
+
+$  5,5 - 3 = 2,5 \gets\dfrac{11}{2} = 5,5 \gets 6 + 5 = 11\gets 6$.
+ 	\end{enumerate}
+\item  %Quel nombre faudrait-il choisir pour que la fonction $f$ et le programme de calcul
+%donnent le même résultat ?
+Il faut trouver $x$ tel que :
+
+$3x - 4 = 2x + 1$ soit en ajoutant $- 2x$ à chaque membre : $x - 4 = 1$ et en ajoutant 4 à chaque membre : $x = 5$.
+
+Par $f$ et par le programme de calcul 5 donne 11.
+\end{enumerate}
+
+\bigskip
+

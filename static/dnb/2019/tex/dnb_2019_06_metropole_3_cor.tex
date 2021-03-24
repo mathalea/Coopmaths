@@ -1,0 +1,52 @@
+
+\medskip
+
+%Le premier juillet 2018, la vitesse maximale autorisée sur les routes à double sens de circulation, sans séparateur central, a été abaissée de $90$ km/h à $80$ km/h.
+%
+%En 2016, \np{1911} personnes ont été tuées sur les routes à double sens de circulation, sans séparateur central, ce qui représente environ 55\,\% des décès sur l'ensemble des routes en France.
+%
+%\emph{Source : www.securite-routiere.gouv.fr}
+%
+%\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Si $x$ est le nombre de personnes tuées sur toutes les routes, on a :
+		
+		$\dfrac{55}{100} \times x = \np{1911}$, d'où $x = \np{1911} \times \dfrac{100}{55} \approx \np{3474,55}$ soit \np{3475} tués à l'unité près.
+%Montrer qu'en 2016, il y a eu environ \np{3475} décès sur l'ensemble des routes en France.
+		\item %Des experts ont estimé que la baisse de la vitesse à $80$ km/h aurait permis de sauver $400$ vies en 2016. 
+		
+%De quel pourcentage le nombre de morts sur l'ensemble des routes de France
+%aurait-il baissé ? Donner une valeur approchée à $0,1$\,\% près.
+400 sur \np{3475} représentent $\dfrac{400}{\np{3475}}\times 100 \approx 11,51$, soit au dixième près 11,5\,\%
+	\end{enumerate}
+\item %En septembre 2018, des gendarmes ont effectué une série de contrôles sur une route dont la vitesse maximale autorisée est $80$ km/h. Les résultats ont été entrés dans un tableur dans l'ordre croissant des vitesses. Malheureusement, les données de la colonne B ont été effacées.
+	
+\begin{center}
+	\begin{tabularx}{\linewidth}{|c|l|*{9}{>{\centering \arraybackslash}X|}c|}\hline
+	&A 						&B 	&C 	&D 	&E 	&F 	&G 	&H 	&I 	&J &K\\ \hline
+1 	&vitesse relevée (km/h)	&	&72 &77 &79 &82 &86 &90 &91 &97& TOTAL\\ \hline
+2 	&nombre d'automobilistes&	& 2 &10 &6 	&1 	&7 	&4 	&3 	&6	&\\ \hline
+\end{tabularx}
+\end{center}
+
+	\begin{enumerate}
+		\item %Calculer la moyenne des vitesses des automobilistes contrôlés qui ont dépassé la vitesse maximale autorisée. Donner une valeur approchée à $0,1$ km/h près.
+Moyenne des vitesses des véhicules en excès de vitesse : 
+		
+		$\dfrac{82 + 7 \times 86 + 4 \times 90 + 3 \times 91 + 6 \times 97}{1 + 7 + 4 + 3 + 6} = \dfrac{\np{1899}}{21} \approx 90,42$ soit 90,4~(km/h) au dixième près.
+		\item %Sachant que l'étendue des vitesses relevées est égale à $27$ km/h et que la médiane est égale à $82$ km/h, quelles sont les données manquantes dans la colonne B ?
+$\bullet~~$Si $b$ est la vitesse la plus basse, on a donc $97 - b = 27$ ou $b = 97 - 27 = 70$.
+
+$\bullet~~$La médiane étant égale 82, il y a $7 + 4 + 3 + 6 = 20$ vitesses supérieures à cette médiane donc 20 qui sont inférieures : on en connait déjà $2 + 10 + 6 = 18$ : conclusion : 2 automobilistes ont été contrôlés à 70~km/h.
+
+Il y a donc en B1  : 70 et en B2 : 2.
+		\item %Quelle formule doit-on saisir dans la cellule K2 pour obtenir le nombre total d'automobilistes contrôlés?
+		Il faut écrire =Somme(B2:J2)
+	\end{enumerate}.
+\end{enumerate}
+
+\bigskip
+

@@ -1,0 +1,70 @@
+\textbf{Exercice 7 : Le club de sport \hfill 3,5 points}
+
+\medskip
+
+\parbox{0.58\linewidth}{Le club de sport \og Santé et Forme \fg{} propose à ses clients deux
+tarifs :
+
+Tarif A: forfait annuel à \np{90000}~F
+
+Tarif B: une adhésion à \np{5000}~F puis un abonnement mensuel à
+\np{7900}~F.
+
+\begin{enumerate}
+\item Mathilde est intéressée mais elle ne sait pas quel tarif
+choisir. Pour s'aider elle utilise un tableur (ci-contre).
+
+Mathilde a utilisé une formule pour le calcul du tarif B.
+
+Parmi les quatre propositions suivantes, recopie sur ta feuille
+celle qui correspond à la cellule C4 :
+
+\fbox{20800 + 7900}
+
+\fbox{=5000+A4*7900}
+
+\fbox{=somme (C2:C3)}
+
+\fbox{(C2+C3)/2}
+\end{enumerate}} \hfill
+\parbox{0.4\linewidth}{\begin{tabularx}{\linewidth}{|c|*{3}{>{\centering \arraybackslash}X|}}\hline
+&A&B&C\\ \hline
+1&\footnotesize Nombre de mois&\footnotesize tarif A&\footnotesize tarif B\\ \hline
+2	&1	&\np{90000}&\np{12900}\\ \hline
+3	&2	&\np{90000}&\np{20800}\\ \hline 
+4	&3	&\np{90000}&\np{28700}\\ \hline 
+5	&4	&\np{90000}&\np{36600}\\ \hline 
+6	&5	&\np{90000}&\np{44500}\\ \hline 
+7	&6	&\np{90000}&\np{52400}\\ \hline 
+8	&7	&\np{90000}&\np{60300}\\ \hline 
+9	&8	&\np{90000}&\np{68200}\\ \hline 
+10	&9	&\np{90000}&\np{76100}\\ \hline 
+11	&10	&\np{90000}&\np{84000}\\ \hline 
+12	&11	&\np{90000}&\np{91900}\\ \hline 
+13	&12	&\np{90000}&\np{99800}\\ \hline  
+\end{tabularx}}
+
+\parbox{0.4\linewidth}{
+\begin{enumerate}
+\item[\textbf{2.}] À partir de combien de mois d'abonnement le tarif A devient-il
+plus intéressant que le tarif B ?
+\item[\textbf{3.}] Mathilde construit aussi le graphique correspondant (ci-contre).
+
+Lequel des tarifs A ou B est représenté par la droite $g$ ?
+\end{enumerate}}
+\hfill
+\parbox{0.6\linewidth}{\psset{xunit=0.45cm,yunit=0.000045cm}
+\begin{pspicture}(-3,-10000)(13,120000)
+\multido{\n=0+1}{14}{\psline[linestyle=dotted](\n,0)(\n,120000)}
+\multido{\n=0+10000}{13}{\psline[linestyle=dotted](0,\n)(13,\n)}
+\psaxes[linewidth=1.25pt,Dy=150000,labelFontSize=\scriptstyle]{->}(0,0)(13,120000)
+\psline[linewidth=1.5pt](0,90000)(13,90000)
+\psplot[plotpoints=3000,linewidth=1.5pt]{0}{13}{7900 x mul 5000 add}
+\uput[u](4.8,90000){$h$}
+\uput[u](4.8,44000){$g$}
+\multido{\n=0+10000}{13}{\uput[l](0,\n){\scriptsize \np{\n}}}
+\end{pspicture}
+}
+
+\vspace{0,5cm}
+

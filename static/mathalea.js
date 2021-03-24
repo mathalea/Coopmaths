@@ -1,4 +1,4 @@
-import { strRandom, telechargeFichier, intro_LaTeX, intro_LaTeX_coop, scratchTraductionFr, modal_youtube } from "./modules/outils.js";
+import { strRandom, telechargeFichier, intro_LaTeX, intro_LaTeX_coop, scratchTraductionFr, modal_youtube, compteOccurences } from "./modules/outils.js";
 import { getUrlVars } from "./modules/getUrlVars.js";
 import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules/menuDesExercicesDisponibles.js";
 
@@ -49,7 +49,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
         (function gestionURL() {
             if (liste_des_exercices.length > 0) {
                 let fin_de_l_URL = "";
-                if (sortie_html && !est_diaporama && window.location.pathname.indexOf('exo.html')<0) {
+                if (sortie_html && !est_diaporama && window.location.pathname.indexOf('exo.html')<0 && window.location.pathname.indexOf('beta.html')<0) {
                     fin_de_l_URL += "exercice.html";
                 }
                 fin_de_l_URL += `?ex=${liste_des_exercices[0]}`
@@ -100,7 +100,24 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 });
             }
         })();
-        if (sortie_html && est_diaporama) {
+        //mise en évidence des exercices sélectionnés.
+		$(".exerciceactif").removeClass("exerciceactif");
+		for (let i = 0; i < liste_des_exercices.length; i++) {
+			$(`a.lien_id_exercice[numero='${liste_des_exercices[i]}']`).addClass("exerciceactif");
+            // Si un exercice a été mis plus d'une fois, on affiche le nombre de fois où il est demandé
+            if (compteOccurences(liste_des_exercices,liste_des_exercices[i])>1) {
+                // Ajout de first() car un exercice de DNB peut apparaitre à plusieurs endroits
+                let ancienTexte = $(`a.lien_id_exercice[numero='${liste_des_exercices[i]}']`).first().text()
+                let txt = ancienTexte.split('✖︎')[0]+` ✖︎ ${compteOccurences(liste_des_exercices,liste_des_exercices[i])}`
+                $(`a.lien_id_exercice[numero='${liste_des_exercices[i]}']`).text(txt)
+            } else {
+                let ancienTexte = $(`a.lien_id_exercice[numero='${liste_des_exercices[i]}']`).first().text()
+                let txt = ancienTexte.split('✖︎')[0]
+                $(`a.lien_id_exercice[numero='${liste_des_exercices[i]}']`).text(txt)
+            }
+		}
+		
+		if (sortie_html && est_diaporama) {
             if (liste_des_exercices.length>0) { // Pour les diaporamas tout cacher quand un exercice est choisi
                 $("#liste_des_exercices").hide();
                 $("#parametres_generaux").show();
@@ -125,7 +142,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
 
                     contenuDesExercices +=`<section class="slider single-item" id="diaporama">`
                     for(let question of listeObjetsExercice[i].liste_questions){
-                        contenuDesExercices += `\n<div id="question_diap" style="font-size:${listeObjetsExercice[i].tailleDiaporama}px"><span>` + question.replace(/\\dotfill/g,'...').replace(/\\\\/g,'<br>').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....') + '</span></div>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+                        contenuDesExercices += `\n<div id="question_diap" style="font-size:${listeObjetsExercice[i].tailleDiaporama}px"><span>` + question.replace(/\\dotfill/g,'...').replace(/\\not=/g,'≠').replace(/\\ldots/g,'....') + '</span></div>'   // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
                     }
                     contenuDesExercices += '<div id="question_diap" style="font-size:100px"><span>$\\text{Terminé !}$</span></div></section>'
                     if (listeObjetsExercice[i].type_exercice == "MG32") {    
@@ -158,7 +175,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 trust: false,
             });
             let besoinMG32 = false;
-              let besoinScratch = false;
+            let besoinScratch = false;
               for (let i = 0; i < liste_des_exercices.length; i++) {
                 if (listeObjetsExercice[i].type_exercice == "MG32") {
                  besoinMG32 = true
@@ -179,7 +196,6 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                       MG32_tracer_toutes_les_figures();
                 })
               }
-
               if (besoinScratch){
                   loadScript("include/scratchblocks-v3.5-min.js")
                   .then(()=>{
@@ -201,34 +217,42 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
 
         // Ajoute le contenu dans les div #exercices et #corrections
         if (sortie_html && !est_diaporama) {
-            document.getElementById("exercices").innerHTML = "";
+			document.getElementById("exercices").innerHTML = "";
             document.getElementById("corrections").innerHTML = "";
-
             let contenuDesExercices = "",
                 contenuDesCorrections = "";
             if (liste_des_exercices.length > 0) {
                 for (let i = 0; i < liste_des_exercices.length; i++) {
                     listeObjetsExercice[i].id = liste_des_exercices[i];
-                    try {
-                        listeObjetsExercice[i].nouvelle_version(i);
-                    } catch (error) {
-                        console.log(error);
-                    }
-                    contenuDesExercices += `<h3 class="ui dividing header">Exercice ${i + 1} − ${listeObjetsExercice[i].id}</h3>`;
-                    if (listeObjetsExercice[i].video.length>3) {
-                        contenuDesExercices += `<div id=video${i}>` +modal_youtube(i,listeObjetsExercice[i].video,'',"Aide","youtube") + `</div>`;
-                    }
-                    if (listeObjetsExercice[i].bouton_aide) {
-                        contenuDesExercices += `<div id=aide${i}> ${listeObjetsExercice[i].bouton_aide}</div>`;
-                    }
-                    contenuDesExercices += listeObjetsExercice[i].contenu;
-                    if (listeObjetsExercice[i].type_exercice == "MG32") {
-                        contenuDesExercices += `<div id="MG32div${i}" class="MG32"></div>`;
-                    }
-                    contenuDesCorrections += `<h3 class="ui dividing header">Exercice ${i + 1}</h3>`;
-                    contenuDesCorrections += listeObjetsExercice[i].contenu_correction;
-                    if (listeObjetsExercice[i].type_exercice == "MG32" && listeObjetsExercice[i].MG32codeBase64corr) {
-                        contenuDesCorrections += `<div id="MG32divcorr${i}" class="MG32"></div>`;
+                    if (listeObjetsExercice[i].type_exercice == "dnb") {
+                        contenuDesExercices += `<h3 class="ui dividing header">Exercice ${i + 1} − DNB ${listeObjetsExercice[i].mois} ${listeObjetsExercice[i].annee} - ${listeObjetsExercice[i].lieu} (ex ${listeObjetsExercice[i].numeroExercice})</h3>`;
+                        contenuDesExercices += `<img width="90%" src="${listeObjetsExercice[i].png}">`
+                        contenuDesCorrections += `<h3 class="ui dividing header">Exercice ${i + 1} − DNB ${listeObjetsExercice[i].mois} ${listeObjetsExercice[i].annee} - ${listeObjetsExercice[i].lieu} (ex ${listeObjetsExercice[i].numeroExercice})</h3>`;
+                        contenuDesCorrections += `<img width="90%" src="${listeObjetsExercice[i].pngcor}">`
+                        listeObjetsExercice[i].video = false
+
+                    } else {
+                        try {
+                            listeObjetsExercice[i].nouvelle_version(i);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                        contenuDesExercices += `<h3 class="ui dividing header">Exercice ${i + 1} − ${listeObjetsExercice[i].id}</h3>`;
+                        if (listeObjetsExercice[i].video.length>3) {
+                            contenuDesExercices += `<div id=video${i}>` +modal_youtube(i,listeObjetsExercice[i].video,'',"Aide","youtube") + `</div>`;
+                        }
+                        if (listeObjetsExercice[i].bouton_aide) {
+                            contenuDesExercices += `<div id=aide${i}> ${listeObjetsExercice[i].bouton_aide}</div>`;
+                        }
+                        contenuDesExercices += listeObjetsExercice[i].contenu;
+                        if (listeObjetsExercice[i].type_exercice == "MG32") {
+                            contenuDesExercices += `<div id="MG32div${i}" class="MG32"></div>`;
+                        }
+                        contenuDesCorrections += `<h3 class="ui dividing header">Exercice ${i + 1}</h3>`;
+                        contenuDesCorrections += listeObjetsExercice[i].contenu_correction;
+                        if (listeObjetsExercice[i].type_exercice == "MG32" && listeObjetsExercice[i].MG32codeBase64corr) {
+                            contenuDesCorrections += `<div id="MG32divcorr${i}" class="MG32"></div>`;
+                        }
                     }
                 }
                 contenuDesExercices = `<ol>\n${contenuDesExercices}\n</ol>`;
@@ -269,7 +293,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 if (listeObjetsExercice[i].type_exercice == "Scratch") {
                  besoinScratch = true
                 }
+               
               }
+              
               if (besoinMG32){
                 loadScript("https://www.mathgraph32.org/js/mtgLoad/mtgLoad.min.js")
                 .then(()=>{
@@ -282,7 +308,6 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                       MG32_tracer_toutes_les_figures();
                 })
               }
-
               if (besoinScratch){
                   loadScript("include/scratchblocks-v3.5-min.js")
                   .then(()=>{
@@ -310,22 +335,32 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
             if (liste_des_exercices.length > 0) {
                 for (let i = 0; i < liste_des_exercices.length; i++) {
                     listeObjetsExercice[i].id = liste_des_exercices[i]; // Pour récupérer l'id qui a appelé l'exercice
-                    listeObjetsExercice[i].nouvelle_version();
-                    if (listeObjetsExercice[i].titre == "Fichier statique") {
-                        liste_des_exercices_statiques.push(listeObjetsExercice[i].sup);
-                    }
-                    codeEnonces += listeObjetsExercice[i].contenu;
-                    codeEnonces += "\n\n";
-                    codeCorrections += listeObjetsExercice[i].contenu_correction;
-                    codeCorrections += "\n\n";
-                    if (typeof listeObjetsExercice[i].liste_packages === "string") {
-                        liste_packages.add(listeObjetsExercice[i].liste_packages);
+                    if (listeObjetsExercice[i].type_exercice == "dnb") {
+                        liste_packages.add('dnb')
+                        codeEnonces += '\n\n\\exo{}\n\n';
+                        codeEnonces += listeObjetsExercice[i].contenu;
+                        codeEnonces += "\n\n";
+                        codeCorrections += '\n\n\\exo{}\n\n';
+                        codeCorrections += listeObjetsExercice[i].contenu_correction;
+                        codeCorrections += "\n\n";
                     } else {
-                        // si c'est un tableau
-                        listeObjetsExercice[i].liste_packages.forEach(liste_packages.add, liste_packages);
+                        listeObjetsExercice[i].nouvelle_version();
+                        if (listeObjetsExercice[i].titre == "Fichier statique") {
+                            liste_des_exercices_statiques.push(listeObjetsExercice[i].sup);
+                        }
+                        codeEnonces += listeObjetsExercice[i].contenu;
+                        codeEnonces += "\n\n";
+                        codeCorrections += listeObjetsExercice[i].contenu_correction;
+                        codeCorrections += "\n\n";
+                        if (typeof listeObjetsExercice[i].liste_packages === "string") {
+                            liste_packages.add(listeObjetsExercice[i].liste_packages);
+                        } else {
+                            // si c'est un tableau
+                            listeObjetsExercice[i].liste_packages.forEach(liste_packages.add, liste_packages);
+                        }
                     }
                 }
-
+ 
                 if ($("#supprimer_correction:checked").val()) {
                     code_LaTeX = codeEnonces;
                 } else {
@@ -334,6 +369,8 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 }
                 $("#message_liste_exercice_vide").hide();
                 $("#cache").show();
+         
+
 
                 // Gestion du nombre de versions
                 if ($("#nombre_de_versions").val() > 1) {
@@ -377,10 +414,8 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
 
         if (!sortie_html) {
             // Gestion du téléchargement
-
-            $("#btn_telechargement").click(function () {
+            $("#btn_telechargement").off("click").on("click",function () {
                 // Gestion du style pour l'entête du fichier
-
                 let contenu_fichier = `
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -413,8 +448,8 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     telechargeFichier(contenu_fichier, "mathalea.tex");
                 }
             });
-
-            $("#btn_overleaf").click(function () {
+			
+			$("#btn_overleaf").off("click").on("click", function () {
                 // Gestion du style pour l'entête du fichier
 
                 let contenu_fichier = `
@@ -443,6 +478,9 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 // Envoi à Overleaf.com en modifiant la valeur dans le formulaire
 
                 $("input[name=encoded_snip]").val(encodeURIComponent(contenu_fichier));
+                if (liste_packages.has('dnb')){ // Force le passage à xelatex sur Overleaf pour les exercices de DNB
+                    $("input[name=engine]").val("xelatex");
+                }
                 if ($("#nom_du_fichier").val()) {
                     $("input[name=snip_name]").val($("#nom_du_fichier").val()); //nomme le projet sur Overleaf
                 }
@@ -477,29 +515,67 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
      *
      */
     function mise_a_jour_de_la_liste_des_exercices() {
+        let besoinXCas = false
         mathalea.listeDesScriptsCharges = [];
         let promises = [];
         for (let i = 0, id; i < liste_des_exercices.length; i++) {
             id = liste_des_exercices[i];
             let url;
             try {
-                url = dictionnaireDesExercices[id]["url"];
+                url = dictionnaireDesExercices[id].url;
             } catch (error) {
                 console.log(error);
                 console.log(`Exercice ${id} non disponible`);
             }
-            promises.push(
-                import(url)
-                .catch((error) => {
-                    console.log(error)
-                        listeObjetsExercice[i] = { titre: "Cet exercice n'existe pas", contenu: "", contenu_correction: "" }; // Un exercice vide pour l'exercice qui n'existe pas
-                    })
-                    .then((module) => {
-                        if (module) {
-                            listeObjetsExercice[i] = new module.default(); // Ajoute l'objet dans la liste des
-                        }
-                    })
-            );
+            if (dictionnaireDesExercices[id].type_exercice == "dnb") {
+                listeObjetsExercice[i] = dictionnaireDesExercices[id];
+                promises.push(
+                fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    listeObjetsExercice[i].nb_questions_modifiable = false;
+                    listeObjetsExercice[i].video = '';
+                    listeObjetsExercice[i].titre = id;
+                    listeObjetsExercice[i].contenu = data;
+                })
+                )
+                promises.push(
+                fetch(dictionnaireDesExercices[id].urlcor)
+                .then(response => response.text())
+                .then(data => {
+                    
+                    listeObjetsExercice[i].contenu_correction = data;
+                })
+                )
+            } else {
+                promises.push(
+                    import(url)
+                    .catch((error) => {
+                        console.log(error)
+                            listeObjetsExercice[i] = { titre: "Cet exercice n'existe pas", contenu: "", contenu_correction: "" }; // Un exercice vide pour l'exercice qui n'existe pas
+                        })
+                        .then((module) => {
+                            if (module) {
+                                listeObjetsExercice[i] = new module.default(); // Ajoute l'objet dans la liste des
+                                if (dictionnaireDesExercices[id].sup!=undefined){
+                                    listeObjetsExercice[i].sup=dictionnaireDesExercices[id].sup
+                                }
+                                if (dictionnaireDesExercices[id].sup2!=undefined){
+                                    listeObjetsExercice[i].sup2=dictionnaireDesExercices[id].sup2
+                                }
+                                if (dictionnaireDesExercices[id].sup3!=undefined){
+                                    listeObjetsExercice[i].sup3=dictionnaireDesExercices[id].sup3
+                                }
+                                if (dictionnaireDesExercices[id].nb_questions!=undefined){
+                                    listeObjetsExercice[i].nb_questions=dictionnaireDesExercices[id].nb_questions
+                                }
+                                if (listeObjetsExercice[i].type_exercice == 'XCas') {
+                                    besoinXCas = true;
+                                }
+                            }
+                        })
+                );
+            }
         }
         Promise.all(promises)
             .then(() => {
@@ -508,19 +584,26 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
             .then(() => {
                 // Récupère les paramètres passés dans l'URL
                 let urlVars = getUrlVars();
-                for (var i = 0; i < urlVars.length; i++) {
+				//trier et mettre de côté les urlvars qui ne sont plus dans la liste des exercices
+				//	=> évite les erreurs lors de la suppression de question dans la liste.
+				for (let i = 0; i < urlVars.length; i++) {
+					if (urlVars[i].id != liste_des_exercices[i]) {
+						urlVars.splice(i,1);
+					}	
+				}
+                for (let i = 0; i < urlVars.length; i++) {
                     // récupère les éventuels paramètres dans l'URL
                     // et les recopie dans les formulaires des paramètres
-                    if (urlVars[i]["nb_questions"] && listeObjetsExercice[i].nb_questions_modifiable) {
-                        listeObjetsExercice[i].nb_questions = urlVars[i]["nb_questions"];
+                    if (urlVars[i].nb_questions && listeObjetsExercice[i].nb_questions_modifiable) {
+                        listeObjetsExercice[i].nb_questions = urlVars[i].nb_questions;
                         form_nb_questions[i].value = listeObjetsExercice[i].nb_questions;
                     }
-                    if (urlVars[i]["video"] && sortie_html && !est_diaporama) {
-                        listeObjetsExercice[i].video = urlVars[i]["video"];
+                    if (urlVars[i].video && sortie_html && !est_diaporama) {
+                        listeObjetsExercice[i].video = urlVars[i].video;
                         form_video[i].value = listeObjetsExercice[i].video;
                     }
-                    if (typeof urlVars[i]["sup"] !== 'undefined') {
-                        listeObjetsExercice[i].sup = urlVars[i]["sup"];
+                    if (typeof urlVars[i].sup !== 'undefined') {
+                        listeObjetsExercice[i].sup = urlVars[i].sup;
                         // Un exercice avec un this.sup mais pas de formulaire pouvait poser problème
                         try {
                             
@@ -528,15 +611,15 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                         } catch {
                         }
                     }
-                    if (typeof urlVars[i]["sup2"] !== 'undefined') {
-                        listeObjetsExercice[i].sup2 = urlVars[i]["sup2"];
+                    if (typeof urlVars[i].sup2 !== 'undefined') {
+                        listeObjetsExercice[i].sup2 = urlVars[i].sup2;
                         try {
                             form_sup2[i].value = listeObjetsExercice[i].sup2;
                         } catch (error) {
                         }
                     }
-                    if (typeof urlVars[i]["sup3"] !== 'undefined') {
-                        listeObjetsExercice[i].sup3 = urlVars[i]["sup3"];
+                    if (typeof urlVars[i].sup3 !== 'undefined') {
+                        listeObjetsExercice[i].sup3 = urlVars[i].sup3;
                         try {
                             form_sup3[i].value = listeObjetsExercice[i].sup3;
                         } catch (error) {
@@ -545,6 +628,32 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     }
                     
                 }
+            })
+            .then(() => {
+                if (besoinXCas){
+                    // On charge le javascript de XCas
+                    let div // le div dans lequel on fera apparaitre le cercle de chargement
+                    if (sortie_html){
+                        div = document.getElementById("exercices")
+                    } else {
+                        div = document.getElementById("div_code_LaTeX")
+                    }
+                    div.innerHTML = `<div class="profile-main-loader">
+                    <div class="loader">
+                      <svg class="circular-loader"viewBox="25 25 50 50" >
+                        <circle class="loader-path" cx="50" cy="50" r="20" fill="none" stroke="#70c542" stroke-width="2" />
+                      </svg>
+                    </div>
+                  </div>`
+                    return loadScript("modules/giacsimple.js")
+
+                }
+            })
+            .then((resolve,reject) => {
+                if (besoinXCas) {
+                    // On vérifie que le code WebAssembly est bien chargé en mémoire et disponible
+                    return checkXCas();
+                    }
             })
             .then(() => {
                 mise_a_jour_du_code();
@@ -566,6 +675,18 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
               }
           })
           
+    }
+    const checkXCas = () => {
+        return new Promise((resolve, reject) => {
+                const monInterval = setInterval(() => {
+                    if (typeof(Module)!= 'undefined'){
+                            if (Module.ready == true){
+                                resolve();
+                                clearInterval(monInterval);
+                            }
+                        }
+                }, 500);
+          })
     }
 
     // GESTION DE MG32
@@ -685,7 +806,8 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
         form_spacing_corr = [],
         form_sup = [],
         form_sup2 = [],
-        form_sup3 = []; // Création de tableaux qui recevront les éléments HTML de chaque formulaires
+        form_sup3 = [],
+        form_ModeQCM= []; // Création de tableaux qui recevront les éléments HTML de chaque formulaires
 
     function parametres_exercice(exercice) {
         /* Pour l'exercice i, on rajoute un formulaire avec 5 inputs : 
@@ -718,7 +840,12 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     div_parametres_generaux.innerHTML +=
                         '<div><label for="form_correction_detaillee' + i + '">Correction détaillée : </label> <input id="form_correction_detaillee' + i + '" type="checkbox" ></div>';
                 }
-                if (!exercice[i].nb_questions_modifiable && !exercice[i].correction_detaillee_disponible && !exercice[i].besoin_formulaire_numerique && !exercice[i].besoin_formulaire_texte) {
+                if (exercice[i].QCM_disponible) {
+                    div_parametres_generaux.innerHTML +=
+                        '<div><label for="form_ModeQCM' + i + '">Mode QCM : </label> <input id="form_ModeQCM' + i + '" type="checkbox" ></div>';
+                }
+                
+                if (!exercice[i].nb_questions_modifiable && !exercice[i].correction_detaillee_disponible && !exercice[i].besoin_formulaire_numerique && !exercice[i].besoin_formulaire_texte && !exercice[i].QCM_disponible) {
                     div_parametres_generaux.innerHTML += "<p><em>Cet exercice ne peut pas être paramétré.</em></p>";
                 }
             } else {
@@ -734,6 +861,10 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 if (exercice[i].correction_detaillee_disponible) {
                     div_parametres_generaux.innerHTML +=
                         '<div><label for="form_correction_detaillee' + i + '">Correction détaillée : </label> <input id="form_correction_detaillee' + i + '" type="checkbox" ></div>';
+                }
+                if (exercice[i].QCM_disponible) {
+                    div_parametres_generaux.innerHTML +=
+                        '<div><label for="form_ModeQCM' + i + '">Mode QCM : </label> <input id="form_ModeQCM' + i + '" type="checkbox" ></div>';
                 }
                 if (exercice[i].nb_cols_modifiable) {
                     div_parametres_generaux.innerHTML += '<div><label for="form_nb_cols' + i + '">Nombre de colonnes : </label><input id="form_nb_cols' + i + '" type="number" min="1" max="99"></div>';
@@ -983,6 +1114,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                     });
                 }
 
+       
                 // Gestion du nombre de colones
                 if (exercice[i].nb_cols_modifiable) {
                     form_nb_cols[i] = document.getElementById("form_nb_cols" + i);
@@ -1031,6 +1163,19 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 let form_correction_affichee = document.getElementById("supprimer_correction");
                 form_correction_affichee.addEventListener("change", function (e) {
                     // Dès que le statut change, on met à jour
+                    mise_a_jour_du_code();
+                });
+                
+                // Gestion du mode N&B pour les remplissages
+                let form_ModeNB = document.getElementById("ModeNB");
+                form_ModeNB.addEventListener("change", function (e) {
+                    // Dès que le statut change, on met à jour
+                    if ($("#ModeNB:checked").val()) {
+                        mathalea.sortieNB=true;
+                    }
+                    else {
+                        mathalea.sortieNB=false;
+                    }
                     mise_a_jour_du_code();
                 });
 
@@ -1082,6 +1227,16 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
                 });
             }
 
+         // Gestion du mode QCM
+         if (exercice[i].QCM_disponible) {
+            form_ModeQCM[i] = document.getElementById("form_ModeQCM" + i);
+            form_ModeQCM[i].checked = exercice[i].ModeQCM; // Rempli le formulaire avec la valeur par défaut
+            form_ModeQCM[i].addEventListener("change", function (e) {
+                // Dès que le statut change, on met à jour
+                exercice[i].ModeQCM = e.target.checked;
+                mise_a_jour_du_code();
+            });
+        }
             // Gestion de l'identifiant de la série
             if (exercice.length > 0) {
                 let form_serie = document.getElementById("form_serie");
@@ -1270,14 +1425,14 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
             // Gestion du bouton de zoom
                 let zoom = 1;
                 $( "#btn_zoom_plus").click(function() {
-                    zoom+=.5;
+                    zoom+=0.5;
                     $("#affichage_exercices").css("transform", `scale(${zoom})`);
                     $("#affichage_exercices").css("transform-origin", "0 0px");
                       //window.location.hash = 'section';
                   });
                 $( "#btn_zoom_moins").click(function() {
                     if (zoom>1) {
-                        zoom-=.5;
+                        zoom-=0.5;
                     }
                     $("#affichage_exercices").css("transform", `scale(${zoom})`);
                     $("#affichage_exercices").css("transform-origin", "0 0px");
@@ -1294,8 +1449,8 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
 				$('#ModalQRcode').html('');
 				let qrcode = new QRCode(document.getElementById("ModalQRcode"), {
 					text: window.location.href,
-					width: Math.min(window.innerHeight,window.innerWidth)*.9,
-					height: Math.min(window.innerHeight,window.innerWidth)*.9,
+					width: Math.min(window.innerHeight,window.innerWidth)*0.9,
+					height: Math.min(window.innerHeight,window.innerWidth)*0.9,
 					colorDark : "#000000",
 					colorLight : "#ffffff",
 					correctLevel : QRCode.CorrectLevel.H
@@ -1317,7 +1472,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices } from "./modules
         let urlVars = getUrlVars();
         if (urlVars.length > 0) {
             for (let i = 0; i < urlVars.length; i++) {
-                liste_des_exercices.push(urlVars[i]["id"]);
+                liste_des_exercices.push(urlVars[i].id);
             }
             form_choix_des_exercices.value = liste_des_exercices.join(",");
             mise_a_jour_de_la_liste_des_exercices();

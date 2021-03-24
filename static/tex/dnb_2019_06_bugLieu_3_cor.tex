@@ -1,0 +1,145 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 3 \hfill 15 points}}
+
+\medskip
+
+%Marc et Jim, deux amateurs de course à pied, s'entrainent sur une piste d'athlétisme dont la longueur du tour mesure $400$~m. 
+
+\smallskip
+
+%Marc fait un temps moyen de $2$ minutes par tour. 
+%
+%Marc commence son entrainement par un échauffement d'une longueur d'un kilomètre. 
+%
+%\medskip
+
+\begin{enumerate}
+\item %Combien de temps durera l'échauffement de Marc?
+En supposant que Marc coure  à la vitesse de 2 minutes pour faire 400 m, il mettra 1 minute pour faire 200 m, donc 5~minutes pour faire $5 \times 200 = \np{1000}$~m
+\item %Quelle est la vitesse moyenne de course de Marc en km/h ? 
+1~km en 5~min représente une vitesse de $12 \times 1 = 12$~(km/h) en $12 \times 5 = 60$~min = 1 h. 
+\end{enumerate}
+
+%À la fin de l'échauffement, Marc et Jim décident de commencer leur course au même point de départ A et vont effectuer un certain nombre de tours. 
+
+%Jim a un temps moyen de 1 minute et 40 secondes par tour. 
+
+%Le schéma ci-dessous représente la piste d'athlétisme de Marc et Jim constituée de deux segments [AB] et [CD] et de deux demi-cercles de diamètre [AD] et [BC). 
+%
+%(\emph{Le schéma n'est pas à l'échelle et les longueurs indiquées sont arrondies à l'unité.}) 
+%
+%\medskip
+%
+%\begin{center}
+%\psset{unit=0.75cm}
+%\begin{pspicture}(18,6)
+%\psline(3,0.5)(9.7,0.5)\psline(3,5.7)(9.7,5.7)
+%\psline[linestyle=dotted](3,0.5)(3,5.7)
+%\psline[linestyle=dotted](9.7,0.5)(9.7,5.7)
+%\psarc(3,3.1){2.6}{90}{270}
+%\psarc(9.7,3.1){2.6}{-90}{90}
+%\uput[u](3,5.7){A} \uput[u](9.7,5.7){B} \uput[d](9.7,0.5){C} \uput[d](3,0.5){D} 
+%\psframe(3,5.7)(3.2,5.5)\psframe(9.7,5.7)(9.5,5.5)\psframe(9.7,0.5)(9.5,0.7)
+%\psframe(3,0.5)(3.2,0.7)
+%\psline[linestyle=dashed]{<->}(3,5.9)(9.7,5.9)\uput[u](6.35,5.9){90 m}
+%\psline[linestyle=dashed]{<->}(3.4,5.7)(3.4,0.5)\uput[r](3.4,3.1){70 m}
+%\rput(15.5,3){ABCD est un rectangle}
+%\rput(15.5,2.2){AB = 90 m et AD = 70 m}
+%\end{pspicture}
+%\end{center}
+
+\begin{enumerate}[resume]
+\item %Calculer le temps qu'il faudra pour qu'ils se retrouvent ensemble, au même moment, et pour la première fois au point A. 
+Un tour de piste a pour longueurs la longueur des deux lignes droites et la longueur d'un cercle de diamètre [AD].
+
+Longueur d'un tour  : $2 \times 90 + 70 \times \pi = 180 + 70\pi \approx 399,911$ ce qui correspond bien à l'unité près à 400~m.
+
+$\bullet~~$Marc passe donc au point A toutes les deux minutes soit toutes les 120 secondes ;
+
+$\bullet~~$Jim passe au point toute les 1 µin 40, soit toutes les 100 secondes.
+
+Ils repasseront la première fois ensemble au point A au bout d'un temps égal au plus petit multiple commun à 100 et à 120.
+
+$100 = 10 \times 10 = 2^2 \times 5^2$ et 
+
+$120 = 12 \times 10 = 2^3 \times 3 \times 5$.
+
+Le p.p.c.m. à 100 et 120 est $2^3 \times 3 \times 5^2  = 24 \times 25 = 600$~(s)
+
+%Puis déterminer combien de tours de piste cela représentera pour chacun d'entre eux. 
+$\bullet~~$Marc aura donc fait $\dfrac{600}{100} = 6$~tours et 
+
+$\bullet~~$Jim aura fait $\dfrac{600}{120} = \dfrac{60}{12} = 5$~tours.
+\smallskip
+
+%\emph{Toute trace de recherche, même non aboutie, devra apparaitre sur la copie. Elle sera prise en compte dans l'évaluation.} 
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\end{document}

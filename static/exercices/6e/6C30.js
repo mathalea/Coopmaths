@@ -12,6 +12,7 @@ import Operation  from '/modules/operations.js'
  * Référence 6C30
  */
 export default function Multiplier_decimaux() {
+
   Exercice.call(this); // Héritage de la classe Exercice()
   this.titre = "Multiplications posées de nombres décimaux";
   this.consigne = "Poser et effectuer les calculs suivants.";
@@ -21,6 +22,7 @@ export default function Multiplier_decimaux() {
   this.liste_packages = "xlop";
 
   this.nouvelle_version = function () {
+    this.QCM=['6C30',[],'Multiplications posées de nombres décimaux',4]
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
 
@@ -29,7 +31,7 @@ export default function Multiplier_decimaux() {
       type_de_questions_disponibles,
       this.nb_questions
     ); // Tous les types de questions sont posées mais l'ordre diffère à chaque "cycle"
-let type_de_questions
+let type_de_questions,reponse
     for (
       let i = 0, texte, texte_corr, cpt = 0, a, b;
       i < this.nb_questions && cpt < 50;
@@ -56,12 +58,15 @@ let type_de_questions
       }
 
       texte = `$${tex_nombre(a)}\\times${tex_nombre(b)}$`;
+      reponse=calcul(a*b)
       texte_corr = Operation({operande1:a,operande2:b,type:'multiplication'})
 
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
+            // Pour AMC
+    this.QCM[1].push([texte, [texte_corr,reponse], {digits:0,decimals:0,signe:false,exposant_nb_chiffres:0,exposant_signe:false,approx:0}])
         i++;
       }
       cpt++;

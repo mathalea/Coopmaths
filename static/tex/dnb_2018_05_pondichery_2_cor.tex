@@ -1,0 +1,54 @@
+
+\medskip
+
+%Le pavage représenté sur la figure 1 est réalisé à partir d'un motif appelé pied-de-coq qui est présent sur de
+%nombreux tissus utilisés pour la fabrication de vêtements.
+%
+%Le motif pied-de-coq est représenté par le polygone ci-dessous à droite (figure 2) qui peut être réalisé à
+%l'aide d'un quadrillage régulier.
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{>{\centering \arraybackslash}X c}
+%\def\pied{\psset{unit=0.5cm}\begin{pspicture}(-3,-2)(2,3)
+%\pspolygon*(0,0)(-1,-1)(-1,-2)(1,0)(1,1)(2,2)(1,2)(1,3)(0,2)(-1,2)(-3,0)(-2,0)(-1,1)(-1,0)
+%\end{pspicture}
+%}
+%\psset{unit=1cm}
+%\begin{pspicture}(-1,-1.5)(5,5)
+%%\psgrid
+%\multido{\n=0.0+2.}{3}{\multido{\na=0.0+2.}{3}{\rput(\n,\na){\pied}}}
+%\rput(0.2,0.2){\pscircle[fillstyle=solid,fillcolor=white](0,0){0.25} }
+%\rput(0.2,0.2){1}
+%\rput(2.2,2.2){\pscircle[fillstyle=solid,fillcolor=white](0,0){0.25} }
+%\rput(2.2,2.2){2}
+%\end{pspicture}
+%&\psset{unit=0.5cm}
+%\begin{pspicture*}(-3.5,-3.5)(3,4)
+%\psgrid[gridlabels=0pt,subgriddiv=1,gridwidth=0.1pt]
+%\psdots[dotstyle=+,dotangle=45](0,0)(-1,-1)(-1,-2)(1,0)(1,1)(2,2)(1,2)(1,3)(0,2)(-1,2)(-3,0)(-2,0)(-1,1)(-1,0)%BCDEFGHIJKLMN
+%\uput[ur](0,0){\footnotesize B}\uput[dl](-1,-1){\footnotesize C}\uput[dl](-1,-2){\footnotesize D}\uput[dr](1,0){\footnotesize E}\uput[dr](1,1){\footnotesize F}\uput[ur](2,2){\footnotesize G}\uput[dl](1,2){\footnotesize H}\uput[ur](1,3){\footnotesize I}\uput[ul](0,2){\footnotesize J}\uput[ul](-1,2){\footnotesize K}\uput[dl](-3,0){\footnotesize L}\uput[dl](-2,0){\footnotesize M}\uput[ur](-1,1){\footnotesize N}\uput[dl](-1,0){\footnotesize A}
+%\pspolygon(0,0)(-1,-1)(-1,-2)(1,0)(1,1)(2,2)(1,2)(1,3)(0,2)(-1,2)(-3,0)(-2,0)(-1,1)(-1,0)
+%\end{pspicture*}
+%\\
+%Figure 1&Figure 2
+%\end{tabularx}
+%\end{center}
+%
+%\medskip
+\begin{enumerate}
+\item %Sur la figure 1, quel type de transformation géométrique permet d'obtenir le motif 2 à partir du motif 1 ?
+On passe du motif 1 au motif 2 par une translation.
+\item %Dans cette question, on considère que : AB = 1 cm (figure 2).
+
+%Déterminer l'aire d'un motif pied-de-coq.
+On compte à l'intérieur du motif 4 carreaux entiers et 8 demi-carreaux, donc : 
+
+aire(pied-de-coq) =  $ 4 + 8 \times 0,5  = 4 + 4 = 8$~(cm$^2$).
+\item  %Marie affirme \og si je divise par 2 les longueurs d'un motif, son aire sera aussi divisée par 2 \fg.
+
+%A-t-elle raison ? Expliquer pourquoi.
+Si les longueurs sont divisées par 2, les aires sont divisées par $2 \times 2 = 4$. Marie a tort.
+\end{enumerate}
+
+\vspace{0,5cm}
+

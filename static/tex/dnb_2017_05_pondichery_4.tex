@@ -1,0 +1,74 @@
+
+\medskip 
+
+Pour ses 32 ans, Denis a acheté un vélo d'appartement afin de pouvoir s'entraîner pendant l'hiver.
+
+La fréquence cardiaque (FC) est le nombre de pulsations (ou battements) du cœur par minute.
+
+\medskip
+
+\begin{enumerate}
+\item Denis veut estimer sa fréquence cardiaque : en quinze secondes, il a compté 18 pulsations. 
+
+À quelle fréquence cardiaque, exprimée en pulsations par minute, cela corres\-pond-il?
+\item Son vélo est équipé d'un cardiofréquencemètre qui lui permet d'optimiser son effort en enregistrant, dans ce cardiofréquencemètre, toutes les pulsations de son coeur. À un moment donné, le cardiofréquencemètre a mesuré un intervalle de $0,8$ seconde entre deux pulsations. 
+
+Calculer la fréquence cardiaque qui sera affichée par le cardiofréquencemètre.
+\item Après une séance d'entraînement, le cardiofréquencemètre lui a fourni les renseignements suivants :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{4}{>{\centering \arraybackslash}X|}}\hline
+\textbf{Nombre de pulsations enregistrées}&\textbf{Fréquence minimale enregistrée}&\textbf{Fréquence moyenne} &\textbf{Fréquence maximale enregistrée}\\ \hline
+\np{3640}& $65$ pulsations/minute &$130$ pulsations/minute &$182$ pulsations/minute\\ \hline
+\end{tabularx}
+\end{center} 
+
+	\begin{enumerate}
+		\item Quelle est l'étendue des fréquences cardiaques enregistrées ?
+		\item Denis n'a pas chronométré la durée de son entraînement. Quelle a été cette durée ?
+	\end{enumerate}
+\item Denis souhaite connaître sa fréquence cardiaque maximale conseillée (FCMC) afin de ne pas la dépasser et ainsi de ménager son cœur. La FCMC d'un individu dépend de son âge $a$, exprimé en années, elle peut s'obtenir grâce à la formule suivante établie par Astrand et Ryhming :
+	
+\begin{center}
+\begin{tabularx}{0.8\linewidth}{|X|}\hline	
+Fréquence cardiaque maximale conseillée = $220 - $âge.\\ \hline
+\end{tabularx}
+\end{center}
+
+On note $f(a)$ la FCMC en fonction de l'âge $a$, on a donc $f(a) = 220 - a$.
+	\begin{enumerate}
+		\item Vérifier que la FCMC de Denis est égale à $188$ pulsations/minute.
+		\item Comparer la FCMC de Denis avec la FCMC d'une personne de $15$ ans.
+ 	\end{enumerate}
+\item  Après quelques recherches, Denis trouve une autre formule permettant d'obtenir sa FCMC de façon plus précise. Si $a$ désigne l'âge d'un individu, sa FCMC peut être calculée à l'aide de la formule de Gellish :
+	
+\begin{center}
+\begin{tabularx}{0.9\linewidth}{|X|}\hline	
+Fréquence cardiaque maximale conseillée = $191,5 - 0,007 \times \text{âge}^2$\rule[-3mm]{0mm}{8mm}\\ \hline
+\end{tabularx}
+\end{center}
+
+On note $g(a)$ la FCMC en fonction de l'âge $a$, on a donc 
+
+$g(a) = 191,5 - 0,007 \times a^2$.
+
+Denis utilise un tableur pour comparer les résultats obtenus à l'aide des deux formules :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|c|c|*{2}{>{\centering \arraybackslash}X|}}\hline
+\multicolumn{1}{|l}{B2}&\multicolumn{1}{l|}{~}&\multicolumn{1}{l|}{=220-A2}&\multicolumn{1}{l|}{~}\\ \hline
+	&A 			&B 									&C\\ \hline
+1	&Âge $a$	&FCMC $f(a)$ (Astrand et Ryhming)	&FCMC $g(a)$ (Gellish)\\ \hline
+2	&30 		&190 								&185,2\\ \hline
+3	&31 		&189 								&184,773\\ \hline
+4	&32 		&188 								&184,332\\ \hline
+5	&33 		&187 								&183,877\\ \hline
+\end{tabularx}
+\end{center}
+
+Quelle formule faut-il insérer dans la cellule C2 puis recopier vers le bas, pour pouvoir compléter la colonne \og FCMC $g(a)$ (Gellish) \fg ?
+
+\end{enumerate}
+
+\bigskip
+ 

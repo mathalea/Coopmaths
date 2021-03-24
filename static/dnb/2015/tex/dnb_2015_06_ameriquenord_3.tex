@@ -1,0 +1,43 @@
+
+\medskip
+
+On lance deux dés tétraédriques, équilibrés et non truqués, dont les faces sont
+numérotées de 1 à 4. On calcule la somme des nombres lus sur chacune des faces sur
+lesquelles reposent les dés.
+
+\smallskip
+
+\np{1000} lancers sont simulés avec un tableur. Le graphique suivant représente la
+fréquence d'apparition de chaque somme obtenue :
+
+\begin{center}
+\psset{xunit=1cm,yunit=0.2cm}
+\begin{pspicture}(-1,-5)(9,25)
+\psaxes[linewidth=1.25pt,Dx=10,Dy=5](0,0)(9,25)
+\multido{\n=1+1}{8}{\uput[d](\n,0){\n}}
+\psframe[fillstyle=solid,fillcolor=lightgray](1.5,0)(2.5,7)
+\psframe[fillstyle=solid,fillcolor=lightgray](2.5,0)(3.5,15)
+\psframe[fillstyle=solid,fillcolor=lightgray](3.5,0)(4.5,19)
+\psframe[fillstyle=solid,fillcolor=lightgray](4.5,0)(5.5,23)
+\psframe[fillstyle=solid,fillcolor=lightgray](5.5,0)(6.5,17)
+\psframe[fillstyle=solid,fillcolor=lightgray](6.5,0)(7.5,13)
+\psframe[fillstyle=solid,fillcolor=lightgray](7.5,0)(8.5,6)
+\rput(4.5,-4){somme des nombres inscrits sur les deux dés} \rput{90}(-1,12.5){fréquence en \,\%}
+\end{pspicture}
+\end{center}
+
+\begin{enumerate}
+\item Par lecture graphique donner la fréquence d'apparition de la somme 3.
+\item Lire la fréquence d'apparition de la somme 1 ? Justifier cette fréquence.
+\item  
+	\begin{enumerate}
+		\item Décrire les lancers de dés qui permettent d'obtenir une somme égale à 3.
+		\item En déduire la probabilité d'obtenir la somme 3 en lançant les dés. On exprimera
+cette probabilité en pourcentage. 
+		
+Expliquer pourquoi ce résultat est différent de celui obtenu à la question 1.
+	\end{enumerate} 
+ \end{enumerate}
+ 
+\vspace{0,5cm}
+

@@ -1,0 +1,35 @@
+
+\medskip
+
+\begin{enumerate}
+\item $\np{3003} = 150 \times 20 + 3$ et $\np{3731} = 186 \times 20  + 11$.
+
+Il restera, \`{a} Arthur, 14 dragées : $3$ au chocolat et $11$ aux amandes.
+\item  
+	\begin{enumerate}
+		\item La proposition d'Emma ne convient pas. En effet, $90$ ne divise ni \np{3303}, ni \np{3731}, et elle doit utiliser tous les dragées ; ce qui est donc impossible.
+		\item Comme on veut faire le maximum de ballotins contenant chacun les mêmes nombres de dragées au chocolat et de dragées aux amandes, il faut rechercher le plus grand diviseur commun de \np{3303} et \np{3731}.
+		
+D'après l'algorithme d'Euclide :
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|} c|}\hline
+$a$			&$b$		&reste	&division euclidienne\\ \hline
+\np{3731}	&\np{3303}	&728	&$\np{3731} = 1 \times \np{3003} + 728$\\ \hline
+\np{3303}	&728		&91		&$\np{3303} = 4 \times 728 + 91$\\ \hline
+728			&91			&0		&$728 = 8 \times 91$\\ \hline
+\end{tabularx}
+\end{center}
+
+Le PGCD de \np{3303} et \np{3731} est le dernier reste non nul, c'est-à-dire $91$. 
+
+Donc Emma et Arthur pourront faire au maximum $91$ ballotins.
+
+On réalise les opérations suivantes : $\np{3303}\div 91 = 33$ et $\np{3731} \div 91 = 41$.
+
+Chacun des ballotins contiendra $33$ dragées au chocolat et $41$ dragées aux amandes.
+	\end{enumerate}
+\end{enumerate}
+
+\vspace{0,5cm}
+

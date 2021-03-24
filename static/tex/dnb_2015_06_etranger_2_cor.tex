@@ -1,0 +1,116 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 2} \hfill 4 points}
+
+\medskip
+
+%Le 14 octobre 2012, Félix Baumgartner, a effectué un saut d'une altitude de \np{38969,3}~mètres.
+%
+%La première partie de son saut s'est faite en chute libre (parachute fermé).
+%
+%La seconde partie, s'est faite avec un parachute ouvert.
+%
+%Son objectif était d'être le premier homme à \textbf{\og dépasser le mur du son \fg}.
+%
+%\begin{center}\textbf{\og dépasser le mur du son \fg{}} : signifie atteindre une vitesse supérieure ou égale à la vitesse du son, c'est à dire $340$ m.s$^{-1}$.\end{center}
+%
+%La Fédération Aéronautique Internationale a établi qu'il avait atteint la vitesse maximale de
+%\np{1357,6} km.h$^{-1}$ au cours de sa chute libre.
+%
+%\medskip
+
+\begin{enumerate}
+\item ~%A-t-il atteint son objectif ? Justifier votre réponse.
+\begin{center}
+\begin{tabularx}{\linewidth}{|l|*{3}{>{\centering \arraybackslash}X|}}\hline
+distance parcourue par le son (km)&0,340&20,4&\np{1224}\\ \hline
+temps (s)&1&60&\np{3600}\\ \hline
+\end{tabularx}
+\end{center}
+
+Le son a donc une vitesse de \np{1224} km/h inférieure à celle de Félix Baumgartner ; celui-ci a atteint son objectif.
+\item %Voici un tableau donnant quelques informations chiffrées sur ce saut :
+
+%\begin{center}
+%\begin{tabularx}{0.7\linewidth}{|l|X|}\hline
+%Altitude du saut 					&\np{38969,3} m\\ \hline
+%Distance parcourue en chute libre	&\np{36529} m\\ \hline
+%Durée totale du saut				&9 min 3 s\\ \hline
+%Durée de la chute libre			&4 min 19 s\\ \hline
+%\end{tabularx}
+%\end{center}
+%
+%Calculer la vitesse moyenne de Félix Baumgartner en chute avec parachute ouvert
+%exprimée en m.s$^{-1}$. On arrondira à l'unité.
+Avec le parachute, Félix a parcouru : $\np{38969,3} - \np{36529} = \np{2440,3}$~m en 
+
+9 min 3 s $-$ 4 min 19 = 4 min 44 s, ou 284 s soit une vitesse moyenne de $\dfrac{\np{2440,3}}{284} \approx 8,59$ en mètres par seconde, soit 9~m/s à l'unité près.
+\end{enumerate}
+
+\vspace{0,5cm}
+
+\end{document}

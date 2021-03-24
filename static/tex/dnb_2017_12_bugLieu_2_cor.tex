@@ -1,0 +1,95 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 2 :  \hfill 4 points}
+
+\vspace{0.2cm}
+Voici les tailles, en cm, de 29 jeunes plants de blé 10 jours après la mise en germination.
+
+\vspace{0.2cm}
+
+\begin{tabularx}{\linewidth}{|l|*{9}{>{\centering \arraybackslash}X|}}\hline
+Taille (en cm) &0 &10 &15 &17 &18 &19 &20 &21 &22\\ \hline
+Effectif &1 &4 &6 &2 &3 &3 &4 &4 &2\\ \hline
+Effectif cumulé croissant&1 &5 &11 &13 &16 &19 &23 &27 &29\\ \hline
+\end{tabularx}
+
+\vspace{0.2cm}
+
+\begin{enumerate}
+\item $\dfrac{1\times 0 + 4\times10  + 6\times15  + 2\times17  + 3\times18  + 3\times 19 + 4\times20  +4\times21  +2\times 22}{29}=\dfrac{483}{29} \approx16,7$
+
+La taille moyenne d'un jeune plant de blé est \textcolor{red}{\textbf{d’environ}} 16,7~cm 10 jours après la mise en germination.
+\item 
+	\begin{enumerate}
+		\item L’effectif total est égal à 29. $29\div2=14,5$. La médiane est la 15\ieme\ donnée de la série de données ordonnée dans l’ordre croissant. La médiane de cette série est égale à 18~cm.
+		\item Dire que la médiane de cette série est égale à 18~cm signifie qu’au moins la moitié des plants de blé mesurent 18~cm ou moins de 18~cm, 10 jours après la mise en germination.
+	\end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\end{document}

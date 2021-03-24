@@ -1,0 +1,120 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{\textsc{Exercice 3} \hfill 6 points}
+
+\medskip
+
+\textbf{Attention les figures tracées ne respectent ni les mesures de longueur, ni les mesures d'angle} 
+
+\medskip
+ 
+Répondre par \og vrai \fg{} ou \og faux \fg{} ou \og on ne peut pas savoir \fg{} à chacune des affirmations suivantes et expliquer votre choix.
+
+\medskip
+\begin{enumerate}
+\item Tout triangle inscrit dans un cercle est rectangle. 
+
+\textit{Cette affirmation est fausse, puisque tout triangle admet un cercle circonscrit (dont le centre est le point d'intersection des médiatrices). On peut aussi tracer un contre-exemple.}
+\item Si un point M appartient à la médiatrice d'un segment [AB] alors le triangle 
+AMB est isocèle. 
+
+\textit{Cette affirmation est vraie (en considérant toutefois $M$ différent du milieu de $[AB]$). En effet tout point de la médiatrice d'un segment est à égale distance des extrémités de ce segment. }
+\item~
+
+\parbox{0.45\linewidth}{Dans le triangle ABC suivant, 
+
+AB = 4 cm.
+
+\textit{Le triangle n'étant pas rectangle, on ne peut pas en déduire la longueur AB avec les seules informations dont nous disposons. On ne peut pas savoir.}
+}\hfill
+\parbox{0.45\linewidth}{\psset{unit=1cm}\begin{pspicture}(4,3.5)
+\pspolygon (0.5,0.5)(3.5,0.5)(0.5,2.8)%ABC
+\uput[dl](0.5,0.5){A}\uput[dr](3.5,0.5){B}\uput[u](0.5,2.8){C}
+\uput[ur](1.75,1.8){8 cm}\psarc(3.5,0.5){1cm}{141}{180}
+\rput(2.85,0.7){60~\degres}
+\end{pspicture}}
+\item~
+
+\parbox{0.45\linewidth}{Le quadrilatère ABCD ci-contre 
+est un carré.
+
+\textit{Le quadrilatère ABCD est un losange car ses côtés sont de la même longueur. De plus, les côtés $[AD]$ et $[AB]$ consécutifs sont perpendiculaires. Donc l'affirmation est vraie.}
+}\hfill
+\parbox{0.45\linewidth}{\psset{unit=1cm}\begin{pspicture}(4,3.5)
+%\psgrid
+\pspolygon(0.5,0.5)(3.5,0.3)(3.3,3.2)(0.4,3)%DCBA
+\uput[ul](0.4,3){A}\uput[ur](3.3,3.2){B}\uput[dr](3.5,0.3){C}
+\uput[dl](0.5,0.5){D}
+\psline(1.9,0.5)(2.1,0.3)\psline(3.3,1.8)(3.5,1.6)
+\psline(1.9,3.2)(2.1,3)\psline(0.3,1.8)(0.6,1.6)
+\psline(0.4,2.6)(0.8,2.6)(0.8,3.03)
+\end{pspicture}}
+\end{enumerate}
+ 
+\newpage
+
+\end{document}

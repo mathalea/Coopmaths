@@ -1,0 +1,112 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 4 \hfill 14 points}
+
+\medskip
+
+Un garçon et une fille pratiquent le roller. Ils décident de faire une course en
+empruntant deux parcours différents. 
+
+La fille, qui part du point F et arrive au point A, met 28,5 secondes. 
+
+Le garçon, qui part du point G et arrive aussi au point A, met 28
+secondes.
+
+Le dessin ci-après, qui n'est pas à l'échelle, représente les deux parcours; celui de la
+fille comporte deux demi-cercles de $5$~m de rayon.
+
+\begin{center}
+\psset{unit=1cm}
+\begin{pspicture}(12,3)
+%\psgrid
+\psline(0,2.5)(10,2.5)
+\psarc(10,2){0.5}{-90}{90}
+\psline(10,1.5)(8,1.5)
+\psarc(8,1){0.5}{90}{270}
+\psline(8,0.5)(10,0.5)
+\uput[u](4,2.5){200 m} \uput[l](0,2.5){G}\uput[u](8,2.5){A} 
+\uput[r](8,1.25){5 m}\uput[u](10,2.5){B}\uput[d](10,1.5){C}
+\uput[u](8,1.5){D}\uput[d](8,0.5){E}\uput[r](10,0.5){F}
+\uput[u](8,2.5){A}\uput[u](9,2.5){60 m}
+\psdots[dotstyle=+,dotangle=45](8,2.5)(10,2.5)(10,1.5)(8,1.5)(8,0.5)(10,0.5)(0,2.5)
+\rput(9,2.5){|||}\rput(9,1.5){|||}\rput(9,0.5){|||}
+\psline{->}(8,1)(8,1.5)\psline{->}(10,2)(10,2.5)
+\uput[r](10,2.25){5 m}
+\end{pspicture}
+\end{center}
+
+\begin{enumerate}
+\item Quel est le parcours le plus long ?
+\item Qui se déplace le plus vite, le garçon ou la fille ?
+\end{enumerate}
+\smallskip
+
+\emph{On rappelle que si $p$ est le périmètre d'un cercle de rayon $r$, alors} $p = 2 \times \pi \times r$.
+
+\bigskip
+
+\end{document}

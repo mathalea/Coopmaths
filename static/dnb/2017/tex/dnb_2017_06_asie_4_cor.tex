@@ -1,0 +1,137 @@
+
+\medskip
+
+%Margot a écrit le programme suivant. Il permet de dessiner avec trois touches du clavier.
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|*{3}{>{\scriptsize\centering \arraybackslash}X|}}\hline
+%\begin{scratch} \blockinit{quand \greenflag est cliqué}
+%\blockvariable{initialisation}
+%\end{scratch}	&								&\\
+%
+%\begin{scratch} 
+%\blockinit{quand \selectmenu{flèche haut} est cliqué}	
+%\blockmove{s'orienter à \ovalnum{0\selectarrownum}}
+%\blockpen{stylo en position d'écriture}
+%\blockmove{avancer de \ovalnum{50}}
+%\blockpen{relever le stylo}
+%\end{scratch}				&
+%\begin{scratch} \blockinit{quand \selectmenu{flèche droite} est cliqué}
+%\blockmove{s'orienter à \ovalnum{90\selectarrownum}}
+%\blockpen{stylo en position d'écriture}
+%\blockmove{avancer de \ovalnum{50}}
+%\blockpen{relever le stylo}
+%\end{scratch}				&
+%\begin{scratch} \blockinit{quand \selectmenu{flèche bas} est cliqué}
+%\blockmove{s'orienter à \ovalnum{180\selectarrownum}}
+%\blockpen{stylo en position d'écriture}
+%\blockmove{avancer de \ovalnum{50}}
+%\blockpen{relever le stylo}
+%\end{scratch}\\ \hline
+%\end{tabularx}
+%\end{center}
+%
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+%\multicolumn{3}{|c|}{\textbf{Pour information}}\\ \hline
+%\begin{scratch}
+%\blockvariable{initialisation}
+%\end{scratch}
+%
+%Ce bloc efface le dessin 
+%
+%précédent, positionne le 
+% 
+%crayon à gauche de  
+% 
+%l'écran et relève le stylo.				&\begin{scratch}
+%\blockmove{s'orienter à \ovalnum{90\selectarrownum}}
+%\blockmove{90 à droite}
+%\blockmove{$- 90$ à gauche}
+%\blockmove{(0) vers le haut}
+%\blockmove{(180) vers le bas} 
+%\end{scratch}&\psset{unit=0.5cm}
+%\def\paleb{\pspolygon(0,0)(1.5,0)(0.2,-0.2)}
+%\def\palen{\pspolygon*(0,0)(0.2,0.2)(1.5,0)}
+%\begin{center}\begin{pspicture}(-1.9,-1.9)(1.9,1.9)
+%\multido{\n=0+90}{4}{\rput{\n}(0,0){\palen}}
+%\multido{\n=0+90}{4}{\rput{\n}(0,0){\paleb}}
+%\rput(1.9,0){90}\rput(0,1.9){0}\rput(-1.9,0){$- 90$}\rput(0,-1.9){180}
+%\end{pspicture}\end{center}\\ \hline
+%\end{tabularx}
+%\end{center}
+
+\begin{enumerate}
+\item %Parmi les trois dessins suivants, un seul ne pourra pas être réalisé avec ce programme. Lequel ? Expliquer.
+Le dessin 2 ne peut être réalisé car il n'y a pas d'instruction pour reculer.
+
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|*{3}{>{\centering \arraybackslash}X|}}\hline
+%Dessin 1 		&Dessin 2 		&Dessin 3\\ 
+%\psset{unit=1cm}
+%\def\crayon{\psline(0.5,0.6)(0.05,0.05)(0,0)(0.02,0.05)(0.4,0.65)}
+%\begin{pspicture}(3.5,2)
+%\psline(0,0.6)(1.8,0.6)(1.8,1.2)(2.4,1.2)(2.4,0)(2.8,0)
+%\rput{-100}(2.9,0.1){\ding{46}}
+%\end{pspicture}	&
+%\psset{unit=1cm}
+%\def\crayon{\psline(0.5,0.6)(0.05,0.05)(0,0)(0.02,0.05)(0.4,0.65)}
+%\begin{pspicture}(3.5,2)
+%\psline(0,0.6)(1.8,0.6)(1.8,1.2)(3,1.2)(3,0)(2.4,0)(2.4,0.6)(3,0.6)
+%\rput{-100}(3.1,0.7){\ding{46}}
+%\end{pspicture}	&\psset{unit=1cm}
+%\def\crayon{\psline(0.5,0.6)(0.05,0.05)(0,0)(0.02,0.05)(0.4,0.65)}
+%\begin{pspicture}(3.5,2)
+%\psline(0,0)(0,0.6)(0.6,0.6)(0.6,1.2)(1.2,1.2)(1.2,1.8)(1.8,1.8)(1.8,1.2)
+%\rput{-100}(1.9,1.3){\ding{46}}
+%\end{pspicture}	\\ \hline
+%\end{tabularx}
+%\end{center}
+
+\item  %Julie a modifié le programme de Margot (voir ci-dessous). Que devient alors le dessin 3 avec le programme modifié par Julie ?
+
+%\begin{center}
+%\begin{tabularx}{\linewidth}{|*{3}{>{\scriptsize \centering \arraybackslash}X}|}\hline
+%\multicolumn{3}{|c|}{Programme modifié par Julie}\\ \cline{2-2}
+%\begin{scratch} \blockinit{quand \greenflag est cliqué}
+%\blockvariable{initialisation}
+%\end{scratch}	&								&\\
+%
+%\begin{scratch} 
+%\blockinit{quand \selectmenu{flèche haut} est cliqué}	
+%\blockmove{s'orienter à \ovalnum{0\selectarrownum}}
+%\blockpen{stylo en position d'écriture}
+%\blockmove{avancer de \ovalnum{50}}
+%\blockpen{relever le stylo}
+%\end{scratch}				&
+%\begin{scratch} \blockinit{quand \selectmenu{flèche droite} est cliqué}
+%\blockmove{s'orienter à \ovalnum{90\selectarrownum}}
+%\blockmove{avancer de \ovalnum{50}}
+%\end{scratch}				&
+%\begin{scratch} \blockinit{quand \selectmenu{flèche bas} est cliqué}
+%\blockmove{s'orienter à \ovalnum{180\selectarrownum}}
+%\blockpen{stylo en position d'écriture}
+%\blockmove{avancer de \ovalnum{50}}
+%\blockpen{relever le stylo}
+%\end{scratch}\\ \hline
+%\end{tabularx}
+%\end{center}
+Quand on est orienté vers la droite on ne peut plus avancer de 50 unités.
+
+Le dessin devient alors :
+
+\begin{center}
+\psset{unit=1cm}
+\def\crayon{\psline(0.5,0.6)(0.05,0.05)(0,0)(0.02,0.05)(0.4,0.65)}
+\begin{pspicture}(3.5,2)
+\psline(0,0)(0,0.6)
+\psline(0.6,0.6)(0.6,1.2)
+\psline(1.2,1.2)(1.2,1.8)
+\psline(1.8,1.2)(1.8,1.8)
+\rput{-100}(1.9,1.9){\ding{46}}
+\end{pspicture}
+\end{center}
+\end{enumerate}
+
+\vspace{0,5cm}
+

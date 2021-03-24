@@ -1,0 +1,50 @@
+
+\medskip
+
+Le graphique ci-dessous représente la hauteur d'eau dans le port de Brest, le 26 octobre 2015.
+
+\begin{center}
+\psset{xunit=0.35cm,yunit=0.7cm}
+\begin{pspicture}(-2,-1)(28.5,9)
+\multido{\n=0+2}{15}{\psline[linewidth=0.25pt](\n,0)(\n,8)}
+\multido{\n=0+1}{9}{\psline[linewidth=0.25pt](0,\n)(28,\n)}
+\pscurve[linewidth=1.25pt,linecolor=blue](2,3.5)(4,6.2)(6,7.05)(8,5)(10,2.5)(12,1)(14,3)(16,6)(18,7.5)(20,5.75)(22,3)(24,0.85)(26,2.1)
+\multido{\n=2+2,\na=0+2}{14}{\uput[d](\n,0){\na}}
+\multido{\n=0+1}{9}{\uput[l](0,\n){\n}}
+\uput[d](13,-0.5){Heures}\uput[u](25,0){http://maree.info}
+\rput{90}(-1.5,7){Hauteur (m)}
+\end{pspicture}
+\end{center}
+
+\textbf{Les questions 1. et 2. sont indépendantes.}
+
+\medskip
+
+\begin{enumerate}
+\item En utilisant ce graphique répondre aux questions suivantes. Aucune justification n'est attendue.
+	\begin{enumerate}
+		\item Le 26 octobre 2015 quelle était environ la hauteur d'eau à 6 heures dans le port de Brest.
+		\item Le 26 octobre 2015 entre 10 heures et 22 heures, pendant combien de temps environ la hauteur d'eau a-t-elle été supérieure à 3 mètres ?
+	\end{enumerate}
+\item  En France, l'ampleur de la marée est indiquée par un nombre entier appelé \og coefficient de marée \fg. Au port Brest, il se calcule grâce à la formule :
+	
+	\[C = \dfrac{H - N_0}{U} \times  100\]
+	
+en donnant un résultat arrondi à  l'entier le plus proche avec : 
+
+\begin{center}
+\begin{tabular}{l l}
+$\bullet~~$ $C$ : coefficient de marée\\
+$\bullet~~$ $H$ : hauteur d'eau maximaJe en mètres pendant la marée\\
+$\bullet~~$ $N_0 = 4,2$ m (\emph{niveau moyen à  Brest})\\
+$\bullet~~$ $U = 3,1$~m (\emph{unité de hauteur à  Brest})
+\end{tabular}
+\end{center}
+
+Dans l'après-mididi du 26 octobre 2015, la hauteur d'eau maximale était de 7,4 mètres.
+
+Calculer le coefficient de cette marée (résultat arrondi à l'unité).
+\end{enumerate}
+
+\vspace{0,5cm}
+

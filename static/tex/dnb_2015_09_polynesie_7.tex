@@ -1,0 +1,108 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}%ATTENTION codage UTF8
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{amsmath,amssymb,makeidx}
+\usepackage[normalem]{ulem}
+\usepackage{diagbox}
+\usepackage{fancybox}
+\usepackage{tabularx,booktabs}
+\usepackage{colortbl}
+\usepackage{pifont}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{lscape}
+\newcommand{\euro}{\eurologo{}}
+\usepackage{graphics,graphicx}
+\usepackage{pstricks,pst-plot,pst-tree,pstricks-add}
+\usepackage[left=3.5cm, right=3.5cm, top=3cm, bottom=3cm]{geometry}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{scratch}
+\renewcommand{\theenumi}{\textbf{\arabic{enumi}}}
+\renewcommand{\labelenumi}{\textbf{\theenumi.}}
+\renewcommand{\theenumii}{\textbf{\alph{enumii}}}
+\renewcommand{\labelenumii}{\textbf{\theenumii.}}
+\newcommand{\vect}[1]{\overrightarrow{\,\mathstrut#1\,}}
+\def\Oij{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath}\right)$}
+\def\Oijk{$\left(\text{O}~;~\vect{\imath},~\vect{\jmath},~\vect{k}\right)$}
+\def\Ouv{$\left(\text{O}~;~\vect{u},~\vect{v}\right)$}
+\usepackage{fancyhdr}
+\usepackage[french]{babel}
+\usepackage[dvips]{hyperref}
+\usepackage[np]{numprint}
+%Tapuscrit : Denis Vergès
+%\frenchbsetup{StandardLists=true}
+
+\begin{document}
+\setlength\parindent{0mm}
+% \rhead{\textbf{A. P{}. M. E. P{}.}}
+% \lhead{\small Brevet des collèges}
+% \lfoot{\small{Polynésie}}
+% \rfoot{\small{7 septembre 2020}}
+\pagestyle{fancy}
+\thispagestyle{empty}
+% \begin{center}
+    
+% {\Large \textbf{\decofourleft~Brevet des collèges Polynésie 7 septembre 2020~\decofourright}}
+    
+% \bigskip
+    
+% \textbf{Durée : 2 heures} \end{center}
+
+% \bigskip
+
+% \textbf{\begin{tabularx}{\linewidth}{|X|}\hline
+%  L'évaluation prend en compte la clarté et la précision des raisonnements ainsi que, plus largement, la qualité de la rédaction. Elle prend en compte les essais et les démarches engagées même non abouties. Toutes les réponses doivent être justifiées, sauf mention contraire.\\ \hline
+% \end{tabularx}}
+
+% \vspace{0.5cm}\textbf{Exercice 7 \hfill 6 points}
+
+\medskip
+
+La distance d'arrêt est la distance que parcourt un véhicule entre le moment où son conducteur voit un obstacle et le moment où le véhicule s'arrête.
+
+Une formule permettant de calculer la distance d'arrêt est :
+
+\[D = \dfrac{5}{18} \times  V + 0,006 \times  V^2 \qquad \begin{tabular}{l}
+$\bullet$~~ D : \text{est la distance d'arrêt en m}\\
+$\bullet$~~ V : \text{la vitesse en km/h}
+\end{tabular}\]
+
+
+\begin{enumerate}
+\item Un conducteur roule à 130~km/h sur l'autoroute. Surgit un obstacle à 100~m de lui. Pourra-t-il s'arrêter à temps ?
+\item On a utilisé un tableur pour calculer la distance d'arrêt pour quelques vitesses. Une copie de l'écran obtenu est donnée ci-dessous. La colonne B est configurée pour afficher les résultats arrondis à l'unité.
+
+\begin{center}
+\begin{tabularx}{0.6\linewidth}{|c|*{2}{>{\centering \arraybackslash}X|}}\hline
+&A &B\\ \hline
+1&Vitesse en km/h& Distance d'arrêt en m\\ \hline
+2&30& 14\\ \hline
+3&40& 21\\ \hline
+4&50& 29\\ \hline
+5&60& 38\\ \hline
+6&70& 49\\ \hline
+7&80& 61\\ \hline
+8&90& 74\\ \hline
+9&100& 88\\ \hline
+\end{tabularx}
+\end{center}
+
+Quelle formule a-t-on saisie dans la cellule B2 avant de la recopier vers le bas ?
+\item On entend fréquemment l'affirmation suivante: \og Lorsqu'on va deux fois plus vite, il faut une
+distance deux fois plus grande pour s'arrêter \fg. Est-elle exacte ?
+\item Au code de la route, on donne la règle suivante pour calculer de tête sa distance d'arrêt:
+\og Pour une vitesse comprise entre 50 km/h et 90 km/h, multiplier par lui-même le chiffre des dizaines de la vitesse \fg.
+ 
+Le résultat calculé avec cette règle pour un automobiliste qui roule à 80~km/h est-il cohérent avec celui calculé par la formule ?
+\end{enumerate}
+\end{document}\end{document}

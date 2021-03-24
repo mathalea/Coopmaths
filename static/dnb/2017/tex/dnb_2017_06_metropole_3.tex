@@ -1,0 +1,32 @@
+
+\medskip
+
+Un condensateur est un composant électronique qui permet de stocker de l'énergie électrique pour la restituer plus tard.
+
+Le graphique suivant montre l'évolution de la tension mesurée aux bornes d'un condensateur en fonction du
+temps lorsqu'il est en charge.
+
+\begin{center}
+\psset{xunit=14cm,yunit=0.8cm,comma=true}
+\begin{pspicture}(-0.1,-1)(0.6,6)
+\multido{\n=0.00+0.01}{61}{\psline[linewidth=0.1pt](\n,0)(\n,6)}
+\multido{\n=0.0+0.1}{7}{\psline[linewidth=1pt](\n,0)(\n,6)}
+\multido{\n=0.0+0.2}{31}{\psline[linewidth=0.1pt](0,\n)(0.6,\n)}
+\multido{\n=0+1}{7}{\psline[linewidth=1pt](0,\n)(0.6,\n)}
+\psaxes[linewidth=1.25pt,Dx=0.1]{->}(0,0)(0,0)(0.6,6)
+\psaxes[linewidth=1.25pt,Dx=0.1](0,0)(0,0)(0.61,6)
+\uput[d](0.55,-0.6){Temps (s)}
+\rput{90}(-0.075,3){Tension (V)}
+\psplot[plotpoints=3000,linewidth=1.25pt,linecolor=blue]{0}{0.6}{5 5 2.71828 x 10 mul  exp div sub}
+\end{pspicture}
+\end{center}
+
+
+\begin{enumerate}
+\item S'agit-il d'une situation de proportionnalité ? Justifier.
+\item Quelle est la tension mesurée au bout de $0,2$~s ?
+\item Au bout de combien de temps la tension aux bornes du condensateur aura-t-elle atteint 60\,\% de la tension maximale qui est estimée à 5 V ?
+\end{enumerate}
+
+\vspace{0,5cm}
+

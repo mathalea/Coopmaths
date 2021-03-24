@@ -1,0 +1,38 @@
+\textbf{Exercice 6 \hfill 4 points}
+
+\medskip
+
+%Le poinçon et le faux-entrait de la figure représentant la maison de Moana sont
+%à \og  angle droit \fg{} (voir la figure de l'exercice 5).
+%
+%On donne BA = 200 et BF = 165.
+%
+%\medskip
+
+\begin{enumerate}
+\item ~
+\parbox{0.65\linewidth}{Indiquer les sommets du triangle rectangle ABF et coder la
+figure ci-contre :}\hfill  
+\parbox{0.27\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(3.5,2.5)
+%\psgrid
+\pspolygon(0.5,0.5)(3,0.5)(3,2)%BFA
+\uput[dl](0.5,0.5){B}\uput[dr](3,0.5){F}\uput[ul](3,2){A}
+\uput[d](1.75,0.5){165} \uput[ul](1.75,1.25){200}
+\psframe(3,0.5)(2.7,0.8)
+\end{pspicture}
+}
+
+\item %En utilisant le théorème de Pythagore, calculer AF. On arrondira le résultat au cm près.
+
+D'après le théorème de Pythagore dans le triangle BAF rectangle en F :
+
+$\text{BA}^2 = \text{BF}^2 + \text{FA}^2$, donc $200^2 = 165^2 + \text{FA}^2$ ;
+
+donc $\text{FA}^2 = 200^2 - 165^2 = \np{40000} - \np{27225} = \np{12775}$.
+
+Donc AF $ = \sqrt{\np{12775}} \approx 113,02$ soit 113~cm au centimètre près.
+\end{enumerate}
+
+\bigskip
+

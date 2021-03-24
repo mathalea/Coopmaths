@@ -1,0 +1,68 @@
+
+\medskip
+
+\parbox{0.35\linewidth}{\psset{unit=1cm}
+\begin{pspicture}(4,3)
+%\psgrid
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(0.5,0.5)(3.5,0.5)
+\psarc(3.5,0.5){0.18}{-90}{30}\psline(0.5,0.3)(3.5,0.3)
+\psarc(2,2.6){0.2}{25}{155}\psline(3.65,0.6)(2.2,2.65)
+\psarc(0.5,0.5){0.18}{120}{270}\psline(1.82,2.7)(0.4,0.65)
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(0.5,0.5)(2,2.6)
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(3.5,0.5)(2,2.6)
+\pspolygon*(1,0.8)(3,0.8)(1.4,1.3)\rput{-15}(2,1.4){10\,\%}
+\end{pspicture}}\hfill \parbox{0.6\linewidth}{Ce panneau routier indique une descente dont la pente est de 10\,\%.}
+
+\medskip
+
+Cela signifie que pour un déplacement horizontal de 100 mètres, le dénivelé est de 10 mètres.
+
+Le schéma ci-dessous n'est pas à l'échelle.
+
+\begin{center}
+\psset{unit=0.5cm}
+\begin{pspicture}(17,6)
+\pspolygon(2.5,1.5)(15.8,1.5)(2.5,5.2)%BCA
+\psframe(2.5,1.5)(2.8,1.8)
+\uput[ul](2.5,5.2){A} \uput[dl](2.5,1.5){B} \uput[r](15.8,1.5){C}
+\rput{-15}(9.15,3.8){Route} \uput[l](2.5,3.45){Dénivelé :}
+\rput(9.15,1){Déplacement horizontal : 100~m}
+\uput[l](1.9,2.7){10 m}
+\end{pspicture}
+\end{center}
+\medskip
+
+\begin{enumerate}
+\item Déterminer la mesure de l'angle $\widehat{\text{BCA}}$ que fait la route avec l'horizontale.
+
+Arrondir la réponse au degré.
+\item Dans certains pays, il arrive parfois que 1a pente d'une route ne soit pas donnée par un pourcentage, mais par une indication telle que \og 1 : 5 \fg, ce qui veut alors dire que pour un déplacement horizontal de 5~mètres, le dénivelé est de 1 mètre.
+
+Lequel des deux panneaux ci-dessous indique la pente la plus forte ?
+
+\begin{center}
+\begin{pspicture}(4,3)
+%\psgrid
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(0.5,0.5)(3.5,0.5)
+\psarc(3.5,0.5){0.18}{-90}{30}\psline(0.5,0.3)(3.5,0.3)
+\psarc(2,2.6){0.2}{25}{155}\psline(3.65,0.6)(2.2,2.65)
+\psarc(0.5,0.5){0.18}{120}{270}\psline(1.82,2.7)(0.4,0.65)
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(0.5,0.5)(2,2.6)
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(3.5,0.5)(2,2.6)
+\pspolygon*(1,0.8)(3,0.8)(1.4,1.3)\rput{-15}(2,1.4){15\,\%}
+\end{pspicture}\qquad \quad \begin{pspicture}(4,3)
+%\psgrid
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(0.5,0.5)(3.5,0.5)
+\psarc(3.5,0.5){0.18}{-90}{30}\psline(0.5,0.3)(3.5,0.3)
+\psarc(2,2.6){0.2}{25}{155}\psline(3.65,0.6)(2.2,2.65)
+\psarc(0.5,0.5){0.18}{120}{270}\psline(1.82,2.7)(0.4,0.65)
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(0.5,0.5)(2,2.6)
+\psline[linewidth=7pt,linecolor=red]{cc-cc}(3.5,0.5)(2,2.6)
+\pspolygon*(1,0.8)(3,0.8)(1.4,1.3)\rput{-15}(2,1.4){1 : 5}
+\end{pspicture}
+\end{center}
+
+\hspace{2.25cm}Panneau A \hspace{3.15cm}   Panneau B
+\end{enumerate}
+
+

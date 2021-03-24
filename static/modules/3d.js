@@ -68,6 +68,7 @@ function ObjetMathalea2D() {
    * le vecteur3d est sans doute l'objet le plus important de cette base d'objets
    * On les utilise dans tous les objets complexeimport Additionner_soustraires_decimaux from '../exercices/6e/6C20';
 s et dans toutes les transformations.import Nature_polygone from './../exercices/2e/2G12';
+import Exercice_fractions_decomposer from './../exercices/6e/6N20';
 
    * Ils servent notament à définir la direction des plans.
    * 
@@ -446,54 +447,57 @@ export function demicercle3d(centre,normal,rayon,cote,color,angledepart=mathalea
    * @param {Vecteur3d} rayon1 
    * @param {Vecteur3d} rayon2
    */
-  function Cylindre3d(centrebase1,centrebase2,normal,rayon1,rayon2){
+  function Cylindre3d(centrebase1,centrebase2,normal,rayon1,rayon2,color){
     ObjetMathalea2D.call(this)
     this.centrebase1=centrebase1
     this.centrebase2=centrebase2
     this.normal=normal
     this.rayon1=rayon1
     this.rayon2=rayon2
+    this.color=color
     let objets=[],c1,c2,c3,c4,s,color1,color2
     let prodvec=vecteur3d(math.cross(this.normal.matrice,this.rayon1.matrice))
     let prodscal=math.dot(prodvec.matrice,vecteur3d(0,1,0).matrice)
     let cote1,cote2
     if (prodscal>0) {
       cote1='caché'
-      color1='gray'
+      color1=this.color
       cote2='visible'
-      color2='black'
+      color2=this.color
     }
     else {
       cote2='caché'
       cote1='visible'
-      color1='black'
-      color2='gray'
+      color1=this.color
+      color2=this.color
     }
     c1=demicercle3d(this.centrebase1,this.normal,this.rayon1,cote1,color1)
     c3=demicercle3d(this.centrebase2,this.normal,this.rayon2,cote1,color1)
     c2=demicercle3d(this.centrebase1,this.normal,this.rayon1,cote2,color2)
     c4=demicercle3d(this.centrebase2,this.normal,this.rayon2,cote2,color2)
     c3.pointilles=false
-    c3.color='black'
-    for (let i=0;i<c1.listePoints.length;i++){
+    c3.color=this.color
+    for (let i=0;i<c1.listePoints.length;i+=2){
       s=segment(c3.listePoints[i],c1.listePoints[i])
       if (cote1=='caché'){
         s.pointilles=2
-        s.color='gray'
+        s.color=this.color
+        s.opacite=0.3
       }
       else {
-        s.color='black'
+        s.color=this.color
       }
       objets.push(s)
     }
-    for (let i=0;i<c2.listePoints.length;i++){
+    for (let i=0;i<c2.listePoints.length;i+=2){
       s=segment(c4.listePoints[i],c2.listePoints[i])
       if (cote2=='caché'){
         s.pointilles=2
-        s.color='gray'
+        s.color=this.color
+        s.opacite=0.3
       }
       else {
-        s.color='black'
+        s.color=this.color
       }
       objets.push(s)
     }
@@ -513,8 +517,8 @@ export function demicercle3d(centre,normal,rayon,cote,color,angledepart=mathalea
       return code;
     }
   }
-  export function cylindre3d(centrebase1,centrebase2,normal,rayon,rayon2){
-    return new Cylindre3d(centrebase1,centrebase2,normal,rayon,rayon2)
+  export function cylindre3d(centrebase1,centrebase2,normal,rayon,rayon2,color='black'){
+    return new Cylindre3d(centrebase1,centrebase2,normal,rayon,rayon2,color)
   }
   
   /**
@@ -566,6 +570,123 @@ export function demicercle3d(centre,normal,rayon,cote,color,angledepart=mathalea
     return new Prisme3d(base,vecteur,color)
   }
   
+/**
+   * LE cube
+   * @Auteur Jean-Claude Lhote
+   * usage : cube(x,y,z,c,color) construit le cube d'arète c dont le sommet en bas à gauche a les coordonnées x,y,z.
+   * le face avant est dans le plan xz
+   * 
+*/
+class Cube3d{
+    constructor (x,y,z,c,color='black'){
+      let faceAV,faceDr,faceTOP
+      let A=point3d(x,y,z)
+      let vx=vecteur3d(c,0,0)
+      let vy=vecteur3d(0,c,0)
+      let vz=vecteur3d(0,0,c)
+      let B=translation3d(A,vx)
+      let C=translation3d(B,vz)
+      let D=translation3d(A,vz)
+      let E=translation3d(A,vy)
+      let F=translation3d(E,vx)
+      let G=translation3d(F,vz)
+      let H=translation3d(D,vy)
+      faceAV=polygone([A.p2d,B.p2d,C.p2d,D.p2d],color)
+      faceDr=polygone([B.p2d,F.p2d,G.p2d,C.p2d],color)
+      faceTOP=polygone([D.p2d,C.p2d,G.p2d,H.p2d],color)
+      faceAV.couleurDeRemplissage="#A9A9A9"
+      faceTOP.couleurDeRemplissage='white'
+      faceDr.couleurDeRemplissage="#A5C400"
+      this.svg=function(coeff){
+        return faceAV.svg(coeff)+'\n'+faceTOP.svg(coeff)+'\n'+faceDr.svg(coeff)
+      }
+      this.tikz=function(){
+        return faceAV.tikz()+'\n'+faceTOP.tikz()+'\n'+faceDr.tikz()
+      }
+    }
+}
+export function cube3d(x,y,z,c){
+  return new Cube3d(x,y,z,c)
+}
+
+class Cube{
+  constructor (x,y,z,alpha,beta,colorD,colorT,colorG){
+    ObjetMathalea2D.call(this)
+    this.x=x
+    this.y=y
+    this.z=z
+    this.alpha=alpha
+    this.beta=beta
+    this.colorD=colorD
+    this.colorG=colorG
+    this.colorT=colorT
+
+    this.lstPoints = [];
+    this.lstPolygone = [];
+    function proj(x,y,z,alpha, beta) {
+      const cosa = Math.cos(alpha*Math.PI/180);
+      const sina = Math.sin(alpha*Math.PI/180);
+      const cosb = Math.cos(beta*Math.PI/180);
+      const sinb = Math.sin(beta*Math.PI/180);
+      return point(cosa*x-sina*y, -sina*sinb*x-cosa*sinb*y+cosb*z);
+    }
+      
+    this.lstPoints.push(proj(this.x,this.y,this.z,this.alpha, this.beta)) // point 0 en bas
+    this.lstPoints.push(proj(this.x+1,this.y,this.z,this.alpha, this.beta)) // point 1
+    this.lstPoints.push(proj(this.x+1,this.y,this.z+1,this.alpha, this.beta)) // point 2
+    this.lstPoints.push(proj(this.x,this.y,this.z+1,this.alpha, this.beta)) //point 3
+    this.lstPoints.push(proj(this.x+1,this.y+1,this.z+1,this.alpha, this.beta)) // point 4
+    this.lstPoints.push(proj(this.x,this.y+1,this.z+1,this.alpha, this.beta)) // point 5
+    this.lstPoints.push(proj(this.x,this.y+1,this.z,this.alpha, this.beta)) // point 6
+    let p
+    p=polygone([this.lstPoints[0], this.lstPoints[1],this.lstPoints[2], this.lstPoints[3]], "black")
+    p.opaciteDeRemplissage=1;
+    p.couleurDeRemplissage=this.colorD
+    this.lstPolygone.push(p)
+    p = polygone([this.lstPoints[2], this.lstPoints[4],this.lstPoints[5], this.lstPoints[3]], "black")
+    p.couleurDeRemplissage=this.colorG
+    p.opaciteDeRemplissage=1;
+    this.lstPolygone.push(p)
+    p = polygone([this.lstPoints[3], this.lstPoints[5],this.lstPoints[6], this.lstPoints[0]], "black")
+    p.couleurDeRemplissage=this.colorT
+    p.opaciteDeRemplissage=1;
+    this.lstPolygone.push(p)
+
+    this.svg=function(coeff){
+      let code = ""
+      for (let i=0;i<3;i++) {
+        code += "\n\t" + this.lstPolygone[i].svg(coeff);
+      }
+      code = `<g id="${this.id}">${code}</g>`
+      return code;
+    }
+    this.tikz = function () {
+      let code = ""
+      for (let i=0;i<3;i++) {
+        code += "\n\t" + this.lstPolygone[i].tikz();
+      }
+      return code;
+    };
+    this.svgml = function (coeff, amp) {
+      let code = ""
+      for (let i=0;i<3;i++) {
+        code += "\n\t" + this.lstPolygone[i].svgml(coeff, amp);
+      }
+      return code;
+    }
+    this.tikzml = function (amp) {
+      let code = ""
+      for (let i=0;i<3;i++) {
+      code += "\n\t" + this.lstPolygone[i].tikzml(amp);
+      }
+      return code;
+    };
+  }
+}
+export function cube(x=0,y=0,z=0,alpha=45,beta=-35,{colorD="#A5C400",colorT="#FFFFFF",colorG="#A9A9A9"}={}){
+  return new Cube(x,y,z,alpha,beta,colorD,colorG,colorT)
+}
+
 /**
    * LE PAVE
    * @Auteur Jean-Claude Lhote
@@ -757,6 +878,36 @@ export function sens_de_rotation3d(axe,rayon,angle,epaisseur,color){
       }
       return polygone3d(p,point3D.color)
     }
+  }
+  export function homothetie3d(point3D,centre,rapport,color){
+    let V
+    let p=[]
+    if (point3D.constructor==Point3d){
+        V=vecteur3d(centre,point3D)
+        V.x3d*=rapport
+        V.y3d*=rapport
+        V.y3d*=rapport
+        return translation3d(centre,V)
+      }
+      else if(point3D.constructor==Vecteur3d){
+        V=point3D
+        V.x3d*=rapport
+        V.y3d*=rapport
+        V.y3d*=rapport
+        return V
+      }
+      else if (point3D.constructor==Polygone3d){
+
+
+        for (let i=0;i<point3D.listePoints.length;i++){
+          p.push(homothetie3d(point3D.listePoints[i],centre,rapport,color))
+        }
+        if (typeof(color)!='undefined'){
+          return polygone3d(p,color)
+        }
+        else
+          return polygone3d(p,point3D.color)
+      }
   }
   
   

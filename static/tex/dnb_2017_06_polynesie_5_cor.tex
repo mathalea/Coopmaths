@@ -1,0 +1,55 @@
+
+\medskip
+
+%On considère le programme de calcul suivant :
+%
+%\begin{center}
+%\begin{tabularx}{0.4\linewidth}{|lX|}\hline
+%$\bullet~~$& Choisir un nombre ;\\
+%$\bullet~~$& Le multiplier par - 4 ;\\
+%$\bullet~~$& Ajouter 5 au résultat.\\ \hline
+%\end{tabularx}
+%\end{center}
+
+\begin{enumerate}
+\item %Vérifier que lorsque l'on choisit $- 2$ avec ce programme, on obtient 13.
+On a $(- 2) \times (- 4) = 8$ et $8 + 5 = 13$.
+\item %Quel nombre faut-il choisir au départ pour obtenir $- 3$ ?
+On peut revenir au nombre de départ :
+
+$- 3 - 5 = - 8$ puis $\dfrac{- 8}{- 4} = 2$.
+\item %Salomé fait exécuter le script suivant:
+
+%\begin{center}
+%\textbf{Script}
+%
+%\begin{scratch}
+%\blockinit{Quand \greenflag cliqué}
+%\blocksensing{demander \txtbox{Choisir un nombre} et attendre}
+%\blockifelse{si \boolsensing{- 4 * réponse + 5 < 0} alors}
+%{\blocklook{dire \txtbox{Bravo}}
+%}
+%{\blocklook{dire \txtbox{Essaie encore}}}
+%\end{scratch}
+%\end{center}
+
+	\begin{enumerate}
+		\item %Quelle sera la réponse du lutin si elle choisit le nombre $12$ ?
+		On a $- 4 \times 12 = - 48$ et $- 48 + 5 = - 43 < 0$. Le lutin dira Bravo. 
+		\item %Quelle sera la réponse du lutin si elle choisit le nombre $- 5$ ?
+		On a $ - 4 \times - 5 = 20$ et $20 + 5 = 25 >0$. La lutin dira Essaie encore.
+ 	\end{enumerate}
+\item  %Le programme de calcul ci-dessus peut se traduire par l'expression littérale
+$- 4x + 5$ avec $x$ représentant le nombre choisi.
+
+%Résoudre l'inéquation suivante : $- 4x + 5 < 0$
+Si $- 4x + 5 < 0$, alors $5 < 4x$ puis $\dfrac{5}{4} < x$ ou $x > \dfrac{5}{4}$.
+
+Les nombres solutions sont les supérieurs à 1,25.
+\item  %À quelle condition, portant sur le nombre choisi, est-on certain que la réponse
+%du lutin sera \og Bravo \fg{} ?
+Le lutin dira Bravo dès que lon choisira un nombre supérieur à 1,25.
+\end{enumerate}
+
+\bigskip
+

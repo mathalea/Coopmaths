@@ -66,11 +66,11 @@
   <!-- Le loader central déclaré comme pouvant charger des modules -->
   <script type="module" src="mathalea.js"></script>
   <script>
-    // Les variables globales nécessaires aux exercices (pas terrible...)
-    let sortie_html = false;
-    let est_diaporama = false;
-    let mathalea = {pixelsParCm :20,scale : 1,unitesLutinParCm : 50, mainlevee:false,amplitude:1,fenetreMathalea2d : [-1,-10,29,10], objets2D:[]};
-  </script>
+		// Les variables globales nécessaires aux exercices (pas terrible...)
+    window.mathalea={sortieNB:false, anglePerspective:30,coeffPerspective:0.5,pixelsParCm :20,scale : 1,unitesLutinParCm : 50, mainlevee:false,amplitude:1,fenetreMathalea2d : [-1,-10,29,10], objets2D:[]};
+    window.sortie_html=false
+    window.est_diaporama=false
+  </script> 
 
 <title>MathALÉA</title>
 </head>
@@ -161,6 +161,7 @@
           <div class="form-group text-center">
             <input type="hidden" name="encoded_snip" value="" autocomplete="off">
             <input type="hidden" name="snip_name" value="CoopMaths" autocomplete="off">
+            <input type="hidden" name="engine" value="" autocomplete="off">
             <button style="margin:10px" class="btn-success btn btn-smclass ui labeled icon button" id="btn_overleaf" type="submit" >
               <i class="cogs icon"></i>Obtenir le PDF via Overleaf.com</button>  
             </div>
@@ -273,7 +274,11 @@
                   </div>
                   <div class="ui checkbox">
                     <input type="checkbox" tabindex="0" id="supprimer_reference" class="hidden">
-                    <label>Cacher les identifiants des exercices</label>
+                    <label>Cacher les identifiants des exercices&nbsp;&nbsp;&nbsp</label>
+                  </div>
+                  <div class="ui checkbox">
+                    <input type="checkbox" tabindex="0" id="ModeNB" class="hidden">
+                    <label>Remplissage N&B</label>
                   </div>
                 </div>
               </form>
@@ -281,6 +286,12 @@
               <div>
                 <a href="fichiers/preambule.tex" class="lien_preambule"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Préambule</button></a>
                 <a href="fichiers/images.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images</button></a>
+                <a href="https://coopmaths.fr/dnb/2013/tex/eps/images_dnb2013.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images DNB-2013</button></a>                      
+                <a href="https://coopmaths.fr/dnb/2014/tex/eps/images_dnb2014.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images DNB-2014</button></a>                                                                               
+                <a href="https://coopmaths.fr/dnb/2017/tex/eps/images_dnb2017.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images DNB-2017</button></a>                      
+                <a href="https://coopmaths.fr/dnb/2018/tex/eps/images_dnb2018.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images DNB-2018</button></a>                      
+                <a href="https://coopmaths.fr/dnb/2019/tex/eps/images_dnb2019.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images DNB-2019</button></a>                      
+                <a href="https://coopmaths.fr/dnb/2020/tex/eps/images_dnb2020.zip" class="lien_images"><button class="ui compact basic icon button" tabindex="0"><i class="download icon"></i> Images DNB-2020</button></a>                      
               </div>
             </div>
             <!-- </div> -->

@@ -1,0 +1,70 @@
+
+\medskip
+
+%Les activités humaines produisent du dioxyde de carbone (CO$_2$) qui contribue au réchauffement
+%climatique. Le graphique suivant représente l'évolution de la concentration atmosphérique moyenne
+%en CO$_2$ (en ppm) en fonction du temps (en année).
+%
+%\begin{center}
+%\psset{xunit=0.35cm,yunit=0.05cm}
+%\begin{pspicture}(45,190)
+%\psaxes[linewidth=1.25pt,Ox=1980,Dx=5,Oy=300,Dy=20](0,0)(0,0)(35,160)
+%\multido{\n=0+5}{8}{\psline[linestyle=dashed](\n,0)(\n,160)}
+%\multido{\n=0+20}{9}{\psline[linestyle=dashed](0,\n)(35,\n)}
+%\pscurve[linewidth=1.25pt,linecolor=blue](4,42)(7.5,50)(10,54)(12.5,58)(15,60)(20,68)(25,80)(30,88)(33,97)
+%\rput(17.5,188){\textbf{Concentration de CO$_2$ atmosphérique}}
+%\rput(17.5,172){\footnotesize (Source: Centre Mondial de Données relatives aux Gaz à Effet de Serre sous l'égide de l'OMM)}
+%\uput[r](35,150){\scriptsize 450 ppm}
+%\uput[r](35,145){\scriptsize niveau moyen}
+%\uput[r](35,140){\scriptsize à ne pas dépasser}
+%\uput[r](35,135){\scriptsize à l'horizon 2100}
+%\uput[r](0,165){parties par million - CO$_2$}
+%\end{pspicture}
+%
+%\vspace{0.6cm}
+%
+%1 ppm de CO$_2$ = 1 partie par million de CO$_2$ = 1 milligramme de CO$_2$ par kilogramme d'air.
+%\end{center}
+%\smallskip
+
+\begin{enumerate}
+\item %Déterminer graphiquement la concentration de CO$_2$ en ppm en 1995 puis en 2005.
+On lit sur le graphique :
+\begin{itemize}
+\item en 1995 : 360~ppm ;
+\item en 2005 : 380~ppm. 
+\end{itemize}
+
+\item %On veut modéliser l'évolution de la concentration de CO$_2$ en fonction du temps à l'aide d'une
+%fonction $g$ où $g(x)$ est la concentration de CO$_2$ en ppm en fonction de l'année $x$.
+	\begin{enumerate}
+		\item %Expliquer pourquoi une fonction affine semble appropriée pour modéliser la concentration
+%en CO$_2$ en fonction du temps entre 1995 et 2005.
+Les points de la courbe sont à peu près alignés : le modèle affine semble donc pertinent.
+		\item  %Arnold et Billy proposent chacun une expression pour la fonction $g$ :
+		
+%Arnold propose l'expression $g(x) = 2x - \np{3630}$ ;
+		
+%Billy propose l'expression $g(x) = 2x - \np{2000}$.
+		
+%Quelle expression modélise le mieux l'évolution de la concentration de CO$_2$ ? Justifier.
+Pour l'année 1995, l'expression de'Arnold donne $2 \times \np{1995} - \np{3630} = 360$, et celle de Billy $2 \times 1995 - \np{2000} = \np{1990}$ : ce dernier résultat est complètement erroné.
+
+Il vaut mieux prendre l'expression d'Arnold.
+		\item  %En utilisant la fonction que vous avez choisie à la question précédente, indiquer l'année pour laquelle la valeur de $450$~ppm est atteinte.
+		Il faut résoudre l'équation :
+		
+$2x - \np{3630} = 450$ soit $2x = \np{4080}$ et $x = \np{2040}$.
+
+La valeur de 450~ppm sera atteinte en 2040.
+ 	\end{enumerate}
+\item  %En France, les forêts, grâce à la photosynthèse, captent environ $70$~mégatonnes de CO$_2$ par an, ce qui représente $15$\,\% des émissions nationales de carbone (année 2016).
+	
+%Calculer une valeur approchée à une mégatonne près de la masse M du CO$_2$ émis en France en 2016.
+Si en 2016, $70$ mégatonnes représentent 15\,\% des émissions $M$ de carbone, alors :
+
+$\dfrac{15}{100} \times M = 70$, soit $M = \dfrac{70 \times 100}{15} \approx 466,6$, soit 467~mégatonnes de CO$_2$ à la mégatonne près.
+\end{enumerate}
+
+\bigskip
+

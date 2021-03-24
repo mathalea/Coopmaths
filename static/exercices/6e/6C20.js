@@ -1,6 +1,6 @@
 import Operation from '/modules/operations.js';
 import Exercice from '../ClasseExercice.js';
-import { liste_de_question_to_contenu, randint, combinaison_listes, calcul, tex_nombrec, tex_nombre } from "/modules/outils.js"
+import { liste_de_question_to_contenu, randint, combinaison_listes, calcul, tex_nombrec, tex_nombre,export_QCM_AMC } from "/modules/outils.js"
 /**
  * Additions et soustractions de nombres décimaux
  * * xxx-xx,x
@@ -23,11 +23,18 @@ export default function Additionner_soustraires_decimaux() {
   this.nb_questions = 4;
   this.sup = 3;
   this.tailleDiaporama = 100;
-
+  this.QCM = ['6C20', [], 'Poser et effectuer les calculs suivants',4]
+ 			/********************************************************************/
+      /** Type 4 : questionmultx avec AMCnumericChoices */
+			// Dans ce cas, le tableau des booléens comprend les renseignements nécessaires pour paramétrer \AMCnumericCoices
+			// {int digits,int decimals,bool signe,int exposant_nb_chiffres,bool exposant_signe,int approx}
+			// La correction est dans tabQCM[1][0] et la réponse numlérique est dans tabQCM[1][1]
+			/********************************************************************/
   this.nouvelle_version = function () {
+    this.QCM[1]=[]
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
-    let type_de_questions
+    let type_de_questions,reponse
     let liste_de_type_d_additions = combinaison_listes(
       [5, 6, 7, 8],
       this.nb_questions
@@ -63,6 +70,7 @@ export default function Additionner_soustraires_decimaux() {
           a = randint(1, 4) * 100 + randint(2, 5) * 10 + randint(1, 9);
           b = calcul(randint(5, 9) * 10 + randint(6, 9) + randint(1, 9) / 10);
           texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+          reponse=calcul(a-b)
           texte_corr = Operation({ operande1: a, operande2: b, type: 'soustraction' })
           break;
         case 2: // xxx-xx,xx
@@ -74,6 +82,7 @@ export default function Additionner_soustraires_decimaux() {
             randint(1, 9) / 100
           );
           texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+          reponse=calcul(a-b)
           texte_corr = Operation({ operande1: a, operande2: b, type: 'soustraction' })
           break;
         case 3: // xxx,x-xxx
@@ -85,6 +94,7 @@ export default function Additionner_soustraires_decimaux() {
           );
           b = randint(1, 4) * 100 + randint(6, 9) * 10 + randint(1, 9);
           texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+          reponse=calcul(a-b)
           texte_corr = Operation({ operande1: a, operande2: b, type: 'soustraction' })
           break;
         case 4: // x0x-xx9,x
@@ -93,12 +103,14 @@ export default function Additionner_soustraires_decimaux() {
             randint(1, 4) * 100 + randint(1, 9) * 10 + 9 + randint(1, 9) / 10
           );
           texte = `$${tex_nombre(a)}-${tex_nombre(b)}$`;
+          reponse=calcul(a-b)
           texte_corr = Operation({ operande1: a, operande2: b, type: 'soustraction' })
           break;
         case 5: // xxx+xx,x
           a = randint(1, 4) * 100 + randint(2, 5) * 10 + randint(1, 9);
           b = calcul(randint(5, 9) * 10 + randint(6, 9) + randint(1, 9) / 10);
           texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+          reponse=calcul(a+b)
           texte_corr = Operation({ operande1: a, operande2: b, type: 'addition' })
           break;
         case 6: // xxx+xx,xx
@@ -110,6 +122,7 @@ export default function Additionner_soustraires_decimaux() {
             randint(1, 9) / 100
           );
           texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+          reponse=calcul(a+b)
           texte_corr = Operation({ operande1: a, operande2: b, type: 'addition' })
           break;
         case 7: // xxx,x+xxx
@@ -121,6 +134,8 @@ export default function Additionner_soustraires_decimaux() {
           );
           b = randint(1, 4) * 100 + randint(6, 9) * 10 + randint(1, 9);
           texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+          reponse=calcul(a+b)
+
           texte_corr = Operation({ operande1: a, operande2: b, type: 'addition' })
           break;
         case 8: // x0x+xx9,x
@@ -129,6 +144,7 @@ export default function Additionner_soustraires_decimaux() {
             randint(1, 4) * 100 + randint(1, 9) * 10 + 9 + randint(1, 9) / 10
           );
           texte = `$${tex_nombre(a)}+${tex_nombre(b)}$`;
+          reponse=calcul(a+b)
           texte_corr = Operation({ operande1: a, operande2: b, type: 'addition' })
           break;
       }
@@ -137,6 +153,7 @@ export default function Additionner_soustraires_decimaux() {
         // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
+        this.QCM[1].push([texte, [texte_corr,reponse], {digits:0,decimals:0,signe:false,exposant_nb_chiffres:0,exposant_signe:false,approx:0}])
         i++;
       }
       cpt++;
