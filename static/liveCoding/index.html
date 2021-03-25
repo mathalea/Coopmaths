@@ -157,6 +157,51 @@ switch (liste_type_de_questions[i]) {
 </code></pre>		
 				</section>
 
+				<section data-markdown style="text-align: left;">
+					<textarea data-template >
+						<!-- .slide: text-aligne="left" -->
+						## Les fonctions utiles
+
+						En JS, le séparateur décimal est le point. `tex_nombre()` nous permet d'afficher les nombres de manière plus conventionelle.
+						
+						```js
+						import {tex_nombre} from "/modules/outils.js" 
+						tex_nombre(2300.45) // "2 300,45"
+						```
+						---
+						## Essai
+						
+						Le Javascript comme beaucoup d'autres langages ne fait pas de calcul exact avec les décimaux. On utilise donc un moteur algébrique pour TOUS les calculs avec des décimaux, même les plus anodins.
+						
+						```js
+						import {calcul, tex_nombre, tex_nombrec} from "/modules/outils.js"
+						let a = 0.568
+						let b = 4.2
+						calcul(a * b) // 2.3856
+						tex_nombrec(a * b) // "2,385 6"
+						```
+						---
+						Pour avoir des valeurs au hasard, on a codé plusieurs petites fonctions.
+						
+						```js
+						import {randint, choice, shuffle} from "/modules/outils.js"
+						randint(1,10) // un entier au hasard entre 1 et 10
+						randint(1,19,10) // un entier au hasard entre 1 et 19 différent de 10
+						randint(-10,10,[-1,0,1]) // un entier au hasard entre -10 et 10 différent de -1, 0 ou 1
+						
+						let v1 = choice(["bateau","voiture","vélo","avion"]) // une chaine de caractère au hasard entre celles proposées dans un tableau
+						let v2 = choice(["bateau","voiture","vélo"],v1) // une chaine de caractère au hasard entre celles proposées dans un tableau sauf celle qui a déjà été choisie en v1
+						let v3 = choice(["bateau","voiture","vélo"],[v1,v2]) // une chaine de caractère au hasard entre celles proposées dans un tableau sauf celles qui ont déjà été choisies en v1 ou v2
+						
+						let tableau_origine = [1,2,3,4,5]
+						let tableau_melange = shuffle (tableau_origine) 
+						// tableau_origine est toujours [1,2,3,4,5]
+						// tableau_melange peut être [5,3,2,1,4]
+						```
+						
+					</textarea>
+				  </section>
+
 				
 
 
