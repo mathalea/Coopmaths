@@ -165,7 +165,7 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/3e/3F13.js"
     },
     "3F13-1": {
-        "titre": "Lecture graphique d'images et d'antécédents.",
+        "titre": "Lecture graphique d'images et d'antécédents",
         "url": "/exercices/3e/3F13-1.js"
     },
     "3F13-2": {
@@ -257,11 +257,11 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/3e/3G32.js"
     },
     "3G32-1": {
-        "titre": "Calcul d\\'un parallèle terrestre",
+        "titre": "Calcul d'un parallèle terrestre",
         "url": "/exercices/3e/3G32-1.js"
     },
     "3G32-2": {
-        "titre": "Calculer la hauteur d\\'un objet vu sous un angle donné",
+        "titre": "Calculer la hauteur d'un objet vu sous un angle donné",
         "url": "/exercices/3e/3G32-2.js"
     },
     "3G32-3": {
@@ -269,7 +269,7 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/3e/3G32-3.js"
     },
     "3G32-4": {
-        "titre": "Calculer la hauteur d\\'une montagne",
+        "titre": "Calculer la hauteur d'une montagne",
         "url": "/exercices/3e/3G32-4.js"
     },
     "3G32-5": {
@@ -605,7 +605,7 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/4e/4S11.js"
     },
     "5A10": {
-        "titre": "Écrire la liste de tous les diviseurs d'un entier.",
+        "titre": "Écrire la liste de tous les diviseurs d'un entier",
         "url": "/exercices/5e/5A10.js"
     },
     "5A11": {
@@ -715,6 +715,14 @@ export let dictionnaireDesExercicesAleatoires =
     "5G40": {
         "titre": "Construire des parallélogrammes avec dispositif d'auto-correction",
         "url": "/exercices/5e/5G40.js"
+    },
+    "5G40-1": {
+        "titre": "Citer les propriétés des parallélogrammes",
+        "url": "/exercices/5e/5G40-1.js"
+    },
+    "5G40-2": {
+        "titre": "Reconnaitre un parallélogramme à partir du codage d'une figure",
+        "url": "/exercices/5e/5G40-2.js"
     },
     "5G41": {
         "titre": "Construire des quadrilatères particuliers",
@@ -1604,6 +1612,10 @@ export let dictionnaireDesExercicesAleatoires =
         "titre": "Stabilisation des fréquences",
         "url": "/exercices/beta/beta3s21.js"
     },
+    "beta4C10-6": {
+        "titre": "Multiplications et quotients de relatifs : signe avec une lettre",
+        "url": "/exercices/beta/beta4C10-6.js"
+    },
     "beta4C25-00": {
         "titre": "Re-Problèmes additifs et de comparaison sur les rationnels",
         "url": "/exercices/beta/beta4C25-00.js"
@@ -1628,13 +1640,9 @@ export let dictionnaireDesExercicesAleatoires =
         "titre": "Parenthèses manquantes",
         "url": "/exercices/beta/beta6C33-1.js"
     },
-    "beta6P11": {
-        "titre": "Résoudre des problèmes de proportionnalité en utilisant la linéarité simple",
-        "url": "/exercices/beta/beta6P11.js"
-    },
-    "beta6exemple1": {
-        "titre": "Exercice exemple",
-        "url": "/exercices/beta/beta6exemple1.js"
+    "beta6G21": {
+        "titre": "Construire un triangle aux instruments",
+        "url": "/exercices/beta/beta6G21.js"
     },
     "beta6test2": {
         "titre": "Mon test",
@@ -1644,9 +1652,45 @@ export let dictionnaireDesExercicesAleatoires =
         "titre": "Tests tableaux fonctions",
         "url": "/exercices/beta/betaClasseTableauVariations.js"
     },
+    "betaExemple": {
+        "titre": "Exercice exemple",
+        "url": "/exercices/beta/betaExemple.js"
+    },
+    "betaExemple1Type": {
+        "titre": "Exercice exemple",
+        "url": "/exercices/beta/betaExemple1Type.js"
+    },
+    "betaExemple1TypeCalculLettre": {
+        "titre": "Exercice exemple",
+        "url": "/exercices/beta/betaExemple1TypeCalculLettre.js"
+    },
+    "betaExemple3Types": {
+        "titre": "Exercice exemple",
+        "url": "/exercices/beta/betaExemple3Types.js"
+    },
+    "betaExempleQuestionsDifferentes": {
+        "titre": "Exercice exemple avec un nombre fixe de questions différentes",
+        "url": "/exercices/beta/betaExempleQuestionsDifferentes.js"
+    },
     "betaExercice_constructions_basiques": {
         "titre": "Programmes de constructions (en chantier)",
         "url": "/exercices/beta/betaExercice_constructions_basiques.js"
+    },
+    "betaExoSimpleMatthieu": {
+        "titre": "Ceci est le titre de l'exercice BetaExosimpleMatthieu",
+        "url": "/exercices/beta/betaExoSimpleMatthieu.js"
+    },
+    "betaNoteLaCouleur": {
+        "titre": "Note la couleur",
+        "url": "/exercices/beta/betaNoteLaCouleur.js"
+    },
+    "betaProbabilites": {
+        "titre": "Probabilités simples",
+        "url": "/exercices/beta/betaProbabilites.js"
+    },
+    "betaPuissances": {
+        "titre": "Exercice exemple",
+        "url": "/exercices/beta/betaPuissances.js"
     },
     "betaXcas": {
         "titre": "Test de XCas",
@@ -1663,10 +1707,6 @@ export let dictionnaireDesExercicesAleatoires =
     "betarotation3d": {
         "titre": "Rotation 3d de polygones",
         "url": "/exercices/beta/betarotation3d.js"
-    },
-    "betatableaux_variation": {
-        "titre": "étude de fonction de degré 3",
-        "url": "/exercices/beta/betatableaux_variation.js"
     },
     "c3C10-1": {
         "titre": "Tables de multiplications",
@@ -1687,6 +1727,10 @@ export let dictionnaireDesExercicesAleatoires =
     "c3N10": {
         "titre": "Écrire un nombre en chiffres ou en lettres",
         "url": "/exercices/c3/c3N10.js"
+    },
+    "c3N20": {
+        "titre": "Donner l'écriture décimale à partir d'un somme d'entiers et de fractions décimales",
+        "url": "/exercices/c3/c3N20.js"
     },
     "c3N22": {
         "titre": "Lire abscisse décimale sous trois formes",

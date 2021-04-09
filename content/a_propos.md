@@ -25,6 +25,16 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 {{% mp4 "Connac" %}}
 
 
+
+### Exercices à données aléatoires - MathALEA
+
+
+- Moteur développé par Rémi Angot sous licence **CC-By-SA** puis amélioré par Jean-Claude Lhote et Cédric Grolleau.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
+- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **CC-By-SA**.
+- Le générateur d'animations pour le lecteur InstrumEnPoche a été développé par Rémi Angot.
+
+
 ### Contributeurs 
 
 - ANGOT Rémi
@@ -53,9 +63,12 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - [Mathmentales.net](http://mathsmentales.net) est développé par Sébastien Cogez
 - Le référentiel pour les ceintures de calcul mental a été écrit par Joan Riguet (auteure de l'excellent blog [joan-riguet.eklablog.fr](http://joan-riguet.eklablog.fr))
 
-### Exercices à données aléatoires - MathALEA
+### Exercices d'annales de brevet des collèges
 
-Les moteur de gestion des exercices à données aléatoires a été développé par Rémi Angot. Vous pouvez tous les retrouver en version web sur [mathalea](../mathalea.html) et en version LaTeX paramétrable sur [mathalealatex](../mathalealatex.html).
+- Denis Vergès a retranscrit en LaTeX et coordonné la rubrique des annales de concours du site de l'APMEP : [https://www.apmep.fr/-Annales-Bac-Brevet-BTS-](https://www.apmep.fr/-Annales-Bac-Brevet-BTS-).
+- Sébastien Lozano a réalisé un [programme](https://github.com/slozano54/projetDNB) (bash et Python) qui analyse les fichiers mis à disposition par l'APMEP pour les découper exercice par exercice et générer une image pour chaque exercice et chaque correction.
+
+
 
 ### Charte graphique pour les exercices
 

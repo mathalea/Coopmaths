@@ -1485,7 +1485,7 @@ export function calcul(expression, arrondir = false) {
 	if (!arrondir) {
 		return parseFloat(Algebrite.eval('float(' + expression + ')'))
 	} else {
-		return arrondi(parseFloat(Algebrite.eval('float(' + expression + ')')), arrondir)
+		return arrondi(parseFloat(Algebrite.eval('float(' + expression + ')')), arrondir);
 	}
 }
 
@@ -1498,7 +1498,7 @@ export function nombreDecimal(expression, arrondir = false) {
 	if (!arrondir) {
 		return string_nombre(calcul(expression))
 	} else {
-		return string_nombre(calcul(expression, 1))
+		return string_nombre(calcul(expression, 1));
 	}
 }
 
@@ -1509,7 +1509,7 @@ export function nombreDecimal(expression, arrondir = false) {
 * @Auteur Rémi Angot
 */
 export function tex_nombrec(expression) {
-	return tex_nombre(parseFloat(Algebrite.eval(expression)))
+	return tex_nombre(parseFloat(Algebrite.eval(expression)));
 }
 /**
  * renvoie le résultat de l'expression en couleur (vert=positif, rouge=négatif, noir=nul)
@@ -1517,8 +1517,8 @@ export function tex_nombrec(expression) {
  */
 export function tex_nombrecoul(nombre) {
 	if (nombre > 0) return mise_en_evidence(tex_nombrec(nombre), 'green')
-	else if (nombre < 0) return mise_en_evidence(tex_nombrec(nombre), 'red')
-	else return mise_en_evidence(tex_nombrec(0), 'black')
+	else if (nombre < 0) return mise_en_evidence(tex_nombrec(nombre), 'red');
+	else return mise_en_evidence(tex_nombrec(0), 'black');
 }
 
 /**
@@ -7882,7 +7882,20 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 
 	let tex_QR = ``, type = '', tabQCM
 	let nbBonnes, id = 0, nb_chiffres_pe, nb_chiffres_pd, nb_chiffres, reponse
-	let params=tabQCMs[4]
+	let params,horizontalite
+	if (tabQCMs.length>4) {
+		params=tabQCMs[4]
+		if (params.vertical==='undefined') {
+			horizontalite='reponseshoriz'
+		}
+		else {
+			horizontalite='reponses'
+		}
+	}
+	else {
+		params={ordered:false,lastChoices:0}
+		horizontalite='reponseshoriz'
+	}
 	for (let j = 0; j < tabQCMs[1].length; j++) {
 		tabQCM = tabQCMs[1][j].slice(0)
 		nbBonnes = 0
@@ -7902,7 +7915,7 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 			tex_QR += `\\element{${tabQCMs[0]}}{\n `
 			tex_QR += `	\\begin{${type}}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}} \n `
 			tex_QR += `		${tabQCM[0]} \n `
-			tex_QR += `		\\begin{reponseshoriz}`
+			tex_QR += `		\\begin{${horizontalite}}`
 			if (params.ordered==true){
 				tex_QR +=`[o]`
 			}
@@ -7920,7 +7933,7 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 						break
 				}
 			}
-			tex_QR += `		\\end{reponseshoriz}\n `
+			tex_QR += `		\\end{${horizontalite}}\n `
 			tex_QR += `	\\end{${type}}\n }\n `
 			id++
 			break
@@ -7931,7 +7944,7 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 				tex_QR += `\\element{${tabQCMs[0]}}{\n `
 				tex_QR += `	\\begin{${type}}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}} \n `
 				tex_QR += `		${tabQCM[0]} \n `
-				tex_QR += `		\\begin{reponseshoriz}`
+				tex_QR += `		\\begin{${horizontalite}}`
 				if (params.ordered==true){
 					tex_QR +=`[o]`
 				}
@@ -7949,7 +7962,7 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 							break
 					}
 				}
-				tex_QR += `		\\end{reponseshoriz}\n `
+				tex_QR += `		\\end{${horizontalite}}\n `
 				tex_QR += `	\\end{${type}}\n }\n `
 				id++
 				break
@@ -7958,7 +7971,8 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 				tex_QR += `	\\begin{question}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}} \n `
 				tex_QR += `		${tabQCM[0]} \n `
 				tex_QR += `\\explain{${tabQCM[1][0]}}\n`
-				tex_QR += `\\AMCOpen{lines=${tabQCM[2][0]}}{\\mauvaise[NR]{NR}\\scoring{0}\\mauvaise[RR]{R}\\scoring{0.01}\\mauvaise[R]{R}\\scoring{0.33}\\mauvaise[V]{V}\\scoring{0.67}\\bonne[VV]{V}\\scoring{1}}\n`
+				tex_QR+=`\\notation{${tabQCM[2][0]}}\n`
+				//tex_QR += `\\AMCOpen{lines=${tabQCM[2][0]}}{\\mauvaise[NR]{NR}\\scoring{0}\\mauvaise[RR]{R}\\scoring{0.01}\\mauvaise[R]{R}\\scoring{0.33}\\mauvaise[V]{V}\\scoring{0.67}\\bonne[VV]{V}\\scoring{1}}\n`
 				tex_QR += `\\end{question}\n }\n`
 				id++
 				break
@@ -8021,7 +8035,8 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 				tex_QR += `	\\begin{question}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}a} \n `
 				tex_QR += `		${tabQCM[0]} \n `
 				tex_QR += `\\explain{${tabQCM[1][0]}}\n`
-				tex_QR += `\\AMCOpen{lines=${tabQCM[1][2]}}{\\mauvaise[NR]{NR}\\scoring{0}\\mauvaise[RR]{R}\\scoring{0.01}\\mauvaise[R]{R}\\scoring{0.33}\\mauvaise[V]{V}\\scoring{0.67}\\bonne[VV]{V}\\scoring{1}}\n`
+				tex_QR+=`\\notation{${tabQCM[1][2]}}\n`
+				//tex_QR += `\\AMCOpen{lines=${tabQCM[1][2]}}{\\mauvaise[NR]{NR}\\scoring{0}\\mauvaise[RR]{R}\\scoring{0.01}\\mauvaise[R]{R}\\scoring{0.33}\\mauvaise[V]{V}\\scoring{0.67}\\bonne[VV]{V}\\scoring{1}}\n`
 				tex_QR += `\\end{question}\n\\end{minipage}\n`
 				if (tabQCM[2].exposant_nb_chiffres == 0) {
 					reponse = tabQCM[1][1]
@@ -8072,7 +8087,7 @@ export function export_QCM_AMC(tabQCMs, idExo) {
  * nb_exemplaire est le nombre de copie à générer
  * matiere et titre se passe de commentaires : ils renseigne l'entête du sujet.
  */
-export function creer_document_AMC({ questions, nb_questions = [], nb_exemplaires = 1, matiere = 'Mathématiques', titre = 'Evaluation',type_entete="AMCcodeGrid"}) {
+export function creer_document_AMC({ questions, nb_questions = [], nb_exemplaires = 1, matiere = 'Mathématiques', titre = 'Evaluation',type_entete="AMCcodeGrid",format='A4'}) {
 	// Attention questions est maintenant un tableau de tous les this.QCM des exos
 	// Dans cette partie, la fonction récupère toutes les questions et les trie pour les rassembler par groupe
 	// Toutes les questions d'un même exercice seront regroupées ce qui permet éventuellement de les récupérer dans des fichiers individuels pour se constituer une base
@@ -8126,9 +8141,15 @@ console.log(type_entete)
 	let preambule = `%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%% -I- PRÉAMBULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	 \\documentclass[10pt,a4paper,francais]{article}
-	 
+	\n`
+	if (format=='A3'){
+		preambule+=`	 \\documentclass[10pt,a3paper,landscape,french]{article}\n`
+	}
+	else {
+		preambule+=`	 	 \\documentclass[10pt,a4paper,french]{article}\n`
+	}
+
+preambule+=`	 
 	%%%%% PACKAGES LANGUE %%%%%
 	 \\usepackage{babel} % sans option => langue définie dans la classe du document
 	 \\usepackage[T1]{fontenc} 
@@ -8136,11 +8157,11 @@ console.log(type_entete)
 	 \\usepackage{lmodern}			        		% Choix de la fonte (Latin Modern de D. Knuth)
 	 \\usepackage{fp}
 	
-	%%%%% SPÉCIFICITÉS A.M.C. %%%%%
+	%%%%%%%%%%%%%%%%%%%%% SPÉCIFICITÉS A.M.C. %%%%%%%%%%%%%%%%%%%%%%
 	%\\usepackage[francais,bloc,completemulti]{automultiplechoice} 
 	%   remarque : avec completmulti => "aucune réponse ne convient" en +
-	 \\usepackage[francais,bloc]{automultiplechoice} %//,insidebox
-	
+	 \\usepackage[francais,bloc,insidebox]{automultiplechoice} %//,insidebox
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	%%%%% PACKAGES MISE EN PAGE %%%%%
 	 \\usepackage{multicol} 
@@ -8224,7 +8245,9 @@ console.log(type_entete)
 	\\newcommand{\\collerVertic}{\\vspace{-3mm}} % évite un trop grand espace vertical
 	\\newcommand{\\TT}{\\sout{\\textbf{Tiers Temps}} \\noindent} % 
 	\\newcommand{\\Prio}{\\fbox{\\textbf{PRIORITAIRE}} \\noindent} % 
-	
+	\\newcommand{\\notation}[1]{
+		\\AMCOpen{lines=#1}{\\mauvaise[{\\tiny NR}]{NR}\\scoring{0}\\mauvaise[{\\tiny RR}]{R}\\scoring{0.01}\\mauvaise[{\\tiny R}]{R}\\scoring{0.33}\\mauvaise[{\\tiny V}]{V}\\scoring{0.67}\\bonne[{\\tiny VV}]{V}\\scoring{1}}
+		}
 	%%pour afficher ailleurs que dans une question
 	\\makeatletter
 	\\newcommand{\\AffichageSiCorrige}[1]{\\ifAMC@correc #1\\fi}
@@ -8236,8 +8259,8 @@ console.log(type_entete)
 	 \\geometry{headsep=0.3cm, left=1.5cm,right=1.5cm,top=2.4cm,bottom=1.5cm}
 	 \\DecimalMathComma 
 	
-	 \\AMCcodeHspace=.4em % réduction de la taille des cases pour le code élève
-	 \\AMCcodeVspace=.4em 
+	 \\AMCcodeHspace=.3em % réduction de la taille des cases pour le code élève
+	 \\AMCcodeVspace=.3em 
 	% \\AMCcodeBoxSep=.1em
 	 
 	 \\def\\AMCotextReserved{\\emph{Ne rien cocher, réservé au prof !}}
@@ -8295,13 +8318,12 @@ console.log(type_entete)
 	Puis remplir les cases des trois premières lettres de votre \\textbf{nom de famille} PUIS des deux premières lettres de votre \\textbf{prénom}
 	\\vspace{1mm}
 	
+	\\def\\AMCchoiceLabelFormat##1{\\textcolor{black!70}{{\\tiny ##1}}}  % pour alléger la couleur des lettres dans les cases et les réduire
 	\\AMCcodeGrid[h]{ID}{ABCDEFGHIJKLMNOPQRSTUVWXYZ,
 	ABCDEFGHIJKLMNOPQRSTUVWXYZ,
 	ABCDEFGHIJKLMNOPQRSTUVWXYZ,
 	ABCDEFGHIJKLMNOPQRSTUVWXYZ,
 	ABCDEFGHIJKLMNOPQRSTUVWXYZ}
-	
-	\\vspace{2mm}
 	`
 	let entete_type_champnom_simple=	`\\begin{minipage}{10cm}
 	\\champnom{\\fbox{\\parbox{10cm}{    
@@ -8332,7 +8354,11 @@ console.log(type_entete)
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\\exemplaire{${nb_exemplaires}}{   % <======  /!\\ PENSER À ADAPTER /!\\  ==  %
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+	\n`
+	if (format=='A3') {
+		entete_copie+=`\\begin{multicols}{2}\n`
+	}
+	entete_copie+=`
 	%%%%% EN-TÊTE, IDENTIFICATION AUTOMATIQUE DE L'ÉLÈVE %%%%%
 	
 	\\vspace*{-17mm}
@@ -8362,7 +8388,7 @@ console.log(type_entete)
 	entete_copie+=
 	`\n{\\footnotesize REMPLIR avec un stylo NOIR la ou les cases pour chaque question. Si vous devez modifier un choix, NE PAS chercher à redessiner la case cochée par erreur, mettez simplement un coup de "blanc" dessus.
 	
-	Les questions n'ont qu'une seule bonne réponse. Les questions qui commencent par \\TT ne doivent pas être faites par les élèves disposant d'un tiers temps.
+	Les questions précédées de \\multiSymbole peuvent avoir plusieurs réponses.\\\\ Les questions qui commencent par \\TT ne doivent pas être faites par les élèves disposant d'un tiers temps.
 	
 	→ Il est fortement conseillé de faire les calculs dans sa tête ou sur la partie blanche de la feuille sans regarder les solutions proposées avant de remplir la bonne case plutôt que d'essayer de choisir entre les propositions (ce qui demande de toutes les examiner et prend donc plus de temps) ←}
 	
@@ -8372,6 +8398,9 @@ console.log(type_entete)
 	// nb_question est un tableau passé en paramètre à la fonction creer_document_AMC pour déterminer le nombre de questions à restituer par groupe.
 	// si ce nombre est 0, on restitue toutes les questions du groupe
 	let contenu_copie=''
+	if (type_entete=="AMCcodeGrid"){
+		contenu_copie +=`		\\def\\AMCchoiceLabel##1{}`
+		}
 	for (let g of groupeDeQuestions) {
 		let i = groupeDeQuestions.indexOf(g)
 		contenu_copie += `
@@ -8388,10 +8417,13 @@ console.log(type_entete)
 		else {
 			contenu_copie += `\\restituegroupe{${g}}\n\n`
 		}
-	}
 
+	}
+	if (format=='A3'){
+		contenu_copie+=`\\end{multicols}\n`
+	}
 	if (type_entete=="AMCassociation"){
-		contenu_copie+=`\\AMCassociation{\id}\n
+		contenu_copie+=`\\AMCassociation{\\id}\n
 	  }
 	}\n`
 	}

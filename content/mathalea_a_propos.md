@@ -45,7 +45,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 ### Crédits
 
 - Moteur développé par Rémi Angot sous licence **CC-By-SA**.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
 - MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **CC-By-SA**.
 
 ### Ressources libres utilisées
@@ -54,6 +54,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
 - [maths.js](https://mathsjs.org) Apache license 2.0 (pour le calcul formel et les matrices)
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Biton - Licence GNU AGPLv3 (pour les constructions géométriques).
+- [InstrumEnPoche](https://instrumenpoche.sesamath.net) Lecteur Javascript développé par Yves Biton d'après une application Flash développée par Laurent Zamo - Licence GNU AGPLv3 (pour les animations avec les instruments de géométrie).
 - [Giac/XCas](https://www-fourier.ujf-grenoble.fr/~parisse/giac_fr.html) développé par Bernard Parisse et Renée De Graeve (pour le calcul formel dans les exercices de lycée)
 - [Semantic UI](https://semantic-ui.com/) MIT license (pour l'interface utilisateur).
 - [KaTeX](https://khan.github.io/KaTeX/) LPPL (pour le rendu LaTeX des exercices en ligne).
@@ -71,6 +72,8 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - Icone "[Whisper](https://thenounproject.com/term/whisper/21616/)" by Rémy Médard from the Noun Project.
 - Icone "[Silence](https://thenounproject.com/term/whisper/77879/)" by Gianluca Manzana from the Noun Project.
 - Icone "[Traffic Light](https://thenounproject.com/term/traffic-lights/1084957/)" by Lukáš Jača from the Noun Project.
+- Icone "[Geometry](https://thenounproject.com/term/geometry/1172014/)" by Vectors Market from the Noun Project.
+- Icone "[Be different](https://thenounproject.com/search/?q=different&i=1295561)" by chiccabubble from the Noun Project.
 
 
 ### ToDo
@@ -88,13 +91,20 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 ### Changelog
 
+#### 04/21
+
+- Intégration du lecteur InstrumEnPoche
+- Création de macros constructions pour InstrumEnPoche
+
 #### 03/21
 
 
 - Intégration des annales de brevet en partenariat avec l'APMEP.
 - Export au format AMC.
 - Exercices sur les ratios.
-- Arrivée de Cédric Grolleau pour la programmation d'exercices.
+- Arrivée de Cédric Grolleau pour la programmation d'exercices et le travail sur l'interface utilisateur.
+- Arrivée de Deviller Matthieu pour la programmation d'exercices.
+
 
 #### 01/21
 
