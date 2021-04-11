@@ -1,3 +1,5 @@
+/* global iepLoad */
+
 import { point, pointAdistance, droite, droiteParPointEtPerpendiculaire, segment, triangle2points2longueurs, cercle, pointIntersectionLC, homothetie, longueur, milieu, pointSurSegment, rotation, pointIntersectionDD, translation2Points, droiteParPointEtParallele, projectionOrtho, centreCercleCirconscrit, angleOriente } from './2d.js'
 import { calcul, randint, nombre_avec_espace as nombreAvecEspace } from './outils.js'
 
@@ -127,15 +129,12 @@ export default function Alea2iep () {
    * @param {int} numeroExercice - Numéro de l'exercice
    * @param {int} i - Numéro de la question
    */
-  this.html = function (numeroExercice, i) {
+  this.html = function (id1, id2) {
     if (window.sortie_html) {
-      const id = `${numeroExercice}_${i}`
-      window.listeIEP.push([id, calcul(this.xMax - this.xMin), calcul(this.yMax - this.yMin)]) // Sauvegard le liste de toutes les animations à ajouter aux exercices
-      const codeHTML = `<script id="figurexml${numeroExercice}_${i}" type="text/xml">
-                ${this.script()}
-            </script>
-            <br>
-            <div id="IEPContainer${id}" ></div>`
+      const id = `IEP_${id1}_${id2}`
+      window.listeScriptsIep[id] = this.script() // On ajoute le script
+      const codeHTML = `<div id="IEPContainer${id}" ></div>`
+      window.listeAnimationsIepACharger.push(id)
       return codeHTML
     }
   }
@@ -146,27 +145,26 @@ export default function Alea2iep () {
    * @param {int} i - Numéro de la question
    * @return Code HTML avec le bouton qui affiche ou masque un div avec l'animation
    */
-  this.htmlBouton = function (numeroExercice, i) {
+  this.htmlBouton = function (id1, id2 = '') {
     if (window.sortie_html) {
-      const id = `${numeroExercice}_${i}`
-      window.listeIEP.push([id, calcul(this.xMax - this.xMin), calcul(this.yMax - this.yMin)]) // Sauvegard le liste de toutes les animations à ajouter aux exercices
-      const codeHTML = `<script id="figurexml${numeroExercice}_${i}" type="text/xml">
-                ${this.script()}
-            </script>
-            <br>
-            <button class="ui mini compact button" id="btnAnimation${id}" onclick="toggleVisibilityIEP(IEPContainer${id},btnAnimation${id})""><i class="large play circle outline icon"></i>Voir animation</button>
+      const id = `IEP_${id1}_${id2}`
+      window.listeScriptsIep[id] = this.script() // On ajoute le script
+      const codeHTML = `<br><button class="ui mini compact button" id="btnAnimation${id}" onclick="toggleVisibilityIEP('${id}')"><i class="large play circle outline icon"></i>Voir animation</button>
             <div id="IEPContainer${id}" style="display: none;" ></div>`
-
-      window.toggleVisibilityIEP = function (idElement, idBtn) {
-        // Pourquoi un string se transforme en élément du DOM !?
-        // let element = document.getElementById(idElement)
-        // let elementBtn = document.getElementById(idBtn)
-        if (idElement.style.display === 'none') {
-          idElement.style.display = 'block'
-          idBtn.innerHTML = '<i class="large stop circle outline icon"></i>Masquer animation'
-        } else {
-          idElement.style.display = 'none'
-          idBtn.innerHTML = '<i class="large play circle outline icon"></i>Voir animation'
+      if (!window.toggleVisibilityIEP) {
+        window.toggleVisibilityIEP = function (id) {
+          const element = document.getElementById(`IEPContainer${id}`)
+          const elementBtn = document.getElementById(`btnAnimation${id}`)
+          const xml = window.listeScriptsIep[id]
+          if (element.style.display === 'none') {
+            element.style.display = 'block'
+            elementBtn.innerHTML = '<i class="large stop circle outline icon"></i>Masquer animation'
+            console.log(element, xml)
+            iepLoad(element, xml, { zoom: true }, (error)=>{console.log(error)})
+          } else {
+            element.style.display = 'none'
+            elementBtn.innerHTML = '<i class="large play circle outline icon"></i>Voir animation'
+          }
         }
       }
       return codeHTML
@@ -337,6 +335,15 @@ export default function Alea2iep () {
    * @param {point} A
    * @param {objet} options
    */
+  this.texteDeplacer = function (id, A, { tempo = this.tempo, vitesse = this.vitesse } = {}) {
+    const codeXML = `<action objet="texte" id="${id}" mouvement="translation" abscisse="${this.x(A)}" ordonnee="${this.y(A)}" tempo="${tempo}" vitesse="${vitesse}" />`
+    this.liste_script.push(codeXML)
+  }
+  /**
+   *
+   * @param {point} A
+   * @param {objet} options
+   */
   this.crayonDeplacer = function (A, options) {
     this.deplacer('crayon', A, options)
   }
@@ -388,9 +395,8 @@ export default function Alea2iep () {
       angle = a
     }
     if (this[objet].angle !== a) { // Si la rotation est inutile, on ne la fait pas
-    // Les angles de MathALEA2D et de IEP sont opposés !!!!!
-      angle = Math.round(angle, 2)
-      const codeXML = `<action objet="${objet}" mouvement="rotation" angle="${-angle}" tempo="${tempo}" sens="${sens}" />`
+      // Les angles de MathALEA2D et de IEP sont opposés !!!!!
+      const codeXML = `<action objet="${objet}" mouvement="rotation" angle="${-1 * angle}" tempo="${tempo}" sens="${sens}" />`
       this[objet].angle = angle
       if (typeof angle === 'number' && isFinite(angle)) {
         this.liste_script.push(codeXML)
@@ -1011,8 +1017,9 @@ export default function Alea2iep () {
    * @param {string} texte
    * @param {point} A
    * @param {objet} options Défaut : { tempo: this.tempo, police: false, couleur: this.couleurTexte, couleurFond, opaciteFond, couleurCadre, epaisseurCadre, marge, margeGauche, margeDroite, margeHaut, margeBas }
+   * @return {id}
    */
-  this.textePoint = function (texte, A, { tempo = this.tempo, police = false, couleur = this.couleurTexte, couleurFond, opaciteFond, couleurCadre, epaisseurCadre, marge, margeGauche, margeDroite, margeHaut, margeBas } = {}) {
+  this.textePoint = function (texte, A, { tempo = this.tempo, police = false, couleur = this.couleurTexte, taille, couleurFond, opaciteFond, couleurCadre, epaisseurCadre, marge, margeGauche, margeDroite, margeHaut, margeBas } = {}) {
     this.idIEP++
     const policeTexte = police ? `police="${police}"` : ''
     let options = ''
@@ -1043,9 +1050,13 @@ export default function Alea2iep () {
     if (typeof margeHaut !== 'undefined') {
       options += ` marge_haut="${margeHaut}"`
     }
+    if (typeof taille !== 'undefined') {
+      options += ` taille="${taille}"`
+    }
     let codeXML = `<action abscisse="${this.x(A)}" ordonnee="${this.y(A)}" id="${this.idIEP}" mouvement="creer" objet="texte" />`
     codeXML += `\n<action ${policeTexte} couleur="${couleur}" texte="${texte}" id="${this.idIEP}" mouvement="ecrire" objet="texte" ${options} tempo="${tempo}" />`
     this.liste_script.push(codeXML)
+    return this.idIEP
   }
   /**
    * Ecris un texte collé au point de coordonnées (x,y). On peut choisir un fond, un cadre, l'opacité du fond, la police...
@@ -1056,7 +1067,16 @@ export default function Alea2iep () {
    */
   this.textePosition = function (texte, x, y, options) {
     const A = point(x, y)
-    this.textePoint(texte, A, options)
+    return this.textePoint(texte, A, options)
+  }
+
+  /**
+ * Masque le trait d'id fourni
+ * @param {int} id
+ * @param {objet} options Défaut : { tempo: 0 }
+ */
+  this.texteMasquer = function (id, { tempo = 0 } = {}) {
+    this.liste_script.push(`<action mouvement="masquer" objet="texte" id="${id}"  />`)
   }
 
   /**
@@ -1471,7 +1491,7 @@ export default function Alea2iep () {
     return { arc1: arc1, arc2: arc2, arc3: arc3, arc4: arc4 }
   }
 
-  this.cercleCirconscrit = function (A, B, C, options) {
+  this.cercleCirconscrit = function (A, B, C, options = {}) {
     if (options.couleur === undefined) {
       options.couleur = this.couleur
     }
@@ -1601,7 +1621,9 @@ export default function Alea2iep () {
     this.equerreDeplacer(B)
     this.tracer(c)
     this.equerreMasquer()
-    if (description) this.textePosition(`${A.nom + C.nom} = ${nombreAvecEspace(AC)} cm donc C appartient au cercle de centre A et de rayon ${nombreAvecEspace(AC)} cm.`, 0, -4)
+    this.codageAngleDroit(A, B, C)
+    this.crayonMasquer()
+    if (description) this.textePosition(`${A.nom + C.nom} = ${nombreAvecEspace(AC)} cm donc ${C.nom} appartient au cercle de centre ${A.nom} et de rayon ${nombreAvecEspace(AC)} cm.`, 0, -4)
     this.compasMontrer(A)
     this.compasEcarterAvecRegle(AC)
     this.couleur = 'forestgreen'
@@ -1610,11 +1632,69 @@ export default function Alea2iep () {
     this.couleur = 'blue'
     this.epaisseur = 2
     if (description) this.textePosition(`${C.nom} est à une intersection de la perpendiculaire et du cercle.`, 0, -5)
+    this.crayonMontrer(C)
     this.pointCreer(C)
     this.compasMasquer()
     this.regleSegment(A, C)
     this.regleMasquer()
     this.crayonMasquer()
+    return [A, B, C]
+  }
+
+  /**
+   * Macro de construction d'un triangle rectangle (l'angle droit est le 2e point dans l'ordre du nom)
+   *  à partir de la donnée de la longueur d'un côté et de la longueur de l'hypoténuse.
+   *  Le premier sommet aura pour coordonnées (6, 0)
+   * @param {string} ABC Une chaine de caractère de 3 lettre
+   * @param {*} AB Distance entre le 1er et le 2e sommet
+   * @param {*} AC Distance entre le 1er et le 3e sommet (hypoténuse)
+   * @param {boolean} description Affichage d'un texte descriptif des étapes de la construction
+   * @return {array} [A, B, C] les 3 sommets du triangle (objets MathALEA2D)
+   */
+  this.triangleRectangle2Cotes = function (ABC, AB, BC, description = true) { // Triangle rectangle en B
+    const A = point(6, 0)
+    const B = pointAdistance(A, AB, randint(-20, 20))
+    const dAB = droite(A, B)
+    dAB.isVisible = false
+    const dBC = droiteParPointEtPerpendiculaire(B, dAB)
+    dBC.isVisible = false
+    const cBC = cercle(B, BC)
+    cBC.isVisible = false
+    const C = pointIntersectionLC(dBC, cBC)
+    const c = homothetie(C, B, 1.2)
+    if (ABC.length !== 3) {
+      description = false
+    } else {
+      A.nom = ABC[0]
+      B.nom = ABC[1]
+      C.nom = ABC[2]
+    }
+
+    if (longueur(A, C) > 8) this.equerreZoom(150)
+    if (description) this.textePosition(`${A.nom + B.nom} = ${nombreAvecEspace(AB)} cm`, 0, -2)
+    this.equerreRotation(dAB.angleAvecHorizontale)
+    this.pointCreer(A)
+    this.regleSegment(A, B)
+    this.pointCreer(B)
+    if (description) this.textePosition(`${A.nom + B.nom + C.nom} est un triangle rectangle en ${B.nom} donc ${C.nom} appartient à la perpendiculaire à (${A.nom + B.nom}) passant par ${B.nom}.`, 0, -3)
+    this.equerreMontrer(A)
+    this.equerreDeplacer(B)
+    this.tracer(c)
+    this.equerreMasquer()
+    this.codageAngleDroit(A, B, C)
+    if (description) this.textePosition(`${B.nom + C.nom} = ${nombreAvecEspace(BC)} cm donc ${C.nom} est à ${nombreAvecEspace(BC)} cm de ${B.nom} sur la perpendiculaire à (${A.nom + B.nom}) passant par ${B.nom}.`, 0, -4)
+    this.regleMontrer(B)
+    this.regleRotation(C)
+    this.crayonDeplacer(C)
+    this.pointCreer(C)
+    this.couleur = 'blue'
+    this.epaisseur = 2
+    this.compasMasquer()
+    this.regleSegment(A, C)
+    this.regleMasquer()
+    this.crayonMasquer()
+
+    return [A, B, C]
   }
   /**
    * Macro de construction d'un triangle à partir d'une longueur et des 2 angles adajcents au côté connu. Le premier point aura pour coordonnées (2,0).
@@ -1625,13 +1705,14 @@ export default function Alea2iep () {
    * @param {boolean} description Affichage d'un texte descriptif des étapes de la construction
    * @return {array} [A, B, C] les 3 sommets du triangle (objets MathALEA2D)
    */
-  this.triangle1longueur2angles = function (NOM, AB, BAC, CBA, description = true) {
+  this.triangle1longueur2angles = function (NOM, AB, BAC, CBA, description = true, mesure = false) {
     const angle = randint(-20, 20)
     const a1 = BAC
     const a2 = CBA
-    const A = point(2, 0)
+    const A = point(6, 0)
     const B = pointAdistance(A, AB, angle)
     const D = pointAdistance(A, 5.2, a1 + angle)
+    console.log(a1 + angle)
     const D2 = pointSurSegment(A, D, 10)
     const D1 = pointSurSegment(D, D2, 0.4)
     const E = pointAdistance(B, 3, 180 - a2 + angle)
@@ -1646,6 +1727,7 @@ export default function Alea2iep () {
     const C = pointIntersectionDD(d, d2)
     if (NOM.length !== 3) {
       description = false
+    } else {
       A.nom = NOM[0]
       B.nom = NOM[1]
       C.nom = NOM[2]
@@ -1688,6 +1770,8 @@ export default function Alea2iep () {
     this.regleSegment(C, A)
     this.regleMasquer()
     this.crayonMasquer()
+    if (description && mesure) this.textePosition(`On peut mesurer ${A.nom + C.nom} ≈ ${nombreAvecEspace(longueur(A, C, 1))} cm et ${B.nom + C.nom} ≈ ${nombreAvecEspace(longueur(B, C, 1))} cm.`, 0, -7)
+
     return [A, B, C]
   }
   /**
@@ -1703,6 +1787,39 @@ export default function Alea2iep () {
     this.traitRapide(A, B)
     this.pointCreer(A, A.nom, 0)
     this.pointCreer(B, B.nom, 0)
+    this.compasEcarter2Points(A, B)
+    this.compasTracerArcCentrePoint(A, C)
+    this.compasTracerArcCentrePoint(B, C)
+    this.pointCreer(C)
+    this.compasMasquer()
+    this.regleSegment(A, C)
+    this.regleSegment(C, B)
+    this.regleMasquer()
+    this.crayonMasquer()
+    this.segmentCodage(A, B)
+    this.segmentCodage(A, C)
+    this.segmentCodage(B, C)
+    return [A, B, C]
+  }
+  /**
+   * Trace un triangle équilatéral à partir de la donnée de la longueur du côté
+   * @param {string} NOM
+   * @param {number} AB
+   * @return {array} [A, B, C]
+   */
+
+  this.triangleEquilateral = function (NOM, AB) {
+    const A = point(6, 0)
+    const B = pointAdistance(A, AB, randint(-20, 20))
+    const C = rotation(B, A, 60)
+    if (NOM.length === 3) {
+      A.nom = NOM[0]
+      B.nom = NOM[1]
+      C.nom = NOM[2]
+    }
+    this.regleSegment(A, B)
+    this.pointCreer(A)
+    this.pointCreer(B)
     this.compasEcarter2Points(A, B)
     this.compasTracerArcCentrePoint(A, C)
     this.compasTracerArcCentrePoint(B, C)
