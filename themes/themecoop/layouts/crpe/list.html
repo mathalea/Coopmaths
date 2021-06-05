@@ -17,6 +17,14 @@
           <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
           {{ end }}
 
+          {{ range where .Site.Pages "Params.ref" "2L1" }}
+          <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
+          {{ end }}
+
+          {{ range where .Site.Pages "Params.ref" "3G1" }}
+          <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
+          {{ end }}
+
      </div>
 
      <!-- <h3><a href="/CM6" style="color:inherit !important" >Calcul mental - 6e (avec mathsmentales.net)</a></h3> -->
