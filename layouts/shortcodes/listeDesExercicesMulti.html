@@ -1,0 +1,15 @@
+<!-- {{/*
+Utilisation: {{% listeDesExercicesMulti "theme" %}}
+*/}}-->
+
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+<div id="MenuDesExercices"></div>
+<script type="module">
+    import {menuTheme} from "/modules/menuDesExercicesDisponibles.js";
+    document.getElementById('MenuDesExercices').insertAdjacentHTML('beforeend',menuTheme({{ .Get 0}}))
+</script>
+
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
