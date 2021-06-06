@@ -1,0 +1,2 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[8236],{98236:(t,e,a)=>{"use strict";a.r(e),a.d(e,{titre:()=>r,default:()=>s});var i=a(34333);const r="Construire le symétrique d’un point par rapport à une droite";function s(){i.default.call(this),this.titre=r,this.figure=!1,this.sup=1}}}]);
+//# sourceMappingURL=8236.a823283f6654f856b98b.js.map

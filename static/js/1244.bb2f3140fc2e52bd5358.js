@@ -1,0 +1,2 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[1244],{71244:(e,a,t)=>{"use strict";t.r(a),t.d(a,{titre:()=>i,default:()=>s});var u=t(29881);const i="Trouver l’image d’une figure par une translation dans un pavage";function s(){u.default.call(this),this.titre=i,this.sup=3,this.besoinFormulaireNumerique=!1}}}]);
+//# sourceMappingURL=1244.bb2f3140fc2e52bd5358.js.map

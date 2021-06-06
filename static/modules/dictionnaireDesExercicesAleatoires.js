@@ -201,7 +201,7 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/3e/3G12.js"
     },
     "3G12-1": {
-        "titre": "Trouver l'image d'une figure par une rotation de 90 degrés dans un pavage (sortie Latex Impossible)",
+        "titre": "Trouver l'image d'une figure par une rotation de 90 degrés dans un pavage",
         "url": "/exercices/3e/3G12-1.js"
     },
     "3G20": {
@@ -485,12 +485,16 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/4e/4G10.js"
     },
     "4G11": {
-        "titre": "Trouver l\\'image d'une figure par une translation dans un pavage",
+        "titre": "Trouver l'image d'une figure par une translation dans un pavage",
         "url": "/exercices/4e/4G11.js"
     },
     "4G11-1": {
-        "titre": "Trouver l'image d'une figure par une translation dans un pavage (sortie Latex impossible)",
+        "titre": "Trouver l'image d'une figure par une translation dans un pavage",
         "url": "/exercices/4e/4G11-1.js"
+    },
+    "4G15": {
+        "titre": "Tranformations de triangle",
+        "url": "/exercices/4e/4G15.js"
     },
     "4G20": {
         "titre": "Calculer une longueur avec le théorème de Pythagore",
@@ -503,6 +507,10 @@ export let dictionnaireDesExercicesAleatoires =
     "4G20-2": {
         "titre": "Racine carré d'un carré parfait (calcul mental)",
         "url": "/exercices/4e/4G20-2.js"
+    },
+    "4G20-5": {
+        "titre": "Trouver la valeur arrondie d'une racine carrée",
+        "url": "/exercices/4e/4G20-5.js"
     },
     "4G20MG32": {
         "titre": "Calculer une longueur avec l'égalité de Pythagore (MG32)",
@@ -677,7 +685,7 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/5e/5G12.js"
     },
     "5G12-1": {
-        "titre": "Symétrique d'une figure dans un pavage avec correction animée (sortie Latex Impossible)",
+        "titre": "Symétrique d'une figure dans un pavage",
         "url": "/exercices/5e/5G12-1.js"
     },
     "5G20": {
@@ -695,6 +703,14 @@ export let dictionnaireDesExercicesAleatoires =
     "5G22": {
         "titre": "Déterminer la nature d'une droite remarquable",
         "url": "/exercices/5e/5G22.js"
+    },
+    "5G24-1": {
+        "titre": "Triangles égaux et côtés homologues",
+        "url": "/exercices/5e/5G24-1.js"
+    },
+    "5G24-2": {
+        "titre": "Justifier que deux triangles sont égaux",
+        "url": "/exercices/5e/5G24-2.js"
     },
     "5G30": {
         "titre": "Utiliser le codage pour décrire une figure",
@@ -944,9 +960,17 @@ export let dictionnaireDesExercicesAleatoires =
         "titre": "Calculer des probabilités dans une expérience aléatoire à une épreuve",
         "url": "/exercices/5e/5S21.js"
     },
+    "5S21-1": {
+        "titre": "Probabilités simples",
+        "url": "/exercices/5e/5S21-1.js"
+    },
     "6Algo10": {
         "titre": "Programmer des déplacements",
         "url": "/exercices/6e/6Algo10.js"
+    },
+    "6Algo11": {
+        "titre": "Note la couleur",
+        "url": "/exercices/6e/6Algo11.js"
     },
     "6C10": {
         "titre": "Additions, soustractions et multiplications posées de nombres entiers",
@@ -979,6 +1003,10 @@ export let dictionnaireDesExercicesAleatoires =
     "6C11": {
         "titre": "Divisions euclidiennes",
         "url": "/exercices/6e/6C11.js"
+    },
+    "6C11-1": {
+        "titre": "Divisions euclidiennes : déterminer reste et quotient à partir d'une égalité",
+        "url": "/exercices/6e/6C11-1.js"
     },
     "6C13": {
         "titre": "Traduire des phrases en calculs et réciproquement",
@@ -1039,6 +1067,10 @@ export let dictionnaireDesExercicesAleatoires =
     "6C34": {
         "titre": "Dernier chiffre d'un calcul",
         "url": "/exercices/6e/6C34.js"
+    },
+    "6C35": {
+        "titre": "Modéliser des problèmes",
+        "url": "/exercices/6e/6C35.js"
     },
     "6D10": {
         "titre": "Convertir des durées",
@@ -1137,7 +1169,7 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/6e/6G25-1.js"
     },
     "6G25-2": {
-        "titre": "Trouver l'image d'une figure par une symétrie axiale dans un pavage carré (sortie Latex Impossible)",
+        "titre": "Trouver l'image d'une figure par une symétrie axiale dans un pavage carré",
         "url": "/exercices/6e/6G25-2.js"
     },
     "6G25-3": {
@@ -1556,6 +1588,10 @@ export let dictionnaireDesExercicesAleatoires =
         "titre": "étude de fonction de degré 3",
         "url": "/exercices/Profs/P010.js"
     },
+    "P011": {
+        "titre": "Construis mon triangle",
+        "url": "/exercices/Profs/P011.js"
+    },
     "PEA11": {
         "titre": "Passer de la base 10 à une autre base et inversement",
         "url": "/exercices/PE/PEA11.js"
@@ -1563,10 +1599,6 @@ export let dictionnaireDesExercicesAleatoires =
     "PEA11-1": {
         "titre": "Passer de la base 12 ou 16 à la base 10 et inversement",
         "url": "/exercices/PE/PEA11-1.js"
-    },
-    "beta.P011": {
-        "titre": "Construis mon triangle",
-        "url": "/exercices/beta/beta.P011.js"
     },
     "beta1F10": {
         "titre": "Calculs de dérivés",
@@ -1652,6 +1684,10 @@ export let dictionnaireDesExercicesAleatoires =
         "titre": "Mon test",
         "url": "/exercices/beta/beta6test2.js"
     },
+    "beta6test2021": {
+        "titre": "Exercice exemple",
+        "url": "/exercices/beta/beta6test2021.js"
+    },
     "betaClasseTableauVariations": {
         "titre": "Tests tableaux fonctions",
         "url": "/exercices/beta/betaClasseTableauVariations.js"
@@ -1683,14 +1719,6 @@ export let dictionnaireDesExercicesAleatoires =
     "betaExoSimpleMatthieu": {
         "titre": "Ceci est le titre de l'exercice BetaExosimpleMatthieu",
         "url": "/exercices/beta/betaExoSimpleMatthieu.js"
-    },
-    "betaNoteLaCouleur": {
-        "titre": "Note la couleur",
-        "url": "/exercices/beta/betaNoteLaCouleur.js"
-    },
-    "betaProbabilites": {
-        "titre": "Probabilités simples",
-        "url": "/exercices/beta/betaProbabilites.js"
     },
     "betaPuissances": {
         "titre": "Exercice exemple",
@@ -1749,7 +1777,7 @@ export let dictionnaireDesExercicesAleatoires =
         "url": "/exercices/beta/moule_a_exo_mathalea.js"
     },
     "moule_a_exo_mathalea2d": {
-        "titre": "Exo zéro Mathalea2d",
+        "titre": "Moule pour Liouba",
         "url": "/exercices/beta/moule_a_exo_mathalea2d.js"
     },
     "moule_a_exo_mathalea2d&3d": {

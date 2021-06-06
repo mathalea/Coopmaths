@@ -360,12 +360,12 @@ export default function Problemes_grandeurs_composees() {
                 )}\\text{ dm}^3$<br>`;
               texte_corr +=
                 num_alpha(1) +
-                ` La masse de lait contenue dans ce tonneau est :<br>`;
+                ` La masse ${liquides[index2][0]} contenue dans ce tonneau est :<br>`;
               texte_corr += `$${tex_nombre(
                 arrondi((r * r * h * Math.PI) / 1000, 1)
               )}\\text{ dm}^3\\times ${tex_nombrec(
                 liquides[index2][1]
-              )} \\times 1 \\dfrac{kg}{dm}^3\\approx${tex_nombre(
+              )} \\times 1 \\dfrac{kg}{dm^3}\\approx${tex_nombre(
                 arrondi(((r * r * h * Math.PI) / 1000) * liquides[index2][1], 3)
               )}\\text{ kg}$`;
               break;
@@ -683,7 +683,7 @@ export default function Problemes_grandeurs_composees() {
                 duree
               )}\\times 1\\text{ s}}=\\dfrac{${tex_nombrec(
                 duree * 340
-              )}}{${duree}\\text{ s}}$<br>`;
+              )}\\text{ m}}{${duree}\\text{ s}}$<br>`;
               texte_corr += `La distance à laquelle l'éclair est tombé est donc de ${nombre_avec_espace(
                 duree * 340
               )} m.<br>`;
@@ -1017,11 +1017,11 @@ export default function Problemes_grandeurs_composees() {
             ` La masse de cette pièce de ${materiaux[index1][0]
             } est de :<br>$${tex_nombre(
               materiaux[index1][1]
-            )}\\text{ km/m}^3\\times ${tex_nombre(
+            )}\\text{ kg/m}^3\\times ${tex_nombre(
               V1
             )}\\text{ cm}^3=${tex_nombre(
               materiaux[index1][1]
-            )}\\text{ km/m}^3\\times ${tex_nombrec(
+            )}\\text{ kg/m}^3\\times ${tex_nombrec(
               V1 / 1000000
             )}\\text{ m}^3=${tex_nombre(masse)}\\text{ kg}$.<br>`;
           texte_corr +=

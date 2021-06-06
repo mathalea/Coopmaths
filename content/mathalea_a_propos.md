@@ -38,21 +38,23 @@ Au printemps 2020, Sébastien Lozano a réalisé un [programme](https://github.c
 
 ### Pour participer
 
-Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/remiangot/MathALEA) et lire la documentation sur le [wiki](https://github.com/remiangot/MathALEA/wiki). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tout ceux qui souhaiteraient participer.
+Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/remiangot/MathALEA) et lire la documentation sur le [wiki](https://github.com/remiangot/MathALEA/wiki). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tout ceux qui souhaiteraient participer.
 
 
 
 ### Crédits
 
-- Moteur développé par Rémi Angot sous licence **CC-By-SA**.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
-- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **CC-By-SA**.
+- Moteur développé par Rémi Angot sous licence **AGPL**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
+- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **AGPL**.
+- Le passage à NodeJS et Webpack a été coordonné par Daniel Caillibaud (Sésamath)
 
 ### Ressources libres utilisées
 
 
 - [Algebrite](http://algebrite.org/) MIT license (pour le calcul exact avec les nombres décimaux et le calcul formel).
 - [maths.js](https://mathsjs.org) Apache license 2.0 (pour le calcul formel et les matrices)
+- [MathLive](https://mathlive.io) MIT license (pour les champs de saisie d'expressions mathématiques)
 - [MathGraph32](https://www.mathgraph32.org) développé par Yves Biton - Licence GNU AGPLv3 (pour les constructions géométriques).
 - [InstrumEnPoche](https://instrumenpoche.sesamath.net) Lecteur Javascript développé par Yves Biton d'après une application Flash développée par Laurent Zamo - Licence GNU AGPLv3 (pour les animations avec les instruments de géométrie).
 - [Giac/XCas](https://www-fourier.ujf-grenoble.fr/~parisse/giac_fr.html) développé par Bernard Parisse et Renée De Graeve (pour le calcul formel dans les exercices de lycée)
@@ -68,6 +70,7 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - [CodeMirror](https://codemirror.net) MIT license (pour l'éditeur de MathALEA2D).
 - [Scratchblocks](https://scratchblocks.github.io/) MIT license (pour le rendu des blocs Scratch).
 - [QRCode.js](https://davidshimjs.github.io/qrcodejs/) MIT license (pour l'affichage d'un QRCode dynamique).
+- [datatables](https://datatables.net) MIT licence (pour la liste des exercices et le moteur de recherche).
 - Merci à Sébastien Cogez pour ses conseils et à Julien Brunel pour son cours sur la programmation objet.
 - Icone "[Whisper](https://thenounproject.com/term/whisper/21616/)" by Rémy Médard from the Noun Project.
 - Icone "[Silence](https://thenounproject.com/term/whisper/77879/)" by Gianluca Manzana from the Noun Project.
@@ -75,6 +78,9 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 - Icone "[Geometry](https://thenounproject.com/term/geometry/1172014/)" by Vectors Market from the Noun Project.
 - Icone "[Be different](https://thenounproject.com/search/?q=different&i=1295561)" by chiccabubble from the Noun Project.
 
+### Outil de suivi des bugs
+
+<a href="https://www.bugsnag.com" target="_blank"><img class="ui centered image" src="/images/bugsnag.png"></a>
 
 ### ToDo
 
@@ -91,10 +97,20 @@ Le code est libre, CC-BY-SA, vous pouvez donc télécharger les sources sur [Git
 
 ### Changelog
 
+#### 05/21
+
+- Arrivée d'Arnaud Durand pour la programmation d'exercices
+- MathALEA est intégré dans le Plan Numérique ([www.mathix.org/plan-numerique/](www.mathix.org/plan-numerique/))
+- Ajout d'exercices interactifs (QCM - réponse numérique)
+- Ajout du clavier mathématiques de MathLive
+- Nouvel objet pour gérer la sortie AMC
+
 #### 04/21
 
 - Intégration du lecteur InstrumEnPoche
-- Création de macros constructions pour InstrumEnPoche
+- Création de macros constructions pour InstrumEnPoche et
+- Arrivée de Liouba Leroux pour la création d'exercices avec InstrumEnPoche
+- Arrivée de Daniel Caillibaud (salarié de Sésamath) pour le passage à NodeJS, webpack, pour l'intégration de nombreux outils (JSDoc, Playwright) et pour l'amélioratio du code
 
 #### 03/21
 

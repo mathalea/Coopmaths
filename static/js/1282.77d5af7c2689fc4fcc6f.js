@@ -1,0 +1,2 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[1282],{51282:(t,a,e)=>{"use strict";e.r(a),e.d(a,{titre:()=>l,default:()=>i});var s=e(77551);const l="Tables de multiplications";function i(){s.default.call(this),this.titre=l,this.sup2=1}}}]);
+//# sourceMappingURL=1282.77d5af7c2689fc4fcc6f.js.map

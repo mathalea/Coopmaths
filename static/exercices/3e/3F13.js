@@ -39,7 +39,7 @@ export default function Antecedent_graphique() {
 				x2 = randint(x1 + 3, 2);
 				x3 = randint(x2 + 2, 8);
 				fx1 = randint(-5, 5);
-				fx2 = randint(-6, 6);
+				fx2 = randint(-6, 6,fx1);
 				fx3 = randint(-5, 5);
 				d = randint(-5, 5);
 				c = randint(-5, 5);
@@ -49,7 +49,7 @@ export default function Antecedent_graphique() {
 				x2 = randint(-1, 2, [0]);
 				x3 = randint(3, 4);
 				fx1 = randint(-4, 4);
-				fx2 = randint(-4, 4);
+				fx2 = randint(-4, 4,fx1);
 				fx3 = randint(-4, 4);
 				d = randint(-3, 3);
 				c = randint(-3, 3);
@@ -67,10 +67,16 @@ export default function Antecedent_graphique() {
 			a = calcul((fx2 - fx1) / (x2 - x1));
 			b = calcul(fx1 - a * x1);
 			expression_f = `${a}*x+(${b})`;
-
+			if (fx2!=fx1) {
 			texte += `Déterminer par lecture graphique les antécédents de $${fx1}$ et de $${fx2}$ par cette fonction $f$.<br><br>`;
 			texte_corr = `L'antécédent de $${fx1}$ est $${x1}$, on note $f(${x1})=${fx1}$.<br>`;
 			texte_corr += `L'antécédent de $${fx2}$ est $${x2}$, on note $f(${x2})=${fx2}$.`;
+			}
+			else {
+				texte += `Déterminer par lecture graphique les antécédents de $${fx1}$ par cette fonction $f$.<br><br>`;
+				texte_corr = `$${fx1}$ possède une infinité d'antécédents : on note $f(x)=${fx1}$ quel que soit $x$.<br>`;
+				
+			}
 
 		}
 

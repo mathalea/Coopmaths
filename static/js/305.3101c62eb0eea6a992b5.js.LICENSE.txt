@@ -1,0 +1,25 @@
+/*
+ * Visualiseur InstrumenPoche en Javascript et SVG
+ * @Author Yves Biton (yves.biton@sesamath.net)
+ * @License: GNU AGPLv3 https://www.gnu.org/licenses/agpl-3.0.html
+ * Attention : Ne pas appeler cet objet Imag car entre en conflit avec l'objet Imag du JS
+ */
+
+/*
+ * Visualiseur InstrumenPoche en Javascript et SVG
+ * @author Association Sésamath
+ * @licence AGPL-3.0-or-later
+ */
+
+/*
+ * Visualiseur InstrumenPoche en Javascript et SVG
+ * @author Yves Biton <yves.biton@sesamath.net>
+ * @licence AGPL-3.0-or-later
+ */
+
+/* Loader qui retourne une promesse
+ *
+ * Visualiseur InstrumenPoche en Javascript et SVG
+ * @author Association Sésamath
+ * @licence AGPL-3.0-or-later
+ */

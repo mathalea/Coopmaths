@@ -1,0 +1,2 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[7485],{67485:(a,t,e)=>{"use strict";e.r(t),e.d(t,{titre:()=>c,interactifReady:()=>l,amcReady:()=>s,amcType:()=>h,default:()=>d});var i=e(77551);const c="Tables de multiplication",l=!0,s=!1,h=4;function d(a="2-3-4-5-6-7-8-9"){i.default.call(this,a),this.titre=c,this.amcReady=s,this.amcType=h,this.interactifReady=l,this.tailleDiaporama=100}}}]);
+//# sourceMappingURL=7485.dce7560be627a114c60e.js.map

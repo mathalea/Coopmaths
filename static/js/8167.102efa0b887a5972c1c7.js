@@ -1,0 +1,1 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[8167,975,9678],{70213:(t,e,a)=>{"use strict";a.r(e),a.d(e,{titre:()=>l,default:()=>i});var s=a(5593);const l="Construire un triangle avec cible";function i(){s.default.call(this),this.titre=l,this.classe=6}}}]);

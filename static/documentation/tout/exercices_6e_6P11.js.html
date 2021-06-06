@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>exercices/6e/6P11.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Arete3d.html">Arete3d</a></li><li><a href="Cube3d.html">Cube3d</a></li><li><a href="Droite3d.html">Droite3d</a></li><li><a href="Fraction.html">Fraction</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Fraction.html#ajouteEntier">ajouteEntier</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#differenceFraction">differenceFraction</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#diviseEntier">diviseEntier</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#diviseEntierIrred">diviseEntierIrred</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#diviseFraction">diviseFraction</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#egal">egal</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#entierDivise">entierDivise</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#entierDiviseIrred">entierDiviseIrred</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#entierMoinsFraction">entierMoinsFraction</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#fractionDecimale">fractionDecimale</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#fractionEgale">fractionEgale</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#inferieurlarge">inferieurlarge</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#inferieurstrict">inferieurstrict</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#inverse">inverse</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#inverseIrrred">inverseIrrred</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#multiplieEntier">multiplieEntier</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#multiplieEntierIrred">multiplieEntierIrred</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#oppose">oppose</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#opposeIrred">opposeIrred</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#produitFraction">produitFraction</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#produitFractions">produitFractions</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#puissanceFraction">puissanceFraction</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#representation">representation</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#representationIrred">representationIrred</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#simplifie">simplifie</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#sommeFraction">sommeFraction</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#sommeFractions">sommeFractions</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#superieurlarge">superieurlarge</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#superieurstrict">superieurstrict</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#texProduitFraction">texProduitFraction</a></li><li data-type='method' style='display: none;'><a href="Fraction.html#texQuotientFraction">texQuotientFraction</a></li></ul></li><li><a href="ListeFraction.html">ListeFraction</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ListeFraction.html#completeListe">completeListe</a></li></ul></li><li><a href="module-modules_outils.Relatif.html">Relatif</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~getCardNegatifs">getCardNegatifs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~getSigneNumber">getSigneNumber</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~getSigneProduitNumber">getSigneProduitNumber</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~getSigneProduitString">getSigneProduitString</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~getSigneString">getSigneString</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~orthographeFacteursNegatifs">orthographeFacteursNegatifs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~setRegleSigneProduit">setRegleSigneProduit</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Relatif.html#~setRegleSigneQuotient">setRegleSigneQuotient</a></li></ul></li><li><a href="module-modules_outils.Triangles.html">Triangles</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getAngles">getAngles</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getAnglesValeurs">getAnglesValeurs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getCotes">getCotes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getLongueurs">getLongueurs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getLongueursValeurs">getLongueursValeurs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getNom">getNom</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getPerimetre">getPerimetre</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~getSommets">getSommets</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~isPlatTriangleAngles">isPlatTriangleAngles</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~isPlatTriangleLongueurs">isPlatTriangleLongueurs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~isTrueTriangleAngles">isTrueTriangleAngles</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.Triangles.html#~isTrueTriangleLongueurs">isTrueTriangleLongueurs</a></li></ul></li><li><a href="module-modules_outils-Personne.html">Personne</a></li><li><a href="NoteLaCouleur.html">NoteLaCouleur</a><ul class='methods'><li data-type='method' style='display: none;'><a href="NoteLaCouleur.html#testBoucle">testBoucle</a></li><li data-type='method' style='display: none;'><a href="NoteLaCouleur.html#testInstruction">testInstruction</a></li><li data-type='method' style='display: none;'><a href="NoteLaCouleur.html#testSequence">testSequence</a></li></ul></li><li><a href="Pave3d.html">Pave3d</a></li><li><a href="Point3d.html">Point3d</a></li><li><a href="Polygone3d.html">Polygone3d</a></li><li><a href="Prisme3d.html">Prisme3d</a></li><li><a href="Syracuse.html">Syracuse</a></li><li><a href="Vecteur3d.html">Vecteur3d</a></li></ul><h3>Modules</h3><ul><li><a href="module-modules_dom.html">modules/dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-modules_dom.html#.addElement">addElement</a></li><li data-type='method' style='display: none;'><a href="module-modules_dom.html#.addText">addText</a></li><li data-type='method' style='display: none;'><a href="module-modules_dom.html#.create">create</a></li><li data-type='method' style='display: none;'><a href="module-modules_dom.html#.get">get</a></li><li data-type='method' style='display: none;'><a href="module-modules_dom.html#~hasProp">hasProp</a></li><li data-type='method' style='display: none;'><a href="module-modules_dom.html#~setStyles">setStyles</a></li></ul></li><li><a href="module-modules_fractions.html">modules/fractions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-modules_fractions.html#.fraction">fraction</a></li><li data-type='method' style='display: none;'><a href="module-modules_fractions.html#.obtenirListeFractionsIrreductibles">obtenirListeFractionsIrreductibles</a></li><li data-type='method' style='display: none;'><a href="module-modules_fractions.html#.obtenirListeFractionsIrreductiblesFaciles">obtenirListeFractionsIrreductiblesFaciles</a></li></ul></li><li><a href="module-modules_messages.html">modules/messages</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-modules_messages.html#.addFeedback">addFeedback</a></li><li data-type='method' style='display: none;'><a href="module-modules_messages.html#.messageFeedback">messageFeedback</a></li><li data-type='method' style='display: none;'><a href="module-modules_messages.html#.messageUtilisateur">messageUtilisateur</a></li></ul></li><li><a href="module-modules_outils.html">modules/outils</a><ul class='members'><li data-type='member' style='display: none;'><a href="module-modules_outils.html#.ppcm">ppcm</a></li><li data-type='member' style='display: none;'><a href="module-modules_outils.html#~nomsPossibles">nomsPossibles</a></li></ul><ul class='methods'><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.abs">abs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.arrondi">arrondi</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.arrondiVirgule">arrondiVirgule</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.calcul">calcul</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.calculAligne">calculAligne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.carreParfait">carreParfait</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.changementDeBaseOrthoTri">changementDeBaseOrthoTri</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.changementDeBaseTriOrtho">changementDeBaseTriOrtho</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.chercheMinMaxFonction">chercheMinMaxFonction</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.cherchePolynomeDegre3aExtremaFixes">cherchePolynomeDegre3aExtremaFixes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.choice">choice</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.choisitLettresDifferentes">choisitLettresDifferentes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.choisitNombresEntreMetN">choisitNombresEntreMetN</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.compareFractions">compareFractions</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.compareNombres">compareNombres</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.compteOccurences">compteOccurences</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.couleurAleatoire">couleurAleatoire</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.creerBoutonMathalea2d">creerBoutonMathalea2d</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.creerCouples">creerCouples</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.creerDocumentAmc">creerDocumentAmc</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.creerModal">creerModal</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.creerNomDePolygone">creerNomDePolygone</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.cribleEratostheneN">cribleEratostheneN</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.criblePolynomeEntier">criblePolynomeEntier</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.decompositionFacteursPremiers">decompositionFacteursPremiers</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.decompositionFacteursPremiersArray">decompositionFacteursPremiersArray</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.detectSafariChromeBrowser">detectSafariChromeBrowser</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.deuxColonnes">deuxColonnes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.eclatePuissance">eclatePuissance</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ecritureAlgebrique">ecritureAlgebrique</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ecritureAlgebriquec">ecritureAlgebriquec</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ecritureAlgebriqueSauf1">ecritureAlgebriqueSauf1</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ecritureNombreRelatif">ecritureNombreRelatif</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ecritureNombreRelatifc">ecritureNombreRelatifc</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ecritureParentheseSiMoins">ecritureParentheseSiMoins</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ecritureParentheseSiNegatif">ecritureParentheseSiNegatif</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.egal">egal</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.enleveElement">enleveElement</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.enleveElementBis">enleveElementBis</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.enleveElementNo">enleveElementNo</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.enleveElementNoBis">enleveElementNoBis</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.enumerate">enumerate</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.enumerateSansPuceSansNumero">enumerateSansPuceSansNumero</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.estentier">estentier</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.exportQcmAmc">exportQcmAmc</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.exposant">exposant</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.extraireRacineCarree">extraireRacineCarree</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.factorisation">factorisation</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.fractionSimplifiee">fractionSimplifiee</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.href">href</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.htmlConsigne">htmlConsigne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.htmlEnumerate">htmlEnumerate</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.htmlLigne">htmlLigne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.htmlParagraphe">htmlParagraphe</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.imagePointParTransformation">imagePointParTransformation</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.inferieur">inferieur</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.inferieurouegal">inferieurouegal</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.infoMessage">infoMessage</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.introLatex">introLatex</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.introLatexCoop">introLatexCoop</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.itemize">itemize</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.jour">jour</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.joursParMois">joursParMois</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.katexPopup">katexPopup</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.katexPopup2">katexPopup2</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.lampeMessage">lampeMessage</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.lettreDepuisChiffre">lettreDepuisChiffre</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.lettreMinusculeDepuisChiffre">lettreMinusculeDepuisChiffre</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeDeChosesAImprimer">listeDeChosesAImprimer</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeDeNotes">listeDeNotes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeDesDiviseurs">listeDesDiviseurs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeDiviseurs">listeDiviseurs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeNombresPremiersStrictJusqua">listeNombresPremiersStrictJusqua</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeQuestionsToContenu">listeQuestionsToContenu</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeQuestionsToContenuSansNumero">listeQuestionsToContenuSansNumero</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.listeQuestionsToContenuSansNumeroEtSansConsigne">listeQuestionsToContenuSansNumeroEtSansConsigne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.machineMathsVideo">machineMathsVideo</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.MatriceCarree">MatriceCarree</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.matriceCarree">matriceCarree</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.minToHoraire">minToHoraire</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.minToHour">minToHour</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.miseEnEvidence">miseEnEvidence</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.modalImage">modalImage</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.modalPdf">modalPdf</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.modalTexteCourt">modalTexteCourt</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.modalTexteLong">modalTexteLong</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.modalUrl">modalUrl</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.modalVideo">modalVideo</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.modalYoutube">modalYoutube</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.nombreAvecEspace">nombreAvecEspace</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.nombreDeChiffresDansLaPartieDecimale">nombreDeChiffresDansLaPartieDecimale</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.nombreDecimal">nombreDecimal</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.nomDuJour">nomDuJour</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.nomDuMois">nomDuMois</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.numAlpha">numAlpha</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.numTrie">numTrie</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.objet">objet</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.objetF">objetF</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.objetM">objetM</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.obtenirListeFacteursPremiers">obtenirListeFacteursPremiers</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.obtenirListeFractionsIrreductibles">obtenirListeFractionsIrreductibles</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.obtenirListeFractionsIrreductiblesFaciles">obtenirListeFractionsIrreductiblesFaciles</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.obtenirListeNombresPremiers">obtenirListeNombresPremiers</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.ordreDeGrandeur">ordreDeGrandeur</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.partieEntiereEnLettres">partieEntiereEnLettres</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.personne">personne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.personnes">personnes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.pgcd">pgcd</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.possedeUnCaractereInterdit">possedeUnCaractereInterdit</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.premiereLettreEnMajuscule">premiereLettreEnMajuscule</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.premierMultipleSuperieur">premierMultipleSuperieur</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.premiersEntreBornes">premiersEntreBornes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.prenom">prenom</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.prenomF">prenomF</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.prenomM">prenomM</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.prenomPronom">prenomPronom</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.printlatex">printlatex</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.produitDeDeuxFractions">produitDeDeuxFractions</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.produitMatriceMatrice3x3">produitMatriceMatrice3x3</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.produitMatriceVecteur3x3">produitMatriceVecteur3x3</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.produitsEnCroix">produitsEnCroix</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.puissance">puissance</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.puissanceEnProduit">puissanceEnProduit</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.quatriemeProportionnelle">quatriemeProportionnelle</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.quotientier">quotientier</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.randint">randint</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.range">range</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.range1">range1</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.rangeMinMax">rangeMinMax</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.reduireAxPlusB">reduireAxPlusB</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.reduirePolynomeDegre3">reduirePolynomeDegre3</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.reorganiseProduitPuissance">reorganiseProduitPuissance</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.resolutionSystemeLineaire2x2">resolutionSystemeLineaire2x2</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.resolutionSystemeLineaire3x3">resolutionSystemeLineaire3x3</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.rienSi1">rienSi1</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.scratchTraductionFr">scratchTraductionFr</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.signe">signe</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.simpExp">simpExp</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.simplificationDeFractionAvecEtapes">simplificationDeFractionAvecEtapes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.simpNotPuissance">simpNotPuissance</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.sommeDesChiffres">sommeDesChiffres</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.sommeDesTermesParSigne">sommeDesTermesParSigne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.sp">sp</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.stringNombre">stringNombre</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.strRandom">strRandom</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.superieur">superieur</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.superieurouegal">superieurouegal</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.tableauColonneLigne">tableauColonneLigne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texCadreParOrange">texCadreParOrange</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texConsigne">texConsigne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texEnumerate">texEnumerate</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texEnumerateSansNumero">texEnumerateSansNumero</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texFraction">texFraction</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texFractionParentheses">texFractionParentheses</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texFractionReduite">texFractionReduite</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texFractionSigne">texFractionSigne</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texGraphique">texGraphique</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texIntroduction">texIntroduction</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texMulticols">texMulticols</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texNombre">texNombre</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texNombre2">texNombre2</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texNombrec">texNombrec</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texNombreCoul">texNombreCoul</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texParagraphe">texParagraphe</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texPrix">texPrix</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texRacineCarree">texRacineCarree</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texteEnCouleur">texteEnCouleur</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texteEnCouleurEtGras">texteEnCouleurEtGras</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texteGras">texteGras</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texteOuPas">texteOuPas</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.texTexte">texTexte</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.tikzMachineDiag">tikzMachineDiag</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.tikzMachineMaths">tikzMachineMaths</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.tirerLesDes">tirerLesDes</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.triePositifsNegatifs">triePositifsNegatifs</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.troncature">troncature</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.TrouverSolutionMathador">TrouverSolutionMathador</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.unMoisDeTemperature">unMoisDeTemperature</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.unSiPositifMoinsUnSinon">unSiPositifMoinsUnSinon</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.valeurBase">valeurBase</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.warnMessage">warnMessage</a></li><li data-type='method' style='display: none;'><a href="module-modules_outils.html#.xcas">xcas</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#acos">acos</a></li><li><a href="global.html#AfficheCoteSegment">AfficheCoteSegment</a></li><li><a href="global.html#AfficheLongueurSegment">AfficheLongueurSegment</a></li><li><a href="global.html#AfficheMesureAngle">AfficheMesureAngle</a></li><li><a href="global.html#AfficherCrayon">AfficherCrayon</a></li><li><a href="global.html#afficherTempo">afficherTempo</a></li><li><a href="global.html#afficherTempoId">afficherTempoId</a></li><li><a href="global.html#afficherUnParUn">afficherUnParUn</a></li><li><a href="global.html#affiniteOrtho">affiniteOrtho</a></li><li><a href="global.html#aireTriangle">aireTriangle</a></li><li><a href="global.html#ajouterAx">ajouterAx</a></li><li><a href="global.html#ajouterAy">ajouterAy</a></li><li><a href="global.html#allerA">allerA</a></li><li><a href="global.html#angle">angle</a></li><li><a href="global.html#angleCodage">angleCodage</a></li><li><a href="global.html#angleCodageMasquer">angleCodageMasquer</a></li><li><a href="global.html#angleCodageMontrer">angleCodageMontrer</a></li><li><a href="global.html#angleModulo">angleModulo</a></li><li><a href="global.html#angleOriente">angleOriente</a></li><li><a href="global.html#angleradian">angleradian</a></li><li><a href="global.html#angleScratchTo2d">angleScratchTo2d</a></li><li><a href="global.html#appartientSegment">appartientSegment</a></li><li><a href="global.html#apps">apps</a></li><li><a href="global.html#Arc">Arc</a></li><li><a href="global.html#ArcMainLevee">ArcMainLevee</a></li><li><a href="global.html#ArcPointPointAngle">ArcPointPointAngle</a></li><li><a href="global.html#asin">asin</a></li><li><a href="global.html#atan">atan</a></li><li><a href="global.html#attendre">attendre</a></li><li><a href="global.html#autoCorrection">autoCorrection</a></li><li><a href="global.html#avance">avance</a></li><li><a href="global.html#Axes">Axes</a></li><li><a href="global.html#baisseCrayon">baisseCrayon</a></li><li><a href="global.html#barycentre">barycentre</a></li><li><a href="global.html#bissectrice">bissectrice</a></li><li><a href="global.html#bissectriceAuCompas">bissectriceAuCompas</a></li><li><a href="global.html#cacherParDiv">cacherParDiv</a></li><li><a href="global.html#carre">carre</a></li><li><a href="global.html#carre1point1longueur">carre1point1longueur</a></li><li><a href="global.html#carreIndirect">carreIndirect</a></li><li><a href="global.html#centreCercleCirconscrit">centreCercleCirconscrit</a></li><li><a href="global.html#centreGraviteTriangle">centreGraviteTriangle</a></li><li><a href="global.html#Cercle">Cercle</a></li><li><a href="global.html#cercle3d">cercle3d</a></li><li><a href="global.html#CercleCentrePoint">CercleCentrePoint</a></li><li><a href="global.html#cercleCirconscrit">cercleCirconscrit</a></li><li><a href="global.html#CercleMainLevee">CercleMainLevee</a></li><li><a href="global.html#CibleCarree">CibleCarree</a></li><li><a href="global.html#CibleCouronne">CibleCouronne</a></li><li><a href="global.html#CibleRonde">CibleRonde</a></li><li><a href="global.html#clone">clone</a></li><li><a href="global.html#CodageAngleDroit">CodageAngleDroit</a></li><li><a href="global.html#codageAngleDroit">codageAngleDroit</a></li><li><a href="global.html#codageAngleDroitMasquer">codageAngleDroitMasquer</a></li><li><a href="global.html#CodageBissectrice">CodageBissectrice</a></li><li><a href="global.html#CodageMediatrice">CodageMediatrice</a></li><li><a href="global.html#CodageMilieu">CodageMilieu</a></li><li><a href="global.html#CodeAngle">CodeAngle</a></li><li><a href="global.html#CodeSegment">CodeSegment</a></li><li><a href="global.html#CodeSegments">CodeSegments</a></li><li><a href="global.html#codeTikz">codeTikz</a></li><li><a href="global.html#compasCercleCentrePoint">compasCercleCentrePoint</a></li><li><a href="global.html#compasCoucher">compasCoucher</a></li><li><a href="global.html#compasDeplacer">compasDeplacer</a></li><li><a href="global.html#compasEcarter">compasEcarter</a></li><li><a href="global.html#compasEcarter2Points">compasEcarter2Points</a></li><li><a href="global.html#compasEcarterAvecRegle">compasEcarterAvecRegle</a></li><li><a href="global.html#compasLever">compasLever</a></li><li><a href="global.html#compasMasquer">compasMasquer</a></li><li><a href="global.html#compasMontrer">compasMontrer</a></li><li><a href="global.html#compasRetourner">compasRetourner</a></li><li><a href="global.html#compasRotation">compasRotation</a></li><li><a href="global.html#compasTracerArc2Angles">compasTracerArc2Angles</a></li><li><a href="global.html#compasTracerArcCentrePoint">compasTracerArcCentrePoint</a></li><li><a href="global.html#compasZoom">compasZoom</a></li><li><a href="global.html#Cone3d">Cone3d</a></li><li><a href="global.html#ConstructionBissectrice">ConstructionBissectrice</a></li><li><a href="global.html#ConstructionMediatrice">ConstructionMediatrice</a></li><li><a href="global.html#cos">cos</a></li><li><a href="global.html#cosineInterpolate">cosineInterpolate</a></li><li><a href="global.html#Courbe">Courbe</a></li><li><a href="global.html#Courbe2">Courbe2</a></li><li><a href="global.html#courbeInterpolee">courbeInterpolee</a></li><li><a href="global.html#crayonDeplacer">crayonDeplacer</a></li><li><a href="global.html#crayonMasquer">crayonMasquer</a></li><li><a href="global.html#crayonMontrer">crayonMontrer</a></li><li><a href="global.html#crayonRotation">crayonRotation</a></li><li><a href="global.html#creeIdPourComparaison">creeIdPourComparaison</a></li><li><a href="global.html#creerLutin">creerLutin</a></li><li><a href="global.html#Cylindre3d">Cylindre3d</a></li><li><a href="global.html#dansLaCibleCarree">dansLaCibleCarree</a></li><li><a href="global.html#dansLaCibleRonde">dansLaCibleRonde</a></li><li><a href="global.html#degres">degres</a></li><li><a href="global.html#demicercle3d">demicercle3d</a></li><li><a href="global.html#demiDroite">demiDroite</a></li><li><a href="global.html#demiDroiteAvecExtremite">demiDroiteAvecExtremite</a></li><li><a href="global.html#demiTourPoint">demiTourPoint</a></li><li><a href="global.html#demiTourPolygone">demiTourPolygone</a></li><li><a href="global.html#deplaceLabel">deplaceLabel</a></li><li><a href="global.html#deplacer">deplacer</a></li><li><a href="global.html#distancePointDroite">distancePointDroite</a></li><li><a href="global.html#Droite">Droite</a></li><li><a href="global.html#DroiteGraduee">DroiteGraduee</a></li><li><a href="global.html#DroiteGraduee2">DroiteGraduee2</a></li><li><a href="global.html#droiteHorizontaleParPoint">droiteHorizontaleParPoint</a></li><li><a href="global.html#DroiteMainLevee">DroiteMainLevee</a></li><li><a href="global.html#droiteParPointEtParallele">droiteParPointEtParallele</a></li><li><a href="global.html#droiteParPointEtPente">droiteParPointEtPente</a></li><li><a href="global.html#droiteParPointEtPerpendiculaire">droiteParPointEtPerpendiculaire</a></li><li><a href="global.html#droiteParPointEtVecteur">droiteParPointEtVecteur</a></li><li><a href="global.html#droiteVerticaleParPoint">droiteVerticaleParPoint</a></li><li><a href="global.html#elimineDoublons">elimineDoublons</a></li><li><a href="global.html#Ellipse">Ellipse</a></li><li><a href="global.html#equerreDeplacer">equerreDeplacer</a></li><li><a href="global.html#equerreMasquer">equerreMasquer</a></li><li><a href="global.html#equerreMontrer">equerreMontrer</a></li><li><a href="global.html#equerreRotation">equerreRotation</a></li><li><a href="global.html#equerreZoom">equerreZoom</a></li><li><a href="global.html#exerciceQcm">exerciceQcm</a></li><li><a href="global.html#Fond_ecran">Fond_ecran</a></li><li><a href="global.html#FractionParPosition">FractionParPosition</a></li><li><a href="global.html#graphiqueInterpole">graphiqueInterpole</a></li><li><a href="global.html#Grille">Grille</a></li><li><a href="global.html#grille">grille</a></li><li><a href="global.html#GrilleHorizontale">GrilleHorizontale</a></li><li><a href="global.html#grilleHorizontale">grilleHorizontale</a></li><li><a href="global.html#grilleVerticale">grilleVerticale</a></li><li><a href="global.html#hauteur">hauteur</a></li><li><a href="global.html#hauteurTriangle">hauteurTriangle</a></li><li><a href="global.html#homothetie">homothetie</a></li><li><a href="global.html#HomothetieAnimee">HomothetieAnimee</a></li><li><a href="global.html#homothetiePoint">homothetiePoint</a></li><li><a href="global.html#homothetiePolygone">homothetiePolygone</a></li><li><a href="global.html#html">html</a></li><li><a href="global.html#htmlBouton">htmlBouton</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#item_to_contenu">item_to_contenu</a></li><li><a href="global.html#LabelPoint">LabelPoint</a></li><li><a href="global.html#labelX">labelX</a></li><li><a href="global.html#LabelY">LabelY</a></li><li><a href="global.html#labelY">labelY</a></li><li><a href="global.html#Labyrinthe">Labyrinthe</a></li><li><a href="global.html#Latex_reperage_sur_un_axe">Latex_reperage_sur_un_axe</a></li><li><a href="global.html#Latex_repere">Latex_repere</a></li><li><a href="global.html#Latex_Tracer_droite">Latex_Tracer_droite</a></li><li><a href="global.html#latexParPoint">latexParPoint</a></li><li><a href="global.html#leveCrayon">leveCrayon</a></li><li><a href="global.html#loadGiac">loadGiac</a></li><li><a href="global.html#loadIep">loadIep</a></li><li><a href="global.html#loadMG32">loadMG32</a></li><li><a href="global.html#loadPrism">loadPrism</a></li><li><a href="global.html#loadScratchblocks">loadScratchblocks</a></li><li><a href="global.html#longueur">longueur</a></li><li><a href="global.html#masquer">masquer</a></li><li><a href="global.html#mathalea2d">mathalea2d</a></li><li><a href="global.html#mediane">mediane</a></li><li><a href="global.html#medianeTriangle">medianeTriangle</a></li><li><a href="global.html#mediatrice">mediatrice</a></li><li><a href="global.html#mediatriceAuCompas">mediatriceAuCompas</a></li><li><a href="global.html#mediatriceRegleEquerre">mediatriceRegleEquerre</a></li><li><a href="global.html#mettrexA">mettrexA</a></li><li><a href="global.html#mettreyA">mettreyA</a></li><li><a href="global.html#mg32DisplayAll">mg32DisplayAll</a></li><li><a href="global.html#milieu">milieu</a></li><li><a href="global.html#mise_a_jour_de_la_liste_des_exercices">mise_a_jour_de_la_liste_des_exercices</a></li><li><a href="global.html#montrer">montrer</a></li><li><a href="global.html#montrerParDiv">montrerParDiv</a></li><li><a href="global.html#my_svg_font">my_svg_font</a></li><li><a href="global.html#NommePolygone">NommePolygone</a></li><li><a href="global.html#NomVecteurParPosition">NomVecteurParPosition</a></li><li><a href="global.html#norme">norme</a></li><li><a href="global.html#onError">onError</a></li><li><a href="global.html#orienter">orienter</a></li><li><a href="global.html#orthoCentre">orthoCentre</a></li><li><a href="global.html#paralleleRegleEquerre2points3epoint">paralleleRegleEquerre2points3epoint</a></li><li><a href="global.html#parallelogramme2points1hauteur">parallelogramme2points1hauteur</a></li><li><a href="global.html#parallelogramme2sommetsConsecutifsCentre">parallelogramme2sommetsConsecutifsCentre</a></li><li><a href="global.html#parallelogramme3points">parallelogramme3points</a></li><li><a href="global.html#parallelogramme3sommetsConsecutifs">parallelogramme3sommetsConsecutifs</a></li><li><a href="global.html#parallelogrammeAngleCentre">parallelogrammeAngleCentre</a></li><li><a href="global.html#pause">pause</a></li><li><a href="global.html#Pavage">Pavage</a></li><li><a href="global.html#Pave">Pave</a></li><li><a href="global.html#perpendiculaireRegleEquerre2points3epoint">perpendiculaireRegleEquerre2points3epoint</a></li><li><a href="global.html#Point">Point</a></li><li><a href="global.html#pointAdistance">pointAdistance</a></li><li><a href="global.html#pointCreer">pointCreer</a></li><li><a href="global.html#pointDansRepere">pointDansRepere</a></li><li><a href="global.html#pointDeplacer">pointDeplacer</a></li><li><a href="global.html#pointIntersectionCC">pointIntersectionCC</a></li><li><a href="global.html#pointIntersectionDD">pointIntersectionDD</a></li><li><a href="global.html#pointIntersectionLC">pointIntersectionLC</a></li><li><a href="global.html#pointMasquer">pointMasquer</a></li><li><a href="global.html#pointMontrer">pointMontrer</a></li><li><a href="global.html#pointNommer">pointNommer</a></li><li><a href="global.html#pointsCreer">pointsCreer</a></li><li><a href="global.html#pointSurCercle">pointSurCercle</a></li><li><a href="global.html#pointSurDroite">pointSurDroite</a></li><li><a href="global.html#pointSurSegment">pointSurSegment</a></li><li><a href="global.html#Polygone">Polygone</a></li><li><a href="global.html#polygoneAvecNom">polygoneAvecNom</a></li><li><a href="global.html#PolygoneMainLevee">PolygoneMainLevee</a></li><li><a href="global.html#polygoneRapide">polygoneRapide</a></li><li><a href="global.html#polygoneRegulier">polygoneRegulier</a></li><li><a href="global.html#polygoneRegulierIndirect">polygoneRegulierIndirect</a></li><li><a href="global.html#polygoneRegulierParCentreEtRayon">polygoneRegulierParCentreEtRayon</a></li><li><a href="global.html#polygoneTracer">polygoneTracer</a></li><li><a href="global.html#Polyline">Polyline</a></li><li><a href="global.html#projectionOrtho">projectionOrtho</a></li><li><a href="global.html#propositionsQcm">propositionsQcm</a></li><li><a href="global.html#qcmDisponible">qcmDisponible</a></li><li><a href="global.html#question_achat">question_achat</a></li><li><a href="global.html#questionNumerique">questionNumerique</a></li><li><a href="global.html#rapporteurCrayonMarqueAngle">rapporteurCrayonMarqueAngle</a></li><li><a href="global.html#rapporteurDeplacer">rapporteurDeplacer</a></li><li><a href="global.html#rapporteurDeplacerRotation2Points">rapporteurDeplacerRotation2Points</a></li><li><a href="global.html#rapporteurMasquer">rapporteurMasquer</a></li><li><a href="global.html#rapporteurMasquerGraduationsExterieures">rapporteurMasquerGraduationsExterieures</a></li><li><a href="global.html#rapporteurMasquerGraduationsInterieures">rapporteurMasquerGraduationsInterieures</a></li><li><a href="global.html#rapporteurMontrer">rapporteurMontrer</a></li><li><a href="global.html#rapporteurMontrerGraduationsExterieures">rapporteurMontrerGraduationsExterieures</a></li><li><a href="global.html#rapporteurMontrerGraduationsInterieures">rapporteurMontrerGraduationsInterieures</a></li><li><a href="global.html#rapporteurRotation">rapporteurRotation</a></li><li><a href="global.html#rapporteurTracerDemiDroiteAngle">rapporteurTracerDemiDroiteAngle</a></li><li><a href="global.html#rapporteurZoom">rapporteurZoom</a></li><li><a href="global.html#regleDemiDroiteOriginePoint">regleDemiDroiteOriginePoint</a></li><li><a href="global.html#regleDeplacer">regleDeplacer</a></li><li><a href="global.html#regleDroite">regleDroite</a></li><li><a href="global.html#regleMasquer">regleMasquer</a></li><li><a href="global.html#regleMasquerGraduations">regleMasquerGraduations</a></li><li><a href="global.html#regleModifierLongueur">regleModifierLongueur</a></li><li><a href="global.html#regleMontrer">regleMontrer</a></li><li><a href="global.html#regleMontrerGraduations">regleMontrerGraduations</a></li><li><a href="global.html#regleProlongerSegment">regleProlongerSegment</a></li><li><a href="global.html#regleRotation">regleRotation</a></li><li><a href="global.html#regleSegment">regleSegment</a></li><li><a href="global.html#regleZoom">regleZoom</a></li><li><a href="global.html#renommePolygone">renommePolygone</a></li><li><a href="global.html#requerreDeplacer">requerreDeplacer</a></li><li><a href="global.html#requerreGlisserEquerre">requerreGlisserEquerre</a></li><li><a href="global.html#requerreMasquer">requerreMasquer</a></li><li><a href="global.html#requerreMontrer">requerreMontrer</a></li><li><a href="global.html#requerreRotation">requerreRotation</a></li><li><a href="global.html#requerreZoom">requerreZoom</a></li><li><a href="global.html#rotation">rotation</a></li><li><a href="global.html#rotation3d">rotation3d</a></li><li><a href="global.html#RotationAnimee">RotationAnimee</a></li><li><a href="global.html#rotationPoint">rotationPoint</a></li><li><a href="global.html#rotationPolygone">rotationPolygone</a></li><li><a href="global.html#rotationV3d">rotationV3d</a></li><li><a href="global.html#scratchblock">scratchblock</a></li><li><a href="global.html#script">script</a></li><li><a href="global.html#Segment">Segment</a></li><li><a href="global.html#segmentAvecExtremites">segmentAvecExtremites</a></li><li><a href="global.html#segmentCodage">segmentCodage</a></li><li><a href="global.html#segmentCodageMasquer">segmentCodageMasquer</a></li><li><a href="global.html#segmentCodageMontrer">segmentCodageMontrer</a></li><li><a href="global.html#SegmentMainLevee">SegmentMainLevee</a></li><li><a href="global.html#SensDeRotation">SensDeRotation</a></li><li><a href="global.html#setReponse">setReponse</a></li><li><a href="global.html#seyes">seyes</a></li><li><a href="global.html#similitude">similitude</a></li><li><a href="global.html#sin">sin</a></li><li><a href="global.html#Sphere3d">Sphere3d</a></li><li><a href="global.html#SVG_Axe_horizontal">SVG_Axe_horizontal</a></li><li><a href="global.html#SVG_Axe_vertical">SVG_Axe_vertical</a></li><li><a href="global.html#SVG_chemin">SVG_chemin</a></li><li><a href="global.html#SVG_engrenages">SVG_engrenages</a></li><li><a href="global.html#SVG_fleche_machine_maths">SVG_fleche_machine_maths</a></li><li><a href="global.html#SVG_fraction">SVG_fraction</a></li><li><a href="global.html#SVG_graduation">SVG_graduation</a></li><li><a href="global.html#SVG_grille">SVG_grille</a></li><li><a href="global.html#SVG_label">SVG_label</a></li><li><a href="global.html#SVG_machine_diag_3F1_act_mono">SVG_machine_diag_3F1_act_mono</a></li><li><a href="global.html#SVG_machine_diag_3F12">SVG_machine_diag_3F12</a></li><li><a href="global.html#SVG_machine_maths">SVG_machine_maths</a></li><li><a href="global.html#SVG_reperage_sur_un_axe">SVG_reperage_sur_un_axe</a></li><li><a href="global.html#SVG_repere">SVG_repere</a></li><li><a href="global.html#SVG_Tracer_droite">SVG_Tracer_droite</a></li><li><a href="global.html#SVG_tracer_droite_flecheH">SVG_tracer_droite_flecheH</a></li><li><a href="global.html#SVG_tracer_droite_flecheV">SVG_tracer_droite_flecheV</a></li><li><a href="global.html#SVG_tracer_flecheH">SVG_tracer_flecheH</a></li><li><a href="global.html#SVG_tracer_flecheV">SVG_tracer_flecheV</a></li><li><a href="global.html#SVG_tracer_point">SVG_tracer_point</a></li><li><a href="global.html#SymetrieAnimee">SymetrieAnimee</a></li><li><a href="global.html#symetrieAxiale">symetrieAxiale</a></li><li><a href="global.html#symetrieAxialePoint">symetrieAxialePoint</a></li><li><a href="global.html#symetrieAxialePolygone">symetrieAxialePolygone</a></li><li><a href="global.html#Tableau_de_variation">Tableau_de_variation</a></li><li><a href="global.html#tan">tan</a></li><li><a href="global.html#textarea_to_array">textarea_to_array</a></li><li><a href="global.html#texteDeplacer">texteDeplacer</a></li><li><a href="global.html#texteMasquer">texteMasquer</a></li><li><a href="global.html#TexteParPoint">TexteParPoint</a></li><li><a href="global.html#texteParPosition">texteParPosition</a></li><li><a href="global.html#textePoint">textePoint</a></li><li><a href="global.html#textePosition">textePosition</a></li><li><a href="global.html#TexteSurSegment">TexteSurSegment</a></li><li><a href="global.html#tournerD">tournerD</a></li><li><a href="global.html#tournerG">tournerG</a></li><li><a href="global.html#TraceBarre">TraceBarre</a></li><li><a href="global.html#TraceBarreHorizontale">TraceBarreHorizontale</a></li><li><a href="global.html#traceCompas">traceCompas</a></li><li><a href="global.html#TraceGraphiqueCartesien">TraceGraphiqueCartesien</a></li><li><a href="global.html#TracePoint">TracePoint</a></li><li><a href="global.html#TracePointSurDroite">TracePointSurDroite</a></li><li><a href="global.html#tracer">tracer</a></li><li><a href="global.html#trait">trait</a></li><li><a href="global.html#traitMasquer">traitMasquer</a></li><li><a href="global.html#traitRapide">traitRapide</a></li><li><a href="global.html#translation">translation</a></li><li><a href="global.html#translation2Points">translation2Points</a></li><li><a href="global.html#translation3d">translation3d</a></li><li><a href="global.html#TranslationAnimee">TranslationAnimee</a></li><li><a href="global.html#translationPoint">translationPoint</a></li><li><a href="global.html#translationPolygone">translationPolygone</a></li><li><a href="global.html#triangle1longueur2angles">triangle1longueur2angles</a></li><li><a href="global.html#triangle2longueurs1angle">triangle2longueurs1angle</a></li><li><a href="global.html#triangle2points1angle1longueur">triangle2points1angle1longueur</a></li><li><a href="global.html#triangle2points1angle1longueurOppose">triangle2points1angle1longueurOppose</a></li><li><a href="global.html#triangle2points1hauteur">triangle2points1hauteur</a></li><li><a href="global.html#triangle2points2angles">triangle2points2angles</a></li><li><a href="global.html#triangle2points2longueurs">triangle2points2longueurs</a></li><li><a href="global.html#triangle3longueurs">triangle3longueurs</a></li><li><a href="global.html#triangleEquilateral">triangleEquilateral</a></li><li><a href="global.html#triangleEquilateral2Sommets">triangleEquilateral2Sommets</a></li><li><a href="global.html#triangleRectangle2Cotes">triangleRectangle2Cotes</a></li><li><a href="global.html#triangleRectangleCoteHypotenuse">triangleRectangleCoteHypotenuse</a></li><li><a href="global.html#txt_to_objet_parametres_exercice">txt_to_objet_parametres_exercice</a></li><li><a href="global.html#updateMessageErreur">updateMessageErreur</a></li><li><a href="global.html#Vecteur">Vecteur</a></li><li><a href="global.html#waitFor">waitFor</a></li><li><a href="global.html#waitForGiac">waitForGiac</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">exercices/6e/6P11.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Exercice from '../Exercice.js'
+import { context } from '../../modules/context.js'
+import {listeQuestionsToContenu,randint,combinaisonListes,calcul,texNombrec,prenomF,prenomM,texteEnCouleur,texPrix,texteEnCouleurEtGras,numAlpha} from '../../modules/outils.js';
+export const titre = 'Résoudre des problèmes de proportionnalité en utilisant la linéarité simple'
+
+/**
+ * On donne une relation de proportionnalité du type n objets coûtent x€ et on demande le prix de y objets
+ * et le nombre d'objets qu'on peut acheter avec z€.
+ * @author Jean-Claude Lhote
+ * référence 6P11
+ * 03/2021 : ajout de situations de proportionnalité : CGrolleau
+*/
+
+// _____ Les fonctions suivantes renvoient un objet : {texte = ; texteCorr = ;} ______
+// elles correspondent aux différentes situations problèmes 
+
+function question_achat() { //questions d'origine du 6P11 : achat.
+    let liste_de_lieux = [
+      "dans un magasin de bricolage",
+      "dans une animalerie",
+      "au supermarché local",
+      "à l'épicerie",
+      "dans la boutique du musée"
+    ];
+    let liste_de_choses = [[]];
+    let liste_de_prix_unit = [[]];
+    liste_de_choses[0] = [
+      "articles",
+      "outils",
+      "accessoires",
+      "pièces d'outillage",
+      "pinceaux",
+      "ampoules",
+      "tournevis",
+      "spatules",
+      "raccords de tuyaux"
+    ];
+    liste_de_choses[1] = [
+      "poissons rouges",
+      "cannetons",
+      "perruches",
+      "phasmes",
+      "colliers anti-puces",
+      "souris",
+      "lapereaux",
+      "paquets de graines"
+    ];
+    liste_de_choses[2] = [
+      "sets de tables",
+      "verres",
+      "assiettes",
+      "os à macher",
+      "dosettes de café",
+      "packs de lait",
+      "paquets de pâtes"
+    ];
+    liste_de_choses[3] = [
+      "mangues",
+      "ananas",
+      "fruits de la passion",
+      "melons",
+      "paquets de madeleines de Commercy",
+      "bergamottes",
+      "bredeles",
+      "pots de cancoillotte"
+    ];
+    liste_de_choses[4] = [
+      "cartes",
+      "livres",
+      "gravures",
+      "puzzles",
+      "maquettes",
+      "roches",
+      "jeux de société"
+    ];
+    liste_de_prix_unit[0] = [5, 4, 1.25, 3, 0.5, 1.5, 2, 6, 4.5];
+    liste_de_prix_unit[1] = [1.5, 7, 20, 2.5, 25, 2, 15, 8];
+    liste_de_prix_unit[2] = [1.25, 1.5, 2, 0.5, 5, 4.5, 3];
+    liste_de_prix_unit[3] = [2, 2.5, 1.25, 1.5, 4, 7, 12, 3];
+    liste_de_prix_unit[4] = [0.5, 5, 7, 13.5, 10, 15, 20];
+    let index1 = randint(0, 4);
+    let prenoms = [prenomF(), prenomM()];
+    let index2 = randint(0, liste_de_choses[index1].length - 1);
+    let objet = liste_de_choses[index1][index2];
+    let pu = liste_de_prix_unit[index1][index2] * (1 + randint(1, 2) * 0.2 * randint(-1, 1));
+    let n = randint(3, 6);
+    let y = n * randint(2, 5);
+    let x = calcul(n * pu, 2);
+    let somme = calcul(y * pu, 2);
+    let met = false;
+    let p;
+	while (met == false) {
+        p = n * randint(2, 5);
+        if (p != y) {
+			met = true;
+		}
+    }
+    let z = calcul(p * pu, 2);
+    let texte = `${numAlpha(0)} ${prenoms[0]} a repéré ${liste_de_lieux[index1]} des ${objet} qui l\'intéressent.&lt;br\> ` +
+		`Elle lit que ${n} ${objet} coûtent ${texPrix(x)} €. ` +
+		`Elle veut en acheter ${y}.&lt;br\> Combien va-t-elle dépenser ?&lt;br\>`;
+    let texteCorr = `${numAlpha(0)} ${y} ${objet}, c'est ${texteEnCouleur(
+        texNombrec(y / n)
+      )} fois ${texteEnCouleur(
+        n,
+        "blue"
+      )} ${objet}.&lt;br\> Si ${texteEnCouleur(
+        n,
+        "blue"
+      )} ${objet} coûtent ${texPrix(x)} €, alors ${texteEnCouleur(
+        texNombrec(y / n)
+      )} fois ${texteEnCouleur(
+        n,
+        "blue"
+      )} ${objet} coutent ${texteEnCouleur(
+        texNombrec(y / n)
+      )} fois ${texPrix(x)} €.&lt;br\>` +
+	  texteEnCouleurEtGras(`Donc ${prenoms[0]} dépensera ${texteEnCouleur(
+        texNombrec(y / n)
+      )} $\\times$ ${texPrix(x)} € = ${texPrix(somme)} €.`,"black") + "&lt;br\>&lt;br\>";
+    texte += `${numAlpha(1)} ${prenoms[1]
+        } veut lui aussi acheter ces ${objet}. Il dispose de ${texPrix(
+          z
+        )} €.&lt;br\> Combien peut-il en acheter ?&lt;br\>`;
+    texteCorr += `${numAlpha(1)} ${texPrix(z)} €, c'est ${texteEnCouleur(
+        texNombrec(z / x)
+      )} fois ${texPrix(x)} €.&lt;br\> Si avec ${texPrix(
+        x
+      )} € on peut acheter ${texteEnCouleur(
+        n,
+        "blue"
+      )} ${objet}, alors avec ${texteEnCouleur(
+        texNombrec(z / x)
+      )} fois ${texPrix(x)} €, on peut acheter ${texteEnCouleur(
+        texNombrec(z / x)
+      )} fois ${texteEnCouleur(n, "blue")} ${objet}.&lt;br\>`;
+      texteCorr += texteEnCouleurEtGras(`Donc ${prenoms[1]} pourra acheter ${texteEnCouleur(
+        texNombrec(z / x)
+      )} $\\times$ ${texteEnCouleur(n, "blue")} = ${p} ${objet}.`,"black") + "&lt;br\>";
+	return {
+		qtexte:texte,
+		qtexteCorr:texteCorr
+	};
+}
+
+function question_recette() { //questions avec des masses pour un nombre de personne dans des recettes correction : passage à l'unité
+	let liste, nb_personne_init, nb_personne_final, alea1, alea2, alea3, alea4, prenoms, quantite, quantite_reponse, quantite_q2, texte, texteCorr;
+	liste = [ //liste des ingrédients avec différentes recettes associées et masses
+		{
+		ingredient : 'farine',
+		recettes : ['gateau au citron','gauffres','crepes','cake'],
+		quantites_par_pers : [20,25,30,35,40,50] // A voir pour l'instant quantités "simples".
+		},
+		{
+		ingredient : 'sucre',
+		recettes : ['gateau','mousse au chocolat','pain perdu','riz au lait'],
+		quantites_par_pers : [15,20,25,30,35]
+		},
+		{
+		ingredient : 'chocolat',
+		recettes : ['gateau','mousse au chocolat','flan','riz au lait'],
+		quantites_par_pers : [10,15,20,25,30,35]
+		},
+		{
+		ingredient : 'beurre',
+		recettes : ['gateau','mousse au chocolat'],
+		quantites_par_pers : [10,12,15,18]
+		}
+	];
+	nb_personne_init = randint(2, 6); //nombre de personne indiqué dans la recette.
+	nb_personne_final = randint(2, 12, [nb_personne_init]); //nombre de personne pour lequel on veut cuisiner
+	alea1 = randint(0, 3); //pour le choix de l'ingredient
+	alea2 = randint(0, liste[alea1].recettes.length-1); //pour le choix de la recette 
+	alea3 = randint(0, liste[alea1].quantites_par_pers.length-1); //pour le choix de la quantité par personne.
+	quantite = calcul(liste[alea1].quantites_par_pers[alea3] * nb_personne_init); //Calcul de la quantité dans la recette à partir de la qtt/personne et du nb de personne
+	quantite_reponse = calcul(liste[alea1].quantites_par_pers[alea3] * nb_personne_final); //Pour la correction
+	alea4 = randint(2, 12, [nb_personne_init,nb_personne_final]); //Pour la deuxième question (on évite une réponse identique à la 1ere et à la recette.)
+	quantite_q2 = calcul(liste[alea1].quantites_par_pers[alea3] * alea4); 
+	prenoms = [prenomF(), prenomM()]; //Choix de prénoms pour l'énoncé
+	texte = `${numAlpha(0)} ${prenoms[0]} lit sur sa recette de ${liste[alea1].recettes[alea2]} pour ${nb_personne_init} personnes qu'il faut ${quantite} g de ${liste[alea1].ingredient}. &lt;br\>` +
+		`Elle veut adapter sa recette pour ${nb_personne_final} personnes.` +
+		`&lt;br\> Quelle masse de ${liste[alea1].ingredient} doit-elle prévoir ? &lt;br\>&lt;br\>`;
+    texteCorr = `${numAlpha(0)} Commençons par trouver la masse de ${liste[alea1].ingredient} pour une personne : &lt;br\>` +
+		` ${nb_personne_init} personnes, c'est ${texteEnCouleur(nb_personne_init)} fois 1 personne. ` +
+		`il faut donc ${texteEnCouleur(nb_personne_init)} fois moins que ${quantite} g pour 1 personne.&lt;br\>` +
+		`${quantite} $\\div $ ${texteEnCouleur(nb_personne_init)} = ${liste[alea1].quantites_par_pers[alea3]}. &lt;br\>` +
+		texteEnCouleurEtGras(` Conclusion intermédiaire :`,"black") +
+		` il faut ${liste[alea1].quantites_par_pers[alea3]} g de ${liste[alea1].ingredient} pour 1 personne. &lt;br\>`+
+        ` Cherchons maintenant la quantité nécessaire pour ${nb_personne_final} personnes : &lt;br\>` +
+		` ${nb_personne_final} personnes c'est ${texteEnCouleur(nb_personne_final)} fois 1 personne. &lt;br\>` +
+		`Donc il faut ${texteEnCouleur(nb_personne_final)} fois plus que ${liste[alea1].quantites_par_pers[alea3]} g de ${liste[alea1].ingredient} que pour 1 personne pour faire sa recette :` + 
+		`&lt;br\> ${liste[alea1].quantites_par_pers[alea3]} $\\times$ ${texteEnCouleur(nb_personne_final)} = ${quantite_reponse} &lt;br\>` +
+		texteEnCouleurEtGras(`Conclusion : ${prenoms[0]} doit utiliser ${quantite_reponse} g de ${liste[alea1].ingredient} pour ${nb_personne_final} personnes. `,"black") +
+		` &lt;br\>&lt;br\>`;	
+    texte += `${numAlpha(1)} ${prenoms[1]} utilise la même recette de ${liste[alea1].recettes[alea2]}. Il dispose de ${quantite_q2} g de ${liste[alea1].ingredient}. &lt;br\>`+
+		` Pour combien de personnes au maximum peut-il cuisiner ? &lt;br\>`;
+    texteCorr += `${numAlpha(1)} ${prenoms[1]} utilise ${quantite_q2} g de ${liste[alea1].ingredient} cela représente ${texteEnCouleur(alea4,"blue")} fois plus que ${liste[alea1].quantites_par_pers[alea3]} g (quantité pour 1 personne).&lt;br\>`+
+	texteEnCouleurEtGras(`  Conclusion :  Il peut donc préparer sa recette pour ${texteEnCouleur(alea4,"blue")} personnes.`,"black"); 
+    return {
+		qtexte : texte,
+		qtexteCorr : texteCorr
+	}; 
+}
+
+function question_dillution() { //questions de mélange de volumes
+	let liste, alea1, alea2, quantite, volume_final, quantite_reponse, volume_final_aff, unitesolvant_volume_final, texte, texteCorr;
+	liste = [ 
+		{
+		solute : 'sirop',
+		volume_unitaire : [12,15,18,20] ,
+		unite_solute : 'cL',		
+		unite_solvant : ['L','L'] //liste pour [0] singulier [1] pluriel
+		},
+		{
+		solute : 'nettoyant pour sol',
+		volume_unitaire : [5,8,10,12],
+		unite_solute : 'cL',
+		unite_solvant : ['L','L']
+		},
+		{
+		solute : 'médicament',
+		volume_unitaire : [3,3.5,4,4.5,5,7.5],
+		unite_solute : 'mL',
+		unite_solvant : ['dL','dL']
+		},
+		{
+		solute : 'produit pour piscine',
+		volume_unitaire : [1,1.2,0.8,1.5],
+		unite_solute : 'L',
+		unite_solvant : ["dizaine de mètres cubes", "dizaines de mètres cubes"]
+		}
+	];
+	volume_final = randint(1, 5) + (randint(1, 5)) * 0.1 * randint(-1, 1,[0]); //volume d'eau pour la préparation
+	alea1 = randint(0, 3); //pour le choix du soluté
+	alea2 = randint(0, liste[alea1].volume_unitaire.length-1); //pour le choix du volume pour une unité de solvant 
+	quantite = liste[alea1].volume_unitaire[alea2];
+	quantite_reponse = calcul(volume_final * quantite); //Calcul du volume de soluté final (pour la correction.)
+	if (volume_final &lt; 2) {
+		unitesolvant_volume_final = liste[alea1].unite_solvant[0];
+	} else {
+		unitesolvant_volume_final = liste[alea1].unite_solvant[1];
+	}
+	volume_final_aff = texNombrec(volume_final); //pour affichage avec bon séparateur.
+	texte = `Il est indiqué sur la bouteille de ${liste[alea1].solute} qu'il faut  ` +
+		` ${texNombrec(quantite)} ${liste[alea1].unite_solute} de  ${liste[alea1].solute} pour 1 ${liste[alea1].unite_solvant[0]} d'eau.&lt;br\> ` +
+		`On veut utiliser ${volume_final_aff} ${unitesolvant_volume_final} d'eau.` +
+		`&lt;br\> Quel volume de ${liste[alea1].solute} doit-on prévoir ? &lt;br\>`;
+    texteCorr = `Le volume de ${liste[alea1].solute} est proportionnel au volume d'eau &lt;br\> ` +
+		` ${texteEnCouleur(volume_final_aff)} ${unitesolvant_volume_final} d'eau, c'est ${texteEnCouleur(volume_final_aff)} fois 1 ${liste[alea1].unite_solvant[0]} d'eau. &lt;br\> ` +
+		`il faut donc ${texteEnCouleur(volume_final_aff)} fois plus que ${texteEnCouleur(texNombrec(quantite),"blue")} ${liste[alea1].unite_solute} de ${liste[alea1].solute}. &lt;br\>` +
+		`${texteEnCouleur(texNombrec(quantite),"blue")} ${liste[alea1].unite_solute} $\\times $ ${texteEnCouleur(volume_final_aff)} = ${texNombrec(quantite_reponse)}  ${liste[alea1].unite_solute}  &lt;br\>  ` +
+        texteEnCouleurEtGras(` Conclusion : Il faut donc prévoir ${texNombrec(quantite_reponse)} ${liste[alea1].unite_solute} de ${liste[alea1].solute}.`,"black") + ` &lt;br\>`;	
+    return {
+		qtexte : texte,
+		qtexteCorr : texteCorr
+	};
+}
+
+function question_distance() { //questions de distance parcourue à une vitesse moyenne donnée
+	let liste, alea1, alea2, alea3, volume_final, duree, rapport, rapport_question2, distance, reponse_q1, texte, texteCorr;
+	liste = [ //liste des "moyens de locomotion" et vitesses associées
+		{
+		locomotion : 'piéton',
+		vitesse : [3,3.5,4,4.5] ,
+		},
+		{
+		locomotion : 'cycliste',
+		vitesse : [12,15,16,17,18,20,22],
+		},
+		{
+		locomotion : 'camion',
+		vitesse : [75,77.5,80,82.5,85],
+		},
+		{
+		locomotion : 'train',
+		vitesse : [125,150,175,185,195],
+		}
+	];
+	alea1 = randint(0, 3); //pour le choix de locomotion
+	duree = [{
+		temps : '15 minutes',
+		rapport : 0.25
+		},
+		{
+		temps : '30 minutes',
+		rapport : 0.5
+		},
+		{
+		temps : '45 minutes',
+		rapport : 0.75
+		},
+		{
+		temps : '1 heure et demi',
+		rapport : 1.5
+		},
+		{
+		temps : '2 heures',
+		rapport : 2
+		},
+		{
+		temps : '2 heures et demi',
+		rapport : 2.5
+		},
+		{
+		temps : '3 heures',
+		rapport : 3
+		}];
+	alea2 = randint(0, liste[alea1].vitesse.length-1); //pour le choix du temps passé 
+	rapport_question2 = [0.25, 0.5, 0.75, 1.25, 1.5, 2];
+	alea3 = randint(0, rapport_question2.length-1,[alea2]);
+	reponse_q1 = calcul(duree[alea2].rapport*liste[alea1].vitesse[alea2]);
+	distance = texNombrec(calcul(rapport_question2[alea3] * liste[alea1].vitesse[alea2])); // pour question 2
+	texte = `${numAlpha(0)} Un ${liste[alea1].locomotion} parcourt en moyenne ${texNombrec(liste[alea1].vitesse[alea2])} km en une heure.&lt;br\> Quelle distance va-t-il parcourir, à la même vitesse en ${duree[alea2].temps} ? &lt;br\>&lt;br\> `;
+    texteCorr = `${numAlpha(0)} ${duree[alea2].temps} c'est ${texteEnCouleur(texNombrec(duree[alea2].rapport))} fois une heure.&lt;br\> ` +
+		`En une heure le ${liste[alea1].locomotion} parcourt ${texteEnCouleur(texNombrec(liste[alea1].vitesse[alea2],"blue"))} km donc en ${duree[alea2].temps} il va parcourir ${texteEnCouleur(texNombrec(duree[alea2].rapport))} fois ${texteEnCouleur(texNombrec(liste[alea1].vitesse[alea2],"blue"))} km. &lt;br\>` +
+		`${texteEnCouleur(texNombrec(duree[alea2].rapport))} $\\times$ ${texteEnCouleur(texNombrec(liste[alea1].vitesse[alea2],"blue"))} km = ${texNombrec(reponse_q1)} km &lt;br\>`  +
+		texteEnCouleurEtGras(` Conclusion : Le ${liste[alea1].locomotion} va donc parcourir ${texNombrec(reponse_q1)} km.`,"black") + `&lt;br\>&lt;br\>`	;	
+	texte += `${numAlpha(1)} Combien de temps va-t-il mettre pour parcourir ${distance} km à cette même vitesse ? &lt;br\> `;
+    texteCorr += `${numAlpha(1)} ${distance} c'est ${texteEnCouleur(texNombrec(rapport_question2[alea3]))} fois ${texNombrec(liste[alea1].vitesse[alea2])} km.
+		Il parcourt ${texNombrec(liste[alea1].vitesse[alea2])} km en une heure. &lt;br\>` + 
+	`Il va mettre donc ${texteEnCouleur(texNombrec(rapport_question2[alea3]))} fois une heure à parcourir ${distance} km &lt;br\>` + 
+	texteEnCouleurEtGras(`Conclusion : Il va donc mettre  ${texNombrec(rapport_question2[alea3])} heure(s) ( ${texNombrec(rapport_question2[alea3])} $\\times$ 1 ) à parcourir ${distance} km  ce qui fait ${calcul(rapport_question2[alea3]*60)} minutes.`,"black") + `&lt;br\>&lt;br\>`;	
+	return {
+		qtexte : texte,
+		qtexteCorr : texteCorr
+	};
+}
+
+function question_echelle() { //X cm sur une carte correspond à x km dans la réalité... 
+	let rapport, distance_carte, distance_reel, distance_reel_q2, alea1, alea2, distance_carte_2, prenoms, texte, texteCorr;
+	distance_carte = randint(1, 7); //Choix d'un nombre de cm sur la carte
+	distance_reel = randint(3, 20, [distance_carte]); //Choix d'un nombre de km dans la réalité (on évite d'avoir 1cm pour 1km)
+	rapport = [0.25, 0.5, 0.75, 1.25, 1.5, 2, 3, 4, 5]; //rapport entre la référence et la question (rapports simples car niveau 6eme)
+	alea1 = randint(0, rapport.length-1);
+	alea2 = randint(0, rapport.length-1, [alea1]);
+	distance_carte_2 = texNombrec(calcul(rapport[alea1] * distance_carte)); 
+	distance_reel_q2 = texNombrec(calcul(rapport[alea2] * distance_reel)); 
+	prenoms = [prenomF(), prenomM()];
+	texte = `${numAlpha(0)} Sur une carte sur laquelle ${distance_carte} cm représente ${distance_reel} km dans la réalité, &lt;br\>
+		${prenoms[0]} mesure sont trajet, elle trouve une distance de ${distance_carte_2} cm. &lt;br\>` +
+		`A quelle distance cela correspond dans la réalité ? &lt;br\>&lt;br\>`;
+    texteCorr = `${numAlpha(0)} ${distance_carte_2} cm c'est ${texteEnCouleur(texNombrec(rapport[alea1]))} fois ${distance_carte} cm &lt;br\>
+		Dans la réalité, ${distance_carte} cm correspond à ${texteEnCouleur(distance_reel,"blue")} km donc &lt;br\>`+
+		`  ${distance_carte_2} cm va correspondre à ${texteEnCouleur(texNombrec(rapport[alea1]))} fois ${texteEnCouleur(distance_reel,"blue")} km  &lt;br\>` +
+		`${texteEnCouleur(texNombrec(rapport[alea1]))} $\\times$ ${texteEnCouleur(distance_reel,"blue")} km = ${texNombrec(calcul(rapport[alea1]*distance_reel))} km &lt;br\>` +
+		texteEnCouleurEtGras(`Conclusion : le trajet de ${prenoms[0]} est de ${texNombrec(calcul(rapport[alea1]*distance_reel))} km.`,"black") + `&lt;br\>&lt;br\>` ;	
+	texte += `${numAlpha(1)} Deux villes sont distantes de ${texNombrec(distance_reel_q2)} km. &lt;br\>` +
+	`Quelle distance va-t-on mesurer sur la carte entre ces deux villes ?`;
+    texteCorr += `${numAlpha(1)} ${texNombrec(distance_reel_q2)} km c'est ${texteEnCouleur(texNombrec(rapport[alea2]))} fois ${distance_reel} km.
+		Or ${distance_reel} km est représenté par ${texteEnCouleur(distance_carte,"blue")} cm sur la carte. &lt;br\>` + 
+		`Donc ${texNombrec(distance_reel_q2)} km est représenté par ${texteEnCouleur(texNombrec(rapport[alea2]))} fois ${texteEnCouleur(distance_carte,"blue")} cm sur la carte &lt;br\>` +
+		`${texteEnCouleur(texNombrec(rapport[alea2]))} $\\times$ ${texteEnCouleur(distance_carte,"blue")} cm = ${texNombrec(calcul(rapport[alea2]*distance_carte))} cm &lt;br\>` +
+		texteEnCouleurEtGras(`Conclusion : Les deux villes sont séparées de ${texNombrec(calcul(rapport[alea2]*distance_carte))} cm sur la carte.`,"black") + `&lt;br\>&lt;br\>`;
+	return {
+		qtexte : texte,
+		qtexteCorr : texteCorr
+	};
+}
+
+function question_recouvrir_surface() { //peinture, gazon, carrelage pour une surface donnée.
+	let liste, alea1, alea2, alea3, alea4, alea5, alea6, quantite, qttaffichage, surface_finale, rapport, quantite2, surface_finale2, prenoms, texte, texteCorr;
+	liste = [ 
+		{
+		matiere : 'de la peinture',
+		unite : 'L',
+		qtt_matiere_unitaire : [0.5,1,1.5,2], //quantité au m²
+		qtt_surface : [10,25,15] //nombre de m² indiqués sur l'emballage
+		},
+		{
+		matiere : 'du gazon',
+		unite : 'kg',
+		qtt_matiere_unitaire : [2.5,3,5,10], 
+		qtt_surface : [200,175,150] 
+		},
+		{
+		matiere : 'du carrelage',
+		unite : 'carreaux',
+		qtt_matiere_unitaire : [25,30,50,100], 
+		qtt_surface : [10,20,5] 
+		}
+	];
+	alea1 = randint(0, liste.length-1); 
+	alea2 = randint(0, liste[alea1].qtt_matiere_unitaire.length-1);
+	alea3 = randint(0, liste[alea1].qtt_surface.length-1);	
+	rapport = [0.25, 0.5, 0.75, 1.25, 1.5, 2, 3, 4, 5]; //choix parmi des rapports simples (en 6eme cela parrait suffisant)
+	quantite = liste[alea1].qtt_matiere_unitaire[alea2]; 
+	alea4 = randint(0, rapport.length-1);
+	surface_finale = calcul(rapport[alea4]*liste[alea1].qtt_surface[alea3]); 
+	alea5 = randint(0, rapport.length-1,[alea4]);
+	quantite2 = calcul(rapport[alea5]*liste[alea1].qtt_matiere_unitaire[alea2]);
+	alea6 = randint(-2, 2,[0]);
+	surface_finale2 =  calcul(rapport[alea5]*liste[alea1].qtt_surface[alea3]+alea6);
+	prenoms = [prenomF(), prenomM()];
+	qttaffichage = texNombrec(quantite); //Pour affichage avec virgule en séparateur.
+	texte = `${numAlpha(0)} ${prenoms[0]} doit acheter ${liste[alea1].matiere}. &lt;br\>`+
+	`Sur la notice il est indiqué de prévoir ${qttaffichage} ${liste[alea1].unite} pour ${liste[alea1].qtt_surface[alea3]} m$^2$ &lt;br\> ` +
+	`Combien doit-elle en acheter pour une surface de ${texNombrec(surface_finale)} m$^2$ ? &lt;br\>`;
+    texteCorr = `${numAlpha(0)} ${texNombrec(surface_finale)} $m^2$ c'est ${texteEnCouleur(texNombrec(rapport[alea4]))} fois ${liste[alea1].qtt_surface[alea3]} $m^2$ &lt;br\>` +
+		`Il va donc falloir ${texteEnCouleur(texNombrec(rapport[alea4]))} fois ${texteEnCouleur(qttaffichage,"blue")} ${liste[alea1].unite} pour ${texNombrec(surface_finale)} $m^2$ &lt;br\>` +
+		`${texteEnCouleur(texNombrec(rapport[alea4]))} $\\times$ ${texteEnCouleur(qttaffichage,"blue")} ${liste[alea1].unite} = ${texNombrec(calcul(rapport[alea4]*quantite))} ${liste[alea1].unite}&lt;br\>` +
+		texteEnCouleurEtGras(`Conclusion : elle doit en acheter ${texteEnCouleur(texNombrec(rapport[alea4]))} $\\times$ ${texteEnCouleur(qttaffichage,"blue")} ${liste[alea1].unite} = ${texNombrec(calcul(rapport[alea4]*quantite))} ${liste[alea1].unite}.`,"black")+ `&lt;br\>  `;	
+	texte += `&lt;br\> ${numAlpha(1)} ${prenoms[1]} a acheté ${liste[alea1].matiere}. Il lui en reste ${texNombrec(quantite2)} ${liste[alea1].unite}. &lt;br\> Sur la notice il est indiqué de prévoir ${qttaffichage} ${liste[alea1].unite} pour ${texNombrec(liste[alea1].qtt_surface[alea3])} m$^2$ &lt;br\>`+
+	`En a-t-il suffisament pour la surface de ${texNombrec(surface_finale2)} m$^2$ qu'il lui reste à faire ? &lt;br\>`;
+    texteCorr += `&lt;br\> ${numAlpha(1)} ${texNombrec(quantite2)} ${liste[alea1].unite} c'est ${texteEnCouleur(texNombrec(rapport[alea5]))} fois ${qttaffichage} ${liste[alea1].unite}. &lt;br\>` +
+		`avec ${texNombrec(quantite2)} ${liste[alea1].unite} on peut donc traiter une surface de ${texteEnCouleur(texNombrec(rapport[alea5]))}
+		fois ${texteEnCouleur(texNombrec(liste[alea1].qtt_surface[alea3]),"blue")} m$^2$ &lt;br\>` +
+		`${texteEnCouleur(texNombrec(rapport[alea5]))} $\\times$ ${texteEnCouleur(texNombrec(liste[alea1].qtt_surface[alea3]),"blue")} m$^2$ = ${texNombrec(calcul(rapport[alea5]*liste[alea1].qtt_surface[alea3]))} m$^2$. &lt;br\>`;
+	if (calcul(rapport[alea5]*liste[alea1].qtt_surface[alea3]) > surface_finale2) {
+		texteCorr += texteEnCouleurEtGras(`Conclusion : ${texNombrec(calcul(rapport[alea5]*liste[alea1].qtt_surface[alea3]))} m$^2$ > ${texNombrec(surface_finale2)} $m^2$ donc il a suffisament pour ${surface_finale2} m$^2$.`,"black") +` &lt;br\>`;
+	} else {
+		texteCorr += texteEnCouleurEtGras(`Conclusion : ${texNombrec(calcul(rapport[alea5]*liste[alea1].qtt_surface[alea3]))} m$^2$ &lt; ${texNombrec(surface_finale2)} $m^2$ donc il n'a pas assez pour ${surface_finale2} m$^2$.`,"black") +` &lt;br\>`;
+	}
+	return {
+		qtexte : texte,
+		qtexteCorr : texteCorr
+	};
+}
+
+// _______ Fin des fonctions correspondants aux situations problèmes _____
+
+
+export default function Proportionnalite_par_linearite() {
+  "use strict";
+  let question;
+  Exercice.call(this); // Héritage de la classe Exercice()
+  this.titre = titre;
+  this.consigne = "Répondre aux questions posées en justifiant";
+  context.isHtml ? (this.spacing = 2) : (this.spacing = 1);
+  context.isHtml ? (this.spacingCorr = 2) : (this.spacingCorr = 1);
+  this.nbQuestions = 5;
+  this.nbCols = 1;
+  this.nbColsCorr = 1;
+  this.nouvelleVersion = function () {
+    this.listeQuestions = []; // Liste de questions
+    this.listeCorrections = []; // Liste de questions corrigées
+    let situationtypes = [];
+	let liste_index_situations_disponible = [0, 1, 2, 3, 4, 5]; 
+	let liste_index_situations = combinaisonListes(
+		liste_index_situations_disponible,
+		this.nbQuestions
+	); //permet de ne pas avoir 2 fois la même situation si - de questions que de situations
+	//boucle pour le nombre de question. 
+	//A chaque question on vérifie qu'elle n'existe pas déjà pour en refaire une. Sécurité : on ajoute un compteur pour eviter trop d'essais...
+	let cpt = 0;
+	for (let i=0; i&lt;this.nbQuestions &amp;&amp; cpt&lt;50;) {
+		switch(liste_index_situations[i]) {
+			case 0:
+				question = question_achat();
+				break;
+			case 1:
+				question = question_recette();
+				break;
+			case 2:
+				question = question_dillution();
+				break;
+			case 3:
+				question = question_distance();
+				break;
+			case 4:
+				question = question_echelle();
+				break;
+			case 5:
+				question = question_recouvrir_surface();
+				break;
+		}
+		if (this.listeQuestions.indexOf(question.qtexte) == -1) { // Si la question n'a jamais été posée, on la garde.
+			this.listeQuestions.push(question.qtexte);
+			this.listeCorrections.push(question.qtexteCorr);
+			i++;
+		}
+		cpt++;
+	}
+    listeQuestionsToContenu(this); //Espacement de 2 em entre chaque questions.
+  };
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu May 20 2021 18:04:47 GMT+0200 (heure d’été d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

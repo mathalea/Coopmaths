@@ -1,0 +1,1 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[2929],{22929:(t,a,e)=>{"use strict";e.r(a),e.d(a,{titre:()=>s,default:()=>n});var i=e(63444);const s="Trouver l’image d’un point par une transformation choisie aléatoirement";function n(){i.default.call(this),this.sup=4,this.titre=s}}}]);

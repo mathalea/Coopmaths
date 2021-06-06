@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 import { egal, randint, choice, rangeMinMax, unSiPositifMoinsUnSinon, arrondi, arrondi_virgule, calcul, lettre_depuis_chiffre, tex_nombre, nombre_avec_espace, string_nombre, premierMultipleSuperieur, premierMultipleInferieur } from "/modules/outils.js"
 
 /*
@@ -39,7 +41,14 @@ export function ObjetMathalea2D() {
   mathalea.objets2D.push(this)
 }
 
-
+/**
+ * 
+ * @param {url} url de l'image 
+ * @param {number} x tous ces nombres sont en pixels
+ * @param {number} y Attention à l'orientation de l'axe SVG
+ * @param {number} largeur 
+ * @param {number} hauteur 
+ */
 function Fond_ecran(url,x,y,largeur,hauteur){
   ObjetMathalea2D.call(this);
   this.svg=function(coeff){
@@ -54,7 +63,30 @@ function Fond_ecran(url,x,y,largeur,hauteur){
 export function fond_ecran(url,x=0,y=0,largeur=mathalea.fenetreMathalea2d.xMax-mathalea.fenetreMathalea2d.xMin,hauteur=mathalea.fenetreMathalea2d.yMax-mathalea.fenetreMathalea2d.yMin){
   return new Fond_ecran(url,x,y,largeur,hauteur)
 }
-
+/**
+ * fork de https://javascript.developpez.com/actu/94357/JavaScript-moins-Realiser-une-copie-parfaite-d-objet/
+ * Ne fonctionne pas complètement : ne copie pas les méthodes svg et tikz...
+ * @param {ObjetMathalea2D} originalObject 
+ * @returns copie de cet objet.
+ */
+ export function clone(obj) {
+  if (null == obj || "object" != typeof obj) return obj;
+  if (obj instanceof Array) {
+      var copy = [];
+      for (var i = 0, len = obj.length; i < len; i++) {
+          copy[i] = clone(obj[i]);
+      }
+      return copy;
+  }
+  if (obj instanceof Object) {
+      var copy = {};
+      for (var attr in obj) {
+          if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+      }
+      return copy;
+  }
+  throw new Error("Unable to copy obj this object.");
+}
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%% LES POINTS %%%%%%%%%%%%%%
@@ -78,19 +110,19 @@ function Point(arg1, arg2, arg3, positionLabel = "above") {
     this.nom = arg1;
   } else if (arguments.length == 2) {
 
-    this.x = arrondi(arg1, 2);
-    this.y = arrondi(arg2, 2);
+    this.x = arrondi(arg1, 3);
+    this.y = arrondi(arg2, 3);
   } else {
-    this.x = arrondi(arg1, 2);
-    this.y = arrondi(arg2, 2);
+    this.x = arrondi(arg1, 3);
+    this.y = arrondi(arg2, 3);
     this.nom = arg3;
   }
   this.positionLabel = positionLabel;
   this.xSVG = function (coeff) {
-    return arrondi(this.x * coeff, 2);
+    return arrondi(this.x * coeff, 3);
   };
   this.ySVG = function (coeff) {
-    return -arrondi(this.y * coeff, 2);
+    return -arrondi(this.y * coeff, 3);
   }
   if (!this.nom) {
     this.nom = " "; // Le nom d'un point est par défaut un espace
@@ -118,6 +150,7 @@ function TracePoint(...points) {
 
   if (typeof points[points.length - 1] === "string") {
     this.color = points[points.length - 1];
+    points.length--;
   }
   else this.color = 'black';
   this.svg = function (coeff) {
@@ -194,7 +227,7 @@ function TracePoint(...points) {
   };
   this.tikz = function () {
     let objetstikz = [], s1, s2, p1, p2, c
-    let tailletikz = this.taille / 20 / mathalea.scale;
+    let tailletikz = this.taille * mathalea.scale / 20 ;
     for (let A of points) {
       if (A.constructor == Point) {
         if (this.style == 'x') {
@@ -469,6 +502,13 @@ export function pointAdistance(...args) {
 function LabelPoint(...points) {
   ObjetMathalea2D.call(this);
   this.taille = 1
+  if (typeof points[points.length - 1] === "string") {
+    this.color = points[points.length - 1];
+    points.length--
+  }
+  else {
+    this.color = 'black'
+  }
   this.svg = function (coeff) {
     let code = "", x, y;
     if (Array.isArray(points[0])) {
@@ -481,28 +521,28 @@ function LabelPoint(...points) {
       x = point.x, y = point.y
       switch (point.positionLabel) {
         case "left":
-          code += texteParPosition(point.nom, x - 15 / coeff, y, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x - 10 / coeff, y,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
         case "right":
-          code += texteParPosition(point.nom, x + 15 / coeff, y, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x + 10 / coeff, y,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
         case "below":
-          code += texteParPosition(point.nom, x, y - 15 / coeff, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x, y - 10 / coeff,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
         case "above":
-          code += texteParPosition(point.nom, x, y + 15 / coeff, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x, y + 10 / coeff,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
         case "above right":
-          code += texteParPosition(point.nom, x + 15 / coeff, y + 15 / coeff, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x + 10 / coeff, y + 10 / coeff,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
         case "below left":
-          code += texteParPosition(point.nom, x - 15 / coeff, y - 15 / coeff, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x - 10 / coeff, y - 10 / coeff,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
         case "below right":
-          code += texteParPosition(point.nom, x + 15 / coeff, y - 15 / coeff, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x + 10 / coeff, y - 10 / coeff,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
         default:
-          code += texteParPosition(point.nom, x - 15 / coeff, y + 15 / coeff, 'milieu', this.color, this.taille, "", true).svg(coeff) + `\n`
+          code += latexParCoordonnees(point.nom, x - 10 / coeff, y + 10 / coeff,this.color, 10,  this.taille*10, "").svg(coeff) + `\n`
           break;
       }
     }
@@ -559,6 +599,7 @@ export function barycentre(p, nom = '', positionLabel = "above") {
  */
 function Droite(arg1, arg2, arg3, arg4) {
   let a, b, c
+
   ObjetMathalea2D.call(this);
   if (arguments.length == 2) {
     this.nom = ""
@@ -656,6 +697,15 @@ function Droite(arg1, arg2, arg3, arg4) {
 
   }
   */
+ let xsav,ysav
+ if (this.x1>this.x2){
+   xsav=this.x1
+   ysav=this.y1
+   this.x1=this.x2+0
+   this.y1=this.y2+0
+   this.x2=xsav
+   this.y2=ysav
+ }
   this.normal = vecteur(this.a, this.b);
   this.directeur = vecteur(this.b, - this.a);
   this.angleAvecHorizontale = angleOriente(
@@ -709,7 +759,7 @@ function Droite(arg1, arg2, arg3, arg4) {
     }
     absNom = arrondi(absNom, 2)
     ordNom = arrondi(ordNom, 2)
-    leNom = texteParPosition(this.nom, absNom, ordNom, "milieu", this.color, 1.2, "milieu", true)
+    leNom = latexParCoordonnees(this.nom, absNom, ordNom, 'black', 20, 0, "")
 
   }
   this.svg = function (coeff) {
@@ -1777,7 +1827,7 @@ export function demiDroiteAvecExtremite(A, B, color = "black") {
  */
 function Polygone(...points) {
   ObjetMathalea2D.call(this);
-  this.couleurDeRemplissage = "";
+  this.couleurDeRemplissage = "none";
   this.opaciteDeRemplissage = 1.1;
   this.hachures = false;
   this.couleurDesHachures = 'black'
@@ -1955,13 +2005,28 @@ function Polygone(...points) {
 export function polygone(...args) {
   return new Polygone(...args);
 }
-
+/**
+ * Crée un groupe d'objets contenant le polygone et ses sommets
+ * @param  {...any} args 
+ * @returns 
+ */
 export function polygoneAvecNom(...args) {
   let groupe
   let p = polygone(...args)
   p.sommets = nommePolygone(p)
   groupe = [p, p.sommets]
   return groupe
+}
+
+/**
+ * Renomme en une fois tous les sommets d'un polygone avec le tableau de string fourni
+ */
+export function renommePolygone(p,noms){
+  for (let i=0; i<p.listePoints.length;i++){
+    if (noms[i]!==undefined){
+      p.listePoints[i].nom=noms[i]
+    }
+  }
 }
 
 /**
@@ -2083,6 +2148,28 @@ export function polygoneRegulierParCentreEtRayon(O, r, n, color = "black") {
   }
   return polygone(p, color);
 }
+/*********************************************/
+/*****************Triangles ******************/
+/*********************************************/
+
+/**
+ * retourne un objet contenant le triangle ABC et le pied de la hauteur H
+ * @param {point} A première extrémité de la base
+ * @param {point} B deuxième extrémité de la base
+ * @param {number} h hauteur du triangle en cm 
+ * @param {number} d valeur algébrique de AH où H est le pied de la hauteur 
+ * @param {*} n = 1 ou 2 permet de choisir le côté pour C.
+ * @Auteur Jean-Claude Lhote
+ * @returns 
+ */
+export function triangle2points1hauteur(A,B,h,d,n=1){
+  if (d===undefined){
+    d=randint(0,Math.floor(longueur(A,B)))
+  }
+  let H=pointSurSegment(A,B,d)
+  let C=similitude(A,H,90*(3-n*2),h/longueur(A,H))
+  return {triangle:polygone(A,B,C),pied:H}
+}
 
 /**
  * t = triangle2points2longueurs(A,B,4,7) // Trace le triangle ABC tel que AC = 4 cm et BC = 7 cm (par défaut C a l'ordonnée la plus grande possible)
@@ -2175,6 +2262,48 @@ export function triangle2points1angle1longueurOppose(A, B, a, l, n = 1) {
   if ((n + 1) >> 1 == 1) M = pointIntersectionLC(e, c, "", 1);
   else M = pointIntersectionLC(e, c, "", 2);
   return polygone(A, B, M);
+}
+
+/*********************************************/
+/*************** Parrallélogrammes*************/
+/*********************************************/
+/**
+ * function qui retourne le parallélogramme ABCD dont on donne les 3 premiers points A, B et C
+ * 
+ * @param {string} NOM
+ * @param {objet} A 
+ * @param {objet} B 
+ * @param {objet} C 
+ * @returns {polygoneAvecNom}
+ */
+export function parallelogramme3points(NOM,A,B,C){
+  let D=translation(A,vecteur(B,C),NOM[3])
+  A.nom=NOM[0]
+  B.nom=NOM[1]
+  C.nom=NOM[2]
+  return polygoneAvecNom(A, B, C, D)
+}
+/**
+ * parrallelogramme2points1hauteur(A,B,5) renvoie un parallélogramme ABCD de base [AB] et de hauteur h
+ * parrallelogramme2points1hauteur(A,7,5) renvoie un parallélogramme ABCD de base 7cm (le point B est choisi sur le cercle de centre A et de rayon 7cm) et de hauteur h
+ * 
+ * @param {String} NOM 
+ * @param {objet} A 
+ * @param {objet} B 
+ * @param {number} h 
+ * @returns {polygoneAvecNom}
+ */
+export function parallelogramme2points1hauteur(NOM,A,B,h){
+if (typeof B == "number" ){
+  B=pointAdistance(A,B,randint(-180,180))
+}
+A.nom=NOM[0]
+B.nom=NOM[1]
+let H=rotation(B,A,90)
+H=pointSurSegment(A,H,h)
+let D=translation(H,homothetie(vecteur(A,B),A,randint(-4,4,0)/10),NOM[3])
+let C=translation(D,vecteur(A,B),NOM[2])
+return polygoneAvecNom(A,B,C,D)
 }
 
 /**
@@ -3662,7 +3791,7 @@ export function rotation(A, O, angle, nom = "", positionLabel = "above") {
   if (A.constructor == Point) {
     let x = calcul(
       O.x +
-      (A.x - O.x) * Math.cos((angle * Math.PI) / 180) -
+      (A.x - O.x) * Math.cos((angle * Math.PI) / 180)-
       (A.y - O.y) * Math.sin((angle * Math.PI) / 180)
     );
     let y = calcul(
@@ -4045,11 +4174,7 @@ export function similitude(A, O, a, k, nom = "", positionLabel = "above") {
  *
  * @Auteur Rémi Angot
  */
-function TranslationAnimee(
-  liste,
-  v,
-  animation = 'begin="0s" dur="2s" repeatCount="indefinite"'
-) {
+function TranslationAnimee(liste,v,animation = 'begin="0s" dur="2s" repeatCount="indefinite"') {
   ObjetMathalea2D.call(this);
   this.svg = function (coeff) {
     let code = `<g> `;
@@ -4061,9 +4186,15 @@ function TranslationAnimee(
       //si ce n'est pas une liste
       code += "\n" + liste.svg(coeff);
     }
-    code += `<animateMotion path="M 0 0 l ${v.xSVG(coeff)} ${v.ySVG(
-      coeff
-    )} " ${animation} />`;
+    if (Array.isArray(v)){
+      code += `<animateMotion path="M 0 0 l`
+      for (const vecteur of v){
+        code +=  ` ${vecteur.xSVG(coeff)} ${vecteur.ySVG(coeff)} ` 
+      }
+      code += `${animation} />`
+    } else {
+      code += `<animateMotion path="M 0 0 l ${v.xSVG(coeff)} ${v.ySVG(coeff)} " ${animation} />`;
+    }
     code += `</g>`;
     return code;
   };
@@ -4128,7 +4259,7 @@ function HomothetieAnimee(
     let p2 = homothetie(p, O, k);
     p2.isVisible = false;
     let binomesXY2 = p2.binomesXY(coeff);
-    let code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="none" >
+    let code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="${p.couleurDeRemplissage}" >
 		<animate attributeName="points" ${animation}
 		from="${binomesXY1}"
 		to="${binomesXY2}"
@@ -4156,9 +4287,9 @@ function SymetrieAnimee(
   this.svg = function (coeff) {
     let binomesXY1 = p.binomesXY(coeff);
     let p2 = symetrieAxiale(p, d);
-    p2.isVisible = false;
+    p2.isVisible = false; 
     let binomesXY2 = p2.binomesXY(coeff);
-    let code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="none" >
+    let code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="${p.couleurDeRemplissage}" >
 		<animate attributeName="points" ${animation}
 		from="${binomesXY1}"
 		to="${binomesXY2}"
@@ -4183,7 +4314,7 @@ function AffiniteOrthoAnimee(
     let p2 = affiniteOrtho(p, d, k);
     p2.isVisible = false;
     let binomesXY2 = p2.binomesXY(coeff);
-    let code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="none" >
+    let code = `<polygon stroke="${p.color}" stroke-width="${p.epaisseur}" fill="${p.couleurDeRemplissage}" >
 		<animate attributeName="points" ${animation}
 		from="${binomesXY1}"
 		to="${binomesXY2}"
@@ -8141,11 +8272,9 @@ export function texteParPosition(texte, x, y, orientation = "milieu", color, sca
 }
 
 /**
- * texteParPoint('mon texte',A) // Écrit 'mon texte' avec A au centre du texte
- * texteParPoint('mon texte',A,'gauche') // Écrit 'mon texte' à gauche de A (qui sera la fin du texte)
- * texteParPoint('mon texte',A,'droite') // Écrit 'mon texte' à droite de A (qui sera le début du texte)
- * texteParPoint('mon texte',A,45) // Écrit 'mon texte' à centré sur A avec une rotation de 45°
- *
+ * latexParPoint('\\dfrac{3}{5}',A,'black',12,20,"white") Ecrit la fraction 3/5 à l'emplacement du label du point A en noir, avec un fond blanc.
+ * 12 est la largeur en pixels 20 la hauteur en pixels (utilisé à des fins de centrage). Pour un bon centrage sur A, il faut que A.positionLabel='center'.
+ * si colorBackground="", le fond est transparent.
  * @Auteur Rémi Angot
  */
 export function latexParPoint(texte, A, color = 'black', size = 200, hauteurLigne = 12, colorBackground = 'white') {
@@ -8206,6 +8335,7 @@ function LatexParCoordonnees(texte, x, y, color = 'black', size = 200, hauteurLi
     else {
       return `<foreignObject style=" overflow: visible; line-height: 0;" x="${arrondi(this.x * coeff, 2) - demiSize}" y="${arrondi(-this.y * coeff, 2) - this.hauteurLigne / 2 - centrage}"  width="${this.size}" height="${this.hauteurLigne}" id="${this.id}" ><div style="width:${this.size}px;height:${this.hauteurLigne}px;position:fixed!important; text-align:center">
       $\\color{${this.color}}{${this.texte}}$</div></foreignObject>`;
+
     }
   };
   this.tikz = function () {
@@ -8367,6 +8497,30 @@ export function angleradian(A, O, B) {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
 
+/**
+ * Parce que le 0 angulaire de Scratch est dirigé vers le Nord et qu'il croît dans le sens indirect
+ * Et que le 0 angulaire de 2d est celui du cercle trigonométrique...
+ * @param {number} x angle Scratch 
+ * @returns angle2d
+ */
+export function angleScratchTo2d(x){
+  let angle2d=90-x
+  if (angle2d<-180) {
+     angle2d+=360
+  }
+  return angleModulo(angle2d)
+  }
+/**
+ * Convertit un nombre de degrés quelconque en une mesure comprise entre -180 et 180
+ * @param {number} a 
+ * @returns 
+ */
+export function angleModulo(a){
+if (a<-180) return a+360
+else if (a>180) return a-360
+else return a
+}
+
 function ObjetLutin() {
   //let mesObjets
   //mesObjets.push(this);
@@ -8383,7 +8537,10 @@ function ObjetLutin() {
   this.historiquePositions = [];
   this.crayonBaisse = false;
   this.isVisible = true;
-  this.costume = "";
+  this.costume = `<radialGradient id="Ball" cx="29.7275" cy="-13.1396" r="38.5299" gradientUnits="userSpaceOnUse">
+  <stop offset="0" style="stop-color:#FFFF99"/>
+  <stop offset="1" style="stop-color:#FF9400"/>
+</radialGradient> <circle fill="url(#Ball)"  r="22.5" stroke-width="1" `;
   this.listeTraces = []; // [[x0,y0,x1,y1,style]...]
   this.color = "black";
   this.epaisseur = 2;
@@ -8412,7 +8569,17 @@ function ObjetLutin() {
       code += `\n\t<line x1="${A.xSVG(coeff)}" y1="${A.ySVG(
         coeff
       )}" x2="${B.xSVG(coeff)}" y2="${B.ySVG(coeff)}" stroke="${color}" ${style}  />`;
+  }
+  if (this.isVisible){
+    code+=`\n<g>${this.costume} x="${this.listeTraces[0][0]*coeff}" y="${-this.listeTraces[0][1]*coeff}">\n<animateMotion path="M ${this.listeTraces[0][0]*coeff} ${-this.listeTraces[0][1]*coeff} L`;
+    for (let i=0;i<this.listeTraces.length;i++) {
+      let B = point(this.listeTraces[i][2], this.listeTraces[i][3]);
+   code+= ` ${B.xSVG(coeff)} ${B.ySVG(coeff)} `
     }
+    code+= `" 'begin="10s" dur="10s" repeatCount="indefinite"' />;
+    </circle>
+    </g>`;
+}
     return code;
   };
   this.tikz = function () {
@@ -8446,11 +8613,21 @@ function ObjetLutin() {
     return code
   }
 }
-
+/**
+ * Crée une nouvelle instance de l'objet lutin
+ * @param  {...any} args En fait, il n'y a pas d'argument... il faudra les renseigner après la création de l'objet.
+ * Voire l'objet lutin pour la liste de ses attributs (lutin.x, lutin.y, lutin.orientation, ...)
+ * @returns 
+ */
 export function creerLutin(...args) {
   return new ObjetLutin(...args);
 }
 
+/**
+ * Fait avancer le lutin de d unités de lutin dans la direction de son orientation
+ * @param {number} d 
+ * @param {objet} lutin 
+ */
 export function avance(d, lutin = mathalea.lutin) { // A faire avec pointSurCercle pour tenir compte de l'orientation
   let xdepart = lutin.x;
   let ydepart = lutin.y;
@@ -8461,27 +8638,51 @@ export function avance(d, lutin = mathalea.lutin) { // A faire avec pointSurCerc
     lutin.listeTraces.push([xdepart, ydepart, lutin.x, lutin.y, lutin.color, lutin.epaisseur, lutin.pointilles, lutin.opacite]);
   }
 }
-
+/**
+ * Fait entrer le lutin dans le mode "trace"
+ * @param {objet} lutin 
+ */
 export function baisseCrayon(lutin = mathalea.lutin) {
   lutin.crayonBaisse = true;
 }
-
+/**
+ * Fait sortir le lutin du mode "trace"
+ * @param {objet} lutin 
+ */
 export function leveCrayon(lutin = mathalea.lutin) {
   lutin.crayonBaisse = false;
 }
-
+/**
+ * Fixe l'orientation du lutin à a degrés (au sens Mathalea2d=trigo)
+ * Voire la fonction angleScratchTo2d(angle_scratch) pour la conversion
+ * @param {number} a 
+ * @param {objet} lutin 
+ */
 export function orienter(a, lutin = mathalea.lutin) {
-  lutin.orientation = a
+  lutin.orientation = angleModulo(a)
 }
-
+/**
+ * Fait tourner de a degrés le lutin dans le sens direct
+ * @param {number} a 
+ * @param {objet} lutin 
+ */
 export function tournerG(a, lutin = mathalea.lutin) {
-  lutin.orientation += a
+  lutin.orientation = angleModulo(lutin.orientation+a)
 }
-
+/**
+ * Fait tourner de a degrés le lutin dans le sens indirect
+ * @param {number} a 
+ * @param {objet} lutin 
+ */
 export function tournerD(a, lutin = mathalea.lutin) {
-  lutin.orientation -= a
+  lutin.orientation =angleModulo(lutin.orientation-a)
 }
-
+/**
+ * Déplace le lutin de sa position courante à (x;y)
+ * @param {number} x 
+ * @param {number} y
+ * @param {Objet} lutin 
+ */
 export function allerA(x, y, lutin = mathalea.lutin) {
   let xdepart = lutin.x;
   let ydepart = lutin.y;
@@ -8492,7 +8693,11 @@ export function allerA(x, y, lutin = mathalea.lutin) {
     lutin.listeTraces.push([xdepart, ydepart, lutin.x, lutin.y, lutin.color, lutin.epaisseur, lutin.pointilles, lutin.opacite]);
   }
 }
-
+/**
+ * Change en x à l'abscisse du lutin
+ * @param {number} x 
+ * @param {Objet} lutin 
+ */
 export function mettrexA(x, lutin = mathalea.lutin) {
   let xdepart = lutin.x;
   lutin.x = calcul(x / mathalea.unitesLutinParCm);
@@ -8501,7 +8706,11 @@ export function mettrexA(x, lutin = mathalea.lutin) {
     lutin.listeTraces.push([xdepart, lutin.y, lutin.x, lutin.y, lutin.color, lutin.epaisseur, lutin.pointilles]);
   }
 }
-
+/**
+ * change en y l'ordonnée du lutin
+ * @param {number} y 
+ * @param {Objet} lutin 
+ */
 export function mettreyA(y, lutin = mathalea.lutin) {
   let ydepart = lutin.y;
   lutin.y = calcul(y / mathalea.unitesLutinParCm);
@@ -8510,7 +8719,11 @@ export function mettreyA(y, lutin = mathalea.lutin) {
     lutin.listeTraces.push([lutin.x, ydepart, lutin.x, lutin.y, lutin.color, lutin.epaisseur, lutin.pointilles]);
   }
 }
-
+/**
+ * Ajoute x à l'abscisse du lutin
+ * @param {number} x 
+ * @param {Objet} lutin 
+ */
 export function ajouterAx(x, lutin = mathalea.lutin) {
   let xdepart = lutin.x;
   lutin.x += calcul(x / mathalea.unitesLutinParCm);
@@ -8519,7 +8732,11 @@ export function ajouterAx(x, lutin = mathalea.lutin) {
     lutin.listeTraces.push([xdepart, lutin.y, lutin.x, lutin.y, lutin.color, lutin.epaisseur, lutin.pointilles]);
   }
 }
-
+/**
+ * Ajoute y à l'ordonnée du lutin
+ * @param {number} y 
+ * @param {Objet} lutin 
+ */
 export function ajouterAy(y, lutin = mathalea.lutin) {
   let ydepart = lutin.y;
   lutin.y += calcul(y / mathalea.unitesLutinParCm);
@@ -8528,9 +8745,26 @@ export function ajouterAy(y, lutin = mathalea.lutin) {
     lutin.listeTraces.push([lutin.x, ydepart, lutin.x, lutin.y, lutin.color, lutin.epaisseur, lutin.pointilles]);
   }
 }
+/**
+ * fait "vibrer" le lutin tempo fois autour de sa position courante
+ * @Auteur Jean-Claude Lhote
+ */
+export function attendre(tempo,lutin=mathalea.lutin){
+  let x=lutin.x,y=lutin.y;
+  for (let i=0;i<tempo;i++){
+    lutin.listeTraces.push([x,y,x+0.1,y, lutin.color, lutin.epaisseur, lutin.pointilles])
+    lutin.listeTraces.push([x+0.1,y,x-0.1,y,lutin.color, lutin.epaisseur, lutin.pointilles])
+    lutin.listeTraces.push([x-0.1,y,x,y,lutin.color, lutin.epaisseur, lutin.pointilles])
+    
+  }
+}
 
 /**
- * Traducteur scratch3 (Latex) -> scratchblock
+ * Traducteur scratch3 (Latex) -> scratchblocks
+ * On lui passe une chaine de caractères contenant une série de commande Latex du package Latex Scratch3
+ * Elle retourne une chaine de caractères contenant l'équivalent en langage scratchblocks
+ * http://mirrors.ctan.org/macros/latex/contrib/scratch3/scratch3-fr.pdf
+ * https://scratchblocks.github.io
  * @Auteur Jean-Claude Lhote. 
  */
 

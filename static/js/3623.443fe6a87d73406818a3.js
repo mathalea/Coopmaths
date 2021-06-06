@@ -1,0 +1,1 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[3623],{63623:(e,t,a)=>{"use strict";a.r(t),a.d(t,{titre:()=>i,default:()=>l});var u=a(63444);const i="Trouver l’image d’un point par une symétrie axiale ou centrale";function l(){u.default.call(this),this.sup=2,this.titre=i}}}]);

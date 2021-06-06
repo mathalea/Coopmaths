@@ -1,3 +1,20 @@
+#--------------------------------------------------
+# Répertoire : ...
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+# Redirection mathalea_amc.html vers mathalea_amc.php
+# RewriteRule ^mathalea_amc.html$ mathalea_amc.php
+
 # Accès interdit à évaluation à la carte
 #<Files alacarte>
 
@@ -80,6 +97,7 @@ Redirect permanent /video6M22 https://www.youtube-nocookie.com/embed/iKyAfCzKnu4
 
 # Aire du disque Monka
 Redirect permanent /video6M22-1 https://www.youtube-nocookie.com/embed/0E8h5WWf4NM
+
 
 
 

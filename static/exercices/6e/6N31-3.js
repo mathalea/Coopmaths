@@ -1,5 +1,5 @@
 import Exercice from '../ClasseExercice.js';
-import {shuffle2tableaux,choice,liste_de_question_to_contenu,randint,troncature,calcul,tex_nombre,mise_en_evidence,tex_fraction} from "/modules/outils.js";
+import {liste_nb_premiers_strict_jusqua,shuffle2tableaux,choice,liste_de_question_to_contenu,randint,troncature,calcul,tex_nombre,mise_en_evidence,tex_fraction} from "/modules/outils.js";
 /** 
  * * Encadrer_puis_arrondir_une_valeur
  * * 6N31-3
@@ -69,24 +69,24 @@ export default function Arrondir_une_valeur() {
         num = randint(1, 50, [7, 9, 11, 13, 14, 18, 21, 22, 26, 27, 28, 33, 35, 36, 39, 42, 44, 45, 49]);
         n = num / den;
         nb = tex_fraction(num, den);
-        di = troncature(n - troncature(n, 0), 1);
-        ci = troncature(n - troncature(n, 1), 2);
-        mi = troncature(n - troncature(n, 2), 3);
+        di = 10*(troncature(n - troncature(n, 0), 1));
+        ci = 100*(troncature(n - troncature(n, 1), 2));
+        mi = 1000*(troncature(n - troncature(n, 2), 3));
       } else if (this.sup == 3) {
-        rac = randint(3, 99, [4, 9, 16, 25, 36, 49, 64, 81]);
+        rac = randint(2,300,[liste_nb_premiers_strict_jusqua(300)]);
         n = Math.sqrt(rac);
         nb = `\\sqrt{${rac}}`;
-        di = troncature(n - troncature(n, 0), 1);
-        ci = troncature(n - troncature(n, 1), 2);
-        mi = troncature(n - troncature(n, 2), 3);
+        di = 10*(troncature(n - troncature(n, 0), 1));
+        ci = 100*(troncature(n - troncature(n, 1), 2));
+        mi = 1000*(troncature(n - troncature(n, 2), 3));
       }
 
       texte = `$${nb}$`;
-      if (this.sup2) {
+      
         if (this.sup == 1) texte += ``;
-        else if (this.sup == 2) texte += `$\\phantom{1234567}$[Quand on écrit sur la calculatrice $${num}\\div ${den}$, elle affiche : $${tex_nombre(n)}$.]`;
-        else if (this.sup == 3) texte += `$\\phantom{1234567}$[Quand on écrit sur la calculatrice $${nb}$, elle affiche : $${tex_nombre(n)}$.]`;
-      }
+        else if (this.sup == 2) texte += `$\\phantom{1234567}Quand~on~écrit~sur~la~calculatrice~ ${num}\\div ${den}, ~elle~renvoie : ${tex_nombre(n)}$`;
+        else if (this.sup == 3) texte += `$\\phantom{1234567}Quand~on~écrit~sur~la~calculatrice~ ${nb}, ~elle~renvoie : ${tex_nombre(n)}$`;
+      
       texte_corr = "Encadrement et arrondi à l'unité : ";
       if (di < 5) {
         texte_corr += `$\\phantom{1234567}${mise_en_evidence(tex_nombre(troncature(n, 0)))} < ${nb} < ${tex_nombre(troncature(n + 1, 0))}$`;
@@ -187,7 +187,3 @@ export default function Arrondir_une_valeur() {
   this.besoin_formulaire_numerique = ['Type de nombre', 2, `1 : Nombre décimal\n 2 : Fraction`];
   this.besoin_formulaire2_case_a_cocher = ["Affichage de la valeur donnée à la calculatrice", false];
 }
-
-
-
-
