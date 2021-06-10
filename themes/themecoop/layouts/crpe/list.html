@@ -14,22 +14,10 @@
           </a> -->
           
           {{ range where .Site.Pages "Params.niveau" "crpe" }}
-          <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
+          <a class="item" href="{{.URL}}"><div class="header content">{{.Title}}</div></a>
           {{ end }}
 
-          <!-- changement de base -->
-          <!-- Transformations du plan (translations; symétries ;rotations, homothéties) -->          
-          <!-- Calcul littéral (développement; factorisation; équation; pourquoi pas programme Scratch) -->
-          <!-- Calcul algébrique (fractions; puissances; et il faut que je regarde en lien avec le prog de seconde) -->
-          <!-- Probabilité -->
-          <!-- Statistique -->
-          <!-- Pythagore  -->
-          <!-- Thalès -->
-          <!-- Trigo -->
-          <!-- Grandeurs et mesures (conversions; aire ; volume; durée) -->
-          <!-- Proportionnalité -->
-          <!-- Arithmétique (diviseurs; multiple; division euclidienne) -->
-
+          <!-- Il y avait ceci <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a> -->
      
 
      </div>

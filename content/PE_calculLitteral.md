@@ -1,5 +1,5 @@
 ---
-title: "5L1/4L1/4L2/3L1 - Calcul littéral/Équation"
+title: "Calcul littéral/Équation"
 ref: "PE"
 niveau: "crpe"
 draft: false
