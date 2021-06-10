@@ -1,7 +1,7 @@
 ---
 title: "Numération"
 ref: "PE"
-niveau: "crpe"
+niveau: "crpee" # penser à remetre crpe
 draft: false
 description : "PE - Numération"
 ---

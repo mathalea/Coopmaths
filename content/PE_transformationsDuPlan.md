@@ -1,7 +1,7 @@
 ---
 title: "Transformations du plan"
 ref: "PE"
-niveau: "crpe"
+niveau: "crpee" # penser à remetre crpe
 draft: false
 description : "PE - Transformations 6e."
 ---
