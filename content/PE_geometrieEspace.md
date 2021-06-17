@@ -12,4 +12,4 @@ description : "PE - Géométrie dans l'espace."
 
 {{% items_crpe "3G42,3G43" "Calculs de Volumes" "sectionDeux" %}}
 
-{{% listeDesExercicesDNBmultiThemes "Géométrie dans l'espace,Volumes" %}}
+{{% listeDesExercicesDNBmultiThemes "Repérage terrestre,Géométrie dans l'espace,Volumes" %}}
