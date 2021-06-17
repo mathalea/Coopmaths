@@ -1,13 +1,21 @@
 ---
 title: "Transformations du plan"
 ref: "PE"
-niveau: "crpee" # penser à remetre crpe
+niveau: "crpe" # penser à remetre crpe
 draft: false
-description : "PE - Transformations 6e."
+description : "PE - Transformations."
 ---
 
-{{% listeDesExercicesMulti "6G2"%}}
-{{% listeDesExercicesMulti "6G3"%}}
-{{% listeDesExercicesMulti "5G1"%}}
-{{% listeDesExercicesMulti "4G1"%}}
-{{% listeDesExercicesMulti "3G1"%}}
+<h2 class="ui horizontal divider header">Exercices en ligne à données aléatoires</h2>
+
+{{% items_crpe "5G10-1,5G10-2" "Symétrie axiale" "sectionUn" %}}
+
+{{% items_crpe "5G11-1,5G11-2,5G12" "Symétrie centrale" "sectionDeux" %}}
+
+{{% items_crpe "4G11,4G11-1" "Translation" "sectionTrois" %}}
+
+{{% items_crpe "3G12" "Rotation" "sectionQuatre" %}}
+
+{{% items_crpe "4G15,3G10-2" "Plusieurs transformations" "sectionCinq" %}}
+
+{{% listeDesExercicesDNB "Transformations" %}}
