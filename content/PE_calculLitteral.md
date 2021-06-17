@@ -1,7 +1,7 @@
 ---
 title: "Calcul littéral"
 ref: "PE"
-niveau: "crpe" # penser à remetre crpe
+niveau: "crpe" 
 draft: false
 description : "PE - Calcul litérral."
 ---
@@ -15,10 +15,5 @@ description : "PE - Calcul litérral."
 {{% items_crpe "3L13,3L14-1,2L12-1" "Équations" "sectionTrois" %}}
 
 {{% items_crpe "2N24" "Inéquations" "sectionQuatre" %}}
-
-<!-- {{% listeDesExercicesDNB "Calcul littéral" %}} -->
-
-
-<!-- ... à venir ... -->
 
 {{% listeDesExercicesDNBmultiThemes "Calcul littéral,Equations" %}}

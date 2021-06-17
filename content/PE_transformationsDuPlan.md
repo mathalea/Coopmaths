@@ -1,7 +1,7 @@
 ---
 title: "Transformations du plan"
 ref: "PE"
-niveau: "crpe" # penser à remetre crpe
+niveau: "crpe" 
 draft: false
 description : "PE - Transformations."
 ---
@@ -18,4 +18,4 @@ description : "PE - Transformations."
 
 {{% items_crpe "4G15,3G10-2" "Plusieurs transformations" "sectionCinq" %}}
 
-{{% listeDesExercicesDNB "Transformations" %}}
+{{% listeDesExercicesDNBmultiThemes "Transformations" %}}

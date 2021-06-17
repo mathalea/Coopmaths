@@ -22,8 +22,7 @@ Utilisation: {{% items_crpe "idEx1,idEx2,idEx3,..." "titre" "section"%}}
          </a>`
       codeHTML += '\n</div>'
       return codeHTML   
-    }
-    //console.log(dictionnaireDesExercicesAleatoires[{{.}}])
+    }    
     document.getElementById({{$section }}).insertAdjacentHTML('beforeend',myhtml({{.}}))
   </script>
 {{end}}

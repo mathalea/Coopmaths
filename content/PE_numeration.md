@@ -10,7 +10,6 @@ description : "PE - Numération"
 
 {{% items_crpe "PEA11,PEA11-1" "Changement de base" "sectionUn" %}}
 
-
 {{% items_crpe "6N20-2,6N23,6N23-3,6N24" "Numération décimale et fractions" "sectionDeux" %}}
 
-<!-- {{% listeDesExercicesDNB "Arithmétique" %}} -->
+<!-- {{% listeDesExercicesDNBmultiThemes "Calcul littéral,Equations" %}} -->
