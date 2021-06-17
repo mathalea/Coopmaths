@@ -138,7 +138,7 @@ function get_liste_html_des_exercices_DNB_theme(){
   return liste;
 }
 
-function liste_html_des_tags(objet){
+export function liste_html_des_tags(objet){
     let result = ''
     if (objet["tags"]!==undefined){
         for (let tag of objet["tags"]){

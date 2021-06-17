@@ -16,7 +16,9 @@ description : "PE - Calcul litérral."
 
 {{% items_crpe "2N24" "Inéquations" "sectionQuatre" %}}
 
-{{% listeDesExercicesDNB "Calcul littéral" %}}
+<!-- {{% listeDesExercicesDNB "Calcul littéral" %}} -->
 
-<h2 class="ui horizontal divider header">Exercices du brevet des collèges - Equations</h2>
-... à venir ...
+
+<!-- ... à venir ... -->
+
+{{% listeDesExercicesDNBmultiThemes "Calcul littéral,Equations" %}}
