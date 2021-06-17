@@ -1,12 +1,14 @@
 <!-- {{/*
-Utilisation: {{% items_crpe "idEx1,idEx2,idEx3,..." %}}
+Utilisation: {{% items_crpe "idEx1,idEx2,idEx3,..." "titre" "section"%}}
 */}}-->
 
 
 {{$itItems := split (.Get 0) ","}}
-<h2 class="ui horizontal divider header">Exercices en ligne à données aléatoires</h2>
+{{$section := .Get 2 }}
+<!-- <h2 class="ui horizontal divider header">Exercices en ligne à données aléatoires</h2> -->
+<h3>{{.Get 1}}</h3>
 <div class="ui middle aligned animated selection divided list">
-  <div id="MenuDesExercices"></div>
+  <div id={{$section }}></div>
 </div>
 {{range $itItems }}
   <script type="module">
@@ -22,6 +24,6 @@ Utilisation: {{% items_crpe "idEx1,idEx2,idEx3,..." %}}
       return codeHTML   
     }
     //console.log(dictionnaireDesExercicesAleatoires[{{.}}])
-    document.getElementById('MenuDesExercices').insertAdjacentHTML('beforeend',myhtml({{.}}))
+    document.getElementById({{$section }}).insertAdjacentHTML('beforeend',myhtml({{.}}))
   </script>
 {{end}}
