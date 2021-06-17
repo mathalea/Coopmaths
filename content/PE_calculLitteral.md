@@ -1,12 +1,22 @@
 ---
-title: "Calcul littéral/Équation"
+title: "Calcul littéral"
 ref: "PE"
-niveau: "crpee" # penser à remetre crpe
+niveau: "crpe" # penser à remetre crpe
 draft: false
-description : "PE - Calcul litérral/Équation niveau collège."
+description : "PE - Calcul litérral."
 ---
 
-{{% listeDesExercicesMulti "5L1"%}}
-{{% listeDesExercicesMulti "4L1"%}}
-{{% listeDesExercicesMulti "4L2"%}}
-{{% listeDesExercicesMulti "3L1"%}}
+<h2 class="ui horizontal divider header">Exercices en ligne à données aléatoires</h2>
+
+{{% items_crpe "3L10-1,3L11,3L11-1,3L11-3,2L10" "Distributivité" "sectionUn" %}}
+
+{{% items_crpe "2L11,3L11-4" "Factorisation" "sectionDeux" %}}
+
+{{% items_crpe "3L13,3L14-1,2L12-1" "Équations" "sectionTrois" %}}
+
+{{% items_crpe "2N24" "Inéquations" "sectionQuatre" %}}
+
+{{% listeDesExercicesDNB "Calcul littéral" %}}
+
+<h2 class="ui horizontal divider header">Exercices du brevet des collèges - Equations</h2>
+... à venir ...
