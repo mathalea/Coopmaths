@@ -1,0 +1,14 @@
+<!-- {{/*
+Utilisation: {{% listeDEsExercicesDNBmultiThemes "theme1,theme2,theme3,..." %}}
+*/}}-->
+
+
+{{$itThemes := split (.Get 0) ","}}
+
+<div id="MenuDesExercicesDNB"></div>
+{{range $itThemes }}
+  <script type="module">
+    import {menuThemeDNB} from "/modules/menuDesExercicesDisponibles.js";    
+    document.getElementById('MenuDesExercicesDNB').insertAdjacentHTML('beforeend',menuThemeDNB({{.}}))
+  </script>
+{{end}}
