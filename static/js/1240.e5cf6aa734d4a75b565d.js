@@ -1,1 +1,0 @@
-(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[1240],{91240:(a,e,t)=>{"use strict";t.r(e),t.d(e,{amcReady:()=>s,titre:()=>l,default:()=>u});var i=t(68378);const s=!0,l="Divisions euclidiennes - Niveau 2";function u(){i.default.call(this),this.sup=2,this.titre=l,this.tailleDiaporama=100}}}]);

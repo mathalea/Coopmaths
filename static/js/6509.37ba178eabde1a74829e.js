@@ -1,2 +1,0 @@
-(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[6509],{66509:(t,a,e)=>{"use strict";e.r(a),e.d(a,{titre:()=>l,default:()=>s});var i=e(77551);const l="Tables de multiplication";function s(t="2-3-4-5-6-7-8-9"){this.titre=l,i.default.call(this,t),this.sup2=2,this.tailleDiaporama=100}}}]);
-//# sourceMappingURL=6509.37ba178eabde1a74829e.js.map

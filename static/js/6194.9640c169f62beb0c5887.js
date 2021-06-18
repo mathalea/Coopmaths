@@ -1,2 +1,0 @@
-(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[6194],{96194:(t,a,e)=>{"use strict";e.r(a),e.d(a,{titre:()=>s,default:()=>i});var u=e(29881);const s="Symétrique d’une figure dans un pavage";function i(){u.default.call(this),this.titre=s,this.sup=2}}}]);
-//# sourceMappingURL=6194.9640c169f62beb0c5887.js.map

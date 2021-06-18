@@ -1,0 +1,2 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[83839],{83839:(e,a,t)=>{"use strict";t.r(a),t.d(a,{titre:()=>i,default:()=>r});var u=t(21630);const i="Trouver l’image d’une figure par une rotation de 90 degrés dans un pavage";function r(){u.default.call(this),this.titre=i,this.sup=4,this.besoinFormulaireNumerique=!1}}}]);
+//# sourceMappingURL=83839.e8b3ad3e7988c445aec5.js.map

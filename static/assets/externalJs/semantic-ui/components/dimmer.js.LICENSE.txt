@@ -1,9 +1,0 @@
-/*!
- * # Semantic UI 2.4.1 - Dimmer
- * http://github.com/semantic-org/semantic-ui/
- *
- *
- * Released under the MIT license
- * http://opensource.org/licenses/MIT
- *
- */

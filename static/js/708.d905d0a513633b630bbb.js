@@ -1,2 +1,0 @@
-(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[708],{40708:(e,a,r)=>{"use strict";r.r(a),r.d(a,{titre:()=>i,default:()=>u});var t=r(97503);const i="Arrondir une valeur numérique";function u(){t.default.call(this),this.sup=3,this.titre=i,this.besoinFormulaireNumerique=["Type de nombre",3,"1 : Nombre décimal\n 2 : Fraction\n 3 : Racine carrée"]}}}]);
-//# sourceMappingURL=708.d905d0a513633b630bbb.js.map

@@ -45,6 +45,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE,QSA]
 
 #RedirectMatch 301 ex([0-9]?[A-Za-z]{1,2}[0-9]+-?_?[0-9]*)$ https://coopmaths.fr/exercice.html?ex=$1
 
+RedirectMatch 301 /exi([0-9a-zA-Z,=\-&]*)$ https://coopmaths.fr/exercice.html?ex=$1,interactif=1
 RedirectMatch 301 /ex([0-9a-zA-Z,=\-&]*)$ https://coopmaths.fr/exercice.html?ex=$1
 
 # Redirection pour les pdf
@@ -62,6 +63,9 @@ Redirect permanent /referentiel https://coopmaths.fr/pdf/CoopMaths-Referentiel.p
 
 
 ### URL Raccourcies pour les vidéos
+
+Redirect permanent /youtube https://www.youtube.com/playlist?list=PLfYukflRZmooU0kzZSu9fnjcqDFhVdP4R
+
 
 # Vocabulaire géométrie Labouche
 Redirect permanent /video6G10 https://www.youtube-nocookie.com/embed/58ZI3W-efDg?rel=0&showinfo=0
@@ -97,10 +101,3 @@ Redirect permanent /video6M22 https://www.youtube-nocookie.com/embed/iKyAfCzKnu4
 
 # Aire du disque Monka
 Redirect permanent /video6M22-1 https://www.youtube-nocookie.com/embed/0E8h5WWf4NM
-
-
-
-
-
-
-

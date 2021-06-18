@@ -1,1 +1,0 @@
-(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[6409],{26409:(t,e,a)=>{"use strict";a.r(e),a.d(e,{titre:()=>u,default:()=>c});var s=a(61463);const u="Tableaux et pourcentages - pourcentage constant";function c(){this.exo="5N11-2",this.titre=u,s.default.call(this)}}}]);

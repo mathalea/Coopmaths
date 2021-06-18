@@ -1,1 +1,0 @@
-(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[2059],{32059:(t,e,s)=>{"use strict";s.r(e),s.d(e,{titre:()=>i,default:()=>l});var a=s(68378);const i="Divisions euclidiennes";function l(){a.default.call(this),this.titre=i,this.sup=0}}}]);
