@@ -1,11 +1,11 @@
 ---
-title: "Algorithmique"
+title: "Tableur"
 ref: "PE"
 niveau: "crpe" 
 draft: false
-description : "PE - Algorithmique."
+description : "PE - Tableur."
 ---
 
 <!-- <h2 class="ui horizontal divider header">Exercices en ligne à données aléatoires</h2> -->
 
-{{% listeDesExercicesDNBmultiThemes "Algorithmique-programmation" %}}
+{{% listeDesExercicesDNBmultiThemes "Tableur" %}}
