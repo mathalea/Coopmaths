@@ -1,4 +1,4 @@
-import { calcul_aligne, egal, superieur, inferieur, superieurouegal, inferieurouegal, estentier, quotientier, carreParfait, ecrireNombre2D, decimal, randint, choice, range, rangeMinMax, range1, numTrie, shuffle, signe, arrondi, troncature, abs, pgcd, calcul, creerNomDePolygone, choisit_nombres_entre_m_et_n, lettre_depuis_chiffre, lettre_minuscule_depuis_chiffre, texcolors, tex_nombre, tex_nombrec } from "/modules/outils.js"
+import { calcul_aligne, egal, superieur, inferieur, superieurouegal, inferieurouegal, estentier, quotientier, carreParfait, ecrireNombre2D, decimal, randint, choice, range, rangeMinMax, range1, numTrie, shuffle, signe, arrondi, troncature, abs, pgcd, calcul, creerNomDePolygone, choisit_nombres_entre_m_et_n, lettre_depuis_chiffre, lettre_minuscule_depuis_chiffre, texcolors, tex_nombre, telechargeFichier } from "/modules/outils.js"
 import { scratchblock, tableau_de_variation, nomVecteurParPosition, point, tracePoint, tracePointSurDroite, milieu, pointSurSegment, pointSurCercle, pointSurDroite, pointIntersectionDD, pointAdistance, labelPoint, barycentre, droite, droiteParPointEtVecteur, droiteParPointEtParallele, droiteParPointEtPerpendiculaire, droiteHorizontaleParPoint, droiteVerticaleParPoint, droiteParPointEtPente, mediatrice, codageMediatrice, codageMilieu, constructionMediatrice, bissectrice, codageBissectrice, constructionBissectrice, polyline, pave, vecteur, segment, segmentAvecExtremites, demiDroite, demiDroiteAvecExtremite, polygone, polygoneAvecNom, polygoneRegulier, polygoneRegulierIndirect, carre, carreIndirect, codageCarre, polygoneRegulierParCentreEtRayon, triangle2points2longueurs, triangle2points2angles, triangle2points1angle1longueur, triangle2points1angle1longueurOppose, nommePolygone, deplaceLabel, aireTriangle, cercle, ellipse, pointIntersectionLC, pointIntersectionCC, cercleCentrePoint, arc, arcPointPointAngle, traceCompas, courbeDeBezier, segmentMainLevee, cercleMainLevee, droiteMainLevee, polygoneMainLevee, arcMainLevee, dansLaCibleCarree, dansLaCibleRonde, cibleCarree, cibleRonde, cibleCouronne, translation, translation2Points, rotation, sens_de_rotation, homothetie, symetrieAxiale, distancePointDroite, projectionOrtho, affiniteOrtho, similitude, translationAnimee, rotationAnimee, homothetieAnimee, symetrieAnimee, affiniteOrthoAnimee, montrerParDiv, cacherParDiv, afficherTempo, afficherTempoId, afficherUnParUn, medianeTriangle, centreGraviteTriangle, hauteurTriangle, CodageHauteurTriangle, codageHauteurTriangle, codageMedianeTriangle, orthoCentre, centreCercleCirconscrit, codageAngleDroit, afficheLongueurSegment, texteSurSegment, afficheMesureAngle, afficheCoteSegment, codeSegment, codeSegments, codeAngle, nomAngleSaillantParPosition, nomAngleRentrantParPosition, droiteGraduee, droiteGraduee2, axes, labelX, labelY, grille, grilleHorizontale, grilleVerticale, seyes, repere, repere2, pointDansRepere, traceGraphiqueCartesien, traceBarre, traceBarreHorizontale, lectureImage, lectureAntecedent, courbe, courbe2, courbeInterpolee, graphiqueInterpole, imageInterpolee, antecedentInterpole, crochetD, crochetG, intervalle, texteParPoint, texteParPosition, latexParPoint, latexParCoordonnees, fractionParPosition, print2d, longueur, norme, angle, angleOriente, angleradian, creerLutin, avance, baisseCrayon, leveCrayon, orienter, tournerG, tournerD, allerA, mettrexA, mettreyA, ajouterAx, ajouterAy, afficherCrayon, codeSvg, codeTikz, mathalea2d, labyrinthe, pavage } from "/modules/2d.js"
 import { cube, cube3d, sens_de_rotation3d, point3d, vecteur3d, arete3d, droite3d, demicercle3d, cercle3d, polygone3d, sphere3d, cone3d, cylindre3d, prisme3d, pave3d, rotationV3d, rotation3d, translation3d } from "/modules/3d.js"
 import { fraction, listeFractions } from "/modules/Fractions.js"
@@ -24,7 +24,8 @@ window.addEventListener('load', function()  {
 	if (document.getElementById("telecharger")) {
 		buttonTelecharger = document.getElementById("telecharger");
 		buttonTelecharger.onclick = function () {
-			download(myCodeMirrorSvg.getValue(), "mathalea2d.svg", "text/plain");
+			telechargeFichier(myCodeMirror.getValue(), "mathalea2d.iep")
+			//download(myCodeMirror.getValue(), "mathalea2d.iep", "text/plain; charset=utf-8");
 		};
 	}
 	if (document.getElementById("url")) {
@@ -48,6 +49,8 @@ window.addEventListener('load', function()  {
 		lineWrapping: true,
 	});
 
+	cmResize(myCodeMirror)
+
 	let myCodeMirrorSvg = CodeMirror(divSortieSvg, {
 		value: "",
 		mode: "htmlmixed",
@@ -60,15 +63,17 @@ window.addEventListener('load', function()  {
 		readOnly: true,
 		lineNumbers: true,
 	});
+	
+	myCodeMirror.setSize(document.getElementById('editeur').offsetWidth*0.9,600)
 
 	let url = new URL(window.location.href);
 	if (url.searchParams.get("url")) { // Si on spécifie une url
-		fetch(`/m2d/${url.searchParams.get("url")}.m2d`)
+		fetch(`/fichiers/iep/${url.searchParams.get("url")}.iep`)
 			.then(function (response) {
 				if (response.ok) {
 					return response.text();
 				} else {
-					return `//Fichier /m2d/${url.searchParams.get("url")}.m2d non trouvé`;
+					return `//Fichier /fichiers/iep/${url.searchParams.get("url")}.iep non trouvé`;
 				}
 			})
 			.then((text) => myCodeMirror.setValue(text));
@@ -80,7 +85,6 @@ window.addEventListener('load', function()  {
 		}
 	}
 
-	//divXmlIep.value = codeIep(mesObjets);
 	//Autocomplétion
 	myCodeMirror.on("inputRead", function onChange(editor, input) {
 		if (input.text[0] === ";" || input.text[0] === " ") {
@@ -284,33 +288,8 @@ function display(event) {
 	try {
 		event.preventDefault()
 		event.stopPropagation()
-		var display = document.getElementById("display")
-		// on nettoie
-		for (var i = 0; i < display.childNodes.length; ++i) {
-			var item = display.childNodes[i]
-			display.removeChild(item)
-		}
-		var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-		svg.id = 'svgIEP'
-		var largeur = Math.max(display.offsetWidth - 20 || 0, 800)
-		var hTot = window.innerHeight || 400
-		var hForm = document.getElementById('iepForm').offsetHeight || 200
-		if (window.location.href.indexOf('/iep.html')>0) {
-			svg.style.width = largeur + 'px'
-			var hauteur = Math.max(hTot - hForm - 40, 700)
-			svg.style.height = hauteur + 'px'
-			
-		} else {
-			svg.style.width = '90%'
-			var hauteur = 400
-			svg.style.height = '400 px'
-		}
-		svg.setAttribute('width', largeur)
-		svg.setAttribute('height', hauteur)
-		display.appendChild(svg)
-		var iepApp = new iep.iepApp()
-		var xmlElt = document.getElementById('xmlSrc')
-		iepApp.addDoc("svgIEP", xmlElt.value, true)
+		let divXmlIep = document.getElementById("xmlSrc");
+		iepLoad("display", divXmlIep.value)
 	} catch (error) {
 		console.log("Plantage à l'affichage, xml probablement malformé")
 		console.error(error)
@@ -355,4 +334,5 @@ previewBtn.addEventListener('click', display, false)
 var textarea = document.getElementById('xmlSrc')
 textarea.addEventListener('dragover', dragOverHandler, false);
 textarea.addEventListener('drop', dropHandler, false);
+
 

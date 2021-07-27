@@ -24,6 +24,10 @@
   }
 }
 
+.titreExercice {
+  margin-top: 40px;
+}
+
 /* Timer pour le calcul chronométré*/
 
 #timer, #numero_question {
@@ -251,10 +255,6 @@ div#gauche
   position: relative;
 }
 
-#liste_des_exercices {
-	line-height: 0.7;	
-}
-
 #choix_exercices_menu {
 	position: -webkit-sticky; 
 	position: sticky;
@@ -285,10 +285,11 @@ div#gauche
   color: #f15929;
   content: counter(list) ".";
   left: -32px;
-  position: absolute;
+  /* position: absolute; */
   text-align: right;
   width: 26px;
   font-weight: bold;
+  padding-right:1em
 }
 
 #corrections ol li {
@@ -302,10 +303,11 @@ div#gauche
   color: #f15929;
   content: counter(list) ".";
   left: -32px;
-  position: absolute;
+  /* position: absolute; */
   text-align: right;
   width: 26px;
   font-weight: bold;
+  padding-right:1em
 }
 
 ::placeholder {
@@ -325,8 +327,8 @@ div#gauche
 #recherche {
     width: 100%;
     clear: both;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 #recherche input {
     width: 60%;
@@ -335,7 +337,7 @@ div#gauche
 }
 
 #replier {
-	margin-left: 50px;
+	margin-left: 10px;
 	font-size: xx-large;
 	font-style: bold;
 	cursor:pointer;
@@ -379,9 +381,18 @@ i.icone_preview {
 	cursor:context-menu;
 }
 
-i.icone_moins, i.icone_up, i.icone_down {
+i.eye, i.minus {
+	cursor:pointer !important;
+}
+
+i.icone_moins, i.icone_up, i.icone_down, i.icone_param {
 	display:inline !important;
 	font-size:1em !important;
+	cursor:pointer !important;
+}
+
+i.icone_param {
+	margin-left:30px;
 }
 
 body.dragging, body.dragging * {
@@ -398,6 +409,46 @@ body.dragging, body.dragging * {
   display: inline-block;
   cursor: pointer;
 }
+
+#exercices_disponibles h3.header {
+	text-align:center !important;
+	line-height: 1.5;
+}
+
+@media only screen and (min-width: 765px) {
+#replier { /*pas besoin de replier car en 2 colonnes*/
+		display:none;
+}
+#left {
+	overflow-y: auto;
+}
+}
+
+@media only screen and (max-width: 765px) {
+#left {
+	height: auto !important;
+}
+#right {
+	height: auto !important;
+}
+}
+
+
+  .ui.container {
+    width: 85%;
+  }
+
+  .ui.grid.container {
+    width: calc( 85%  +  2rem ) !important;
+  }
+
+  .ui.relaxed.grid.container {
+    width: calc( 85%  +  3rem ) !important;
+  }
+
+  .ui.very.relaxed.grid.container {
+    width: calc( 85%  +  5rem ) !important;
+  }
 
 /* The actual popup (appears on top) */
 .popup .popuptext {
@@ -450,7 +501,7 @@ body.dragging, body.dragging * {
 }
 
 .mode_choix {
-	margin-left: 50px;
+	margin: 10px;
 	cursor:pointer;
 	background-color: white;
     text-align: center;
@@ -460,7 +511,10 @@ body.dragging, body.dragging * {
 	white-space:nowrap;
 }
 
+h3 i.double {
+	cursor:pointer !important;
 }
+
 .colonnecode {
 	width:20px !important;
 }
@@ -468,7 +522,7 @@ body.dragging, body.dragging * {
 a.lien_id_exercice {
   text-decoration: none;
   color : black;
-
+  cursor:pointer;
 }
 
 a.lien_id_exercice:hover {
@@ -485,7 +539,6 @@ a.lien_id_exercice.exerciceactif {
 {
 	white-space: pre;
 }
-
 
 .ui.dividing.header, .ui.block.header
 {

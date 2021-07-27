@@ -553,6 +553,18 @@ export function shuffle(array) {
 	return array_bis;
 }
 
+/*
+* Mélange les lettres d'un string
+*
+* @Example
+* motMelange = shuffleLettres (mot)
+* @Source https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+*/
+export function shuffleLettres(txt) {
+	const array = txt.split('')
+	return shuffle(array).join('')
+}
+
 
 
 /*
@@ -1622,7 +1634,7 @@ export function choisit_nombres_entre_m_et_n(m, n, combien, liste_a_eviter = [])
  * les lettres à éviter sont données dans une chaine par exemple : 'QXY'
  * @Auteur Jean-Claude Lhote
  */
-export function choisit_lettres_differentes(nombre, lettres_a_eviter, majuscule = true) {
+export function choisit_lettres_differentes(nombre, lettres_a_eviter = '', majuscule = true) {
 	let liste_a_eviter = [], lettres = []
 	for (let l of lettres_a_eviter) {
 		liste_a_eviter.push(l.charCodeAt(0) - 64)
@@ -1733,10 +1745,10 @@ export function minToHour(minutes) {
 */
 export function prenomF(n = 1) {
 	if (n == 1) {
-		return choice(['Manon', 'Julie', 'Aude', 'Corinne', 'Léa', 'Carine', 'Elsa', 'Lisa', 'Marina', 'Magalie', 'Nawel', 'Dalila', 'Nadia', 'Yasmine'])
+		return choice(['Aude', 'Béatrice', 'Carine', 'Corinne', 'Dalila', 'Elsa', 'Farida', 'Julie', 'Karole', 'Léa', 'Lisa', 'Manon', 'Marina', 'Magalie', 'Nadia', 'Nawel', 'Teresa', 'Vanessa', 'Yasmine'])
 	}
 	else {
-		return shuffle(['Manon', 'Julie', 'Aude', 'Corinne', 'Léa', 'Carine', 'Elsa', 'Lisa', 'Marina', 'Magalie', 'Nawel', 'Dalila', 'Nadia', 'Yasmine']).slice(0, n)
+		return shuffle(['Aude', 'Béatrice', 'Carine', 'Corinne', 'Dalila', 'Elsa', 'Farida', 'Julie', 'Karole', 'Léa', 'Lisa', 'Manon', 'Marina', 'Magalie', 'Nadia', 'Nawel', 'Teresa', 'Vanessa', 'Yasmine']).slice(0, n)
 	}
 }
 
@@ -1746,10 +1758,10 @@ export function prenomF(n = 1) {
 */
 export function prenomM(n = 1) {
 	if (n == 1) {
-		return choice(['Rémi', 'Benjamin', 'Guillaume', 'Christophe', 'Cyril', 'Kamel', 'Yazid', 'Mehdi', 'Karim', 'Bernard', 'Joachim', 'Jean-Claude'])
+		return choice(['Arthur', 'Benjamin', 'Bernard', 'Christophe', 'Cyril', 'David', 'Fernando', 'Guillaume', 'Jean-Claude', 'Joachim', 'José', 'Kamel', 'Karim', 'Laurent', 'Mehdi', 'Nacim', 'Pablo', 'Rémi', 'Victor', 'Yazid'])
 	}
 	else {
-		return shuffle(['Rémi', 'Benjamin', 'Guillaume', 'Christophe', 'Cyril', 'Kamel', 'Yazid', 'Mehdi', 'Karim', 'Bernard', 'Joachim', 'Jean-Claude']).slice(0, n)
+		return shuffle(['Arthur', 'Benjamin', 'Bernard', 'Christophe', 'Cyril', 'David', 'Fernando', 'Guillaume', 'Jean-Claude', 'Joachim', 'José', 'Kamel', 'Karim', 'Laurent', 'Mehdi', 'Nacim', 'Pablo', 'Rémi', 'Victor', 'Yazid']).slice(0, n)
 	}
 }
 
@@ -1762,9 +1774,34 @@ export function prenom(n = 1) {
 		return choice([prenomF(), prenomM()])
 	}
 	else {
-		return shuffle(['Rmi', 'Benjamin', 'Guillaume', 'Christophe', 'Cyril', 'Kamel', 'Yazid', 'Mehdi', 'Karim', 'Bernard', 'Joachim', 'Jean-Claude', 'Manon', 'Julie', 'Aude', 'Corinne', 'Léa', 'Carine', 'Elsa', 'Lisa', 'Marina', 'Magalie', 'Nawel', 'Dalila', 'Nadia', 'Yasmine']).slice(0, n)
+		return shuffle(['Aude', 'Béatrice', 'Carine', 'Corinne', 'Dalila', 'Elsa', 'Farida', 'Julie', 'Karole', 'Léa', 'Lisa', 'Manon', 'Marina', 'Magalie', 'Nadia', 'Nawel', 'Teresa', 'Vanessa', 'Yasmine','Arthur', 'Benjamin', 'Bernard', 'Christophe', 'Cyril', 'David', 'Fernando', 'Guillaume', 'Jean-Claude', 'Joachim', 'José', 'Kamel', 'Karim', 'Laurent', 'Mehdi', 'Nacim', 'Pablo', 'Rémi', 'Victor', 'Yazid']).slice(0, n)
 	}
 }
+
+
+/**
+* Renvoie un petit objet féminin au hasard 
+* @Auteur Mireille Gain
+*/
+export function objetF() {
+	return choice(['billes', 'bougies', 'cartes de voeux', 'bagues', 'images','peluches','clés USB','pochettes'])
+	}
+
+	/**
+* Renvoie un petit objet masculin au hasard 
+* @Auteur Mireille Gain
+*/
+export function objetM() {
+	return choice(['jeux','gâteaux','cahiers','livres','stylos','bracelets','badges','porte-clés','crayons'])
+	}
+
+		/**
+* Renvoie un petit objet au hasard 
+* @Auteur Mireille Gain
+*/
+export function objet() {
+	return choice(['billes', 'bougies', 'cartes de voeux', 'gommes', 'images','auto-collants','bonbons','cahiers','livres','stylos'])
+	}
 
 /**
  * Définit l'objet personne
@@ -1796,6 +1833,7 @@ class Personne {
 		}
 	}
 }
+
 /**
  * crée une instance de la classe Personne
  * @Auteur Jean-Claude Lhote
@@ -1804,6 +1842,7 @@ class Personne {
 export function personne({ prenom = '', genre = '', pronom = '' } = {}) {
 	return new Personne({ prenom: prenom, genre: genre, pronom: pronom })
 }
+
 /**
  * Crée un tableau de n objet de la classe Personne
  * @Auteur Jean-Claude Lhote
@@ -1907,6 +1946,25 @@ export function un_mois_de_temperature(base, mois, annee) {
 export function nom_du_mois(n) {
 	let mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 	return mois[n - 1]
+}
+
+/**
+* Renvoie le nom du jour
+* @param n quantième du jour
+* @auteur Mireille Gain
+*/
+export function nom_du_jour(n) {
+	let jour = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+	return jour[n - 1]
+}
+
+/**
+* Renvoie le nom d'un jour au hasard
+* @param n quantième du jour
+* @auteur Mireille Gain
+*/
+export function jour() {
+	return choice(['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'])
 }
 
 // Fonctions LaTeX
@@ -7978,13 +8036,13 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 				break
 			case 4: // AMCOpen question ouverte avec encodage numérique de la réponse
 				/********************************************************************/
-				// Dans ce cas, le tableau des booléens comprend les renseignements nécessaires pour paramétrer \AMCnumericCoices
+				// Dans ce cas, le tableau des booléens comprend les renseignements nécessaires pour paramétrer \AMCnumericChoices
 				// On pourra rajouter des options : les paramètres sont nommés.
 				// {digits=0,decimals=0,vertical=false,signe=false,exposant_nb_chiffres=0,exposant_signe=false,approx=0}
 				// si digits=0 alors la fonction va analyser le nombre décimal (ou entier) pour déterminer digits et decimals
 				// signe et exposant_signe sont des booléens
 				// approx est un entier : on enlève la virgule pour comparer la réponse avec la valeur : approx est le seuil de cette différence.
-				// La correction est dans tabQCM[1][0] et la réponse numlérique est dans tabQCM[1][1]
+				// La correction est dans tabQCM[1][0] et la réponse numérique est dans tabQCM[1][1]
 				/********************************************************************/
 				if (tabQCM[2].exposant_nb_chiffres == 0) {
 					reponse = tabQCM[1][1]
@@ -8048,6 +8106,7 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 					}
 				}
 				tex_QR+=`\\begin{minipage}[b]{0.3 \\linewidth}\n`
+				tex_QR +=`\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse`
 				tex_QR += `	\\begin{questionmultx}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}b} \n `
 				tex_QR += `\\AMCnumericChoices{${tabQCM[1][1]}}{digits=${tabQCM[2].digits},decimals=${tabQCM[2].decimals},sign=${tabQCM[2].signe},`
 				if (tabQCM[2][3] != 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
@@ -8060,6 +8119,81 @@ export function export_QCM_AMC(tabQCMs, idExo) {
 				tex_QR += `\\end{questionmultx}\n\\end{minipage}}\n`
 				id++
 			break
+		case 6 : // AMCOpen + deux AMCnumeric Choices. (Nouveau ! en test)
+			/********************************************************************/
+			// /!\/!\/!\/!\ ATTENTION /!\/!\/!\/!\
+			// Pour ce type :
+			// =======tabQCM[0] contient toujours le texte de l'énoncé
+			// =======tabQCM[1] est un tableau de tableau avec :
+			// ===================tabQCM[1][0] qui contient ce qu'il faut pour le 1er numericchoice ['question 1','réponse1',réponse1 num]
+			// ===================tabQCM[1][1] qui contient ce qu'il faut pour le 2e numericchoice ['question 2','réponse2',réponse2 num]
+			// =======tabQCM[2] est un tableau de tableau avec :
+			// ===================tabQCM[2][0] qui contient les paramètres pour la réponse1 avec un texte en plus qui est inscrit au dessus du champ de code de la reponse 1
+			// =============================== {texte:'numérateur',digits:3,decimals:0,signe:false,exposant_nb_chiffres:0,exposant_signe:false,approx:0}
+			// ===================tabQCM[2][1] qui contient les paramètres pour la réponse2 avec un texte en plus qui est inscrit au dessus du champ de code de la reponse 2
+			// =============================== {texte:'dénominateur',digits:3,decimals:0,signe:false,exposant_nb_chiffres:0,exposant_signe:false,approx:0}
+			//===================================================================================
+			// Dans ce cas, le tableau des booléens comprend les renseignements nécessaires pour paramétrer \AMCnumericChoices
+			// On pourra rajouter des options : les paramètres sont nommés.
+			// {digits=0,decimals=0,signe=false,exposant_nb_chiffres=0,exposant_signe=false,approx=0}
+			// si digits=0 alors la fonction va analyser le nombre décimal (ou entier) pour déterminer digits et decimals
+			// signe et exposant_signe sont des booléens
+			// approx est un entier : on enlève la virgule pour comparer la réponse avec la valeur : approx est le seuil de cette différence.
+			// La correction est dans tabQCM[1][0], la réponse numlérique est dans tabQCM[1][1] et le nombre de ligne pour le cadre dans tabQCM[1][2] et 
+			/********************************************************************/
+			
+			tex_QR += `\\element{${tabQCMs[0]}}{\n `
+			// premier champ de codage
+			tex_QR+=`\\begin{minipage}[b]{0.7 \\linewidth}\n`
+			tex_QR += `	\\begin{question}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}a} \n `
+			tex_QR += `		${tabQCM[0]} \n `
+			tex_QR += `\\explain{${tabQCM[1][0][0]}}\n`
+			tex_QR+=`\\notation{${tabQCM[1][0][2]}}\n`
+			//tex_QR += `\\AMCOpen{lines=${tabQCM[1][2]}}{\\mauvaise[NR]{NR}\\scoring{0}\\mauvaise[RR]{R}\\scoring{0.01}\\mauvaise[R]{R}\\scoring{0.33}\\mauvaise[V]{V}\\scoring{0.67}\\bonne[VV]{V}\\scoring{1}}\n`
+			tex_QR += `\\end{question}\n\\end{minipage}\n`
+			// Pour les deux champs supplémentaires
+			// if (tabQCM[2].exposant_nb_chiffres == 0) {
+			// 	reponse = tabQCM[1][1]
+			// 	if (tabQCM[2].digits == 0) {
+			// 		nb_chiffres_pd = nombre_de_chiffres_dans_la_partie_decimale(reponse)
+			// 		tabQCM[2].decimals = nb_chiffres_pd
+			// 		nb_chiffres_pe = nombre_de_chiffres_dans_la_partie_entiere(reponse)
+			// 		tabQCM[2].digits = nb_chiffres_pd + nb_chiffres_pe
+			// 	}
+			// }
+			//deuxième champ de codage numérique
+			tex_QR+=`\\begin{minipage}[b]{0.15 \\linewidth}\n`
+			tex_QR +=`\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse`
+			tex_QR += `	\\begin{questionmultx}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}b} \n `
+			tex_QR += `${tabQCM[2][0].texte}\n` //pour pouvoir mettre du texte adapté par ex Dénominateur éventuellement de façon conditionnelle avec une valeur par défaut			
+			tex_QR += `\\AMCnumericChoices{${tabQCM[1][0][1]}}{digits=${tabQCM[2][0].digits},decimals=${tabQCM[2][0].decimals},sign=${tabQCM[2][0].signe},`
+			if (tabQCM[2][0][3] != 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
+				tex_QR += `exponent=${tabQCM[2][0].exposant_nb_chiffres},exposign=${tabQCM[2][0].exposant_signe},`
+			}
+			if (tabQCM[2][0].approx != 0) {
+				tex_QR += `approx=${tabQCM[2][0].approx},`
+			}
+			tex_QR += `borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,},vertical=true}\n`
+			tex_QR += `\\end{questionmultx}\n\\end{minipage}\n`
+
+			//troisième champ de codage numérique
+			tex_QR+=`\\begin{minipage}[b]{0.15 \\linewidth}\n`
+			tex_QR +=`\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse`
+			tex_QR += `	\\begin{questionmultx}{question-${tabQCMs[0]}-${lettre_depuis_chiffre(idExo + 1)}-${id}c} \n `
+			tex_QR += `${tabQCM[2][1].texte}\n` //pour pouvoir mettre du texte adapté par ex Dénominateur éventuellement de façon conditionnelle avec une valeur par défaut
+			tex_QR += `\\AMCnumericChoices{${tabQCM[1][1][1]}}{digits=${tabQCM[2][1].digits},decimals=${tabQCM[2][1].decimals},sign=${tabQCM[2][1].signe},`
+			if (tabQCM[2][1][3] != 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
+				tex_QR += `exponent=${tabQCM[2][1].exposant_nb_chiffres},exposign=${tabQCM[2][1].exposant_signe},`
+			}
+			if (tabQCM[2][1].approx != 0) {
+				tex_QR += `approx=${tabQCM[2][1].approx},`
+			}
+			tex_QR += `borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,},vertical=true}\n`
+			tex_QR += `\\end{questionmultx}\n\\end{minipage}}\n`
+
+			id++
+		break
+
 		}
 
 
@@ -8160,7 +8294,7 @@ preambule+=`
 	%%%%%%%%%%%%%%%%%%%%% SPÉCIFICITÉS A.M.C. %%%%%%%%%%%%%%%%%%%%%%
 	%\\usepackage[francais,bloc,completemulti]{automultiplechoice} 
 	%   remarque : avec completmulti => "aucune réponse ne convient" en +
-	 \\usepackage[francais,bloc,insidebox]{automultiplechoice} %//,insidebox
+	 \\usepackage[francais,bloc,insidebox,nowatermark]{automultiplechoice} %//,insidebox
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	%%%%% PACKAGES MISE EN PAGE %%%%%

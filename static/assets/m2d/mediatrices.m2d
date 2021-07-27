@@ -1,0 +1,14 @@
+let A = point(3,2,'A','left')
+let B = point(10,3,'B','right')
+let C = point(6,6,'C')
+let p = polygone(A,B,C)
+let d1 = mediatrice(A,B,'','blue') // trace la médiatrice de [AB] sans la nommer
+let d2 = mediatrice(B,C,'','blue')
+let d3 = mediatrice(A,C,'','blue')
+let O = centreCercleCirconscrit(A,B,C)
+let c = cercleCentrePoint(O,A,'green')
+codageMediatrice(A,B,'red') // par défaut la marque du codage est X
+codageMediatrice(B,C,'red','O') 
+codageMediatrice(C,A,'red','Δ') // on peut aussi utiliser des caractères spéciaux pour le codage
+c.epaisseur = 2 // augmente l'épaisseur du cercle
+p.epaisseur = 2 // augmente l'épaisseur du triangle

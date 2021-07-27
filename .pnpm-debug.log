@@ -1,0 +1,14 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+    "err": {
+      "name": "Error",
+      "message": "No package.json (or package.yaml, or package.json5) was found in \"/Users/remi/Dropbox/Rémi/dev/Coopmaths\".",
+      "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+      "stack": "Error: No package.json (or package.yaml, or package.json5) was found in \"/Users/remi/Dropbox/Rémi/dev/Coopmaths\".\n    at readProjectManifest (/opt/homebrew/Cellar/node/15.14.0/pnpm-global/5/node_modules/.pnpm/pnpm@6.2.5/node_modules/pnpm/dist/pnpm.cjs:43384:11)\n    at async Object.readProjectManifestOnly (/opt/homebrew/Cellar/node/15.14.0/pnpm-global/5/node_modules/.pnpm/pnpm@6.2.5/node_modules/pnpm/dist/pnpm.cjs:43388:24)\n    at async Object.readProjectManifestOnly (/opt/homebrew/Cellar/node/15.14.0/pnpm-global/5/node_modules/.pnpm/pnpm@6.2.5/node_modules/pnpm/dist/pnpm.cjs:43603:22)\n    at async Object.handler (/opt/homebrew/Cellar/node/15.14.0/pnpm-global/5/node_modules/.pnpm/pnpm@6.2.5/node_modules/pnpm/dist/pnpm.cjs:117110:22)\n    at async Timeout._onTimeout (/opt/homebrew/Cellar/node/15.14.0/pnpm-global/5/node_modules/.pnpm/pnpm@6.2.5/node_modules/pnpm/dist/pnpm.cjs:121000:22)"
+    }
+  }
+}

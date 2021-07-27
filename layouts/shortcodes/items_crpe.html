@@ -1,0 +1,28 @@
+<!-- {{/*
+Utilisation: {{% items_crpe "idEx1,idEx2,idEx3,..." "titre" "section"%}}
+*/}}-->
+
+
+{{$itItems := split (.Get 0) ","}}
+{{$section := .Get 2 }}
+<!-- <h2 class="ui horizontal divider header">Exercices en ligne à données aléatoires</h2> -->
+<h3>{{.Get 1}}</h3>
+<div class="ui middle aligned animated selection divided list">
+  <div id={{$section }}></div>
+</div>
+{{range $itItems }}
+  <script type="module">
+    import {dictionnaireDesExercicesAleatoires} from "/modules/dictionnaireDesExercicesAleatoires.js";  
+    function myhtml(id){
+      let codeHTML
+      codeHTML = '\n<div class="ui middle aligned animated selection divided list">'  
+      codeHTML +=
+        `<a class="item" href="/exercice.html?ex=${id}" target="_blank">
+        <img class="ui avatar image" src="/images/dice.png"> <div class="header content">${id} - ${dictionnaireDesExercicesAleatoires[id].titre} </div>
+         </a>`
+      codeHTML += '\n</div>'
+      return codeHTML   
+    }    
+    document.getElementById({{$section }}).insertAdjacentHTML('beforeend',myhtml({{.}}))
+  </script>
+{{end}}

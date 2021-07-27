@@ -95,7 +95,7 @@ Pour faciliter le partage de liens vers ce site, quelques adresses raccourcies o
 
 ### Données personnelles
 
-Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune donnée personnelle et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données receuillies sont les statistiques de visite avec Google Analytics (adresses IP anonymisées et cookies désactivés).
+Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune donnée personnelle et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données recueillies sont les statistiques de visite avec Google Analytics (adresses IP anonymisées et cookies désactivés).
 
 Pour de plus amples renseignements : [contact@coopmaths.fr](mailto:contact@coopmaths.fr)
 

@@ -1,0 +1,55 @@
+
+Un professeur propose à ses élèves trois programmes de calculs, dont deux sont réalisés avec un logiciel de programmation.
+
+\begin{tabularx}{\linewidth}{|*{2}{>{\centering \arraybackslash} X|}} \hline
+	Programme A & Programme B\\
+	\begin{scratch}[scale=0.75]
+		\blockinit{quand \greenflag est cliqué}
+		\blocksensing{demander \ovalnum{choisir un nombre}~ et attendre}
+		\blockvariable{mettre \selectmenu{nombre choisi} à \ovalsensing{réponse}}
+		\blockvariable{mettre \selectmenu{Valeur 1} à \ovaloperator{\ovalnum{1} + \ovalvariable{nombre choisi}}}
+		\blockvariable{mettre \selectmenu{Valeur 2} à \ovaloperator{\ovalnum{3} * \ovalvariable{Valeur 1}}}
+		\blockvariable{mettre \selectmenu{résultat} à \ovaloperator{\ovalvariable{Valeur 2} - \ovalnum{3}}}
+		\blocklook{dire \ovaloperator{regrouper \ovalnum{On obtient} et \ovalvariable{résultat}} pendant \ovalnum{2} secondes}
+	\end{scratch}&\begin{scratch}[scale=0.75]
+	\blockinit{quand \greenflag est cliqué}
+	\blocksensing{demander \ovalnum{choisir un nombre}~ et attendre}
+	\blockvariable{mettre \selectmenu{nombre choisi} à \ovalsensing{réponse}}
+	\blockvariable{mettre \selectmenu{Valeur 1} à \ovaloperator{\ovalvariable{nombre choisi} + \ovalnum{3}}}
+	\blockvariable{mettre \selectmenu{Valeur 2} à \ovaloperator{\ovalvariable{nombre choisi} - \ovalnum{5}}}
+	\blockvariable{mettre \selectmenu{résultat} à \ovaloperator{\ovalvariable{Valeur 1} * \ovalvariable{Valeur 2}}}
+	\blocklook{dire \ovaloperator{regrouper \ovalnum{On obtient} et \ovalvariable{résultat}} pendant \ovalnum{2} secondes}
+	\end{scratch}\\ \hline
+	\multicolumn{2}{|c|}{Programme C}\\
+	\multicolumn{2}{|c|}{\begin{minipage}{6cm}
+			\textbullet~~ Choisir un nombre
+			
+			\textbullet~~ Multiplier par 7
+			
+			\textbullet~~ Ajouter 3
+			
+			\textbullet~~ Soustraire le nombre de départ
+			
+		\end{minipage}}\\ \hline
+\end{tabularx}
+\begin{enumerate}
+	\item \begin{enumerate}
+		\item Montrer que si on choisit 1 comme nombre de départ alors le programme A affiche pendant 2 secondes « On obtient 3 ».
+		
+		\item Montrer que si on choisit 2 comme nombre de départ alors le programme B affiche pendant 2 secondes « On obtient $-15$ ».
+	\end{enumerate}
+	
+	\item Soit $x$ le nombre de départ, quelle expression littérale obtient-on à la fin de l'exécution du programme C ?
+	
+	\item Un élève affirme qu'avec un des trois programmes on obtient toujours le triple du nombre choisi. A-t-il raison ?
+	
+	\item \begin{enumerate}
+		\item Résoudre l'équation $(x + 3)(x - 5) = 0$.
+		
+		\item Pour quelles valeurs de départ le programme B affiche-t-il « On obtient 0 » ?
+	\end{enumerate}
+
+	\item Pour quelle(s) valeur(s) de départ le programme C affiche-t-il le même résultat que le programme A ?
+\end{enumerate}
+\vspace{0,5cm}
+

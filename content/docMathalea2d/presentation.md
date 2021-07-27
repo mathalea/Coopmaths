@@ -26,11 +26,13 @@ Cet outil servira principalement à la création d'exercices pour MathALEA mais 
 {{% item "Les transformations" "/docMathalea2d/transformations" %}}
 {{% item "Les droites remarquables" "/docMathalea2d/remarquables" %}}
 {{% item "Quadrillages, repères et graphiques" "/docMathalea2d/repere" %}}
+{{% item "Tableau de proportionnalité" "/docMathalea2d/tableau" %}}
 {{% item "Les codages" "/docMathalea2d/codages" %}}
 {{% item "Les animations" "/docMathalea2d/animations" %}}
 {{% item "La programmation" "/docMathalea2d/programmation" %}}
 {{% item "La programmation Logo - GéoTortue - Crayon de Scratch" "/docMathalea2d/lutin" %}}
 {{% item "La 3d" "/docMathalea2d/3d" %}}
+{{% item "Animations avec des instruments" "/docMathalea2d/InstrumEnPoche" %}}
 
 {{< /liste >}}
 
@@ -42,4 +44,4 @@ Cet outil servira principalement à la création d'exercices pour MathALEA mais 
 
 MathALEA 2D a été développé par Rémi Angot et Jean-Claude Lhote durant l'été 2020.
 
-Comme le reste du site, MathALEA 2D est libre de droit sous licence CC-BY-SA et le code est disponible [ici](https://github.com/remiangot/MathALEA/blob/master/include/mathalea2d.js).
+Comme le reste du site, MathALEA 2D est libre de droit sous licence CC-BY-SA et le code de MathALEA2D est [ici](https://github.com/mathalea/mathalea/blob/master/src/js/modules/2d.js) et celui de MathAleaInstrumEnPoche est [ici](https://github.com/mathalea/mathalea/blob/master/src/js/modules/Alea2iep.js).

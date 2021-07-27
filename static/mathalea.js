@@ -197,8 +197,10 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
   	}
 
   function contenu_exercice_html (obj, num_exercice, isdiaporama) {
-    let contenu_un_exercice = ''; var contenu_une_correction = ''
-    if (isdiaporama) {
+    let contenu_un_exercice = ''; 
+	var contenu_une_correction = ''
+    var param_tooltip = ''
+	if (isdiaporama) {
       contenu_un_exercice += '<section class="slider single-item" id="diaporama">'
       for (const question of obj.liste_questions) {
         contenu_un_exercice += `\n<div id="question_diap" style="font-size:${obj.tailleDiaporama}px"><span>` + question.replace(/\\dotfill/g, '...').replace(/\\not=/g, '≠').replace(/\\ldots/g, '....') + '</span></div>' // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
@@ -225,7 +227,18 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
         } catch (error) {
           console.log(error)
         }
-        contenu_un_exercice += `Exercice ${num_exercice} − ${obj.id}</h3>`
+        if ((!obj.nb_questions_modifiable && !obj.besoin_formulaire_numerique && !obj.besoin_formulaire_texte && !obj.QCM_disponible) || (!$('#liste_des_exercices').is(':visible') && !$('#exercices_disponibles').is(':visible'))) {
+			contenu_un_exercice += `Exercice ${num_exercice} − ${obj.id} </h3>`
+		} else {
+			if (obj.besoin_formulaire_numerique && obj.besoin_formulaire_numerique[2]) {
+				param_tooltip += (obj.besoin_formulaire_numerique[0] +': \n' + obj.besoin_formulaire_numerique[2]) + '\n';		
+			}
+			if (obj.besoin_formulaire2_numerique && obj.besoin_formulaire2_numerique[2]) {
+				param_tooltip += (obj.besoin_formulaire2_numerique[0] +': \n' + obj.besoin_formulaire2_numerique[2]);		
+			}
+			param_tooltip = param_tooltip ? `data-tooltip="${param_tooltip}" data-position="right center"` : '' ;
+			contenu_un_exercice += `<span ${param_tooltip}> Exercice ${num_exercice} − ${obj.id} <i class="cog icon icone_param"></i></span></h3>`
+		}
         if (obj.video.length > 3) {
           contenu_un_exercice += `<div id=video${num_exercice - 1}>` + modal_youtube(num_exercice - 1, obj.video, '', 'Aide', 'youtube') + '</div>';
         }
@@ -273,7 +286,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
     (function gestionURL () {
       if (liste_des_exercices.length > 0) {
         let fin_de_l_URL = ''
-        if (sortie_html && !est_diaporama && window.location.pathname.indexOf('exo.html') < 0 && window.location.pathname.indexOf('beta.html') < 0) {
+        if (sortie_html && !est_diaporama && window.location.pathname.indexOf('exo.html') < 0 ) {
           fin_de_l_URL += 'exercice.html'
         }
         fin_de_l_URL += `?ex=${liste_des_exercices[0]}`
@@ -362,7 +375,11 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
 
     // Ajoute le contenu dans les div #exercices et #corrections
     if (sortie_html && !est_diaporama) {
-      document.getElementById('exercices').innerHTML = '';
+      let scroll_level;
+	  if (document.getElementById('right')) {
+		scroll_level = document.getElementById('right').scrollTop
+	  }
+	  document.getElementById('exercices').innerHTML = '';
       document.getElementById('corrections').innerHTML = '';
       let contenuDesExercices = '';
       let contenuDesCorrections = '';
@@ -372,11 +389,19 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
           listeObjetsExercice[i].id = liste_des_exercices[i]
           contenu = contenu_exercice_html(listeObjetsExercice[i], i + 1, false)			
           if ($('#liste_des_exercices').is(':visible') || $('#exercices_disponibles').is(':visible')) { // si on n'a plus la liste des exercices il ne faut plus pouvoir en supprimer (pour exercice.html et exo.html)
-            contenuDesExercices += `<div id="exercice${i}"> <h3 class="ui dividing header"><i id="${i}" class="trash alternate icon icone_moins"></i><i id="${i}" class="arrow circle down icon icone_down"></i><i id="${i}" class="arrow circle up icon icone_up"></i>${contenu.contenu_un_exercice} </div>`
+            if (liste_des_exercices.length === 1) {
+				contenuDesExercices += `<div id="exercice${i}"> <h3 class="ui dividing header"><i id="${i}" class="trash alternate icon icone_moins"></i>${contenu.contenu_un_exercice} </div>`
+			} else if (i === 0) {
+				contenuDesExercices += `<div id="exercice${i}"> <h3 class="ui dividing header"><i id="${i}" class="trash alternate icon icone_moins"></i><i id="${i}" class="arrow circle down icon icone_down"></i>${contenu.contenu_un_exercice} </div>`
+			} else if (i === liste_des_exercices.length-1) {
+				contenuDesExercices += `<div id="exercice${i}"> <h3 class="ui dividing header"><i id="${i}" class="trash alternate icon icone_moins"></i><i id="${i}" class="arrow circle up icon icone_up"></i>${contenu.contenu_un_exercice} </div>`
+			} else {
+				contenuDesExercices += `<div id="exercice${i}"> <h3 class="ui dividing header"><i id="${i}" class="trash alternate icon icone_moins"></i><i id="${i}" class="arrow circle down icon icone_down"></i><i id="${i}" class="arrow circle up icon icone_up"></i>${contenu.contenu_un_exercice} </div>`
+			}
           } else {
-            contenuDesExercices += `<div id="exercice${i}"> <h3 class="ui dividing header">${contenu.contenu_un_exercice} </div>`
+            contenuDesExercices += `<div id="exercice${i}" class="titreExercice"> <h3 class="ui dividing header">${contenu.contenu_un_exercice} </div>`
           }
-          contenuDesCorrections += `<div id="divexcorr${i}"> ${contenu.contenu_une_correction} </div>`	
+          contenuDesCorrections += `<div id="divexcorr${i}" class="titreExercice"> ${contenu.contenu_une_correction} </div>`	
         }
         contenuDesExercices = `<ol>\n${contenuDesExercices}\n</ol>`
         contenuDesCorrections = `<ol>\n${contenuDesCorrections}\n</ol>`
@@ -386,7 +411,11 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
         $('#message_liste_exercice_vide').show() // Message au dessus de la liste des exercices
         $('#cache').dimmer('show') // Cache au dessus du code LaTeX
       }
+	  $("#popup_preview .icone_param").remove() //dans l'aperçu pas d'engrenage pour les paramètres.
       document.getElementById('exercices').innerHTML = contenuDesExercices
+	  if (scroll_level) {
+		document.getElementById('right').scrollTop = scroll_level;
+	  }
       document.getElementById('corrections').innerHTML = contenuDesCorrections        
       gestion_modules(false, listeObjetsExercice)
     }
@@ -435,7 +464,6 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
         }
         $('#message_liste_exercice_vide').hide()
         copier_exercices_form_vers_affichage(liste_des_exercices)
-        $('.choix_exercices:last').focus()
         $('#cache').show()
 
         // Gestion du nombre de versions
@@ -567,6 +595,12 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
       })
     }
 
+	//cg 04/2021 : icone_parmètres fait le focus sur les parmètres correspondant à l'exercice
+	$('.icone_param').off('click').on('click', function (e) {
+       $("#accordeon_parametres >div").addClass('active');
+	   var num_ex = event.target.parentElement.parentElement.parentElement.id;
+	   $(`.${num_ex} + div :input`).focus();
+    })
     	// cg 04-2021 possibilité de manipuler la liste des exercices via les exercices.
 
     $('.icone_moins').off('click').on('click', function (e) {
@@ -778,7 +812,17 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
           contenu = contenu_exercice_html(listeObjetsExercice[liste_exercices.length - 1], liste_exercices.length, false) 
           $('#popup_preview').html(contenu.contenu_un_exercice)
           $('.popup').addClass('show')
-          $('.popuptext').css({ top: document.documentElement.scrollTop - 20 })
+		  if (document.getElementById("left")) {
+			$('.popuptext').css({ top: document.getElementById("left").scrollTop - 10 })
+			$('.popuptext').css({ left: document.getElementById('left').offsetLeft + 5 })
+			if (window.innerWidth < 765) {
+				$('.popuptext').css({ left: document.getElementById('left').offsetLeft + 25 })
+				$('.popup').css({ left: document.getElementById('left').offsetLeft + 25 })
+			}
+		  }
+		  else {
+			  $('.popuptext').css({ top: document.documentElement.scrollTop - 10 })
+		  }
           $('.popuptext').show()	
           liste_des_exercices.pop()
           if (!output) {
@@ -951,7 +995,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
 
     for (let i = 0; i < exercice.length; i++) {
       if (sortie_html) {
-        div_parametres_generaux.innerHTML += '<h4 class="ui dividing header">Exercice n°' + (i + 1) + ' : ' + exercice[i].titre + ' − ' + liste_des_exercices[i] + '</h4>'
+        div_parametres_generaux.innerHTML += '<h4 class="ui dividing header exercice'+i+'">Exercice n°' + (i + 1) + ' : ' + exercice[i].titre + ' − ' + liste_des_exercices[i] + '</h4>'
         if (exercice[i].pas_de_version_LaTeX) {
           div_parametres_generaux.innerHTML += "<p><em>Cet exercice n'a pas de version LaTeX et ne peut donc pas être exporté en PDF.</em></p>"
         }
@@ -1521,38 +1565,48 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
       mise_a_jour_du_code()
     }
 
-    // Gestion du bouton de zoom
-    // let taille = parseInt($("#affichage_exercices").css("font-size"));
-    // $("#btn_zoom_plus").click(function () {
-    //     taille *= 1.2;
-    //     $("#affichage_exercices").css("font-size", `${taille}px`);
-    //     $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
-    //     $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
-    // });
-    // $("#btn_zoom_moins").click(function () {
-    //     if (parseInt(taille) > 14) {
-    //         taille *= 0.8;
-    //     }
-    //     $("#affichage_exercices").css("font-size", `${taille}px`);
-    //     $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
-    //     $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
-    // });
+    
 
     if (sortie_html && !est_diaporama) {
       // Gestion du bouton de zoom
-      let zoom = 1
-      $('#btn_zoom_plus').click(function () {
-        zoom += 0.5
-        $('#affichage_exercices').css('transform', `scale(${zoom})`)
-        $('#affichage_exercices').css('transform-origin', '0 0px')
-      })
-      $('#btn_zoom_moins').click(function () {
-        if (zoom > 1) {
-          zoom -= 0.5
+      // let zoom = 1
+      // $('#btn_zoom_plus').click(function () {
+      //   zoom += 0.5
+      //   $('#affichage_exercices').css('transform', `scale(${zoom})`)
+      //   $('#affichage_exercices').css('transform-origin', '0 0px')
+      // })
+      // $('#btn_zoom_moins').click(function () {
+      //   if (zoom > 1) {
+      //     zoom -= 0.5
+      //   }
+      //   $('#affichage_exercices').css('transform', `scale(${zoom})`)
+      //   $('#affichage_exercices').css('transform-origin', '0 0px')
+      // })
+
+    let taille = parseInt($("#affichage_exercices").css("font-size"));
+    let lineHeight = parseInt($("#affichage_exercices").css("line-height"));
+    $("#btn_zoom_plus").click(function () {
+        taille *= 1.2;
+        lineHeight *= 1.2;
+        $("#affichage_exercices").css("font-size", `${taille}px`);
+        $("#affichage_exercices").css("line-height", `${lineHeight}px`);
+        $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
+        $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
+        $(".mathalea2d").css("width", parseFloat($(".mathalea2d").css("width")) * 1.2);
+        $(".mathalea2d").css("height", parseFloat($(".mathalea2d").css("height")) * 1.2);
+    });
+    $("#btn_zoom_moins").click(function () {
+        if (parseInt(taille) > 10) {
+            taille *= 0.8;
+            lineHeight *=0.8;
         }
-        $('#affichage_exercices').css('transform', `scale(${zoom})`)
-        $('#affichage_exercices').css('transform-origin', '0 0px')
-      })
+        $("#affichage_exercices").css("font-size", `${taille}px`);
+        $("#affichage_exercices").css("line-height", `${lineHeight}px`);
+        $("#affichage_exercices").find("h3").css("font-size", `${taille}px`);
+        $("#affichage_exercices").find("h4").css("font-size", `${taille}px`);
+        $(".mathalea2d").css("width", parseFloat($(".mathalea2d").css("width")) * 0.8);
+        $(".mathalea2d").css("height", parseFloat($(".mathalea2d").css("height")) * 0.8);
+    });
     }
 
     // Gestion de la redirection vers MathaleaLaTeX
@@ -1563,7 +1617,7 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
     // handlers pour la prévisualisation des exercices cg 04-20201
     function afficher_popup () {
       if ($('.popuptext').is(':visible')) {
-        $('.popuptext').html('')
+        $('.popuptext').empty()
         $('.popuptext').hide() 
       } else {
         mise_a_jour_de_la_liste_des_exercices(event.target.id)
@@ -1583,13 +1637,36 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
     $(document).click(function (event) {
       if ($('.popuptext').is(':visible')) {
         $('.popuptext').hide()
-        $('.popuptext').html('')
+        $('.popuptext').empty()
         $('.icone_preview').off('click').on('click', function (e) {
           afficher_popup()
         })
       }
     })
+	
+	$("#exo_plein_ecran").click(function (event) {
+      if ($('#exo_plein_ecran').hasClass("left")) {
+        $('#left').hide()
+		$('#right').removeClass('column')
+		$('#right').css("width","100%")
+		$('#exo_plein_ecran').removeClass("left")
+		$('#exo_plein_ecran').addClass("right")
+      }
+	  else {
+		$('#left').show()
+		$('#right').addClass('column')
+		$('#right').css("width",$('#left').css("width"))
+		$('#exo_plein_ecran').removeClass("right")
+		$('#exo_plein_ecran').addClass("left")
+	  }
+    })
 		
+	window.addEventListener('resize',function(e){
+		if ($('#exo_plein_ecran').hasClass("left")) {
+			$('#right').css("width",$('#left').css("width"));
+		}
+	});
+	
     if (document.getElementById('btnQRcode')) {
       document.getElementById('btnQRcode').addEventListener('click', function () {
         $('#ModalQRcode').html('')
@@ -1603,6 +1680,26 @@ import { menuDesExercicesDisponibles, dictionnaireDesExercices, apparence_exerci
         })
         qrcode.makeCode(window.location.href)
         $('#ModalQRcode').modal('show')
+      })
+    }
+    if (document.getElementById('btnEmbed')) {
+      document.getElementById('btnEmbed').addEventListener('click', function () {
+        $('#ModalEmbed').html(`<div class="content"><p><pre><code>&lt;iframe width="660"
+        height="315" 
+        src="${window.location.href.replace('exercice.html','exo.html')}"
+        frameborder="0" >
+&lt;/iframe></code><pre></p>
+        <button id="btnEmbedCode" style="margin:10px" class="btn ui toggle button labeled icon url"
+        data-clipboard-action="copy" data-clipboard-text=url_courant()><i class="copy icon"></i>Copier le code HTML</button></div>`)
+        new Clipboard('#btnEmbedCode', {
+          text: function () { return `<iframe width="660"
+          height="315" 
+          src="${window.location.href.replace('exercice.html','exo.html')}"
+          frameborder="0" >
+  </iframe>` }
+        })
+        $('.ui.button.toggle').state() // initialise le bouton
+        $('#ModalEmbed').modal('show')
       })
     }
 

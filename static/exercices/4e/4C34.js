@@ -69,8 +69,7 @@ export default function Priorites_et_relatifs_et_puissances() {
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
   
-    let liste_questions_disponibles
-      liste_questions_disponibles = range1(7);
+    let liste_questions_disponibles = range1(7);
   
     let liste_type_de_questions = combinaison_listes(
       liste_questions_disponibles,
@@ -164,7 +163,8 @@ export default function Priorites_et_relatifs_et_puissances() {
         // Si la question n'a jamais été posée, on en créé une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
-        this.QCM[1].push([texte, [texte_corr,reponse,3], {digits:3,decimals:0,signe:false,exposant_nb_chiffres:0,exposant_signe:false,approx:0}])
+        this.QCM[1].push([texte, [texte_corr,reponse,3], {digits:3,decimals:0,signe:true,exposant_nb_chiffres:0,exposant_signe:false,approx:0}])
+        console.log(reponse)
         i++;
       }
       cpt++;
