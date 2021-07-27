@@ -30,6 +30,7 @@ La variable globale `pixelsParCm` permet de paramétrer l'affichage des figures 
 {{% alea2d "cf2"  %}}
 
 `repere()` est une fonction qui peut être paramétrée de bien des manières. On a décidé d'utiliser un objet JavaScript pour la paramétrer. Cela impose de mettre les paramètres entre accolades et d'utiliser `:` à la place de `=`. L'avantage, c'est que l'on peut écrire les paramètres dans l'ordre que l'on veut et ne surcharger que ceux souhaités.
+Voir la fonction `repere2()` à la fin de ce fichier qui est une amélioration de `repere()`
 
 Voici tous les paramètres par défaut que vous pouvez changer : 
 
@@ -130,3 +131,81 @@ Paramètres :
  * LegendePosition (1,5cm après Max): position de la légende
  */
 {{% alea2d "droitegraduee2"  %}}
+
+`Repere2()` est une fonction qui succède à `Repere()` dont elle reprend bon nombre de paramètres mais en ajoute quelques uns pour obtenir des graphiques encore plus jolis. Voici la liste des paramètres et leur valeurs par défaut.
+Ces paramètres sont passés via un objet, donc on utilise : à la place de = et on ne passe que les paramètres que l'on souhaite modifier.
+
+````
+  xUnite = 1, // Facteur de zoom en absciss c'est à dire le nombre de cm que représente l'unité en abscisse. Si xUnite = 0.5, on aura 1cm = 2 unités
+  yUnite = 1, // Idem en ordonnée
+  xMin = -10, // Les limites du repère
+  xMax = 10,
+  yMin = -10,
+  yMax = 10,
+  axesEpaisseur = 2, 
+  axesCouleur = 'black',
+  axeXStyle = '->', // Les styles possibles sont : '|->','->',... voir les styleExtremites des segments.
+  axeYStyle = '->', // Idem
+  thickEpaisseur = 2, // épaisseur des graduations
+  thickHauteur = 0.2, // hauteur des graduations (ici 2mm au dessus et 2mm en dessous de l'axe soit 4mm de hauteur)
+  thickCouleur = axesCouleur, // pour des graduations colorées par défaut dans la couleur de l'axe
+  xThickDistance = 1, // La distance entre 2 graduations successives en abscisse. définit aussi l'espacement des lignes verticales de la grille principale si grilleDistance reste à false
+  xThickListe = false, // si ce paramètre contient un tableau de valeurs, seules ces valeurs auront des graduations.
+  xThickMin = xMin + xThickDistance,
+  xThickMax = xMax - xThickDistance,
+  yThickDistance = 1,
+  yThickListe = false,
+  yThickMin = yMin + yThickDistance,
+  yThickMax = yMax - yThickDistance,
+  xLabelDistance = xThickDistance,
+  xLabelListe = false,
+  xLabelMin = xThickMin,
+  xLabelMax = xThickMax,
+  yLabelDistance = yThickDistance,
+  yLabelListe = false,
+  yLabelMin = yThickMin,
+  yLabelMax = yThickMax,
+  xLegende = '',
+  xLegendePosition = [calcul(xMax * xUnite) + 0.5, 0.5],
+  yLegende = '',
+  yLegendePosition = [0.5, calcul(yMax * yUnite) + 0.5],
+  grille = true,
+  grilleDistance = false,
+  grilleCouleur = 'black',
+  grilleOpacite = 0.5,
+  grilleEpaisseur = 1,
+  grilleSecondaire = false,
+  grilleSecondaireDistance = false,
+  grilleSecondaireCouleur = 'gray',
+  grilleSecondaireOpacite = 0.3,
+  grilleSecondaireEpaisseur = 1,
+  grilleX = grille,
+  grilleXListe = false,
+  grilleXDistance = grilleDistance,
+  grilleXMin = false,
+  grilleXMax = false,
+  grilleXCouleur = grilleCouleur,
+  grilleXOpacite = grilleOpacite,
+  grilleY = grille,
+  grilleYListe = false,
+  grilleYDistance = grilleDistance,
+  grilleYMin = false,
+  grilleYMax = false,
+  grilleYCouleur = grilleCouleur,
+  grilleYOpacite = grilleOpacite,
+  grilleSecondaireX = grilleSecondaire,
+  grilleSecondaireXListe = false,
+  grilleSecondaireXDistance = grilleSecondaireDistance,
+  grilleSecondaireXMin = false,
+  grilleSecondaireXMax = false,
+  grilleSecondaireXCouleur = grilleSecondaireCouleur,
+  grilleSecondaireXOpacite = grilleSecondaireOpacite,
+  grilleSecondaireY = grilleSecondaire,
+  grilleSecondaireYListe = false,
+  grilleSecondaireYDistance = grilleSecondaireDistance,
+  grilleSecondaireYMin = false,
+  grilleSecondaireYMax = false,
+  grilleSecondaireYCouleur = grilleSecondaireCouleur,
+  grilleSecondaireYOpacite = grilleSecondaireOpacite
+} = {}) {
+
