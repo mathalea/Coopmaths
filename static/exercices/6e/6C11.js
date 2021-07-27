@@ -28,8 +28,12 @@ export default function Divisions_euclidiennes() {
   this.liste_packages = "xlop";
 
   this.nouvelle_version = function () {
-   if (this.sup<2) this.QCM=['6C11',[],'division euclidienne',3]
-   else this.QCM=['6C21',[],'division euclidienne niveau 2',3]
+   if (this.sup<2) {
+     this.QCM=['6C11',[],'division euclidienne',3,{}]
+   }
+   else {
+      this.QCM=['6C21',[],'division euclidienne niveau 2',3,{}]
+   }
     this.liste_questions = []; // Liste de questions
     this.liste_corrections = []; // Liste de questions corrigées
     let type_de_questions_disponibles,type_de_questions
@@ -81,16 +85,18 @@ export default function Divisions_euclidiennes() {
       a = b * q + r;
       texte = `$${tex_nombre(a)}\\div${b}$`;
       if (r == 0) {
-        texte_corr = `${Operation({operande1:a,operande2:b,type:'division'})}$${tex_nombre(a)}\\div${b}=${q}$`;
+        texte_corr = `${Operation({operande1:a,operande2:b,type:'divisionE'})}$${tex_nombre(a)}\\div${b}=${q}$`;
       } else {
-        texte_corr = `${Operation({operande1:a,operande2:b,type:'division'})}$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
+        texte_corr = `${Operation({operande1:a,operande2:b,type:'divisionE'})}$${tex_nombre(a)}=${b}\\times${q}+${r}$`;
       }
 
       if (this.liste_questions.indexOf(texte) == -1) {
         // Si la question n'a jamais été posée, on en crée une autre
         this.liste_questions.push(texte);
         this.liste_corrections.push(texte_corr);
-        this.QCM[1].push([texte,[texte_corr],[4]])
+        /***************** AMC Open ************************/
+        this.QCM[1].push([texte,[texte_corr],[4]])    // [question,[reponse],[nb_lignes_cadre]]
+        /*********************************************/
         i++;
       }
       cpt++;

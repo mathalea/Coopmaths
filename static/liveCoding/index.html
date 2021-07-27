@@ -1,131 +1,135 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+	<meta charset="utf-8">
 
-		<title>MathALEA - Présentation</title>
+	<title>MathALEA - Présentation</title>
 
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="/include/reveal.js/dist/reset.css">
-		<link rel="stylesheet" href="/include/reveal.js/dist/reveal.css">
-		<link rel="stylesheet" href="/include/reveal.js/dist/theme/coopmaths.css" id="theme">
-		<link rel="stylesheet" href="/include/reveal.js/plugin/highlight/monokai.css">
+	<link rel="stylesheet" href="/include/reveal.js/dist/reset.css">
+	<link rel="stylesheet" href="/include/reveal.js/dist/reveal.css">
+	<link rel="stylesheet" href="/include/reveal.js/dist/theme/coopmaths.css" id="theme">
+	<link rel="stylesheet" href="/include/reveal.js/plugin/highlight/monokai.css">
 
-	</head>
+</head>
 
-	<body>
+<body>
 
-		<div class="reveal">
+	<div class="reveal">
 
-			<div class="slides">
-				<section  > 
-					<h1 >#LiveCoding MathALEA</h1>
-					<div style="position: absolute; width: 40%; right: 0; bottom:-100px; text-align: right;font-size:large;">
-						<p>Diaporama : coopmaths.fr/liveCoding<br>contact@coopmaths.fr <br> remi.angot@ac-montpellier.fr</p>
-					</div>
-					<div style="position: absolute; width: 40%; left: 0; bottom:-100px; text-align: left;font-size:large;">
-						<img src="/images/logo-coopmaths.png" width = "150px">
-					</div>
-				</section>
-				<section  > 
-						<h2>Programme</h2>
-						<ul>
-							<li class="fragment">Les prérequis logiciels</li>
-							<li class="fragment">L'arborescence de MathALEA</li>
-							<li class="fragment">Un exercice est un objet</li>
-							<li class="fragment">Chaines de caractères et formules LaTeX</li>
-							<li class="fragment">Scénario didactique de l'exercice</li>
-							<li class="fragment">Programmation de l'exercice</li>
-							<li class="fragment">Paramètres de l'exercices</li>
-						</ul>
-				</section>
+		<div class="slides">
+			<section>
+				<h1>#LiveCoding MathALEA</h1>
+				<div
+					style="position: absolute; width: 40%; right: 0; bottom:-100px; text-align: right;font-size:large;">
+					<p>Diaporama : coopmaths.fr/liveCoding<br>contact@coopmaths.fr <br> remi.angot@ac-montpellier.fr</p>
+				</div>
+				<div style="position: absolute; width: 40%; left: 0; bottom:-100px; text-align: left;font-size:large;">
+					<img src="/images/logo-coopmaths.png" width="150px">
+				</div>
+			</section>
+			<section>
+				<h2>Programme</h2>
+				<ul>
+					<li>Les prérequis logiciels</li>
+					<li>L'arborescence de MathALEA</li>
+					<li>Un exercice est un objet</li>
+					<li>Chaines de caractères et formules LaTeX</li>
+					<li>Scénario didactique de l'exercice</li>
+					<li>Programmation de l'exercice</li>
+					<li>Paramètres de l'exercices</li>
+				</ul>
+			</section>
 
-				
 
-				<section>
-					<p>Les prérequis logiciels</p>
-						<ul>
-							<li>Un éditeur : VSCodium ou Visual Studio Code</li>
-							<li>Des extensions : Live Server, Python, Auto Import - ES6, TS, JSX, TSX de Sergey Korenuk, French Language Pack... </li>
-							<li>Régler la sauvegarde automatique</li>
-							<li>Un compte sur Github.com pour créer un fork</li>
-							<li>Un client Git : Github Desktop</li>
-						</ul>
-				</section>
-				
-				<section>
-					<p>Tester MathALEA en local</p>
-						<ul>
-							<li>On ouvre le répertoire du dépôt local dans VSCodium</li>
-							<li>On clique sur Go Live</li>
-							<li>mathalea.html : les exercices</li>
-							<li>mathalealatex.html : le générateur LaTeX</li>
-							<li>cm.html : les diaporamas</li>
-							<li>beta.html : les exercices beta</li>
-						</ul>
-				</section>
-				<section>
-					<p>L'arborescence</p>
-						<ul>
-							<li>/exercices/ : les exercices rangés par niveau, le rangement se fera suivant les premièrs caractères 6N1, beta...</li>
-							<li>/modules/outils.js : ensemble de fonctions à importer à la demande dans les exercices </li>
-							<li>/modules/2d.js : fonctions pour générer des illustrations avec MathALEA2D</li>
-							<li>/modules/exercices_to_json.py : script pour mettre à jour le menu avec tous les exercices</li>
-						</ul>
-				</section>
-				<section>
-					<h5>L'objet exercice</h5>
-					<p>Dans le moteur de MathALEA : </p>
-<pre class="javascript"><code  >
+
+			<section>
+				<p>Les prérequis logiciels</p>
+				<ul>
+					<li>Un éditeur (VSCodium, Visual Studio Code, Sublime Text...)</li>
+					<li>Des extensions : Live Server, Python, French Language Pack... </li> 
+					<!-- Auto Import - ES6, TS, JSX, TSX de Sergey Korenuk, -->
+					<li>Régler la sauvegarde automatique</li>
+					<li>Un compte sur Github.com pour créer un fork</li>
+					<li>Un client Git (Github Desktop)</li>
+				</ul>
+			</section>
+
+			<section>
+				<p>Tester MathALEA en local</p>
+				<ul>
+					<li>On ouvre le répertoire du dépôt local dans l'éditeur</li>
+					<li>On lance le serveur (Go Live)</li>
+					<li>mathalea.html : les exercices</li>
+					<li>mathalealatex.html : le générateur LaTeX</li>
+					<li>cm.html : les diaporamas</li>
+					<li>beta.html : les exercices beta</li>
+					<li>mathalea_amc.html : le générateur pour AMC</li>
+				</ul>
+			</section>
+			<section>
+				<p>L'arborescence</p>
+				<ul>
+					<li>/exercices/ : les exercices rangés par niveau, le rangement se fera suivant les premièrs
+						caractères 6N1, beta...</li>
+					<li>/modules/outils.js : ensemble de fonctions à importer à la demande dans les exercices </li>
+					<li>/modules/2d.js : fonctions pour générer des illustrations avec MathALEA2D</li>
+					<li>/modules/exercices_to_json.py : script pour mettre à jour le menu avec tous les exercices</li>
+				</ul>
+			</section>
+			<section>
+				<h5>L'objet exercice</h5>
+				<p>Dans le moteur de MathALEA : </p>
+				<pre class="javascript"><code  >
 let exercice2 = new 3G31();
 exercice2.titre
 exercice2.contenu
 exercice2.contenu_corr	
 </code></pre>
-					<p>Dans un exercice : </p>
-<pre class="javascript"><code  >
+				<p>Dans un exercice : </p>
+				<pre class="javascript"><code  >
 this.titre = "Additions posées de nombres entiers";
 this.consigne = "Poser et effectuer les calculs suivants.";
 this.spacing = 2;
 this.contenu = "Mon énoncé"
 </code></pre>
-				</section>
-				
-				<section>
-					<h5>Les chaines de caractères</h5>
-					<p>Concaténation classique</p>
-<pre class="javascript fragment"><code  >
+			</section>
+
+			<section>
+				<h5>Les chaines de caractères</h5>
+				<p>Concaténation classique</p>
+				<pre class="javascript fragment"><code  >
 let a = randint(2,10) // fonction à importer de outils.js
 let texte = "Mon article coûte " + a + "euros."	
 </code></pre>
-					<p>Gabarits de littéraux</p>
-<pre class="javascript fragment"><code>
+				<p>Littéraux de gabarits</p>
+				<pre class="javascript fragment"><code>
 let a = randint(2,10)
 let texte = `Mon article coûte ${a} euros.`
 </code></pre>
-					<p>Gabarits de littéraux et LaTeX</p>
-<pre class="javascript fragment"><code>
+				<p>Littéraux de gabarits et LaTeX</p>
+				<pre class="javascript fragment"><code>
 let a = randint(2,10)
 let b = randint(-10,10,[-1,0,1]) // on exclut 3 valeurs
 let texte = `Calcul : $${a} \\div ${b}$` // $...$ pour KaTeX 
 // toutes les commandes LaTeX doivent être précédées de \\
 </code></pre>
-				</section>
+			</section>
 
-				<section>
-					<h5>Scénario didactique</h5>
-							
-							<pre class="javascript fragment"><code>
+			<section>
+				<h5>Scénario didactique</h5>
+
+				<pre class="javascript fragment"><code>
 let type_de_questions_disponibles=["add", "add", "mul"]
 let liste_type_de_questions = combinaison_listes(type_de_questions_disponibles, this.nb_questions)
-</code></pre>		
-							<pre class="javascript fragment"><code>
+</code></pre>
+				<pre class="javascript fragment"><code>
 switch (liste_type_de_questions[i]) {
 	case "add":
 		texte = `$ ${a} + ${b} = $`;
@@ -136,12 +140,12 @@ switch (liste_type_de_questions[i]) {
 		texte_corr = `$ ${a} \\times ${b} = ${a * b} $`;
 		break;
 
-</code></pre>		
-				</section>
-				<section>
-					<h5>Attention aux décimaux</h5>
-							
-							<pre class="javascript"><code>
+</code></pre>
+			</section>
+			<section>
+				<h5>Attention aux décimaux</h5>
+
+				<pre class="javascript"><code>
 import {calcul, tex_nombre, tex_nombrec} from "/modules/outils.js"
 switch (liste_type_de_questions[i]) {
 	case "add":
@@ -154,49 +158,97 @@ switch (liste_type_de_questions[i]) {
 		texte_corr = `$ ${a} \\times ${b} = ${tex_nombrec(a * b)} $`;
 		break;
 
-</code></pre>		
-				</section>
+</code></pre>
+			</section>
 
-				
+			<section data-markdown style="text-align: left;">
+				<textarea data-template>
+						<!-- .slide: text-aligne="left" -->
+
+						En JS, le séparateur décimal est le point. `tex_nombre()` nous permet d'afficher les nombres de manière plus conventionelle.
+						
+						```js
+						import {tex_nombre} from "/modules/outils.js" 
+						tex_nombre(2300.45) // "2 300,45"
+						```
+						</textarea>
+			</section>
+
+			<section >
+						
+						<p>Le Javascript comme beaucoup d'autres langages ne fait pas de calcul exact avec les décimaux. On utilise donc un moteur algébrique pour TOUS les calculs avec des décimaux, même les plus anodins.</p>
+						
+						<pre class="javascript"><code>
+import {calcul, tex_nombre, tex_nombrec} from "/modules/outils.js"
+let a = 0.568
+let b = 4.2
+calcul(a * b) // 2.3856
+tex_nombrec(a * b) // "2,385 6"
+						</code></pre>						
+					</textarea>
+			</section>
+			<section >
+						<p>Gestion du hasard : </p>
+						
+						<pre class="javascript"><code>
+import {randint, choice, shuffle} from "/modules/outils.js"
+randint(1,10) // un entier au hasard entre 1 et 10
+randint(1,19,10) // un entier au hasard entre 1 et 19 différent de 10
+randint(-10,10,[-1,0,1]) // un entier au hasard entre -10 et 10 différent de -1, 0 ou 1
+
+let v1 = choice(["bateau","voiture","vélo","avion"]) // une chaine de caractère au hasard entre celles proposées dans un tableau
+let v2 = choice(["bateau","voiture","vélo"],v1) // une chaine de caractère au hasard entre celles proposées dans un tableau sauf celle qui a déjà été choisie en v1
+let v3 = choice(["bateau","voiture","vélo"],[v1,v2]) // une chaine de caractère au hasard entre celles proposées dans un tableau sauf celles qui ont déjà été choisies en v1 ou v2
+
+let tableau_origine = [1,2,3,4,5]
+let tableau_melange = shuffle (tableau_origine) 
+// tableau_origine est toujours [1,2,3,4,5]
+// tableau_melange peut être [5,3,2,1,4]
+						</code></pre>
+						
+			</section>
 
 
-			</div>
+
 
 		</div>
 
-		<script src="/include/reveal.js/dist/reveal.js"></script>
-		<script src="/include/reveal.js/plugin/zoom/zoom.js"></script>
-		<script src="/include/reveal.js/plugin/notes/notes.js"></script>
-		<script src="/include/reveal.js/plugin/search/search.js"></script>
-		<script src="/include/reveal.js/plugin/markdown/markdown.js"></script>
-		<script src="/include/reveal.js/plugin/highlight/highlight.js"></script>
-		<script src="/include/reveal.js/plugin/math/math.js"></script>
-<script>
-  Reveal.initialize({
-    math: {
-      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
-      config: 'TeX-AMS_HTML-full',
-      // pass other options into `MathJax.Hub.Config()`
-      TeX: { Macros: { RR: "{\\bf R}" } }
-    },
-    plugins: [ RevealMath ]
-  });
-</script>
-		<script>
+	</div>
 
-			// Also available as an ES module, see:
-			// https://revealjs.com/initialization/
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				center: true,
-				hash: true,
+	<script src="/include/reveal.js/dist/reveal.js"></script>
+	<script src="/include/reveal.js/plugin/zoom/zoom.js"></script>
+	<script src="/include/reveal.js/plugin/notes/notes.js"></script>
+	<script src="/include/reveal.js/plugin/search/search.js"></script>
+	<script src="/include/reveal.js/plugin/markdown/markdown.js"></script>
+	<script src="/include/reveal.js/plugin/highlight/highlight.js"></script>
+	<script src="/include/reveal.js/plugin/math/math.js"></script>
+	<script>
+		Reveal.initialize({
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+			},
+			plugins: [RevealMath]
+		});
+	</script>
+	<script>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
-			});
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			center: true,
+			hash: true,
 
-		</script>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+		});
 
-	</body>
+	</script>
+
+</body>
+
 </html>

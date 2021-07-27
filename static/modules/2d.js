@@ -39,6 +39,22 @@ export function ObjetMathalea2D() {
   mathalea.objets2D.push(this)
 }
 
+
+function Fond_ecran(url,x,y,largeur,hauteur){
+  ObjetMathalea2D.call(this);
+  this.svg=function(coeff){
+    return `<image xlink:href="${url}" x="${x}" y="${y}" height="${hauteur}" width="${largeur}" />`
+  }
+  this.tikz=function(){
+    return `\node[inner sep=0pt] at (${x},${y})
+    {\includegraphics[width= l cm]{url}};`
+  }
+}
+
+export function fond_ecran(url,x=0,y=0,largeur=mathalea.fenetreMathalea2d.xMax-mathalea.fenetreMathalea2d.xMin,hauteur=mathalea.fenetreMathalea2d.yMax-mathalea.fenetreMathalea2d.yMin){
+  return new Fond_ecran(url,x,y,largeur,hauteur)
+}
+
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%% LES POINTS %%%%%%%%%%%%%%
@@ -55,6 +71,9 @@ export function ObjetMathalea2D() {
  */
 function Point(arg1, arg2, arg3, positionLabel = "above") {
   // ObjetMathalea2D.call(this);
+  this.typeObjet = "point";
+  numId++
+  this.id = numId
   if (arguments.length == 1) {
     this.nom = arg1;
   } else if (arguments.length == 2) {
@@ -72,7 +91,7 @@ function Point(arg1, arg2, arg3, positionLabel = "above") {
   };
   this.ySVG = function (coeff) {
     return -arrondi(this.y * coeff, 2);
-  };
+  }
   if (!this.nom) {
     this.nom = " "; // Le nom d'un point est par défaut un espace
     // On pourra chercher tous les objets qui ont ce nom pour les nommer automatiquement
@@ -329,6 +348,35 @@ export function pointSurSegment(A, B, l, nom = "", positionLabel = "above") {
   }
   return homothetie(B, A, calcul(l / longueur(A, B)), nom, positionLabel);
 }
+
+/**
+ * 
+ * Est-ce que le point C appartien au segment [AB]
+ * C'est ce que dira cette fonction
+ * @Auteur Jean-Claude Lhote
+ */
+
+export function appartientSegment(C,A,B){
+  let prodvect=(B.x-A.x)*(C.y-A.y)-(C.x-A.x)*(B.y-A.y)
+  let prodscal=(C.x-A.x)*(B.x-A.x)+(C.y-A.y)*(B.y-A.y)
+  let prodscalABAB=(B.x-A.x)**2+(B.y-A.y)**2
+  if (prodvect==0&&prodscal>0&&prodscal<prodscalABAB) return true
+  else return false
+}
+
+export function appartientDroite(C,A,B){
+  let prodvect=(B.x-A.x)*(C.y-A.y)-(C.x-A.x)*(B.y-A.y)
+  if (prodvect==0) return true
+  else return false
+}
+
+export function appartientDemiDroite(C,A,B){
+  let prodvect=(B.x-A.x)*(C.y-A.y)-(C.x-A.x)*(B.y-A.y)
+  let prodscal=(C.x-A.x)*(B.x-A.x)+(C.y-A.y)*(B.y-A.y)
+  if (prodvect==0&&prodscal>0) return true
+  else return false
+}
+
 /**
  *
  * @param {Cercle} c
@@ -1422,6 +1470,7 @@ export function nomVecteurParPosition(nom, x, y, taille = 1, angle = 0, color = 
  */
 function Segment(arg1, arg2, arg3, arg4, color) {
   ObjetMathalea2D.call(this);
+  this.typeObjet = "segment";
   this.styleExtremites = "";
   this.tailleExtremites = 4;
   if (arguments.length == 2) {
@@ -6402,6 +6451,7 @@ export function traceGraphiqueCartesien(...args) {
  * tabInit:[[[texte1,taille1,long1],[texte2,taille2,long2]...],[valeur1,long1,valeur2,long2,valeur3,long3...]]
  * tabLines:[[type,long0,codeL1C1,long1,codeL1C2,long2,codeL1C3,long3...],[type,long0,codeL2C1,long1,codeL2C2,long2,codeL2C3,long3...]]
  * @param {*} param0 
+ * @Auteur Jean-Claude Lhote
  */
 function Tableau_de_variation({ tabInit, tabLines, lgt, escpl, deltacl, colors, hauteurLignes, colorBackground }) {
 
@@ -7207,24 +7257,24 @@ function Tableau_de_variation({ tabInit, tabLines, lgt, escpl, deltacl, colors, 
             if (tabLines[index][3] != "") {
               texte = tabLines[index][3]
               long = tabLines[index][4]
-              if (texte.indexOf('frac')!=-1){
-              textes.push(latexParCoordonnees(MathToSVG(texte), this.lgt + this.deltacl + this.escpl * ((tabLines[index][1] - 1) + (tabLines[index][2] - 1)) / 2, yLine + tabInit0[i][1] * this.hauteurLignes[i] / 30-0.1, 'black', long, 30, colorBackground))
+              if (texte.indexOf('frac') != -1) {
+                textes.push(latexParCoordonnees(MathToSVG(texte), this.lgt + this.deltacl + this.escpl * ((tabLines[index][1] - 1) + (tabLines[index][2] - 1)) / 2, yLine + tabInit0[i][1] * this.hauteurLignes[i] / 30 - 0.1, 'black', long, 30, colorBackground))
               }
               else[
-                textes.push(latexParCoordonnees(MathToSVG(texte), this.lgt + this.deltacl + this.escpl * ((tabLines[index][1] - 1) + (tabLines[index][2] - 1)) / 2, yLine + tabInit0[i][1] * this.hauteurLignes[i] / 30-0.1, 'black', long, 15, colorBackground))
+                textes.push(latexParCoordonnees(MathToSVG(texte), this.lgt + this.deltacl + this.escpl * ((tabLines[index][1] - 1) + (tabLines[index][2] - 1)) / 2, yLine + tabInit0[i][1] * this.hauteurLignes[i] / 30 - 0.1, 'black', long, 15, colorBackground))
               ]
             }
             index++
             break
-          case 'Slope': 
-          /****************************************************************************/
-          // Slope n'est pas implémenté... reste à faire (si quelqu'un en a besoin).
-          /****************************************************************************/
+          case 'Slope':
+            /****************************************************************************/
+            // Slope n'est pas implémenté... reste à faire (si quelqu'un en a besoin).
+            /****************************************************************************/
             for (let k = 1; k < tabLines[index].length / 2; k++) {
               if (tabLines[index][k * 2] != "") {
                 texte = tabLines[index][k * 2]
                 long = tabLines[index][k * 2 + 1]
-               console.log('tabSlope', texte, long, i, index)
+                console.log('tabSlope', texte, long, i, index)
               }
             }
             break
@@ -7297,6 +7347,22 @@ function Tableau_de_variation({ tabInit, tabLines, lgt, escpl, deltacl, colors, 
     return code
   }
 }
+// tableau_de_variation crée une instance de la classe. voici le détail des paramètres.
+// escpl=taille en cm entre deux antécédents, deltacl=distance entre la bordure et les premiers et derniers antécédents
+// lgt = taille de la première colonne tout est en cm
+// tabInit contient 2 tableaux
+// le premier contient des triplets [chaine d'entête,hauteur de ligne,nombre de pixels de largeur estimée du texte pour le centrage]
+// le deuxième contient une succession de chaines et de largeurs en pixels : ce sont les antécédent de la ligne d'entête
+// tabLines contient des tableaux de la forme ['type',...] 
+// type est 'Line' pour une ligne de signes et valeurs. Les valeurs sont données avec à la suite leur largeur estimée en pixels.
+// type est 'Var' pour une ligne de variations. Les variations sont des chaines respectant une syntaxe particulière.
+// On intercale une largeur estimée pour le texte éventuel
+// type est 'Ima' il faut 4 paramètres numériques : le 1er et le 2e sont les N° des antécédents entre lesquels on veut placer l'image
+// le 3e est la valeur de l'image et le 4e est la largeur estimée en pixels 
+// type est 'Val' il faut 5 paramètres : Idem Ima pour les deux premiers, le 3e est l'antécédent à ajouter, le 4e son image et le 5e sa taille
+// Pour plus d'info sur le codage des variations, voir ce tuto : https://zestedesavoir.com/tutoriels/439/des-tableaux-de-variations-et-de-signes-avec-latex/
+// reste à faire les types  'Slope"
+
 export function tableau_de_variation({ tabInit = ['', ''], tabLines = [], lgt = 3.5, escpl = 5, deltacl = 0.8, colors = [], hauteurLignes = [], colorBackground = 'gray' }) {
   return new Tableau_de_variation({ tabInit: tabInit, tabLines: tabLines, lgt: lgt, escpl: escpl, deltacl: deltacl, colors: colors, hauteurLignes: hauteurLignes, colorBackground: colorBackground })
 }
@@ -8462,6 +8528,386 @@ export function ajouterAy(y, lutin = mathalea.lutin) {
     lutin.listeTraces.push([lutin.x, ydepart, lutin.x, lutin.y, lutin.color, lutin.epaisseur, lutin.pointilles]);
   }
 }
+
+/**
+ * Traducteur scratch3 (Latex) -> scratchblock
+ * @Auteur Jean-Claude Lhote. 
+ */
+
+export function scratchblock(stringLatex) {
+  let regex1 = /[\\\{\}]/
+  let regex2 = /[\{\}]/
+  let regex3 = /[\[\]<>]/
+  let regex4 = /[\{\ ]/
+  let litcommande = function (souschaine) {
+    let extrait
+    if (souschaine[0] == '}') {
+      return '}'
+    }
+    else {
+      extrait=souschaine.split(regex4)[0];
+      return extrait
+    }
+  }
+
+  /*****************************************************/
+  /*********** La fonction d'analyse récursive *********/
+  /*****************************************************/
+  let translatex = function (chaine, index, compteAccolades) {
+
+    let resultat = [], commande, texte = [], texte2 = [], texte3 = [], taille, string, fleche;
+    let compteur, debut, fin // pour les boucles et les if
+    let souschaine = chaine.substring(index)
+    commande = litcommande(souschaine)
+    switch (commande.substring(0, 5)) {
+      case '\\bloc':
+        string = commande.split('{')[0]
+        taille = string.length
+        string = string.substring(6)
+        compteAccolades++
+        switch (string) {
+          case 'stop':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            texte2 =translatex(chaine, texte[1], texte[2])
+            resultat = [`${texte[0]} ${texte2[0]} `, texte2[1], texte2[2]]
+          break;
+          case 'move':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            resultat = [texte[0], texte[1], texte[2]]
+            break;
+          case 'control':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            resultat = [texte[0], texte[1], texte[2]]
+            break;
+          case 'list':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            resultat = [texte[0]+' :: list', texte[1], texte[2]]
+          break;
+          case 'init':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            resultat = [texte[0], texte[1], texte[2]]
+            break;
+          case 'space\n':
+            compteAccolades--
+            resultat = ['\n', 11 + index, compteAccolades]
+            break;
+          case 'if':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            texte2 = translatex(chaine, texte[1], texte[2])
+            texte3 = translatex(chaine, texte2[1], texte2[2])
+            resultat = [`${texte[0]} ${texte2[0]} ${texte3[0]}`, texte3[1] + 1, texte3[2] - 1]
+            compteAccolades = resultat[2]
+            compteur = compteAccolades + 1
+            debut = chaine.substring(resultat[1]).indexOf('{') + resultat[1]
+            resultat[1] = debut + 1
+            resultat[0] += '\n'
+            while (compteur > compteAccolades) {
+              texte = translatex(chaine, resultat[1], compteur)
+              resultat[0] += ' ' + texte[0]
+              resultat[1] = texte[1]
+              compteur = texte[2]
+            }
+            resultat[0] += ' fin'
+            break;
+
+          case 'ifelse':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            texte2 = translatex(chaine, texte[1], texte[2])
+            texte3 = translatex(chaine, texte2[1], texte2[2])
+            resultat = [`${texte[0]} ${texte2[0]} ${texte3[0]}`, texte3[1] + 1, texte3[2] - 1]
+            compteAccolades = resultat[2]
+            compteur = compteAccolades + 1
+            debut = chaine.substring(resultat[1]).indexOf('{') + resultat[1]
+            resultat[1] = debut + 1
+            resultat[0] += '\n'
+            while (compteur > compteAccolades) {
+              texte = translatex(chaine, resultat[1], compteur)
+              resultat[0] += ' ' + texte[0]
+              resultat[1] = texte[1]
+              compteur = texte[2]
+            }
+            resultat[0] += ' sinon'
+            compteur = compteAccolades + 1
+            debut = chaine.substring(resultat[1]).indexOf('{') + resultat[1]
+            resultat[1] = debut + 1
+            resultat[0] += '\n'
+            while (compteur > compteAccolades) {
+              texte = translatex(chaine, resultat[1], compteur)
+              resultat[0] += ' ' + texte[0]
+              resultat[1] = texte[1]
+              compteur = texte[2]
+            }
+            resultat[0] += ' fin'
+            break;
+          case 'repeat':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            if (texte[0].split(' ')[1]!='indéfiniment'){
+              if (texte[0].split(' ')[1]!="jusqu'à"){
+              texte2 = translatex(chaine, texte[1], texte[2])
+              texte3 = translatex(chaine, texte2[1], texte2[2])
+              resultat = [`${texte[0]} ${texte2[0]} ${texte3[0]}`, texte3[1] + 1, texte3[2] - 1]
+              compteAccolades = resultat[2]
+              }
+              else {
+                texte2 = translatex(chaine, texte[1], texte[2])
+                resultat = [`${texte[0]} ${texte2[0]} `, texte2[1]+1, texte2[2]-1]
+              compteAccolades = resultat[2]
+              }
+            }
+            else {
+              resultat = [`${texte[0]} `, texte[1] + 1, texte[2] - 1]
+              compteAccolades = resultat[2]
+            }
+            compteur = compteAccolades + 1
+            debut = chaine.substring(resultat[1]).indexOf('{') + resultat[1]
+            resultat[1] = debut + 1
+            resultat[0] += '\n'
+            while (compteur > compteAccolades) {
+              texte = translatex(chaine, resultat[1], compteur)
+              resultat[0] += ' ' + texte[0]
+              resultat[1] = texte[1]
+              compteur = texte[2]
+            }
+            resultat[0] += ' fin'
+            break;
+          default:
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            resultat = [texte[0], texte[1], texte[2]]
+            break;
+        }
+
+        break;
+      case '\\oval':
+        string = commande.split('{')[0]
+        taille = string.length
+        string = string.substring(5)
+        compteAccolades++
+        if (string.charAt(string.length - 1) == '*') {
+          fleche = true;
+          string = string.substring(0, string.length - 1)
+        }
+        else fleche = false;
+        switch (string) {
+          case 'num':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            if (isNaN(texte[0]) && texte[0].indexOf(regex3)) {
+              resultat = [`[${texte[0]}]`, texte[1] + 1, texte[2] - 1]
+            }
+            else {
+              resultat = [`(${texte[0]})`, texte[1] + 1, texte[2] - 1]
+            }
+            break;
+          case 'moreblocks':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            if (fleche) {
+              resultat = [`(${texte[0]} v)`, texte[1], texte[2]]
+            }
+            else {
+              resultat = [`(${texte[0]})`, texte[1], texte[2]]
+            }
+          break;
+          case 'variable':
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            if (fleche) {
+              resultat = [`(${texte[0]} v)`, texte[1] + 1, texte[2] - 1]
+            }
+            else {
+              resultat = [`(${texte[0]})`, texte[1] + 1, texte[2] - 1]
+            }
+            break;
+          case 'sound':
+            texte = translatex(chaine, index + taille + 1, compteAccolades);
+            if (fleche) {
+              resultat = [`(${texte[0]} v :: sound)`, texte[1] + 1, texte[2] - 1];
+            }
+            else {
+              resultat = [`(${texte[0]} :: sound)`, texte[1] + 1, texte[2] - 1];
+            }
+            break;
+          case 'sensing':
+            texte = translatex(chaine, index + taille + 1, compteAccolades);
+            if (fleche) {
+              resultat = [`(${texte[0]} v :: sensing)`, texte[1] + 1, texte[2] - 1];
+            }
+            else {
+              resultat = [`(${texte[0]} :: sensing)`, texte[1] + 1, texte[2] - 1];
+            }
+          break;
+          case 'operator':
+            texte = translatex(chaine, index + taille + 1, compteAccolades);
+            texte2 = translatex(chaine, texte[1], texte[2]);
+            resultat = [`(${texte[0]} ${texte2[0]}`, texte2[1], texte2[2]];
+            while (chaine.charAt(texte2[1])!='}'){
+              texte2 =translatex(chaine, texte2[1], texte2[2]);
+              resultat[0]+=' '+texte2[0];
+            }
+            resultat[0]+=')'
+            resultat[1]=texte2[1]+1
+            resultat[2]=texte2[2]-1
+            break;
+
+          default:
+            texte = translatex(chaine, index + taille + 1, compteAccolades)
+            if (fleche) {
+              resultat = [`(${texte[0]} v)`, texte[1] + 1, texte[2] - 1]
+            }
+            else {
+              resultat = [`(${texte[0]})`, texte[1] + 1, texte[2] - 1]
+            }
+            break;
+        }
+
+        break;
+      case '\\bool':
+        string = commande.split(/\{ /)[0]
+        taille = string.length
+        string = string.substring(5, 9)
+        switch (string) {
+          case 'oper':
+            compteAccolades++
+            texte = translatex(chaine, index + taille + 1, compteAccolades);
+            texte2 = translatex(chaine, texte[1], texte[2]);
+            resultat = [`<${texte[0]} ${texte2[0]}`, texte2[1], texte2[2]];
+            while (chaine.charAt(texte2[1])!='}'){
+              texte2 =translatex(chaine, texte2[1], texte2[2]);
+              resultat[0]+=' '+texte2[0];
+            }
+            resultat[0]+=' :: operators boolean>'
+            resultat[1]=texte2[1]+1
+            resultat[2]=texte2[2]-1
+            break;
+          case 'empt':
+            resultat = [`< vide :: operators boolean>`, index + taille + 1, compteAccolades]
+            break;
+          case 'sens':
+            compteAccolades++
+            texte = translatex(chaine, index + taille + 1, compteAccolades);
+            texte2 = translatex(chaine, texte[1], texte[2]);
+            resultat = [`<${texte[0]} ${texte2[0]}`, texte2[1], texte2[2]];
+            while (chaine.charAt(texte2[1])!='}'){
+              texte2 =translatex(chaine, texte2[1], texte2[2]);
+              resultat[0]+=' '+texte2[0];
+            }
+            resultat[0]+=' :: sensing>'
+            resultat[1]=texte2[1]+1
+            resultat[2]=texte2[2]-1
+            break;
+          case 'list':
+            compteAccolades++
+            texte = translatex(chaine, index + taille + 1, compteAccolades);
+            texte2 = translatex(chaine, texte[1], texte[2]);
+            resultat = [`<${texte[0]} ${texte2[0]}`, texte2[1], texte2[2]];
+            while (chaine.charAt(texte2[1])!='}'){
+              texte2 =translatex(chaine, texte2[1], texte2[2]);
+              resultat[0]+=' '+texte2[0];
+            }
+            resultat[0]+=' :: list>'
+            resultat[1]=texte2[1]+1
+            resultat[2]=texte2[2]-1
+            break;
+          default:
+            texte = translatex(chaine, index + taille + 1,compteAccolades)
+            resultat = [`<${texte[0]}>`, texte[1], texte[2]]
+            break;
+
+        }
+        break;
+      case '\\init':
+        string = commande.split('{')[0]
+        taille = string.length
+        compteAccolades++
+        texte = translatex(chaine, index + taille + 1, compteAccolades)
+        texte2 = translatex(chaine,texte[1],texte[2])
+        resultat = [`${texte[0]} ${texte2[0]} `,texte2[1],texte2[2]]
+      break;
+      case '\\name':
+        string = commande.split('{')[0]
+        taille = string.length
+        compteAccolades++
+        texte = translatex(chaine, index + taille + 1, compteAccolades)
+        texte2 = translatex(chaine, texte[1], texte[2]);
+        resultat = [`${texte[0]} ${texte2[0]}`, texte2[1], texte2[2]];
+        while (chaine.charAt(texte2[1])!='}'){
+          texte2 =translatex(chaine, texte2[1], texte2[2]);
+          resultat[0]+=' '+texte2[0];
+        }
+        resultat[1]=texte2[1]+1
+        resultat[2]=texte2[2]-1
+        break;
+      default:
+        switch (commande) {
+          case '}':
+            compteAccolades--
+            resultat = [' ', 1 + index, compteAccolades]
+            break;
+          case '\\begin':
+            compteAccolades++
+            if (chaine.substring(15+index)[0]=='['){
+              index=chaine.substring(15+index).indexOf(']')+16+index
+            }
+            else {
+              index +=15
+            }
+              resultat = [` <!-- Code Scratch  -->`, index, compteAccolades]
+            break;
+          case '\\end':
+            compteAccolades--
+            resultat = [` <!-- Fin du Code Scratch  -->\n`, 13 + index, compteAccolades]
+            break;
+          case '\\turnleft':
+            resultat = ['gauche ', 11 + index, compteAccolades]
+            break;
+          case '\\turnright':
+            resultat = ['droite ', 12 + index, compteAccolades]
+            break;
+          case '\\greenflag':
+            resultat = [' @greenFlag ', 10 + index, compteAccolades]
+            break;
+          case '\\selectmenu':
+            compteAccolades++
+            texte = translatex(chaine, 12 + index, compteAccolades)
+            resultat = [`[${texte[0]} v]`, texte[1]+1, texte[2]-1]
+            break;
+          default:
+            string = chaine.substring(index).split(regex1)[0]
+            resultat = [string, string.length + index, compteAccolades]
+            break;
+        }
+        break;
+    }
+    return resultat
+  }
+  /*********************************************/
+  /************* Fin de translatex *************/
+  /*********************************************/
+
+  // boucle pricipale de scratchblock2
+  let codeScratch = '';
+  let fin, result = [], index;
+  let compteur = 0
+  if (!((stringLatex.match(/\{/g)||[]).length==(stringLatex.match(/\}/g)||[]).length)) {
+    console.log("Il n'y a pas le même nombre de { que de }. Je préfère m'arrêter.")
+    return false
+  }
+  if (!sortie_html) {
+    codeScratch = stringLatex;
+  }
+  else {
+    codeScratch = `<pre class='blocks'>`;
+    index = 0;
+    fin = false;
+    while (!fin) {
+      result = translatex(stringLatex, index, compteur);
+      codeScratch += result[0];
+      index = result[1];
+      compteur = result[2];
+      if (compteur == 0) fin = true;
+    }
+    codeScratch += `</pre>\n`
+  }
+  return codeScratch;
+}
+
 
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Scan le répertoire /exercices puis ecris le fichier /module/dictionnaireDesExercicesAleatoires
 #
 
@@ -50,6 +51,8 @@ for (dirpath, dirnames, filenames) in os.walk('./exercices/'):
                             'this.titre\s*=\s*(\"|\'|`)\s*', '', line)
                         # Guillemets et ; de la fin
                         line = re.sub('\s*(\"|\'|`)\s*\;\s*$', '', line)
+                        # Guillemets de la fin s'il n'y a pas de ;
+                        line = re.sub('\s*(\"|\'|`)\s*$', '', line)
                         # Espaces du début
                         line = re.sub('^\s*', '', line)
                         # Gestion des \\  
