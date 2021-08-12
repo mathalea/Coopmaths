@@ -8,7 +8,7 @@ Utilisation: {{% listeDEsExercicesDNBmultiThemes "theme1,theme2,theme3,..." %}}
 <div id="MenuDesExercicesDNB"></div>
 {{range $itThemes }}
   <script type="module">
-    import {menuThemeDNB} from "/modules/menuDesExercicesDisponibles.js";    
+    import {menuThemeDNB} from "/modules/menuTheme.js";    
     document.getElementById('MenuDesExercicesDNB').insertAdjacentHTML('beforeend',menuThemeDNB({{.}}))
   </script>
 {{end}}

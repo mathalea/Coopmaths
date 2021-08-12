@@ -1,0 +1,59 @@
+
+\medskip
+
+Voici un algorithme:
+
+\begin{center}
+\psset{unit=1cm,arrowsize=2pt 3}
+\begin{pspicture}(-6,0)(6,6.5)
+%\psgrid
+\rput(0,6){Choisir un nombre $N$}
+\psframe(-2,5.6)(2,6.3)
+\psline{->}(0,5.8)(0,5)
+\rput(0,4){A-t-on : $N > 15$?}
+\pspolygon(-2.5,4)(0,5)(2.5,4)(0,3.)
+\psline{->}(-2.5,4)(-4,4)(-4,2)\psline{->}(2.5,4)(4,4)(4,2)
+\rput(-4,1.5){Calculer $100 - N \times 4$}\rput(4,1.5){Calculer $2 \times (N + 10)$}
+\psframe(-5.6,1)(-2.3,2)\psframe(2.4,1)(5.6,2)
+\uput[u](-3.2,4){OUI}\uput[u](3.2,4){NON}
+\end{pspicture}
+\end{center}
+
+\begin{enumerate}
+\item Justifier que si on choisit le nombre $N$ de départ égal à 18, le résultat final de cet algorithme est $28$.
+\item Quel résultat final obtient-on si on choisit $14$ comme nombre $N$ de départ ?
+\item En appliquant cet algorithme, deux nombres de départ différents permettent d'obtenir $32$ comme résultat final. Quels sont ces deux nombres ?
+\item On programme l'algorithme précédent:
+
+\begin{center}
+\begin{tabular}{r l}
+\multicolumn{1}{l}{\textbf{Numéros}}&\\
+\multicolumn{1}{l}{\textbf{de ligne}}&\\
+\psline{->}(-1,0.2)(0.5,0.2)(0.5,0)&\\
+&\begin{scratch}
+\setscratch{num blocks=true}
+\blockinit{quand \greenflag est cliqué}
+\blocksensing{demander \txtbox{Choisir un nombre} et attendre}
+\blockifelse{si \booloperator{réponse > \txtbox{\phantom{de}} alors}}
+{\blocksound{dire \ovalnum{100} - réponse * \ovalnum{4} pendant \ovalnum{2} secondes}}
+{\blocksound{dire \ovalnum{} * \ovalnum{} + \ovalnum{} pendant \ovalnum{2} secondes}}
+\end{scratch}
+\\
+\end{tabular}
+\end{center}
+
+	\begin{enumerate}
+		\item Recopier la ligne 3 en complétant les pointillés: 
+		
+		ligne 3 : si réponse $> \ldots$  alors
+		\item Recopier la ligne 6 en complétant les pointillés:
+		
+		ligne 6 : dire \ldots $*(\ldots  + \ldots)$ pendant 2 secondes
+	\end{enumerate}
+\item On choisit au hasard un nombre premier entre 10 et 25 comme nombre $N$ de départ. 
+
+Quelle est la probabilité que l'algorithme renvoie un multiple de 4 comme résultat final ?
+\end{enumerate}
+
+\bigskip
+

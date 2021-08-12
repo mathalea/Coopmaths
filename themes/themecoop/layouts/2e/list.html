@@ -13,8 +13,8 @@
                <i class="large black file pdf outline icon"></i> <div class="header content"> Télécharger le référentiel -> à faire</div>
           </a> -->
           
-          {{ range where .Site.Pages "Params.niveau" "2e" }}
-          <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
+          {{ range sort (where .Site.Pages "Params.niveau" "2e") "Params.ref" }}
+           <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a>
           {{ end }}
 
      </div>

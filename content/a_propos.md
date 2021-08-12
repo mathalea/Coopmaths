@@ -39,6 +39,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 
 - ANGOT Rémi
 - BRINGARD Christophe
+- CANDILLE Laurence
 - CARON Guillaume
 - CAUCAT Bernard
 - COGEZ Sébastien
@@ -46,17 +47,29 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - DEVILLERS Matthieu
 - DUVOID Aude
 - DUPLESSY Erwan
+- DURAND Arnaud
+- DOTTO Claire
 - FOURNIER Carine
 - GAIN Mireille
 - GUYON Sthéphane
+- GOMBERT Christophe
 - GROLLEAU Cédric
+- LASCASSIES Cyril
 - LACROIX Olivier
+- LEROUX Liouba
 - LEFORT Julie
 - LHOTE Jean-Claude
 - LOZANO Sébastien
+- MICONI Audrey
+- MEVEL Christophe
+- MORA Gilles
 - MORVAN Gaelle
+- PIOLTI-LAMORTHE Claire
 - ROUBIN Sophie
+- SCHRAFSTETTER Éric
 - UZU Anne
+- VALMONT Guillaume
+- VAMECH Sébastien
 
 ### Exercices de calcul mental
 
