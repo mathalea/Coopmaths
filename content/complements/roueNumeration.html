@@ -1,0 +1,395 @@
+---
+title: 'Numération'
+draft: false
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bases de numération</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
+      integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"
+      integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"
+      integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
+  </head>
+  <body>
+    <div style="margin-left: 5%">
+      <button id="btnBase">Choisir la base</button>
+      <button id="btnNbChiffres">Nombre de chiffres</button>
+      <button id="btnSaisieNombre">Saisir un nombre</button>
+      <button id="btnPlus">+1</button>
+      <button id="btnMoins">-1</button>
+
+      <div id="figures" style="display: flex; flex-direction: row; justify-content: flex-end; margin-right: 10%;" ></div>
+      <div>
+        <input type="checkbox" id="checkConversion" />
+        <label for="checkConversion">Conversion en base 10</label>
+      </div>
+
+      <div id="conversion"></div>
+    </div>
+  </body>
+  <script>
+    let base = 4
+    let nbRoues = 0
+    let nbRotationsDeLaRoue = [0]
+    let chiffreDeLaRoue = [0]
+    let angleDeLaRoue = [0]
+    let roueVisible = [1]
+    const dTor = (deg) => (deg * Math.PI) / 180
+    let shadok = false
+    let bibi = false
+
+    const reinitialisation = () => {
+      document.getElementById('figures').innerHTML = ''
+      nbRoues = 0
+      nbRotationsDeLaRoue = []
+      chiffreDeLaRoue = []
+      roueVisible = []
+      angleDeLaRoue = [0]
+    }
+
+    // Portion de disque colorée
+    const arcDeCercle = (a1, a2, i) => {
+      const path = document.getElementById(`arcDeCercle${i}`)
+      path.setAttributeNS(
+        null,
+        'd',
+        `M 50 50  L ${50 + 50 * Math.sin(dTor(a1))} ${50 + 50 * Math.cos(dTor(a1))} A 50 50 0 0 0 ${50 + 50 * Math.sin(dTor(a2))} ${
+          50 + 50 * Math.cos(dTor(a2))
+        } M 50 50`
+      )
+      path.setAttributeNS(null, 'stroke', 'blue')
+      path.setAttributeNS(null, 'stroke-width', 0)
+      path.setAttributeNS(null, 'opacity', 0.1)
+      path.setAttributeNS(null, 'fill', 'blue')
+    }
+    // Trace un trait de séparation avec un angle a (0° correspond au rayon vertical vers le bas)
+    const trait = (a, i) => {
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+      line.setAttributeNS(null, 'x1', 50)
+      line.setAttributeNS(null, 'y1', 50)
+      line.setAttributeNS(null, 'x2', 50)
+      line.setAttributeNS(null, 'y2', 100)
+      line.setAttributeNS(null, 'stroke', 'black')
+      line.setAttributeNS(null, 'transform', `rotate(${-a}  50 50)`)
+      document.getElementById(`roue${i}`).appendChild(line)
+    }
+
+    // Ajoute le texte
+    const texte = (texte, a, i) => {
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text')
+      text.setAttributeNS(null, 'x', 50)
+      text.setAttributeNS(null, 'y', 85)
+      text.setAttributeNS(null, 'style', 'font-family: Times New Roman; font-size: 9; pointer-events: none')
+      text.setAttributeNS(null, 'transform', `rotate(${a}  50 50)`)
+      text.setAttributeNS(null, 'text-anchor', `middle`)
+      if (shadok) {
+        text.textContent = chiffreToShadok(texte)
+      } else if (bibi) {
+        text.textContent = chiffreToBibi(texte)
+        text.setAttributeNS(null, 'style', 'font-family: Times New Roman; font-size: 7; pointer-events: none')
+
+      } else {
+        if (texte < 10) {
+          text.textContent = texte
+        } else {
+          text.textContent = String.fromCharCode(55 + texte)
+        }
+      }
+      document.getElementById(`roue${i}`).appendChild(text)
+    }
+
+    // Définir la base
+    document.getElementById('btnBase').addEventListener('click', () => {
+      reinitialisation()
+      base = window.prompt('Choix de la base') || 4
+      if (base > 16 || base < 2) {
+        alert('Choisissez une base comprise entre 2 et 16')
+      } else {
+        if (base === 'shadok') {
+          base = 4
+          shadok = true
+          bibi = false
+        } else if (base === 'bibi') {
+          base = 16
+          bibi = true
+          shadok = false
+        } else {
+          shadok = false
+          bibi = false
+        }
+        chiffreDeLaRoue = []
+        ajouteRoue(0)
+        conversion()
+      }
+    })
+
+    // Affiche autant de roues que de chiffre
+    document.getElementById('btnNbChiffres').addEventListener('click', () => {
+      // Réinitialisation
+      document.getElementById('figures').innerHTML = ''
+      nbChiffres = parseInt(window.prompt('Nombre de chiffres'))
+      for (let i = 0; i < nbChiffres; i++) {
+        ajouteRoue(i)
+      }
+    })
+
+    const partageRoue = (i) => {
+      const angle = 360 / base
+      arcDeCercle(-angle / 2, angle / 2, i)
+      let angleDuTrait = -angle / 2
+      for (let n = 0; n < base; n++) {
+        trait(angleDuTrait, i)
+        texte(n, angleDuTrait + angle / 2, i)
+        angleDuTrait -= angle
+      }
+    }
+
+    const rotation = (sens = '+', roue = 0, engrenage = true, increment = 1, instantanne = false) => {
+      if (sens === '-') {
+        let tousEgauxAZero = true
+        for (let roue = 0; roue < nbRoues; roue++)
+          if (chiffreDeLaRoue[roue] != 0) {
+            tousEgauxAZero = false
+          }
+        if (tousEgauxAZero) {
+          return -1
+        }
+      }
+      sens === '+' ? (nbRotationsDeLaRoue[roue] += increment) : (nbRotationsDeLaRoue[roue] -= increment)
+      if (nbRotationsDeLaRoue[roue] > 0) {
+        chiffreDeLaRoue[roue] = nbRotationsDeLaRoue[roue] % base
+      } else if (Math.abs(nbRotationsDeLaRoue[roue]) % base === 0) {
+        chiffreDeLaRoue[roue] = 0
+      } else if (nbRotationsDeLaRoue[roue] < 0) {
+        chiffreDeLaRoue[roue] = parseInt(base) + (nbRotationsDeLaRoue[roue] % base)
+      }
+      if (!instantanne) {
+        const interval = setInterval(() => {
+          sens === '+' ? angleDeLaRoue[roue]++ : angleDeLaRoue[roue]--
+          document.getElementById(`roue${roue}`).setAttribute('transform', `rotate(${angleDeLaRoue[roue]} 50 50)`)
+          if (
+            (sens === '+' && angleDeLaRoue[roue] >= (360 / base) * nbRotationsDeLaRoue[roue]) ||
+            (sens === '-' && angleDeLaRoue[roue] <= (360 / base) * nbRotationsDeLaRoue[roue])
+          ) {
+            clearInterval(interval)
+            if (sens === '+' && chiffreDeLaRoue[roue] === 0 && engrenage) {
+              if (!roueVisible[roue + 1]) {
+                ajouteRoue(roue + 1)
+              }
+              rotation('+', roue + 1)
+            } else if (sens === '-' && chiffreDeLaRoue[roue] === base - 1 && nbRoues !==1 && engrenage) {
+              rotation('-', roue + 1)
+            } else if (sens === '-' && chiffreDeLaRoue[roue] === 0 && roue === nbRoues -1 && nbRoues !== 1 && engrenage) {
+              supprimeRoue(roue)
+              conversion()
+            } else {
+              conversion()
+            }
+          }
+        }, 1)
+      } else {
+        document.getElementById(`roue${roue}`).setAttribute('transform', `rotate(${(360 / base) * nbRotationsDeLaRoue[roue]} 50 50)`)
+        angleDeLaRoue[roue] = (360 / base) * nbRotationsDeLaRoue[roue]
+        conversion()
+      }
+    }
+
+    const ajouteRoue = (i) => {
+      document.getElementById('figures').innerHTML =
+        `<div style="width: 19%;">
+        <svg id="fig${i}" viewBox="-10 -10 120 120" xmlns="http://www.w3.org/2000/svg" >
+        <path id="arcDeCercle${i}"></path>
+        <g id="roue${i}" style="pointer-events: fill; cursor: pointer" onclick="rotation('+', ${i}, false)">
+          <circle id="cercle${i}" cx="50" cy="50" r="50" fill="none" stroke="black" />
+        </g>
+      </svg>
+      </div>` + document.getElementById('figures').innerHTML
+      angleDeLaRoue[i] = 0
+      nbRotationsDeLaRoue[i] = 0
+      chiffreDeLaRoue[i] = 0
+      nbRoues++
+      partageRoue(i)
+      roueVisible[i] = 1
+    }
+
+    const supprimeRoue = (i) => {
+      document.getElementById(`fig${i}`).remove()
+      chiffreDeLaRoue.pop()
+      nbRotationsDeLaRoue.pop()
+      roueVisible.pop()
+      angleDeLaRoue.pop()
+      nbRoues--
+    }
+
+    const valeurBase = (n) => {
+      switch (n) {
+        case 'A':
+          return 10
+        case 'B':
+          return 11
+        case 'C':
+          return 12
+        case 'D':
+          return 13
+        case 'E':
+          return 14
+        case 'F':
+          return 15
+        default:
+          return parseInt(n)
+      }
+    }
+
+    const inverseValeurBase = (n) => {
+      switch (parseInt(n)) {
+        case 10:
+          return 'A'
+        case 11:
+          return 'B'
+        case 12:
+          return 'C'
+        case 13:
+          return 'D'
+        case 14:
+          return 'E'
+        case 15:
+          return 'F'
+        default:
+          return parseInt(n)
+      }
+    }
+
+    const chiffreToShadok = (n) => {
+      switch (parseInt(n)) {
+        case 0:
+          return 'GA'
+        case 1:
+          return 'BU'
+        case 2:
+          return 'ZO'
+        case 3:
+          return 'MEU'
+      }
+    }
+    const shadokToChiffre = (n) => {
+      switch (n) {
+        case 'GA':
+          return 0
+        case 'BU':
+          return 1
+        case 'ZO':
+          return 2
+        case 'MEU':
+          return 3
+      }
+    }
+    const listeChiffresBibi = ['HO', 'HA', 'HE', 'HI', 'BO', 'BA', 'BE', 'BI', 'KO', 'KA', 'KE', 'KI', 'DO', 'DA', 'DE', 'DI']
+    const chiffreToBibi = (n) => {
+      return listeChiffresBibi[n]
+    }
+    const bibiToChiffre = (txt) => {
+      return listeChiffresBibi.indexOf(txt)
+    }
+    const conversion = () => {
+      if (document.getElementById('checkConversion').checked === true) {
+        let txt = ''
+        if (shadok) {
+          txt = '$$ \\text{'
+          for (let i = chiffreDeLaRoue.length - 1; i > -1; i--) {
+            txt += ' ' + chiffreToShadok(chiffreDeLaRoue[i])
+          }
+          txt += '} = '
+        } else if (bibi) {
+          txt = '$$ \\text{'
+          for (let i = chiffreDeLaRoue.length - 1; i > -1; i--) {
+            txt += chiffreToBibi(chiffreDeLaRoue[i]) + ' '
+          }
+          txt += ' } = '
+        } else {
+          txt = '$$ ('
+          for (let i = chiffreDeLaRoue.length - 1; i > -1; i--) {
+            txt += inverseValeurBase(chiffreDeLaRoue[i])
+          }
+          txt += `)_{${base}} = `
+        }
+        for (let i = chiffreDeLaRoue.length - 1; i > 1; i--) {
+          txt += ` ${chiffreDeLaRoue[i]} \\times ${base}^{${i}} +`
+        }
+        if (chiffreDeLaRoue[1] !== undefined) {
+          txt += ` ${chiffreDeLaRoue[1]} \\times ${base} +`
+        }
+        if (chiffreDeLaRoue.length > 1) txt += `${chiffreDeLaRoue[0]} =`
+        let base10 = 0
+        for (let i = 0; i < chiffreDeLaRoue.length; i++) {
+          base10 += parseInt(chiffreDeLaRoue[i]) * base ** i
+        }
+        txt += ` ${base10} $$`
+        document.getElementById('conversion').innerText = txt
+        renderMathInElement(document.body)
+      } else {
+        document.getElementById('conversion').innerText = ''
+      }
+    }
+
+    document.getElementById('checkConversion').addEventListener('change', () => {
+      conversion()
+    })
+
+    document.getElementById('btnPlus').addEventListener('click', () => {
+      rotation()
+    })
+    document.getElementById('btnMoins').addEventListener('click', () => {
+      rotation('-')
+    })
+    document.getElementById('btnSaisieNombre').addEventListener('click', () => {
+      let nombre = prompt('Saisir un nombre')
+      reinitialisation()
+      if (shadok || bibi) {
+        let tableau = nombre.split(' ')
+        nombre = ''
+        for (n of tableau) {
+          if (shadok) nombre = nombre + shadokToChiffre(n).toString()
+          if (bibi) nombre = nombre + bibiToChiffre(n).toString()
+        }
+      }
+      while (parseInt(nombre.charAt(0)) === 0 ) {
+        nombre = nombre.substring(1)
+      }
+      while (nbRoues < nombre.length) {
+        ajouteRoue(nbRoues)
+      }
+      for (let i = nombre.length - 1; i >= 0; i--) {
+        const chiffre = nombre[i]
+        if (valeurBase(chiffre) >= base) {
+          alert(`En base ${base}, les chiffres doivent être inférieurs à ${base}`)
+          return -1
+        } else {
+          rotation('+', nombre.length - 1 - i, false, valeurBase(chiffre), true)
+        }
+      }
+    })
+
+    ajouteRoue(0)
+  </script>
+</html>
