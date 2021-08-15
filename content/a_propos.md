@@ -39,6 +39,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 
 - ANGOT Rémi
 - BRINGARD Christophe
+- CANDILLE Laurence
 - CARON Guillaume
 - CAUCAT Bernard
 - COGEZ Sébastien
@@ -46,17 +47,29 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - DEVILLERS Matthieu
 - DUVOID Aude
 - DUPLESSY Erwan
+- DURAND Arnaud
+- DOTTO Claire
 - FOURNIER Carine
 - GAIN Mireille
 - GUYON Sthéphane
+- GOMBERT Christophe
 - GROLLEAU Cédric
+- LASCASSIES Cyril
 - LACROIX Olivier
+- LEROUX Liouba
 - LEFORT Julie
 - LHOTE Jean-Claude
 - LOZANO Sébastien
+- MICONI Audrey
+- MEVEL Christophe
+- MORA Gilles
 - MORVAN Gaelle
+- PIOLTI-LAMORTHE Claire
 - ROUBIN Sophie
+- SCHRAFSTETTER Éric
 - UZU Anne
+- VALMONT Guillaume
+- VAMECH Sébastien
 
 ### Exercices de calcul mental
 
@@ -95,7 +108,7 @@ Pour faciliter le partage de liens vers ce site, quelques adresses raccourcies o
 
 ### Données personnelles
 
-Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune donnée personnelle et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données receuillies sont les statistiques de visite avec Google Analytics (adresses IP anonymisées et cookies désactivés).
+Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune donnée personnelle et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données recueillies sont les statistiques de visite avec Google Analytics (adresses IP anonymisées et cookies désactivés).
 
 Pour de plus amples renseignements : [contact@coopmaths.fr](mailto:contact@coopmaths.fr)
 

@@ -7,7 +7,7 @@ Utilisation: {{% listeDesExercicesMulti "theme" %}}
 
 <div id="MenuDesExercices"></div>
 <script type="module">
-    import {menuTheme} from "/modules/menuDesExercicesDisponibles.js";
+    import {menuTheme} from "/modules/menuTheme.js";
     document.getElementById('MenuDesExercices').insertAdjacentHTML('beforeend',menuTheme({{ .Get 0}}))
 </script>
 

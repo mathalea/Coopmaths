@@ -8,6 +8,14 @@ description: "Générateur d'exercices de mathématiques à données aléatoires
 
 Ce générateur d'exercices à données aléatoires est présenté dans cet <a href="http://revue.sesamath.net/spip.php?article1352" target="_blank">article de MathémaTICE</a> (écrit en juin 2020).
 
+### Crédits
+
+- Moteur développé par Rémi Angot sous licence **AGPL**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Laurence Candille, Christophe Gombert, Éric Schrafstetter puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
+- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence .**AGPL**.
+- Le passage à NodeJS et Webpack a été coordonné par Daniel Caillibaud (Sésamath).
+- La partie PHP pour la gestion des scores a été programmée par Sébastien Lozano.
+
 
 ### Soutiens
 
@@ -38,16 +46,8 @@ Au printemps 2020, Sébastien Lozano a réalisé un [programme](https://github.c
 
 ### Pour participer
 
-Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/remiangot/MathALEA) et lire la documentation sur le [wiki](https://github.com/remiangot/MathALEA/wiki). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tout ceux qui souhaiteraient participer.
+Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/mathalea/mathalea) et lire la documentation sur le [coopmaths.fr/documentation](coopmaths.fr/documentation) ou voir les [vidéos](https://coopmaths.fr/youtube). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tous ceux qui souhaiteraient participer.
 
-
-
-### Crédits
-
-- Moteur développé par Rémi Angot sous licence **AGPL**.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
-- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **AGPL**.
-- Le passage à NodeJS et Webpack a été coordonné par Daniel Caillibaud (Sésamath)
 
 ### Ressources libres utilisées
 
@@ -66,7 +66,7 @@ Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub]
 - [prismjs](http://prismjs.com/) MIT license (pour la coloration syntaxique du code LaTeX).
 - [Slick](https://kenwheeler.github.io/slick/) MIT license (pour le diaporama).
 - [TextFill](https://jquery-textfill.github.io) MIT license (pour adapter la taille de la police dans les diaporamas).
-- [SVG.js](https://svgjs.com/) MIT license (pour afficher des figures).
+- [SVG.js](https://svgjs.dev/) MIT license (pour afficher des figures).
 - [CodeMirror](https://codemirror.net) MIT license (pour l'éditeur de MathALEA2D).
 - [Scratchblocks](https://scratchblocks.github.io/) MIT license (pour le rendu des blocs Scratch).
 - [QRCode.js](https://davidshimjs.github.io/qrcodejs/) MIT license (pour l'affichage d'un QRCode dynamique).
@@ -96,6 +96,20 @@ Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub]
 
 
 ### Changelog
+
+#### 07/21
+
+- Arrivée de Laurence Candille et Christophe Gombert pour la programmation d'exercices de collège
+- Arrivée d'Éric Schrafstetter pour la programmation d'exercices de lycée
+- Premiers développements d'exercices pour la course aux nombres
+- Amélioration de l'affichage et centralisation de toutes les fonctionnalités sur mathalea.html
+- Nouveau référentiel pour le lycée
+- Nouveau type d'exercice hybride pour la sortie AMC
+
+#### 06/21
+
+- Arrivée de Guillaume Valmont pour le lien avec Anki et la programmation d'exercices
+- Premiers travaux pour l'enregistrement des scores
 
 #### 05/21
 

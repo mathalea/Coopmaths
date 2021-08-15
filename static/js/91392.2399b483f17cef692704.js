@@ -1,0 +1,2 @@
+(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[91392,23727,63363],{20214:(t,e,a)=>{"use strict";a.r(e),a.d(e,{titre:()=>c,default:()=>i});var s=a(97306);const c="Construire un triangle avec cible auto-corrective";function i(){s.default.call(this),this.titre=c,this.classe=5}}}]);
+//# sourceMappingURL=91392.2399b483f17cef692704.js.map
