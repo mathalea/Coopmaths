@@ -1,0 +1,89 @@
+
+\medskip
+
+La production annuelle de déchets par Français était de 5,2 tonnes par habitant en 2007.
+
+Entre 2007 et 2017, elle a diminué de 6,5\,\%.
+
+\medskip
+
+\begin{enumerate}
+\item De combien de tonnes la production annuelle de déchets par Français en 2017 a-t-elle diminué par rapport à l'année 2007 ?
+\item Pour continuer à diminuer leur production de déchets de nombreuses familles utilisent désormais un composteur.
+
+Une de ces familles a choisi le modèle ci-dessous, composé d'un pavé droit et d'un prisme droit
+
+(la figure du composteur n'est pas à l'échelle). Le descriptif indique qu'il a une contenance d'environ 0,5 m$^3$,
+
+On souhaite vérifier cette information.
+
+\begin{center}
+\psset{unit=0.5cm,arrowsize=2pt 3}
+\begin{pspicture}(0,-0.75)(27,12)
+%\psgrid
+\psframe(0.5,0.5)(5.5,6.5)
+\uput[dl](5.5,6.5){C}\uput[r](8.2,8.8){B}\uput[ur](8.2,10.5){A}
+\uput[u](6.3,9.1){D}\uput[d](6.3,7.1){H}
+\psline(5.5,0.5)(8.2,2.8)(8.2,8.8)(5.5,6.5)
+\psline(8.2,8.8)(8.2,10.5)(6.3,9.1)(6.3,7.1)%BADH
+\psline(6.3,9.1)(5.5,6.5)
+\psline(0.5,6.5)(1.3,9.1)(6.3,9.1)
+\psline(1.3,9.1)(3.2,10.5)(8.2,10.5)
+\psline[linewidth=0.4pt]{<->}(9.1,2.8)(9.1,10.5)\uput[r](9.1,6.75){1,1 m}
+\psline[linewidth=0.4pt]{<->}(1,9.1)(2.9,10.5)\uput[ul](2.4,9.8){39 cm}
+\psline[linewidth=0.4pt]{<->}(6,0.5)(8.7,2.8)\uput[dr](7.35,1.65){67 cm}
+\psframe(5.5,0.5)(5.1,0.9)
+\psline(7.9,10.2)(7.9,9.8)(8.2,10)
+\psline(7.9,8.6)(7.9,8.2)(8.2,8.4)
+\psline(7.9,2.6)(7.9,3)(8.2,3.3)
+\psline(5.5,0.9)(5.8,1.2)(5.8,0.7)
+\pspolygon[fillstyle=solid,fillcolor=lightgray](1.2,7)(1.7,8.6)(5.7,8.6)(5.15,7)
+%%%%%%
+\pspolygon(13,0.5)(24,0.5)(24,7.5)(17.5,7.5)%CBAD
+\uput[dl](13,0.5){C} \uput[dr](24,0.5){B} \uput[ur](24,7.5){A} \uput[ul](17.5,7.5){D} 
+\psline(17.5,7.5)(17.5,0.5)\uput[d](17.5,0.6){H}
+\psframe(17.5,0.5)(17.2,0.8)\psframe(24,7.5)(23.7,7.2)\psframe(24,0.5)(23.7,0.8)
+\psline[linewidth=0.4pt]{<->}(25,0.5)(25,7.5)\rput{90}(25.3,4){Hauteur}
+\psline[linewidth=0.4pt]{<->}(12.5,0.5)(17,7.5)\uput[ul](14.75,4){53 cm}
+\psline[linewidth=0.4pt]{<->}(24,8)(17.5,8)\uput[u](20.75,8){Petit côté : 39 cm}
+\rput(20,75,9.5){Trapèze ABCD}
+\psline[linewidth=0.4pt]{<->}(13,-0.2)(24,-0.2)
+\uput[d](18.5,-0.2){Grand côté : 67 cm}
+\end{pspicture}
+\end{center}
+%39cm 
+%
+%
+%
+%Trapèze ASCO Petit côté: 39 cm
+%
+%l
+%./
+%c
+%53 cm
+%1 . Hauteur
+%67 cm
+%CHB
+%
+%
+%Grand côté: 67 cm
+
+	\begin{enumerate}
+		\item Dans le trapèze ASCO, calculer la longueur CH.
+		\item Montrer que la longueur DH est égale à 45~cm.
+		\item Vérifier que l'aire du trapèze ASCO est de \np{2385}~cm$^2$.
+		\item Calculer le volume du composteur.
+		
+L'affirmation \og il a une contenance d'environ 0,5 m$^3$ \fg{} est-elle vraie ? Justifier.
+	\end{enumerate}
+\end{enumerate}	
+\medskip
+
+\textbf{Rappels :}
+
+\begin{tabularx}{\linewidth}{|X|}\hline
+Aire du trapèze $ = \dfrac{(\text{Petit côté} + \text{Grand côté}) \times \text{Hauteur}}{2}$\rule[-3mm]{0mm}{9mm}\\
+Volume du prisme droit $=$ Aire de la base $\times$  hauteur \\
+Volume du pavé droit $= \text{Longueur} \times \text{largeur} \times  \text{hauteur}$.\\ \hline
+\end{tabularx}
+
