@@ -3,7 +3,6 @@ languageCode = "fr-fr"
 title = "CoopMaths"
 theme = "themecoop"
 disablePathToLower = true #pour garder des URL en majuscule
-googleAnalytics = "UA-5318292-3"
 publishDir = "../CoopMaths_Public" 
 
 [params]
@@ -26,11 +25,6 @@ publishDir = "../CoopMaths_Public"
 [privacy]
   [privacy.disqus]
     disable = false
-  [privacy.googleAnalytics]
-    anonymizeIP = true
-    disable = false
-    respectDoNotTrack = true
-    useSessionStorage = true
   [privacy.instagram]
     disable = false
     simple = false

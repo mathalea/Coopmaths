@@ -39,7 +39,7 @@ draft: false
       <button id="btnPlus">+1</button>
       <button id="btnMoins">-1</button>
 
-      <div id="figures" style="display: flex; flex-direction: row; justify-content: flex-end; margin-right: 10%;" ></div>
+      <div id="figures" style="display: flex; flex-direction: row; justify-content: flex-end; margin-right: 10%"></div>
       <div>
         <input type="checkbox" id="checkConversion" />
         <label for="checkConversion">Conversion en base 10</label>
@@ -87,7 +87,11 @@ draft: false
     const trait = (a, i) => {
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
       line.setAttributeNS(null, 'x1', 50)
-      line.setAttributeNS(null, 'y1', 50)
+      if (base == 60) {
+        line.setAttributeNS(null, 'y1', 95)
+      } else {
+        line.setAttributeNS(null, 'y1', 50)
+      }
       line.setAttributeNS(null, 'x2', 50)
       line.setAttributeNS(null, 'y2', 100)
       line.setAttributeNS(null, 'stroke', 'black')
@@ -108,7 +112,13 @@ draft: false
       } else if (bibi) {
         text.textContent = chiffreToBibi(texte)
         text.setAttributeNS(null, 'style', 'font-family: Times New Roman; font-size: 7; pointer-events: none')
-
+      } else if (base == 60) {
+        if (texte % 5 === 0) {
+          text.textContent = texte
+          text.setAttributeNS(null, 'y', 110)
+        } else {
+          text.textContent = ''
+        }
       } else {
         if (texte < 10) {
           text.textContent = texte
@@ -123,7 +133,7 @@ draft: false
     document.getElementById('btnBase').addEventListener('click', () => {
       reinitialisation()
       base = window.prompt('Choix de la base') || 4
-      if (base > 16 || base < 2) {
+      if ((base > 16 || base < 2) && base != 60) {
         alert('Choisissez une base comprise entre 2 et 16')
       } else {
         if (base === 'shadok') {
@@ -198,9 +208,9 @@ draft: false
                 ajouteRoue(roue + 1)
               }
               rotation('+', roue + 1)
-            } else if (sens === '-' && chiffreDeLaRoue[roue] === base - 1 && nbRoues !==1 && engrenage) {
+            } else if (sens === '-' && chiffreDeLaRoue[roue] === base - 1 && nbRoues !== 1 && engrenage) {
               rotation('-', roue + 1)
-            } else if (sens === '-' && chiffreDeLaRoue[roue] === 0 && roue === nbRoues -1 && nbRoues !== 1 && engrenage) {
+            } else if (sens === '-' && chiffreDeLaRoue[roue] === 0 && roue === nbRoues - 1 && nbRoues !== 1 && engrenage) {
               supprimeRoue(roue)
               conversion()
             } else {
@@ -218,7 +228,7 @@ draft: false
     const ajouteRoue = (i) => {
       document.getElementById('figures').innerHTML =
         `<div style="width: 19%;">
-        <svg id="fig${i}" viewBox="-10 -10 120 120" xmlns="http://www.w3.org/2000/svg" >
+        <svg id="fig${i}" viewBox="-20 -20 130 130" xmlns="http://www.w3.org/2000/svg" >
         <path id="arcDeCercle${i}"></path>
         <g id="roue${i}" style="pointer-events: fill; cursor: pointer" onclick="rotation('+', ${i}, false)">
           <circle id="cercle${i}" cx="50" cy="50" r="50" fill="none" stroke="black" />
@@ -326,6 +336,16 @@ draft: false
             txt += chiffreToBibi(chiffreDeLaRoue[i]) + ' '
           }
           txt += ' } = '
+        } else if (base == 60) {
+          if (nbRoues > 3) {
+            txt = ''
+          } else {
+            txt = `$$ ${chiffreDeLaRoue[2] || 0}~\\text{h}~${chiffreDeLaRoue[1] || 0}~\\text{min}~~${chiffreDeLaRoue[0] || 0}~\\text{s} = ${
+              chiffreDeLaRoue[2] || 0
+            } \\times 3600~\\text{s} + ${chiffreDeLaRoue[1] || 0} \\times 60~\\text{s} + ${chiffreDeLaRoue[0] || 0} ~\\text{s} = ${
+              (chiffreDeLaRoue[2] || 0) * 3600 + (chiffreDeLaRoue[1] || 0) * 60 + chiffreDeLaRoue[0]
+            }~\\text{s} $$ `
+          }
         } else {
           txt = '$$ ('
           for (let i = chiffreDeLaRoue.length - 1; i > -1; i--) {
@@ -333,18 +353,20 @@ draft: false
           }
           txt += `)_{${base}} = `
         }
-        for (let i = chiffreDeLaRoue.length - 1; i > 1; i--) {
-          txt += ` ${chiffreDeLaRoue[i]} \\times ${base}^{${i}} +`
+        if (base != 60) {
+          for (let i = chiffreDeLaRoue.length - 1; i > 1; i--) {
+            txt += ` ${chiffreDeLaRoue[i]} \\times ${base}^{${i}} +`
+          }
+          if (chiffreDeLaRoue[1] !== undefined) {
+            txt += ` ${chiffreDeLaRoue[1]} \\times ${base} +`
+          }
+          if (chiffreDeLaRoue.length > 1) txt += `${chiffreDeLaRoue[0]} =`
+          let base10 = 0
+          for (let i = 0; i < chiffreDeLaRoue.length; i++) {
+            base10 += parseInt(chiffreDeLaRoue[i]) * base ** i
+          }
+          txt += ` ${base10} $$`
         }
-        if (chiffreDeLaRoue[1] !== undefined) {
-          txt += ` ${chiffreDeLaRoue[1]} \\times ${base} +`
-        }
-        if (chiffreDeLaRoue.length > 1) txt += `${chiffreDeLaRoue[0]} =`
-        let base10 = 0
-        for (let i = 0; i < chiffreDeLaRoue.length; i++) {
-          base10 += parseInt(chiffreDeLaRoue[i]) * base ** i
-        }
-        txt += ` ${base10} $$`
         document.getElementById('conversion').innerText = txt
         renderMathInElement(document.body)
       } else {
@@ -363,7 +385,14 @@ draft: false
       rotation('-')
     })
     document.getElementById('btnSaisieNombre').addEventListener('click', () => {
-      let nombre = prompt('Saisir un nombre')
+      let nombre
+      if (base == 60) {
+        nombre = prompt('Saisir un nombre au format HMS avec des espaces (2 59 pour 2 min 59s, 1 15 30 pour 1 h 15 min 30 s) ')
+      } else if (bibi || shadok) {
+        nombre = prompt('Saisir un nombre avec des espaces entre chaque chiffres')
+      } else {
+        nombre = prompt('Saisir un nombre')
+      }
       reinitialisation()
       if (shadok || bibi) {
         let tableau = nombre.split(' ')
@@ -373,20 +402,44 @@ draft: false
           if (bibi) nombre = nombre + bibiToChiffre(n).toString()
         }
       }
-      while (parseInt(nombre.charAt(0)) === 0 ) {
-        nombre = nombre.substring(1)
-      }
-      while (nbRoues < nombre.length) {
-        ajouteRoue(nbRoues)
-      }
-      for (let i = nombre.length - 1; i >= 0; i--) {
-        const chiffre = nombre[i]
-        if (valeurBase(chiffre) >= base) {
-          alert(`En base ${base}, les chiffres doivent être inférieurs à ${base}`)
-          return -1
-        } else {
-          rotation('+', nombre.length - 1 - i, false, valeurBase(chiffre), true)
+      if (base != 60) {
+        while (parseInt(nombre.charAt(0)) === 0) {
+          nombre = nombre.substring(1)
         }
+        while (nbRoues < nombre.length) {
+          ajouteRoue(nbRoues)
+        }
+        for (let i = nombre.length - 1; i >= 0; i--) {
+          const chiffre = nombre[i]
+          if (valeurBase(chiffre) >= base) {
+            alert(`En base ${base}, les chiffres doivent être inférieurs à ${base}`)
+            return -1
+          } else {
+            rotation('+', nombre.length - 1 - i, false, valeurBase(chiffre), true)
+          }
+        }
+      } else {
+        let tableau = nombre.split(' ')
+        let heures, minutes, secondes
+        if (tableau.length === 3) {
+          heures = parseInt(tableau[0] || 0)
+          minutes = parseInt(tableau[1] || 0)
+          secondes = parseInt(tableau[2] || 0)
+          ajouteRoue(0)
+          ajouteRoue(1)
+          ajouteRoue(2)
+        } else if (tableau.length === 2) {
+          minutes = parseInt(tableau[0] || 0)
+          secondes = parseInt(tableau[1] || 0)
+          ajouteRoue(0)
+          ajouteRoue(1)
+        } else if (tableau.length === 1) {
+          secondes = parseInt(tableau[0] || 0)
+          ajouteRoue(0)
+        }
+        if (secondes > 0) rotation('+', 0, false, secondes, true)
+        if (minutes > 0) rotation('+', 1, false, minutes, true)
+        if (heures > 0) rotation('+', 2, false, heures, true)
       }
     })
 

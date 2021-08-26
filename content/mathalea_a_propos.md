@@ -46,7 +46,7 @@ Au printemps 2020, Sébastien Lozano a réalisé un [programme](https://github.c
 
 ### Pour participer
 
-Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/mathalea/mathalea) et lire la documentation sur le [coopmaths.fr/documentation](coopmaths.fr/documentation) ou voir les [vidéos](https://coopmaths.fr/youtube). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tous ceux qui souhaiteraient participer.
+Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub](https://github.com/mathalea/mathalea) et lire la [documentation](https://coopmaths.fr/documentation) ou voir les [vidéos](https://coopmaths.fr/youtube). N'hésitez pas à nous contacter (contact@coopmaths.fr) pour proposer des exercices, proposer des relectures ou pour programmer. L'équipe s'engage à accompagner au mieux tous ceux qui souhaiteraient participer.
 
 
 ### Ressources libres utilisées
@@ -77,6 +77,7 @@ Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub]
 - Icone "[Traffic Light](https://thenounproject.com/term/traffic-lights/1084957/)" by Lukáš Jača from the Noun Project.
 - Icone "[Geometry](https://thenounproject.com/term/geometry/1172014/)" by Vectors Market from the Noun Project.
 - Icone "[Be different](https://thenounproject.com/search/?q=different&i=1295561)" by chiccabubble from the Noun Project.
+- Icone "[teacher](https://thenounproject.com/term/teacher/20545/)" by visualiaBCN from the Noun Project.
 
 ### Outil de suivi des bugs
 
@@ -96,6 +97,14 @@ Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub]
 
 
 ### Changelog
+
+#### 08/21
+
+- Sébastien Lozano finalise l'enregistrement des scores
+- Nouveaux boutons pour les différentes vues : course aux nombres, exercice par exercice, smartphone
+- Possibilité de mettre un compte à rebours pour les exercices
+- De nombreux exercices ont dorénavant un mode interactif et un mode AMC
+- Suppression de SVG.js au profit de MathALEA2D
 
 #### 07/21
 

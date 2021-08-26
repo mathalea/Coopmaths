@@ -1,18 +1,23 @@
 ---
 title: "À propos"
 niveau:
-description : "Présentation du projet COOPMaths - Personnalisation des apprentissages - Pédagogie Freinet au collège en mathématiques"
+description : "Présentation du projet CoopMaths - Personnalisation des apprentissages - Pédagogie Freinet au collège en mathématiques"
 ---
 
 ### Nos objectifs
 
-**Coopmaths** est né d’une volonté de créer et **mutualiser** des outils calibrés pour s’intégrer dans une logique de **personnalisation des apprentissages**.
-Les fichiers de travail proposés ici permettent la mise en place du travail individualisé et s’intègrent parfaitement à l’utilisation de plans de travail. 
+**CoopMaths** est né d’une volonté de créer et **mutualiser** des outils calibrés pour s’intégrer dans une logique de **personnalisation des apprentissages**.
 
-Un [référentiel](/pdf/CoopMaths-Referentiel.pdf) décline des niveaux de maîtrise pour différentes thématiques. Pour chaque niveau, des fiches de « _mise en route_ », d’« _entraînement_ » et d’« _évaluation_ », accompagnées de leur correction, sont disponibles afin que chaque élève puisse avancer à son rythme.
+Les fichiers de travail pour les sixièmes ainsi que les exercices aléatoires de MathALEA, permettent la mise en place du travail individualisé et s’intègrent parfaitement à l’utilisation de plans de travail. 
+
+Un [référentiel](/pdf/CoopMaths-Referentiel.pdf) décline des niveaux de maîtrise pour différentes thématiques. 
+
+En sixième, pour chaque niveau, des fiches de « _mise en route_ », d’« _entraînement_ » et d’« _évaluation_ », accompagnées de leur correction, sont disponibles afin que chaque élève puisse avancer à son rythme.
+
+Pour les autres niveaux, nous avons programmé des exercices à données aléatoires.
 
 
-Ces ressources s’inscrivent dans une démarche plus globale que les auteurs mettent en œuvre : celle des **pédagogies coopératives**. Les fichiers disponibles sur ce site ne sont donc qu’une pierre à l'édifice. En effet, la personnalisation des apprentissages articule trois éléments : les situations collectives, le travail individualisé et la coopération (_Connac, 2012_[^1]). 
+Ces ressources s’inscrivent dans une démarche plus globale que les auteurs mettent en œuvre : celle des **pédagogies coopératives**. Les activités disponibles sur ce site ne sont donc qu’une pierre à l'édifice. En effet, la personnalisation des apprentissages articule trois éléments : les situations collectives, le travail individualisé et la coopération (_Connac, 2012_[^1]). 
 
 Les fichiers de travail Coopmaths sont utilisables pour la partie individualisée (qui peut inclure la mise en place de l’aide par des élèves ayant déjà validé les niveaux concernés). Ils s’orientent davantage vers le travail des techniques et des automatismes. Lors des temps de travail individualisé, les élèves travaillent une bonne partie du temps en autonomie et certains peuvent aider leurs camarades. Il s’agit donc de proposer des activités ne nécessitant pas un étayage fort de l’enseignant. Compléter ces temps par des tâches à prise d’initiatives individuelles et collectives permettant de développer plus largement les 6 compétences mathématiques est donc indispensable.
 
@@ -29,10 +34,10 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 ### Exercices à données aléatoires - MathALEA
 
 
-- Moteur développé par Rémi Angot sous licence **CC-By-SA** puis amélioré par Jean-Claude Lhote et Cédric Grolleau.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau puis relus par les contributeurs de CoopMaths sous licence **CC-By-SA**.
-- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **CC-By-SA**.
-- Le générateur d'animations pour le lecteur InstrumEnPoche a été développé par Rémi Angot.
+- Moteur développé par Rémi Angot sous licence **AGPL** puis amélioré, entre autres, par Jean-Claude Lhote, Sébastien Lozano et Cédric Grolleau.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Laurence Candille, Christophe Gombert, Éric Schrafstetter puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
+- MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **AGPL**.
+- Le générateur d'animations pour le lecteur InstrumEnPoche a été développé par Rémi Angot sous licence **AGPL**.
 
 
 ### Contributeurs 
