@@ -1,0 +1,3 @@
+/*! For license information please see 55713.9deb9c262af15da32b82.js.LICENSE.txt */
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[55713],{55713:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>c,default:()=>n});var i=t(71609);const c="Calcul d’image niveau 3";function n(){i.default.call(this),this.nbQuestions=1,this.interactif=!0,this.sup=3}}}]);
+//# sourceMappingURL=55713.9deb9c262af15da32b82.js.map

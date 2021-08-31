@@ -1,43 +1,19 @@
 <?php
-// TODO
-// =>OK => Vérifier/Nettoyer les variables qui arrivent du client, il n'y en a plus 
-// =>OK => Gestion d'un feedback d'erreur sur le format du userId
-// =>OK => Gestion d'un feedback d'erreur si le userId n'existe pas et qu'on demande d'enregistrer avec PLUS D'ACTUALITE
-// =>OK => Placement de la variable $keypass cf post de Rémi
-// => Suppression des espaces userId trop vieux, On garde 15 jours un autre délai qu'on pourra adapter,
-// la routine de nettoyage serait lancée à chaque requete 
-// =>OK => Problème url avec des % une fois qu'on affecte un userId
+/**
+ * =============================================================================================================================
+ * Traitement des scores
+ * @author Sébastien LOZANO
+ * 
+ * =============================================================================================================================
+ */
+
+// On inclut le scripts avec les outils
+require_once "scoresTools.php";
 
 $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
-// // Procédure de suppression des fichiers avec exploration recursive
-function recursiveDelete($pathToClean,$timeBeforeDelete) {
-  $repertoire = opendir($pathToClean); // On définit le répertoire dans lequel on souhaite travailler.
-  
-  while (false !== ($fichier = readdir($repertoire))) // On lit chaque fichier du répertoire dans la boucle.
-  {
-  $chemin = $pathToClean."/".$fichier; // On définit le chemin du fichier à effacer.
-  
-  // Si le fichier n'est pas un répertoire…
-  if ($fichier != ".." && $fichier != "." && !is_dir($fichier))
-        {
-        $Diff = (time() - filectime($chemin));
-        if ($Diff > $timeBeforeDelete) unlink($chemin); // On efface si c'est trop vieux depuis la dernière modification        
-        }
-  elseif (is_dir($fichier)) 
-        {
-          recursiveDelete($fichier,$timeBeforeDelete);
-        }
-  }
-  closedir($repertoire);
-}
+$scoresDir = "./resultats";
 
-  // // On supprime tout ce qui a plus de 1 minute
-  $thisdir = "./resultats";
-  $timeBeforeDelete = 60; // Nombre de secondes 
-  // if (file_exists($thisdir)) {
-  //   recursiveDelete($thisdir,$timeBeforeDelete);
-  // }
 if ($contentType === "application/json") {
 
   // On reçoit les données brutes du post.
@@ -149,7 +125,7 @@ if ($contentType === "application/json") {
 
   if ($errors=="") {
     // On va créer le repertoire pour le stockage des résultats par semaine
-    $path = './resultats/'.$prof1.'/'.$prof2.'/'.$prof3;
+    $path = $scoresDir.'/'.$prof1.'/'.$prof2.'/'.$prof3;
     
     // On génère une nouvelle clef uniquement si l'arborescence n'existe pas
     // Sinon on récupère la clef dans le nom du fichier on verra plus tard s'il y a plusieurs fichiers
@@ -171,6 +147,9 @@ if ($contentType === "application/json") {
       // Il faut créer le dossier de stockage s'il n'existe pas à partir de la clef  
       $pathToFile = $path.'/'.$keypass;
       $url = $pathToFile;
+      // Une fois tout ça créé,
+      // On va créer un fichier index.php qui va bien pour afficher tout ce qu'on veut
+      createIndexScores($url,$prof1.$prof2.$prof3);
     } else {
       if (sizeof(scandir($path))>2) {// S'il y a déjà un sous-dossier son nom est le keypass à recuperer pour les enregistrements      
         $keypass = scandir($path)[2];
@@ -187,16 +166,16 @@ if ($contentType === "application/json") {
       };
       if ($isVerifResult) {
         $url = "pas d'url pour les verifsResult";
-        $fileNameToSaveDatas = $pathToFile.'/semaine'.$currentWeek.'.csv';
+        $fileNameToSaveDatas = $pathToFile.'/semaine'.$currentWeek.'.csv';        
         // On ouvre le fichier
         $fp = fopen($fileNameToSaveDatas, 'a+');      
         // On définit le séparateur pour le csv
         $sep = ';';
         // S'il n'existe pas on crée l'entete et on ajoute les données
         if (strlen(file_get_contents($fileNameToSaveDatas))==0) {
-          fputs($fp, "Identifiant utilisateur".$sep."Identifiant exercice".$sep."Niveau sup".$sep."Niveau sup2".$sep."Nniveau sup3".$sep."Nombre de bonnes réponses".$sep."Nombre de questions".$sep."Score en %;Date".$sep."Heure \r\n");  
+          fputs($fp, "Semaine".$sep."Identifiant utilisateur".$sep."Course aux nombres ?".$sep."Identifiant exercice".$sep."Niveau sup".$sep."Niveau sup2".$sep."Niveau sup3".$sep."Url des exos".$sep."Nombre de bonnes réponses".$sep."Nombre de questions".$sep."Score en %;Date".$sep."Heure \r\n");  
         };
-        fputs($fp, $decoded->userId.$sep.$decoded->exId.$sep.$decoded->sup.$sep.$decoded->sup2.$sep.$decoded->sup3.$sep.$decoded->nbBonnesReponses.$sep.$decoded->nbQuestions.$sep.$decoded->score.'%'.$sep.$currentDate.$sep.$currentTime."\r\n");  
+        fputs($fp, 'semaine'.$currentWeek.$sep.$decoded->userId.$sep.$decoded->isCan.$sep.$decoded->exId.$sep.$decoded->sup.$sep.$decoded->sup2.$sep.$decoded->sup3.$sep.$decoded->urlExos.$sep.$decoded->nbBonnesReponses.$sep.$decoded->nbQuestions.$sep.$decoded->score.'%'.$sep.$currentDate.$sep.$currentTime."\r\n");  
         fclose($fp);
       };
       
@@ -216,5 +195,4 @@ if ($contentType === "application/json") {
     // On peut envoyer un message d'erreur à l'utilisateur
   }
 }
-
 ?>

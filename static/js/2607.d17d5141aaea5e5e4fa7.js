@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[2607],{2607:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>c,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>r});var i=a(23848);const c="Périmètres et aires de disques (à partir d’un texte).";function r(){i.default.call(this),this.sup=2,this.titre=c,this.interactif=!0}}}]);
+//# sourceMappingURL=2607.d17d5141aaea5e5e4fa7.js.map

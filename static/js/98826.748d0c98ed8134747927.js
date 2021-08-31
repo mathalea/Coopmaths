@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[98826],{98826:(a,e,t)=>{t.r(e),t.d(e,{titre:()=>c,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>r});var i=t(51387);const c="Trouver l’image d’un point par une symétrie axiale";function r(){i.default.call(this),this.sup=1,this.titre=c}}}]);
+//# sourceMappingURL=98826.748d0c98ed8134747927.js.map

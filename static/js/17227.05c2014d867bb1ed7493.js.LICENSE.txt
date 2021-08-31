@@ -1,0 +1,3 @@
+/*!
+ * @author Jean-Claude Lhote & Gilles Mora
+ */

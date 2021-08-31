@@ -18,10 +18,6 @@
       Créer un espace
       <i class="key icon"></i>
     </div>
-    <div id="scoresSaveToUserId" class="ui positive right labeled icon button">
-      Enregistrer des scores 
-      <i class="save icon"></i>
-    </div>
   </div>
   <br>
    <div class="image content">
@@ -30,33 +26,6 @@
         <div id="scoresDocumentationFeedback" class="ui message" hidden>          
             <div id="scoresDocumentationFeedbackHeader" class="ui header"></div>          
             <div id="scoresDocumentationFeedbackBody">
-               <!-- <div class="header">Vous pouvez au choix :</div>
-               <ul>
-                 <li>Créer un espace de sauvegarde pour vos classes, vous obtenez :
-                    <ul>
-                       <li>Un code prof public de trois lettres majuscules, par exemple <b>STI</b></li>
-                       <li>Un lien vers l'espace web où seront stocker les résultats de vos élèves :
-                          <ul>
-                             <li>Un fichier csv par semaine et par classe avec un nom générique, par exemple <b>semaine27.csv</b> si on est la 27e semaine de l'année.</li>
-                             <li>Par exemple, pour la classe de 6A, le fichier contiendra tous les résultats de la semaine 27 pour tous les élèves de la classe de 6A.</li>
-                          </ul>
-                       </li>
-                    </ul>
-                    <img src="./assets/images/scores-espaceProfResultats_1.png"/>
-                    <img src="./assets/images/scores-espaceProfResultats_2.png"/>
-                    <img src="./assets/images/scores-espaceProfResultats_3.png"/>
-                 </li>
-       
-                 <li>Pour pouvoir <b>enregistrer des scores</b> dans un espace existant l'élève doit se connecter avec un userId au format suivant :
-                   <ul>
-                     <li>Le code prof => 3 lettres majuscules, par exemple <b>STI</b>.</li>
-                     <li>Le code classe => 2 caractères alphanumériques, les lettres sont des majuscules, par exemple <b>6A</b>.</li>
-                     <li>Le code eleve => 2 caractères alphanumériques, les lettres sont des majuscules, par exemple <b>1E</b>.</li>
-                   </ul>
-                   Le code élève est alors <b>STI6A1E</b>, une fois connecter ce code apparait dans la banière de titre des exercices.
-                   <img src="./assets/images/scores-userIdConnecte.png"/>
-                 </li>
-               </ul> -->
                Sur <a href="https://coopmaths.fr/mathalea.html" target="_blank">coopmaths.fr/mathalea</a>, vous avez la possibilité d’enregistrer les scores de vos élèves. Pour être en conformité avec la RGPD, nous avons fait le choix de ne conserver aucune données personnelles sur notre site. Nous ne stockerons aucun nom, aucun prénom, aucune adresse électronique, aucune adresse IP …
                <br>
                Le principe est le suivant : 
@@ -66,8 +35,8 @@
                 <li> Il obtient un identifiant avec 3 lettres majuscules au hasard (par exemple DNY) et une adresse qui lui permettra d’accéder aux scores qu’il faudra conserver précieusement.
                   <img class="ui image" src="./assets/images/scores-espaceProfResultats_1.png"/>
                 </li>
-                <li> À ces 3 lettres, le professeur devra en ajouter 2 de son choix pour décrire un classe (par exemple DNY6A, DNYI21...).</li>
-                <li> Ensuite, pour chaque élève, il devra ajouter 2 autres caractères (par exemple DNY6A01, DNY6A02, DNY6AGN...).</li>
+                <li> À ces 3 lettres, le professeur devra en ajouter 2 de son choix pour décrire un classe (par exemple DNY6A, DNYI2, ...).</li>
+                <li> Ensuite, pour chaque élève, il devra ajouter 2 autres caractères (par exemple DNY6A01, DNY6A02, DNY6AGN, ...).</li>
                 <li> Seul le professeur saura à quel élève correspond chaque code. Et si un élève de la 6A oublie son code, le professeur peut en inventer un nouveau (DNY6AZZ) et lui attribuer immédiatement sans avoir besoin de faire quoi que ce soit sur l’ordinateur.</li>
                 <div class="ui icon message">
                   <i class="lightbulb icon"></i>
@@ -81,9 +50,9 @@
                         <li>Cliquer sur connexion<br>
                           <img class="ui image" src="./assets/images/scores-userIdConnexion.png"/>    
                         </li>  
-                        <li>Il a alors besoin : 
+                        <li>Une fenêtre modale s'ouvre, il a alors besoin : 
                           <ul>
-                            <li>Du code prof => 3 lettres majuscules, par exemple <b>STI</b>.</li>
+                            <li>Du code prof => 3 lettres majuscules, par exemple <b>LOZ</b>.</li>
                             <li>Du code classe => 2 caractères alphanumériques, les lettres sont des majuscules, par exemple <b>6A</b>.</li>
                             <li>Le code eleve => 2 caractères alphanumériques, les lettres sont des majuscules, par exemple <b>1E</b>.</li>
                           </ul>
@@ -93,16 +62,80 @@
                       <br>
                       <img class="ui image" src="./assets/images/scores-userIdZoneDeSaisie.png"/>
                       <br>
-                      Il peut ensuite fermer la fenêtre et choisir des exercices. Son userId est affiché tant qu'il est connecté :
+                      Après avoir cliqué sur <b>Valider</b>, la fenêtre se ferme. Son identifiant est affiché tant qu'il est connecté :
                       <br>
                       <img class="ui image" src="./assets/images/scores-userIdConnecte.png"/>                        
+                      <br> 
+                      Il peut se déconnecter à tout moment. S'il change de fenêtre, il doit éventuellement se reconnecter.
+                      <br>
+                      Lorsqu'il clique sur <b>Vérifier les réponses</b>, son score est automatiquement enregistré dans un fichier accessible au professeur.
+                      <br>
+                      <img class="ui image" src="./assets/images/scores-userIdVerifierLesReponses.png"/>                        
+
                     </p>
                   </div>
                 </div>
-                <li> Enfin, le professeur pourra se rendre sur l’adresse qu’il a obtenue au moment de l’inscription pour télécharger un fichier tableur par classe et par semaine contenant tous les résultats associés aux différents codes à 7 caractères. Il restera à la charge du professeur d’associer les résultats d’un code avec le nom et le prénom de l’élève que seul lui connait.</li>
-                <img class="ui image" src="./assets/images/scores-espaceProfResultats_4.png"/>
-                <img class="ui image" src="./assets/images/scores-espaceProfResultats_5.png"/>
-                <img class="ui image" src="./assets/images/scores-espaceProfResultats_6.png"/>
+                <li> Enfin, le professeur pourra se rendre sur l’adresse qu’il a obtenue au moment de l’inscription pour télécharger :
+                  <ul>
+                    <li>Soit un fichier tableur par classe et par semaine contenant tous les résultats associés aux différents codes à 7 caractères.</li>
+                    <li>Soit une archive par classe avec tous les résultats de toutes les semaines pour tous les élèves de la classe, contenant un fichier de traitement <b>Scores_MathAlea.ods</b></li>
+                    <li>Soit une archive avec tous les résultats de toutes les semaines pour tous ses élèves quelle que soit la classe, contenant un fichier de traitement <b>Scores_MathAlea.ods</b></li>
+                  </ul>                  
+                   Il restera à la charge du professeur d’associer les résultats d’un code avec le nom et le prénom de l’élève que seul lui connait.
+                   Le fichier de traitement <b>Scores_MathAlea.ods</b> pourra en faciliter la tâche.
+                   <br>
+                   <img class="ui image" src="./assets/images/scores-espaceProfResultats_2.png"/>                
+                </li>
+                <li> Après extraction de l'archive, le fichier de traitement <b>Scores_MathAlea.ods</b> fonctionne ainsi :
+                  <ul>
+                    <li>Tous les fichiers de semaines sont dans le dossier <b>"Fichiers semaines"</b> de l'archive.</li>
+                    <li>Le bouton <b>"Mise à jour"</b> :
+                      <ul>
+                        <li>Récupère la liste des <b>"Code Classe"</b> dans la colonne C de l'onglet <b>"Paramètres"</b></li>
+                        <li>Parcourt le dossier <b>"Fichiers semaines"</b> à la recherche des fichiers "Code Classe"-semaine"1 à 56".csv qui existent et dont le nom ne figure pas déjà dans la liste des fichiers ajoutés (colonne A de l'onglet <b>"Données brutes"</b>)</li>
+                        <li>Copie le contenu des fichiers dans l'onglet <b>"Données brutes"</b></li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <div class="ui icon message">
+                    <i class="lightbulb icon"></i>
+                    <div class="content">
+                      <div class="header">
+                        Note sur les macros                        
+                      </div>
+                      <p>
+                        Les macros ne sont nécessaires que pour cette mise à jour qui récupère le contenu de tous les fichiers pour les ajouter.
+                        Si quelqu'un préfère ne pas exécuter les macros, il peut copier et coller le contenu des fichiers à la main et quand même profiter de la désanonymisation qui se fait à l'aide de formules.                          
+                      </p>
+                    </div>
+                  </div>
+                  <b>Onglet "Statistiques"</b>
+                  <img class="ui image" src="./assets/images/scores-espaceProfResultats_3_statistiques.png"/>
+                  <br>
+                  <b>Onglet "Données désanonymisées"</b>
+                  <img class="ui image" src="./assets/images/scores-espaceProfResultats_4_donneesDesanonymisees.png"/>
+                  <br>
+                  <b>Onglet "Paramètres"</b>
+                  <br>
+                  <div class="ui icon message">
+                    <i class="lightbulb icon"></i>
+                    <div class="content">
+                      <div class="header">
+                        Note sur l'onglet "Paramètres"                        
+                      </div>
+                      <p>
+                        Pour que le bouton <b>Mise à jour</b> importe correctement les résultats dans les onglets <b>Données désanonymisées</b> et <b>Données brutes</b>,
+                        il est nécessaire que les données renseignées, <b>Code Classe, ...</b> de l'onglet <b>Paramètres</b> soient à jour .
+                      </p>
+                    </div>
+                  </div>
+                  <br>
+                  <img class="ui image" src="./assets/images/scores-espaceProfResultats_5_parametres.png"/>
+                  <br>
+                  <b>Onglet "Données brutes"</b>
+                  <img class="ui image" src="./assets/images/scores-espaceProfResultats_6_donneesBrutes.png"/>
+                </li>                
                </ul>
                       
 
@@ -113,23 +146,6 @@
         <div id="scoresFeedback" class="ui positive message" hidden>          
             <div id="scoresFeedbackHeader" class="header"></div>          
             <div id="scoresFeedbackBody"></div>          
-        </div>
-        <!-- Formulaire pour saisir un userId -->
-        <!-- https://semantic-ui.com/collections/message.html -->
-        <!-- https://semantic-ui.com/elements/input.html -->
-        <div id="scoresPromptUserId" hidden>
-          <div class="ui right labeled left icon input">
-            <i class="user icon"></i>
-            <input id="scoresInputUserId" type="text" placeholder="PPPCCEE" onkeyup="this.value=this.value.toUpperCase()">
-            <span class="ui tag label">
-              userId ici
-            </span>
-            <button id="scoresSubmitUserId" class="ui positive button">Submit</button>
-          </div>
-          <div id ="scoresInputUserIdError" class="ui negative message" hidden>
-            <div id="scoresInputUserIdErrorHeader" class="header"></div>          
-            <div id="scoresInputUserIdErrorBody"></div>          
-          </div> 
         </div>
       </div>             
     </div>

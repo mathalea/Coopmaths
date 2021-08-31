@@ -3,57 +3,79 @@
         {
         "nom": "Remi Angot",
         "codeProf": "ANG",
-        "md5Key": "00fc7bc204d9d8565e2e4cdde23656f1"
+        "md5Key": "00fc7bc204d9d8565e2e4cdde23656f1",
+        "isEmailOk": true,
+        "email": "remi.angot@gmail.com"
         },
         {
         "nom": "Remi Angot",
         "codeProf": "FDE",
-        "md5Key": "4bd275dc6b32256a834958c198a3289a"
+        "md5Key": "4bd275dc6b32256a834958c198a3289a",
+        "isEmailOk": true,
+        "email": "remi.angot@gmail.com"
         },
         {
         "nom": "Guillaume Valmont",
         "codeProf": "VAL",
-        "md5Key": "5a5211a0fe63297e4d0bc4cde350f105"
+        "md5Key": "5a5211a0fe63297e4d0bc4cde350f105",
+        "isEmailOk": true,
+        "email": "guillaume.valmont@ac-reunion.fr"
         },
         {
         "nom": "Stéphane Guyon",
         "codeProf": "MAT",
-        "md5Key": "6654332f932c038a9f2df351cedced59"        
+        "md5Key": "6654332f932c038a9f2df351cedced59",
+        "isEmailOk": true,
+        "email": "mathsguyon@gmail.com"        
         },
         {
         "nom": "Mireille Gain",
         "codeProf": "MIR",
-        "md5Key": "3dddc6e720c132396e44f3fbfc2f9ce0"
+        "md5Key": "3dddc6e720c132396e44f3fbfc2f9ce0",
+        "isEmailOk": true,
+        "email": "mireillegain.prof@gmail.com"
         },
         {
         "nom": "Jean-Claude Lhote",
         "codeProf": "JCL",
-        "md5Key": "1a4eab81a5c864a823b0a2b0fec62ad9"
+        "md5Key": "1a4eab81a5c864a823b0a2b0fec62ad9",
+        "isEmailOk": true,
+        "email": "Jean-Claude.lhote@ac-nancy-metz.fr"
         },
         {
         "nom": "B L Lhote",
         "codeProf": "BLL",
-        "md5Key": "39b3147aea26882dd496a81b370ed856"
+        "md5Key": "39b3147aea26882dd496a81b370ed856",
+        "isEmailOk": true,
+        "email": "Blandine.lhote@ac-nancy-metz.fr"
         },
         {
         "nom": "Liouba Leroux",
         "codeProf": "LER",
-        "md5Key": "5b0f6f18a4ef4a59f695d0e1261beab5"
+        "md5Key": "5b0f6f18a4ef4a59f695d0e1261beab5",
+        "isEmailOk": true,
+        "email": "antoine.leroux1@ac-montpellier.fr"
         },
         {
         "nom": "Gilles Mora",
         "codeProf": "GIL",
-        "md5Key": "c2b48c6ef102e8a60c3831510183e1c3"
+        "md5Key": "c2b48c6ef102e8a60c3831510183e1c3",
+        "isEmailOk": true,
+        "email": "gilles.mora@ac-rouen.fr"
         },
         {
         "nom": "Matthieu Devillers",
         "codeProf": "DEV",
-        "md5Key": "23eec311b7c99c3cee761d8237c609fe"
+        "md5Key": "23eec311b7c99c3cee761d8237c609fe",
+        "isEmailOk": true,
+        "email": "matthieu.devillers@ac-rennes.fr"
         },
         {
         "nom": "Sébastien Lozano",
         "codeProf": "LOZ",
-        "md5Key": "6c336421548ff17f1ae4045d777c3676"
+        "md5Key": "6c336421548ff17f1ae4045d777c3676",
+        "isEmailOk": true,
+        "email": "sebastien.lozano@ac-nancy-metz.fr,lozanofamilia54@gmail.com"
         }
     ]
 }

@@ -1,0 +1,10 @@
+/*!
+* @svgdotjs/svg.js - A lightweight library for manipulating and animating SVG.
+* @version 3.1.1
+* https://svgjs.dev/
+*
+* @copyright Wout Fierens <wout@mick-wout.com>
+* @license MIT
+*
+* BUILT: Fri Jun 25 2021 15:37:54 GMT+0200 (Mitteleuropäische Sommerzeit)
+*/

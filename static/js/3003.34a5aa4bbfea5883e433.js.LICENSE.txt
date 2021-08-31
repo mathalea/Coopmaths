@@ -1,0 +1,7 @@
+/*! DataTables 1.10.25
+ * ©2008-2021 SpryMedia Ltd - datatables.net/license
+ */
+
+/*! DataTables styling integration
+ * ©2018 SpryMedia Ltd - datatables.net/license
+ */
