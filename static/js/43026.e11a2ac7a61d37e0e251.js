@@ -1,0 +1,3 @@
+/*! For license information please see 43026.e11a2ac7a61d37e0e251.js.LICENSE.txt */
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[43026],{43026:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>c,default:()=>n});var i=t(71609);const c="Calcul d’image ou d’antécédent niveau 2";function n(){i.default.call(this),this.nbQuestions=1,this.interactif=!0,this.sup=2}}}]);
+//# sourceMappingURL=43026.e11a2ac7a61d37e0e251.js.map

@@ -1327,7 +1327,8 @@ export default {
     "titre": "Donner ou compléter une égalité de Pythagore",
     "url": "/exercices/4e/4G20-1.js",
     "amcReady": false,
-    "interactifReady": false,
+    "interactifReady": true,
+    "interactifType": "mathLive",
     "name": "4G20-1"
   },
   "4G20-2": {
@@ -1377,13 +1378,6 @@ export default {
     "interactifReady": true,
     "interactifType": "mathLive",
     "name": "4G20"
-  },
-  "4G20MG32": {
-    "titre": "Calculer une longueur avec l’égalité de Pythagore (MG32)",
-    "url": "/exercices/4e/4G20MG32.js",
-    "amcReady": false,
-    "interactifReady": false,
-    "name": "4G20MG32"
   },
   "4G21": {
     "titre": "Déterminer si un triangle est rectangle ou pas.",
@@ -3241,8 +3235,12 @@ export default {
   "6N20-1": {
     "titre": "Encadrer une fraction entre deux nombres entiers",
     "url": "/exercices/6e/6N20-1.js",
-    "amcReady": false,
-    "interactifReady": false,
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCHybride"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
     "name": "6N20-1"
   },
   "6N20-2": {
@@ -3625,6 +3623,17 @@ export default {
     "interactifReady": true,
     "interactifType": "mathLive",
     "name": "6P13"
+  },
+  "6S10-1": {
+    "titre": "Représenter des données par un diagramme",
+    "url": "/exercices/6e/6S10-1.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCHybride"
+    },
+    "interactifReady": true,
+    "interactifType": "qcm",
+    "name": "6S10-1"
   },
   "6S10": {
     "titre": "Lire un diagramme en barre",
@@ -4105,6 +4114,20 @@ export default {
     "interactifType": "mathLive",
     "name": "betaCaNCM2"
   },
+  "betaCan2G01": {
+    "titre": "Périmètres de carrés et de rectangles",
+    "url": "/exercices/beta/betaCan2G01.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": [
+      "qcm",
+      "mathLive"
+    ],
+    "name": "betaCan2G01"
+  },
   "betaComplexes": {
     "titre": "Exercice exemple Nombres complexes",
     "url": "/exercices/beta/betaComplexes.js",
@@ -4405,9 +4428,42 @@ export default {
     "interactifReady": false,
     "name": "c3N23"
   },
+  "can2G01": {
+    "titre": "Agrandissement/réduction avec fraction",
+    "url": "/exercices/can/2e/can2G01.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can2G01"
+  },
+  "can2L01": {
+    "titre": "Nombre de solutions de l’équation $-x^2+a=b$",
+    "url": "/exercices/can/2e/can2L01.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can2L01"
+  },
+  "can2P01": {
+    "titre": "Calculs de probabilités",
+    "url": "/exercices/can/2e/can2P01.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can2P01"
+  },
   "can3C01": {
     "titre": "Puissances de nombre entier",
-    "url": "/exercices/can/can3C01.js",
+    "url": "/exercices/can/3e/can3C01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4418,7 +4474,7 @@ export default {
   },
   "can3C02": {
     "titre": "Moyenne entière de trois décimaux",
-    "url": "/exercices/can/can3C02.js",
+    "url": "/exercices/can/3e/can3C02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4429,7 +4485,7 @@ export default {
   },
   "can3C03": {
     "titre": "Fraction irréductible",
-    "url": "/exercices/can/can3C03.js",
+    "url": "/exercices/can/3e/can3C03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4438,9 +4494,20 @@ export default {
     "interactifType": "mathLive",
     "name": "can3C03"
   },
+  "can3C04": {
+    "titre": "Somme Entier et fraction à réduire",
+    "url": "/exercices/can/3e/can3C04.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can3C04"
+  },
   "can3E01": {
     "titre": "Calcul de volume 3e",
-    "url": "/exercices/can/can3E01.js",
+    "url": "/exercices/can/3e/can3E01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4451,7 +4518,7 @@ export default {
   },
   "can3F01": {
     "titre": "Lecture graphique",
-    "url": "/exercices/can/can3F01.js",
+    "url": "/exercices/can/3e/can3F01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4462,7 +4529,7 @@ export default {
   },
   "can3F02": {
     "titre": "Calcul d’image ou d’antécédent niveau 1",
-    "url": "/exercices/can/can3F02.js",
+    "url": "/exercices/can/3e/can3F02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4473,7 +4540,7 @@ export default {
   },
   "can3F03": {
     "titre": "Calcul d’image ou d’antécédent niveau 2",
-    "url": "/exercices/can/can3F03.js",
+    "url": "/exercices/can/3e/can3F03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4484,7 +4551,7 @@ export default {
   },
   "can3F04": {
     "titre": "Calcul d’image niveau 3",
-    "url": "/exercices/can/can3F04.js",
+    "url": "/exercices/can/3e/can3F04.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4493,9 +4560,20 @@ export default {
     "interactifType": "mathLive",
     "name": "can3F04"
   },
+  "can3G01": {
+    "titre": "Agrandissement/réduction",
+    "url": "/exercices/can/3e/can3G01.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can3G01"
+  },
   "can3L1": {
     "titre": "Équation ax=b",
-    "url": "/exercices/can/can3L1.js",
+    "url": "/exercices/can/3e/can3L1.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4506,7 +4584,7 @@ export default {
   },
   "can3L2": {
     "titre": "Équation ax+b=0",
-    "url": "/exercices/can/can3L2.js",
+    "url": "/exercices/can/3e/can3L2.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4517,7 +4595,7 @@ export default {
   },
   "can3L3": {
     "titre": "Équation ax+b=c",
-    "url": "/exercices/can/can3L3.js",
+    "url": "/exercices/can/3e/can3L3.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4526,9 +4604,20 @@ export default {
     "interactifType": "mathLive",
     "name": "can3L3"
   },
+  "can3M01": {
+    "titre": "Aire et carré",
+    "url": "/exercices/can/3e/can3M01.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can3M01"
+  },
   "can3S01": {
     "titre": "Calcul de probabilité simple",
-    "url": "/exercices/can/can3S01.js",
+    "url": "/exercices/can/3e/can3S01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4539,7 +4628,7 @@ export default {
   },
   "can4L01": {
     "titre": "Résoudre une équation niveau 1",
-    "url": "/exercices/can/can4L01.js",
+    "url": "/exercices/can/4e/can4L01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4550,7 +4639,7 @@ export default {
   },
   "can4L02": {
     "titre": "Résoudre une équation niveau 2",
-    "url": "/exercices/can/can4L02.js",
+    "url": "/exercices/can/4e/can4L02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4561,7 +4650,7 @@ export default {
   },
   "can4L03": {
     "titre": "Résoudre une équation niveau 3",
-    "url": "/exercices/can/can4L03.js",
+    "url": "/exercices/can/4e/can4L03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4572,7 +4661,7 @@ export default {
   },
   "can5C01": {
     "titre": "Produit de nombres entiers",
-    "url": "/exercices/can/can5C01.js",
+    "url": "/exercices/can/5e/can5C01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4583,7 +4672,7 @@ export default {
   },
   "can5C02": {
     "titre": "Somme de nombres entiers",
-    "url": "/exercices/can/can5C02.js",
+    "url": "/exercices/can/5e/can5C02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4594,7 +4683,7 @@ export default {
   },
   "can5C03": {
     "titre": "Différence de nombres entiers",
-    "url": "/exercices/can/can5C03.js",
+    "url": "/exercices/can/5e/can5C03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4605,7 +4694,7 @@ export default {
   },
   "can5C04": {
     "titre": "Triple et moitié",
-    "url": "/exercices/can/can5C04.js",
+    "url": "/exercices/can/5e/can5C04.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4616,7 +4705,7 @@ export default {
   },
   "can5C05": {
     "titre": "Quotient entier",
-    "url": "/exercices/can/can5C05.js",
+    "url": "/exercices/can/5e/can5C05.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4627,7 +4716,7 @@ export default {
   },
   "can5C06": {
     "titre": "Reste de division euclidienne",
-    "url": "/exercices/can/can5C06.js",
+    "url": "/exercices/can/5e/can5C06.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4638,7 +4727,7 @@ export default {
   },
   "can5C07": {
     "titre": "Priorité opératoire",
-    "url": "/exercices/can/can5C07.js",
+    "url": "/exercices/can/5e/can5C07.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4649,7 +4738,7 @@ export default {
   },
   "can5C08": {
     "titre": "Quart entier",
-    "url": "/exercices/can/can5C08.js",
+    "url": "/exercices/can/5e/can5C08.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4660,7 +4749,7 @@ export default {
   },
   "can5C09": {
     "titre": "Multiplier par 5",
-    "url": "/exercices/can/can5C09.js",
+    "url": "/exercices/can/5e/can5C09.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4671,7 +4760,7 @@ export default {
   },
   "can5C10": {
     "titre": "Décomposition en produit de facteurs premiers niveau 1",
-    "url": "/exercices/can/can5C10.js",
+    "url": "/exercices/can/5e/can5C10.js",
     "amcReady": false,
     "interactifReady": true,
     "interactifType": "mathLive",
@@ -4679,7 +4768,7 @@ export default {
   },
   "can5C11": {
     "titre": "Différence négative",
-    "url": "/exercices/can/can5C11.js",
+    "url": "/exercices/can/5e/can5C11.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4690,7 +4779,7 @@ export default {
   },
   "can5D01": {
     "titre": "Conversion Heures minutes",
-    "url": "/exercices/can/can5D01.js",
+    "url": "/exercices/can/5e/can5D01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4701,7 +4790,7 @@ export default {
   },
   "can5N01": {
     "titre": "Somme de nombres décimaux",
-    "url": "/exercices/can/can5N01.js",
+    "url": "/exercices/can/5e/can5N01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4710,9 +4799,20 @@ export default {
     "interactifType": "mathLive",
     "name": "can5N01"
   },
+  "canPredef5-1": {
+    "titre": "Course aux nombres début de 5e",
+    "url": "/exercices/can/5e/canPredef5-1.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "canPredef5-1"
+  },
   "can6C01": {
     "titre": "Ordre de grandeur",
-    "url": "/exercices/can/can6C01.js",
+    "url": "/exercices/can/6e/can6C01.js",
     "amcReady": true,
     "amcType": {
       "text": "qcmMono"
@@ -4723,7 +4823,7 @@ export default {
   },
   "can6C02": {
     "titre": "Nombre pair multiplié par 5",
-    "url": "/exercices/can/can6C02.js",
+    "url": "/exercices/can/6e/can6C02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4734,7 +4834,7 @@ export default {
   },
   "can6C03": {
     "titre": "Addition à trou",
-    "url": "/exercices/can/can6C03.js",
+    "url": "/exercices/can/6e/can6C03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4745,7 +4845,7 @@ export default {
   },
   "can6C04": {
     "titre": "Ajoute 10n + 9",
-    "url": "/exercices/can/can6C04.js",
+    "url": "/exercices/can/6e/can6C04.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4756,7 +4856,7 @@ export default {
   },
   "can6C05": {
     "titre": "Multiplier astucieusement",
-    "url": "/exercices/can/can6C05.js",
+    "url": "/exercices/can/6e/can6C05.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4767,7 +4867,7 @@ export default {
   },
   "can6C06": {
     "titre": "Division par 9",
-    "url": "/exercices/can/can6C06.js",
+    "url": "/exercices/can/6e/can6C06.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4778,7 +4878,7 @@ export default {
   },
   "can6C07": {
     "titre": "Reste de division par 3",
-    "url": "/exercices/can/can6C07.js",
+    "url": "/exercices/can/6e/can6C07.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4789,7 +4889,7 @@ export default {
   },
   "can6C08": {
     "titre": "Quart ou Tiers",
-    "url": "/exercices/can/can6C08.js",
+    "url": "/exercices/can/6e/can6C08.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4800,7 +4900,7 @@ export default {
   },
   "can6C09": {
     "titre": "Soustraire un nombre se finissant par 9",
-    "url": "/exercices/can/can6C09.js",
+    "url": "/exercices/can/6e/can6C09.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4811,7 +4911,7 @@ export default {
   },
   "can6C10": {
     "titre": "Tables de x du 5 au 9",
-    "url": "/exercices/can/can6C10.js",
+    "url": "/exercices/can/6e/can6C10.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4822,7 +4922,7 @@ export default {
   },
   "can6C11": {
     "titre": "Double ou triple (décimal)",
-    "url": "/exercices/can/can6C11.js",
+    "url": "/exercices/can/6e/can6C11.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4833,7 +4933,7 @@ export default {
   },
   "can6C12": {
     "titre": "Double ou triple",
-    "url": "/exercices/can/can6C12.js",
+    "url": "/exercices/can/6e/can6C12.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4844,7 +4944,7 @@ export default {
   },
   "can6C13": {
     "titre": "Somme de deux décimaux",
-    "url": "/exercices/can/can6C13.js",
+    "url": "/exercices/can/6e/can6C13.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4855,7 +4955,7 @@ export default {
   },
   "can6C14": {
     "titre": "Somme de quatre entiers qui se marient",
-    "url": "/exercices/can/can6C14.js",
+    "url": "/exercices/can/6e/can6C14.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4866,7 +4966,7 @@ export default {
   },
   "can6C15": {
     "titre": "Fraction comme facteur manquant",
-    "url": "/exercices/can/can6C15.js",
+    "url": "/exercices/can/6e/can6C15.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCHybride"
@@ -4877,7 +4977,7 @@ export default {
   },
   "can6C16": {
     "titre": "Double et moitié",
-    "url": "/exercices/can/can6C16.js",
+    "url": "/exercices/can/6e/can6C16.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4888,7 +4988,7 @@ export default {
   },
   "can6C17": {
     "titre": "Fraction simple de quantité",
-    "url": "/exercices/can/can6C17.js",
+    "url": "/exercices/can/6e/can6C17.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4899,7 +4999,7 @@ export default {
   },
   "can6C18": {
     "titre": "Reste de la division euclidienne",
-    "url": "/exercices/can/can6C18.js",
+    "url": "/exercices/can/6e/can6C18.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4910,7 +5010,7 @@ export default {
   },
   "can6C19": {
     "titre": "Complément à 100",
-    "url": "/exercices/can/can6C19.js",
+    "url": "/exercices/can/6e/can6C19.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4921,7 +5021,7 @@ export default {
   },
   "can6C20": {
     "titre": "Complément à 1",
-    "url": "/exercices/can/can6C20.js",
+    "url": "/exercices/can/6e/can6C20.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4932,7 +5032,7 @@ export default {
   },
   "can6C21": {
     "titre": "Complément à 1 Niveau 2",
-    "url": "/exercices/can/can6C21.js",
+    "url": "/exercices/can/6e/can6C21.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4943,7 +5043,7 @@ export default {
   },
   "can6C22": {
     "titre": "Valeurs décimales quarts et cinquièmes",
-    "url": "/exercices/can/can6C22.js",
+    "url": "/exercices/can/6e/can6C22.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4954,7 +5054,7 @@ export default {
   },
   "can6D01": {
     "titre": "Conversion Heures minutes",
-    "url": "/exercices/can/can6D01.js",
+    "url": "/exercices/can/6e/can6D01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4965,7 +5065,7 @@ export default {
   },
   "can6D02": {
     "titre": "Reste en minutes",
-    "url": "/exercices/can/can6D02.js",
+    "url": "/exercices/can/6e/can6D02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4976,7 +5076,7 @@ export default {
   },
   "can6D03": {
     "titre": "Calcul de durée en minutes",
-    "url": "/exercices/can/can6D03.js",
+    "url": "/exercices/can/6e/can6D03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -4987,7 +5087,7 @@ export default {
   },
   "can6M01": {
     "titre": "Question de périmètres",
-    "url": "/exercices/can/can6M01.js",
+    "url": "/exercices/can/6e/can6M01.js",
     "amcReady": true,
     "amcType": {
       "text": "qcmMono"
@@ -4998,7 +5098,7 @@ export default {
   },
   "can6M02": {
     "titre": "La bonne unité",
-    "url": "/exercices/can/can6M02.js",
+    "url": "/exercices/can/6e/can6M02.js",
     "amcReady": true,
     "amcType": {
       "text": "qcmMono"
@@ -5009,7 +5109,7 @@ export default {
   },
   "can6M03": {
     "titre": "Conversions en mètres",
-    "url": "/exercices/can/can6M03.js",
+    "url": "/exercices/can/6e/can6M03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5020,7 +5120,7 @@ export default {
   },
   "can6M04": {
     "titre": "Conversions en tous sens",
-    "url": "/exercices/can/can6M04.js",
+    "url": "/exercices/can/6e/can6M04.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5029,9 +5129,31 @@ export default {
     "interactifType": "mathLive",
     "name": "can6M04"
   },
+  "can6M05": {
+    "titre": "Conversions m$^3$ et litres",
+    "url": "/exercices/can/6e/can6M05.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can6M05"
+  },
+  "can6M06": {
+    "titre": "Périmètre d’une figure",
+    "url": "/exercices/can/6e/can6M06.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCNum"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can6M06"
+  },
   "can6N01": {
     "titre": "Recomposition entier",
-    "url": "/exercices/can/can6N01.js",
+    "url": "/exercices/can/6e/can6N01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5042,7 +5164,7 @@ export default {
   },
   "can6N02": {
     "titre": "Recomposition entier simple",
-    "url": "/exercices/can/can6N02.js",
+    "url": "/exercices/can/6e/can6N02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5053,7 +5175,7 @@ export default {
   },
   "can6N03": {
     "titre": "Recomposition entier moins simple",
-    "url": "/exercices/can/can6N03.js",
+    "url": "/exercices/can/6e/can6N03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5064,7 +5186,7 @@ export default {
   },
   "can6N04": {
     "titre": "Abscisse fractionnaire",
-    "url": "/exercices/can/can6N04.js",
+    "url": "/exercices/can/6e/can6N04.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCHybride"
@@ -5073,9 +5195,20 @@ export default {
     "interactifType": "mathLive",
     "name": "can6N04"
   },
+  "can6N05": {
+    "titre": "Chiffre des ...",
+    "url": "/exercices/can/6e/can6N05.js",
+    "amcReady": true,
+    "amcType": {
+      "text": "AMCHybride"
+    },
+    "interactifReady": true,
+    "interactifType": "mathLive",
+    "name": "can6N05"
+  },
   "can6P01": {
     "titre": "Proportionnalité simple",
-    "url": "/exercices/can/can6P01.js",
+    "url": "/exercices/can/6e/can6P01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5086,7 +5219,7 @@ export default {
   },
   "can6P02": {
     "titre": "Proportionnalité compliquée",
-    "url": "/exercices/can/can6P02.js",
+    "url": "/exercices/can/6e/can6P02.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5097,7 +5230,7 @@ export default {
   },
   "can6P03": {
     "titre": "Question de vitesse",
-    "url": "/exercices/can/can6P03.js",
+    "url": "/exercices/can/6e/can6P03.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5108,7 +5241,7 @@ export default {
   },
   "can6P04": {
     "titre": "Appliquer un pourcentage",
-    "url": "/exercices/can/can6P04.js",
+    "url": "/exercices/can/6e/can6P04.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5119,7 +5252,7 @@ export default {
   },
   "can6S01": {
     "titre": "Lecture de diagramme en barres",
-    "url": "/exercices/can/can6S01.js",
+    "url": "/exercices/can/6e/can6S01.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
@@ -5128,20 +5261,9 @@ export default {
     "interactifType": "mathLive",
     "name": "can6S01"
   },
-  "canPredef5-1": {
-    "titre": "Course aux nombres début de 5e",
-    "url": "/exercices/can/canPredef5-1.js",
-    "amcReady": true,
-    "amcType": {
-      "text": "AMCNum"
-    },
-    "interactifReady": true,
-    "interactifType": "mathLive",
-    "name": "canPredef5-1"
-  },
   "canPredef6-3": {
     "titre": "Course aux nombres fin de 6e",
-    "url": "/exercices/can/canPredef6-3.js",
+    "url": "/exercices/can/6e/canPredef6-3.js",
     "amcReady": true,
     "amcType": {
       "text": "AMCNum"
