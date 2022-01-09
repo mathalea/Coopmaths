@@ -1,0 +1,3 @@
+/*! For license information please see 4818.a0867bc822441abb0e69.js.LICENSE.txt */
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[4818],{4818:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>n,default:()=>c});var i=t(47960);const n="Calculer un antécédent par une fonction linéaire";function c(){i.default.call(this),this.nbQuestions=1,this.sup=1,this.sup2=2}}}]);
+//# sourceMappingURL=4818.a0867bc822441abb0e69.js.map

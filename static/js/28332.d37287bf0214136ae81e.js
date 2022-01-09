@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[28332],{28332:(a,e,t)=>{t.r(e),t.d(e,{titre:()=>c,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>s});var i=t(86377);const c="Équations du premier degré";function s(){i.default.call(this),this.sup=!0,this.sup2=4}}}]);
+//# sourceMappingURL=28332.d37287bf0214136ae81e.js.map

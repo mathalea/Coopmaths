@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[54950],{54950:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>u,default:()=>i});var s=a(55641);const u="Tester si un nombre est solution d’une équation du premier degré";function i(){s.default.call(this),this.exo="4L14-1",this.titre=u}}}]);
-//# sourceMappingURL=54950.e1a059318167e47034a3.js.map

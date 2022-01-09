@@ -1,0 +1,5 @@
+/*!
+ * @author Jean-Claude Lhote
+ * Date de publication septembre 2021
+ * Référence can6N01
+ */

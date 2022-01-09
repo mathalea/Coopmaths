@@ -1,0 +1,5 @@
+/*!
+ * @author Gilles Mora & Jean-Claude Lhote
+ * Créé pendant l'été 2021
+ * Référence can6N05
+ */

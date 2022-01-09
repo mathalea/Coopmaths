@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[2268],{2268:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>r,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>u});var i=t(43524);const r="Trouver l’image d’une figure par une symétrie axiale dans un pavage carré";function u(){i.default.call(this),this.titre=r,this.sup=1,this.besoinFormulaireNumerique=!1}}}]);
-//# sourceMappingURL=2268.0bd7aee5f7aeb8f73890.js.map

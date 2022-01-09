@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[70737],{70737:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>i,default:()=>l});var s=a(10496);const i="Utiliser le codage pour décrire une figure";function l(){s.default.call(this),this.titre=i,this.classe=6}}}]);
-//# sourceMappingURL=70737.c5f40f389271eb7ddea0.js.map

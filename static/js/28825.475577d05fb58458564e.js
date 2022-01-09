@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[28825],{28825:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>n,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,dateDePublication:()=>r,default:()=>c});var i=t(17116);const n="Trouver les coordonnée de l’image d’un point par une symétrie axiale ou centrale",r="28/10/2021";function c(){i.default.call(this),this.sup=2,this.sup2=!1,this.besoinFormulaire=!1,this.besoinFormulaire2=!1}}}]);
+//# sourceMappingURL=28825.475577d05fb58458564e.js.map

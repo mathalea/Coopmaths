@@ -76,6 +76,27 @@
         "md5Key": "6c336421548ff17f1ae4045d777c3676",
         "isEmailOk": true,
         "email": "sebastien.lozano@ac-nancy-metz.fr,lozanofamilia54@gmail.com"
+        },
+        {
+        "nom": "Aude Duvoid",
+        "codeProf": "DUV",
+        "md5Key": "25432f465e7bd410d4bc92ed18d40221",
+        "isEmailOk": true,
+        "email": "aude.duvoid@gmail.com"
+        },
+        {
+        "nom": "Laurence Candille",
+        "codeProf": "CAN",
+        "md5Key": "824d7b57150d6d6baef59392c52e9ad0",
+        "isEmailOk": true,
+        "email": "laurence.candille@gmail.com"
+        },
+        {
+        "nom": "Cyril LASCASSIES",
+        "codeProf": "CYL",
+        "md5Key": "509643f4a0c4aea5cf539b63c065f0cf",
+        "isEmailOk": true,
+        "email": "cyril.lascassies@ac-toulouse.fr"
         }
     ]
 }

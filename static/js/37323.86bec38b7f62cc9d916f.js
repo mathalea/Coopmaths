@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[37323],{37323:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>u,default:()=>i});var s=a(60111);const u="Construire l’image d’une figure par symétrie centrale";function i(){s.default.call(this),this.sup=2,this.sup2=1,this.figure=!0}}}]);
-//# sourceMappingURL=37323.86bec38b7f62cc9d916f.js.map

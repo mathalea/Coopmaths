@@ -60,15 +60,12 @@ Si vous n'êtes pas habitué·e à utiliser LaTeX, vous pouvez vous créer un co
 
 <h3 class="ui horizontal divider header" id="flash">Questions flash - Diaporama</h3>
 
-- Se rendre sur MathALEA > Diaporama.
-- Choisir le temps pour chaque questions.
-- Cliquer sur le titre de l'exercice choisi.
-- Choisir le nombre de questions.
-- Appuyer sur le bouton de lecture.
+- Se rendre sur Professeurs > Exercices en ligne.
+- Choisir les exercices et les paramétrer.
+- Cliquer sur [...] au-dessus des exercices pour paramétrer le temps par question puis choisir la vue diaporama/
+
 
 On peut donner un lien vers ce diaporama aux élèves en recopiant l'adresse internet qui comprend tous les réglages.
-
-{{% video "/mp4/diaporama.mp4"  %}}
 
 
 <h3 class="ui horizontal divider header" id="alacarte">Créer une évaluation différente pour chaque élève</h3>

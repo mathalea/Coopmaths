@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[73596],{73596:(t,a,e)=>{e.r(a),e.d(a,{titre:()=>i,default:()=>l});var s=e(39981);const i="Fractions irréductibles";function l(){s.default.call(this),this.titre=i}}}]);
+//# sourceMappingURL=73596.6c0cce389066aabb1876.js.map

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[97345],{97345:(a,e,t)=>{t.r(e),t.d(e,{titre:()=>c,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcType:()=>i.amcType,amcReady:()=>i.amcReady,dateDeModifImportante:()=>r,default:()=>n});var i=t(37272);const c="Arrondir une valeur",r="27/10/2021";function n(){i.default.call(this),this.sup=5}}}]);
+//# sourceMappingURL=97345.b6c59bc820b4491c850f.js.map

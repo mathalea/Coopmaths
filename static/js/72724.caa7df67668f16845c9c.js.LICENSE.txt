@@ -1,0 +1,4 @@
+/*!
+ * @author Jean-Claude Lhote
+ * Référence canc3D03
+ */

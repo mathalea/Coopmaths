@@ -11,7 +11,7 @@ Ce générateur d'exercices à données aléatoires est présenté dans cet <a h
 ### Crédits
 
 - Moteur développé par Rémi Angot sous licence **AGPL**.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Laurence Candille, Christophe Gombert, Éric Schrafstetter puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Gilles Mora, Laurence Candille, Christophe Gombert, Éric Schrafstetter, Éric Elter Frédéric Piou, Florence Tapiero, Jean-Léon Henry puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
 - MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence .**AGPL**.
 - Le passage à NodeJS et Webpack a été coordonné par Daniel Caillibaud (Sésamath).
 - La partie PHP pour la gestion des scores a été programmée par Sébastien Lozano.
@@ -98,6 +98,26 @@ Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub]
 
 ### Changelog
 
+#### 12/21
+
+- Arrivée de Florence Tapiero et Jean-Léon Henry dans l'équipe de programmeurs
+- Nouveaux exercices sur les transformations
+- Nouveaux exercices CAN et lycée
+
+#### 11/21
+
+- Arrivée de Frédéric Piou dans l'équipe des programmeurs
+- Réorganisation ergonomique avec une diminution du nombre de boutons
+- Nouvelle vue diapoarama qui peut être utilisée avec des questions provenant de plusieurs exercices
+- Nouvelle gestion du diaporama
+
+#### 09/21
+
+- Nouveaux exercices CAN
+- Nouveaux exercices en seconde et première (factorisation, forme canonique)
+- Arrivée d'Éric Elter pour un travail important de relecture et d'uniformisation des formulations et de la typographie
+- Les exercices peuvent maintenant avoir 4 paramètres supplémentaires de réglages
+
 #### 08/21
 
 - Sébastien Lozano finalise l'enregistrement des scores
@@ -118,6 +138,7 @@ Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub]
 #### 06/21
 
 - Arrivée de Guillaume Valmont pour le lien avec Anki et la programmation d'exercices
+- Arrivée de Gilles Mora pour le développement d'exercices de lycée et pour la Course aux nombres
 - Premiers travaux pour l'enregistrement des scores
 
 #### 05/21

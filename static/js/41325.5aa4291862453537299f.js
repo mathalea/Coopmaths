@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[41325],{41325:(t,a,e)=>{e.r(a),e.d(a,{titre:()=>s,interactifReady:()=>c,interactifType:()=>h,amcReady:()=>l,amcType:()=>u,default:()=>m});var i=e(72928);const s="Calculs de volumes",c=!0,h=["qcm","mathLive"],l=!0,u="AMCNum";function m(){i.default.call(this),this.titre=s,this.amcReady=l,this.amcType=u,this.interactifReady=c,this.interactifType=h,this.sup=1,this.classe=4}}}]);
-//# sourceMappingURL=41325.5aa4291862453537299f.js.map

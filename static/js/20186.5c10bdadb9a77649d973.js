@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[20186,23215,9418,51142],{2244:(t,a,e)=>{e.r(a),e.d(a,{titre:()=>l,default:()=>h});var s=e(8572);const l="Tracer des parallèles";function h(){s.default.call(this),this.titre=l,this.sup=1,this.type=2}}}]);
-//# sourceMappingURL=20186.5c10bdadb9a77649d973.js.map

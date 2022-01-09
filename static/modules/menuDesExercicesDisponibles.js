@@ -4,26 +4,33 @@ import dictionnaireDesExercicesAleatoires from './dictionnaireDesExercicesAleato
 import { dictionnaireC3 } from './dictionnaireC3.js'
 import { dictionnaireDNB } from './dictionnaireDNB.js'
 import { dictionnaireLycee } from './dictionnaireLycee.js'
+import { dictionnaireCrpe } from './dictionnaireCrpe.js'
 import $ from 'jquery'
 import 'datatables.net-dt/css/jquery.dataTables.css'
 import { getFilterFromUrl, getVueFromUrl } from './gestionUrl.js'
 import renderMathInElement from 'katex/dist/contrib/auto-render.js'
 import { context } from './context.js'
 
-// Liste tous les tags qui ont été utilisé
-const tags = new Set()
-for (const item in dictionnaireDNB) {
-  for (const k of dictionnaireDNB[item].tags) {
-    tags.add(k)
+// Liste tous les tags qui ont été utilisé dans un dictionnaire
+function dictionnaireToTableauTags (dictionnaire) {
+  const tags = new Set()
+  for (const item in dictionnaire) {
+    for (const k of dictionnaire[item].tags) {
+      tags.add(k)
+    }
   }
+  // transforme le set en tableau dans l'ordre alphabétique
+  return ([...tags].sort((a, b) => { return a.localeCompare(b) })) // Ordre alphabétique avec localCompare pour tenir compte des accents
 }
-// transforme le set en tableau dans l'ordre alphabétique
-const tableauTags = ([...tags].sort())
+
+const tableauTags = dictionnaireToTableauTags(dictionnaireDNB)
 enleveElement(tableauTags, "Système d'équations")
 enleveElement(tableauTags, 'Hors programme')
 
+const tableauTagsCrpe = dictionnaireToTableauTags(dictionnaireCrpe)
+
 // On concatène les différentes listes d'exercices
-export const dictionnaireDesExercices = { ...dictionnaireDesExercicesAleatoires, ...dictionnaireDNB, ...dictionnaireC3, ...dictionnaireLycee }
+export const dictionnaireDesExercices = { ...dictionnaireDesExercicesAleatoires, ...dictionnaireDNB, ...dictionnaireC3, ...dictionnaireLycee, ...dictionnaireCrpe }
 let listeDesExercicesDisponibles
 if (getVueFromUrl() === 'amc') {
   const dictionnaireDesExercicesAMC = {}
@@ -61,7 +68,12 @@ function spanExercice (id, titre) {
     : ''
   const titreTronque = titre.length > maxLength ? titre.substr(0, maxLength) + '...' : titre
   const amcPrecisionType = context.isAmc ? `<span style="color:#f15929;"> ${listeDesExercicesDisponibles[id].amcType.text} </span>` : ''
-  return `<span class="id_exercice">${id}</span> - <a class="ui bouton lien_id_exercice" ${tooltip} data-id_exercice="${id}">${titreTronque} ${amcPrecisionType ? '-' + amcPrecisionType : ''}</a></a><span data-content="Prévisualiser l'exercice."><i id="${id}" class="eye icon icone_preview" size="mini"></i></span></br>\n`
+  const filtre = getFilterFromUrl()
+  const vue = getVueFromUrl()
+  const iconeInteractifDisponible = (listeDesExercicesDisponibles[id].interactifReady && filtre !== 'interactif' && vue !== 'latex' && vue !== 'amc') ? `<span data-tooltip="Version interactive disponible."><a class="ui bouton lien_id_exercice" data-id_exercice="${id}" data-mode="interactif"><i id="${id}" class="keyboard outline icon orange" size="mini"></i></a></span>` : ''
+  const tagNew = (listeDesExercicesDisponibles[id].newEx !== undefined && listeDesExercicesDisponibles[id].newEx.isNew) ? listeDesExercicesDisponibles[id].newEx.tag : ''
+  const tagFeat = (listeDesExercicesDisponibles[id].updateEx !== undefined && listeDesExercicesDisponibles[id].updateEx.isNewFeat) ? listeDesExercicesDisponibles[id].updateEx.tag : ''
+  return `<span class="id_exercice">${id}</span> - ${tagNew} ${tagFeat} <a class="ui bouton lien_id_exercice" ${tooltip} data-id_exercice="${id}">${titreTronque} ${amcPrecisionType ? '-' + amcPrecisionType : ''}</a></a>${iconeInteractifDisponible}<span data-content="Prévisualiser l'exercice."><i id="${id}" class="eye icon icone_preview" size="mini"></i></span></br>\n`
 }
 
 function listeHtmlDesExercicesDUnTheme (theme) {
@@ -69,7 +81,10 @@ function listeHtmlDesExercicesDUnTheme (theme) {
   // Appelée lorsqu'on fait la liste par niveau
   let liste = ''
   const dictionnaire = filtreDictionnaire(listeDesExercicesDisponibles, theme)
-  const filtre = getFilterFromUrl()
+  let filtre = getFilterFromUrl()
+  if (getVueFromUrl() === 'moodle') {
+    filtre = 'interactif'
+  }
   for (const id in dictionnaire) {
     if (filtre === 'interactif') {
       // avant il y avait un focntionnement avec qcmInteractif qui devient interactifReady cf commit f59bb8e
@@ -85,13 +100,43 @@ function listeHtmlDesExercicesDUnTheme (theme) {
   }
   return liste
 }
+function aCrpe (id, dictionnaire, mode) {
+  // donne la ligne pour un exercice d'annale de Crpe lorsqu'on les regarde par année.
+  if (mode === 'annee') {
+    return `<a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${id}">${dictionnaire[id].lieu} -  ${dictionnaire[id].numeroInitial}</a> ${listeHtmlDesTags(dictionnaire[id])} </br>\n`
+  } else {
+    return `<a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${id}">${dictionnaire[id].annee} - ${dictionnaire[id].lieu} -  ${dictionnaire[id].numeroInitial}</a> ${listeHtmlDesTags(dictionnaire[id])} </br>\n`
+  }
+}
 function aDnb (id, dictionnaire, mode) {
   // donne la ligne pour un exercice dnb lorsqu'on les regarde par année.
   if (mode === 'annee') {
-    return `<a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${id}">${dictionnaire[id].lieu} - ${dictionnaire[id].mois} -  Ex ${dictionnaire[id].numeroExercice}</a> ${listeHtmlDesTags(dictionnaire[id])} <i id="${id}" class="eye icon icone_preview"></i></br>\n`
+    return `<a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${id}">${dictionnaire[id].lieu} - ${dictionnaire[id].mois} -  Ex ${dictionnaire[id].numeroInitial}</a> ${listeHtmlDesTags(dictionnaire[id])} <i id="${id}" class="eye icon icone_preview"></i></br>\n`
   } else {
-    return `<a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${id}">${dictionnaire[id].annee} - ${id.substr(9, 2)} - ${dictionnaire[id].lieu} - Ex ${dictionnaire[id].numeroExercice}</a> ${listeHtmlDesTags(dictionnaire[id])} <i id="${id}" class="eye icon icone_preview"></i></br>\n`
+    return `<a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${id}">${dictionnaire[id].annee} - ${id.substr(9, 2)} - ${dictionnaire[id].lieu} - Ex ${dictionnaire[id].numeroInitial}</a> ${listeHtmlDesTags(dictionnaire[id])} <i id="${id}" class="eye icon icone_preview"></i></br>\n`
   }
+}
+function listeHtmlDesExercicesCrpeAnnee (annee) {
+  let liste = ''
+  const dictionnaire = filtreDictionnaireValeurCle(dictionnaireCrpe, 'annee', annee)
+  for (const id in dictionnaire) {
+    liste += aCrpe(id, dictionnaire, 'annee')
+  }
+  return liste
+}
+function listeHtmlDesExercicesCrpeTheme (theme) {
+  let liste = ''
+  const dictionnaire = filtreDictionnaireValeurTableauCle(dictionnaireCrpe, 'tags', theme)
+  let tableauDesExercices = []
+  for (const id in dictionnaire) {
+    tableauDesExercices.push(id)
+  }
+  // On créé un tableau "copie" du dictionnaire pour pouvoir le trier dans l'inverse de l'ordre alphabétique et faire ainsi apparaitre les exercices les plus récents
+  tableauDesExercices = tableauDesExercices.sort().reverse()
+  for (const id of tableauDesExercices) {
+    liste += aCrpe(id, dictionnaire, 'theme')
+  }
+  return liste
 }
 function listeHtmlDesExercicesDNBAnnee (annee) {
   let liste = ''
@@ -127,17 +172,35 @@ function listeHtmlDesExercicesDUnNiveau (listeDeThemes) { // liste_de_themes = [
 }
 function listeHtmlDesExercicesDUnNiveauAvecSousTheme (listeDeThemes) { // liste_de_themes = [['6N1','6N1 - Numérations et fractions niveau 1'] , [' ',' '] ]
   // Appelée par la fonction menuDesExercicesDisponibles
-  let liste = ''
+  let liste = '<div class="accordion transition">'
   for (const theme of listeDeThemes) {
-    liste += `<h3 style="background-color:#f15929; color:white">${theme[1]}</h3>`
+    liste += `<div class="title"><h3><i class="dropdown icon"></i>${theme[1]}</h3></div>`
+    liste += '<div class="content">'
     for (let i = 2; i < theme.length; i++) {
       liste += `<h4 style="color:#f15929">${theme[i]}</h4>`
-      liste += listeHtmlDesExercicesDUnTheme(theme[i].substr(0, 4))
+      if (theme[0].substr(0, 5) === 'canc3') {
+        liste += listeHtmlDesExercicesDUnTheme(theme[i].substr(0, 6))
+      } else if (theme[0].substr(0, 3) === 'can') {
+        liste += listeHtmlDesExercicesDUnTheme(theme[i].substr(0, 5))
+      } else {
+        liste += listeHtmlDesExercicesDUnTheme(theme[i].substr(0, 4))
+      }
     }
+    liste += '</div>'
   }
+  liste += '</div>'
   return liste
 }
-
+function getListeHtmlDesExercicesCrpe () {
+  let liste = '<div class="accordion">'
+  for (const annee of ['2016', '2017']) {
+    liste += `<div class="title"><i class="dropdown icon"></i> ${annee}</div><div class="content">`
+    liste += listeHtmlDesExercicesCrpeAnnee(annee)
+    liste += '</div>'
+  }
+  liste += '</div>'
+  return liste
+}
 function getListeHtmlDesExercicesDNB () {
   let liste = '<div class="accordion">'
   for (const annee of ['2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013']) {
@@ -159,33 +222,48 @@ function getListeHtmlDesExercicesDNBTheme () {
     //   "Arithmétique",
     //   "Calcul littéral",
     //   "Calculs numériques",
-    //   "Géométrie dans l'espace",
     //   "Durées",
     //   "Équations",
-    //   "Fractions",
     //   "Fonctions",
+    //   "Fractions",
+    //   "Géométrie dans l'espace",
     //   "Géométrie plane",
     //   "Grandeurs composées",
+    //   "Lecture graphique",
     //   "Pourcentages",
     //   "Prise d'initiatives",
-    //   "Programme de calculs",
     //   "Probabilités",
+    //   "Programme de calculs",
     //   "Proportionnalité",
     //   "Puissances",
     //   "Pythagore",
     //   "QCM",
+    //   "Recherche d'informations",
+    //   "Statistiques",
+    //   "Tableur",
     //   "Thalès",
     //   "Transformations",
     //   "Trigonométrie",
     //   "Vitesses",
     //   "Volumes",
-    //   "Vrai-faux",
-    //   "Statistiques",
-    //   "Tableur"
+    //   "Vrai-faux"
     // ]){
     liste += `<div class="title"><i class="dropdown icon"></i> ${theme}</div><div class="content">`
     liste += listeHtmlDesExercicesDNBTheme(theme)
     liste += '</div>'
+  }
+  liste += '</div>'
+  return liste
+}
+function getListeHtmlDesExercicesCrpeTheme () {
+  let liste = '<div class="accordion">'
+  for (const theme of tableauTagsCrpe) {
+    const listeHtml = listeHtmlDesExercicesCrpeTheme(theme)
+    if (listeHtml.length > 1) {
+      liste += `<div class="title"><i class="dropdown icon"></i> ${theme}</div><div class="content">`
+      liste += listeHtml
+      liste += '</div>'
+    }
   }
   liste += '</div>'
   return liste
@@ -208,7 +286,7 @@ function listeHtmlDesTags (objet) {
 function divNiveau (obj, active, id) {
   // construction de la div contenant l'ensemble d'un niveau.
   let nombreExo = ''
-  if (id !== 'DNB' && id !== 'DNBtheme') {
+  if (id !== 'DNB' && id !== 'DNBtheme' && id !== 'CRPE' && id !== 'CrpeTheme') {
     nombreExo = '(' + obj.nombre_exercices_dispo + ')'
   }
   return `<div id=${id} class="${active ? 'active title fermer_niveau' : 'title ouvrir_niveau'}"><i class="dropdown icon"></i>${obj.label} ${nombreExo}</div><div id="content${id}" class="${active} content">${active ? obj.liste_html_des_exercices : ''}</div>`
@@ -217,9 +295,16 @@ function divNiveau (obj, active, id) {
 function addExercice (e) {
   // fonction ajout d'un exercice : ajoute l'exercice dans l'input avec la liste des exercice et provoque l'evt change pour recalcul de la page.
   // utilisée lors du clic sur le nom d'un exercice.
+  if ($(e.target).parents('a.lien_id_exercice').attr('data-mode') === 'interactif' || $(e.target).attr('data-mode') === 'interactif') {
+    if (!document.getElementById('exoModeInteractif')) {
+      $('#choix_exercices_menu').append('<span style="display:none" id="exoModeInteractif">ModeInteractifActivé</span>')
+    }
+  } else {
+    $('#exoModeInteractif').remove()
+  }
   const numero = $(e.target).attr('data-id_exercice') ? $(e.target).attr('data-id_exercice') : $(e.target).parents('a.lien_id_exercice').attr('data-id_exercice')
-  if ($('#choix_des_exercices').val() === '') {
-    $('#choix_des_exercices').val($('#choix_des_exercices').val() + numero)
+  if ($('#choix_des_exercices').val() === '' || context.vue === 'alc') { // Pour a la carte on ne selectionne qu'un seul exercice pour choisir ses paramètres.
+    $('#choix_des_exercices').val(numero)
   } else {
     $('#choix_des_exercices').val(
       $('#choix_des_exercices').val() + ',' + numero
@@ -252,7 +337,7 @@ export function apparenceExerciceActif () {
     $('.delexercice').remove()
     listeExercicesSelectionnes = listeExercicesSelectionnes.value.split(',')
     for (let i = 0; i < listeExercicesSelectionnes.length; i++) {
-      const elemListe = $(`a.lien_id_exercice[data-id_exercice='${listeExercicesSelectionnes[i]}']`)
+      const elemListe = $(`a.lien_id_exercice[data-id_exercice='${listeExercicesSelectionnes[i]}']:not([data-mode])`)
       // Si un exercice a été mis plus d'une fois, on affiche le nombre de fois où il est demandé
       if (compteOccurences(listeExercicesSelectionnes, listeExercicesSelectionnes[i]) > 1) {
       // Ajout de first() car un exercice de DNB peut apparaitre à plusieurs endroits
@@ -267,7 +352,7 @@ export function apparenceExerciceActif () {
         }
       }
       if (!elemListe.hasClass('exerciceactif')) {
-        elemListe.after(`<span data-tooltip="Supprimer le dernière occurence de l'exercice." class="delexercice"><i class="minus square icon delexercice" id="del¤${listeExercicesSelectionnes[i]}" ></i></span>`)
+        elemListe.after(`<span data-tooltip="Supprimer la dernière occurence de l'exercice." class="delexercice"><i class="minus square icon delexercice" id="del¤${listeExercicesSelectionnes[i]}" ></i></span>`)
       }
       elemListe.addClass('exerciceactif')
     }
@@ -304,25 +389,26 @@ function ligneTableau (exercice) {
   let ligne = ''
   const modeAmc = dictionnaireDesExercices[exercice].amcReady ? `AMC <b>${dictionnaireDesExercices[exercice].amcType.text}</b>` : ''
   // avant il y avait un focntionnement avec qcmInteractif qui devient interactifReady cf commit f59bb8e
-  const modeInteractif = dictionnaireDesExercices[exercice].interactifReady ? ' Interactif' : ''
+  const modeInteractif = dictionnaireDesExercices[exercice].interactifReady ? `<a class="ui bouton lien_id_exercice" data-id_exercice="${exercice}" data-mode="interactif"> Interactif </a>` : ''
+  const tagNew = (dictionnaireDesExercices[exercice].newEx !== undefined && dictionnaireDesExercices[exercice].newEx.isNew) ? dictionnaireDesExercices[exercice].newEx.tag : ''
+  const tagFeat = (dictionnaireDesExercices[exercice].updateEx !== undefined && dictionnaireDesExercices[exercice].updateEx.isNewFeat) ? dictionnaireDesExercices[exercice].updateEx.tag : ''
   if (dictionnaireDesExercices[exercice].titre) {
     if (context.isAmc) {
-      ligne = `<tr><td class="colonnecode"><span class="id_exercice">${exercice}
+      ligne = `<tr><td class="colonnecode"><span class="id_exercice">${exercice} <br> ${tagNew} ${tagFeat}
       </span></td> <td> <a class="lien_id_exercice" data-id_exercice="${exercice}">${dictionnaireDesExercices[exercice].titre}
       </a></td><td> ${modeAmc} <br> ${modeInteractif}
       </td><td data-tooltip="Prévisualiser l'exercice."><i id="${exercice}" class="eye icon icone_preview" ></td></tr>`
     } else {
-      ligne = `<tr><td class="colonnecode"><span class="id_exercice">${exercice}
+      ligne = `<tr><td class="colonnecode"><span class="id_exercice">${exercice} <br> ${tagNew} ${tagFeat}
       </span></td> <td> <a class="lien_id_exercice" data-id_exercice="${exercice}">${dictionnaireDesExercices[exercice].titre}
       </a></td><td> ${modeAmc} ${modeInteractif}
       </td><td data-tooltip="Prévisualiser l'exercice."><i id="${exercice}" class="eye icon icone_preview" ></td></tr>`
     }
   } else {
-    ligne = '<tr><td class="colonnecode"><span class="id_exercice">' +
-    exercice +
-    '</span></td> <td>' +
-    `<a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${exercice}">${dictionnaireDesExercices[exercice].annee} - ${exercice.substr(9, 2)} - ${dictionnaireDesExercices[exercice].lieu} - Ex ${dictionnaireDesExercices[exercice].numeroExercice}</a> ${listeHtmlDesTags(dictionnaireDesExercices[exercice])} </br>\n` +
-    '</td><td></td><td><i id=' + exercice + ' class="eye icon icone_preview"></i></td></tr>'
+    ligne = `<tr><td class="colonnecode"><span class="id_exercice">${exercice}<br>${tagNew}${tagFeat}
+    </span></td> <td><a style="line-height:2.5" class="lien_id_exercice" data-id_exercice="${exercice}">${dictionnaireDesExercices[exercice].annee} - ${exercice.substr(9, 2)} - ${dictionnaireDesExercices[exercice].lieu} - Ex ${dictionnaireDesExercices[exercice].numeroInitial}
+    </a> ${listeHtmlDesTags(dictionnaireDesExercices[exercice])} </br>\n
+    </td><td></td><td><i id=${exercice} class="eye icon icone_preview"></i></td></tr>`
   }
   return ligne
 }
@@ -354,11 +440,18 @@ export function menuDesExercicesDisponibles () {
     document.getElementById('liste_des_exercices').innerHTML = ''
   }
   const listeThemesCan = [
-    ['can6', 'can6 - Course aux nombres niveau 6e'], ['can5', 'can5 - Course aux nombres niveau 5e'], ['can4', 'can4 - Course aux nombres niveau 4e'],
-    ['can3', 'can3 - Course aux nombres niveau 3e'], ['can2', 'can2 - Course aux nombres niveau 2e'], ['can1', 'can1 - Course aux nombres niveau 1e'],
-    ['canT', 'canT - Course aux nombres niveau Terminale'], ['canP', 'canPredef - Courses aux nombres clé en main']]
+    ['canc3', 'canc3 - Course aux nombres niveau CM1-CM2', 'canc3C - Calculs', 'canc3D - Durées', 'canc3M - Mesures', 'canc3N - Numération'],
+    ['can6', 'can6 - Course aux nombres niveau 6e', 'can6C - Calculs', 'can6D - Durées', 'can6G - Géométrie', 'can6I - Algorithmique', 'can6M - Mesures', 'can6N - Numération', 'can6P - Proportionnalité', 'can6S - Statistiques'],
+    ['can5', 'can5 - Course aux nombres niveau 5e', 'can5A - Algorithmes', 'can5C - Calculs', 'can5D - Durées', 'can5G - Géométrie', 'can5M - Mesures', 'can5N - Numération', 'can5P - Proportionnalité', 'can5S - Statistiques'],
+    ['can4', 'can4 - Course aux nombres niveau 4e', 'can4C - Calculs', 'can4D - Durées', 'can4G - Géométrie', 'can4L - Calcul littéral', 'can4N - Numération', 'can4P - Proportionnalité', 'can4S - Statistiques'],
+    ['can3', 'can3 - Course aux nombres niveau 3e', 'can3C - Calculs', 'can3E - Équations', 'can3F - Fonctions', 'can3G - Géométrie', 'can3L - Calcul littéral', 'can3M - Mesures', 'can3N - Numération', 'can3P - Proportionnalité', 'can3S - Statistiques & probabilités'],
+    ['can2', 'can2 - Course aux nombres niveau 2e', 'can2C - Calculs', 'can2F - Fonctions', 'can2G - Géométrie', 'can2L - Calcul littéral', 'can2N - Numération', 'can2P - Probabilités'],
+    ['can1', 'can1 - Course aux nombres niveau 1e', 'can1C - Calculs', 'can1F - Fonctions', 'can1G - Géométrie', 'can1L - Calcul littéral', 'can1N - Numération', 'can1P - Proportionnalité', 'can1S - Statistiques et probabilités'],
+    ['canT', 'canT - Course aux nombres niveau Terminale'],
+    ['canEx', 'canExpert - Course aux nombres niveau Terminale expert'],
+    ['canP', 'canPredef - Courses aux nombres clé en main']]
   const listeThemesC3 = [
-    ['c3C1', 'c3C1 - Calculs niveau 1'], ['c3C2', 'c3C2 - Calculs niveau 2'], ['c3C3', 'c3C3 - Calculs niveau 3'],
+    ['c3C1', 'c3C1 - Calculs niveau 1'], ['c3C2', 'c3C2 - Calculs niveau 2'], ['c3C3', 'c3C3 - Calculs niveau 3'], ['c3I1', 'c3I1 - Algorithmique'],
     ['c3N1', 'c3N1 - Numération Niveau 1'], ['c3N2', 'c3N2 - Numération Niveau 2'], ['c3N3', 'c3N3 - Numération Niveau 3']]
   const listeThemes6 = [
     ['6C1', '6C1 - Calculs niveau 1'], ['6C2', '6C2 - Calculs niveau 2'], ['6C3', '6C3 - Calculs niveau 3'],
@@ -371,12 +464,14 @@ export function menuDesExercicesDisponibles () {
   const listeThemes5 = [
     ['5A1', '5A1 - Arithmetique'], ['5C1', '5C1 - Calculs'],
     ['5G1', '5G1 - Symétries'], ['5G2', '5G2 - Triangles'], ['5G3', '5G3 - Angles'], ['5G4', '5G4 - Parallélogrammes'], ['5G5', '5G5 - Espace'],
+    ['5I1', '5I1 - Algorithmique'],
     ['5L1', '5L1 - Calcul littéral'],
     ['5M1', '5M1 - Périmètres et aires'], ['5M2', '5M2 - Volumes'], ['5M3', '5M3 - Durées'],
     ['5N1', '5N1 - Numération et fractions niveau 1'], ['5N2', '5N2 - Calculs avec les fractions'],
     ['5P1', '5P1 - Proportionnalité'], ['5R1', '5R1 - Relatifs niveau 1'], ['5R2', '5R2 - Relatifs niveau 2'],
     ['5S1', '5S1 - Statistiques'], ['5S2', '5S2 - Probabilités']]
   const listeThemes4 = [
+    ['4A1', '4A1 - Arithmétique'],
     ['4C1', '4C1 - Relatifs'], ['4C2', '4C2 - Fractions'], ['4C3', '4C3 - Puissances'],
     ['4F1', '4F1 - Notion de fonction'],
     ['4G1', '4G1 - Translation et rotation'], ['4G2', '4G2 - Théorème de Pythagore'], ['4G3', '4G3 - Théorème de Thalès'], ['4G4', "4G4 - Cosinus d'un angle"], ['4G5', '4G5 - Espace'],
@@ -413,11 +508,11 @@ export function menuDesExercicesDisponibles () {
       '2G24 - Calculer les coordonnées d’une somme de vecteurs, d’un produit d’un vecteur par un nombre réel',
       '2G25 - Caractériser alignement et parallélisme par la colinéarité de vecteurs',
       '2G26 - Résoudre des problèmes en utilisant la représentation la plus adaptée des vecteurs'],
-    ['2G3', '2G3 - Représenter et caractériser les droites du plan', '2G31 - Déterminer une équation de droite à partir de deux points, un point et un vecteur directeur ou un point et la pente',
-      '2G32 - Déterminer la pente ou un vecteur directeur d’une droite donnée par une équation ou une représentation graphique',
-      '2G33 - Tracer une droite connaissant son équation cartésienne ou réduite',
-      '2G34 - Établir alignement et parallélisme',
-      '2G35 - Résoudre un système de deux équations linéaires à deux inconnues, déterminer le point d’intersection de deux droites sécantes'],
+    ['2G3', '2G3 - Représenter et caractériser les droites du plan', '2G30 - Déterminer une équation de droite à partir de deux points, un point et un vecteur directeur ou un point et la pente',
+      '2G31 - Déterminer la pente ou un vecteur directeur d’une droite donnée par une équation ou une représentation graphique',
+      '2G32 - Tracer une droite connaissant son équation cartésienne ou réduite',
+      '2G33 - Établir alignement et parallélisme',
+      '2G34 - Résoudre un système de deux équations linéaires à deux inconnues, déterminer le point d’intersection de deux droites sécantes'],
     ['2N1', '2N1 - Manipuler les nombres réels', '2N10 - Associer à chaque point de la droite graduée un unique nombre réel et réciproquement',
       '2N11 - Représenter un intervalle de la droite numérique. Déterminer si un nombre réel appartient à un intervalle donné',
       '2N12 - Donner un encadrement, d’amplitude donnée, d’un nombre réel par des décimaux',
@@ -446,11 +541,18 @@ export function menuDesExercicesDisponibles () {
       '2S30 - Calculer des probabilités dans des cas simples'],
     ['2S4', '2S4 - Échantillonnage']
   ]
+  const listeThemesEx = [
+    ['ExC1', 'ExC1 - Calculs avec nombres complexes'], ['ExE1', 'ExE1 - Équations'], ['ExL1', 'ExL1 - Calcul littéral']
+  ]
+  const listeThemesHP = [
+    ['HPC1', 'HPC1 - Calculs']
+  ]
+
   const objExercicesDisponibles = {
     ca: {
       label: 'Course aux nombres',
       nombre_exercices_dispo: 0,
-      liste_html_des_exercices: listeHtmlDesExercicesDUnNiveau(listeThemesCan),
+      liste_html_des_exercices: listeHtmlDesExercicesDUnNiveauAvecSousTheme(listeThemesCan),
       lignes_tableau: ''
     },
     c3: {
@@ -519,6 +621,12 @@ export function menuDesExercicesDisponibles () {
       liste_html_des_exercices: '',
       lignes_tableau: ''
     },
+    Ex: {
+      label: 'Terminale expert',
+      nombre_exercices_dispo: 0,
+      liste_html_des_exercices: listeHtmlDesExercicesDUnNiveau(listeThemesEx),
+      lignes_tableau: ''
+    },
     be: {
       label: 'Beta',
       nombre_exercices_dispo: 0,
@@ -536,6 +644,24 @@ export function menuDesExercicesDisponibles () {
       nombre_exercices_dispo: 0,
       liste_html_des_exercices: '',
       lignes_tableau: ''
+    },
+    HP: {
+      label: 'Hors programme Lycée',
+      nombre_exercices_dispo: 0,
+      liste_html_des_exercices: listeHtmlDesExercicesDUnNiveau(listeThemesHP),
+      lignes_tableau: ''
+    },
+    CRPE: {
+      label: 'Concours CRPE corrigés par la Copirelem (classés par année)',
+      nombre_exercices_dispo: 0,
+      liste_html_des_exercices: getListeHtmlDesExercicesCrpe(),
+      lignes_tableau: ''
+    },
+    CrpeTheme: {
+      label: 'Concours CRPE corrigés par la Copirelem (classés par thème)',
+      nombre_exercices_dispo: 0,
+      liste_html_des_exercices: getListeHtmlDesExercicesCrpeTheme(),
+      lignes_tableau: ''
     }
   }
 
@@ -544,7 +670,7 @@ export function menuDesExercicesDisponibles () {
 
   // Calcul et comptage des lignes
   for (const id in listeDesExercicesDisponibles) {
-    if ((id[0] === 'c' && id[1] === 'a') || (id[0] === 'c' && id[1] === '3') || (id[0] === 'P' && id[1] === '0') || (id[0] === 'P' && id[1] === 'E') || (id[0] === 'b' && id[1] === 'e')) {
+    if ((id[0] === 'c' && id[1] === 'a') || (id[0] === 'c' && id[1] === '3') || (id[0] === 'P' && id[1] === '0') || (id[0] === 'P' && id[1] === 'E') || (id[0] === 'b' && id[1] === 'e') || (id[0] === 'E' && id[1] === 'x') || (id[0] === 'H' && id[1] === 'P')) {
       if (filtre === 'interactif') {
         // avant il y avait un focntionnement avec qcmInteractif qui devient interactifReady cf commit f59bb8e
         if (dictionnaireDesExercices[id].interactifReady) {
@@ -588,6 +714,11 @@ export function menuDesExercicesDisponibles () {
         objExercicesDisponibles.DNB.lignes_tableau += ligneTableau(id)
       }
     }
+    if (id[0] === 'c' && id[1] === 'r' && id[2] === 'p' && id[3] === 'e') {
+      if (filtre !== 'interactif') {
+        objExercicesDisponibles.CRPE.lignes_tableau += ligneTableau(id)
+      }
+    }
   }
 
   listeHtmlDesExercices = '<div class="ui accordion">'
@@ -598,7 +729,7 @@ export function menuDesExercicesDisponibles () {
     listeHtmlDesExercicesTab += objExercicesDisponibles.be.lignes_tableau
   } else if (context.vue === 'cm') {
     htmlAffichage = htmlListes({
-      liste_affichage: ['ca', 'C', 'c3', 6, 5, 4, 3, 2, 1, 'T', 'PE'],
+      liste_affichage: ['ca', 'C', 'c3', 6, 5, 4, 3, 2, 1, 'T', 'Ex', 'HP', 'PE'],
       active: 'C',
       obj_ex: objExercicesDisponibles
     })
@@ -608,6 +739,11 @@ export function menuDesExercicesDisponibles () {
     listeHtmlDesExercices += divNiveau(objExercicesDisponibles.P0, 'active', 'P0')
     listeHtmlDesExercices += '</div>'
     listeHtmlDesExercicesTab += objExercicesDisponibles.P0.lignes_tableau
+  } else if (context.vue === 'crpe') {
+    listeHtmlDesExercices += divNiveau(objExercicesDisponibles.CRPE, 'active', 'CRPE')
+    listeHtmlDesExercices += divNiveau(objExercicesDisponibles.CrpeTheme, 'active', 'CrpeTheme')
+    listeHtmlDesExercices += '</div>'
+    listeHtmlDesExercicesTab += objExercicesDisponibles.CRPE.lignes_tableau
   } else if (filtre === 'dnb') {
     listeHtmlDesExercices += divNiveau(objExercicesDisponibles.DNB, 'active', 'DNB')
     listeHtmlDesExercices += divNiveau(objExercicesDisponibles.DNBtheme, 'active', 'DNBtheme')
@@ -627,7 +763,7 @@ export function menuDesExercicesDisponibles () {
     listeHtmlDesExercicesTab += htmlAffichage.lignes
   } else if (filtre === 'lycee') {
     htmlAffichage = htmlListes({
-      liste_affichage: ['ca', 2, 1, 'T'],
+      liste_affichage: ['ca', 2, 1, 'T', 'Ex'],
       active: '',
       obj_ex: objExercicesDisponibles
     })
@@ -643,7 +779,7 @@ export function menuDesExercicesDisponibles () {
     listeHtmlDesExercicesTab += htmlAffichage.lignes
   } else if (context.isAmc) {
     htmlAffichage = htmlListes({
-      liste_affichage: ['ca', 'c3', 6, 5, 4, 3, 2, 1, 'T', 'PE', 'C'],
+      liste_affichage: ['ca', 'c3', 6, 5, 4, 3, 2, 1, 'T', 'Ex', 'HP', 'PE', 'C'],
       active: '',
       obj_ex: objExercicesDisponibles
     })
@@ -651,7 +787,7 @@ export function menuDesExercicesDisponibles () {
     listeHtmlDesExercicesTab += htmlAffichage.lignes
   } else {
     htmlAffichage = htmlListes({
-      liste_affichage: ['ca', 'c3', 6, 5, 4, 3, 'DNB', 'DNBtheme', 2, 1, 'T', 'PE', 'C'],
+      liste_affichage: ['ca', 'c3', 6, 5, 4, 3, 'DNB', 'DNBtheme', 2, 1, 'T', 'Ex', 'HP', 'PE', 'C'], // 'CRPE', 'CrpeTheme'],
       active: '',
       obj_ex: objExercicesDisponibles
     })
@@ -670,7 +806,7 @@ export function menuDesExercicesDisponibles () {
   listeHtmlDesExercicesTab = `<div id="recherche"> </div><table id='listtab' class="stripe"><thead>
     <tr><th class="colonnecode">Code</th><th>Intitulé de l'exercice</th><th>Mode</th><th>Prévisualiser</th></thead><tbody>
     ${listeHtmlDesExercicesTab}
-    </tbody><tfoot><tr><th class="colonnecode">Code</th><th>Intitulé de l'exercice</th><th>Mode</th><th>prévisualiser</th></tr>
+    </tbody><tfoot><tr><th class="colonnecode">Code</th><th>Intitulé de l'exercice</th><th>Mode</th><th>Prévisualiser</th></tr>
     </tfoot></table>`
   $('#liste_des_exercices_tableau').html(listeHtmlDesExercicesTab)
   $('#liste_des_exercices_tableau').hide()
@@ -790,7 +926,7 @@ export function menuDesExercicesDisponibles () {
       fixedHeader: true,
       language: {
         sEmptyTable: 'Aucune donnée disponible dans le tableau',
-        sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+        sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ élément(s)",
         sInfoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
         sInfoFiltered: '(filtré à partir de _MAX_ éléments au total)',
         sInfoThousands: ',',
@@ -886,7 +1022,7 @@ export function menuThemeDNB (theme) {
   tableauDesExercices = tableauDesExercices.sort().reverse()
   for (const id of tableauDesExercices) {
     codeHTML +=
-      `<a style="line-height:2.5" class="item" href="/mathalea.html?ex=${id}&v=ex" target="_blank"><div class="header content"> ${dictionnaire[id].annee} - ${dictionnaire[id].lieu} - Ex ${dictionnaire[id].numeroExercice} ${listeHtmlDesTags(dictionnaire[id])} </div></a> \n`
+      `<a style="line-height:2.5" class="item" href="/mathalea.html?ex=${id}&v=ex" target="_blank"><div class="header content"> ${dictionnaire[id].annee} - ${dictionnaire[id].lieu} - Ex ${dictionnaire[id].numeroInitial} ${listeHtmlDesTags(dictionnaire[id])} </div></a> \n`
   }
   codeHTML += '\n</div>'
   return codeHTML

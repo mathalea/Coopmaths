@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[50498],{50498:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>n,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,dateDePublication:()=>r,default:()=>c});var i=t(17116);const n="Trouver les coordonnée de l’image d’un point par une symétrie centrale",r="28/10/2021";function c(){i.default.call(this),this.sup=2,this.sup2=!0,this.besoinFormulaire=!1,this.besoinFormulaire2=!1}}}]);
+//# sourceMappingURL=50498.ad1ab315e75e7541e44e.js.map

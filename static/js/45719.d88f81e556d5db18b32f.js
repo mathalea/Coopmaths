@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[45719],{45719:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>r,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>n});var i=t(72107);const r="Trouver l’image d’une figure par une translation dans un pavage";function n(){i.default.call(this),this.titre=r,this.sup=3,this.besoinFormulaireNumerique=!1}}}]);
+//# sourceMappingURL=45719.d88f81e556d5db18b32f.js.map

@@ -1,0 +1,5 @@
+/*!
+ * @author Jean-Claude Lhote
+ * Créé le 4/12/2021
+ * Référence 5G12-3 clone Symétries de 4G12-1
+ */

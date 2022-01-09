@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[79577,90321,62566,78938],{79657:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>c,amcReady:()=>i,amcType:()=>h,default:()=>l});var s=t(7117);const c="Tracer des perpendiculaires",i=!0,h="AMCOpen";function l(){s.default.call(this),this.titre=c,this.sup=1,this.type=1}}}]);
+//# sourceMappingURL=79577.0a4888ae10a75ee59de8.js.map

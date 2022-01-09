@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[94754],{94754:(e,t,s)=>{s.r(t),s.d(t,{titre:()=>u,default:()=>n});var a=s(55641);const u="Tester si un nombre est solution d'une équation du second degré";function n(){a.default.call(this),this.exo="4L14-2",this.titre=u}}}]);
-//# sourceMappingURL=94754.75edf00a4d343438477b.js.map

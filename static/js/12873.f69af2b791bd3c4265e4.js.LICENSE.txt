@@ -1,0 +1,5 @@
+/*!
+ * @author Jean-Claude Lhote
+ * Créé le 7/11/2021
+ * Référence can6G04
+ */

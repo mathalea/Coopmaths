@@ -35,7 +35,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 
 
 - Moteur développé par Rémi Angot sous licence **AGPL** puis amélioré, entre autres, par Jean-Claude Lhote, Sébastien Lozano et Cédric Grolleau.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Laurence Candille, Christophe Gombert, Éric Schrafstetter puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Mora Gilles, Laurence Candille, Christophe Gombert, Éric Schrafstetter, Éric Elter, Frédéric Piou, Florence Tapiero, Jean-Léon Henry puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
 - MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **AGPL**.
 - Le générateur d'animations pour le lecteur InstrumEnPoche a été développé par Rémi Angot sous licence **AGPL**.
 
@@ -54,11 +54,13 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - DUPLESSY Erwan
 - DURAND Arnaud
 - DOTTO Claire
+- ELTER Éric
 - FOURNIER Carine
 - GAIN Mireille
 - GUYON Sthéphane
 - GOMBERT Christophe
 - GROLLEAU Cédric
+- HENRY Jean-Léon
 - LASCASSIES Cyril
 - LACROIX Olivier
 - LEROUX Liouba
@@ -69,9 +71,11 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - MEVEL Christophe
 - MORA Gilles
 - MORVAN Gaelle
+- PIOU Frédéric
 - PIOLTI-LAMORTHE Claire
 - ROUBIN Sophie
 - SCHRAFSTETTER Éric
+- TAPIERO Florence
 - UZU Anne
 - VALMONT Guillaume
 - VAMECH Sébastien
@@ -113,13 +117,13 @@ Pour faciliter le partage de liens vers ce site, quelques adresses raccourcies o
 
 ### Données personnelles
 
-Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune donnée personnelle et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données recueillies sont les statistiques de visite avec Google Analytics (adresses IP anonymisées et cookies désactivés).
+Ce site à destination d'élèves mineurs, de parents et d'enseignants n'utilise aucun cookie, ne recueille aucune donnée personnelle et ne contient aucun traqueur (publicitaire ou du fait de la présence de boutons pour les réseaux sociaux). Les seules données recueillies sont les erreurs javascript transmises à bugsnag.com.
 
 Pour de plus amples renseignements : [contact@coopmaths.fr](mailto:contact@coopmaths.fr)
 
 ### Sources
 
-Toutes les sources de ce site sont disponible sur [GitHub](https://github.com/remiangot/Coopmaths).
+Toutes les sources de ce site sont disponible sur [GitHub](https://github.com/mathalea/Coopmaths).
 
 
 ### Crédits

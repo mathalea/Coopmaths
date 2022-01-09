@@ -1,0 +1,17 @@
+<!-- {{/*
+Utilisation: {{% selection "titre"  %}}
+*/}}-->
+
+
+<div id="MenuDesExercices"></div>
+<script type="module">
+    import {lienSelection} from "/modules/lienSelection.js";
+    const monLien = document.getElementById({{ .Get 0}})
+    monLien.onclick = () => {
+        console.log(lienSelection({{ .Get 0}}))
+    }
+</script>
+
+<a href="" id="{{ .Get 0}}">{{ .Get 0}}</a>
+
+

@@ -1,0 +1,3 @@
+/*! For license information please see 23805.248a08c53dbe553a04c0.js.LICENSE.txt */
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[23805],{23805:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>s,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,dateDePublication:()=>c,default:()=>n});var i=t(19201);const s="Trouver les symétries axiales successives dans un damier",c="4/12/2021";function n(){i.default.call(this),this.titre=s,this.sup=1,this.nbQuestions=1}}}]);
+//# sourceMappingURL=23805.248a08c53dbe553a04c0.js.map

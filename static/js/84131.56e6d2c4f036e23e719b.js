@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[84131],{84131:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>n,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,dateDePublication:()=>r,default:()=>s});var i=t(17116);const n="Trouver les coordonnée de l’image d’un point par une translation",r="28/10/2021";function s(){i.default.call(this),this.sup=3,this.sup2=!0,this.besoinFormulaire=!1,this.besoinFormulaire2=!1}}}]);
+//# sourceMappingURL=84131.56e6d2c4f036e23e719b.js.map

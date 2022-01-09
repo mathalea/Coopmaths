@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[87890],{87890:(e,i,a)=>{a.r(i),a.d(i,{titre:()=>s,interactifReady:()=>t.interactifReady,interactifType:()=>t.interactifType,amcReady:()=>t.amcReady,amcType:()=>t.amcType,default:()=>n});var t=a(4251);const s="Additionner des fractions simples";function n(){t.default.call(this),this.nbQuestions=4,this.sup=1,this.sup2=1,this.besoinFormulaireNumerique=!1,this.besoinFormulaire2Numerique=!1}}}]);
+//# sourceMappingURL=87890.0405b3d16187ac7d6c83.js.map

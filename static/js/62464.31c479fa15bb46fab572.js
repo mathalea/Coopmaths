@@ -1,0 +1,3 @@
+/*! For license information please see 62464.31c479fa15bb46fab572.js.LICENSE.txt */
+"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[62464],{62464:(t,a,e)=>{e.r(a),e.d(a,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,titre:()=>n,default:()=>s});var i=e(72071);const n="Trouver l’image d’un point par une  transformation 3e";function s(){i.default.call(this),this.nbQuestions=1,this.can=!0,this.sup=4}}}]);
+//# sourceMappingURL=62464.31c479fa15bb46fab572.js.map

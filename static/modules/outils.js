@@ -2,10 +2,12 @@
 import { texteParPosition } from './2d.js'
 import { fraction } from './fractions.js'
 import Algebrite from 'algebrite'
-import { format, evaluate, isPrime } from 'mathjs'
+import { format, evaluate, isPrime, gcd, round, largerEq, equal, smaller } from 'mathjs'
 import { loadScratchblocks } from './loaders'
 import { context } from './context.js'
-import { setReponse } from './gestionInteractif.js'
+import { elimineDoublons, setReponse } from './gestionInteractif.js'
+import { getVueFromUrl } from './gestionUrl.js'
+import { toDfrac } from './fonctionsMaths.js'
 
 const math = { format: format, evaluate: evaluate }
 const epsilon = 0.000001
@@ -21,9 +23,9 @@ const epsilon = 0.000001
  */
 export function listeQuestionsToContenu (exercice) {
   if (context.isHtml) {
-    exercice.contenu = htmlConsigne(exercice.consigne) + htmlParagraphe(exercice.introduction) + htmlEnumerate(exercice.listeQuestions, exercice.spacing, 'question', `exercice${exercice.numeroExercice}Q`)
-    if (exercice.interactif && exercice.interactifReady) {
-      exercice.contenu += `<button class="ui button checkReponses" type="submit" style="margin-bottom: 20px; margin-top: 20px" id="btnValidationEx${exercice.numeroExercice}-${exercice.id}">Vérifier les réponses</button>`
+    exercice.contenu = htmlConsigne(exercice.consigne) + htmlParagraphe(exercice.introduction) + htmlEnumerate(exercice.listeQuestions, exercice.spacing, 'question', `exercice${exercice.numeroExercice}Q`, exercice.tailleDiaporama)
+    if ((exercice.interactif && exercice.interactifReady) || getVueFromUrl() === 'eval') {
+      exercice.contenu += `<button class="ui blue button checkReponses" type="submit" style="margin-bottom: 20px; margin-top: 20px" id="btnValidationEx${exercice.numeroExercice}-${exercice.id}">Vérifier les réponses</button>`
     }
     exercice.contenuCorrection = htmlParagraphe(exercice.consigneCorrection) + htmlEnumerate(exercice.listeCorrections, exercice.spacingCorr, 'correction')
   } else {
@@ -39,6 +41,8 @@ export function listeQuestionsToContenu (exercice) {
       }
     }
     exercice.contenuCorrection = texConsigne('') + texIntroduction(exercice.consigneCorrection) + texMulticols(texEnumerate(exercice.listeCorrections, exercice.spacingCorr), exercice.nbColsCorr)
+    exercice.contenuCorrection = exercice.contenuCorrection.replace(/\\\\\n*/g, '\\\\\n')
+    exercice.contenu = exercice.contenu.replace(/\\\\\n*/g, '\\\\\n')
   }
 }
 
@@ -99,21 +103,21 @@ export function listeDeChosesAImprimer (exercice) {
  * @param {Exercice} exercice
  * @author Rémi Angot
  */
-export function listeQuestionsToContenuSansNumero (exercice) {
+export function listeQuestionsToContenuSansNumero (exercice, retourCharriot = true) {
   if (context.isHtml) {
-    exercice.contenu = htmlConsigne(exercice.consigne) + htmlParagraphe(exercice.introduction) + htmlLigne(exercice.listeQuestions, exercice.spacing)
+    exercice.contenu = htmlConsigne(exercice.consigne) + htmlParagraphe(exercice.introduction) + htmlLigne(exercice.listeQuestions, exercice.spacing, 'question', `exercice${exercice.numeroExercice}Q`, exercice.tailleDiaporama)
     if (exercice.interactif) {
-      exercice.contenu += `<button class="ui button checkReponses" type="submit" style="margin-bottom: 20px; margin-top: 20px;" id="btnValidationEx${exercice.numeroExercice}-${exercice.id}">Vérifier les réponses</button>`
+      exercice.contenu += `<button class="ui blue button checkReponses" type="submit" style="margin-bottom: 20px; margin-top: 20px;" id="btnValidationEx${exercice.numeroExercice}-${exercice.id}">Vérifier les réponses</button>`
     }
-    exercice.contenuCorrection = htmlConsigne(exercice.consigneCorrection) + htmlLigne(exercice.listeCorrections, exercice.spacingCorr)
+    exercice.contenuCorrection = htmlConsigne(exercice.consigneCorrection) + htmlLigne(exercice.listeCorrections, exercice.spacingCorr, 'correction')
   } else {
     if (document.getElementById('supprimer_reference').checked === true) {
-      exercice.contenu = texConsigne(exercice.consigne) + texIntroduction(exercice.introduction) + texMulticols(texParagraphe(exercice.listeQuestions, exercice.spacing), exercice.nbCols)
+      exercice.contenu = texConsigne(exercice.consigne) + texIntroduction(exercice.introduction) + texMulticols(texParagraphe(exercice.listeQuestions, exercice.spacing, retourCharriot), exercice.nbCols)
     } else {
-      exercice.contenu = texConsigne(exercice.consigne) + `\n\\marginpar{\\footnotesize ${exercice.id}}` + texIntroduction(exercice.introduction) + texMulticols(texParagraphe(exercice.listeQuestions, exercice.spacing), exercice.nbCols)
+      exercice.contenu = texConsigne(exercice.consigne) + `\n\\marginpar{\\footnotesize ${exercice.id}}` + texIntroduction(exercice.introduction) + texMulticols(texParagraphe(exercice.listeQuestions, exercice.spacing, retourCharriot), exercice.nbCols)
     }
     // exercice.contenuCorrection = texConsigne(exercice.consigneCorrection) + texMulticols(texEnumerateSansNumero(exercice.listeCorrections,exercice.spacingCorr),exercice.nbColsCorr)
-    exercice.contenuCorrection = texConsigne(exercice.consigneCorrection) + texMulticols(texParagraphe(exercice.listeCorrections, exercice.spacingCorr), exercice.nbColsCorr)
+    exercice.contenuCorrection = texConsigne(exercice.consigneCorrection) + texMulticols(texParagraphe(exercice.listeCorrections, exercice.spacingCorr, retourCharriot), exercice.nbColsCorr)
   }
 }
 
@@ -142,25 +146,50 @@ export function listeQuestionsToContenuSansNumeroEtSansConsigne (exercice) {
  * @param {string} cont2
  * @return {string}
  */
-export function deuxColonnes (cont1, cont2) {
+export function deuxColonnes (cont1, cont2, largeur1 = 50) {
   if (context.isHtml) {
     return `
-    <div style="float:left;min-width: fit-content;max-width : 35%;margin-right: 30px">
+    <div>
+    <div class="question" style="float:left;max-width: ${largeur1}%;margin-right: 30px">
     ${cont1}
    </div>
-   <div style="float:left;min-width: fit-content; max-width : 45%">
+   <div style="float:left; max-width: ${90 - largeur1}%">
     ${cont2}
    </div>
-   <div style="clear:both"></div>`
+   <div style="clear:both"></div>
+   <div class="ui hidden divider"></div>
+   </div>
+`
   } else {
-    return `\\begin{minipage}{.5\\linewidth}
-    ${cont1}
+    return `\\begin{minipage}{${calcul(largeur1 / 100)}\\linewidth}
+    ${cont1.replaceAll('<br>', '\\\\\n')}
     \\end{minipage}
-    \\begin{minipage}{.5\\linewidth}
-    ${cont2}
+    \\begin{minipage}{${calcul((100 - largeur1) / 100)}\\linewidth}
+    ${cont2.replaceAll('<br>', '\\\\\n')}
     \\end{minipage}
     `
   }
+}
+/**
+ *
+ * @param {string} texte
+ * @returns le texte centré dans la page selon le contexte.
+ * @author Jean-Claude Lhote
+ */
+export function centrage (texte) {
+  return context.isHtml ? `<center>${texte}</center>` : `\\begin{center}\n\t${texte}\n\\end{center}\n`
+}
+/**
+ * Contraint une valeur à rester dans un intervalle donné. Si elle est trop petite, elle prend la valeur min, si elle est trop grande elle prend la valeur max
+ * @author Jean-Claude Lhote à partir du code de Eric Elter
+ * @param {number} min borne inférieur
+ * @param {number} max borne supérieur
+ * @param {number} valeur la valeur à contraindre
+ * @param {number} defaut valeur par défaut si non entier
+ */
+
+export function contraindreValeur (min, max, valeur, defaut) {
+  return !(isNaN(valeur)) ? (valeur < min) ? min : (valeur > max) ? max : valeur : defaut
 }
 
 /**
@@ -222,7 +251,7 @@ export function inferieurouegal (a, b, tolerance = epsilon) {
  * @return {boolean}
  */
 export function estentier (a, tolerance = epsilon) {
-  return (Math.abs(a - Math.round(a)) < tolerance)
+  return (Math.abs(a - round(a)) < tolerance)
 }
 
 /**
@@ -256,52 +285,13 @@ export function ecrireNombre2D (x, y, n) {
   return nombre2D
 }
 
-class NombreDecimal {
-  constructor (nombre) {
-    if (nombre < 0) {
-      this.signe = '-'
-      nombre = calcul(-nombre)
-    } else this.signe = '+'
-    this.exposant = Math.floor(Math.log10(nombre))
-    nombre = nombre / 10 ** this.exposant
-    this.mantisse = []
-    for (let k = 0; k < 16; k++) {
-      if (egal(Math.ceil(nombre) - nombre, 0, 0.00001)) {
-        this.mantisse.push(Math.ceil(nombre))
-        nombre = (this.mantisse[k] - nombre) * 10
-      } else {
-        this.mantisse.push(Math.floor(nombre))
-        nombre = (nombre - this.mantisse[k]) * 10
-      }
-      if (egal(nombre, 0, 0.001)) { break }
-    }
-  }
-
-  get valeur () {
-    return this.recompose()
-  }
-
-  recompose () {
-    let val = 0
-    for (let i = 0; i < 10; i++) { val += this.mantisse[i] * 10 ** (-i) }
-    val = val * 10 ** this.exposant
-    if (this.signe === '+') return val
-    else return calcul(-val)
-  }
-}
-export function decimal (n) {
-  return new NombreDecimal(n)
-}
-
-// FIXME {liste} n'existe pas dans jsdoc, si c'est un array de strings ça se note {string[]}
-
 /**
 * Créé tous les couples possibles avec un élément de E1 et un élément de E2.
 * L'ordre est pris en compte, donc on pourra avoir (3,4) et (4,3).
 * Si le nombre de couples possibles est inférieur à nombreDeCouplesMin alors
 * on concatène 2 fois la même liste mais avec des ordres différents.
-* @param {liste} E1 - Liste
-* @param {liste} E2 - Liste
+* @param {string[]} E1 - Liste
+* @param {string[]} E2 - Liste
 * @param {int} nombreDeCouplesMin=10 - Nombre de couples souhaités
 * @author Rémi Angot
 */
@@ -484,6 +474,9 @@ export function enleveElementNoBis (array, index) {
 */
 export function choice (liste, listeAEviter = []) {
   // copie la liste pour ne pas y toucher (ce n'est pas le but de choice)
+  if (!Array.isArray(listeAEviter)) {
+    listeAEviter = [listeAEviter]
+  }
   const listebis = liste.slice()
   // Supprime les éléments de liste à éviter
   for (let i = 0; i < listeAEviter.length; i++) {
@@ -499,7 +492,7 @@ export function choice (liste, listeAEviter = []) {
 * @param {listeAEviter}
 *
 * @example
-* // Renvoie [1,4,5,6,7,8,9,10]
+* // Renvoie [0,1,4,5,6,7,8,9,10]
 * range(10,[2,3])
 *
 * @author Rémi Angot
@@ -609,6 +602,27 @@ export function enleveDoublonNum (arr, tolerance) {
   return arr
 }
 /**
+ * retourne un tableau dans lequel les doublons ont été supprimés s'il y en a MAIS SANS TRI
+ * @param {array} arr Tableau duquel ont veut supprimer les doublons numériques
+ * @param {number} tolerance La différence minimale entre deux valeurs pour les considérer comme égales
+ * @author Eric Elter d'après enleveDoublonNum
+ */
+export function enleveDoublonNum2 (arr, tolerance) {
+  let k = 0
+  while (k < arr.length - 1) {
+    let kk = k + 1
+    while (kk < arr.length - 1) {
+      if (egal(arr[k], arr[kk], tolerance)) {
+        arr[k] = calcul((arr[k] + arr[kk]) / 2) // On remplace la valeur dont on a trouvé un double par la moyenne des deux valeurs
+        arr.splice(kk, 1) // on supprime le doublon.
+      }
+      kk++
+    }
+    k++
+  }
+  return arr
+}
+/**
  * fonction qui retourne une chaine construite en concaténant les arguments
  * Le rôle de cette fonction est de construire un identifiant unique de question
  * afin de contrôler que l'aléatoire ne produit pas deux questions identiques.
@@ -623,7 +637,6 @@ export function checkSum (...args) {
       checkString += args[0]
     }
   }
-  console.log(checkString)
   return checkString
 }
 /**
@@ -784,7 +797,7 @@ function cleExisteEtContient (v, val) {
 }
 
 /**
-* Concatène liste à elle même en changeant l'ordre à chaque cycle
+* Concatène liste à elle-même en changeant l'ordre à chaque cycle
 *
 *
 * @Example
@@ -802,6 +815,25 @@ export function combinaisonListes (liste, tailleMinimale) {
   return l
 }
 
+/**
+* Concatène liste à elle-même en imposant à la nouvelle liste de contenir au moins tous les élements
+* de la liste initiale mais sans gestion de nombre de doublons au final.
+* @Example
+* combinaisonListes2([A,B,C],7)
+* // [B,C,B,B,C,A,B]
+* combinaisonListes2([A,B,C,D],6)
+* // [B,C,D,B,C,A,B]
+* @author Eric Elter
+*/
+export function combinaisonListes2 (liste, tailleMinimale) {
+  if (liste.length === 0) return []
+  let l = liste
+  while (l.length < tailleMinimale) {
+    l = l.concat(choice(liste))
+  }
+  return shuffle(l)
+}
+
 export function combinaisonListesSansChangerOrdre (liste, tailleMinimale) {
   // Concatène liste à elle même en changeant
   while (liste.length < tailleMinimale) {
@@ -817,12 +849,24 @@ export function combinaisonListesSansChangerOrdre (liste, tailleMinimale) {
 * @author Rémi Angot
 */
 export function rienSi1 (a) {
-  if (a === 1) {
-    return ''
-  } else if (a === -1) {
-    return '-'
+  if (typeof a === 'object') {
+    let A
+    if (a.n !== undefined) {
+      A = a
+    } else if (a.num !== undefined) {
+      A = fraction(a.num, a.den)
+    } else window.notify('rienSi1 : type de valeur non prise en compte')
+    if (equal(A, 1)) return ''
+    else if (equal(A, -1)) return '-'
+    else return toDfrac(A)
   } else {
-    return a
+    if (a === 1 || a === '1') {
+      return ''
+    } else if (a === -1 || a === '-1') {
+      return '-'
+    } else {
+      return a
+    }
   }
 }
 
@@ -881,10 +925,24 @@ export function ecritureNombreRelatifc (a) {
 */
 export function ecritureAlgebrique (a) {
   let result = ''
-  if (a >= 0) {
-    result = '+' + texNombrec(a)
+  if (typeof a === 'object') {
+    let A
+    if (a.n !== undefined) {
+      A = a
+    } else if (a.num !== undefined) {
+      A = fraction(a.num, a.den)
+    }
+    if (largerEq(A, 0)) {
+      result = '+' + toDfrac(A)
+    } else {
+      result = toDfrac(A)
+    }
   } else {
-    result = texNombrec(a)
+    if (a >= 0) {
+      result = '+' + texNombrec(a)
+    } else {
+      result = texNombrec(a)
+    }
   }
   return result
 }
@@ -897,21 +955,37 @@ export function ecritureAlgebrique (a) {
 */
 export function ecritureAlgebriqueSauf1 (a) {
   let result = ''
-  if (a >= 0) {
-    result = '+' + texNombrec(a)
-  }
-  if (a < 0) {
-    result = texNombrec(a)
-  }
-  if (a === 1) {
-    result = '+'
-  }
-  if (a === -1) {
-    result = '-'
-  }
-  return result
-}
+  if (typeof a === 'object') {
+    let A
+    if (a.n !== undefined) {
+      A = a
+    } else if (a.num !== undefined) {
+      A = fraction(a.num, a.den)
+    }
+    if (equal(A, 1)) {
+      result = '+'
+    } else if (largerEq(A, 0)) {
+      result = '+' + toDfrac(A)
+    } else if (equal(A, -1)) {
+      result = '-'
+    } else if (smaller(A, 0)) {
+      result = toDfrac(A)
+    }
+    return result
+  } else {
+    if (a === 1) {
+      result = '+'
+    } else if (a >= 0) {
+      result = '+' + texNombrec(a)
+    } else if (a === -1) {
+      result = '-'
+    } else if (a < 0) {
+      result = texNombrec(a)
+    }
 
+    return result
+  }
+}
 /**
  * Idem ecritureAlgebrique mais retourne le nombre en couleur (vert si positif, rouge si négatif et noir si nul)
  * @param {number} a
@@ -989,6 +1063,56 @@ export function valeurBase (n) {
     case 'F': return 15
     default: return parseInt(n)
   }
+}
+
+export function baseValeur (n) {
+  switch (n) {
+    case 10: return 'A'
+    case 11: return 'B'
+    case 12: return 'C'
+    case 13: return 'D'
+    case 14: return 'E'
+    case 15: return 'F'
+    default: return Number(n).toString()
+  }
+}
+/**
+ * Convertit une chaine correspondant à un nombre écrit en base b en un nombre entier en base 10.
+ * @param {} nombre
+ * @param {number} b la base de départ
+ */
+export function baseNVersBase10 (stringNombre, b) {
+  let result = 0
+  if (typeof stringNombre === 'number') {
+    stringNombre = Number(stringNombre).toString()
+  }
+  for (let i = 0; i < stringNombre.length; i++) {
+    result += b ** i * valeurBase(stringNombre.charAt(stringNombre.length - 1 - i))
+  }
+  return result
+}
+
+export function base10VersBaseN (nombre, b) {
+  // let puissanceMax = 0
+  // let chiffre
+  // let valeur
+  // let code = ''
+  // while (b ** (puissanceMax + 1) < nombre) {
+  //   puissanceMax++
+  // }
+  // for (let i = puissanceMax; i >= 0; i--) {
+  //   chiffre = 0
+  //   do {
+  //     valeur = chiffre * b ** i
+  //     chiffre++
+  //   } while (valeur + b ** i <= nombre)
+  //   chiffre--
+  //   code += baseValeur(chiffre)
+  //   nombre -= chiffre * b ** i
+  // }
+  // return code
+  return nombre.toString(b).toUpperCase()
+  // Il y avait un probleme avec 3 = (3)_3
 }
 
 /**
@@ -1203,8 +1327,12 @@ export function unSiPositifMoinsUnSinon (a) {
  * @return {number}
  */
 export function arrondi (nombre, precision = 2) {
-  const tmp = Math.pow(10, precision)
-  return Math.round(nombre * tmp) / tmp
+  if (isNaN(nombre)) {
+    window.notify('Le nombre à arrondir n\'en est pas un, ça retourne NaN', { nombre, precision })
+    return NaN
+  } else {
+    return round(nombre, precision)
+  }
 }
 /**
  * Retourne la troncature signée de nombre.
@@ -1231,16 +1359,16 @@ export function abs (a) {
 * @author Rémi Angot
 */
 export function arrondiVirgule (nombre, precision = 2) { //
-  const tmp = Math.pow(10, precision)
-  return String(Math.round(nombre * tmp) / tmp).replace('.', ',')
+  // const tmp = Math.pow(10, precision)
+  return String(round(nombre, precision)).replace('.', ',')
 }
 
 /**
 * Renvoie le PGCD de deux nombres
 * @author Rémi Angot
 */
-export function pgcd (a, b) {
-  return parseInt(Algebrite.run(`gcd(${a},${b})`))
+export function pgcd (...args) {
+  return gcd(...args)
 }
 
 /**
@@ -1314,16 +1442,23 @@ export function produitDeDeuxFractions (num1, den1, num2, den2) {
 * @author Rémi Angot
 */
 export function simplificationDeFractionAvecEtapes (num, den) {
+  let result = '='
+  if (num * den < 0) {
+    result += '-'
+    num = Math.abs(num)
+    den = Math.abs(den)
+  } else if (num === 0) {
+    return '=0'
+  }
   // Est-ce que le résultat est simplifiable ?
-  let result = ''
   const s = pgcd(num, den)
   if (s !== 1) {
     if ((num) % (den) === 0) { // si le résultat est entier
-      result = `=${(num) / (den)}`
+      result += `${(num) / (den)}`
     } else {
-      result = `=${texFraction(Algebrite.eval((num) / s) + miseEnEvidence('\\times' + s), Algebrite.eval(den / s) + miseEnEvidence('\\times' + s))}=${texFractionSigne(Algebrite.eval((num) / s), Algebrite.eval(den / s))}`
+      result += `${texFraction(Algebrite.eval((num) / s) + miseEnEvidence('\\times' + s), Algebrite.eval(den / s) + miseEnEvidence('\\times' + s))}=${result.charAt(1) === '-' ? '-' : ''}${texFractionSigne(Algebrite.eval((num) / s), Algebrite.eval(den / s))}`
     }
-  }
+  } else return ''
   return result
 }
 
@@ -1534,6 +1669,31 @@ export function factorisation (n) {
 }
 /**
  *
+ * @param {number} n
+ * @param {boolean} puissancesOn
+ * @returns {string} texFacto
+ */
+export function texFactorisation (n, puissancesOn = true) {
+  let texFacto = ''
+  let facto = []
+  if (puissancesOn) {
+    facto = factorisation(n)
+    for (let i = 0; i < facto.length - 1; i++) {
+      texFacto += `${facto[i][0]}${facto[i][1] > 1 ? '^{' + facto[i][1] + '}\\times ' : '\\times '}`
+    }
+    texFacto += `${facto[facto.length - 1][0]}${facto[facto.length - 1][1] > 1 ? '^{' + facto[facto.length - 1][1] + '}' : ''}`
+  } else {
+    facto = obtenirListeFacteursPremiers(n)
+    for (let i = 0; i < facto.length - 1; i++) {
+      texFacto += `${facto[i][0]}\\times `
+    }
+    texFacto += `${facto[facto.length - 1][0]}`
+  }
+  return texFacto
+}
+
+/**
+ *
  * @param {Entier} n
  * Extrait le plus grand nombre possible de la racine carrée de n
  * retourne le résulat [a,b] pour a²b=n
@@ -1613,9 +1773,34 @@ export function nombreDecimal (expression, arrondir = false) {
 * Utilise Algebrite pour s'assurer qu'il n'y a pas d'erreur dans les calculs avec des décimaux et retourne un string avec la virgule comme séparateur décimal
 * @author Rémi Angot
 */
+
 export function texNombrec (expression) {
-  return texNombre(parseFloat(Algebrite.eval(expression)))
+  // return texNombre(parseFloat(Algebrite.eval(expression)))
+  return texNombre(arrondi(expression, 6))
 }
+
+/**
+* Formattage pour une sortie LaTeX entre $$
+* formatFraction = false : si l'expression est un objet fraction du module mathjs alors elle peut donner l'écriture fractionnaire
+* Pour une fraction négative la sortie est -\dfrac{6}{7} au lieu de \dfrac{-6}{7}
+* @author Frédéric PIOU
+*/
+
+export function texNum (expression, formatFraction = false) {
+  if (typeof expression === 'object') {
+    const signe = expression.s === 1 ? '' : '-'
+    if (formatFraction === true) {
+      expression = expression.d !== 1 ? signe + texFraction(expression.n, expression.d) : signe + expression.n
+    } else {
+      expression = texNombre(evaluate(format(expression)))
+    }
+    expression = expression.replace(',', '{,}').replace('{{,}}', '{,}')
+  } else {
+    expression = texNombre(parseFloat(Algebrite.eval(expression)))
+  }
+  return expression
+}
+
 /**
  * renvoie le résultat de l'expression en couleur (vert=positif, rouge=négatif, noir=nul)
  * @param {string} expression l'expression à calculer
@@ -1896,22 +2081,26 @@ export function objet () {
  * le 14/03/2021
  */
 class Personne {
-  constructor ({ prenom = '', genre = '', pronom = '' } = {}) {
+  constructor ({ prenom = '', genre = '', pronom = '', Pronom = '' } = {}) {
     let choix
     this.prenom = ''
     this.genre = ''
     this.pronom = ''
+    this.Pronom = ''
     if (prenom === '' || ((typeof prenom) === 'undefined')) { // On le/la baptise
       choix = prenomPronom()
       this.prenom = choix[0]
       this.pronom = choix[1]
     } else if (pronom === '') { // le pronom n'est pas précisé
       this.pronom = 'on'
+      this.Pronom = 'On'
     }
     if (genre === '') {
       if (this.pronom === 'il') {
+        this.Pronom = 'Il'
         this.genre = 'masculin'
       } else if (this.pronom === 'elle') {
+        this.Pronom = 'Elle'
         this.genre = 'féminin'
       } else this.genre = 'neutre'
     }
@@ -2125,14 +2314,18 @@ export function texEnumerateSansNumero (liste, spacing) {
 * * `<br><br>` est remplacé par un saut de paragraphe et un medskip
 * @author Rémi Angot
 */
-export function texParagraphe (liste, spacing = false) {
+export function texParagraphe (liste, spacing = false, retourCharriot) {
   let result = ''
   if (spacing > 1) {
     result = `\\begin{spacing}{${spacing}}\n`
   }
 
   for (const i in liste) {
-    result += `\t${liste[i]}\\\\\n`
+    if (retourCharriot) {
+      result += `\t${liste[i]}\\\\\n`
+    } else {
+      result += `\t${liste[i]}\n`
+    }
   }
   if (spacing > 1) {
     result += '\\end{spacing}'
@@ -2158,20 +2351,19 @@ export function texIntroduction (texte) {
 * @param spacing interligne (line-height en css)
 * @author Rémi Angot
 */
-export function htmlEnumerate (liste, spacing, classe = 'question', id = '') {
+export function htmlEnumerate (liste, spacing, classe = 'question', id = '', tailleDiaporama = 1) {
   let result = ''
-
   if (liste.length > 1) {
     (spacing > 1) ? result = `<ol style="line-height: ${spacing};">` : result = '<ol>'
     for (const i in liste) {
-      result += `<li class="${classe}" ${id ? 'id="' + id + i + '"' : ''}>` + liste[i].replace(/\\dotfill/g, '..............................').replace(/\\not=/g, '≠').replace(/\\ldots/g, '....') + '</li>' // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+      result += `<li class="${classe}" ${id ? 'id="' + id + i + '"' : ''} ${dataTaille(tailleDiaporama)}>` + liste[i].replace(/\\dotfill/g, '..............................').replace(/\\not=/g, '≠').replace(/\\ldots/g, '....') + '</li>' // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
     }
     result += '</ol>'
   } else if (liste.length === 1) {
     // Pour garder la même hiérarchie avec une ou plusieurs questions
     // On met ce div inutile comme ça le grand-père de la question est toujours l'exercice
     // Utile pour la vue can
-    (spacing > 1) ? result = `<div><div class="${classe}" ${id ? 'id="' + id + '0"' : ''} style="line-height: ${spacing};">` : result = `<div><div class="${classe}" ${id ? 'id="' + id + '0"' : ''}>`
+    (spacing > 1) ? result = `<div><div class="${classe}" ${id ? 'id="' + id + '0"' : ''} style="line-height: ${spacing}; margin-bottom: 20px" ${dataTaille(tailleDiaporama)}>` : result = `<div><div class="${classe}" ${id ? 'id="' + id + '0"' : ''}>`
     result += liste[0].replace(/\\dotfill/g, '..............................').replace(/\\not=/g, '≠').replace(/\\ldots/g, '....') // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
     result += '</div></div>'
   }
@@ -2219,9 +2411,13 @@ export function enumerateSansPuceSansNumero (liste, spacing) {
 * @param string
 * @author Rémi Angot
 */
-export function htmlParagraphe (texte) {
+export function htmlParagraphe (texte, retourCharriot) {
   if (texte.length > 1) {
-    return `\n<p>${texte}</p>\n\n`
+    if (retourCharriot) {
+      return `\n<p>${texte}</p>\n\n`
+    } else {
+      return `\n${texte}\n\n`
+    }
   } else {
     return ''
   }
@@ -2234,18 +2430,17 @@ export function htmlParagraphe (texte) {
 * @param spacing interligne (line-height en css)
 * @author Rémi Angot
 */
-export function htmlLigne (liste, spacing) {
-  let result = ''
-  if (spacing > 1) {
-    result = `<div style="line-height: ${spacing};">\n`
-  } else {
-    result = '<div>\n'
-  }
+export function htmlLigne (liste, spacing, classe = 'question') {
+  let result = '<div>'
+  const spacingTxt = (spacing > 1) ? `style="line-height: ${spacing};"` : ''
+  // Pour garder la même hiérarchie avec listeDeQuestionsToContenu
+  // On met ce div inutile comme ça le grand-père de la question est toujours l'exercice
+  // Utile pour la vue can
   for (const i in liste) {
-    result += '\t' + liste[i].replace(/\\dotfill/g, '...') + '<br>' // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
+    result += '\t' + `<div ${spacingTxt}  class="${classe}">` + liste[i].replace(/\\dotfill/g, '...') + '</div>' // .replace(/~/g,' ') pour enlever les ~ mais je voulais les garder dans les formules LaTeX donc abandonné
     // .replace(/\\\\/g,'<br>') abandonné pour supporter les array
   }
-  result += '</div>\n'
+  result += '</div></div>\n'
 
   return result
 }
@@ -2270,7 +2465,8 @@ export function texMulticols (texte, nbCols = 2) {
 * @author Rémi Angot
 */
 export function htmlConsigne (consigne) {
-  return '<h4>' + consigne + '</h4>\n\n'
+  if (consigne) return '<h4>' + consigne + '</h4>\n\n'
+  else return ''
 }
 
 /**
@@ -2286,16 +2482,17 @@ export function texConsigne (consigne) {
 * @author Rémi Angot
 */
 export function texNombre (nb) {
-  // Ecrit \nombre{nb} pour tous les nombres supérieurs à 1 000 (pour la gestion des espaces)
+  // Ecrit \numprint{nb} pour tous les nombres supérieurs à 1 000 (pour la gestion des espaces en latex)
+  // Ajoute des accolades autour de la virgule {,} pour supprimer l'espace "disgracieux" qui le suit dans l'écriture décimale des nombres sinon.
   if (context.isHtml) {
-    // return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace ').replace(',','{,}'); // .replace(',','{,}') servait à enlever l'espace disgracieux des décimaux mais ne passait qu'en mode LaTeX
-    return Intl.NumberFormat('fr-FR', { maximumFractionDigits: 20 }).format(nb).toString().replace(/\s+/g, '\\thickspace ') // \nombre n'est pas pris en charge par katex
+    // return Intl.NumberFormat("fr-FR",{maximumFractionDigits:20}).format(nb).toString().replace(/\s+/g,'\\thickspace ').replace(',','{,}');
+    return Intl.NumberFormat('fr-FR', { maximumFractionDigits: 20 }).format(nb).toString().replace(/\s+/g, '\\thickspace ')
   } else {
     let result
     if (nb > 999 || nombreDeChiffresDansLaPartieDecimale(nb) > 3) {
       result = '\\numprint{' + nb.toString().replace('.', ',') + '}'
     } else {
-      result = nb.toString().replace('.', ',')
+      result = nb.toString().replace('.', '{,}')
     }
     return result
   }
@@ -2322,7 +2519,7 @@ export function texNombre2 (nb) {
   for (let i = partieEntiere.length - 3; i > 0; i -= 3) {
     partieEntiere = partieEntiere.substring(0, i) + '\\thickspace ' + partieEntiere.substring(i)
   }
-  for (let i = 3; i <= partieDecimale.length; i += 3) {
+  for (let i = 3; i < partieDecimale.length; i += 3) {
     partieDecimale = partieDecimale.substring(0, i) + '\\thickspace ' + partieDecimale.substring(i)
     i += 12
   }
@@ -2341,13 +2538,49 @@ export function nombrec2 (nb) {
 }
 
 /**
- * Renvoie un espace insécable pour le mode texte suivant la sorite html ou Latex.
+* Renvoie un nombre dans le format français (séparateur de classes) pour la partie entière comme pour la partie décimale
+* Avec espace géré par nbsp en HTML pour pouvoir l'inclure dans une phrase formatée en français et pas seulement un calcul.
+* Modif EE pour la gestion de l'espace dans un texte non mathématique
+* @author Eric Elter d'après la fonction de Rémi Angot
+* Rajout Octobre 2021 pour 6C14
+*/
+export function texNombre3 (nb) {
+  let nombre = math.format(nb, { notation: 'auto', lowerExp: -12, upperExp: 12, precision: 12 }).replace('.', ',')
+  const rangVirgule = nombre.indexOf(',')
+  let partieEntiere = ''
+  if (rangVirgule !== -1) {
+    partieEntiere = nombre.substring(0, rangVirgule)
+  } else {
+    partieEntiere = nombre
+  }
+  let partieDecimale = ''
+  if (rangVirgule !== -1) {
+    partieDecimale = nombre.substring(rangVirgule + 1)
+  }
+
+  for (let i = partieEntiere.length - 3; i > 0; i -= 3) {
+    partieEntiere = partieEntiere.substring(0, i) + sp() + partieEntiere.substring(i)
+  }
+  for (let i = 3; i <= partieDecimale.length; i += 3) {
+    partieDecimale = partieDecimale.substring(0, i) + sp() + partieDecimale.substring(i)
+    i += 12
+  }
+  if (partieDecimale === '') {
+    nombre = partieEntiere
+  } else {
+    nombre = partieEntiere + ',' + partieDecimale
+  }
+  return nombre
+}
+
+/**
+ * Renvoie un espace insécable pour le mode texte suivant la sortie html ou Latex.
  * @author Jean-Claude Lhote
  */
 export function sp (nb = 1) {
   let s = ''
   for (let i = 0; i < nb; i++) {
-    if (context.isHtml) s += '&nbsp'
+    if (context.isHtml) s += '&nbsp;'
     else s += '~'
   }
   return s
@@ -2356,6 +2589,7 @@ export function sp (nb = 1) {
 /**
 * Renvoie un nombre dans le format français (séparateur de classes)
 * Fonctionne sans le mode maths contrairement à texNombre()
+* insereEspaceDansNombre fonctionne peut-être mieux
 * @author Rémi Angot
 */
 export function nombreAvecEspace (nb) {
@@ -2372,6 +2606,75 @@ export function nombreAvecEspace (nb) {
     return result
   }
 }
+
+/**
+ *
+ * @param {number} mantisse
+ * @param {integer} exp
+ * @returns {string} Écriture décimale avec espaces
+ */
+export const scientifiqueToDecimal = (mantisse, exp) => {
+  mantisse = mantisse.toString()
+  let indiceVirguleDepart = mantisse.indexOf('.')
+  if (indiceVirguleDepart < 0) {
+    indiceVirguleDepart = mantisse.length
+  }
+  const indiceVirguleArrivee = indiceVirguleDepart + exp
+  let mantisseSansVirgule = mantisse.replace('.', '')
+  const indiceMax = mantisseSansVirgule.length - 1
+  // indiceMax est l'indice du chiffre des unités
+  if (indiceVirguleArrivee > indiceMax) {
+    // On ajoute des 0 à droite
+    for (let i = indiceMax + 1; i < indiceVirguleArrivee; i++) {
+      mantisseSansVirgule += '0'
+    }
+  } else if (indiceVirguleArrivee > 0 && indiceVirguleArrivee <= indiceMax) {
+    // On insère la virgule
+    mantisseSansVirgule = mantisseSansVirgule.substring(0, indiceVirguleArrivee) + ',' + mantisseSansVirgule.substring(indiceVirguleArrivee, mantisseSansVirgule.length)
+  } else {
+    // On ajoute des 0 à gauche
+    let partiGauche = '0,'
+    for (let i = 0; i < Math.abs(indiceVirguleArrivee); i++) {
+      partiGauche += '0'
+    }
+    mantisseSansVirgule = partiGauche + mantisseSansVirgule
+  }
+  return insereEspaceDansNombre(mantisseSansVirgule)
+}
+
+/**
+ *
+ * @param {string |number} nb
+ * @returns {string}
+ */
+export const insereEspaceDansNombre = nb => {
+  if (!Number.isNaN(nb)) {
+    nb = nb.toString().replace('.', ',')
+  }
+  let indiceVirgule = nb.indexOf(',')
+  const indiceMax = nb.length - 1
+  const tableauIndicesEspaces = []
+  if (indiceVirgule < 0) {
+    // S'il n'y a pas de virgule c'est qu'elle est après le dernier chiffre
+    indiceVirgule = nb.length
+  }
+  for (let i = 0; i < indiceMax; i++) {
+    if ((i - indiceVirgule) % 3 === 0 && (i - indiceVirgule) !== 0) {
+      if (i < indiceVirgule) {
+        tableauIndicesEspaces.push(i - 1) // Partie entière espace à gauche
+      } else {
+        tableauIndicesEspaces.push(i) // Partie décimale espace à droite
+      }
+    }
+  }
+  for (let i = tableauIndicesEspaces.length - 1; i >= 0; i--) {
+    const indice = tableauIndicesEspaces[i] + 1
+    if (indice !== 0)nb = insertCharInString(nb, indice, ' \\thickspace ')
+  }
+  return nb
+}
+
+export const insertCharInString = (string, index, char) => string.substring(0, index) + char + string.substring(index, string.length)
 
 /**
 * Renvoie un nombre dans le format français (séparateur de classes) version sans Katex (pour les SVG)
@@ -2395,8 +2698,25 @@ export function stringNombre (nb) {
   return result
 }
 /**
+* Centre un texte
+*
+* @author Rémi Angot
+*/
+export function texteCentre (texte) {
+  if (context.isHtml) {
+    return `<p style="text-align: center">${texte}</p>`
+  } else {
+    return `\\begin{center}
+${texte}
+\\end{center}`
+  }
+}
+/**
 * Met en couleur et en gras
 *
+* Met en couleur et gras un texte. JCL dit : "S'utilise entre $ car utilise des commandes qui fonctionnent en math inline"
+* @param {string} texte à mettre en couleur
+* @param {string} couleur en anglais ou code couleur hexadécimal par défaut c'est le orange de CoopMaths
 * @author Rémi Angot
 */
 export function miseEnEvidence (texte, couleur = '#f15929') {
@@ -2430,7 +2750,7 @@ export function texteEnCouleur (texte, couleur = '#f15929') {
 }
 
 /**
-* Met en couleur et gras un texte
+* Met en couleur et gras un texte. JCL dit : "Ne fonctionne qu'en dehors de $....$"
 * @param {string} texte à mettre en couleur
 * @param {string} couleur en anglais ou code couleur hexadécimal par défaut c'est le orange de CoopMaths
 * @author Rémi Angot
@@ -3111,7 +3431,7 @@ export function ecriturePuissance (a, b, n) {
     case 1:
       return `$${puissance(b, n)}$`
     default:
-      return `$${String(Math.round(a * 1000) / 1000).replace('.', '{,}')} \\times ${puissance(b, n)}$`.replace('.', '{,}')
+      return `$${String(round(a, 3)).replace('.', '{,}')} \\times ${puissance(b, n)}$`.replace('.', '{,}')
   }
 }
 
@@ -3202,6 +3522,41 @@ export function puissanceEnProduit (b, e) {
 }
 
 /**
+ * Fonction qui renvoie un tableau contenant la mantisse et l'exposant de l'écriture scientique d'un nombre donné en paramètres sous sa forme décimale.
+ * @param nbDecimal
+ *
+ * @example
+ * // Renvoie [4.1276,1]
+ * range(decimalToScientifique,[41.276])
+ * // Renvoie [3.48,-2]
+ * range(decimalToScientifique,[0.0348])
+ * // Renvoie [-2.315,3]
+ * range(decimalToScientifique,[-2315])
+ *
+ * @author Eric Elter
+ * exemple...
+ */
+export function decimalToScientifique (nbDecimal) {
+  let kk = 0
+  let mantisseNb = nbDecimal
+  if (abs(mantisseNb) >= 10) {
+    while (kk < 50 & (abs(mantisseNb) / 10) > 1) {
+      mantisseNb = calcul(mantisseNb / 10, kk + 1 + nombreDeChiffresDansLaPartieDecimale(nbDecimal))
+      kk++
+    }
+    return [mantisseNb, kk]
+  } else if (mantisseNb === 0) {
+    return [nbDecimal, 0]
+  } else if (abs(mantisseNb) < 1) {
+    while (kk < 50 & abs(mantisseNb) < 1) {
+      mantisseNb = calcul(mantisseNb * 10, nombreDeChiffresDansLaPartieDecimale(nbDecimal) - 1 - kk)
+      kk++
+    }
+    return [mantisseNb, -1 * kk]
+  } else return [nbDecimal, 0]
+}
+
+/**
  * Fonction pour écrire avec deux couleurs la forme éclatée d'un produit de puissances de même exposant
  * @param b1 base1
  * @param b2 base2
@@ -3251,11 +3606,15 @@ export function ordreDeGrandeur (x, type) {
 * @author Rémi Angot
 */
 export function creerModal (numeroExercice, contenu, labelBouton, icone) {
-  const HTML = `<button class="ui right floated mini compact button" onclick="$('#modal${numeroExercice}').modal('show');"><i class="large ${icone} icon"></i>${labelBouton}</button>
-    <div class="ui modal" id="modal${numeroExercice}">
-    ${contenu}
-    </div>`
-  return HTML
+  if (context.isHtml) {
+    const HTML = `<button class="ui right floated mini compact button" onclick="$('#modal${numeroExercice}').modal('show');"><i class="large ${icone} icon"></i>${labelBouton}</button>
+      <div class="ui modal" id="modal${numeroExercice}">
+      ${contenu}
+      </div>`
+    return HTML
+  } else {
+    return ''
+  }
 }
 /**
 * Fonction créant le bouton d'aide utilisée par les différentes fonctions modal_ type de contenu
@@ -3692,7 +4051,7 @@ export function numAlpha (k) {
   'use strict'
   if (context.isHtml) return '<span style="color:#f15929; font-weight:bold">' + String.fromCharCode(97 + k) + ') &nbsp;</span>'
   // else return '\\textcolor [HTML] {f15929} {'+String.fromCharCode(97+k)+'/}';
-  else return '\\textbf {' + String.fromCharCode(97 + k) + '.}'
+  else return '\\textbf {' + String.fromCharCode(97 + k) + '.} '
 }
 
 /**
@@ -4038,6 +4397,10 @@ export function lampeMessage ({ titre, texte, couleur }) {
           <p>` + texte + `</p>
       </div>
       </div>
+    `
+  } else if (context.isAmc) {
+    return `
+    {\\bf ${titre}} : ${texte}
     `
   } else {
     return `
@@ -4646,8 +5009,17 @@ export function nombreEnLettres (nb, type = 1) {
         break
     }
 
-    if (type === 1) nbstring = partieEntiereEnLettres(partieEntiere) + ' unités et ' + partieEntiereEnLettres(partieDecimale) + decstring
-    else nbstring = partieEntiereEnLettres(partieEntiere) + ' virgule ' + partieEntiereEnLettres(partieDecimale)
+    if (type === 1) {
+      nbstring = partieEntiereEnLettres(partieEntiere) + ' unités et ' + partieEntiereEnLettres(partieDecimale) + decstring
+    } else if (nbDec === nombreDeChiffresDansLaPartieEntiere(partieDecimale)) {
+      nbstring = partieEntiereEnLettres(partieEntiere) + ' virgule ' + partieEntiereEnLettres(partieDecimale)
+    } else {
+      nbstring = partieEntiereEnLettres(partieEntiere) + ' virgule '
+      for (let n = 0; n < nbDec - nombreDeChiffresDansLaPartieEntiere(partieDecimale); n++) {
+        nbstring += 'zéro-'
+      }
+      nbstring += partieEntiereEnLettres(partieDecimale)
+    }
   }
   return nbstring
 }
@@ -5706,6 +6078,14 @@ export function partieEntiereEnLettres (nb) {
   if (classeDesUnites.length > 1 && classeDesUnites !== 'zéro') {
     result += classeDesUnites
   }
+  result = result.replace('deux-cents-mille', 'deux-cent-mille')
+  result = result.replace('trois-cents-mille', 'trois-cent-mille')
+  result = result.replace('quatre-cents-mille', 'quatre-cent-mille')
+  result = result.replace('cinq-cents-mille', 'cinq-cent-mille')
+  result = result.replace('six-cents-mille', 'six-cent-mille')
+  result = result.replace('sept-cents-mille', 'sept-cent-mille')
+  result = result.replace('huit-cents-mille', 'huit-cent-mille')
+  result = result.replace('neuf-cents-mille', 'neuf-cent-mille')
   return result
 }
 
@@ -6961,7 +7341,7 @@ export async function scratchTraductionFr () {
  */
 
 export function exportQcmAmc (exercice, idExo) {
-  const ref = exercice.id
+  const ref = `${exercice.id}${exercice.sup ? 'S:' + exercice.sup : ''}${exercice.sup2 ? 'S2:' + exercice.sup2 : ''}${exercice.sup3 ? 'S3:' + exercice.sup3 : ''}${exercice.sup4 ? 'S4:' + exercice.sup4 : ''}`
   const autoCorrection = exercice.autoCorrection
   const titre = exercice.titre
   const type = exercice.amcType
@@ -6972,7 +7352,7 @@ export function exportQcmAmc (exercice, idExo) {
   let lastchoice = false
   let ordered = false
   let nbChiffresPd, nbChiffresPe
-
+  let melange = true
   for (let j = 0; j < autoCorrection.length; j++) {
     if (autoCorrection[j] === undefined) { // normalement, cela ne devrait jamais arriver !
       autoCorrection[j] = {}
@@ -6990,10 +7370,15 @@ export function exportQcmAmc (exercice, idExo) {
         lastchoice = autoCorrection[j].options.lastChoice
       }
     }
+    let valeurAMCNum = 0
+    if (autoCorrection[j].reponse !== undefined) { valeurAMCNum = autoCorrection[j].reponse.valeur[0] }
     switch (type) {
       case 'qcmMono': // question QCM 1 bonne réponse
-        if (exercice.autoCorrection[j].enonce === undefined) {
-          exercice.autoCorrection[j].enonce = exercice.listeQuestions[j]
+        if (elimineDoublons(autoCorrection[j].propositions)) {
+          console.log('doublons trouvés')
+        }
+        if (autoCorrection[j].enonce === undefined) {
+          autoCorrection[j].enonce = exercice.listeQuestions[j]
         }
         texQr += `\\element{${ref}}{\n `
         texQr += `\\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
@@ -7019,8 +7404,11 @@ export function exportQcmAmc (exercice, idExo) {
         break
 
       case 'qcmMult': // question QCM plusieurs bonnes réponses (même si il n'y a qu'une seule bonne réponse, il y aura le symbole multiSymbole)
-        if (exercice.autoCorrection[j].enonce === undefined) {
-          exercice.autoCorrection[j].enonce = exercice.listeQuestions[j]
+        if (elimineDoublons(autoCorrection[j].propositions)) {
+          console.log('doublons trouvés')
+        }
+        if (autoCorrection[j].enonce === undefined) {
+          autoCorrection[j].enonce = exercice.listeQuestions[j]
         }
 
         texQr += `\\element{${ref}}{\n `
@@ -7046,54 +7434,134 @@ export function exportQcmAmc (exercice, idExo) {
         id++
         break
       case 'AMCOpen': // AMCOpen question ouverte corrigée par l'enseignant
+        if (autoCorrection[j].enonce === undefined) {
+          autoCorrection[j].enonce = exercice.listeQuestions[j]
+        }
+        if (autoCorrection[j].propositions === undefined) {
+          autoCorrection[j].propositions = [{ texte: exercice.listeCorrections[j], statut: '3' }]
+        }
         texQr += `\\element{${ref}}{\n `
         texQr += `\t\\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
         texQr += `\t\t${autoCorrection[j].enonce} \n `
         texQr += `\t\t\\explain{${autoCorrection[j].propositions[0].texte}}\n`
-        texQr += `\t\t\\notation{${autoCorrection[j].propositions[0].statut}}\n` // le statut contiendra le nombre de lignes pour ce type
-        texQr += '\t\\end{question}\n }\n'
+        texQr += `\t\t\\notation{${autoCorrection[j].propositions[0].statut}}`
+        if (!(isNaN(autoCorrection[j].propositions[0].sanscadre))) {
+          texQr += `[${autoCorrection[j].propositions[0].sanscadre}]` // le statut contiendra le nombre de lignes pour ce type
+        }
+        texQr += '\n\t\\end{question}\n }\n'
         id++
         break
-      case 'AMCNum': // AMCOpen question ouverte avec encodage numérique de la réponse
+      case 'AMCNum': // AMCNum avec encodage numérique de la réponse
         /********************************************************************/
         // On pourra rajouter des options : les paramètres sont nommés.
-        // {digits=0,decimals=0,vertical=false,signe=false,exposantNbChiffres=0,exposantSigne=false,approx=0}
+        // {digits=0,digitsDen=0,digitsNum=0,decimals=0,vertical=false,signe=false,exposantNbChiffres=0,exposantSigne=false,approx=0}
         // si digits=0 alors la fonction va analyser le nombre décimal (ou entier) pour déterminer digits et decimals
         // signe et exposantSigne sont des booléens
         // approx est un entier : on enlève la virgule pour comparer la réponse avec la valeur : approx est le seuil de cette différence.
         /********************************************************************/
-        if (exercice.autoCorrection[j].enonce === undefined) {
-          exercice.autoCorrection[j].enonce = exercice.listeQuestions[j]
+        if (autoCorrection[j].enonce === undefined) {
+          autoCorrection[j].enonce = exercice.listeQuestions[j]
         }
-        if (exercice.autoCorrection[j].propositions === undefined) {
-          exercice.autoCorrection[j].propositions = [{ texte: exercice.listeCorrections[j], statut: '' }]
+        if (autoCorrection[j].propositions === undefined) {
+          autoCorrection[j].propositions = [{ texte: exercice.listeCorrections[j], statut: '' }]
         }
-        if (autoCorrection[j].reponse.valeur[0].num !== undefined) { // Si une fraction a été passée à AMCNum, on met deux AMCNumericChoice
-          texQr += `\\element{${ref}}{\n `
+        if (!Array.isArray(autoCorrection[j].reponse.valeur)) {
+          autoCorrection[j].reponse.valeur = [autoCorrection[j].reponse.valeur]
+        }
+        if (autoCorrection[j].reponse.param.basePuissance !== undefined) {
+          if (autoCorrection[j].reponse.param.exposantPuissance === undefined) {
+            autoCorrection[j].reponse.param.exposantPuissance = 1000 // Nb volontairement grand pour faire comprendre à l'utilisateur AMC qu'il y a eu une erreur de programmation lors de la conception de l'exercice.
+          }
+          texQr += `\\element{${ref}}{\n`
+          texQr += '\\begin{minipage}{\\textwidth}\n'
+          texQr += '\\begin{multicols}{2}\n'
           texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
-          texQr += `${autoCorrection[j].enonce} \n `
+          texQr += `${autoCorrection[j].enonce} \n \\vspace{0.25cm} \n`
           if (autoCorrection[j].propositions !== undefined) {
             texQr += `\\explain{${autoCorrection[j].propositions[0].texte}}\n`
           }
-          texQr += `Numérateur\n \\AMCnumericChoices{${autoCorrection[j].reponse.valeur[0].num}}{digits=${nombreDeChiffresDansLaPartieEntiere(autoCorrection[j].reponse.valeur[0].num)},decimals=0,sign=${autoCorrection[j].reponse.valeur[0].signe === -1},approx=0,`
+          let digitsBase = 0
+          if (autoCorrection[j].reponse.param.baseNbChiffres !== undefined) {
+            digitsBase = Math.max(autoCorrection[j].reponse.param.baseNbChiffres, nombreDeChiffresDansLaPartieEntiere(autoCorrection[j].reponse.param.basePuissance))
+          } else {
+            digitsBase = nombreDeChiffresDansLaPartieEntiere(autoCorrection[j].reponse.param.basePuissance)
+          }
+          let digitsExposant = 0
+          if (autoCorrection[j].reponse.param.exposantNbChiffres !== undefined) {
+            digitsExposant = Math.max(autoCorrection[j].reponse.param.exposantNbChiffres, nombreDeChiffresDansLaPartieEntiere(autoCorrection[j].reponse.param.exposantPuissance))
+          } else {
+            digitsExposant = nombreDeChiffresDansLaPartieEntiere(autoCorrection[j].reponse.param.exposantPuissance)
+          }
+          texQr += '\n'
+          texQr += `Base\n \\AMCnumericChoices{${autoCorrection[j].reponse.param.basePuissance}}{digits=${digitsBase},decimals=0,sign=${autoCorrection[j].reponse.param.basePuissance < 0 || autoCorrection[j].reponse.param.signe ? 'true' : 'false'},approx=0,`
+          if (autoCorrection[j].reponse.param.aussiCorrect !== undefined) texQr += `alsocorrect=${autoCorrection[j].reponse.param.aussiCorrect},`
           texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,}}\n'
           texQr += '\\end{questionmultx}\n'
+          texQr += '\\AMCquestionNumberfalse\\def\\AMCbeginQuestion#1#2{}'
           texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id + 1}} \n `
-          texQr += `Dénominateur\n \\AMCnumericChoices{${autoCorrection[j].reponse.valeur[0].den}}{digits=${nombreDeChiffresDansLaPartieEntiere(autoCorrection[j].reponse.valeur[0].den)},decimals=0,sign=false,approx=0,`
+          texQr += '\\vspace{18pt}'
+          // texQr += `Exposant\n \\AMCnumericChoices{${autoCorrection[j].reponse.param.exposantPuissance}}{digits=${digitsExposant},decimals=0,sign=${autoCorrection[j].reponse.param.exposantPuissance < 0 ? 'true' : 'false'},approx=0,`
+          texQr += `Exposant\n \\AMCnumericChoices{${autoCorrection[j].reponse.param.exposantPuissance}}{digits=${digitsExposant},decimals=0,sign=true,approx=0,`
           texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,}}\n'
-          texQr += '\\end{questionmultx}\n}\n'
+          texQr += '\\end{questionmultx}\n\\end{multicols}\n\\end{minipage}\n}\n\n'
+          id += 2
+        } else if (valeurAMCNum.num !== undefined) { // Si une fraction a été passée à AMCNum, on met un seul AMCNumericChoice particulier
+          texQr += `\\element{${ref}}{\n`
+          texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+          texQr += `${autoCorrection[j].enonce} \n`
+          if (autoCorrection[j].propositions !== undefined) {
+            texQr += `\\explain{${autoCorrection[j].propositions[0].texte}}\n`
+          }
+          let digitsNum = 0
+          if (autoCorrection[j].reponse.param.digitsNum !== undefined) {
+            digitsNum = Math.max(autoCorrection[j].reponse.param.digitsNum, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.num))
+          } else if (autoCorrection[j].reponse.param.digits !== undefined) {
+            digitsNum = Math.max(autoCorrection[j].reponse.param.digits, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.num))
+          } else {
+            digitsNum = nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.num)
+          }
+          let digitsDen = 0
+          if (autoCorrection[j].reponse.param.digitsDen !== undefined) {
+            digitsDen = Math.max(autoCorrection[j].reponse.param.digitsDen, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den))
+          } else if (autoCorrection[j].reponse.param.digits !== undefined) {
+            digitsDen = Math.max(autoCorrection[j].reponse.param.digits, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den))
+          } else {
+            digitsDen = nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den)
+          }
+          let signeNum = true
+          if (autoCorrection[j].reponse.param.signe !== undefined) {
+            signeNum = autoCorrection[j].reponse.param.signe
+          } else {
+            signeNum = valeurAMCNum.signe === -1
+          }
+          let reponseF
+          let reponseAlsoCorrect
+          if (valeurAMCNum.num > 0) {
+            reponseF = calcul(valeurAMCNum.num + valeurAMCNum.den / (10 ** nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den)))
+            reponseAlsoCorrect = calcul(valeurAMCNum.num + valeurAMCNum.den / (10 ** digitsDen))
+          } else {
+            reponseF = calcul(valeurAMCNum.num - valeurAMCNum.den / (10 ** nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den)))
+            reponseAlsoCorrect = calcul(valeurAMCNum.num - valeurAMCNum.den / (10 ** digitsDen))
+          }
+          texQr += `\\AMCnumericChoices{${reponseF}}{digits=${digitsNum + digitsDen},decimals=${digitsDen},sign=${signeNum},approx=0,`
+          texQr += `borderwidth=0pt,backgroundcol=lightgray,scoreexact=1,Tpoint={\\vspace{0.5cm} \\vrule height 0.4pt width 5.5cm },alsocorrect=${reponseAlsoCorrect}}\n`
+          texQr += '\\end{questionmultx}\n}\n\n'
           id += 2
         } else {
-          if (autoCorrection[j].reponse.param.exposantNbChiffres !== undefined && autoCorrection[j].reponse.param.exposantNbChiffres === 0) {
-            reponse = autoCorrection[j].reponse.valeur
-            if (autoCorrection[j].reponse.param.digits === 0) {
-              nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse)
-              autoCorrection[j].reponse.param.decimals = nbChiffresPd
-              nbChiffresPe = nombreDeChiffresDansLaPartieEntiere(reponse)
-              autoCorrection[j].reponse.param.digits = nbChiffresPd + nbChiffresPe
-            } else if (autoCorrection[j].reponse.param.decimals === undefined) {
-              autoCorrection[j].reponse.param.decimals = 0
-            }
+          let nbChiffresExpo
+          if (autoCorrection[j].reponse.param.exposantNbChiffres !== undefined && autoCorrection[j].reponse.param.exposantNbChiffres !== 0) {
+            nbChiffresPd = Math.max(nombreDeChiffresDansLaPartieDecimale(decimalToScientifique(valeurAMCNum)[0]), autoCorrection[j].reponse.param.decimals)
+            nbChiffresPe = Math.max(nombreDeChiffresDansLaPartieEntiere(decimalToScientifique(valeurAMCNum)[0]), autoCorrection[j].reponse.param.digits - nbChiffresPd)
+            nbChiffresExpo = Math.max(nombreDeChiffresDansLaPartieEntiere(decimalToScientifique(valeurAMCNum)[1]), autoCorrection[j].reponse.param.exposantNbChiffres)
+          } else {
+            nbChiffresPd = Math.max(nombreDeChiffresDansLaPartieDecimale(valeurAMCNum), autoCorrection[j].reponse.param.decimals)
+            nbChiffresPe = Math.max(nombreDeChiffresDansLaPartieEntiere(valeurAMCNum), autoCorrection[j].reponse.param.digits - nbChiffresPd)
+          }
+          if (autoCorrection[j].reponse.param.milieuIntervalle !== undefined) {
+            const demiMediane = autoCorrection[j].reponse.param.milieuIntervalle - valeurAMCNum
+            nbChiffresPd = Math.max(nbChiffresPd, nombreDeChiffresDansLaPartieDecimale(demiMediane))
+            valeurAMCNum = autoCorrection[j].reponse.param.milieuIntervalle
+            autoCorrection[j].reponse.param.approx = autoCorrection[j].reponse.param.approx === 'intervalleStrict' ? calcul(demiMediane * 10 ** nbChiffresPd - 1) : calcul(demiMediane * 10 ** nbChiffresPd)
           }
           texQr += `\\element{${ref}}{\n `
           texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
@@ -7101,12 +7569,14 @@ export function exportQcmAmc (exercice, idExo) {
           if (autoCorrection[j].propositions !== undefined) {
             texQr += `\\explain{${autoCorrection[j].propositions[0].texte}}\n`
           }
-          texQr += `\\AMCnumericChoices{${autoCorrection[j].reponse.valeur}}{digits=${autoCorrection[j].reponse.param.digits},decimals=${autoCorrection[j].reponse.param.decimals},sign=${autoCorrection[j].reponse.param.signe},`
+          if (autoCorrection[j].reponse.textePosition === 'left') texQr += `${autoCorrection[j].reponse.texte} `
+          texQr += `\\AMCnumericChoices{${valeurAMCNum}}{digits=${nbChiffresPe + nbChiffresPd},decimals=${nbChiffresPd},sign=${autoCorrection[j].reponse.param.signe},`
           if (autoCorrection[j].reponse.param.exposantNbChiffres !== undefined && autoCorrection[j].reponse.param.exposantNbChiffres !== 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
-            texQr += `exponent=${autoCorrection[j].reponse.param.exposantNbChiffres},exposign=${autoCorrection[j].reponse.param.exposantSigne},`
+            texQr += `exponent=${nbChiffresExpo},exposign=${autoCorrection[j].reponse.param.exposantSigne},`
           }
           if (autoCorrection[j].reponse.param.approx !== undefined && autoCorrection[j].reponse.param.approx !== 0) {
             texQr += `approx=${autoCorrection[j].reponse.param.approx},`
+            texQr += 'scoreapprox=1,'
           }
           if (autoCorrection[j].reponse.param.vertical !== undefined && autoCorrection[j].reponse.param.vertical) {
             texQr += `vertical=${autoCorrection[j].reponse.param.vertical},`
@@ -7117,26 +7587,32 @@ export function exportQcmAmc (exercice, idExo) {
           if (autoCorrection[j].reponse.param.vhead !== undefined && autoCorrection[j].reponse.param.vhead) {
             texQr += `vhead=${autoCorrection[j].reponse.param.vhead},`
           }
-          texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,}}\n'
-          texQr += '\\end{questionmultx}\n }\n'
+          if (autoCorrection[j].reponse.param.tpoint !== undefined && autoCorrection[j].reponse.param.tpoint) {
+            texQr += `Tpoint={${autoCorrection[j].reponse.param.tpoint}},`
+          }
+          texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreexact=1} '
+          if (autoCorrection[j].reponse.textePosition === 'right') texQr += `${autoCorrection[j].reponse.texte}\n`
+          texQr += '\\end{questionmultx}\n }\n\n'
           id++
         }
         break
-
-      case 'AMCOpenNum': // AMCOpen + AMCnumeric Choices. (Nouveau ! en test)
+      case 'AMCOpenNum': // AMCOpen + AMCnumeric Choices. (A ne plus utiliser au profit de AMCHybride)
         /********************************************************************/
         // On pourra rajouter des options : les paramètres sont nommés.
         // {digits=0,decimals=0,signe=false,exposantNbChiffres=0,exposantSigne=false,approx=0}
         // si digits=0 alors la fonction va analyser le nombre décimal (ou entier) pour déterminer digits et decimals
         // signe et exposantSigne sont des booléens
         // approx est un entier : on enlève la virgule pour comparer la réponse avec la valeur : approx est le seuil de cette différence.
-        // La correction est dans tabQCM[1][0], la réponse numlérique est dans tabQCM[1][1] et le nombre de ligne pour le cadre dans tabQCM[1][2] et
+        // La correction est dans tabQCM[1][0], la réponse numérique est dans tabQCM[1][1] et le nombre de ligne pour le cadre dans tabQCM[1][2] et
         /********************************************************************/
         if (exercice.autoCorrection[j].enonce === undefined) {
           exercice.autoCorrection[j].enonce = exercice.listeQuestions[j]
         }
         if (exercice.autoCorrection[j].propositions === undefined) {
           exercice.autoCorrection[j].propositions = [{ texte: exercice.listeCorrections[j], statut: 2, feedback: '' }]
+        }
+        if (!Array.isArray(autoCorrection[j].reponse.valeur)) {
+          autoCorrection[j].reponse.valeur = [autoCorrection[j].reponse.valeur]
         }
         texQr += `\\element{${ref}}{\n `
         texQr += '\\begin{minipage}[b]{0.7 \\linewidth}\n'
@@ -7145,15 +7621,16 @@ export function exportQcmAmc (exercice, idExo) {
         if (autoCorrection[j].propositions !== undefined) {
           texQr += `\\explain{${autoCorrection[j].propositions[0].texte}}\n`
         }
-        texQr += `\\notation{${autoCorrection[j].propositions[0].statut}}\n`
-        // texQr += `\\AMCOpen{lines=${tabQCM[1][2]}}{\\mauvaise[NR]{NR}\\scoring{0}\\mauvaise[RR]{R}\\scoring{0.01}\\mauvaise[R]{R}\\scoring{0.33}\\mauvaise[V]{V}\\scoring{0.67}\\bonne[VV]{V}\\scoring{1}}\n`
-        texQr += '\\end{question}\n\\end{minipage}\n'
+        texQr += `\t\t\\notation{${autoCorrection[j].propositions[0].statut}}`
+        if (!(isNaN(autoCorrection[j].propositions[0].sanscadre))) {
+          texQr += `[${autoCorrection[j].propositions[0].sanscadre}]` // le statut contiendra le nombre de lignes pour ce type
+        }
+        texQr += '\n\t\\end{question}\n\\end{minipage}\n'
         if (autoCorrection[j].reponse.param.exposantNbChiffres !== undefined && autoCorrection[j].reponse.param.exposantNbChiffres === 0) {
-          reponse = autoCorrection[j].reponse.valeur
           if (autoCorrection[j].reponse.param.digits === 0) {
-            nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse)
+            nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(valeurAMCNum)
             autoCorrection[j].reponse.param.decimals = nbChiffresPd
-            nbChiffresPe = nombreDeChiffresDansLaPartieEntiere(reponse)
+            nbChiffresPe = nombreDeChiffresDansLaPartieEntiere(valeurAMCNum)
             autoCorrection[j].reponse.param.digits = nbChiffresPd + nbChiffresPe
           } else if (autoCorrection[j].reponse.param.decimals === undefined) {
             autoCorrection[j].reponse.param.decimals = 0
@@ -7168,7 +7645,7 @@ export function exportQcmAmc (exercice, idExo) {
         texQr += '\\begin{minipage}[b]{0.3 \\linewidth}\n'
         texQr += '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse'
         texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}b} \n `
-        texQr += `\\AMCnumericChoices{${autoCorrection[j].reponse.valeur}}{digits=${autoCorrection[j].reponse.param.digits},decimals=${autoCorrection[j].reponse.param.decimals},sign=${autoCorrection[j].reponse.param.signe},`
+        texQr += `\\AMCnumericChoices{${valeurAMCNum}}{digits=${autoCorrection[j].reponse.param.digits},decimals=${autoCorrection[j].reponse.param.decimals},sign=${autoCorrection[j].reponse.param.signe},`
         if (autoCorrection[j].reponse.param.exposantNbChiffres === 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
           texQr += `exponent=${autoCorrection[j].reponse.param.exposantNbChiffres},exposign=${autoCorrection[j].reponse.param.exposantSigne},`
         }
@@ -7184,7 +7661,10 @@ export function exportQcmAmc (exercice, idExo) {
         if (autoCorrection[j].reponse.param.vhead !== undefined && autoCorrection[j].reponse.param.vhead) {
           texQr += `vhead=${autoCorrection[j].reponse.param.vhead},`
         }
-        texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,},vertical=true}\n'
+        if (autoCorrection[j].reponse.param.tpoint !== undefined && autoCorrection[j].reponse.param.tpoint) {
+          texQr += `Tpoint={${autoCorrection[j].reponse.param.tpoint}},`
+        }
+        texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,vertical=true}\n'
         texQr += '\\end{questionmultx}\n\\end{minipage}}\n'
         id++
         break
@@ -7201,6 +7681,12 @@ export function exportQcmAmc (exercice, idExo) {
         if (exercice.autoCorrection[j].propositions === undefined) {
           exercice.autoCorrection[j].propositions = [{ texte: exercice.listeCorrections[j], statut: '', feedback: '' }]
         }
+        if (!Array.isArray(autoCorrection[j].reponse.valeur)) {
+          autoCorrection[j].reponse.valeur = [autoCorrection[j].reponse.valeur]
+        }
+        if (!Array.isArray(autoCorrection[j].reponse2.valeur)) {
+          autoCorrection[j].reponse2.valeur = [autoCorrection[j].reponse2.valeur]
+        }
         texQr += `\\element{${ref}}{\n `
         // premier champ de codage
         texQr += '\\begin{minipage}[b]{0.7 \\linewidth}\n'
@@ -7211,7 +7697,7 @@ export function exportQcmAmc (exercice, idExo) {
         }
         texQr += `\\notation{${autoCorrection[j].propositions[0].statut}}\n`
         texQr += '\\end{question}\n\\end{minipage}\n'
-        reponse = autoCorrection[j].reponse.valeur
+        reponse = valeurAMCNum
         if (autoCorrection[j].reponse.param.digits === 0) {
           nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse)
           autoCorrection[j].reponse.param.decimals = nbChiffresPd
@@ -7225,7 +7711,7 @@ export function exportQcmAmc (exercice, idExo) {
         texQr += '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse'
         texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}b} \n `
         texQr += `${autoCorrection[j].reponse.texte}\n` // pour pouvoir mettre du texte adapté par ex Dénominateur éventuellement de façon conditionnelle avec une valeur par défaut
-        texQr += `\\AMCnumericChoices{${autoCorrection[j].reponse.valeur}}{digits=${autoCorrection[j].reponse.param.digits},decimals=${autoCorrection[j].reponse.param.decimals},sign=${autoCorrection[j].reponse.param.signe},`
+        texQr += `\\AMCnumericChoices{${valeurAMCNum}}{digits=${autoCorrection[j].reponse.param.digits},decimals=${autoCorrection[j].reponse.param.decimals},sign=${autoCorrection[j].reponse.param.signe},`
         if (autoCorrection[j].reponse.param.exposantNbChiffres !== 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
           texQr += `exponent=${autoCorrection[j].reponse.param.exposantNbChiffres},exposign=${autoCorrection[j].reponse.param.exposantSigne},`
         }
@@ -7239,7 +7725,7 @@ export function exportQcmAmc (exercice, idExo) {
         texQr += '\\begin{minipage}[b]{0.15 \\linewidth}\n'
         texQr += '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse'
         texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}c} \n `
-        reponse2 = autoCorrection[j].reponse2.valeur
+        reponse2 = autoCorrection[j].reponse2.valeur[0]
         if (autoCorrection[j].reponse2.param.digits === 0) {
           nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse2)
           autoCorrection[j].reponse2.param.decimals = nbChiffresPd
@@ -7275,6 +7761,15 @@ export function exportQcmAmc (exercice, idExo) {
         if (exercice.autoCorrection[j].propositions === undefined) {
           exercice.autoCorrection[j].propositions = [{ texte: exercice.listeCorrections[j], statut: '', feedback: '' }]
         }
+        if (!Array.isArray(autoCorrection[j].reponse.valeur)) {
+          autoCorrection[j].reponse.valeur = [autoCorrection[j].reponse.valeur]
+        }
+        if (!Array.isArray(autoCorrection[j].reponse2.valeur)) {
+          autoCorrection[j].reponse2.valeur = [autoCorrection[j].reponse2.valeur]
+        }
+        if (!Array.isArray(autoCorrection[j].reponse3.valeur)) {
+          autoCorrection[j].reponse3.valeur = [autoCorrection[j].reponse3.valeur]
+        }
         texQr += `\\element{${ref}}{\n `
         // premier champ de codage
         texQr += '\\begin{minipage}[b]{0.4 \\linewidth}\n'
@@ -7285,7 +7780,7 @@ export function exportQcmAmc (exercice, idExo) {
         }
         texQr += `\\notation{${autoCorrection[j].propositions[0].statut}}\n`
         texQr += '\\end{question}\n\\end{minipage}\n'
-        reponse = autoCorrection[j].reponse.valeur
+        reponse = valeurAMCNum
         if (autoCorrection[j].reponse.param.digits === 0) {
           nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse)
           autoCorrection[j].reponse.param.decimals = nbChiffresPd
@@ -7300,7 +7795,7 @@ export function exportQcmAmc (exercice, idExo) {
         texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}b} \n `
         if (autoCorrection[j].reponse.textePosition === 'top') texQr += `${autoCorrection[j].reponse.texte}\n` // pour pouvoir mettre du texte adapté par ex Dénominateur éventuellement de façon conditionnelle avec une valeur par défaut
         else if (autoCorrection[j].reponse.textePosition === 'left') texQr += `${autoCorrection[j].reponse.texte} `
-        texQr += `\\AMCnumericChoices{${autoCorrection[j].reponse.valeur}}{digits=${autoCorrection[j].reponse.param.digits},decimals=${autoCorrection[j].reponse.param.decimals},sign=${autoCorrection[j].reponse.param.signe},`
+        texQr += `\\AMCnumericChoices{${valeurAMCNum}}{digits=${autoCorrection[j].reponse.param.digits},decimals=${autoCorrection[j].reponse.param.decimals},sign=${autoCorrection[j].reponse.param.signe},`
         if (autoCorrection[j].reponse.param.exposantNbChiffres !== 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
           texQr += `exponent=${autoCorrection[j].reponse.param.exposantNbChiffres},exposign=${autoCorrection[j].reponse.param.exposantSigne},`
         }
@@ -7315,7 +7810,7 @@ export function exportQcmAmc (exercice, idExo) {
         texQr += '\\begin{minipage}[b]{0.2 \\linewidth}\n'
         texQr += '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse'
         texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}c} \n `
-        reponse2 = autoCorrection[j].reponse2.valeur
+        reponse2 = autoCorrection[j].reponse2.valeur[0]
         if (autoCorrection[j].reponse2.param.digits === 0) {
           nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse2)
           autoCorrection[j].reponse2.param.decimals = nbChiffresPd
@@ -7341,7 +7836,7 @@ export function exportQcmAmc (exercice, idExo) {
         texQr += '\\begin{minipage}[b]{0.2 \\linewidth}\n'
         texQr += '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse'
         texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}d} \n `
-        reponse3 = autoCorrection[j].reponse3.valeur
+        reponse3 = autoCorrection[j].reponse3.valeur[0]
         if (autoCorrection[j].reponse3.param.digits === 0) {
           nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse3)
           autoCorrection[j].reponse3.param.decimals = nbChiffresPd
@@ -7367,29 +7862,43 @@ export function exportQcmAmc (exercice, idExo) {
 
       default : // Si on arrive ici, c'est que le type est AMCHybride
         if (type !== 'AMCHybride') {
-          console.log('Il doit y avoir une erreur de type AMC, je ne connais pas le type : ', type)
+          // console.log('Il doit y avoir une erreur de type AMC, je ne connais pas le type : ', type)
         }
         if (autoCorrection[j].enonce === undefined) { // Si l'énoncé n'a pas été défini, on va le chercher dans la question
           autoCorrection[j].enonce = exercice.listeQuestions[j]
         }
         if (autoCorrection[j].propositions === undefined) {
-          console.log(`Il ne peut pas y avoir de type AMCHybride si exercice.autoCorrection[${j}].propositions n'est pas défini !`)
           break
         }
+        if (autoCorrection[j].melange !== undefined) {
+          melange = autoCorrection[j].melange
+        }
         texQr += `\\element{${ref}}{\n ` // Un seul élément du groupe de question pour AMC... plusieurs questions dedans !
-        texQr += `${autoCorrection[j].enonce} \\\\\n`
+        if (autoCorrection[j].enonceAvant === undefined) { // Dans une suite de questions, il se peut qu'il n'y ait pas d'énoncé général donc pas besoin de saut de ligne non plus.
+          texQr += `${autoCorrection[j].enonce} \\\\\n `
+        } else if (autoCorrection[j].enonceAvant) {
+          texQr += `${autoCorrection[j].enonce} \\\\\n `
+        } else if (autoCorrection[j].enonceAvantUneFois !== undefined) {
+          if (autoCorrection[j].enonceAvantUneFois && j === 0) {
+            texQr += `${autoCorrection[j].enonce} \\\\\n `
+          }
+        }
+
         if (typeof autoCorrection[j].options !== 'undefined') {
           if (autoCorrection[j].options.multicols) {
             texQr += '\\begin{multicols}{2}\n'
           }
         }
-        for (let qr = 0, qrType, prop, propositions, rep; qr < autoCorrection[j].propositions.length; qr++) { // Début de la boucle pour traiter toutes les question-reponse de l'élément j
-          prop = autoCorrection[j].propositions[qr] // proposition est un objet avec cette structure : {type,propositions,reponse}
+        for (let qr = 0, qrType, prop, propositions, rep; qr < autoCorrection[j].propositions.length; qr++) { // Début de la boucle pour traiter toutes les questions-reponses de l'élément j
+          prop = autoCorrection[j].propositions[qr] // prop est un objet avec cette structure : {type,propositions,reponse}
           qrType = prop.type
 
           propositions = prop.propositions
           switch (qrType) {
             case 'qcmMono':
+              if (elimineDoublons(propositions)) {
+                console.log('doublons trouvés')
+              }
 
               if (prop.options !== undefined) {
                 if (prop.options.vertical === undefined) {
@@ -7404,7 +7913,7 @@ export function exportQcmAmc (exercice, idExo) {
                   lastchoice = prop.options.lastChoice
                 }
               }
-              texQr += `\\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+              texQr += `${qr > 0 ? '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse' : ''}\\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
               if (propositions[0].reponse !== undefined) {
                 if (propositions[0].reponse.texte) {
                   texQr += propositions[0].reponse.texte + '\n'
@@ -7430,6 +7939,9 @@ export function exportQcmAmc (exercice, idExo) {
               id++
               break
             case 'qcmMult':
+              if (elimineDoublons(propositions)) {
+                console.log('doublons trouvés')
+              }
               if (prop.options !== undefined) {
                 if (prop.options.vertical === undefined) {
                   horizontalite = 'reponseshoriz'
@@ -7443,7 +7955,7 @@ export function exportQcmAmc (exercice, idExo) {
                   lastchoice = prop.options.lastChoice
                 }
               }
-              texQr += `\\begin{questionmult}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+              texQr += `${qr > 0 ? '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse' : ''}\\begin{questionmult}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
               texQr += `\t\\begin{${horizontalite}}`
               if (ordered) {
                 texQr += '[o]'
@@ -7465,46 +7977,167 @@ export function exportQcmAmc (exercice, idExo) {
               break
             case 'AMCNum':
               rep = prop.propositions[0].reponse
-              if (rep.param.exposantNbChiffres !== undefined && rep.param.exposantNbChiffres === 0) {
-                reponse = rep.valeur
-                if (rep.param.digits === 0) {
-                  nbChiffresPd = nombreDeChiffresDansLaPartieDecimale(reponse)
-                  rep.param.decimals = nbChiffresPd
-                  nbChiffresPe = nombreDeChiffresDansLaPartieEntiere(reponse)
-                  rep.param.digits = nbChiffresPd + nbChiffresPe
-                } else if (rep.param.decimals === undefined) {
-                  rep.param.decimals = 0
+              if (!Array.isArray(rep.valeur)) { // rep.valeur est un tableau si la réponse est une fraction
+                rep.valeur = [rep.valeur]
+              }
+              if (rep.param.basePuissance !== undefined) {
+                if (rep.param.exposantPuissance === undefined) {
+                  rep.param.exposantPuissance = 1000 // Nb volontairement grand pour faire comprendre à l'utilisateur AMC qu'il y a eu une erreur de programmation lors de la conception de l'exercice.
+                }
+                texQr += '\\begin{minipage}{\\textwidth}\n'
+                texQr += '\\begin{multicols}{2}\n'
+                texQr += `${qr > 0 ? '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse' : ''}\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+                if (propositions !== undefined) {
+                  texQr += `\\explain{${propositions[0].texte}}\n`
+                }
+                texQr += `${rep.texte}\n \\vspace{0.25cm} \n`
+                let digitsBase = 0
+                if (rep.param.baseNbChiffres !== undefined) {
+                  digitsBase = Math.max(rep.param.baseNbChiffres, nombreDeChiffresDansLaPartieEntiere(rep.param.basePuissance))
+                } else {
+                  digitsBase = nombreDeChiffresDansLaPartieEntiere(rep.param.basePuissance)
+                }
+                let digitsExposant = 0
+                if (rep.param.exposantNbChiffres !== undefined) {
+                  digitsExposant = Math.max(rep.param.exposantNbChiffres, nombreDeChiffresDansLaPartieEntiere(rep.param.exposantPuissance))
+                } else {
+                  digitsExposant = nombreDeChiffresDansLaPartieEntiere(rep.param.exposantPuissance)
+                }
+                texQr += '\n'
+                texQr += `Base\n \\AMCnumericChoices{${rep.param.basePuissance}}{digits=${digitsBase},decimals=0,sign=${rep.param.basePuissance < 0 ? 'true' : 'false'},approx=0,`
+                texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,}}\n'
+                texQr += '\\end{questionmultx}\n'
+                texQr += '\\AMCquestionNumberfalse\\def\\AMCbeginQuestion#1#2{}'
+                texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id + 1}} \n `
+                texQr += '\\vspace{18pt}'
+                // texQr += `Exposant\n \\AMCnumericChoices{${rep.param.exposantPuissance}}{digits=${digitsExposant},decimals=0,sign=${rep.param.exposantPuissance < 0 ? 'true' : 'false'},approx=0,`
+                texQr += `Exposant\n \\AMCnumericChoices{${rep.param.exposantPuissance}}{digits=${digitsExposant},decimals=0,sign=true,approx=0,`
+                texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,}}\n'
+                texQr += '\\end{questionmultx}\\end{multicols}\n\\end{minipage}\n\n'
+                id += 2
+              } else if (rep.valeur[0].num !== undefined) { // Si une fraction a été passée à AMCNum, on met deux AMCNumericChoice
+                valeurAMCNum = rep.valeur[0]
+                texQr += `${qr > 0 ? '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse' : ''}\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+                if (!(propositions[0].alignement === undefined)) {
+                  texQr += '\\begin{'
+                  texQr += `${propositions[0].alignement}}`
+                }
+                if (propositions !== undefined) {
+                  texQr += `\\explain{${propositions[0].texte}}\n`
+                }
+                texQr += `${rep.texte}\n`
+                let digitsNum = 0
+                if (rep.param.digitsNum !== undefined) {
+                  digitsNum = Math.max(rep.param.digitsNum, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.num))
+                } else if (rep.param.digits !== undefined) {
+                  digitsNum = Math.max(rep.param.digits, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.num))
+                } else {
+                  digitsNum = nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.num)
+                }
+                let digitsDen = 0
+                if (rep.param.digitsDen !== undefined) {
+                  digitsDen = Math.max(rep.param.digitsDen, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den))
+                } else if (rep.param.digits !== undefined) {
+                  digitsDen = Math.max(rep.param.digits, nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den))
+                } else {
+                  digitsDen = nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den)
+                }
+                let signeNum = true
+                if (rep.param.signe !== undefined) {
+                  signeNum = rep.param.signe
+                } else {
+                  signeNum = (valeurAMCNum.num * valeurAMCNum.den < 0)
+                }
+                let reponseF
+                let reponseAlsoCorrect
+                if (valeurAMCNum.num > 0) {
+                  reponseF = calcul(valeurAMCNum.num + valeurAMCNum.den / (10 ** nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den)))
+                  reponseAlsoCorrect = calcul(valeurAMCNum.num + valeurAMCNum.den / (10 ** digitsDen))
+                } else {
+                  reponseF = calcul(valeurAMCNum.num - valeurAMCNum.den / (10 ** nombreDeChiffresDansLaPartieEntiere(valeurAMCNum.den)))
+                  reponseAlsoCorrect = calcul(valeurAMCNum.num - valeurAMCNum.den / (10 ** digitsDen))
+                }
+                texQr += `\\AMCnumericChoices{${reponseF}}{digits=${digitsNum + digitsDen},decimals=${digitsDen},sign=${signeNum},approx=0,`
+                texQr += `borderwidth=0pt,backgroundcol=lightgray,scoreexact=1,Tpoint={\\vspace{0.5cm} \\vrule height 0.4pt width 5.5cm },alsocorrect=${reponseAlsoCorrect}}\n`
+                if (!(propositions[0].alignement === undefined)) {
+                  texQr += '\\end{'
+                  texQr += `${propositions[0].alignement}}`
+                }
+                texQr += '\\end{questionmultx}\n'
+                id += 2
+              } else {
+                let nbChiffresExpo
+                if (rep.param.exposantNbChiffres !== undefined && rep.param.exposantNbChiffres !== 0) {
+                  nbChiffresPd = Math.max(nombreDeChiffresDansLaPartieDecimale(decimalToScientifique(rep.valeur[0])[0]), rep.param.decimals)
+                  nbChiffresPe = Math.max(nombreDeChiffresDansLaPartieEntiere(decimalToScientifique(rep.valeur[0])[0]), rep.param.digits - nbChiffresPd)
+                  nbChiffresExpo = Math.max(nombreDeChiffresDansLaPartieEntiere(decimalToScientifique(rep.valeur[0])[1]), rep.param.exposantNbChiffres)
+                } else {
+                  nbChiffresPd = Math.max(nombreDeChiffresDansLaPartieDecimale(rep.valeur[0]), rep.param.decimals)
+                  nbChiffresPe = Math.max(nombreDeChiffresDansLaPartieEntiere(rep.valeur[0]), rep.param.digits - nbChiffresPd)
+                }
+                if (rep.param.milieuIntervalle !== undefined) {
+                  const demiMediane = rep.param.milieuIntervalle - valeurAMCNum
+                  nbChiffresPd = Math.max(nbChiffresPd, nombreDeChiffresDansLaPartieDecimale(demiMediane))
+                  valeurAMCNum = rep.param.milieuIntervalle
+                  rep.param.approx = autoCorrection[j].reponse.param.approx === 'intervalleStrict' ? calcul(demiMediane * 10 ** nbChiffresPd - 1) : calcul(demiMediane * 10 ** nbChiffresPd)
+                }
+                texQr += `${qr > 0 ? '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse' : ''}\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+                if (propositions !== undefined) {
+                  texQr += `\\explain{${propositions[0].texte}}\n`
+                }
+                texQr += `${rep.texte}\n`
+                if (!(propositions[0].alignement === undefined)) {
+                  texQr += '\\begin{'
+                  texQr += `${propositions[0].alignement}}`
+                }
+                texQr += `\\AMCnumericChoices{${rep.valeur[0]}}{digits=${nbChiffresPe + nbChiffresPd},decimals=${nbChiffresPd},sign=${rep.param.signe},`
+                if (rep.param.exposantNbChiffres !== undefined && rep.param.exposantNbChiffres !== 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
+                  texQr += `exponent=${nbChiffresExpo},exposign=${rep.param.exposantSigne},`
+                }
+                if (rep.param.approx !== undefined && rep.param.approx !== 0) {
+                  texQr += `approx=${rep.param.approx},`
+                  texQr += 'scoreapprox=1,'
+                }
+                if (rep.param.vertical !== undefined && rep.param.vertical) {
+                  texQr += `vertical=${rep.param.vertical},`
+                }
+                if (rep.param.strict !== undefined && rep.param.strict) {
+                  texQr += `strict=${rep.param.strict},`
+                }
+                if (rep.param.vhead !== undefined && rep.param.vhead) {
+                  texQr += `vhead=${rep.param.vhead},`
+                }
+                if (rep.param.tpoint !== undefined && rep.param.tpoint) {
+                  texQr += `Tpoint={${rep.param.tpoint}},`
+                }
+                texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreexact=1}\n'
+                if (!(propositions[0].alignement === undefined)) {
+                  texQr += '\\end{'
+                  texQr += `${propositions[0].alignement}}`
+                }
+                texQr += '\\end{questionmultx}\n'
+                id++
+              }
+              break
+            case 'AMCOpen': // AMCOpen de Hybride
+              if (propositions[0].numQuestionVisible === undefined) {
+                texQr += `\t${qr > 0 ? '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse' : ''}\\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+              } else if (propositions[0].numQuestionVisible) {
+                texQr += `\t${qr > 0 ? '\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse' : ''}\\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
+              } else {
+                texQr += `\t\\def\\AMCbeginQuestion#1#2{}\\AMCquestionNumberfalse \\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}}\\QuestionIndicative \n `
+              }
+              if (!(propositions[0].enonce === undefined)) texQr += `\t${propositions[0].enonce}\n`
+              texQr += `\t\t\\explain{${propositions[0].texte}}\n`
+
+              if (propositions[0].numQuestionVisible === undefined) {
+                texQr += `\t\t\\notation{${propositions[0].statut}}`
+                if (!(isNaN(propositions[0].sanscadre))) {
+                  texQr += `[${propositions[0].sanscadre}]` // le statut contiendra le nombre de lignes pour ce type
                 }
               }
-              texQr += `\\begin{questionmultx}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
-              if (propositions !== undefined) {
-                texQr += `\\explain{${propositions[0].texte}}\n`
-              }
-              texQr += `${rep.texte}\n` // pour pouvoir mettre du texte adapté par ex Dénominateur éventuellement de façon conditionnelle avec une valeur par défaut
-              texQr += `\\AMCnumericChoices{${rep.valeur}}{digits=${rep.param.digits},decimals=${rep.param.decimals},sign=${rep.param.signe},`
-              if (rep.param.exposantNbChiffres !== undefined && rep.param.exposantNbChiffres !== 0) { // besoin d'un champ pour la puissance de 10. (notation scientifique)
-                texQr += `exponent=${rep.param.exposantNbChiffres},exposign=${rep.param.exposantSigne},`
-              }
-              if (rep.param.approx !== undefined && rep.param.approx !== 0) {
-                texQr += `approx=${rep.param.approx},`
-              }
-              if (rep.param.vertical !== undefined && rep.param.vertical) {
-                texQr += `vertical=${rep.param.vertical},`
-              }
-              if (rep.param.strict !== undefined && rep.param.strict) {
-                texQr += `strict=${rep.param.strict},`
-              }
-              if (rep.param.vhead !== undefined && rep.param.vhead) {
-                texQr += `vhead=${rep.param.vhead},`
-              }
-              texQr += 'borderwidth=0pt,backgroundcol=lightgray,scoreapprox=0.5,scoreexact=1,Tpoint={,}}\n'
-              texQr += '\\end{questionmultx}\n'
-              id++
-              break
-            case 'AMCOpen':
-              texQr += `\t\\begin{question}{question-${ref}-${lettreDepuisChiffre(idExo + 1)}-${id}} \n `
-              texQr += `\t\t\\explain{${propositions[0].texte}}\n`
-              texQr += `\t\t\\notation{${propositions[0].statut}}\n` // le statut contiendra le nombre de lignes pour ce type
+
+              texQr += '\n' // le statut contiendra le nombre de lignes pour ce type
               texQr += '\t\\end{question}\n'
               id++
               break
@@ -7519,7 +8152,7 @@ export function exportQcmAmc (exercice, idExo) {
         break
     }
   }
-  return [texQr, ref, exercice.nbQuestions, titre]
+  return [texQr, ref, exercice.nbQuestions, titre, melange]
 }
 
 /**
@@ -7538,9 +8171,9 @@ export function exportQcmAmc (exercice, idExo) {
  * 4=questionmultx avec AMCnumeriqueChoices question ouverte à réponse numérique codée
  *
  * nbQuestions est un tableau pour préciser le nombre de questions à prendre dans chaque groupe pour constituer une copie
- * si il est indéfini, toutes les questions du groupe seront posées.
- * nb_exemplaire est le nombre de copie à générer
- * matiere et titre se passe de commentaires : ils renseigne l'entête du sujet.
+ * s'il est indéfini, toutes les questions du groupe seront posées.
+ * nb_exemplaire est le nombre de copies à générer
+ * matiere et titre se passent de commentaires : ils renseignent l'entête du sujet.
  */
 export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires = 1, matiere = 'Mathématiques', titre = 'Evaluation', typeEntete = 'AMCcodeGrid', format = 'A4' }) {
   // Attention questions est maintenant un tableau de tous les this.amc des exos
@@ -7549,7 +8182,7 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
   let idExo = 0; let code; let indexOfCode
   const nombreDeQuestionsIndefinie = []
   const graine = randint(1, 100000)
-  const groupeDeQuestions = []; const texQuestions = [[]]; const titreQuestion = []
+  const groupeDeQuestions = []; const texQuestions = [[]]; const titreQuestion = []; const melangeQuestion = []
   for (const exercice of questions) {
     code = exportQcmAmc(exercice, idExo)
     idExo++
@@ -7568,6 +8201,7 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
       }
       // Si le nombre de questions du groupe n'est pas défini, alors on met toutes les questions sinon on laisse le nombre choisi par l'utilisateur
       titreQuestion[indexOfCode] = code[3]
+      melangeQuestion[indexOfCode] = code[4]
     } else { // Donc le groupe existe, on va vérifier si la question existe déjà et si non, on l'ajoute.
       if (texQuestions[indexOfCode].indexOf(code[0]) === -1) {
         texQuestions[indexOfCode] += code[0]
@@ -7585,7 +8219,7 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
 
   // variable preambule à abonder le cas échéant si des packages sont nécessaires.
   // Merci à Sébastien Lozano pour la vérification des dépendances
-  // Merci à Liouba Lerou pour ses documents qui ont servi de base
+  // Merci à Liouba Leroux pour ses documents qui ont servi de base
   // A faire : abonder le preambule pour qu'il colle à tous les exos Mathalea_AMC
 
   let preambule = `%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -7598,7 +8232,9 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
     preambule += '\t \\documentclass[10pt,a4paper,french]{article}\n'
   }
 
-  preambule += `\t 
+  preambule += `\t
+  %%%%%% EE : Le mettre le plus tôt possible pour éviter un Warning à la compilation 
+  \\RequirePackage{etex}\t  % pour avoir plus de "registres" mémoires / tikz...
   %%%%% PACKAGES LANGUE %%%%%  
   \\usepackage{babel} % sans option => langue définie dans la classe du document
    \\usepackage[T1]{fontenc} 
@@ -7621,11 +8257,12 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
    \\usepackage{enumitem}
    \\usepackage{tabularx}\t% Pour faire des tableaux
 
+   \\usepackage{xargs}\t% EE : pour permettre DES options dans newcommand
+
   %%%%% PACKAGES FIGURES %%%%%
   %\\usepackage{pstricks,pst-plot,pstricks-add}
   %   POUR PSTRICKS d'où compilation sans PDFLateX mais : dvi, dvi2ps, ps2PDF...
   %   MAIS ON PRÉFÉRERA UTILISER TIKZ...
-  \\RequirePackage{etex}\t  % pour avoir plus de "registres" mémoires / tikz...
   \\usepackage{xcolor}% [avant tikz] xcolor permet de nommer + de couleurs
   \\usepackage{pgf,tikz}
   \\usepackage{graphicx} % pour inclure une image
@@ -7696,9 +8333,13 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
   \\newcommand{\\collerVertic}{\\vspace{-3mm}} % évite un trop grand espace vertical
   \\newcommand{\\TT}{\\sout{\\textbf{Tiers Temps}} \\noindent} % 
   \\newcommand{\\Prio}{\\fbox{\\textbf{PRIORITAIRE}} \\noindent} % 
-  \\newcommand{\\notation}[1]{
-    \\AMCOpen{lines=#1}{\\mauvaise[{\\tiny NR}]{NR}\\scoring{0}\\mauvaise[{\\tiny RR}]{R}\\scoring{0.01}\\mauvaise[{\\tiny R}]{R}\\scoring{0.33}\\mauvaise[{\\tiny V}]{V}\\scoring{0.67}\\bonne[{\\tiny VV}]{V}\\scoring{1}}
-    }
+  \\newcommandx{\\notation}[2][2=false]{
+    \\AMCOpen{lines=#1,lineup=#2,lineuptext=\\hspace{1cm}}{\\mauvaise[{\\tiny NR}]{NR}\\scoring{0}\\mauvaise[{\\tiny RR}]{R}\\scoring{0.01}\\mauvaise[{\\tiny R}]{R}\\scoring{0.33}\\mauvaise[{\\tiny V}]{V}\\scoring{0.67}\\bonne[{\\tiny VV}]{V}\\scoring{1}}
+  }
+  %%\\newcommand{\\notation}[1]{
+  %%\\AMCOpen{lines=#1}{\\mauvaise[{\\tiny NR}]{NR}\\scoring{0}\\mauvaise[{\\tiny RR}]{R}\\scoring{0.01}\\mauvaise[{\\tiny R}]{R}\\scoring{0.33}\\mauvaise[{\\tiny V}]{V}\\scoring{0.67}\\bonne[{\\tiny VV}]{V}\\scoring{1}}
+  %%}
+    
   %%pour afficher ailleurs que dans une question
   \\makeatletter
   \\newcommand{\\AffichageSiCorrige}[1]{\\ifAMC@correc #1\\fi}
@@ -7860,6 +8501,9 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
     \\vspace{1mm}
     \\hrule
   \\end{center}\n`
+    if (!melangeQuestion[i]) {
+      contenuCopie += `\\setgroupmode{${g}}{cyclic}\n\n`
+    }
     if (nbQuestions[i] > 0) {
       contenuCopie += `\\restituegroupe[${nbQuestions[i]}]{${g}}\n\n`
     } else {
@@ -7884,4 +8528,42 @@ export function creerDocumentAmc ({ questions, nbQuestions = [], nbExemplaires =
   }
   codeLatex += '\\end{document}\n'
   return codeLatex
+}
+
+export function dataTailleDiaporama (exercice) {
+  if (context.vue !== 'diap') {
+    return ''
+  } else if (exercice.tailleDiaporama !== 1) {
+    return `data-taille = "${exercice.tailleDiaporama}"`
+  }
+}
+function dataTaille (taille) {
+  if (context.vue !== 'diap') {
+    return ''
+  } else if (taille !== 1) {
+    return `data-taille = "${taille}"`
+  }
+}
+
+/**
+* Donne une liste d'entiers relatifs dont on connait la somme.
+* @example > listeEntiersSommeConnue(4,10,-2)
+* < [1,-2,6,5]
+* @param {int} nbElements Nombre d'éléments de la liste
+* @param {int} total Somme des éléments de la liste (peut être un nombre négatif)
+* @param {int} [valMin = 1] Valeur minimale de chaque élément (peut être un nombre négatif)
+* @return {Array} Liste d'entiers relatifs
+* @author Frédéric PIOU
+*/
+export function listeEntiersSommeConnue (nbElements, total, valMin = 1) {
+  const liste = []
+  liste.push(randint(valMin, total - (nbElements - 1) * valMin))
+  for (let j = 1; j < nbElements - 1; j++) {
+    liste.push(randint(liste[j - 1] + valMin, total - (nbElements - j - 1) * valMin))
+  }
+  liste.push(total)
+  for (let j = nbElements - 1; j > 0; j--) {
+    liste[j] = liste[j] - liste[j - 1]
+  }
+  return liste
 }

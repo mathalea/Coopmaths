@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[79175],{79175:(t,e,a)=>{a.r(e),a.d(e,{titre:()=>i,default:()=>l});var s=a(10390);const i="Constructibilité des triangles via les longueurs";function l(){this.beta="",this.exo=this.beta+"5G21-1",this.titre=i,s.default.call(this)}}}]);
-//# sourceMappingURL=79175.6c602288e8a4ad2af572.js.map

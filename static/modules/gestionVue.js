@@ -1,5 +1,5 @@
 import { context } from './context'
-import { get, setStyles } from './dom'
+import { create } from './dom'
 import { getVueFromUrl, setUrl } from './gestionUrl'
 
 export async function gestionVue (vue) {
@@ -22,10 +22,9 @@ export async function gestionVue (vue) {
     const btnEdit = document.getElementById('buttonEdit')
     // const btnMiseAJourCode = get('btn_mise_a_jour_code', false)
     // const btnCopieURL = get('btnCopieURL', false)
-    // const btnLaTeX = get('btnLaTeX', false)
     // const btnEmbed = get('btnEmbed', false)
     // const btnQRcode = get('btnQRcode', false)
-    // const buttonFullScreen = get('buttonFullScreen', false)
+    const buttonFullScreen = document.getElementById('buttonFullScreen2')
     const colonneGauche = document.getElementById('left')
     const colonneDroite = document.getElementById('right')
     const container2Colonnes = document.getElementById('mathaleaContainer')
@@ -86,6 +85,7 @@ export async function gestionVue (vue) {
       masqueMenuDesExercices()
       masqueBandeauTitre()
       if (btnEdit) btnEdit.style.display = 'inline'
+      if (buttonFullScreen) buttonFullScreen.style.display = 'none'
       for (const e of [divChoixExercices, titreExerciceAvecChevron]) {
         if (e !== null) e.style.display = 'none'
       }
@@ -93,12 +93,47 @@ export async function gestionVue (vue) {
     if (context.vue === 'exEtChoix') { // Affichage des seuls exercices
       masqueMenuDesExercices()
       if (btnEdit) btnEdit.style.display = 'inline'
+      if (buttonFullScreen) buttonFullScreen.style.display = 'inline'
     }
     if (context.vue === 'menu') { // Affichage des seuls exercices
       demasqueMenuDesExercices()
       if (btnEdit) btnEdit.style.display = 'none'
     }
+    if (context.vue === 'crpe') { // Affichage des seuls exercices
+      const section = document.querySelector('section')
+      const divCopirelem = create('div')
+      divCopirelem.innerHTML = `<div class="ui icon message">
+      <img src="assets/images/logo_copi.png">
+      <div class="content">
+        <div class="header">
+          Les annales du CRPE et leurs corrections sont l'oeuvre de la COPIRELEM
+        </div>
+        <p>Vous pouvez commander les brochures avec des ressources plus récentes sur leur <a href="http://www.arpeme.fr/index.php?id_page=18" target="_blank">site</a>.</p>
+      </div>
+    </div>`
+      divCopirelem.style.marginBottom = '30px'
+      section.insertBefore(divCopirelem, divChoixExercices)
+      demasqueMenuDesExercices()
+      if (btnEdit) btnEdit.style.display = 'none'
+      const btnLaTeX = document.getElementById('btnLaTeX')
+      if (btnLaTeX) btnLaTeX.style.display = 'none'
+      const btnTousInteractifs = document.getElementById('btnTousInteractifs')
+      if (btnTousInteractifs) btnTousInteractifs.style.display = 'none'
+      const menuAvecFiltre = document.getElementById('exercices_disponibles')
+      if (menuAvecFiltre) menuAvecFiltre.style.display = 'none'
+    }
+    if (context.vue === 'alcexEtChoix') { // Affichage des seuls exercices
+      masqueMenuDesExercices()
+      if (btnEdit) btnEdit.style.display = 'inline'
+      context.vue = 'alc'
+    }
+    if (context.vue === 'alcmenu') { // Affichage des seuls exercices
+      demasqueMenuDesExercices()
+      if (btnEdit) btnEdit.style.display = 'none'
+      context.vue = 'alc'
+    }
     // Met à jour l'URL avec notamment la nouvelle vue
     setUrl()
   }
+  if (document.getElementById('buttonEdit') && context.vue === null) document.getElementById('buttonEdit').style.display = 'none'
 }

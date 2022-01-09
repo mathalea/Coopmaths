@@ -1,0 +1,11 @@
+/*!
+ * @author Jean-Claude Lhote
+ * Créé le 3/11/2021
+ * Référence can6G06
+ */
+
+/*!
+ * @author Jean-Claude Lhote
+ * Créé le 7/11/2021
+ * Référence 6G44 clone à 4 question de can6G06
+ */

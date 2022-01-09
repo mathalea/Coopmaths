@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[56541],{56541:(t,e,a)=>{a.r(e),a.d(e,{titre:()=>u,default:()=>c});var s=a(92493);const u="Tableaux et pourcentages - pourcentage constant";function c(){this.exo="5N11-2",this.titre=u,s.default.call(this)}}}]);
-//# sourceMappingURL=56541.f4db7f04cf856c3d3271.js.map

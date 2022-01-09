@@ -1,0 +1,66 @@
+{{ define "main" }} {{ partial "header" }}
+
+<div class="ui text container">
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+
+  <p>
+    La « Course aux nombres » est un concours de calcul mental impulsé par l'AEFE puis l'Académie de Strasbourg avec le soutien d'autres académies et de
+    l'APMEP. Son objectif est le renforcement d'automatismes numériques et géométriques.
+  </p>
+
+  <p>
+    Vous trouverez plus d'informations sur l'excellent blog de
+    <a href="https://clairelommeblog.wordpress.com/?s=course+aux+nombres" target="_blank">Claire Lommé</a> et sur
+    <a href="https://www.ac-strasbourg.fr/pedagogie/mathematiques/competitions/can/" target="_blank">le site de l'Académie de Strasbourg</a>.
+  </p>
+
+  <p>
+    En nous inspirant de ce concours, nous développons des exercices interactifs avec des données aléatoires pour permettre aux élèves de travailler ces
+    automatismes.
+  </p>
+
+  <p>Nous vous proposerons bientôt une sélection d'exercices pour vous entrainer à ce concours et développer vos automatismes.</p>
+
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+
+  <div class="ui one raised stackable cards">
+    <a class="card" href="/mathalea.html">
+      <div class="content">
+        <div class="center aligned huge header"><img class="ui avatar image" src="/images/dice.png" />Diaporama MathALEA</div>
+        <div class="center aligned description">Sélectionnez vos exercices puis appuyer sur le bouton <i class="play icon"></i></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+  <div class="ui one raised stackable cards">
+    <a class="card" href="https://www.mathgm.fr/index.php/can" target="_blank">
+      <div class="content">
+        <div class="center aligned huge header"><img class="ui image" src="https://www.mathgm.fr/images/yootheme/logo2.png" /></div>
+        <div class="center aligned description">Entrainement à la « Course aux nombres » sur le site de Gilles Mora.</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+
+  <div class="ui one raised stackable cards">
+    <a class="card" href="https://mathsmentales.net" target="_blank">
+      <div class="content">
+        <div class="center aligned huge header"><img class="ui image" src="/assets/images/logocm.png" /></div>
+        <div class="center aligned description">
+          Automatismes et calcul mental à données aléatoires sous forme de diaporamas, réponses en ligne, feuilles d'exercices, cartes flash, dominos, duels en
+          ligne... sur le site de Sébastien Cogez.
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+{{ partial "footer" . }} {{ end }}
