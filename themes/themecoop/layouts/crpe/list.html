@@ -5,26 +5,42 @@
 
 <div class="ui text container">
 
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
 
-     <h1 class="ui block center aligned header">CRPE<a href="/"><i class="small level up alternate icon" style="color: black"></i></a> </h1>
+  <div class="ui one raised stackable cards">
+    <a class="card" href="https://coopmaths.fr/mathalea.html?v=crpe" target="_blank">
+      <div class="content">
+        <div class="left aligned huge header">
+          <div style="float: left; width: 25%;"><img class="ui image"
+              src="https://coopmaths.fr/assets/images/logo_copi.png" /></div>
+          <div style="margin-left: 25%;">Exercices issus des annales du CRPE <br>pour s'entrainer au concours</div>
+        </div>
+        <!-- <div class="center aligned description"></div> -->
+      </div>
+    </a>
+  </div>
 
-     <div class="ui middle aligned animated selection divided list">
-          <!-- <a class="item" href="/pdf/CoopMaths-Referentiel-6e.pdf" target="_blank">
-               <i class="large black file pdf outline icon"></i> <div class="header content"> Télécharger le référentiel -> à faire</div>
-          </a> -->
-          
-          {{ range where .Site.Pages "Params.niveau" "crpe" }}
-          <a class="item" href="{{.URL}}"><div class="header content">{{.Title}}</div></a>
-          {{ end }}
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+  
+  <div class="ui one raised stackable cards">
+    <a class="card" href="/crpe2" target="_blank">
+      <div class="content">
+        <div class="left aligned huge header">
+          <div style="float: left; width: 25%;"><img width="80%"
+              src="https://coopmaths.fr/assets/images/dice.png" /></div>
+          <div style="margin-left: 25%;">Exercices MathALEA et du DNB<br>pour se remettre à niveau</div>
+        </div>
+        <!-- <div class="center aligned description"></div> -->
+      </div>
+    </a>
+  </div>
 
-          <!-- Il y avait ceci <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a> -->
-     
 
-     </div>
+  </div>
 
-     <!-- <h3><a href="/CM6" style="color:inherit !important" >Calcul mental - 6e (avec mathsmentales.net)</a></h3> -->
-
-</div>    
+</div>
 {{ partial "footer" . }}
 
 {{ end }}

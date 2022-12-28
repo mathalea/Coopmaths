@@ -1,0 +1,39 @@
+{{ define "main" }}
+
+
+{{ partial "header" }}
+
+<div class="ui text container">
+
+  <div class="ui hidden divider"></div>
+  <div class="ui hidden divider"></div>
+
+  
+
+
+
+  <h1 class="ui block center aligned header">Réviser pour le CRPE<a href="/"><i class="small level up alternate icon"
+        style="color: black"></i></a> </h1>
+
+  <div class="ui middle aligned animated selection divided list">
+    <!-- <a class="item" href="/pdf/CoopMaths-Referentiel-6e.pdf" target="_blank">
+               <i class="large black file pdf outline icon"></i> <div class="header content"> Télécharger le référentiel -> à faire</div>
+          </a> -->
+
+    {{ range where .Site.Pages "Params.niveau" "crpe" }}
+    <a class="item" href="{{.URL}}">
+      <div class="header content">{{.Title}}</div>
+    </a>
+    {{ end }}
+
+    <!-- Il y avait ceci <a class="item" href="{{.URL}}"><div class="header content">{{.Params.ref}} - {{.Title}}</div></a> -->
+
+
+  </div>
+
+  <!-- <h3><a href="/CM6" style="color:inherit !important" >Calcul mental - 6e (avec mathsmentales.net)</a></h3> -->
+
+</div>
+{{ partial "footer" . }}
+
+{{ end }}

@@ -11,7 +11,7 @@ Ce générateur d'exercices à données aléatoires est présenté dans cet <a h
 ### Crédits
 
 - Moteur développé par Rémi Angot sous licence **AGPL**.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Gilles Mora, Laurence Candille, Christophe Gombert, Éric Schrafstetter, Éric Elter Frédéric Piou, Florence Tapiero, Jean-Léon Henry puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Gilles Mora, Laurence Candille, Christophe Gombert, Éric Schrafstetter, Éric Elter, Frédéric Piou, Florence Tapiero, Jean-Léon Henry, Mathieu Degrange, Loïc Geeraerts, Sylvain Chambon, Delphine David puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
 - MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence .**AGPL**.
 - Le passage à NodeJS et Webpack a été coordonné par Daniel Caillibaud (Sésamath).
 - La partie PHP pour la gestion des scores a été programmée par Sébastien Lozano.
@@ -97,6 +97,34 @@ Le code est libre, AGPL, vous pouvez donc télécharger les sources sur [GitHub]
 
 
 ### Changelog
+
+#### 06/22
+
+- Début du travail sur la v3
+- Arrivée de Delphine David dans l'équipe des programmeurs
+
+#### 05/22
+
+- Personnalisation du clavier suivant l'exercice
+
+#### 04/22
+
+- Sujet complet d'annales de la cours aux nombres aléatoirisés
+- Mise à jour de ComputeEngine pour avoir un nouveau moteur de calcul
+
+#### 03/22
+
+- Nouveaux exercices notamment pour la course aux nombres
+
+#### 02/22
+
+- Développement de apiGeom pour la géométrie dynamique
+- Possibilité de programmer des arbres pondérés
+- Utilisation de MathSteps pour détailler les étapes en calcul littéral
+#### 01/22
+
+- Arrivée de Mathieu Degrange et Loïc Geeraerts dans l'équipe des programmeurs
+- Ajout des annales CRPE en partenariat avec la COPIRELEM
 
 #### 12/21
 

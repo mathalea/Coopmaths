@@ -35,7 +35,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 
 
 - Moteur développé par Rémi Angot sous licence **AGPL** puis amélioré, entre autres, par Jean-Claude Lhote, Sébastien Lozano et Cédric Grolleau.
-- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Mora Gilles, Laurence Candille, Christophe Gombert, Éric Schrafstetter, Éric Elter, Frédéric Piou, Florence Tapiero, Jean-Léon Henry puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
+- Exercices programmés par Rémi Angot, Jean-Claude Lhote, Sébastien Lozano, Stéphane Guyon, Gaëlle Morvan, Mireille Gain, Erwan Duplessy, Cédric Grolleau, Matthieu Devillers, Liouba Leroux, Durand Arnaud, Guillaume Valmont, Mora Gilles, Laurence Candille, Christophe Gombert, Éric Schrafstetter, Éric Elter, Frédéric Piou, Florence Tapiero, Jean-Léon Henry, Mathieu Degrange puis relus par les contributeurs de CoopMaths sous licence **AGPL**.
 - MathALEA2D (pour la réalisation des illustrations) a été développé par Rémi Angot et Jean-Claude Lhote sous licence **AGPL**.
 - Le générateur d'animations pour le lecteur InstrumEnPoche a été développé par Rémi Angot sous licence **AGPL**.
 
@@ -47,7 +47,11 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - CANDILLE Laurence
 - CARON Guillaume
 - CAUCAT Bernard
+- CHAMBON Eve
+- CHAMBON Sylvain
 - COGEZ Sébastien
+- DAVID Delphine
+- DEGRANGE Mathieu 
 - DESRUELLE Sophie
 - DEVILLERS Matthieu
 - DUVOID Aude
@@ -56,6 +60,7 @@ Tous les documents sont libres de droit (licence Creative Commons **CC-BY-SA**) 
 - DOTTO Claire
 - ELTER Éric
 - FOURNIER Carine
+- GEERAERTS Loïc
 - GAIN Mireille
 - GUYON Sthéphane
 - GOMBERT Christophe

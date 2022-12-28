@@ -193,7 +193,7 @@ function listeHtmlDesExercicesDUnNiveauAvecSousTheme (listeDeThemes) { // liste_
 }
 function getListeHtmlDesExercicesCrpe () {
   let liste = '<div class="accordion">'
-  for (const annee of ['2016', '2017']) {
+  for (const annee of ['2019', '2018', '2017', '2016']) {
     liste += `<div class="title"><i class="dropdown icon"></i> ${annee}</div><div class="content">`
     liste += listeHtmlDesExercicesCrpeAnnee(annee)
     liste += '</div>'
@@ -740,8 +740,8 @@ export function menuDesExercicesDisponibles () {
     listeHtmlDesExercices += '</div>'
     listeHtmlDesExercicesTab += objExercicesDisponibles.P0.lignes_tableau
   } else if (context.vue === 'crpe') {
-    listeHtmlDesExercices += divNiveau(objExercicesDisponibles.CRPE, 'active', 'CRPE')
     listeHtmlDesExercices += divNiveau(objExercicesDisponibles.CrpeTheme, 'active', 'CrpeTheme')
+    listeHtmlDesExercices += divNiveau(objExercicesDisponibles.CRPE, 'active', 'CRPE')
     listeHtmlDesExercices += '</div>'
     listeHtmlDesExercicesTab += objExercicesDisponibles.CRPE.lignes_tableau
   } else if (filtre === 'dnb') {
