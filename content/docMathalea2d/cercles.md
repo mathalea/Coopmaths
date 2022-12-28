@@ -4,7 +4,7 @@ niveau:
 description: "MathALEA 2D - Les cercles et arcs de cercles"
 ---
 
-{{% alea2d "cercles" %}}
+{{% alea2d "cerclesetarcs" %}}
 
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>
