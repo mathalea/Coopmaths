@@ -56,11 +56,10 @@ On peut changer les extrémités d'un segment avec `s.styleExtremites='|-|'` ou 
 Par ailleurs, il est possible de coder un segment.
 
 * `afficheLongueurSegment(A,B)` // Note la longueur de [AB] au dessus si A est le point le plus à gauche sinon au dessous
-* `codeSegment(A,B,'X','blue')` // Code le segment [AB] avec une croix bleue
-* `codeSegments('X','blue',A,B, B,C, C,D)` // Code les segments [AB], [BC] et [CD] avec une croix bleue
- * `codeSegments('X','blue',[A,B,C,D])` // Code les segments [AB], [BC], [CD] et [DA]\(attention, chemin fermé,pratique pour des polygones pas pour des lignes brisées)
- * `codeSegments('X','blue',s1,s2,s3)` // Code les segments s1, s2 et s3 avec une croix bleue
- * `codeSegments('X','blue',p.listePoints)` // Code tous les segments du polygone avec une croix bleue
+* `codageSegments('X','blue',A,B, B,C, C,D)` // Code les segments [AB], [BC] et [CD] avec une croix bleue
+ * `codageSegments('X','blue',[A,B,C,D])` // Code les segments [AB], [BC], [CD] et [DA]\(attention, chemin fermé,pratique pour des polygones pas pour des lignes brisées)
+ * `codageSegments('X','blue',s1,s2,s3)` // Code les segments s1, s2 et s3 avec une croix bleue
+ * `codageSegments('X','blue',p.listePoints)` // Code tous les segments du polygone avec une croix bleue
 
  On peut changer l'apparence d'un segment (mais aussi d'une droite, d'une demi-droite, d'un polygone ou d'un cercle) de la manière suivante : 
 
