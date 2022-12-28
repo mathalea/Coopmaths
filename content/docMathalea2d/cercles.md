@@ -4,17 +4,28 @@ niveau:
 description: "MathALEA 2D - Les cercles et arcs de cercles"
 ---
 
-
-<!-- {{% alea2d "mediatrices"  %}} -->
+{{% alea2d "cercles" %}}
 
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>
 
-* `let c = cercle(O,r)` //Cercle de centre O et de rayon r
-* `let c = cercleCentrePoint(O,A)` //Cercle de centre O passant par A
-* `let c = cercleCentrePoint(O,A,'blue')` //Cercle de centre O passant par A en bleu
-* `let c = arc(O,a,r)` // Arc de cercle de centre O, d'angle a et de rayon r
-* `let c = arc(O,a,r,true)` // Arc de cercle de centre O, d'angle a et de rayon r fermé par les rayons aux extrémités
-* `let c = arcPointPointAngle(A,B,a,true)` // Arc de cercle d'extrémités A et B d'angle a fermé par les rayons aux extrémités
-* `let M = pointIntersectionCC(c1,c2,'M')` // M est le point d'intersection le plus haut des cercles c1 et c2
-* `let M = pointIntersectionCC(c1,c2,'M',2)` // M est le point d'intersection le plus bas des cercles c1 et c2
+* fenetreMathalea2d = [-11,-10,18,9]
+* const r = 4
+* const A = point(3,4,'A')
+* const B = point(5,5,'B')
+* const O = point(0,0,'O')
+* tracePoint(O,A,B)
+* labelPoint(O,A,B)
+* const a = 30
+* const c1 = cercle(O,r) // Cercle de centre O de rayon r
+* const c2 = cercleCentrePoint(O,A) // Cercle de centre O passant par A
+* const c3 = cercleCentrePoint(A,O,'blue') // Cercle de centre A passant par O en bleu
+* const c4 = arc(B,O,a) // Arc de cercle de centre O, d'extrémité B et d'angle a
+* const c5 = arc(A,B,a,true,'red','blue') // Arc de cercle de centre , d'extrémité A et d'angle a, rempli de rouge et dont les rayons aux extrémités sont bleus
+* const c6 = arcPointPointAngle(O,A,2*a,true) // Arc de cercle d'extrémités O et A d'angle 2a fermé par les rayons aux extrémités
+* const M = pointIntersectionCC(c1,c3,'M') // M est le point d'intersection le plus haut des cercles c1 et c3
+* tracePoint(M)
+* labelPoint(M)
+* const P = pointIntersectionCC(c1,c3,'P',2) // P est le point d'intersection le plus bas des cercles c1 et c3
+* tracePoint(P)
+* labelPoint(P)
