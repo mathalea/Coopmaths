@@ -63,7 +63,7 @@ Par ailleurs, il est possible de coder un segment.
 
  On peut changer l'apparence d'un segment (mais aussi d'une droite, d'une demi-droite, d'un polygone ou d'un cercle) de la manière suivante : 
 
- * `s.color = colorToLatexOrHTML('red')
+ * `s.color = colorToLatexOrHTML('red')`
  * `s.epaisseur = 2`
  * `s.pointilles = 2`
  * `s.opacite = .2`
