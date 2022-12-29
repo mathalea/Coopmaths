@@ -66,7 +66,7 @@ Par ailleurs, il est possible de coder un segment.
  * `s.color = colorToLatexOrHTML('red')`
  * `s.epaisseur = 2`
  * `s.pointilles = 2`
- * `s.opacite = .2`
+ * `s.opacite = 0.2`
 
 
 <div class="ui hidden divider"></div>
