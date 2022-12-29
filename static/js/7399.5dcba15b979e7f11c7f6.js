@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[7399],{7399:(e,t,a)=>{a.r(t),a.d(t,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,titre:()=>s,default:()=>n});var i=a(70246);const s="Calculer avec les identités remarquables - simple";function n(){i.default.call(this),this.typeExercice="simple",this.nbQuestions=1,this.tailleDiaporama=2,this.formatChampTexte="largeur15 inline",this.can=!0,this.canVersion="v1",this.consigne=""}}}]);
-//# sourceMappingURL=7399.5dcba15b979e7f11c7f6.js.map

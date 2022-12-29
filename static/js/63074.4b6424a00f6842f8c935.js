@@ -1,3 +1,0 @@
-/*! For license information please see 63074.4b6424a00f6842f8c935.js.LICENSE.txt */
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[63074],{63074:(e,a,t)=>{t.r(a),t.d(a,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcType:()=>i.amcType,amcReady:()=>i.amcReady,titre:()=>c,default:()=>n});var i=t(72071);const c="Trouver le symétrique d’un point";function n(){i.default.call(this),this.nbQuestions=1,this.can=!0,this.sup=1}}}]);
-//# sourceMappingURL=63074.4b6424a00f6842f8c935.js.map

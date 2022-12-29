@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[31436],{31436:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>u,dateDeModificationImportante:()=>r,default:()=>n});var i=a(35281);const u="Construire le symétrique d’une figure par rapport à une droite",r="14/11/2021";function n(){i.default.call(this),this.figure=!0,this.sup=4,this.besoinFormulaireNumerique=["Type de questions",4,"1 : Axe horizontal ou vertical\n2 : Axe oblique à 45°\n3 : Axe avec une légère pente\n4 : Mélange"]}}}]);
-//# sourceMappingURL=31436.983cb2e22aa9233f2745.js.map

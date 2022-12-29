@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[42095],{44828:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>s,dateDeModificationImportante:()=>u,default:()=>r});var i=a(35281);const s="Construire l’image d’une figure par symétrie centrale",u="14/11/2021";function r(){i.default.call(this),this.sup=5,this.sup2=1,this.figure=!0,this.besoinFormulaireNumerique=!1}}}]);
-//# sourceMappingURL=42095.d0cf23be20862a717033.js.map

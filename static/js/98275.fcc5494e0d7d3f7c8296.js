@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[98275],{98275:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>c,default:()=>n});var i=t(72071);const c="Trouver l’image d’un point par une transformation choisie aléatoirement";function n(){i.default.call(this),this.sup=4,this.titre=c}}}]);
-//# sourceMappingURL=98275.fcc5494e0d7d3f7c8296.js.map

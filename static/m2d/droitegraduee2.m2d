@@ -1,5 +1,0 @@
-fenetreMathalea2d = [-0.7,2.3,31.3,12.3]
-pixelsParCm=30
-a=randint(5,19)/10+randint(3,8)/100
-droiteGraduee2({x:0,y:7,Min:0,Max:2.7,thickEpaisseur:1,thickSec:true,thickTer:true,axeStyle:'|->',pointListe:[[a,'B'],[Math.floor(a*10)/10,'A'],[Math.floor(a*10+1)/10,'C']]})
-droiteGraduee2({x:0,y:4,Min:0,Max:2.7,thickEpaisseur:1,thickSec:true,thickTer:true,axeStyle:'|->',pointListe:[[1.73,'B'],[1.7,'A'],[1.8,'C']],labelListe:[[1.7,'x'],[1.8,'y']]})

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[43738],{43738:(t,e,a)=>{a.r(e),a.d(e,{titre:()=>i,default:()=>l});var s=a(102);const i="Constructibilité des triangles via les angles";function l(){this.beta="",this.exo=this.beta+"5G31-1",this.titre=i,s.default.call(this)}}}]);
-//# sourceMappingURL=43738.d835c1baef78d9c1a927.js.map

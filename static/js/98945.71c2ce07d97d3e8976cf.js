@@ -1,3 +1,0 @@
-/*! For license information please see 98945.71c2ce07d97d3e8976cf.js.LICENSE.txt */
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[98945],{98945:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>s,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,dateDePublication:()=>c,default:()=>r});var i=t(19201);const s="Trouver les symétries successives dans un damiers",c="4/12/2021";function r(){i.default.call(this),this.titre=s,this.sup=2,this.nbQuestions=1,this.besoinFormulaireNumerique=!1}}}]);
-//# sourceMappingURL=98945.71c2ce07d97d3e8976cf.js.map

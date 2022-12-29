@@ -1,5 +1,0 @@
-/*!
- * Gilles Mora
- * Publié le 02 / 12 / 2021
- * Référence can6N06
- */

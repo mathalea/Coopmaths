@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[39954],{39954:(e,a,t)=>{t.r(a),t.d(a,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>i.titre,default:()=>c});var i=t(18386);function c(){i.default.call(this),this.besoinFormulaireNumerique=!1,this.video="nFgFG3YQ1O4"}}}]);
-//# sourceMappingURL=39954.625aef6159d3b7f0a804.js.map

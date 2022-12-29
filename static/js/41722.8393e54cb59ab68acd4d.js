@@ -1,3 +1,0 @@
-/*! For license information please see 41722.8393e54cb59ab68acd4d.js.LICENSE.txt */
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[41722],{41722:(t,e,a)=>{a.r(e),a.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,titre:()=>n,default:()=>s});var i=a(72071);const n="Trouver le symétrique d’un point 5e";function s(){i.default.call(this),this.nbQuestions=1,this.can=!0,this.sup=2}}}]);
-//# sourceMappingURL=41722.8393e54cb59ab68acd4d.js.map

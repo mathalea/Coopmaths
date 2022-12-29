@@ -1,3 +1,0 @@
-/*! For license information please see 32166.9fd8415b78ae04df490c.js.LICENSE.txt */
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[32166],{32166:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>c,default:()=>n});var i=t(47960);const c="Calculer un antécédent par fonction affine";function n(){i.default.call(this),this.nbQuestions=1,this.sup=2,this.sup2=2}}}]);
-//# sourceMappingURL=32166.9fd8415b78ae04df490c.js.map

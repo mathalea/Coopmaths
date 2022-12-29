@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[53052],{53052:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>u,amcReady:()=>s,amcType:()=>c,interactifReady:()=>l,interactifType:()=>n,dateDePublication:()=>r,default:()=>h});var i=a(63657);const u="Multiplier un nombre entier (ou décimal) par 10, 100 ou 1 000",s=!0,c="AMCNum",l=!0,n="numerique",r="12/12/2021";function h(){i.default.call(this),this.titre=u,this.sup=1,this.sup3=!1,this.sup4=!0}}}]);
-//# sourceMappingURL=53052.aed52c22a16325aaa95f.js.map

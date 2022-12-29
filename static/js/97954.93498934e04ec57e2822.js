@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[97954],{97954:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>c,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>r});var i=t(72071);const c="Trouver l’image d’un point par une symétrie axiale ou centrale";function r(){i.default.call(this),this.sup=2,this.titre=c}}}]);
-//# sourceMappingURL=97954.93498934e04ec57e2822.js.map

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[53076],{53076:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>r,dateDeModificationImportante:()=>s,default:()=>u});var i=a(35281);const r="Construire le symétrique d’un point par symétrie centrale",s="14/11/2021";function u(){i.default.call(this),this.figure=!1,this.sup=5,this.besoinFormulaireNumerique=!1}}}]);
-//# sourceMappingURL=53076.1f62da0b4a6687fcf9dc.js.map

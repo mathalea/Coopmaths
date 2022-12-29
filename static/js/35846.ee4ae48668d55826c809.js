@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[35846],{35846:(e,t,a)=>{a.r(t),a.d(t,{amcReady:()=>s,interactifReady:()=>c,interactifType:()=>n,amcType:()=>r,titre:()=>u,default:()=>d});var i=a(4251);const s=!0,c=!0,n="qcm",r="qcmMono",u="Additionner ou soustraire des fractions de même dénominateur";function d(){i.default.call(this),this.sup=1,this.sup2=3,this.level=6,this.titre=u}}}]);
-//# sourceMappingURL=35846.ee4ae48668d55826c809.js.map

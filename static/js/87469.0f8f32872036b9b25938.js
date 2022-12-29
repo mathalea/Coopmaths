@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[87469],{87469:(e,t,a)=>{a.r(t),a.d(t,{titre:()=>n,dateDeModificationImportante:()=>u,default:()=>r});var i=a(35281);const n="Construire le symétrique d’un point par rapport à une droite",u="14/11/2021";function r(){i.default.call(this),this.figure=!1,this.sup=4,this.besoinFormulaireNumerique=["Type de questions",4,"1 : Axe horizontal ou vertical\n2 : Axe oblique à 45°\n3 : Axe avec une légère pente\n4 : Mélange"]}}}]);
-//# sourceMappingURL=87469.0f8f32872036b9b25938.js.map

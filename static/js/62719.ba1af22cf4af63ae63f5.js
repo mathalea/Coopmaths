@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[62719],{62719:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>i.titre,default:()=>c});var i=t(18386);function c(){i.default.call(this),this.sup=2,this.video="j_zZOpLLl9k",this.pointsParQuestions=2}}}]);
-//# sourceMappingURL=62719.ba1af22cf4af63ae63f5.js.map

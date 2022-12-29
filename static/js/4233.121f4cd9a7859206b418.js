@@ -1,3 +1,0 @@
-/*! For license information please see 4233.121f4cd9a7859206b418.js.LICENSE.txt */
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[4233],{4233:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>c,default:()=>n});var i=t(47960);const c="Calculer une image par une fonction affine";function n(){i.default.call(this),this.nbQuestions=1,this.sup=2,this.sup2=1}}}]);
-//# sourceMappingURL=4233.121f4cd9a7859206b418.js.map

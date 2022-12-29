@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[16802],{16802:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>c,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>r});var i=t(62525);const c="Nombre premier ou pas";function r(){i.default.call(this),this.titre=c,this.sup2=!1}}}]);
-//# sourceMappingURL=16802.a4cd0d740d939d3f379f.js.map

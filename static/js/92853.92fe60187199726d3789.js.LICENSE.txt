@@ -1,4 +1,0 @@
-/*!
- * @author Gilles Mora
- * Réference : can4L06
- */

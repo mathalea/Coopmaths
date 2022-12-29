@@ -1,5 +1,0 @@
-/*!
- * @author Jean-Claude Lhote
- * Publié le 15/09/2021
- * Référence can6M07
- */

@@ -1,3 +1,0 @@
-/*! For license information please see 17867.6434000fbadbc4fe47cb.js.LICENSE.txt */
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[17867],{17867:(a,e,t)=>{t.r(e),t.d(e,{interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,titre:()=>c,default:()=>n});var i=t(47960);const c="Calculer une image par une fonction linéaire";function n(){i.default.call(this),this.nbQuestions=1,this.sup=1,this.sup2=1}}}]);
-//# sourceMappingURL=17867.6434000fbadbc4fe47cb.js.map

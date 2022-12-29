@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[45489],{45489:(t,a,e)=>{e.r(a),e.d(a,{interactifReady:()=>l.interactifReady,interactifType:()=>l.interactifType,titre:()=>i,default:()=>c});var l=e(70246);const i="Calcul mental et calcul littéral";function c(){l.default.call(this),this.sup=4}}}]);
-//# sourceMappingURL=45489.019672b9ee30bac9577f.js.map

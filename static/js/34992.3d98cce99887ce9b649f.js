@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[34992],{34992:(e,a,t)=>{t.r(a),t.d(a,{titre:()=>s,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>c});var i=t(10824);const s="Calculer des périmètres et des aires de figures usuelles";function c(){i.default.call(this),this.titre=s,this.sup=1}}}]);
-//# sourceMappingURL=34992.3d98cce99887ce9b649f.js.map

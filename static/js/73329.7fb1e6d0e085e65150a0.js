@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[73329],{73329:(t,e,a)=>{a.r(e),a.d(e,{titre:()=>s,interactifReady:()=>i.interactifReady,interactifType:()=>i.interactifType,amcReady:()=>i.amcReady,amcType:()=>i.amcType,default:()=>c});var i=a(63657);const s="Additions, soustractions et multiplications posées de nombres entiers";function c(){i.default.call(this),this.nbQuestions=3,this.sup=1,this.sup2=!1}}}]);
-//# sourceMappingURL=73329.7fb1e6d0e085e65150a0.js.map

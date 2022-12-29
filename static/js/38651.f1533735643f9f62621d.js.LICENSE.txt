@@ -1,5 +1,0 @@
-/*!
- * @author Jean-Claude Lhote
- * publié le 24/10/2021
- * Référence can5A01
- */

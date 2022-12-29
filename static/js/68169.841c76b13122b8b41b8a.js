@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkmathalea=self.webpackChunkmathalea||[]).push([[68169],{68169:(a,e,t)=>{t.r(e),t.d(e,{titre:()=>i,interactifReady:()=>c.interactifReady,interactifType:()=>c.interactifType,amcReady:()=>c.amcReady,amcType:()=>c.amcType,default:()=>s});var c=t(91687);const i="Calculs de volumes";function s(){c.default.call(this),this.titre=i,this.sup=1,this.classe=3}}}]);
-//# sourceMappingURL=68169.841c76b13122b8b41b8a.js.map
