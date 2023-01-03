@@ -7,10 +7,30 @@ description: "MathALEA 2D - Les codages"
 
 
 
+{{% alea2d "codageSegments"  %}}
+
+<div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
+
+* `fenetreMathalea2d = [-11.5,-11.9,18.5,8.1]`
+* `const A=point(1,0); B=point(4,0); C=point(1,6); D=point(-1,5)`
+* `const E=point(-4,2); F=point(-2,-2);G=point(-5,-2); H=point(-6,-4);I=point(-7,0); J=point(-5,3)`
+* `const s1=segment(A,B); s2=segment(B,C); s3=segment(C,D); s4=segment(D,E,'blue')`
+* `const s5=segment(E,F,'blue'); s6=segment(D,F,'blue');s7=segment(A,C,'red'); s8=segment(A,D,'red')`
+* `const p=polygone([G,H,I,J],'#f15929')`
+* `const monCodage1=afficheLongueurSegment(A,B) // Note la longueur de [AB] au dessus si A est le point le plus à gauche sinon au dessous`
+* `const monCodage2=codageSegments('X','blue',A,B, B,C, C,D) // Code les segments [AB], [BC] et [CD] avec une croix bleue`
+* `const monCodage3=codageSegments('||','red',[D,E,F]) // Code les segments [DE], [EF] et [DF] avec deux barres rouges \(attention, chemin fermé,pratique pour des polygones pas pour des lignes brisées)`
+* `const monCodage4=codageSegments('O','black',s7,s8) // Code les segments s1, s2 et s3 avec un rond noir`
+* `const monCodage5=codageSegments('\\','green',p.listePoints) // Code tous les côtés du polygone avec une barre verte`
+
+
+
 {{% alea2d "codage"  %}}
 
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>
+
 
 * `let monCodage = afficheLongueurSegment(A,B)` // Note la longueur de [AB] au dessus si A est le point le plus à gauche sinon au dessous
 * `let monCodage = codeSegment(A,B,'X','blue')` // Code le segment [AB] avec une croix bleue
