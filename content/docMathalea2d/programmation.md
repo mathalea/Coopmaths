@@ -21,9 +21,8 @@ En plus des commandes de bases de Javascript, on a créé plusieurs fonctions pr
 * `randint(-4,4,[-1,0,1])` // renvoie un entier entre -4 et 4 qui soit différent de -1, 0 ou 1
 * `choice(['blue','red','green'])` // renvoie un élément au hasard de la liste 
 * `couleurAleatoire()` // renvoie le code d'une couleur au hasard
-* `calcul(0.003+0.02)` // fait un calcul exact même avec des nombres décimaux
 
-Toutes les autres fonctions sont décrites dans [le wiki de MathALEA](https://github.com/remiangot/MathALEA/wiki/Mathalea_outils.js).
+Toutes les autres fonctions sont décrites dans [le wiki de MathALEA](https://coopmaths.fr/documentation/2d/).
 
 <h3 class="ui horizontal divider header">Les calculs</h3>
 
